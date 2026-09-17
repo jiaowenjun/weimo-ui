@@ -1,0 +1,91 @@
+@layer components {
+  .weimo-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: calc(var(--space-card-section-gap) - (var(--size-icon-button-sm) - var(--font-size-sm)) / 2);
+    color: var(--color-text-placeholder);
+  }
+
+  .weimo-card__header-main {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .weimo-card__header-action {
+    flex: none;
+  }
+
+  .weimo-card__time {
+    font-size: var(--font-size-sm);
+  }
+
+  .weimo-card__title {
+    display: block;
+    overflow: hidden;
+    font-size: var(--font-size-sm);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .weimo-card-top-bar__slot {
+    display: grid;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .weimo-card-top-bar__slot-layer {
+    grid-area: 1 / 1;
+    min-width: 0;
+    opacity: 0;
+    transition: opacity 160ms ease;
+    pointer-events: none;
+  }
+
+  .weimo-card-top-bar__slot-layer[data-active="true"] {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .weimo-card-top-bar__edit-title {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .weimo-card-top-bar__title-input {
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: var(--font-size-sm);
+    letter-spacing: 0;
+  }
+
+  .weimo-card-top-bar__title-input::placeholder {
+    color: var(--color-text-placeholder);
+    opacity: 1;
+  }
+
+  .weimo-card-top-bar__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-tag-gap);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .weimo-card-top-bar__slot-layer {
+      transition-duration: 1ms;
+    }
+  }
+}
+
+button.icon-button.weimo-card__header-icon-button {
+  color: var(--color-text-placeholder);
+}

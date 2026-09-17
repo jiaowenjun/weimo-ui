@@ -1,0 +1,58 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "type": "registry:ui",
+  "dependencies": [],
+  "name": "chip",
+  "title": "Chip",
+  "description": "A neutral chip surface with prefix, content, suffix, and width animation support.",
+  "categories": [
+    "tag",
+    "display"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/chip.tsx",
+      "type": "registry:ui",
+      "target": "@ui/chip.tsx"
+    },
+    {
+      "path": "src/components/chip.css",
+      "type": "registry:ui",
+      "target": "@ui/chip.css"
+    },
+    {
+      "path": "src/components/chip-surface.tsx",
+      "type": "registry:ui",
+      "target": "@ui/chip-surface.tsx"
+    },
+    {
+      "path": "src/components/chip-surface-model.ts",
+      "type": "registry:ui",
+      "target": "@ui/chip-surface-model.ts"
+    },
+    {
+      "path": "src/components/chip-surface.css",
+      "type": "registry:ui",
+      "target": "@ui/chip-surface.css"
+    },
+    {
+      "path": "src/components/animated-inline-size.tsx",
+      "type": "registry:ui",
+      "target": "@ui/animated-inline-size.tsx"
+    },
+    {
+      "path": "src/components/animated-inline-size-model.ts",
+      "type": "registry:ui",
+      "target": "@ui/animated-inline-size-model.ts"
+    },
+    {
+      "path": "src/components/animated-inline-size.css",
+      "type": "registry:ui",
+      "target": "@ui/animated-inline-size.css"
+    }
+  ]
+}

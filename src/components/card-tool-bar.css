@@ -1,0 +1,13 @@
+@layer components {
+  .weimo-card-tool-bar .float-bar__slot--left {
+    min-width: 0;
+    overflow: visible;
+  }
+
+  .weimo-card-tool-bar__actions {
+    display: flex;
+    min-width: 0;
+    justify-content: flex-end;
+    gap: 8px;
+  }
+}

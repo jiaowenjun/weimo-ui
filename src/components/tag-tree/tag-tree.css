@@ -1,0 +1,250 @@
+@layer components {
+  .tag-tree {
+    --tag-tree-row-height: 40px;
+    --tag-tree-depth-step: 20px;
+    --tag-tree-action-size: 28px;
+    --tag-tree-row-background-inset-start: -1px;
+    --tag-tree-body-margin-end: 0;
+    --tag-tree-body-padding-start: 6px;
+    --tag-tree-row-body-padding-inline: 3px;
+    --tag-tree-icon-size: 20px;
+    --tag-tree-guide-padding-start: 2px;
+    --tag-tree-root-body-padding-start: var(--tag-tree-row-body-padding-inline);
+    --tag-tree-root-icon-center: calc(var(--tag-tree-root-body-padding-start) + (var(--tag-tree-icon-size) / 2));
+
+    display: grid;
+    gap: 2px;
+    width: 100%;
+    min-width: 0;
+    color: var(--color-text-primary);
+    font-size: var(--font-size-base);
+  }
+
+  .tag-tree__list {
+    display: grid;
+    gap: 0;
+  }
+
+  .tag-tree__empty {
+    min-height: var(--tag-tree-row-height);
+    padding: 0 16px;
+    color: var(--color-text-placeholder);
+    font-size: var(--font-size-sm);
+    line-height: var(--tag-tree-row-height);
+  }
+
+  .tag-tree__row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: stretch;
+    height: var(--tag-tree-row-height);
+    overflow: hidden;
+    opacity: 1;
+    color: var(--color-text-primary);
+    transition:
+      height 200ms ease,
+      opacity 200ms ease;
+  }
+
+  .tag-tree__row[data-entering="true"] {
+    height: 0;
+    opacity: 0;
+  }
+
+  .tag-tree__row[data-removing="true"] {
+    height: 0;
+    opacity: 0;
+  }
+
+  .tag-tree__guides {
+    display: flex;
+    min-width: 16px;
+    align-self: stretch;
+    padding-inline-start: var(--tag-tree-guide-padding-start);
+  }
+
+  .tag-tree__row[data-depth="0"] .tag-tree__guides {
+    min-width: 0;
+    padding-inline-start: 0;
+  }
+
+  .tag-tree__guide {
+    position: relative;
+    display: grid;
+    width: var(--tag-tree-depth-step);
+    flex: none;
+    place-items: stretch center;
+  }
+
+  .tag-tree__guide::before {
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: calc(var(--tag-tree-row-body-padding-inline) + (var(--tag-tree-icon-size) / 2));
+    width: 1px;
+    background: var(--color-border-divider);
+  }
+
+  .tag-tree__guide:first-child::before {
+    inset-inline-start: calc(var(--tag-tree-root-icon-center) - var(--tag-tree-guide-padding-start));
+  }
+
+  .tag-tree__row-body {
+    position: relative;
+    display: grid;
+    min-width: 0;
+    min-height: var(--tag-tree-row-height);
+    margin-inline-end: var(--tag-tree-body-margin-end);
+    padding-inline: var(--tag-tree-row-body-padding-inline);
+    grid-template-columns: minmax(0, 1fr) var(--tag-tree-action-size) var(--tag-tree-action-size);
+    align-items: center;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    isolation: isolate;
+  }
+
+  .tag-tree__row-body[data-variant="no-action"],
+  .tag-tree__row-body[data-variant="no-action"][data-has-menu="true"] {
+    grid-template-columns: minmax(0, 1fr) var(--tag-tree-action-size);
+  }
+
+  .tag-tree__row-body[data-variant="default"]:not([data-has-menu="true"]) {
+    grid-template-columns: minmax(0, 1fr) var(--tag-tree-action-size);
+  }
+
+  .tag-tree__row-body::before {
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: var(--tag-tree-row-background-inset-start);
+    inset-inline-end: 0;
+    z-index: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: transparent;
+    transition:
+      background-color 160ms ease,
+      color 160ms ease;
+  }
+
+  .tag-tree__row[data-depth="0"] .tag-tree__row-body::before {
+    inset-inline-start: 0;
+  }
+
+  .tag-tree__row-body > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .tag-tree__row[data-selected="true"] .tag-tree__row-body::before {
+    background: var(--color-bg-selected);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .tag-tree__row:hover .tag-tree__row-body::before {
+      background: var(--color-bg-hover);
+    }
+
+    .tag-tree__row:hover .tag-tree__toggle,
+    .tag-tree__row:hover .tag-tree__menu-trigger {
+      --icon-button-ghost-hover-bg: var(--color-bg-hover-on-hover);
+    }
+
+    .tag-tree__row:has(.tag-tree__toggle:hover, .tag-tree__menu-trigger:hover) .tag-tree__row-body::before {
+      transition-duration: 0ms;
+    }
+  }
+
+  .tag-tree__select,
+  .tag-tree__toggle {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+  }
+
+  .tag-tree__select {
+    display: grid;
+    grid-template-columns: var(--tag-tree-icon-size) minmax(0, 1fr);
+    column-gap: 4px;
+    align-items: center;
+    height: 100%;
+    text-align: left;
+  }
+
+  .tag-tree__tag-icon {
+    display: inline-grid;
+    width: var(--tag-tree-icon-size);
+    height: var(--tag-tree-icon-size);
+    place-items: center;
+    color: var(--color-text-placeholder);
+  }
+
+  .tag-tree__tag-icon svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .tag-tree__label {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .tag-tree__toggle,
+  .tag-tree__toggle-spacer,
+  .tag-tree__menu-slot {
+    display: inline-grid;
+    width: var(--tag-tree-action-size);
+    height: var(--tag-tree-action-size);
+    place-items: center;
+  }
+
+  .tag-tree__row-body[data-variant="no-action"] .tag-tree__toggle {
+    grid-column: 2;
+  }
+
+  .tag-tree__toggle {
+    color: var(--color-text-placeholder);
+    border-radius: var(--radius-round);
+  }
+
+  .tag-tree__toggle svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    transition: transform 180ms ease;
+  }
+
+  .tag-tree__toggle[data-expanded="true"] svg {
+    transform: rotate(90deg);
+  }
+
+  .tag-tree__menu-slot {
+    color: var(--color-text-placeholder);
+  }
+
+  .tag-tree__menu-trigger {
+    color: var(--color-text-placeholder);
+  }
+
+  .tag-tree__menu-trigger svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+  }
+}
+
+button.icon-button.tag-tree__menu-trigger {
+  color: var(--color-text-placeholder);
+}
+
+button.tag-tree__toggle {
+  color: var(--color-text-placeholder);
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "type": "registry:ui",
+  "dependencies": [
+    "react-markdown",
+    "remark-gfm",
+    "remark-math",
+    "remark-breaks",
+    "rehype-raw",
+    "rehype-sanitize",
+    "rehype-katex",
+    "katex"
+  ],
+  "name": "md-render",
+  "title": "Md Render",
+  "description": "A markdown renderer with Weimo markdown styling, math, tables, and centered quote support.",
+  "categories": [
+    "markdown",
+    "display"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/md-render.tsx",
+      "type": "registry:ui",
+      "target": "@ui/md-render.tsx"
+    },
+    {
+      "path": "src/components/markdown-option-grid.ts",
+      "type": "registry:ui",
+      "target": "@ui/markdown-option-grid.ts"
+    },
+    {
+      "path": "src/components/markdown-parenthesized-list.ts",
+      "type": "registry:ui",
+      "target": "@ui/markdown-parenthesized-list.ts"
+    },
+    {
+      "path": "src/components/markdown-sanitize.ts",
+      "type": "registry:ui",
+      "target": "@ui/markdown-sanitize.ts"
+    },
+    {
+      "path": "src/components/markdown-centered-quote.ts",
+      "type": "registry:ui",
+      "target": "@ui/markdown-centered-quote.ts"
+    },
+    {
+      "path": "src/components/markdown-image-size.ts",
+      "type": "registry:ui",
+      "target": "@ui/markdown-image-size.ts"
+    },
+    {
+      "path": "src/components/markdown-image-renderer.ts",
+      "type": "registry:ui",
+      "target": "@ui/markdown-image-renderer.ts"
+    },
+    {
+      "path": "src/components/markdown-content.css",
+      "type": "registry:ui",
+      "target": "@ui/markdown-content.css"
+    }
+  ]
+}

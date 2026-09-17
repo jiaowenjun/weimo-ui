@@ -1,0 +1,59 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sidebar",
+  "type": "registry:ui",
+  "title": "Sidebar",
+  "description": "A glass-morphism blank sidebar panel with responsive drawer (mobile) and fixed panel (desktop).",
+  "categories": [
+    "navigation"
+  ],
+  "dependencies": [
+    "@base-ui/react"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/sidebar/index.tsx",
+      "type": "registry:ui",
+      "target": "@ui/sidebar/index.tsx"
+    },
+    {
+      "path": "src/components/sidebar/sidebar-shell.tsx",
+      "type": "registry:ui",
+      "target": "@ui/sidebar/sidebar-shell.tsx"
+    },
+    {
+      "path": "src/components/sidebar/sidebar-shell.css",
+      "type": "registry:ui",
+      "target": "@ui/sidebar/sidebar-shell.css"
+    },
+    {
+      "path": "src/components/glass-surface.tsx",
+      "type": "registry:ui",
+      "target": "@ui/glass-surface.tsx"
+    },
+    {
+      "path": "src/components/glass-surface-model.ts",
+      "type": "registry:ui",
+      "target": "@ui/glass-surface-model.ts"
+    },
+    {
+      "path": "src/components/glass-surface.css",
+      "type": "registry:ui",
+      "target": "@ui/glass-surface.css"
+    },
+    {
+      "path": "src/components/card-surface.tsx",
+      "type": "registry:ui",
+      "target": "@ui/card-surface.tsx"
+    },
+    {
+      "path": "src/components/card-surface.css",
+      "type": "registry:ui",
+      "target": "@ui/card-surface.css"
+    }
+  ]
+}

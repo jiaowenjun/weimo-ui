@@ -1,0 +1,541 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "card",
+  "type": "registry:ui",
+  "title": "Card",
+  "description": "A Weimo note card that owns view/edit state and composes CardTopBar, MdView, and TagBar.",
+  "categories": [
+    "surface",
+    "editor"
+  ],
+  "dependencies": [
+    "@base-ui/react",
+    "@tiptap/core",
+    "@tiptap/pm",
+    "@tiptap/react",
+    "@tiptap/starter-kit",
+    "@tiptap/markdown",
+    "@tiptap/extension-list",
+    "@tiptap/extension-placeholder",
+    "@tiptap/extension-task-list",
+    "@tiptap/extension-task-item",
+    "@tiptap/extension-table",
+    "@tiptap/extension-table-row",
+    "@tiptap/extension-table-header",
+    "@tiptap/extension-table-cell",
+    "@tiptap/extension-mathematics",
+    "react-markdown",
+    "remark-gfm",
+    "remark-math",
+    "remark-parse",
+    "remark-stringify",
+    "remark-breaks",
+    "unified",
+    "rehype-raw",
+    "rehype-sanitize",
+    "rehype-katex",
+    "katex",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/card.tsx",
+      "type": "registry:ui",
+      "target": "@ui/card.tsx"
+    },
+    {
+      "path": "src/components/card-edit-state-machine.ts",
+      "type": "registry:ui",
+      "target": "@ui/card-edit-state-machine.ts"
+    },
+    {
+      "path": "src/components/use-card-edit-transition.ts",
+      "type": "registry:ui",
+      "target": "@ui/use-card-edit-transition.ts"
+    },
+    {
+      "path": "src/components/md-editor/md-editor-content-format.ts",
+      "type": "registry:ui",
+      "target": "@ui/md-editor/md-editor-content-format.ts"
+    },
+    {
+      "path": "src/components/card-save-shortcut.ts",
+      "type": "registry:ui",
+      "target": "@ui/card-save-shortcut.ts"
+    },
+    {
+      "path": "src/components/card-resolvers.tsx",
+      "type": "registry:ui",
+      "target": "@ui/card-resolvers.tsx"
+    },
+    {
+      "path": "src/components/deferred-md-editor-toolbar.tsx",
+      "type": "registry:ui",
+      "target": "@ui/deferred-md-editor-toolbar.tsx"
+    },
+    {
+      "path": "src/components/use-card-draft.ts",
+      "type": "registry:ui",
+      "target": "@ui/use-card-draft.ts"
+    },
+    {
+      "path": "src/components/card-layout-measurement.ts",
+      "type": "registry:ui",
+      "target": "@ui/card-layout-measurement.ts"
+    },
+    {
+      "path": "src/components/use-height-transition.ts",
+      "type": "registry:ui",
+      "target": "@ui/use-height-transition.ts"
+    },
+    {
+      "path": "src/components/card-editable.css",
+      "type": "registry:ui",
+      "target": "@ui/card-editable.css"
+    },
+    {
+      "path": "src/components/card.css",
+      "type": "registry:ui",
+      "target": "@ui/card.css"
+    },
+    {
+      "path": "src/components/card-top-bar.tsx",
+      "type": "registry:ui",
+      "target": "@ui/card-top-bar.tsx"
+    },
+    {
+      "path": "src/components/card-top-bar.css",
+      "type": "registry:ui",
+      "target": "@ui/card-top-bar.css"
+    },
+    {
+      "path": "src/components/mode-button.tsx",
+      "type": "registry:ui",
+      "target": "@ui/mode-button.tsx"
+    },
+    {
+      "path": "src/components/mode-button.css",
+      "type": "registry:ui",
+      "target": "@ui/mode-button.css"
+    },
+    {
+      "path": "src/components/card-tool-bar.tsx",
+      "type": "registry:ui",
+      "target": "@ui/card-tool-bar.tsx"
+    },
+    {
+      "path": "src/components/card-tool-bar.css",
+      "type": "registry:ui",
+      "target": "@ui/card-tool-bar.css"
+    },
+    {
+      "path": "src/components/md-view.tsx",
+      "type": "registry:ui",
+      "target": "@ui/md-view.tsx"
+    },
+    {
+      "path": "src/components/md-render.tsx",
+      "type": "registry:ui",
+      "target": "@ui/md-render.tsx"
+    },
+    {
+      "path": "src/components/markdown-option-grid.ts",
+      "type": "registry:ui",
+      "target": "@ui/markdown-option-grid.ts"
+    },
+    {
+      "path": "src/components/markdown-parenthesized-list.ts",
+      "type": "registry:ui",
+      "target": "@ui/markdown-parenthesized-list.ts"
+    },
+    {
+      "path": "src/components/markdown-sanitize.ts",
+      "type": "registry:ui",
+      "target": "@ui/markdown-sanitize.ts"
+    },
+    {
+      "path": "src/components/markdown-content.css",
+      "type": "registry:ui",
+      "target": "@ui/markdown-content.css"
+    },
+    {
+      "path": "src/components/markdown-centered-quote.ts",
+      "type": "registry:ui",
+      "target": "@ui/markdown-centered-quote.ts"
+    },
+    {
+      "path": "src/components/markdown-image-size.ts",
+      "type": "registry:ui",
+      "target": "@ui/markdown-image-size.ts"
+    },
+    {
+      "path": "src/components/markdown-image-renderer.ts",
+      "type": "registry:ui",
+      "target": "@ui/markdown-image-renderer.ts"
+    },
+    {
+      "path": "src/components/md-editor.tsx",
+      "type": "registry:ui",
+      "target": "@ui/md-editor.tsx"
+    },
+    {
+      "path": "src/components/md-editor/index.tsx",
+      "type": "registry:ui",
+      "target": "@ui/md-editor/index.tsx"
+    },
+    {
+      "path": "src/components/md-editor/md-editor-types.ts",
+      "type": "registry:ui",
+      "target": "@ui/md-editor/md-editor-types.ts"
+    },
+    {
+      "path": "src/components/md-editor/md-editor.tsx",
+      "type": "registry:ui",
+      "target": "@ui/md-editor/md-editor.tsx"
+    },
+    {
+      "path": "src/components/md-editor/md-editor-toolbar.tsx",
+      "type": "registry:ui",
+      "target": "@ui/md-editor/md-editor-toolbar.tsx"
+    },
+    {
+      "path": "src/components/md-editor/use-md-editor.ts",
+      "type": "registry:ui",
+      "target": "@ui/md-editor/use-md-editor.ts"
+    },
+    {
+      "path": "src/components/md-editor/md-editor-extensions.ts",
+      "type": "registry:ui",
+      "target": "@ui/md-editor/md-editor-extensions.ts"
+    },
+    {
+      "path": "src/components/md-editor/md-editor-option-grid.ts",
+      "type": "registry:ui",
+      "target": "@ui/md-editor/md-editor-option-grid.ts"
+    },
+    {
+      "path": "src/components/md-editor/md-editor-list-image-layout.ts",
+      "type": "registry:ui",
+      "target": "@ui/md-editor/md-editor-list-image-layout.ts"
+    },
+    {
+      "path": "src/components/md-editor/md-editor-table.ts",
+      "type": "registry:ui",
+      "target": "@ui/md-editor/md-editor-table.ts"
+    },
+    {
+      "path": "src/components/md-editor/md-editor-ordered-list.ts",
+      "type": "registry:ui",
+      "target": "@ui/md-editor/md-editor-ordered-list.ts"
+    },
+    {
+      "path": "src/components/md-editor/md-editor-block-math.ts",
+      "type": "registry:ui",
+      "target": "@ui/md-editor/md-editor-block-math.ts"
+    },
+    {
+      "path": "src/components/md-editor/md-editor-inline-math.ts",
+      "type": "registry:ui",
+      "target": "@ui/md-editor/md-editor-inline-math.ts"
+    },
+    {
+      "path": "src/components/md-editor/md-editor-math-view.tsx",
+      "type": "registry:ui",
+      "target": "@ui/md-editor/md-editor-math-view.tsx"
+    },
+    {
+      "path": "src/components/md-editor/md-editor-math-conversion.ts",
+      "type": "registry:ui",
+      "target": "@ui/md-editor/md-editor-math-conversion.ts"
+    },
+    {
+      "path": "src/components/md-editor/md-editor-centered-quote.ts",
+      "type": "registry:ui",
+      "target": "@ui/md-editor/md-editor-centered-quote.ts"
+    },
+    {
+      "path": "src/components/md-editor/md-editor-image.ts",
+      "type": "registry:ui",
+      "target": "@ui/md-editor/md-editor-image.ts"
+    },
+    {
+      "path": "src/components/md-editor/md-editor-image-view.tsx",
+      "type": "registry:ui",
+      "target": "@ui/md-editor/md-editor-image-view.tsx"
+    },
+    {
+      "path": "src/components/md-editor/md-editor-markdown.ts",
+      "type": "registry:ui",
+      "target": "@ui/md-editor/md-editor-markdown.ts"
+    },
+    {
+      "path": "src/components/md-editor/md-editor-save-keymap.ts",
+      "type": "registry:ui",
+      "target": "@ui/md-editor/md-editor-save-keymap.ts"
+    },
+    {
+      "path": "src/components/md-editor/math-editor.tsx",
+      "type": "registry:ui",
+      "target": "@ui/md-editor/math-editor.tsx"
+    },
+    {
+      "path": "src/components/md-editor/md-editor.css",
+      "type": "registry:ui",
+      "target": "@ui/md-editor/md-editor.css"
+    },
+    {
+      "path": "src/components/tag-bar.tsx",
+      "type": "registry:ui",
+      "target": "@ui/tag-bar.tsx"
+    },
+    {
+      "path": "src/components/tag-bar.css",
+      "type": "registry:ui",
+      "target": "@ui/tag-bar.css"
+    },
+    {
+      "path": "src/components/chip-button.tsx",
+      "type": "registry:ui",
+      "target": "@ui/chip-button.tsx"
+    },
+    {
+      "path": "src/components/chip-button.css",
+      "type": "registry:ui",
+      "target": "@ui/chip-button.css"
+    },
+    {
+      "path": "src/components/chip-surface.tsx",
+      "type": "registry:ui",
+      "target": "@ui/chip-surface.tsx"
+    },
+    {
+      "path": "src/components/chip-surface-model.ts",
+      "type": "registry:ui",
+      "target": "@ui/chip-surface-model.ts"
+    },
+    {
+      "path": "src/components/chip-surface.css",
+      "type": "registry:ui",
+      "target": "@ui/chip-surface.css"
+    },
+    {
+      "path": "src/components/animated-inline-size.tsx",
+      "type": "registry:ui",
+      "target": "@ui/animated-inline-size.tsx"
+    },
+    {
+      "path": "src/components/animated-inline-size-model.ts",
+      "type": "registry:ui",
+      "target": "@ui/animated-inline-size-model.ts"
+    },
+    {
+      "path": "src/components/animated-inline-size.css",
+      "type": "registry:ui",
+      "target": "@ui/animated-inline-size.css"
+    },
+    {
+      "path": "src/components/tag-picker.tsx",
+      "type": "registry:ui",
+      "target": "@ui/tag-picker.tsx"
+    },
+    {
+      "path": "src/components/tag-picker/index.tsx",
+      "type": "registry:ui",
+      "target": "@ui/tag-picker/index.tsx"
+    },
+    {
+      "path": "src/components/tag-picker/tag-picker.tsx",
+      "type": "registry:ui",
+      "target": "@ui/tag-picker/tag-picker.tsx"
+    },
+    {
+      "path": "src/components/tag-picker/use-tag-picker.ts",
+      "type": "registry:ui",
+      "target": "@ui/tag-picker/use-tag-picker.ts"
+    },
+    {
+      "path": "src/components/tag-picker/tag-picker-model.ts",
+      "type": "registry:ui",
+      "target": "@ui/tag-picker/tag-picker-model.ts"
+    },
+    {
+      "path": "src/components/tag-picker/tag-picker.css",
+      "type": "registry:ui",
+      "target": "@ui/tag-picker/tag-picker.css"
+    },
+    {
+      "path": "src/components/action-dialog.tsx",
+      "type": "registry:ui",
+      "target": "@ui/action-dialog.tsx"
+    },
+    {
+      "path": "src/components/action-dialog.css",
+      "type": "registry:ui",
+      "target": "@ui/action-dialog.css"
+    },
+    {
+      "path": "src/components/float-bar.tsx",
+      "type": "registry:ui",
+      "target": "@ui/float-bar.tsx"
+    },
+    {
+      "path": "src/components/float-bar.css",
+      "type": "registry:ui",
+      "target": "@ui/float-bar.css"
+    },
+    {
+      "path": "src/components/bottom-bar.tsx",
+      "type": "registry:ui",
+      "target": "@ui/bottom-bar.tsx"
+    },
+    {
+      "path": "src/components/bottom-bar.css",
+      "type": "registry:ui",
+      "target": "@ui/bottom-bar.css"
+    },
+    {
+      "path": "src/components/icon-button.css",
+      "type": "registry:ui",
+      "target": "@ui/icon-button.css"
+    },
+    {
+      "path": "src/components/menu.tsx",
+      "type": "registry:ui",
+      "target": "@ui/menu.tsx"
+    },
+    {
+      "path": "src/components/menu.css",
+      "type": "registry:ui",
+      "target": "@ui/menu.css"
+    },
+    {
+      "path": "src/components/menu/menu-variants.ts",
+      "type": "registry:ui",
+      "target": "@ui/menu/menu-variants.ts"
+    },
+    {
+      "path": "src/components/coss/dialog.tsx",
+      "type": "registry:ui",
+      "target": "@ui/coss/dialog.tsx"
+    },
+    {
+      "path": "src/components/coss/dialog.css",
+      "type": "registry:ui",
+      "target": "@ui/coss/dialog.css"
+    },
+    {
+      "path": "src/components/coss/button.tsx",
+      "type": "registry:ui",
+      "target": "@ui/coss/button.tsx"
+    },
+    {
+      "path": "src/components/coss/button.css",
+      "type": "registry:ui",
+      "target": "@ui/coss/button.css"
+    },
+    {
+      "path": "src/components/coss/input-group.tsx",
+      "type": "registry:ui",
+      "target": "@ui/coss/input-group.tsx"
+    },
+    {
+      "path": "src/components/coss/input-group.css",
+      "type": "registry:ui",
+      "target": "@ui/coss/input-group.css"
+    },
+    {
+      "path": "src/components/coss/scroll-area.tsx",
+      "type": "registry:ui",
+      "target": "@ui/coss/scroll-area.tsx"
+    },
+    {
+      "path": "src/components/coss/scroll-area.css",
+      "type": "registry:ui",
+      "target": "@ui/coss/scroll-area.css"
+    },
+    {
+      "path": "src/components/coss/tabs.tsx",
+      "type": "registry:ui",
+      "target": "@ui/coss/tabs.tsx"
+    },
+    {
+      "path": "src/components/coss/tabs.css",
+      "type": "registry:ui",
+      "target": "@ui/coss/tabs.css"
+    },
+    {
+      "path": "src/components/coss/toolbar.tsx",
+      "type": "registry:ui",
+      "target": "@ui/coss/toolbar.tsx"
+    },
+    {
+      "path": "src/components/coss/tooltip.tsx",
+      "type": "registry:ui",
+      "target": "@ui/coss/tooltip.tsx"
+    },
+    {
+      "path": "src/components/coss/tooltip.css",
+      "type": "registry:ui",
+      "target": "@ui/coss/tooltip.css"
+    },
+    {
+      "path": "src/lib/utils.ts",
+      "type": "registry:lib",
+      "target": "@ui/lib/utils.ts"
+    },
+    {
+      "path": "src/components/glass-surface.tsx",
+      "type": "registry:ui",
+      "target": "@ui/glass-surface.tsx"
+    },
+    {
+      "path": "src/components/glass-surface-model.ts",
+      "type": "registry:ui",
+      "target": "@ui/glass-surface-model.ts"
+    },
+    {
+      "path": "src/components/glass-surface.css",
+      "type": "registry:ui",
+      "target": "@ui/glass-surface.css"
+    },
+    {
+      "path": "src/components/glass-icon-button.tsx",
+      "type": "registry:ui",
+      "target": "@ui/glass-icon-button.tsx"
+    },
+    {
+      "path": "src/components/icon-button-model.ts",
+      "type": "registry:ui",
+      "target": "@ui/icon-button-model.ts"
+    },
+    {
+      "path": "src/components/ghost-icon-button.tsx",
+      "type": "registry:ui",
+      "target": "@ui/ghost-icon-button.tsx"
+    },
+    {
+      "path": "src/components/card-surface.tsx",
+      "type": "registry:ui",
+      "target": "@ui/card-surface.tsx"
+    },
+    {
+      "path": "src/components/card-surface.css",
+      "type": "registry:ui",
+      "target": "@ui/card-surface.css"
+    },
+    {
+      "path": "src/components/popup-surface.tsx",
+      "type": "registry:ui",
+      "target": "@ui/popup-surface.tsx"
+    },
+    {
+      "path": "src/components/popup-surface.css",
+      "type": "registry:ui",
+      "target": "@ui/popup-surface.css"
+    }
+  ]
+}

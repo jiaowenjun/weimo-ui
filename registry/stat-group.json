@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "stat-group",
+  "type": "registry:ui",
+  "title": "Stat Group",
+  "description": "A three-column metrics row matching the Skyline sidebar notes, words, and days statistics.",
+  "categories": [
+    "display"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/stat-group.tsx",
+      "type": "registry:ui",
+      "target": "@ui/stat-group.tsx"
+    },
+    {
+      "path": "src/components/stat-group.css",
+      "type": "registry:ui",
+      "target": "@ui/stat-group.css"
+    }
+  ]
+}

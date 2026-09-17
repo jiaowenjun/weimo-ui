@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "type": "registry:ui",
+  "dependencies": [],
+  "name": "popup-surface",
+  "title": "Popup Surface",
+  "description": "A raised popup material surface for modal and tooltip overlay bodies.",
+  "categories": [
+    "layout",
+    "surface"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/popup-surface.tsx",
+      "type": "registry:ui",
+      "target": "@ui/popup-surface.tsx"
+    },
+    {
+      "path": "src/components/popup-surface.css",
+      "type": "registry:ui",
+      "target": "@ui/popup-surface.css"
+    }
+  ]
+}

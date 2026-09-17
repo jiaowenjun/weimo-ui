@@ -1,0 +1,105 @@
+import { useState } from 'react'
+
+import { OcrDetail } from '../../components/ocr-detail'
+import { TextButton } from '../../components/text-button'
+import type { ComponentDefinition } from '../component-docs'
+
+const sampleOcrImage =
+  'data:image/png;base64,' +
+  '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' +
+  'S4VubtZJNwpdD13bSBvpq4HwQuj8fN650NlCw2t10lBosNDFVtpAXwAEIAABCEAAAhCAAAQgAAEIQAACEIAABCAAAQhAAAIQ' +
+  'gAAEIAABCEAAAhCAAAQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAAB' +
+  'CEAAAhCAAAQgAAEIQAACEIAABCAAAQhAAP4pAI0iGUUyimQUySocAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQg' +
+  'AAEIQAACEIAABCAAAQhAAAIQgAAEIAABCAAAQhAAAIQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIQAAC' +
+  'EIAABCAAAQhAAAIQgAAEIAABCEAAAhCARwugUSSjSEaRjCJZhQMgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQg' +
+  'AAEIQAACEIAABCAAAQhAAAIQgAAEIAABCAAAQhAAAIQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIQAAC' +
+  'EIAABCAAAQhAAAIQgAAEIAABCEAAAvBoATSKZBTJKJJRJKtwAAQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQg' +
+  'AAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIQAACEIAABCAAAQhAAAIQgAAEIAABCEAAAhCAAAQgAAEIQAAC' +
+  'EIAABCAAAQhAAAIQgAAEIAABCEAAHimA/wJ1WWrqMDcOmAAAAABJRU5ErkJggg=='
+
+const sampleMarkdown = `# OCR Review
+
+这是一段从图片中识别出的 Markdown。
+
+- 校对标题层级
+- 修正错别字
+- 保留列表结构
+
+> 识别结果可以直接编辑。`
+
+function OcrDetailPreview() {
+  const [open, setOpen] = useState(false)
+  const [markdown, setMarkdown] = useState(sampleMarkdown)
+  const [title, setTitle] = useState('OCR 校对题目')
+
+  return (
+    <div className="ocr-detail-docs-preview">
+      <TextButton onClick={() => setOpen(true)} type="button">
+        打开 OCR 校对
+      </TextButton>
+      <OcrDetail
+        imageSrc={sampleOcrImage}
+        onChange={(nextMarkdown, draft) => {
+          setMarkdown(nextMarkdown)
+          setTitle(draft.title)
+        }}
+        onOpenChange={setOpen}
+        open={open}
+        tags={['OCR', '校对']}
+        title={title}
+        value={markdown}
+      />
+    </div>
+  )
+}
+
+export const ocrDetailDefinition = {
+  id: 'ocr-detail',
+  summary: '用于 OCR 校对的全屏弹窗，左侧自然尺寸查看图片，右侧用 Card 编辑 Markdown',
+  status: 'Ready',
+  props: [
+    { name: 'open', type: 'boolean', defaultValue: '-' },
+    { name: 'onOpenChange', type: '(open: boolean) => void', defaultValue: '-' },
+    { name: 'imageSrc', type: 'string', defaultValue: '-' },
+    { name: 'imageAlt', type: 'string', defaultValue: "'OCR source image'" },
+    { name: 'title', type: 'string', defaultValue: "''" },
+    { name: 'tags', type: 'string[]', defaultValue: '[]' },
+    { name: 'value', type: 'string', defaultValue: '-' },
+    { name: 'defaultValue', type: 'string', defaultValue: '-' },
+    { name: 'onChange', type: '(markdown: string, draft: OcrDetailDraft) => void', defaultValue: '-' },
+    { name: 'onSave', type: '(markdown: string, draft: OcrDetailDraft) => void', defaultValue: '-' },
+    { name: 'onCancel', type: '() => void', defaultValue: '-' },
+    { name: 'placeholder', type: 'string', defaultValue: "'Review and correct OCR markdown...'" },
+    { name: 'disabled', type: 'boolean', defaultValue: 'false' },
+    { name: 'cardProps', type: "Omit<CardProps, 'note' | 'onDraftChange' | 'onSave' | 'onCancel' | 'disabled'>", defaultValue: '-' },
+    {
+      name: '...dialogProps',
+      type: "Omit<ActionDialogProps, 'children' | 'title' | 'showCloseButton' | 'onOpenChange'>",
+      defaultValue: '-',
+    },
+  ],
+  preview: () => <OcrDetailPreview />,
+} satisfies ComponentDefinition

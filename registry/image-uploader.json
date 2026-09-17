@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "image-uploader",
+  "type": "registry:ui",
+  "title": "Image Uploader",
+  "description": "A controlled image upload drop zone with OCR-demo picker and clipboard paste handling.",
+  "categories": [
+    "input"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/utils",
+    "@weimo/image-view"
+  ],
+  "files": [
+    {
+      "path": "src/components/image-uploader.tsx",
+      "type": "registry:ui",
+      "target": "@ui/image-uploader.tsx"
+    },
+    {
+      "path": "src/components/image-uploader.css",
+      "type": "registry:ui",
+      "target": "@ui/image-uploader.css"
+    }
+  ]
+}

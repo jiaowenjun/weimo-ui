@@ -1,0 +1,55 @@
+@layer components {
+  .weimo-ocr-composer-card {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .weimo-ocr-composer__content {
+    display: grid;
+    flex: 1 1 auto;
+    min-height: 0;
+    margin: 0 0 var(--space-card-section-gap);
+    align-items: stretch;
+  }
+
+  .weimo-ocr-composer__uploader.image-uploader {
+    min-height: 0;
+    align-self: stretch;
+  }
+
+  .weimo-ocr-composer__uploader .image-uploader__panel {
+    height: 100%;
+  }
+
+  .weimo-ocr-composer__tags {
+    min-width: 0;
+  }
+
+  .weimo-ocr-composer__tag-row {
+    display: flex;
+    min-width: 0;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-tag-gap);
+  }
+
+  .weimo-ocr-composer__tag-bar {
+    flex: 1 1 min(100%, 240px);
+    min-width: 0;
+  }
+
+  .weimo-ocr-composer__tag-bar .tag-bar__chips {
+    align-items: center;
+  }
+
+  .weimo-ocr-composer__actions {
+    display: flex;
+    flex: 0 0 auto;
+    min-width: 0;
+    align-items: center;
+    margin-inline-start: auto;
+    gap: 8px;
+  }
+}

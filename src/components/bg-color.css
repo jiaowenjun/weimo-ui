@@ -1,0 +1,43 @@
+.bg-color--page {
+  background: var(--color-bg-page);
+}
+
+.bg-color--card {
+  background: var(--color-bg-card);
+}
+
+.bg-color--raised {
+  background: var(--color-bg-raised);
+}
+
+.bg-color--primary {
+  background: var(--color-bg-primary);
+}
+
+.bg-color--hover {
+  background: var(--color-bg-hover);
+}
+
+.bg-color--hover-on-hover {
+  background: var(--color-bg-hover-on-hover);
+}
+
+.bg-color--selected {
+  background: var(--color-bg-selected);
+}
+
+.bg-color--chip {
+  background: var(--color-bg-chip);
+}
+
+.bg-color--selection {
+  background: var(--color-bg-selection);
+}
+
+.bg-color--share-card {
+  background: var(--color-bg-share-card);
+}
+
+.bg-color--share-card-tag-mask {
+  background: var(--color-bg-share-card-tag-mask);
+}

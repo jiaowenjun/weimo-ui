@@ -1,0 +1,71 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tag-bread",
+  "type": "registry:ui",
+  "title": "Tag Bread",
+  "description": "A frosted-glass tag breadcrumb built on the coss Breadcrumb primitive.",
+  "categories": [
+    "navigation",
+    "tag"
+  ],
+  "dependencies": [
+    "@base-ui/react",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/tag-bread.tsx",
+      "type": "registry:ui",
+      "target": "@ui/tag-bread.tsx"
+    },
+    {
+      "path": "src/components/tag-bread.css",
+      "type": "registry:ui",
+      "target": "@ui/tag-bread.css"
+    },
+    {
+      "path": "src/components/chip-surface.tsx",
+      "type": "registry:ui",
+      "target": "@ui/chip-surface.tsx"
+    },
+    {
+      "path": "src/components/chip-surface-model.ts",
+      "type": "registry:ui",
+      "target": "@ui/chip-surface-model.ts"
+    },
+    {
+      "path": "src/components/chip-surface.css",
+      "type": "registry:ui",
+      "target": "@ui/chip-surface.css"
+    },
+    {
+      "path": "src/components/animated-inline-size.tsx",
+      "type": "registry:ui",
+      "target": "@ui/animated-inline-size.tsx"
+    },
+    {
+      "path": "src/components/animated-inline-size-model.ts",
+      "type": "registry:ui",
+      "target": "@ui/animated-inline-size-model.ts"
+    },
+    {
+      "path": "src/components/animated-inline-size.css",
+      "type": "registry:ui",
+      "target": "@ui/animated-inline-size.css"
+    },
+    {
+      "path": "src/components/coss/breadcrumb.tsx",
+      "type": "registry:ui",
+      "target": "@ui/coss/breadcrumb.tsx"
+    },
+    {
+      "path": "src/components/coss/breadcrumb.css",
+      "type": "registry:ui",
+      "target": "@ui/coss/breadcrumb.css"
+    }
+  ]
+}

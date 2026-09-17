@@ -1,0 +1,82 @@
+@layer components {
+  .coss-breadcrumb {
+    display: block;
+    min-width: 0;
+  }
+
+  .coss-breadcrumb__list {
+    display: flex;
+    min-width: 0;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1;
+    list-style: none;
+    overflow-wrap: anywhere;
+  }
+
+  .coss-breadcrumb__item {
+    display: inline-flex;
+    min-width: 0;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .coss-breadcrumb__link {
+    min-width: 0;
+    color: inherit;
+    text-decoration: none;
+    transition: color 160ms ease;
+  }
+
+  .coss-breadcrumb__link:hover {
+    color: var(--color-text-primary);
+  }
+
+  .coss-breadcrumb__link:focus-visible {
+    border-radius: var(--radius-xs);
+    outline: 2px solid var(--color-border-accent);
+    outline-offset: 2px;
+  }
+
+  .coss-breadcrumb__page {
+    min-width: 0;
+    color: var(--color-text-primary);
+    font-weight: 400;
+  }
+
+  .coss-breadcrumb__separator,
+  .coss-breadcrumb__ellipsis {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-subtle);
+  }
+
+  .coss-breadcrumb__separator {
+    opacity: 0.8;
+  }
+
+  .coss-breadcrumb__separator svg,
+  .coss-breadcrumb__ellipsis svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .coss-breadcrumb__sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    white-space: nowrap;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+}

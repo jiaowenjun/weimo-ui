@@ -1,0 +1,2966 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "weimo-ui",
+  "homepage": "https://weimo.ink/ui",
+  "items": [
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "utils",
+      "type": "registry:lib",
+      "title": "cn() Utility",
+      "description": "Class name utility combining clsx and tailwind-merge.",
+      "categories": [
+        "lib"
+      ],
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@ui/lib/utils.ts"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "style",
+      "type": "registry:style",
+      "title": "Weimo Style",
+      "description": "Shared Weimo tokens for colors, fonts, spacing, layout, radii, and glass surfaces.",
+      "categories": [
+        "style"
+      ],
+      "extends": "none",
+      "cssVars": {
+        "theme": {
+          "color-background": "hsl(var(--background))",
+          "color-foreground": "hsl(var(--foreground))",
+          "color-card": "hsl(var(--card))",
+          "color-card-foreground": "hsl(var(--card-foreground))",
+          "color-primary": "hsl(var(--primary))",
+          "color-primary-foreground": "hsl(var(--primary-foreground))",
+          "color-muted": "hsl(var(--muted))",
+          "color-muted-foreground": "hsl(var(--muted-foreground))",
+          "color-border": "hsl(0 0% 90%)",
+          "font-sans": "var(--font-sans)",
+          "font-mono": "var(--font-mono)",
+          "radius": "var(--radius)"
+        },
+        "light": {
+          "background": "40 16% 96%",
+          "foreground": "0 0% 9%",
+          "card": "0 0% 100%",
+          "card-foreground": "0 0% 9%",
+          "primary": "0 0% 15%",
+          "primary-foreground": "0 0% 98%",
+          "muted": "40 10% 94%",
+          "muted-foreground": "0 0% 28%",
+          "border": "0 0% 80%",
+          "radius": "16px",
+          "font-sans": "\"Segoe UI\", \"SF Pro Text\", \"Helvetica Neue\", Arial, sans-serif",
+          "font-mono": "\"SFMono-Regular\", \"Cascadia Code\", \"Liberation Mono\", Menlo, Consolas, monospace",
+          "space-gutter-compact": "12px",
+          "space-gutter-normal": "15px",
+          "space-gutter": "var(--space-gutter-compact)",
+          "space-layout-outline": "2px",
+          "space-card-padding": "13px",
+          "space-card-section-gap": "1em",
+          "space-tag-gap": "4px",
+          "breakpoint-wide": "700px",
+          "size-sidebar-width": "270px",
+          "size-content-max-width": "700px",
+          "size-layout-max-width": "calc(var(--size-sidebar-width) + var(--space-gutter) + var(--size-content-max-width) + var(--space-gutter) * 2)",
+          "size-topbar-button": "44px",
+          "size-topbar-icon": "20px",
+          "size-topbar-height": "calc(var(--space-layout-outline) * 4 + 4px + var(--size-topbar-button))",
+          "size-icon-button": "36px",
+          "size-icon-button-sm": "28px",
+          "space-main-offset-top": "calc(var(--space-gutter) + var(--size-topbar-height) + var(--space-gutter))",
+          "font-size-2xs": "10px",
+          "font-size-xs": "12px",
+          "font-size-sm": "13px",
+          "font-size-md": "14px",
+          "font-size-base": "15px",
+          "font-size-lg": "16px",
+          "font-size-xl": "17px",
+          "font-size-stat": "28px",
+          "font-line-height-reading": "1.6",
+          "radius-xs": "4px",
+          "radius-sm": "8px",
+          "radius-round": "999px",
+          "glass-blur": "14px",
+          "backdrop-blur": "4px",
+          "glass-surface-light-border": "hsl(0 0% 80%)",
+          "glass-surface-dark-border": "hsl(0 0% 38%)",
+          "glass-surface-light-fg": "rgba(15, 23, 42, 0.9)",
+          "glass-surface-light-muted-fg": "rgba(51, 65, 85, 0.68)",
+          "glass-surface-dark-fg": "rgba(255, 255, 255, 0.9)",
+          "glass-surface-dark-muted-fg": "rgba(255, 255, 255, 0.72)",
+          "shadow-card": "0 1px 4px rgba(0, 0, 0, 0.035)",
+          "shadow-card-interactive": "0 6px 18px rgb(0 0 0 / 0.06)",
+          "shadow-overlay": "0 28px 80px rgb(0 0 0 / 0.22)",
+          "shadow-tooltip": "0 4px 12px rgb(0 0 0 / 0.1), 0 12px 28px rgb(0 0 0 / 0.12)",
+          "color-bg-page": "hsl(var(--background))",
+          "color-bg-card": "hsl(var(--card))",
+          "color-bg-raised": "hsl(var(--muted))",
+          "color-bg-primary": "hsl(var(--primary))",
+          "color-bg-selected": "hsl(var(--muted))",
+          "color-text-primary": "hsl(0 0% 9%)",
+          "color-text-secondary": "hsl(0 0% 28%)",
+          "color-text-subtle": "hsl(0 0% 28% / 0.72)",
+          "color-text-placeholder": "rgb(0 0 0 / 0.26)",
+          "color-text-disable": "hsl(0 0% 56%)",
+          "color-text-disable-on-light": "hsl(0 0% 56%)",
+          "color-text-disable-on-dark": "hsl(0 0% 62%)",
+          "color-border-divider": "hsl(0 0% 88%)",
+          "color-border-divider-menu": "hsl(0 0% 88%)",
+          "color-border-divider-menu-on-light": "hsl(0 0% 88%)",
+          "color-border-divider-menu-on-dark": "hsl(0 0% 28%)",
+          "color-border": "hsl(0 0% 90%)",
+          "color-border-emphasis": "hsl(0 0% 68%)",
+          "color-border-accent": "hsl(0 0% 35%)",
+          "color-border-disable": "hsl(0 0% 92%)",
+          "color-border-disable-on-light": "hsl(0 0% 92%)",
+          "color-border-disable-on-dark": "hsl(0 0% 24%)",
+          "color-bg-chip": "hsl(40 12% 96%)",
+          "color-bg-selection": "hsl(var(--primary) / 0.2)",
+          "color-bg-backdrop": "rgb(7 10 14 / 0.32)",
+          "color-bg-share-card": "#eee8e8",
+          "color-bg-share-card-tag-mask": "#111816",
+          "color-heat-0": "rgba(0, 0, 0, 0.06)",
+          "color-heat-1": "rgba(202, 84, 33, 0.2)",
+          "color-heat-2": "rgba(202, 84, 33, 0.4)",
+          "color-heat-3": "rgba(202, 84, 33, 0.65)",
+          "color-heat-4": "rgba(202, 84, 33, 0.9)",
+          "color-heatmap-today-ring": "rgba(202, 84, 33, 0.55)",
+          "color-bg-hover": "hsl(40 12% 96%)",
+          "color-bg-hover-on-hover": "hsl(40 12% 88%)",
+          "color-text-danger": "#b42318",
+          "color-border-danger": "#b42318",
+          "glass-surface-border": "hsl(0 0% 80%)",
+          "glass-surface-fg": "rgba(15, 23, 42, 0.9)",
+          "glass-surface-muted-fg": "rgba(51, 65, 85, 0.68)"
+        },
+        "dark": {
+          "background": "0 0% 7%",
+          "foreground": "0 0% 98%",
+          "card": "0 0% 12%",
+          "card-foreground": "0 0% 98%",
+          "primary": "0 0% 96%",
+          "primary-foreground": "0 0% 9%",
+          "muted": "0 0% 15%",
+          "muted-foreground": "0 0% 64%",
+          "border": "0 0% 38%",
+          "color-bg-page": "hsl(var(--background))",
+          "color-bg-card": "hsl(var(--card))",
+          "color-bg-raised": "hsl(var(--muted))",
+          "color-bg-primary": "hsl(var(--primary))",
+          "color-bg-selected": "hsl(var(--muted))",
+          "color-text-primary": "hsl(0 0% 98%)",
+          "color-text-secondary": "hsl(0 0% 64%)",
+          "color-text-subtle": "hsl(0 0% 64% / 0.72)",
+          "color-text-placeholder": "rgb(255 255 255 / 0.26)",
+          "color-text-disable": "hsl(0 0% 42%)",
+          "color-text-disable-on-light": "hsl(0 0% 56%)",
+          "color-text-disable-on-dark": "hsl(0 0% 62%)",
+          "color-border-divider": "hsl(0 0% 28%)",
+          "color-border-divider-menu": "hsl(0 0% 28%)",
+          "color-border-divider-menu-on-light": "hsl(0 0% 88%)",
+          "color-border-divider-menu-on-dark": "hsl(0 0% 28%)",
+          "color-border": "hsl(0 0% 20%)",
+          "color-border-emphasis": "hsl(0 0% 50%)",
+          "color-border-accent": "hsl(0 0% 75%)",
+          "color-border-disable": "hsl(0 0% 24%)",
+          "color-border-disable-on-light": "hsl(0 0% 92%)",
+          "color-border-disable-on-dark": "hsl(0 0% 24%)",
+          "color-bg-chip": "hsl(0 0% 13%)",
+          "color-bg-selection": "hsl(var(--primary) / 0.2)",
+          "color-bg-share-card": "#2e2e29",
+          "color-bg-share-card-tag-mask": "#939388",
+          "color-heat-0": "rgba(255, 255, 255, 0.08)",
+          "color-heat-1": "rgba(240, 134, 70, 0.2)",
+          "color-heat-2": "rgba(240, 134, 70, 0.4)",
+          "color-heat-3": "rgba(240, 134, 70, 0.65)",
+          "color-heat-4": "rgba(240, 134, 70, 0.9)",
+          "color-heatmap-today-ring": "rgba(255, 255, 255, 0.38)",
+          "color-bg-hover": "hsl(0 0% 20%)",
+          "color-bg-hover-on-hover": "hsl(0 0% 28%)",
+          "glass-surface-light-border": "hsl(0 0% 80%)",
+          "glass-surface-dark-border": "hsl(0 0% 38%)",
+          "glass-surface-light-fg": "rgba(15, 23, 42, 0.9)",
+          "glass-surface-light-muted-fg": "rgba(51, 65, 85, 0.68)",
+          "glass-surface-dark-fg": "rgba(255, 255, 255, 0.9)",
+          "glass-surface-dark-muted-fg": "rgba(255, 255, 255, 0.72)",
+          "shadow-card": "none",
+          "color-text-danger": "#ff8a7a",
+          "color-border-danger": "#ff8a7a",
+          "glass-surface-border": "hsl(0 0% 38%)",
+          "glass-surface-fg": "rgba(202, 202, 202, 1.0)",
+          "glass-surface-muted-fg": "rgba(255, 255, 255, 0.68)"
+        }
+      },
+      "css": {
+        "@media (min-width: 700px)": {
+          ":root": {
+            "--space-gutter": "var(--space-gutter-normal)"
+          }
+        }
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "bg-blur",
+      "type": "registry:ui",
+      "title": "Bg Blur",
+      "description": "Semantic transparent background plus blur utilities backed by shared Weimo surfaces.",
+      "categories": [
+        "style",
+        "blur"
+      ],
+      "registryDependencies": [
+        "@weimo/style"
+      ],
+      "files": [
+        {
+          "path": "src/components/bg-blur.ts",
+          "type": "registry:ui",
+          "target": "@ui/bg-blur.ts"
+        },
+        {
+          "path": "src/components/bg-blur.css",
+          "type": "registry:ui",
+          "target": "@ui/bg-blur.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "bg-color",
+      "type": "registry:ui",
+      "title": "Bg Color",
+      "description": "Semantic background color utilities and a tone map backed by shared Weimo tokens.",
+      "categories": [
+        "style",
+        "color"
+      ],
+      "registryDependencies": [
+        "@weimo/style"
+      ],
+      "files": [
+        {
+          "path": "src/components/bg-color.ts",
+          "type": "registry:ui",
+          "target": "@ui/bg-color.ts"
+        },
+        {
+          "path": "src/components/bg-color.css",
+          "type": "registry:ui",
+          "target": "@ui/bg-color.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "border-color",
+      "type": "registry:ui",
+      "title": "Border Color",
+      "description": "Semantic border color utilities and a tone map backed by shared Weimo tokens.",
+      "categories": [
+        "style",
+        "color"
+      ],
+      "registryDependencies": [
+        "@weimo/style"
+      ],
+      "files": [
+        {
+          "path": "src/components/border-color.ts",
+          "type": "registry:ui",
+          "target": "@ui/border-color.ts"
+        },
+        {
+          "path": "src/components/border-color.css",
+          "type": "registry:ui",
+          "target": "@ui/border-color.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "border-radius",
+      "type": "registry:ui",
+      "title": "Border Radius",
+      "description": "Semantic border radius scale map backed by shared Weimo radius tokens.",
+      "categories": [
+        "style",
+        "layout"
+      ],
+      "registryDependencies": [
+        "@weimo/style"
+      ],
+      "files": [
+        {
+          "path": "src/components/border-radius.ts",
+          "type": "registry:ui",
+          "target": "@ui/border-radius.ts"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "font-size",
+      "type": "registry:ui",
+      "title": "Font Size",
+      "description": "Semantic font-size utilities and a scale map backed by shared Weimo typography tokens.",
+      "categories": [
+        "style",
+        "typography"
+      ],
+      "registryDependencies": [
+        "@weimo/style"
+      ],
+      "files": [
+        {
+          "path": "src/components/font-size.ts",
+          "type": "registry:ui",
+          "target": "@ui/font-size.ts"
+        },
+        {
+          "path": "src/components/font-size.css",
+          "type": "registry:ui",
+          "target": "@ui/font-size.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "heat-color",
+      "type": "registry:ui",
+      "title": "Heat Color",
+      "description": "Standalone heatmap heat color utilities shared by Heatmap.",
+      "categories": [
+        "display"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/heat-color.tsx",
+          "type": "registry:ui",
+          "target": "@ui/heat-color.tsx"
+        },
+        {
+          "path": "src/components/heatmap/heat-color.tsx",
+          "type": "registry:ui",
+          "target": "@ui/heatmap/heat-color.tsx"
+        },
+        {
+          "path": "src/components/heatmap/heatmap-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/heatmap/heatmap-model.ts"
+        },
+        {
+          "path": "src/components/heat-color.css",
+          "type": "registry:ui",
+          "target": "@ui/heat-color.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [
+        "react-markdown",
+        "remark-gfm",
+        "remark-math",
+        "remark-breaks",
+        "rehype-katex",
+        "katex"
+      ],
+      "name": "md",
+      "title": "Md",
+      "description": "A Markdown style and token inspection wrapper backed by MdRender.",
+      "categories": [
+        "style",
+        "markdown"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/md-render"
+      ],
+      "files": [
+        {
+          "path": "src/components/md.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md.tsx"
+        },
+        {
+          "path": "src/components/md.css",
+          "type": "registry:ui",
+          "target": "@ui/md.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "pressable",
+      "type": "registry:ui",
+      "title": "Pressable",
+      "description": "Interaction feedback tone map for button, menu item, and glass control hover and active states.",
+      "categories": [
+        "style",
+        "action"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/bg-color"
+      ],
+      "files": [
+        {
+          "path": "src/components/pressable.ts",
+          "type": "registry:ui",
+          "target": "@ui/pressable.ts"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "text-color",
+      "type": "registry:ui",
+      "title": "Text Color",
+      "description": "Semantic text color utilities and a tone map backed by shared Weimo tokens.",
+      "categories": [
+        "style",
+        "typography"
+      ],
+      "registryDependencies": [
+        "@weimo/style"
+      ],
+      "files": [
+        {
+          "path": "src/components/text-color.ts",
+          "type": "registry:ui",
+          "target": "@ui/text-color.ts"
+        },
+        {
+          "path": "src/components/text-color.css",
+          "type": "registry:ui",
+          "target": "@ui/text-color.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [],
+      "name": "card-surface",
+      "title": "Card Surface",
+      "description": "A static card material surface that centralizes background, border, radius, and lightweight elevation tokens.",
+      "categories": [
+        "layout",
+        "surface"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/card-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/card-surface.tsx"
+        },
+        {
+          "path": "src/components/card-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/card-surface.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [],
+      "name": "glass-surface",
+      "title": "Glass Surface Surface",
+      "description": "A glass material surface that samples nearby background styles and adapts foreground color.",
+      "categories": [
+        "layout",
+        "surface"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/glass-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.tsx"
+        },
+        {
+          "path": "src/components/glass-surface-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface-model.ts"
+        },
+        {
+          "path": "src/components/glass-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [],
+      "name": "popup-surface",
+      "title": "Popup Surface",
+      "description": "A raised popup material surface for modal and tooltip overlay bodies.",
+      "categories": [
+        "layout",
+        "surface"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/popup-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/popup-surface.tsx"
+        },
+        {
+          "path": "src/components/popup-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/popup-surface.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "name": "action-dialog",
+      "title": "Action Dialog",
+      "description": "A Base UI dialog composed with a Weimo floating top toolbar, optional right actions, and a bottom action bar.",
+      "categories": [
+        "overlay",
+        "action"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/float-bar",
+        "@weimo/bottom-bar",
+        "@weimo/glass-icon-button"
+      ],
+      "files": [
+        {
+          "path": "src/components/action-dialog.tsx",
+          "type": "registry:ui",
+          "target": "@ui/action-dialog.tsx"
+        },
+        {
+          "path": "src/components/action-dialog.css",
+          "type": "registry:ui",
+          "target": "@ui/action-dialog.css"
+        },
+        {
+          "path": "src/components/coss/dialog.tsx",
+          "type": "registry:ui",
+          "target": "@ui/coss/dialog.tsx"
+        },
+        {
+          "path": "src/components/coss/dialog.css",
+          "type": "registry:ui",
+          "target": "@ui/coss/dialog.css"
+        },
+        {
+          "path": "src/components/glass-icon-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-icon-button.tsx"
+        },
+        {
+          "path": "src/components/icon-button-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/icon-button-model.ts"
+        },
+        {
+          "path": "src/components/icon-button.css",
+          "type": "registry:ui",
+          "target": "@ui/icon-button.css"
+        },
+        {
+          "path": "src/components/glass-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.tsx"
+        },
+        {
+          "path": "src/components/glass-surface-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface-model.ts"
+        },
+        {
+          "path": "src/components/glass-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.css"
+        },
+        {
+          "path": "src/components/popup-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/popup-surface.tsx"
+        },
+        {
+          "path": "src/components/popup-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/popup-surface.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "ghost-icon-button",
+      "type": "registry:ui",
+      "title": "Ghost Icon Button",
+      "description": "A circular transparent icon button with shared hover scale and feedback background.",
+      "categories": [
+        "action"
+      ],
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ghost-icon-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/ghost-icon-button.tsx"
+        },
+        {
+          "path": "src/components/icon-button-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/icon-button-model.ts"
+        },
+        {
+          "path": "src/components/icon-button.css",
+          "type": "registry:ui",
+          "target": "@ui/icon-button.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "glass-icon-button",
+      "type": "registry:ui",
+      "title": "Glass Icon Button",
+      "description": "A circular glass icon button that samples the background and adapts foreground and hover feedback.",
+      "categories": [
+        "action"
+      ],
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/glass-icon-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-icon-button.tsx"
+        },
+        {
+          "path": "src/components/icon-button-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/icon-button-model.ts"
+        },
+        {
+          "path": "src/components/icon-button.css",
+          "type": "registry:ui",
+          "target": "@ui/icon-button.css"
+        },
+        {
+          "path": "src/components/glass-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.tsx"
+        },
+        {
+          "path": "src/components/glass-surface-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface-model.ts"
+        },
+        {
+          "path": "src/components/glass-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "menu",
+      "type": "registry:ui",
+      "title": "Menu",
+      "description": "A Coss/Base UI action menu with Weimo frosted popup material and skyline-style scale animation.",
+      "categories": [
+        "action",
+        "overlay"
+      ],
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/menu.tsx",
+          "type": "registry:ui",
+          "target": "@ui/menu.tsx"
+        },
+        {
+          "path": "src/components/menu/menu-variants.ts",
+          "type": "registry:ui",
+          "target": "@ui/menu/menu-variants.ts"
+        },
+        {
+          "path": "src/components/menu.css",
+          "type": "registry:ui",
+          "target": "@ui/menu.css"
+        },
+        {
+          "path": "src/components/glass-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.tsx"
+        },
+        {
+          "path": "src/components/glass-surface-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface-model.ts"
+        },
+        {
+          "path": "src/components/glass-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "name": "mode-button",
+      "title": "Mode Button",
+      "description": "An icon mode button that switches between display and edit actions.",
+      "categories": [
+        "action"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/ghost-icon-button",
+        "@weimo/menu"
+      ],
+      "files": [
+        {
+          "path": "src/components/mode-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/mode-button.tsx"
+        },
+        {
+          "path": "src/components/mode-button.css",
+          "type": "registry:ui",
+          "target": "@ui/mode-button.css"
+        },
+        {
+          "path": "src/components/ghost-icon-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/ghost-icon-button.tsx"
+        },
+        {
+          "path": "src/components/icon-button-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/icon-button-model.ts"
+        },
+        {
+          "path": "src/components/icon-button.css",
+          "type": "registry:ui",
+          "target": "@ui/icon-button.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "text-button",
+      "type": "registry:ui",
+      "title": "Text Button",
+      "description": "A small bordered text button with shared hover, active, and disabled token feedback.",
+      "categories": [
+        "action"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/text-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/text-button.tsx"
+        },
+        {
+          "path": "src/components/text-button.css",
+          "type": "registry:ui",
+          "target": "@ui/text-button.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [],
+      "name": "bottom-bar",
+      "title": "Bottom Bar",
+      "description": "A bottom toolbar built on FloatBar with left and right action slots.",
+      "categories": [
+        "layout",
+        "toolbar"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/float-bar"
+      ],
+      "files": [
+        {
+          "path": "src/components/bottom-bar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/bottom-bar.tsx"
+        },
+        {
+          "path": "src/components/bottom-bar.css",
+          "type": "registry:ui",
+          "target": "@ui/bottom-bar.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "name": "card-tool-bar",
+      "title": "Card Tool Bar",
+      "description": "A card editing bottom toolbar with save action and custom toolbar slot.",
+      "categories": [
+        "action",
+        "toolbar"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/bottom-bar",
+        "@weimo/glass-icon-button"
+      ],
+      "files": [
+        {
+          "path": "src/components/card-tool-bar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/card-tool-bar.tsx"
+        },
+        {
+          "path": "src/components/card-tool-bar.css",
+          "type": "registry:ui",
+          "target": "@ui/card-tool-bar.css"
+        },
+        {
+          "path": "src/components/glass-icon-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-icon-button.tsx"
+        },
+        {
+          "path": "src/components/icon-button-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/icon-button-model.ts"
+        },
+        {
+          "path": "src/components/icon-button.css",
+          "type": "registry:ui",
+          "target": "@ui/icon-button.css"
+        },
+        {
+          "path": "src/components/glass-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.tsx"
+        },
+        {
+          "path": "src/components/glass-surface-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface-model.ts"
+        },
+        {
+          "path": "src/components/glass-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [],
+      "name": "card-top-bar",
+      "title": "Card Top Bar",
+      "description": "A card header bar that unifies display and edit mode controls.",
+      "categories": [
+        "layout",
+        "toolbar"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/mode-button",
+        "@weimo/menu"
+      ],
+      "files": [
+        {
+          "path": "src/components/card-top-bar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/card-top-bar.tsx"
+        },
+        {
+          "path": "src/components/card-top-bar.css",
+          "type": "registry:ui",
+          "target": "@ui/card-top-bar.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [],
+      "name": "float-bar",
+      "title": "Float Bar",
+      "description": "A floating toolbar shell with left, center, and right slots.",
+      "categories": [
+        "layout",
+        "toolbar"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/float-bar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/float-bar.tsx"
+        },
+        {
+          "path": "src/components/float-bar.css",
+          "type": "registry:ui",
+          "target": "@ui/float-bar.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "sidebar",
+      "type": "registry:ui",
+      "title": "Sidebar",
+      "description": "A glass-morphism blank sidebar panel with responsive drawer (mobile) and fixed panel (desktop).",
+      "categories": [
+        "navigation"
+      ],
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/sidebar/index.tsx",
+          "type": "registry:ui",
+          "target": "@ui/sidebar/index.tsx"
+        },
+        {
+          "path": "src/components/sidebar/sidebar-shell.tsx",
+          "type": "registry:ui",
+          "target": "@ui/sidebar/sidebar-shell.tsx"
+        },
+        {
+          "path": "src/components/sidebar/sidebar-shell.css",
+          "type": "registry:ui",
+          "target": "@ui/sidebar/sidebar-shell.css"
+        },
+        {
+          "path": "src/components/glass-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.tsx"
+        },
+        {
+          "path": "src/components/glass-surface-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface-model.ts"
+        },
+        {
+          "path": "src/components/glass-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.css"
+        },
+        {
+          "path": "src/components/card-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/card-surface.tsx"
+        },
+        {
+          "path": "src/components/card-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/card-surface.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "top-bar",
+      "type": "registry:ui",
+      "title": "Top Bar",
+      "description": "A fixed-position blank glass top panel that renders caller-owned children.",
+      "categories": [
+        "navigation"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/top-bar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/top-bar.tsx"
+        },
+        {
+          "path": "src/components/top-bar.css",
+          "type": "registry:ui",
+          "target": "@ui/top-bar.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [],
+      "name": "chip",
+      "title": "Chip",
+      "description": "A neutral chip surface with prefix, content, suffix, and width animation support.",
+      "categories": [
+        "tag",
+        "display"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/chip.tsx",
+          "type": "registry:ui",
+          "target": "@ui/chip.tsx"
+        },
+        {
+          "path": "src/components/chip.css",
+          "type": "registry:ui",
+          "target": "@ui/chip.css"
+        },
+        {
+          "path": "src/components/chip-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/chip-surface.tsx"
+        },
+        {
+          "path": "src/components/chip-surface-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/chip-surface-model.ts"
+        },
+        {
+          "path": "src/components/chip-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/chip-surface.css"
+        },
+        {
+          "path": "src/components/animated-inline-size.tsx",
+          "type": "registry:ui",
+          "target": "@ui/animated-inline-size.tsx"
+        },
+        {
+          "path": "src/components/animated-inline-size-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/animated-inline-size-model.ts"
+        },
+        {
+          "path": "src/components/animated-inline-size.css",
+          "type": "registry:ui",
+          "target": "@ui/animated-inline-size.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [],
+      "name": "chip-button",
+      "title": "Chip Button",
+      "description": "A button-shaped chip surface with default and glass states.",
+      "categories": [
+        "action",
+        "tag"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/chip-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/chip-button.tsx"
+        },
+        {
+          "path": "src/components/chip-button.css",
+          "type": "registry:ui",
+          "target": "@ui/chip-button.css"
+        },
+        {
+          "path": "src/components/chip-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/chip-surface.tsx"
+        },
+        {
+          "path": "src/components/chip-surface-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/chip-surface-model.ts"
+        },
+        {
+          "path": "src/components/chip-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/chip-surface.css"
+        },
+        {
+          "path": "src/components/animated-inline-size.tsx",
+          "type": "registry:ui",
+          "target": "@ui/animated-inline-size.tsx"
+        },
+        {
+          "path": "src/components/animated-inline-size-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/animated-inline-size-model.ts"
+        },
+        {
+          "path": "src/components/animated-inline-size.css",
+          "type": "registry:ui",
+          "target": "@ui/animated-inline-size.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [],
+      "name": "tag-bar",
+      "title": "Tag Bar",
+      "description": "A compact tag bar for displaying and editing tag chips.",
+      "categories": [
+        "tag",
+        "toolbar"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/float-bar",
+        "@weimo/chip-button",
+        "@weimo/tag-picker"
+      ],
+      "files": [
+        {
+          "path": "src/components/tag-bar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/tag-bar.tsx"
+        },
+        {
+          "path": "src/components/tag-bar.css",
+          "type": "registry:ui",
+          "target": "@ui/tag-bar.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "tag-bread",
+      "type": "registry:ui",
+      "title": "Tag Bread",
+      "description": "A frosted-glass tag breadcrumb built on the coss Breadcrumb primitive.",
+      "categories": [
+        "navigation",
+        "tag"
+      ],
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/tag-bread.tsx",
+          "type": "registry:ui",
+          "target": "@ui/tag-bread.tsx"
+        },
+        {
+          "path": "src/components/tag-bread.css",
+          "type": "registry:ui",
+          "target": "@ui/tag-bread.css"
+        },
+        {
+          "path": "src/components/chip-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/chip-surface.tsx"
+        },
+        {
+          "path": "src/components/chip-surface-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/chip-surface-model.ts"
+        },
+        {
+          "path": "src/components/chip-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/chip-surface.css"
+        },
+        {
+          "path": "src/components/animated-inline-size.tsx",
+          "type": "registry:ui",
+          "target": "@ui/animated-inline-size.tsx"
+        },
+        {
+          "path": "src/components/animated-inline-size-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/animated-inline-size-model.ts"
+        },
+        {
+          "path": "src/components/animated-inline-size.css",
+          "type": "registry:ui",
+          "target": "@ui/animated-inline-size.css"
+        },
+        {
+          "path": "src/components/coss/breadcrumb.tsx",
+          "type": "registry:ui",
+          "target": "@ui/coss/breadcrumb.tsx"
+        },
+        {
+          "path": "src/components/coss/breadcrumb.css",
+          "type": "registry:ui",
+          "target": "@ui/coss/breadcrumb.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "tag-picker",
+      "type": "registry:ui",
+      "title": "Tag Picker",
+      "description": "A Skyline-style tag picker dialog supporting insert, update, and pick flows.",
+      "categories": [
+        "input",
+        "overlay"
+      ],
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/glass-icon-button"
+      ],
+      "files": [
+        {
+          "path": "src/components/tag-picker.tsx",
+          "type": "registry:ui",
+          "target": "@ui/tag-picker.tsx"
+        },
+        {
+          "path": "src/components/tag-picker/index.tsx",
+          "type": "registry:ui",
+          "target": "@ui/tag-picker/index.tsx"
+        },
+        {
+          "path": "src/components/tag-picker/tag-picker.tsx",
+          "type": "registry:ui",
+          "target": "@ui/tag-picker/tag-picker.tsx"
+        },
+        {
+          "path": "src/components/tag-picker/use-tag-picker.ts",
+          "type": "registry:ui",
+          "target": "@ui/tag-picker/use-tag-picker.ts"
+        },
+        {
+          "path": "src/components/tag-picker/tag-picker-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/tag-picker/tag-picker-model.ts"
+        },
+        {
+          "path": "src/components/tag-picker/tag-picker.css",
+          "type": "registry:ui",
+          "target": "@ui/tag-picker/tag-picker.css"
+        },
+        {
+          "path": "src/components/action-dialog.tsx",
+          "type": "registry:ui",
+          "target": "@ui/action-dialog.tsx"
+        },
+        {
+          "path": "src/components/action-dialog.css",
+          "type": "registry:ui",
+          "target": "@ui/action-dialog.css"
+        },
+        {
+          "path": "src/components/float-bar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/float-bar.tsx"
+        },
+        {
+          "path": "src/components/float-bar.css",
+          "type": "registry:ui",
+          "target": "@ui/float-bar.css"
+        },
+        {
+          "path": "src/components/bottom-bar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/bottom-bar.tsx"
+        },
+        {
+          "path": "src/components/bottom-bar.css",
+          "type": "registry:ui",
+          "target": "@ui/bottom-bar.css"
+        },
+        {
+          "path": "src/components/coss/dialog.tsx",
+          "type": "registry:ui",
+          "target": "@ui/coss/dialog.tsx"
+        },
+        {
+          "path": "src/components/coss/dialog.css",
+          "type": "registry:ui",
+          "target": "@ui/coss/dialog.css"
+        },
+        {
+          "path": "src/components/coss/input-group.tsx",
+          "type": "registry:ui",
+          "target": "@ui/coss/input-group.tsx"
+        },
+        {
+          "path": "src/components/coss/input-group.css",
+          "type": "registry:ui",
+          "target": "@ui/coss/input-group.css"
+        },
+        {
+          "path": "src/components/coss/scroll-area.tsx",
+          "type": "registry:ui",
+          "target": "@ui/coss/scroll-area.tsx"
+        },
+        {
+          "path": "src/components/coss/scroll-area.css",
+          "type": "registry:ui",
+          "target": "@ui/coss/scroll-area.css"
+        },
+        {
+          "path": "src/components/glass-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.tsx"
+        },
+        {
+          "path": "src/components/glass-surface-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface-model.ts"
+        },
+        {
+          "path": "src/components/glass-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.css"
+        },
+        {
+          "path": "src/components/glass-icon-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-icon-button.tsx"
+        },
+        {
+          "path": "src/components/icon-button-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/icon-button-model.ts"
+        },
+        {
+          "path": "src/components/icon-button.css",
+          "type": "registry:ui",
+          "target": "@ui/icon-button.css"
+        },
+        {
+          "path": "src/components/popup-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/popup-surface.tsx"
+        },
+        {
+          "path": "src/components/popup-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/popup-surface.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "tag-tree",
+      "type": "registry:ui",
+      "title": "Tag Tree",
+      "description": "A sidebar-only tag navigation tree with Skyline-like guide lines, selected rows, and row action menus.",
+      "categories": [
+        "navigation"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/ghost-icon-button",
+        "@weimo/menu"
+      ],
+      "files": [
+        {
+          "path": "src/components/tag-tree.tsx",
+          "type": "registry:ui",
+          "target": "@ui/tag-tree.tsx"
+        },
+        {
+          "path": "src/components/tag-tree/index.tsx",
+          "type": "registry:ui",
+          "target": "@ui/tag-tree/index.tsx"
+        },
+        {
+          "path": "src/components/tag-tree/tag-tree.tsx",
+          "type": "registry:ui",
+          "target": "@ui/tag-tree/tag-tree.tsx"
+        },
+        {
+          "path": "src/components/tag-tree/tag-tree-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/tag-tree/tag-tree-model.ts"
+        },
+        {
+          "path": "src/components/tag-tree/use-tag-tree.ts",
+          "type": "registry:ui",
+          "target": "@ui/tag-tree/use-tag-tree.ts"
+        },
+        {
+          "path": "src/components/tag-tree/tag-tree-row.tsx",
+          "type": "registry:ui",
+          "target": "@ui/tag-tree/tag-tree-row.tsx"
+        },
+        {
+          "path": "src/components/tag-tree/tag-tree.css",
+          "type": "registry:ui",
+          "target": "@ui/tag-tree/tag-tree.css"
+        },
+        {
+          "path": "src/components/ghost-icon-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/ghost-icon-button.tsx"
+        },
+        {
+          "path": "src/components/icon-button-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/icon-button-model.ts"
+        },
+        {
+          "path": "src/components/icon-button.css",
+          "type": "registry:ui",
+          "target": "@ui/icon-button.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "name": "tag-tree-row",
+      "title": "Tag Tree Row",
+      "description": "A single animated tag tree row with selection, toggle, and optional menu controls.",
+      "categories": [
+        "tag",
+        "navigation"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/ghost-icon-button",
+        "@weimo/menu"
+      ],
+      "files": [
+        {
+          "path": "src/components/tag-tree-row.tsx",
+          "type": "registry:ui",
+          "target": "@ui/tag-tree-row.tsx"
+        },
+        {
+          "path": "src/components/tag-tree/tag-tree-row.tsx",
+          "type": "registry:ui",
+          "target": "@ui/tag-tree/tag-tree-row.tsx"
+        },
+        {
+          "path": "src/components/tag-tree/tag-tree-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/tag-tree/tag-tree-model.ts"
+        },
+        {
+          "path": "src/components/tag-tree/tag-tree.tsx",
+          "type": "registry:ui",
+          "target": "@ui/tag-tree/tag-tree.tsx"
+        },
+        {
+          "path": "src/components/tag-tree/use-tag-tree.ts",
+          "type": "registry:ui",
+          "target": "@ui/tag-tree/use-tag-tree.ts"
+        },
+        {
+          "path": "src/components/tag-tree/tag-tree.css",
+          "type": "registry:ui",
+          "target": "@ui/tag-tree/tag-tree.css"
+        },
+        {
+          "path": "src/components/ghost-icon-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/ghost-icon-button.tsx"
+        },
+        {
+          "path": "src/components/icon-button-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/icon-button-model.ts"
+        },
+        {
+          "path": "src/components/icon-button.css",
+          "type": "registry:ui",
+          "target": "@ui/icon-button.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "A Weimo note card that owns view/edit state and composes CardTopBar, MdView, and TagBar.",
+      "categories": [
+        "surface",
+        "editor"
+      ],
+      "dependencies": [
+        "@base-ui/react",
+        "@tiptap/core",
+        "@tiptap/pm",
+        "@tiptap/react",
+        "@tiptap/starter-kit",
+        "@tiptap/markdown",
+        "@tiptap/extension-list",
+        "@tiptap/extension-placeholder",
+        "@tiptap/extension-task-list",
+        "@tiptap/extension-task-item",
+        "@tiptap/extension-table",
+        "@tiptap/extension-table-row",
+        "@tiptap/extension-table-header",
+        "@tiptap/extension-table-cell",
+        "@tiptap/extension-mathematics",
+        "react-markdown",
+        "remark-gfm",
+        "remark-math",
+        "remark-parse",
+        "remark-stringify",
+        "remark-breaks",
+        "unified",
+        "rehype-raw",
+        "rehype-sanitize",
+        "rehype-katex",
+        "katex",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/card.tsx",
+          "type": "registry:ui",
+          "target": "@ui/card.tsx"
+        },
+        {
+          "path": "src/components/card-edit-state-machine.ts",
+          "type": "registry:ui",
+          "target": "@ui/card-edit-state-machine.ts"
+        },
+        {
+          "path": "src/components/use-card-edit-transition.ts",
+          "type": "registry:ui",
+          "target": "@ui/use-card-edit-transition.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-content-format.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-content-format.ts"
+        },
+        {
+          "path": "src/components/card-save-shortcut.ts",
+          "type": "registry:ui",
+          "target": "@ui/card-save-shortcut.ts"
+        },
+        {
+          "path": "src/components/card-resolvers.tsx",
+          "type": "registry:ui",
+          "target": "@ui/card-resolvers.tsx"
+        },
+        {
+          "path": "src/components/deferred-md-editor-toolbar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/deferred-md-editor-toolbar.tsx"
+        },
+        {
+          "path": "src/components/use-card-draft.ts",
+          "type": "registry:ui",
+          "target": "@ui/use-card-draft.ts"
+        },
+        {
+          "path": "src/components/card-layout-measurement.ts",
+          "type": "registry:ui",
+          "target": "@ui/card-layout-measurement.ts"
+        },
+        {
+          "path": "src/components/use-height-transition.ts",
+          "type": "registry:ui",
+          "target": "@ui/use-height-transition.ts"
+        },
+        {
+          "path": "src/components/card-editable.css",
+          "type": "registry:ui",
+          "target": "@ui/card-editable.css"
+        },
+        {
+          "path": "src/components/card.css",
+          "type": "registry:ui",
+          "target": "@ui/card.css"
+        },
+        {
+          "path": "src/components/card-top-bar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/card-top-bar.tsx"
+        },
+        {
+          "path": "src/components/card-top-bar.css",
+          "type": "registry:ui",
+          "target": "@ui/card-top-bar.css"
+        },
+        {
+          "path": "src/components/mode-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/mode-button.tsx"
+        },
+        {
+          "path": "src/components/mode-button.css",
+          "type": "registry:ui",
+          "target": "@ui/mode-button.css"
+        },
+        {
+          "path": "src/components/card-tool-bar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/card-tool-bar.tsx"
+        },
+        {
+          "path": "src/components/card-tool-bar.css",
+          "type": "registry:ui",
+          "target": "@ui/card-tool-bar.css"
+        },
+        {
+          "path": "src/components/md-view.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-view.tsx"
+        },
+        {
+          "path": "src/components/md-render.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-render.tsx"
+        },
+        {
+          "path": "src/components/markdown-option-grid.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-option-grid.ts"
+        },
+        {
+          "path": "src/components/markdown-parenthesized-list.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-parenthesized-list.ts"
+        },
+        {
+          "path": "src/components/markdown-sanitize.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-sanitize.ts"
+        },
+        {
+          "path": "src/components/markdown-content.css",
+          "type": "registry:ui",
+          "target": "@ui/markdown-content.css"
+        },
+        {
+          "path": "src/components/markdown-centered-quote.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-centered-quote.ts"
+        },
+        {
+          "path": "src/components/markdown-image-size.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-image-size.ts"
+        },
+        {
+          "path": "src/components/markdown-image-renderer.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-image-renderer.ts"
+        },
+        {
+          "path": "src/components/md-editor.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-editor.tsx"
+        },
+        {
+          "path": "src/components/md-editor/index.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/index.tsx"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-types.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-types.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor.tsx"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-toolbar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-toolbar.tsx"
+        },
+        {
+          "path": "src/components/md-editor/use-md-editor.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/use-md-editor.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-extensions.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-extensions.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-option-grid.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-option-grid.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-list-image-layout.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-list-image-layout.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-table.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-table.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-ordered-list.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-ordered-list.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-block-math.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-block-math.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-inline-math.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-inline-math.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-math-view.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-math-view.tsx"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-math-conversion.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-math-conversion.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-centered-quote.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-centered-quote.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-image.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-image.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-image-view.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-image-view.tsx"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-markdown.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-markdown.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-save-keymap.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-save-keymap.ts"
+        },
+        {
+          "path": "src/components/md-editor/math-editor.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/math-editor.tsx"
+        },
+        {
+          "path": "src/components/md-editor/md-editor.css",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor.css"
+        },
+        {
+          "path": "src/components/tag-bar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/tag-bar.tsx"
+        },
+        {
+          "path": "src/components/tag-bar.css",
+          "type": "registry:ui",
+          "target": "@ui/tag-bar.css"
+        },
+        {
+          "path": "src/components/chip-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/chip-button.tsx"
+        },
+        {
+          "path": "src/components/chip-button.css",
+          "type": "registry:ui",
+          "target": "@ui/chip-button.css"
+        },
+        {
+          "path": "src/components/chip-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/chip-surface.tsx"
+        },
+        {
+          "path": "src/components/chip-surface-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/chip-surface-model.ts"
+        },
+        {
+          "path": "src/components/chip-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/chip-surface.css"
+        },
+        {
+          "path": "src/components/animated-inline-size.tsx",
+          "type": "registry:ui",
+          "target": "@ui/animated-inline-size.tsx"
+        },
+        {
+          "path": "src/components/animated-inline-size-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/animated-inline-size-model.ts"
+        },
+        {
+          "path": "src/components/animated-inline-size.css",
+          "type": "registry:ui",
+          "target": "@ui/animated-inline-size.css"
+        },
+        {
+          "path": "src/components/tag-picker.tsx",
+          "type": "registry:ui",
+          "target": "@ui/tag-picker.tsx"
+        },
+        {
+          "path": "src/components/tag-picker/index.tsx",
+          "type": "registry:ui",
+          "target": "@ui/tag-picker/index.tsx"
+        },
+        {
+          "path": "src/components/tag-picker/tag-picker.tsx",
+          "type": "registry:ui",
+          "target": "@ui/tag-picker/tag-picker.tsx"
+        },
+        {
+          "path": "src/components/tag-picker/use-tag-picker.ts",
+          "type": "registry:ui",
+          "target": "@ui/tag-picker/use-tag-picker.ts"
+        },
+        {
+          "path": "src/components/tag-picker/tag-picker-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/tag-picker/tag-picker-model.ts"
+        },
+        {
+          "path": "src/components/tag-picker/tag-picker.css",
+          "type": "registry:ui",
+          "target": "@ui/tag-picker/tag-picker.css"
+        },
+        {
+          "path": "src/components/action-dialog.tsx",
+          "type": "registry:ui",
+          "target": "@ui/action-dialog.tsx"
+        },
+        {
+          "path": "src/components/action-dialog.css",
+          "type": "registry:ui",
+          "target": "@ui/action-dialog.css"
+        },
+        {
+          "path": "src/components/float-bar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/float-bar.tsx"
+        },
+        {
+          "path": "src/components/float-bar.css",
+          "type": "registry:ui",
+          "target": "@ui/float-bar.css"
+        },
+        {
+          "path": "src/components/bottom-bar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/bottom-bar.tsx"
+        },
+        {
+          "path": "src/components/bottom-bar.css",
+          "type": "registry:ui",
+          "target": "@ui/bottom-bar.css"
+        },
+        {
+          "path": "src/components/icon-button.css",
+          "type": "registry:ui",
+          "target": "@ui/icon-button.css"
+        },
+        {
+          "path": "src/components/menu.tsx",
+          "type": "registry:ui",
+          "target": "@ui/menu.tsx"
+        },
+        {
+          "path": "src/components/menu.css",
+          "type": "registry:ui",
+          "target": "@ui/menu.css"
+        },
+        {
+          "path": "src/components/menu/menu-variants.ts",
+          "type": "registry:ui",
+          "target": "@ui/menu/menu-variants.ts"
+        },
+        {
+          "path": "src/components/coss/dialog.tsx",
+          "type": "registry:ui",
+          "target": "@ui/coss/dialog.tsx"
+        },
+        {
+          "path": "src/components/coss/dialog.css",
+          "type": "registry:ui",
+          "target": "@ui/coss/dialog.css"
+        },
+        {
+          "path": "src/components/coss/button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/coss/button.tsx"
+        },
+        {
+          "path": "src/components/coss/button.css",
+          "type": "registry:ui",
+          "target": "@ui/coss/button.css"
+        },
+        {
+          "path": "src/components/coss/input-group.tsx",
+          "type": "registry:ui",
+          "target": "@ui/coss/input-group.tsx"
+        },
+        {
+          "path": "src/components/coss/input-group.css",
+          "type": "registry:ui",
+          "target": "@ui/coss/input-group.css"
+        },
+        {
+          "path": "src/components/coss/scroll-area.tsx",
+          "type": "registry:ui",
+          "target": "@ui/coss/scroll-area.tsx"
+        },
+        {
+          "path": "src/components/coss/scroll-area.css",
+          "type": "registry:ui",
+          "target": "@ui/coss/scroll-area.css"
+        },
+        {
+          "path": "src/components/coss/tabs.tsx",
+          "type": "registry:ui",
+          "target": "@ui/coss/tabs.tsx"
+        },
+        {
+          "path": "src/components/coss/tabs.css",
+          "type": "registry:ui",
+          "target": "@ui/coss/tabs.css"
+        },
+        {
+          "path": "src/components/coss/toolbar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/coss/toolbar.tsx"
+        },
+        {
+          "path": "src/components/coss/tooltip.tsx",
+          "type": "registry:ui",
+          "target": "@ui/coss/tooltip.tsx"
+        },
+        {
+          "path": "src/components/coss/tooltip.css",
+          "type": "registry:ui",
+          "target": "@ui/coss/tooltip.css"
+        },
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "@ui/lib/utils.ts"
+        },
+        {
+          "path": "src/components/glass-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.tsx"
+        },
+        {
+          "path": "src/components/glass-surface-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface-model.ts"
+        },
+        {
+          "path": "src/components/glass-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.css"
+        },
+        {
+          "path": "src/components/glass-icon-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-icon-button.tsx"
+        },
+        {
+          "path": "src/components/icon-button-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/icon-button-model.ts"
+        },
+        {
+          "path": "src/components/ghost-icon-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/ghost-icon-button.tsx"
+        },
+        {
+          "path": "src/components/card-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/card-surface.tsx"
+        },
+        {
+          "path": "src/components/card-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/card-surface.css"
+        },
+        {
+          "path": "src/components/popup-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/popup-surface.tsx"
+        },
+        {
+          "path": "src/components/popup-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/popup-surface.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "card-composer",
+      "type": "registry:ui",
+      "title": "Card Composer",
+      "description": "A new-note composer shell that reuses Card editing, focus, and height-transition behavior.",
+      "categories": [
+        "surface",
+        "editor"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/card",
+        "@weimo/ghost-icon-button"
+      ],
+      "files": [
+        {
+          "path": "src/components/card-composer.tsx",
+          "type": "registry:ui",
+          "target": "@ui/card-composer.tsx"
+        },
+        {
+          "path": "src/components/composer-shell.tsx",
+          "type": "registry:ui",
+          "target": "@ui/composer-shell.tsx"
+        },
+        {
+          "path": "src/components/card-composer.css",
+          "type": "registry:ui",
+          "target": "@ui/card-composer.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "name": "math-editor",
+      "title": "Math Editor",
+      "description": "A dialog editor for inline and block LaTeX formulas used by MdEditor.",
+      "categories": [
+        "markdown",
+        "overlay"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/action-dialog",
+        "@weimo/glass-icon-button"
+      ],
+      "files": [
+        {
+          "path": "src/components/math-editor.tsx",
+          "type": "registry:ui",
+          "target": "@ui/math-editor.tsx"
+        },
+        {
+          "path": "src/components/md-editor/math-editor.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/math-editor.tsx"
+        },
+        {
+          "path": "src/components/coss/dialog.tsx",
+          "type": "registry:ui",
+          "target": "@ui/coss/dialog.tsx"
+        },
+        {
+          "path": "src/components/coss/dialog.css",
+          "type": "registry:ui",
+          "target": "@ui/coss/dialog.css"
+        },
+        {
+          "path": "src/components/glass-icon-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-icon-button.tsx"
+        },
+        {
+          "path": "src/components/icon-button-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/icon-button-model.ts"
+        },
+        {
+          "path": "src/components/icon-button.css",
+          "type": "registry:ui",
+          "target": "@ui/icon-button.css"
+        },
+        {
+          "path": "src/components/glass-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.tsx"
+        },
+        {
+          "path": "src/components/glass-surface-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface-model.ts"
+        },
+        {
+          "path": "src/components/glass-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.css"
+        },
+        {
+          "path": "src/components/popup-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/popup-surface.tsx"
+        },
+        {
+          "path": "src/components/popup-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/popup-surface.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react",
+        "@tiptap/core",
+        "@tiptap/pm",
+        "@tiptap/react",
+        "@tiptap/starter-kit",
+        "@tiptap/markdown",
+        "@tiptap/extension-list",
+        "@tiptap/extension-placeholder",
+        "@tiptap/extension-task-list",
+        "@tiptap/extension-task-item",
+        "@tiptap/extension-table",
+        "@tiptap/extension-table-row",
+        "@tiptap/extension-table-header",
+        "@tiptap/extension-table-cell",
+        "@tiptap/extension-mathematics",
+        "lucide-react"
+      ],
+      "name": "md-editor",
+      "title": "Md Editor",
+      "description": "A controlled markdown editor with TipTap, math editing, toolbar actions, and save shortcuts.",
+      "categories": [
+        "markdown",
+        "input"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/action-dialog",
+        "@weimo/menu",
+        "@weimo/glass-icon-button"
+      ],
+      "files": [
+        {
+          "path": "src/components/md-editor.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-editor.tsx"
+        },
+        {
+          "path": "src/components/md-editor/index.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/index.tsx"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-types.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-types.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor.tsx"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-content-format.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-content-format.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-toolbar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-toolbar.tsx"
+        },
+        {
+          "path": "src/components/md-editor/use-md-editor.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/use-md-editor.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-extensions.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-extensions.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-option-grid.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-option-grid.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-list-image-layout.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-list-image-layout.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-table.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-table.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-ordered-list.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-ordered-list.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-block-math.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-block-math.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-inline-math.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-inline-math.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-math-view.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-math-view.tsx"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-math-conversion.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-math-conversion.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-centered-quote.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-centered-quote.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-image.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-image.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-image-view.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-image-view.tsx"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-markdown.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-markdown.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-save-keymap.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-save-keymap.ts"
+        },
+        {
+          "path": "src/components/md-editor/math-editor.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/math-editor.tsx"
+        },
+        {
+          "path": "src/components/md-editor/md-editor.css",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor.css"
+        },
+        {
+          "path": "src/components/markdown-centered-quote.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-centered-quote.ts"
+        },
+        {
+          "path": "src/components/markdown-image-size.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-image-size.ts"
+        },
+        {
+          "path": "src/components/markdown-image-renderer.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-image-renderer.ts"
+        },
+        {
+          "path": "src/components/markdown-parenthesized-list.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-parenthesized-list.ts"
+        },
+        {
+          "path": "src/components/markdown-option-grid.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-option-grid.ts"
+        },
+        {
+          "path": "src/components/markdown-content.css",
+          "type": "registry:ui",
+          "target": "@ui/markdown-content.css"
+        },
+        {
+          "path": "src/components/coss/button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/coss/button.tsx"
+        },
+        {
+          "path": "src/components/coss/button.css",
+          "type": "registry:ui",
+          "target": "@ui/coss/button.css"
+        },
+        {
+          "path": "src/components/coss/toolbar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/coss/toolbar.tsx"
+        },
+        {
+          "path": "src/components/coss/tooltip.tsx",
+          "type": "registry:ui",
+          "target": "@ui/coss/tooltip.tsx"
+        },
+        {
+          "path": "src/components/coss/tooltip.css",
+          "type": "registry:ui",
+          "target": "@ui/coss/tooltip.css"
+        },
+        {
+          "path": "src/components/glass-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.tsx"
+        },
+        {
+          "path": "src/components/glass-surface-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface-model.ts"
+        },
+        {
+          "path": "src/components/glass-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.css"
+        },
+        {
+          "path": "src/components/glass-icon-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-icon-button.tsx"
+        },
+        {
+          "path": "src/components/icon-button-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/icon-button-model.ts"
+        },
+        {
+          "path": "src/components/icon-button.css",
+          "type": "registry:ui",
+          "target": "@ui/icon-button.css"
+        },
+        {
+          "path": "src/components/popup-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/popup-surface.tsx"
+        },
+        {
+          "path": "src/components/popup-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/popup-surface.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [
+        "react-markdown",
+        "remark-gfm",
+        "remark-math",
+        "remark-breaks",
+        "rehype-raw",
+        "rehype-sanitize",
+        "rehype-katex",
+        "katex"
+      ],
+      "name": "md-render",
+      "title": "Md Render",
+      "description": "A markdown renderer with Weimo markdown styling, math, tables, and centered quote support.",
+      "categories": [
+        "markdown",
+        "display"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/md-render.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-render.tsx"
+        },
+        {
+          "path": "src/components/markdown-option-grid.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-option-grid.ts"
+        },
+        {
+          "path": "src/components/markdown-parenthesized-list.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-parenthesized-list.ts"
+        },
+        {
+          "path": "src/components/markdown-sanitize.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-sanitize.ts"
+        },
+        {
+          "path": "src/components/markdown-centered-quote.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-centered-quote.ts"
+        },
+        {
+          "path": "src/components/markdown-image-size.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-image-size.ts"
+        },
+        {
+          "path": "src/components/markdown-image-renderer.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-image-renderer.ts"
+        },
+        {
+          "path": "src/components/markdown-content.css",
+          "type": "registry:ui",
+          "target": "@ui/markdown-content.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [
+        "remark-gfm",
+        "remark-math",
+        "remark-parse",
+        "remark-stringify",
+        "unified"
+      ],
+      "name": "md-view",
+      "title": "Md View",
+      "description": "A markdown view/edit bridge that swaps MdRender and MdEditor while preserving measured height.",
+      "categories": [
+        "markdown",
+        "display",
+        "input"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/md-editor",
+        "@weimo/md-render"
+      ],
+      "files": [
+        {
+          "path": "src/components/md-view.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-view.tsx"
+        },
+        {
+          "path": "src/components/md-view.css",
+          "type": "registry:ui",
+          "target": "@ui/md-view.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "share-card",
+      "type": "registry:ui",
+      "title": "Share Card",
+      "description": "A Skyline-style note share paper with markdown, tags, date, nickname, and brand footer.",
+      "categories": [
+        "surface"
+      ],
+      "dependencies": [
+        "react-markdown",
+        "remark-gfm",
+        "remark-math",
+        "remark-breaks",
+        "rehype-raw",
+        "rehype-sanitize",
+        "rehype-katex",
+        "katex",
+        "lunar-javascript"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/share-card.tsx",
+          "type": "registry:ui",
+          "target": "@ui/share-card.tsx"
+        },
+        {
+          "path": "src/components/share-card.css",
+          "type": "registry:ui",
+          "target": "@ui/share-card.css"
+        },
+        {
+          "path": "src/components/share-card-date.ts",
+          "type": "registry:ui",
+          "target": "@ui/share-card-date.ts"
+        },
+        {
+          "path": "src/components/lunar-javascript.d.ts",
+          "type": "registry:ui",
+          "target": "@ui/lunar-javascript.d.ts"
+        },
+        {
+          "path": "src/components/md-render.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-render.tsx"
+        },
+        {
+          "path": "src/components/markdown-option-grid.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-option-grid.ts"
+        },
+        {
+          "path": "src/components/markdown-parenthesized-list.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-parenthesized-list.ts"
+        },
+        {
+          "path": "src/components/markdown-sanitize.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-sanitize.ts"
+        },
+        {
+          "path": "src/components/markdown-content.css",
+          "type": "registry:ui",
+          "target": "@ui/markdown-content.css"
+        },
+        {
+          "path": "src/components/markdown-centered-quote.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-centered-quote.ts"
+        },
+        {
+          "path": "src/components/markdown-image-size.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-image-size.ts"
+        },
+        {
+          "path": "src/components/markdown-image-renderer.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-image-renderer.ts"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "canvas-transparency",
+      "type": "registry:ui",
+      "title": "Canvas Transparency",
+      "description": "A Canvas-based image component that generates transparent PNG variants for light and dark backgrounds.",
+      "categories": [
+        "media"
+      ],
+      "registryDependencies": [
+        "@weimo/style"
+      ],
+      "files": [
+        {
+          "path": "src/components/canvas-transparency.tsx",
+          "type": "registry:ui",
+          "target": "@ui/canvas-transparency.tsx"
+        },
+        {
+          "path": "src/components/canvas-transparency-cache.ts",
+          "type": "registry:ui",
+          "target": "@ui/canvas-transparency-cache.ts"
+        },
+        {
+          "path": "src/components/canvas-transparency-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/canvas-transparency-model.ts"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "image-uploader",
+      "type": "registry:ui",
+      "title": "Image Uploader",
+      "description": "A controlled image upload drop zone with OCR-demo picker and clipboard paste handling.",
+      "categories": [
+        "input"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/image-view"
+      ],
+      "files": [
+        {
+          "path": "src/components/image-uploader.tsx",
+          "type": "registry:ui",
+          "target": "@ui/image-uploader.tsx"
+        },
+        {
+          "path": "src/components/image-uploader.css",
+          "type": "registry:ui",
+          "target": "@ui/image-uploader.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "image-view",
+      "type": "registry:ui",
+      "title": "Image View",
+      "description": "An image preview and pannable detail viewport with 100%, fit-width, and fit-height display modes.",
+      "categories": [
+        "media"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/action-dialog",
+        "@weimo/glass-icon-button",
+        "@weimo/menu"
+      ],
+      "files": [
+        {
+          "path": "src/components/image-view.tsx",
+          "type": "registry:ui",
+          "target": "@ui/image-view.tsx"
+        },
+        {
+          "path": "src/components/image-view.css",
+          "type": "registry:ui",
+          "target": "@ui/image-view.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "ocr-card",
+      "type": "registry:ui",
+      "title": "Ocr Card",
+      "description": "An editable OCR card that reuses Card editing chrome while switching between source image and Markdown recognition results.",
+      "categories": [
+        "media",
+        "card"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/card",
+        "@weimo/image-view",
+        "@weimo/ocr-detail"
+      ],
+      "files": [
+        {
+          "path": "src/components/ocr-card.tsx",
+          "type": "registry:ui",
+          "target": "@ui/ocr-card.tsx"
+        },
+        {
+          "path": "src/components/ocr-card.css",
+          "type": "registry:ui",
+          "target": "@ui/ocr-card.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "ocr-composer",
+      "type": "registry:ui",
+      "title": "Ocr Composer",
+      "description": "An OCR image composer that keeps the CardComposer shell and bottom toolbar while replacing the text editor with ImageUploader.",
+      "categories": [
+        "input",
+        "editor"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/card-composer",
+        "@weimo/image-uploader",
+        "@weimo/glass-icon-button"
+      ],
+      "files": [
+        {
+          "path": "src/components/ocr-composer.tsx",
+          "type": "registry:ui",
+          "target": "@ui/ocr-composer.tsx"
+        },
+        {
+          "path": "src/components/ocr-composer.css",
+          "type": "registry:ui",
+          "target": "@ui/ocr-composer.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "ocr-detail",
+      "type": "registry:ui",
+      "title": "Ocr Detail",
+      "description": "A wide OCR correction dialog with a natural-size image pane and editable Markdown output powered by Card.",
+      "categories": [
+        "input",
+        "editor",
+        "overlay"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/action-dialog",
+        "@weimo/card",
+        "@weimo/image-view"
+      ],
+      "files": [
+        {
+          "path": "src/components/ocr-detail.tsx",
+          "type": "registry:ui",
+          "target": "@ui/ocr-detail.tsx"
+        },
+        {
+          "path": "src/components/ocr-detail.css",
+          "type": "registry:ui",
+          "target": "@ui/ocr-detail.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "heatmap",
+      "type": "registry:ui",
+      "title": "Heatmap",
+      "description": "A clickable 13-week Skyline-style sidebar activity heatmap.",
+      "categories": [
+        "display",
+        "navigation"
+      ],
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/heatmap.tsx",
+          "type": "registry:ui",
+          "target": "@ui/heatmap.tsx"
+        },
+        {
+          "path": "src/components/heatmap/index.tsx",
+          "type": "registry:ui",
+          "target": "@ui/heatmap/index.tsx"
+        },
+        {
+          "path": "src/components/heatmap/heatmap.tsx",
+          "type": "registry:ui",
+          "target": "@ui/heatmap/heatmap.tsx"
+        },
+        {
+          "path": "src/components/heatmap/heat-color.tsx",
+          "type": "registry:ui",
+          "target": "@ui/heatmap/heat-color.tsx"
+        },
+        {
+          "path": "src/components/heatmap/heatmap-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/heatmap/heatmap-model.ts"
+        },
+        {
+          "path": "src/components/heat-color.css",
+          "type": "registry:ui",
+          "target": "@ui/heat-color.css"
+        },
+        {
+          "path": "src/components/heatmap/heatmap.css",
+          "type": "registry:ui",
+          "target": "@ui/heatmap/heatmap.css"
+        },
+        {
+          "path": "src/components/coss/tooltip.tsx",
+          "type": "registry:ui",
+          "target": "@ui/coss/tooltip.tsx"
+        },
+        {
+          "path": "src/components/coss/tooltip.css",
+          "type": "registry:ui",
+          "target": "@ui/coss/tooltip.css"
+        },
+        {
+          "path": "src/components/popup-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/popup-surface.tsx"
+        },
+        {
+          "path": "src/components/popup-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/popup-surface.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "stat-group",
+      "type": "registry:ui",
+      "title": "Stat Group",
+      "description": "A three-column metrics row matching the Skyline sidebar notes, words, and days statistics.",
+      "categories": [
+        "display"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/stat-group.tsx",
+          "type": "registry:ui",
+          "target": "@ui/stat-group.tsx"
+        },
+        {
+          "path": "src/components/stat-group.css",
+          "type": "registry:ui",
+          "target": "@ui/stat-group.css"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+@layer components {
+  .heatmap {
+    --heatmap-cell-size: 15px;
+    --heatmap-gap: 4px;
+    --heatmap-cell-radius: var(--radius-xs);
+  }
+
+  .heatmap {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding: 12px 16px;
+  }
+
+  .heatmap__grid {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .heatmap__column {
+    display: flex;
+    width: var(--heatmap-cell-size);
+    flex-direction: column;
+    margin-right: var(--heatmap-gap);
+  }
+
+  .heatmap__column:last-child {
+    margin-right: 0;
+  }
+
+  .heatmap__cell {
+    width: var(--heatmap-cell-size);
+    height: var(--heatmap-cell-size);
+    margin: 0 0 var(--heatmap-gap);
+    padding: 0;
+    border: 0;
+    border-radius: var(--heatmap-cell-radius);
+    background: var(--color-border);
+    cursor: pointer;
+    transition:
+      opacity 160ms ease,
+      transform 160ms ease;
+  }
+
+  .heatmap__cell:hover {
+    opacity: 0.82;
+  }
+
+  .heatmap__cell:focus-visible {
+    outline: 2px solid var(--color-text-primary);
+    outline-offset: 2px;
+  }
+
+  .heatmap__cell--active {
+    box-shadow: 0 0 0 1.5px var(--color-text-primary);
+  }
+
+  .heatmap__cell--today {
+    box-shadow: inset 0 0 0 1px var(--color-heatmap-today-ring);
+  }
+
+  .heatmap__cell--today.heatmap__cell--active {
+    box-shadow:
+      inset 0 0 0 1px var(--color-heatmap-today-ring),
+      0 0 0 1.5px var(--color-text-primary);
+  }
+
+  .heatmap__month,
+  .heatmap__month-spacer {
+    height: var(--heatmap-cell-size);
+    margin-top: var(--heatmap-gap);
+    line-height: var(--heatmap-cell-size);
+  }
+
+  .heatmap__month {
+    overflow: visible;
+    color: var(--color-text-placeholder);
+    font-size: var(--font-size-2xs);
+    white-space: nowrap;
+  }
+
+  .heatmap__month-spacer {
+    pointer-events: none;
+  }
+}
+
+button.heatmap__cell {
+  color: inherit;
+  font: inherit;
+}

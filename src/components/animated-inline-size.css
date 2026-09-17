@@ -1,0 +1,17 @@
+@layer components {
+  .animated-inline-size__measure {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    inline-size: max-content;
+    max-inline-size: none;
+    overflow: visible;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .animated-inline-size__measure > * {
+    width: max-content;
+    max-width: none;
+  }
+}

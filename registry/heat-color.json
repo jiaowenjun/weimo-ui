@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "heat-color",
+  "type": "registry:ui",
+  "title": "Heat Color",
+  "description": "Standalone heatmap heat color utilities shared by Heatmap.",
+  "categories": [
+    "display"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/heat-color.tsx",
+      "type": "registry:ui",
+      "target": "@ui/heat-color.tsx"
+    },
+    {
+      "path": "src/components/heatmap/heat-color.tsx",
+      "type": "registry:ui",
+      "target": "@ui/heatmap/heat-color.tsx"
+    },
+    {
+      "path": "src/components/heatmap/heatmap-model.ts",
+      "type": "registry:ui",
+      "target": "@ui/heatmap/heatmap-model.ts"
+    },
+    {
+      "path": "src/components/heat-color.css",
+      "type": "registry:ui",
+      "target": "@ui/heat-color.css"
+    }
+  ]
+}

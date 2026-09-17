@@ -1,0 +1,87 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "share-card",
+  "type": "registry:ui",
+  "title": "Share Card",
+  "description": "A Skyline-style note share paper with markdown, tags, date, nickname, and brand footer.",
+  "categories": [
+    "surface"
+  ],
+  "dependencies": [
+    "react-markdown",
+    "remark-gfm",
+    "remark-math",
+    "remark-breaks",
+    "rehype-raw",
+    "rehype-sanitize",
+    "rehype-katex",
+    "katex",
+    "lunar-javascript"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/share-card.tsx",
+      "type": "registry:ui",
+      "target": "@ui/share-card.tsx"
+    },
+    {
+      "path": "src/components/share-card.css",
+      "type": "registry:ui",
+      "target": "@ui/share-card.css"
+    },
+    {
+      "path": "src/components/share-card-date.ts",
+      "type": "registry:ui",
+      "target": "@ui/share-card-date.ts"
+    },
+    {
+      "path": "src/components/lunar-javascript.d.ts",
+      "type": "registry:ui",
+      "target": "@ui/lunar-javascript.d.ts"
+    },
+    {
+      "path": "src/components/md-render.tsx",
+      "type": "registry:ui",
+      "target": "@ui/md-render.tsx"
+    },
+    {
+      "path": "src/components/markdown-option-grid.ts",
+      "type": "registry:ui",
+      "target": "@ui/markdown-option-grid.ts"
+    },
+    {
+      "path": "src/components/markdown-parenthesized-list.ts",
+      "type": "registry:ui",
+      "target": "@ui/markdown-parenthesized-list.ts"
+    },
+    {
+      "path": "src/components/markdown-sanitize.ts",
+      "type": "registry:ui",
+      "target": "@ui/markdown-sanitize.ts"
+    },
+    {
+      "path": "src/components/markdown-content.css",
+      "type": "registry:ui",
+      "target": "@ui/markdown-content.css"
+    },
+    {
+      "path": "src/components/markdown-centered-quote.ts",
+      "type": "registry:ui",
+      "target": "@ui/markdown-centered-quote.ts"
+    },
+    {
+      "path": "src/components/markdown-image-size.ts",
+      "type": "registry:ui",
+      "target": "@ui/markdown-image-size.ts"
+    },
+    {
+      "path": "src/components/markdown-image-renderer.ts",
+      "type": "registry:ui",
+      "target": "@ui/markdown-image-renderer.ts"
+    }
+  ]
+}

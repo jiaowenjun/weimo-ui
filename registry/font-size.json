@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "font-size",
+  "type": "registry:ui",
+  "title": "Font Size",
+  "description": "Semantic font-size utilities and a scale map backed by shared Weimo typography tokens.",
+  "categories": [
+    "style",
+    "typography"
+  ],
+  "registryDependencies": [
+    "@weimo/style"
+  ],
+  "files": [
+    {
+      "path": "src/components/font-size.ts",
+      "type": "registry:ui",
+      "target": "@ui/font-size.ts"
+    },
+    {
+      "path": "src/components/font-size.css",
+      "type": "registry:ui",
+      "target": "@ui/font-size.css"
+    }
+  ]
+}

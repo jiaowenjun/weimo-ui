@@ -1,0 +1,107 @@
+@layer components {
+  .image-uploader {
+    --image-uploader-panel-padding: 15px;
+
+    display: grid;
+    width: 100%;
+    place-items: center;
+    color: var(--color-text-secondary);
+    text-align: center;
+    isolation: isolate;
+  }
+
+  .image-uploader__panel {
+    position: relative;
+    display: grid;
+    width: 100%;
+    min-height: 104px;
+    place-items: center;
+    gap: 6px;
+    padding: var(--image-uploader-panel-padding);
+    cursor: pointer;
+    border: 1px dashed var(--color-border-emphasis, var(--color-border));
+    border-radius: var(--radius);
+    background: color-mix(in srgb, var(--color-bg-page) 58%, transparent);
+    transition:
+      border-color 160ms ease,
+      background 160ms ease;
+  }
+
+  .image-uploader[data-state="initial"] .image-uploader__panel:hover {
+    border-color: var(--color-border-accent);
+    background: color-mix(in srgb, var(--color-bg-chip) 42%, transparent);
+  }
+
+  .image-uploader[data-state="initial"][data-drag-over="true"] .image-uploader__panel {
+    border-color: var(--color-border-accent);
+    background: color-mix(in srgb, var(--color-bg-chip) 42%, transparent);
+  }
+
+  .image-uploader[data-state="ready"] .image-uploader__panel {
+    padding: 0;
+    min-height: 0;
+    border-color: transparent;
+    cursor: default;
+  }
+
+  .image-uploader__input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .image-uploader__preview {
+    display: grid;
+    width: 100%;
+    max-width: 100%;
+    place-items: center;
+  }
+
+  .image-uploader__preview-view.image-view {
+    --image-uploader-preview-max-height: min(70vh, calc(100vw - 36px));
+
+    width: min(
+      100%,
+      calc(var(--image-uploader-preview-max-height) * var(--image-view-aspect-ratio))
+    );
+    max-width: 100%;
+    border: 0;
+    background: transparent;
+  }
+
+  .image-uploader__preview-view .image-view__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  .image-uploader__title {
+    max-width: 100%;
+    overflow: hidden;
+    color: var(--color-text-primary);
+    font-size: var(--font-size-base);
+    font-weight: 650;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .image-uploader__description {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+    line-height: 1.4;
+  }
+
+  .image-uploader__source {
+    color: var(--color-primary);
+    font-size: var(--font-size-xs);
+    font-weight: 650;
+    line-height: 1.4;
+  }
+}

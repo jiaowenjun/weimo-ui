@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ocr-card",
+  "type": "registry:ui",
+  "title": "Ocr Card",
+  "description": "An editable OCR card that reuses Card editing chrome while switching between source image and Markdown recognition results.",
+  "categories": [
+    "media",
+    "card"
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/utils",
+    "@weimo/card",
+    "@weimo/image-view",
+    "@weimo/ocr-detail"
+  ],
+  "files": [
+    {
+      "path": "src/components/ocr-card.tsx",
+      "type": "registry:ui",
+      "target": "@ui/ocr-card.tsx"
+    },
+    {
+      "path": "src/components/ocr-card.css",
+      "type": "registry:ui",
+      "target": "@ui/ocr-card.css"
+    }
+  ]
+}

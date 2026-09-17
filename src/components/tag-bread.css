@@ -1,0 +1,59 @@
+@layer components {
+  .tag-bread {
+    max-width: 100%;
+  }
+
+  .tag-bread .coss-breadcrumb__list {
+    min-width: 0;
+    flex-wrap: nowrap;
+    gap: 6px;
+    overflow: hidden;
+    font-size: var(--font-size-base);
+    line-height: 1;
+  }
+
+  .tag-bread .coss-breadcrumb__item {
+    flex: none;
+    white-space: nowrap;
+  }
+
+  .tag-bread .coss-breadcrumb__item:last-of-type {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .tag-bread .coss-breadcrumb__link {
+    white-space: inherit;
+  }
+
+  .tag-bread .coss-breadcrumb__page {
+    display: block;
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: inherit;
+  }
+
+  .tag-bread__item {
+    align-items: center;
+    gap: 2px;
+  }
+
+  .tag-bread__prefix {
+    display: inline-flex;
+    flex: none;
+    align-self: center;
+    width: 14px;
+    height: 14px;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-subtle);
+  }
+
+  .tag-bread__prefix svg {
+    width: 100%;
+    height: 100%;
+  }
+}

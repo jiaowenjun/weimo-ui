@@ -1,0 +1,71 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tag-tree",
+  "type": "registry:ui",
+  "title": "Tag Tree",
+  "description": "A sidebar-only tag navigation tree with Skyline-like guide lines, selected rows, and row action menus.",
+  "categories": [
+    "navigation"
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/utils",
+    "@weimo/ghost-icon-button",
+    "@weimo/menu"
+  ],
+  "files": [
+    {
+      "path": "src/components/tag-tree.tsx",
+      "type": "registry:ui",
+      "target": "@ui/tag-tree.tsx"
+    },
+    {
+      "path": "src/components/tag-tree/index.tsx",
+      "type": "registry:ui",
+      "target": "@ui/tag-tree/index.tsx"
+    },
+    {
+      "path": "src/components/tag-tree/tag-tree.tsx",
+      "type": "registry:ui",
+      "target": "@ui/tag-tree/tag-tree.tsx"
+    },
+    {
+      "path": "src/components/tag-tree/tag-tree-model.ts",
+      "type": "registry:ui",
+      "target": "@ui/tag-tree/tag-tree-model.ts"
+    },
+    {
+      "path": "src/components/tag-tree/use-tag-tree.ts",
+      "type": "registry:ui",
+      "target": "@ui/tag-tree/use-tag-tree.ts"
+    },
+    {
+      "path": "src/components/tag-tree/tag-tree-row.tsx",
+      "type": "registry:ui",
+      "target": "@ui/tag-tree/tag-tree-row.tsx"
+    },
+    {
+      "path": "src/components/tag-tree/tag-tree.css",
+      "type": "registry:ui",
+      "target": "@ui/tag-tree/tag-tree.css"
+    },
+    {
+      "path": "src/components/ghost-icon-button.tsx",
+      "type": "registry:ui",
+      "target": "@ui/ghost-icon-button.tsx"
+    },
+    {
+      "path": "src/components/icon-button-model.ts",
+      "type": "registry:ui",
+      "target": "@ui/icon-button-model.ts"
+    },
+    {
+      "path": "src/components/icon-button.css",
+      "type": "registry:ui",
+      "target": "@ui/icon-button.css"
+    }
+  ]
+}

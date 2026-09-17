@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "bg-blur",
+  "type": "registry:ui",
+  "title": "Bg Blur",
+  "description": "Semantic transparent background plus blur utilities backed by shared Weimo surfaces.",
+  "categories": [
+    "style",
+    "blur"
+  ],
+  "registryDependencies": [
+    "@weimo/style"
+  ],
+  "files": [
+    {
+      "path": "src/components/bg-blur.ts",
+      "type": "registry:ui",
+      "target": "@ui/bg-blur.ts"
+    },
+    {
+      "path": "src/components/bg-blur.css",
+      "type": "registry:ui",
+      "target": "@ui/bg-blur.css"
+    }
+  ]
+}

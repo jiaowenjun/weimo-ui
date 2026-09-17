@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "text-button",
+  "type": "registry:ui",
+  "title": "Text Button",
+  "description": "A small bordered text button with shared hover, active, and disabled token feedback.",
+  "categories": [
+    "action"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/text-button.tsx",
+      "type": "registry:ui",
+      "target": "@ui/text-button.tsx"
+    },
+    {
+      "path": "src/components/text-button.css",
+      "type": "registry:ui",
+      "target": "@ui/text-button.css"
+    }
+  ]
+}

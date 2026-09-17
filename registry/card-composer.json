@@ -1,0 +1,36 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "card-composer",
+  "type": "registry:ui",
+  "title": "Card Composer",
+  "description": "A new-note composer shell that reuses Card editing, focus, and height-transition behavior.",
+  "categories": [
+    "surface",
+    "editor"
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/card",
+    "@weimo/ghost-icon-button"
+  ],
+  "files": [
+    {
+      "path": "src/components/card-composer.tsx",
+      "type": "registry:ui",
+      "target": "@ui/card-composer.tsx"
+    },
+    {
+      "path": "src/components/composer-shell.tsx",
+      "type": "registry:ui",
+      "target": "@ui/composer-shell.tsx"
+    },
+    {
+      "path": "src/components/card-composer.css",
+      "type": "registry:ui",
+      "target": "@ui/card-composer.css"
+    }
+  ]
+}

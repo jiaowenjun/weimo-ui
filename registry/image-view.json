@@ -1,0 +1,32 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "image-view",
+  "type": "registry:ui",
+  "title": "Image View",
+  "description": "An image preview and pannable detail viewport with 100%, fit-width, and fit-height display modes.",
+  "categories": [
+    "media"
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/utils",
+    "@weimo/action-dialog",
+    "@weimo/glass-icon-button",
+    "@weimo/menu"
+  ],
+  "files": [
+    {
+      "path": "src/components/image-view.tsx",
+      "type": "registry:ui",
+      "target": "@ui/image-view.tsx"
+    },
+    {
+      "path": "src/components/image-view.css",
+      "type": "registry:ui",
+      "target": "@ui/image-view.css"
+    }
+  ]
+}

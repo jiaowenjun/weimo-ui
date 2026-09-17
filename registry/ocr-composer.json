@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ocr-composer",
+  "type": "registry:ui",
+  "title": "Ocr Composer",
+  "description": "An OCR image composer that keeps the CardComposer shell and bottom toolbar while replacing the text editor with ImageUploader.",
+  "categories": [
+    "input",
+    "editor"
+  ],
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/utils",
+    "@weimo/card-composer",
+    "@weimo/image-uploader",
+    "@weimo/glass-icon-button"
+  ],
+  "files": [
+    {
+      "path": "src/components/ocr-composer.tsx",
+      "type": "registry:ui",
+      "target": "@ui/ocr-composer.tsx"
+    },
+    {
+      "path": "src/components/ocr-composer.css",
+      "type": "registry:ui",
+      "target": "@ui/ocr-composer.css"
+    }
+  ]
+}

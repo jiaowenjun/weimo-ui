@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "type": "registry:ui",
+  "dependencies": [],
+  "name": "glass-surface",
+  "title": "Glass Surface Surface",
+  "description": "A glass material surface that samples nearby background styles and adapts foreground color.",
+  "categories": [
+    "layout",
+    "surface"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/glass-surface.tsx",
+      "type": "registry:ui",
+      "target": "@ui/glass-surface.tsx"
+    },
+    {
+      "path": "src/components/glass-surface-model.ts",
+      "type": "registry:ui",
+      "target": "@ui/glass-surface-model.ts"
+    },
+    {
+      "path": "src/components/glass-surface.css",
+      "type": "registry:ui",
+      "target": "@ui/glass-surface.css"
+    }
+  ]
+}

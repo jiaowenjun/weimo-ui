@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "type": "registry:ui",
+  "dependencies": [],
+  "name": "bottom-bar",
+  "title": "Bottom Bar",
+  "description": "A bottom toolbar built on FloatBar with left and right action slots.",
+  "categories": [
+    "layout",
+    "toolbar"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/utils",
+    "@weimo/float-bar"
+  ],
+  "files": [
+    {
+      "path": "src/components/bottom-bar.tsx",
+      "type": "registry:ui",
+      "target": "@ui/bottom-bar.tsx"
+    },
+    {
+      "path": "src/components/bottom-bar.css",
+      "type": "registry:ui",
+      "target": "@ui/bottom-bar.css"
+    }
+  ]
+}

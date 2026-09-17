@@ -1,0 +1,40 @@
+@layer components {
+  .heat-color {
+    --heat-color-size: 15px;
+    --heat-color-gap: 4px;
+    --heat-color-radius: var(--radius-xs);
+
+    display: inline-flex;
+    align-items: center;
+    gap: var(--heat-color-gap);
+  }
+
+  .heat-color__swatch {
+    display: block;
+    width: var(--heat-color-size);
+    height: var(--heat-color-size);
+    border-radius: var(--heat-color-radius);
+  }
+}
+
+@layer utilities {
+  .heat-color--0 {
+    background: var(--color-heat-0);
+  }
+
+  .heat-color--1 {
+    background: var(--color-heat-1);
+  }
+
+  .heat-color--2 {
+    background: var(--color-heat-2);
+  }
+
+  .heat-color--3 {
+    background: var(--color-heat-3);
+  }
+
+  .heat-color--4 {
+    background: var(--color-heat-4);
+  }
+}

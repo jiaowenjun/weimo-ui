@@ -1,0 +1,58 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "type": "registry:ui",
+  "dependencies": [],
+  "name": "chip-button",
+  "title": "Chip Button",
+  "description": "A button-shaped chip surface with default and glass states.",
+  "categories": [
+    "action",
+    "tag"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/chip-button.tsx",
+      "type": "registry:ui",
+      "target": "@ui/chip-button.tsx"
+    },
+    {
+      "path": "src/components/chip-button.css",
+      "type": "registry:ui",
+      "target": "@ui/chip-button.css"
+    },
+    {
+      "path": "src/components/chip-surface.tsx",
+      "type": "registry:ui",
+      "target": "@ui/chip-surface.tsx"
+    },
+    {
+      "path": "src/components/chip-surface-model.ts",
+      "type": "registry:ui",
+      "target": "@ui/chip-surface-model.ts"
+    },
+    {
+      "path": "src/components/chip-surface.css",
+      "type": "registry:ui",
+      "target": "@ui/chip-surface.css"
+    },
+    {
+      "path": "src/components/animated-inline-size.tsx",
+      "type": "registry:ui",
+      "target": "@ui/animated-inline-size.tsx"
+    },
+    {
+      "path": "src/components/animated-inline-size-model.ts",
+      "type": "registry:ui",
+      "target": "@ui/animated-inline-size-model.ts"
+    },
+    {
+      "path": "src/components/animated-inline-size.css",
+      "type": "registry:ui",
+      "target": "@ui/animated-inline-size.css"
+    }
+  ]
+}

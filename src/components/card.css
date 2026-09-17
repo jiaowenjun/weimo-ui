@@ -1,0 +1,48 @@
+@import "./markdown-content.css";
+@import "./card-surface.css";
+
+@layer components {
+  .weimo-card {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-card-padding);
+  }
+
+  .weimo-card__body {
+    margin: 0 0 var(--space-card-section-gap);
+  }
+
+  .weimo-card__header:last-child,
+  .weimo-card__body:last-child,
+  .weimo-card__tags:last-child {
+    margin-bottom: 0;
+  }
+
+  .weimo-card__plain {
+    margin: 0;
+    color: var(--color-text-primary);
+    font-size: var(--font-size-base);
+    line-height: var(--font-line-height-reading);
+    text-align: justify;
+    text-justify: inter-ideograph;
+  }
+
+  .weimo-card__plain + .weimo-card__plain {
+    margin-top: var(--space-card-section-gap);
+  }
+
+  .weimo-card__tags {
+    display: flex;
+    min-width: 0;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: var(--space-tag-gap);
+  }
+
+  .weimo-card__tag-anchor {
+    display: inline-flex;
+    max-width: 100%;
+    border-radius: var(--radius-round);
+  }
+
+}

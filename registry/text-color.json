@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "text-color",
+  "type": "registry:ui",
+  "title": "Text Color",
+  "description": "Semantic text color utilities and a tone map backed by shared Weimo tokens.",
+  "categories": [
+    "style",
+    "typography"
+  ],
+  "registryDependencies": [
+    "@weimo/style"
+  ],
+  "files": [
+    {
+      "path": "src/components/text-color.ts",
+      "type": "registry:ui",
+      "target": "@ui/text-color.ts"
+    },
+    {
+      "path": "src/components/text-color.css",
+      "type": "registry:ui",
+      "target": "@ui/text-color.css"
+    }
+  ]
+}

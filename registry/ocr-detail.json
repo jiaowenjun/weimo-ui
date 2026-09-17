@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ocr-detail",
+  "type": "registry:ui",
+  "title": "Ocr Detail",
+  "description": "A wide OCR correction dialog with a natural-size image pane and editable Markdown output powered by Card.",
+  "categories": [
+    "input",
+    "editor",
+    "overlay"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/utils",
+    "@weimo/action-dialog",
+    "@weimo/card",
+    "@weimo/image-view"
+  ],
+  "files": [
+    {
+      "path": "src/components/ocr-detail.tsx",
+      "type": "registry:ui",
+      "target": "@ui/ocr-detail.tsx"
+    },
+    {
+      "path": "src/components/ocr-detail.css",
+      "type": "registry:ui",
+      "target": "@ui/ocr-detail.css"
+    }
+  ]
+}

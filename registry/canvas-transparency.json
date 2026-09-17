@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "canvas-transparency",
+  "type": "registry:ui",
+  "title": "Canvas Transparency",
+  "description": "A Canvas-based image component that generates transparent PNG variants for light and dark backgrounds.",
+  "categories": [
+    "media"
+  ],
+  "registryDependencies": [
+    "@weimo/style"
+  ],
+  "files": [
+    {
+      "path": "src/components/canvas-transparency.tsx",
+      "type": "registry:ui",
+      "target": "@ui/canvas-transparency.tsx"
+    },
+    {
+      "path": "src/components/canvas-transparency-cache.ts",
+      "type": "registry:ui",
+      "target": "@ui/canvas-transparency-cache.ts"
+    },
+    {
+      "path": "src/components/canvas-transparency-model.ts",
+      "type": "registry:ui",
+      "target": "@ui/canvas-transparency-model.ts"
+    }
+  ]
+}

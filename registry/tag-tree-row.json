@@ -1,0 +1,67 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "name": "tag-tree-row",
+  "title": "Tag Tree Row",
+  "description": "A single animated tag tree row with selection, toggle, and optional menu controls.",
+  "categories": [
+    "tag",
+    "navigation"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/utils",
+    "@weimo/ghost-icon-button",
+    "@weimo/menu"
+  ],
+  "files": [
+    {
+      "path": "src/components/tag-tree-row.tsx",
+      "type": "registry:ui",
+      "target": "@ui/tag-tree-row.tsx"
+    },
+    {
+      "path": "src/components/tag-tree/tag-tree-row.tsx",
+      "type": "registry:ui",
+      "target": "@ui/tag-tree/tag-tree-row.tsx"
+    },
+    {
+      "path": "src/components/tag-tree/tag-tree-model.ts",
+      "type": "registry:ui",
+      "target": "@ui/tag-tree/tag-tree-model.ts"
+    },
+    {
+      "path": "src/components/tag-tree/tag-tree.tsx",
+      "type": "registry:ui",
+      "target": "@ui/tag-tree/tag-tree.tsx"
+    },
+    {
+      "path": "src/components/tag-tree/use-tag-tree.ts",
+      "type": "registry:ui",
+      "target": "@ui/tag-tree/use-tag-tree.ts"
+    },
+    {
+      "path": "src/components/tag-tree/tag-tree.css",
+      "type": "registry:ui",
+      "target": "@ui/tag-tree/tag-tree.css"
+    },
+    {
+      "path": "src/components/ghost-icon-button.tsx",
+      "type": "registry:ui",
+      "target": "@ui/ghost-icon-button.tsx"
+    },
+    {
+      "path": "src/components/icon-button-model.ts",
+      "type": "registry:ui",
+      "target": "@ui/icon-button-model.ts"
+    },
+    {
+      "path": "src/components/icon-button.css",
+      "type": "registry:ui",
+      "target": "@ui/icon-button.css"
+    }
+  ]
+}

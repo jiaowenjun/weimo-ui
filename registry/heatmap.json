@@ -1,0 +1,75 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "heatmap",
+  "type": "registry:ui",
+  "title": "Heatmap",
+  "description": "A clickable 13-week Skyline-style sidebar activity heatmap.",
+  "categories": [
+    "display",
+    "navigation"
+  ],
+  "dependencies": [
+    "@base-ui/react"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/heatmap.tsx",
+      "type": "registry:ui",
+      "target": "@ui/heatmap.tsx"
+    },
+    {
+      "path": "src/components/heatmap/index.tsx",
+      "type": "registry:ui",
+      "target": "@ui/heatmap/index.tsx"
+    },
+    {
+      "path": "src/components/heatmap/heatmap.tsx",
+      "type": "registry:ui",
+      "target": "@ui/heatmap/heatmap.tsx"
+    },
+    {
+      "path": "src/components/heatmap/heat-color.tsx",
+      "type": "registry:ui",
+      "target": "@ui/heatmap/heat-color.tsx"
+    },
+    {
+      "path": "src/components/heatmap/heatmap-model.ts",
+      "type": "registry:ui",
+      "target": "@ui/heatmap/heatmap-model.ts"
+    },
+    {
+      "path": "src/components/heat-color.css",
+      "type": "registry:ui",
+      "target": "@ui/heat-color.css"
+    },
+    {
+      "path": "src/components/heatmap/heatmap.css",
+      "type": "registry:ui",
+      "target": "@ui/heatmap/heatmap.css"
+    },
+    {
+      "path": "src/components/coss/tooltip.tsx",
+      "type": "registry:ui",
+      "target": "@ui/coss/tooltip.tsx"
+    },
+    {
+      "path": "src/components/coss/tooltip.css",
+      "type": "registry:ui",
+      "target": "@ui/coss/tooltip.css"
+    },
+    {
+      "path": "src/components/popup-surface.tsx",
+      "type": "registry:ui",
+      "target": "@ui/popup-surface.tsx"
+    },
+    {
+      "path": "src/components/popup-surface.css",
+      "type": "registry:ui",
+      "target": "@ui/popup-surface.css"
+    }
+  ]
+}

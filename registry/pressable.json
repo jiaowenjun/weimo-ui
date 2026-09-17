@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pressable",
+  "type": "registry:ui",
+  "title": "Pressable",
+  "description": "Interaction feedback tone map for button, menu item, and glass control hover and active states.",
+  "categories": [
+    "style",
+    "action"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/bg-color"
+  ],
+  "files": [
+    {
+      "path": "src/components/pressable.ts",
+      "type": "registry:ui",
+      "target": "@ui/pressable.ts"
+    }
+  ]
+}

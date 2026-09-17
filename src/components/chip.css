@@ -1,0 +1,13 @@
+@layer components {
+  .chip {
+    gap: 4px;
+  }
+
+  .chip__slot {
+    color: inherit;
+  }
+
+  .chip__content {
+    color: inherit;
+  }
+}
