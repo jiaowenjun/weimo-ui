@@ -4,20 +4,11 @@ import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
-const bijiRoot = join(root, '../weimo-biji/frontend/web')
 
 function readProjectFile(relativePath) {
   const absolutePath = join(root, relativePath)
 
   assert.ok(existsSync(absolutePath), `${relativePath} must exist.`)
-
-  return readFileSync(absolutePath, 'utf8')
-}
-
-function readBijiFile(relativePath) {
-  const absolutePath = join(bijiRoot, relativePath)
-
-  assert.ok(existsSync(absolutePath), `biji-react/${relativePath} must exist.`)
 
   return readFileSync(absolutePath, 'utf8')
 }
@@ -64,11 +55,6 @@ const commandSource = readProjectFile('src/components/coss/command.tsx')
 const commandCss = readProjectFile('src/components/coss/command.css')
 const tooltipSource = readProjectFile('src/components/coss/tooltip.tsx')
 const tooltipCss = readProjectFile('src/components/coss/tooltip.css')
-
-const refCardSource = readBijiFile('src/components/ref-card.tsx')
-const refCardCss = readBijiFile('src/components/ref-card.css')
-const loginSource = readBijiFile('src/features/auth/login-screen.tsx')
-const authCss = readBijiFile('src/features/auth/auth.css')
 
 assert.equal(
   packageJson.exports['./components/card-surface'],
@@ -188,27 +174,6 @@ assert.ok(
   !blockFor(sidebarCss, '.weimo-sidebar--normal').includes('background: var(--color-bg-card);') &&
     !blockFor(sidebarCss, '.weimo-sidebar--normal').includes('box-shadow: var(--shadow-card);'),
   'SideBar normal CSS must delegate static card material to CardSurface.',
-)
-
-assert.ok(
-  refCardSource.includes("from 'weimo-ui/components/card-surface'") &&
-    refCardSource.includes("getCardSurfaceClassName('ref-card')"),
-  'biji RefCard must compose CardSurface for reference wrappers.',
-)
-assert.ok(
-  !blockFor(refCardCss, '.ref-card[data-has-reference="true"]').includes('background: var(--color-bg-card);') &&
-    !blockFor(refCardCss, '.ref-card[data-has-reference="true"]').includes('box-shadow: var(--shadow-card);'),
-  'biji RefCard CSS must delegate reference wrapper material to CardSurface.',
-)
-assert.ok(
-  loginSource.includes("from 'weimo-ui/components/card-surface'") &&
-    loginSource.includes("className={getCardSurfaceClassName('login-screen__panel')}"),
-  'biji login screen panel must compose CardSurface.',
-)
-assert.ok(
-  !blockFor(authCss, '.login-screen__panel').includes('background: var(--color-bg-card);') &&
-    !blockFor(authCss, '.login-screen__panel').includes('box-shadow: var(--shadow-card);'),
-  'biji auth panel CSS must delegate panel material to CardSurface.',
 )
 
 for (const snippet of [

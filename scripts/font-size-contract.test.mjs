@@ -4,20 +4,11 @@ import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
-const bijiRoot = join(root, '../weimo-biji/frontend/web')
 
 function readProjectFile(relativePath) {
   const absolutePath = join(root, relativePath)
 
   assert.ok(existsSync(absolutePath), `${relativePath} must exist.`)
-
-  return readFileSync(absolutePath, 'utf8')
-}
-
-function readBijiFile(relativePath) {
-  const absolutePath = join(bijiRoot, relativePath)
-
-  assert.ok(existsSync(absolutePath), `biji-react/${relativePath} must exist.`)
 
   return readFileSync(absolutePath, 'utf8')
 }
@@ -61,11 +52,6 @@ const styleRegistry = readJson('registry/style.json')
 const standaloneRegistryItem = readJson('registry/font-size.json')
 const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const registryItem = rootRegistry.items.find((item) => item.name === 'font-size')
-const bijiIndexCss = readBijiFile('src/index.css')
-const bijiSideBarCss = readBijiFile('src/components/biji-side-bar.css')
-const bijiFormControlsCss = readBijiFile('src/components/ui/form-controls.css')
-const bijiAuthCss = readBijiFile('src/features/auth/auth.css')
-const bijiMemoDialogCss = readBijiFile('src/features/workspace/workspace-memo-detail-dialog.css')
 const sampleBlock = blockFor(appCss, '.font-size-preview__sample')
 const descriptionBlock = blockFor(appCss, '.font-size-preview__description')
 
@@ -158,19 +144,6 @@ assert.ok(
 assert.deepEqual(rootStyleItem, styleRegistry, 'registry.json style item must match registry/style.json.')
 
 assert.ok(
-  bijiIndexCss.includes('font-size: 15px;') &&
-    bijiIndexCss.includes('font-size: 13px;') &&
-    bijiSideBarCss.includes('font-size: var(--font-size-base);') &&
-    bijiSideBarCss.includes('font-size: 28px;') &&
-    bijiFormControlsCss.includes('font-size: 12px;') &&
-    bijiFormControlsCss.includes('font-size: 15px;') &&
-    bijiAuthCss.includes('font-size: 14px;') &&
-    bijiAuthCss.includes('font-size: 24px;') &&
-    bijiMemoDialogCss.includes('font-size: var(--font-size-xs);'),
-  'FontSize detail metadata must be based on current biji-react font-size usage sources.',
-)
-
-assert.ok(
   manifestSource.includes("id: 'font-size'") &&
     manifestSource.includes("name: 'FontSize'") &&
     manifestSource.includes("registryName: 'font-size'") &&
@@ -194,7 +167,6 @@ assert.ok(
     docsDefinitionSource.includes('font-size-preview__identity') &&
     docsDefinitionSource.includes('font-size-preview__description') &&
     docsDefinitionSource.includes('ui: {item.uiUsage}') &&
-    docsDefinitionSource.includes('biji-react: {item.bijiUsage}') &&
     docsDefinitionSource.includes('{value}'),
   'FontSize docs definition must render the scale map preview with concrete token values and usage metadata.',
 )

@@ -1,10 +1,9 @@
 import assert from 'node:assert/strict'
-import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
-const bijiRoot = join(root, '../weimo-biji/frontend/web')
 
 function readProjectFile(relativePath) {
   const absolutePath = join(root, relativePath)
@@ -26,19 +25,6 @@ function blockFor(source, selector) {
   assert.ok(match, `${selector} block must exist.`)
 
   return match[1]
-}
-
-function listSourceFiles(directory) {
-  return readdirSync(directory).flatMap((entry) => {
-    const absolutePath = join(directory, entry)
-    const stats = statSync(absolutePath)
-
-    if (stats.isDirectory()) {
-      return listSourceFiles(absolutePath)
-    }
-
-    return /\.(css|mjs|ts|tsx)$/.test(entry) ? [absolutePath] : []
-  })
 }
 
 const expectedTones = [
@@ -84,7 +70,6 @@ const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const registryItem = rootRegistry.items.find((item) => item.name === 'bg-blur')
 const sampleBlock = blockFor(appCss, '.bg-blur-preview__sample')
 const overlayBlock = blockFor(appCss, '.bg-blur-preview__overlay')
-const descriptionBlock = blockFor(appCss, '.bg-blur-preview__description')
 
 assert.equal(
   packageJson.exports?.['./components/bg-blur'],
@@ -139,8 +124,7 @@ for (const item of expectedTones) {
       bgBlurSource.includes(`filter: '${item.filter}'`) &&
       bgBlurSource.includes(`className: '${item.className}'`) &&
       bgBlurSource.includes(item.usage) &&
-      bgBlurSource.includes('uiUsage:') &&
-      bgBlurSource.includes('bijiUsage:'),
+      bgBlurSource.includes('uiUsage:'),
     `bgBlurToneMap must include ${item.tone} with background marker, blur token, value, class, and usage notes.`,
   )
 
@@ -237,21 +221,6 @@ assert.ok(
   'SideBar drawer backdrop must use --color-bg-backdrop and animate between blur(0) and --backdrop-blur.',
 )
 
-const bijiBackgroundBlurHits = listSourceFiles(join(bijiRoot, 'src'))
-  .concat(listSourceFiles(join(bijiRoot, 'scripts')))
-  .filter((filePath) => {
-    const source = readFileSync(filePath, 'utf8')
-
-    return /backdrop-filter|-webkit-backdrop-filter|filter:\s*blur|blur\(/.test(source) &&
-      !source.includes('activeElement.blur()')
-  })
-
-assert.deepEqual(
-  bijiBackgroundBlurHits,
-  [],
-  'biji-react must not define local background blur values; it inherits shared UI blur surfaces.',
-)
-
 assert.ok(
   manifestSource.includes("id: 'bg-blur'") &&
     manifestSource.includes("name: 'BgBlur'") &&
@@ -270,70 +239,38 @@ assert.ok(
 )
 assert.ok(
   docsDefinitionSource.includes("id: 'bg-blur'") &&
-    docsDefinitionSource.includes('bgBlurToneGroups.map') &&
-    docsDefinitionSource.includes('group.tones.map') &&
+    docsDefinitionSource.includes('bgBlurTones.map') &&
     docsDefinitionSource.includes('bgBlurToneMap[tone]') &&
     docsDefinitionSource.includes('getBgBlurClassName(tone)') &&
-    docsDefinitionSource.includes('getBgBlurBackgroundToken(tone)') &&
     docsDefinitionSource.includes('getBgBlurBlurToken(tone)') &&
     docsDefinitionSource.includes('getBgBlurBlurValue(tone)') &&
-    docsDefinitionSource.includes('getBgBlurFilter(tone)') &&
     docsDefinitionSource.includes('bg-blur-preview__group') &&
     docsDefinitionSource.includes('bg-blur-preview__sample') &&
     docsDefinitionSource.includes('bg-blur-preview__overlay') &&
-    docsDefinitionSource.includes('bg-blur-preview__value') &&
-    docsDefinitionSource.includes('weimo-ui') &&
-    docsDefinitionSource.includes('biji-react: {item.bijiUsage}'),
-  'BgBlur docs definition must render the background-plus-blur map preview and usage summary.',
+    docsDefinitionSource.includes('bg-blur-preview__value'),
+  'BgBlur docs definition must render the blur tone preview driven by the shared tone map.',
 )
 assert.ok(
   !docsDefinitionSource.includes('<span>text</span>') && !docsDefinitionSource.includes('>text<'),
   'BgBlur docs preview overlay must not render sample text inside the background-only swatch.',
 )
-
-const groupedTones = new Set()
-
-for (const [groupTitle, tones] of [
-  ['玻璃材质', ['glass']],
-  ['背景遮罩', ['backdrop']],
-]) {
-  assert.ok(
-    docsDefinitionSource.includes(`title: '${groupTitle}'`),
-    `BgBlur docs preview must include the ${groupTitle} semantic group.`,
-  )
-
-  const groupIndex = docsDefinitionSource.indexOf(`title: '${groupTitle}'`)
-  const nextGroupIndex = docsDefinitionSource.indexOf('title: ', groupIndex + groupTitle.length)
-  const groupSource = docsDefinitionSource.slice(
-    groupIndex,
-    nextGroupIndex === -1 ? docsDefinitionSource.length : nextGroupIndex,
-  )
-
-  for (const tone of tones) {
-    assert.ok(groupSource.includes(`'${tone}'`), `BgBlur ${groupTitle} group must include ${tone}.`)
-    assert.ok(!groupedTones.has(tone), `BgBlur ${tone} tone must be assigned to only one group.`)
-    groupedTones.add(tone)
-  }
-}
-assert.deepEqual(
-  [...groupedTones].sort(),
-  expectedTones.map((item) => item.tone).sort(),
-  'BgBlur semantic groups must cover every public tone exactly once.',
+assert.ok(
+  !docsDefinitionSource.includes('bijiUsage') &&
+    !docsDefinitionSource.includes('uiUsage') &&
+    !docsDefinitionSource.includes('getBgBlurBackgroundToken') &&
+    !docsDefinitionSource.includes('getBgBlurFilter'),
+  'BgBlur docs preview must stay visual-only: no usage notes or background/filter metadata text.',
 )
 
 assert.ok(
   appCss.includes('.bg-blur-preview') &&
     appCss.includes('.bg-blur-preview__group') &&
-    appCss.includes('.bg-blur-preview__row') &&
     appCss.includes('.bg-blur-preview__sample') &&
     appCss.includes('.bg-blur-preview__backdrop') &&
     appCss.includes('.bg-blur-preview__overlay') &&
-    appCss.includes('.bg-blur-preview__identity') &&
-    appCss.includes('.bg-blur-preview__token') &&
-    appCss.includes('.bg-blur-preview__value') &&
-    appCss.includes('.bg-blur-preview__description') &&
-    appCss.includes('grid-template-columns: minmax(156px, 0.62fr) minmax(220px, 0.9fr) minmax(0, 1.35fr);'),
-  'App.css must include scoped BgBlur detail-page preview styles with a wider sample column.',
+    appCss.includes('.bg-blur-preview__label') &&
+    appCss.includes('.bg-blur-preview__value'),
+  'App.css must include scoped BgBlur detail-page preview styles.',
 )
 assert.ok(
   sampleBlock.includes('position: relative;') &&
@@ -342,15 +279,10 @@ assert.ok(
   'BgBlur preview samples must create a stable backdrop clipping context.',
 )
 assert.ok(
-  overlayBlock.includes('inset: 10px 14px;') &&
+  overlayBlock.includes('inset: 16px 20px;') &&
     overlayBlock.includes('border: 1px solid var(--color-border);') &&
     !overlayBlock.includes('background: rgb(255 255 255 / 0.34);'),
   'BgBlur preview overlay must use the real utility background instead of a hard-coded demo background.',
-)
-assert.ok(
-  descriptionBlock.includes('min-width: 0;') &&
-    descriptionBlock.includes('overflow-wrap: anywhere;'),
-  'BgBlur detail usage column must shrink and wrap instead of overflowing.',
 )
 
 assert.ok(registryItem, 'registry.json must include the bg-blur registry item.')

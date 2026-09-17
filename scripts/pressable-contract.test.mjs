@@ -160,10 +160,6 @@ assert.ok(
     pressablePreviewSource.includes('TagTree row') &&
     pressablePreviewSource.includes('ChipSurface') &&
     pressablePreviewSource.includes('coss Button ghost') &&
-    pressablePreviewSource.includes('biji-react close button') &&
-    pressablePreviewSource.includes('weimo-biji/frontend/web') &&
-    pressablePreviewSource.includes('workspace-filter-bar__close:hover') &&
-    pressablePreviewSource.includes('app-local close button 复用 --color-bg-hover 语义，具体值由 biji-react token 覆盖。') &&
     pressablePreviewSource.includes('不展示真实 CSS 中不存在的持久按下态。') &&
     pressablePreviewSource.includes('--glass-surface-hover-bg') &&
     pressablePreviewSource.includes('--color-bg-hover') &&

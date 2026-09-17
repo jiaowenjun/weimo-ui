@@ -4,20 +4,11 @@ import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
-const bijiRoot = join(root, '../weimo-biji/frontend/web')
 
 function readProjectFile(relativePath) {
   const absolutePath = join(root, relativePath)
 
   assert.ok(existsSync(absolutePath), `${relativePath} must exist.`)
-
-  return readFileSync(absolutePath, 'utf8')
-}
-
-function readBijiFile(relativePath) {
-  const absolutePath = join(bijiRoot, relativePath)
-
-  assert.ok(existsSync(absolutePath), `biji-react/${relativePath} must exist.`)
 
   return readFileSync(absolutePath, 'utf8')
 }
@@ -133,7 +124,6 @@ const styleRegistry = readJson('registry/style.json')
 const standaloneRegistryItem = readJson('registry/bg-color.json')
 const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const registryItem = rootRegistry.items.find((item) => item.name === 'bg-color')
-const bijiIndexCss = readBijiFile('src/index.css')
 const sampleBlock = firstBlockFor(appCss, '.bg-color-preview__sample')
 const sampleFillBlock = firstBlockFor(appCss, '.bg-color-preview__sample-fill')
 const sampleFillFramedBlock = firstBlockFor(appCss, '.bg-color-preview__sample-fill--framed')
@@ -175,8 +165,7 @@ for (const [tone, token, className, lightValue, darkValue] of expectedTones) {
       bgColorSource.includes(`light: '${lightValue}'`) &&
       bgColorSource.includes(`dark: '${darkValue}'`) &&
       bgColorSource.includes(`className: '${className}'`) &&
-      bgColorSource.includes('uiUsage:') &&
-      bgColorSource.includes('bijiUsage:'),
+      bgColorSource.includes('uiUsage:'),
     `bgColorToneMap must include ${tone} -> ${token} -> ${className} with concrete light/dark values and usage notes.`,
   )
 
@@ -370,8 +359,7 @@ assert.ok(
     docsDefinitionSource.includes('bg-color-preview__value') &&
     docsDefinitionSource.includes('亮: {item.value.light}') &&
     docsDefinitionSource.includes('暗: {item.value.dark}') &&
-    docsDefinitionSource.includes('ui: {item.uiUsage}') &&
-    docsDefinitionSource.includes('biji-react: {item.bijiUsage}'),
+    docsDefinitionSource.includes('ui: {item.uiUsage}'),
   'BgColor docs definition must render the background tone map preview and usage summary.',
 )
 assert.ok(
@@ -489,16 +477,6 @@ assert.ok(
   descriptionBlock.includes('min-width: 0;') &&
     descriptionBlock.includes('overflow-wrap: anywhere;'),
   'BgColor detail usage column must shrink and wrap instead of overflowing.',
-)
-
-assert.ok(
-  bijiIndexCss.includes('--color-bg-page:') &&
-    bijiIndexCss.includes('--color-bg-card:') &&
-    bijiIndexCss.includes('--color-bg-raised:') &&
-    bijiIndexCss.includes('--color-bg-chip:') &&
-    bijiIndexCss.includes('--color-bg-hover:') &&
-    !bijiIndexCss.includes('--color-bg-pressable-overlay:'),
-  'biji-react runtime CSS must keep overriding its app background tones without reintroducing pressable overlay tokens.',
 )
 
 assert.ok(registryItem, 'registry.json must include the bg-color registry item.')

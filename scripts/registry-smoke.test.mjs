@@ -18,8 +18,7 @@ const packageManagerName = process.env.npm_config_user_agent?.split('/')[0]
 const packageRunnerCommand = packageManagerCli ? process.execPath : 'pnpm'
 const packageRunnerArgsPrefix = packageManagerCli ? [packageManagerCli] : []
 const root = new URL('..', import.meta.url)
-const repositoryRoot = new URL('../..', import.meta.url)
-const workspacePackageJson = JSON.parse(readFileSync(new URL('package.json', repositoryRoot), 'utf8'))
+const workspacePackageJson = JSON.parse(readFileSync(new URL('package.json', root), 'utf8'))
 const env = {
   ...process.env,
   PATH: `${nodeBinDir}:${process.env.PATH}`,

@@ -4,20 +4,11 @@ import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
-const bijiRoot = join(root, '../weimo-biji/frontend/web')
 
 function readProjectFile(relativePath) {
   const absolutePath = join(root, relativePath)
 
   assert.ok(existsSync(absolutePath), `${relativePath} must exist.`)
-
-  return readFileSync(absolutePath, 'utf8')
-}
-
-function readBijiFile(relativePath) {
-  const absolutePath = join(bijiRoot, relativePath)
-
-  assert.ok(existsSync(absolutePath), `biji-react/${relativePath} must exist.`)
 
   return readFileSync(absolutePath, 'utf8')
 }
@@ -106,9 +97,6 @@ const styleRegistry = readJson('registry/style.json')
 const standaloneRegistryItem = readJson('registry/border-color.json')
 const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const registryItem = rootRegistry.items.find((item) => item.name === 'border-color')
-const bijiIndexCss = readBijiFile('src/index.css')
-const bijiFormControlsCss = readBijiFile('src/components/ui/form-controls.css')
-const bijiAuthCss = readBijiFile('src/features/auth/auth.css')
 const cossButtonFocusBlock = blockFor(cossButtonCss, '.coss-button:focus-visible')
 const cossCardInteractiveBlock = blockFor(
   cossCardCss,
@@ -182,8 +170,7 @@ for (const [tone, token, className, lightValue, darkValue] of expectedTones) {
       borderColorSource.includes(`className: '${className}'`) &&
       borderColorSource.includes(`light: '${lightValue}'`) &&
       borderColorSource.includes(`dark: '${darkValue}'`) &&
-      borderColorSource.includes('uiUsage:') &&
-      borderColorSource.includes('bijiUsage:'),
+      borderColorSource.includes('uiUsage:'),
     `borderColorToneMap must include ${tone} -> ${token} -> ${className} with values and usage notes.`,
   )
 
@@ -333,9 +320,8 @@ assert.ok(
 assert.ok(
   !tokensCss.includes('--glass-border') &&
     !JSON.stringify(styleRegistry.cssVars).includes('glass-border') &&
-    !(rootStyleItem && JSON.stringify(rootStyleItem.cssVars).includes('glass-border')) &&
-    !bijiIndexCss.includes('--glass-border'),
-  'Shared and app tokens must remove --glass-border and --glass-border-strong.',
+    !(rootStyleItem && JSON.stringify(rootStyleItem.cssVars).includes('glass-border')),
+  'Shared tokens must remove --glass-border and --glass-border-strong.',
 )
 assert.ok(
   borderColorSource.includes('TagTree guide line') &&
@@ -367,9 +353,7 @@ assert.ok(
     cossInputGroupCss.includes('color-mix(in srgb, var(--color-border-accent) 18%, transparent)') &&
     cossTabsFocusBlock.includes('outline: 2px solid var(--color-border-accent);') &&
     mdEditorCss.includes('.md-editor__math-dialog-textarea:focus') &&
-    mdEditorCss.includes('border-color: var(--color-border-accent);') &&
-    bijiFormControlsCss.includes('outline: 2px solid var(--color-border-accent);') &&
-    bijiFormControlsCss.includes("border-color: var(--color-border-danger);"),
+    mdEditorCss.includes('border-color: var(--color-border-accent);'),
   'Emphasis and accent BorderColor usage must separate neutral hover from action, selected, focus, and invalid states.',
 )
 assert.ok(
@@ -440,7 +424,6 @@ assert.ok(
     docsDefinitionSource.includes('borderColorDisableContextTokens') &&
     docsDefinitionSource.includes('getBorderColorClassName(tone)') &&
     docsDefinitionSource.includes('getBorderColorToken(tone)') &&
-    docsDefinitionSource.includes('value: { light; dark }') &&
     docsDefinitionSource.includes('border-color-preview__sample') &&
     docsDefinitionSource.includes('border-color-preview__context-tokens') &&
     docsDefinitionSource.includes('--color-border-disable-on-light') &&
@@ -452,8 +435,7 @@ assert.ok(
     docsDefinitionSource.includes('ui: {item.uiUsage}') &&
     docsDefinitionSource.includes('border-color-preview__value') &&
     docsDefinitionSource.includes('亮: {item.value.light}') &&
-    docsDefinitionSource.includes('暗: {item.value.dark}') &&
-    docsDefinitionSource.includes('biji-react: {item.bijiUsage}'),
+    docsDefinitionSource.includes('暗: {item.value.dark}'),
   'BorderColor docs definition must render the border color tone map preview, concrete values, and usage summary.',
 )
 assert.ok(
@@ -483,23 +465,6 @@ assert.ok(
   contextTokensBlock.includes('display: grid;') &&
     contextTokensBlock.includes('overflow-wrap: anywhere;'),
   'BorderColor detail background-aware token list must stack and wrap instead of overflowing.',
-)
-
-assert.ok(
-  bijiIndexCss.includes('--border: 0 0% 80%;') &&
-    bijiIndexCss.includes('--border: 0 0% 38%;'),
-  'biji-react runtime CSS must customize shared border inputs through inherited separated border steps.',
-)
-assert.ok(
-  bijiFormControlsCss.includes('border: 1px solid var(--color-border);') &&
-    bijiFormControlsCss.includes('border-color: var(--color-border-emphasis);') &&
-    bijiFormControlsCss.includes('border-color: var(--color-border-accent);') &&
-    bijiFormControlsCss.includes('color-mix(in srgb, var(--color-border-accent) 18%, transparent)'),
-  'biji-react form controls must consume default, emphasis, and accent border tones.',
-)
-assert.ok(
-  bijiAuthCss.includes('color-mix(in srgb, var(--color-border-danger) 24%, transparent)'),
-  'biji-react Auth surfaces must consume danger-derived border tones.',
 )
 
 assert.ok(registryItem, 'registry.json must include the border-color registry item.')

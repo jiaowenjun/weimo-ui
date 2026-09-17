@@ -4,20 +4,11 @@ import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
-const bijiRoot = join(root, '../weimo-biji/frontend/web')
 
 function readProjectFile(relativePath) {
   const absolutePath = join(root, relativePath)
 
   assert.ok(existsSync(absolutePath), `${relativePath} must exist.`)
-
-  return readFileSync(absolutePath, 'utf8')
-}
-
-function readBijiFile(relativePath) {
-  const absolutePath = join(bijiRoot, relativePath)
-
-  assert.ok(existsSync(absolutePath), `biji-react/${relativePath} must exist.`)
 
   return readFileSync(absolutePath, 'utf8')
 }
@@ -57,8 +48,6 @@ const styleRegistry = readJson('registry/style.json')
 const standaloneRegistryItem = readJson('registry/border-radius.json')
 const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const registryItem = rootRegistry.items.find((item) => item.name === 'border-radius')
-const bijiIndexCss = readBijiFile('src/index.css')
-const bijiAuthCss = readBijiFile('src/features/auth/auth.css')
 
 assert.equal(
   packageJson.exports?.['./components/border-radius'],
@@ -140,22 +129,11 @@ assert.ok(
 )
 
 const menuPopupBlock = blockFor(menuCss, '.weimo-menu__popup')
-const loginPanelBlock = blockFor(bijiAuthCss, '.login-screen__panel')
 
 assert.ok(
   menuPopupBlock.includes('border-radius: var(--radius);') &&
     !menuPopupBlock.includes('var(--radius-lg)'),
   'Menu popup must use the unified --radius token.',
-)
-assert.ok(
-  loginPanelBlock.includes('border-radius: var(--radius);') &&
-    !loginPanelBlock.includes('var(--radius-lg)'),
-  'biji-react auth shell must use the unified --radius token.',
-)
-
-assert.ok(
-  bijiIndexCss.includes('--radius: 16px;'),
-  'biji-react runtime CSS must define --radius in px units.',
 )
 
 assert.deepEqual(rootStyleItem, styleRegistry, 'Root registry style item must match registry/style.json.')
@@ -227,8 +205,4 @@ assert.deepEqual(
 assert.ok(
   !appCss.includes('border-radius: 1rem;') && !readProjectFile('src/index.css').includes('border-radius: 5px;'),
   'weimo-ui runtime CSS must not keep hard-coded radius values that match shared radius tokens.',
-)
-assert.ok(
-  !bijiIndexCss.includes('border-radius: 999px;'),
-  'biji-react runtime CSS must use --radius-round instead of hard-coded 999px.',
 )
