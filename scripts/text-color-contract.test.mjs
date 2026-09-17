@@ -63,7 +63,6 @@ const styleRegistry = readJson('registry/style.json')
 const standaloneRegistryItem = readJson('registry/text-color.json')
 const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const registryItem = rootRegistry.items.find((item) => item.name === 'text-color')
-const descriptionBlock = blockFor(appCss, '.text-color-preview__description')
 
 assert.equal(
   packageJson.exports?.['./components/text-color'],
@@ -215,7 +214,7 @@ for (const [tone, token, className] of removedTones) {
 
 assert.ok(
   manifestSource.includes("id: 'text-color'") &&
-    manifestSource.includes("name: 'TextColor'") &&
+    manifestSource.includes("name: '字色'") &&
     manifestSource.includes("registryName: 'text-color'") &&
     manifestSource.includes("packageExport: './components/text-color'"),
   'component manifest must list TextColor as a public registry-backed utility.',
@@ -227,33 +226,42 @@ assert.ok(
 )
 assert.ok(
   docsDefinitionSource.includes("id: 'text-color'") &&
-    docsDefinitionSource.includes("const previewTextColorTones = textColorTones.filter((tone) => tone !== 'inherit')") &&
+    docsDefinitionSource.includes("frame: 'plain',") &&
+    docsDefinitionSource.includes("import { CardPanel } from '../../components/coss/card'") &&
+    docsDefinitionSource.includes('const previewTextColorTones = textColorTones.filter((tone) => tone !== \'inherit\')') &&
     docsDefinitionSource.includes('textColorToneMap[tone]') &&
-    docsDefinitionSource.includes('previewTextColorTones.map') &&
+    docsDefinitionSource.includes('function TextColorPreview()') &&
+    docsDefinitionSource.includes('orderedTones.map') &&
+    docsDefinitionSource.includes('function parseColorLightness') &&
+    docsDefinitionSource.includes('function useIsDarkTheme') &&
+    docsDefinitionSource.includes('toneTextBrightness(b, isDark) - toneTextBrightness(a, isDark)') &&
     docsDefinitionSource.includes('getTextColorClassName(tone)') &&
-    docsDefinitionSource.includes('text-color-preview__identity') &&
-    docsDefinitionSource.includes('{item.token}') &&
-    docsDefinitionSource.includes('text-color-preview__value') &&
-    docsDefinitionSource.includes('亮: {item.value.light}') &&
-    docsDefinitionSource.includes('暗: {item.value.dark}') &&
-    docsDefinitionSource.includes('text-color-preview'),
+    docsDefinitionSource.includes('getTextColorToken(tone)') &&
+    docsDefinitionSource.includes('<CardPanel className="text-color-preview__panel"') &&
+    docsDefinitionSource.includes('text-color-preview__sample') &&
+    docsDefinitionSource.includes('text-color-preview__token-value--light') &&
+    docsDefinitionSource.includes('text-color-preview__token-value--dark') &&
+    !docsDefinitionSource.includes('summary:') &&
+    !docsDefinitionSource.includes('text-color-preview__row') &&
+    !docsDefinitionSource.includes('text-color-preview__description') &&
+    !docsDefinitionSource.includes('uiUsage') &&
+    !docsDefinitionSource.includes('bijiUsage'),
   'TextColor docs definition must render the tone map preview with concrete token values.',
 )
 assert.ok(
   appCss.includes('.text-color-preview') &&
-    appCss.includes('.text-color-preview__row') &&
-    appCss.includes('.text-color-preview__identity') &&
+    appCss.includes('.text-color-preview__panel') &&
+    appCss.includes('.text-color-preview__meta') &&
+    appCss.includes('.text-color-preview__label') &&
     appCss.includes('.text-color-preview__token') &&
-    appCss.includes('.text-color-preview__value') &&
-    appCss.includes('.text-color-preview__description') &&
-    appCss.includes('overflow-wrap: anywhere;') &&
-    appCss.includes('grid-template-columns: minmax(180px, 0.9fr) minmax(220px, 1.4fr) minmax(0, 1.1fr);'),
+    appCss.includes('.text-color-preview__sample') &&
+    appCss.includes('.text-color-preview__token-value--dark') &&
+    appCss.includes('.dark .text-color-preview__token-value--light') &&
+    !appCss.includes('.text-color-preview__row') &&
+    !appCss.includes('.text-color-preview__identity') &&
+    !appCss.includes('.text-color-preview__description') &&
+    !appCss.includes('.text-color-preview__value'),
   'App.css must include scoped TextColor detail-page preview styles.',
-)
-assert.ok(
-  descriptionBlock.includes('min-width: 0;') &&
-    descriptionBlock.includes('overflow-wrap: anywhere;'),
-  'TextColor detail preview description column must shrink and wrap instead of overflowing.',
 )
 assert.ok(
   !appCss.includes('grid-template-columns: minmax(112px, 0.8fr) minmax(180px, 1.4fr) minmax(150px, 0.9fr) minmax(180px, 1.2fr);'),

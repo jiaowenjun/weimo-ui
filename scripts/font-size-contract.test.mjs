@@ -53,7 +53,6 @@ const standaloneRegistryItem = readJson('registry/font-size.json')
 const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const registryItem = rootRegistry.items.find((item) => item.name === 'font-size')
 const sampleBlock = blockFor(appCss, '.font-size-preview__sample')
-const descriptionBlock = blockFor(appCss, '.font-size-preview__description')
 
 assert.equal(
   packageJson.exports?.['./components/font-size'],
@@ -145,7 +144,7 @@ assert.deepEqual(rootStyleItem, styleRegistry, 'registry.json style item must ma
 
 assert.ok(
   manifestSource.includes("id: 'font-size'") &&
-    manifestSource.includes("name: 'FontSize'") &&
+    manifestSource.includes("name: '字号'") &&
     manifestSource.includes("registryName: 'font-size'") &&
     manifestSource.includes("packageExport: './components/font-size'") &&
     manifestSource.includes("group: 'token-style'"),
@@ -158,38 +157,41 @@ assert.ok(
 )
 assert.ok(
   docsDefinitionSource.includes("id: 'font-size'") &&
+    docsDefinitionSource.includes("frame: 'plain',") &&
+    docsDefinitionSource.includes("import { CardPanel } from '../../components/coss/card'") &&
     docsDefinitionSource.includes('fontSizeScales.map') &&
     docsDefinitionSource.includes('fontSizeScaleMap[scale]') &&
     docsDefinitionSource.includes('getFontSizeClassName(scale)') &&
     docsDefinitionSource.includes('getFontSizeToken(scale)') &&
     docsDefinitionSource.includes('getFontSizeValue(scale)') &&
+    docsDefinitionSource.includes('<CardPanel className="font-size-preview__panel"') &&
     docsDefinitionSource.includes('font-size-preview__sample') &&
-    docsDefinitionSource.includes('font-size-preview__identity') &&
-    docsDefinitionSource.includes('font-size-preview__description') &&
-    docsDefinitionSource.includes('ui: {item.uiUsage}') &&
-    docsDefinitionSource.includes('{value}'),
-  'FontSize docs definition must render the scale map preview with concrete token values and usage metadata.',
+    docsDefinitionSource.includes('{getFontSizeToken(scale)}: {getFontSizeValue(scale)}') &&
+    !docsDefinitionSource.includes('summary:') &&
+    !docsDefinitionSource.includes('font-size-preview__row') &&
+    !docsDefinitionSource.includes('font-size-preview__description') &&
+    !docsDefinitionSource.includes('uiUsage') &&
+    !docsDefinitionSource.includes('bijiUsage'),
+  'FontSize docs definition must render one CardPanel per font-size scale with the token and concrete value.',
 )
 
 assert.ok(
   appCss.includes('.font-size-preview') &&
-    appCss.includes('.font-size-preview__row') &&
-    appCss.includes('.font-size-preview__sample') &&
-    appCss.includes('.font-size-preview__identity') &&
+    appCss.includes('.font-size-preview__panel') &&
+    appCss.includes('.font-size-preview__meta') &&
+    appCss.includes('.font-size-preview__label') &&
     appCss.includes('.font-size-preview__token') &&
-    appCss.includes('.font-size-preview__value') &&
-    appCss.includes('.font-size-preview__description') &&
-    appCss.includes('grid-template-columns: minmax(180px, 0.95fr) minmax(220px, 1.1fr) minmax(0, 1.35fr);'),
+    appCss.includes('.font-size-preview__sample') &&
+    !appCss.includes('.font-size-preview__row') &&
+    !appCss.includes('.font-size-preview__identity') &&
+    !appCss.includes('.font-size-preview__description') &&
+    !appCss.includes('.font-size-preview__value'),
   'App.css must include scoped FontSize detail-page preview styles.',
 )
 assert.ok(
   sampleBlock.includes('font-family: var(--font-sans);') &&
     sampleBlock.includes('overflow-wrap: anywhere;'),
   'FontSize preview samples must render real text with shared font family and safe wrapping.',
-)
-assert.ok(
-  descriptionBlock.includes('overflow-wrap: anywhere;'),
-  'FontSize usage metadata must wrap instead of overflowing.',
 )
 
 assert.ok(registryItem, 'registry.json must include the font-size registry item.')

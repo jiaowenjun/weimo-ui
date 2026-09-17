@@ -158,7 +158,7 @@ const actualToneOrder = expectedToneOrder
 assert.deepEqual(
   actualToneOrder,
   expectedToneOrder,
-  'BorderColor detail page must list border tones from weakest to strongest.',
+  'BorderColor tone map must keep its canonical order from weakest to strongest; the docs preview re-sorts by brightness.',
 )
 
 for (const [tone, token, className, lightValue, darkValue] of expectedTones) {
@@ -409,7 +409,9 @@ assert.ok(
   docsDefinitionSource.includes("id: 'border-color'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
     docsDefinitionSource.includes("import { CardPanel } from '../../components/coss/card'") &&
-    docsDefinitionSource.includes('borderColorTones.map') &&
+    docsDefinitionSource.includes('[...borderColorTones]') &&
+    docsDefinitionSource.includes('orderedTones.map') &&
+    docsDefinitionSource.includes('toneBrightness(b, isDark) - toneBrightness(a, isDark)') &&
     docsDefinitionSource.includes('borderColorToneMap[tone]') &&
     docsDefinitionSource.includes('getBorderColorClassName(tone)') &&
     docsDefinitionSource.includes('getBorderColorToken(tone)') &&

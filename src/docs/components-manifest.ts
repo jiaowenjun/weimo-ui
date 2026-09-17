@@ -49,15 +49,6 @@ export type ComponentManifestItem = PublicComponentManifestItem
 
 export const componentManifest = [
   {
-    id: 'font-size',
-    name: 'FontSize',
-    registryName: 'font-size',
-    packageExport: './components/font-size',
-    group: 'token-style',
-    docs: true,
-    registry: true,
-  },
-  {
     id: 'heat-color',
     name: 'HeatColor',
     registryName: 'heat-color',
@@ -85,8 +76,17 @@ export const componentManifest = [
     registry: true,
   },
   {
+    id: 'font-size',
+    name: '字号',
+    registryName: 'font-size',
+    packageExport: './components/font-size',
+    group: 'token-style',
+    docs: true,
+    registry: true,
+  },
+  {
     id: 'text-color',
-    name: 'TextColor',
+    name: '字色',
     registryName: 'text-color',
     packageExport: './components/text-color',
     group: 'token-style',
