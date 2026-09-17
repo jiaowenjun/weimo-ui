@@ -64,8 +64,6 @@ const expectedToneGroups = [
   ['分享输出', ['share-card', 'share-card-tag-mask']],
 ]
 
-const pressableTonesDelegatedToPressable = new Set()
-
 const excludedTokens = [
   '--color-heat-0',
   '--color-heat-1',
@@ -128,7 +126,6 @@ const sampleBlock = firstBlockFor(appCss, '.bg-color-preview__sample')
 const sampleFillBlock = firstBlockFor(appCss, '.bg-color-preview__sample-fill')
 const sampleFillFramedBlock = firstBlockFor(appCss, '.bg-color-preview__sample-fill--framed')
 const sampleBackdropBlock = firstBlockFor(appCss, '.bg-color-preview__sample-backdrop')
-const descriptionBlock = blockFor(appCss, '.bg-color-preview__description')
 
 assert.equal(
   packageJson.exports?.['./components/bg-color'],
@@ -329,7 +326,7 @@ assert.deepEqual(rootStyleItem, styleRegistry, 'Root registry style item must ma
 
 assert.ok(
   manifestSource.includes("id: 'bg-color'") &&
-    manifestSource.includes("name: 'BgColor'") &&
+    manifestSource.includes("name: '背景色'") &&
     manifestSource.includes("registryName: 'bg-color'") &&
     manifestSource.includes("packageExport: './components/bg-color'"),
   'component manifest must list BgColor as a public registry-backed utility.',
@@ -341,26 +338,29 @@ assert.ok(
 )
 assert.ok(
   docsDefinitionSource.includes("id: 'bg-color'") &&
-    docsDefinitionSource.includes('bgColorToneGroups.map') &&
-    docsDefinitionSource.includes('group.tones.map') &&
+    docsDefinitionSource.includes("frame: 'plain',") &&
+    docsDefinitionSource.includes("import { CardPanel } from '../../components/coss/card'") &&
+    docsDefinitionSource.includes('bgColorPreviewTones') &&
+    docsDefinitionSource.includes('orderedTones.map') &&
     docsDefinitionSource.includes('bgColorToneMap[tone]') &&
     docsDefinitionSource.includes('getBgColorClassName(tone)') &&
     docsDefinitionSource.includes('getBgColorToken(tone)') &&
-    docsDefinitionSource.includes('bg-color-preview__group') &&
-    docsDefinitionSource.includes('bg-color-preview__group-header') &&
-    docsDefinitionSource.includes('bg-color-preview__group-title') &&
-    docsDefinitionSource.includes('bg-color-preview__group-description') &&
-    docsDefinitionSource.includes('bg-color-preview__group-list') &&
+    docsDefinitionSource.includes('<CardPanel className="bg-color-preview__panel"') &&
     docsDefinitionSource.includes('bg-color-preview__sample') &&
     docsDefinitionSource.includes('bg-color-preview__sample-fill') &&
     docsDefinitionSource.includes('const isTransparent = hasTransparentBgColorValue(item)') &&
     docsDefinitionSource.includes('bg-color-preview__sample-backdrop') &&
     docsDefinitionSource.includes('bg-color-preview__sample-fill--framed') &&
-    docsDefinitionSource.includes('bg-color-preview__value') &&
-    docsDefinitionSource.includes('亮: {item.value.light}') &&
-    docsDefinitionSource.includes('暗: {item.value.dark}') &&
-    docsDefinitionSource.includes('ui: {item.uiUsage}'),
-  'BgColor docs definition must render the background tone map preview and usage summary.',
+    docsDefinitionSource.includes('bg-color-preview__token-value--light') &&
+    docsDefinitionSource.includes('bg-color-preview__token-value--dark') &&
+    docsDefinitionSource.includes('{item.value.light}') &&
+    docsDefinitionSource.includes('{item.value.dark}') &&
+    !docsDefinitionSource.includes('summary:') &&
+    !docsDefinitionSource.includes('bg-color-preview__group') &&
+    !docsDefinitionSource.includes('bg-color-preview__description') &&
+    !docsDefinitionSource.includes('uiUsage') &&
+    !docsDefinitionSource.includes('bijiUsage'),
+  'BgColor docs definition must render one CardPanel per background tone with no summary, grouping, or usage prose.',
 )
 assert.ok(
   docsDefinitionSource.includes('function hasTransparentBgColorValue') &&
@@ -368,41 +368,25 @@ assert.ok(
     docsDefinitionSource.includes('hsla(') &&
     docsDefinitionSource.includes('/\\s*(?:0?\\.\\d+|[1-9]\\d?%)') &&
     docsDefinitionSource.includes('[tone.value.light, tone.value.dark].some'),
-  'BgColor docs definition must detect semi-transparent tone values before showing the text-under-background sample.',
+  'BgColor docs definition must detect semi-transparent tone values before showing the striped backdrop sample.',
 )
 
-const groupedTones = new Set()
-
-for (const [groupTitle, tones] of expectedToneGroups) {
-  assert.ok(
-    docsDefinitionSource.includes(`title: '${groupTitle}'`),
-    `BgColor docs preview must include the ${groupTitle} semantic group.`,
-  )
-
-  const groupIndex = docsDefinitionSource.indexOf(`title: '${groupTitle}'`)
-  const nextGroupIndex = docsDefinitionSource.indexOf('title: ', groupIndex + groupTitle.length)
-  const groupSource = docsDefinitionSource.slice(
-    groupIndex,
-    nextGroupIndex === -1 ? docsDefinitionSource.length : nextGroupIndex,
-  )
-
-  for (const tone of tones) {
-    assert.ok(
-      groupSource.includes(`'${tone}'`),
-      `BgColor ${groupTitle} group must include the ${tone} tone.`,
-    )
-    assert.ok(!groupedTones.has(tone), `BgColor ${tone} tone must be assigned to only one group.`)
-    groupedTones.add(tone)
-  }
-}
+const previewTonesSource = docsDefinitionSource.slice(
+  docsDefinitionSource.indexOf('const bgColorPreviewTones'),
+  docsDefinitionSource.indexOf('satisfies readonly BgColorTone[]'),
+)
 
 assert.deepEqual(
-  [...groupedTones].sort(),
-  expectedTones
-    .map(([tone]) => tone)
-    .filter((tone) => !pressableTonesDelegatedToPressable.has(tone))
-    .sort(),
-  'BgColor semantic groups must cover every non-Pressable tone exactly once.',
+  [...previewTonesSource.matchAll(/'([a-z-]+)'/g)].map((match) => match[1]),
+  expectedToneGroups.flatMap(([, tones]) => tones),
+  'BgColor docs preview must cover every tone exactly once in semantic group order.',
+)
+assert.ok(
+  docsDefinitionSource.includes('function useIsDarkTheme()') &&
+    docsDefinitionSource.includes('function parseColorLightness(value: string)') &&
+    docsDefinitionSource.includes('function toneBrightness(tone: BgColorTone, isDark: boolean)') &&
+    docsDefinitionSource.includes('toneBrightness(b, isDark) - toneBrightness(a, isDark)'),
+  'BgColor docs preview must order swatches from bright to dark for the current theme.',
 )
 assert.ok(
   !docsDefinitionSource.includes("title: '可按压反馈'") &&
@@ -416,29 +400,30 @@ assert.ok(
 
 assert.ok(
   appCss.includes('.bg-color-preview') &&
-    appCss.includes('.bg-color-preview__group') &&
-    appCss.includes('.bg-color-preview__group-header') &&
-    appCss.includes('.bg-color-preview__group-title') &&
-    appCss.includes('.bg-color-preview__group-description') &&
-    appCss.includes('.bg-color-preview__group-list') &&
-    appCss.includes('.bg-color-preview__row') &&
+    appCss.includes('.bg-color-preview__panel') &&
+    appCss.includes('.bg-color-preview__meta') &&
+    appCss.includes('.bg-color-preview__label') &&
+    appCss.includes('.bg-color-preview__token') &&
     appCss.includes('.bg-color-preview__sample') &&
     appCss.includes('.bg-color-preview__sample-fill') &&
     appCss.includes('.bg-color-preview__sample-backdrop') &&
-    appCss.includes('.bg-color-preview__identity') &&
-    appCss.includes('.bg-color-preview__token') &&
-    appCss.includes('.bg-color-preview__value') &&
-    appCss.includes('.bg-color-preview__description') &&
-    appCss.includes('grid-template-columns: minmax(128px, 0.55fr) minmax(220px, 0.9fr) minmax(0, 1.5fr);'),
+    appCss.includes('.bg-color-preview__token-value--dark') &&
+    appCss.includes('.dark .bg-color-preview__token-value--light') &&
+    appCss.includes('.dark .bg-color-preview__token-value--dark') &&
+    !appCss.includes('.bg-color-preview__group') &&
+    !appCss.includes('.bg-color-preview__row') &&
+    !appCss.includes('.bg-color-preview__identity') &&
+    !appCss.includes('.bg-color-preview__description') &&
+    !appCss.includes('.bg-color-preview__value'),
   'App.css must include scoped BgColor detail-page preview styles.',
 )
 assert.ok(
   sampleBlock.includes('border: 1px solid var(--color-border);') &&
     sampleBlock.includes('position: relative;') &&
     sampleBlock.includes('isolation: isolate;') &&
-    sampleBlock.includes('width: 112px;') &&
-    sampleBlock.includes('height: 58px;') &&
+    sampleBlock.includes('height: 64px;') &&
     sampleBlock.includes('background: var(--color-bg-raised);') &&
+    !sampleBlock.includes('width:') &&
     !sampleBlock.includes('background-image:') &&
     !sampleBlock.includes('background-blend-mode:') &&
     !sampleBlock.includes('background-size:') &&
@@ -463,8 +448,8 @@ assert.ok(
     sampleBackdropBlock.includes('inset: 0;') &&
     sampleBackdropBlock.includes('z-index: 0;') &&
     sampleBackdropBlock.includes('repeating-linear-gradient') &&
-    sampleBackdropBlock.includes('rgb(255 255 255 / 0.68) 0 7px') &&
-    sampleBackdropBlock.includes('rgb(255 255 255 / 0.16) 7px 14px'),
+    sampleBackdropBlock.includes('rgb(255 255 255 / 0.68) 0 14px') &&
+    sampleBackdropBlock.includes('rgb(255 255 255 / 0.16) 14px 28px'),
   'BgColor semi-transparent samples must render a striped backdrop underneath the background fill.',
 )
 assert.ok(
@@ -472,11 +457,6 @@ assert.ok(
     !docsDefinitionSource.includes('>text</span>') &&
     !appCss.includes('.bg-color-preview__sample-text'),
   'BgColor transparency preview must use the striped backdrop instead of the old text-underlay sample.',
-)
-assert.ok(
-  descriptionBlock.includes('min-width: 0;') &&
-    descriptionBlock.includes('overflow-wrap: anywhere;'),
-  'BgColor detail usage column must shrink and wrap instead of overflowing.',
 )
 
 assert.ok(registryItem, 'registry.json must include the bg-color registry item.')

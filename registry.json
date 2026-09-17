@@ -212,32 +212,6 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "name": "bg-color",
-      "type": "registry:ui",
-      "title": "Bg Color",
-      "description": "Semantic background color utilities and a tone map backed by shared Weimo tokens.",
-      "categories": [
-        "style",
-        "color"
-      ],
-      "registryDependencies": [
-        "@weimo/style"
-      ],
-      "files": [
-        {
-          "path": "src/components/bg-color.ts",
-          "type": "registry:ui",
-          "target": "@ui/bg-color.ts"
-        },
-        {
-          "path": "src/components/bg-color.css",
-          "type": "registry:ui",
-          "target": "@ui/bg-color.css"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "border-color",
       "type": "registry:ui",
       "title": "Border Color",
@@ -452,6 +426,32 @@
           "path": "src/components/bg-blur.css",
           "type": "registry:ui",
           "target": "@ui/bg-blur.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "bg-color",
+      "type": "registry:ui",
+      "title": "Bg Color",
+      "description": "Semantic background color utilities and a tone map backed by shared Weimo tokens.",
+      "categories": [
+        "style",
+        "color"
+      ],
+      "registryDependencies": [
+        "@weimo/style"
+      ],
+      "files": [
+        {
+          "path": "src/components/bg-color.ts",
+          "type": "registry:ui",
+          "target": "@ui/bg-color.ts"
+        },
+        {
+          "path": "src/components/bg-color.css",
+          "type": "registry:ui",
+          "target": "@ui/bg-color.css"
         }
       ]
     },
