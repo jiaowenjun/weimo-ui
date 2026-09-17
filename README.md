@@ -55,4 +55,10 @@ pnpm lint
 pnpm preview
 ```
 
-Vite 的 base 路径为 `/ui/`，可部署在 `https://weimo.ink/ui`。
+Vite 的 base 路径为 `/weimo-ui/`，本地开发访问 `http://localhost:5176/weimo-ui/`。
+
+## 部署
+
+推送到 `main` 后，GitHub Actions 自动构建并发布到 GitHub Pages：`https://jiaowenjun.github.io/weimo-ui/`（workflow 见 `.github/workflows/deploy-pages.yml`）。
+
+构建产物为纯静态 SPA。GitHub Pages 没有 SPA fallback，workflow 在构建后把 `index.html` 复制为 `404.html`，配合应用内 `path="*"` 兜底路由，使 `/components/:id` 等深链接可直接访问。
