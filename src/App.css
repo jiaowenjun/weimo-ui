@@ -860,18 +860,11 @@
   width: min(100%, 920px);
   gap: 14px;
   align-self: center;
-  justify-self: stretch;
 }
 
-.bg-blur-preview__group {
+.bg-blur-preview__panel {
   display: grid;
-  min-width: 0;
   gap: 8px;
-}
-
-.bg-blur-preview__stage {
-  min-width: 0;
-  padding: 16px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   background: var(--color-bg-card);

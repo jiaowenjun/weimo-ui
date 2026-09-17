@@ -157,6 +157,12 @@ for (const snippet of [
   )
 }
 
+assert.ok(
+  detailPageSource.includes("{selected.frame === 'plain' ? (") &&
+    componentDocsSource.includes("frame?: 'stage' | 'plain'"),
+  'component detail page must let frame: plain definitions skip the demo-block stage wrapper and render their own preview surfaces.',
+)
+
 for (const snippet of [
   'API 参考',
   'api-heading',

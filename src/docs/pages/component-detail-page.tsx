@@ -31,11 +31,15 @@ export function ComponentDetailPage() {
         <p className="doc-page__summary">{selected.summary}</p>
       </header>
 
-      <div className="demo-block">
-        <CossCardPanel className="demo-block__panel preview-stage" data-component-id={selected.id} variant="stage">
-          {selected.preview(previewContext)}
-        </CossCardPanel>
-      </div>
+      {selected.frame === 'plain' ? (
+        selected.preview(previewContext)
+      ) : (
+        <div className="demo-block">
+          <CossCardPanel className="demo-block__panel preview-stage" data-component-id={selected.id} variant="stage">
+            {selected.preview(previewContext)}
+          </CossCardPanel>
+        </div>
+      )}
     </CossCardFrame>
   )
 }

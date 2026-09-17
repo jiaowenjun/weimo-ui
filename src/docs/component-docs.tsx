@@ -18,6 +18,7 @@ export type ComponentDoc = {
   group: ComponentGroupId
   summary: string
   status: 'Ready' | 'Preview'
+  frame?: 'stage' | 'plain'
   preview: (context: ComponentPreviewContext) => ReactNode
 }
 
@@ -26,6 +27,7 @@ export type ComponentDefinition = Pick<
   'id'
   | 'summary'
   | 'status'
+  | 'frame'
   | 'preview'
 >
 
@@ -38,7 +40,7 @@ export type ComponentDocGroup = {
 export const componentDocs: ComponentDoc[] = componentManifest
   .filter((item) => item.docs)
   .map((item) => {
-    const definition = componentDefinitionsById[item.id]
+    const definition: ComponentDefinition = componentDefinitionsById[item.id]
 
     if (!definition || definition.id !== item.id) {
       throw new Error(`Missing component definition for ${item.id}`)
@@ -50,6 +52,7 @@ export const componentDocs: ComponentDoc[] = componentManifest
       group: item.group,
       summary: definition.summary,
       status: definition.status,
+      frame: definition.frame,
       preview: definition.preview,
     }
   })
