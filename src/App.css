@@ -869,6 +869,15 @@
   gap: 8px;
 }
 
+.bg-blur-preview__stage {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-bg-card);
+  box-shadow: var(--shadow-card);
+}
+
 .bg-blur-preview__sample {
   position: relative;
   overflow: hidden;

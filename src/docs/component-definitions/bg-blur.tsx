@@ -18,15 +18,17 @@ export const bgBlurDefinition = {
 
         return (
           <section className="bg-blur-preview__group" key={tone}>
-            <div className="bg-blur-preview__sample" aria-hidden="true">
-              <span className="bg-blur-preview__backdrop" />
-              <span className={`bg-blur-preview__overlay ${getBgBlurClassName(tone)}`} />
-            </div>
             <div className="bg-blur-preview__meta">
               <span className="bg-blur-preview__label">{item.label}</span>
               <code className="bg-blur-preview__value">
                 {getBgBlurBlurToken(tone)}: {getBgBlurBlurValue(tone)}
               </code>
+            </div>
+            <div className="bg-blur-preview__stage">
+              <div className="bg-blur-preview__sample" aria-hidden="true">
+                <span className="bg-blur-preview__backdrop" />
+                <span className={`bg-blur-preview__overlay ${getBgBlurClassName(tone)}`} />
+              </div>
             </div>
           </section>
         )

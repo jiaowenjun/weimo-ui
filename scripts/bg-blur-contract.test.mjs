@@ -245,6 +245,7 @@ assert.ok(
     docsDefinitionSource.includes('getBgBlurBlurToken(tone)') &&
     docsDefinitionSource.includes('getBgBlurBlurValue(tone)') &&
     docsDefinitionSource.includes('bg-blur-preview__group') &&
+    docsDefinitionSource.includes('bg-blur-preview__stage') &&
     docsDefinitionSource.includes('bg-blur-preview__sample') &&
     docsDefinitionSource.includes('bg-blur-preview__overlay') &&
     docsDefinitionSource.includes('bg-blur-preview__value'),
@@ -265,6 +266,7 @@ assert.ok(
 assert.ok(
   appCss.includes('.bg-blur-preview') &&
     appCss.includes('.bg-blur-preview__group') &&
+    appCss.includes('.bg-blur-preview__stage') &&
     appCss.includes('.bg-blur-preview__sample') &&
     appCss.includes('.bg-blur-preview__backdrop') &&
     appCss.includes('.bg-blur-preview__overlay') &&
