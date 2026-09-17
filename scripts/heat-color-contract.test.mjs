@@ -51,9 +51,8 @@ const rootHeatColorItem = rootRegistry.items.find((item) => item.name === 'heat-
 const rootHeatmapItem = rootRegistry.items.find((item) => item.name === 'heatmap')
 const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const heatColorPreviewBlock = cssBlockFor(appCss, '.heat-color-preview')
-const heatColorPreviewRowBlock = cssBlockFor(appCss, '.heat-color-preview__row')
+const heatColorPreviewPanelBlock = cssBlockFor(appCss, '.heat-color-preview__panel')
 const heatColorSampleBlock = cssBlockFor(appCss, '.heat-color-preview__sample')
-const heatColorDescriptionBlock = cssBlockFor(appCss, '.heat-color-preview__description')
 
 assert.equal(
   packageJson.exports?.['./components/heat-color'],
@@ -154,19 +153,22 @@ assert.ok(
 
 assert.ok(
   docsDefinitionSource.includes("id: 'heat-color'") &&
+    docsDefinitionSource.includes("frame: 'plain',") &&
+    docsDefinitionSource.includes("import { CardPanel } from '../../components/coss/card'") &&
     docsDefinitionSource.includes('heatColorLevels.map') &&
     docsDefinitionSource.includes('heatColorMap[level]') &&
     docsDefinitionSource.includes('getHeatColorClassName(level)') &&
     docsDefinitionSource.includes('getHeatColorToken(level)') &&
-    docsDefinitionSource.includes('aria-label="HeatColor 热力色阶预览"') &&
-    docsDefinitionSource.includes('heat-color-preview__sample-wrap') &&
-    docsDefinitionSource.includes('heat-color-preview__meta') &&
-    docsDefinitionSource.includes('heat-color-preview__level') &&
-    docsDefinitionSource.includes('heat-color-preview__value') &&
-    docsDefinitionSource.includes('亮: {item.value.light}') &&
-    docsDefinitionSource.includes('暗: {item.value.dark}') &&
-    docsDefinitionSource.includes('HeatColor'),
-  'HeatColor docs definition must render the utility map preview with concrete token values.',
+    docsDefinitionSource.includes('<CardPanel className="heat-color-preview__panel"') &&
+    docsDefinitionSource.includes('heat-color-preview__sample') &&
+    docsDefinitionSource.includes('heat-color-preview__token-value--light') &&
+    docsDefinitionSource.includes('heat-color-preview__token-value--dark') &&
+    !docsDefinitionSource.includes('summary:') &&
+    !docsDefinitionSource.includes('heat-color-preview__row') &&
+    !docsDefinitionSource.includes('heat-color-preview__description') &&
+    !docsDefinitionSource.includes('uiUsage') &&
+    !docsDefinitionSource.includes('bijiUsage'),
+  'HeatColor docs definition must render one CardPanel per level with theme-aware token values.',
 )
 assert.equal(
   docsDefinitionSource.match(/<HeatColor\b/g)?.length ?? 0,
@@ -175,29 +177,21 @@ assert.equal(
 )
 assert.ok(
   heatColorPreviewBlock.includes('width: min(100%, 920px);') &&
-    heatColorPreviewBlock.includes('gap: 10px;') &&
-    heatColorPreviewBlock.includes('align-self: center;') &&
-    heatColorPreviewBlock.includes('justify-self: stretch;'),
-  'HeatColor detail preview must use the same overall row layout sizing as BorderColor.',
+    heatColorPreviewBlock.includes('repeat(auto-fill, minmax(min(100%, 300px), 1fr))') &&
+    heatColorPreviewBlock.includes('align-self: center;'),
+  'HeatColor detail preview must use the shared token-page card grid sizing.',
 )
 assert.ok(
-  heatColorPreviewRowBlock.includes('grid-template-columns: minmax(120px, 0.5fr) minmax(220px, 0.9fr) minmax(0, 1.45fr);') &&
-    heatColorPreviewRowBlock.includes('padding: 10px 12px;') &&
-    heatColorPreviewRowBlock.includes('border: 1px solid var(--color-border);') &&
-    heatColorPreviewRowBlock.includes('background: color-mix(in srgb, var(--color-bg-card) 88%, transparent);'),
-  'HeatColor detail rows must mirror the BorderColor preview row structure.',
+  heatColorPreviewPanelBlock.includes('border: 1px solid var(--color-border);') &&
+    heatColorPreviewPanelBlock.includes('background: var(--color-bg-card);') &&
+    heatColorPreviewPanelBlock.includes('box-shadow: var(--shadow-card);'),
+  'HeatColor detail cards must mirror the shared CardPanel preview chrome.',
 )
 assert.ok(
-  heatColorSampleBlock.includes('width: 48px;') &&
-    heatColorSampleBlock.includes('height: 48px;') &&
+  heatColorSampleBlock.includes('height: 64px;') &&
     heatColorSampleBlock.includes('border-radius: var(--radius-sm);') &&
     !heatColorSampleBlock.includes('border:'),
-  'HeatColor preview samples must use square borderless color blocks.',
-)
-assert.ok(
-  heatColorDescriptionBlock.includes('min-width: 0;') &&
-    heatColorDescriptionBlock.includes('overflow-wrap: anywhere;'),
-  'HeatColor detail description column must shrink and wrap instead of overflowing.',
+  'HeatColor preview samples must use full-width borderless color blocks.',
 )
 
 assert.ok(rootHeatColorItem, 'registry.json must include the heat-color registry item.')

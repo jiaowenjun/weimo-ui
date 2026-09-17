@@ -49,15 +49,6 @@ export type ComponentManifestItem = PublicComponentManifestItem
 
 export const componentManifest = [
   {
-    id: 'heat-color',
-    name: 'HeatColor',
-    registryName: 'heat-color',
-    packageExport: './components/heat-color',
-    group: 'token-style',
-    docs: true,
-    registry: true,
-  },
-  {
     id: 'md',
     name: 'Md',
     registryName: 'md',
@@ -89,6 +80,15 @@ export const componentManifest = [
     name: '字色',
     registryName: 'text-color',
     packageExport: './components/text-color',
+    group: 'token-style',
+    docs: true,
+    registry: true,
+  },
+  {
+    id: 'heat-color',
+    name: '热力图色',
+    registryName: 'heat-color',
+    packageExport: './components/heat-color',
     group: 'token-style',
     docs: true,
     registry: true,
