@@ -163,6 +163,12 @@ assert.ok(
   'component detail page must let frame: plain definitions skip the demo-block stage wrapper and render their own preview surfaces.',
 )
 
+assert.ok(
+  detailPageSource.includes('{selected.summary ? <p className="doc-page__summary">{selected.summary}</p> : null}') &&
+    componentDocsSource.includes('summary?: string'),
+  'component detail page must omit the summary paragraph for definitions without a summary.',
+)
+
 for (const snippet of [
   'API 参考',
   'api-heading',

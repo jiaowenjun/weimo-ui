@@ -16,7 +16,7 @@ export type ComponentDoc = {
   id: ComponentId
   name: string
   group: ComponentGroupId
-  summary: string
+  summary?: string
   status: 'Ready' | 'Preview'
   frame?: 'stage' | 'plain'
   preview: (context: ComponentPreviewContext) => ReactNode

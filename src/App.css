@@ -920,6 +920,7 @@
 
 .bg-blur-preview__value {
   min-width: 0;
+  margin-left: auto;
   color: var(--color-text-secondary);
   font-family: var(--font-mono);
   font-size: var(--font-size-xs);

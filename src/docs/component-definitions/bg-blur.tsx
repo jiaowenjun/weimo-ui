@@ -10,11 +10,10 @@ import type { ComponentDefinition } from '../component-docs'
 
 export const bgBlurDefinition = {
   id: 'bg-blur',
-  summary: '背景模糊档位：--glass-blur 与 --backdrop-blur',
   status: 'Ready',
   frame: 'plain',
   preview: () => (
-    <div className="bg-blur-preview" aria-label="BgBlur 背景模糊档位预览">
+    <div className="bg-blur-preview" aria-label="背景模糊度档位预览">
       {bgBlurTones.map((tone) => {
         const item = bgBlurToneMap[tone]
 

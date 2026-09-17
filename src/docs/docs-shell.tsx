@@ -174,7 +174,7 @@ export function DocsShell() {
 
     return componentDocs.filter((doc) =>
       [doc.name, doc.summary].some((value) =>
-        value.toLowerCase().includes(normalized),
+        value?.toLowerCase().includes(normalized),
       ),
     )
   }, [query])
@@ -288,7 +288,7 @@ export function DocsShell() {
               <CommandItem key={doc.id} onClick={() => openComponent(doc.id)}>
                 <span>
                   <strong>{doc.name}</strong>
-                  <small>{doc.summary}</small>
+                  {doc.summary ? <small>{doc.summary}</small> : null}
                 </span>
                 <ArrowRight />
               </CommandItem>

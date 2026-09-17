@@ -212,32 +212,6 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "name": "bg-blur",
-      "type": "registry:ui",
-      "title": "Bg Blur",
-      "description": "Semantic transparent background plus blur utilities backed by shared Weimo surfaces.",
-      "categories": [
-        "style",
-        "blur"
-      ],
-      "registryDependencies": [
-        "@weimo/style"
-      ],
-      "files": [
-        {
-          "path": "src/components/bg-blur.ts",
-          "type": "registry:ui",
-          "target": "@ui/bg-blur.ts"
-        },
-        {
-          "path": "src/components/bg-blur.css",
-          "type": "registry:ui",
-          "target": "@ui/bg-blur.css"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "bg-color",
       "type": "registry:ui",
       "title": "Bg Color",
@@ -452,6 +426,32 @@
           "path": "src/components/text-color.css",
           "type": "registry:ui",
           "target": "@ui/text-color.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "bg-blur",
+      "type": "registry:ui",
+      "title": "Bg Blur",
+      "description": "Semantic transparent background plus blur utilities backed by shared Weimo surfaces.",
+      "categories": [
+        "style",
+        "blur"
+      ],
+      "registryDependencies": [
+        "@weimo/style"
+      ],
+      "files": [
+        {
+          "path": "src/components/bg-blur.ts",
+          "type": "registry:ui",
+          "target": "@ui/bg-blur.ts"
+        },
+        {
+          "path": "src/components/bg-blur.css",
+          "type": "registry:ui",
+          "target": "@ui/bg-blur.css"
         }
       ]
     },

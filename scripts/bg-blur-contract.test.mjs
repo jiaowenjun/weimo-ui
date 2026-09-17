@@ -223,7 +223,7 @@ assert.ok(
 
 assert.ok(
   manifestSource.includes("id: 'bg-blur'") &&
-    manifestSource.includes("name: 'BgBlur'") &&
+    manifestSource.includes("name: '背景模糊度'") &&
     manifestSource.includes("registryName: 'bg-blur'") &&
     manifestSource.includes("packageExport: './components/bg-blur'") &&
     !manifestSource.includes("id: 'blur'") &&
@@ -251,8 +251,9 @@ assert.ok(
     docsDefinitionSource.includes('bg-blur-preview__overlay') &&
     docsDefinitionSource.includes('bg-blur-preview__value') &&
     !docsDefinitionSource.includes('bg-blur-preview__group') &&
-    !docsDefinitionSource.includes('bg-blur-preview__stage'),
-  'BgBlur docs definition must render one CardPanel per blur tone driven by the shared tone map.',
+    !docsDefinitionSource.includes('bg-blur-preview__stage') &&
+    !docsDefinitionSource.includes('summary:'),
+  'BgBlur docs definition must render one CardPanel per blur tone driven by the shared tone map, without a redundant page summary.',
 )
 assert.ok(
   !docsDefinitionSource.includes('<span>text</span>') && !docsDefinitionSource.includes('>text<'),

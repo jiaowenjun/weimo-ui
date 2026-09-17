@@ -28,7 +28,7 @@ export function ComponentDetailPage() {
     <CossCardFrame className="doc-page">
       <header className="doc-page__header">
         <h1 className="doc-page__title">{selected.name}</h1>
-        <p className="doc-page__summary">{selected.summary}</p>
+        {selected.summary ? <p className="doc-page__summary">{selected.summary}</p> : null}
       </header>
 
       {selected.frame === 'plain' ? (
