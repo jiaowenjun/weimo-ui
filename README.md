@@ -1,21 +1,32 @@
 # Weimo UI
 
-`weimo-ui` 是仓库根目录下的独立前端子项目，也是面向 Weimo 产品的 React 组件库文档站。
+`weimo-ui` 是独立 Git 仓库，也是面向 Weimo 产品的 React 组件库与文档站。
 
 站点参考 `https://coss.com/ui` 搭建，提供精简文档壳、命令式搜索、明暗主题切换、组件预览、安装片段和参数表。初始组件来自 `examples/demo/src/components`。
 
-## 独立子项目
+## 安装与消费
 
-`weimo-ui` 不依赖 weimo 的其他子项目：源码零跨项目导入，依赖全部来自 npm，并且拥有独立的 pnpm workspace（`pnpm-workspace.yaml`）与 `pnpm-lock.yaml`，不在仓库根 workspace 内。
+`weimo-ui` 不依赖 Weimo 应用仓库：源码零跨仓库导入，依赖全部来自 npm，并拥有自己的 pnpm workspace 和 lockfile。
 
 ```bash
+git clone https://github.com/jiaowenjun/weimo-ui.git
 cd weimo-ui
 pnpm install
 ```
 
-即可独立安装、测试和构建；未来可将目录整体摘出单独发布为 UI 组件库。包内消费者（`weimo-timu`、`weimo-biji`、`weimo-home`、`examples/demo`）通过 pnpm `link:` 相对路径引用本包，导入符为 `weimo-ui/...`。
+即可独立安装、测试和构建。Weimo 应用通过锁定的 Git commit 消费本包，避免跟随 `main` 漂移：
 
-发布形态为源码导出：`exports` 直接指向 `src` 下的 `.ts/.tsx/.css`，要求消费方使用支持 TypeScript 的打包器（仓库内各 Vite 应用均满足）。`react` 与 `react-dom` 声明为 peerDependencies，其余运行时依赖为普通 dependencies。注意 `scripts/surface-material-contract.test.mjs` 等跨包契约测试会读取 `weimo-biji` 源码断言一致性，属于测试期引用，不构成运行时依赖。
+```json
+{
+  "dependencies": {
+    "weimo-ui": "github:jiaowenjun/weimo-ui#<full-commit-sha>"
+  }
+}
+```
+
+更新依赖时先在本仓库完成测试并 push commit，再更新 Weimo 的 package manifests 与 lockfile，并验证所有真实消费者。导入符保持为 `weimo-ui/...`。
+
+分发形态为源码导出：`exports` 直接指向 `src` 下的 `.ts/.tsx/.css`，要求消费方使用支持 TypeScript、TSX 和 CSS 的打包器。`react` 与 `react-dom` 声明为 peer dependencies，其余运行时依赖为普通 dependencies。`private: true` 仅禁止误发到 npm，不影响通过 Git commit 安装。
 
 ## 职责定位
 

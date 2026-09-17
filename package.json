@@ -6,9 +6,9 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://gitee.com/jiaowenjun/weimo.git",
-    "directory": "weimo-ui"
+    "url": "git+https://github.com/jiaowenjun/weimo-ui.git"
   },
+  "homepage": "https://jiaowenjun.github.io/weimo-ui/",
   "packageManager": "pnpm@11.9.0+sha512.bd682d5d03fe525ef7c9fd6780c6884d1e756ac4c9c9fe00c538782824310dcf90e3ddc4f53835f06dfaebd5085e41855e0bcbb3b60de2ac5bbab89e5036f03b",
   "engines": {
     "node": ">=20.19"
@@ -46,6 +46,7 @@
     "./components/glass-icon-button": "./src/components/glass-icon-button.tsx",
     "./components/ghost-icon-button": "./src/components/ghost-icon-button.tsx",
     "./components/text-button": "./src/components/text-button.tsx",
+    "./components/coss/dialog": "./src/components/coss/dialog.tsx",
     "./components/coss/button": "./src/components/coss/button.tsx",
     "./components/coss/input-group": "./src/components/coss/input-group.tsx",
     "./components/coss/tabs": "./src/components/coss/tabs.tsx",

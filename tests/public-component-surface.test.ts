@@ -36,6 +36,7 @@ const conceptualTokenModules = new Set([
   'border-color',
   'border-radius',
   'font-size',
+  'heat-color',
   'pressable',
   'text-color',
 ])
@@ -104,6 +105,23 @@ describe('public component catalog', () => {
         expect(file.target.startsWith('@ui/')).toBe(true)
       }
     }
+  })
+})
+
+describe('package exports', () => {
+  it('keeps every export target installable and exposes the dialog used by Weimo', () => {
+    const packageJson = readProjectJson<PackageJson>('package.json')
+
+    for (const [packageExport, sourcePath] of Object.entries(packageJson.exports)) {
+      expect(
+        projectFileExists(sourcePath.replace(/^\.\//u, '')),
+        `${packageExport} target`,
+      ).toBe(true)
+    }
+
+    const dialogSource = packageJson.exports['./components/coss/dialog']
+    expect(dialogSource).toBe('./src/components/coss/dialog.tsx')
+    expect(exportedNames(dialogSource.replace(/^\.\//u, '')).has('DialogPanel')).toBe(true)
   })
 })
 
