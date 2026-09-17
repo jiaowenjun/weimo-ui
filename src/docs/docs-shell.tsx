@@ -224,7 +224,7 @@ export function DocsShell() {
         }
         onClick={() => setTheme((current) => nextTheme(current))}
       >
-        {theme === 'system' ? <Monitor /> : theme === 'light' ? <Moon /> : <Sun />}
+        {theme === 'system' ? <Monitor /> : theme === 'light' ? <Sun /> : <Moon />}
       </GlassIconButton>
     </>
   )
