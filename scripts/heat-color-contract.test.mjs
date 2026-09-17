@@ -158,7 +158,6 @@ assert.ok(
     docsDefinitionSource.includes('heatColorMap[level]') &&
     docsDefinitionSource.includes('getHeatColorClassName(level)') &&
     docsDefinitionSource.includes('getHeatColorToken(level)') &&
-    docsDefinitionSource.includes('value: { light; dark }') &&
     docsDefinitionSource.includes('aria-label="HeatColor 热力色阶预览"') &&
     docsDefinitionSource.includes('heat-color-preview__sample-wrap') &&
     docsDefinitionSource.includes('heat-color-preview__meta') &&

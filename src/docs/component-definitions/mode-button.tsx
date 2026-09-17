@@ -39,30 +39,5 @@ export const modeButtonDefinition = {
   id: 'mode-button',
   summary: '内部模式图标按钮，统一菜单进入编辑态与关闭编辑态',
   status: 'Ready',
-  props: [
-    { name: 'mode', type: '"display" | "edit"', defaultValue: '-' },
-    {
-      name: 'onModeChange',
-      type: '(mode: "display" | "edit") => void',
-      defaultValue: '-',
-    },
-    { name: 'disabled', type: 'boolean', defaultValue: 'false' },
-    { name: 'className', type: 'string', defaultValue: '-' },
-    {
-      name: 'buttonProps',
-      type: 'Omit<GhostIconButtonProps, "children" | "onClick" | "aria-label">',
-      defaultValue: '-',
-    },
-    {
-      name: 'menuCloseTiming',
-      type: '"before-mode-change" | "after-mode-change"',
-      defaultValue: 'before-mode-change',
-    },
-    { name: 'displayMenuItems', type: 'ActionMenuItem[]', defaultValue: '[]' },
-    { name: 'displayLabel', type: 'string', defaultValue: '打开操作菜单' },
-    { name: 'editLabel', type: 'string', defaultValue: '退出编辑态' },
-    { name: 'menuLabel', type: 'string', defaultValue: '操作菜单' },
-    { name: 'editMenuItemLabel', type: 'string', defaultValue: '编辑' },
-  ],
   preview: () => <ModeButtonDemo />,
 } satisfies ComponentDefinition

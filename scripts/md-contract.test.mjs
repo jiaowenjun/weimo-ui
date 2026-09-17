@@ -302,13 +302,6 @@ assert.ok(
   'MdRender must pass the same resolved source, class, and measured sizing props to custom and native image renderers.',
 )
 assert.ok(
-  mdRenderDefinitionSource.includes(
-    "{ name: 'renderImage', type: 'MdRenderImageRenderer', defaultValue: '-' }",
-  ),
-  'MdRender docs must document the caller-controlled image renderer.',
-)
-
-assert.ok(
   mdRenderSource.includes('function trailingOrderedListImageRemarkPlugin()'),
   'MdRender must expose a Remark transform for the trailing ordered-list and single-image layout.',
 )

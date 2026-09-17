@@ -34,17 +34,5 @@ export const chipDefinition = {
   id: 'chip',
   summary: '内部共享标签胶囊，支持 prefix、content、suffix 三段 slot 和默认/玻璃两种外观',
   status: 'Preview',
-  props: [
-    { name: 'prefix', type: 'ReactNode', defaultValue: '-' },
-    { name: 'content', type: 'ReactNode', defaultValue: '-' },
-    { name: 'suffix', type: 'ReactNode', defaultValue: '-' },
-    { name: 'variant', type: "'default' | 'glass'", defaultValue: "'default'" },
-    { name: 'textSize', type: "'sm' | 'base'", defaultValue: "'sm'" },
-    {
-      name: '...spanProps',
-      type: "Omit<ComponentPropsWithoutRef<'span'>, 'children' | 'content' | 'prefix'>",
-      defaultValue: '-',
-    },
-  ],
   preview: () => <ChipDemo />,
 } satisfies ComponentDefinition

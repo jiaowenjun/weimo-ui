@@ -95,16 +95,5 @@ export const tagBreadDefinition = {
   id: 'tag-bread',
   summary: '基于 coss Breadcrumb 的标签路径导航，提供磨砂玻璃背景和紧凑标签层级展示',
   status: 'Ready',
-  props: [
-    { name: 'tag', type: 'string', defaultValue: '-' },
-    { name: 'onSelect', type: '(tag: string) => void', defaultValue: '-' },
-    { name: 'prefix', type: 'ReactNode', defaultValue: '<Hash />' },
-    { name: 'separator', type: 'ReactNode', defaultValue: "'/'" },
-    {
-      name: '...navProps',
-      type: 'ComponentPropsWithoutRef<"nav">',
-      defaultValue: '-',
-    },
-  ],
   preview: () => <TagBreadDemo />,
 } satisfies ComponentDefinition

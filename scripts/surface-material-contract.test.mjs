@@ -146,7 +146,6 @@ for (const snippet of [
   "id: 'card-surface'",
   '静态实体卡片材质',
   '<CardSurface className="card-surface-preview__tile">',
-  "{ name: '...divProps', type: \"ComponentPropsWithoutRef<'div'>\", defaultValue: '-' }",
 ]) {
   assert.ok(cardDefinitionSource.includes(snippet), `CardSurface docs definition must include ${snippet}.`)
 }
@@ -251,7 +250,6 @@ for (const snippet of [
   '抬升浮层主体材质',
   '<PopupSurface className="popup-surface-preview__tile">',
   '<PopupSurface className="popup-surface-preview__tile" level="tooltip">',
-  "{ name: 'level', type: \"'modal' | 'tooltip'\", defaultValue: \"'modal'\" }",
 ]) {
   assert.ok(popupDefinitionSource.includes(snippet), `PopupSurface docs definition must include ${snippet}.`)
 }

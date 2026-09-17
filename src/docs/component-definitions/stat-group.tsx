@@ -23,15 +23,5 @@ export const statGroupDefinition = {
   id: 'stat-group',
   summary: '复刻 Skyline 侧边栏统计区的笔记、字数、天数三栏',
   status: 'Ready',
-  props: [
-    { name: 'items', type: 'StatGroupItem[]', defaultValue: '-' },
-    { name: 'children', type: 'ReactNode', defaultValue: '-' },
-    { name: 'className', type: 'string', defaultValue: '-' },
-    {
-      name: '...divProps',
-      type: 'ComponentPropsWithoutRef<"div">',
-      defaultValue: '-',
-    },
-  ],
   preview: () => <StatGroup items={sidebarStatsItems} aria-label="笔记统计" />,
 } satisfies ComponentDefinition

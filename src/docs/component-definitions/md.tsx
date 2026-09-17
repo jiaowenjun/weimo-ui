@@ -232,14 +232,5 @@ export const mdDefinition = {
   id: 'md',
   summary: 'Markdown 渲染相关 token 汇总，用真实 Markdown 场景辅助观察底层样式值',
   status: 'Ready',
-  props: [
-    { name: 'content', type: 'string', defaultValue: '-' },
-    { name: 'className', type: 'string', defaultValue: '-' },
-    {
-      name: '...divProps',
-      type: 'ComponentPropsWithoutRef<"div">',
-      defaultValue: '-',
-    },
-  ],
   preview: () => <MdStylePreview />,
 } satisfies ComponentDefinition

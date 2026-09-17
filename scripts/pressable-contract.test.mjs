@@ -199,7 +199,7 @@ for (const forbiddenPressedPreviewSnippet of [
 }
 
 for (const [tone, bgColorTone, token, className] of expectedTones) {
-  assert.ok(docsDefinitionSource.includes(`'${tone}'`), `Pressable docs must include ${tone}.`)
+  assert.ok(pressablePreviewSource.includes(`'${tone}'`), `Pressable docs must include ${tone}.`)
   assert.ok(pressableSource.includes(bgColorTone), `Pressable source must reference ${bgColorTone}.`)
   assert.ok(typeof token === 'string' && token.startsWith('--color-bg-'), `${tone} token must reuse a shared BgColor token.`)
   assert.ok(typeof className === 'string' && className.startsWith('bg-color--'), `${tone} class must reuse a BgColor utility.`)

@@ -331,9 +331,6 @@ for (const snippet of [
   'displayMode={displayMode}',
   'open',
   'src={sampleImage}',
-  "{ name: 'displayMode', type: \"'actual-size' | 'fit-width' | 'fit-height'\", defaultValue: '-' }",
-  "{ name: 'open', type: 'boolean', defaultValue: '-' }",
-  "{ name: 'imageRef', type: 'Ref<HTMLImageElement>', defaultValue: '-' }",
 ]) {
   assertIncludes(docsDefinition, snippet, `ImageView docs must include ${snippet}.`)
 }

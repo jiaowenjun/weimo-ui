@@ -49,21 +49,5 @@ export const imageViewDefinition = {
   id: 'image-view',
   summary: '内部共享图片组件，为 OCR 校对等场景提供稳定比例预览，并提供 100%、适应宽度、适应高度三种详情模式',
   status: 'Preview',
-  props: [
-    { name: 'src', type: 'string', defaultValue: '-' },
-    { name: 'alt', type: 'string', defaultValue: "''" },
-    { name: 'displayMode', type: "'actual-size' | 'fit-width' | 'fit-height'", defaultValue: '-' },
-    { name: 'imageWidth', type: 'number', defaultValue: '-' },
-    { name: 'imageHeight', type: 'number', defaultValue: '-' },
-    { name: 'imageRef', type: 'Ref<HTMLImageElement>', defaultValue: '-' },
-    { name: 'objectFit', type: "'contain' | 'cover'", defaultValue: "'contain'" },
-    { name: 'open', type: 'boolean', defaultValue: '-' },
-    { name: 'placeholder', type: 'ReactNode', defaultValue: "'No image selected'" },
-    {
-      name: '...figureProps',
-      type: "Omit<ComponentPropsWithoutRef<'figure'>, 'children'>",
-      defaultValue: '-',
-    },
-  ],
   preview: () => <ImageViewPreview />,
 } satisfies ComponentDefinition

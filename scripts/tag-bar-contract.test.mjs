@@ -434,7 +434,6 @@ assert.ok(
     docsSource.includes("id: 'tag-bar'") &&
     docsSource.includes('summary:') &&
     docsSource.includes('status:') &&
-    docsSource.includes('props:') &&
     docsSource.includes('preview:') &&
     !docsSource.includes('code:') &&
     !docsSource.includes('variantPreviews:') &&
@@ -446,10 +445,8 @@ assert.ok(
     docsSource.includes('tagOptions={tagOptions}') &&
     docsSource.includes('tags={tags}') &&
     docsSource.includes('<TextButton') &&
-    docsSource.includes("editable ? '切换到展示态' : '切换到编辑态'") &&
-    docsSource.includes("{ name: 'editable', type: 'boolean', defaultValue: 'false' }") &&
-    docsSource.includes("{ name: 'emptyLabel', type: 'string', defaultValue: \"'无'\" }"),
-  'TagBar docs definition must provide a local state preview with a mode toggle and props.',
+    docsSource.includes("editable ? '切换到展示态' : '切换到编辑态'"),
+  'TagBar docs definition must provide a local state preview with a mode toggle.',
 )
 assert.ok(
   !docsSource.includes("import { Button } from '../../components/coss/button'") &&

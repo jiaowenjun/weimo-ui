@@ -45,30 +45,5 @@ export const heatColorDefinition = {
   id: 'heat-color',
   summary: 'Heatmap 共享颜色色阶，独立展示 0-4 级热力颜色',
   status: 'Ready',
-  props: [
-    { name: 'levels', type: 'HeatColorLevel[]', defaultValue: '[0, 1, 2, 3, 4]' },
-    {
-      name: 'heatColorMap',
-      type: 'Record<HeatColorLevel, { label; token; value: { light; dark }; className; description }>',
-      defaultValue: '-',
-    },
-    {
-      name: 'getHeatColorClassName(level)',
-      type: '(level: HeatColorLevel) => string',
-      defaultValue: '-',
-    },
-    {
-      name: 'getHeatColorToken(level)',
-      type: '(level: HeatColorLevel) => string',
-      defaultValue: '-',
-    },
-    { name: 'ariaLabel', type: 'string', defaultValue: '热力图颜色色阶' },
-    { name: 'getLevelLabel', type: '(level: HeatColorLevel) => string', defaultValue: '-' },
-    {
-      name: '...divProps',
-      type: 'Omit<HTMLAttributes<HTMLDivElement>, "aria-label">',
-      defaultValue: '-',
-    },
-  ],
   preview: () => <HeatColorDemo />,
 } satisfies ComponentDefinition

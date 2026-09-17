@@ -228,8 +228,6 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'text-color'") &&
     docsDefinitionSource.includes("const previewTextColorTones = textColorTones.filter((tone) => tone !== 'inherit')") &&
-    docsDefinitionSource.includes("defaultValue: \"['primary', 'secondary', 'subtle', 'placeholder', 'disable', ...]\"") &&
-    docsDefinitionSource.includes('value: { light; dark }') &&
     docsDefinitionSource.includes('textColorToneMap[tone]') &&
     docsDefinitionSource.includes('previewTextColorTones.map') &&
     docsDefinitionSource.includes('getTextColorClassName(tone)') &&

@@ -197,10 +197,7 @@ assert.ok(
     docsSource.includes('prefix={<Hash aria-hidden="true" />}') &&
     docsSource.includes('suffix={') &&
     docsSource.includes('<button className="internal-chip-preview__action" type="button">') &&
-    docsSource.includes('<X aria-hidden="true" />') &&
-    docsSource.includes("{ name: 'content', type: 'ReactNode', defaultValue: '-' }") &&
-    docsSource.includes("{ name: 'variant', type: \"'default' | 'glass'\", defaultValue: \"'default'\" }") &&
-    docsSource.includes("{ name: 'textSize', type: \"'sm' | 'base'\", defaultValue: \"'sm'\" }"),
+    docsSource.includes('<X aria-hidden="true" />'),
   'Chip docs definition must show internal slot, variant, and text-size examples.',
 )
 assert.ok(

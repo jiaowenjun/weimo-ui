@@ -46,14 +46,5 @@ export const ghostIconButtonDefinition = {
   id: 'ghost-icon-button',
   summary: '透明圆形图标按钮，使用共享 hover/active 反馈 token',
   status: 'Ready',
-  props: [
-    {
-      name: '...buttonProps',
-      type: 'ComponentPropsWithoutRef<"button">',
-      defaultValue: '-',
-    },
-    { name: 'size', type: "'default' | 'sm'", defaultValue: 'default' },
-    { name: 'disabled', type: 'boolean', defaultValue: 'false' },
-  ],
   preview: () => <GhostIconButtonPreview />,
 } satisfies ComponentDefinition

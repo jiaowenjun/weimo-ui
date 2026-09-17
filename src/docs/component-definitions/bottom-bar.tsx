@@ -33,10 +33,5 @@ export const bottomBarDefinition = {
   id: 'bottom-bar',
   summary: '内部底部浮动操作栏，复用 FloatBar 的 slot 布局',
   status: 'Ready',
-  props: [
-    { name: 'leftSlot', type: 'ReactNode', defaultValue: '-' },
-    { name: 'rightSlot', type: 'ReactNode', defaultValue: '-' },
-    { name: '...divProps', type: 'ComponentPropsWithoutRef<"div">', defaultValue: '-' },
-  ],
   preview: () => <BottomBarDemo />,
 } satisfies ComponentDefinition

@@ -56,20 +56,5 @@ export const tagBarDefinition = {
   id: 'tag-bar',
   summary: '内部共享标签栏，可在展示态和编辑态之间切换',
   status: 'Preview',
-  props: [
-    { name: 'tags', type: 'string[]', defaultValue: '[]' },
-    { name: 'editable', type: 'boolean', defaultValue: 'false' },
-    { name: 'tagOptions', type: 'string[]', defaultValue: '[]' },
-    { name: 'isTagClickEnabled', type: '(tag: string) => boolean', defaultValue: '() => true' },
-    { name: 'onTagsChange', type: '(tags: string[]) => void', defaultValue: '-' },
-    { name: 'disabled', type: 'boolean', defaultValue: 'false' },
-    { name: 'addLabel', type: 'string', defaultValue: "'标签'" },
-    { name: 'emptyLabel', type: 'string', defaultValue: "'无'" },
-    {
-      name: '...divProps',
-      type: "Omit<ComponentPropsWithoutRef<'div'>, 'children' | 'onChange'>",
-      defaultValue: '-',
-    },
-  ],
   preview: () => <TagBarDemo />,
 } satisfies ComponentDefinition

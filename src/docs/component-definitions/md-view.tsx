@@ -77,14 +77,5 @@ export const mdViewDefinition = {
   id: 'md-view',
   summary: '受控切换 Markdown 展示态和编辑态的内部组合组件',
   status: 'Preview',
-  props: [
-    { name: 'mode', type: "'view' | 'edit'", defaultValue: '-' },
-    { name: 'value', type: 'string', defaultValue: '-' },
-    { name: 'onChange', type: '(markdown: string) => void', defaultValue: '-' },
-    { name: 'className', type: 'string', defaultValue: '-' },
-    { name: 'editorBottomSafeArea', type: 'number | string', defaultValue: '100' },
-    { name: 'renderProps', type: 'Omit<MdRenderProps, "content" | "className">', defaultValue: '-' },
-    { name: 'editorProps', type: 'Omit<MdEditorProps, "value" | "onChange" | "className">', defaultValue: '-' },
-  ],
   preview: () => <MdViewDemo />,
 } satisfies ComponentDefinition

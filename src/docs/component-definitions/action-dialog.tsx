@@ -37,16 +37,5 @@ export const actionDialogDefinition = {
   id: 'action-dialog',
   summary: '内部操作对话框骨架，组合 FloatBar 标题栏、右侧工具按钮、关闭按钮和可选 BottomBar',
   status: 'Ready',
-  props: [
-    { name: 'open', type: 'boolean', defaultValue: '-' },
-    { name: 'onOpenChange', type: '(open: boolean) => void', defaultValue: '-' },
-    { name: 'title', type: 'ReactNode', defaultValue: '-' },
-    { name: 'children', type: 'ReactNode', defaultValue: '-' },
-    { name: 'toolbarRightSlot', type: 'ReactNode', defaultValue: '-' },
-    { name: 'showCloseButton', type: 'boolean', defaultValue: 'true' },
-    { name: 'bottomBarLeftSlot', type: 'ReactNode', defaultValue: '-' },
-    { name: 'bottomBarRightSlot', type: 'ReactNode', defaultValue: '-' },
-    { name: 'popupProps', type: 'Omit<DialogPopupProps, "children" | "className">', defaultValue: '-' },
-  ],
   preview: () => <ActionDialogDemo />,
 } satisfies ComponentDefinition

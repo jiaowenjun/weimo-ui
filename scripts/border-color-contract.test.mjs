@@ -438,7 +438,6 @@ assert.ok(
     docsDefinitionSource.includes('borderColorTones.map') &&
     docsDefinitionSource.includes('borderColorToneMap[tone]') &&
     docsDefinitionSource.includes('borderColorDisableContextTokens') &&
-    docsDefinitionSource.includes("defaultValue: \"['disable', 'divider', 'default', 'emphasis', 'accent', ...]\"") &&
     docsDefinitionSource.includes('getBorderColorClassName(tone)') &&
     docsDefinitionSource.includes('getBorderColorToken(tone)') &&
     docsDefinitionSource.includes('value: { light; dark }') &&

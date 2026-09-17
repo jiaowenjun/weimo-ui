@@ -11,33 +11,6 @@ export const fontSizeDefinition = {
   id: 'font-size',
   summary: '统一字号 token scale，展示 weimo-ui 与 biji-react 当前使用的 font-size 档位',
   status: 'Ready',
-  props: [
-    {
-      name: 'fontSizeScales',
-      type: 'FontSizeScale[]',
-      defaultValue: "['2xs', 'xs', 'sm', ...]",
-    },
-    {
-      name: 'fontSizeScaleMap',
-      type: 'Record<FontSizeScale, { label; token; value; className; description }>',
-      defaultValue: '-',
-    },
-    {
-      name: 'getFontSizeClassName(scale)',
-      type: '(scale: FontSizeScale) => string',
-      defaultValue: '-',
-    },
-    {
-      name: 'getFontSizeToken(scale)',
-      type: '(scale: FontSizeScale) => string',
-      defaultValue: '-',
-    },
-    {
-      name: 'getFontSizeValue(scale)',
-      type: '(scale: FontSizeScale) => string',
-      defaultValue: '-',
-    },
-  ],
   preview: () => (
     <div className="font-size-preview" aria-label="FontSize 字号 token 预览">
       {fontSizeScales.map((scale) => {

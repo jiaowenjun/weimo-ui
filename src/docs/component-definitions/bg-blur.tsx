@@ -32,43 +32,6 @@ export const bgBlurDefinition = {
   id: 'bg-blur',
   summary: '统一透明背景 + blur utility 和 tone map，汇总 weimo-ui 与 biji-react 的稳定搭配场景',
   status: 'Ready',
-  props: [
-    {
-      name: 'bgBlurTones',
-      type: 'BgBlurTone[]',
-      defaultValue: "['glass', 'backdrop']",
-    },
-    {
-      name: 'bgBlurToneMap',
-      type: 'Record<BgBlurTone, { label; backgroundToken; backgroundValue; blurToken; blurValue; filter; className; description; uiUsage; bijiUsage }>',
-      defaultValue: '-',
-    },
-    {
-      name: 'getBgBlurClassName(tone)',
-      type: '(tone: BgBlurTone) => string',
-      defaultValue: '-',
-    },
-    {
-      name: 'getBgBlurBackgroundToken(tone)',
-      type: '(tone: BgBlurTone) => string',
-      defaultValue: '-',
-    },
-    {
-      name: 'getBgBlurBlurToken(tone)',
-      type: '(tone: BgBlurTone) => string',
-      defaultValue: '-',
-    },
-    {
-      name: 'getBgBlurBlurValue(tone)',
-      type: '(tone: BgBlurTone) => string',
-      defaultValue: '-',
-    },
-    {
-      name: 'getBgBlurFilter(tone)',
-      type: '(tone: BgBlurTone) => string',
-      defaultValue: '-',
-    },
-  ],
   preview: () => (
     <div className="bg-blur-preview" aria-label="BgBlur 透明背景与背景模糊档位预览">
       {bgBlurToneGroups.map((group) => (

@@ -109,17 +109,5 @@ export const tagPickerDefinition = {
   id: 'tag-picker',
   summary: '复刻 Skyline 标签选择器的 Dialog 组件，支持新增、替换和选择已有标签',
   status: 'Ready',
-  props: [
-    { name: 'open', type: 'boolean', defaultValue: '-' },
-    { name: 'mode', type: "'insert' | 'update' | 'pick'", defaultValue: '-' },
-    { name: 'tagOptions', type: 'string[]', defaultValue: '[]' },
-    { name: 'selectedTags', type: 'string[]', defaultValue: '[]' },
-    { name: 'targetTag', type: 'string', defaultValue: "''" },
-    { name: 'initialDraft', type: 'string', defaultValue: "''" },
-    { name: 'allowEmptyRemove', type: 'boolean', defaultValue: 'true' },
-    { name: 'title', type: 'ReactNode', defaultValue: '按模式生成' },
-    { name: 'onOpenChange', type: '(open: boolean) => void', defaultValue: '-' },
-    { name: 'onApply', type: '(payload: TagPickerApplyPayload) => void', defaultValue: '-' },
-  ],
   preview: () => <TagPickerDemo />,
 } satisfies ComponentDefinition

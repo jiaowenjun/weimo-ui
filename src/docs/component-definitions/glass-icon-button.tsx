@@ -57,14 +57,5 @@ export const glassIconButtonDefinition = {
   id: 'glass-icon-button',
   summary: '玻璃质感圆形图标按钮，自动感知背景并调整字色与 hover 反馈',
   status: 'Ready',
-  props: [
-    {
-      name: '...buttonProps',
-      type: 'ComponentPropsWithoutRef<"button">',
-      defaultValue: '-',
-    },
-    { name: 'size', type: "'default' | 'sm'", defaultValue: 'default' },
-    { name: 'disabled', type: 'boolean', defaultValue: 'false' },
-  ],
   preview: () => <GlassIconButtonPreview />,
 } satisfies ComponentDefinition

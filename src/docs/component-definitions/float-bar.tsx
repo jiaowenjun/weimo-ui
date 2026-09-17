@@ -34,12 +34,5 @@ export const floatBarDefinition = {
   id: 'float-bar',
   summary: '内部浮动工具栏布局，提供左中右 slot 和默认 toolbar 语义',
   status: 'Ready',
-  props: [
-    { name: 'leftSlot', type: 'ReactNode', defaultValue: '-' },
-    { name: 'centerSlot', type: 'ReactNode', defaultValue: '-' },
-    { name: 'rightSlot', type: 'ReactNode', defaultValue: '-' },
-    { name: 'role', type: 'AriaRole', defaultValue: 'toolbar' },
-    { name: '...divProps', type: 'ComponentPropsWithoutRef<"div">', defaultValue: '-' },
-  ],
   preview: () => <FloatBarDemo />,
 } satisfies ComponentDefinition

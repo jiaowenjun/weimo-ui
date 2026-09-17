@@ -45,16 +45,6 @@ export const cardComposerDefinition = {
   id: 'card-composer',
   summary: '用于新建草稿的 Card 组合壳层，复用 Card 编辑态与高度过渡',
   status: 'Preview',
-  props: [
-    { name: 'clientId', type: 'string', defaultValue: '-' },
-    { name: 'note', type: 'CardNote', defaultValue: '-' },
-    { name: 'isClosing', type: 'boolean', defaultValue: 'false' },
-    { name: 'renderCard', type: '(props: CardProps) => ReactNode', defaultValue: 'Card' },
-    { name: 'onExitAnimationEnd', type: '() => void', defaultValue: '-' },
-    { name: 'onViewTransitionEnd', type: '() => void', defaultValue: '-' },
-    { name: 'onSave', type: '(draft: CardDraft) => void', defaultValue: '-' },
-    { name: 'onCancel', type: '() => void', defaultValue: '-' },
-  ],
   preview: () => <CardComposerDemo />,
 } satisfies ComponentDefinition
 

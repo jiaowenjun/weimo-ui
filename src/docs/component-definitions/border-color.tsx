@@ -59,28 +59,6 @@ export const borderColorDefinition = {
   id: 'border-color',
   summary: '统一边框色 utility 和 tone map，汇总 weimo-ui 与 biji-react 的边框/轮廓色档位',
   status: 'Ready',
-  props: [
-    {
-      name: 'borderColorTones',
-      type: 'BorderColorTone[]',
-      defaultValue: "['disable', 'divider', 'default', 'emphasis', 'accent', ...]",
-    },
-    {
-      name: 'borderColorToneMap',
-      type: 'Record<BorderColorTone, { label; token; value: { light; dark }; className; description; uiUsage; bijiUsage }>',
-      defaultValue: '-',
-    },
-    {
-      name: 'getBorderColorClassName(tone)',
-      type: '(tone: BorderColorTone) => string',
-      defaultValue: '-',
-    },
-    {
-      name: 'getBorderColorToken(tone)',
-      type: '(tone: BorderColorTone) => string',
-      defaultValue: '-',
-    },
-  ],
   preview: () => (
     <div className="border-color-preview" aria-label="BorderColor 边框色档位预览">
       {borderColorTones.map((tone) => {

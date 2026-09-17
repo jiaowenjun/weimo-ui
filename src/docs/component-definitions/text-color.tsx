@@ -11,28 +11,6 @@ export const textColorDefinition = {
   id: 'text-color',
   summary: '统一文字颜色 utility 和 tone map，提供语义化字色档位、CSS class 与 token 对照',
   status: 'Ready',
-  props: [
-    {
-      name: 'textColorTones',
-      type: 'TextColorTone[]',
-      defaultValue: "['primary', 'secondary', 'subtle', 'placeholder', 'disable', ...]",
-    },
-    {
-      name: 'textColorToneMap',
-      type: 'Record<TextColorTone, { label; token; value: { light; dark }; className; description }>',
-      defaultValue: '-',
-    },
-    {
-      name: 'getTextColorClassName(tone)',
-      type: '(tone: TextColorTone) => string',
-      defaultValue: '-',
-    },
-    {
-      name: 'getTextColorToken(tone)',
-      type: '(tone: TextColorTone) => string',
-      defaultValue: '-',
-    },
-  ],
   preview: () => (
     <div className="text-color-preview" aria-label="TextColor 字色档位预览">
       {previewTextColorTones.map((tone) => {

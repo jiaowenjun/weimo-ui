@@ -18,16 +18,14 @@ export type ComponentDoc = {
   group: ComponentGroupId
   summary: string
   status: 'Ready' | 'Preview'
-  props: Array<{ name: string; type: string; defaultValue: string }>
   preview: (context: ComponentPreviewContext) => ReactNode
 }
 
 export type ComponentDefinition = Pick<
   ComponentDoc,
-  | 'id'
+  'id'
   | 'summary'
   | 'status'
-  | 'props'
   | 'preview'
 >
 
@@ -52,7 +50,6 @@ export const componentDocs: ComponentDoc[] = componentManifest
       group: item.group,
       summary: definition.summary,
       status: definition.status,
-      props: definition.props,
       preview: definition.preview,
     }
   })

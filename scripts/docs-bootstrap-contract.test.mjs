@@ -254,40 +254,6 @@ for (const snippet of [
 }
 
 for (const snippet of [
-  `size', type: "'default' | 'sm'"`,
-  "{ name: 'disabled', type: 'boolean'",
-  "{ name: 'children', type: 'ReactNode'",
-  "{ name: 'mode', type: \"'insert' | 'update' | 'pick'\"",
-  "{ name: 'tagOptions', type: 'string[]'",
-  "{ name: 'tag', type: 'string'",
-  "{ name: 'onSelect', type: '(tag: string) => void'",
-  "{ name: 'nodes', type: 'TagTreeNode[]'",
-  "{ name: 'variant', type: \"'default' | 'no-action'\"",
-  "{ name: 'defaultIcon', type: 'ReactNode'",
-  "{ name: 'dailyCounts', type: 'HeatmapDailyCount[]'",
-  "{ name: 'onDateSelect'",
-  "name: 'onMenuAction'",
-  '"rename" | "delete"',
-  "name: 'additionalMenuItems'",
-  'ActionMenuItem[]',
-  "{ name: 'leftSlot'",
-  "{ name: 'rightSlot'",
-  "{ name: 'content', type: 'string'",
-  "{ name: 'createdAt', type: 'Date'",
-  "{ name: 'font', type: \"'default' | 'print'\"",
-  "{ name: 'note', type: 'CardNote'",
-  "{ name: 'onDraftChange', type: '(draft: CardDraft) => void'",
-  "{ name: 'labels', type: 'CardLabels'",
-  "{ name: 'editor', type: 'CardEditorOptions'",
-  "{ name: 'onEditorChange', type: '(editor: Editor | null) => void'",
-]) {
-  assert.ok(
-    componentDefinitionsSource.includes(snippet),
-    `component definitions must include ${snippet}.`,
-  )
-}
-
-for (const snippet of [
   "import { useState } from 'react'",
   'type TagTreeNode',
   "import { CalendarDays, Folder, Hash } from 'lucide-react'",

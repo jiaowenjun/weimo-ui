@@ -33,15 +33,6 @@ export const topBarDefinition = {
   id: 'top-bar',
   summary: '响应式顶部工具栏，承载调用方提供的操作',
   status: 'Preview',
-  props: [
-    { name: 'leftSlot', type: 'ReactNode', defaultValue: '-' },
-    { name: 'rightSlot', type: 'ReactNode', defaultValue: '-' },
-    {
-      name: '...divProps',
-      type: 'ComponentPropsWithoutRef<"div">',
-      defaultValue: '-',
-    },
-  ],
   preview: () => (
     <TopBar
       className="top-bar-preview"

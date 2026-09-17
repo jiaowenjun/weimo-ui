@@ -10,28 +10,6 @@ export const borderRadiusDefinition = {
   id: 'border-radius',
   summary: '统一圆角 token scale，汇总 weimo-ui 与 biji-react 的圆角档位和使用语义',
   status: 'Ready',
-  props: [
-    {
-      name: 'borderRadiusScales',
-      type: 'BorderRadiusScale[]',
-      defaultValue: "['xs', 'sm', 'base', 'round']",
-    },
-    {
-      name: 'borderRadiusScaleMap',
-      type: 'Record<BorderRadiusScale, { label; token; value; description }>',
-      defaultValue: '-',
-    },
-    {
-      name: 'getBorderRadiusToken(scale)',
-      type: '(scale: BorderRadiusScale) => string',
-      defaultValue: '-',
-    },
-    {
-      name: 'getBorderRadiusValue(scale)',
-      type: '(scale: BorderRadiusScale) => string',
-      defaultValue: '-',
-    },
-  ],
   preview: () => (
     <div className="border-radius-preview" aria-label="BorderRadius 圆角档位预览">
       <p className="border-radius-preview__notes">

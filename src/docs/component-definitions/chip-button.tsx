@@ -77,15 +77,5 @@ export const chipButtonDefinition = {
   id: 'chip-button',
   summary: '内部状态化标签胶囊，可在默认态和玻璃态之间平滑过渡',
   status: 'Preview',
-  props: [
-    { name: 'children', type: 'ReactNode', defaultValue: '-' },
-    { name: 'prefix', type: 'string', defaultValue: "'#'" },
-    { name: 'state', type: "'default' | 'glass'", defaultValue: "'default'" },
-    {
-      name: '...buttonProps',
-      type: "Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'prefix'>",
-      defaultValue: '-',
-    },
-  ],
   preview: () => <ChipButtonDemo />,
 } satisfies ComponentDefinition

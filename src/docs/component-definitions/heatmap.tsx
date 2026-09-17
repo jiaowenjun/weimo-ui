@@ -55,16 +55,5 @@ export const heatmapDefinition = {
   id: 'heatmap',
   summary: '复刻 Skyline 侧边栏日期热力图的可点击筛选组件',
   status: 'Ready',
-  props: [
-    { name: 'dailyCounts', type: 'HeatmapDailyCount[]', defaultValue: '[]' },
-    { name: 'activeDate', type: 'string', defaultValue: '-' },
-    { name: 'ariaLabel', type: 'string', defaultValue: '日期热力图' },
-    { name: 'onDateSelect', type: '(date: string, cell: HeatmapCell) => void', defaultValue: '-' },
-    {
-      name: '...divProps',
-      type: 'Omit<HTMLAttributes<HTMLDivElement>, "onSelect" | "aria-label">',
-      defaultValue: '-',
-    },
-  ],
   preview: () => <HeatmapDemo />,
 } satisfies ComponentDefinition

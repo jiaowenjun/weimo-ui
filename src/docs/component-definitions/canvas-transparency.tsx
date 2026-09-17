@@ -19,22 +19,6 @@ export const canvasTransparencyDefinition = {
   id: 'canvas-transparency',
   summary: '基于角点背景采样生成亮暗主题透明 PNG，最多缓存 32 组处理结果及已解码资源，由共享缓存管理对象 URL 生命周期',
   status: 'Ready',
-  props: [
-    { name: 'src', type: 'string', defaultValue: '-' },
-    { name: 'alt', type: 'string', defaultValue: '-' },
-    { name: 'tolerance', type: 'number', defaultValue: '18' },
-    { name: 'feather', type: 'number', defaultValue: '42' },
-    {
-      name: 'onStateChange',
-      type: '(state: CanvasTransparencyState) => void',
-      defaultValue: '-',
-    },
-    {
-      name: '...imgProps',
-      type: "Omit<ComponentPropsWithoutRef<'img'>, 'src' | 'alt'>",
-      defaultValue: '-',
-    },
-  ],
   preview: () => (
     <CanvasTransparency
       alt="几何图透明化结果"

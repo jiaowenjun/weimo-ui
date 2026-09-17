@@ -43,7 +43,6 @@ const expectedScales = [
   ['round', '--radius-round', '999px'],
 ]
 const expectedScaleOrder = expectedScales.map(([scale]) => scale)
-const expectedScaleDefaultValue = "['xs', 'sm', 'base', 'round']"
 
 const packageJson = readJson('package.json')
 const borderRadiusSource = readProjectFile('src/components/border-radius.ts')
@@ -176,7 +175,6 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'border-radius'") &&
     docsDefinitionSource.includes('borderRadiusScales.map') &&
-    docsDefinitionSource.includes(`defaultValue: "${expectedScaleDefaultValue}"`) &&
     docsDefinitionSource.includes('borderRadiusScaleMap[scale]') &&
     docsDefinitionSource.includes('getBorderRadiusToken(scale)') &&
     docsDefinitionSource.includes('getBorderRadiusValue(scale)') &&

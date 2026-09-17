@@ -374,21 +374,6 @@ for (const dependencyName of ['remark-parse', 'remark-stringify', 'unified']) {
   )
 }
 
-for (const propName of [
-  'mode',
-  'value',
-  'onChange',
-  'className',
-  'editorBottomSafeArea',
-  'renderProps',
-  'editorProps',
-]) {
-  assert.ok(
-    definitionSource.includes(`{ name: '${propName}'`),
-    `MdView docs props must document ${propName}.`,
-  )
-}
-
 for (const selector of [
   '.md-view-docs-preview',
   '.md-view-docs-preview__toolbar',

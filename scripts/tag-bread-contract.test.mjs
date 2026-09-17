@@ -313,15 +313,7 @@ assert.ok(
     docsDefinition.includes('<MenuItem render={<a href="/particles" />}>Particles</MenuItem>') &&
     docsDefinition.includes('<BreadcrumbLink className="tag-bread__link" href="/docs/components">') &&
     docsDefinition.includes('<BreadcrumbPage className="tag-bread__page">Breadcrumb</BreadcrumbPage>') &&
-    !docsDefinition.includes("href: '#writing'") &&
-    docsDefinition.includes("name: 'tag'") &&
-    docsDefinition.includes("type: 'string'") &&
-    docsDefinition.includes("name: 'onSelect'") &&
-    docsDefinition.includes("type: '(tag: string) => void'") &&
-    docsDefinition.includes("name: 'prefix'") &&
-    docsDefinition.includes("name: 'separator'") &&
-    docsDefinition.includes('<Hash />') &&
-    docsDefinition.includes("'/'"),
+    !docsDefinition.includes("href: '#writing'"),
   'TagBread docs definition must preview the tag-string API and the coss ellipsis breadcrumb example.',
 )
 

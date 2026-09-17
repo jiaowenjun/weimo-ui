@@ -60,15 +60,5 @@ export const mdRenderDefinition = {
   id: 'md-render',
   summary: '用于笔记正文的 Markdown、GFM 与数学公式预览',
   status: 'Ready',
-  props: [
-    { name: 'content', type: 'string', defaultValue: '-' },
-    { name: 'className', type: 'string', defaultValue: '-' },
-    { name: 'renderImage', type: 'MdRenderImageRenderer', defaultValue: '-' },
-    {
-      name: '...divProps',
-      type: 'ComponentPropsWithoutRef<"div">',
-      defaultValue: '-',
-    },
-  ],
   preview: () => <MdRenderPreview />,
 } satisfies ComponentDefinition

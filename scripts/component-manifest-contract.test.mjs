@@ -94,11 +94,11 @@ for (const item of componentManifest) {
 
   assert.ok(
     definitionSource.includes(`id: '${item.id}'`) &&
-      definitionSource.includes('props:') &&
       definitionSource.includes('preview:') &&
+      !definitionSource.includes('props:') &&
       !definitionSource.includes('code:') &&
       !definitionSource.includes('variantPreviews:'),
-    `${definitionPath} must own the component docs definition.`,
+    `${definitionPath} must own the preview-only component docs definition.`,
   )
   assert.equal(typeof item.name, 'string', `${item.id} must have a display name.`)
   assert.equal(typeof item.registryName, 'string', `${item.id} must have a registry name.`)

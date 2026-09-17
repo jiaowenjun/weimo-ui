@@ -37,11 +37,5 @@ export const mathEditorDefinition = {
   id: 'math-editor',
   summary: 'MdEditor 内部公式编辑对话框，支持行内/块级 LaTeX 编辑和错误态',
   status: 'Ready',
-  props: [
-    { name: 'dialog', type: 'MathEditorValue | null', defaultValue: '-' },
-    { name: 'error', type: 'string | null', defaultValue: '-' },
-    { name: 'onOpenChange', type: '(open: boolean) => void', defaultValue: '-' },
-    { name: 'onSave', type: '(latex: string) => void', defaultValue: '-' },
-  ],
   preview: () => <MathEditorDemo error="请输入 LaTeX 源码。" />,
 } satisfies ComponentDefinition

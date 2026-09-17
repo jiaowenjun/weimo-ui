@@ -66,17 +66,5 @@ export const cardToolBarDefinition = {
   id: 'card-tool-bar',
   summary: '内部卡片工具栏，统一编辑工具栏与保存动作',
   status: 'Ready',
-  props: [
-    { name: 'toolbarSlot', type: 'ReactNode', defaultValue: '-' },
-    { name: 'saveLabel', type: 'string', defaultValue: '保存' },
-    { name: 'saveDisabled', type: 'boolean', defaultValue: 'false' },
-    { name: 'disabled', type: 'boolean', defaultValue: 'false' },
-    { name: 'onSave', type: '() => void', defaultValue: '-' },
-    {
-      name: '...divProps',
-      type: 'Omit<ComponentPropsWithoutRef<"div">, "children">',
-      defaultValue: '-',
-    },
-  ],
   preview: () => <CardToolBarDemo />,
 } satisfies ComponentDefinition

@@ -235,9 +235,6 @@ for (const snippet of [
   "import type { OcrComposerDraft } from '../../components/ocr-composer'",
   "id: 'ocr-composer'",
   "summary: '复用 CardComposer 外观的 OCR 图片上传草稿壳层，正文区域替换为 ImageUploader'",
-  "{ name: 'file', type: 'File | null', defaultValue: 'null' }",
-  "{ name: 'onFileChange', type: '(file: File | null) => void', defaultValue: '-' }",
-  "{ name: 'onSave', type: '(draft: OcrComposerDraft) => void', defaultValue: '-' }",
   'preview: () => <OcrComposerDemo />',
 ]) {
   assert.ok(definitionSource.includes(snippet), `OcrComposer docs must include: ${snippet}`)

@@ -38,11 +38,11 @@ assert.ok(
   definitionSource.includes("id: 'tag-picker'") &&
   definitionSource.includes('summary:') &&
   definitionSource.includes('status:') &&
-  definitionSource.includes('props:') &&
   definitionSource.includes('preview:') &&
   !definitionSource.includes('code:') &&
-  !definitionSource.includes('variantPreviews:'),
-  'TagPicker docs definition must have the simplified detail-page definition shape.',
+  !definitionSource.includes('variantPreviews:') &&
+  !definitionSource.includes('props:'),
+  'TagPicker docs definition must have the simplified preview-only definition shape.',
 )
 for (const snippet of [
   "import { useState } from 'react'",
@@ -76,23 +76,6 @@ assert.ok(
   !definitionSource.includes('选择标签'),
   'TagPicker docs preview must use only tag chips as triggers, without the old select-tag button.',
 )
-for (const propName of [
-  'open',
-  'mode',
-  'tagOptions',
-  'selectedTags',
-  'targetTag',
-  'initialDraft',
-  'allowEmptyRemove',
-  'title',
-  'onOpenChange',
-  'onApply',
-]) {
-  assert.ok(
-    definitionSource.includes(`name: '${propName}'`),
-    `TagPicker docs props must document ${propName}.`,
-  )
-}
 
 assert.ok(rootItem, 'Root registry must include tag-picker item.')
 assert.deepEqual(

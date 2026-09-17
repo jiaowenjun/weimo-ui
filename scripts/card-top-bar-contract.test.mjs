@@ -226,8 +226,6 @@ for (const snippet of [
   "setMode('display')",
   'onAction={enterEdit}',
   'onCancel={exitEdit}',
-  "{ name: 'editActionLabel', type: 'string', defaultValue: '编辑' }",
-  "{ name: 'displayMenuItems', type: 'ActionMenuItem[]', defaultValue: '[]' }",
   '切换到编辑态',
   '切换到展示态',
   'preview: () => <CardTopBarDemo />',

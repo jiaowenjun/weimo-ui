@@ -49,23 +49,5 @@ export const cardTopBarDefinition = {
   id: 'card-top-bar',
   summary: '内部卡片顶部栏，统一展示态与 Card 编辑态',
   status: 'Ready',
-  props: [
-    { name: 'mode', type: '"display" | "edit"', defaultValue: '-' },
-    { name: 'createdAtText', type: 'ReactNode', defaultValue: '-' },
-    { name: 'actionLabel', type: 'string', defaultValue: '更多操作' },
-    { name: 'actionSlot', type: 'ReactNode', defaultValue: '-' },
-    { name: 'displayMenuItems', type: 'ActionMenuItem[]', defaultValue: '[]' },
-    { name: 'editActionLabel', type: 'string', defaultValue: '编辑' },
-    { name: 'onAction', type: '() => void', defaultValue: '-' },
-    { name: 'editTitle', type: 'ReactNode', defaultValue: '-' },
-    { name: 'cancelLabel', type: 'string', defaultValue: '取消' },
-    { name: 'onCancel', type: '() => void', defaultValue: '-' },
-    { name: 'disabled', type: 'boolean', defaultValue: 'false' },
-    {
-      name: '...headerProps',
-      type: 'Omit<ComponentPropsWithoutRef<"header">, "children">',
-      defaultValue: '-',
-    },
-  ],
   preview: () => <CardTopBarDemo />,
 } satisfies ComponentDefinition

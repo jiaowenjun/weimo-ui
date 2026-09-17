@@ -387,10 +387,6 @@ for (const snippet of [
   "import { ImageUploader, type ImageUploaderActionApi } from '../../components/image-uploader'",
   "id: 'image-uploader'",
   "summary: '受控图片上传区域，支持拖放、选择、粘贴和调用者自定义按钮'",
-  "{ name: 'file', type: 'File | null', defaultValue: 'null' }",
-  "{ name: 'onFileChange', type: '(file: File | null) => void', defaultValue: '-' }",
-  "{ name: 'onActionsChange', type: '(actions: ImageUploaderActionApi) => void', defaultValue: '-' }",
-  "{ name: 'onCheck', type: '() => void', defaultValue: '-' }",
   'function ImageUploaderPreview()',
   'const [file, setFile] = useState<File | null>(null)',
   'const [actions, setActions] = useState<ImageUploaderActionApi | null>(null)',
@@ -416,8 +412,6 @@ for (const snippet of [
   'disabled={!actions?.canCheck}',
   'onClick={() => actions?.check()}',
   '<Check aria-hidden="true" />',
-  "name: '...divProps'",
-  'type: \'Omit<ComponentPropsWithoutRef<"div">, "children" | "onChange">\'',
   'preview: () => <ImageUploaderPreview />',
 ]) {
   assertIncludes(docsDefinition, snippet, `ImageUploader docs must include ${snippet}.`)
@@ -434,16 +428,7 @@ assert.ok(
   'ImageUploader docs preview must start empty without a bundled preview image.',
 )
 assert.ok(
-  docsDefinition.includes("{ name: 'title', type: 'string', defaultValue: \"'上传图片'\" }") &&
-    docsDefinition.includes("defaultValue: \"'拖放、选择或粘贴图片'\"") &&
-    docsDefinition.includes("{ name: 'clipboardSourceLabel', type: 'string', defaultValue: \"'来自剪贴板'\" }"),
-  'ImageUploader docs prop defaults must show concise Chinese prompt copy.',
-)
-assert.ok(
-  !docsDefinition.includes("{ name: 'source'") &&
-    !docsDefinition.includes("{ name: 'fileName'") &&
-    !docsDefinition.includes("{ name: 'uploadAction'") &&
-    !docsDefinition.includes('fileName={') &&
+  !docsDefinition.includes('fileName={') &&
     !docsDefinition.includes('...labelProps') &&
     !docsDefinition.includes('ComponentPropsWithoutRef<"label">') &&
     !docsDefinition.includes('source="clipboard"') &&

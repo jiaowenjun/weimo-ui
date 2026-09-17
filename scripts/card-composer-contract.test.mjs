@@ -189,7 +189,6 @@ for (const snippet of [
   'className="card-composer-docs-preview"',
   "id: 'card-composer'",
   "summary: '用于新建草稿的 Card 组合壳层，复用 Card 编辑态与高度过渡'",
-  "{ name: 'renderCard', type: '(props: CardProps) => ReactNode', defaultValue: 'Card' }",
   'preview: () => <CardComposerDemo />',
 ]) {
   assert.ok(definitionSource.includes(snippet), `CardComposer docs must include: ${snippet}`)

@@ -64,44 +64,5 @@ export const tagTreeDefinition = {
   id: 'tag-tree',
   summary: '只服务于侧边栏标签导航的树组件',
   status: 'Ready',
-  props: [
-    { name: 'nodes', type: 'TagTreeNode[]', defaultValue: '-' },
-    { name: 'variant', type: "'default' | 'no-action'", defaultValue: "'default'" },
-    { name: 'defaultIcon', type: 'ReactNode', defaultValue: '<Hash />' },
-    { name: 'selectedTag', type: 'string', defaultValue: '-' },
-    { name: 'expandedTags', type: 'string[]', defaultValue: '-' },
-    { name: 'defaultExpandedTags', type: 'string[]', defaultValue: '[]' },
-    { name: 'emptyLabel', type: 'ReactNode', defaultValue: '暂无标签' },
-    {
-      name: 'additionalMenuItems',
-      type: '(tag: string, node: TagTreeNode) => ActionMenuItem[]',
-      defaultValue: '-',
-    },
-    {
-      name: 'onExpandedTagsChange',
-      type: '(tags: string[]) => void',
-      defaultValue: '-',
-    },
-    {
-      name: 'onSelect',
-      type: '(tag: string, node: TagTreeNode) => void',
-      defaultValue: '-',
-    },
-    {
-      name: 'onMenuAction',
-      type: '(action: "rename" | "delete", tag: string, node: TagTreeNode) => void',
-      defaultValue: '-',
-    },
-    {
-      name: 'node.menuEnabled',
-      type: 'boolean',
-      defaultValue: 'true',
-    },
-    {
-      name: '...divProps',
-      type: 'Omit<HTMLAttributes<HTMLDivElement>, "onSelect">',
-      defaultValue: '-',
-    },
-  ],
   preview: () => <TagTreeDemo />,
 } satisfies ComponentDefinition

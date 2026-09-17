@@ -122,10 +122,8 @@ assert.ok(
 
 assert.ok(
   actionDialogDefinitionSource.includes('preview: () => <ActionDialogDemo />') &&
-    actionDialogDefinitionSource.includes("{ name: 'toolbarRightSlot', type: 'ReactNode', defaultValue: '-' }") &&
-    actionDialogDefinitionSource.includes("{ name: 'showCloseButton', type: 'boolean', defaultValue: 'true' }") &&
     actionDialogDefinitionSource.includes('右侧工具按钮'),
-  'ActionDialog detail preview must not open the dialog on initial render and must document the right toolbar slot plus close visibility.',
+  'ActionDialog detail preview must not open the dialog on initial render and must show the right toolbar slot.',
 )
 
 assert.ok(

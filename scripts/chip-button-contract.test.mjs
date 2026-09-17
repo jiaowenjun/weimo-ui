@@ -253,8 +253,7 @@ assert.ok(
     docsSource.includes('aria-label="ChipButton 宽度变化预览"') &&
     docsSource.includes('<TextButton') &&
     docsSource.includes("state === 'default' ? '切换到玻璃态' : '切换到默认态'") &&
-    docsSource.includes("widthMode === 'short' ? '切换到长标签' : '切换到短标签'") &&
-    docsSource.includes("{ name: 'state', type: \"'default' | 'glass'\", defaultValue: \"'default'\" }"),
+    docsSource.includes("widthMode === 'short' ? '切换到长标签' : '切换到短标签'"),
   'ChipButton docs definition must include an internal preview with state and width-change toggles.',
 )
 assert.ok(

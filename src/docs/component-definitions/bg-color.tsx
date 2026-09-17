@@ -52,28 +52,6 @@ export const bgColorDefinition = {
   id: 'bg-color',
   summary: '统一背景色 utility 和 tone map，汇总 weimo-ui 与 biji-react 的背景/填充色档位',
   status: 'Ready',
-  props: [
-    {
-      name: 'bgColorTones',
-      type: 'BgColorTone[]',
-      defaultValue: "['page', 'card', 'raised', ..., 'share-card-tag-mask']",
-    },
-    {
-      name: 'bgColorToneMap',
-      type: 'Record<BgColorTone, { label; token; value: { light; dark }; className; description; uiUsage; bijiUsage }>',
-      defaultValue: '-',
-    },
-    {
-      name: 'getBgColorClassName(tone)',
-      type: '(tone: BgColorTone) => string',
-      defaultValue: '-',
-    },
-    {
-      name: 'getBgColorToken(tone)',
-      type: '(tone: BgColorTone) => string',
-      defaultValue: '-',
-    },
-  ],
   preview: () => (
     <div className="bg-color-preview" aria-label="BgColor 背景色档位预览">
       {bgColorToneGroups.map((group) => (

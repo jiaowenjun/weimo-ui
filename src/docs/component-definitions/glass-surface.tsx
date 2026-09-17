@@ -50,9 +50,5 @@ export const glassSurfaceDefinition = {
   id: 'glass-surface',
   summary: '运行时读取组件背后的背景亮度，自动切换玻璃层文字和边框颜色',
   status: 'Preview',
-  props: [
-    { name: 'observe', type: 'boolean', defaultValue: 'true' },
-    { name: '...divProps', type: "ComponentPropsWithoutRef<'div'>", defaultValue: '-' },
-  ],
   preview: () => <GlassSurfaceDemo />,
 } satisfies ComponentDefinition

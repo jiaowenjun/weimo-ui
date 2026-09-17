@@ -16,8 +16,5 @@ export const cardSurfaceDefinition = {
   id: 'card-surface',
   summary: '统一静态实体卡片的背景、边框、圆角与轻量阴影',
   status: 'Preview',
-  props: [
-    { name: '...divProps', type: "ComponentPropsWithoutRef<'div'>", defaultValue: '-' },
-  ],
   preview: () => <CardSurfaceDemo />,
 } satisfies ComponentDefinition

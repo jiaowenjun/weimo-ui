@@ -24,9 +24,5 @@ export const textButtonDefinition = {
   id: 'text-button',
   summary: '文本操作按钮，封装普通边框、hover/active 与 disabled token',
   status: 'Ready',
-  props: [
-    { name: '...buttonProps', type: 'ComponentPropsWithoutRef<"button">', defaultValue: '-' },
-    { name: 'disabled', type: 'boolean', defaultValue: 'false' },
-  ],
   preview: () => <TextButtonPreview />,
 } satisfies ComponentDefinition

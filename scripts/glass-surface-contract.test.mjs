@@ -323,7 +323,6 @@ for (const snippet of [
   "import { GlassSurface } from '../../components/glass-surface'",
   "id: 'glass-surface'",
   '运行时读取组件背后的背景亮度',
-  "{ name: 'observe', type: 'boolean', defaultValue: 'true' }",
   'glassSurfacePreviewBackgroundBands',
   'glass-surface-preview__scroll-viewport',
   'glass-surface-preview__scroll-content',

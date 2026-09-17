@@ -60,14 +60,5 @@ export const tagTreeRowDefinition = {
   id: 'tag-tree-row',
   summary: 'TagTree 的内部行组件，负责缩进引导线、选择态、展开按钮和行操作菜单',
   status: 'Ready',
-  props: [
-    { name: 'row', type: 'AnimatedTagTreeRow', defaultValue: '-' },
-    { name: 'variant', type: "'default' | 'no-action'", defaultValue: '-' },
-    { name: 'rowMenuEnabled', type: 'boolean', defaultValue: '-' },
-    { name: 'defaultIcon', type: 'ReactNode', defaultValue: '-' },
-    { name: 'onSelect', type: '(row: VisibleTagTreeRow) => void', defaultValue: '-' },
-    { name: 'onToggle', type: '(row: VisibleTagTreeRow) => void', defaultValue: '-' },
-    { name: 'onMenuAction', type: '(action, tag, node) => void', defaultValue: '-' },
-  ],
   preview: () => <TagTreeRowDemo />,
 } satisfies ComponentDefinition

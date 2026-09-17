@@ -150,7 +150,6 @@ for (const snippet of [
   '<div className="demo-block">',
   '<CossCardPanel className="demo-block__panel preview-stage" data-component-id={selected.id} variant="stage">',
   '{selected.preview(previewContext)}',
-  'API 参考',
 ]) {
   assert.ok(
     detailPageSource.includes(snippet),
@@ -159,6 +158,9 @@ for (const snippet of [
 }
 
 for (const snippet of [
+  'API 参考',
+  'api-heading',
+  'selected.props',
   "from '../../components/coss/tabs'",
   '<TabsTab value="code">',
   '<TabsTab value="preview">',
@@ -183,15 +185,18 @@ assert.ok(
   !componentDocsSource.includes('ComponentInstallGuide') &&
     !componentDocsSource.includes('buildInstallGuide') &&
     !componentDocsSource.includes('install:') &&
-    !componentDocsSource.includes("| 'code'"),
-  'component-docs.tsx must not expose install guide or example code for detail pages.',
+    !componentDocsSource.includes("| 'code'") &&
+    !componentDocsSource.includes('props:') &&
+    !componentDocsSource.includes('definition.props'),
+  'component-docs.tsx must not expose install guide, example code, or props metadata for detail pages.',
 )
 
 assert.ok(
   !componentDefinitionsSource.includes('const code =') &&
     !componentDefinitionsSource.includes('code:') &&
-    !componentDefinitionsSource.includes('variantPreviews:'),
-  'component definitions must not keep detail-page code samples or extra example previews.',
+    !componentDefinitionsSource.includes('variantPreviews:') &&
+    !componentDefinitionsSource.includes('props: ['),
+  'component definitions must not keep detail-page code samples, extra example previews, or props metadata.',
 )
 
 for (const snippet of [
@@ -327,19 +332,12 @@ assert.ok(
     imageViewDefinitionSource.includes('className="image-view-docs-preview__detail"') &&
     imageViewDefinitionSource.includes('displayMode={displayMode}') &&
     imageViewDefinitionSource.includes('open') &&
-    imageViewDefinitionSource.includes("{ name: 'imageWidth', type: 'number', defaultValue: '-' }") &&
-    imageViewDefinitionSource.includes("{ name: 'imageHeight', type: 'number', defaultValue: '-' }") &&
-    imageViewDefinitionSource.includes("{ name: 'displayMode', type: \"'actual-size' | 'fit-width' | 'fit-height'\", defaultValue: '-' }") &&
-    imageViewDefinitionSource.includes("{ name: 'imageRef', type: 'Ref<HTMLImageElement>', defaultValue: '-' }") &&
-    imageViewDefinitionSource.includes("{ name: 'open', type: 'boolean', defaultValue: '-' }") &&
     !imageViewDefinitionSource.includes('objectFit="cover"') &&
     imageViewDefinitionSource.includes('placeholder="等待上传或识别图片"') &&
     !imageViewDefinitionSource.includes('showZoomButton') &&
     !imageViewDefinitionSource.includes("useState(true)") &&
     !imageViewDefinitionSource.includes('showRemoveButton') &&
-    !imageViewDefinitionSource.includes('onRemove') &&
-    !imageViewDefinitionSource.includes("{ name: 'showRemoveButton'") &&
-    !imageViewDefinitionSource.includes("{ name: 'onRemove'"),
+    !imageViewDefinitionSource.includes('onRemove'),
   'ImageView detail page must render preview, non-image, placeholder, and pannable detail-mode states.',
 )
 assertDecodablePngDataUrl(
@@ -357,8 +355,7 @@ assert.ok(
     componentDefinitionsSource.includes('glass-surface-preview__band') &&
     componentDefinitionsSource.includes('glass-surface-preview__fixed') &&
     componentDefinitionsSource.includes('<GlassSurface className="glass-surface-preview__tile">') &&
-    !componentDefinitionsSource.includes('glass-surface-preview__sticky') &&
-    componentDefinitionsSource.includes("{ name: 'observe', type: 'boolean', defaultValue: 'true' }"),
+    !componentDefinitionsSource.includes('glass-surface-preview__sticky'),
   'GlassSurface detail page must render a scrollable dark-to-light adaptive material preview.',
 )
 assert.ok(
