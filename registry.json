@@ -212,27 +212,6 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "name": "border-radius",
-      "type": "registry:ui",
-      "title": "Border Radius",
-      "description": "Semantic border radius scale map backed by shared Weimo radius tokens.",
-      "categories": [
-        "style",
-        "layout"
-      ],
-      "registryDependencies": [
-        "@weimo/style"
-      ],
-      "files": [
-        {
-          "path": "src/components/border-radius.ts",
-          "type": "registry:ui",
-          "target": "@ui/border-radius.ts"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "font-size",
       "type": "registry:ui",
       "title": "Font Size",
@@ -426,6 +405,27 @@
           "path": "src/components/bg-color.css",
           "type": "registry:ui",
           "target": "@ui/bg-color.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "border-radius",
+      "type": "registry:ui",
+      "title": "Border Radius",
+      "description": "Semantic border radius scale map backed by shared Weimo radius tokens.",
+      "categories": [
+        "style",
+        "layout"
+      ],
+      "registryDependencies": [
+        "@weimo/style"
+      ],
+      "files": [
+        {
+          "path": "src/components/border-radius.ts",
+          "type": "registry:ui",
+          "target": "@ui/border-radius.ts"
         }
       ]
     },

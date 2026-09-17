@@ -49,15 +49,6 @@ export type ComponentManifestItem = PublicComponentManifestItem
 
 export const componentManifest = [
   {
-    id: 'border-radius',
-    name: 'BorderRadius',
-    registryName: 'border-radius',
-    packageExport: './components/border-radius',
-    group: 'token-style',
-    docs: true,
-    registry: true,
-  },
-  {
     id: 'font-size',
     name: 'FontSize',
     registryName: 'font-size',
@@ -116,6 +107,15 @@ export const componentManifest = [
     name: '背景色',
     registryName: 'bg-color',
     packageExport: './components/bg-color',
+    group: 'token-style',
+    docs: true,
+    registry: true,
+  },
+  {
+    id: 'border-radius',
+    name: '边框圆角',
+    registryName: 'border-radius',
+    packageExport: './components/border-radius',
     group: 'token-style',
     docs: true,
     registry: true,

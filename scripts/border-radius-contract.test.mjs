@@ -140,7 +140,7 @@ assert.deepEqual(rootStyleItem, styleRegistry, 'Root registry style item must ma
 
 assert.ok(
   manifestSource.includes("id: 'border-radius'") &&
-    manifestSource.includes("name: 'BorderRadius'") &&
+    manifestSource.includes("name: '边框圆角'") &&
     manifestSource.includes("registryName: 'border-radius'") &&
     manifestSource.includes("packageExport: './components/border-radius'"),
   'component manifest must list BorderRadius as a public registry-backed design-token utility.',
@@ -152,36 +152,40 @@ assert.ok(
 )
 assert.ok(
   docsDefinitionSource.includes("id: 'border-radius'") &&
+    docsDefinitionSource.includes("frame: 'plain',") &&
+    docsDefinitionSource.includes("import { CardPanel } from '../../components/coss/card'") &&
     docsDefinitionSource.includes('borderRadiusScales.map') &&
     docsDefinitionSource.includes('borderRadiusScaleMap[scale]') &&
     docsDefinitionSource.includes('getBorderRadiusToken(scale)') &&
     docsDefinitionSource.includes('getBorderRadiusValue(scale)') &&
+    docsDefinitionSource.includes('<CardPanel className="border-radius-preview__panel"') &&
     docsDefinitionSource.includes('border-radius-preview__sample') &&
-    docsDefinitionSource.includes('border-radius-preview__identity') &&
-    docsDefinitionSource.includes('border-radius-preview__value') &&
-    docsDefinitionSource.includes('{value}') &&
+    docsDefinitionSource.includes('{getBorderRadiusToken(scale)}: {getBorderRadiusValue(scale)}') &&
+    !docsDefinitionSource.includes('summary:') &&
+    !docsDefinitionSource.includes('border-radius-preview__row') &&
+    !docsDefinitionSource.includes('border-radius-preview__notes') &&
+    !docsDefinitionSource.includes('border-radius-preview__description') &&
+    !docsDefinitionSource.includes('uiUsage') &&
+    !docsDefinitionSource.includes('bijiUsage') &&
     !docsDefinitionSource.includes('--radius-card'),
-  'BorderRadius docs definition must render the scale map preview with concrete token values.',
+  'BorderRadius docs definition must render one CardPanel per radius scale with the token and concrete value.',
 )
 
-const notesBlock = blockFor(appCss, '.border-radius-preview__notes')
 const sampleBlock = blockFor(appCss, '.border-radius-preview__sample')
 
 assert.ok(
   appCss.includes('.border-radius-preview') &&
-    appCss.includes('.border-radius-preview__row') &&
-    appCss.includes('.border-radius-preview__sample') &&
-    appCss.includes('.border-radius-preview__identity') &&
+    appCss.includes('.border-radius-preview__panel') &&
+    appCss.includes('.border-radius-preview__meta') &&
+    appCss.includes('.border-radius-preview__label') &&
     appCss.includes('.border-radius-preview__token') &&
-    appCss.includes('.border-radius-preview__value') &&
-    appCss.includes('.border-radius-preview__description') &&
-    appCss.includes('grid-template-columns: minmax(132px, 0.65fr) minmax(210px, 1fr) minmax(0, 1.35fr);'),
+    appCss.includes('.border-radius-preview__sample') &&
+    !appCss.includes('.border-radius-preview__row') &&
+    !appCss.includes('.border-radius-preview__notes') &&
+    !appCss.includes('.border-radius-preview__identity') &&
+    !appCss.includes('.border-radius-preview__description') &&
+    !appCss.includes('.border-radius-preview__value'),
   'App.css must include scoped BorderRadius detail-page preview styles.',
-)
-assert.ok(
-  notesBlock.includes('color: var(--color-text-secondary);') &&
-    notesBlock.includes('overflow-wrap: anywhere;'),
-  'BorderRadius detail notes must use secondary text and wrap.',
 )
 assert.ok(
   sampleBlock.includes('border: 1px solid var(--color-border);') &&
