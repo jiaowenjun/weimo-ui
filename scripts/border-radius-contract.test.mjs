@@ -188,10 +188,10 @@ assert.ok(
   'App.css must include scoped BorderRadius detail-page preview styles.',
 )
 assert.ok(
-  sampleBlock.includes('border: 1px solid var(--color-border);') &&
+  sampleBlock.includes('border: 1px solid var(--color-border-emphasis);') &&
     !sampleBlock.includes('background:') &&
     !sampleBlock.includes('box-shadow:'),
-  'BorderRadius preview samples must show the applied border radius without background or shadow decoration.',
+  'BorderRadius preview samples must use the emphasis border color so the radius outline stays readable.',
 )
 
 assert.ok(registryItem, 'registry.json must include the border-radius registry item.')
