@@ -212,32 +212,6 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "name": "border-color",
-      "type": "registry:ui",
-      "title": "Border Color",
-      "description": "Semantic border color utilities and a tone map backed by shared Weimo tokens.",
-      "categories": [
-        "style",
-        "color"
-      ],
-      "registryDependencies": [
-        "@weimo/style"
-      ],
-      "files": [
-        {
-          "path": "src/components/border-color.ts",
-          "type": "registry:ui",
-          "target": "@ui/border-color.ts"
-        },
-        {
-          "path": "src/components/border-color.css",
-          "type": "registry:ui",
-          "target": "@ui/border-color.css"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "border-radius",
       "type": "registry:ui",
       "title": "Border Radius",
@@ -452,6 +426,32 @@
           "path": "src/components/bg-color.css",
           "type": "registry:ui",
           "target": "@ui/bg-color.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "border-color",
+      "type": "registry:ui",
+      "title": "Border Color",
+      "description": "Semantic border color utilities and a tone map backed by shared Weimo tokens.",
+      "categories": [
+        "style",
+        "color"
+      ],
+      "registryDependencies": [
+        "@weimo/style"
+      ],
+      "files": [
+        {
+          "path": "src/components/border-color.ts",
+          "type": "registry:ui",
+          "target": "@ui/border-color.ts"
+        },
+        {
+          "path": "src/components/border-color.css",
+          "type": "registry:ui",
+          "target": "@ui/border-color.css"
         }
       ]
     },

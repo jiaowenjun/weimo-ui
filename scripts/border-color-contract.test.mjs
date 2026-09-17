@@ -115,11 +115,9 @@ const markdownEditorTableWrapperBlock = blockFor(
 const demoBlockPanelBlock = blockFor(appCss, '.demo-block__panel')
 const mdViewDocsPreviewFrameBlock = blockFor(appCss, '.md-view-docs-preview__frame')
 const tagTreePreviewPanelBlock = firstBlockFor(appCss, '.tag-tree-preview__panel')
-const borderColorPreviewRowBlock = firstBlockFor(appCss, '.border-color-preview__row')
+const borderColorPreviewPanelBlock = firstBlockFor(appCss, '.border-color-preview__panel')
 const tagBarPreviewPanelBlock = blockFor(appCss, '.tag-bar-preview__panel')
 const sampleBlock = blockFor(appCss, '.border-color-preview__sample')
-const descriptionBlock = blockFor(appCss, '.border-color-preview__description')
-const contextTokensBlock = blockFor(appCss, '.border-color-preview__context-tokens')
 
 assert.equal(
   packageJson.exports?.['./components/border-color'],
@@ -332,16 +330,6 @@ assert.ok(
   'BorderColor detail usage copy must include guide-line and divider examples.',
 )
 assert.ok(
-  docsDefinitionSource.includes('borderColorMenuSeparatorTokens') &&
-    docsDefinitionSource.includes("token: '--color-border-divider-menu'") &&
-    docsDefinitionSource.includes("token: '--color-border-divider-menu-on-light'") &&
-    docsDefinitionSource.includes("token: '--color-border-divider-menu-on-dark'") &&
-    docsDefinitionSource.includes('Menu separator 背景感知 divider token') &&
-    docsDefinitionSource.includes('亮背景 / Menu:') &&
-    docsDefinitionSource.includes('borderColorToneMap.divider.value.light'),
-  'BorderColor detail usage copy must show that Menu separator follows its own background-aware divider tokens.',
-)
-assert.ok(
   borderColorSource.includes('neutral hover boundary') &&
     borderColorSource.includes('primary action/selected/keyboard focus') &&
     cossCardInteractiveBlock.includes('border-color: var(--color-border-emphasis);') &&
@@ -393,7 +381,7 @@ assert.ok(
     demoBlockPanelBlock.includes('border: 1px solid var(--color-border);') &&
     mdViewDocsPreviewFrameBlock.includes('border: 1px solid var(--color-border);') &&
     tagTreePreviewPanelBlock.includes('border: 1px solid var(--color-border);') &&
-    borderColorPreviewRowBlock.includes('border: 1px solid var(--color-border);') &&
+    borderColorPreviewPanelBlock.includes('border: 1px solid var(--color-border);') &&
     tagBarPreviewPanelBlock.includes('border: 1px solid var(--color-border);'),
   'Default BorderColor usage must cover surface/container outer borders and docs preview frames.',
 )
@@ -407,7 +395,7 @@ assert.deepEqual(rootStyleItem, styleRegistry, 'Root registry style item must ma
 
 assert.ok(
   manifestSource.includes("id: 'border-color'") &&
-    manifestSource.includes("name: 'BorderColor'") &&
+    manifestSource.includes("name: '边框色'") &&
     manifestSource.includes("registryName: 'border-color'") &&
     manifestSource.includes("packageExport: './components/border-color'"),
   'component manifest must list BorderColor as a public registry-backed utility.',
@@ -418,36 +406,39 @@ assert.ok(
   'component definitions index must wire the BorderColor detail definition.',
 )
 assert.ok(
-    docsDefinitionSource.includes("id: 'border-color'") &&
+  docsDefinitionSource.includes("id: 'border-color'") &&
+    docsDefinitionSource.includes("frame: 'plain',") &&
+    docsDefinitionSource.includes("import { CardPanel } from '../../components/coss/card'") &&
     docsDefinitionSource.includes('borderColorTones.map') &&
     docsDefinitionSource.includes('borderColorToneMap[tone]') &&
-    docsDefinitionSource.includes('borderColorDisableContextTokens') &&
     docsDefinitionSource.includes('getBorderColorClassName(tone)') &&
     docsDefinitionSource.includes('getBorderColorToken(tone)') &&
+    docsDefinitionSource.includes('<CardPanel className="border-color-preview__panel"') &&
     docsDefinitionSource.includes('border-color-preview__sample') &&
-    docsDefinitionSource.includes('border-color-preview__context-tokens') &&
-    docsDefinitionSource.includes('--color-border-disable-on-light') &&
-    docsDefinitionSource.includes('--color-border-disable-on-dark') &&
-    docsDefinitionSource.includes('value: borderColorToneMap.disable.value.light') &&
-    docsDefinitionSource.includes('value: borderColorToneMap.disable.value.dark') &&
-    docsDefinitionSource.includes('亮背景:') &&
-    docsDefinitionSource.includes('暗背景:') &&
-    docsDefinitionSource.includes('ui: {item.uiUsage}') &&
-    docsDefinitionSource.includes('border-color-preview__value') &&
-    docsDefinitionSource.includes('亮: {item.value.light}') &&
-    docsDefinitionSource.includes('暗: {item.value.dark}'),
-  'BorderColor docs definition must render the border color tone map preview, concrete values, and usage summary.',
+    docsDefinitionSource.includes('border-color-preview__token-value--light') &&
+    docsDefinitionSource.includes('border-color-preview__token-value--dark') &&
+    !docsDefinitionSource.includes('summary:') &&
+    !docsDefinitionSource.includes('border-color-preview__row') &&
+    !docsDefinitionSource.includes('border-color-preview__description') &&
+    !docsDefinitionSource.includes('border-color-preview__context-token') &&
+    !docsDefinitionSource.includes('uiUsage') &&
+    !docsDefinitionSource.includes('bijiUsage'),
+  'BorderColor docs definition must render one CardPanel per border tone showing exactly one token each.',
 )
 assert.ok(
   appCss.includes('.border-color-preview') &&
-    appCss.includes('.border-color-preview__row') &&
-    appCss.includes('.border-color-preview__sample') &&
-    appCss.includes('.border-color-preview__identity') &&
+    appCss.includes('.border-color-preview__panel') &&
+    appCss.includes('.border-color-preview__meta') &&
+    appCss.includes('.border-color-preview__label') &&
     appCss.includes('.border-color-preview__token') &&
-    appCss.includes('.border-color-preview__value') &&
-    appCss.includes('.border-color-preview__context-tokens') &&
-    appCss.includes('.border-color-preview__description') &&
-    appCss.includes('grid-template-columns: minmax(120px, 0.5fr) minmax(220px, 0.9fr) minmax(0, 1.45fr);'),
+    appCss.includes('.border-color-preview__sample') &&
+    appCss.includes('.border-color-preview__token-value--dark') &&
+    appCss.includes('.dark .border-color-preview__token-value--light') &&
+    !appCss.includes('.border-color-preview__row') &&
+    !appCss.includes('.border-color-preview__identity') &&
+    !appCss.includes('.border-color-preview__description') &&
+    !appCss.includes('.border-color-preview__value') &&
+    !appCss.includes('.border-color-preview__context-token'),
   'App.css must include scoped BorderColor detail-page preview styles.',
 )
 assert.ok(
@@ -455,16 +446,6 @@ assert.ok(
     !sampleBlock.includes('background:') &&
     !sampleBlock.includes('box-shadow:'),
   'BorderColor preview samples must show the applied border color without background or shadow decoration.',
-)
-assert.ok(
-  descriptionBlock.includes('min-width: 0;') &&
-    descriptionBlock.includes('overflow-wrap: anywhere;'),
-  'BorderColor detail usage column must shrink and wrap instead of overflowing.',
-)
-assert.ok(
-  contextTokensBlock.includes('display: grid;') &&
-    contextTokensBlock.includes('overflow-wrap: anywhere;'),
-  'BorderColor detail background-aware token list must stack and wrap instead of overflowing.',
 )
 
 assert.ok(registryItem, 'registry.json must include the border-color registry item.')

@@ -402,24 +402,12 @@ assert.ok(
   'GlassIconButton detail page must render a manual disabled-state transition preview across light and dark backgrounds.',
 )
 assert.ok(
-    borderColorDefinitionSource.includes('borderColorGlassSurfaceTokens') &&
-    borderColorDefinitionSource.includes('borderColorMenuSeparatorTokens') &&
-    borderColorDefinitionSource.includes("token: '--glass-surface-border'") &&
-    borderColorDefinitionSource.includes("token: '--glass-surface-light-border'") &&
-    borderColorDefinitionSource.includes("token: '--glass-surface-dark-border'") &&
-    borderColorDefinitionSource.includes("token: '--color-border-divider-menu'") &&
-    borderColorDefinitionSource.includes("token: '--color-border-divider-menu-on-light'") &&
-    borderColorDefinitionSource.includes("token: '--color-border-divider-menu-on-dark'") &&
-    borderColorDefinitionSource.includes('borderColorToneMap.default.value.light') &&
-    borderColorDefinitionSource.includes('borderColorToneMap.default.value.light') &&
-    borderColorDefinitionSource.includes('borderColorToneMap.divider.value.light') &&
-    borderColorDefinitionSource.includes('borderColorToneMap.default.value.dark') &&
-    borderColorDefinitionSource.includes("tone === 'default'") &&
-    borderColorDefinitionSource.includes("tone === 'divider'") &&
-    borderColorDefinitionSource.includes('aria-label="GlassSurface 背景感知边框 token"') &&
-    borderColorDefinitionSource.includes('aria-label="Menu separator 背景感知 divider token"') &&
-    borderColorDefinitionSource.includes('亮背景 / Menu:'),
-  'BorderColor detail page must show separate GlassSurface border and Menu separator divider background-aware tokens.',
+    borderColorDefinitionSource.includes("frame: 'plain',") &&
+    borderColorDefinitionSource.includes('<CardPanel className="border-color-preview__panel"') &&
+    !borderColorDefinitionSource.includes('border-color-preview__context-token') &&
+    !borderColorDefinitionSource.includes('GlassSurface 背景感知边框 token') &&
+    !borderColorDefinitionSource.includes('glass-surface-border'),
+  'BorderColor detail page must render one CardPanel per border tone showing exactly one token each.',
 )
 assert.ok(
     ghostIconButtonDefinitionSource.includes("import { GhostIconButton } from '../../components/ghost-icon-button'") &&
