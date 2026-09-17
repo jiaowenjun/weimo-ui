@@ -30,8 +30,6 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       - run: pnpm build
-        env:
-          DEPLOY_BASE: /weimo-ui/
 
       # GitHub Pages 无 SPA fallback,深链接靠 404.html 引导回 index.html
       - name: Add SPA fallback page
