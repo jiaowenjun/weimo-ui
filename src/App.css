@@ -890,8 +890,8 @@
     linear-gradient(315deg, rgb(15 23 42 / 0.72), transparent 36%),
     repeating-linear-gradient(
       90deg,
-      rgb(255 255 255 / 0.68) 0 7px,
-      rgb(255 255 255 / 0.16) 7px 14px
+      rgb(255 255 255 / 0.68) 0 14px,
+      rgb(255 255 255 / 0.16) 14px 28px
     );
 }
 
