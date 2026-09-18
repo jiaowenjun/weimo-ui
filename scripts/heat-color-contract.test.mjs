@@ -27,11 +27,11 @@ function cssBlockFor(source, selector) {
 }
 
 const expectedLevels = [
-  [0, '--color-heat-0', 'heat-color--0', 'rgba(0, 0, 0, 0.06)', 'rgba(255, 255, 255, 0.08)'],
-  [1, '--color-heat-1', 'heat-color--1', 'rgba(202, 84, 33, 0.2)', 'rgba(240, 134, 70, 0.2)'],
-  [2, '--color-heat-2', 'heat-color--2', 'rgba(202, 84, 33, 0.4)', 'rgba(240, 134, 70, 0.4)'],
-  [3, '--color-heat-3', 'heat-color--3', 'rgba(202, 84, 33, 0.65)', 'rgba(240, 134, 70, 0.65)'],
-  [4, '--color-heat-4', 'heat-color--4', 'rgba(202, 84, 33, 0.9)', 'rgba(240, 134, 70, 0.9)'],
+  [0, '--color-heat-0', 'heat-color--0', 'hsl(0 0% 0% / 0.06)', 'hsl(0 0% 100% / 0.08)'],
+  [1, '--color-heat-1', 'heat-color--1', 'hsl(18.1 71.9% 46.1% / 0.2)', 'hsl(22.6 85% 60.8% / 0.2)'],
+  [2, '--color-heat-2', 'heat-color--2', 'hsl(18.1 71.9% 46.1% / 0.4)', 'hsl(22.6 85% 60.8% / 0.4)'],
+  [3, '--color-heat-3', 'heat-color--3', 'hsl(18.1 71.9% 46.1% / 0.65)', 'hsl(22.6 85% 60.8% / 0.65)'],
+  [4, '--color-heat-4', 'heat-color--4', 'hsl(18.1 71.9% 46.1% / 0.9)', 'hsl(22.6 85% 60.8% / 0.9)'],
 ]
 
 const packageJson = readJson('package.json')
@@ -153,7 +153,7 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'heat-color'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { TokenPreviewCard } from '../token-preview-card'") &&
+    docsDefinitionSource.includes("import { TokenPreviewCard } from '../../components/token-preview-card'") &&
     docsDefinitionSource.includes('heatColorLevels.map') &&
     docsDefinitionSource.includes('heatColorMap[level]') &&
     docsDefinitionSource.includes('getHeatColorClassName(level)') &&
@@ -184,7 +184,7 @@ assert.ok(
   'HeatColor cards must use the content-level token grid without a preview wrapper.',
 )
 assert.ok(
-  heatColorSampleBlock.includes('height: 64px;') &&
+  heatColorSampleBlock.includes('height: 80px;') &&
     heatColorSampleBlock.includes('border-radius: var(--radius-sm);') &&
     !heatColorSampleBlock.includes('border:'),
   'HeatColor preview samples must use full-width borderless color blocks.',

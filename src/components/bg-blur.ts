@@ -20,8 +20,8 @@ export const bgBlurToneMap = {
     label: '背景遮罩',
     backgroundToken: '--color-bg-backdrop',
     backgroundValue: {
-      light: 'rgb(7 10 14 / 0.32)',
-      dark: 'rgb(7 10 14 / 0.32)',
+      light: 'hsl(214.3 33.3% 4.1% / 0.32)',
+      dark: 'hsl(214.3 33.3% 4.1% / 0.32)',
     },
     blurToken: '--backdrop-blur',
     blurValue: '4px',

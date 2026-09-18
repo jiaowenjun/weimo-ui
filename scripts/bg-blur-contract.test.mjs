@@ -57,6 +57,7 @@ const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const docsDefinitionSource = readProjectFile('src/docs/component-definitions/bg-blur.tsx')
 const appCss = readProjectFile('src/App.css')
+const tokenPreviewCardCss = readProjectFile('src/components/token-preview-card.css')
 const tokensCss = readProjectFile('src/styles/tokens.css')
 const glassSurfaceCss = readProjectFile('src/components/glass-surface.css')
 const chipSurfaceCss = readProjectFile('src/components/chip-surface.css')
@@ -68,8 +69,18 @@ const styleRegistry = readJson('registry/style.json')
 const standaloneRegistryItem = readJson('registry/bg-blur.json')
 const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const registryItem = rootRegistry.items.find((item) => item.name === 'bg-blur')
-const sampleBlock = blockFor(appCss, '.bg-blur-preview__sample')
-const overlayBlock = blockFor(appCss, '.bg-blur-preview__overlay')
+const sampleBlock = blockFor(
+  tokenPreviewCardCss,
+  '.token-preview-card > .token-preview-card__meta ~ *',
+)
+const backdropBlock = blockFor(
+  tokenPreviewCardCss,
+  '.token-preview-card .token-preview-card__surface-backdrop',
+)
+const surfaceBlock = blockFor(
+  tokenPreviewCardCss,
+  '.token-preview-card .token-preview-card__surface',
+)
 
 assert.equal(
   packageJson.exports?.['./components/bg-blur'],
@@ -167,18 +178,18 @@ assert.equal(
   'registry.json style item must export --glass-blur as 14px.',
 )
 assert.ok(
-  tokensCss.includes('--color-bg-backdrop: rgb(7 10 14 / 0.32);') &&
+  tokensCss.includes('--color-bg-backdrop: hsl(214.3 33.3% 4.1% / 0.32);') &&
     tokensCss.includes('--backdrop-blur: 4px;'),
   'shared UI tokens must define the backdrop background and blur pair.',
 )
 assert.equal(
   styleRegistry.cssVars?.light?.['color-bg-backdrop'],
-  'rgb(7 10 14 / 0.32)',
+  'hsl(214.3 33.3% 4.1% / 0.32)',
   'registry/style.json must export the light --color-bg-backdrop value.',
 )
 assert.equal(
   rootStyleItem?.cssVars?.light?.['color-bg-backdrop'],
-  'rgb(7 10 14 / 0.32)',
+  'hsl(214.3 33.3% 4.1% / 0.32)',
   'registry.json style item must export the light --color-bg-backdrop value.',
 )
 assert.equal(
@@ -240,7 +251,7 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'bg-blur'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { TokenPreviewCard } from '../token-preview-card'") &&
+    docsDefinitionSource.includes("import { TokenPreviewCard } from '../../components/token-preview-card'") &&
     docsDefinitionSource.includes('bgBlurTones.map') &&
     docsDefinitionSource.includes('bgBlurToneMap[tone]') &&
     docsDefinitionSource.includes('getBgBlurClassName(tone)') &&
@@ -250,8 +261,9 @@ assert.ok(
     docsDefinitionSource.includes('label={item.label}') &&
     docsDefinitionSource.includes('token={getBgBlurBlurToken(tone)}') &&
     docsDefinitionSource.includes('value={getBgBlurBlurValue(tone)}') &&
-    docsDefinitionSource.includes('bg-blur-preview__sample') &&
-    docsDefinitionSource.includes('bg-blur-preview__overlay') &&
+    docsDefinitionSource.includes('token-preview-card__surface-preview') &&
+    docsDefinitionSource.includes('token-preview-card__surface-backdrop') &&
+    docsDefinitionSource.includes('token-preview-card__surface') &&
     !docsDefinitionSource.includes('bg-blur-preview__group') &&
     !docsDefinitionSource.includes('bg-blur-preview__stage') &&
     !docsDefinitionSource.includes('summary:'),
@@ -273,24 +285,27 @@ assert.ok(
 )
 
 assert.ok(
-  appCss.includes('.bg-blur-preview__sample') &&
-    appCss.includes('.bg-blur-preview__backdrop') &&
-    appCss.includes('.bg-blur-preview__overlay') &&
+  !appCss.includes('.bg-blur-preview__') &&
     !appCss.includes('.bg-blur-preview__group') &&
     !appCss.includes('.bg-blur-preview__stage'),
-  'App.css must include only the BgBlur-specific preview-effect styles.',
+  'App.css must not own any BgBlur preview styles.',
 )
 assert.ok(
   sampleBlock.includes('position: relative;') &&
     sampleBlock.includes('overflow: hidden;') &&
     sampleBlock.includes('isolation: isolate;'),
-  'BgBlur preview samples must create a stable backdrop clipping context.',
+  'TokenPreviewCard must provide the stable preview clipping context used by BgBlur.',
 )
 assert.ok(
-  overlayBlock.includes('inset: 16px 20px;') &&
-    overlayBlock.includes('border: 1px solid var(--color-border);') &&
-    !overlayBlock.includes('background: rgb(255 255 255 / 0.34);'),
-  'BgBlur preview overlay must use the real utility background instead of a hard-coded demo background.',
+  backdropBlock.includes('position: absolute;') &&
+    backdropBlock.includes('inset: -16px;') &&
+    backdropBlock.includes('hsl(18.1 71.9% 46.1% / 0.72)') &&
+    !backdropBlock.includes('rgb(') &&
+    surfaceBlock.includes('inset: 10px 12px;') &&
+    surfaceBlock.includes('border: 1px solid var(--color-border);') &&
+    surfaceBlock.includes('border-radius: var(--radius-sm);') &&
+    !surfaceBlock.includes('background:'),
+  'TokenPreviewCard must own the shared backdrop and surface presentation used by BgBlur.',
 )
 
 assert.ok(registryItem, 'registry.json must include the bg-blur registry item.')

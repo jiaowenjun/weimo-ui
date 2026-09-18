@@ -523,12 +523,12 @@ for (const [tokenName, lightValue, darkValue] of [
   ['glass-surface-border', 'hsl(0 0% 80%)', 'hsl(0 0% 38%)'],
   ['glass-surface-light-border', 'hsl(0 0% 80%)'],
   ['glass-surface-dark-border', 'hsl(0 0% 38%)'],
-  ['glass-surface-fg', 'rgba(15, 23, 42, 0.9)', 'rgba(202, 202, 202, 1.0)'],
-  ['glass-surface-muted-fg', 'rgba(51, 65, 85, 0.68)', 'rgba(255, 255, 255, 0.68)'],
-  ['glass-surface-light-fg', 'rgba(15, 23, 42, 0.9)'],
-  ['glass-surface-light-muted-fg', 'rgba(51, 65, 85, 0.68)'],
-  ['glass-surface-dark-fg', 'rgba(255, 255, 255, 0.9)'],
-  ['glass-surface-dark-muted-fg', 'rgba(255, 255, 255, 0.72)'],
+  ['glass-surface-fg', 'hsl(222.2 47.4% 11.2% / 0.9)', 'hsl(0 0% 79.2%)'],
+  ['glass-surface-muted-fg', 'hsl(215.3 25% 26.7% / 0.68)', 'hsl(0 0% 100% / 0.68)'],
+  ['glass-surface-light-fg', 'hsl(222.2 47.4% 11.2% / 0.9)'],
+  ['glass-surface-light-muted-fg', 'hsl(215.3 25% 26.7% / 0.68)'],
+  ['glass-surface-dark-fg', 'hsl(0 0% 100% / 0.9)'],
+  ['glass-surface-dark-muted-fg', 'hsl(0 0% 100% / 0.72)'],
 ].map(([tokenName, lightValue, darkValue = lightValue]) => [tokenName, lightValue, darkValue])) {
   assertIncludes(
     tokensCss,

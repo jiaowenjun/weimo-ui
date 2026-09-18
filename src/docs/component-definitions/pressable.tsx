@@ -3,8 +3,8 @@ import {
   pressableTones,
   getPressableToken,
 } from '../../components/pressable'
+import { TokenPreviewCard } from '../../components/token-preview-card'
 import type { ComponentDefinition } from '../component-docs'
-import { TokenPreviewCard } from '../token-preview-card'
 
 export const pressableDefinition = {
   id: 'pressable',

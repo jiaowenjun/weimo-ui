@@ -1,10 +1,10 @@
 import { render, screen, within } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 
-import { TokenPreviewCard } from '../src/docs/token-preview-card'
+import { TokenPreviewCard } from '../src/components/token-preview-card'
 
 describe('TokenPreviewCard', () => {
-  it('renders token identity and preview content in one CardPanel', () => {
+  it('renders token identity and preview content in one card surface', () => {
     render(
       <TokenPreviewCard
         className="custom-card"
@@ -18,10 +18,13 @@ describe('TokenPreviewCard', () => {
     )
 
     const card = screen.getByTestId('card')
+    const meta = card.querySelector('.token-preview-card__meta')
 
-    expect(card).toHaveClass('coss-card__panel', 'token-preview-card', 'custom-card')
+    expect(card).toHaveClass('card-surface', 'token-preview-card', 'custom-card')
     expect(within(card).getByText('默认圆角')).toHaveClass('token-preview-card__label')
-    expect(within(card).getByText(/--radius/)).toHaveTextContent('--radius: 16px')
+    expect(within(card).getByText('--radius')).toHaveClass('token-preview-card__token')
+    expect(within(card).getByText('16px')).toHaveClass('token-preview-card__value')
+    expect(meta?.children).toHaveLength(3)
     expect(screen.getByTestId('preview').parentElement).toBe(card)
   })
 

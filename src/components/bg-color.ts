@@ -113,8 +113,8 @@ export const bgColorToneMap = {
     label: '分享纸面',
     token: '--color-bg-share-card',
     value: {
-      light: '#eee8e8',
-      dark: '#2e2e29',
+      light: 'hsl(0 15% 92.2%)',
+      dark: 'hsl(60 5.7% 17.1%)',
     },
     className: 'bg-color--share-card',
     description: 'ShareCard 生成图文卡时的纸面底色。',
@@ -125,8 +125,8 @@ export const bgColorToneMap = {
     label: '分享标签遮罩',
     token: '--color-bg-share-card-tag-mask',
     value: {
-      light: '#111816',
-      dark: '#939388',
+      light: 'hsl(162.9 17.1% 8%)',
+      dark: 'hsl(60 4.8% 55.5%)',
     },
     className: 'bg-color--share-card-tag-mask',
     description: 'ShareCard 标签区域的遮罩填充色。',

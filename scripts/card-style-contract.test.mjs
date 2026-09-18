@@ -840,12 +840,12 @@ assert.deepEqual(
 )
 
 for (const snippet of [
-  '--color-text-placeholder: rgb(0 0 0 / 0.26);',
-  '--color-text-placeholder: rgb(255 255 255 / 0.26);',
-  '--color-bg-share-card: #eee8e8;',
-  '--color-bg-share-card-tag-mask: #111816;',
-  '--color-bg-share-card: #2e2e29;',
-  '--color-bg-share-card-tag-mask: #939388;',
+  '--color-text-placeholder: hsl(0 0% 0% / 0.26);',
+  '--color-text-placeholder: hsl(0 0% 100% / 0.26);',
+  '--color-bg-share-card: hsl(0 15% 92.2%);',
+  '--color-bg-share-card-tag-mask: hsl(162.9 17.1% 8%);',
+  '--color-bg-share-card: hsl(60 5.7% 17.1%);',
+  '--color-bg-share-card-tag-mask: hsl(60 4.8% 55.5%);',
 ]) {
   assert.ok(sharedTokenCss.includes(snippet), `src/styles/tokens.css must include ${snippet}`)
 }
@@ -866,42 +866,42 @@ assert.ok(rootStyleItem, 'registry.json must include the @weimo/style item.')
 assert.deepEqual(styleRegistry, rootStyleItem, 'registry/style.json must match the root style item.')
 assert.equal(
   rootStyleItem.cssVars.light['color-text-placeholder'],
-  'rgb(0 0 0 / 0.26)',
+  'hsl(0 0% 0% / 0.26)',
   'Root registry light theme must export color-text-placeholder.',
 )
 assert.equal(
   rootStyleItem.cssVars.dark['color-text-placeholder'],
-  'rgb(255 255 255 / 0.26)',
+  'hsl(0 0% 100% / 0.26)',
   'Root registry dark theme must export color-text-placeholder.',
 )
 assert.equal(
   rootStyleItem.cssVars.light['color-bg-share-card'],
-  '#eee8e8',
+  'hsl(0 15% 92.2%)',
   'Root registry light theme must export ShareCard paper surface.',
 )
 assert.equal(
   rootStyleItem.cssVars.light['color-bg-share-card-tag-mask'],
-  '#111816',
+  'hsl(162.9 17.1% 8%)',
   'Root registry light theme must export ShareCard tag mask.',
 )
 assert.equal(
   rootStyleItem.cssVars.dark['color-bg-share-card'],
-  '#2e2e29',
+  'hsl(60 5.7% 17.1%)',
   'Root registry dark theme must export ShareCard paper surface.',
 )
 assert.equal(
   rootStyleItem.cssVars.dark['color-bg-share-card-tag-mask'],
-  '#939388',
+  'hsl(60 4.8% 55.5%)',
   'Root registry dark theme must export ShareCard tag mask.',
 )
 assert.equal(
   styleRegistry.cssVars.light['color-text-placeholder'],
-  'rgb(0 0 0 / 0.26)',
+  'hsl(0 0% 0% / 0.26)',
   'Standalone style registry light theme must export color-text-placeholder.',
 )
 assert.equal(
   styleRegistry.cssVars.dark['color-text-placeholder'],
-  'rgb(255 255 255 / 0.26)',
+  'hsl(0 0% 100% / 0.26)',
   'Standalone style registry dark theme must export color-text-placeholder.',
 )
 assert.ok(

@@ -60,6 +60,15 @@ export const componentManifest = [
     registry: true,
   },
   {
+    id: 'token-preview-card',
+    name: 'TokenPreviewCard',
+    registryName: 'token-preview-card',
+    packageExport: './components/token-preview-card',
+    group: 'token-style',
+    docs: true,
+    registry: true,
+  },
+  {
     id: 'font-size',
     name: '字号',
     registryName: 'font-size',

@@ -4,8 +4,8 @@ import {
   getHeatColorClassName,
   getHeatColorToken,
 } from '../../components/heat-color'
+import { TokenPreviewCard } from '../../components/token-preview-card'
 import type { ComponentDefinition } from '../component-docs'
-import { TokenPreviewCard } from '../token-preview-card'
 
 function HeatColorPreview() {
   return (

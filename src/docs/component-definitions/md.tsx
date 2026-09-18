@@ -1,7 +1,7 @@
-import { Md } from '../../components/md'
 import { CardPanel } from '../../components/coss/card'
+import { Md } from '../../components/md'
+import { TokenPreviewCard } from '../../components/token-preview-card'
 import type { ComponentDefinition } from '../component-docs'
-import { TokenPreviewCard } from '../token-preview-card'
 import { mdRenderSample } from './markdown-sample'
 
 type MarkdownTokenPreview =

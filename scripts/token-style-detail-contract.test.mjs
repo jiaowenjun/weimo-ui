@@ -21,8 +21,15 @@ const detailPageSource = readProjectFile('src/docs/pages/component-detail-page.t
 const docsShellSource = readProjectFile('src/docs/docs-shell.tsx')
 const searchSource = readProjectFile('src/docs/search-component-docs.ts')
 const colorSource = readProjectFile('src/docs/token-preview-color.ts')
-const cardSource = readProjectFile('src/docs/token-preview-card.tsx')
-const cardCss = readProjectFile('src/docs/token-preview-card.css')
+const cardSource = readProjectFile('src/components/token-preview-card.tsx')
+const cardCss = readProjectFile('src/components/token-preview-card.css')
+const cardDefinitionSource = readProjectFile(
+  'src/docs/component-definitions/token-preview-card.tsx',
+)
+const cardDemoSource = readProjectFile(
+  'src/docs/component-definitions/token-preview-card-demo.tsx',
+)
+const cardRegistry = JSON.parse(readProjectFile('registry/token-preview-card.json'))
 const appCss = readProjectFile('src/App.css')
 
 assert.ok(
@@ -61,13 +68,14 @@ assert.ok(
 )
 
 for (const snippet of [
-  "import { CardPanel } from '../components/coss/card'",
+  "import { CardSurface } from './card-surface'",
   'export type TokenPreviewCardProps',
   'export function TokenPreviewCard',
   'darkValue?: ReactNode',
   'className="token-preview-card__meta"',
   'className="token-preview-card__label"',
   'className="token-preview-card__token"',
+  'className="token-preview-card__value"',
   'className="token-preview-card__value--light"',
   'className="token-preview-card__value--dark"',
   '{children}',
@@ -80,11 +88,108 @@ for (const selector of [
   '.token-preview-card__meta',
   '.token-preview-card__label',
   '.token-preview-card__token',
+  '.token-preview-card__value',
   '.token-preview-card__value--dark',
   '.dark .token-preview-card__value--light',
 ]) {
   assert.ok(cardCss.includes(selector), `TokenPreviewCard styles must include ${selector}.`)
 }
+
+assert.ok(
+  cardCss.includes('.token-preview-card__meta {\n    display: grid;') &&
+    cardSource.includes('<code className="token-preview-card__token">{token}</code>') &&
+    cardSource.includes('<code className="token-preview-card__value">') &&
+    !cardCss.includes('margin-left: auto;'),
+  'TokenPreviewCard must place the label, token identity, and value on dedicated rows.',
+)
+
+assert.ok(
+  cardCss.includes('.token-preview-card > .token-preview-card__meta ~ * {') &&
+    cardCss.includes('height: 80px;') &&
+    cardCss.includes('min-height: 80px;') &&
+    cardCss.includes('overflow: hidden;') &&
+    cardCss.includes('isolation: isolate;') &&
+    cardCss.includes('border: 1px solid var(--color-border);') &&
+    cardCss.includes('border-radius: var(--radius-sm);') &&
+    cardCss.includes('background: var(--color-bg-raised);') &&
+    !cardSource.includes('token-preview-card__preview'),
+  'TokenPreviewCard must own the shared size and surface styles for each direct preview child.',
+)
+
+assert.ok(
+  cardCss.includes('.token-preview-card .token-preview-card__surface-backdrop {') &&
+    cardCss.includes('.token-preview-card .token-preview-card__surface {') &&
+    cardCss.includes('inset: 10px 12px;') &&
+    cardDemoSource.match(/className="token-preview-card__surface-preview"/g)?.length === 2 &&
+    cardDemoSource.match(/className="token-preview-card__surface-backdrop"/g)?.length === 2 &&
+    cardDemoSource.includes(
+      "className={`token-preview-card__surface ${getBgColorClassName('selection')}`}",
+    ) &&
+    cardDemoSource.includes(
+      "className={`token-preview-card__surface ${getBgBlurClassName('backdrop')}`}",
+    ),
+  'Transparent color and blur demos must share one TokenPreviewCard surface layout.',
+)
+
+for (const selector of [
+  '.bg-color-preview__sample',
+  '.border-radius-preview__sample',
+  '.border-color-preview__sample',
+  '.font-size-preview__sample',
+  '.text-color-preview__sample',
+  '.heat-color-preview__sample',
+  '.pressable-preview__sample',
+  '.md-style-preview__effect',
+]) {
+  const escapedSelector = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
+  assert.match(
+    appCss,
+    new RegExp(`${escapedSelector}\\s*\\{[^}]*height: 80px;`),
+    `${selector} must define an 80px preview element height.`,
+  )
+}
+
+assert.equal(
+  packageJson.exports?.['./components/token-preview-card'],
+  './src/components/token-preview-card.tsx',
+  'TokenPreviewCard must have a public package export.',
+)
+assert.ok(
+  manifestSource.includes("id: 'token-preview-card'") &&
+    manifestSource.includes("name: 'TokenPreviewCard'") &&
+    manifestSource.includes("registryName: 'token-preview-card'") &&
+    manifestSource.includes("packageExport: './components/token-preview-card'"),
+  'TokenPreviewCard must be listed in the Token / style component catalog.',
+)
+assert.ok(
+  cardDefinitionSource.includes("id: 'token-preview-card'") &&
+    cardDefinitionSource.includes("frame: 'plain',") &&
+    cardDefinitionSource.includes('<TokenPreviewCardDemo') &&
+    cardDemoSource.includes('<TokenPreviewCard') &&
+    cardDemoSource.includes('token-preview-card-demo__category') &&
+    cardDemoSource.includes('非透明背景色') &&
+    cardDemoSource.includes('bgColorToneMap.primary') &&
+    cardDemoSource.includes("getBgColorClassName('primary')") &&
+    cardDemoSource.includes('透明背景色') &&
+    cardDemoSource.includes('背景模糊度') &&
+    cardDemoSource.includes('边框圆角') &&
+    cardDemoSource.includes('边框色') &&
+    cardDemoSource.includes('字号') &&
+    cardDemoSource.includes('字色') &&
+    cardDemoSource.includes('热力色') &&
+    cardDemoSource.includes('按压反馈') &&
+    cardDemoSource.includes('自定义内容') &&
+    appCss.includes('.token-preview-card-demo__category'),
+  'TokenPreviewCard docs must categorize every supported preview effect.',
+)
+assert.equal(cardRegistry.name, 'token-preview-card')
+assert.equal(cardRegistry.type, 'registry:ui')
+assert.deepEqual(cardRegistry.registryDependencies, [
+  '@weimo/style',
+  '@weimo/utils',
+  '@weimo/card-surface',
+])
 
 for (const snippet of [
   'useSyncExternalStore',
@@ -124,7 +229,7 @@ for (const componentId of semanticTokenDefinitions) {
   assert.ok(
       definitionSource.includes("frame: 'plain',") &&
       definitionSource.includes('searchAliases:') &&
-      definitionSource.includes("import { TokenPreviewCard } from '../token-preview-card'") &&
+      definitionSource.includes("import { TokenPreviewCard } from '../../components/token-preview-card'") &&
       definitionSource.includes('<TokenPreviewCard') &&
       !definitionSource.includes('description={item.description}') &&
       !definitionSource.includes('uiUsage={item.uiUsage}') &&

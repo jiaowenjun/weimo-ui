@@ -94,7 +94,7 @@ assert.ok(
 for (const snippet of [
   "import { Md } from '../../components/md'",
   "import { CardPanel } from '../../components/coss/card'",
-  "import { TokenPreviewCard } from '../token-preview-card'",
+  "import { TokenPreviewCard } from '../../components/token-preview-card'",
   "import { mdRenderSample } from './markdown-sample'",
   "id: 'md'",
   "frame: 'plain',",
@@ -1081,7 +1081,7 @@ assert.ok(
   'Md real-scene render must stay contained with internal scrolling.',
 )
 assert.ok(
-  mdEffectBlock.includes('min-height: 54px;') &&
+  mdEffectBlock.includes('height: 80px;') &&
     mdEffectBlock.includes('background: var(--color-bg-card);'),
   'Md token items must include a stable effect preview area.',
 )

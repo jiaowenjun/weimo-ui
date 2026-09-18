@@ -4,8 +4,8 @@ import {
   getBorderRadiusToken,
   getBorderRadiusValue,
 } from '../../components/border-radius'
+import { TokenPreviewCard } from '../../components/token-preview-card'
 import type { ComponentDefinition } from '../component-docs'
-import { TokenPreviewCard } from '../token-preview-card'
 
 export const borderRadiusDefinition = {
   id: 'border-radius',

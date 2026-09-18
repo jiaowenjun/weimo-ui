@@ -418,8 +418,8 @@ assert.ok(
     appCss.includes('.icon-preview__scene--light-gradient') &&
     appCss.includes('.icon-preview__scene--dark-solid') &&
     appCss.includes('.icon-preview__scene--dark-gradient') &&
-    appCss.includes('--icon-preview-text: rgba(15, 23, 42, 0.9);') &&
-    appCss.includes('--icon-preview-text: rgba(255, 255, 255, 0.9);'),
+    appCss.includes('--icon-preview-text: hsl(222.2 47.4% 11.2% / 0.9);') &&
+    appCss.includes('--icon-preview-text: hsl(0 0% 100% / 0.9);'),
   'Icon button docs previews must define light and dark background scene styles.',
 )
 assert.ok(

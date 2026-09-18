@@ -4,9 +4,9 @@ import {
   getTextColorClassName,
   getTextColorToken,
 } from '../../components/text-color'
+import { TokenPreviewCard } from '../../components/token-preview-card'
 import type { ComponentDefinition } from '../component-docs'
 import { sortByThemeLightness, useIsDarkTheme } from '../token-preview-color'
-import { TokenPreviewCard } from '../token-preview-card'
 
 const previewTextColorTones = textColorTones.filter((tone) => tone !== 'inherit')
 

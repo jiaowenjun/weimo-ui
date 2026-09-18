@@ -31,9 +31,9 @@ const expectedTones = [
   ['primary', '--color-text-primary', 'text-color--primary', 'hsl(0 0% 9%)', 'hsl(0 0% 98%)'],
   ['secondary', '--color-text-secondary', 'text-color--secondary', 'hsl(0 0% 28%)', 'hsl(0 0% 64%)'],
   ['subtle', '--color-text-subtle', 'text-color--subtle', 'hsl(0 0% 28% / 0.72)', 'hsl(0 0% 64% / 0.72)'],
-  ['placeholder', '--color-text-placeholder', 'text-color--placeholder', 'rgb(0 0 0 / 0.26)', 'rgb(255 255 255 / 0.26)'],
+  ['placeholder', '--color-text-placeholder', 'text-color--placeholder', 'hsl(0 0% 0% / 0.26)', 'hsl(0 0% 100% / 0.26)'],
   ['disable', '--color-text-disable', 'text-color--disable', 'hsl(0 0% 56%)', 'hsl(0 0% 42%)'],
-  ['danger', '--color-text-danger', 'text-color--danger', '#b42318', '#ff8a7a'],
+  ['danger', '--color-text-danger', 'text-color--danger', 'hsl(4.2 76.5% 40%)', 'hsl(7.2 100% 73.9%)'],
   ['inherit', 'inherit', 'text-color--inherit', 'inherit', 'inherit'],
 ]
 
@@ -227,7 +227,7 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'text-color'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { TokenPreviewCard } from '../token-preview-card'") &&
+    docsDefinitionSource.includes("import { TokenPreviewCard } from '../../components/token-preview-card'") &&
     docsDefinitionSource.includes('const previewTextColorTones = textColorTones.filter((tone) => tone !== \'inherit\')') &&
     docsDefinitionSource.includes('textColorToneMap[tone]') &&
     docsDefinitionSource.includes('function TextColorPreview()') &&

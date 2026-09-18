@@ -35,8 +35,8 @@ export const textColorToneMap = {
     label: '占位文字',
     token: '--color-text-placeholder',
     value: {
-      light: 'rgb(0 0 0 / 0.26)',
-      dark: 'rgb(255 255 255 / 0.26)',
+      light: 'hsl(0 0% 0% / 0.26)',
+      dark: 'hsl(0 0% 100% / 0.26)',
     },
     className: 'text-color--placeholder',
     description: '输入占位、空状态提示和非主动作图标',
@@ -55,8 +55,8 @@ export const textColorToneMap = {
     label: '危险文字',
     token: '--color-text-danger',
     value: {
-      light: '#b42318',
-      dark: '#ff8a7a',
+      light: 'hsl(4.2 76.5% 40%)',
+      dark: 'hsl(7.2 100% 73.9%)',
     },
     className: 'text-color--danger',
     description: '破坏性操作、校验失败和风险提示',

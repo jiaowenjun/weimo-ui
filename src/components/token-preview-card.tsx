@@ -1,12 +1,12 @@
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 
-import { CardPanel } from '../components/coss/card'
-import { cn } from '../components/lib/utils'
+import { CardSurface } from './card-surface'
+import { cn } from './lib/utils'
 
 import './token-preview-card.css'
 
 export type TokenPreviewCardProps = Omit<
-  ComponentPropsWithoutRef<typeof CardPanel>,
+  ComponentPropsWithoutRef<typeof CardSurface>,
   'children'
 > & {
   children: ReactNode
@@ -26,11 +26,11 @@ export function TokenPreviewCard({
   ...props
 }: TokenPreviewCardProps) {
   return (
-    <CardPanel className={cn('token-preview-card', className)} {...props}>
+    <CardSurface className={cn('token-preview-card', className)} {...props}>
       <div className="token-preview-card__meta">
         <span className="token-preview-card__label">{label}</span>
-        <code className="token-preview-card__token">
-          {token}: {' '}
+        <code className="token-preview-card__token">{token}</code>
+        <code className="token-preview-card__value">
           {darkValue === undefined ? (
             value
           ) : (
@@ -42,6 +42,6 @@ export function TokenPreviewCard({
         </code>
       </div>
       {children}
-    </CardPanel>
+    </CardSurface>
   )
 }

@@ -49,7 +49,7 @@ const expectedTones = [
   ['default', '--color-border', 'border-color--default', 'hsl(0 0% 90%)', 'hsl(0 0% 20%)'],
   ['emphasis', '--color-border-emphasis', 'border-color--emphasis', 'hsl(0 0% 68%)', 'hsl(0 0% 50%)'],
   ['accent', '--color-border-accent', 'border-color--accent', 'hsl(0 0% 35%)', 'hsl(0 0% 75%)'],
-  ['danger', '--color-border-danger', 'border-color--danger', '#b42318', '#ff8a7a'],
+  ['danger', '--color-border-danger', 'border-color--danger', 'hsl(4.2 76.5% 40%)', 'hsl(7.2 100% 73.9%)'],
 ]
 const expectedToneOrder = expectedTones.map(([tone]) => tone)
 
@@ -115,8 +115,6 @@ const markdownEditorTableWrapperBlock = blockFor(
 const demoBlockPanelBlock = blockFor(appCss, '.demo-block__panel')
 const mdViewDocsPreviewFrameBlock = blockFor(appCss, '.md-view-docs-preview__frame')
 const tagTreePreviewPanelBlock = firstBlockFor(appCss, '.tag-tree-preview__panel')
-const tokenPreviewCardCss = readProjectFile('src/docs/token-preview-card.css')
-const tokenPreviewCardBlock = firstBlockFor(tokenPreviewCardCss, '.token-preview-card')
 const tagBarPreviewPanelBlock = blockFor(appCss, '.tag-bar-preview__panel')
 const sampleBlock = blockFor(appCss, '.border-color-preview__sample')
 
@@ -382,7 +380,6 @@ assert.ok(
     demoBlockPanelBlock.includes('border: 1px solid var(--color-border);') &&
     mdViewDocsPreviewFrameBlock.includes('border: 1px solid var(--color-border);') &&
     tagTreePreviewPanelBlock.includes('border: 1px solid var(--color-border);') &&
-    tokenPreviewCardBlock.includes('border: 1px solid var(--color-border);') &&
     tagBarPreviewPanelBlock.includes('border: 1px solid var(--color-border);'),
   'Default BorderColor usage must cover surface/container outer borders and docs preview frames.',
 )
@@ -409,7 +406,7 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'border-color'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { TokenPreviewCard } from '../token-preview-card'") &&
+    docsDefinitionSource.includes("import { TokenPreviewCard } from '../../components/token-preview-card'") &&
     docsDefinitionSource.includes("from '../token-preview-color'") &&
     docsDefinitionSource.includes('sortByThemeLightness(') &&
     docsDefinitionSource.includes('orderedTones.map') &&

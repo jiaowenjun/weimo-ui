@@ -4,9 +4,9 @@ import {
   getBgColorToken,
   type BgColorTone,
 } from '../../components/bg-color'
+import { TokenPreviewCard } from '../../components/token-preview-card'
 import type { ComponentDefinition } from '../component-docs'
 import { sortByThemeLightness, useIsDarkTheme } from '../token-preview-color'
-import { TokenPreviewCard } from '../token-preview-card'
 
 const bgColorPreviewTones = [
   'page',
@@ -53,18 +53,20 @@ function BgColorPreview() {
             token={getBgColorToken(tone)}
             value={item.value.light}
           >
-            <div className="bg-color-preview__sample" aria-hidden="true">
-              {isTransparent ? <span className="bg-color-preview__sample-backdrop" /> : null}
-              <span
-                className={[
-                  'bg-color-preview__sample-fill',
-                  isTransparent ? 'bg-color-preview__sample-fill--framed' : '',
-                  getBgColorClassName(tone),
-                ]
-                  .filter(Boolean)
-                  .join(' ')}
-              />
-            </div>
+            {isTransparent ? (
+              <div className="token-preview-card__surface-preview" aria-hidden="true">
+                <span className="token-preview-card__surface-backdrop" />
+                <span
+                  className={`token-preview-card__surface ${getBgColorClassName(tone)}`}
+                />
+              </div>
+            ) : (
+              <div className="bg-color-preview__sample" aria-hidden="true">
+                <span
+                  className={`bg-color-preview__sample-fill ${getBgColorClassName(tone)}`}
+                />
+              </div>
+            )}
           </TokenPreviewCard>
         )
       })}

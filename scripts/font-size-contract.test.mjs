@@ -158,7 +158,7 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'font-size'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { TokenPreviewCard } from '../token-preview-card'") &&
+    docsDefinitionSource.includes("import { TokenPreviewCard } from '../../components/token-preview-card'") &&
     docsDefinitionSource.includes('fontSizeScales.map') &&
     docsDefinitionSource.includes('fontSizeScaleMap[scale]') &&
     docsDefinitionSource.includes('getFontSizeClassName(scale)') &&

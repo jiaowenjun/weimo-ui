@@ -145,8 +145,8 @@ assert.ok(
   'Menu separator must use its own background-aware divider token family instead of GlassSurface border or the global divider token.',
 )
 assert.ok(menuCss.includes('var(--color-text-danger)'), 'Menu destructive state must use the shared danger token.')
-assert.ok(tokensCss.includes('--color-text-danger: #b42318;'), 'Light theme must define --color-text-danger.')
-assert.ok(tokensCss.includes('--color-text-danger: #ff8a7a;'), 'Dark theme must define --color-text-danger.')
+assert.ok(tokensCss.includes('--color-text-danger: hsl(4.2 76.5% 40%);'), 'Light theme must define --color-text-danger.')
+assert.ok(tokensCss.includes('--color-text-danger: hsl(7.2 100% 73.9%);'), 'Dark theme must define --color-text-danger.')
 assert.ok(tokensCss.includes('--size-sidebar-width: 290px;'), 'Shared tokens must define a 290px sidebar width.')
 assert.ok(
   rootTokenBlock.includes('--border: 0 0% 80%;') &&
@@ -164,8 +164,8 @@ assert.ok(
     darkTokenBlock.includes('--color-border-accent: hsl(0 0% 75%);'),
   'Dark theme must use distinct concrete border values for divider, normal, emphasis, and accent levels.',
 )
-assert.equal(styleItem.cssVars.light['color-text-danger'], '#b42318', 'Registry light style must include --color-text-danger.')
-assert.equal(styleItem.cssVars.dark['color-text-danger'], '#ff8a7a', 'Registry dark style must include --color-text-danger.')
+assert.equal(styleItem.cssVars.light['color-text-danger'], 'hsl(4.2 76.5% 40%)', 'Registry light style must include --color-text-danger.')
+assert.equal(styleItem.cssVars.dark['color-text-danger'], 'hsl(7.2 100% 73.9%)', 'Registry dark style must include --color-text-danger.')
 assert.equal(styleItem.cssVars.light.border, '0 0% 80%', 'Registry light style must export the default border step.')
 assert.equal(styleItem.cssVars.light['color-border-divider'], 'hsl(0 0% 88%)', 'Registry light style must export the divider border lightness step.')
 assert.equal(styleItem.cssVars.light['color-border-divider-menu'], 'hsl(0 0% 88%)', 'Registry light style must export the menu divider token.')

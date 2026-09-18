@@ -52,8 +52,8 @@ const expectedTones = [
   ['selected', '--color-bg-selected', 'bg-color--selected', 'hsl(40 10% 94%)', 'hsl(0 0% 15%)'],
   ['chip', '--color-bg-chip', 'bg-color--chip', 'hsl(40 12% 96%)', 'hsl(0 0% 13%)'],
   ['selection', '--color-bg-selection', 'bg-color--selection', 'hsl(0 0% 15% / 0.2)', 'hsl(0 0% 96% / 0.2)'],
-  ['share-card', '--color-bg-share-card', 'bg-color--share-card', '#eee8e8', '#2e2e29'],
-  ['share-card-tag-mask', '--color-bg-share-card-tag-mask', 'bg-color--share-card-tag-mask', '#111816', '#939388'],
+  ['share-card', '--color-bg-share-card', 'bg-color--share-card', 'hsl(0 15% 92.2%)', 'hsl(60 5.7% 17.1%)'],
+  ['share-card-tag-mask', '--color-bg-share-card-tag-mask', 'bg-color--share-card-tag-mask', 'hsl(162.9 17.1% 8%)', 'hsl(60 4.8% 55.5%)'],
 ]
 
 const expectedToneGroups = [
@@ -113,6 +113,7 @@ const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const docsDefinitionSource = readProjectFile('src/docs/component-definitions/bg-color.tsx')
 const appCss = readProjectFile('src/App.css')
+const tokenPreviewCardCss = readProjectFile('src/components/token-preview-card.css')
 const tokensCss = readProjectFile('src/styles/tokens.css')
 const dialogCss = readProjectFile('src/components/coss/dialog.css')
 const commandCss = readProjectFile('src/components/coss/command.css')
@@ -124,8 +125,14 @@ const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const registryItem = rootRegistry.items.find((item) => item.name === 'bg-color')
 const sampleBlock = firstBlockFor(appCss, '.bg-color-preview__sample')
 const sampleFillBlock = firstBlockFor(appCss, '.bg-color-preview__sample-fill')
-const sampleFillFramedBlock = firstBlockFor(appCss, '.bg-color-preview__sample-fill--framed')
-const sampleBackdropBlock = firstBlockFor(appCss, '.bg-color-preview__sample-backdrop')
+const surfaceBackdropBlock = firstBlockFor(
+  tokenPreviewCardCss,
+  '.token-preview-card .token-preview-card__surface-backdrop',
+)
+const surfaceBlock = firstBlockFor(
+  tokenPreviewCardCss,
+  '.token-preview-card .token-preview-card__surface',
+)
 
 assert.equal(
   packageJson.exports?.['./components/bg-color'],
@@ -339,7 +346,7 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'bg-color'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { TokenPreviewCard } from '../token-preview-card'") &&
+    docsDefinitionSource.includes("import { TokenPreviewCard } from '../../components/token-preview-card'") &&
     docsDefinitionSource.includes('bgColorPreviewTones') &&
     docsDefinitionSource.includes('orderedTones.map') &&
     docsDefinitionSource.includes('bgColorToneMap[tone]') &&
@@ -353,8 +360,9 @@ assert.ok(
     docsDefinitionSource.includes('bg-color-preview__sample') &&
     docsDefinitionSource.includes('bg-color-preview__sample-fill') &&
     docsDefinitionSource.includes('const isTransparent = hasTransparentBgColorValue(item)') &&
-    docsDefinitionSource.includes('bg-color-preview__sample-backdrop') &&
-    docsDefinitionSource.includes('bg-color-preview__sample-fill--framed') &&
+    docsDefinitionSource.includes('token-preview-card__surface-preview') &&
+    docsDefinitionSource.includes('token-preview-card__surface-backdrop') &&
+    docsDefinitionSource.includes('token-preview-card__surface') &&
     !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     !docsDefinitionSource.includes('summary:') &&
     !docsDefinitionSource.includes('bg-color-preview__group') &&
@@ -399,7 +407,8 @@ assert.ok(
 assert.ok(
   appCss.includes('.bg-color-preview__sample') &&
     appCss.includes('.bg-color-preview__sample-fill') &&
-    appCss.includes('.bg-color-preview__sample-backdrop') &&
+    !appCss.includes('.bg-color-preview__sample-backdrop') &&
+    !appCss.includes('.bg-color-preview__sample-fill--framed') &&
     !appCss.includes('.bg-color-preview__group') &&
     !appCss.includes('.bg-color-preview__row') &&
     !appCss.includes('.bg-color-preview__identity') &&
@@ -411,7 +420,7 @@ assert.ok(
   sampleBlock.includes('border: 1px solid var(--color-border);') &&
     sampleBlock.includes('position: relative;') &&
     sampleBlock.includes('isolation: isolate;') &&
-    sampleBlock.includes('height: 64px;') &&
+    sampleBlock.includes('height: 80px;') &&
     sampleBlock.includes('background: var(--color-bg-raised);') &&
     !sampleBlock.includes('width:') &&
     !sampleBlock.includes('background-image:') &&
@@ -428,19 +437,20 @@ assert.ok(
   'BgColor sample fill must sit above the optional striped backdrop.',
 )
 assert.ok(
-  sampleFillFramedBlock.includes('inset: 10px 12px;') &&
-    sampleFillFramedBlock.includes('border: 1px solid rgb(255 255 255 / 0.46);') &&
-    sampleFillFramedBlock.includes('border-radius: var(--radius-sm);'),
-  'BgColor semi-transparent sample fill must be smaller than the striped backdrop frame.',
+  surfaceBlock.includes('inset: 10px 12px;') &&
+    surfaceBlock.includes('border: 1px solid var(--color-border);') &&
+    surfaceBlock.includes('border-radius: var(--radius-sm);') &&
+    !surfaceBlock.includes('background:'),
+  'Transparent BgColor samples must use the shared TokenPreviewCard surface geometry.',
 )
 assert.ok(
-  sampleBackdropBlock.includes('position: absolute;') &&
-    sampleBackdropBlock.includes('inset: 0;') &&
-    sampleBackdropBlock.includes('z-index: 0;') &&
-    sampleBackdropBlock.includes('repeating-linear-gradient') &&
-    sampleBackdropBlock.includes('rgb(255 255 255 / 0.68) 0 14px') &&
-    sampleBackdropBlock.includes('rgb(255 255 255 / 0.16) 14px 28px'),
-  'BgColor semi-transparent samples must render a striped backdrop underneath the background fill.',
+  surfaceBackdropBlock.includes('position: absolute;') &&
+    surfaceBackdropBlock.includes('inset: -16px;') &&
+    surfaceBackdropBlock.includes('z-index: 0;') &&
+    surfaceBackdropBlock.includes('repeating-linear-gradient') &&
+    surfaceBackdropBlock.includes('hsl(0 0% 100% / 0.68) 0 14px') &&
+    surfaceBackdropBlock.includes('hsl(0 0% 100% / 0.16) 14px 28px'),
+  'Transparent BgColor samples must use the shared TokenPreviewCard backdrop.',
 )
 assert.ok(
   !docsDefinitionSource.includes('bg-color-preview__sample-text') &&

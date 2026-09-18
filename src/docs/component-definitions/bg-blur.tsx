@@ -5,8 +5,8 @@ import {
   getBgBlurBlurValue,
   getBgBlurClassName,
 } from '../../components/bg-blur'
+import { TokenPreviewCard } from '../../components/token-preview-card'
 import type { ComponentDefinition } from '../component-docs'
-import { TokenPreviewCard } from '../token-preview-card'
 
 export const bgBlurDefinition = {
   id: 'bg-blur',
@@ -38,9 +38,9 @@ export const bgBlurDefinition = {
             token={getBgBlurBlurToken(tone)}
             value={getBgBlurBlurValue(tone)}
           >
-            <div className="bg-blur-preview__sample" aria-hidden="true">
-              <span className="bg-blur-preview__backdrop" />
-              <span className={`bg-blur-preview__overlay ${getBgBlurClassName(tone)}`} />
+            <div className="token-preview-card__surface-preview" aria-hidden="true">
+              <span className="token-preview-card__surface-backdrop" />
+              <span className={`token-preview-card__surface ${getBgBlurClassName(tone)}`} />
             </div>
           </TokenPreviewCard>
         )

@@ -5,8 +5,8 @@ import {
   getFontSizeToken,
   getFontSizeValue,
 } from '../../components/font-size'
+import { TokenPreviewCard } from '../../components/token-preview-card'
 import type { ComponentDefinition } from '../component-docs'
-import { TokenPreviewCard } from '../token-preview-card'
 
 export const fontSizeDefinition = {
   id: 'font-size',

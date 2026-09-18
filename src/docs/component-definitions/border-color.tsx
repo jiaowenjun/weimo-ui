@@ -5,9 +5,9 @@ import {
   getBorderColorToken,
   type BorderColorTone,
 } from '../../components/border-color'
+import { TokenPreviewCard } from '../../components/token-preview-card'
 import type { ComponentDefinition } from '../component-docs'
 import { sortByThemeLightness, useIsDarkTheme } from '../token-preview-color'
-import { TokenPreviewCard } from '../token-preview-card'
 
 type BorderContextToken = {
   label: string

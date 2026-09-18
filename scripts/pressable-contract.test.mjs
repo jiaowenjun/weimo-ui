@@ -95,7 +95,7 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'pressable'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { TokenPreviewCard } from '../token-preview-card'") &&
+    docsDefinitionSource.includes("import { TokenPreviewCard } from '../../components/token-preview-card'") &&
     docsDefinitionSource.includes('pressableTones.map') &&
     docsDefinitionSource.includes('pressableToneMap[tone]') &&
     docsDefinitionSource.includes('getPressableToken(tone)') &&

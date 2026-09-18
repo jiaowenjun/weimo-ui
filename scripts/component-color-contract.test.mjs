@@ -37,6 +37,16 @@ const tokensCss = readProjectFile('src/styles/tokens.css')
 const rootRegistry = readJson('registry.json')
 const styleRegistry = readJson('registry/style.json')
 const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
+const hslOnlyTokenSources = [
+  'src/styles/tokens.css',
+  'src/components/bg-blur.ts',
+  'src/components/bg-color.ts',
+  'src/components/border-color.ts',
+  'src/components/heatmap/heat-color.tsx',
+  'src/components/text-color.ts',
+  'registry/style.json',
+]
+const nonHslColorPattern = /#[\da-f]{3,8}\b|rgba?\(/i
 const removedColorAliases = [
   '--color-brand',
   '--color-brand-foreground',
@@ -49,6 +59,20 @@ const removedColorAliases = [
 
 assert.ok(cssFiles.length > 0, 'Component color contract must inspect component CSS files.')
 assert.ok(rootStyleItem, 'Root registry must include the shared style item.')
+
+for (const relativePath of hslOnlyTokenSources) {
+  assert.doesNotMatch(
+    readProjectFile(relativePath),
+    nonHslColorPattern,
+    `${relativePath} color token values must use hsl().`,
+  )
+}
+
+assert.doesNotMatch(
+  JSON.stringify(rootStyleItem),
+  nonHslColorPattern,
+  'registry.json style token values must use hsl().',
+)
 
 const violations = []
 const removedAliasViolations = []
