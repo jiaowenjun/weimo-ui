@@ -1,4 +1,5 @@
 import { Md } from '../../components/md'
+import { CardPanel } from '../../components/coss/card'
 import type { ComponentDefinition } from '../component-docs'
 import { mdRenderSample } from './markdown-sample'
 
@@ -17,137 +18,79 @@ type MarkdownTokenPreview =
 
 type MarkdownStyleToken = {
   token: string
-  values: readonly MarkdownStyleTokenValue[]
   role: string
-  usedBy: string
+  value: string | { light: string; dark: string }
   preview: MarkdownTokenPreview
 }
 
-type MarkdownStyleTokenValue = {
-  label: string
-  value: string
-}
-
-type MarkdownStyleTokenGroup = {
-  title: string
-  description: string
-  tokens: readonly MarkdownStyleToken[]
-}
-
-const markdownStyleTokenGroups = [
+const markdownStyleTokens = [
   {
-    title: '排版',
-    description: '控制 Markdown 根容器、正文、标题和阅读行高。',
-    tokens: [
-      {
-        token: '--color-text-primary',
-        values: [
-          { label: '亮', value: 'hsl(0 0% 9%)' },
-          { label: '暗', value: 'hsl(0 0% 98%)' },
-        ],
-        role: '正文、标题、代码块文字',
-        usedBy: '.weimo-markdown-content、.weimo-card-markdown__p、heading、pre code',
-        preview: 'text-primary',
-      },
-      {
-        token: '--font-size-base',
-        values: [{ label: '全局', value: '15px' }],
-        role: 'Markdown 默认字号',
-        usedBy: '.weimo-markdown-content、h1-h6',
-        preview: 'font-base',
-      },
-      {
-        token: '--font-line-height-reading',
-        values: [{ label: '全局', value: '1.6' }],
-        role: '长文阅读行高',
-        usedBy: '.weimo-markdown-content、paragraph、heading',
-        preview: 'line-height',
-      },
-      {
-        token: '--color-text-secondary',
-        values: [
-          { label: '亮', value: 'hsl(0 0% 28%)' },
-          { label: '暗', value: 'hsl(0 0% 64%)' },
-        ],
-        role: '引用、删除线和表头弱文字',
-        usedBy: '.weimo-card-markdown__blockquote、del、table th',
-        preview: 'text-secondary',
-      },
-    ],
+    token: '--color-text-primary',
+    role: '正文与标题文字',
+    value: { light: 'hsl(0 0% 9%)', dark: 'hsl(0 0% 98%)' },
+    preview: 'text-primary',
   },
   {
-    title: '结构',
-    description: '覆盖引用留白、分隔线、区块间距和容器圆角。',
-    tokens: [
-      {
-        token: '--space-md-quote-padding',
-        values: [{ label: '局部', value: '20px' }],
-        role: '引用块左右留白',
-        usedBy: '.weimo-card-markdown__blockquote',
-        preview: 'quote-padding',
-      },
-      {
-        token: '--color-border-divider',
-        values: [
-          { label: '亮', value: 'hsl(0 0% 88%)' },
-          { label: '暗', value: 'hsl(0 0% 28%)' },
-        ],
-        role: '行内代码、表格外框、表格内部分隔和 hr',
-        usedBy: 'inline code、table outer、table cell、hr',
-        preview: 'divider',
-      },
-      {
-        token: '--space-card-section-gap',
-        values: [{ label: '全局', value: '1em' }],
-        role: '代码块内边距',
-        usedBy: '.weimo-card-markdown__pre',
-        preview: 'section-gap',
-      },
-      {
-        token: '--radius-sm',
-        values: [{ label: '全局', value: '8px' }],
-        role: '代码、表格滚动框、图片和可编辑数学节点圆角',
-        usedBy: 'code、pre、scroll-block、img、.tiptap-mathematics-render',
-        preview: 'radius-sm',
-      },
-    ],
+    token: '--font-size-base',
+    role: '默认字号',
+    value: '15px',
+    preview: 'font-base',
   },
   {
-    title: '富内容',
-    description: '覆盖代码、图片占位和数学公式等富内容样式。',
-    tokens: [
-      {
-        token: '--font-size-md',
-        values: [{ label: '全局', value: '14px' }],
-        role: '行内代码和图片占位字号',
-        usedBy: '.weimo-card-markdown__code、image-placeholder',
-        preview: 'inline-code-size',
-      },
-      {
-        token: '--font-mono',
-        values: [
-          {
-            label: '全局',
-            value: '"SFMono-Regular", "Cascadia Code", "Liberation Mono", Menlo, Consolas, monospace',
-          },
-        ],
-        role: '代码字体',
-        usedBy: 'inline code、pre code',
-        preview: 'font-mono',
-      },
-      {
-        token: '--color-bg-hover',
-        values: [
-          { label: '亮', value: 'hsl(40 12% 96%)' },
-          { label: '暗', value: 'hsl(0 0% 20%)' },
-        ],
-        role: '数学节点 hover 背景（复用通用反馈）',
-        usedBy: '.tiptap-mathematics-render--editable:hover',
-        preview: 'math-hover',
-      },
-    ],
+    token: '--font-line-height-reading',
+    role: '长文阅读行高',
+    value: '1.6',
+    preview: 'line-height',
   },
-] satisfies readonly MarkdownStyleTokenGroup[]
+  {
+    token: '--color-text-secondary',
+    role: '引用与弱文字',
+    value: { light: 'hsl(0 0% 28%)', dark: 'hsl(0 0% 64%)' },
+    preview: 'text-secondary',
+  },
+  {
+    token: '--space-md-quote-padding',
+    role: '引用块左右留白',
+    value: '20px',
+    preview: 'quote-padding',
+  },
+  {
+    token: '--color-border-divider',
+    role: '行内代码与表格分隔',
+    value: { light: 'hsl(0 0% 88%)', dark: 'hsl(0 0% 28%)' },
+    preview: 'divider',
+  },
+  {
+    token: '--space-card-section-gap',
+    role: '代码块内边距',
+    value: '1em',
+    preview: 'section-gap',
+  },
+  {
+    token: '--radius-sm',
+    role: '代码与图片圆角',
+    value: '8px',
+    preview: 'radius-sm',
+  },
+  {
+    token: '--font-size-md',
+    role: '行内代码字号',
+    value: '14px',
+    preview: 'inline-code-size',
+  },
+  {
+    token: '--font-mono',
+    role: '代码字体',
+    value: '"SFMono-Regular", "Cascadia Code", "Liberation Mono", Menlo, Consolas, monospace',
+    preview: 'font-mono',
+  },
+  {
+    token: '--color-bg-hover',
+    role: '数学节点 hover 背景',
+    value: { light: 'hsl(40 12% 96%)', dark: 'hsl(0 0% 20%)' },
+    preview: 'math-hover',
+  },
+] satisfies readonly MarkdownStyleToken[]
 
 function renderMarkdownTokenPreview(preview: MarkdownTokenPreview) {
   switch (preview) {
@@ -184,53 +127,40 @@ function renderMarkdownTokenPreview(preview: MarkdownTokenPreview) {
 
 function MdStylePreview() {
   return (
-    <div className="md-style-preview" aria-label="Markdown token 值与真实场景预览">
-      <div className="md-style-preview__token-grid" aria-label="Markdown 渲染相关 token 按排版、结构和富内容分组。">
-        {markdownStyleTokenGroups.map((group) => (
-          <article className="md-style-preview__token-group" key={group.title}>
-            <div className="md-style-preview__group-header">
-              <h4>{group.title}</h4>
-              <p>{group.description}</p>
-            </div>
-            {group.tokens.map((item) => (
-              <div className="md-style-preview__token-card" key={item.token}>
-                <code>{item.token}</code>
-                <dl className="md-style-preview__token-values" aria-label={`${item.token} 具体值`}>
-                  {item.values.map((value) => (
-                    <div className="md-style-preview__token-value" key={`${item.token}-${value.label}`}>
-                      <dt>{value.label}</dt>
-                      <dd>
-                        <code>{value.value}</code>
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-                <p>{item.role}</p>
-                <span>{item.usedBy}</span>
-                <div className="md-style-preview__effect" aria-label={`${item.token} 样式效果预览`}>
-                  {renderMarkdownTokenPreview(item.preview)}
-                </div>
-              </div>
-            ))}
-          </article>
-        ))}
-      </div>
-      <aside className="md-style-preview__usage-scene" aria-label="Markdown token 值真实场景预览">
-        <div className="md-style-preview__scene-header">
-          <h3>真实 Markdown 场景</h3>
-          <p>完整渲染只用于观察左侧 token 值在正文、引用、代码、表格和公式中的效果。</p>
-        </div>
+    <div className="md-style-preview" aria-label="Markdown样式档位预览">
+      {markdownStyleTokens.map((item) => (
+        <CardPanel className="md-style-preview__panel" key={item.token}>
+          <div className="md-style-preview__meta">
+            <span className="md-style-preview__label">{item.role}</span>
+            <code className="md-style-preview__token">
+              {item.token}:{' '}
+              {typeof item.value === 'string' ? (
+                item.value
+              ) : (
+                <>
+                  <span className="md-style-preview__token-value--light">{item.value.light}</span>
+                  <span className="md-style-preview__token-value--dark">{item.value.dark}</span>
+                </>
+              )}
+            </code>
+          </div>
+          <div className="md-style-preview__effect" aria-hidden="true">
+            {renderMarkdownTokenPreview(item.preview)}
+          </div>
+        </CardPanel>
+      ))}
+      <CardPanel className="md-style-preview__scene">
         <div className="md-style-preview__render">
           <Md content={mdRenderSample} />
         </div>
-      </aside>
+      </CardPanel>
     </div>
   )
 }
 
 export const mdDefinition = {
   id: 'md',
-  summary: 'Markdown 渲染相关 token 汇总，用真实 Markdown 场景辅助观察底层样式值',
   status: 'Ready',
+  frame: 'plain',
   preview: () => <MdStylePreview />,
 } satisfies ComponentDefinition

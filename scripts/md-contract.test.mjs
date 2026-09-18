@@ -60,12 +60,10 @@ const standaloneRegistry = JSON.parse(readProjectFile('registry/md.json'))
 const rootRegistryItem = rootRegistry.items.find((item) => item.name === 'md')
 
 const mdPreviewBlock = cssBlockFor(appCss, '.md-style-preview')
-const mdUsageSceneBlock = cssBlocksFor(appCss, '.md-style-preview__usage-scene')
-const mdTokenGridBlock = cssBlockFor(appCss, '.md-style-preview__token-grid')
-const mdTokenCardBlock = cssBlockFor(appCss, '.md-style-preview__token-card')
-const mdTokenNameBlock = cssBlockFor(appCss, '.md-style-preview__token-card > code')
+const mdPanelBlock = cssBlockFor(appCss, '.md-style-preview__panel')
+const mdSceneBlock = cssBlockFor(appCss, '.md-style-preview__scene')
+const mdRenderBlock = cssBlockFor(appCss, '.md-style-preview__render')
 const mdEffectBlock = cssBlockFor(appCss, '.md-style-preview__effect')
-const mdTokenValuesBlock = cssBlockFor(appCss, '.md-style-preview__token-values')
 const mdMiniMathHoverBlock = cssBlockFor(appCss, '.md-style-preview__mini-math-hover')
 const mdMiniQuoteSpaceBlock = cssBlockFor(appCss, '.md-style-preview__mini-quote-space')
 const markdownRootBlock = cssBlockFor(markdownContentCss, '.weimo-markdown-content')
@@ -81,7 +79,7 @@ assert.ok(
 
 assert.ok(
   manifestSource.includes("id: 'md'") &&
-    manifestSource.includes("name: 'Md'") &&
+    manifestSource.includes("name: 'Markdown样式'") &&
     manifestSource.includes("registryName: 'md'") &&
     manifestSource.includes("packageExport: './components/md'") &&
     manifestSource.includes("group: 'token-style'"),
@@ -96,27 +94,19 @@ assert.ok(
 
 for (const snippet of [
   "import { Md } from '../../components/md'",
+  "import { CardPanel } from '../../components/coss/card'",
   "import { mdRenderSample } from './markdown-sample'",
   "id: 'md'",
-  'Markdown 渲染相关 token 汇总',
-  'type MarkdownStyleTokenValue = {',
-  'values: readonly MarkdownStyleTokenValue[]',
-  'markdownStyleTokenGroups',
+  "frame: 'plain',",
+  'markdownStyleTokens',
   'renderMarkdownTokenPreview',
   'className="md-style-preview"',
-  'aria-label="Markdown 渲染相关 token 按排版、结构和富内容分组。"',
-  "title: '排版'",
-  "title: '结构'",
-  "title: '富内容'",
-  'className="md-style-preview__token-grid"',
-  'className="md-style-preview__token-group"',
-  'className="md-style-preview__token-values"',
-  'aria-label={`${item.token} 具体值`}',
-  '<dt>{value.label}</dt>',
-  '<code>{value.value}</code>',
-  'className="md-style-preview__usage-scene"',
-  'aria-label="Markdown token 值真实场景预览"',
+  'aria-label="Markdown样式档位预览"',
+  '<CardPanel className="md-style-preview__panel"',
   'className="md-style-preview__effect"',
+  'md-style-preview__token-value--light',
+  'md-style-preview__token-value--dark',
+  '<CardPanel className="md-style-preview__scene"',
   '<Md content={mdRenderSample} />',
   '--font-size-md',
   '--space-md-quote-padding',
@@ -124,24 +114,34 @@ for (const snippet of [
   '--color-text-secondary',
   '--font-line-height-reading',
   '--color-border-divider',
-  '行内代码、表格外框、表格内部分隔和 hr',
-  "usedBy: 'inline code、table outer、table cell、hr'",
   '--color-bg-hover',
   '--radius-sm',
   '--font-mono',
-  '代码、表格滚动框、图片和可编辑数学节点圆角',
-  'code、pre、scroll-block、img、.tiptap-mathematics-render',
-  "value: 'hsl(0 0% 9%)'",
-  "value: 'hsl(0 0% 98%)'",
+  "light: 'hsl(0 0% 9%)'",
+  "dark: 'hsl(0 0% 98%)'",
   "value: '15px'",
   "value: '1.6'",
   "value: '20px'",
   "value: '14px'",
-  "value: 'hsl(40 12% 96%)'",
-  "value: 'hsl(0 0% 20%)'",
+  "light: 'hsl(40 12% 96%)'",
+  "dark: 'hsl(0 0% 20%)'",
 ]) {
   assert.ok(definitionSource.includes(snippet), `Md docs definition must include ${snippet}.`)
 }
+assert.ok(
+  !definitionSource.includes('summary:') &&
+    !definitionSource.includes('markdownStyleTokenGroups') &&
+    !definitionSource.includes('usedBy') &&
+    !definitionSource.includes("title: '排版'") &&
+    !definitionSource.includes("title: '结构'") &&
+    !definitionSource.includes("title: '富内容'") &&
+    !definitionSource.includes('md-style-preview__token-group') &&
+    !definitionSource.includes('md-style-preview__token-values') &&
+    !definitionSource.includes('md-style-preview__usage-scene') &&
+    !definitionSource.includes('md-style-preview__group-header') &&
+    !definitionSource.includes('md-style-preview__scene-header'),
+  'Md docs definition must stay visual-only: no grouping, usage selectors, or scene prose.',
+)
 assert.ok(
   !definitionSource.includes('二三级标题字号') &&
     !definitionSource.includes('heading--h2/h3') &&
@@ -1038,13 +1038,9 @@ assert.ok(
 
 for (const snippet of [
   '.md-style-preview',
-  '.md-style-preview__usage-scene',
+  '.md-style-preview__panel',
+  '.md-style-preview__scene',
   '.md-style-preview__render',
-  '.md-style-preview__token-grid',
-  '.md-style-preview__token-group',
-  '.md-style-preview__token-card',
-  '.md-style-preview__token-values',
-  '.md-style-preview__token-value',
   '.md-style-preview__effect',
   '.md-style-preview__mini-swatch',
 ]) {
@@ -1060,50 +1056,40 @@ for (const forbidden of [
   '.md-style-preview__selector-grid',
   '.md-style-preview__selector-group',
   '.md-style-preview__selector-card',
+  '.md-style-preview__token-grid',
+  '.md-style-preview__token-group',
+  '.md-style-preview__token-card',
+  '.md-style-preview__token-values',
+  '.md-style-preview__usage-scene',
+  '.md-style-preview__group-header',
+  '.md-style-preview__scene-header',
 ]) {
   assert.ok(!appCss.includes(forbidden), `App.css must remove ${forbidden}.`)
 }
 
 assert.ok(
-  mdPreviewBlock.includes('width: 100%;') &&
-    mdPreviewBlock.includes('grid-template-columns: minmax(0, 1fr);'),
-  'Md style preview must use a single token-first column so token rows are not squeezed beside the Markdown scene.',
+  mdPreviewBlock.includes('width: min(100%, 920px);') &&
+    mdPreviewBlock.includes('repeat(auto-fill, minmax(min(100%, 300px), 1fr))'),
+  'Md style preview must use the shared token-page card grid.',
 )
 assert.ok(
-  mdUsageSceneBlock.includes('position: static;') &&
-    mdUsageSceneBlock.includes('background: color-mix(in srgb, var(--color-bg-card) 88%, transparent);'),
-  'Md usage scene must sit below the token groups as a contained companion preview.',
+  mdPanelBlock.includes('border: 1px solid var(--color-border);') &&
+    mdPanelBlock.includes('background: var(--color-bg-card);'),
+  'Md token cards must use the shared CardPanel chrome.',
 )
 assert.ok(
-  mdTokenGridBlock.includes('grid-template-columns: minmax(0, 1fr);'),
-  'Md token groups must stay single-column so token rows remain readable.',
+  mdSceneBlock.includes('grid-column: 1 / -1;'),
+  'Md real-scene card must span the full preview grid width.',
 )
 assert.ok(
-  mdTokenCardBlock.includes(
-    'grid-template-columns: minmax(0, 1fr) minmax(128px, 0.32fr);',
-  ) &&
-    mdTokenCardBlock.includes('grid-template-areas:') &&
-    mdTokenCardBlock.includes('"token preview"') &&
-    mdTokenCardBlock.includes('"values preview"') &&
-    mdTokenCardBlock.includes('"role preview"') &&
-    mdTokenCardBlock.includes('"usage preview"') &&
-    mdTokenCardBlock.includes('border-top: 1px solid color-mix(in srgb, var(--color-border) 70%, transparent);'),
-  'Md token items must keep token metadata in one wide column with a compact preview column.',
+  mdRenderBlock.includes('max-height: 640px;') &&
+    mdRenderBlock.includes('overflow: auto;'),
+  'Md real-scene render must stay contained with internal scrolling.',
 )
 assert.ok(
-  mdTokenNameBlock.includes('grid-area: token;'),
-  'Md token card grid placement must target only the direct token-name code element.',
-)
-assert.ok(
-  mdEffectBlock.includes('grid-area: preview;') &&
+  mdEffectBlock.includes('min-height: 54px;') &&
     mdEffectBlock.includes('background: var(--color-bg-card);'),
-  'Md token items must include a stable effect preview area in the third column.',
-)
-assert.ok(
-  mdTokenValuesBlock.includes('grid-area: values;') &&
-    mdTokenValuesBlock.includes('display: flex;') &&
-    mdTokenValuesBlock.includes('flex-wrap: wrap;'),
-  'Md token items must render concrete token values as a compact wrapped value row.',
+  'Md token items must include a stable effect preview area.',
 )
 assert.ok(
   mdMiniMathHoverBlock.includes('border-radius: var(--radius-sm);') &&
