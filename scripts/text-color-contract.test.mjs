@@ -63,6 +63,7 @@ const styleRegistry = readJson('registry/style.json')
 const standaloneRegistryItem = readJson('registry/text-color.json')
 const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const registryItem = rootRegistry.items.find((item) => item.name === 'text-color')
+const sampleBlock = blockFor(appCss, '.text-color-preview__sample')
 
 assert.equal(
   packageJson.exports?.['./components/text-color'],
@@ -256,6 +257,12 @@ assert.ok(
     !appCss.includes('.text-color-preview__description') &&
     !appCss.includes('.text-color-preview__value'),
   'App.css must include only the TextColor-specific preview-effect styles.',
+)
+assert.ok(
+  sampleBlock.includes('align-items: center;') &&
+    sampleBlock.includes('justify-content: center;') &&
+    sampleBlock.includes('text-align: center;'),
+  'TextColor preview samples must center their text in both axes.',
 )
 assert.ok(
   !appCss.includes('grid-template-columns: minmax(112px, 0.8fr) minmax(180px, 1.4fr) minmax(150px, 0.9fr) minmax(180px, 1.2fr);'),

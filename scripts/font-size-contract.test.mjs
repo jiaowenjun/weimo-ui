@@ -186,8 +186,11 @@ assert.ok(
 )
 assert.ok(
   sampleBlock.includes('font-family: var(--font-sans);') &&
-    sampleBlock.includes('overflow-wrap: anywhere;'),
-  'FontSize preview samples must render real text with shared font family and safe wrapping.',
+    sampleBlock.includes('overflow-wrap: anywhere;') &&
+    sampleBlock.includes('align-items: center;') &&
+    sampleBlock.includes('justify-content: center;') &&
+    sampleBlock.includes('text-align: center;'),
+  'FontSize preview samples must render centered text with shared font family and safe wrapping.',
 )
 
 assert.ok(registryItem, 'registry.json must include the font-size registry item.')

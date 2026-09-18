@@ -286,9 +286,10 @@ assert.ok(
 
 assert.ok(
   !appCss.includes('.bg-blur-preview__') &&
+    !appCss.includes(".app-shell__content--token-grid[data-component-id='bg-blur']") &&
     !appCss.includes('.bg-blur-preview__group') &&
     !appCss.includes('.bg-blur-preview__stage'),
-  'App.css must not own any BgBlur preview styles.',
+  'BgBlur must use the shared token grid without page-specific preview or layout overrides.',
 )
 assert.ok(
   sampleBlock.includes('position: relative;') &&
