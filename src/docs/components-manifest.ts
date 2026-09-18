@@ -51,7 +51,7 @@ export type ComponentManifestItem = PublicComponentManifestItem
 export const componentManifest = [
   {
     id: 'md',
-    name: 'Markdown样式',
+    name: 'Markdown渲染',
     exportName: 'Md',
     registryName: 'md',
     packageExport: './components/md',

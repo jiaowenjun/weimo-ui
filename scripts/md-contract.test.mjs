@@ -61,7 +61,6 @@ const rootRegistryItem = rootRegistry.items.find((item) => item.name === 'md')
 
 const tokenGridBlock = cssBlockFor(appCss, '.app-shell__content--token-grid')
 const mdSceneBlock = cssBlockFor(appCss, '.md-style-preview__scene')
-const mdRenderBlock = cssBlockFor(appCss, '.md-style-preview__render')
 const mdEffectBlock = cssBlockFor(appCss, '.md-style-preview__effect')
 const mdMiniMathHoverBlock = cssBlockFor(appCss, '.md-style-preview__mini-math-hover')
 const mdMiniQuoteSpaceBlock = cssBlockFor(appCss, '.md-style-preview__mini-quote-space')
@@ -78,7 +77,7 @@ assert.ok(
 
 assert.ok(
   manifestSource.includes("id: 'md'") &&
-    manifestSource.includes("name: 'Markdown样式'") &&
+    manifestSource.includes("name: 'Markdown渲染'") &&
     manifestSource.includes("registryName: 'md'") &&
     manifestSource.includes("packageExport: './components/md'") &&
     manifestSource.includes("group: 'token-style'"),
@@ -127,6 +126,13 @@ for (const snippet of [
 ]) {
   assert.ok(definitionSource.includes(snippet), `Md docs definition must include ${snippet}.`)
 }
+assert.ok(
+  definitionSource.indexOf('<CardPanel className="md-style-preview__scene"') <
+    definitionSource.indexOf('{markdownStyleTokens.map((item) => (') &&
+    definitionSource.includes("'Markdown渲染'") &&
+    definitionSource.includes("'Markdown样式'"),
+  'Md docs must place the real render card first and keep both page names searchable.',
+)
 assert.ok(
   !definitionSource.includes('summary:') &&
     !definitionSource.includes('markdownStyleTokenGroups') &&
@@ -1037,7 +1043,6 @@ assert.ok(
 
 for (const snippet of [
   '.md-style-preview__scene',
-  '.md-style-preview__render',
   '.md-style-preview__effect',
   '.md-style-preview__mini-swatch',
 ]) {
@@ -1060,6 +1065,7 @@ for (const forbidden of [
   '.md-style-preview__usage-scene',
   '.md-style-preview__group-header',
   '.md-style-preview__scene-header',
+  '.md-style-preview__render',
 ]) {
   assert.ok(!appCss.includes(forbidden), `App.css must remove ${forbidden}.`)
 }
@@ -1072,13 +1078,11 @@ assert.ok(
   'Md style cards must use the content-level token grid without a preview wrapper.',
 )
 assert.ok(
-  mdSceneBlock.includes('grid-column: 1 / -1;'),
-  'Md real-scene card must span the full preview grid width.',
-)
-assert.ok(
-  mdRenderBlock.includes('max-height: 640px;') &&
-    mdRenderBlock.includes('overflow: auto;'),
-  'Md real-scene render must stay contained with internal scrolling.',
+  mdSceneBlock.includes('grid-column: 1 / -1;') &&
+    mdSceneBlock.includes('max-height: 640px;') &&
+    mdSceneBlock.includes('overflow: auto;') &&
+    !definitionSource.includes('md-style-preview__render'),
+  'Md real-scene CardPanel must span the grid and own scrolling without an inner wrapper.',
 )
 assert.ok(
   mdEffectBlock.includes('height: 80px;') &&

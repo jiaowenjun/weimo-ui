@@ -13,6 +13,8 @@ describe('component docs search', () => {
     expect(resultIds('text-color')).toContain('font-size')
     expect(resultIds('Md')).toContain('md')
     expect(resultIds('Markdown')).toContain('md')
+    expect(resultIds('Markdown渲染')).toContain('md')
+    expect(resultIds('Markdown样式')).toContain('md')
   })
 
   it('finds token pages by CSS token and usage language', () => {

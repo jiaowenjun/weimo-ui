@@ -126,9 +126,15 @@ function renderMarkdownTokenPreview(preview: MarkdownTokenPreview) {
   }
 }
 
+// Docs definitions intentionally colocate preview components with exported page metadata.
+// eslint-disable-next-line react-refresh/only-export-components
 function MdStylePreview() {
   return (
     <>
+      <CardPanel className="md-style-preview__scene">
+        <Md content={mdRenderSample} />
+      </CardPanel>
+
       {markdownStyleTokens.map((item) => (
         <TokenPreviewCard
           darkValue={typeof item.value === 'string' ? undefined : item.value.dark}
@@ -142,11 +148,6 @@ function MdStylePreview() {
           </div>
         </TokenPreviewCard>
       ))}
-      <CardPanel className="md-style-preview__scene">
-        <div className="md-style-preview__render">
-          <Md content={mdRenderSample} />
-        </div>
-      </CardPanel>
     </>
   )
 }
@@ -157,6 +158,8 @@ export const mdDefinition = {
   frame: 'plain',
   searchAliases: [
     'Markdown',
+    'Markdown渲染',
+    'Markdown样式',
     ...markdownStyleTokens.flatMap((item) => [item.token, item.role]),
   ],
   preview: () => <MdStylePreview />,

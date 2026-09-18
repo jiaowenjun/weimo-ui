@@ -1203,21 +1203,12 @@
 
 .md-style-preview__scene {
   grid-column: 1 / -1;
-  display: grid;
-  gap: 8px;
+  max-height: 640px;
+  overflow: auto;
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   background: var(--color-bg-card);
   box-shadow: var(--shadow-card);
-}
-
-.md-style-preview__render {
-  max-height: 640px;
-  overflow: auto;
-  padding: 16px;
-  border: 1px solid color-mix(in srgb, var(--color-border) 72%, transparent);
-  border-radius: var(--radius-sm);
-  background: var(--color-bg-card);
 }
 
 .md-style-preview__effect {
