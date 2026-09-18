@@ -40,7 +40,7 @@ const borderRadiusSource = readProjectFile('src/components/border-radius.ts')
 const menuCss = readProjectFile('src/components/menu.css')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinitionSource = readProjectFile('src/docs/component-definitions/border-radius.tsx')
+const docsDefinitionSource = readProjectFile('src/docs/component-definitions/border-color.tsx')
 const appCss = readProjectFile('src/App.css')
 const tokensCss = readProjectFile('src/styles/tokens.css')
 const rootRegistry = readJson('registry.json')
@@ -142,16 +142,18 @@ assert.ok(
   manifestSource.includes("id: 'border-radius'") &&
     manifestSource.includes("name: '边框圆角'") &&
     manifestSource.includes("registryName: 'border-radius'") &&
-    manifestSource.includes("packageExport: './components/border-radius'"),
+    manifestSource.includes("packageExport: './components/border-radius'") &&
+    /id: 'border-radius',[\s\S]*?docs: false,/.test(manifestSource),
   'component manifest must list BorderRadius as a public registry-backed design-token utility.',
 )
 assert.ok(
-  definitionsIndexSource.includes("import { borderRadiusDefinition } from './border-radius'") &&
-    definitionsIndexSource.includes("'border-radius': borderRadiusDefinition"),
-  'component definitions index must wire the BorderRadius detail definition.',
+  !definitionsIndexSource.includes("from './border-radius'") &&
+    !definitionsIndexSource.includes('borderRadiusDefinition') &&
+    !existsSync(join(root, 'src/docs/component-definitions/border-radius.tsx')),
+  'component definitions index must not expose a separate BorderRadius detail page.',
 )
 assert.ok(
-  docsDefinitionSource.includes("id: 'border-radius'") &&
+  docsDefinitionSource.includes("id: 'border-color'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
     docsDefinitionSource.includes("import { TokenPreviewCard } from '../../components/token-preview-card'") &&
     docsDefinitionSource.includes('borderRadiusScales.map') &&
@@ -163,13 +165,15 @@ assert.ok(
     docsDefinitionSource.includes('token={getBorderRadiusToken(scale)}') &&
     docsDefinitionSource.includes('value={getBorderRadiusValue(scale)}') &&
     docsDefinitionSource.includes('border-radius-preview__sample') &&
+    docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">圆角</h2>') &&
+    docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">边框色</h2>') &&
     !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     !docsDefinitionSource.includes('summary:') &&
     !docsDefinitionSource.includes('border-radius-preview__row') &&
     !docsDefinitionSource.includes('border-radius-preview__notes') &&
     !docsDefinitionSource.includes('border-radius-preview__description') &&
     !docsDefinitionSource.includes('--radius-card'),
-  'BorderRadius docs definition must render each scale with TokenPreviewCard.',
+  'Border docs definition must render the BorderRadius group with TokenPreviewCard.',
 )
 
 const sampleBlock = blockFor(appCss, '.border-radius-preview__sample')

@@ -42,7 +42,7 @@ export type PublicComponentManifestItem = {
   registryName: string
   packageExport: string
   group: ComponentGroupId
-  docs: true
+  docs: boolean
   registry: true
 }
 
@@ -70,7 +70,7 @@ export const componentManifest = [
   },
   {
     id: 'font-size',
-    name: '字号',
+    name: '字体',
     registryName: 'font-size',
     packageExport: './components/font-size',
     group: 'token-style',
@@ -83,7 +83,7 @@ export const componentManifest = [
     registryName: 'text-color',
     packageExport: './components/text-color',
     group: 'token-style',
-    docs: true,
+    docs: false,
     registry: true,
   },
   {
@@ -92,7 +92,7 @@ export const componentManifest = [
     registryName: 'pressable',
     packageExport: './components/pressable',
     group: 'token-style',
-    docs: true,
+    docs: false,
     registry: true,
   },
   {
@@ -101,7 +101,7 @@ export const componentManifest = [
     registryName: 'heat-color',
     packageExport: './components/heat-color',
     group: 'token-style',
-    docs: true,
+    docs: false,
     registry: true,
   },
   {
@@ -110,12 +110,12 @@ export const componentManifest = [
     registryName: 'bg-blur',
     packageExport: './components/bg-blur',
     group: 'token-style',
-    docs: true,
+    docs: false,
     registry: true,
   },
   {
     id: 'bg-color',
-    name: '背景色',
+    name: '背景',
     registryName: 'bg-color',
     packageExport: './components/bg-color',
     group: 'token-style',
@@ -128,12 +128,12 @@ export const componentManifest = [
     registryName: 'border-radius',
     packageExport: './components/border-radius',
     group: 'token-style',
-    docs: true,
+    docs: false,
     registry: true,
   },
   {
     id: 'border-color',
-    name: '边框色',
+    name: '边框',
     registryName: 'border-color',
     packageExport: './components/border-color',
     group: 'token-style',
@@ -475,4 +475,7 @@ export const componentManifest = [
   },
 ] as const satisfies ComponentManifestItem[]
 
-export type ComponentId = (typeof componentManifest)[number]['id']
+export type ComponentId = Extract<
+  (typeof componentManifest)[number],
+  { readonly docs: true }
+>['id']

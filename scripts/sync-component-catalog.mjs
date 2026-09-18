@@ -76,10 +76,12 @@ function validateDefinitionFiles(componentManifest) {
 }
 
 function renderDefinitionsIndex(componentManifest) {
-  const definitions = componentManifest.map((item) => ({
-    exportName: definitionExportFor(item.id),
-    id: item.id,
-  }))
+  const definitions = componentManifest
+    .filter((item) => item.docs)
+    .map((item) => ({
+      exportName: definitionExportFor(item.id),
+      id: item.id,
+    }))
   const imports = definitions
     .map(({ exportName, id }) => `import { ${exportName} } from './${id}'`)
     .join('\n')
@@ -119,8 +121,8 @@ function validateManifest(componentGroups, componentManifest, packageJson) {
     if (!groupIds.has(item.group)) {
       throw new Error(`${item.id} uses unknown component group ${item.group}.`)
     }
-    if (item.docs !== true || item.registry !== true) {
-      throw new Error(`${item.id} must remain docs-enabled and registry-backed.`)
+    if (typeof item.docs !== 'boolean' || item.registry !== true) {
+      throw new Error(`${item.id} must declare docs visibility and remain registry-backed.`)
     }
     if (!packageJson.exports?.[item.packageExport]) {
       throw new Error(`${item.id} package export ${item.packageExport} must exist.`)

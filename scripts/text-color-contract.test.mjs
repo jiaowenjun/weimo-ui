@@ -56,7 +56,7 @@ const textColorCss = readProjectFile('src/components/text-color.css')
 const tokensCss = readProjectFile('src/styles/tokens.css')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinitionSource = readProjectFile('src/docs/component-definitions/text-color.tsx')
+const docsDefinitionSource = readProjectFile('src/docs/component-definitions/font-size.tsx')
 const appCss = readProjectFile('src/App.css')
 const rootRegistry = readJson('registry.json')
 const styleRegistry = readJson('registry/style.json')
@@ -217,22 +217,24 @@ assert.ok(
   manifestSource.includes("id: 'text-color'") &&
     manifestSource.includes("name: '字色'") &&
     manifestSource.includes("registryName: 'text-color'") &&
-    manifestSource.includes("packageExport: './components/text-color'"),
+    manifestSource.includes("packageExport: './components/text-color'") &&
+    /id: 'text-color',[\s\S]*?docs: false,/.test(manifestSource),
   'component manifest must list TextColor as a public registry-backed utility.',
 )
 assert.ok(
-  definitionsIndexSource.includes("import { textColorDefinition } from './text-color'") &&
-    definitionsIndexSource.includes("'text-color': textColorDefinition"),
-  'component definitions index must wire the TextColor detail definition.',
+  !definitionsIndexSource.includes("from './text-color'") &&
+    !definitionsIndexSource.includes('textColorDefinition') &&
+    !existsSync(join(root, 'src/docs/component-definitions/text-color.tsx')),
+  'component definitions index must not expose a separate TextColor detail page.',
 )
 assert.ok(
-  docsDefinitionSource.includes("id: 'text-color'") &&
+  docsDefinitionSource.includes("id: 'font-size'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
     docsDefinitionSource.includes("import { TokenPreviewCard } from '../../components/token-preview-card'") &&
     docsDefinitionSource.includes('const previewTextColorTones = textColorTones.filter((tone) => tone !== \'inherit\')') &&
     docsDefinitionSource.includes('textColorToneMap[tone]') &&
-    docsDefinitionSource.includes('function TextColorPreview()') &&
-    docsDefinitionSource.includes('orderedTones.map') &&
+    docsDefinitionSource.includes('function FontPreview()') &&
+    docsDefinitionSource.includes('orderedTextColorTones.map') &&
     docsDefinitionSource.includes("from '../token-preview-color'") &&
     docsDefinitionSource.includes('useIsDarkTheme()') &&
     docsDefinitionSource.includes('sortByThemeLightness(') &&
@@ -244,11 +246,13 @@ assert.ok(
     docsDefinitionSource.includes('token={getTextColorToken(tone)}') &&
     docsDefinitionSource.includes('value={item.value.light}') &&
     docsDefinitionSource.includes('text-color-preview__sample') &&
+    docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">字色</h2>') &&
+    docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">字号</h2>') &&
     !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     !docsDefinitionSource.includes('summary:') &&
     !docsDefinitionSource.includes('text-color-preview__row') &&
     !docsDefinitionSource.includes('text-color-preview__description'),
-  'TextColor docs definition must render the tone map preview with concrete token values.',
+  'Font docs definition must render the TextColor tone group with concrete token values.',
 )
 assert.ok(
   appCss.includes('.text-color-preview__sample') &&

@@ -5,6 +5,12 @@ import {
   getBorderColorToken,
   type BorderColorTone,
 } from '../../components/border-color'
+import {
+  borderRadiusScaleMap,
+  borderRadiusScales,
+  getBorderRadiusToken,
+  getBorderRadiusValue,
+} from '../../components/border-radius'
 import { TokenPreviewCard } from '../../components/token-preview-card'
 import type { ComponentDefinition } from '../component-docs'
 import { sortByThemeLightness, useIsDarkTheme } from '../token-preview-color'
@@ -52,6 +58,7 @@ const borderColorSearchAliases = borderColorTones.flatMap((tone) => {
 
   return [
     'BorderColor',
+    '边框色',
     tone,
     item.label,
     item.token,
@@ -62,6 +69,8 @@ const borderColorSearchAliases = borderColorTones.flatMap((tone) => {
   ]
 })
 
+// Docs definitions intentionally colocate preview components with exported page metadata.
+// eslint-disable-next-line react-refresh/only-export-components
 function BorderColorPreview() {
   const isDark = useIsDarkTheme()
   const orderedTones = sortByThemeLightness(
@@ -73,6 +82,29 @@ function BorderColorPreview() {
 
   return (
     <>
+      <h2 className="token-preview-card-demo__category">圆角</h2>
+
+      {borderRadiusScales.map((scale) => {
+        const item = borderRadiusScaleMap[scale]
+
+        return (
+          <TokenPreviewCard
+            key={scale}
+            label={item.label}
+            token={getBorderRadiusToken(scale)}
+            value={getBorderRadiusValue(scale)}
+          >
+            <div
+              className="border-radius-preview__sample"
+              style={{ borderRadius: `var(${getBorderRadiusToken(scale)})` }}
+              aria-hidden="true"
+            />
+          </TokenPreviewCard>
+        )
+      })}
+
+      <h2 className="token-preview-card-demo__category">边框色</h2>
+
       {orderedTones.map((tone) => {
         const item = borderColorToneMap[tone]
 
@@ -99,6 +131,12 @@ export const borderColorDefinition = {
   id: 'border-color',
   status: 'Ready',
   frame: 'plain',
-  searchAliases: borderColorSearchAliases,
+  searchAliases: borderColorSearchAliases.concat(
+    borderRadiusScales.flatMap((scale) => {
+      const item = borderRadiusScaleMap[scale]
+
+      return ['BorderRadius', '边框圆角', '圆角', scale, item.label, item.token, item.description, item.uiUsage, item.bijiUsage]
+    }),
+  ),
   preview: () => <BorderColorPreview />,
 } satisfies ComponentDefinition

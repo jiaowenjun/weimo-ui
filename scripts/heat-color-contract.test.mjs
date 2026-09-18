@@ -40,7 +40,9 @@ const heatColorSource = readProjectFile('src/components/heatmap/heat-color.tsx')
 const heatColorCss = readProjectFile('src/components/heat-color.css')
 const heatmapCss = readProjectFile('src/components/heatmap/heatmap.css')
 const heatmapSource = readProjectFile('src/components/heatmap/heatmap.tsx')
-const docsDefinitionSource = readProjectFile('src/docs/component-definitions/heat-color.tsx')
+const bgColorDocsDefinitionSource = readProjectFile('src/docs/component-definitions/bg-color.tsx')
+const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
+const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const appCss = readProjectFile('src/App.css')
 const tokensCss = readProjectFile('src/styles/tokens.css')
 const rootRegistry = readJson('registry.json')
@@ -151,36 +153,33 @@ assert.ok(
 )
 
 assert.ok(
-  docsDefinitionSource.includes("id: 'heat-color'") &&
-    docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { TokenPreviewCard } from '../../components/token-preview-card'") &&
-    docsDefinitionSource.includes('heatColorLevels.map') &&
-    docsDefinitionSource.includes('heatColorMap[level]') &&
-    docsDefinitionSource.includes('getHeatColorClassName(level)') &&
-    docsDefinitionSource.includes('getHeatColorToken(level)') &&
-    docsDefinitionSource.includes('<TokenPreviewCard') &&
-    docsDefinitionSource.includes('darkValue={item.value.dark}') &&
-    docsDefinitionSource.includes('label={item.label}') &&
-    docsDefinitionSource.includes('token={getHeatColorToken(level)}') &&
-    docsDefinitionSource.includes('value={item.value.light}') &&
-    docsDefinitionSource.includes('heat-color-preview__sample') &&
-    !docsDefinitionSource.includes('<TokenPreviewDetails') &&
-    !docsDefinitionSource.includes('summary:') &&
-    !docsDefinitionSource.includes('heat-color-preview__row') &&
-    !docsDefinitionSource.includes('heat-color-preview__description') &&
-    !docsDefinitionSource.includes('uiUsage') &&
-    !docsDefinitionSource.includes('bijiUsage'),
-  'HeatColor docs definition must render one TokenPreviewCard per level with theme-aware values.',
+  !existsSync(join(root, 'src/docs/component-definitions/heat-color.tsx')) &&
+    !definitionsIndexSource.includes("from './heat-color'") &&
+    !definitionsIndexSource.includes('heatColorDefinition') &&
+    /id: 'heat-color',[\s\S]*?docs: false,/.test(manifestSource),
+  'HeatColor must remain public without exposing a separate detail page.',
 )
-assert.equal(
-  docsDefinitionSource.match(/<HeatColor\b/g)?.length ?? 0,
-  0,
-  'HeatColor docs preview must render one BorderColor-style row per level instead of an extra horizontal HeatColor legend.',
+assert.ok(
+  bgColorDocsDefinitionSource.includes("from '../../components/heat-color'") &&
+    bgColorDocsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">热力图</h2>') &&
+    bgColorDocsDefinitionSource.includes('heatColorLevels.map') &&
+    bgColorDocsDefinitionSource.includes('heatColorMap[level]') &&
+    bgColorDocsDefinitionSource.includes('getHeatColorClassName(level)') &&
+    bgColorDocsDefinitionSource.includes('getHeatColorToken(level)') &&
+    bgColorDocsDefinitionSource.includes('darkValue={item.value.dark}') &&
+    bgColorDocsDefinitionSource.includes('label={item.label}') &&
+    bgColorDocsDefinitionSource.includes('token={getHeatColorToken(level)}') &&
+    bgColorDocsDefinitionSource.includes('value={item.value.light}') &&
+    bgColorDocsDefinitionSource.includes('heat-color-preview__sample') &&
+    bgColorDocsDefinitionSource.includes("'HeatColor'") &&
+    bgColorDocsDefinitionSource.includes("'热力图'") &&
+    !bgColorDocsDefinitionSource.includes('<HeatColor'),
+  'BgColor docs must render the Heatmap group as one searchable TokenPreviewCard per level.',
 )
 assert.ok(
   tokenGridBlock.includes('display: grid;') &&
     tokenGridBlock.includes('repeat(auto-fill, minmax(min(100%, 300px), 1fr))') &&
-    !docsDefinitionSource.includes('className="heat-color-preview"'),
+    !bgColorDocsDefinitionSource.includes('className="heat-color-preview"'),
   'HeatColor cards must use the content-level token grid without a preview wrapper.',
 )
 assert.ok(

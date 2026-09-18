@@ -43,10 +43,6 @@ const componentDefinitionSources = {
   'heatmap': readProjectFile(
     'src/docs/component-definitions/heatmap.tsx',
   ),
-  'heat-color': readProjectFile(
-    'src/docs/component-definitions/heat-color.tsx',
-  ),
-  'bg-blur': readProjectFile('src/docs/component-definitions/bg-blur.tsx'),
   'bg-color': readProjectFile('src/docs/component-definitions/bg-color.tsx'),
   'border-color': readProjectFile('src/docs/component-definitions/border-color.tsx'),
   'glass-icon-button': readProjectFile('src/docs/component-definitions/glass-icon-button.tsx'),
@@ -195,8 +191,6 @@ for (const componentId of [
   'tag-bread',
   'stat-group',
   'heatmap',
-  'heat-color',
-  'bg-blur',
   'bg-color',
   'border-color',
   'ghost-icon-button',
@@ -356,18 +350,21 @@ assert.ok(
   !componentDefinitionSources['heatmap'].includes('HeatColor') &&
     !componentDefinitionSources['heatmap'].includes('<HeatColor') &&
     !componentDefinitionSources['heatmap'].includes('HeatColor.'),
-  'Heatmap docs must not display HeatColor because the heat color has its own component detail page.',
+  'Heatmap component docs must leave token previews to the BgColor detail page.',
 )
 
-assert.equal(
-  componentDefinitionSources['heat-color'].match(/<HeatColor\b/g)?.length ?? 0,
-  0,
-  'HeatColor docs preview must render one row per level instead of an extra horizontal HeatColor legend.',
-)
 assert.ok(
-  !componentDefinitionSources['heat-color'].includes('高热力色阶') &&
-    !componentDefinitionSources['heat-color'].includes('levels={[2, 3, 4]}'),
-  'HeatColor docs preview must not include the redundant subset heat color row.',
+  !existsSync(join(root, 'src/docs/component-definitions/bg-blur.tsx')) &&
+    componentDefinitionSources['bg-color'].includes('bgBlurTones.map') &&
+    componentDefinitionSources['bg-color'].includes('>背景模糊度</h2>'),
+  'BgBlur docs must be merged into the Background detail page.',
+)
+
+assert.ok(
+  !existsSync(join(root, 'src/docs/component-definitions/heat-color.tsx')) &&
+    componentDefinitionSources['bg-color'].includes('heatColorLevels.map') &&
+    componentDefinitionSources['bg-color'].includes('>热力图</h2>'),
+  'HeatColor docs must be merged into the BgColor Heatmap group.',
 )
 
 for (const snippet of [

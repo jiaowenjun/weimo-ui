@@ -2,12 +2,7 @@
 import { mdDefinition } from './md'
 import { tokenPreviewCardDefinition } from './token-preview-card'
 import { fontSizeDefinition } from './font-size'
-import { textColorDefinition } from './text-color'
-import { pressableDefinition } from './pressable'
-import { heatColorDefinition } from './heat-color'
-import { bgBlurDefinition } from './bg-blur'
 import { bgColorDefinition } from './bg-color'
-import { borderRadiusDefinition } from './border-radius'
 import { borderColorDefinition } from './border-color'
 import { cardSurfaceDefinition } from './card-surface'
 import { glassSurfaceDefinition } from './glass-surface'
@@ -53,12 +48,7 @@ export const componentDefinitionsById = {
   md: mdDefinition,
   'token-preview-card': tokenPreviewCardDefinition,
   'font-size': fontSizeDefinition,
-  'text-color': textColorDefinition,
-  pressable: pressableDefinition,
-  'heat-color': heatColorDefinition,
-  'bg-blur': bgBlurDefinition,
   'bg-color': bgColorDefinition,
-  'border-radius': borderRadiusDefinition,
   'border-color': borderColorDefinition,
   'card-surface': cardSurfaceDefinition,
   'glass-surface': glassSurfaceDefinition,

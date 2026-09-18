@@ -333,7 +333,7 @@ assert.deepEqual(rootStyleItem, styleRegistry, 'Root registry style item must ma
 
 assert.ok(
   manifestSource.includes("id: 'bg-color'") &&
-    manifestSource.includes("name: '背景色'") &&
+    manifestSource.includes("name: '背景'") &&
     manifestSource.includes("registryName: 'bg-color'") &&
     manifestSource.includes("packageExport: './components/bg-color'"),
   'component manifest must list BgColor as a public registry-backed utility.',
@@ -347,6 +347,11 @@ assert.ok(
   docsDefinitionSource.includes("id: 'bg-color'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
     docsDefinitionSource.includes("import { TokenPreviewCard } from '../../components/token-preview-card'") &&
+    docsDefinitionSource.includes("import { pressableToneMap, pressableTones } from '../../components/pressable'") &&
+    docsDefinitionSource.includes("from '../../components/bg-blur'") &&
+    docsDefinitionSource.includes('bgColorPreviewGroups.map') &&
+    docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">') &&
+    docsDefinitionSource.includes('group.tones') &&
     docsDefinitionSource.includes('bgColorPreviewTones') &&
     docsDefinitionSource.includes('orderedTones.map') &&
     docsDefinitionSource.includes('bgColorToneMap[tone]') &&
@@ -354,7 +359,7 @@ assert.ok(
     docsDefinitionSource.includes('getBgColorToken(tone)') &&
     docsDefinitionSource.includes('<TokenPreviewCard') &&
     docsDefinitionSource.includes('darkValue={item.value.dark}') &&
-    docsDefinitionSource.includes('label={item.label}') &&
+    docsDefinitionSource.includes('pressableFeedback.label') &&
     docsDefinitionSource.includes('token={getBgColorToken(tone)}') &&
     docsDefinitionSource.includes('value={item.value.light}') &&
     docsDefinitionSource.includes('bg-color-preview__sample') &&
@@ -363,6 +368,10 @@ assert.ok(
     docsDefinitionSource.includes('token-preview-card__surface-preview') &&
     docsDefinitionSource.includes('token-preview-card__surface-backdrop') &&
     docsDefinitionSource.includes('token-preview-card__surface') &&
+    docsDefinitionSource.includes('pressable-preview__sample') &&
+    docsDefinitionSource.includes('tone === pressableFeedback.bgColorTone') &&
+    docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">背景模糊度</h2>') &&
+    docsDefinitionSource.includes('bgBlurTones.map') &&
     !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     !docsDefinitionSource.includes('summary:') &&
     !docsDefinitionSource.includes('bg-color-preview__group') &&
@@ -378,15 +387,20 @@ assert.ok(
   'BgColor docs definition must detect semi-transparent tone values before showing the striped backdrop sample.',
 )
 
-const previewTonesSource = docsDefinitionSource.slice(
+const previewGroupsSource = docsDefinitionSource.slice(
+  docsDefinitionSource.indexOf('const bgColorPreviewGroups'),
   docsDefinitionSource.indexOf('const bgColorPreviewTones'),
-  docsDefinitionSource.indexOf('satisfies readonly BgColorTone[]'),
 )
 
 assert.deepEqual(
-  [...previewTonesSource.matchAll(/'([a-z-]+)'/g)].map((match) => match[1]),
+  [...previewGroupsSource.matchAll(/label: '([^']+)'/g)].map((match) => match[1]),
+  expectedToneGroups.map(([label]) => label),
+  'BgColor docs preview must render the semantic groups in the expected order.',
+)
+assert.deepEqual(
+  [...previewGroupsSource.matchAll(/'([a-z-]+)'/g)].map((match) => match[1]),
   expectedToneGroups.flatMap(([, tones]) => tones),
-  'BgColor docs preview must cover every tone exactly once in semantic group order.',
+  'BgColor docs preview groups must cover every tone exactly once.',
 )
 assert.ok(
   docsDefinitionSource.includes("from '../token-preview-color'") &&
@@ -395,13 +409,14 @@ assert.ok(
   'BgColor docs preview must use the shared theme-aware lightness ordering.',
 )
 assert.ok(
-  !docsDefinitionSource.includes("title: '可按压反馈'") &&
+  docsDefinitionSource.includes('pressableToneMap.feedback') &&
+    docsDefinitionSource.includes('pressableTones.flatMap') &&
     !docsDefinitionSource.includes("'pressable-hover'") &&
     !docsDefinitionSource.includes("'pressable-hover-strong'") &&
     !docsDefinitionSource.includes("'pressable-hover-inverse'") &&
     !docsDefinitionSource.includes("'pressable-active-inverse'") &&
     !docsDefinitionSource.includes("'pressable-overlay'"),
-  'BgColor detail page must delegate pressable feedback previews to the Pressable detail page.',
+  'BgColor detail page must absorb Pressable metadata without restoring removed tones.',
 )
 
 assert.ok(

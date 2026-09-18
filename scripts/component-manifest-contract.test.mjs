@@ -68,7 +68,7 @@ const registryNames = new Set()
 
 for (const groupId of expectedGroupIds) {
   const groupNames = componentManifest
-    .filter((item) => item.group === groupId)
+    .filter((item) => item.group === groupId && item.docs)
     .map((item) => item.name)
   const sortedGroupNames = [...groupNames].sort((left, right) =>
     left.localeCompare(right, 'en'),
@@ -83,7 +83,6 @@ for (const groupId of expectedGroupIds) {
 
 for (const item of componentManifest) {
   const definitionPath = `src/docs/component-definitions/${item.id}.tsx`
-  const definitionSource = readProjectFile(definitionPath)
 
   assert.ok(!componentIds.has(item.id), `${item.id} must be unique.`)
   assert.ok(!packageExports.has(item.packageExport), `${item.packageExport} must be unique.`)
@@ -92,19 +91,28 @@ for (const item of componentManifest) {
   packageExports.add(item.packageExport)
   registryNames.add(item.registryName)
 
-  assert.ok(
-    definitionSource.includes(`id: '${item.id}'`) &&
-      definitionSource.includes('preview:') &&
-      !definitionSource.includes('props:') &&
-      !definitionSource.includes('code:') &&
-      !definitionSource.includes('variantPreviews:'),
-    `${definitionPath} must own the preview-only component docs definition.`,
-  )
+  if (item.docs) {
+    const definitionSource = readProjectFile(definitionPath)
+
+    assert.ok(
+      definitionSource.includes(`id: '${item.id}'`) &&
+        definitionSource.includes('preview:') &&
+        !definitionSource.includes('props:') &&
+        !definitionSource.includes('code:') &&
+        !definitionSource.includes('variantPreviews:'),
+      `${definitionPath} must own the preview-only component docs definition.`,
+    )
+  } else {
+    assert.ok(
+      !existsSync(join(root, definitionPath)),
+      `${definitionPath} must be removed when its content is merged into another docs page.`,
+    )
+  }
   assert.equal(typeof item.name, 'string', `${item.id} must have a display name.`)
   assert.equal(typeof item.registryName, 'string', `${item.id} must have a registry name.`)
   assert.equal(typeof item.packageExport, 'string', `${item.id} must have a package export key.`)
   assert.ok(expectedGroupIds.has(item.group), `${item.id} must use a known docs group.`)
-  assert.equal(item.docs, true, `${item.id} must remain visible in docs.`)
+  assert.equal(typeof item.docs, 'boolean', `${item.id} must declare docs visibility.`)
   assert.equal(item.registry, true, `${item.id} must remain available in the registry.`)
   assert.ok(
     packageJson.exports?.[item.packageExport],
@@ -115,6 +123,12 @@ for (const item of componentManifest) {
   assert.ok(!('registryImport' in item), `${item.id} must not declare registryImport.`)
   assert.ok(!('workspaceImport' in item), `${item.id} must not declare workspaceImport.`)
 }
+
+assert.deepEqual(
+  componentManifest.filter((item) => !item.docs).map((item) => item.id),
+  ['text-color', 'pressable', 'heat-color', 'bg-blur', 'border-radius'],
+  'Merged token utilities must remain public without separate docs pages.',
+)
 
 assert.equal(
   packageJson.scripts?.['catalog:sync'],

@@ -393,7 +393,7 @@ assert.deepEqual(rootStyleItem, styleRegistry, 'Root registry style item must ma
 
 assert.ok(
   manifestSource.includes("id: 'border-color'") &&
-    manifestSource.includes("name: '边框色'") &&
+    manifestSource.includes("name: '边框'") &&
     manifestSource.includes("registryName: 'border-color'") &&
     manifestSource.includes("packageExport: './components/border-color'"),
   'component manifest must list BorderColor as a public registry-backed utility.',
@@ -407,6 +407,10 @@ assert.ok(
   docsDefinitionSource.includes("id: 'border-color'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
     docsDefinitionSource.includes("import { TokenPreviewCard } from '../../components/token-preview-card'") &&
+    docsDefinitionSource.includes("from '../../components/border-radius'") &&
+    docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">圆角</h2>') &&
+    docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">边框色</h2>') &&
+    docsDefinitionSource.includes('borderRadiusScales.map') &&
     docsDefinitionSource.includes("from '../token-preview-color'") &&
     docsDefinitionSource.includes('sortByThemeLightness(') &&
     docsDefinitionSource.includes('orderedTones.map') &&

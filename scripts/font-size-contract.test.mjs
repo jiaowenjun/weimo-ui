@@ -144,7 +144,7 @@ assert.deepEqual(rootStyleItem, styleRegistry, 'registry.json style item must ma
 
 assert.ok(
   manifestSource.includes("id: 'font-size'") &&
-    manifestSource.includes("name: '字号'") &&
+    manifestSource.includes("name: '字体'") &&
     manifestSource.includes("registryName: 'font-size'") &&
     manifestSource.includes("packageExport: './components/font-size'") &&
     manifestSource.includes("group: 'token-style'"),
@@ -159,6 +159,11 @@ assert.ok(
   docsDefinitionSource.includes("id: 'font-size'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
     docsDefinitionSource.includes("import { TokenPreviewCard } from '../../components/token-preview-card'") &&
+    docsDefinitionSource.includes("from '../../components/text-color'") &&
+    docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">字色</h2>') &&
+    docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">字号</h2>') &&
+    docsDefinitionSource.includes('textColorToneMap[tone]') &&
+    docsDefinitionSource.includes('getTextColorClassName(tone)') &&
     docsDefinitionSource.includes('fontSizeScales.map') &&
     docsDefinitionSource.includes('fontSizeScaleMap[scale]') &&
     docsDefinitionSource.includes('getFontSizeClassName(scale)') &&
@@ -173,7 +178,7 @@ assert.ok(
     !docsDefinitionSource.includes('summary:') &&
     !docsDefinitionSource.includes('font-size-preview__row') &&
     !docsDefinitionSource.includes('font-size-preview__description'),
-  'FontSize docs definition must render each scale with TokenPreviewCard.',
+  'Font docs definition must group TextColor and FontSize TokenPreviewCards.',
 )
 
 assert.ok(

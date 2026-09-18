@@ -55,7 +55,7 @@ const bgBlurSource = readProjectFile('src/components/bg-blur.ts')
 const bgBlurCss = readProjectFile('src/components/bg-blur.css')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinitionSource = readProjectFile('src/docs/component-definitions/bg-blur.tsx')
+const docsDefinitionSource = readProjectFile('src/docs/component-definitions/bg-color.tsx')
 const appCss = readProjectFile('src/App.css')
 const tokenPreviewCardCss = readProjectFile('src/components/token-preview-card.css')
 const tokensCss = readProjectFile('src/styles/tokens.css')
@@ -237,19 +237,21 @@ assert.ok(
     manifestSource.includes("name: '背景模糊度'") &&
     manifestSource.includes("registryName: 'bg-blur'") &&
     manifestSource.includes("packageExport: './components/bg-blur'") &&
+    /id: 'bg-blur',[\s\S]*?docs: false,/.test(manifestSource) &&
     !manifestSource.includes("id: 'blur'") &&
     !manifestSource.includes("name: 'Blur'"),
   'component manifest must list BgBlur as the public registry-backed utility and remove Blur.',
 )
 assert.ok(
-  definitionsIndexSource.includes("import { bgBlurDefinition } from './bg-blur'") &&
-    definitionsIndexSource.includes("'bg-blur': bgBlurDefinition") &&
+  !definitionsIndexSource.includes("from './bg-blur'") &&
+    !definitionsIndexSource.includes('bgBlurDefinition') &&
+    !existsSync(join(root, 'src/docs/component-definitions/bg-blur.tsx')) &&
     !definitionsIndexSource.includes("from './blur'") &&
     !definitionsIndexSource.includes("'blur':"),
-  'component definitions index must wire the BgBlur detail definition and remove Blur.',
+  'component definitions index must remove the merged BgBlur detail page and old Blur alias.',
 )
 assert.ok(
-  docsDefinitionSource.includes("id: 'bg-blur'") &&
+  docsDefinitionSource.includes("id: 'bg-color'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
     docsDefinitionSource.includes("import { TokenPreviewCard } from '../../components/token-preview-card'") &&
     docsDefinitionSource.includes('bgBlurTones.map') &&
@@ -264,10 +266,11 @@ assert.ok(
     docsDefinitionSource.includes('token-preview-card__surface-preview') &&
     docsDefinitionSource.includes('token-preview-card__surface-backdrop') &&
     docsDefinitionSource.includes('token-preview-card__surface') &&
+    docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">背景模糊度</h2>') &&
     !docsDefinitionSource.includes('bg-blur-preview__group') &&
     !docsDefinitionSource.includes('bg-blur-preview__stage') &&
     !docsDefinitionSource.includes('summary:'),
-  'BgBlur docs definition must render one TokenPreviewCard per tone driven by the shared tone map.',
+  'Background docs definition must render the BgBlur group from the shared tone map.',
 )
 assert.ok(
   !docsDefinitionSource.includes('<span>text</span>') && !docsDefinitionSource.includes('>text<'),

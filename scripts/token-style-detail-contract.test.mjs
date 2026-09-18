@@ -218,25 +218,15 @@ for (const snippet of [
 }
 
 const semanticTokenDefinitions = [
-  'bg-blur',
   'bg-color',
   'border-color',
-  'border-radius',
   'font-size',
-  'heat-color',
-  'pressable',
-  'text-color',
 ]
 
 const tokenPreviewWrappers = {
-  'bg-blur': 'bg-blur-preview',
   'bg-color': 'bg-color-preview',
   'border-color': 'border-color-preview',
-  'border-radius': 'border-radius-preview',
   'font-size': 'font-size-preview',
-  'heat-color': 'heat-color-preview',
-  pressable: 'pressable-preview',
-  'text-color': 'text-color-preview',
 }
 
 for (const componentId of semanticTokenDefinitions) {
@@ -266,14 +256,9 @@ assert.ok(
   'token cards must be direct app-shell__content children and use the content-level grid.',
 )
 
-const bgBlurDefinitionSource = readProjectFile('src/docs/component-definitions/bg-blur.tsx')
+const bgColorDefinitionSource = readProjectFile('src/docs/component-definitions/bg-color.tsx')
 const borderColorDefinitionSource = readProjectFile('src/docs/component-definitions/border-color.tsx')
-
-assert.ok(
-  !bgBlurDefinitionSource.includes('<TokenPreviewDetails') &&
-    bgBlurDefinitionSource.includes('item.backgroundToken'),
-  'BgBlur must hide related-token prose while keeping the background token searchable.',
-)
+const fontSizeDefinitionSource = readProjectFile('src/docs/component-definitions/font-size.tsx')
 
 assert.ok(
   !borderColorDefinitionSource.includes('<TokenPreviewDetails') &&
@@ -295,6 +280,43 @@ assert.ok(
 )
 
 assert.ok(
-  !existsSync(join(root, 'src/docs/component-definitions/pressable-demo.tsx')),
-  'the removed standalone Pressable demo must not be reintroduced.',
+  !existsSync(join(root, 'src/docs/component-definitions/bg-blur.tsx')) &&
+    bgColorDefinitionSource.includes('>背景模糊度</h2>') &&
+    bgColorDefinitionSource.includes('bgBlurTones.map') &&
+    bgColorDefinitionSource.includes('item.backgroundToken'),
+  'BgBlur and BgColor docs must share the grouped Background detail page.',
+)
+
+assert.ok(
+  !existsSync(join(root, 'src/docs/component-definitions/pressable.tsx')) &&
+    !existsSync(join(root, 'src/docs/component-definitions/pressable-demo.tsx')) &&
+    bgColorDefinitionSource.includes('pressableToneMap') &&
+    bgColorDefinitionSource.includes('pressable-preview__sample'),
+  'Pressable docs must stay merged into the BgColor detail page.',
+)
+
+assert.ok(
+  !existsSync(join(root, 'src/docs/component-definitions/heat-color.tsx')) &&
+    bgColorDefinitionSource.includes('heatColorLevels.map') &&
+    bgColorDefinitionSource.includes('heat-color-preview__sample') &&
+    bgColorDefinitionSource.includes('>热力图</h2>'),
+  'HeatColor docs must stay merged into the BgColor detail page under the Heatmap group.',
+)
+
+assert.ok(
+  !existsSync(join(root, 'src/docs/component-definitions/text-color.tsx')) &&
+    fontSizeDefinitionSource.includes('>字色</h2>') &&
+    fontSizeDefinitionSource.includes('>字号</h2>') &&
+    fontSizeDefinitionSource.includes('textColorToneMap') &&
+    fontSizeDefinitionSource.includes('fontSizeScaleMap'),
+  'TextColor and FontSize docs must share the grouped Font detail page.',
+)
+
+assert.ok(
+  !existsSync(join(root, 'src/docs/component-definitions/border-radius.tsx')) &&
+    borderColorDefinitionSource.includes('>圆角</h2>') &&
+    borderColorDefinitionSource.includes('>边框色</h2>') &&
+    borderColorDefinitionSource.includes('borderRadiusScaleMap') &&
+    borderColorDefinitionSource.includes('borderColorToneMap'),
+  'BorderRadius and BorderColor docs must share the grouped Border detail page.',
 )

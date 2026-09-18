@@ -31,7 +31,6 @@ const packageJson = readJson('package.json')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const pressableSource = readProjectFile('src/components/pressable.ts')
-const docsDefinitionSource = readProjectFile('src/docs/component-definitions/pressable.tsx')
 const bgColorDocsDefinitionSource = readProjectFile('src/docs/component-definitions/bg-color.tsx')
 const appCss = readProjectFile('src/App.css')
 const registrySmokeSource = readProjectFile('scripts/registry-smoke.test.mjs')
@@ -78,38 +77,31 @@ for (const [tone, bgColorTone, token, className, label] of expectedTones) {
 }
 
 assert.ok(
-  definitionsIndexSource.includes("import { pressableDefinition } from './pressable'") &&
-    (definitionsIndexSource.includes('pressable: pressableDefinition') ||
-      definitionsIndexSource.includes("'pressable': pressableDefinition")),
-  'component definitions index must wire the Pressable detail page.',
+  !definitionsIndexSource.includes("from './pressable'") &&
+    !definitionsIndexSource.includes('pressableDefinition'),
+  'component definitions index must not expose a separate Pressable detail page.',
 )
 assert.ok(
   manifestSource.includes("id: 'pressable'") &&
     manifestSource.includes("name: '按压反馈色'") &&
     manifestSource.includes("registryName: 'pressable'") &&
     manifestSource.includes("packageExport: './components/pressable'") &&
-    manifestSource.includes("group: 'token-style'"),
-  'component manifest must list Pressable as a public token-style utility.',
+    manifestSource.includes("group: 'token-style'") &&
+    /id: 'pressable',[\s\S]*?docs: false,/.test(manifestSource),
+  'component manifest must keep Pressable public while hiding its merged docs page.',
 )
 
 assert.ok(
-  docsDefinitionSource.includes("id: 'pressable'") &&
-    docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { TokenPreviewCard } from '../../components/token-preview-card'") &&
-    docsDefinitionSource.includes('pressableTones.map') &&
-    docsDefinitionSource.includes('pressableToneMap[tone]') &&
-    docsDefinitionSource.includes('getPressableToken(tone)') &&
-    docsDefinitionSource.includes('<TokenPreviewCard') &&
-    docsDefinitionSource.includes('darkValue={item.value.dark}') &&
-    docsDefinitionSource.includes('label={item.label}') &&
-    docsDefinitionSource.includes('token={getPressableToken(tone)}') &&
-    docsDefinitionSource.includes('value={item.value.light}') &&
-    docsDefinitionSource.includes('pressable-preview__sample') &&
-    !docsDefinitionSource.includes('<TokenPreviewDetails') &&
-    !docsDefinitionSource.includes('summary:') &&
-    !docsDefinitionSource.includes('pressable-demo') &&
-    !existsSync(join(root, 'src/docs/component-definitions/pressable-demo.tsx')),
-  'Pressable docs definition must render one interactive TokenPreviewCard per tone.',
+  !existsSync(join(root, 'src/docs/component-definitions/pressable.tsx')) &&
+    !existsSync(join(root, 'src/docs/component-definitions/pressable-demo.tsx')) &&
+    bgColorDocsDefinitionSource.includes("import { pressableToneMap, pressableTones } from '../../components/pressable'") &&
+    bgColorDocsDefinitionSource.includes('const pressableFeedback = pressableToneMap.feedback') &&
+    bgColorDocsDefinitionSource.includes('tone === pressableFeedback.bgColorTone') &&
+    bgColorDocsDefinitionSource.includes('pressable-preview__sample') &&
+    bgColorDocsDefinitionSource.includes('悬停 / 按压查看反馈色') &&
+    bgColorDocsDefinitionSource.includes("'Pressable'") &&
+    bgColorDocsDefinitionSource.includes('pressableTones.flatMap'),
+  'BgColor docs must absorb the interactive Pressable preview and search metadata.',
 )
 
 assert.ok(
@@ -131,8 +123,8 @@ for (const forbiddenPressedPreviewSnippet of [
   'setLockedSampleKey',
 ]) {
   assert.ok(
-    !docsDefinitionSource.includes(forbiddenPressedPreviewSnippet),
-    `Pressable docs must not invent a persistent pressed state through ${forbiddenPressedPreviewSnippet}.`,
+    !bgColorDocsDefinitionSource.includes(forbiddenPressedPreviewSnippet),
+    `Merged Pressable docs must not invent a persistent pressed state through ${forbiddenPressedPreviewSnippet}.`,
   )
 }
 
@@ -143,7 +135,8 @@ for (const [tone, bgColorTone, token, className] of expectedTones) {
 }
 
 assert.ok(
-  !bgColorDocsDefinitionSource.includes("title: '可按压反馈'") &&
+  bgColorDocsDefinitionSource.includes('pressableToneMap.feedback') &&
+    bgColorDocsDefinitionSource.includes('pressable-preview__sample') &&
     !bgColorDocsDefinitionSource.includes("'pressable-hover'") &&
     !bgColorDocsDefinitionSource.includes("'pressable-hover-strong'") &&
     !bgColorDocsDefinitionSource.includes("'pressable-hover-inverse'") &&
@@ -151,7 +144,7 @@ assert.ok(
     !bgColorDocsDefinitionSource.includes("'surface'") &&
     !bgColorDocsDefinitionSource.includes("'overlay'") &&
     !bgColorDocsDefinitionSource.includes("'pressable-overlay'"),
-  'BgColor detail page must delegate pressable feedback previews to the Pressable detail page.',
+  'BgColor detail page must own the single feedback preview without restoring removed tones.',
 )
 
 assert.ok(
