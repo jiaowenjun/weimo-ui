@@ -27,7 +27,7 @@
   }
 
   .weimo-share-card--font-print {
-    font-family: "WeimoJingHuaLaoSong", serif;
+    font-family: var(--font-print);
   }
 
   .weimo-share-card--large-text {

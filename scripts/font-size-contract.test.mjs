@@ -162,6 +162,12 @@ assert.ok(
     docsDefinitionSource.includes("from '../../components/text-color'") &&
     docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">字色</h2>') &&
     docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">字号</h2>') &&
+    docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">字体</h2>') &&
+    docsDefinitionSource.includes('fontFamilyTokens.map') &&
+    docsDefinitionSource.includes("'--font-sans'") &&
+    docsDefinitionSource.includes("'--font-mono'") &&
+    docsDefinitionSource.includes("'--font-print'") &&
+    docsDefinitionSource.includes('typography-preview__sample') &&
     docsDefinitionSource.includes('textColorToneMap[tone]') &&
     docsDefinitionSource.includes('getTextColorClassName(tone)') &&
     docsDefinitionSource.includes('fontSizeScales.map') &&
@@ -178,7 +184,14 @@ assert.ok(
     !docsDefinitionSource.includes('summary:') &&
     !docsDefinitionSource.includes('font-size-preview__row') &&
     !docsDefinitionSource.includes('font-size-preview__description'),
-  'Font docs definition must group TextColor and FontSize TokenPreviewCards.',
+  'Font docs definition must group TextColor, FontSize, and FontFamily TokenPreviewCards.',
+)
+
+assert.ok(
+  appCss.includes('.typography-preview__sample--font-sans') &&
+    appCss.includes('.typography-preview__sample--font-mono') &&
+    appCss.includes('.typography-preview__sample--font-print'),
+  'App.css must style FontFamily preview samples through the shared font tokens.',
 )
 
 assert.ok(

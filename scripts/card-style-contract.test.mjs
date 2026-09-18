@@ -387,8 +387,8 @@ assertIncludes(
 )
 assertIncludes(
   shareCardPrintBlock,
-  'font-family: "WeimoJingHuaLaoSong", serif;',
-  'ShareCard print font class must apply the registered print family.',
+  'font-family: var(--font-print);',
+  'ShareCard print font class must use the shared print font token.',
 )
 assertIncludes(
   shareCardRichBlock,
@@ -840,6 +840,7 @@ assert.deepEqual(
 )
 
 for (const snippet of [
+  '--font-print: "WeimoJingHuaLaoSong", serif;',
   '--color-text-placeholder: hsl(0 0% 0% / 0.26);',
   '--color-text-placeholder: hsl(0 0% 100% / 0.26);',
   '--color-bg-share-card: hsl(0 15% 92.2%);',
@@ -864,6 +865,16 @@ const rootStyleItem = registry.items.find((item) => item.name === 'style')
 
 assert.ok(rootStyleItem, 'registry.json must include the @weimo/style item.')
 assert.deepEqual(styleRegistry, rootStyleItem, 'registry/style.json must match the root style item.')
+assert.equal(
+  rootStyleItem.cssVars.light['font-print'],
+  '"WeimoJingHuaLaoSong", serif',
+  'Root registry light theme must export the print font token.',
+)
+assert.equal(
+  styleRegistry.cssVars.light['font-print'],
+  '"WeimoJingHuaLaoSong", serif',
+  'Standalone style registry light theme must export the print font token.',
+)
 assert.equal(
   rootStyleItem.cssVars.light['color-text-placeholder'],
   'hsl(0 0% 0% / 0.26)',

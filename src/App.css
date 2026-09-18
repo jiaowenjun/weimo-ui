@@ -879,6 +879,18 @@
   font-family: var(--font-mono);
 }
 
+.typography-preview__sample--font-sans {
+  font-family: var(--font-sans);
+}
+
+.typography-preview__sample--font-mono {
+  font-family: var(--font-mono);
+}
+
+.typography-preview__sample--font-print {
+  font-family: var(--font-print);
+}
+
 .typography-preview__sample--line-height {
   line-height: var(--font-line-height-reading);
 }

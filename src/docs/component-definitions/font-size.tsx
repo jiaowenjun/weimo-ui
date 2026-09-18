@@ -17,6 +17,27 @@ import { sortByThemeLightness, useIsDarkTheme } from '../token-preview-color'
 
 const previewTextColorTones = textColorTones.filter((tone) => tone !== 'inherit')
 
+const fontFamilyTokens = [
+  {
+    label: '无衬线字体',
+    token: '--font-sans',
+    value: '"Segoe UI"',
+    className: 'typography-preview__sample--font-sans',
+  },
+  {
+    label: '等宽字体',
+    token: '--font-mono',
+    value: '"SFMono-Regular"',
+    className: 'typography-preview__sample--font-mono',
+  },
+  {
+    label: '印刷字体',
+    token: '--font-print',
+    value: '"WeimoJingHuaLaoSong"',
+    className: 'typography-preview__sample--font-print',
+  },
+] as const
+
 // Docs definitions intentionally colocate preview components with exported page metadata.
 // eslint-disable-next-line react-refresh/only-export-components
 function FontPreview() {
@@ -74,6 +95,24 @@ function FontPreview() {
           </TokenPreviewCard>
         )
       })}
+
+      <h2 className="token-preview-card-demo__category">字体</h2>
+
+      {fontFamilyTokens.map((font) => (
+        <TokenPreviewCard
+          key={font.token}
+          label={font.label}
+          token={font.token}
+          value={font.value}
+        >
+          <div
+            className={`typography-preview__sample ${font.className}`}
+            aria-hidden="true"
+          >
+            Aa 0123 汉字
+          </div>
+        </TokenPreviewCard>
+      ))}
     </>
   )
 }
@@ -92,6 +131,8 @@ export const fontSizeDefinition = {
 
       return ['TextColor', '字色', tone, item.label, item.token, item.description]
     }),
+  ).concat(
+    fontFamilyTokens.flatMap((font) => ['FontFamily', '字体', '字型', font.token, font.label]),
   ),
   preview: () => <FontPreview />,
 } satisfies ComponentDefinition
