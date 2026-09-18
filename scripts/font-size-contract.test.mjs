@@ -167,12 +167,11 @@ assert.ok(
     docsDefinitionSource.includes('<CardPanel className="font-size-preview__panel"') &&
     docsDefinitionSource.includes('font-size-preview__sample') &&
     docsDefinitionSource.includes('{getFontSizeToken(scale)}: {getFontSizeValue(scale)}') &&
+    !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     !docsDefinitionSource.includes('summary:') &&
     !docsDefinitionSource.includes('font-size-preview__row') &&
-    !docsDefinitionSource.includes('font-size-preview__description') &&
-    !docsDefinitionSource.includes('uiUsage') &&
-    !docsDefinitionSource.includes('bijiUsage'),
-  'FontSize docs definition must render one CardPanel per font-size scale with the token and concrete value.',
+    !docsDefinitionSource.includes('font-size-preview__description'),
+  'FontSize docs definition must render each scale with its value and no redundant prose.',
 )
 
 assert.ok(

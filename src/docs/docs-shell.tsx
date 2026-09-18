@@ -34,6 +34,7 @@ import {
 } from './component-docs'
 import { type DocsOutletContext } from './docs-outlet-context'
 import { componentHref, componentPath } from './routes'
+import { searchComponentDocs } from './search-component-docs'
 
 type Theme = 'light' | 'dark' | 'system'
 
@@ -172,11 +173,7 @@ export function DocsShell() {
       return componentDocs
     }
 
-    return componentDocs.filter((doc) =>
-      [doc.name, doc.summary].some((value) =>
-        value?.toLowerCase().includes(normalized),
-      ),
-    )
+    return searchComponentDocs(componentDocs, normalized)
   }, [query])
 
   function navigateTo(path: string) {

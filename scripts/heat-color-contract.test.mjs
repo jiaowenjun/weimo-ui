@@ -163,6 +163,7 @@ assert.ok(
     docsDefinitionSource.includes('heat-color-preview__sample') &&
     docsDefinitionSource.includes('heat-color-preview__token-value--light') &&
     docsDefinitionSource.includes('heat-color-preview__token-value--dark') &&
+    !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     !docsDefinitionSource.includes('summary:') &&
     !docsDefinitionSource.includes('heat-color-preview__row') &&
     !docsDefinitionSource.includes('heat-color-preview__description') &&

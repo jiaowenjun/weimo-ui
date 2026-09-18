@@ -404,10 +404,10 @@ assert.ok(
 assert.ok(
     borderColorDefinitionSource.includes("frame: 'plain',") &&
     borderColorDefinitionSource.includes('<CardPanel className="border-color-preview__panel"') &&
-    !borderColorDefinitionSource.includes('border-color-preview__context-token') &&
-    !borderColorDefinitionSource.includes('GlassSurface 背景感知边框 token') &&
-    !borderColorDefinitionSource.includes('glass-surface-border'),
-  'BorderColor detail page must render one CardPanel per border tone showing exactly one token each.',
+    borderColorDefinitionSource.includes('contextTokens={borderContextTokens[tone]}') &&
+    borderColorDefinitionSource.includes('--glass-surface-border') &&
+    borderColorDefinitionSource.includes('--color-border-divider-menu-on-light'),
+  'BorderColor detail page must retain background-aware token variants inside the card layout.',
 )
 assert.ok(
     ghostIconButtonDefinitionSource.includes("import { GhostIconButton } from '../../components/ghost-icon-button'") &&

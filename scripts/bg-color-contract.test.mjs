@@ -355,12 +355,11 @@ assert.ok(
     docsDefinitionSource.includes('bg-color-preview__token-value--dark') &&
     docsDefinitionSource.includes('{item.value.light}') &&
     docsDefinitionSource.includes('{item.value.dark}') &&
+    !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     !docsDefinitionSource.includes('summary:') &&
     !docsDefinitionSource.includes('bg-color-preview__group') &&
-    !docsDefinitionSource.includes('bg-color-preview__description') &&
-    !docsDefinitionSource.includes('uiUsage') &&
-    !docsDefinitionSource.includes('bijiUsage'),
-  'BgColor docs definition must render one CardPanel per background tone with no summary, grouping, or usage prose.',
+    !docsDefinitionSource.includes('bg-color-preview__description'),
+  'BgColor docs definition must render one concise CardPanel per tone without redundant prose.',
 )
 assert.ok(
   docsDefinitionSource.includes('function hasTransparentBgColorValue') &&
@@ -382,11 +381,10 @@ assert.deepEqual(
   'BgColor docs preview must cover every tone exactly once in semantic group order.',
 )
 assert.ok(
-  docsDefinitionSource.includes('function useIsDarkTheme()') &&
-    docsDefinitionSource.includes('function parseColorLightness(value: string)') &&
-    docsDefinitionSource.includes('function toneBrightness(tone: BgColorTone, isDark: boolean)') &&
-    docsDefinitionSource.includes('toneBrightness(b, isDark) - toneBrightness(a, isDark)'),
-  'BgColor docs preview must order swatches from bright to dark for the current theme.',
+  docsDefinitionSource.includes("from '../token-preview-color'") &&
+    docsDefinitionSource.includes('useIsDarkTheme()') &&
+    docsDefinitionSource.includes('sortByThemeLightness('),
+  'BgColor docs preview must use the shared theme-aware lightness ordering.',
 )
 assert.ok(
   !docsDefinitionSource.includes("title: '可按压反馈'") &&

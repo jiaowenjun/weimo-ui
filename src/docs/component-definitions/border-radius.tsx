@@ -11,6 +11,11 @@ export const borderRadiusDefinition = {
   id: 'border-radius',
   status: 'Ready',
   frame: 'plain',
+  searchAliases: borderRadiusScales.flatMap((scale) => {
+    const item = borderRadiusScaleMap[scale]
+
+    return ['BorderRadius', scale, item.label, item.token, item.description, item.uiUsage, item.bijiUsage]
+  }),
   preview: () => (
     <div className="border-radius-preview" aria-label="边框圆角档位预览">
       {borderRadiusScales.map((scale) => {

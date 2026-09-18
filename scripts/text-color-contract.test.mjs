@@ -232,20 +232,19 @@ assert.ok(
     docsDefinitionSource.includes('textColorToneMap[tone]') &&
     docsDefinitionSource.includes('function TextColorPreview()') &&
     docsDefinitionSource.includes('orderedTones.map') &&
-    docsDefinitionSource.includes('function parseColorLightness') &&
-    docsDefinitionSource.includes('function useIsDarkTheme') &&
-    docsDefinitionSource.includes('toneTextBrightness(b, isDark) - toneTextBrightness(a, isDark)') &&
+    docsDefinitionSource.includes("from '../token-preview-color'") &&
+    docsDefinitionSource.includes('useIsDarkTheme()') &&
+    docsDefinitionSource.includes('sortByThemeLightness(') &&
     docsDefinitionSource.includes('getTextColorClassName(tone)') &&
     docsDefinitionSource.includes('getTextColorToken(tone)') &&
     docsDefinitionSource.includes('<CardPanel className="text-color-preview__panel"') &&
     docsDefinitionSource.includes('text-color-preview__sample') &&
     docsDefinitionSource.includes('text-color-preview__token-value--light') &&
     docsDefinitionSource.includes('text-color-preview__token-value--dark') &&
+    !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     !docsDefinitionSource.includes('summary:') &&
     !docsDefinitionSource.includes('text-color-preview__row') &&
-    !docsDefinitionSource.includes('text-color-preview__description') &&
-    !docsDefinitionSource.includes('uiUsage') &&
-    !docsDefinitionSource.includes('bijiUsage'),
+    !docsDefinitionSource.includes('text-color-preview__description'),
   'TextColor docs definition must render the tone map preview with concrete token values.',
 )
 assert.ok(

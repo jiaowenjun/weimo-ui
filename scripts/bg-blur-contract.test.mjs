@@ -260,11 +260,14 @@ assert.ok(
   'BgBlur docs preview overlay must not render sample text inside the background-only swatch.',
 )
 assert.ok(
-  !docsDefinitionSource.includes('bijiUsage') &&
-    !docsDefinitionSource.includes('uiUsage') &&
+  !docsDefinitionSource.includes('<TokenPreviewDetails') &&
+    !docsDefinitionSource.includes('description={item.description}') &&
+    !docsDefinitionSource.includes('uiUsage={item.uiUsage}') &&
+    !docsDefinitionSource.includes('bijiUsage={item.bijiUsage}') &&
+    docsDefinitionSource.includes('item.backgroundToken') &&
     !docsDefinitionSource.includes('getBgBlurBackgroundToken') &&
     !docsDefinitionSource.includes('getBgBlurFilter'),
-  'BgBlur docs preview must stay visual-only: no usage notes or background/filter metadata text.',
+  'BgBlur docs preview must index background-token metadata without rendering redundant prose.',
 )
 
 assert.ok(

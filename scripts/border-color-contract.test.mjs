@@ -409,9 +409,9 @@ assert.ok(
   docsDefinitionSource.includes("id: 'border-color'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
     docsDefinitionSource.includes("import { CardPanel } from '../../components/coss/card'") &&
-    docsDefinitionSource.includes('[...borderColorTones]') &&
+    docsDefinitionSource.includes("from '../token-preview-color'") &&
+    docsDefinitionSource.includes('sortByThemeLightness(') &&
     docsDefinitionSource.includes('orderedTones.map') &&
-    docsDefinitionSource.includes('toneBrightness(b, isDark) - toneBrightness(a, isDark)') &&
     docsDefinitionSource.includes('borderColorToneMap[tone]') &&
     docsDefinitionSource.includes('getBorderColorClassName(tone)') &&
     docsDefinitionSource.includes('getBorderColorToken(tone)') &&
@@ -419,13 +419,18 @@ assert.ok(
     docsDefinitionSource.includes('border-color-preview__sample') &&
     docsDefinitionSource.includes('border-color-preview__token-value--light') &&
     docsDefinitionSource.includes('border-color-preview__token-value--dark') &&
+    !docsDefinitionSource.includes('<TokenPreviewDetails') &&
+    docsDefinitionSource.includes('--color-border-disable-on-light') &&
+    docsDefinitionSource.includes('--color-border-divider-menu-on-dark') &&
+    docsDefinitionSource.includes('--glass-surface-dark-border') &&
+    !docsDefinitionSource.includes('description={item.description}') &&
+    !docsDefinitionSource.includes('uiUsage={item.uiUsage}') &&
+    !docsDefinitionSource.includes('bijiUsage={item.bijiUsage}') &&
     !docsDefinitionSource.includes('summary:') &&
     !docsDefinitionSource.includes('border-color-preview__row') &&
     !docsDefinitionSource.includes('border-color-preview__description') &&
-    !docsDefinitionSource.includes('border-color-preview__context-token') &&
-    !docsDefinitionSource.includes('uiUsage') &&
-    !docsDefinitionSource.includes('bijiUsage'),
-  'BorderColor docs definition must render one CardPanel per border tone showing exactly one token each.',
+    !docsDefinitionSource.includes('border-color-preview__context-token'),
+  'BorderColor docs definition must index background-aware tokens without rendering redundant prose.',
 )
 assert.ok(
   appCss.includes('.border-color-preview') &&
@@ -439,8 +444,7 @@ assert.ok(
     !appCss.includes('.border-color-preview__row') &&
     !appCss.includes('.border-color-preview__identity') &&
     !appCss.includes('.border-color-preview__description') &&
-    !appCss.includes('.border-color-preview__value') &&
-    !appCss.includes('.border-color-preview__context-token'),
+    !appCss.includes('.border-color-preview__value'),
   'App.css must include scoped BorderColor detail-page preview styles.',
 )
 assert.ok(

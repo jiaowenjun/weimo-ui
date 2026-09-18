@@ -161,14 +161,13 @@ assert.ok(
     docsDefinitionSource.includes('<CardPanel className="border-radius-preview__panel"') &&
     docsDefinitionSource.includes('border-radius-preview__sample') &&
     docsDefinitionSource.includes('{getBorderRadiusToken(scale)}: {getBorderRadiusValue(scale)}') &&
+    !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     !docsDefinitionSource.includes('summary:') &&
     !docsDefinitionSource.includes('border-radius-preview__row') &&
     !docsDefinitionSource.includes('border-radius-preview__notes') &&
     !docsDefinitionSource.includes('border-radius-preview__description') &&
-    !docsDefinitionSource.includes('uiUsage') &&
-    !docsDefinitionSource.includes('bijiUsage') &&
     !docsDefinitionSource.includes('--radius-card'),
-  'BorderRadius docs definition must render one CardPanel per radius scale with the token and concrete value.',
+  'BorderRadius docs definition must render each scale with its value and no redundant prose.',
 )
 
 const sampleBlock = blockFor(appCss, '.border-radius-preview__sample')

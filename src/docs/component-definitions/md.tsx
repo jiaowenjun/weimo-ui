@@ -162,5 +162,9 @@ export const mdDefinition = {
   id: 'md',
   status: 'Ready',
   frame: 'plain',
+  searchAliases: [
+    'Markdown',
+    ...markdownStyleTokens.flatMap((item) => [item.token, item.role]),
+  ],
   preview: () => <MdStylePreview />,
 } satisfies ComponentDefinition

@@ -12,6 +12,11 @@ export const fontSizeDefinition = {
   id: 'font-size',
   status: 'Ready',
   frame: 'plain',
+  searchAliases: fontSizeScales.flatMap((scale) => {
+    const item = fontSizeScaleMap[scale]
+
+    return ['FontSize', scale, item.label, item.token, item.description, item.uiUsage, item.bijiUsage]
+  }),
   preview: () => (
     <div className="font-size-preview" aria-label="字号档位预览">
       {fontSizeScales.map((scale) => {

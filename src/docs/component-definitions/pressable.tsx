@@ -10,6 +10,11 @@ export const pressableDefinition = {
   id: 'pressable',
   status: 'Ready',
   frame: 'plain',
+  searchAliases: pressableTones.flatMap((tone) => {
+    const item = pressableToneMap[tone]
+
+    return ['Pressable', tone, item.label, item.token, item.description, item.uiUsage, item.bijiUsage]
+  }),
   preview: () => (
     <div className="pressable-preview" aria-label="按压反馈色档位预览">
       {pressableTones.map((tone) => {

@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react'
-
 import {
   borderColorToneMap,
   borderColorTones,
@@ -9,60 +7,68 @@ import {
 } from '../../components/border-color'
 import { CardPanel } from '../../components/coss/card'
 import type { ComponentDefinition } from '../component-docs'
+import { sortByThemeLightness, useIsDarkTheme } from '../token-preview-color'
 
-function parseColorLightness(value: string): number | null {
-  const hsl = value.match(/^hsl\(\s*[\d.]+\s+[\d.]+%\s+([\d.]+)%\s*\)/)
-
-  if (hsl) {
-    return Number(hsl[1])
-  }
-
-  const hex = value.match(/^#([0-9a-f]{6})$/i)
-
-  if (hex) {
-    const [r, g, b] = [0, 2, 4].map((offset) => parseInt(hex[1].slice(offset, offset + 2), 16))
-
-    return (Math.max(r, g, b) + Math.min(r, g, b)) / 2 / 2.55
-  }
-
-  return null
+type BorderContextToken = {
+  label: string
+  token: string
 }
 
-function toneBrightness(tone: BorderColorTone, isDark: boolean): number {
-  const value = isDark
-    ? borderColorToneMap[tone].value.dark
-    : borderColorToneMap[tone].value.light
-
-  return parseColorLightness(value) ?? 0
+const borderContextTokens: Partial<Record<BorderColorTone, readonly BorderContextToken[]>> = {
+  disable: [
+    {
+      label: '亮背景',
+      token: '--color-border-disable-on-light',
+    },
+    {
+      label: '暗背景',
+      token: '--color-border-disable-on-dark',
+    },
+  ],
+  divider: [
+    {
+      label: '主题默认',
+      token: '--color-border-divider-menu',
+    },
+    {
+      label: '亮背景',
+      token: '--color-border-divider-menu-on-light',
+    },
+    {
+      label: '暗背景',
+      token: '--color-border-divider-menu-on-dark',
+    },
+  ],
+  default: [
+    { label: '主题默认', token: '--glass-surface-border' },
+    { label: '亮背景', token: '--glass-surface-light-border' },
+    { label: '暗背景', token: '--glass-surface-dark-border' },
+  ],
 }
 
-function useIsDarkTheme() {
-  const [isDark, setIsDark] = useState(() =>
-    typeof document === 'undefined' ? false : document.documentElement.classList.contains('dark'),
-  )
+const borderColorSearchAliases = borderColorTones.flatMap((tone) => {
+  const item = borderColorToneMap[tone]
+  const contexts = borderContextTokens[tone] ?? []
 
-  useEffect(() => {
-    const root = document.documentElement
-    const sync = () => {
-      setIsDark(root.classList.contains('dark'))
-    }
-
-    sync()
-
-    const observer = new MutationObserver(sync)
-
-    observer.observe(root, { attributes: true, attributeFilter: ['class'] })
-
-    return () => observer.disconnect()
-  }, [])
-
-  return isDark
-}
+  return [
+    'BorderColor',
+    tone,
+    item.label,
+    item.token,
+    item.description,
+    item.uiUsage,
+    item.bijiUsage,
+    ...contexts.flatMap((context) => [context.label, context.token]),
+  ]
+})
 
 function BorderColorPreview() {
   const isDark = useIsDarkTheme()
-  const orderedTones = [...borderColorTones].sort(
-    (a, b) => toneBrightness(b, isDark) - toneBrightness(a, isDark),
+  const orderedTones = sortByThemeLightness(
+    borderColorTones,
+    (tone) => borderColorToneMap[tone].value,
+    isDark,
+    isDark ? 0 : 100,
   )
 
   return (
@@ -95,5 +101,6 @@ export const borderColorDefinition = {
   id: 'border-color',
   status: 'Ready',
   frame: 'plain',
+  searchAliases: borderColorSearchAliases,
   preview: () => <BorderColorPreview />,
 } satisfies ComponentDefinition

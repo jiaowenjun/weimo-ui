@@ -103,12 +103,11 @@ assert.ok(
     docsDefinitionSource.includes('pressable-preview__sample') &&
     docsDefinitionSource.includes('pressable-preview__token-value--light') &&
     docsDefinitionSource.includes('pressable-preview__token-value--dark') &&
+    !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     !docsDefinitionSource.includes('summary:') &&
     !docsDefinitionSource.includes('pressable-demo') &&
-    !docsDefinitionSource.includes('uiUsage') &&
-    !docsDefinitionSource.includes('bijiUsage') &&
     !existsSync(join(root, 'src/docs/component-definitions/pressable-demo.tsx')),
-  'Pressable docs definition must render one interactive CardPanel per tone bound to the shared feedback token.',
+  'Pressable docs definition must render one concise interactive CardPanel per tone.',
 )
 
 assert.ok(
@@ -117,7 +116,7 @@ assert.ok(
     !pressableSource.includes('Menu item') &&
     !pressableSource.includes('GlassIconButton / GhostIconButton') &&
     pressableSource.includes('app-local controls 复用 --color-bg-hover 语义'),
-  'Pressable usage notes must live in the public tone map instead of the docs page.',
+  'Pressable usage notes must remain owned by the public tone map.',
 )
 
 for (const forbiddenPressedPreviewSnippet of [

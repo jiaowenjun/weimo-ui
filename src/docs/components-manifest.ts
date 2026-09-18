@@ -38,6 +38,7 @@ export type ComponentGroupId = (typeof componentGroups)[number]['id']
 export type PublicComponentManifestItem = {
   id: string
   name: string
+  exportName?: string
   registryName: string
   packageExport: string
   group: ComponentGroupId
@@ -51,6 +52,7 @@ export const componentManifest = [
   {
     id: 'md',
     name: 'Markdown样式',
+    exportName: 'Md',
     registryName: 'md',
     packageExport: './components/md',
     group: 'token-style',

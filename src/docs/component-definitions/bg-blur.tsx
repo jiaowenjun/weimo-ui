@@ -12,6 +12,20 @@ export const bgBlurDefinition = {
   id: 'bg-blur',
   status: 'Ready',
   frame: 'plain',
+  searchAliases: bgBlurTones.flatMap((tone) => {
+    const item = bgBlurToneMap[tone]
+
+    return [
+      'BgBlur',
+      tone,
+      item.label,
+      item.backgroundToken,
+      item.blurToken,
+      item.description,
+      item.uiUsage,
+      item.bijiUsage,
+    ]
+  }),
   preview: () => (
     <div className="bg-blur-preview" aria-label="背景模糊度档位预览">
       {bgBlurTones.map((tone) => {

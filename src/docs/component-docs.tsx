@@ -15,7 +15,11 @@ export type ComponentPreviewContext = {
 export type ComponentDoc = {
   id: ComponentId
   name: string
+  exportName: string
   group: ComponentGroupId
+  registryName: string
+  packageExport: string
+  searchAliases: readonly string[]
   summary?: string
   status: 'Ready' | 'Preview'
   frame?: 'stage' | 'plain'
@@ -29,7 +33,9 @@ export type ComponentDefinition = Pick<
   | 'status'
   | 'frame'
   | 'preview'
->
+> & {
+  searchAliases?: readonly string[]
+}
 
 export type ComponentDocGroup = {
   id: ComponentGroupId
@@ -49,7 +55,11 @@ export const componentDocs: ComponentDoc[] = componentManifest
     return {
       id: item.id,
       name: item.name,
+      exportName: ('exportName' in item ? item.exportName : undefined) ?? item.name,
       group: item.group,
+      registryName: item.registryName,
+      packageExport: item.packageExport,
+      searchAliases: definition.searchAliases ?? [],
       summary: definition.summary,
       status: definition.status,
       frame: definition.frame,

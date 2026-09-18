@@ -38,5 +38,10 @@ export const heatColorDefinition = {
   id: 'heat-color',
   status: 'Ready',
   frame: 'plain',
+  searchAliases: heatColorLevels.flatMap((level) => {
+    const item = heatColorMap[level]
+
+    return ['HeatColor', `level ${level}`, item.label, item.token, item.description]
+  }),
   preview: () => <HeatColorPreview />,
 } satisfies ComponentDefinition

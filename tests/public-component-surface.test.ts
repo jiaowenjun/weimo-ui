@@ -83,7 +83,9 @@ describe('public component catalog', () => {
       const names = exportedNames(sourcePath.replace(/^\.\//u, ''))
       expect(names.size, `${item.id} source exports`).toBeGreaterThan(0)
       if (!conceptualTokenModules.has(item.id)) {
-        expect(names.has(item.name), `${item.id} exports ${item.name}`).toBe(true)
+        const exportName = ('exportName' in item ? item.exportName : undefined) ?? item.name
+
+        expect(names.has(exportName), `${item.id} exports ${exportName}`).toBe(true)
       }
     }
   })
