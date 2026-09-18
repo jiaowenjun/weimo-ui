@@ -6,10 +6,19 @@ import {
 } from '../../components/border-color'
 import { borderRadiusScaleMap } from '../../components/border-radius'
 import { fontSizeScaleMap, getFontSizeClassName } from '../../components/font-size'
-import { getHeatColorClassName, heatColorMap } from '../../components/heat-color'
 import { pressableToneMap } from '../../components/pressable'
 import { getTextColorClassName, textColorToneMap } from '../../components/text-color'
 import { TokenPreviewCard } from '../../components/token-preview-card'
+
+const fontFamilyToken = {
+  token: '--font-mono',
+  value: '"SFMono-Regular"',
+}
+
+const lineHeightToken = {
+  token: '--font-line-height-reading',
+  value: '1.6',
+}
 
 export function TokenPreviewCardDemo() {
   const opaqueBackground = bgColorToneMap.primary
@@ -19,7 +28,6 @@ export function TokenPreviewCardDemo() {
   const borderColor = borderColorToneMap.accent
   const fontSize = fontSizeScaleMap.stat
   const textColor = textColorToneMap.danger
-  const heatColor = heatColorMap[3]
   const pressable = pressableToneMap.feedback
 
   return (
@@ -117,19 +125,37 @@ export function TokenPreviewCardDemo() {
         </p>
       </TokenPreviewCard>
 
-      <h2 className="token-preview-card-demo__category">状态与自定义内容</h2>
-
       <TokenPreviewCard
-        darkValue={heatColor.value.dark}
-        label="热力色"
-        token={heatColor.token}
-        value={heatColor.value.light}
+        label="字体"
+        token={fontFamilyToken.token}
+        value={fontFamilyToken.value}
       >
         <div
           aria-hidden="true"
-          className={`heat-color-preview__sample ${getHeatColorClassName(3)}`}
-        />
+          className="typography-preview__sample typography-preview__sample--font-family"
+        >
+          Aa 0123
+        </div>
       </TokenPreviewCard>
+
+      <TokenPreviewCard
+        label="行高"
+        token={lineHeightToken.token}
+        value={lineHeightToken.value}
+      >
+        <div
+          aria-hidden="true"
+          className="typography-preview__sample typography-preview__sample--line-height"
+        >
+          <span>
+            第一行
+            <br />
+            第二行
+          </span>
+        </div>
+      </TokenPreviewCard>
+
+      <h2 className="token-preview-card-demo__category">交互</h2>
 
       <TokenPreviewCard
         darkValue={pressable.value.dark}
@@ -140,18 +166,6 @@ export function TokenPreviewCardDemo() {
         <button type="button" className="pressable-preview__sample">
           悬停 / 按压
         </button>
-      </TokenPreviewCard>
-
-      <TokenPreviewCard
-        label="自定义内容"
-        token="--font-mono"
-        value="SFMono-Regular, Menlo, monospace"
-      >
-        <div className="md-style-preview__effect" aria-hidden="true">
-          <code className="md-style-preview__mini-code md-style-preview__mini-code--mono">
-            token: value
-          </code>
-        </div>
       </TokenPreviewCard>
     </>
   )

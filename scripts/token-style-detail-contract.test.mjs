@@ -137,6 +137,7 @@ for (const selector of [
   '.border-color-preview__sample',
   '.font-size-preview__sample',
   '.text-color-preview__sample',
+  '.typography-preview__sample',
   '.heat-color-preview__sample',
   '.pressable-preview__sample',
   '.md-style-preview__effect',
@@ -163,8 +164,10 @@ assert.ok(
   'TokenPreviewCard must be listed in the Token / style component catalog.',
 )
 assert.ok(
-  cardDefinitionSource.includes("id: 'token-preview-card'") &&
+    cardDefinitionSource.includes("id: 'token-preview-card'") &&
     cardDefinitionSource.includes("frame: 'plain',") &&
+    cardDefinitionSource.includes("'交互'") &&
+    !cardDefinitionSource.includes("'自定义内容'") &&
     cardDefinitionSource.includes('<TokenPreviewCardDemo') &&
     cardDemoSource.includes('<TokenPreviewCard') &&
     cardDemoSource.includes('token-preview-card-demo__category') &&
@@ -177,9 +180,22 @@ assert.ok(
     cardDemoSource.includes('边框色') &&
     cardDemoSource.includes('字号') &&
     cardDemoSource.includes('字色') &&
-    cardDemoSource.includes('热力色') &&
+    cardDemoSource.includes('字体') &&
+    cardDemoSource.includes("token: '--font-mono'") &&
+    cardDemoSource.includes('typography-preview__sample--font-family') &&
+    cardDemoSource.includes('行高') &&
+    cardDemoSource.includes("token: '--font-line-height-reading'") &&
+    cardDemoSource.includes('typography-preview__sample--line-height') &&
+    appCss.includes('font-family: var(--font-mono);') &&
+    appCss.includes('line-height: var(--font-line-height-reading);') &&
+    !cardDefinitionSource.includes("'热力色'") &&
+    !cardDemoSource.includes('热力色') &&
+    cardDemoSource.includes(
+      '<h2 className="token-preview-card-demo__category">交互</h2>',
+    ) &&
     cardDemoSource.includes('按压反馈') &&
-    cardDemoSource.includes('自定义内容') &&
+    !cardDemoSource.includes('状态与自定义内容') &&
+    !cardDemoSource.includes('自定义内容') &&
     appCss.includes('.token-preview-card-demo__category'),
   'TokenPreviewCard docs must categorize every supported preview effect.',
 )
