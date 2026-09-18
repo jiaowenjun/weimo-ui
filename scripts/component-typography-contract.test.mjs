@@ -34,9 +34,9 @@ for (const [token, value] of Object.entries({
   'font-size-xs': '12px',
   'font-size-sm': '13px',
   'font-size-md': '14px',
-  'font-size-base': '15px',
-  'font-size-lg': '16px',
-  'font-size-xl': '17px',
+  'font-size-base': '16px',
+  'font-size-lg': '17px',
+  'font-size-xl': '18px',
   'font-size-stat': '28px',
 })) {
   assert.ok(tokensCss.includes(`--${token}: ${value};`), `Shared tokens must define --${token}.`)

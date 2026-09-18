@@ -32,9 +32,9 @@ const expectedScales = [
   ['xs', '--font-size-xs', 'font-size--xs', '12px'],
   ['sm', '--font-size-sm', 'font-size--sm', '13px'],
   ['md', '--font-size-md', 'font-size--md', '14px'],
-  ['base', '--font-size-base', 'font-size--base', '15px'],
-  ['lg', '--font-size-lg', 'font-size--lg', '16px'],
-  ['xl', '--font-size-xl', 'font-size--xl', '17px'],
+  ['base', '--font-size-base', 'font-size--base', '16px'],
+  ['lg', '--font-size-lg', 'font-size--lg', '17px'],
+  ['xl', '--font-size-xl', 'font-size--xl', '18px'],
   ['stat', '--font-size-stat', 'font-size--stat', '28px'],
 ]
 

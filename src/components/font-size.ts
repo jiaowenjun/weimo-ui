@@ -40,7 +40,7 @@ export const fontSizeScaleMap = {
   base: {
     label: '正文字号',
     token: '--font-size-base',
-    value: '15px',
+    value: '16px',
     className: 'font-size--base',
     description: '笔记正文、输入正文和主要内容区默认使用的阅读字号。',
     uiUsage: 'Card、Md、TagBread、ImageUploader title、TagTree',
@@ -49,7 +49,7 @@ export const fontSizeScaleMap = {
   lg: {
     label: '强调字号',
     token: '--font-size-lg',
-    value: '16px',
+    value: '17px',
     className: 'font-size--lg',
     description: '弹层标题和关键操作标题使用的轻强调字号。',
     uiUsage: 'ActionDialog title、Dialog title',
@@ -58,7 +58,7 @@ export const fontSizeScaleMap = {
   xl: {
     label: '分享正文大号',
     token: '--font-size-xl',
-    value: '17px',
+    value: '18px',
     className: 'font-size--xl',
     description: '分享卡片的大号正文和标题使用，保持 Markdown 标题与正文同字号。',
     uiUsage: 'ShareCard large body、ShareCard large heading',
