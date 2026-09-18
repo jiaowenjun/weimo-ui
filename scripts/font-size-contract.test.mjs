@@ -144,7 +144,7 @@ assert.deepEqual(rootStyleItem, styleRegistry, 'registry.json style item must ma
 
 assert.ok(
   manifestSource.includes("id: 'font-size'") &&
-    manifestSource.includes("name: '字体'") &&
+    manifestSource.includes("name: '文字'") &&
     manifestSource.includes("registryName: 'font-size'") &&
     manifestSource.includes("packageExport: './components/font-size'") &&
     manifestSource.includes("group: 'token-style'"),

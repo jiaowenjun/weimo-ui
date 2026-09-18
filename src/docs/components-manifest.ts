@@ -70,7 +70,7 @@ export const componentManifest = [
   },
   {
     id: 'font-size',
-    name: '字体',
+    name: '文字',
     registryName: 'font-size',
     packageExport: './components/font-size',
     group: 'token-style',

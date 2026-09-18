@@ -85,7 +85,7 @@ export const fontSizeDefinition = {
   searchAliases: fontSizeScales.flatMap((scale) => {
     const item = fontSizeScaleMap[scale]
 
-    return ['FontSize', '字体', '字号', scale, item.label, item.token, item.description, item.uiUsage, item.bijiUsage]
+    return ['FontSize', '文字', '字体', '字号', scale, item.label, item.token, item.description, item.uiUsage, item.bijiUsage]
   }).concat(
     previewTextColorTones.flatMap((tone) => {
       const item = textColorToneMap[tone]

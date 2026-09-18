@@ -27,6 +27,7 @@ describe('component docs search', () => {
     expect(resultIds('背景')).toContain('bg-color')
     expect(resultIds('背景色')).toContain('bg-color')
     expect(resultIds('背景模糊度')).toContain('bg-color')
+    expect(resultIds('文字')).toContain('font-size')
     expect(resultIds('字体')).toContain('font-size')
     expect(resultIds('字号')).toContain('font-size')
     expect(resultIds('边框')).toContain('border-color')
