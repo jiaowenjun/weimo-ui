@@ -5,9 +5,9 @@ import {
   getBorderColorToken,
   type BorderColorTone,
 } from '../../components/border-color'
-import { CardPanel } from '../../components/coss/card'
 import type { ComponentDefinition } from '../component-docs'
 import { sortByThemeLightness, useIsDarkTheme } from '../token-preview-color'
+import { TokenPreviewCard } from '../token-preview-card'
 
 type BorderContextToken = {
   label: string
@@ -72,28 +72,26 @@ function BorderColorPreview() {
   )
 
   return (
-    <div className="border-color-preview" aria-label="边框色档位预览（按亮度排序）">
+    <>
       {orderedTones.map((tone) => {
         const item = borderColorToneMap[tone]
 
         return (
-          <CardPanel className="border-color-preview__panel" key={tone}>
-            <div className="border-color-preview__meta">
-              <span className="border-color-preview__label">{item.label}</span>
-              <code className="border-color-preview__token">
-                {getBorderColorToken(tone)}:{' '}
-                <span className="border-color-preview__token-value--light">{item.value.light}</span>
-                <span className="border-color-preview__token-value--dark">{item.value.dark}</span>
-              </code>
-            </div>
+          <TokenPreviewCard
+            darkValue={item.value.dark}
+            key={tone}
+            label={item.label}
+            token={getBorderColorToken(tone)}
+            value={item.value.light}
+          >
             <div
               className={`border-color-preview__sample ${getBorderColorClassName(tone)}`}
               aria-hidden="true"
             />
-          </CardPanel>
+          </TokenPreviewCard>
         )
       })}
-    </div>
+    </>
   )
 }
 

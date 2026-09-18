@@ -1,6 +1,7 @@
 import { Md } from '../../components/md'
 import { CardPanel } from '../../components/coss/card'
 import type { ComponentDefinition } from '../component-docs'
+import { TokenPreviewCard } from '../token-preview-card'
 import { mdRenderSample } from './markdown-sample'
 
 type MarkdownTokenPreview =
@@ -127,34 +128,26 @@ function renderMarkdownTokenPreview(preview: MarkdownTokenPreview) {
 
 function MdStylePreview() {
   return (
-    <div className="md-style-preview" aria-label="Markdown样式档位预览">
+    <>
       {markdownStyleTokens.map((item) => (
-        <CardPanel className="md-style-preview__panel" key={item.token}>
-          <div className="md-style-preview__meta">
-            <span className="md-style-preview__label">{item.role}</span>
-            <code className="md-style-preview__token">
-              {item.token}:{' '}
-              {typeof item.value === 'string' ? (
-                item.value
-              ) : (
-                <>
-                  <span className="md-style-preview__token-value--light">{item.value.light}</span>
-                  <span className="md-style-preview__token-value--dark">{item.value.dark}</span>
-                </>
-              )}
-            </code>
-          </div>
+        <TokenPreviewCard
+          darkValue={typeof item.value === 'string' ? undefined : item.value.dark}
+          key={item.token}
+          label={item.role}
+          token={item.token}
+          value={typeof item.value === 'string' ? item.value : item.value.light}
+        >
           <div className="md-style-preview__effect" aria-hidden="true">
             {renderMarkdownTokenPreview(item.preview)}
           </div>
-        </CardPanel>
+        </TokenPreviewCard>
       ))}
       <CardPanel className="md-style-preview__scene">
         <div className="md-style-preview__render">
           <Md content={mdRenderSample} />
         </div>
       </CardPanel>
-    </div>
+    </>
   )
 }
 

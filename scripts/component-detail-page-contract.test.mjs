@@ -73,6 +73,7 @@ function assertDecodablePngDataUrl(dataUrl, message) {
 }
 
 const detailPageSource = readProjectFile('src/docs/pages/component-detail-page.tsx')
+const docsShellSource = readProjectFile('src/docs/docs-shell.tsx')
 const componentDocsSource = readProjectFile('src/docs/component-docs.tsx')
 const shareCardDefinitionSource = readProjectFile('src/docs/component-definitions/share-card.tsx')
 const mdRenderDefinitionSource = readProjectFile('src/docs/component-definitions/md-render.tsx')
@@ -122,6 +123,15 @@ const iconPreviewRowBlock = blockFor(css, '.icon-preview__row')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 
 assert.ok(
+  docsShellSource.includes('{selected ? <h1 className="docs-top-bar__title">{selected.name}</h1> : null}') &&
+    !detailPageSource.includes('<h1') &&
+    !detailPageSource.includes('doc-page__header') &&
+    !css.includes('.doc-page__title') &&
+    css.includes('.docs-top-bar__title'),
+  'component titles must render in the TopBar instead of consuming detail-page content space.',
+)
+
+assert.ok(
   !existsSync(join(root, 'src/docs/component-definitions/editable-card.tsx')),
   'Removed EditableCard detail docs definition must not exist.',
 )
@@ -158,9 +168,10 @@ for (const snippet of [
 }
 
 assert.ok(
-  detailPageSource.includes("{selected.frame === 'plain' ? (") &&
+  detailPageSource.includes("if (selected.frame === 'plain')") &&
+    detailPageSource.includes('return selected.preview(previewContext)') &&
     componentDocsSource.includes("frame?: 'stage' | 'plain'"),
-  'component detail page must let frame: plain definitions skip the demo-block stage wrapper and render their own preview surfaces.',
+  'component detail page must return plain previews directly without a doc-page or demo-block wrapper.',
 )
 
 assert.ok(
@@ -402,12 +413,13 @@ assert.ok(
   'GlassIconButton detail page must render a manual disabled-state transition preview across light and dark backgrounds.',
 )
 assert.ok(
-    borderColorDefinitionSource.includes("frame: 'plain',") &&
-    borderColorDefinitionSource.includes('<CardPanel className="border-color-preview__panel"') &&
-    borderColorDefinitionSource.includes('contextTokens={borderContextTokens[tone]}') &&
+  borderColorDefinitionSource.includes("frame: 'plain',") &&
+    borderColorDefinitionSource.includes('<TokenPreviewCard') &&
+    !borderColorDefinitionSource.includes('<TokenPreviewDetails') &&
+    borderColorDefinitionSource.includes('...contexts.flatMap') &&
     borderColorDefinitionSource.includes('--glass-surface-border') &&
     borderColorDefinitionSource.includes('--color-border-divider-menu-on-light'),
-  'BorderColor detail page must retain background-aware token variants inside the card layout.',
+  'BorderColor detail page must keep background-aware token variants searchable without rendering redundant prose.',
 )
 assert.ok(
     ghostIconButtonDefinitionSource.includes("import { GhostIconButton } from '../../components/ghost-icon-button'") &&

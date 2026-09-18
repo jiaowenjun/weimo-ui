@@ -4,8 +4,8 @@ import {
   getBorderRadiusToken,
   getBorderRadiusValue,
 } from '../../components/border-radius'
-import { CardPanel } from '../../components/coss/card'
 import type { ComponentDefinition } from '../component-docs'
+import { TokenPreviewCard } from '../token-preview-card'
 
 export const borderRadiusDefinition = {
   id: 'border-radius',
@@ -17,26 +17,25 @@ export const borderRadiusDefinition = {
     return ['BorderRadius', scale, item.label, item.token, item.description, item.uiUsage, item.bijiUsage]
   }),
   preview: () => (
-    <div className="border-radius-preview" aria-label="边框圆角档位预览">
+    <>
       {borderRadiusScales.map((scale) => {
         const item = borderRadiusScaleMap[scale]
 
         return (
-          <CardPanel className="border-radius-preview__panel" key={scale}>
-            <div className="border-radius-preview__meta">
-              <span className="border-radius-preview__label">{item.label}</span>
-              <code className="border-radius-preview__token">
-                {getBorderRadiusToken(scale)}: {getBorderRadiusValue(scale)}
-              </code>
-            </div>
+          <TokenPreviewCard
+            key={scale}
+            label={item.label}
+            token={getBorderRadiusToken(scale)}
+            value={getBorderRadiusValue(scale)}
+          >
             <div
               className="border-radius-preview__sample"
               style={{ borderRadius: `var(${getBorderRadiusToken(scale)})` }}
               aria-hidden="true"
             />
-          </CardPanel>
+          </TokenPreviewCard>
         )
       })}
-    </div>
+    </>
   ),
 } satisfies ComponentDefinition

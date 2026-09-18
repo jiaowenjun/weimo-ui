@@ -17,8 +17,12 @@ const packageJson = JSON.parse(readProjectFile('package.json'))
 const readmeSource = readProjectFile('README.md')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const componentDocsSource = readProjectFile('src/docs/component-docs.tsx')
+const detailPageSource = readProjectFile('src/docs/pages/component-detail-page.tsx')
+const docsShellSource = readProjectFile('src/docs/docs-shell.tsx')
 const searchSource = readProjectFile('src/docs/search-component-docs.ts')
 const colorSource = readProjectFile('src/docs/token-preview-color.ts')
+const cardSource = readProjectFile('src/docs/token-preview-card.tsx')
+const cardCss = readProjectFile('src/docs/token-preview-card.css')
 const appCss = readProjectFile('src/App.css')
 
 assert.ok(
@@ -57,6 +61,32 @@ assert.ok(
 )
 
 for (const snippet of [
+  "import { CardPanel } from '../components/coss/card'",
+  'export type TokenPreviewCardProps',
+  'export function TokenPreviewCard',
+  'darkValue?: ReactNode',
+  'className="token-preview-card__meta"',
+  'className="token-preview-card__label"',
+  'className="token-preview-card__token"',
+  'className="token-preview-card__value--light"',
+  'className="token-preview-card__value--dark"',
+  '{children}',
+]) {
+  assert.ok(cardSource.includes(snippet), `TokenPreviewCard must include ${snippet}.`)
+}
+
+for (const selector of [
+  '.token-preview-card',
+  '.token-preview-card__meta',
+  '.token-preview-card__label',
+  '.token-preview-card__token',
+  '.token-preview-card__value--dark',
+  '.dark .token-preview-card__value--light',
+]) {
+  assert.ok(cardCss.includes(selector), `TokenPreviewCard styles must include ${selector}.`)
+}
+
+for (const snippet of [
   'useSyncExternalStore',
   'parseColorLightness',
   'effectiveColorLightness',
@@ -77,19 +107,43 @@ const semanticTokenDefinitions = [
   'text-color',
 ]
 
+const tokenPreviewWrappers = {
+  'bg-blur': 'bg-blur-preview',
+  'bg-color': 'bg-color-preview',
+  'border-color': 'border-color-preview',
+  'border-radius': 'border-radius-preview',
+  'font-size': 'font-size-preview',
+  'heat-color': 'heat-color-preview',
+  pressable: 'pressable-preview',
+  'text-color': 'text-color-preview',
+}
+
 for (const componentId of semanticTokenDefinitions) {
   const definitionSource = readProjectFile(`src/docs/component-definitions/${componentId}.tsx`)
 
   assert.ok(
-    definitionSource.includes("frame: 'plain',") &&
+      definitionSource.includes("frame: 'plain',") &&
       definitionSource.includes('searchAliases:') &&
-      definitionSource.includes('<CardPanel') &&
+      definitionSource.includes("import { TokenPreviewCard } from '../token-preview-card'") &&
+      definitionSource.includes('<TokenPreviewCard') &&
       !definitionSource.includes('description={item.description}') &&
       !definitionSource.includes('uiUsage={item.uiUsage}') &&
-      !definitionSource.includes('bijiUsage={item.bijiUsage}'),
-    `${componentId} must keep its searchable card layout without rendering redundant prose.`,
+      !definitionSource.includes('bijiUsage={item.bijiUsage}') &&
+      !definitionSource.includes(`className="${tokenPreviewWrappers[componentId]}"`) &&
+      !appCss.includes(`\n.${tokenPreviewWrappers[componentId]} {`),
+    `${componentId} must render searchable cards directly without a preview wrapper or redundant prose.`,
   )
 }
+
+assert.ok(
+  docsShellSource.includes("const tokenPreview = selected?.group === 'token-style'") &&
+    docsShellSource.includes("'app-shell__content app-shell__content--token-grid'") &&
+    docsShellSource.includes('data-component-id={selected?.id}') &&
+    detailPageSource.includes("if (selected.frame === 'plain')") &&
+    detailPageSource.includes('return selected.preview(previewContext)') &&
+    appCss.includes('.app-shell__content--token-grid'),
+  'token cards must be direct app-shell__content children and use the content-level grid.',
+)
 
 const bgBlurDefinitionSource = readProjectFile('src/docs/component-definitions/bg-blur.tsx')
 const borderColorDefinitionSource = readProjectFile('src/docs/component-definitions/border-color.tsx')
@@ -111,8 +165,11 @@ const mdDefinitionSource = readProjectFile('src/docs/component-definitions/md.ts
 assert.ok(
   mdDefinitionSource.includes("frame: 'plain',") &&
     mdDefinitionSource.includes('searchAliases:') &&
-    mdDefinitionSource.includes('<CardPanel') &&
-    mdDefinitionSource.includes('<Md content={mdRenderSample} />'),
+    mdDefinitionSource.includes('<TokenPreviewCard') &&
+    mdDefinitionSource.includes('<CardPanel className="md-style-preview__scene"') &&
+    mdDefinitionSource.includes('<Md content={mdRenderSample} />') &&
+    !mdDefinitionSource.includes('className="md-style-preview"') &&
+    !appCss.includes('\n.md-style-preview {'),
   'Markdown token docs must remain token-first, searchable, and grounded in a real rendering sample.',
 )
 

@@ -59,8 +59,7 @@ const rootRegistry = JSON.parse(readProjectFile('registry.json'))
 const standaloneRegistry = JSON.parse(readProjectFile('registry/md.json'))
 const rootRegistryItem = rootRegistry.items.find((item) => item.name === 'md')
 
-const mdPreviewBlock = cssBlockFor(appCss, '.md-style-preview')
-const mdPanelBlock = cssBlockFor(appCss, '.md-style-preview__panel')
+const tokenGridBlock = cssBlockFor(appCss, '.app-shell__content--token-grid')
 const mdSceneBlock = cssBlockFor(appCss, '.md-style-preview__scene')
 const mdRenderBlock = cssBlockFor(appCss, '.md-style-preview__render')
 const mdEffectBlock = cssBlockFor(appCss, '.md-style-preview__effect')
@@ -95,17 +94,17 @@ assert.ok(
 for (const snippet of [
   "import { Md } from '../../components/md'",
   "import { CardPanel } from '../../components/coss/card'",
+  "import { TokenPreviewCard } from '../token-preview-card'",
   "import { mdRenderSample } from './markdown-sample'",
   "id: 'md'",
   "frame: 'plain',",
   'markdownStyleTokens',
   'renderMarkdownTokenPreview',
-  'className="md-style-preview"',
-  'aria-label="Markdown样式档位预览"',
-  '<CardPanel className="md-style-preview__panel"',
+  '<TokenPreviewCard',
+  'darkValue={typeof item.value === \'string\' ? undefined : item.value.dark}',
+  'label={item.role}',
+  'token={item.token}',
   'className="md-style-preview__effect"',
-  'md-style-preview__token-value--light',
-  'md-style-preview__token-value--dark',
   '<CardPanel className="md-style-preview__scene"',
   '<Md content={mdRenderSample} />',
   '--font-size-md',
@@ -1037,8 +1036,6 @@ assert.ok(
 )
 
 for (const snippet of [
-  '.md-style-preview',
-  '.md-style-preview__panel',
   '.md-style-preview__scene',
   '.md-style-preview__render',
   '.md-style-preview__effect',
@@ -1068,14 +1065,11 @@ for (const forbidden of [
 }
 
 assert.ok(
-  mdPreviewBlock.includes('width: min(100%, 920px);') &&
-    mdPreviewBlock.includes('repeat(auto-fill, minmax(min(100%, 300px), 1fr))'),
-  'Md style preview must use the shared token-page card grid.',
-)
-assert.ok(
-  mdPanelBlock.includes('border: 1px solid var(--color-border);') &&
-    mdPanelBlock.includes('background: var(--color-bg-card);'),
-  'Md token cards must use the shared CardPanel chrome.',
+  tokenGridBlock.includes('display: grid;') &&
+    tokenGridBlock.includes('repeat(auto-fill, minmax(min(100%, 300px), 1fr))') &&
+    !definitionSource.includes('className="md-style-preview"') &&
+    !appCss.includes('\n.md-style-preview {'),
+  'Md style cards must use the content-level token grid without a preview wrapper.',
 )
 assert.ok(
   mdSceneBlock.includes('grid-column: 1 / -1;'),

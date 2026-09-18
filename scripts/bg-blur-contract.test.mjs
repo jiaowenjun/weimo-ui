@@ -240,20 +240,22 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'bg-blur'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { CardPanel } from '../../components/coss/card'") &&
+    docsDefinitionSource.includes("import { TokenPreviewCard } from '../token-preview-card'") &&
     docsDefinitionSource.includes('bgBlurTones.map') &&
     docsDefinitionSource.includes('bgBlurToneMap[tone]') &&
     docsDefinitionSource.includes('getBgBlurClassName(tone)') &&
     docsDefinitionSource.includes('getBgBlurBlurToken(tone)') &&
     docsDefinitionSource.includes('getBgBlurBlurValue(tone)') &&
-    docsDefinitionSource.includes('<CardPanel className="bg-blur-preview__panel"') &&
+    docsDefinitionSource.includes('<TokenPreviewCard') &&
+    docsDefinitionSource.includes('label={item.label}') &&
+    docsDefinitionSource.includes('token={getBgBlurBlurToken(tone)}') &&
+    docsDefinitionSource.includes('value={getBgBlurBlurValue(tone)}') &&
     docsDefinitionSource.includes('bg-blur-preview__sample') &&
     docsDefinitionSource.includes('bg-blur-preview__overlay') &&
-    docsDefinitionSource.includes('bg-blur-preview__value') &&
     !docsDefinitionSource.includes('bg-blur-preview__group') &&
     !docsDefinitionSource.includes('bg-blur-preview__stage') &&
     !docsDefinitionSource.includes('summary:'),
-  'BgBlur docs definition must render one CardPanel per blur tone driven by the shared tone map, without a redundant page summary.',
+  'BgBlur docs definition must render one TokenPreviewCard per tone driven by the shared tone map.',
 )
 assert.ok(
   !docsDefinitionSource.includes('<span>text</span>') && !docsDefinitionSource.includes('>text<'),
@@ -271,16 +273,12 @@ assert.ok(
 )
 
 assert.ok(
-  appCss.includes('.bg-blur-preview') &&
-    appCss.includes('.bg-blur-preview__panel') &&
-    appCss.includes('.bg-blur-preview__sample') &&
+  appCss.includes('.bg-blur-preview__sample') &&
     appCss.includes('.bg-blur-preview__backdrop') &&
     appCss.includes('.bg-blur-preview__overlay') &&
-    appCss.includes('.bg-blur-preview__label') &&
-    appCss.includes('.bg-blur-preview__value') &&
     !appCss.includes('.bg-blur-preview__group') &&
     !appCss.includes('.bg-blur-preview__stage'),
-  'App.css must include scoped BgBlur detail-page preview styles.',
+  'App.css must include only the BgBlur-specific preview-effect styles.',
 )
 assert.ok(
   sampleBlock.includes('position: relative;') &&

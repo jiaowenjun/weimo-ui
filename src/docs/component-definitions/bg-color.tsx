@@ -4,9 +4,9 @@ import {
   getBgColorToken,
   type BgColorTone,
 } from '../../components/bg-color'
-import { CardPanel } from '../../components/coss/card'
 import type { ComponentDefinition } from '../component-docs'
 import { sortByThemeLightness, useIsDarkTheme } from '../token-preview-color'
+import { TokenPreviewCard } from '../token-preview-card'
 
 const bgColorPreviewTones = [
   'page',
@@ -40,21 +40,19 @@ function BgColorPreview() {
   )
 
   return (
-    <div className="bg-color-preview" aria-label="背景色档位预览（按亮度排序）">
+    <>
       {orderedTones.map((tone) => {
         const item = bgColorToneMap[tone]
         const isTransparent = hasTransparentBgColorValue(item)
 
         return (
-          <CardPanel className="bg-color-preview__panel" key={tone}>
-            <div className="bg-color-preview__meta">
-              <span className="bg-color-preview__label">{item.label}</span>
-              <code className="bg-color-preview__token">
-                {getBgColorToken(tone)}:{' '}
-                <span className="bg-color-preview__token-value--light">{item.value.light}</span>
-                <span className="bg-color-preview__token-value--dark">{item.value.dark}</span>
-              </code>
-            </div>
+          <TokenPreviewCard
+            darkValue={item.value.dark}
+            key={tone}
+            label={item.label}
+            token={getBgColorToken(tone)}
+            value={item.value.light}
+          >
             <div className="bg-color-preview__sample" aria-hidden="true">
               {isTransparent ? <span className="bg-color-preview__sample-backdrop" /> : null}
               <span
@@ -67,10 +65,10 @@ function BgColorPreview() {
                   .join(' ')}
               />
             </div>
-          </CardPanel>
+          </TokenPreviewCard>
         )
       })}
-    </div>
+    </>
   )
 }
 

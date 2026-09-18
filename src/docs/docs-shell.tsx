@@ -117,6 +117,7 @@ export function DocsShell() {
   const selected = activeComponentId
     ? componentDocs.find((doc) => doc.id === activeComponentId)
     : undefined
+  const tokenPreview = selected?.group === 'token-style'
 
   useEffect(() => {
     if (theme !== 'system') {
@@ -194,13 +195,16 @@ export function DocsShell() {
   })
 
   const topBarLeftSlot = (
-    <GlassIconButton
-      className="docs-top-bar__sidebar-trigger"
-      aria-label="打开侧边栏"
-      onClick={() => setSidebarOpen(true)}
-    >
-      <Menu />
-    </GlassIconButton>
+    <>
+      <GlassIconButton
+        className="docs-top-bar__sidebar-trigger"
+        aria-label="打开侧边栏"
+        onClick={() => setSidebarOpen(true)}
+      >
+        <Menu />
+      </GlassIconButton>
+      {selected ? <h1 className="docs-top-bar__title">{selected.name}</h1> : null}
+    </>
   )
   const topBarRightSlot = (
     <>
@@ -253,7 +257,12 @@ export function DocsShell() {
         <div className="app-shell__layout">
           <div aria-hidden="true" className="app-shell__sidebar-space" />
 
-          <div className="app-shell__content">
+          <div
+            className={tokenPreview
+              ? 'app-shell__content app-shell__content--token-grid'
+              : 'app-shell__content'}
+            data-component-id={selected?.id}
+          >
             <Outlet context={outletContext} />
           </div>
         </div>

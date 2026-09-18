@@ -5,8 +5,8 @@ import {
   getFontSizeToken,
   getFontSizeValue,
 } from '../../components/font-size'
-import { CardPanel } from '../../components/coss/card'
 import type { ComponentDefinition } from '../component-docs'
+import { TokenPreviewCard } from '../token-preview-card'
 
 export const fontSizeDefinition = {
   id: 'font-size',
@@ -18,24 +18,23 @@ export const fontSizeDefinition = {
     return ['FontSize', scale, item.label, item.token, item.description, item.uiUsage, item.bijiUsage]
   }),
   preview: () => (
-    <div className="font-size-preview" aria-label="字号档位预览">
+    <>
       {fontSizeScales.map((scale) => {
         const item = fontSizeScaleMap[scale]
 
         return (
-          <CardPanel className="font-size-preview__panel" key={scale}>
-            <div className="font-size-preview__meta">
-              <span className="font-size-preview__label">{item.label}</span>
-              <code className="font-size-preview__token">
-                {getFontSizeToken(scale)}: {getFontSizeValue(scale)}
-              </code>
-            </div>
+          <TokenPreviewCard
+            key={scale}
+            label={item.label}
+            token={getFontSizeToken(scale)}
+            value={getFontSizeValue(scale)}
+          >
             <p className={`font-size-preview__sample ${getFontSizeClassName(scale)}`} aria-hidden="true">
               Aa
             </p>
-          </CardPanel>
+          </TokenPreviewCard>
         )
       })}
-    </div>
+    </>
   ),
 } satisfies ComponentDefinition

@@ -115,7 +115,8 @@ const markdownEditorTableWrapperBlock = blockFor(
 const demoBlockPanelBlock = blockFor(appCss, '.demo-block__panel')
 const mdViewDocsPreviewFrameBlock = blockFor(appCss, '.md-view-docs-preview__frame')
 const tagTreePreviewPanelBlock = firstBlockFor(appCss, '.tag-tree-preview__panel')
-const borderColorPreviewPanelBlock = firstBlockFor(appCss, '.border-color-preview__panel')
+const tokenPreviewCardCss = readProjectFile('src/docs/token-preview-card.css')
+const tokenPreviewCardBlock = firstBlockFor(tokenPreviewCardCss, '.token-preview-card')
 const tagBarPreviewPanelBlock = blockFor(appCss, '.tag-bar-preview__panel')
 const sampleBlock = blockFor(appCss, '.border-color-preview__sample')
 
@@ -381,7 +382,7 @@ assert.ok(
     demoBlockPanelBlock.includes('border: 1px solid var(--color-border);') &&
     mdViewDocsPreviewFrameBlock.includes('border: 1px solid var(--color-border);') &&
     tagTreePreviewPanelBlock.includes('border: 1px solid var(--color-border);') &&
-    borderColorPreviewPanelBlock.includes('border: 1px solid var(--color-border);') &&
+    tokenPreviewCardBlock.includes('border: 1px solid var(--color-border);') &&
     tagBarPreviewPanelBlock.includes('border: 1px solid var(--color-border);'),
   'Default BorderColor usage must cover surface/container outer borders and docs preview frames.',
 )
@@ -408,17 +409,19 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'border-color'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { CardPanel } from '../../components/coss/card'") &&
+    docsDefinitionSource.includes("import { TokenPreviewCard } from '../token-preview-card'") &&
     docsDefinitionSource.includes("from '../token-preview-color'") &&
     docsDefinitionSource.includes('sortByThemeLightness(') &&
     docsDefinitionSource.includes('orderedTones.map') &&
     docsDefinitionSource.includes('borderColorToneMap[tone]') &&
     docsDefinitionSource.includes('getBorderColorClassName(tone)') &&
     docsDefinitionSource.includes('getBorderColorToken(tone)') &&
-    docsDefinitionSource.includes('<CardPanel className="border-color-preview__panel"') &&
+    docsDefinitionSource.includes('<TokenPreviewCard') &&
+    docsDefinitionSource.includes('darkValue={item.value.dark}') &&
+    docsDefinitionSource.includes('label={item.label}') &&
+    docsDefinitionSource.includes('token={getBorderColorToken(tone)}') &&
+    docsDefinitionSource.includes('value={item.value.light}') &&
     docsDefinitionSource.includes('border-color-preview__sample') &&
-    docsDefinitionSource.includes('border-color-preview__token-value--light') &&
-    docsDefinitionSource.includes('border-color-preview__token-value--dark') &&
     !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     docsDefinitionSource.includes('--color-border-disable-on-light') &&
     docsDefinitionSource.includes('--color-border-divider-menu-on-dark') &&
@@ -433,19 +436,12 @@ assert.ok(
   'BorderColor docs definition must index background-aware tokens without rendering redundant prose.',
 )
 assert.ok(
-  appCss.includes('.border-color-preview') &&
-    appCss.includes('.border-color-preview__panel') &&
-    appCss.includes('.border-color-preview__meta') &&
-    appCss.includes('.border-color-preview__label') &&
-    appCss.includes('.border-color-preview__token') &&
-    appCss.includes('.border-color-preview__sample') &&
-    appCss.includes('.border-color-preview__token-value--dark') &&
-    appCss.includes('.dark .border-color-preview__token-value--light') &&
+  appCss.includes('.border-color-preview__sample') &&
     !appCss.includes('.border-color-preview__row') &&
     !appCss.includes('.border-color-preview__identity') &&
     !appCss.includes('.border-color-preview__description') &&
     !appCss.includes('.border-color-preview__value'),
-  'App.css must include scoped BorderColor detail-page preview styles.',
+  'App.css must include only the BorderColor-specific preview-effect styles.',
 )
 assert.ok(
   sampleBlock.includes('border: 1px solid') &&

@@ -50,8 +50,7 @@ const heatmapRegistryItem = readJson('registry/heatmap.json')
 const rootHeatColorItem = rootRegistry.items.find((item) => item.name === 'heat-color')
 const rootHeatmapItem = rootRegistry.items.find((item) => item.name === 'heatmap')
 const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
-const heatColorPreviewBlock = cssBlockFor(appCss, '.heat-color-preview')
-const heatColorPreviewPanelBlock = cssBlockFor(appCss, '.heat-color-preview__panel')
+const tokenGridBlock = cssBlockFor(appCss, '.app-shell__content--token-grid')
 const heatColorSampleBlock = cssBlockFor(appCss, '.heat-color-preview__sample')
 
 assert.equal(
@@ -154,22 +153,24 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'heat-color'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { CardPanel } from '../../components/coss/card'") &&
+    docsDefinitionSource.includes("import { TokenPreviewCard } from '../token-preview-card'") &&
     docsDefinitionSource.includes('heatColorLevels.map') &&
     docsDefinitionSource.includes('heatColorMap[level]') &&
     docsDefinitionSource.includes('getHeatColorClassName(level)') &&
     docsDefinitionSource.includes('getHeatColorToken(level)') &&
-    docsDefinitionSource.includes('<CardPanel className="heat-color-preview__panel"') &&
+    docsDefinitionSource.includes('<TokenPreviewCard') &&
+    docsDefinitionSource.includes('darkValue={item.value.dark}') &&
+    docsDefinitionSource.includes('label={item.label}') &&
+    docsDefinitionSource.includes('token={getHeatColorToken(level)}') &&
+    docsDefinitionSource.includes('value={item.value.light}') &&
     docsDefinitionSource.includes('heat-color-preview__sample') &&
-    docsDefinitionSource.includes('heat-color-preview__token-value--light') &&
-    docsDefinitionSource.includes('heat-color-preview__token-value--dark') &&
     !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     !docsDefinitionSource.includes('summary:') &&
     !docsDefinitionSource.includes('heat-color-preview__row') &&
     !docsDefinitionSource.includes('heat-color-preview__description') &&
     !docsDefinitionSource.includes('uiUsage') &&
     !docsDefinitionSource.includes('bijiUsage'),
-  'HeatColor docs definition must render one CardPanel per level with theme-aware token values.',
+  'HeatColor docs definition must render one TokenPreviewCard per level with theme-aware values.',
 )
 assert.equal(
   docsDefinitionSource.match(/<HeatColor\b/g)?.length ?? 0,
@@ -177,16 +178,10 @@ assert.equal(
   'HeatColor docs preview must render one BorderColor-style row per level instead of an extra horizontal HeatColor legend.',
 )
 assert.ok(
-  heatColorPreviewBlock.includes('width: min(100%, 920px);') &&
-    heatColorPreviewBlock.includes('repeat(auto-fill, minmax(min(100%, 300px), 1fr))') &&
-    heatColorPreviewBlock.includes('align-self: center;'),
-  'HeatColor detail preview must use the shared token-page card grid sizing.',
-)
-assert.ok(
-  heatColorPreviewPanelBlock.includes('border: 1px solid var(--color-border);') &&
-    heatColorPreviewPanelBlock.includes('background: var(--color-bg-card);') &&
-    heatColorPreviewPanelBlock.includes('box-shadow: var(--shadow-card);'),
-  'HeatColor detail cards must mirror the shared CardPanel preview chrome.',
+  tokenGridBlock.includes('display: grid;') &&
+    tokenGridBlock.includes('repeat(auto-fill, minmax(min(100%, 300px), 1fr))') &&
+    !docsDefinitionSource.includes('className="heat-color-preview"'),
+  'HeatColor cards must use the content-level token grid without a preview wrapper.',
 )
 assert.ok(
   heatColorSampleBlock.includes('height: 64px;') &&

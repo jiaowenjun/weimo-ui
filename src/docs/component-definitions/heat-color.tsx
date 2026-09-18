@@ -4,33 +4,31 @@ import {
   getHeatColorClassName,
   getHeatColorToken,
 } from '../../components/heat-color'
-import { CardPanel } from '../../components/coss/card'
 import type { ComponentDefinition } from '../component-docs'
+import { TokenPreviewCard } from '../token-preview-card'
 
 function HeatColorPreview() {
   return (
-    <div className="heat-color-preview" aria-label="热力图色档位预览">
+    <>
       {heatColorLevels.map((level) => {
         const item = heatColorMap[level]
 
         return (
-          <CardPanel className="heat-color-preview__panel" key={level}>
-            <div className="heat-color-preview__meta">
-              <span className="heat-color-preview__label">{item.label}</span>
-              <code className="heat-color-preview__token">
-                {getHeatColorToken(level)}:{' '}
-                <span className="heat-color-preview__token-value--light">{item.value.light}</span>
-                <span className="heat-color-preview__token-value--dark">{item.value.dark}</span>
-              </code>
-            </div>
+          <TokenPreviewCard
+            darkValue={item.value.dark}
+            key={level}
+            label={item.label}
+            token={getHeatColorToken(level)}
+            value={item.value.light}
+          >
             <div
               aria-hidden="true"
               className={`heat-color-preview__sample ${getHeatColorClassName(level)}`}
             />
-          </CardPanel>
+          </TokenPreviewCard>
         )
       })}
-    </div>
+    </>
   )
 }
 

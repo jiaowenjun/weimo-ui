@@ -153,38 +153,35 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'border-radius'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { CardPanel } from '../../components/coss/card'") &&
+    docsDefinitionSource.includes("import { TokenPreviewCard } from '../token-preview-card'") &&
     docsDefinitionSource.includes('borderRadiusScales.map') &&
     docsDefinitionSource.includes('borderRadiusScaleMap[scale]') &&
     docsDefinitionSource.includes('getBorderRadiusToken(scale)') &&
     docsDefinitionSource.includes('getBorderRadiusValue(scale)') &&
-    docsDefinitionSource.includes('<CardPanel className="border-radius-preview__panel"') &&
+    docsDefinitionSource.includes('<TokenPreviewCard') &&
+    docsDefinitionSource.includes('label={item.label}') &&
+    docsDefinitionSource.includes('token={getBorderRadiusToken(scale)}') &&
+    docsDefinitionSource.includes('value={getBorderRadiusValue(scale)}') &&
     docsDefinitionSource.includes('border-radius-preview__sample') &&
-    docsDefinitionSource.includes('{getBorderRadiusToken(scale)}: {getBorderRadiusValue(scale)}') &&
     !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     !docsDefinitionSource.includes('summary:') &&
     !docsDefinitionSource.includes('border-radius-preview__row') &&
     !docsDefinitionSource.includes('border-radius-preview__notes') &&
     !docsDefinitionSource.includes('border-radius-preview__description') &&
     !docsDefinitionSource.includes('--radius-card'),
-  'BorderRadius docs definition must render each scale with its value and no redundant prose.',
+  'BorderRadius docs definition must render each scale with TokenPreviewCard.',
 )
 
 const sampleBlock = blockFor(appCss, '.border-radius-preview__sample')
 
 assert.ok(
-  appCss.includes('.border-radius-preview') &&
-    appCss.includes('.border-radius-preview__panel') &&
-    appCss.includes('.border-radius-preview__meta') &&
-    appCss.includes('.border-radius-preview__label') &&
-    appCss.includes('.border-radius-preview__token') &&
-    appCss.includes('.border-radius-preview__sample') &&
+  appCss.includes('.border-radius-preview__sample') &&
     !appCss.includes('.border-radius-preview__row') &&
     !appCss.includes('.border-radius-preview__notes') &&
     !appCss.includes('.border-radius-preview__identity') &&
     !appCss.includes('.border-radius-preview__description') &&
     !appCss.includes('.border-radius-preview__value'),
-  'App.css must include scoped BorderRadius detail-page preview styles.',
+  'App.css must include only the BorderRadius-specific preview-effect styles.',
 )
 assert.ok(
   sampleBlock.includes('border: 1px solid var(--color-border-emphasis);') &&

@@ -24,22 +24,19 @@ export function ComponentDetailPage() {
     return null
   }
 
+  if (selected.frame === 'plain') {
+    return selected.preview(previewContext)
+  }
+
   return (
     <CossCardFrame className="doc-page">
-      <header className="doc-page__header">
-        <h1 className="doc-page__title">{selected.name}</h1>
-        {selected.summary ? <p className="doc-page__summary">{selected.summary}</p> : null}
-      </header>
+      {selected.summary ? <p className="doc-page__summary">{selected.summary}</p> : null}
 
-      {selected.frame === 'plain' ? (
-        selected.preview(previewContext)
-      ) : (
-        <div className="demo-block">
-          <CossCardPanel className="demo-block__panel preview-stage" data-component-id={selected.id} variant="stage">
-            {selected.preview(previewContext)}
-          </CossCardPanel>
-        </div>
-      )}
+      <div className="demo-block">
+        <CossCardPanel className="demo-block__panel preview-stage" data-component-id={selected.id} variant="stage">
+          {selected.preview(previewContext)}
+        </CossCardPanel>
+      </div>
     </CossCardFrame>
   )
 }

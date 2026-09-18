@@ -339,27 +339,27 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'bg-color'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { CardPanel } from '../../components/coss/card'") &&
+    docsDefinitionSource.includes("import { TokenPreviewCard } from '../token-preview-card'") &&
     docsDefinitionSource.includes('bgColorPreviewTones') &&
     docsDefinitionSource.includes('orderedTones.map') &&
     docsDefinitionSource.includes('bgColorToneMap[tone]') &&
     docsDefinitionSource.includes('getBgColorClassName(tone)') &&
     docsDefinitionSource.includes('getBgColorToken(tone)') &&
-    docsDefinitionSource.includes('<CardPanel className="bg-color-preview__panel"') &&
+    docsDefinitionSource.includes('<TokenPreviewCard') &&
+    docsDefinitionSource.includes('darkValue={item.value.dark}') &&
+    docsDefinitionSource.includes('label={item.label}') &&
+    docsDefinitionSource.includes('token={getBgColorToken(tone)}') &&
+    docsDefinitionSource.includes('value={item.value.light}') &&
     docsDefinitionSource.includes('bg-color-preview__sample') &&
     docsDefinitionSource.includes('bg-color-preview__sample-fill') &&
     docsDefinitionSource.includes('const isTransparent = hasTransparentBgColorValue(item)') &&
     docsDefinitionSource.includes('bg-color-preview__sample-backdrop') &&
     docsDefinitionSource.includes('bg-color-preview__sample-fill--framed') &&
-    docsDefinitionSource.includes('bg-color-preview__token-value--light') &&
-    docsDefinitionSource.includes('bg-color-preview__token-value--dark') &&
-    docsDefinitionSource.includes('{item.value.light}') &&
-    docsDefinitionSource.includes('{item.value.dark}') &&
     !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     !docsDefinitionSource.includes('summary:') &&
     !docsDefinitionSource.includes('bg-color-preview__group') &&
     !docsDefinitionSource.includes('bg-color-preview__description'),
-  'BgColor docs definition must render one concise CardPanel per tone without redundant prose.',
+  'BgColor docs definition must render one concise TokenPreviewCard per tone.',
 )
 assert.ok(
   docsDefinitionSource.includes('function hasTransparentBgColorValue') &&
@@ -397,23 +397,15 @@ assert.ok(
 )
 
 assert.ok(
-  appCss.includes('.bg-color-preview') &&
-    appCss.includes('.bg-color-preview__panel') &&
-    appCss.includes('.bg-color-preview__meta') &&
-    appCss.includes('.bg-color-preview__label') &&
-    appCss.includes('.bg-color-preview__token') &&
-    appCss.includes('.bg-color-preview__sample') &&
+  appCss.includes('.bg-color-preview__sample') &&
     appCss.includes('.bg-color-preview__sample-fill') &&
     appCss.includes('.bg-color-preview__sample-backdrop') &&
-    appCss.includes('.bg-color-preview__token-value--dark') &&
-    appCss.includes('.dark .bg-color-preview__token-value--light') &&
-    appCss.includes('.dark .bg-color-preview__token-value--dark') &&
     !appCss.includes('.bg-color-preview__group') &&
     !appCss.includes('.bg-color-preview__row') &&
     !appCss.includes('.bg-color-preview__identity') &&
     !appCss.includes('.bg-color-preview__description') &&
     !appCss.includes('.bg-color-preview__value'),
-  'App.css must include scoped BgColor detail-page preview styles.',
+  'App.css must include only the BgColor-specific preview-effect styles.',
 )
 assert.ok(
   sampleBlock.includes('border: 1px solid var(--color-border);') &&

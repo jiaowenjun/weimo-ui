@@ -227,7 +227,7 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'text-color'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { CardPanel } from '../../components/coss/card'") &&
+    docsDefinitionSource.includes("import { TokenPreviewCard } from '../token-preview-card'") &&
     docsDefinitionSource.includes('const previewTextColorTones = textColorTones.filter((tone) => tone !== \'inherit\')') &&
     docsDefinitionSource.includes('textColorToneMap[tone]') &&
     docsDefinitionSource.includes('function TextColorPreview()') &&
@@ -237,10 +237,12 @@ assert.ok(
     docsDefinitionSource.includes('sortByThemeLightness(') &&
     docsDefinitionSource.includes('getTextColorClassName(tone)') &&
     docsDefinitionSource.includes('getTextColorToken(tone)') &&
-    docsDefinitionSource.includes('<CardPanel className="text-color-preview__panel"') &&
+    docsDefinitionSource.includes('<TokenPreviewCard') &&
+    docsDefinitionSource.includes('darkValue={item.value.dark}') &&
+    docsDefinitionSource.includes('label={item.label}') &&
+    docsDefinitionSource.includes('token={getTextColorToken(tone)}') &&
+    docsDefinitionSource.includes('value={item.value.light}') &&
     docsDefinitionSource.includes('text-color-preview__sample') &&
-    docsDefinitionSource.includes('text-color-preview__token-value--light') &&
-    docsDefinitionSource.includes('text-color-preview__token-value--dark') &&
     !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     !docsDefinitionSource.includes('summary:') &&
     !docsDefinitionSource.includes('text-color-preview__row') &&
@@ -248,19 +250,12 @@ assert.ok(
   'TextColor docs definition must render the tone map preview with concrete token values.',
 )
 assert.ok(
-  appCss.includes('.text-color-preview') &&
-    appCss.includes('.text-color-preview__panel') &&
-    appCss.includes('.text-color-preview__meta') &&
-    appCss.includes('.text-color-preview__label') &&
-    appCss.includes('.text-color-preview__token') &&
-    appCss.includes('.text-color-preview__sample') &&
-    appCss.includes('.text-color-preview__token-value--dark') &&
-    appCss.includes('.dark .text-color-preview__token-value--light') &&
+  appCss.includes('.text-color-preview__sample') &&
     !appCss.includes('.text-color-preview__row') &&
     !appCss.includes('.text-color-preview__identity') &&
     !appCss.includes('.text-color-preview__description') &&
     !appCss.includes('.text-color-preview__value'),
-  'App.css must include scoped TextColor detail-page preview styles.',
+  'App.css must include only the TextColor-specific preview-effect styles.',
 )
 assert.ok(
   !appCss.includes('grid-template-columns: minmax(112px, 0.8fr) minmax(180px, 1.4fr) minmax(150px, 0.9fr) minmax(180px, 1.2fr);'),

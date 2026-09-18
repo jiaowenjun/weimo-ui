@@ -158,34 +158,31 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'font-size'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { CardPanel } from '../../components/coss/card'") &&
+    docsDefinitionSource.includes("import { TokenPreviewCard } from '../token-preview-card'") &&
     docsDefinitionSource.includes('fontSizeScales.map') &&
     docsDefinitionSource.includes('fontSizeScaleMap[scale]') &&
     docsDefinitionSource.includes('getFontSizeClassName(scale)') &&
     docsDefinitionSource.includes('getFontSizeToken(scale)') &&
     docsDefinitionSource.includes('getFontSizeValue(scale)') &&
-    docsDefinitionSource.includes('<CardPanel className="font-size-preview__panel"') &&
+    docsDefinitionSource.includes('<TokenPreviewCard') &&
+    docsDefinitionSource.includes('label={item.label}') &&
+    docsDefinitionSource.includes('token={getFontSizeToken(scale)}') &&
+    docsDefinitionSource.includes('value={getFontSizeValue(scale)}') &&
     docsDefinitionSource.includes('font-size-preview__sample') &&
-    docsDefinitionSource.includes('{getFontSizeToken(scale)}: {getFontSizeValue(scale)}') &&
     !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     !docsDefinitionSource.includes('summary:') &&
     !docsDefinitionSource.includes('font-size-preview__row') &&
     !docsDefinitionSource.includes('font-size-preview__description'),
-  'FontSize docs definition must render each scale with its value and no redundant prose.',
+  'FontSize docs definition must render each scale with TokenPreviewCard.',
 )
 
 assert.ok(
-  appCss.includes('.font-size-preview') &&
-    appCss.includes('.font-size-preview__panel') &&
-    appCss.includes('.font-size-preview__meta') &&
-    appCss.includes('.font-size-preview__label') &&
-    appCss.includes('.font-size-preview__token') &&
-    appCss.includes('.font-size-preview__sample') &&
+  appCss.includes('.font-size-preview__sample') &&
     !appCss.includes('.font-size-preview__row') &&
     !appCss.includes('.font-size-preview__identity') &&
     !appCss.includes('.font-size-preview__description') &&
     !appCss.includes('.font-size-preview__value'),
-  'App.css must include scoped FontSize detail-page preview styles.',
+  'App.css must include only the FontSize-specific preview-effect styles.',
 )
 assert.ok(
   sampleBlock.includes('font-family: var(--font-sans);') &&

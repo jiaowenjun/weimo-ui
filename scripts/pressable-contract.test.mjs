@@ -95,19 +95,21 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'pressable'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { CardPanel } from '../../components/coss/card'") &&
+    docsDefinitionSource.includes("import { TokenPreviewCard } from '../token-preview-card'") &&
     docsDefinitionSource.includes('pressableTones.map') &&
     docsDefinitionSource.includes('pressableToneMap[tone]') &&
     docsDefinitionSource.includes('getPressableToken(tone)') &&
-    docsDefinitionSource.includes('<CardPanel className="pressable-preview__panel"') &&
+    docsDefinitionSource.includes('<TokenPreviewCard') &&
+    docsDefinitionSource.includes('darkValue={item.value.dark}') &&
+    docsDefinitionSource.includes('label={item.label}') &&
+    docsDefinitionSource.includes('token={getPressableToken(tone)}') &&
+    docsDefinitionSource.includes('value={item.value.light}') &&
     docsDefinitionSource.includes('pressable-preview__sample') &&
-    docsDefinitionSource.includes('pressable-preview__token-value--light') &&
-    docsDefinitionSource.includes('pressable-preview__token-value--dark') &&
     !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     !docsDefinitionSource.includes('summary:') &&
     !docsDefinitionSource.includes('pressable-demo') &&
     !existsSync(join(root, 'src/docs/component-definitions/pressable-demo.tsx')),
-  'Pressable docs definition must render one concise interactive CardPanel per tone.',
+  'Pressable docs definition must render one interactive TokenPreviewCard per tone.',
 )
 
 assert.ok(
@@ -168,14 +170,7 @@ assert.ok(
 )
 
 assert.ok(
-  appCss.includes('.pressable-preview') &&
-    appCss.includes('.pressable-preview__panel') &&
-    appCss.includes('.pressable-preview__meta') &&
-    appCss.includes('.pressable-preview__label') &&
-    appCss.includes('.pressable-preview__token') &&
-    appCss.includes('.pressable-preview__sample') &&
-    appCss.includes('.pressable-preview__token-value--dark') &&
-    appCss.includes('.dark .pressable-preview__token-value--light') &&
+  appCss.includes('.pressable-preview__sample') &&
     appCss.includes('.pressable-preview__sample:hover') &&
     appCss.includes('.pressable-preview__sample:active') &&
     appCss.includes('background: var(--color-bg-hover);') &&
@@ -183,7 +178,7 @@ assert.ok(
     !appCss.includes('.pressable-preview__row') &&
     !appCss.includes('.pressable-preview__state-') &&
     !appCss.includes('--smart-glass-preview-stage-bg'),
-  'App.css must include scoped interactive Pressable preview styles bound to the shared feedback token.',
+  'App.css must include the Pressable-specific interactive preview-effect styles.',
 )
 
 for (const forbiddenPressedStyle of [
