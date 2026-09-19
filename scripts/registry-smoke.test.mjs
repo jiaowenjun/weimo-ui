@@ -15,8 +15,11 @@ import { dirname, join } from 'node:path'
 const nodeBinDir = dirname(process.execPath)
 const packageManagerCli = process.env.npm_execpath
 const packageManagerName = process.env.npm_config_user_agent?.split('/')[0]
-const packageRunnerCommand = packageManagerCli ? process.execPath : 'pnpm'
-const packageRunnerArgsPrefix = packageManagerCli ? [packageManagerCli] : []
+const packageManagerCliIsScript = /\.(?:[cm]?js)$/iu.test(packageManagerCli ?? '')
+const packageRunnerCommand = packageManagerCliIsScript
+  ? process.execPath
+  : packageManagerCli ?? 'pnpm'
+const packageRunnerArgsPrefix = packageManagerCliIsScript ? [packageManagerCli] : []
 const root = new URL('..', import.meta.url)
 const workspacePackageJson = JSON.parse(readFileSync(new URL('package.json', root), 'utf8'))
 const env = {
@@ -1439,9 +1442,9 @@ try {
   assert.match(consumerCss, /--radius:\s*16px;/)
   assert.match(consumerCss, /--color-background:\s*hsl\(var\(--background\)\);/)
   assert.match(consumerCss, /--color-bg-card:/)
-  assert.match(consumerCss, /--color-heat-0:\s*rgba\(0,\s*0,\s*0,\s*0\.06\);/)
-  assert.match(consumerCss, /--color-heat-1:\s*rgba\(202,\s*84,\s*33,\s*0\.2\);/)
-  assert.match(consumerCss, /--color-heatmap-today-ring:\s*rgba\(202,\s*84,\s*33,\s*0\.55\);/)
+  assert.match(consumerCss, /--color-heat-0:\s*hsl\(0 0% 0% \/ 0\.06\);/)
+  assert.match(consumerCss, /--color-heat-1:\s*hsl\(18\.1 71\.9% 46\.1% \/ 0\.2\);/)
+  assert.match(consumerCss, /--color-heatmap-today-ring:\s*hsl\(18\.1 71\.9% 46\.1% \/ 0\.55\);/)
   assert.ok(
     tagPickerSource.includes("from '../coss/input-group'") &&
     !tagPickerSource.includes("from '../bottom-bar'") &&

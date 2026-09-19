@@ -11,8 +11,11 @@ const registry = JSON.parse(readFileSync(new URL('../registry.json', import.meta
 const nodeBinDir = dirname(process.execPath)
 const packageManagerCli = process.env.npm_execpath
 const packageManagerName = process.env.npm_config_user_agent?.split('/')[0]
-const packageRunnerCommand = packageManagerCli ? process.execPath : 'pnpm'
-const packageRunnerArgsPrefix = packageManagerCli ? [packageManagerCli] : []
+const packageManagerCliIsScript = /\.(?:[cm]?js)$/iu.test(packageManagerCli ?? '')
+const packageRunnerCommand = packageManagerCliIsScript
+  ? process.execPath
+  : packageManagerCli ?? 'pnpm'
+const packageRunnerArgsPrefix = packageManagerCliIsScript ? [packageManagerCli] : []
 
 execFileSync(process.execPath, ['scripts/sync-component-catalog.mjs', '--check'], {
   cwd: rootPath,

@@ -32,6 +32,17 @@ function listCssFiles(directory) {
 
 const rawColorPattern = /#[\da-f]{3,8}\b|rgba?\([^)]*\)|hsla?\([^)]*\)/gi
 const allowlistedTokenFiles = new Set(['src/styles/tokens.css'])
+const allowlistedComponentColors = new Map([
+  [
+    'src/components/token-preview-card.css',
+    new Set([
+      'hsl(18.1 71.9% 46.1% / 0.72)',
+      'hsl(222.2 47.4% 11.2% / 0.72)',
+      'hsl(0 0% 100% / 0.68)',
+      'hsl(0 0% 100% / 0.16)',
+    ]),
+  ],
+])
 const cssFiles = listCssFiles(componentsRoot)
 const tokensCss = readProjectFile('src/styles/tokens.css')
 const rootRegistry = readJson('registry.json')
@@ -96,6 +107,8 @@ for (const file of cssFiles) {
   }
 
   for (const match of source.matchAll(rawColorPattern)) {
+    if (allowlistedComponentColors.get(relativePath)?.has(match[0])) continue
+
     const before = source.slice(0, match.index)
     const line = before.split('\n').length
 

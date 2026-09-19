@@ -272,32 +272,6 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "name": "font-size",
-      "type": "registry:ui",
-      "title": "Font Size",
-      "description": "Semantic font-size utilities and a scale map backed by shared Weimo typography tokens.",
-      "categories": [
-        "style",
-        "typography"
-      ],
-      "registryDependencies": [
-        "@weimo/style"
-      ],
-      "files": [
-        {
-          "path": "src/components/font-size.ts",
-          "type": "registry:ui",
-          "target": "@ui/font-size.ts"
-        },
-        {
-          "path": "src/components/font-size.css",
-          "type": "registry:ui",
-          "target": "@ui/font-size.css"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "text-color",
       "type": "registry:ui",
       "title": "Text Color",
@@ -346,6 +320,32 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "font-size",
+      "type": "registry:ui",
+      "title": "Font Size",
+      "description": "Semantic font-size utilities and a scale map backed by shared Weimo typography tokens.",
+      "categories": [
+        "style",
+        "typography"
+      ],
+      "registryDependencies": [
+        "@weimo/style"
+      ],
+      "files": [
+        {
+          "path": "src/components/font-size.ts",
+          "type": "registry:ui",
+          "target": "@ui/font-size.ts"
+        },
+        {
+          "path": "src/components/font-size.css",
+          "type": "registry:ui",
+          "target": "@ui/font-size.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "heat-color",
       "type": "registry:ui",
       "title": "Heat Color",
@@ -382,32 +382,6 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "name": "bg-blur",
-      "type": "registry:ui",
-      "title": "Bg Blur",
-      "description": "Semantic transparent background plus blur utilities backed by shared Weimo surfaces.",
-      "categories": [
-        "style",
-        "blur"
-      ],
-      "registryDependencies": [
-        "@weimo/style"
-      ],
-      "files": [
-        {
-          "path": "src/components/bg-blur.ts",
-          "type": "registry:ui",
-          "target": "@ui/bg-blur.ts"
-        },
-        {
-          "path": "src/components/bg-blur.css",
-          "type": "registry:ui",
-          "target": "@ui/bg-blur.css"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "bg-color",
       "type": "registry:ui",
       "title": "Bg Color",
@@ -434,22 +408,27 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "name": "border-radius",
+      "name": "bg-blur",
       "type": "registry:ui",
-      "title": "Border Radius",
-      "description": "Semantic border radius scale map backed by shared Weimo radius tokens.",
+      "title": "Bg Blur",
+      "description": "Semantic transparent background plus blur utilities backed by shared Weimo surfaces.",
       "categories": [
         "style",
-        "layout"
+        "blur"
       ],
       "registryDependencies": [
         "@weimo/style"
       ],
       "files": [
         {
-          "path": "src/components/border-radius.ts",
+          "path": "src/components/bg-blur.ts",
           "type": "registry:ui",
-          "target": "@ui/border-radius.ts"
+          "target": "@ui/bg-blur.ts"
+        },
+        {
+          "path": "src/components/bg-blur.css",
+          "type": "registry:ui",
+          "target": "@ui/bg-blur.css"
         }
       ]
     },
@@ -476,6 +455,27 @@
           "path": "src/components/border-color.css",
           "type": "registry:ui",
           "target": "@ui/border-color.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "border-radius",
+      "type": "registry:ui",
+      "title": "Border Radius",
+      "description": "Semantic border radius scale map backed by shared Weimo radius tokens.",
+      "categories": [
+        "style",
+        "layout"
+      ],
+      "registryDependencies": [
+        "@weimo/style"
+      ],
+      "files": [
+        {
+          "path": "src/components/border-radius.ts",
+          "type": "registry:ui",
+          "target": "@ui/border-radius.ts"
         }
       ]
     },
