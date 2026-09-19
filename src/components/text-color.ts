@@ -25,8 +25,8 @@ export const textColorToneMap = {
     label: '弱次级文字',
     token: '--color-text-subtle',
     value: {
-      light: 'hsl(0 0% 28% / 0.72)',
-      dark: 'hsl(0 0% 64% / 0.72)',
+      light: 'hsl(0 0% 48%)',
+      dark: 'hsl(0 0% 49%)',
     },
     className: 'text-color--subtle',
     description: '分隔符、前缀和更轻的辅助标记',
@@ -35,8 +35,8 @@ export const textColorToneMap = {
     label: '占位文字',
     token: '--color-text-placeholder',
     value: {
-      light: 'hsl(0 0% 0% / 0.26)',
-      dark: 'hsl(0 0% 100% / 0.26)',
+      light: 'hsl(0 0% 74%)',
+      dark: 'hsl(0 0% 35%)',
     },
     className: 'text-color--placeholder',
     description: '输入占位、空状态提示和非主动作图标',

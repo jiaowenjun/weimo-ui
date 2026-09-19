@@ -841,8 +841,8 @@ assert.deepEqual(
 
 for (const snippet of [
   '--font-print: "WeimoJingHuaLaoSong", serif;',
-  '--color-text-placeholder: hsl(0 0% 0% / 0.26);',
-  '--color-text-placeholder: hsl(0 0% 100% / 0.26);',
+  '--color-text-placeholder: hsl(0 0% 74%);',
+  '--color-text-placeholder: hsl(0 0% 35%);',
   '--color-bg-share-card: hsl(0 15% 92.2%);',
   '--color-bg-share-card-tag-mask: hsl(162.9 17.1% 8%);',
   '--color-bg-share-card: hsl(60 5.7% 17.1%);',
@@ -877,12 +877,12 @@ assert.equal(
 )
 assert.equal(
   rootStyleItem.cssVars.light['color-text-placeholder'],
-  'hsl(0 0% 0% / 0.26)',
+  'hsl(0 0% 74%)',
   'Root registry light theme must export color-text-placeholder.',
 )
 assert.equal(
   rootStyleItem.cssVars.dark['color-text-placeholder'],
-  'hsl(0 0% 100% / 0.26)',
+  'hsl(0 0% 35%)',
   'Root registry dark theme must export color-text-placeholder.',
 )
 assert.equal(
@@ -907,12 +907,12 @@ assert.equal(
 )
 assert.equal(
   styleRegistry.cssVars.light['color-text-placeholder'],
-  'hsl(0 0% 0% / 0.26)',
+  'hsl(0 0% 74%)',
   'Standalone style registry light theme must export color-text-placeholder.',
 )
 assert.equal(
   styleRegistry.cssVars.dark['color-text-placeholder'],
-  'hsl(0 0% 100% / 0.26)',
+  'hsl(0 0% 35%)',
   'Standalone style registry dark theme must export color-text-placeholder.',
 )
 assert.ok(

@@ -30,8 +30,8 @@ function readJson(relativePath) {
 const expectedTones = [
   ['primary', '--color-text-primary', 'text-color--primary', 'hsl(0 0% 9%)', 'hsl(0 0% 98%)'],
   ['secondary', '--color-text-secondary', 'text-color--secondary', 'hsl(0 0% 28%)', 'hsl(0 0% 64%)'],
-  ['subtle', '--color-text-subtle', 'text-color--subtle', 'hsl(0 0% 28% / 0.72)', 'hsl(0 0% 64% / 0.72)'],
-  ['placeholder', '--color-text-placeholder', 'text-color--placeholder', 'hsl(0 0% 0% / 0.26)', 'hsl(0 0% 100% / 0.26)'],
+  ['subtle', '--color-text-subtle', 'text-color--subtle', 'hsl(0 0% 48%)', 'hsl(0 0% 49%)'],
+  ['placeholder', '--color-text-placeholder', 'text-color--placeholder', 'hsl(0 0% 74%)', 'hsl(0 0% 35%)'],
   ['disable', '--color-text-disable', 'text-color--disable', 'hsl(0 0% 56%)', 'hsl(0 0% 42%)'],
   ['danger', '--color-text-danger', 'text-color--danger', 'hsl(4.2 76.5% 40%)', 'hsl(7.2 100% 73.9%)'],
   ['inherit', 'inherit', 'text-color--inherit', 'inherit', 'inherit'],
@@ -147,6 +147,14 @@ for (const [tone, token, className, lightValue, darkValue] of expectedTones) {
       rootStyleItem?.cssVars.dark[tokenName],
       darkValue,
       `registry.json style item must mirror the dark ${token} value.`,
+    )
+  }
+
+  if (tone === 'subtle' || tone === 'placeholder') {
+    assert.ok(
+      !lightValue.includes('/') && !darkValue.includes('/') &&
+        !lightValue.includes('rgba(') && !darkValue.includes('rgba('),
+      `${tone} text token must use an opaque color value.`,
     )
   }
 }
