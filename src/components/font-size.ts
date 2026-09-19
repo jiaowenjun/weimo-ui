@@ -56,12 +56,12 @@ export const fontSizeScaleMap = {
     bijiUsage: '继承 ui/styles/tokens.css，暂无稳定业务使用',
   },
   xl: {
-    label: '分享正文大号',
+    label: '大字号',
     token: '--font-size-xl',
     value: '18px',
     className: 'font-size--xl',
-    description: '分享卡片的大号正文和标题使用，保持 Markdown 标题与正文同字号。',
-    uiUsage: 'ShareCard large body、ShareCard large heading',
+    description: '需要比默认正文更醒目的阅读内容和局部标题使用。',
+    uiUsage: '开放给业务侧的强调阅读场景',
     bijiUsage: '继承 ui/styles/tokens.css，暂无稳定业务使用',
   },
   stat: {

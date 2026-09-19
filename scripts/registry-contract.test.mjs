@@ -122,7 +122,6 @@ const itemFiles = readdirSync(new URL('../registry/', import.meta.url))
 const rootItemsByName = new Map(items.map((item) => [item.name, item]))
 const CardItem = rootItemsByName.get('card')
 const cardComposerItem = rootItemsByName.get('card-composer')
-const shareCardItem = rootItemsByName.get('share-card')
 const mdRenderItem = rootItemsByName.get('md-render')
 const mdEditorItem = rootItemsByName.get('md-editor')
 const canvasTransparencyItem = rootItemsByName.get('canvas-transparency')
@@ -146,7 +145,8 @@ assert.ok(
   !rootItemsByName.has('composer-shell'),
   'Internal ComposerShell must not be listed as a standalone registry item.',
 )
-assert.ok(shareCardItem, 'Root registry must include the @weimo/share-card item.')
+assert.ok(!rootItemsByName.has('share-card'), 'Removed @weimo/share-card item must not be listed in the root registry.')
+assert.ok(!itemFiles.includes('share-card.json'), 'Removed ShareCard must not have registry/share-card.json.')
 assert.ok(!rootItemsByName.has('image-detail'), 'Removed @weimo/image-detail item must not be listed in the root registry.')
 assert.ok(!itemFiles.includes('image-detail.json'), 'Removed ImageDetail must not have registry/image-detail.json.')
 assert.ok(!rootItemsByName.has('image-detail-view'), 'Removed @weimo/image-detail-view item must not be listed in the root registry.')
@@ -271,24 +271,8 @@ assert.deepEqual(
   ['remark-gfm', 'remark-math', 'remark-parse', 'remark-stringify', 'remark-breaks', 'unified'],
   'Card registry item must install all unified and remark packages used by MdView and MdRender.',
 )
-assert.deepEqual(
-  shareCardItem.dependencies,
-  [
-    'react-markdown',
-    'remark-gfm',
-    'remark-math',
-    'remark-breaks',
-    'rehype-raw',
-    'rehype-sanitize',
-    'rehype-katex',
-    'katex',
-    'lunar-javascript',
-  ],
-  'ShareCard registry item must install sanitized HTML, Markdown, line-break, KaTeX, and lunar date dependencies.',
-)
 for (const [item, itemName] of [
   [CardItem, 'Card'],
-  [shareCardItem, 'ShareCard'],
 ]) {
   assert.ok(
     item.files.some((file) => file.path === 'src/components/markdown-content.css'),
@@ -297,7 +281,6 @@ for (const [item, itemName] of [
 }
 for (const [item, itemName] of [
   [CardItem, 'Card'],
-  [shareCardItem, 'ShareCard'],
   [mdRenderItem, 'MdRender'],
   [mdEditorItem, 'MdEditor'],
 ]) {
@@ -455,31 +438,6 @@ for (const filePath of [
   assert.ok(
     CardItem.files.some((file) => file.path === filePath),
     `Card registry item must ship internal ${filePath}.`,
-  )
-}
-for (const filePath of [
-  'src/components/share-card.tsx',
-  'src/components/share-card.css',
-  'src/components/share-card-date.ts',
-  'src/components/lunar-javascript.d.ts',
-  'src/components/md-render.tsx',
-  'src/components/markdown-centered-quote.ts',
-  'src/components/markdown-image-size.ts',
-]) {
-  assert.ok(
-    shareCardItem.files.some((file) => file.path === filePath),
-    `ShareCard registry item must ship internal ${filePath}.`,
-  )
-}
-for (const filePath of [
-  'src/components/share-card.tsx',
-  'src/components/share-card.css',
-  'src/components/share-card-date.ts',
-  'src/components/lunar-javascript.d.ts',
-]) {
-  assert.ok(
-    !CardItem.files.some((file) => file.path === filePath),
-    `Card registry item must not ship ShareCard internal ${filePath}.`,
   )
 }
 assert.ok(

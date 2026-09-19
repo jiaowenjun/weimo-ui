@@ -75,7 +75,6 @@ function assertDecodablePngDataUrl(dataUrl, message) {
 const detailPageSource = readProjectFile('src/docs/pages/component-detail-page.tsx')
 const docsShellSource = readProjectFile('src/docs/docs-shell.tsx')
 const componentDocsSource = readProjectFile('src/docs/component-docs.tsx')
-const shareCardDefinitionSource = readProjectFile('src/docs/component-definitions/share-card.tsx')
 const mdRenderDefinitionSource = readProjectFile('src/docs/component-definitions/md-render.tsx')
 const imageViewDefinitionSource = readProjectFile('src/docs/component-definitions/image-view.tsx')
 const glassIconButtonDefinitionSource = readProjectFile('src/docs/component-definitions/glass-icon-button.tsx')
@@ -83,7 +82,6 @@ const ghostIconButtonDefinitionSource = readProjectFile('src/docs/component-defi
 const textButtonDefinitionSource = readProjectFile('src/docs/component-definitions/text-button.tsx')
 const borderColorDefinitionSource = readProjectFile('src/docs/component-definitions/border-color.tsx')
 const componentDefinitionsSource = readProjectFile('src/docs/component-definitions/card.tsx') +
-  readProjectFile('src/docs/component-definitions/share-card.tsx') +
   readProjectFile('src/docs/component-definitions/canvas-transparency.tsx') +
   mdRenderDefinitionSource +
   readProjectFile('src/docs/component-definitions/md-view.tsx') +
@@ -112,11 +110,6 @@ const componentDefinitionsSource = readProjectFile('src/docs/component-definitio
   readProjectFile('src/docs/component-definitions/chip-button.tsx') +
   readProjectFile('src/docs/component-definitions/math-editor.tsx')
 const css = readProjectFile('src/App.css')
-const shareCardDocsPreviewBlock = blockFor(
-  css,
-  '.share-card-docs-preview,\n.card-docs-preview,\n.card-composer-docs-preview',
-)
-const shareCardDocsCardBlock = blockFor(css, '.share-card-docs-preview .weimo-share-card')
 const iconPreviewSceneBlock = blockFor(css, '.icon-preview__scene')
 const iconPreviewSceneTitleBlock = blockFor(css, '.icon-preview__scene-title')
 const iconPreviewRowBlock = blockFor(css, '.icon-preview__row')
@@ -263,35 +256,10 @@ assert.ok(
 )
 
 assert.ok(
-  shareCardDefinitionSource.includes("import { mdRenderSample } from './markdown-sample'") &&
-    shareCardDefinitionSource.includes('className="share-card-docs-preview"') &&
-    shareCardDefinitionSource.includes('content={mdRenderSample}') &&
-    !shareCardDefinitionSource.includes('shareCardContent'),
-  'ShareCard detail preview must reuse the shared markdown sample instead of maintaining a separate preview copy.',
-)
-
-for (const declaration of [
-  'width: min(100%, 960px);',
-  'min-width: 0;',
-  'justify-self: stretch;',
-]) {
-  assert.ok(
-    shareCardDocsPreviewBlock.includes(declaration),
-    `ShareCard docs preview must include ${declaration}`,
-  )
-}
-
-for (const declaration of ['width: 100%;', 'max-width: none;']) {
-  assert.ok(
-    shareCardDocsCardBlock.includes(declaration),
-    `ShareCard docs card must include ${declaration}`,
-  )
-}
-
-assert.ok(
-  componentDefinitionsSource.includes("import { MdRender } from '../../components/md-render'") &&
-    componentDefinitionsSource.includes("id: 'md-render'") &&
-    componentDefinitionsSource.includes('content={mdRenderSample}'),
+  mdRenderDefinitionSource.includes("import { MdRender } from '../../components/md-render'") &&
+    mdRenderDefinitionSource.includes("id: 'md-render'") &&
+    mdRenderDefinitionSource.includes('const [markdown, setMarkdown] = useState(mdRenderSample)') &&
+    mdRenderDefinitionSource.includes('content={markdown}'),
   'MdRender detail page must render the standalone markdown preview component with the shared markdown sample.',
 )
 assert.ok(

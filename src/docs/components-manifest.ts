@@ -393,15 +393,6 @@ export const componentManifest = [
     registry: true,
   },
   {
-    id: 'share-card',
-    name: 'ShareCard',
-    registryName: 'share-card',
-    packageExport: './components/share-card',
-    group: 'content-markdown',
-    docs: true,
-    registry: true,
-  },
-  {
     id: 'canvas-transparency',
     name: 'CanvasTransparency',
     registryName: 'canvas-transparency',

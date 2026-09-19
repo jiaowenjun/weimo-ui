@@ -52,8 +52,6 @@ const expectedTones = [
   ['selected', '--color-bg-selected', 'bg-color--selected', 'hsl(40 10% 94%)', 'hsl(0 0% 15%)'],
   ['chip', '--color-bg-chip', 'bg-color--chip', 'hsl(40 12% 96%)', 'hsl(0 0% 13%)'],
   ['selection', '--color-bg-selection', 'bg-color--selection', 'hsl(0 0% 15% / 0.2)', 'hsl(0 0% 96% / 0.2)'],
-  ['share-card', '--color-bg-share-card', 'bg-color--share-card', 'hsl(0 15% 92.2%)', 'hsl(60 5.7% 17.1%)'],
-  ['share-card-tag-mask', '--color-bg-share-card-tag-mask', 'bg-color--share-card-tag-mask', 'hsl(162.9 17.1% 8%)', 'hsl(60 4.8% 55.5%)'],
 ]
 
 const expectedToneGroups = [
@@ -61,7 +59,6 @@ const expectedToneGroups = [
   ['动作与反馈', ['primary', 'hover', 'hover-on-hover']],
   ['组件状态', ['selected', 'chip']],
   ['内容高亮', ['selection']],
-  ['分享输出', ['share-card', 'share-card-tag-mask']],
 ]
 
 const excludedTokens = [
@@ -232,6 +229,22 @@ for (const forbidden of ['md-math-hover', '--color-bg-md-math-hover', 'bg-color-
       !JSON.stringify(styleRegistry).includes(forbidden) &&
       !JSON.stringify(rootStyleItem).includes(forbidden),
     `BgColor and shared token registry must not keep removed math hover background surface ${forbidden}.`,
+  )
+}
+
+for (const removedShareCardToken of [
+  'share-card',
+  '--color-bg-share-card',
+  'bg-color--share-card',
+]) {
+  assert.ok(
+    !bgColorSource.includes(removedShareCardToken) &&
+      !bgColorCss.includes(removedShareCardToken) &&
+      !tokensCss.includes(removedShareCardToken) &&
+      !docsDefinitionSource.includes(removedShareCardToken) &&
+      !JSON.stringify(styleRegistry).includes(removedShareCardToken) &&
+      !JSON.stringify(rootStyleItem).includes(removedShareCardToken),
+    `BgColor and shared tokens must not keep removed ShareCard token ${removedShareCardToken}.`,
   )
 }
 

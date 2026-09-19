@@ -171,7 +171,6 @@ function writeConsumerProject(consumerDir, registryUrl) {
     `import { useState } from "react"
 import { PanelLeft } from "lucide-react"
 import { Card } from "@/components/ui/card"
-import { ShareCard } from "@/components/ui/share-card"
 import { CanvasTransparency } from "@/components/ui/canvas-transparency"
 import { ImageUploader } from "@/components/ui/image-uploader"
 import { OcrComposer } from "@/components/ui/ocr-composer"
@@ -278,16 +277,6 @@ export function RegistryConsumerContract() {
           }))
         }}
         tagOptions={["Tag", "Editable", "Work"]}
-      />
-      <ShareCard
-        brandIcon={<span aria-hidden="true">微</span>}
-        content={"## 共享\\n\\n正文 **粗体**\\n\\n>= 居中引用"}
-        createdAt={new Date(2026, 4, 2)}
-        font="print"
-        largeText
-        nickname="青简"
-        tags={["共享", "笔记"]}
-        useLunarDate
       />
       <CanvasTransparency
         alt="Transparent geometry"
@@ -562,7 +551,6 @@ try {
   writeConsumerProject(consumerDir, `http://127.0.0.1:${port}/{name}.json`)
 
   await runShadcnAdd(consumerDir, '@weimo/card')
-  await runShadcnAdd(consumerDir, '@weimo/share-card')
   await runShadcnAdd(consumerDir, '@weimo/canvas-transparency')
   await runShadcnAdd(consumerDir, '@weimo/image-uploader')
   await runShadcnAdd(consumerDir, '@weimo/ocr-composer')
@@ -615,10 +603,6 @@ try {
   assert.ok(
     hits.includes('card.json'),
     'Smoke test must install the requested Card item through the local @weimo registry.',
-  )
-  assert.ok(
-    hits.includes('share-card.json'),
-    'Smoke test must install the requested ShareCard item through the local @weimo registry.',
   )
   assert.ok(
     hits.includes('canvas-transparency.json'),
@@ -794,14 +778,6 @@ try {
     'shadcn add must write internal AnimatedInlineSize files used by chip surfaces.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/share-card.tsx')),
-    'shadcn add must write the independent ShareCard component file.',
-  )
-  assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/share-card.css')),
-    'shadcn add must write the independent ShareCard CSS file.',
-  )
-  assert.ok(
     existsSync(join(consumerDir, 'src/components/ui/canvas-transparency.tsx')) &&
       existsSync(join(consumerDir, 'src/components/ui/canvas-transparency-model.ts')),
     'shadcn add must write the CanvasTransparency component and processing model files.',
@@ -845,14 +821,6 @@ try {
   assert.ok(
     existsSync(join(consumerDir, 'src/components/ui/md-render.tsx')),
     'shadcn add must write the shared MdRender component file.',
-  )
-  assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/share-card-date.ts')),
-    'shadcn add must write the ShareCard date helper.',
-  )
-  assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/lunar-javascript.d.ts')),
-    'shadcn add must write the ShareCard lunar-javascript declaration.',
   )
   assert.ok(
     existsSync(join(consumerDir, 'src/components/ui/tag-picker.tsx')),
@@ -1170,14 +1138,6 @@ try {
     join(consumerDir, 'src/components/ui/animated-inline-size-model.ts'),
     'utf8',
   )
-  const shareCardSource = readFileSync(
-    join(consumerDir, 'src/components/ui/share-card.tsx'),
-    'utf8',
-  )
-  const shareCardCssSource = readFileSync(
-    join(consumerDir, 'src/components/ui/share-card.css'),
-    'utf8',
-  )
   const mdRenderSource = readFileSync(
     join(consumerDir, 'src/components/ui/md-render.tsx'),
     'utf8',
@@ -1454,15 +1414,11 @@ try {
       !cardEditableCssSource.includes('.weimo-editable-card {'),
     'Installed Card editable CSS must use Card selectors and reserve editor bottom safe area without styling old EditableCard.',
   )
-  assert.match(shareCardSource, /export function ShareCard/)
-  assert.match(shareCardSource, /export type ShareCardFont = 'default' \| 'print'/)
-  assert.match(shareCardSource, /createdAt\?: Date/)
   assert.match(mdRenderSource, /react-markdown/)
   assert.match(mdRenderSource, /remark-gfm/)
   assert.match(mdRenderSource, /remark-breaks/)
   assert.match(mdRenderSource, /rehype-katex/)
   for (const source of [
-    shareCardSource,
     tagPickerSource,
     floatBarSource,
     actionDialogSource,
@@ -1550,15 +1506,8 @@ try {
     'Installed Card CSS must import shared Markdown content CSS.',
   )
   assert.ok(
-    !cardCssSource.includes('.weimo-share-card') &&
-      !cardCssSource.includes('WeimoJingHuaLaoSong'),
-    'Installed Card CSS must not include ShareCard styles or print font.',
-  )
-  assert.ok(
-    shareCardCssSource.includes('WeimoJingHuaLaoSong') &&
-      shareCardCssSource.includes('/fonts/京華老宋体v3.0.ttf') &&
-      shareCardCssSource.includes('.weimo-share-card'),
-    'Installed ShareCard CSS must include ShareCard print font and share-paper styles.',
+    !cardCssSource.includes('.weimo-share-card'),
+    'Installed Card CSS must not include removed ShareCard styles.',
   )
   assert.ok(
     mdEditorCssSource.includes('@import "../markdown-content.css";'),

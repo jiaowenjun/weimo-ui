@@ -41,10 +41,6 @@ const bgColorPreviewGroups = [
     label: '内容高亮',
     tones: ['selection'],
   },
-  {
-    label: '分享输出',
-    tones: ['share-card', 'share-card-tag-mask'],
-  },
 ] as const satisfies readonly {
   label: string
   tones: readonly BgColorTone[]

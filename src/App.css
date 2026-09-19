@@ -116,7 +116,6 @@
   max-width: 100%;
 }
 
-.share-card-docs-preview,
 .card-docs-preview,
 .card-composer-docs-preview {
   width: min(100%, 960px);
@@ -126,11 +125,6 @@
 }
 
 .card-docs-preview .weimo-card {
-  width: 100%;
-  max-width: none;
-}
-
-.share-card-docs-preview .weimo-share-card {
   width: 100%;
   max-width: none;
 }
@@ -885,10 +879,6 @@
 
 .typography-preview__sample--font-mono {
   font-family: var(--font-mono);
-}
-
-.typography-preview__sample--font-print {
-  font-family: var(--font-print);
 }
 
 .typography-preview__sample--line-height {

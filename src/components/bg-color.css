@@ -33,11 +33,3 @@
 .bg-color--selection {
   background: var(--color-bg-selection);
 }
-
-.bg-color--share-card {
-  background: var(--color-bg-share-card);
-}
-
-.bg-color--share-card-tag-mask {
-  background: var(--color-bg-share-card-tag-mask);
-}

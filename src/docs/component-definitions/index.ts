@@ -32,7 +32,6 @@ import { mathEditorDefinition } from './math-editor'
 import { mdEditorDefinition } from './md-editor'
 import { mdRenderDefinition } from './md-render'
 import { mdViewDefinition } from './md-view'
-import { shareCardDefinition } from './share-card'
 import { canvasTransparencyDefinition } from './canvas-transparency'
 import { imageUploaderDefinition } from './image-uploader'
 import { imageViewDefinition } from './image-view'
@@ -78,7 +77,6 @@ export const componentDefinitionsById = {
   'md-editor': mdEditorDefinition,
   'md-render': mdRenderDefinition,
   'md-view': mdViewDefinition,
-  'share-card': shareCardDefinition,
   'canvas-transparency': canvasTransparencyDefinition,
   'image-uploader': imageUploaderDefinition,
   'image-view': imageViewDefinition,

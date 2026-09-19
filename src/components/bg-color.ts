@@ -109,30 +109,6 @@ export const bgColorToneMap = {
     uiUsage: 'MdEditor selection',
     bijiUsage: 'Card edit mode、MdEditor',
   },
-  'share-card': {
-    label: '分享纸面',
-    token: '--color-bg-share-card',
-    value: {
-      light: 'hsl(0 15% 92.2%)',
-      dark: 'hsl(60 5.7% 17.1%)',
-    },
-    className: 'bg-color--share-card',
-    description: 'ShareCard 生成图文卡时的纸面底色。',
-    uiUsage: 'ShareCard article surface',
-    bijiUsage: '继承 shared ShareCard',
-  },
-  'share-card-tag-mask': {
-    label: '分享标签遮罩',
-    token: '--color-bg-share-card-tag-mask',
-    value: {
-      light: 'hsl(162.9 17.1% 8%)',
-      dark: 'hsl(60 4.8% 55.5%)',
-    },
-    className: 'bg-color--share-card-tag-mask',
-    description: 'ShareCard 标签区域的遮罩填充色。',
-    uiUsage: 'ShareCard tag mask',
-    bijiUsage: '继承 shared ShareCard',
-  },
 } as const
 
 export type BgColorTone = keyof typeof bgColorToneMap

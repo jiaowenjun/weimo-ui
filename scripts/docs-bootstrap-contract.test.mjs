@@ -36,7 +36,6 @@ const sidebarPreviewSource = readProjectFile(
 )
 const componentDefinitionSources = {
   'card': readProjectFile('src/docs/component-definitions/card.tsx'),
-  'share-card': readProjectFile('src/docs/component-definitions/share-card.tsx'),
   'tag-picker': readProjectFile('src/docs/component-definitions/tag-picker.tsx'),
   'tag-bread': readProjectFile('src/docs/component-definitions/tag-bread.tsx'),
   'stat-group': readProjectFile('src/docs/component-definitions/stat-group.tsx'),
@@ -186,7 +185,6 @@ for (const snippet of [
 
 for (const componentId of [
   'card',
-  'share-card',
   'tag-picker',
   'tag-bread',
   'stat-group',
@@ -209,7 +207,6 @@ for (const componentId of [
 
 for (const snippet of [
   "id: 'card'",
-  "id: 'share-card'",
   "id: 'tag-picker'",
   "id: 'tag-bread'",
   "id: 'stat-group'",
@@ -238,7 +235,6 @@ for (const snippet of [
   './components/menu',
   './components/glass-surface',
   './components/tag-tree',
-  './components/share-card',
   './components/card',
 ]) {
   assert.ok(
@@ -492,13 +488,6 @@ assert.ok(
   'Menu preview must render only its trigger button and menu content, not a memo card shell.',
 )
 assert.ok(
-  componentDefinitionSources['share-card'].includes("from '../../components/share-card'") &&
-    componentDefinitionSources['share-card'].includes("id: 'share-card'") &&
-    componentDefinitionSources['share-card'].includes('font="print"') &&
-    componentDefinitionSources['share-card'].includes('useLunarDate'),
-  'ShareCard docs must live on an independent detail page, not inside Card docs.',
-)
-assert.ok(
   componentDefinitionSources.menu.includes(
     'render: <GhostIconButton aria-label="更多操作" size="sm" />',
   ) &&
@@ -574,7 +563,7 @@ assert.ok(
   'overview-only gallery preview code and tests must be removed.',
 )
 
-for (const componentId of ['card', 'share-card', 'md-editor', 'md-view', 'md-render']) {
+for (const componentId of ['card', 'md-editor', 'md-view', 'md-render']) {
   assert.ok(
     !componentDefinitionSources[componentId].includes('galleryPreview') &&
       !componentDefinitionSources[componentId].includes('gallery-preview-sample'),

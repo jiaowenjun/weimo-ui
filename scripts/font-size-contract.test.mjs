@@ -166,7 +166,7 @@ assert.ok(
     docsDefinitionSource.includes('fontFamilyTokens.map') &&
     docsDefinitionSource.includes("'--font-sans'") &&
     docsDefinitionSource.includes("'--font-mono'") &&
-    docsDefinitionSource.includes("'--font-print'") &&
+    !docsDefinitionSource.includes("'--font-print'") &&
     docsDefinitionSource.includes('typography-preview__sample') &&
     docsDefinitionSource.includes('textColorToneMap[tone]') &&
     docsDefinitionSource.includes('getTextColorClassName(tone)') &&
@@ -190,7 +190,7 @@ assert.ok(
 assert.ok(
   appCss.includes('.typography-preview__sample--font-sans') &&
     appCss.includes('.typography-preview__sample--font-mono') &&
-    appCss.includes('.typography-preview__sample--font-print'),
+    !appCss.includes('.typography-preview__sample--font-print'),
   'App.css must style FontFamily preview samples through the shared font tokens.',
 )
 

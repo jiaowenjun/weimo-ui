@@ -42,7 +42,6 @@ function assertIncludes(block, snippet, message) {
 
 const cardCss = readProjectFile('src/components/card.css')
 const cardTopBarCss = readProjectFile('src/components/card-top-bar.css')
-const shareCardCss = readProjectFile('src/components/share-card.css')
 const markdownContentCss = readProjectFile('src/components/markdown-content.css')
 const CardSource = readProjectFile('src/components/card.tsx')
 const CardResolversSource = readProjectFile('src/components/card-resolvers.tsx')
@@ -60,7 +59,6 @@ const docsMarkdownSampleSource = readProjectFile('src/docs/component-definitions
 const registry = JSON.parse(readProjectFile('registry.json'))
 const styleRegistry = JSON.parse(readProjectFile('registry/style.json'))
 const packageJson = JSON.parse(readProjectFile('package.json'))
-const shareCardItem = registry.items.find((item) => item.name === 'share-card')
 const CardItem = registry.items.find((item) => item.name === 'card')
 
 const markdownSanitizeContext = {
@@ -197,30 +195,6 @@ const trailingResetBlock = blockForPattern(
   '\\.weimo-card__header:last-child,\\s*\\n\\s*\\.weimo-card__body:last-child,\\s*\\n\\s*\\.weimo-card__tags:last-child',
   'Card trailing margin reset',
 )
-const shareCardFontFaceBlock = blockForPattern(
-  shareCardCss,
-  '@font-face',
-  'ShareCard print font face',
-)
-const shareCardBlock = blockFor(shareCardCss, '.weimo-share-card')
-const shareCardLargeTextBlock = blockFor(shareCardCss, '.weimo-share-card--large-text')
-const shareCardPrintBlock = blockFor(shareCardCss, '.weimo-share-card--font-print')
-const shareCardRichBlock = blockFor(shareCardCss, '.weimo-share-card__rich.weimo-markdown-content')
-const shareCardCenteredQuoteParagraphBlock = blockFor(
-  shareCardCss,
-  '.weimo-share-card__rich .weimo-card-markdown__blockquote--centered .weimo-card-markdown__p',
-)
-const shareCardInlineCodeBlock = blockFor(
-  shareCardCss,
-  '.weimo-share-card__rich :not(pre) > .weimo-card-markdown__code',
-)
-const shareCardTagsBlock = blockFor(shareCardCss, '.weimo-share-card__tags')
-const shareCardTagBlock = blockFor(shareCardCss, '.weimo-share-card__tag')
-const shareCardFooterBlock = blockFor(shareCardCss, '.weimo-share-card__footer')
-const shareCardFooterDatelineBlock = blockFor(shareCardCss, '.weimo-share-card__footer-dateline')
-const shareCardNicknameBlock = blockFor(shareCardCss, '.weimo-share-card__nickname')
-const shareCardDateBlock = blockFor(shareCardCss, '.weimo-share-card__date')
-const shareCardBrandBlock = blockFor(shareCardCss, '.weimo-share-card__brand')
 const markdownBlock = blockFor(markdownContentCss, '.weimo-markdown-content')
 const markdownParagraphBlock = blockFor(markdownContentCss, '.weimo-card-markdown__p')
 const markdownHeadingBlock = blockFor(markdownContentCss, '.weimo-card-markdown__heading')
@@ -351,106 +325,6 @@ assert.ok(
   'Card must delegate its display top bar to CardTopBar.',
 )
 assertIncludes(
-  shareCardFontFaceBlock,
-  'font-family: "WeimoJingHuaLaoSong";',
-  'ShareCard must register the JingHuaLaoSong print font family.',
-)
-assertIncludes(
-  shareCardFontFaceBlock,
-  'url("/fonts/京華老宋体v3.0.ttf") format("truetype")',
-  'ShareCard print font face must reference the approved public font path.',
-)
-assertIncludes(
-  shareCardBlock,
-  '--weimo-share-card-surface: var(--color-bg-share-card);',
-  'ShareCard surface must read from the shared share paper token.',
-)
-assertIncludes(
-  shareCardBlock,
-  '--weimo-share-card-tag-mask: var(--color-bg-share-card-tag-mask);',
-  'ShareCard tag mask must read from the shared share paper token.',
-)
-assertIncludes(
-  shareCardBlock,
-  'padding: 1.5em 20px;',
-  'ShareCard must map Skyline 1.5em 40rpx padding to web pixels.',
-)
-assertIncludes(
-  shareCardBlock,
-  'box-shadow: none;',
-  'ShareCard must not inherit normal Card shadow.',
-)
-assertIncludes(
-  shareCardLargeTextBlock,
-  '--weimo-share-card-font-size: var(--font-size-xl);',
-  'ShareCard large text mode must lift body text to the shared XL size.',
-)
-assertIncludes(
-  shareCardPrintBlock,
-  'font-family: var(--font-print);',
-  'ShareCard print font class must use the shared print font token.',
-)
-assertIncludes(
-  shareCardRichBlock,
-  'text-align: justify;',
-  'ShareCard markdown content must keep Skyline justified text.',
-)
-assertIncludes(
-  shareCardRichBlock,
-  'text-justify: inter-ideograph;',
-  'ShareCard markdown content must keep CJK justification.',
-)
-assertIncludes(
-  shareCardCenteredQuoteParagraphBlock,
-  'text-align: center;',
-  'ShareCard centered quote paragraphs must keep the shared centered quote alignment after ShareCard paragraph overrides.',
-)
-assertIncludes(
-  shareCardInlineCodeBlock,
-  'background: transparent;',
-  'ShareCard inline code must remove the shared filled background while keeping the inline code border treatment.',
-)
-assertIncludes(
-  shareCardTagsBlock,
-  'gap: var(--space-tag-gap);',
-  'ShareCard tags must use the shared tag gap rhythm.',
-)
-assertIncludes(
-  shareCardTagBlock,
-  'background: var(--weimo-share-card-tag-mask);',
-  'ShareCard tags must use the Skyline mask background.',
-)
-assertIncludes(
-  shareCardTagBlock,
-  'color: var(--weimo-share-card-surface);',
-  'ShareCard tags must knock out text using the paper color.',
-)
-assertIncludes(
-  shareCardFooterBlock,
-  'margin-top: 2em;',
-  'ShareCard footer must match Skyline share paper spacing.',
-)
-assertIncludes(
-  shareCardFooterDatelineBlock,
-  'justify-content: space-between;',
-  'ShareCard footer dateline must separate date and brand.',
-)
-assertIncludes(
-  shareCardNicknameBlock,
-  'font-weight: 700;',
-  'ShareCard nickname must use the Skyline bold footer style.',
-)
-assertIncludes(
-  shareCardDateBlock,
-  'font-weight: 400;',
-  'ShareCard date must use the Skyline regular footer style.',
-)
-assertIncludes(
-  shareCardBrandBlock,
-  'display: inline-flex;',
-  'ShareCard brand must align caller-provided icon and label inline.',
-)
-assertIncludes(
   bodyBlock,
   'margin: 0 0 var(--space-card-section-gap);',
   'Card body must own the following section gap after parent gap removal.',
@@ -473,16 +347,13 @@ assert.ok(
   'Card must not keep the unused glass variant API or styles.',
 )
 assert.ok(CardItem, 'registry.json must include the @weimo/card item.')
-assert.ok(shareCardItem, 'registry.json must include the @weimo/share-card item.')
 assert.ok(
   CardItem.files.some((file) => file.path === 'src/components/card-resolvers.tsx'),
   'Card registry item must ship private Card resolver helpers.',
 )
 assert.ok(
-  !cardCss.includes('weimo-share-card') &&
-    !cardCss.includes('WeimoJingHuaLaoSong') &&
-    !cardCss.includes('京華老宋体v3.0.ttf'),
-  'Card CSS must not ship ShareCard styles or print font.',
+  !cardCss.includes('weimo-share-card'),
+  'Card CSS must not ship removed ShareCard styles.',
 )
 assert.ok(
   mdRenderSource.includes("import ReactMarkdown, { type Components } from 'react-markdown'"),
@@ -833,20 +704,9 @@ assert.deepEqual(
   true,
   'Card registry item must keep shipping shared card shell CSS.',
 )
-assert.deepEqual(
-  shareCardItem.dependencies,
-  ['react-markdown', 'remark-gfm', 'remark-math', 'remark-breaks', 'rehype-raw', 'rehype-sanitize', 'rehype-katex', 'katex', 'lunar-javascript'],
-  'ShareCard registry item must install sanitized HTML, Markdown, KaTeX, and lunar date runtime dependencies.',
-)
-
 for (const snippet of [
-  '--font-print: "WeimoJingHuaLaoSong", serif;',
   '--color-text-placeholder: hsl(0 0% 74%);',
   '--color-text-placeholder: hsl(0 0% 35%);',
-  '--color-bg-share-card: hsl(0 15% 92.2%);',
-  '--color-bg-share-card-tag-mask: hsl(162.9 17.1% 8%);',
-  '--color-bg-share-card: hsl(60 5.7% 17.1%);',
-  '--color-bg-share-card-tag-mask: hsl(60 4.8% 55.5%);',
 ]) {
   assert.ok(sharedTokenCss.includes(snippet), `src/styles/tokens.css must include ${snippet}`)
 }
@@ -866,16 +726,6 @@ const rootStyleItem = registry.items.find((item) => item.name === 'style')
 assert.ok(rootStyleItem, 'registry.json must include the @weimo/style item.')
 assert.deepEqual(styleRegistry, rootStyleItem, 'registry/style.json must match the root style item.')
 assert.equal(
-  rootStyleItem.cssVars.light['font-print'],
-  '"WeimoJingHuaLaoSong", serif',
-  'Root registry light theme must export the print font token.',
-)
-assert.equal(
-  styleRegistry.cssVars.light['font-print'],
-  '"WeimoJingHuaLaoSong", serif',
-  'Standalone style registry light theme must export the print font token.',
-)
-assert.equal(
   rootStyleItem.cssVars.light['color-text-placeholder'],
   'hsl(0 0% 74%)',
   'Root registry light theme must export color-text-placeholder.',
@@ -884,26 +734,6 @@ assert.equal(
   rootStyleItem.cssVars.dark['color-text-placeholder'],
   'hsl(0 0% 35%)',
   'Root registry dark theme must export color-text-placeholder.',
-)
-assert.equal(
-  rootStyleItem.cssVars.light['color-bg-share-card'],
-  'hsl(0 15% 92.2%)',
-  'Root registry light theme must export ShareCard paper surface.',
-)
-assert.equal(
-  rootStyleItem.cssVars.light['color-bg-share-card-tag-mask'],
-  'hsl(162.9 17.1% 8%)',
-  'Root registry light theme must export ShareCard tag mask.',
-)
-assert.equal(
-  rootStyleItem.cssVars.dark['color-bg-share-card'],
-  'hsl(60 5.7% 17.1%)',
-  'Root registry dark theme must export ShareCard paper surface.',
-)
-assert.equal(
-  rootStyleItem.cssVars.dark['color-bg-share-card-tag-mask'],
-  'hsl(60 4.8% 55.5%)',
-  'Root registry dark theme must export ShareCard tag mask.',
 )
 assert.equal(
   styleRegistry.cssVars.light['color-text-placeholder'],

@@ -1,8 +1,3 @@
-import {
-  type ShareCardFont,
-  type ShareCardProps,
-  ShareCard,
-} from '../src/components/share-card'
 import { GlassIconButton } from '../src/components/glass-icon-button'
 import { GhostIconButton } from '../src/components/ghost-icon-button'
 import { TextButton, type TextButtonProps } from '../src/components/text-button'
@@ -19,21 +14,6 @@ import {
   pressableTones,
   type PressableTone,
 } from '../src/components/pressable'
-
-const shareCardFont: ShareCardFont = 'print'
-const shareCardProps: ShareCardProps = {
-  content: '## Contract',
-  createdAt: new Date(2026, 6, 22),
-  font: shareCardFont,
-  tags: ['public'],
-}
-const shareCard = <ShareCard {...shareCardProps} />
-// @ts-expect-error ShareCard only supports the public font presets.
-const shareCardRejectsCustomFont = <ShareCard content="x" font="serif" />
-// @ts-expect-error ShareCard requires a Date instance.
-const shareCardRejectsCreatedAtString = <ShareCard content="x" createdAt="2026-07-22" />
-// @ts-expect-error ShareCard owns its content API and does not accept children.
-const shareCardRejectsChildren = <ShareCard content="x">child</ShareCard>
 
 const textButtonProps: TextButtonProps = { disabled: false, type: 'button' }
 const glassIconButton = <GlassIconButton aria-label="Glass action" />
@@ -67,10 +47,6 @@ const pressableTone: PressableTone = pressableTones[0]
 const pressableClassName = getPressableClassName(pressableTone)
 const pressableToken = getPressableToken(pressableTone)
 
-void shareCard
-void shareCardRejectsCustomFont
-void shareCardRejectsCreatedAtString
-void shareCardRejectsChildren
 void glassIconButton
 void ghostIconButton
 void textButton

@@ -30,12 +30,6 @@ const fontFamilyTokens = [
     value: '"SFMono-Regular"',
     className: 'typography-preview__sample--font-mono',
   },
-  {
-    label: '印刷字体',
-    token: '--font-print',
-    value: '"WeimoJingHuaLaoSong"',
-    className: 'typography-preview__sample--font-print',
-  },
 ] as const
 
 // Docs definitions intentionally colocate preview components with exported page metadata.
