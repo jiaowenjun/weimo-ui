@@ -775,8 +775,21 @@
   justify-content: center;
 }
 
-.heat-color-preview__sample {
-  height: 80px;
+.heat-color-preview__group {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(6px, 2vw, 16px);
+}
+
+.heat-color-preview__swatch {
+  display: block;
+  width: min(84px, 15%);
+  aspect-ratio: 1;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 84px;
   border-radius: var(--radius-sm);
 }
 

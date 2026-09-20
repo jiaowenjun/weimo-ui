@@ -53,7 +53,8 @@ const rootHeatColorItem = rootRegistry.items.find((item) => item.name === 'heat-
 const rootHeatmapItem = rootRegistry.items.find((item) => item.name === 'heatmap')
 const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const tokenGridBlock = cssBlockFor(appCss, '.app-shell__content--token-grid')
-const heatColorSampleBlock = cssBlockFor(appCss, '.heat-color-preview__sample')
+const heatColorGroupBlock = cssBlockFor(appCss, '.heat-color-preview__group')
+const heatColorSwatchBlock = cssBlockFor(appCss, '.heat-color-preview__swatch')
 
 assert.equal(
   packageJson.exports?.['./components/heat-color'],
@@ -161,20 +162,22 @@ assert.ok(
 )
 assert.ok(
   bgColorDocsDefinitionSource.includes("from '../../components/heat-color'") &&
-    bgColorDocsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">热力图</h2>') &&
+    bgColorDocsDefinitionSource.includes("from '../../components/token-group-preview-card'") &&
     bgColorDocsDefinitionSource.includes('heatColorLevels.map') &&
     bgColorDocsDefinitionSource.includes('heatColorMap[level]') &&
     bgColorDocsDefinitionSource.includes('getHeatColorClassName(level)') &&
     bgColorDocsDefinitionSource.includes('getHeatColorToken(level)') &&
-    bgColorDocsDefinitionSource.includes('darkValue={item.value.dark}') &&
-    bgColorDocsDefinitionSource.includes('label={item.label}') &&
-    bgColorDocsDefinitionSource.includes('token={getHeatColorToken(level)}') &&
-    bgColorDocsDefinitionSource.includes('value={item.value.light}') &&
-    bgColorDocsDefinitionSource.includes('heat-color-preview__sample') &&
+    bgColorDocsDefinitionSource.includes('darkValue: item.value.dark') &&
+    bgColorDocsDefinitionSource.includes('label="热力图"') &&
+    bgColorDocsDefinitionSource.includes('token: getHeatColorToken(level)') &&
+    bgColorDocsDefinitionSource.includes('value: item.value.light') &&
+    bgColorDocsDefinitionSource.includes('heat-color-preview__group') &&
+    bgColorDocsDefinitionSource.includes('heat-color-preview__swatch') &&
+    bgColorDocsDefinitionSource.includes('<TokenGroupPreviewCard') &&
     bgColorDocsDefinitionSource.includes("'HeatColor'") &&
     bgColorDocsDefinitionSource.includes("'热力图'") &&
     !bgColorDocsDefinitionSource.includes('<HeatColor'),
-  'BgColor docs must render the Heatmap group as one searchable TokenPreviewCard per level.',
+  'BgColor docs must render the Heatmap tokens as one searchable TokenGroupPreviewCard.',
 )
 assert.ok(
   tokenGridBlock.includes('display: grid;') &&
@@ -183,10 +186,13 @@ assert.ok(
   'HeatColor cards must use the content-level token grid without a preview wrapper.',
 )
 assert.ok(
-  heatColorSampleBlock.includes('height: 80px;') &&
-    heatColorSampleBlock.includes('border-radius: var(--radius-sm);') &&
-    !heatColorSampleBlock.includes('border:'),
-  'HeatColor preview samples must use full-width borderless color blocks.',
+  heatColorGroupBlock.includes('display: flex;') &&
+    heatColorGroupBlock.includes('gap: clamp(6px, 2vw, 16px);') &&
+    heatColorSwatchBlock.includes('aspect-ratio: 1;') &&
+    heatColorSwatchBlock.includes('border-radius: var(--radius-sm);') &&
+    !heatColorSwatchBlock.includes('border:') &&
+    !heatColorGroupBlock.includes('border:'),
+  'HeatColor preview must use five square, rounded, borderless color swatches in one row.',
 )
 
 assert.ok(rootHeatColorItem, 'registry.json must include the heat-color registry item.')

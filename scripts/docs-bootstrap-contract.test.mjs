@@ -359,7 +359,8 @@ assert.ok(
 assert.ok(
   !existsSync(join(root, 'src/docs/component-definitions/heat-color.tsx')) &&
     componentDefinitionSources['bg-color'].includes('heatColorLevels.map') &&
-    componentDefinitionSources['bg-color'].includes('>热力图</h2>'),
+    componentDefinitionSources['bg-color'].includes('<TokenGroupPreviewCard') &&
+    componentDefinitionSources['bg-color'].includes('label="热力图"'),
   'HeatColor docs must be merged into the BgColor Heatmap group.',
 )
 

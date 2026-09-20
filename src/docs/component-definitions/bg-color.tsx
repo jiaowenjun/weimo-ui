@@ -20,6 +20,7 @@ import {
   heatColorMap,
 } from '../../components/heat-color'
 import { pressableToneMap, pressableTones } from '../../components/pressable'
+import { TokenGroupPreviewCard } from '../../components/token-group-preview-card'
 import { TokenPreviewCard } from '../../components/token-preview-card'
 import type { ComponentDefinition } from '../component-docs'
 import { sortByThemeLightness, useIsDarkTheme } from '../token-preview-color'
@@ -140,26 +141,27 @@ function BgColorPreview() {
         )
       })}
 
-      <h2 className="token-preview-card-demo__category">热力图</h2>
+      <TokenGroupPreviewCard
+        items={heatColorLevels.map((level) => {
+          const item = heatColorMap[level]
 
-      {heatColorLevels.map((level) => {
-        const item = heatColorMap[level]
-
-        return (
-          <TokenPreviewCard
-            darkValue={item.value.dark}
-            key={level}
-            label={item.label}
-            token={getHeatColorToken(level)}
-            value={item.value.light}
-          >
-            <div
-              aria-hidden="true"
-              className={`heat-color-preview__sample ${getHeatColorClassName(level)}`}
+          return {
+            darkValue: item.value.dark,
+            token: getHeatColorToken(level),
+            value: item.value.light,
+          }
+        })}
+        label="热力图"
+      >
+        <div aria-hidden="true" className="heat-color-preview__group">
+          {heatColorLevels.map((level) => (
+            <span
+              className={`heat-color-preview__swatch ${getHeatColorClassName(level)}`}
+              key={level}
             />
-          </TokenPreviewCard>
-        )
-      })}
+          ))}
+        </div>
+      </TokenGroupPreviewCard>
     </>
   )
 }

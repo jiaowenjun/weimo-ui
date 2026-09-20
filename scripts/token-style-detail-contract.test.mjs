@@ -161,7 +161,6 @@ for (const selector of [
   '.font-size-preview__sample',
   '.text-color-preview__sample',
   '.typography-preview__sample',
-  '.heat-color-preview__sample',
   '.pressable-preview__sample',
 ]) {
   const escapedSelector = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
@@ -357,9 +356,10 @@ assert.ok(
 assert.ok(
   !existsSync(join(root, 'src/docs/component-definitions/heat-color.tsx')) &&
     bgColorDefinitionSource.includes('heatColorLevels.map') &&
-    bgColorDefinitionSource.includes('heat-color-preview__sample') &&
-    bgColorDefinitionSource.includes('>热力图</h2>'),
-  'HeatColor docs must stay merged into the BgColor detail page under the Heatmap group.',
+    bgColorDefinitionSource.includes('<TokenGroupPreviewCard') &&
+    bgColorDefinitionSource.includes('heat-color-preview__swatch') &&
+    bgColorDefinitionSource.includes('label="热力图"'),
+  'HeatColor docs must stay merged into the BgColor detail page under the grouped TokenGroupPreviewCard.',
 )
 
 assert.ok(
