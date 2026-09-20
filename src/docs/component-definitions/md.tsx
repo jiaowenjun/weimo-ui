@@ -99,7 +99,7 @@ const markdownStyleTokens = [
   {
     token: '--markdown-inline-code-font-family',
     role: '行内代码字体',
-    value: '"SFMono-Regular", "Cascadia Code", "Liberation Mono", Menlo, Consolas, monospace',
+    value: 'SFMono-Regular',
   },
   {
     token: '--markdown-inline-code-font-size',
@@ -124,7 +124,7 @@ const markdownStyleTokens = [
   {
     token: '--markdown-code-block-font-family',
     role: '代码块字体',
-    value: '"SFMono-Regular", "Cascadia Code", "Liberation Mono", Menlo, Consolas, monospace',
+    value: 'SFMono-Regular',
   },
   {
     token: '--markdown-code-block-font-size',
