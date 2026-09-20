@@ -360,7 +360,7 @@ assert.ok(
   'Divider BorderColor usage must cover TagTree guide lines, menu separators, and Coss section dividers.',
 )
 assert.ok(
-    markdownContentCss.includes('border-top: 1px solid var(--markdown-divider-color);') &&
+    !markdownContentCss.includes('--markdown-divider-color') &&
     markdownContentCss.includes('border-bottom: 1px solid var(--markdown-table-cell-border-color);') &&
     markdownContentCss.includes('border-left: 1px solid var(--markdown-table-cell-border-color);') &&
     markdownInlineCodeSurfaceBlock.includes('border: 1px solid var(--markdown-inline-code-border-color);') &&

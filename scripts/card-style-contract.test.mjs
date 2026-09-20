@@ -198,7 +198,6 @@ const trailingResetBlock = blockForPattern(
 const markdownBlock = blockFor(markdownContentCss, '.weimo-markdown-content')
 const markdownParagraphBlock = blockFor(markdownContentCss, '.weimo-card-markdown__p')
 const markdownHeadingBlock = blockFor(markdownContentCss, '.weimo-card-markdown__heading')
-const markdownHeadingH2Block = blockFor(markdownContentCss, '.weimo-card-markdown__heading--h2')
 const markdownBlockquoteBlock = blockFor(markdownContentCss, '.weimo-card-markdown__blockquote')
 const markdownCenteredBlockquoteBlock = blockFor(
   markdownContentCss,
@@ -497,13 +496,13 @@ assertIncludes(
   'Markdown headings must match Skyline centered memo headings.',
 )
 assert.ok(
-    markdownContentCss.includes('.weimo-card-markdown__heading--h2') &&
-    markdownHeadingH2Block.includes('font-size: var(--markdown-heading-2-font-size);') &&
+    !markdownContentCss.includes('.weimo-card-markdown__heading--h2') &&
+    !markdownContentCss.includes('--markdown-heading-2-') &&
     !markdownContentCss.includes('--markdown-heading-3-') &&
     !markdownContentCss.includes('--markdown-heading-4-') &&
     !markdownContentCss.includes('--markdown-heading-5-') &&
     !markdownContentCss.includes('--markdown-heading-6-'),
-  'Markdown heading theme tokens must stop at level two.',
+  'Markdown heading theme tokens must stop at level one.',
 )
 assertIncludes(
   markdownBlockquoteBlock,

@@ -47,21 +47,6 @@ const markdownStyleTokens = [
     value: '1.6',
   },
   {
-    token: '--markdown-heading-2-color',
-    role: '二级标题文字颜色',
-    value: { light: 'hsl(0 0% 9%)', dark: 'hsl(0 0% 98%)' },
-  },
-  {
-    token: '--markdown-heading-2-font-size',
-    role: '二级标题字号',
-    value: '16px',
-  },
-  {
-    token: '--markdown-heading-2-line-height',
-    role: '二级标题行高',
-    value: '1.6',
-  },
-  {
     token: '--markdown-blockquote-color',
     role: '引用块文字颜色',
     value: { light: 'hsl(0 0% 28%)', dark: 'hsl(0 0% 64%)' },
@@ -72,16 +57,6 @@ const markdownStyleTokens = [
     value: '20px',
   },
   {
-    token: '--markdown-strong-color',
-    role: '加粗文字颜色',
-    value: { light: 'hsl(0 0% 9%)', dark: 'hsl(0 0% 98%)' },
-  },
-  {
-    token: '--markdown-strikethrough-color',
-    role: '删除线文字颜色',
-    value: { light: 'hsl(0 0% 28%)', dark: 'hsl(0 0% 64%)' },
-  },
-  {
     token: '--markdown-list-padding-left',
     role: '列表左内边距',
     value: '1.35em',
@@ -90,11 +65,6 @@ const markdownStyleTokens = [
     token: '--markdown-ordered-list-wide-marker-padding-left',
     role: '宽序号有序列表左内边距',
     value: '2em',
-  },
-  {
-    token: '--markdown-task-checkbox-accent-color',
-    role: '任务复选框强调色',
-    value: { light: 'hsl(0 0% 15%)', dark: 'hsl(0 0% 96%)' },
   },
   {
     token: '--markdown-inline-code-font-family',
@@ -117,44 +87,9 @@ const markdownStyleTokens = [
     value: '8px',
   },
   {
-    token: '--markdown-code-block-color',
-    role: '代码块文字颜色',
-    value: { light: 'hsl(0 0% 9%)', dark: 'hsl(0 0% 98%)' },
-  },
-  {
-    token: '--markdown-code-block-font-family',
-    role: '代码块字体',
-    value: 'SFMono-Regular',
-  },
-  {
-    token: '--markdown-code-block-font-size',
-    role: '代码块字号',
-    value: '13px',
-  },
-  {
-    token: '--markdown-code-block-padding',
-    role: '代码块内边距',
-    value: '1em',
-  },
-  {
-    token: '--markdown-code-block-border-color',
-    role: '代码块边框颜色',
-    value: { light: 'hsl(0 0% 90%)', dark: 'hsl(0 0% 20%)' },
-  },
-  {
-    token: '--markdown-code-block-border-radius',
-    role: '代码块圆角',
-    value: '8px',
-  },
-  {
     token: '--markdown-link-color',
     role: '链接文字颜色',
     value: { light: 'hsl(0 0% 15%)', dark: 'hsl(0 0% 96%)' },
-  },
-  {
-    token: '--markdown-divider-color',
-    role: '分隔线颜色',
-    value: { light: 'hsl(0 0% 88%)', dark: 'hsl(0 0% 28%)' },
   },
   {
     token: '--markdown-image-placeholder-color',
@@ -236,9 +171,6 @@ const markdownStyleTokenGroups = [
       '--markdown-heading-1-color',
       '--markdown-heading-1-font-size',
       '--markdown-heading-1-line-height',
-      '--markdown-heading-2-color',
-      '--markdown-heading-2-font-size',
-      '--markdown-heading-2-line-height',
     ],
   },
   {
@@ -249,18 +181,10 @@ const markdownStyleTokenGroups = [
     ],
   },
   {
-    label: '行内文本',
-    tokens: [
-      '--markdown-strong-color',
-      '--markdown-strikethrough-color',
-    ],
-  },
-  {
     label: '列表',
     tokens: [
       '--markdown-list-padding-left',
       '--markdown-ordered-list-wide-marker-padding-left',
-      '--markdown-task-checkbox-accent-color',
     ],
   },
   {
@@ -270,16 +194,9 @@ const markdownStyleTokenGroups = [
       '--markdown-inline-code-font-size',
       '--markdown-inline-code-border-color',
       '--markdown-inline-code-border-radius',
-      '--markdown-code-block-color',
-      '--markdown-code-block-font-family',
-      '--markdown-code-block-font-size',
-      '--markdown-code-block-padding',
-      '--markdown-code-block-border-color',
-      '--markdown-code-block-border-radius',
     ],
   },
   { label: '链接', tokens: ['--markdown-link-color'] },
-  { label: '分隔线', tokens: ['--markdown-divider-color'] },
   {
     label: '图片',
     tokens: [
@@ -331,19 +248,15 @@ function renderMarkdownTokenGroupPreview(
     case '段落':
       return <Md content="这是一段用于预览正文颜色的 Markdown 文本。" />
     case '标题':
-      return <Md content={'# 一级标题\n\n## 二级标题'} />
+      return <Md content="# 一级标题" />
     case '引用块':
       return <Md content="> 引用块使用独立字色与横向内边距。" />
-    case '行内文本':
-      return <Md content="**加粗文本** 与 ~~删除线文本~~" />
     case '列表':
-      return <Md content={'- 普通列表\n\nA. 宽序号列表\n\n- [x] 已完成任务'} />
+      return <Md content={'- 普通列表\n\nA. 宽序号列表'} />
     case '代码':
-      return <Md content={'行内 `const token = true` 示例\n\n```ts\nconst theme = "markdown"\n```'} />
+      return <Md content="行内 `const token = true` 示例" />
     case '链接':
       return <Md content="[Markdown 链接](https://weimo.ink)" />
-    case '分隔线':
-      return <Md content={'分隔线之前\n\n---\n\n分隔线之后'} />
     case '图片':
       return (
         <Md

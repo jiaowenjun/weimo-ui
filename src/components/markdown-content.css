@@ -55,12 +55,6 @@
     line-height: var(--markdown-heading-1-line-height);
   }
 
-  .weimo-card-markdown__heading--h2,
-  .md-editor__content.weimo-markdown-content h2 {
-    color: var(--markdown-heading-2-color);
-    font-size: var(--markdown-heading-2-font-size);
-    line-height: var(--markdown-heading-2-line-height);
-  }
 
   .weimo-card-markdown__blockquote,
   .md-editor__content.weimo-markdown-content blockquote {
@@ -92,7 +86,6 @@
 
   .weimo-card-markdown__strong,
   .md-editor__content.weimo-markdown-content strong {
-    color: var(--markdown-strong-color);
     font-weight: 650;
   }
 
@@ -101,10 +94,6 @@
     font-style: italic;
   }
 
-  .weimo-card-markdown__del,
-  .md-editor__content.weimo-markdown-content :where(del, s) {
-    color: var(--markdown-strikethrough-color);
-  }
 
   .weimo-card-markdown__list,
   .md-editor__content.weimo-markdown-content :where(ul, ol) {
@@ -245,10 +234,6 @@
     min-width: 0;
   }
 
-  .weimo-card-markdown__list input[type="checkbox"],
-  .md-editor__content.weimo-markdown-content ul[data-type="taskList"] input {
-    accent-color: var(--markdown-task-checkbox-accent-color);
-  }
 
   .weimo-markdown-content :not(pre) > :where(.weimo-card-markdown__code, code) {
     padding: 2px 6px;
@@ -263,17 +248,11 @@
   .md-editor__content.weimo-markdown-content pre {
     margin: 0;
     overflow: auto;
-    padding: var(--markdown-code-block-padding);
-    border: 1px solid var(--markdown-code-block-border-color);
-    border-radius: var(--markdown-code-block-border-radius);
   }
 
   .weimo-card-markdown__pre .weimo-card-markdown__code,
   .md-editor__content.weimo-markdown-content pre code {
     display: block;
-    color: var(--markdown-code-block-color);
-    font-family: var(--markdown-code-block-font-family);
-    font-size: var(--markdown-code-block-font-size);
     line-height: 1.72;
     white-space: pre-wrap;
     word-break: break-word;
@@ -290,12 +269,6 @@
     color: var(--markdown-link-color);
   }
 
-  .weimo-card-markdown__hr,
-  .md-editor__content.weimo-markdown-content hr {
-    margin: 0;
-    border: 0;
-    border-top: 1px solid var(--markdown-divider-color);
-  }
 
   .weimo-card-markdown__image-placeholder {
     padding: 2px 6px;

@@ -77,16 +77,9 @@ const markdownColorTokens = [
   ['--markdown-content-color', 'hsl(0 0% 9%)', 'hsl(0 0% 98%)'],
   ['--markdown-paragraph-color', 'hsl(0 0% 9%)', 'hsl(0 0% 98%)'],
   ['--markdown-heading-1-color', 'hsl(0 0% 9%)', 'hsl(0 0% 98%)'],
-  ['--markdown-heading-2-color', 'hsl(0 0% 9%)', 'hsl(0 0% 98%)'],
   ['--markdown-blockquote-color', 'hsl(0 0% 28%)', 'hsl(0 0% 64%)'],
-  ['--markdown-strong-color', 'hsl(0 0% 9%)', 'hsl(0 0% 98%)'],
-  ['--markdown-strikethrough-color', 'hsl(0 0% 28%)', 'hsl(0 0% 64%)'],
-  ['--markdown-task-checkbox-accent-color', 'hsl(0 0% 15%)', 'hsl(0 0% 96%)'],
   ['--markdown-inline-code-border-color', 'hsl(0 0% 88%)', 'hsl(0 0% 28%)'],
-  ['--markdown-code-block-color', 'hsl(0 0% 9%)', 'hsl(0 0% 98%)'],
-  ['--markdown-code-block-border-color', 'hsl(0 0% 90%)', 'hsl(0 0% 20%)'],
   ['--markdown-link-color', 'hsl(0 0% 15%)', 'hsl(0 0% 96%)'],
-  ['--markdown-divider-color', 'hsl(0 0% 88%)', 'hsl(0 0% 28%)'],
   ['--markdown-image-placeholder-color', 'hsl(0 0% 74%)', 'hsl(0 0% 35%)'],
   ['--markdown-table-frame-border-color', 'hsl(0 0% 88%)', 'hsl(0 0% 28%)'],
   ['--markdown-table-cell-border-color', 'hsl(0 0% 88%)', 'hsl(0 0% 28%)'],
@@ -98,18 +91,12 @@ const markdownStaticTokens = [
   ['--markdown-content-line-height', '1.6'],
   ['--markdown-heading-1-font-size', '16px'],
   ['--markdown-heading-1-line-height', '1.6'],
-  ['--markdown-heading-2-font-size', '16px'],
-  ['--markdown-heading-2-line-height', '1.6'],
   ['--markdown-blockquote-padding-inline', '20px'],
   ['--markdown-list-padding-left', '1.35em'],
   ['--markdown-ordered-list-wide-marker-padding-left', '2em'],
   ['--markdown-inline-code-font-family', '"SFMono-Regular", "Cascadia Code", "Liberation Mono", Menlo, Consolas, monospace'],
   ['--markdown-inline-code-font-size', '14px'],
   ['--markdown-inline-code-border-radius', '8px'],
-  ['--markdown-code-block-font-family', '"SFMono-Regular", "Cascadia Code", "Liberation Mono", Menlo, Consolas, monospace'],
-  ['--markdown-code-block-font-size', '13px'],
-  ['--markdown-code-block-padding', '1em'],
-  ['--markdown-code-block-border-radius', '8px'],
   ['--markdown-image-placeholder-font-size', '14px'],
   ['--markdown-image-placeholder-border-radius', '8px'],
   ['--markdown-image-border-radius', '8px'],
@@ -131,6 +118,19 @@ const markdownDefinedTokens = [
   ...tokensRootBlock.matchAll(/^\s*(--markdown-[a-z0-9-]+):/gm),
 ].map((match) => match[1])
 const legacyMarkdownTokenNames = [
+  '--markdown-heading-2-color',
+  '--markdown-heading-2-font-size',
+  '--markdown-heading-2-line-height',
+  '--markdown-strong-color',
+  '--markdown-strikethrough-color',
+  '--markdown-task-checkbox-accent-color',
+  '--markdown-code-block-color',
+  '--markdown-code-block-font-family',
+  '--markdown-code-block-font-size',
+  '--markdown-code-block-padding',
+  '--markdown-code-block-border-color',
+  '--markdown-code-block-border-radius',
+  '--markdown-divider-color',
   '--markdown-color-text-primary',
   '--markdown-color-text-secondary',
   '--markdown-color-text-placeholder',
@@ -285,11 +285,9 @@ assert.deepEqual(
     '段落',
     '标题',
     '引用块',
-    '行内文本',
     '列表',
     '代码',
     '链接',
-    '分隔线',
     '图片',
     '列表与图片布局',
     '表格',
@@ -1292,9 +1290,8 @@ assert.ok(
 assert.ok(
   definitionSource.includes("case '代码':") &&
     definitionSource.includes('行内 `const token = true` 示例') &&
-    definitionSource.includes('const theme = "markdown"') &&
     definitionSource.includes("case '标题':") &&
-    definitionSource.includes('# 一级标题\\n\\n## 二级标题') &&
+    definitionSource.includes('# 一级标题') &&
     definitionSource.includes("case '表格':") &&
     definitionSource.includes('| 节点 | 状态 |'),
   'Md docs must preview grouped tokens through their combined semantic Markdown nodes.',
