@@ -185,7 +185,6 @@ for (const selector of [
   '.bg-color-preview__sample',
   '.border-radius-preview__sample',
   '.border-color-preview__sample',
-  '.font-size-preview__sample',
   '.text-color-preview__sample',
   '.typography-preview__sample',
   '.pressable-preview__sample',

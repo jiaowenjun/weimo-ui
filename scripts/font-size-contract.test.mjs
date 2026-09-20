@@ -177,8 +177,13 @@ assert.ok(
     docsDefinitionSource.includes('getFontSizeValue(scale)') &&
     docsDefinitionSource.includes('<TokenPreviewCard') &&
     docsDefinitionSource.includes('label={item.label}') &&
-    docsDefinitionSource.includes('token={getFontSizeToken(scale)}') &&
-    docsDefinitionSource.includes('value={getFontSizeValue(scale)}') &&
+    docsDefinitionSource.includes('items={fontSizeScales.map((scale) => ({') &&
+    docsDefinitionSource.includes('token: getFontSizeToken(scale),') &&
+    docsDefinitionSource.includes('value: getFontSizeValue(scale),') &&
+    docsDefinitionSource.includes('label="字号"') &&
+    docsDefinitionSource.includes('className="font-size-preview__samples"') &&
+    docsDefinitionSource.includes("getFontSizeToken(scale) === '--font-size-base'") &&
+    docsDefinitionSource.includes('font-size-preview__sample--base') &&
     docsDefinitionSource.includes('font-size-preview__sample') &&
     !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     !docsDefinitionSource.includes('summary:') &&
@@ -196,19 +201,24 @@ assert.ok(
 
 assert.ok(
   appCss.includes('.font-size-preview__sample') &&
-    !appCss.includes('.font-size-preview__row') &&
+    appCss.includes('.font-size-preview__samples {\n  display: flex;') &&
+    appCss.includes('gap: 24px;') &&
+    !appCss.includes('.font-size-preview__row {') &&
     !appCss.includes('.font-size-preview__identity') &&
     !appCss.includes('.font-size-preview__description') &&
     !appCss.includes('.font-size-preview__value'),
   'App.css must include only the FontSize-specific preview-effect styles.',
 )
 assert.ok(
-  sampleBlock.includes('font-family: var(--font-sans);') &&
+  appCss.includes('.font-size-preview__samples {\n  display: flex;\n  align-items: baseline;') &&
+    appCss.includes('.font-size-preview__sample--base {\n  text-decoration: underline;') &&
+    appCss.includes('gap: 24px;') &&
+    sampleBlock.includes('font-family: var(--font-sans);') &&
     sampleBlock.includes('overflow-wrap: anywhere;') &&
-    sampleBlock.includes('align-items: center;') &&
-    sampleBlock.includes('justify-content: center;') &&
-    sampleBlock.includes('text-align: center;'),
-  'FontSize preview samples must render centered text with shared font family and safe wrapping.',
+    sampleBlock.includes('line-height: 1.15;') &&
+    !sampleBlock.includes('height: 80px;') &&
+    !sampleBlock.includes('align-items: center;'),
+  'FontSize preview samples must baseline-align one row of glyphs with shared font family and safe wrapping.',
 )
 
 assert.ok(registryItem, 'registry.json must include the font-size registry item.')

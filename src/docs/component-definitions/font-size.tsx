@@ -70,25 +70,28 @@ function FontPreview() {
 
       <h2 className="token-preview-card-demo__category">字号</h2>
 
-      {fontSizeScales.map((scale) => {
-        const item = fontSizeScaleMap[scale]
-
-        return (
-          <TokenPreviewCard
-            key={scale}
-            label={item.label}
-            token={getFontSizeToken(scale)}
-            value={getFontSizeValue(scale)}
-          >
+      <TokenPreviewCard
+        items={fontSizeScales.map((scale) => ({
+          token: getFontSizeToken(scale),
+          value: getFontSizeValue(scale),
+        }))}
+        label="字号"
+      >
+        <div aria-hidden="true" className="font-size-preview__samples">
+          {fontSizeScales.map((scale) => (
             <p
-              className={`font-size-preview__sample ${getFontSizeClassName(scale)}`}
-              aria-hidden="true"
+              className={`font-size-preview__sample ${getFontSizeClassName(scale)}${
+                getFontSizeToken(scale) === '--font-size-base'
+                  ? ' font-size-preview__sample--base'
+                  : ''
+              }`}
+              key={scale}
             >
               Aa
             </p>
-          </TokenPreviewCard>
-        )
-      })}
+          ))}
+        </div>
+      </TokenPreviewCard>
 
       <h2 className="token-preview-card-demo__category">字体</h2>
 
