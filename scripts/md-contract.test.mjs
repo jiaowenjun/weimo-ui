@@ -64,7 +64,7 @@ const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 
 const tokenGridBlock = cssBlockFor(appCss, '.app-shell__content--token-grid')
 const mdSceneBlock = cssBlockFor(appCss, '.md-style-preview__scene')
-const mdEffectBlock = cssBlockFor(appCss, '.md-style-preview__effect')
+const mdGroupEffectBlock = cssBlockFor(appCss, '.md-style-preview__group-effect')
 const markdownRootBlock = cssBlockFor(markdownContentCss, '.weimo-markdown-content')
 const tokensRootBlock = cssBlockFor(tokensCss, ':root')
 const tokensDarkBlock = cssBlockFor(tokensCss, '.dark')
@@ -240,23 +240,20 @@ assert.ok(
 for (const snippet of [
   "import { Md } from '../../components/md'",
   "import { CardPanel } from '../../components/coss/card'",
-  "import { TokenPreviewCard } from '../../components/token-preview-card'",
-  "import { Fragment } from 'react'",
+  "import { TokenGroupPreviewCard } from '../../components/token-group-preview-card'",
   "import { mdRenderSample } from './markdown-sample'",
   "id: 'md'",
   "frame: 'plain',",
   'markdownStyleTokens',
   'markdownStyleTokenGroups',
   'getMarkdownStyleToken',
-  'renderMarkdownTokenPreview',
-  'const value = `var(${item.token})`',
-  '<TokenPreviewCard',
-  'darkValue={typeof item.value === \'string\' ? undefined : item.value.dark}',
-  'label={item.role}',
-  'token={item.token}',
-  'className="md-style-preview__effect"',
-  'className="token-preview-card-demo__category"',
-  '{group.tokens.map((token) => {',
+  'renderMarkdownTokenGroupPreview',
+  '<TokenGroupPreviewCard',
+  'items={group.tokens.map((token) => {',
+  "darkValue: typeof item.value === 'string' ? undefined : item.value.dark",
+  'token: item.token',
+  'className="md-style-preview__group-effect"',
+  '{renderMarkdownTokenGroupPreview(group)}',
   '<CardPanel className="md-style-preview__scene"',
   '<Md content={mdRenderSample} />',
   "light: 'hsl(0 0% 9%)'",
@@ -299,6 +296,11 @@ assert.deepEqual(
     '数学公式',
   ],
   'Md docs must group tokens by each rendered Markdown semantic node.',
+)
+assert.equal(
+  [...definitionSource.matchAll(/<TokenGroupPreviewCard/g)].length,
+  1,
+  'Md docs must render every semantic group through the shared TokenGroupPreviewCard map.',
 )
 assert.deepEqual(
   [...markdownGroupSource.matchAll(/'(--markdown-[a-z0-9-]+)'/g)]
@@ -1223,10 +1225,9 @@ assert.ok(
 
 for (const snippet of [
   '.md-style-preview__scene',
-  '.md-style-preview__effect',
-  '.md-style-preview__mini-border',
-  '.md-style-preview__mini-padding',
-  '.md-style-preview__mini-gap',
+  '.md-style-preview__group-effect',
+  '.md-style-preview__image',
+  '.md-style-preview__math .katex',
 ]) {
   assert.ok(appCss.includes(snippet), `App.css must include ${snippet}.`)
 }
@@ -1248,6 +1249,10 @@ for (const forbidden of [
   '.md-style-preview__group-header',
   '.md-style-preview__scene-header',
   '.md-style-preview__render',
+  '.md-style-preview__effect',
+  '.md-style-preview__mini-border',
+  '.md-style-preview__mini-padding',
+  '.md-style-preview__mini-gap',
 ]) {
   assert.ok(!appCss.includes(forbidden), `App.css must remove ${forbidden}.`)
 }
@@ -1267,18 +1272,21 @@ assert.ok(
   'Md real-scene CardPanel must span the grid and own scrolling without an inner wrapper.',
 )
 assert.ok(
-  mdEffectBlock.includes('height: 80px;') &&
-    !mdEffectBlock.includes('border:') &&
-    !mdEffectBlock.includes('background:') &&
-    !mdEffectBlock.includes('box-shadow:'),
-  'Md token items must use the borderless, background-free TokenPreviewCard preview area.',
+  mdGroupEffectBlock.includes('min-height: 112px;') &&
+    !mdGroupEffectBlock.includes('border:') &&
+    !mdGroupEffectBlock.includes('background:') &&
+    !mdGroupEffectBlock.includes('box-shadow:'),
+  'Md token groups must use a borderless, background-free TokenGroupPreviewCard preview area.',
 )
 assert.ok(
-  definitionSource.includes("case 'border-color':") &&
-    definitionSource.includes('style={{ borderColor: value }}') &&
-    definitionSource.includes("case 'padding-inline':") &&
-    definitionSource.includes('style={{ paddingInline: value }}'),
-  'Md docs must render each semantic token through its matching CSS property.',
+  definitionSource.includes("case '代码':") &&
+    definitionSource.includes('行内 `const token = true` 示例') &&
+    definitionSource.includes('const theme = "markdown"') &&
+    definitionSource.includes("case '标题':") &&
+    definitionSource.includes('# 一级标题\\n\\n## 二级标题') &&
+    definitionSource.includes("case '表格':") &&
+    definitionSource.includes('| 节点 | 状态 |'),
+  'Md docs must preview grouped tokens through their combined semantic Markdown nodes.',
 )
 
 assert.ok(rootRegistryItem, 'Root registry must include the @weimo/md item.')

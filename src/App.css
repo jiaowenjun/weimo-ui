@@ -1211,79 +1211,39 @@
   box-shadow: var(--shadow-card);
 }
 
-.md-style-preview__effect {
+.md-style-preview__group-effect {
   display: flex;
   min-width: 0;
-  height: 80px;
+  min-height: 112px;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: 8px;
+  padding: 16px;
   border-radius: var(--radius-sm);
   color: var(--color-text-primary);
 }
 
-.md-style-preview__effect > * {
+.md-style-preview__group-effect > * {
+  width: min(100%, 720px);
   min-width: 0;
 }
 
-.md-style-preview__mini-text {
-  font-weight: 650;
-  line-height: 1.25;
-}
-
-.md-style-preview__mini-lines {
-  color: var(--color-text-primary);
-  font-size: var(--font-size-xs);
-}
-
-.md-style-preview__effect input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  margin: 0;
-}
-
-.md-style-preview__mini-border,
-.md-style-preview__mini-radius {
+.md-style-preview__image {
   display: block;
-  width: 56px;
-  height: 30px;
-  border: 2px solid var(--color-border);
+  width: 120px;
+  height: 72px;
+  background:
+    linear-gradient(135deg, hsl(198 72% 72%), hsl(160 48% 76%));
 }
 
-.md-style-preview__mini-background,
-.md-style-preview__mini-font,
-.md-style-preview__mini-padding {
-  display: block;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  color: var(--color-text-primary);
-  font-size: var(--font-size-xs);
-  line-height: 1;
+.md-style-preview__group-effect .weimo-card-markdown__image-placeholder {
+  background: hsl(0 0% 50% / 0.08);
 }
 
-.md-style-preview__mini-background,
-.md-style-preview__mini-font {
-  padding: 8px 10px;
-}
-
-.md-style-preview__mini-padding {
-  box-sizing: border-box;
-  max-width: 100%;
-}
-
-.md-style-preview__mini-gap {
-  display: flex;
-  align-items: center;
-}
-
-.md-style-preview__mini-gap > i {
-  display: block;
-  width: 28px;
-  height: 28px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xs);
-  background: var(--color-bg-card);
+.md-style-preview__math .katex {
+  padding: 4px 8px;
+  border-radius: var(--markdown-math-border-radius);
+  background: var(--markdown-math-hover-background);
 }
 
 @media (min-width: 700px) {

@@ -69,6 +69,15 @@ export const componentManifest = [
     registry: true,
   },
   {
+    id: 'token-group-preview-card',
+    name: 'TokenGroupPreviewCard',
+    registryName: 'token-group-preview-card',
+    packageExport: './components/token-group-preview-card',
+    group: 'token-style',
+    docs: false,
+    registry: true,
+  },
+  {
     id: 'text-color',
     name: '字色',
     registryName: 'text-color',

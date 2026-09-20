@@ -201,6 +201,7 @@ import { borderColorTones, getBorderColorClassName } from "@/components/ui/borde
 import { borderRadiusScales, getBorderRadiusToken } from "@/components/ui/border-radius"
 import { fontSizeScales, getFontSizeClassName } from "@/components/ui/font-size"
 import { TokenPreviewCard } from "@/components/ui/token-preview-card"
+import { TokenGroupPreviewCard } from "@/components/ui/token-group-preview-card"
 import { TagTree } from "@/components/ui/tag-tree"
 import { StatGroup } from "@/components/ui/stat-group"
 import { TagPicker, type TagPickerApplyPayload } from "@/components/ui/tag-picker"
@@ -372,6 +373,15 @@ export function RegistryConsumerContract() {
       <TokenPreviewCard label="Radius" token="--radius" value="16px">
         <span>Token preview</span>
       </TokenPreviewCard>
+      <TokenGroupPreviewCard
+        items={[
+          { token: "--markdown-inline-code-font-size", value: "14px" },
+          { token: "--markdown-inline-code-border-radius", value: "8px" },
+        ]}
+        label="Inline code"
+      >
+        <code>Token group preview</code>
+      </TokenGroupPreviewCard>
       <TagPicker
         mode="insert"
         onApply={handleTagPickerApply}
@@ -574,6 +584,7 @@ try {
   await runShadcnAdd(consumerDir, '@weimo/border-radius')
   await runShadcnAdd(consumerDir, '@weimo/font-size')
   await runShadcnAdd(consumerDir, '@weimo/token-preview-card')
+  await runShadcnAdd(consumerDir, '@weimo/token-group-preview-card')
   await runShadcnAdd(consumerDir, '@weimo/top-bar')
   await runShadcnAdd(consumerDir, '@weimo/sidebar')
   await runShadcnAdd(consumerDir, '@weimo/menu')
@@ -703,6 +714,10 @@ try {
   assert.ok(
     hits.includes('token-preview-card.json'),
     'Smoke test must install the explicitly requested TokenPreviewCard item through the local @weimo registry.',
+  )
+  assert.ok(
+    hits.includes('token-group-preview-card.json'),
+    'Smoke test must install the explicitly requested TokenGroupPreviewCard item through the local @weimo registry.',
   )
   assert.ok(
     hits.includes('glass-icon-button.json') && hits.includes('ghost-icon-button.json'),
@@ -958,6 +973,11 @@ try {
     existsSync(join(consumerDir, 'src/components/ui/token-preview-card.tsx')) &&
       existsSync(join(consumerDir, 'src/components/ui/token-preview-card.css')),
     'shadcn add must write the public TokenPreviewCard component and stylesheet from the configured custom registry.',
+  )
+  assert.ok(
+    existsSync(join(consumerDir, 'src/components/ui/token-group-preview-card.tsx')) &&
+      existsSync(join(consumerDir, 'src/components/ui/token-group-preview-card.css')),
+    'shadcn add must write the public TokenGroupPreviewCard component and stylesheet from the configured custom registry.',
   )
   assert.ok(
     existsSync(

@@ -245,6 +245,7 @@
     min-width: 0;
   }
 
+  .weimo-card-markdown__list input[type="checkbox"],
   .md-editor__content.weimo-markdown-content ul[data-type="taskList"] input {
     accent-color: var(--markdown-task-checkbox-accent-color);
   }
