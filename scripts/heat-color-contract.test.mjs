@@ -190,7 +190,7 @@ assert.ok(
 )
 assert.ok(
   tokenGridBlock.includes('display: grid;') &&
-    tokenGridBlock.includes('repeat(auto-fill, minmax(min(100%, 300px), 1fr))') &&
+    tokenGridBlock.includes('grid-template-columns: minmax(0, 1fr);') &&
     !bgColorDocsDefinitionSource.includes('className="heat-color-preview"'),
   'HeatColor cards must use the content-level token grid without a preview wrapper.',
 )

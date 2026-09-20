@@ -244,8 +244,8 @@ for (const snippet of [
 }
 
 assert.ok(
-  groupCardBlock.includes('grid-column: 1 / -1;'),
-  'TokenGroupPreviewCard must always span the complete token grid row.',
+  !groupCardCss.includes('grid-column:') && !cardCss.includes('grid-column:'),
+  'TokenGroupPreviewCard and TokenPreviewCard must not carry component-level grid placement.',
 )
 assert.ok(
   groupRowBlock.includes('display: grid;') &&

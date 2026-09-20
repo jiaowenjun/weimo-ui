@@ -2,7 +2,6 @@
   .token-group-preview-card {
     display: grid;
     min-width: 0;
-    grid-column: 1 / -1;
     gap: 12px;
     padding: 16px;
   }

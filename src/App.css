@@ -28,13 +28,9 @@
 
 .app-shell__content--token-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 14px;
   align-content: start;
-}
-
-.app-shell__content--token-grid[data-component-id='bg-color'] {
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
 }
 
 .token-preview-card-demo__category {
