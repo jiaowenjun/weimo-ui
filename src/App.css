@@ -785,11 +785,11 @@
 
 .heat-color-preview__swatch {
   display: block;
-  width: min(84px, 15%);
+  width: min(42px, 15%);
   aspect-ratio: 1;
   flex: 1 1 0;
   min-width: 0;
-  max-width: 84px;
+  max-width: 42px;
   border-radius: var(--radius-sm);
 }
 
