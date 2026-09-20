@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import { CardPanel } from '../../components/coss/card'
 import { Md } from '../../components/md'
 import { TokenPreviewCard } from '../../components/token-preview-card'
@@ -273,6 +274,110 @@ const markdownStyleTokens = [
   },
 ] satisfies readonly MarkdownStyleToken[]
 
+type MarkdownStyleTokenName = (typeof markdownStyleTokens)[number]['token']
+
+const markdownStyleTokenGroups = [
+  {
+    label: '内容容器',
+    tokens: [
+      '--markdown-content-color',
+      '--markdown-content-font-size',
+      '--markdown-content-line-height',
+    ],
+  },
+  { label: '段落', tokens: ['--markdown-paragraph-color'] },
+  {
+    label: '标题',
+    tokens: [
+      '--markdown-heading-1-color',
+      '--markdown-heading-1-font-size',
+      '--markdown-heading-1-line-height',
+      '--markdown-heading-2-color',
+      '--markdown-heading-2-font-size',
+      '--markdown-heading-2-line-height',
+    ],
+  },
+  {
+    label: '引用块',
+    tokens: [
+      '--markdown-blockquote-color',
+      '--markdown-blockquote-padding-inline',
+    ],
+  },
+  {
+    label: '行内文本',
+    tokens: [
+      '--markdown-strong-color',
+      '--markdown-strikethrough-color',
+    ],
+  },
+  {
+    label: '列表',
+    tokens: [
+      '--markdown-list-padding-left',
+      '--markdown-ordered-list-wide-marker-padding-left',
+      '--markdown-task-checkbox-accent-color',
+    ],
+  },
+  {
+    label: '代码',
+    tokens: [
+      '--markdown-inline-code-font-family',
+      '--markdown-inline-code-font-size',
+      '--markdown-inline-code-border-color',
+      '--markdown-inline-code-border-radius',
+      '--markdown-code-block-color',
+      '--markdown-code-block-font-family',
+      '--markdown-code-block-font-size',
+      '--markdown-code-block-padding',
+      '--markdown-code-block-border-color',
+      '--markdown-code-block-border-radius',
+    ],
+  },
+  { label: '链接', tokens: ['--markdown-link-color'] },
+  { label: '分隔线', tokens: ['--markdown-divider-color'] },
+  {
+    label: '图片',
+    tokens: [
+      '--markdown-image-placeholder-color',
+      '--markdown-image-placeholder-font-size',
+      '--markdown-image-placeholder-border-radius',
+      '--markdown-image-border-radius',
+    ],
+  },
+  { label: '列表与图片布局', tokens: ['--markdown-list-image-gap'] },
+  {
+    label: '表格',
+    tokens: [
+      '--markdown-table-frame-border-color',
+      '--markdown-table-border-radius',
+      '--markdown-table-font-size',
+      '--markdown-table-cell-border-color',
+      '--markdown-table-header-color',
+    ],
+  },
+  {
+    label: '数学公式',
+    tokens: [
+      '--markdown-math-border-radius',
+      '--markdown-math-hover-background',
+    ],
+  },
+] satisfies readonly {
+  label: string
+  tokens: readonly MarkdownStyleTokenName[]
+}[]
+
+function getMarkdownStyleToken(token: MarkdownStyleTokenName) {
+  const item = markdownStyleTokens.find((candidate) => candidate.token === token)
+
+  if (!item) {
+    throw new Error(`Unknown Markdown style token: ${token}`)
+  }
+
+  return item
+}
+
 function renderMarkdownTokenPreview(item: MarkdownStyleToken) {
   const value = `var(${item.token})`
 
@@ -322,18 +427,28 @@ function MdStylePreview() {
         <Md content={mdRenderSample} />
       </CardPanel>
 
-      {markdownStyleTokens.map((item) => (
-        <TokenPreviewCard
-          darkValue={typeof item.value === 'string' ? undefined : item.value.dark}
-          key={item.token}
-          label={item.role}
-          token={item.token}
-          value={typeof item.value === 'string' ? item.value : item.value.light}
-        >
-          <div className="md-style-preview__effect" aria-hidden="true">
-            {renderMarkdownTokenPreview(item)}
-          </div>
-        </TokenPreviewCard>
+      {markdownStyleTokenGroups.map((group) => (
+        <Fragment key={group.label}>
+          <h2 className="token-preview-card-demo__category">{group.label}</h2>
+
+          {group.tokens.map((token) => {
+            const item = getMarkdownStyleToken(token)
+
+            return (
+              <TokenPreviewCard
+                darkValue={typeof item.value === 'string' ? undefined : item.value.dark}
+                key={item.token}
+                label={item.role}
+                token={item.token}
+                value={typeof item.value === 'string' ? item.value : item.value.light}
+              >
+                <div className="md-style-preview__effect" aria-hidden="true">
+                  {renderMarkdownTokenPreview(item)}
+                </div>
+              </TokenPreviewCard>
+            )
+          })}
+        </Fragment>
       ))}
     </>
   )

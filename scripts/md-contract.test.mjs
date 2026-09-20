@@ -241,10 +241,13 @@ for (const snippet of [
   "import { Md } from '../../components/md'",
   "import { CardPanel } from '../../components/coss/card'",
   "import { TokenPreviewCard } from '../../components/token-preview-card'",
+  "import { Fragment } from 'react'",
   "import { mdRenderSample } from './markdown-sample'",
   "id: 'md'",
   "frame: 'plain',",
   'markdownStyleTokens',
+  'markdownStyleTokenGroups',
+  'getMarkdownStyleToken',
   'renderMarkdownTokenPreview',
   'const value = `var(${item.token})`',
   '<TokenPreviewCard',
@@ -252,6 +255,8 @@ for (const snippet of [
   'label={item.role}',
   'token={item.token}',
   'className="md-style-preview__effect"',
+  'className="token-preview-card-demo__category"',
+  '{group.tokens.map((token) => {',
   '<CardPanel className="md-style-preview__scene"',
   '<Md content={mdRenderSample} />',
   "light: 'hsl(0 0% 9%)'",
@@ -272,16 +277,45 @@ assert.deepEqual(
   [...markdownTokenNames].sort(),
   'Md docs must expose every Markdown theme token without external token names.',
 )
+const markdownGroupSource = definitionSource.slice(
+  definitionSource.indexOf('const markdownStyleTokenGroups = ['),
+  definitionSource.indexOf('function getMarkdownStyleToken'),
+)
+assert.deepEqual(
+  [...markdownGroupSource.matchAll(/label: '([^']+)'/g)].map((match) => match[1]),
+  [
+    '内容容器',
+    '段落',
+    '标题',
+    '引用块',
+    '行内文本',
+    '列表',
+    '代码',
+    '链接',
+    '分隔线',
+    '图片',
+    '列表与图片布局',
+    '表格',
+    '数学公式',
+  ],
+  'Md docs must group tokens by each rendered Markdown semantic node.',
+)
+assert.deepEqual(
+  [...markdownGroupSource.matchAll(/'(--markdown-[a-z0-9-]+)'/g)]
+    .map((match) => match[1])
+    .sort(),
+  [...markdownTokenNames].sort(),
+  'Every Markdown token must appear in exactly one semantic-node group.',
+)
 assert.ok(
   definitionSource.indexOf('<CardPanel className="md-style-preview__scene"') <
-    definitionSource.indexOf('{markdownStyleTokens.map((item) => (') &&
+    definitionSource.indexOf('{markdownStyleTokenGroups.map((group) => (') &&
     definitionSource.includes("'Markdown渲染'") &&
     definitionSource.includes("'Markdown样式'"),
   'Md docs must place the real render card first and keep both page names searchable.',
 )
 assert.ok(
   !definitionSource.includes('summary:') &&
-    !definitionSource.includes('markdownStyleTokenGroups') &&
     !definitionSource.includes('usedBy') &&
     !definitionSource.includes("title: '排版'") &&
     !definitionSource.includes("title: '结构'") &&
@@ -291,7 +325,7 @@ assert.ok(
     !definitionSource.includes('md-style-preview__usage-scene') &&
     !definitionSource.includes('md-style-preview__group-header') &&
     !definitionSource.includes('md-style-preview__scene-header'),
-  'Md docs definition must stay visual-only: no grouping, usage selectors, or scene prose.',
+  'Md docs definition must stay visual-only beyond semantic group headings.',
 )
 assert.ok(
   !definitionSource.includes('二三级标题字号') &&
