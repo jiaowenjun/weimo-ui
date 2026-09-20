@@ -303,34 +303,6 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "name": "token-preview-card",
-      "type": "registry:ui",
-      "title": "Token Preview Card",
-      "description": "A compact card for inspecting a token label, name, theme-aware value, and rendered effect together.",
-      "categories": [
-        "style",
-        "development"
-      ],
-      "registryDependencies": [
-        "@weimo/style",
-        "@weimo/utils",
-        "@weimo/card-surface"
-      ],
-      "files": [
-        {
-          "path": "src/components/token-preview-card.tsx",
-          "type": "registry:ui",
-          "target": "@ui/token-preview-card.tsx"
-        },
-        {
-          "path": "src/components/token-preview-card.css",
-          "type": "registry:ui",
-          "target": "@ui/token-preview-card.css"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "token-group-preview-card",
       "type": "registry:ui",
       "title": "Token Group Preview Card",
@@ -354,6 +326,34 @@
           "path": "src/components/token-group-preview-card.css",
           "type": "registry:ui",
           "target": "@ui/token-group-preview-card.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "token-preview-card",
+      "type": "registry:ui",
+      "title": "Token Preview Card",
+      "description": "A compact card for inspecting a token label, name, theme-aware value, and rendered effect together.",
+      "categories": [
+        "style",
+        "development"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/card-surface"
+      ],
+      "files": [
+        {
+          "path": "src/components/token-preview-card.tsx",
+          "type": "registry:ui",
+          "target": "@ui/token-preview-card.tsx"
+        },
+        {
+          "path": "src/components/token-preview-card.css",
+          "type": "registry:ui",
+          "target": "@ui/token-preview-card.css"
         }
       ]
     },

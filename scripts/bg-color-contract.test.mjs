@@ -257,7 +257,8 @@ assert.ok(
 )
 
 for (const oldMdTokenName of [
-  'markdown-math-hover',
+  "'markdown-math-hover'",
+  '"markdown-math-hover"',
   '--color-bg-markdown-math-hover',
   'bg-color--markdown-math-hover',
 ]) {

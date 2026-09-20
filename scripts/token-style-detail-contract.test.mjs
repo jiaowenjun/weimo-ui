@@ -125,6 +125,21 @@ assert.ok(
   'TokenPreviewCard must place the label, token identity, and value on dedicated rows.',
 )
 
+const cardSwatchBlock = blockFor(cardCss, '.token-preview-card__value-swatch')
+
+assert.ok(
+  cardSource.includes('const colorValuePattern =') &&
+    cardSource.includes("renderTokenValue(value, 'token-preview-card__value-swatch')") &&
+    cardSource.includes("renderTokenValue(darkValue, 'token-preview-card__value-swatch')") &&
+    cardSource.includes('background: `linear-gradient(${value}),') &&
+    cardSource.includes('aria-hidden="true"') &&
+    cardSwatchBlock.includes('display: inline-block;') &&
+    cardSwatchBlock.includes('width: 12px;') &&
+    cardSwatchBlock.includes('height: 12px;') &&
+    cardSwatchBlock.includes('margin-left: 6px;'),
+  'TokenPreviewCard must append a checkerboard-backed swatch to the right of every color token value in the single and light/dark branches.',
+)
+
 assert.ok(
   previewBlock.includes('height: 80px;') &&
     previewBlock.includes('min-height: 80px;') &&
@@ -228,6 +243,24 @@ assert.ok(
     groupCardCss.includes('.token-group-preview-card__token {\n    text-align: left;') &&
     groupCardCss.includes('.token-group-preview-card__value {\n    text-align: right;'),
   'TokenGroupPreviewCard must render one two-column row per token with opposing alignment.',
+)
+
+const groupSwatchBlock = blockFor(groupCardCss, '.token-group-preview-card__value-swatch')
+
+assert.ok(
+  groupCardSource.includes('const colorValuePattern =') &&
+    groupCardSource.includes(
+      "renderTokenValue(item.value, 'token-group-preview-card__value-swatch')",
+    ) &&
+    groupCardSource.includes(
+      "renderTokenValue(item.darkValue, 'token-group-preview-card__value-swatch')",
+    ) &&
+    groupCardSource.includes('background: `linear-gradient(${value}),') &&
+    groupSwatchBlock.includes('display: inline-block;') &&
+    groupSwatchBlock.includes('width: 12px;') &&
+    groupSwatchBlock.includes('height: 12px;') &&
+    groupSwatchBlock.includes('margin-left: 6px;'),
+  'TokenGroupPreviewCard must append a checkerboard-backed swatch to the right of every color token value in the single and light/dark branches.',
 )
 assert.ok(
   groupPreviewBlock.includes('min-height: 112px;') &&
