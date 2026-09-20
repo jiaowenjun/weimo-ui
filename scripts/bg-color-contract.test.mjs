@@ -377,10 +377,16 @@ assert.ok(
     docsDefinitionSource.includes('value={item.value.light}') &&
     docsDefinitionSource.includes('bg-color-preview__sample') &&
     docsDefinitionSource.includes('bg-color-preview__sample-fill') &&
+    docsDefinitionSource.includes(
+      'className={`bg-color-preview__sample-fill ${getBgColorClassName(tone)}`}',
+    ) &&
     docsDefinitionSource.includes('const isTransparent = hasTransparentBgColorValue(item)') &&
     docsDefinitionSource.includes('token-preview-card__surface-preview') &&
     docsDefinitionSource.includes('token-preview-card__surface-backdrop') &&
     docsDefinitionSource.includes('token-preview-card__surface') &&
+    docsDefinitionSource.includes(
+      'className={`token-preview-card__surface ${getBgColorClassName(tone)}`}',
+    ) &&
     docsDefinitionSource.includes('pressable-preview__sample') &&
     docsDefinitionSource.includes('tone === pressableFeedback.bgColorTone') &&
     docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">背景模糊度</h2>') &&
@@ -445,11 +451,11 @@ assert.ok(
   'App.css must include only the BgColor-specific preview-effect styles.',
 )
 assert.ok(
-  sampleBlock.includes('border: 1px solid var(--color-border);') &&
-    sampleBlock.includes('position: relative;') &&
+  sampleBlock.includes('position: relative;') &&
     sampleBlock.includes('isolation: isolate;') &&
     sampleBlock.includes('height: 80px;') &&
-    sampleBlock.includes('background: var(--color-bg-raised);') &&
+    !sampleBlock.includes('border:') &&
+    !sampleBlock.includes('background:') &&
     !sampleBlock.includes('width:') &&
     !sampleBlock.includes('background-image:') &&
     !sampleBlock.includes('background-blend-mode:') &&
@@ -466,8 +472,8 @@ assert.ok(
 )
 assert.ok(
   surfaceBlock.includes('inset: 10px 12px;') &&
-    surfaceBlock.includes('border: 1px solid var(--color-border);') &&
     surfaceBlock.includes('border-radius: var(--radius-sm);') &&
+    !surfaceBlock.includes('border:') &&
     !surfaceBlock.includes('background:'),
   'Transparent BgColor samples must use the shared TokenPreviewCard surface geometry.',
 )

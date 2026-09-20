@@ -423,6 +423,9 @@ assert.ok(
     docsDefinitionSource.includes('token={getBorderColorToken(tone)}') &&
     docsDefinitionSource.includes('value={item.value.light}') &&
     docsDefinitionSource.includes('border-color-preview__sample') &&
+    docsDefinitionSource.includes(
+      'className={`border-color-preview__sample ${getBorderColorClassName(tone)}`}',
+    ) &&
     !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     docsDefinitionSource.includes('--color-border-disable-on-light') &&
     docsDefinitionSource.includes('--color-border-divider-menu-on-dark') &&

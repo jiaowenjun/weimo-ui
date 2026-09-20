@@ -306,8 +306,8 @@ assert.ok(
     backdropBlock.includes('hsl(18.1 71.9% 46.1% / 0.72)') &&
     !backdropBlock.includes('rgb(') &&
     surfaceBlock.includes('inset: 10px 12px;') &&
-    surfaceBlock.includes('border: 1px solid var(--color-border);') &&
     surfaceBlock.includes('border-radius: var(--radius-sm);') &&
+    !surfaceBlock.includes('border:') &&
     !surfaceBlock.includes('background:'),
   'TokenPreviewCard must own the shared backdrop and surface presentation used by BgBlur.',
 )

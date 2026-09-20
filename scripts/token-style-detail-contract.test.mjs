@@ -13,6 +13,15 @@ function readProjectFile(relativePath) {
   return readFileSync(absolutePath, 'utf8')
 }
 
+function blockFor(source, selector) {
+  const escapedSelector = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  const match = source.match(new RegExp(`${escapedSelector}\\s*\\{([^}]*)\\}`))
+
+  assert.ok(match, `${selector} block must exist.`)
+
+  return match[1]
+}
+
 const packageJson = JSON.parse(readProjectFile('package.json'))
 const readmeSource = readProjectFile('README.md')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
@@ -25,6 +34,16 @@ const cardSource = readProjectFile('src/components/token-preview-card.tsx')
 const cardCss = readProjectFile('src/components/token-preview-card.css')
 const cardRegistry = JSON.parse(readProjectFile('registry/token-preview-card.json'))
 const appCss = readProjectFile('src/App.css')
+const previewBlock = blockFor(
+  cardCss,
+  '.token-preview-card > .token-preview-card__meta ~ *',
+)
+const transparentSurfaceBlock = blockFor(
+  cardCss,
+  '.token-preview-card .token-preview-card__surface',
+)
+const backgroundSampleBlock = blockFor(appCss, '.bg-color-preview__sample')
+const borderSampleBlock = blockFor(appCss, '.border-color-preview__sample')
 
 assert.ok(
   packageJson.scripts?.test?.includes('scripts/token-style-detail-contract.test.mjs'),
@@ -98,22 +117,31 @@ assert.ok(
 )
 
 assert.ok(
-  cardCss.includes('.token-preview-card > .token-preview-card__meta ~ * {') &&
-    cardCss.includes('height: 80px;') &&
-    cardCss.includes('min-height: 80px;') &&
-    cardCss.includes('overflow: hidden;') &&
-    cardCss.includes('isolation: isolate;') &&
-    cardCss.includes('border: 1px solid var(--color-border);') &&
-    cardCss.includes('border-radius: var(--radius-sm);') &&
-    cardCss.includes('background: var(--color-bg-raised);') &&
+  previewBlock.includes('height: 80px;') &&
+    previewBlock.includes('min-height: 80px;') &&
+    previewBlock.includes('overflow: hidden;') &&
+    previewBlock.includes('isolation: isolate;') &&
+    previewBlock.includes('border-radius: var(--radius-sm);') &&
+    !previewBlock.includes('border:') &&
+    !previewBlock.includes('background:') &&
     !cardSource.includes('token-preview-card__preview'),
-  'TokenPreviewCard must own the shared size and surface styles for each direct preview child.',
+  'TokenPreviewCard must size and clip each direct preview child without adding a default border or background.',
+)
+
+assert.ok(
+  !backgroundSampleBlock.includes('border:') &&
+    !backgroundSampleBlock.includes('background:') &&
+    borderSampleBlock.includes('border: 1px solid;') &&
+    !borderSampleBlock.includes('background:'),
+  'Background and border previews must leave their visible color to the token-specific utility class.',
 )
 
 assert.ok(
   cardCss.includes('.token-preview-card .token-preview-card__surface-backdrop {') &&
     cardCss.includes('.token-preview-card .token-preview-card__surface {') &&
-    cardCss.includes('inset: 10px 12px;'),
+    transparentSurfaceBlock.includes('inset: 10px 12px;') &&
+    !transparentSurfaceBlock.includes('border:') &&
+    !transparentSurfaceBlock.includes('background:'),
   'Transparent color and blur previews must share one TokenPreviewCard surface layout.',
 )
 

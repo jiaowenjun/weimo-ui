@@ -785,9 +785,7 @@
   overflow: hidden;
   isolation: isolate;
   height: 80px;
-  border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
-  background: var(--color-bg-raised);
 }
 
 .bg-color-preview__sample-fill {
