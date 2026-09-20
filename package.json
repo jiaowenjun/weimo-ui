@@ -59,7 +59,6 @@
     "./components/bg-color": "./src/components/bg-color.ts",
     "./components/pressable": "./src/components/pressable.ts",
     "./components/token-preview-card": "./src/components/token-preview-card.tsx",
-    "./components/token-group-preview-card": "./src/components/token-group-preview-card.tsx",
     "./components/text-color": "./src/components/text-color.ts",
     "./components/border-color": "./src/components/border-color.ts",
     "./components/border-radius": "./src/components/border-radius.ts",

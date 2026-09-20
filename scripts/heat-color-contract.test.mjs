@@ -171,7 +171,7 @@ assert.ok(
 )
 assert.ok(
   bgColorDocsDefinitionSource.includes("from '../../components/heat-color'") &&
-    bgColorDocsDefinitionSource.includes("from '../../components/token-group-preview-card'") &&
+    bgColorDocsDefinitionSource.includes("from '../../components/token-preview-card'") &&
     bgColorDocsDefinitionSource.includes('heatColorLevels.map') &&
     bgColorDocsDefinitionSource.includes('heatColorMap[level]') &&
     bgColorDocsDefinitionSource.includes('getHeatColorClassName(level)') &&
@@ -182,11 +182,11 @@ assert.ok(
     bgColorDocsDefinitionSource.includes('value: item.value.light') &&
     bgColorDocsDefinitionSource.includes('heat-color-preview__group') &&
     bgColorDocsDefinitionSource.includes('heat-color-preview__swatch') &&
-    bgColorDocsDefinitionSource.includes('<TokenGroupPreviewCard') &&
+    bgColorDocsDefinitionSource.includes('<TokenPreviewCard') &&
     bgColorDocsDefinitionSource.includes("'HeatColor'") &&
     bgColorDocsDefinitionSource.includes("'热力图'") &&
     !bgColorDocsDefinitionSource.includes('<HeatColor'),
-  'BgColor docs must render the Heatmap tokens as one searchable TokenGroupPreviewCard.',
+  'BgColor docs must render the Heatmap tokens as one searchable TokenPreviewCard.',
 )
 assert.ok(
   tokenGridBlock.includes('display: grid;') &&

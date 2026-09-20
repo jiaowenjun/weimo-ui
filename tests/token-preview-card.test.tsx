@@ -52,4 +52,33 @@ describe('TokenPreviewCard', () => {
       'hsl(0 0% 20%)',
     )
   })
+
+  it('renders multiple token rows through items', () => {
+    const { container } = render(
+      <TokenPreviewCard
+        items={[
+          { token: '--color-heat-0', value: 'hsl(0 0% 94%)' },
+          { darkValue: 'hsl(22 42% 32%)', token: '--color-heat-2', value: 'hsl(18 62% 78%)' },
+        ]}
+        label="热力图"
+      >
+        <div data-testid="group-preview" />
+      </TokenPreviewCard>,
+    )
+
+    const rows = container.querySelectorAll('.token-preview-card__row')
+
+    expect(rows).toHaveLength(2)
+    expect(rows[0]).toHaveTextContent('--color-heat-0')
+    expect(rows[0]).toHaveTextContent('hsl(0 0% 94%)')
+    expect(rows[1].querySelector('.token-preview-card__value--light')).toHaveTextContent(
+      'hsl(18 62% 78%)',
+    )
+    expect(rows[1].querySelector('.token-preview-card__value--dark')).toHaveTextContent(
+      'hsl(22 42% 32%)',
+    )
+    expect(screen.getByTestId('group-preview').parentElement).toBe(
+      container.querySelector('.token-preview-card'),
+    )
+  })
 })

@@ -126,7 +126,7 @@ for (const item of componentManifest) {
 
 assert.deepEqual(
   componentManifest.filter((item) => !item.docs).map((item) => item.id),
-  ['token-group-preview-card', 'token-preview-card', 'text-color', 'pressable', 'heat-color', 'bg-blur', 'border-radius'],
+  ['token-preview-card', 'text-color', 'pressable', 'heat-color', 'bg-blur', 'border-radius'],
   'Merged token utilities and both token preview cards must remain public without separate docs pages.',
 )
 

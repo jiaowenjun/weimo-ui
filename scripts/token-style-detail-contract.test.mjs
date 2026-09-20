@@ -33,9 +33,6 @@ const colorSource = readProjectFile('src/docs/token-preview-color.ts')
 const cardSource = readProjectFile('src/components/token-preview-card.tsx')
 const cardCss = readProjectFile('src/components/token-preview-card.css')
 const cardRegistry = JSON.parse(readProjectFile('registry/token-preview-card.json'))
-const groupCardSource = readProjectFile('src/components/token-group-preview-card.tsx')
-const groupCardCss = readProjectFile('src/components/token-group-preview-card.css')
-const groupCardRegistry = JSON.parse(readProjectFile('registry/token-group-preview-card.json'))
 const appCss = readProjectFile('src/App.css')
 const previewBlock = blockFor(
   cardCss,
@@ -44,12 +41,6 @@ const previewBlock = blockFor(
 const transparentSurfaceBlock = blockFor(
   cardCss,
   '.token-preview-card .token-preview-card__surface',
-)
-const groupCardBlock = blockFor(groupCardCss, '.token-group-preview-card')
-const groupRowBlock = blockFor(groupCardCss, '.token-group-preview-card__row')
-const groupPreviewBlock = blockFor(
-  groupCardCss,
-  '.token-group-preview-card > .token-group-preview-card__meta ~ *',
 )
 const backgroundSampleBlock = blockFor(appCss, '.bg-color-preview__sample')
 const borderSampleBlock = blockFor(appCss, '.border-color-preview__sample')
@@ -121,7 +112,7 @@ const cardRowBlock = blockFor(cardCss, '.token-preview-card__row')
 
 assert.ok(
   cardCss.includes('.token-preview-card__meta {\n    display: grid;') &&
-    cardSource.includes('<code className="token-preview-card__token">{token}</code>') &&
+    cardSource.includes('<code className="token-preview-card__token">{row.token}</code>') &&
     cardSource.includes('<code className="token-preview-card__value">') &&
     cardSource.includes('className="token-preview-card__row"') &&
     !cardCss.includes('margin-left: auto;'),
@@ -132,15 +123,26 @@ assert.ok(
     cardRowBlock.includes('grid-template-columns: repeat(2, minmax(0, 1fr));') &&
     cardCss.includes('.token-preview-card__token {\n    text-align: left;') &&
     cardCss.includes('.token-preview-card__value {\n    text-align: right;'),
-  'TokenPreviewCard must align the token name left and the value right on one row, matching TokenGroupPreviewCard.',
+  'TokenPreviewCard must align the token name left and the value right on every row.',
+)
+assert.ok(
+  cardSource.includes('export type TokenPreviewCardItem') &&
+    cardSource.includes('items?: readonly TokenPreviewCardItem[]') &&
+    cardSource.includes('rows.map((row) => (') &&
+    cardSource.includes('key={row.token}') &&
+    cardSource.includes(
+      "items ?? (token === undefined || value === undefined ? [] : [{ darkValue, token, value }])",
+    ) &&
+    !cardCss.includes('grid-column:'),
+  'TokenPreviewCard must support multi-token rows through items while keeping the single-token props, without component-level grid placement.',
 )
 
 const cardSwatchBlock = blockFor(cardCss, '.token-preview-card__value-swatch')
 
 assert.ok(
   cardSource.includes('const colorValuePattern =') &&
-    cardSource.includes("renderTokenValue(value, 'token-preview-card__value-swatch')") &&
-    cardSource.includes("renderTokenValue(darkValue, 'token-preview-card__value-swatch')") &&
+    cardSource.includes("renderTokenValue(row.value, 'token-preview-card__value-swatch')") &&
+    cardSource.includes("renderTokenValue(row.darkValue, 'token-preview-card__value-swatch')") &&
     cardSource.includes('background: `linear-gradient(${value}),') &&
     cardSource.includes('aria-hidden="true"') &&
     cardSwatchBlock.includes('display: inline-block;') &&
@@ -151,15 +153,15 @@ assert.ok(
 )
 
 assert.ok(
-  previewBlock.includes('height: 80px;') &&
-    previewBlock.includes('min-height: 80px;') &&
+  previewBlock.includes('min-height: 80px;') &&
+    !previewBlock.includes('\n    height: 80px;') &&
     previewBlock.includes('overflow: hidden;') &&
     previewBlock.includes('isolation: isolate;') &&
     previewBlock.includes('border-radius: var(--radius-sm);') &&
     !previewBlock.includes('border:') &&
     !previewBlock.includes('background:') &&
     !cardSource.includes('token-preview-card__preview'),
-  'TokenPreviewCard must size and clip each direct preview child without adding a default border or background.',
+  'TokenPreviewCard must let each direct preview child grow to its content height with an 80px floor, without a default border or background.',
 )
 
 assert.ok(
@@ -220,96 +222,6 @@ assert.ok(
 assert.equal(cardRegistry.name, 'token-preview-card')
 assert.equal(cardRegistry.type, 'registry:ui')
 assert.deepEqual(cardRegistry.registryDependencies, [
-  '@weimo/style',
-  '@weimo/utils',
-  '@weimo/card-surface',
-])
-
-for (const snippet of [
-  "import { CardSurface } from './card-surface'",
-  'export type TokenGroupPreviewCardItem',
-  'export type TokenGroupPreviewCardProps',
-  'export function TokenGroupPreviewCard',
-  'items: readonly TokenGroupPreviewCardItem[]',
-  'items.map((item) => (',
-  'className="token-group-preview-card__label"',
-  'className="token-group-preview-card__row"',
-  'className="token-group-preview-card__token"',
-  'className="token-group-preview-card__value"',
-  'className="token-group-preview-card__value--light"',
-  'className="token-group-preview-card__value--dark"',
-  '{children}',
-]) {
-  assert.ok(groupCardSource.includes(snippet), `TokenGroupPreviewCard must include ${snippet}.`)
-}
-
-assert.ok(
-  !groupCardCss.includes('grid-column:') && !cardCss.includes('grid-column:'),
-  'TokenGroupPreviewCard and TokenPreviewCard must not carry component-level grid placement.',
-)
-assert.ok(
-  groupRowBlock.includes('display: grid;') &&
-    groupRowBlock.includes('grid-template-columns: repeat(2, minmax(0, 1fr));') &&
-    groupCardCss.includes('.token-group-preview-card__token {\n    text-align: left;') &&
-    groupCardCss.includes('.token-group-preview-card__value {\n    text-align: right;'),
-  'TokenGroupPreviewCard must render one two-column row per token with opposing alignment.',
-)
-
-assert.ok(
-  groupCardCss.includes(
-    '.token-group-preview-card__token code,\n  .token-group-preview-card__value code {\n    color: var(--color-text-secondary);\n  }',
-  ),
-  'TokenGroupPreviewCard inner code elements must match TokenPreviewCard secondary text color instead of the global code primary override.',
-)
-
-const groupSwatchBlock = blockFor(groupCardCss, '.token-group-preview-card__value-swatch')
-
-assert.ok(
-  groupCardSource.includes('const colorValuePattern =') &&
-    groupCardSource.includes(
-      "renderTokenValue(item.value, 'token-group-preview-card__value-swatch')",
-    ) &&
-    groupCardSource.includes(
-      "renderTokenValue(item.darkValue, 'token-group-preview-card__value-swatch')",
-    ) &&
-    groupCardSource.includes('background: `linear-gradient(${value}),') &&
-    groupSwatchBlock.includes('display: inline-block;') &&
-    groupSwatchBlock.includes('width: 12px;') &&
-    groupSwatchBlock.includes('height: 12px;') &&
-    groupSwatchBlock.includes('margin-left: 6px;'),
-  'TokenGroupPreviewCard must append a checkerboard-backed swatch to the right of every color token value in the single and light/dark branches.',
-)
-assert.ok(
-  groupPreviewBlock.includes('min-height: 112px;') &&
-    groupPreviewBlock.includes('overflow: hidden;') &&
-    groupPreviewBlock.includes('isolation: isolate;') &&
-    groupPreviewBlock.includes('border-radius: var(--radius-sm);') &&
-    !groupPreviewBlock.includes('border:') &&
-    !groupPreviewBlock.includes('background:'),
-  'TokenGroupPreviewCard must clip its preview without adding a default border or background.',
-)
-assert.equal(
-  packageJson.exports?.['./components/token-group-preview-card'],
-  './src/components/token-group-preview-card.tsx',
-  'TokenGroupPreviewCard must have a public package export.',
-)
-assert.ok(
-  manifestSource.includes("id: 'token-group-preview-card'") &&
-    manifestSource.includes("name: 'TokenGroupPreviewCard'") &&
-    manifestSource.includes("registryName: 'token-group-preview-card'") &&
-    manifestSource.includes("packageExport: './components/token-group-preview-card'") &&
-    manifestSource.includes(
-      "packageExport: './components/token-group-preview-card',\n    group: 'token-style',\n    docs: false,",
-    ),
-  'TokenGroupPreviewCard must be listed in the Token / style catalog as a registry-only entry.',
-)
-assert.ok(
-  !existsSync(join(root, 'src/docs/component-definitions/token-group-preview-card.tsx')),
-  'TokenGroupPreviewCard must not add a standalone debug docs page.',
-)
-assert.equal(groupCardRegistry.name, 'token-group-preview-card')
-assert.equal(groupCardRegistry.type, 'registry:ui')
-assert.deepEqual(groupCardRegistry.registryDependencies, [
   '@weimo/style',
   '@weimo/utils',
   '@weimo/card-surface',
@@ -379,7 +291,7 @@ const mdDefinitionSource = readProjectFile('src/docs/component-definitions/md.ts
 assert.ok(
   mdDefinitionSource.includes("frame: 'plain',") &&
     mdDefinitionSource.includes('searchAliases:') &&
-    mdDefinitionSource.includes('<TokenGroupPreviewCard') &&
+    mdDefinitionSource.includes('<TokenPreviewCard') &&
     mdDefinitionSource.includes('<CardPanel className="md-style-preview__scene"') &&
     mdDefinitionSource.includes('<Md content={mdRenderSample} />') &&
     !mdDefinitionSource.includes('className="md-style-preview"') &&
@@ -406,10 +318,10 @@ assert.ok(
 assert.ok(
   !existsSync(join(root, 'src/docs/component-definitions/heat-color.tsx')) &&
     bgColorDefinitionSource.includes('heatColorLevels.map') &&
-    bgColorDefinitionSource.includes('<TokenGroupPreviewCard') &&
+    bgColorDefinitionSource.includes('<TokenPreviewCard') &&
     bgColorDefinitionSource.includes('heat-color-preview__swatch') &&
     bgColorDefinitionSource.includes('label="热力图"'),
-  'HeatColor docs must stay merged into the BgColor detail page under the grouped TokenGroupPreviewCard.',
+  'HeatColor docs must stay merged into the BgColor detail page under the grouped TokenPreviewCard.',
 )
 
 assert.ok(

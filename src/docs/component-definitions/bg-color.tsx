@@ -20,7 +20,6 @@ import {
   heatColorMap,
 } from '../../components/heat-color'
 import { pressableToneMap, pressableTones } from '../../components/pressable'
-import { TokenGroupPreviewCard } from '../../components/token-group-preview-card'
 import { TokenPreviewCard } from '../../components/token-preview-card'
 import type { ComponentDefinition } from '../component-docs'
 import { sortByThemeLightness, useIsDarkTheme } from '../token-preview-color'
@@ -141,7 +140,7 @@ function BgColorPreview() {
         )
       })}
 
-      <TokenGroupPreviewCard
+      <TokenPreviewCard
         items={heatColorLevels.map((level) => {
           const item = heatColorMap[level]
 
@@ -161,7 +160,7 @@ function BgColorPreview() {
             />
           ))}
         </div>
-      </TokenGroupPreviewCard>
+      </TokenPreviewCard>
     </>
   )
 }
