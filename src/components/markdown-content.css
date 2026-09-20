@@ -5,9 +5,9 @@
     min-width: 0;
     overflow-x: clip;
     overflow-y: visible;
-    color: var(--markdown-color-text-primary);
-    font-size: var(--markdown-font-size-base);
-    line-height: var(--markdown-font-line-height-reading);
+    color: var(--markdown-content-color);
+    font-size: var(--markdown-content-font-size);
+    line-height: var(--markdown-content-line-height);
     overflow-wrap: anywhere;
   }
 
@@ -35,7 +35,7 @@
   .weimo-card-markdown__p,
   .md-editor__content.weimo-markdown-content p {
     margin: 0;
-    color: var(--markdown-color-text-primary);
+    color: var(--markdown-paragraph-color);
     text-align: justify;
     text-justify: inter-ideograph;
   }
@@ -44,48 +44,35 @@
   .md-editor__content.weimo-markdown-content :where(h1, h2, h3),
   .md-editor__content.weimo-markdown-content :where(h4, h5, h6) {
     margin: 0;
-    color: var(--markdown-color-text-primary);
     font-weight: 650;
     text-align: center;
   }
 
   .weimo-card-markdown__heading--h1,
   .md-editor__content.weimo-markdown-content h1 {
-    font-size: var(--markdown-font-size-base);
-    line-height: var(--markdown-font-line-height-reading);
+    color: var(--markdown-heading-1-color);
+    font-size: var(--markdown-heading-1-font-size);
+    line-height: var(--markdown-heading-1-line-height);
   }
 
   .weimo-card-markdown__heading--h2,
   .md-editor__content.weimo-markdown-content h2 {
-    font-size: var(--markdown-font-size-base);
-    line-height: var(--markdown-font-line-height-reading);
-  }
-
-  .weimo-card-markdown__heading--h3,
-  .md-editor__content.weimo-markdown-content h3 {
-    font-size: var(--markdown-font-size-base);
-    line-height: var(--markdown-font-line-height-reading);
-  }
-
-  .weimo-card-markdown__heading--h4,
-  .weimo-card-markdown__heading--h5,
-  .weimo-card-markdown__heading--h6,
-  .md-editor__content.weimo-markdown-content :where(h4, h5, h6) {
-    font-size: var(--markdown-font-size-base);
-    line-height: var(--markdown-font-line-height-reading);
+    color: var(--markdown-heading-2-color);
+    font-size: var(--markdown-heading-2-font-size);
+    line-height: var(--markdown-heading-2-line-height);
   }
 
   .weimo-card-markdown__blockquote,
   .md-editor__content.weimo-markdown-content blockquote {
     margin: 0;
-    padding: 0 var(--markdown-quote-padding);
-    color: var(--markdown-color-text-secondary);
+    padding: 0 var(--markdown-blockquote-padding-inline);
+    color: var(--markdown-blockquote-color);
     text-align: left;
   }
 
   .weimo-card-markdown__blockquote .weimo-card-markdown__p,
   .md-editor__content.weimo-markdown-content blockquote p {
-    color: var(--markdown-color-text-secondary);
+    color: var(--markdown-blockquote-color);
     text-align: left;
   }
 
@@ -105,7 +92,7 @@
 
   .weimo-card-markdown__strong,
   .md-editor__content.weimo-markdown-content strong {
-    color: var(--markdown-color-text-primary);
+    color: var(--markdown-strong-color);
     font-weight: 650;
   }
 
@@ -116,13 +103,13 @@
 
   .weimo-card-markdown__del,
   .md-editor__content.weimo-markdown-content :where(del, s) {
-    color: var(--markdown-color-text-secondary);
+    color: var(--markdown-strikethrough-color);
   }
 
   .weimo-card-markdown__list,
   .md-editor__content.weimo-markdown-content :where(ul, ol) {
     margin: 0;
-    padding-left: var(--markdown-list-indent-compact);
+    padding-left: var(--markdown-list-padding-left);
   }
 
   .weimo-card-markdown__list--ul,
@@ -149,7 +136,7 @@
 
   .weimo-card-markdown__list--ol[data-marker-type="A"],
   .md-editor__content.weimo-markdown-content ol[data-marker-type="A"] {
-    padding-left: var(--markdown-list-indent-wide);
+    padding-left: var(--markdown-ordered-list-wide-marker-padding-left);
     list-style-type: upper-alpha;
   }
 
@@ -188,31 +175,31 @@
 
   .weimo-card-markdown__list--ol[data-marker-type="a"],
   .md-editor__content.weimo-markdown-content ol[data-marker-type="a"] {
-    padding-left: var(--markdown-list-indent-wide);
+    padding-left: var(--markdown-ordered-list-wide-marker-padding-left);
     list-style-type: lower-alpha;
   }
 
   .weimo-card-markdown__list--ol[data-marker-type="I"],
   .md-editor__content.weimo-markdown-content ol[type="I"] {
-    padding-left: var(--markdown-list-indent-wide);
+    padding-left: var(--markdown-ordered-list-wide-marker-padding-left);
     list-style-type: upper-roman;
   }
 
   .weimo-card-markdown__list--ol[data-marker-type="i"],
   .md-editor__content.weimo-markdown-content ol[type="i"] {
-    padding-left: var(--markdown-list-indent-wide);
+    padding-left: var(--markdown-ordered-list-wide-marker-padding-left);
     list-style-type: lower-roman;
   }
 
   .weimo-card-markdown__list--ol[data-marker-style="paren-upper-roman"],
   .md-editor__content.weimo-markdown-content ol[data-marker-style="paren-upper-roman"] {
-    padding-left: var(--markdown-list-indent-wide);
+    padding-left: var(--markdown-ordered-list-wide-marker-padding-left);
     list-style-type: weimo-paren-upper-roman;
   }
 
   .weimo-card-markdown__list--ol[data-marker-style="paren-decimal"],
   .md-editor__content.weimo-markdown-content ol[data-marker-style="paren-decimal"] {
-    padding-left: var(--markdown-list-indent-wide);
+    padding-left: var(--markdown-ordered-list-wide-marker-padding-left);
     list-style-type: weimo-paren-decimal;
   }
 
@@ -259,19 +246,15 @@
   }
 
   .md-editor__content.weimo-markdown-content ul[data-type="taskList"] input {
-    accent-color: var(--markdown-color-primary);
-  }
-
-  .weimo-card-markdown__code,
-  .md-editor__content.weimo-markdown-content code {
-    font-family: var(--markdown-font-mono);
-    font-size: var(--markdown-font-size-md);
+    accent-color: var(--markdown-task-checkbox-accent-color);
   }
 
   .weimo-markdown-content :not(pre) > :where(.weimo-card-markdown__code, code) {
     padding: 2px 6px;
-    border: 1px solid var(--markdown-color-border-divider);
-    border-radius: var(--markdown-radius-sm);
+    border: 1px solid var(--markdown-inline-code-border-color);
+    border-radius: var(--markdown-inline-code-border-radius);
+    font-family: var(--markdown-inline-code-font-family);
+    font-size: var(--markdown-inline-code-font-size);
     word-break: break-all;
   }
 
@@ -279,16 +262,17 @@
   .md-editor__content.weimo-markdown-content pre {
     margin: 0;
     overflow: auto;
-    padding: var(--markdown-space-section-gap);
-    border: 1px solid var(--markdown-color-border);
-    border-radius: var(--markdown-radius-sm);
+    padding: var(--markdown-code-block-padding);
+    border: 1px solid var(--markdown-code-block-border-color);
+    border-radius: var(--markdown-code-block-border-radius);
   }
 
   .weimo-card-markdown__pre .weimo-card-markdown__code,
   .md-editor__content.weimo-markdown-content pre code {
     display: block;
-    color: var(--markdown-color-text-primary);
-    font-size: var(--markdown-font-size-sm);
+    color: var(--markdown-code-block-color);
+    font-family: var(--markdown-code-block-font-family);
+    font-size: var(--markdown-code-block-font-size);
     line-height: 1.72;
     white-space: pre-wrap;
     word-break: break-word;
@@ -296,27 +280,27 @@
 
   .weimo-card-markdown__link,
   .md-editor__content.weimo-markdown-content a {
-    color: var(--markdown-color-primary);
+    color: var(--markdown-link-color);
     text-decoration: underline;
     text-underline-offset: 0.2em;
   }
 
   .weimo-card-markdown__link-text {
-    color: var(--markdown-color-primary);
+    color: var(--markdown-link-color);
   }
 
   .weimo-card-markdown__hr,
   .md-editor__content.weimo-markdown-content hr {
     margin: 0;
     border: 0;
-    border-top: 1px solid var(--markdown-color-border-divider);
+    border-top: 1px solid var(--markdown-divider-color);
   }
 
   .weimo-card-markdown__image-placeholder {
     padding: 2px 6px;
-    border-radius: var(--markdown-radius-sm);
-    color: var(--markdown-color-text-placeholder);
-    font-size: var(--markdown-font-size-md);
+    border-radius: var(--markdown-image-placeholder-border-radius);
+    color: var(--markdown-image-placeholder-color);
+    font-size: var(--markdown-image-placeholder-font-size);
   }
 
   .weimo-card-markdown__image,
@@ -325,14 +309,14 @@
     max-width: 100%;
     height: auto;
     margin-inline: auto;
-    border-radius: var(--markdown-radius-sm);
+    border-radius: var(--markdown-image-border-radius);
   }
 
   .weimo-card-markdown__list-image-pair {
     display: grid;
     grid-template-columns: minmax(0, 1fr) fit-content(50%);
     align-items: start;
-    column-gap: var(--markdown-space-section-gap);
+    column-gap: var(--markdown-list-image-gap);
   }
 
   .weimo-card-markdown__list-image-pair > .weimo-card-markdown__list {
@@ -348,7 +332,7 @@
     display: grid;
     grid-template-columns: minmax(0, 1fr) fit-content(50%);
     align-items: start;
-    column-gap: var(--markdown-space-section-gap);
+    column-gap: var(--markdown-list-image-gap);
   }
 
   .md-editor__content.weimo-markdown-content[data-list-image-layout="true"] > * {
@@ -376,8 +360,8 @@
     max-width: 100%;
     margin-inline: auto;
     overflow-x: auto;
-    border: 1px solid var(--markdown-color-border-divider);
-    border-radius: var(--markdown-radius-sm);
+    border: 1px solid var(--markdown-table-frame-border-color);
+    border-radius: var(--markdown-table-border-radius);
   }
 
   .md-editor__content.weimo-markdown-content .tableWrapper {
@@ -385,21 +369,21 @@
     max-width: 100%;
     margin-inline: auto;
     overflow-x: auto;
-    border: 1px solid var(--markdown-color-border-divider);
-    border-radius: var(--markdown-radius-sm);
+    border: 1px solid var(--markdown-table-frame-border-color);
+    border-radius: var(--markdown-table-border-radius);
   }
 
   .weimo-card-markdown__table,
   .md-editor__content.weimo-markdown-content table {
     width: max-content;
     border-collapse: collapse;
-    font-size: var(--markdown-font-size-sm);
+    font-size: var(--markdown-table-font-size);
   }
 
   .weimo-card-markdown__table-cell,
   .md-editor__content.weimo-markdown-content :where(td, th) {
     padding: 6px 8px;
-    border-bottom: 1px solid var(--markdown-color-border-divider);
+    border-bottom: 1px solid var(--markdown-table-cell-border-color);
     word-break: break-all;
     text-align: left;
     vertical-align: top;
@@ -407,12 +391,12 @@
 
   .weimo-card-markdown__table-cell + .weimo-card-markdown__table-cell,
   .md-editor__content.weimo-markdown-content :where(td, th) + :where(td, th) {
-    border-left: 1px solid var(--markdown-color-border-divider);
+    border-left: 1px solid var(--markdown-table-cell-border-color);
   }
 
   .weimo-card-markdown__table-cell--header,
   .md-editor__content.weimo-markdown-content th {
-    color: var(--markdown-color-text-secondary);
+    color: var(--markdown-table-header-color);
     font-weight: 600;
   }
 
@@ -427,7 +411,7 @@
 
   .weimo-markdown-content .tiptap-mathematics-render {
     display: inline-block;
-    border-radius: var(--markdown-radius-sm);
+    border-radius: var(--markdown-math-border-radius);
   }
 
   .weimo-markdown-content .tiptap-mathematics-render:not([data-type="block-math"]) {
@@ -441,7 +425,7 @@
   }
 
   .weimo-markdown-content .tiptap-mathematics-render--editable:hover {
-    background: var(--markdown-color-bg-hover);
+    background: var(--markdown-math-hover-background);
   }
 
   .weimo-markdown-content .tiptap-mathematics-render[data-type="block-math"],

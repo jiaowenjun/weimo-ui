@@ -65,8 +65,6 @@ const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const tokenGridBlock = cssBlockFor(appCss, '.app-shell__content--token-grid')
 const mdSceneBlock = cssBlockFor(appCss, '.md-style-preview__scene')
 const mdEffectBlock = cssBlockFor(appCss, '.md-style-preview__effect')
-const mdMiniMathHoverBlock = cssBlockFor(appCss, '.md-style-preview__mini-math-hover')
-const mdMiniQuoteSpaceBlock = cssBlockFor(appCss, '.md-style-preview__mini-quote-space')
 const markdownRootBlock = cssBlockFor(markdownContentCss, '.weimo-markdown-content')
 const tokensRootBlock = cssBlockFor(tokensCss, ':root')
 const tokensDarkBlock = cssBlockFor(tokensCss, '.dark')
@@ -76,25 +74,49 @@ const markdownImageBlock = cssBlockFor(
 )
 
 const markdownColorTokens = [
-  ['--markdown-color-text-primary', 'hsl(0 0% 9%)', 'hsl(0 0% 98%)'],
-  ['--markdown-color-text-secondary', 'hsl(0 0% 28%)', 'hsl(0 0% 64%)'],
-  ['--markdown-color-text-placeholder', 'hsl(0 0% 74%)', 'hsl(0 0% 35%)'],
-  ['--markdown-color-primary', 'hsl(0 0% 15%)', 'hsl(0 0% 96%)'],
-  ['--markdown-color-border', 'hsl(0 0% 90%)', 'hsl(0 0% 20%)'],
-  ['--markdown-color-border-divider', 'hsl(0 0% 88%)', 'hsl(0 0% 28%)'],
-  ['--markdown-color-bg-hover', 'hsl(40 12% 96%)', 'hsl(0 0% 20%)'],
+  ['--markdown-content-color', 'hsl(0 0% 9%)', 'hsl(0 0% 98%)'],
+  ['--markdown-paragraph-color', 'hsl(0 0% 9%)', 'hsl(0 0% 98%)'],
+  ['--markdown-heading-1-color', 'hsl(0 0% 9%)', 'hsl(0 0% 98%)'],
+  ['--markdown-heading-2-color', 'hsl(0 0% 9%)', 'hsl(0 0% 98%)'],
+  ['--markdown-blockquote-color', 'hsl(0 0% 28%)', 'hsl(0 0% 64%)'],
+  ['--markdown-strong-color', 'hsl(0 0% 9%)', 'hsl(0 0% 98%)'],
+  ['--markdown-strikethrough-color', 'hsl(0 0% 28%)', 'hsl(0 0% 64%)'],
+  ['--markdown-task-checkbox-accent-color', 'hsl(0 0% 15%)', 'hsl(0 0% 96%)'],
+  ['--markdown-inline-code-border-color', 'hsl(0 0% 88%)', 'hsl(0 0% 28%)'],
+  ['--markdown-code-block-color', 'hsl(0 0% 9%)', 'hsl(0 0% 98%)'],
+  ['--markdown-code-block-border-color', 'hsl(0 0% 90%)', 'hsl(0 0% 20%)'],
+  ['--markdown-link-color', 'hsl(0 0% 15%)', 'hsl(0 0% 96%)'],
+  ['--markdown-divider-color', 'hsl(0 0% 88%)', 'hsl(0 0% 28%)'],
+  ['--markdown-image-placeholder-color', 'hsl(0 0% 74%)', 'hsl(0 0% 35%)'],
+  ['--markdown-table-frame-border-color', 'hsl(0 0% 88%)', 'hsl(0 0% 28%)'],
+  ['--markdown-table-cell-border-color', 'hsl(0 0% 88%)', 'hsl(0 0% 28%)'],
+  ['--markdown-table-header-color', 'hsl(0 0% 28%)', 'hsl(0 0% 64%)'],
+  ['--markdown-math-hover-background', 'hsl(40 12% 96%)', 'hsl(0 0% 20%)'],
 ]
 const markdownStaticTokens = [
-  ['--markdown-font-size-base', '16px'],
-  ['--markdown-font-size-md', '14px'],
-  ['--markdown-font-size-sm', '13px'],
-  ['--markdown-font-line-height-reading', '1.6'],
-  ['--markdown-font-mono', '"SFMono-Regular", "Cascadia Code", "Liberation Mono", Menlo, Consolas, monospace'],
-  ['--markdown-radius-sm', '8px'],
-  ['--markdown-space-section-gap', '1em'],
-  ['--markdown-quote-padding', '20px'],
-  ['--markdown-list-indent-compact', '1.35em'],
-  ['--markdown-list-indent-wide', '2em'],
+  ['--markdown-content-font-size', '16px'],
+  ['--markdown-content-line-height', '1.6'],
+  ['--markdown-heading-1-font-size', '16px'],
+  ['--markdown-heading-1-line-height', '1.6'],
+  ['--markdown-heading-2-font-size', '16px'],
+  ['--markdown-heading-2-line-height', '1.6'],
+  ['--markdown-blockquote-padding-inline', '20px'],
+  ['--markdown-list-padding-left', '1.35em'],
+  ['--markdown-ordered-list-wide-marker-padding-left', '2em'],
+  ['--markdown-inline-code-font-family', '"SFMono-Regular", "Cascadia Code", "Liberation Mono", Menlo, Consolas, monospace'],
+  ['--markdown-inline-code-font-size', '14px'],
+  ['--markdown-inline-code-border-radius', '8px'],
+  ['--markdown-code-block-font-family', '"SFMono-Regular", "Cascadia Code", "Liberation Mono", Menlo, Consolas, monospace'],
+  ['--markdown-code-block-font-size', '13px'],
+  ['--markdown-code-block-padding', '1em'],
+  ['--markdown-code-block-border-radius', '8px'],
+  ['--markdown-image-placeholder-font-size', '14px'],
+  ['--markdown-image-placeholder-border-radius', '8px'],
+  ['--markdown-image-border-radius', '8px'],
+  ['--markdown-list-image-gap', '1em'],
+  ['--markdown-table-border-radius', '8px'],
+  ['--markdown-table-font-size', '13px'],
+  ['--markdown-math-border-radius', '8px'],
 ]
 const markdownTokenNames = [
   ...markdownColorTokens.map(([token]) => token),
@@ -104,6 +126,41 @@ const markdownReferencedTokens = [
   ...new Set(
     [...markdownContentCss.matchAll(/var\((--[^,)]+)/g)].map((match) => match[1]),
   ),
+]
+const markdownDefinedTokens = [
+  ...tokensRootBlock.matchAll(/^\s*(--markdown-[a-z0-9-]+):/gm),
+].map((match) => match[1])
+const legacyMarkdownTokenNames = [
+  '--markdown-color-text-primary',
+  '--markdown-color-text-secondary',
+  '--markdown-color-text-placeholder',
+  '--markdown-color-primary',
+  '--markdown-color-border',
+  '--markdown-color-border-divider',
+  '--markdown-color-bg-hover',
+  '--markdown-font-size-base',
+  '--markdown-font-size-md',
+  '--markdown-font-size-sm',
+  '--markdown-font-line-height-reading',
+  '--markdown-font-mono',
+  '--markdown-radius-sm',
+  '--markdown-space-section-gap',
+  '--markdown-quote-padding',
+  '--markdown-list-indent-compact',
+  '--markdown-list-indent-wide',
+  '--markdown-table-border-color',
+  '--markdown-heading-3-color',
+  '--markdown-heading-3-font-size',
+  '--markdown-heading-3-line-height',
+  '--markdown-heading-4-color',
+  '--markdown-heading-4-font-size',
+  '--markdown-heading-4-line-height',
+  '--markdown-heading-5-color',
+  '--markdown-heading-5-font-size',
+  '--markdown-heading-5-line-height',
+  '--markdown-heading-6-color',
+  '--markdown-heading-6-font-size',
+  '--markdown-heading-6-line-height',
 ]
 
 assert.ok(
@@ -116,10 +173,29 @@ assert.deepEqual(
   [...markdownTokenNames].sort(),
   'Markdown rendering CSS must depend exclusively on the complete --markdown-* theme contract.',
 )
+assert.deepEqual(
+  markdownDefinedTokens.sort(),
+  [...markdownTokenNames].sort(),
+  'Markdown token definitions must not contain unreferenced or undocumented theme variables.',
+)
 assert.ok(
   markdownReferencedTokens.every((token) => token.startsWith('--markdown-')),
   'Markdown rendering CSS must not depend on external component or shared style tokens.',
 )
+for (const token of legacyMarkdownTokenNames) {
+  const key = token.slice(2)
+
+  assert.ok(
+    !tokensCss.includes(token) &&
+      !markdownContentCss.includes(token) &&
+      !definitionSource.includes(token) &&
+      !(key in styleRegistry.cssVars.light) &&
+      !(key in styleRegistry.cssVars.dark) &&
+      !(key in rootStyleItem.cssVars.light) &&
+      !(key in rootStyleItem.cssVars.dark),
+    `The obsolete Markdown token ${token} must be absent from every public surface.`,
+  )
+}
 
 for (const [token, lightValue, darkValue] of markdownColorTokens) {
   const key = token.slice(2)
@@ -170,6 +246,7 @@ for (const snippet of [
   "frame: 'plain',",
   'markdownStyleTokens',
   'renderMarkdownTokenPreview',
+  'const value = `var(${item.token})`',
   '<TokenPreviewCard',
   'darkValue={typeof item.value === \'string\' ? undefined : item.value.dark}',
   'label={item.role}',
@@ -189,8 +266,10 @@ for (const snippet of [
   assert.ok(definitionSource.includes(snippet), `Md docs definition must include ${snippet}.`)
 }
 assert.deepEqual(
-  [...definitionSource.matchAll(/token: '(--[^']+)'/g)].map((match) => match[1]),
-  markdownTokenNames,
+  [...definitionSource.matchAll(/token: '(--[^']+)'/g)]
+    .map((match) => match[1])
+    .sort(),
+  [...markdownTokenNames].sort(),
   'Md docs must expose every Markdown theme token without external token names.',
 )
 assert.ok(
@@ -1033,7 +1112,7 @@ assert.match(
 )
 assert.match(
   markdownContentCss,
-  /\.weimo-card-markdown__list--ol\[data-marker-type="A"\][^{]*\.md-editor__content\.weimo-markdown-content ol\[data-marker-type="A"\][^{]*\{[^}]*padding-left:\s*var\(--markdown-list-indent-wide\);/s,
+  /\.weimo-card-markdown__list--ol\[data-marker-type="A"\][^{]*\.md-editor__content\.weimo-markdown-content ol\[data-marker-type="A"\][^{]*\{[^}]*padding-left:\s*var\(--markdown-ordered-list-wide-marker-padding-left\);/s,
   'MdRender and MdEditor uppercase alphabetic lists must reserve wide Safari-safe marker indentation.',
 )
 assert.match(
@@ -1043,7 +1122,7 @@ assert.match(
 )
 assert.match(
   markdownContentCss,
-  /\.weimo-card-markdown__list--ol\[data-marker-type="a"\][^{]*\.md-editor__content\.weimo-markdown-content ol\[data-marker-type="a"\][^{]*\{[^}]*padding-left:\s*var\(--markdown-list-indent-wide\);/s,
+  /\.weimo-card-markdown__list--ol\[data-marker-type="a"\][^{]*\.md-editor__content\.weimo-markdown-content ol\[data-marker-type="a"\][^{]*\{[^}]*padding-left:\s*var\(--markdown-ordered-list-wide-marker-padding-left\);/s,
   'MdRender and MdEditor lowercase alphabetic lists must reserve wide Safari-safe marker indentation.',
 )
 assert.match(
@@ -1058,12 +1137,12 @@ assert.match(
 )
 assert.match(
   markdownContentCss,
-  /\.weimo-card-markdown__list--ol\[data-marker-type="I"\][^{]*\.md-editor__content\.weimo-markdown-content ol\[type="I"\][^{]*\{[^}]*padding-left:\s*var\(--markdown-list-indent-wide\);/s,
+  /\.weimo-card-markdown__list--ol\[data-marker-type="I"\][^{]*\.md-editor__content\.weimo-markdown-content ol\[type="I"\][^{]*\{[^}]*padding-left:\s*var\(--markdown-ordered-list-wide-marker-padding-left\);/s,
   'MdRender and MdEditor uppercase Roman lists must share wide-marker indentation.',
 )
 assert.match(
   markdownContentCss,
-  /\.weimo-card-markdown__list--ol\[data-marker-type="i"\][^{]*\.md-editor__content\.weimo-markdown-content ol\[type="i"\][^{]*\{[^}]*padding-left:\s*var\(--markdown-list-indent-wide\);/s,
+  /\.weimo-card-markdown__list--ol\[data-marker-type="i"\][^{]*\.md-editor__content\.weimo-markdown-content ol\[type="i"\][^{]*\{[^}]*padding-left:\s*var\(--markdown-ordered-list-wide-marker-padding-left\);/s,
   'MdRender and MdEditor lowercase Roman lists must share wide-marker indentation.',
 )
 assert.ok(
@@ -1111,7 +1190,9 @@ assert.ok(
 for (const snippet of [
   '.md-style-preview__scene',
   '.md-style-preview__effect',
-  '.md-style-preview__mini-swatch',
+  '.md-style-preview__mini-border',
+  '.md-style-preview__mini-padding',
+  '.md-style-preview__mini-gap',
 ]) {
   assert.ok(appCss.includes(snippet), `App.css must include ${snippet}.`)
 }
@@ -1159,14 +1240,11 @@ assert.ok(
   'Md token items must use the borderless, background-free TokenPreviewCard preview area.',
 )
 assert.ok(
-  mdMiniMathHoverBlock.includes('border-radius: var(--markdown-radius-sm);') &&
-    !mdMiniMathHoverBlock.includes('border-radius: var(--radius-xs);'),
-  'Md math hover preview must use the same rounded token as editable math nodes.',
-)
-assert.ok(
-  mdMiniQuoteSpaceBlock.includes('padding-inline: var(--markdown-quote-padding);') &&
-    !mdMiniQuoteSpaceBlock.includes('border-left:'),
-  'Md quote padding preview must show spacing without reintroducing a quote left border.',
+  definitionSource.includes("case 'border-color':") &&
+    definitionSource.includes('style={{ borderColor: value }}') &&
+    definitionSource.includes("case 'padding-inline':") &&
+    definitionSource.includes('style={{ paddingInline: value }}'),
+  'Md docs must render each semantic token through its matching CSS property.',
 )
 
 assert.ok(rootRegistryItem, 'Root registry must include the @weimo/md item.')

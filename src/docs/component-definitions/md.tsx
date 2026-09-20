@@ -5,23 +5,17 @@ import type { ComponentDefinition } from '../component-docs'
 import { mdRenderSample } from './markdown-sample'
 
 type MarkdownTokenPreview =
-  | 'text-primary'
-  | 'text-secondary'
-  | 'text-placeholder'
-  | 'color-primary'
-  | 'border'
-  | 'divider'
-  | 'math-hover'
-  | 'font-base'
-  | 'font-md'
-  | 'font-sm'
+  | 'text-color'
+  | 'accent-color'
+  | 'border-color'
+  | 'background-color'
+  | 'font-size'
   | 'line-height'
-  | 'font-mono'
-  | 'radius-sm'
-  | 'section-gap'
-  | 'quote-padding'
-  | 'list-indent-compact'
-  | 'list-indent-wide'
+  | 'font-family'
+  | 'border-radius'
+  | 'padding-inline'
+  | 'padding'
+  | 'gap'
 
 type MarkdownStyleToken = {
   token: string
@@ -32,151 +26,290 @@ type MarkdownStyleToken = {
 
 const markdownStyleTokens = [
   {
-    token: '--markdown-color-text-primary',
-    role: '正文与标题文字',
+    token: '--markdown-content-color',
+    role: '内容默认文字颜色',
     value: { light: 'hsl(0 0% 9%)', dark: 'hsl(0 0% 98%)' },
-    preview: 'text-primary',
+    preview: 'text-color',
   },
   {
-    token: '--markdown-color-text-secondary',
-    role: '引用与弱文字',
-    value: { light: 'hsl(0 0% 28%)', dark: 'hsl(0 0% 64%)' },
-    preview: 'text-secondary',
-  },
-  {
-    token: '--markdown-color-text-placeholder',
-    role: '图片占位文字',
-    value: { light: 'hsl(0 0% 74%)', dark: 'hsl(0 0% 35%)' },
-    preview: 'text-placeholder',
-  },
-  {
-    token: '--markdown-color-primary',
-    role: '链接与任务控件',
-    value: { light: 'hsl(0 0% 15%)', dark: 'hsl(0 0% 96%)' },
-    preview: 'color-primary',
-  },
-  {
-    token: '--markdown-color-border',
-    role: '代码块边框',
-    value: { light: 'hsl(0 0% 90%)', dark: 'hsl(0 0% 20%)' },
-    preview: 'border',
-  },
-  {
-    token: '--markdown-color-border-divider',
-    role: '行内代码与表格分隔',
-    value: { light: 'hsl(0 0% 88%)', dark: 'hsl(0 0% 28%)' },
-    preview: 'divider',
-  },
-  {
-    token: '--markdown-color-bg-hover',
-    role: '数学节点 hover 背景',
-    value: { light: 'hsl(40 12% 96%)', dark: 'hsl(0 0% 20%)' },
-    preview: 'math-hover',
-  },
-  {
-    token: '--markdown-font-size-base',
-    role: '正文与标题字号',
+    token: '--markdown-content-font-size',
+    role: '内容默认字号',
     value: '16px',
-    preview: 'font-base',
+    preview: 'font-size',
   },
   {
-    token: '--markdown-font-size-md',
-    role: '行内代码与图片占位字号',
-    value: '14px',
-    preview: 'font-md',
-  },
-  {
-    token: '--markdown-font-size-sm',
-    role: '代码块与表格字号',
-    value: '13px',
-    preview: 'font-sm',
-  },
-  {
-    token: '--markdown-font-line-height-reading',
-    role: '长文阅读行高',
+    token: '--markdown-content-line-height',
+    role: '内容默认行高',
     value: '1.6',
     preview: 'line-height',
   },
   {
-    token: '--markdown-font-mono',
-    role: '代码字体',
-    value: '"SFMono-Regular", "Cascadia Code", "Liberation Mono", Menlo, Consolas, monospace',
-    preview: 'font-mono',
+    token: '--markdown-paragraph-color',
+    role: '正文文字颜色',
+    value: { light: 'hsl(0 0% 9%)', dark: 'hsl(0 0% 98%)' },
+    preview: 'text-color',
   },
   {
-    token: '--markdown-radius-sm',
-    role: '代码与图片圆角',
-    value: '8px',
-    preview: 'radius-sm',
+    token: '--markdown-heading-1-color',
+    role: '一级标题文字颜色',
+    value: { light: 'hsl(0 0% 9%)', dark: 'hsl(0 0% 98%)' },
+    preview: 'text-color',
   },
   {
-    token: '--markdown-space-section-gap',
-    role: '代码块内边距与图文间距',
-    value: '1em',
-    preview: 'section-gap',
+    token: '--markdown-heading-1-font-size',
+    role: '一级标题字号',
+    value: '16px',
+    preview: 'font-size',
   },
   {
-    token: '--markdown-quote-padding',
-    role: '引用块左右留白',
+    token: '--markdown-heading-1-line-height',
+    role: '一级标题行高',
+    value: '1.6',
+    preview: 'line-height',
+  },
+  {
+    token: '--markdown-heading-2-color',
+    role: '二级标题文字颜色',
+    value: { light: 'hsl(0 0% 9%)', dark: 'hsl(0 0% 98%)' },
+    preview: 'text-color',
+  },
+  {
+    token: '--markdown-heading-2-font-size',
+    role: '二级标题字号',
+    value: '16px',
+    preview: 'font-size',
+  },
+  {
+    token: '--markdown-heading-2-line-height',
+    role: '二级标题行高',
+    value: '1.6',
+    preview: 'line-height',
+  },
+  {
+    token: '--markdown-blockquote-color',
+    role: '引用块文字颜色',
+    value: { light: 'hsl(0 0% 28%)', dark: 'hsl(0 0% 64%)' },
+    preview: 'text-color',
+  },
+  {
+    token: '--markdown-blockquote-padding-inline',
+    role: '引用块横向内边距',
     value: '20px',
-    preview: 'quote-padding',
+    preview: 'padding-inline',
   },
   {
-    token: '--markdown-list-indent-compact',
-    role: '普通列表缩进',
+    token: '--markdown-strong-color',
+    role: '加粗文字颜色',
+    value: { light: 'hsl(0 0% 9%)', dark: 'hsl(0 0% 98%)' },
+    preview: 'text-color',
+  },
+  {
+    token: '--markdown-strikethrough-color',
+    role: '删除线文字颜色',
+    value: { light: 'hsl(0 0% 28%)', dark: 'hsl(0 0% 64%)' },
+    preview: 'text-color',
+  },
+  {
+    token: '--markdown-list-padding-left',
+    role: '列表左内边距',
     value: '1.35em',
-    preview: 'list-indent-compact',
+    preview: 'padding-inline',
   },
   {
-    token: '--markdown-list-indent-wide',
-    role: '字母与罗马序号缩进',
+    token: '--markdown-ordered-list-wide-marker-padding-left',
+    role: '宽序号有序列表左内边距',
     value: '2em',
-    preview: 'list-indent-wide',
+    preview: 'padding-inline',
+  },
+  {
+    token: '--markdown-task-checkbox-accent-color',
+    role: '任务复选框强调色',
+    value: { light: 'hsl(0 0% 15%)', dark: 'hsl(0 0% 96%)' },
+    preview: 'accent-color',
+  },
+  {
+    token: '--markdown-inline-code-font-family',
+    role: '行内代码字体',
+    value: '"SFMono-Regular", "Cascadia Code", "Liberation Mono", Menlo, Consolas, monospace',
+    preview: 'font-family',
+  },
+  {
+    token: '--markdown-inline-code-font-size',
+    role: '行内代码字号',
+    value: '14px',
+    preview: 'font-size',
+  },
+  {
+    token: '--markdown-inline-code-border-color',
+    role: '行内代码边框颜色',
+    value: { light: 'hsl(0 0% 88%)', dark: 'hsl(0 0% 28%)' },
+    preview: 'border-color',
+  },
+  {
+    token: '--markdown-inline-code-border-radius',
+    role: '行内代码圆角',
+    value: '8px',
+    preview: 'border-radius',
+  },
+  {
+    token: '--markdown-code-block-color',
+    role: '代码块文字颜色',
+    value: { light: 'hsl(0 0% 9%)', dark: 'hsl(0 0% 98%)' },
+    preview: 'text-color',
+  },
+  {
+    token: '--markdown-code-block-font-family',
+    role: '代码块字体',
+    value: '"SFMono-Regular", "Cascadia Code", "Liberation Mono", Menlo, Consolas, monospace',
+    preview: 'font-family',
+  },
+  {
+    token: '--markdown-code-block-font-size',
+    role: '代码块字号',
+    value: '13px',
+    preview: 'font-size',
+  },
+  {
+    token: '--markdown-code-block-padding',
+    role: '代码块内边距',
+    value: '1em',
+    preview: 'padding',
+  },
+  {
+    token: '--markdown-code-block-border-color',
+    role: '代码块边框颜色',
+    value: { light: 'hsl(0 0% 90%)', dark: 'hsl(0 0% 20%)' },
+    preview: 'border-color',
+  },
+  {
+    token: '--markdown-code-block-border-radius',
+    role: '代码块圆角',
+    value: '8px',
+    preview: 'border-radius',
+  },
+  {
+    token: '--markdown-link-color',
+    role: '链接文字颜色',
+    value: { light: 'hsl(0 0% 15%)', dark: 'hsl(0 0% 96%)' },
+    preview: 'text-color',
+  },
+  {
+    token: '--markdown-divider-color',
+    role: '分隔线颜色',
+    value: { light: 'hsl(0 0% 88%)', dark: 'hsl(0 0% 28%)' },
+    preview: 'border-color',
+  },
+  {
+    token: '--markdown-image-placeholder-color',
+    role: '图片占位文字颜色',
+    value: { light: 'hsl(0 0% 74%)', dark: 'hsl(0 0% 35%)' },
+    preview: 'text-color',
+  },
+  {
+    token: '--markdown-image-placeholder-font-size',
+    role: '图片占位文字字号',
+    value: '14px',
+    preview: 'font-size',
+  },
+  {
+    token: '--markdown-image-placeholder-border-radius',
+    role: '图片占位圆角',
+    value: '8px',
+    preview: 'border-radius',
+  },
+  {
+    token: '--markdown-image-border-radius',
+    role: '图片圆角',
+    value: '8px',
+    preview: 'border-radius',
+  },
+  {
+    token: '--markdown-list-image-gap',
+    role: '列表与图片间距',
+    value: '1em',
+    preview: 'gap',
+  },
+  {
+    token: '--markdown-table-frame-border-color',
+    role: '表格外框颜色',
+    value: { light: 'hsl(0 0% 88%)', dark: 'hsl(0 0% 28%)' },
+    preview: 'border-color',
+  },
+  {
+    token: '--markdown-table-cell-border-color',
+    role: '表格单元格边框颜色',
+    value: { light: 'hsl(0 0% 88%)', dark: 'hsl(0 0% 28%)' },
+    preview: 'border-color',
+  },
+  {
+    token: '--markdown-table-border-radius',
+    role: '表格圆角',
+    value: '8px',
+    preview: 'border-radius',
+  },
+  {
+    token: '--markdown-table-font-size',
+    role: '表格字号',
+    value: '13px',
+    preview: 'font-size',
+  },
+  {
+    token: '--markdown-table-header-color',
+    role: '表头文字颜色',
+    value: { light: 'hsl(0 0% 28%)', dark: 'hsl(0 0% 64%)' },
+    preview: 'text-color',
+  },
+  {
+    token: '--markdown-math-border-radius',
+    role: '数学节点圆角',
+    value: '8px',
+    preview: 'border-radius',
+  },
+  {
+    token: '--markdown-math-hover-background',
+    role: '数学节点悬停背景',
+    value: { light: 'hsl(40 12% 96%)', dark: 'hsl(0 0% 20%)' },
+    preview: 'background-color',
   },
 ] satisfies readonly MarkdownStyleToken[]
 
-function renderMarkdownTokenPreview(preview: MarkdownTokenPreview) {
-  switch (preview) {
-    case 'text-primary':
-      return <span className="md-style-preview__mini-type md-style-preview__mini-type--primary">正文 Aa</span>
-    case 'font-base':
-      return <span className="md-style-preview__mini-type md-style-preview__mini-type--base">Base 16</span>
+function renderMarkdownTokenPreview(item: MarkdownStyleToken) {
+  const value = `var(${item.token})`
+
+  switch (item.preview) {
+    case 'text-color':
+      return <span className="md-style-preview__mini-text" style={{ color: value }}>Markdown Aa</span>
+    case 'accent-color':
+      return <input aria-label="任务复选框预览" defaultChecked readOnly style={{ accentColor: value }} type="checkbox" />
+    case 'border-color':
+      return <span className="md-style-preview__mini-border" style={{ borderColor: value }} />
+    case 'background-color':
+      return <span className="md-style-preview__mini-background" style={{ background: value }}>Markdown</span>
+    case 'font-size':
+      return <span className="md-style-preview__mini-text" style={{ fontSize: value }}>Markdown Aa</span>
     case 'line-height':
       return (
-        <span className="md-style-preview__mini-lines">
+        <span className="md-style-preview__mini-lines" style={{ lineHeight: value }}>
           阅读行高
           <br />
           第二行
         </span>
       )
-    case 'text-secondary':
-      return <span className="md-style-preview__mini-type md-style-preview__mini-type--secondary">辅助文字</span>
-    case 'text-placeholder':
-      return <span className="md-style-preview__mini-type md-style-preview__mini-type--placeholder">图片占位</span>
-    case 'color-primary':
-      return <span className="md-style-preview__mini-link">链接文字</span>
-    case 'border':
-      return <span className="md-style-preview__mini-swatch md-style-preview__mini-swatch--border" />
-    case 'divider':
-      return <span className="md-style-preview__mini-divider" />
-    case 'math-hover':
-      return <span className="md-style-preview__mini-math-hover">math hover</span>
-    case 'font-md':
-      return <code className="md-style-preview__mini-code">inline()</code>
-    case 'font-sm':
-      return <code className="md-style-preview__mini-code md-style-preview__mini-code--sm">code()</code>
-    case 'font-mono':
-      return <code className="md-style-preview__mini-code md-style-preview__mini-code--mono">mono_01</code>
-    case 'radius-sm':
-      return <span className="md-style-preview__mini-radius md-style-preview__mini-radius--sm" />
-    case 'section-gap':
-      return <span className="md-style-preview__mini-inset">padding</span>
-    case 'quote-padding':
-      return <span className="md-style-preview__mini-quote-space">quote</span>
-    case 'list-indent-compact':
-      return <span className="md-style-preview__mini-list-indent md-style-preview__mini-list-indent--compact">• 列表项</span>
-    case 'list-indent-wide':
-      return <span className="md-style-preview__mini-list-indent md-style-preview__mini-list-indent--wide">(VIII) 列表项</span>
+    case 'font-family':
+      return <code className="md-style-preview__mini-font" style={{ fontFamily: value }}>mono_01</code>
+    case 'border-radius':
+      return <span className="md-style-preview__mini-radius" style={{ borderRadius: value }} />
+    case 'padding-inline':
+      return <span className="md-style-preview__mini-padding" style={{ paddingInline: value }}>节点内容</span>
+    case 'padding':
+      return <span className="md-style-preview__mini-padding" style={{ padding: value }}>节点内容</span>
+    case 'gap':
+      return (
+        <span className="md-style-preview__mini-gap" style={{ gap: value }}>
+          <i />
+          <i />
+        </span>
+      )
   }
 }
 
@@ -198,7 +331,7 @@ function MdStylePreview() {
           value={typeof item.value === 'string' ? item.value : item.value.light}
         >
           <div className="md-style-preview__effect" aria-hidden="true">
-            {renderMarkdownTokenPreview(item.preview)}
+            {renderMarkdownTokenPreview(item)}
           </div>
         </TokenPreviewCard>
       ))}
