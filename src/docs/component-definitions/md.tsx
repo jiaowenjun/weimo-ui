@@ -405,7 +405,9 @@ function MdStylePreview() {
           label={group.label}
         >
           <div className="md-style-preview__group-effect">
-            {renderMarkdownTokenGroupPreview(group)}
+            <div className="md-style-preview__content-wrapper">
+              {renderMarkdownTokenGroupPreview(group)}
+            </div>
           </div>
         </TokenGroupPreviewCard>
       ))}

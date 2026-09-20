@@ -1226,6 +1226,7 @@ assert.ok(
 for (const snippet of [
   '.md-style-preview__scene',
   '.md-style-preview__group-effect',
+  '.md-style-preview__content-wrapper',
   '.md-style-preview__image',
   '.md-style-preview__math .katex',
 ]) {
@@ -1277,6 +1278,16 @@ assert.ok(
     !mdGroupEffectBlock.includes('background:') &&
     !mdGroupEffectBlock.includes('box-shadow:'),
   'Md token groups must use a borderless, background-free TokenGroupPreviewCard preview area.',
+)
+const mdContentWrapperBlock = cssBlockFor(appCss, '.md-style-preview__content-wrapper')
+assert.ok(
+  mdContentWrapperBlock.includes('width: 50%;') &&
+    mdContentWrapperBlock.includes('margin-inline: auto;') &&
+    mdContentWrapperBlock.includes('padding: 16px;') &&
+    mdContentWrapperBlock.includes('border: 1px solid var(--color-border);') &&
+    mdContentWrapperBlock.includes('border-radius: var(--radius-sm);') &&
+    definitionSource.includes('className="md-style-preview__content-wrapper"'),
+  'Md token group previews must center a padded, half-width rounded border wrapper around the rendered content.',
 )
 assert.ok(
   definitionSource.includes("case '代码':") &&
