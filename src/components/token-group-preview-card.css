@@ -48,6 +48,11 @@
     overflow-wrap: anywhere;
   }
 
+  .token-group-preview-card__token code,
+  .token-group-preview-card__value code {
+    color: var(--color-text-secondary);
+  }
+
   .token-group-preview-card__token {
     text-align: left;
   }

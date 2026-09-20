@@ -255,6 +255,13 @@ assert.ok(
   'TokenGroupPreviewCard must render one two-column row per token with opposing alignment.',
 )
 
+assert.ok(
+  groupCardCss.includes(
+    '.token-group-preview-card__token code,\n  .token-group-preview-card__value code {\n    color: var(--color-text-secondary);\n  }',
+  ),
+  'TokenGroupPreviewCard inner code elements must match TokenPreviewCard secondary text color instead of the global code primary override.',
+)
+
 const groupSwatchBlock = blockFor(groupCardCss, '.token-group-preview-card__value-swatch')
 
 assert.ok(
