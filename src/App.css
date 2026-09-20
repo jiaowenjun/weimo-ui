@@ -830,10 +830,18 @@
   transform: scale(0.98);
 }
 
+.border-color-preview__samples {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 24px 16px;
+}
+
 .border-color-preview__sample {
-  width: 100%;
-  height: 80px;
-  border: 1px solid;
+  width: 48px;
+  height: 48px;
+  border: 2px solid;
   border-radius: var(--radius-sm);
 }
 

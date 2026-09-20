@@ -411,17 +411,19 @@ assert.ok(
     docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">圆角</h2>') &&
     docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">边框色</h2>') &&
     docsDefinitionSource.includes('borderRadiusScales.map') &&
-    docsDefinitionSource.includes("from '../token-preview-color'") &&
-    docsDefinitionSource.includes('sortByThemeLightness(') &&
-    docsDefinitionSource.includes('orderedTones.map') &&
+    docsDefinitionSource.includes('const borderColorToneOrder = [') &&
+    docsDefinitionSource.includes("'default',\n  'disable',\n  'divider',\n  'emphasis',\n  'accent',\n  'danger',") &&
+    docsDefinitionSource.includes('borderColorToneOrder.map') &&
     docsDefinitionSource.includes('borderColorToneMap[tone]') &&
     docsDefinitionSource.includes('getBorderColorClassName(tone)') &&
     docsDefinitionSource.includes('getBorderColorToken(tone)') &&
     docsDefinitionSource.includes('<TokenPreviewCard') &&
-    docsDefinitionSource.includes('darkValue={item.value.dark}') &&
     docsDefinitionSource.includes('label={item.label}') &&
-    docsDefinitionSource.includes('token={getBorderColorToken(tone)}') &&
-    docsDefinitionSource.includes('value={item.value.light}') &&
+    docsDefinitionSource.includes('darkValue: borderColorToneMap[tone].value.dark,') &&
+    docsDefinitionSource.includes('token: getBorderColorToken(tone),') &&
+    docsDefinitionSource.includes('value: borderColorToneMap[tone].value.light,') &&
+    docsDefinitionSource.includes('label="边框色"') &&
+    docsDefinitionSource.includes('className="border-color-preview__samples"') &&
     docsDefinitionSource.includes('border-color-preview__sample') &&
     docsDefinitionSource.includes(
       'className={`border-color-preview__sample ${getBorderColorClassName(tone)}`}',
@@ -448,10 +450,14 @@ assert.ok(
   'App.css must include only the BorderColor-specific preview-effect styles.',
 )
 assert.ok(
-  sampleBlock.includes('border: 1px solid') &&
+  appCss.includes('.border-color-preview__samples {\n  display: flex;') &&
+    sampleBlock.includes('width: 48px;') &&
+    sampleBlock.includes('height: 48px;') &&
+    sampleBlock.includes('border: 2px solid;') &&
+    sampleBlock.includes('border-radius: var(--radius-sm);') &&
     !sampleBlock.includes('background:') &&
     !sampleBlock.includes('box-shadow:'),
-  'BorderColor preview samples must show the applied border color without background or shadow decoration.',
+  'BorderColor preview samples must show one centered row of rounded-square borders in the applied border color.',
 )
 
 assert.ok(registryItem, 'registry.json must include the border-color registry item.')

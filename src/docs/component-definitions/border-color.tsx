@@ -13,7 +13,6 @@ import {
 } from '../../components/border-radius'
 import { TokenPreviewCard } from '../../components/token-preview-card'
 import type { ComponentDefinition } from '../component-docs'
-import { sortByThemeLightness, useIsDarkTheme } from '../token-preview-color'
 
 type BorderContextToken = {
   label: string
@@ -52,6 +51,15 @@ const borderContextTokens: Partial<Record<BorderColorTone, readonly BorderContex
   ],
 }
 
+const borderColorToneOrder = [
+  'default',
+  'disable',
+  'divider',
+  'emphasis',
+  'accent',
+  'danger',
+] as const
+
 const borderColorSearchAliases = borderColorTones.flatMap((tone) => {
   const item = borderColorToneMap[tone]
   const contexts = borderContextTokens[tone] ?? []
@@ -72,14 +80,6 @@ const borderColorSearchAliases = borderColorTones.flatMap((tone) => {
 // Docs definitions intentionally colocate preview components with exported page metadata.
 // eslint-disable-next-line react-refresh/only-export-components
 function BorderColorPreview() {
-  const isDark = useIsDarkTheme()
-  const orderedTones = sortByThemeLightness(
-    borderColorTones,
-    (tone) => borderColorToneMap[tone].value,
-    isDark,
-    isDark ? 0 : 100,
-  )
-
   return (
     <>
       <h2 className="token-preview-card-demo__category">圆角</h2>
@@ -105,24 +105,23 @@ function BorderColorPreview() {
 
       <h2 className="token-preview-card-demo__category">边框色</h2>
 
-      {orderedTones.map((tone) => {
-        const item = borderColorToneMap[tone]
-
-        return (
-          <TokenPreviewCard
-            darkValue={item.value.dark}
-            key={tone}
-            label={item.label}
-            token={getBorderColorToken(tone)}
-            value={item.value.light}
-          >
+      <TokenPreviewCard
+        items={borderColorToneOrder.map((tone) => ({
+          darkValue: borderColorToneMap[tone].value.dark,
+          token: getBorderColorToken(tone),
+          value: borderColorToneMap[tone].value.light,
+        }))}
+        label="边框色"
+      >
+        <div aria-hidden="true" className="border-color-preview__samples">
+          {borderColorToneOrder.map((tone) => (
             <div
               className={`border-color-preview__sample ${getBorderColorClassName(tone)}`}
-              aria-hidden="true"
+              key={tone}
             />
-          </TokenPreviewCard>
-        )
-      })}
+          ))}
+        </div>
+      </TokenPreviewCard>
     </>
   )
 }
