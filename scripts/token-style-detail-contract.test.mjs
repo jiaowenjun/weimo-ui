@@ -23,12 +23,6 @@ const searchSource = readProjectFile('src/docs/search-component-docs.ts')
 const colorSource = readProjectFile('src/docs/token-preview-color.ts')
 const cardSource = readProjectFile('src/components/token-preview-card.tsx')
 const cardCss = readProjectFile('src/components/token-preview-card.css')
-const cardDefinitionSource = readProjectFile(
-  'src/docs/component-definitions/token-preview-card.tsx',
-)
-const cardDemoSource = readProjectFile(
-  'src/docs/component-definitions/token-preview-card-demo.tsx',
-)
 const cardRegistry = JSON.parse(readProjectFile('registry/token-preview-card.json'))
 const appCss = readProjectFile('src/App.css')
 
@@ -119,16 +113,8 @@ assert.ok(
 assert.ok(
   cardCss.includes('.token-preview-card .token-preview-card__surface-backdrop {') &&
     cardCss.includes('.token-preview-card .token-preview-card__surface {') &&
-    cardCss.includes('inset: 10px 12px;') &&
-    cardDemoSource.match(/className="token-preview-card__surface-preview"/g)?.length === 2 &&
-    cardDemoSource.match(/className="token-preview-card__surface-backdrop"/g)?.length === 2 &&
-    cardDemoSource.includes(
-      "className={`token-preview-card__surface ${getBgColorClassName('selection')}`}",
-    ) &&
-    cardDemoSource.includes(
-      "className={`token-preview-card__surface ${getBgBlurClassName('backdrop')}`}",
-    ),
-  'Transparent color and blur demos must share one TokenPreviewCard surface layout.',
+    cardCss.includes('inset: 10px 12px;'),
+  'Transparent color and blur previews must share one TokenPreviewCard surface layout.',
 )
 
 for (const selector of [
@@ -160,44 +146,16 @@ assert.ok(
   manifestSource.includes("id: 'token-preview-card'") &&
     manifestSource.includes("name: 'TokenPreviewCard'") &&
     manifestSource.includes("registryName: 'token-preview-card'") &&
-    manifestSource.includes("packageExport: './components/token-preview-card'"),
-  'TokenPreviewCard must be listed in the Token / style component catalog.',
+    manifestSource.includes("packageExport: './components/token-preview-card'") &&
+    manifestSource.includes(
+      "packageExport: './components/token-preview-card',\n    group: 'token-style',\n    docs: false,",
+    ),
+  'TokenPreviewCard must be listed in the Token / style component catalog as a registry-only entry.',
 )
 assert.ok(
-    cardDefinitionSource.includes("id: 'token-preview-card'") &&
-    cardDefinitionSource.includes("frame: 'plain',") &&
-    cardDefinitionSource.includes("'交互'") &&
-    !cardDefinitionSource.includes("'自定义内容'") &&
-    cardDefinitionSource.includes('<TokenPreviewCardDemo') &&
-    cardDemoSource.includes('<TokenPreviewCard') &&
-    cardDemoSource.includes('token-preview-card-demo__category') &&
-    cardDemoSource.includes('非透明背景色') &&
-    cardDemoSource.includes('bgColorToneMap.primary') &&
-    cardDemoSource.includes("getBgColorClassName('primary')") &&
-    cardDemoSource.includes('透明背景色') &&
-    cardDemoSource.includes('背景模糊度') &&
-    cardDemoSource.includes('边框圆角') &&
-    cardDemoSource.includes('边框色') &&
-    cardDemoSource.includes('字号') &&
-    cardDemoSource.includes('字色') &&
-    cardDemoSource.includes('字体') &&
-    cardDemoSource.includes("token: '--font-mono'") &&
-    cardDemoSource.includes('typography-preview__sample--font-family') &&
-    cardDemoSource.includes('行高') &&
-    cardDemoSource.includes("token: '--font-line-height-reading'") &&
-    cardDemoSource.includes('typography-preview__sample--line-height') &&
-    appCss.includes('font-family: var(--font-mono);') &&
-    appCss.includes('line-height: var(--font-line-height-reading);') &&
-    !cardDefinitionSource.includes("'热力色'") &&
-    !cardDemoSource.includes('热力色') &&
-    cardDemoSource.includes(
-      '<h2 className="token-preview-card-demo__category">交互</h2>',
-    ) &&
-    cardDemoSource.includes('按压反馈') &&
-    !cardDemoSource.includes('状态与自定义内容') &&
-    !cardDemoSource.includes('自定义内容') &&
-    appCss.includes('.token-preview-card-demo__category'),
-  'TokenPreviewCard docs must categorize every supported preview effect.',
+  !existsSync(join(root, 'src/docs/component-definitions/token-preview-card.tsx')) &&
+    !existsSync(join(root, 'src/docs/component-definitions/token-preview-card-demo.tsx')),
+  'the TokenPreviewCard debug docs page must stay removed; each token group has its own detail page.',
 )
 assert.equal(cardRegistry.name, 'token-preview-card')
 assert.equal(cardRegistry.type, 'registry:ui')

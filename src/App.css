@@ -1309,7 +1309,7 @@
 .md-style-preview__mini-quote-space {
   display: block;
   width: 100%;
-  padding-inline: var(--space-md-quote-padding);
+  padding-inline: var(--markdown-quote-padding);
   color: var(--color-text-secondary);
   font-size: var(--font-size-xs);
   line-height: 1.4;

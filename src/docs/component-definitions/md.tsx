@@ -34,7 +34,7 @@ const markdownStyleTokens = [
   {
     token: '--font-size-base',
     role: '默认字号',
-    value: '15px',
+    value: '16px',
     preview: 'font-base',
   },
   {
@@ -50,7 +50,7 @@ const markdownStyleTokens = [
     preview: 'text-secondary',
   },
   {
-    token: '--space-md-quote-padding',
+    token: '--markdown-quote-padding',
     role: '引用块左右留白',
     value: '20px',
     preview: 'quote-padding',

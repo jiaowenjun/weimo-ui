@@ -507,7 +507,7 @@ assert.ok(
 )
 assertIncludes(
   markdownBlockquoteBlock,
-  'padding: 0 var(--space-md-quote-padding);',
+  'padding: 0 var(--markdown-quote-padding);',
   'Markdown blockquotes must keep horizontal quote padding.',
 )
 assert.ok(
@@ -558,17 +558,17 @@ assertIncludes(
 )
 assertIncludes(
   markdownContentCss,
-  '--space-md-list-indent-compact: 1.35em;',
+  '--markdown-list-indent-compact: 1.35em;',
   'Shared Markdown styles must define the compact list indentation token.',
 )
 assertIncludes(
   markdownContentCss,
-  '--space-md-list-indent-wide: 2em;',
+  '--markdown-list-indent-wide: 2em;',
   'Shared Markdown styles must define one wide-marker indentation token.',
 )
 assertIncludes(
   markdownListBlock,
-  'padding-left: var(--space-md-list-indent-compact);',
+  'padding-left: var(--markdown-list-indent-compact);',
   'Standard lists in MdRender and MdEditor must share compact indentation.',
 )
 assertIncludes(
@@ -588,7 +588,7 @@ assertIncludes(
 )
 assertIncludes(
   markdownUpperAlphaOrderedListBlock,
-  'padding-left: var(--space-md-list-indent-wide);',
+  'padding-left: var(--markdown-list-indent-wide);',
   'Markdown uppercase alpha typed ordered lists must reserve enough marker space for Safari in both MdRender and MdEditor.',
 )
 assertIncludes(
@@ -598,7 +598,7 @@ assertIncludes(
 )
 assertIncludes(
   markdownLowerAlphaOrderedListBlock,
-  'padding-left: var(--space-md-list-indent-wide);',
+  'padding-left: var(--markdown-list-indent-wide);',
   'Markdown lowercase alpha typed ordered lists must reserve enough marker space for Safari in both MdRender and MdEditor.',
 )
 assertIncludes(
@@ -608,7 +608,7 @@ assertIncludes(
 )
 assertIncludes(
   markdownUpperRomanOrderedListBlock,
-  'padding-left: var(--space-md-list-indent-wide);',
+  'padding-left: var(--markdown-list-indent-wide);',
   'MdRender and MdEditor uppercase Roman lists must share wide-marker indentation.',
 )
 assertIncludes(
@@ -618,12 +618,12 @@ assertIncludes(
 )
 assertIncludes(
   markdownLowerRomanOrderedListBlock,
-  'padding-left: var(--space-md-list-indent-wide);',
+  'padding-left: var(--markdown-list-indent-wide);',
   'MdRender and MdEditor lowercase Roman lists must share wide-marker indentation.',
 )
 assertIncludes(
   markdownParenthesizedRomanListBlock,
-  'padding-left: var(--space-md-list-indent-wide);',
+  'padding-left: var(--markdown-list-indent-wide);',
   'Parenthesized Roman lists must use the shared wide-marker indentation.',
 )
 assertIncludes(
@@ -649,7 +649,7 @@ assertIncludes(
 )
 assertIncludes(
   markdownParenthesizedDecimalListBlock,
-  'padding-left: var(--space-md-list-indent-wide);',
+  'padding-left: var(--markdown-list-indent-wide);',
   'Parenthesized decimal lists must use the shared wide-marker indentation.',
 )
 for (const declaration of [

@@ -107,7 +107,7 @@ for (const snippet of [
   '<CardPanel className="md-style-preview__scene"',
   '<Md content={mdRenderSample} />',
   '--font-size-md',
-  '--space-md-quote-padding',
+  '--markdown-quote-padding',
   '--color-text-primary',
   '--color-text-secondary',
   '--font-line-height-reading',
@@ -117,7 +117,7 @@ for (const snippet of [
   '--font-mono',
   "light: 'hsl(0 0% 9%)'",
   "dark: 'hsl(0 0% 98%)'",
-  "value: '15px'",
+  "value: '16px'",
   "value: '1.6'",
   "value: '20px'",
   "value: '14px'",
@@ -966,7 +966,7 @@ assert.match(
 )
 assert.match(
   markdownContentCss,
-  /\.weimo-card-markdown__list--ol\[data-marker-type="A"\][^{]*\.md-editor__content\.weimo-markdown-content ol\[data-marker-type="A"\][^{]*\{[^}]*padding-left:\s*var\(--space-md-list-indent-wide\);/s,
+  /\.weimo-card-markdown__list--ol\[data-marker-type="A"\][^{]*\.md-editor__content\.weimo-markdown-content ol\[data-marker-type="A"\][^{]*\{[^}]*padding-left:\s*var\(--markdown-list-indent-wide\);/s,
   'MdRender and MdEditor uppercase alphabetic lists must reserve wide Safari-safe marker indentation.',
 )
 assert.match(
@@ -976,7 +976,7 @@ assert.match(
 )
 assert.match(
   markdownContentCss,
-  /\.weimo-card-markdown__list--ol\[data-marker-type="a"\][^{]*\.md-editor__content\.weimo-markdown-content ol\[data-marker-type="a"\][^{]*\{[^}]*padding-left:\s*var\(--space-md-list-indent-wide\);/s,
+  /\.weimo-card-markdown__list--ol\[data-marker-type="a"\][^{]*\.md-editor__content\.weimo-markdown-content ol\[data-marker-type="a"\][^{]*\{[^}]*padding-left:\s*var\(--markdown-list-indent-wide\);/s,
   'MdRender and MdEditor lowercase alphabetic lists must reserve wide Safari-safe marker indentation.',
 )
 assert.match(
@@ -991,12 +991,12 @@ assert.match(
 )
 assert.match(
   markdownContentCss,
-  /\.weimo-card-markdown__list--ol\[data-marker-type="I"\][^{]*\.md-editor__content\.weimo-markdown-content ol\[type="I"\][^{]*\{[^}]*padding-left:\s*var\(--space-md-list-indent-wide\);/s,
+  /\.weimo-card-markdown__list--ol\[data-marker-type="I"\][^{]*\.md-editor__content\.weimo-markdown-content ol\[type="I"\][^{]*\{[^}]*padding-left:\s*var\(--markdown-list-indent-wide\);/s,
   'MdRender and MdEditor uppercase Roman lists must share wide-marker indentation.',
 )
 assert.match(
   markdownContentCss,
-  /\.weimo-card-markdown__list--ol\[data-marker-type="i"\][^{]*\.md-editor__content\.weimo-markdown-content ol\[type="i"\][^{]*\{[^}]*padding-left:\s*var\(--space-md-list-indent-wide\);/s,
+  /\.weimo-card-markdown__list--ol\[data-marker-type="i"\][^{]*\.md-editor__content\.weimo-markdown-content ol\[type="i"\][^{]*\{[^}]*padding-left:\s*var\(--markdown-list-indent-wide\);/s,
   'MdRender and MdEditor lowercase Roman lists must share wide-marker indentation.',
 )
 assert.ok(
@@ -1095,7 +1095,7 @@ assert.ok(
   'Md math hover preview must use the same rounded token as editable math nodes.',
 )
 assert.ok(
-  mdMiniQuoteSpaceBlock.includes('padding-inline: var(--space-md-quote-padding);') &&
+  mdMiniQuoteSpaceBlock.includes('padding-inline: var(--markdown-quote-padding);') &&
     !mdMiniQuoteSpaceBlock.includes('border-left:'),
   'Md quote padding preview must show spacing without reintroducing a quote left border.',
 )

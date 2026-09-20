@@ -65,7 +65,7 @@ export const componentManifest = [
     registryName: 'token-preview-card',
     packageExport: './components/token-preview-card',
     group: 'token-style',
-    docs: true,
+    docs: false,
     registry: true,
   },
   {
