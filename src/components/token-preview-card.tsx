@@ -51,21 +51,23 @@ export function TokenPreviewCard({
     <CardSurface className={cn('token-preview-card', className)} {...props}>
       <div className="token-preview-card__meta">
         <span className="token-preview-card__label">{label}</span>
-        <code className="token-preview-card__token">{token}</code>
-        <code className="token-preview-card__value">
-          {darkValue === undefined ? (
-            renderTokenValue(value, 'token-preview-card__value-swatch')
-          ) : (
-            <>
-              <span className="token-preview-card__value--light">
-                {renderTokenValue(value, 'token-preview-card__value-swatch')}
-              </span>
-              <span className="token-preview-card__value--dark">
-                {renderTokenValue(darkValue, 'token-preview-card__value-swatch')}
-              </span>
-            </>
-          )}
-        </code>
+        <div className="token-preview-card__row">
+          <code className="token-preview-card__token">{token}</code>
+          <code className="token-preview-card__value">
+            {darkValue === undefined ? (
+              renderTokenValue(value, 'token-preview-card__value-swatch')
+            ) : (
+              <>
+                <span className="token-preview-card__value--light">
+                  {renderTokenValue(value, 'token-preview-card__value-swatch')}
+                </span>
+                <span className="token-preview-card__value--dark">
+                  {renderTokenValue(darkValue, 'token-preview-card__value-swatch')}
+                </span>
+              </>
+            )}
+          </code>
+        </div>
       </div>
       {children}
     </CardSurface>

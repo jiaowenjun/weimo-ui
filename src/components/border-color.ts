@@ -65,8 +65,8 @@ export const borderColorToneMap = {
     label: '危险边框',
     token: '--color-border-danger',
     value: {
-      light: 'hsl(4.2 76.5% 40%)',
-      dark: 'hsl(7.2 100% 73.9%)',
+      light: 'hsl(4 77% 40%)',
+      dark: 'hsl(7 100% 74%)',
     },
     className: 'border-color--danger',
     description: '错误、校验失败和破坏性状态的风险边界。',

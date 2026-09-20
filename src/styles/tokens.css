@@ -137,7 +137,7 @@
   --color-border-disable: hsl(0 0% 92%);
   --color-border-disable-on-light: hsl(0 0% 92%);
   --color-border-disable-on-dark: hsl(0 0% 24%);
-  --color-border-danger: hsl(4.2 76.5% 40%);
+  --color-border-danger: hsl(4 77% 40%);
   --color-bg-chip: hsl(40 12% 96%);
   --color-bg-selection: hsl(var(--primary) / 0.2);
   --color-bg-backdrop: hsl(214.3 33.3% 4.1% / 0.32);
@@ -149,7 +149,7 @@
   --color-heatmap-today-ring: hsl(18.1 71.9% 46.1% / 0.55);
   --color-bg-hover: hsl(40 12% 96%);
   --color-bg-hover-on-hover: hsl(40 12% 88%);
-  --color-text-danger: hsl(4.2 76.5% 40%);
+  --color-text-danger: hsl(4 77% 40%);
 }
 
 .dark {
@@ -189,7 +189,7 @@
   --color-border-disable: hsl(0 0% 24%);
   --color-border-disable-on-light: hsl(0 0% 92%);
   --color-border-disable-on-dark: hsl(0 0% 24%);
-  --color-border-danger: hsl(7.2 100% 73.9%);
+  --color-border-danger: hsl(7 100% 74%);
   --color-bg-chip: hsl(0 0% 13%);
   --color-bg-selection: hsl(var(--primary) / 0.2);
   --color-heat-0: hsl(0 0% 19%);
@@ -200,7 +200,7 @@
   --color-heatmap-today-ring: hsl(0 0% 100% / 0.38);
   --color-bg-hover: hsl(0 0% 20%);
   --color-bg-hover-on-hover: hsl(0 0% 28%);
-  --color-text-danger: hsl(7.2 100% 73.9%);
+  --color-text-danger: hsl(7 100% 74%);
 
   /* === Markdown 渲染暗色覆盖 === */
   --markdown-content-color: hsl(0 0% 98%);

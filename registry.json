@@ -177,8 +177,8 @@
           "color-heatmap-today-ring": "hsl(18.1 71.9% 46.1% / 0.55)",
           "color-bg-hover": "hsl(40 12% 96%)",
           "color-bg-hover-on-hover": "hsl(40 12% 88%)",
-          "color-text-danger": "hsl(4.2 76.5% 40%)",
-          "color-border-danger": "hsl(4.2 76.5% 40%)",
+          "color-text-danger": "hsl(4 77% 40%)",
+          "color-border-danger": "hsl(4 77% 40%)",
           "glass-surface-border": "hsl(0 0% 80%)",
           "glass-surface-fg": "hsl(222.2 47.4% 11.2% / 0.9)",
           "glass-surface-muted-fg": "hsl(215.3 25% 26.7% / 0.68)"
@@ -250,8 +250,8 @@
           "glass-surface-dark-fg": "hsl(0 0% 100% / 0.9)",
           "glass-surface-dark-muted-fg": "hsl(0 0% 100% / 0.72)",
           "shadow-card": "none",
-          "color-text-danger": "hsl(7.2 100% 73.9%)",
-          "color-border-danger": "hsl(7.2 100% 73.9%)",
+          "color-text-danger": "hsl(7 100% 74%)",
+          "color-border-danger": "hsl(7 100% 74%)",
           "glass-surface-border": "hsl(0 0% 38%)",
           "glass-surface-fg": "hsl(0 0% 79.2%)",
           "glass-surface-muted-fg": "hsl(0 0% 100% / 0.68)"

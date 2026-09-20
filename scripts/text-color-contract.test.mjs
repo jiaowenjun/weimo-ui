@@ -33,7 +33,7 @@ const expectedTones = [
   ['subtle', '--color-text-subtle', 'text-color--subtle', 'hsl(0 0% 48%)', 'hsl(0 0% 49%)'],
   ['placeholder', '--color-text-placeholder', 'text-color--placeholder', 'hsl(0 0% 74%)', 'hsl(0 0% 35%)'],
   ['disable', '--color-text-disable', 'text-color--disable', 'hsl(0 0% 56%)', 'hsl(0 0% 42%)'],
-  ['danger', '--color-text-danger', 'text-color--danger', 'hsl(4.2 76.5% 40%)', 'hsl(7.2 100% 73.9%)'],
+  ['danger', '--color-text-danger', 'text-color--danger', 'hsl(4 77% 40%)', 'hsl(7 100% 74%)'],
   ['inherit', 'inherit', 'text-color--inherit', 'inherit', 'inherit'],
 ]
 

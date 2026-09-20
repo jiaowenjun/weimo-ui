@@ -117,12 +117,22 @@ for (const selector of [
   assert.ok(cardCss.includes(selector), `TokenPreviewCard styles must include ${selector}.`)
 }
 
+const cardRowBlock = blockFor(cardCss, '.token-preview-card__row')
+
 assert.ok(
   cardCss.includes('.token-preview-card__meta {\n    display: grid;') &&
     cardSource.includes('<code className="token-preview-card__token">{token}</code>') &&
     cardSource.includes('<code className="token-preview-card__value">') &&
+    cardSource.includes('className="token-preview-card__row"') &&
     !cardCss.includes('margin-left: auto;'),
-  'TokenPreviewCard must place the label, token identity, and value on dedicated rows.',
+  'TokenPreviewCard must place the label above one two-column token-name/value row.',
+)
+assert.ok(
+  cardRowBlock.includes('display: grid;') &&
+    cardRowBlock.includes('grid-template-columns: repeat(2, minmax(0, 1fr));') &&
+    cardCss.includes('.token-preview-card__token {\n    text-align: left;') &&
+    cardCss.includes('.token-preview-card__value {\n    text-align: right;'),
+  'TokenPreviewCard must align the token name left and the value right on one row, matching TokenGroupPreviewCard.',
 )
 
 const cardSwatchBlock = blockFor(cardCss, '.token-preview-card__value-swatch')

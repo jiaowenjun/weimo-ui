@@ -24,7 +24,12 @@ describe('TokenPreviewCard', () => {
     expect(within(card).getByText('默认圆角')).toHaveClass('token-preview-card__label')
     expect(within(card).getByText('--radius')).toHaveClass('token-preview-card__token')
     expect(within(card).getByText('16px')).toHaveClass('token-preview-card__value')
-    expect(meta?.children).toHaveLength(3)
+    expect(meta?.children).toHaveLength(2)
+    const row = card.querySelector('.token-preview-card__row')
+
+    expect(row?.children).toHaveLength(2)
+    expect(row?.children[0]).toHaveClass('token-preview-card__token')
+    expect(row?.children[1]).toHaveClass('token-preview-card__value')
     expect(screen.getByTestId('preview').parentElement).toBe(card)
   })
 

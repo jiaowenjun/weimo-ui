@@ -49,7 +49,7 @@ const expectedTones = [
   ['default', '--color-border', 'border-color--default', 'hsl(0 0% 90%)', 'hsl(0 0% 20%)'],
   ['emphasis', '--color-border-emphasis', 'border-color--emphasis', 'hsl(0 0% 68%)', 'hsl(0 0% 50%)'],
   ['accent', '--color-border-accent', 'border-color--accent', 'hsl(0 0% 35%)', 'hsl(0 0% 75%)'],
-  ['danger', '--color-border-danger', 'border-color--danger', 'hsl(4.2 76.5% 40%)', 'hsl(7.2 100% 73.9%)'],
+  ['danger', '--color-border-danger', 'border-color--danger', 'hsl(4 77% 40%)', 'hsl(7 100% 74%)'],
 ]
 const expectedToneOrder = expectedTones.map(([tone]) => tone)
 

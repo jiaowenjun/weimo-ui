@@ -19,6 +19,13 @@
     line-height: 1.2;
   }
 
+  .token-preview-card__row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: baseline;
+    gap: 16px;
+  }
+
   .token-preview-card__token,
   .token-preview-card__value {
     min-width: 0;
@@ -27,6 +34,14 @@
     font-size: var(--font-size-xs);
     line-height: 1.4;
     overflow-wrap: anywhere;
+  }
+
+  .token-preview-card__token {
+    text-align: left;
+  }
+
+  .token-preview-card__value {
+    text-align: right;
   }
 
   .token-preview-card > .token-preview-card__meta ~ * {
