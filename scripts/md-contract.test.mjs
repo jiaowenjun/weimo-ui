@@ -54,10 +54,13 @@ const mdRenderDefinitionSource = readProjectFile(
 )
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const appCss = readProjectFile('src/App.css')
+const tokensCss = readProjectFile('src/styles/tokens.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 const rootRegistry = JSON.parse(readProjectFile('registry.json'))
 const standaloneRegistry = JSON.parse(readProjectFile('registry/md.json'))
+const styleRegistry = JSON.parse(readProjectFile('registry/style.json'))
 const rootRegistryItem = rootRegistry.items.find((item) => item.name === 'md')
+const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 
 const tokenGridBlock = cssBlockFor(appCss, '.app-shell__content--token-grid')
 const mdSceneBlock = cssBlockFor(appCss, '.md-style-preview__scene')
@@ -65,15 +68,83 @@ const mdEffectBlock = cssBlockFor(appCss, '.md-style-preview__effect')
 const mdMiniMathHoverBlock = cssBlockFor(appCss, '.md-style-preview__mini-math-hover')
 const mdMiniQuoteSpaceBlock = cssBlockFor(appCss, '.md-style-preview__mini-quote-space')
 const markdownRootBlock = cssBlockFor(markdownContentCss, '.weimo-markdown-content')
+const tokensRootBlock = cssBlockFor(tokensCss, ':root')
+const tokensDarkBlock = cssBlockFor(tokensCss, '.dark')
 const markdownImageBlock = cssBlockFor(
   markdownContentCss,
   '.md-editor__content.weimo-markdown-content img',
 )
 
+const markdownColorTokens = [
+  ['--markdown-color-text-primary', 'hsl(0 0% 9%)', 'hsl(0 0% 98%)'],
+  ['--markdown-color-text-secondary', 'hsl(0 0% 28%)', 'hsl(0 0% 64%)'],
+  ['--markdown-color-text-placeholder', 'hsl(0 0% 74%)', 'hsl(0 0% 35%)'],
+  ['--markdown-color-primary', 'hsl(0 0% 15%)', 'hsl(0 0% 96%)'],
+  ['--markdown-color-border', 'hsl(0 0% 90%)', 'hsl(0 0% 20%)'],
+  ['--markdown-color-border-divider', 'hsl(0 0% 88%)', 'hsl(0 0% 28%)'],
+  ['--markdown-color-bg-hover', 'hsl(40 12% 96%)', 'hsl(0 0% 20%)'],
+]
+const markdownStaticTokens = [
+  ['--markdown-font-size-base', '16px'],
+  ['--markdown-font-size-md', '14px'],
+  ['--markdown-font-size-sm', '13px'],
+  ['--markdown-font-line-height-reading', '1.6'],
+  ['--markdown-font-mono', '"SFMono-Regular", "Cascadia Code", "Liberation Mono", Menlo, Consolas, monospace'],
+  ['--markdown-radius-sm', '8px'],
+  ['--markdown-space-section-gap', '1em'],
+  ['--markdown-quote-padding', '20px'],
+  ['--markdown-list-indent-compact', '1.35em'],
+  ['--markdown-list-indent-wide', '2em'],
+]
+const markdownTokenNames = [
+  ...markdownColorTokens.map(([token]) => token),
+  ...markdownStaticTokens.map(([token]) => token),
+]
+const markdownReferencedTokens = [
+  ...new Set(
+    [...markdownContentCss.matchAll(/var\((--[^,)]+)/g)].map((match) => match[1]),
+  ),
+]
+
 assert.ok(
   packageJson.exports?.['./components/md'] === './src/components/md.tsx',
   'package.json must expose ./components/md.',
 )
+
+assert.deepEqual(
+  markdownReferencedTokens.sort(),
+  [...markdownTokenNames].sort(),
+  'Markdown rendering CSS must depend exclusively on the complete --markdown-* theme contract.',
+)
+assert.ok(
+  markdownReferencedTokens.every((token) => token.startsWith('--markdown-')),
+  'Markdown rendering CSS must not depend on external component or shared style tokens.',
+)
+
+for (const [token, lightValue, darkValue] of markdownColorTokens) {
+  const key = token.slice(2)
+
+  assert.ok(
+    tokensRootBlock.includes(`${token}: ${lightValue};`) &&
+      tokensDarkBlock.includes(`${token}: ${darkValue};`),
+    `src/styles/tokens.css must define concrete light and dark values for ${token}.`,
+  )
+  assert.equal(styleRegistry.cssVars.light[key], lightValue, `registry/style.json must export the light ${token}.`)
+  assert.equal(styleRegistry.cssVars.dark[key], darkValue, `registry/style.json must export the dark ${token}.`)
+  assert.equal(rootStyleItem?.cssVars.light[key], lightValue, `registry.json must export the light ${token}.`)
+  assert.equal(rootStyleItem?.cssVars.dark[key], darkValue, `registry.json must export the dark ${token}.`)
+}
+
+for (const [token, value] of markdownStaticTokens) {
+  const key = token.slice(2)
+
+  assert.ok(
+    tokensRootBlock.includes(`${token}: ${value};`) && !value.includes('var('),
+    `src/styles/tokens.css must define a concrete value for ${token}.`,
+  )
+  assert.equal(styleRegistry.cssVars.light[key], value, `registry/style.json must export ${token}.`)
+  assert.equal(rootStyleItem?.cssVars.light[key], value, `registry.json must export ${token}.`)
+}
 
 assert.ok(
   manifestSource.includes("id: 'md'") &&
@@ -106,15 +177,6 @@ for (const snippet of [
   'className="md-style-preview__effect"',
   '<CardPanel className="md-style-preview__scene"',
   '<Md content={mdRenderSample} />',
-  '--font-size-md',
-  '--markdown-quote-padding',
-  '--color-text-primary',
-  '--color-text-secondary',
-  '--font-line-height-reading',
-  '--color-border-divider',
-  '--color-bg-hover',
-  '--radius-sm',
-  '--font-mono',
   "light: 'hsl(0 0% 9%)'",
   "dark: 'hsl(0 0% 98%)'",
   "value: '16px'",
@@ -126,6 +188,11 @@ for (const snippet of [
 ]) {
   assert.ok(definitionSource.includes(snippet), `Md docs definition must include ${snippet}.`)
 }
+assert.deepEqual(
+  [...definitionSource.matchAll(/token: '(--[^']+)'/g)].map((match) => match[1]),
+  markdownTokenNames,
+  'Md docs must expose every Markdown theme token without external token names.',
+)
 assert.ok(
   definitionSource.indexOf('<CardPanel className="md-style-preview__scene"') <
     definitionSource.indexOf('{markdownStyleTokens.map((item) => (') &&
@@ -1086,11 +1153,13 @@ assert.ok(
 )
 assert.ok(
   mdEffectBlock.includes('height: 80px;') &&
-    mdEffectBlock.includes('background: var(--color-bg-card);'),
-  'Md token items must include a stable effect preview area.',
+    !mdEffectBlock.includes('border:') &&
+    !mdEffectBlock.includes('background:') &&
+    !mdEffectBlock.includes('box-shadow:'),
+  'Md token items must use the borderless, background-free TokenPreviewCard preview area.',
 )
 assert.ok(
-  mdMiniMathHoverBlock.includes('border-radius: var(--radius-sm);') &&
+  mdMiniMathHoverBlock.includes('border-radius: var(--markdown-radius-sm);') &&
     !mdMiniMathHoverBlock.includes('border-radius: var(--radius-xs);'),
   'Md math hover preview must use the same rounded token as editable math nodes.',
 )

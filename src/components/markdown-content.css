@@ -2,16 +2,12 @@
 
 @layer components {
   .weimo-markdown-content {
-    --markdown-list-indent-compact: 1.35em;
-    --markdown-list-indent-wide: 2em;
-    --markdown-quote-padding: 20px;
-
     min-width: 0;
     overflow-x: clip;
     overflow-y: visible;
-    color: var(--color-text-primary);
-    font-size: var(--font-size-base);
-    line-height: var(--font-line-height-reading);
+    color: var(--markdown-color-text-primary);
+    font-size: var(--markdown-font-size-base);
+    line-height: var(--markdown-font-line-height-reading);
     overflow-wrap: anywhere;
   }
 
@@ -39,7 +35,7 @@
   .weimo-card-markdown__p,
   .md-editor__content.weimo-markdown-content p {
     margin: 0;
-    color: var(--color-text-primary);
+    color: var(--markdown-color-text-primary);
     text-align: justify;
     text-justify: inter-ideograph;
   }
@@ -48,48 +44,48 @@
   .md-editor__content.weimo-markdown-content :where(h1, h2, h3),
   .md-editor__content.weimo-markdown-content :where(h4, h5, h6) {
     margin: 0;
-    color: var(--color-text-primary);
+    color: var(--markdown-color-text-primary);
     font-weight: 650;
     text-align: center;
   }
 
   .weimo-card-markdown__heading--h1,
   .md-editor__content.weimo-markdown-content h1 {
-    font-size: var(--font-size-base);
-    line-height: var(--font-line-height-reading);
+    font-size: var(--markdown-font-size-base);
+    line-height: var(--markdown-font-line-height-reading);
   }
 
   .weimo-card-markdown__heading--h2,
   .md-editor__content.weimo-markdown-content h2 {
-    font-size: var(--font-size-base);
-    line-height: var(--font-line-height-reading);
+    font-size: var(--markdown-font-size-base);
+    line-height: var(--markdown-font-line-height-reading);
   }
 
   .weimo-card-markdown__heading--h3,
   .md-editor__content.weimo-markdown-content h3 {
-    font-size: var(--font-size-base);
-    line-height: var(--font-line-height-reading);
+    font-size: var(--markdown-font-size-base);
+    line-height: var(--markdown-font-line-height-reading);
   }
 
   .weimo-card-markdown__heading--h4,
   .weimo-card-markdown__heading--h5,
   .weimo-card-markdown__heading--h6,
   .md-editor__content.weimo-markdown-content :where(h4, h5, h6) {
-    font-size: var(--font-size-base);
-    line-height: var(--font-line-height-reading);
+    font-size: var(--markdown-font-size-base);
+    line-height: var(--markdown-font-line-height-reading);
   }
 
   .weimo-card-markdown__blockquote,
   .md-editor__content.weimo-markdown-content blockquote {
     margin: 0;
     padding: 0 var(--markdown-quote-padding);
-    color: var(--color-text-secondary);
+    color: var(--markdown-color-text-secondary);
     text-align: left;
   }
 
   .weimo-card-markdown__blockquote .weimo-card-markdown__p,
   .md-editor__content.weimo-markdown-content blockquote p {
-    color: var(--color-text-secondary);
+    color: var(--markdown-color-text-secondary);
     text-align: left;
   }
 
@@ -109,7 +105,7 @@
 
   .weimo-card-markdown__strong,
   .md-editor__content.weimo-markdown-content strong {
-    color: var(--color-text-primary);
+    color: var(--markdown-color-text-primary);
     font-weight: 650;
   }
 
@@ -120,7 +116,7 @@
 
   .weimo-card-markdown__del,
   .md-editor__content.weimo-markdown-content :where(del, s) {
-    color: var(--color-text-secondary);
+    color: var(--markdown-color-text-secondary);
   }
 
   .weimo-card-markdown__list,
@@ -263,19 +259,19 @@
   }
 
   .md-editor__content.weimo-markdown-content ul[data-type="taskList"] input {
-    accent-color: var(--color-primary);
+    accent-color: var(--markdown-color-primary);
   }
 
   .weimo-card-markdown__code,
   .md-editor__content.weimo-markdown-content code {
-    font-family: var(--font-mono);
-    font-size: var(--font-size-md);
+    font-family: var(--markdown-font-mono);
+    font-size: var(--markdown-font-size-md);
   }
 
   .weimo-markdown-content :not(pre) > :where(.weimo-card-markdown__code, code) {
     padding: 2px 6px;
-    border: 1px solid var(--color-border-divider);
-    border-radius: var(--radius-sm);
+    border: 1px solid var(--markdown-color-border-divider);
+    border-radius: var(--markdown-radius-sm);
     word-break: break-all;
   }
 
@@ -283,16 +279,16 @@
   .md-editor__content.weimo-markdown-content pre {
     margin: 0;
     overflow: auto;
-    padding: var(--space-card-section-gap);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
+    padding: var(--markdown-space-section-gap);
+    border: 1px solid var(--markdown-color-border);
+    border-radius: var(--markdown-radius-sm);
   }
 
   .weimo-card-markdown__pre .weimo-card-markdown__code,
   .md-editor__content.weimo-markdown-content pre code {
     display: block;
-    color: var(--color-text-primary);
-    font-size: var(--font-size-sm);
+    color: var(--markdown-color-text-primary);
+    font-size: var(--markdown-font-size-sm);
     line-height: 1.72;
     white-space: pre-wrap;
     word-break: break-word;
@@ -300,27 +296,27 @@
 
   .weimo-card-markdown__link,
   .md-editor__content.weimo-markdown-content a {
-    color: var(--color-primary);
+    color: var(--markdown-color-primary);
     text-decoration: underline;
     text-underline-offset: 0.2em;
   }
 
   .weimo-card-markdown__link-text {
-    color: var(--color-primary);
+    color: var(--markdown-color-primary);
   }
 
   .weimo-card-markdown__hr,
   .md-editor__content.weimo-markdown-content hr {
     margin: 0;
     border: 0;
-    border-top: 1px solid var(--color-border-divider);
+    border-top: 1px solid var(--markdown-color-border-divider);
   }
 
   .weimo-card-markdown__image-placeholder {
     padding: 2px 6px;
-    border-radius: var(--radius-sm);
-    color: var(--color-text-placeholder);
-    font-size: var(--font-size-md);
+    border-radius: var(--markdown-radius-sm);
+    color: var(--markdown-color-text-placeholder);
+    font-size: var(--markdown-font-size-md);
   }
 
   .weimo-card-markdown__image,
@@ -329,14 +325,14 @@
     max-width: 100%;
     height: auto;
     margin-inline: auto;
-    border-radius: var(--radius-sm);
+    border-radius: var(--markdown-radius-sm);
   }
 
   .weimo-card-markdown__list-image-pair {
     display: grid;
     grid-template-columns: minmax(0, 1fr) fit-content(50%);
     align-items: start;
-    column-gap: var(--space-card-section-gap);
+    column-gap: var(--markdown-space-section-gap);
   }
 
   .weimo-card-markdown__list-image-pair > .weimo-card-markdown__list {
@@ -352,7 +348,7 @@
     display: grid;
     grid-template-columns: minmax(0, 1fr) fit-content(50%);
     align-items: start;
-    column-gap: var(--space-card-section-gap);
+    column-gap: var(--markdown-space-section-gap);
   }
 
   .md-editor__content.weimo-markdown-content[data-list-image-layout="true"] > * {
@@ -380,8 +376,8 @@
     max-width: 100%;
     margin-inline: auto;
     overflow-x: auto;
-    border: 1px solid var(--color-border-divider);
-    border-radius: var(--radius-sm);
+    border: 1px solid var(--markdown-color-border-divider);
+    border-radius: var(--markdown-radius-sm);
   }
 
   .md-editor__content.weimo-markdown-content .tableWrapper {
@@ -389,21 +385,21 @@
     max-width: 100%;
     margin-inline: auto;
     overflow-x: auto;
-    border: 1px solid var(--color-border-divider);
-    border-radius: var(--radius-sm);
+    border: 1px solid var(--markdown-color-border-divider);
+    border-radius: var(--markdown-radius-sm);
   }
 
   .weimo-card-markdown__table,
   .md-editor__content.weimo-markdown-content table {
     width: max-content;
     border-collapse: collapse;
-    font-size: var(--font-size-sm);
+    font-size: var(--markdown-font-size-sm);
   }
 
   .weimo-card-markdown__table-cell,
   .md-editor__content.weimo-markdown-content :where(td, th) {
     padding: 6px 8px;
-    border-bottom: 1px solid var(--color-border-divider);
+    border-bottom: 1px solid var(--markdown-color-border-divider);
     word-break: break-all;
     text-align: left;
     vertical-align: top;
@@ -411,12 +407,12 @@
 
   .weimo-card-markdown__table-cell + .weimo-card-markdown__table-cell,
   .md-editor__content.weimo-markdown-content :where(td, th) + :where(td, th) {
-    border-left: 1px solid var(--color-border-divider);
+    border-left: 1px solid var(--markdown-color-border-divider);
   }
 
   .weimo-card-markdown__table-cell--header,
   .md-editor__content.weimo-markdown-content th {
-    color: var(--color-text-secondary);
+    color: var(--markdown-color-text-secondary);
     font-weight: 600;
   }
 
@@ -431,7 +427,7 @@
 
   .weimo-markdown-content .tiptap-mathematics-render {
     display: inline-block;
-    border-radius: var(--radius-sm);
+    border-radius: var(--markdown-radius-sm);
   }
 
   .weimo-markdown-content .tiptap-mathematics-render:not([data-type="block-math"]) {
@@ -445,7 +441,7 @@
   }
 
   .weimo-markdown-content .tiptap-mathematics-render--editable:hover {
-    background: var(--color-bg-hover);
+    background: var(--markdown-color-bg-hover);
   }
 
   .weimo-markdown-content .tiptap-mathematics-render[data-type="block-math"],

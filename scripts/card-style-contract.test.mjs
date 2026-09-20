@@ -448,28 +448,28 @@ assert.ok(
 )
 assertIncludes(
   markdownBlock,
-  'font-size: var(--font-size-base);',
-  'Markdown root must use the Card/Skyline base text size.',
+  'font-size: var(--markdown-font-size-base);',
+  'Markdown root must use its dedicated base text size.',
 )
 assertIncludes(
   markdownBlock,
-  'line-height: var(--font-line-height-reading);',
-  'Markdown root must use the shared reading line height.',
+  'line-height: var(--markdown-font-line-height-reading);',
+  'Markdown root must use its dedicated reading line height.',
 )
 assert.ok(
-  markdownContentCss.includes('font-size: var(--font-size-md);') &&
+  markdownContentCss.includes('font-size: var(--markdown-font-size-md);') &&
     !markdownContentCss.includes('--md-inline-code-size') &&
     !markdownContentCss.includes('--weimo-md-inline-code-size'),
-  'Markdown inline code and image placeholders must use --font-size-md without the old Markdown-local inline code size tokens.',
+  'Markdown inline code and image placeholders must use the dedicated Markdown medium size token.',
 )
 assertIncludes(
   markdownInlineCodeSurfaceBlock,
-  'border: 1px solid var(--color-border-divider);',
-  'Markdown inline code must use the divider border token.',
+  'border: 1px solid var(--markdown-color-border-divider);',
+  'Markdown inline code must use the dedicated Markdown divider token.',
 )
 assert.ok(
-  !markdownInlineCodeSurfaceBlock.includes('border: 1px solid var(--color-border);'),
-  'Markdown inline code must not use the default border token.',
+  !markdownInlineCodeSurfaceBlock.includes('border: 1px solid var(--markdown-color-border);'),
+  'Markdown inline code must not use the Markdown block border token.',
 )
 for (const [block, label] of [
   [markdownInlineCodeSurfaceBlock, 'inline code'],
@@ -499,10 +499,10 @@ assertIncludes(
 assert.ok(
   markdownContentCss.includes('.weimo-card-markdown__heading--h2') &&
     markdownContentCss.includes('.weimo-card-markdown__heading--h3') &&
-    !markdownHeadingH2Block.includes('font-size: var(--font-size-md);') &&
-    !markdownHeadingH3Block.includes('font-size: var(--font-size-md);') &&
-    markdownHeadingH2Block.includes('font-size: var(--font-size-base);') &&
-    markdownHeadingH3Block.includes('font-size: var(--font-size-base);'),
+    !markdownHeadingH2Block.includes('font-size: var(--markdown-font-size-md);') &&
+    !markdownHeadingH3Block.includes('font-size: var(--markdown-font-size-md);') &&
+    markdownHeadingH2Block.includes('font-size: var(--markdown-font-size-base);') &&
+    markdownHeadingH3Block.includes('font-size: var(--markdown-font-size-base);'),
   'Markdown rendered headings h1-h6 must all use the same font size as body text.',
 )
 assertIncludes(
@@ -538,12 +538,12 @@ for (const [block, label] of [
 ]) {
   assertIncludes(
     block,
-    'border: 1px solid var(--color-border-divider);',
-    `${label} must use the divider border token.`,
+    'border: 1px solid var(--markdown-color-border-divider);',
+    `${label} must use the dedicated Markdown divider token.`,
   )
   assert.ok(
-    !block.includes('border: 1px solid var(--color-border);'),
-    `${label} must not use the default border token.`,
+    !block.includes('border: 1px solid var(--markdown-color-border);'),
+    `${label} must not use the Markdown block border token.`,
   )
 }
 assertIncludes(
@@ -557,14 +557,14 @@ assertIncludes(
   'Markdown unordered lists must show standard bullet markers.',
 )
 assertIncludes(
-  markdownContentCss,
+  sharedTokenCss,
   '--markdown-list-indent-compact: 1.35em;',
-  'Shared Markdown styles must define the compact list indentation token.',
+  'Shared style tokens must define the compact Markdown list indentation.',
 )
 assertIncludes(
-  markdownContentCss,
+  sharedTokenCss,
   '--markdown-list-indent-wide: 2em;',
-  'Shared Markdown styles must define one wide-marker indentation token.',
+  'Shared style tokens must define the wide-marker Markdown indentation.',
 )
 assertIncludes(
   markdownListBlock,
@@ -673,7 +673,7 @@ assert.ok(
   !markdownContentCss.includes('--space-card-markdown-heavy-gap') &&
     !markdownContentCss.includes('var(--space-card-markdown-heavy-gap)') &&
     !markdownContentCss.includes('--space-card-markdown-quote-padding') &&
-    !markdownContentCss.includes('calc(var(--space-card-section-gap) * 0.75)'),
+    !markdownContentCss.includes('calc(var(--markdown-space-section-gap) * 0.75)'),
   'Markdown block spacing and quote spacing must not keep old card-markdown-specific token names.',
 )
 assert.ok(

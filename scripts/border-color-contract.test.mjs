@@ -360,13 +360,13 @@ assert.ok(
   'Divider BorderColor usage must cover TagTree guide lines, menu separators, and Coss section dividers.',
 )
 assert.ok(
-    markdownContentCss.includes('border-top: 1px solid var(--color-border-divider);') &&
-    markdownContentCss.includes('border-bottom: 1px solid var(--color-border-divider);') &&
-    markdownContentCss.includes('border-left: 1px solid var(--color-border-divider);') &&
-    markdownInlineCodeSurfaceBlock.includes('border: 1px solid var(--color-border-divider);') &&
-    markdownTableScrollBlock.includes('border: 1px solid var(--color-border-divider);') &&
-    markdownEditorTableWrapperBlock.includes('border: 1px solid var(--color-border-divider);'),
-  'Divider BorderColor usage must cover Markdown hr/table divider lines, inline code, and table outer borders.',
+    markdownContentCss.includes('border-top: 1px solid var(--markdown-color-border-divider);') &&
+    markdownContentCss.includes('border-bottom: 1px solid var(--markdown-color-border-divider);') &&
+    markdownContentCss.includes('border-left: 1px solid var(--markdown-color-border-divider);') &&
+    markdownInlineCodeSurfaceBlock.includes('border: 1px solid var(--markdown-color-border-divider);') &&
+    markdownTableScrollBlock.includes('border: 1px solid var(--markdown-color-border-divider);') &&
+    markdownEditorTableWrapperBlock.includes('border: 1px solid var(--markdown-color-border-divider);'),
+  'Markdown divider lines and frames must use the dedicated Markdown border token.',
 )
 assert.ok(
     cardSurfaceCss.includes('border: 1px solid var(--color-border);') &&

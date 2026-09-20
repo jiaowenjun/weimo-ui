@@ -52,6 +52,25 @@
   --radius-sm: 8px;
   --radius-round: 999px;
 
+  /* === Markdown 渲染 === */
+  --markdown-color-text-primary: hsl(0 0% 9%);
+  --markdown-color-text-secondary: hsl(0 0% 28%);
+  --markdown-color-text-placeholder: hsl(0 0% 74%);
+  --markdown-color-primary: hsl(0 0% 15%);
+  --markdown-color-border: hsl(0 0% 90%);
+  --markdown-color-border-divider: hsl(0 0% 88%);
+  --markdown-color-bg-hover: hsl(40 12% 96%);
+  --markdown-font-mono: "SFMono-Regular", "Cascadia Code", "Liberation Mono", Menlo, Consolas, monospace;
+  --markdown-font-size-base: 16px;
+  --markdown-font-size-md: 14px;
+  --markdown-font-size-sm: 13px;
+  --markdown-font-line-height-reading: 1.6;
+  --markdown-radius-sm: 8px;
+  --markdown-space-section-gap: 1em;
+  --markdown-quote-padding: 20px;
+  --markdown-list-indent-compact: 1.35em;
+  --markdown-list-indent-wide: 2em;
+
   /* === 玻璃效果 === */
   --glass-blur: 14px;
   --backdrop-blur: 4px;
@@ -158,6 +177,15 @@
   --color-bg-hover: hsl(0 0% 20%);
   --color-bg-hover-on-hover: hsl(0 0% 28%);
   --color-text-danger: hsl(7.2 100% 73.9%);
+
+  /* === Markdown 渲染暗色覆盖 === */
+  --markdown-color-text-primary: hsl(0 0% 98%);
+  --markdown-color-text-secondary: hsl(0 0% 64%);
+  --markdown-color-text-placeholder: hsl(0 0% 35%);
+  --markdown-color-primary: hsl(0 0% 96%);
+  --markdown-color-border: hsl(0 0% 20%);
+  --markdown-color-border-divider: hsl(0 0% 28%);
+  --markdown-color-bg-hover: hsl(0 0% 20%);
 
   /* === 玻璃效果暗色 === */
   --glass-surface-border: hsl(0 0% 38%);

@@ -1220,8 +1220,6 @@
   overflow: hidden;
   padding: 8px;
   border-radius: var(--radius-sm);
-  background: var(--color-bg-card);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-border) 72%, transparent);
   color: var(--color-text-primary);
 }
 
@@ -1286,29 +1284,40 @@
 }
 
 .md-style-preview__mini-type--primary {
-  color: var(--color-text-primary);
+  color: var(--markdown-color-text-primary);
 }
 
 .md-style-preview__mini-type--base {
-  color: var(--color-text-primary);
-  font-size: var(--font-size-base);
+  color: var(--markdown-color-text-primary);
+  font-size: var(--markdown-font-size-base);
 }
 
 .md-style-preview__mini-type--secondary {
-  color: var(--color-text-secondary);
+  color: var(--markdown-color-text-secondary);
+}
+
+.md-style-preview__mini-type--placeholder {
+  color: var(--markdown-color-text-placeholder);
+}
+
+.md-style-preview__mini-link {
+  color: var(--markdown-color-primary);
+  font-size: var(--markdown-font-size-base);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
 
 .md-style-preview__mini-lines {
-  color: var(--color-text-primary);
+  color: var(--markdown-color-text-primary);
   font-size: var(--font-size-xs);
-  line-height: var(--font-line-height-reading);
+  line-height: var(--markdown-font-line-height-reading);
 }
 
 .md-style-preview__mini-quote-space {
   display: block;
   width: 100%;
   padding-inline: var(--markdown-quote-padding);
-  color: var(--color-text-secondary);
+  color: var(--markdown-color-text-secondary);
   font-size: var(--font-size-xs);
   line-height: 1.4;
 }
@@ -1317,17 +1326,21 @@
   display: block;
   width: 100%;
   height: 1px;
-  background: var(--color-border-divider);
+  background: var(--markdown-color-border-divider);
 }
 
 .md-style-preview__mini-code {
   padding: 2px 6px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  color: var(--color-text-primary);
-  font-family: var(--font-mono);
-  font-size: var(--font-size-md);
+  border: 1px solid var(--markdown-color-border);
+  border-radius: var(--markdown-radius-sm);
+  color: var(--markdown-color-text-primary);
+  font-family: var(--markdown-font-mono);
+  font-size: var(--markdown-font-size-md);
   line-height: 1.45;
+}
+
+.md-style-preview__mini-code--sm {
+  font-size: var(--markdown-font-size-sm);
 }
 
 .md-style-preview__mini-code--mono {
@@ -1336,10 +1349,10 @@
 
 .md-style-preview__mini-inset {
   display: block;
-  padding: var(--space-card-section-gap);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  color: var(--color-text-secondary);
+  padding: var(--markdown-space-section-gap);
+  border: 1px solid var(--markdown-color-border);
+  border-radius: var(--markdown-radius-sm);
+  color: var(--markdown-color-text-secondary);
   font-size: var(--font-size-xs);
   line-height: 1;
 }
@@ -1348,29 +1361,48 @@
   display: block;
   width: 56px;
   height: 30px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
+  border: 1px solid var(--markdown-color-border);
+  border-radius: var(--markdown-radius-sm);
+}
+
+.md-style-preview__mini-swatch--border {
+  border-color: var(--markdown-color-border);
 }
 
 .md-style-preview__mini-radius {
   display: block;
   width: 56px;
   height: 30px;
-  border: 1px solid var(--color-border);
-  background: var(--color-bg-page);
+  border: 1px solid var(--markdown-color-border);
 }
 
 .md-style-preview__mini-radius--sm {
-  border-radius: var(--radius-sm);
+  border-radius: var(--markdown-radius-sm);
 }
 
 .md-style-preview__mini-math-hover {
   padding: 4px 8px;
-  border-radius: var(--radius-sm);
-  background: var(--color-bg-hover);
-  color: var(--color-text-primary);
+  border-radius: var(--markdown-radius-sm);
+  background: var(--markdown-color-bg-hover);
+  color: var(--markdown-color-text-primary);
   font-size: var(--font-size-xs);
   line-height: 1.2;
+}
+
+.md-style-preview__mini-list-indent {
+  display: block;
+  width: 100%;
+  color: var(--markdown-color-text-secondary);
+  font-size: var(--markdown-font-size-sm);
+  line-height: var(--markdown-font-line-height-reading);
+}
+
+.md-style-preview__mini-list-indent--compact {
+  padding-left: var(--markdown-list-indent-compact);
+}
+
+.md-style-preview__mini-list-indent--wide {
+  padding-left: var(--markdown-list-indent-wide);
 }
 
 @media (min-width: 700px) {
