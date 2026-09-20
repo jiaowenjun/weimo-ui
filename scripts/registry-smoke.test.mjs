@@ -1462,8 +1462,8 @@ try {
   assert.match(consumerCss, /--radius:\s*16px;/)
   assert.match(consumerCss, /--color-background:\s*hsl\(var\(--background\)\);/)
   assert.match(consumerCss, /--color-bg-card:/)
-  assert.match(consumerCss, /--color-heat-0:\s*hsl\(0 0% 0% \/ 0\.06\);/)
-  assert.match(consumerCss, /--color-heat-1:\s*hsl\(18\.1 71\.9% 46\.1% \/ 0\.2\);/)
+  assert.match(consumerCss, /--color-heat-0:\s*hsl\(0 0% 94%\);/)
+  assert.match(consumerCss, /--color-heat-1:\s*hsl\(18 62% 89%\);/)
   assert.match(consumerCss, /--color-heatmap-today-ring:\s*hsl\(18\.1 71\.9% 46\.1% \/ 0\.55\);/)
   assert.ok(
     tagPickerSource.includes("from '../coss/input-group'") &&

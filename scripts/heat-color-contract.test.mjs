@@ -27,11 +27,11 @@ function cssBlockFor(source, selector) {
 }
 
 const expectedLevels = [
-  [0, '--color-heat-0', 'heat-color--0', 'hsl(0 0% 0% / 0.06)', 'hsl(0 0% 100% / 0.08)'],
-  [1, '--color-heat-1', 'heat-color--1', 'hsl(18.1 71.9% 46.1% / 0.2)', 'hsl(22.6 85% 60.8% / 0.2)'],
-  [2, '--color-heat-2', 'heat-color--2', 'hsl(18.1 71.9% 46.1% / 0.4)', 'hsl(22.6 85% 60.8% / 0.4)'],
-  [3, '--color-heat-3', 'heat-color--3', 'hsl(18.1 71.9% 46.1% / 0.65)', 'hsl(22.6 85% 60.8% / 0.65)'],
-  [4, '--color-heat-4', 'heat-color--4', 'hsl(18.1 71.9% 46.1% / 0.9)', 'hsl(22.6 85% 60.8% / 0.9)'],
+  [0, '--color-heat-0', 'heat-color--0', 'hsl(0 0% 94%)', 'hsl(0 0% 19%)'],
+  [1, '--color-heat-1', 'heat-color--1', 'hsl(18 62% 89%)', 'hsl(23 31% 22%)'],
+  [2, '--color-heat-2', 'heat-color--2', 'hsl(18 62% 78%)', 'hsl(23 42% 32%)'],
+  [3, '--color-heat-3', 'heat-color--3', 'hsl(18 62% 65%)', 'hsl(23 50% 44%)'],
+  [4, '--color-heat-4', 'heat-color--4', 'hsl(18 62% 52%)', 'hsl(23 68% 56%)'],
 ]
 
 const packageJson = readJson('package.json')
@@ -130,6 +130,15 @@ for (const [level, token, className, lightValue, darkValue] of expectedLevels) {
     rootStyleItem.cssVars.dark[token.slice(2)],
     styleRegistry.cssVars.dark[token.slice(2)],
     `registry.json style item dark cssVars must mirror ${token}.`,
+  )
+  assert.ok(
+    tokensCss.includes(`${token}: ${lightValue};`) && tokensCss.includes(`${token}: ${darkValue};`),
+    `tokens.css must define the concrete ${token} values in both themes.`,
+  )
+  assert.ok(
+    !lightValue.includes('/') && !darkValue.includes('/') &&
+      !lightValue.includes('rgba(') && !darkValue.includes('rgba('),
+    `${token} must use an opaque color value pre-blended over the card background.`,
   )
 }
 
