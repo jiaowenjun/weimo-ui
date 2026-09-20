@@ -13,9 +13,17 @@ import {
 } from '../../components/text-color'
 import { TokenPreviewCard } from '../../components/token-preview-card'
 import type { ComponentDefinition } from '../component-docs'
-import { sortByThemeLightness, useIsDarkTheme } from '../token-preview-color'
 
 const previewTextColorTones = textColorTones.filter((tone) => tone !== 'inherit')
+
+const textColorToneOrder = [
+  'primary',
+  'secondary',
+  'subtle',
+  'disable',
+  'placeholder',
+  'danger',
+] as const
 
 const fontFamilyTokens = [
   {
@@ -35,40 +43,28 @@ const fontFamilyTokens = [
 // Docs definitions intentionally colocate preview components with exported page metadata.
 // eslint-disable-next-line react-refresh/only-export-components
 function FontPreview() {
-  const isDark = useIsDarkTheme()
-  const orderedTextColorTones = sortByThemeLightness(
-    previewTextColorTones,
-    (tone) => textColorToneMap[tone].value,
-    isDark,
-    isDark ? 12 : 100,
+  const orderedTextColorTones = textColorToneOrder.filter((tone) =>
+    previewTextColorTones.includes(tone),
   )
 
   return (
     <>
-      <h2 className="token-preview-card-demo__category">字色</h2>
-
-      {orderedTextColorTones.map((tone) => {
-        const item = textColorToneMap[tone]
-
-        return (
-          <TokenPreviewCard
-            darkValue={item.value.dark}
-            key={tone}
-            label={item.label}
-            token={getTextColorToken(tone)}
-            value={item.value.light}
-          >
-            <p
-              className={`text-color-preview__sample ${getTextColorClassName(tone)}`}
-              aria-hidden="true"
-            >
+      <TokenPreviewCard
+        items={orderedTextColorTones.map((tone) => ({
+          darkValue: textColorToneMap[tone].value.dark,
+          token: getTextColorToken(tone),
+          value: textColorToneMap[tone].value.light,
+        }))}
+        label="字色"
+      >
+        <div aria-hidden="true" className="text-color-preview__samples">
+          {orderedTextColorTones.map((tone) => (
+            <p className={`text-color-preview__sample ${getTextColorClassName(tone)}`} key={tone}>
               Aa
             </p>
-          </TokenPreviewCard>
-        )
-      })}
-
-      <h2 className="token-preview-card-demo__category">字号</h2>
+          ))}
+        </div>
+      </TokenPreviewCard>
 
       <TokenPreviewCard
         items={fontSizeScales.map((scale) => ({
@@ -93,23 +89,21 @@ function FontPreview() {
         </div>
       </TokenPreviewCard>
 
-      <h2 className="token-preview-card-demo__category">字体</h2>
-
-      {fontFamilyTokens.map((font) => (
-        <TokenPreviewCard
-          key={font.token}
-          label={font.label}
-          token={font.token}
-          value={font.value}
-        >
-          <div
-            className={`typography-preview__sample ${font.className}`}
-            aria-hidden="true"
-          >
-            Aa 0123 汉字
-          </div>
-        </TokenPreviewCard>
-      ))}
+      <TokenPreviewCard
+        items={fontFamilyTokens.map((font) => ({
+          token: font.token,
+          value: font.value,
+        }))}
+        label="字体"
+      >
+        <div aria-hidden="true" className="typography-preview__samples">
+          {fontFamilyTokens.map((font) => (
+            <div className={`typography-preview__sample ${font.className}`} key={font.token}>
+              Aa 0123 汉字
+            </div>
+          ))}
+        </div>
+      </TokenPreviewCard>
     </>
   )
 }

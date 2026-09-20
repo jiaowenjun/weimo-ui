@@ -243,19 +243,19 @@ assert.ok(
     docsDefinitionSource.includes('textColorToneMap[tone]') &&
     docsDefinitionSource.includes('function FontPreview()') &&
     docsDefinitionSource.includes('orderedTextColorTones.map') &&
-    docsDefinitionSource.includes("from '../token-preview-color'") &&
-    docsDefinitionSource.includes('useIsDarkTheme()') &&
-    docsDefinitionSource.includes('sortByThemeLightness(') &&
+    docsDefinitionSource.includes('const textColorToneOrder = [') &&
+    docsDefinitionSource.includes("'primary',\n  'secondary',\n  'subtle',\n  'disable',\n  'placeholder',\n  'danger',") &&
+    docsDefinitionSource.includes('textColorToneOrder.filter((tone) =>') &&
     docsDefinitionSource.includes('getTextColorClassName(tone)') &&
     docsDefinitionSource.includes('getTextColorToken(tone)') &&
     docsDefinitionSource.includes('<TokenPreviewCard') &&
-    docsDefinitionSource.includes('darkValue={item.value.dark}') &&
-    docsDefinitionSource.includes('label={item.label}') &&
-    docsDefinitionSource.includes('token={getTextColorToken(tone)}') &&
-    docsDefinitionSource.includes('value={item.value.light}') &&
+    docsDefinitionSource.includes('darkValue: textColorToneMap[tone].value.dark,') &&
+    docsDefinitionSource.includes('token: getTextColorToken(tone),') &&
+    docsDefinitionSource.includes('value: textColorToneMap[tone].value.light,') &&
+    docsDefinitionSource.includes('label="字色"') &&
+    docsDefinitionSource.includes('className="text-color-preview__samples"') &&
     docsDefinitionSource.includes('text-color-preview__sample') &&
-    docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">字色</h2>') &&
-    docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">字号</h2>') &&
+    !docsDefinitionSource.includes('token-preview-card-demo__category') &&
     !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     !docsDefinitionSource.includes('summary:') &&
     !docsDefinitionSource.includes('text-color-preview__row') &&
@@ -271,10 +271,12 @@ assert.ok(
   'App.css must include only the TextColor-specific preview-effect styles.',
 )
 assert.ok(
-  sampleBlock.includes('align-items: center;') &&
-    sampleBlock.includes('justify-content: center;') &&
-    sampleBlock.includes('text-align: center;'),
-  'TextColor preview samples must center their text in both axes.',
+  appCss.includes('.text-color-preview__samples {\n  display: flex;\n  align-items: baseline;') &&
+    appCss.includes('gap: 24px;') &&
+    sampleBlock.includes('font-size: 1.75rem;') &&
+    sampleBlock.includes('font-weight: 600;') &&
+    !sampleBlock.includes('height: 80px;'),
+  'TextColor preview samples must render one baseline-aligned row of colored glyphs.',
 )
 assert.ok(
   !appCss.includes('grid-template-columns: minmax(112px, 0.8fr) minmax(180px, 1.4fr) minmax(150px, 0.9fr) minmax(180px, 1.2fr);'),

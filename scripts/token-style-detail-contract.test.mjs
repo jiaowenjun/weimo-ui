@@ -185,8 +185,6 @@ for (const selector of [
   '.bg-color-preview__sample',
   '.border-radius-preview__sample',
   '.border-color-preview__sample',
-  '.text-color-preview__sample',
-  '.typography-preview__sample',
   '.pressable-preview__sample',
 ]) {
   const escapedSelector = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
@@ -325,8 +323,8 @@ assert.ok(
 
 assert.ok(
   !existsSync(join(root, 'src/docs/component-definitions/text-color.tsx')) &&
-    fontSizeDefinitionSource.includes('>字色</h2>') &&
-    fontSizeDefinitionSource.includes('>字号</h2>') &&
+    fontSizeDefinitionSource.includes('label="字色"') &&
+    fontSizeDefinitionSource.includes('label="字号"') &&
     fontSizeDefinitionSource.includes('textColorToneMap') &&
     fontSizeDefinitionSource.includes('fontSizeScaleMap'),
   'TextColor and FontSize docs must share the grouped Font detail page.',

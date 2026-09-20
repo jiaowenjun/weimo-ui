@@ -160,14 +160,14 @@ assert.ok(
     docsDefinitionSource.includes("frame: 'plain',") &&
     docsDefinitionSource.includes("import { TokenPreviewCard } from '../../components/token-preview-card'") &&
     docsDefinitionSource.includes("from '../../components/text-color'") &&
-    docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">字色</h2>') &&
-    docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">字号</h2>') &&
-    docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">字体</h2>') &&
+    !docsDefinitionSource.includes('token-preview-card-demo__category') &&
     docsDefinitionSource.includes('fontFamilyTokens.map') &&
     docsDefinitionSource.includes("'--font-sans'") &&
     docsDefinitionSource.includes("'--font-mono'") &&
     !docsDefinitionSource.includes("'--font-print'") &&
     docsDefinitionSource.includes('typography-preview__sample') &&
+    docsDefinitionSource.includes('className="typography-preview__samples"') &&
+    docsDefinitionSource.includes('label="字体"') &&
     docsDefinitionSource.includes('textColorToneMap[tone]') &&
     docsDefinitionSource.includes('getTextColorClassName(tone)') &&
     docsDefinitionSource.includes('fontSizeScales.map') &&
@@ -176,7 +176,6 @@ assert.ok(
     docsDefinitionSource.includes('getFontSizeToken(scale)') &&
     docsDefinitionSource.includes('getFontSizeValue(scale)') &&
     docsDefinitionSource.includes('<TokenPreviewCard') &&
-    docsDefinitionSource.includes('label={item.label}') &&
     docsDefinitionSource.includes('items={fontSizeScales.map((scale) => ({') &&
     docsDefinitionSource.includes('token: getFontSizeToken(scale),') &&
     docsDefinitionSource.includes('value: getFontSizeValue(scale),') &&
@@ -193,7 +192,9 @@ assert.ok(
 )
 
 assert.ok(
-  appCss.includes('.typography-preview__sample--font-sans') &&
+  appCss.includes('.typography-preview__samples {\n  display: grid;') &&
+  appCss.includes('.typography-preview__sample {\n  min-width: 0;\n  color: var(--color-text-primary);\n  font-size: var(--font-size-lg);\n  line-height: 1.4;\n  overflow-wrap: anywhere;\n  text-align: center;\n}') &&
+    appCss.includes('.typography-preview__sample--font-sans') &&
     appCss.includes('.typography-preview__sample--font-mono') &&
     !appCss.includes('.typography-preview__sample--font-print'),
   'App.css must style FontFamily preview samples through the shared font tokens.',

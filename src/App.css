@@ -837,16 +837,21 @@
   border-radius: var(--radius-sm);
 }
 
-.text-color-preview__sample {
+.text-color-preview__samples {
   display: flex;
-  min-width: 0;
-  height: 80px;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
+  gap: 24px;
+  padding: 24px 16px;
+}
+
+.text-color-preview__sample {
+  min-width: 0;
   margin: 0;
   font-size: 1.75rem;
   font-weight: 600;
   line-height: 1.2;
+  overflow-wrap: anywhere;
   text-align: center;
 }
 
@@ -875,14 +880,18 @@
   text-underline-offset: 4px;
 }
 
+.typography-preview__samples {
+  display: grid;
+  gap: 8px;
+  padding: 16px;
+}
+
 .typography-preview__sample {
-  display: flex;
   min-width: 0;
-  height: 80px;
-  align-items: center;
-  justify-content: center;
   color: var(--color-text-primary);
   font-size: var(--font-size-lg);
+  line-height: 1.4;
+  overflow-wrap: anywhere;
   text-align: center;
 }
 
