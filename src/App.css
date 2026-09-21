@@ -932,8 +932,8 @@
 }
 
 .border-radius-preview__sample {
-  width: 64px;
-  height: 64px;
+  width: 48px;
+  height: 48px;
   border: 2px solid var(--color-border-emphasis);
 }
 

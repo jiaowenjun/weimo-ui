@@ -190,10 +190,12 @@ assert.ok(
   'App.css must include only the BorderRadius-specific preview-effect styles.',
 )
 assert.ok(
-  sampleBlock.includes('border: 2px solid var(--color-border-emphasis);') &&
+  sampleBlock.includes('width: 48px;') &&
+    sampleBlock.includes('height: 48px;') &&
+    sampleBlock.includes('border: 2px solid var(--color-border-emphasis);') &&
     !sampleBlock.includes('background:') &&
     !sampleBlock.includes('box-shadow:'),
-  'BorderRadius preview samples must use the emphasis border color so the radius outline stays readable.',
+  'BorderRadius preview samples must stay height-aligned with the BorderColor preview samples (48px squares).',
 )
 
 assert.ok(registryItem, 'registry.json must include the border-radius registry item.')
