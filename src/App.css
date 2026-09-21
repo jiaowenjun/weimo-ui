@@ -1095,6 +1095,12 @@
   padding: 18px;
 }
 
+/* --shadow-overlay(0 28px 80px)向下延伸约 68px,超出预览区上下各 50px 的可用空间;
+   预览窗默认裁切是给衬底演示定的,浮层瓦片需要把真实阴影画进卡片 padding(距卡片边缘 67px)。 */
+.component-preview-card > .component-preview-card__meta ~ .popup-surface-preview {
+  overflow: visible;
+}
+
 .card-surface-preview__title,
 .popup-surface-preview__title {
   font-size: var(--font-size-base);

@@ -168,6 +168,12 @@ assert.ok(
     ),
   'Surface page demo containers must keep identical 180px preview areas.',
 )
+assert.ok(
+  appCss.includes(
+    '.component-preview-card > .component-preview-card__meta ~ .popup-surface-preview {\n  overflow: visible;\n}',
+  ),
+  'PopupSurface demo must opt out of the preview-window clip so the real --shadow-overlay renders into the card padding.',
+)
 
 for (const snippet of [
   "from './card-surface'",
