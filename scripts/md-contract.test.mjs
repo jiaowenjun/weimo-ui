@@ -1289,13 +1289,13 @@ assert.ok(
 )
 const mdContentWrapperBlock = cssBlockFor(appCss, '.md-style-preview__content-wrapper')
 assert.ok(
-  mdContentWrapperBlock.includes('width: 50%;') &&
+  mdContentWrapperBlock.includes('width: 80%;') &&
     mdContentWrapperBlock.includes('margin-inline: auto;') &&
     mdContentWrapperBlock.includes('padding: 16px;') &&
     mdContentWrapperBlock.includes('border: 1px solid var(--color-border);') &&
     mdContentWrapperBlock.includes('border-radius: var(--radius-sm);') &&
     definitionSource.includes('className="md-style-preview__content-wrapper"'),
-  'Md token group previews must center a padded, half-width rounded border wrapper around the rendered content.',
+  'Md token group previews must center a padded, 80%-width rounded border wrapper around the rendered content.',
 )
 assert.ok(
   definitionSource.includes("case '代码':") &&

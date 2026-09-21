@@ -1299,7 +1299,7 @@
 
 .md-style-preview__content-wrapper {
   box-sizing: border-box;
-  width: 50%;
+  width: 80%;
   min-width: 0;
   margin-inline: auto;
   overflow: hidden;
