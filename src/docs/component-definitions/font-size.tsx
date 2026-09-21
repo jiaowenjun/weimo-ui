@@ -72,25 +72,6 @@ function FontPreview() {
       </TokenPreviewCard>
 
       <TokenPreviewCard
-        darkValue={bgColorToneMap.selection.value.dark}
-        label={bgColorToneMap.selection.label}
-        token={getBgColorToken('selection')}
-        value={bgColorToneMap.selection.value.light}
-      >
-        <p className="bg-color-preview__selection-sample">
-          <span className="bg-color-preview__selection-copy">
-            在编辑器里
-            <span
-              className={`bg-color-preview__selection-highlight ${getBgColorClassName('selection')}`}
-            >
-              选中一段文字
-            </span>
-            时，会铺上这层柔和的强调底色；也可以直接拖选这段话试试。
-          </span>
-        </p>
-      </TokenPreviewCard>
-
-      <TokenPreviewCard
         items={fontSizeScales.map((scale) => ({
           token: getFontSizeToken(scale),
           value: getFontSizeValue(scale),
@@ -127,6 +108,25 @@ function FontPreview() {
             </div>
           ))}
         </div>
+      </TokenPreviewCard>
+
+      <TokenPreviewCard
+        darkValue={bgColorToneMap.selection.value.dark}
+        label={bgColorToneMap.selection.label}
+        token={getBgColorToken('selection')}
+        value={bgColorToneMap.selection.value.light}
+      >
+        <p className="bg-color-preview__selection-sample">
+          <span className="bg-color-preview__selection-copy">
+            在编辑器里
+            <span
+              className={`bg-color-preview__selection-highlight ${getBgColorClassName('selection')}`}
+            >
+              选中一段文字
+            </span>
+            时，会铺上这层柔和的强调底色；也可以直接拖选这段话试试。
+          </span>
+        </p>
       </TokenPreviewCard>
     </>
   )
