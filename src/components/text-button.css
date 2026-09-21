@@ -32,8 +32,8 @@
 
   .text-button:disabled {
     cursor: default;
-    color: var(--color-text-disable);
-    border-color: var(--color-border-disable);
+    color: var(--color-text-disabled);
+    border-color: var(--color-border-disabled);
     background: var(--color-bg-card);
   }
 
@@ -54,5 +54,5 @@ button.text-button {
 }
 
 button.text-button:disabled {
-  color: var(--color-text-disable);
+  color: var(--color-text-disabled);
 }

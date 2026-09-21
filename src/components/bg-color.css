@@ -19,7 +19,7 @@
 }
 
 .bg-color--hover-on-hover {
-  background: var(--color-bg-hover-on-hover);
+  background: var(--color-bg-nested-hover);
 }
 
 .bg-color--selected {

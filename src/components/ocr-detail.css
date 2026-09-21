@@ -13,16 +13,16 @@
     flex: 1;
     grid-template-columns: minmax(0, 1.1fr) minmax(360px, 0.9fr);
     grid-template-rows: minmax(0, 1fr);
-    gap: var(--space-card-padding);
-    padding: var(--space-card-padding);
+    gap: var(--space-card-pad);
+    padding: var(--space-card-pad);
   }
 
   .ocr-detail__image-toolbar {
     display: grid;
     box-sizing: border-box;
     grid-template-columns: minmax(0, 1.1fr) minmax(360px, 0.9fr);
-    gap: var(--space-card-padding);
-    padding: var(--space-card-padding);
+    gap: var(--space-card-pad);
+    padding: var(--space-card-pad);
   }
 
   .ocr-detail__image-toolbar .float-bar__frame {

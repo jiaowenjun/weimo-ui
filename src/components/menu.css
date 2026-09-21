@@ -34,7 +34,7 @@
   }
 
   .weimo-menu__popup {
-    --weimo-menu-item-hover-bg: color-mix(in srgb, var(--glass-surface-fg) 12%, transparent);
+    --weimo-menu-item-hover-bg: color-mix(in srgb, var(--gls-surface-fg) 12%, transparent);
     --weimo-menu-separator-bg: var(--color-border-divider-menu);
 
     min-width: 180px;

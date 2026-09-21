@@ -74,36 +74,36 @@ const markdownImageBlock = cssBlockFor(
 )
 
 const markdownColorTokens = [
-  ['--markdown-content-color', 'hsl(0 0% 9%)', 'hsl(0 0% 98%)'],
-  ['--markdown-paragraph-color', 'hsl(0 0% 9%)', 'hsl(0 0% 98%)'],
-  ['--markdown-heading-1-color', 'hsl(0 0% 9%)', 'hsl(0 0% 98%)'],
-  ['--markdown-blockquote-color', 'hsl(0 0% 28%)', 'hsl(0 0% 64%)'],
-  ['--markdown-inline-code-border-color', 'hsl(0 0% 88%)', 'hsl(0 0% 28%)'],
-  ['--markdown-link-color', 'hsl(0 0% 15%)', 'hsl(0 0% 96%)'],
-  ['--markdown-image-placeholder-color', 'hsl(0 0% 74%)', 'hsl(0 0% 35%)'],
-  ['--markdown-table-frame-border-color', 'hsl(0 0% 88%)', 'hsl(0 0% 28%)'],
-  ['--markdown-table-cell-border-color', 'hsl(0 0% 88%)', 'hsl(0 0% 28%)'],
-  ['--markdown-table-header-color', 'hsl(0 0% 28%)', 'hsl(0 0% 64%)'],
-  ['--markdown-math-hover-background', 'hsl(40 12% 96%)', 'hsl(0 0% 20%)'],
+  ['--md-color', 'hsl(0 0% 9%)', 'hsl(0 0% 98%)'],
+  ['--md-paragraph-color', 'hsl(0 0% 9%)', 'hsl(0 0% 98%)'],
+  ['--md-h1-color', 'hsl(0 0% 9%)', 'hsl(0 0% 98%)'],
+  ['--md-quote-color', 'hsl(0 0% 28%)', 'hsl(0 0% 64%)'],
+  ['--md-inline-code-border-color', 'hsl(0 0% 88%)', 'hsl(0 0% 28%)'],
+  ['--md-link-color', 'hsl(0 0% 15%)', 'hsl(0 0% 96%)'],
+  ['--md-img-placeholder-color', 'hsl(0 0% 74%)', 'hsl(0 0% 35%)'],
+  ['--md-tbl-frame-border-color', 'hsl(0 0% 88%)', 'hsl(0 0% 28%)'],
+  ['--md-tbl-cell-border-color', 'hsl(0 0% 88%)', 'hsl(0 0% 28%)'],
+  ['--md-tbl-header-color', 'hsl(0 0% 28%)', 'hsl(0 0% 64%)'],
+  ['--md-math-hover-bg', 'hsl(40 12% 96%)', 'hsl(0 0% 20%)'],
 ]
 const markdownStaticTokens = [
-  ['--markdown-content-font-size', '16px'],
-  ['--markdown-content-line-height', '1.6'],
-  ['--markdown-heading-1-font-size', '16px'],
-  ['--markdown-heading-1-line-height', '1.6'],
-  ['--markdown-blockquote-padding-inline', '20px'],
-  ['--markdown-list-padding-left', '1.35em'],
-  ['--markdown-ordered-list-wide-marker-padding-left', '2em'],
-  ['--markdown-inline-code-font-family', '"SFMono-Regular", "Cascadia Code", "Liberation Mono", Menlo, Consolas, monospace'],
-  ['--markdown-inline-code-font-size', '14px'],
-  ['--markdown-inline-code-border-radius', '8px'],
-  ['--markdown-image-placeholder-font-size', '14px'],
-  ['--markdown-image-placeholder-border-radius', '8px'],
-  ['--markdown-image-border-radius', '8px'],
-  ['--markdown-list-image-gap', '1em'],
-  ['--markdown-table-border-radius', '8px'],
-  ['--markdown-table-font-size', '13px'],
-  ['--markdown-math-border-radius', '8px'],
+  ['--md-font-size', '16px'],
+  ['--md-line-height', '1.6'],
+  ['--md-h1-font-size', '16px'],
+  ['--md-h1-line-height', '1.6'],
+  ['--md-quote-pad-inline', '20px'],
+  ['--md-list-indent', '1.35em'],
+  ['--md-list-wide-marker-indent', '2em'],
+  ['--md-inline-code-font-family', '"SFMono-Regular", "Cascadia Code", "Liberation Mono", Menlo, Consolas, monospace'],
+  ['--md-inline-code-font-size', '14px'],
+  ['--md-inline-code-border-radius', '8px'],
+  ['--md-img-placeholder-font-size', '14px'],
+  ['--md-img-placeholder-border-radius', '8px'],
+  ['--md-img-border-radius', '8px'],
+  ['--md-list-img-gap', '1em'],
+  ['--md-tbl-border-radius', '8px'],
+  ['--md-tbl-font-size', '13px'],
+  ['--md-math-border-radius', '8px'],
 ]
 const markdownTokenNames = [
   ...markdownColorTokens.map(([token]) => token),
@@ -115,7 +115,7 @@ const markdownReferencedTokens = [
   ),
 ]
 const markdownDefinedTokens = [
-  ...tokensRootBlock.matchAll(/^\s*(--markdown-[a-z0-9-]+):/gm),
+  ...tokensRootBlock.matchAll(/^\s*(--md-[a-z0-9-]+):/gm),
 ].map((match) => match[1])
 const legacyMarkdownTokenNames = [
   '--markdown-heading-2-color',
@@ -171,7 +171,7 @@ assert.ok(
 assert.deepEqual(
   markdownReferencedTokens.sort(),
   [...markdownTokenNames].sort(),
-  'Markdown rendering CSS must depend exclusively on the complete --markdown-* theme contract.',
+  'Markdown rendering CSS must depend exclusively on the complete --md-* theme contract.',
 )
 assert.deepEqual(
   markdownDefinedTokens.sort(),
@@ -179,8 +179,18 @@ assert.deepEqual(
   'Markdown token definitions must not contain unreferenced or undocumented theme variables.',
 )
 assert.ok(
-  markdownReferencedTokens.every((token) => token.startsWith('--markdown-')),
+  markdownReferencedTokens.every((token) => token.startsWith('--md-')),
   'Markdown rendering CSS must not depend on external component or shared style tokens.',
+)
+assert.ok(
+  !tokensCss.includes('--markdown-') &&
+    !markdownContentCss.includes('--markdown-') &&
+    !definitionSource.includes('--markdown-') &&
+    !Object.keys(styleRegistry.cssVars.light).some((key) => key.startsWith('markdown-')) &&
+    !Object.keys(styleRegistry.cssVars.dark).some((key) => key.startsWith('markdown-')) &&
+    !Object.keys(rootStyleItem.cssVars.light).some((key) => key.startsWith('markdown-')) &&
+    !Object.keys(rootStyleItem.cssVars.dark).some((key) => key.startsWith('markdown-')),
+  'Public Markdown token surfaces must not retain the old --markdown-* namespace.',
 )
 for (const token of legacyMarkdownTokenNames) {
   const key = token.slice(2)
@@ -301,7 +311,7 @@ assert.equal(
   'Md docs must render every semantic group through the shared TokenPreviewCard map.',
 )
 assert.deepEqual(
-  [...markdownGroupSource.matchAll(/'(--markdown-[a-z0-9-]+)'/g)]
+  [...markdownGroupSource.matchAll(/'(--md-[a-z0-9-]+)'/g)]
     .map((match) => match[1])
     .sort(),
   [...markdownTokenNames].sort(),
@@ -1146,7 +1156,7 @@ assert.match(
 )
 assert.match(
   markdownContentCss,
-  /\.weimo-card-markdown__list--ol\[data-marker-type="A"\][^{]*\.md-editor__content\.weimo-markdown-content ol\[data-marker-type="A"\][^{]*\{[^}]*padding-left:\s*var\(--markdown-ordered-list-wide-marker-padding-left\);/s,
+  /\.weimo-card-markdown__list--ol\[data-marker-type="A"\][^{]*\.md-editor__content\.weimo-markdown-content ol\[data-marker-type="A"\][^{]*\{[^}]*padding-left:\s*var\(--md-list-wide-marker-indent\);/s,
   'MdRender and MdEditor uppercase alphabetic lists must reserve wide Safari-safe marker indentation.',
 )
 assert.match(
@@ -1156,7 +1166,7 @@ assert.match(
 )
 assert.match(
   markdownContentCss,
-  /\.weimo-card-markdown__list--ol\[data-marker-type="a"\][^{]*\.md-editor__content\.weimo-markdown-content ol\[data-marker-type="a"\][^{]*\{[^}]*padding-left:\s*var\(--markdown-ordered-list-wide-marker-padding-left\);/s,
+  /\.weimo-card-markdown__list--ol\[data-marker-type="a"\][^{]*\.md-editor__content\.weimo-markdown-content ol\[data-marker-type="a"\][^{]*\{[^}]*padding-left:\s*var\(--md-list-wide-marker-indent\);/s,
   'MdRender and MdEditor lowercase alphabetic lists must reserve wide Safari-safe marker indentation.',
 )
 assert.match(
@@ -1171,12 +1181,12 @@ assert.match(
 )
 assert.match(
   markdownContentCss,
-  /\.weimo-card-markdown__list--ol\[data-marker-type="I"\][^{]*\.md-editor__content\.weimo-markdown-content ol\[type="I"\][^{]*\{[^}]*padding-left:\s*var\(--markdown-ordered-list-wide-marker-padding-left\);/s,
+  /\.weimo-card-markdown__list--ol\[data-marker-type="I"\][^{]*\.md-editor__content\.weimo-markdown-content ol\[type="I"\][^{]*\{[^}]*padding-left:\s*var\(--md-list-wide-marker-indent\);/s,
   'MdRender and MdEditor uppercase Roman lists must share wide-marker indentation.',
 )
 assert.match(
   markdownContentCss,
-  /\.weimo-card-markdown__list--ol\[data-marker-type="i"\][^{]*\.md-editor__content\.weimo-markdown-content ol\[type="i"\][^{]*\{[^}]*padding-left:\s*var\(--markdown-ordered-list-wide-marker-padding-left\);/s,
+  /\.weimo-card-markdown__list--ol\[data-marker-type="i"\][^{]*\.md-editor__content\.weimo-markdown-content ol\[type="i"\][^{]*\{[^}]*padding-left:\s*var\(--md-list-wide-marker-indent\);/s,
   'MdRender and MdEditor lowercase Roman lists must share wide-marker indentation.',
 )
 assert.ok(

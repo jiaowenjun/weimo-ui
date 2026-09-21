@@ -374,8 +374,8 @@ export function RegistryConsumerContract() {
       </TokenPreviewCard>
       <TokenPreviewCard
         items={[
-          { token: "--markdown-inline-code-font-size", value: "14px" },
-          { token: "--markdown-inline-code-border-radius", value: "8px" },
+          { token: "--md-inline-code-font-size", value: "14px" },
+          { token: "--md-inline-code-border-radius", value: "8px" },
         ]}
         label="Inline code"
       >

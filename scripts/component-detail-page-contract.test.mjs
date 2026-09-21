@@ -385,7 +385,7 @@ assert.ok(
     borderColorDefinitionSource.includes('<TokenPreviewCard') &&
     !borderColorDefinitionSource.includes('<TokenPreviewDetails') &&
     borderColorDefinitionSource.includes('...contexts.flatMap') &&
-    borderColorDefinitionSource.includes('--glass-surface-border') &&
+    borderColorDefinitionSource.includes('--gls-surface-border') &&
     borderColorDefinitionSource.includes('--color-border-divider-menu-on-light'),
   'BorderColor detail page must keep background-aware token variants searchable without rendering redundant prose.',
 )

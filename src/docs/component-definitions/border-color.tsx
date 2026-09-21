@@ -23,11 +23,11 @@ const borderContextTokens: Partial<Record<BorderColorTone, readonly BorderContex
   disable: [
     {
       label: '亮背景',
-      token: '--color-border-disable-on-light',
+      token: '--color-border-disabled-on-light',
     },
     {
       label: '暗背景',
-      token: '--color-border-disable-on-dark',
+      token: '--color-border-disabled-on-dark',
     },
   ],
   divider: [
@@ -45,9 +45,9 @@ const borderContextTokens: Partial<Record<BorderColorTone, readonly BorderContex
     },
   ],
   default: [
-    { label: '主题默认', token: '--glass-surface-border' },
-    { label: '亮背景', token: '--glass-surface-light-border' },
-    { label: '暗背景', token: '--glass-surface-dark-border' },
+    { label: '主题默认', token: '--gls-surface-border' },
+    { label: '亮背景', token: '--gls-surface-border-on-light' },
+    { label: '暗背景', token: '--gls-surface-border-on-dark' },
   ],
 }
 

@@ -32,14 +32,14 @@ const expectedTones = [
   ['secondary', '--color-text-secondary', 'text-color--secondary', 'hsl(0 0% 28%)', 'hsl(0 0% 64%)'],
   ['subtle', '--color-text-subtle', 'text-color--subtle', 'hsl(0 0% 48%)', 'hsl(0 0% 49%)'],
   ['placeholder', '--color-text-placeholder', 'text-color--placeholder', 'hsl(0 0% 74%)', 'hsl(0 0% 35%)'],
-  ['disable', '--color-text-disable', 'text-color--disable', 'hsl(0 0% 56%)', 'hsl(0 0% 42%)'],
+  ['disable', '--color-text-disabled', 'text-color--disable', 'hsl(0 0% 56%)', 'hsl(0 0% 42%)'],
   ['danger', '--color-text-danger', 'text-color--danger', 'hsl(4 77% 40%)', 'hsl(7 100% 74%)'],
   ['inherit', 'inherit', 'text-color--inherit', 'inherit', 'inherit'],
 ]
 
 const expectedBackgroundAwareDisableTokens = [
-  ['color-text-disable-on-light', 'hsl(0 0% 56%)'],
-  ['color-text-disable-on-dark', 'hsl(0 0% 62%)'],
+  ['color-text-disabled-on-light', 'hsl(0 0% 56%)'],
+  ['color-text-disabled-on-dark', 'hsl(0 0% 62%)'],
 ]
 
 const removedTones = [

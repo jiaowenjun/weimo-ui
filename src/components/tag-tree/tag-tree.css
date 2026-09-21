@@ -148,7 +148,7 @@
 
     .tag-tree__row:hover .tag-tree__toggle,
     .tag-tree__row:hover .tag-tree__menu-trigger {
-      --icon-button-ghost-hover-bg: var(--color-bg-hover-on-hover);
+      --icon-button-ghost-hover-bg: var(--color-bg-nested-hover);
     }
 
     .tag-tree__row:has(.tag-tree__toggle:hover, .tag-tree__menu-trigger:hover) .tag-tree__row-body::before {

@@ -78,7 +78,7 @@ assert.ok(
 assert.ok(!glassSurfaceBlock.includes('background: var(--glass-gradient);'), 'GlassSurface must not use the Weimo glass gradient.')
 assert.ok(!glassSurfaceBlock.includes('linear-gradient'), 'GlassSurface must not use a gradient background.')
 assert.ok(
-  glassSurfaceBlock.includes('border: 1px solid var(--glass-surface-border);'),
+  glassSurfaceBlock.includes('border: 1px solid var(--gls-surface-border);'),
   'GlassSurface must use its background-aware border token.',
 )
 assert.ok(!glassSurfaceCss.includes('box-shadow:'), 'GlassSurface must not use inner or outer shadow effects.')
@@ -86,8 +86,8 @@ assert.ok(!glassSurfaceCss.includes('--glass-shadow'), 'GlassSurface must not de
 assert.ok(menuSource.includes('className="weimo-menu__positioner"'), 'Menu positioner must expose a stable class for layer styling.')
 assert.ok(menuSource.includes('data-slot="menu-positioner"'), 'Menu positioner must expose a stable data-slot for diagnostics.')
 assert.ok(positionerBlock.includes('z-index: 90;'), 'Menu positioner must render above dialogs, fixed sidebars, and drawers.')
-assert.ok(glassSurfaceBlock.includes('backdrop-filter: blur(var(--glass-blur));'), 'GlassSurface must use backdrop blur.')
-assert.ok(glassSurfaceBlock.includes('-webkit-backdrop-filter: blur(var(--glass-blur));'), 'GlassSurface must include the WebKit backdrop filter.')
+assert.ok(glassSurfaceBlock.includes('backdrop-filter: blur(var(--gls-blur));'), 'GlassSurface must use backdrop blur.')
+assert.ok(glassSurfaceBlock.includes('-webkit-backdrop-filter: blur(var(--gls-blur));'), 'GlassSurface must include the WebKit backdrop filter.')
 assert.ok(popupBlock.includes('transform-origin: var(--transform-origin, top right);'), 'Menu popup must use Base UI transform origin with a skyline fallback.')
 assert.ok(popupBlock.includes('cubic-bezier(0.34, 1.56, 0.64, 1)'), 'Menu popup must use the skyline spring enter curve.')
 assert.ok(transitionBlock.includes('transform: scale(0.7);'), 'Menu popup must start and end from skyline scale(0.7).')
@@ -129,7 +129,7 @@ assert.ok(
 )
 assert.ok(
   popupBlock.includes(
-    '--weimo-menu-item-hover-bg: color-mix(in srgb, var(--glass-surface-fg) 12%, transparent);',
+    '--weimo-menu-item-hover-bg: color-mix(in srgb, var(--gls-surface-fg) 12%, transparent);',
   ) &&
     itemHoverBlock.includes('background: var(--weimo-menu-item-hover-bg);') &&
     !itemHoverBlock.includes('background: var(--color-bg-hover);'),
@@ -140,7 +140,7 @@ assert.ok(
     menuPopupLightToneBlock.includes('--weimo-menu-separator-bg: var(--color-border-divider-menu-on-light);') &&
     menuPopupDarkToneBlock.includes('--weimo-menu-separator-bg: var(--color-border-divider-menu-on-dark);') &&
     separatorBlock.includes('background: var(--weimo-menu-separator-bg);') &&
-    !separatorBlock.includes('var(--glass-surface-border)') &&
+    !separatorBlock.includes('var(--gls-surface-border)') &&
     !separatorBlock.includes('var(--color-border-divider)'),
   'Menu separator must use its own background-aware divider token family instead of GlassSurface border or the global divider token.',
 )

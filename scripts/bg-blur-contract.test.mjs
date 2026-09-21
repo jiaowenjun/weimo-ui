@@ -32,9 +32,9 @@ const expectedTones = [
     tone: 'glass',
     label: '玻璃材质',
     backgroundToken: 'none',
-    blurToken: '--glass-blur',
+    blurToken: '--gls-blur',
     blurValue: '14px',
-    filter: 'blur(var(--glass-blur))',
+    filter: 'blur(var(--gls-blur))',
     className: 'bg-blur--glass',
     usage: 'ChipSurface glass',
   },
@@ -167,15 +167,15 @@ assert.ok(
   'shared UI tokens and registry style payloads must remove the glass background gradient token.',
 )
 assert.equal(
-  styleRegistry.cssVars?.light?.['glass-blur'],
+  styleRegistry.cssVars?.light?.['gls-blur'],
   '14px',
-  'registry/style.json must export --glass-blur as 14px.',
+  'registry/style.json must export --gls-blur as 14px.',
 )
-assert.ok(tokensCss.includes('--glass-blur: 14px;'), 'shared UI tokens must define --glass-blur as 14px.')
+assert.ok(tokensCss.includes('--gls-blur: 14px;'), 'shared UI tokens must define --gls-blur as 14px.')
 assert.equal(
-  rootStyleItem?.cssVars?.light?.['glass-blur'],
+  rootStyleItem?.cssVars?.light?.['gls-blur'],
   '14px',
-  'registry.json style item must export --glass-blur as 14px.',
+  'registry.json style item must export --gls-blur as 14px.',
 )
 assert.ok(
   tokensCss.includes('--color-bg-backdrop: hsl(214.3 33.3% 4.1% / 0.32);') &&
@@ -203,12 +203,12 @@ const chipGlassBlock = blockFor(chipSurfaceCss, '.chip-surface[data-variant="gla
 assert.ok(
   chipSurfaceCss.includes('.chip-surface::after') &&
     !chipSurfaceCss.includes('--glass-gradient') &&
-    chipGlassBlock.includes('backdrop-filter: blur(var(--glass-blur));') &&
-    chipGlassBlock.includes('-webkit-backdrop-filter: blur(var(--glass-blur));'),
+    chipGlassBlock.includes('backdrop-filter: blur(var(--gls-blur));') &&
+    chipGlassBlock.includes('-webkit-backdrop-filter: blur(var(--gls-blur));'),
   'ChipSurface glass must keep the shared blur while removing the shared glass background gradient token.',
 )
 assert.ok(
-  blockFor(glassSurfaceCss, '.glass-surface').includes('backdrop-filter: blur(var(--glass-blur));') &&
+  blockFor(glassSurfaceCss, '.glass-surface').includes('backdrop-filter: blur(var(--gls-blur));') &&
     !blockFor(glassSurfaceCss, '.glass-surface').includes('background: var(--glass-gradient);'),
   'GlassSurface currently owns only the shared glass blur.',
 )

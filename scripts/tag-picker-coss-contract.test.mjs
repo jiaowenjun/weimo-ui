@@ -108,13 +108,13 @@ assert.ok(
 assert.ok(
   inputGroupSource.includes("getGlassSurfaceClassName('coss-input-group', className)") &&
     !inputGroupSource.includes('getGlassSurfaceAttributes') &&
-    glassSurfaceBlock.includes('border: 1px solid var(--glass-surface-border);') &&
+    glassSurfaceBlock.includes('border: 1px solid var(--gls-surface-border);') &&
     !glassSurfaceBlock.includes('background: var(--glass-gradient);') &&
     !glassSurfaceBlock.includes('linear-gradient') &&
     !glassSurfaceCss.includes('box-shadow:') &&
     !glassSurfaceCss.includes('--glass-shadow') &&
-    glassSurfaceBlock.includes('backdrop-filter: blur(var(--glass-blur));') &&
-    glassSurfaceBlock.includes('-webkit-backdrop-filter: blur(var(--glass-blur));'),
+    glassSurfaceBlock.includes('backdrop-filter: blur(var(--gls-blur));') &&
+    glassSurfaceBlock.includes('-webkit-backdrop-filter: blur(var(--gls-blur));'),
   'coss input-group must compose the shared Weimo frosted GlassSurface material without a gradient background.',
 )
 

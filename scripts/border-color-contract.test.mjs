@@ -44,7 +44,7 @@ function cssVarsIncludeToken(item, token) {
 }
 
 const expectedTones = [
-  ['disable', '--color-border-disable', 'border-color--disable', 'hsl(0 0% 92%)', 'hsl(0 0% 24%)'],
+  ['disable', '--color-border-disabled', 'border-color--disable', 'hsl(0 0% 92%)', 'hsl(0 0% 24%)'],
   ['divider', '--color-border-divider', 'border-color--divider', 'hsl(0 0% 88%)', 'hsl(0 0% 28%)'],
   ['default', '--color-border', 'border-color--default', 'hsl(0 0% 90%)', 'hsl(0 0% 20%)'],
   ['emphasis', '--color-border-emphasis', 'border-color--emphasis', 'hsl(0 0% 68%)', 'hsl(0 0% 50%)'],
@@ -54,8 +54,8 @@ const expectedTones = [
 const expectedToneOrder = expectedTones.map(([tone]) => tone)
 
 const expectedBackgroundAwareDisableTokens = [
-  ['color-border-disable-on-light', 'hsl(0 0% 92%)'],
-  ['color-border-disable-on-dark', 'hsl(0 0% 24%)'],
+  ['color-border-disabled-on-light', 'hsl(0 0% 92%)'],
+  ['color-border-disabled-on-dark', 'hsl(0 0% 24%)'],
 ]
 
 const excludedTokens = [
@@ -349,7 +349,7 @@ assert.ok(
     menuCss.includes('--weimo-menu-separator-bg: var(--color-border-divider-menu-on-light);') &&
     menuCss.includes('--weimo-menu-separator-bg: var(--color-border-divider-menu-on-dark);') &&
     menuCss.includes('background: var(--weimo-menu-separator-bg);') &&
-    !menuCss.includes('background: var(--glass-surface-border);') &&
+    !menuCss.includes('background: var(--gls-surface-border);') &&
     !menuCss.includes('background: var(--color-border-divider);') &&
     cossCardCss.includes('border-bottom: 1px solid var(--color-border-divider, var(--color-border));') &&
     cossCommandCss.includes('border-bottom: 1px solid var(--color-border-divider, var(--color-border));') &&
@@ -360,12 +360,12 @@ assert.ok(
   'Divider BorderColor usage must cover TagTree guide lines, menu separators, and Coss section dividers.',
 )
 assert.ok(
-    !markdownContentCss.includes('--markdown-divider-color') &&
-    markdownContentCss.includes('border-bottom: 1px solid var(--markdown-table-cell-border-color);') &&
-    markdownContentCss.includes('border-left: 1px solid var(--markdown-table-cell-border-color);') &&
-    markdownInlineCodeSurfaceBlock.includes('border: 1px solid var(--markdown-inline-code-border-color);') &&
-    markdownTableScrollBlock.includes('border: 1px solid var(--markdown-table-frame-border-color);') &&
-    markdownEditorTableWrapperBlock.includes('border: 1px solid var(--markdown-table-frame-border-color);'),
+    !markdownContentCss.includes('--md-divider-color') &&
+    markdownContentCss.includes('border-bottom: 1px solid var(--md-tbl-cell-border-color);') &&
+    markdownContentCss.includes('border-left: 1px solid var(--md-tbl-cell-border-color);') &&
+    markdownInlineCodeSurfaceBlock.includes('border: 1px solid var(--md-inline-code-border-color);') &&
+    markdownTableScrollBlock.includes('border: 1px solid var(--md-tbl-frame-border-color);') &&
+    markdownEditorTableWrapperBlock.includes('border: 1px solid var(--md-tbl-frame-border-color);'),
   'Markdown dividers, inline code, and tables must use separate node-semantic border tokens.',
 )
 assert.ok(
@@ -384,7 +384,7 @@ assert.ok(
   'Default BorderColor usage must cover surface/container outer borders and docs preview frames.',
 )
 assert.ok(
-  glassSurfaceCss.includes('border: 1px solid var(--glass-surface-border);') &&
+  glassSurfaceCss.includes('border: 1px solid var(--gls-surface-border);') &&
     !glassSurfaceCss.includes('border: 1px solid var(--color-border);'),
   'GlassSurface must use its background-aware border token instead of the fixed default BorderColor token.',
 )
@@ -429,9 +429,9 @@ assert.ok(
       'className={`border-color-preview__sample ${getBorderColorClassName(tone)}`}',
     ) &&
     !docsDefinitionSource.includes('<TokenPreviewDetails') &&
-    docsDefinitionSource.includes('--color-border-disable-on-light') &&
+    docsDefinitionSource.includes('--color-border-disabled-on-light') &&
     docsDefinitionSource.includes('--color-border-divider-menu-on-dark') &&
-    docsDefinitionSource.includes('--glass-surface-dark-border') &&
+    docsDefinitionSource.includes('--gls-surface-border-on-dark') &&
     !docsDefinitionSource.includes('description={item.description}') &&
     !docsDefinitionSource.includes('uiUsage={item.uiUsage}') &&
     !docsDefinitionSource.includes('bijiUsage={item.bijiUsage}') &&

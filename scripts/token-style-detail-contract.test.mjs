@@ -120,10 +120,13 @@ assert.ok(
 )
 assert.ok(
   cardRowBlock.includes('display: grid;') &&
-    cardRowBlock.includes('grid-template-columns: repeat(2, minmax(0, 1fr));') &&
+    cardRowBlock.includes(
+      'grid-template-columns: minmax(min-content, max-content) minmax(max-content, 1fr);',
+    ) &&
+    cardRowBlock.includes('gap: 2em;') &&
     cardCss.includes('.token-preview-card__token {\n    text-align: left;') &&
     cardCss.includes('.token-preview-card__value {\n    text-align: right;'),
-  'TokenPreviewCard must align the token name left and the value right on every row.',
+  'TokenPreviewCard must align the token name left and the value right on every row, keeping the token name on one line whenever it fits beside the value with at least a 2em gap.',
 )
 assert.ok(
   cardSource.includes('export type TokenPreviewCardItem') &&

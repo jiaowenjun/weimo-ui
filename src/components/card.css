@@ -5,7 +5,7 @@
   .weimo-card {
     display: flex;
     flex-direction: column;
-    padding: var(--space-card-padding);
+    padding: var(--space-card-pad);
   }
 
   .weimo-card__body {

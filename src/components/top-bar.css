@@ -22,7 +22,7 @@
     pointer-events: none;
     background: transparent;
     padding-inline: var(--space-gutter);
-    padding-block: var(--space-layout-outline);
+    padding-block: var(--space-topbar-pad-block);
   }
 
   .top-bar__slot {

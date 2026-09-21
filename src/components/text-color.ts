@@ -43,7 +43,7 @@ export const textColorToneMap = {
   },
   disable: {
     label: '禁用文字',
-    token: '--color-text-disable',
+    token: '--color-text-disabled',
     value: {
       light: 'hsl(0 0% 56%)',
       dark: 'hsl(0 0% 42%)',

@@ -3,7 +3,7 @@ import './border-color.css'
 export const borderColorToneMap = {
   disable: {
     label: '禁用边框',
-    token: '--color-border-disable',
+    token: '--color-border-disabled',
     value: {
       light: 'hsl(0 0% 92%)',
       dark: 'hsl(0 0% 24%)',

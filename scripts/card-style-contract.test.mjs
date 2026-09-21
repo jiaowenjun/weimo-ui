@@ -446,28 +446,28 @@ assert.ok(
 )
 assertIncludes(
   markdownBlock,
-  'font-size: var(--markdown-content-font-size);',
+  'font-size: var(--md-font-size);',
   'Markdown root must use its node-semantic content text size.',
 )
 assertIncludes(
   markdownBlock,
-  'line-height: var(--markdown-content-line-height);',
+  'line-height: var(--md-line-height);',
   'Markdown root must use its node-semantic content line height.',
 )
 assert.ok(
-  markdownInlineCodeSurfaceBlock.includes('font-size: var(--markdown-inline-code-font-size);') &&
-    markdownImagePlaceholderBlock.includes('font-size: var(--markdown-image-placeholder-font-size);') &&
+  markdownInlineCodeSurfaceBlock.includes('font-size: var(--md-inline-code-font-size);') &&
+    markdownImagePlaceholderBlock.includes('font-size: var(--md-img-placeholder-font-size);') &&
     !markdownContentCss.includes('--md-inline-code-size') &&
     !markdownContentCss.includes('--weimo-md-inline-code-size'),
   'Markdown inline code and image placeholders must use separate node-semantic size tokens.',
 )
 assertIncludes(
   markdownInlineCodeSurfaceBlock,
-  'border: 1px solid var(--markdown-inline-code-border-color);',
+  'border: 1px solid var(--md-inline-code-border-color);',
   'Markdown inline code must use its node-semantic border token.',
 )
 assert.ok(
-  !markdownInlineCodeSurfaceBlock.includes('var(--markdown-code-block-border-color)'),
+  !markdownInlineCodeSurfaceBlock.includes('var(--md-code-block-border-color)'),
   'Markdown inline code must not use the Markdown code-block border token.',
 )
 for (const [block, label] of [
@@ -497,16 +497,16 @@ assertIncludes(
 )
 assert.ok(
     !markdownContentCss.includes('.weimo-card-markdown__heading--h2') &&
-    !markdownContentCss.includes('--markdown-heading-2-') &&
-    !markdownContentCss.includes('--markdown-heading-3-') &&
-    !markdownContentCss.includes('--markdown-heading-4-') &&
-    !markdownContentCss.includes('--markdown-heading-5-') &&
-    !markdownContentCss.includes('--markdown-heading-6-'),
+    !markdownContentCss.includes('--md-h2-') &&
+    !markdownContentCss.includes('--md-h3-') &&
+    !markdownContentCss.includes('--md-h4-') &&
+    !markdownContentCss.includes('--md-h5-') &&
+    !markdownContentCss.includes('--md-h6-'),
   'Markdown heading theme tokens must stop at level one.',
 )
 assertIncludes(
   markdownBlockquoteBlock,
-  'padding: 0 var(--markdown-blockquote-padding-inline);',
+  'padding: 0 var(--md-quote-pad-inline);',
   'Markdown blockquotes must keep horizontal quote padding.',
 )
 assert.ok(
@@ -537,11 +537,11 @@ for (const [block, label] of [
 ]) {
   assertIncludes(
     block,
-    'border: 1px solid var(--markdown-table-frame-border-color);',
+    'border: 1px solid var(--md-tbl-frame-border-color);',
     `${label} must use the node-semantic Markdown table border token.`,
   )
   assert.ok(
-    !block.includes('var(--markdown-code-block-border-color)'),
+    !block.includes('var(--md-code-block-border-color)'),
     `${label} must not use the Markdown code-block border token.`,
   )
 }
@@ -557,17 +557,17 @@ assertIncludes(
 )
 assertIncludes(
   sharedTokenCss,
-  '--markdown-list-padding-left: 1.35em;',
+  '--md-list-indent: 1.35em;',
   'Shared style tokens must define the standard Markdown list padding.',
 )
 assertIncludes(
   sharedTokenCss,
-  '--markdown-ordered-list-wide-marker-padding-left: 2em;',
+  '--md-list-wide-marker-indent: 2em;',
   'Shared style tokens must define the wide-marker ordered-list padding.',
 )
 assertIncludes(
   markdownListBlock,
-  'padding-left: var(--markdown-list-padding-left);',
+  'padding-left: var(--md-list-indent);',
   'Standard lists in MdRender and MdEditor must share compact indentation.',
 )
 assertIncludes(
@@ -587,7 +587,7 @@ assertIncludes(
 )
 assertIncludes(
   markdownUpperAlphaOrderedListBlock,
-  'padding-left: var(--markdown-ordered-list-wide-marker-padding-left);',
+  'padding-left: var(--md-list-wide-marker-indent);',
   'Markdown uppercase alpha typed ordered lists must reserve enough marker space for Safari in both MdRender and MdEditor.',
 )
 assertIncludes(
@@ -597,7 +597,7 @@ assertIncludes(
 )
 assertIncludes(
   markdownLowerAlphaOrderedListBlock,
-  'padding-left: var(--markdown-ordered-list-wide-marker-padding-left);',
+  'padding-left: var(--md-list-wide-marker-indent);',
   'Markdown lowercase alpha typed ordered lists must reserve enough marker space for Safari in both MdRender and MdEditor.',
 )
 assertIncludes(
@@ -607,7 +607,7 @@ assertIncludes(
 )
 assertIncludes(
   markdownUpperRomanOrderedListBlock,
-  'padding-left: var(--markdown-ordered-list-wide-marker-padding-left);',
+  'padding-left: var(--md-list-wide-marker-indent);',
   'MdRender and MdEditor uppercase Roman lists must share wide-marker indentation.',
 )
 assertIncludes(
@@ -617,12 +617,12 @@ assertIncludes(
 )
 assertIncludes(
   markdownLowerRomanOrderedListBlock,
-  'padding-left: var(--markdown-ordered-list-wide-marker-padding-left);',
+  'padding-left: var(--md-list-wide-marker-indent);',
   'MdRender and MdEditor lowercase Roman lists must share wide-marker indentation.',
 )
 assertIncludes(
   markdownParenthesizedRomanListBlock,
-  'padding-left: var(--markdown-ordered-list-wide-marker-padding-left);',
+  'padding-left: var(--md-list-wide-marker-indent);',
   'Parenthesized Roman lists must use the shared wide-marker indentation.',
 )
 assertIncludes(
@@ -648,7 +648,7 @@ assertIncludes(
 )
 assertIncludes(
   markdownParenthesizedDecimalListBlock,
-  'padding-left: var(--markdown-ordered-list-wide-marker-padding-left);',
+  'padding-left: var(--md-list-wide-marker-indent);',
   'Parenthesized decimal lists must use the shared wide-marker indentation.',
 )
 for (const declaration of [
@@ -672,7 +672,7 @@ assert.ok(
   !markdownContentCss.includes('--space-card-markdown-heavy-gap') &&
     !markdownContentCss.includes('var(--space-card-markdown-heavy-gap)') &&
     !markdownContentCss.includes('--space-card-markdown-quote-padding') &&
-    !markdownContentCss.includes('--markdown-space-section-gap'),
+    !markdownContentCss.includes('--md-section-gap'),
   'Markdown block spacing and quote spacing must not keep old card-markdown-specific token names.',
 )
 assert.ok(

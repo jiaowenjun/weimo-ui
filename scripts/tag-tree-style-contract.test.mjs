@@ -181,7 +181,7 @@ assert.ok(
 assert.ok(selectedBlock.includes('background: var(--color-bg-selected);'), 'Selected rows must use the shared selected background token.')
 assert.ok(hoverBlock.includes('background: var(--color-bg-hover);'), 'Hovered rows must use the shared hover token.')
 assert.ok(
-  hoveredActionBlock.includes('--icon-button-ghost-hover-bg: var(--color-bg-hover-on-hover);'),
+  hoveredActionBlock.includes('--icon-button-ghost-hover-bg: var(--color-bg-nested-hover);'),
   'TagTree actions on hovered rows must use the stronger nested hover token.',
 )
 assert.ok(

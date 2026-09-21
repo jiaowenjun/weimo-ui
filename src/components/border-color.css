@@ -15,7 +15,7 @@
 }
 
 .border-color--disable {
-  border-color: var(--color-border-disable);
+  border-color: var(--color-border-disabled);
 }
 
 .border-color--danger {

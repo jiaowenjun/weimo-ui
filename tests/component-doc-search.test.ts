@@ -19,10 +19,10 @@ describe('component docs search', () => {
 
   it('finds token pages by CSS token and usage language', () => {
     expect(resultIds('--color-bg-card')).toContain('bg-color')
-    expect(resultIds('--glass-blur')).toContain('bg-color')
+    expect(resultIds('--gls-blur')).toContain('bg-color')
     expect(resultIds('TagPicker option')).toContain('bg-color')
     expect(resultIds('--color-heat-4')).toContain('bg-color')
-    expect(resultIds('--glass-surface-dark-border')).toContain('border-color')
+    expect(resultIds('--gls-surface-border-on-dark')).toContain('border-color')
   })
 
   it('keeps localized display-name search working', () => {

@@ -117,7 +117,7 @@
   .weimo-card-editable[data-edit-layout="true"] .weimo-card-editable__tags {
     position: absolute;
     z-index: 1;
-    inset-inline: var(--space-card-padding);
+    inset-inline: var(--space-card-pad);
     inset-block-start: var(--weimo-card-editable-tags-top-offset);
     transform: translateY(var(--weimo-card-editable-content-extra-height, 0px));
     transition: transform var(--weimo-card-transition-duration) cubic-bezier(0.2, 0, 0, 1);
@@ -156,7 +156,7 @@
     position: absolute;
     z-index: 1;
     margin-top: 0;
-    inset-inline: var(--space-card-padding);
+    inset-inline: var(--space-card-pad);
     inset-block-start: calc(
       var(--weimo-card-editable-tags-top-offset) +
         var(--weimo-card-editable-tags-height) +
@@ -207,7 +207,7 @@
   }
 
   .weimo-card-editable__bottom-bar[data-layout="true"] {
-    inset-inline: var(--space-card-padding);
+    inset-inline: var(--space-card-pad);
     inset-block-start: calc(
       var(--weimo-card-editable-tags-top-offset) +
         var(--weimo-card-editable-tags-height) +

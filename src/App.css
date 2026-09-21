@@ -1288,8 +1288,8 @@
 
 .md-style-preview__math .katex {
   padding: 4px 8px;
-  border-radius: var(--markdown-math-border-radius);
-  background: var(--markdown-math-hover-background);
+  border-radius: var(--md-math-border-radius);
+  background: var(--md-math-hover-bg);
 }
 
 @media (min-width: 700px) {

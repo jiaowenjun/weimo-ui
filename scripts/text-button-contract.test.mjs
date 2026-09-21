@@ -120,13 +120,13 @@ for (const [block, snippet, message] of [
   [hoverBlock, 'background: var(--color-bg-hover);', 'TextButton hover must use the shared feedback background.'],
   [activeBlock, 'background: var(--color-bg-hover);', 'TextButton active must keep the shared feedback background.'],
   [disabledBlock, 'cursor: default;', 'TextButton disabled state must remove pointer affordance.'],
-  [disabledBlock, 'color: var(--color-text-disable);', 'TextButton disabled state must use the shared disabled text token.'],
-  [disabledBlock, 'border-color: var(--color-border-disable);', 'TextButton disabled state must use the shared disabled border token.'],
+  [disabledBlock, 'color: var(--color-text-disabled);', 'TextButton disabled state must use the shared disabled text token.'],
+  [disabledBlock, 'border-color: var(--color-border-disabled);', 'TextButton disabled state must use the shared disabled border token.'],
   [disabledBlock, 'background: var(--color-bg-card);', 'TextButton disabled state must keep the ordinary card surface.'],
   [focusBlock, 'outline: 2px solid var(--color-border-accent);', 'TextButton focus must use the shared accent border.'],
   [focusBlock, 'outline-offset: 2px;', 'TextButton focus ring must stay outside the control.'],
   [unlayeredBaseBlock, 'color: var(--color-text-primary);', 'TextButton must keep primary text outside layered CSS ordering.'],
-  [unlayeredDisabledBlock, 'color: var(--color-text-disable);', 'TextButton must keep disabled text outside layered CSS ordering.'],
+  [unlayeredDisabledBlock, 'color: var(--color-text-disabled);', 'TextButton must keep disabled text outside layered CSS ordering.'],
   [previewBlock, 'display: flex;', 'TextButton detail preview must lay out examples in one row when possible.'],
 ]) {
   assertIncludes(block, snippet, message)

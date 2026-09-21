@@ -48,7 +48,7 @@ const expectedTones = [
   ['raised', '--color-bg-raised', 'bg-color--raised', 'hsl(40 10% 94%)', 'hsl(0 0% 15%)'],
   ['primary', '--color-bg-primary', 'bg-color--primary', 'hsl(0 0% 15%)', 'hsl(0 0% 96%)'],
   ['hover', '--color-bg-hover', 'bg-color--hover', 'hsl(40 12% 96%)', 'hsl(0 0% 20%)'],
-  ['hover-on-hover', '--color-bg-hover-on-hover', 'bg-color--hover-on-hover', 'hsl(40 12% 88%)', 'hsl(0 0% 28%)'],
+  ['hover-on-hover', '--color-bg-nested-hover', 'bg-color--hover-on-hover', 'hsl(40 12% 88%)', 'hsl(0 0% 28%)'],
   ['selected', '--color-bg-selected', 'bg-color--selected', 'hsl(40 10% 94%)', 'hsl(0 0% 15%)'],
   ['chip', '--color-bg-chip', 'bg-color--chip', 'hsl(40 12% 96%)', 'hsl(0 0% 13%)'],
   ['selection', '--color-bg-selection', 'bg-color--selection', 'hsl(0 0% 15% / 0.2)', 'hsl(0 0% 96% / 0.2)'],
@@ -71,13 +71,13 @@ const excludedTokens = [
 
 const opaqueFeedbackTokens = new Set([
   '--color-bg-hover',
-  '--color-bg-hover-on-hover',
+  '--color-bg-nested-hover',
   '--color-bg-chip',
 ])
 
 const expectedOpaqueFeedbackTokenValues = new Map([
   ['--color-bg-hover', ['hsl(40 12% 96%)', 'hsl(0 0% 20%)']],
-  ['--color-bg-hover-on-hover', ['hsl(40 12% 88%)', 'hsl(0 0% 28%)']],
+  ['--color-bg-nested-hover', ['hsl(40 12% 88%)', 'hsl(0 0% 28%)']],
   ['--color-bg-chip', ['hsl(40 12% 96%)', 'hsl(0 0% 13%)']],
 ])
 
@@ -220,7 +220,12 @@ for (const token of excludedTokens) {
   )
 }
 
-for (const forbidden of ['md-math-hover', '--color-bg-md-math-hover', 'bg-color--md-math-hover']) {
+for (const forbidden of [
+  "'md-math-hover'",
+  '"md-math-hover"',
+  '--color-bg-md-math-hover',
+  'bg-color--md-math-hover',
+]) {
   assert.ok(
     !bgColorSource.includes(forbidden) &&
       !bgColorCss.includes(forbidden) &&

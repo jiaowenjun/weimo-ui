@@ -70,27 +70,27 @@
   }
 
   .icon-button--ghost:disabled {
-    color: var(--color-text-disable);
+    color: var(--color-text-disabled);
   }
 
   .icon-button--glass:disabled {
-    --icon-button-disabled-fg: var(--color-text-disable);
-    --icon-button-disabled-border: var(--color-border-disable);
-    --glass-surface-fg: var(--icon-button-disabled-fg);
-    --glass-surface-light-fg: var(--icon-button-disabled-fg);
-    --glass-surface-dark-fg: var(--icon-button-disabled-fg);
+    --icon-button-disabled-fg: var(--color-text-disabled);
+    --icon-button-disabled-border: var(--color-border-disabled);
+    --gls-surface-fg: var(--icon-button-disabled-fg);
+    --gls-surface-fg-on-light: var(--icon-button-disabled-fg);
+    --gls-surface-fg-on-dark: var(--icon-button-disabled-fg);
 
     border-color: var(--icon-button-disabled-border);
   }
 
   .icon-button--glass:disabled[data-background-tone="light"] {
-    --icon-button-disabled-fg: var(--color-text-disable-on-light);
-    --icon-button-disabled-border: var(--color-border-disable-on-light);
+    --icon-button-disabled-fg: var(--color-text-disabled-on-light);
+    --icon-button-disabled-border: var(--color-border-disabled-on-light);
   }
 
   .icon-button--glass:disabled[data-background-tone="dark"] {
-    --icon-button-disabled-fg: var(--color-text-disable-on-dark);
-    --icon-button-disabled-border: var(--color-border-disable-on-dark);
+    --icon-button-disabled-fg: var(--color-text-disabled-on-dark);
+    --icon-button-disabled-border: var(--color-border-disabled-on-dark);
   }
 
   /* === Hover === */

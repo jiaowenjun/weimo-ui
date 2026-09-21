@@ -16,7 +16,7 @@
   }
 
   .text-color--disable {
-    color: var(--color-text-disable);
+    color: var(--color-text-disabled);
   }
 
   .text-color--danger {

@@ -5,9 +5,9 @@
     min-width: 0;
     overflow-x: clip;
     overflow-y: visible;
-    color: var(--markdown-content-color);
-    font-size: var(--markdown-content-font-size);
-    line-height: var(--markdown-content-line-height);
+    color: var(--md-color);
+    font-size: var(--md-font-size);
+    line-height: var(--md-line-height);
     overflow-wrap: anywhere;
   }
 
@@ -35,7 +35,7 @@
   .weimo-card-markdown__p,
   .md-editor__content.weimo-markdown-content p {
     margin: 0;
-    color: var(--markdown-paragraph-color);
+    color: var(--md-paragraph-color);
     text-align: justify;
     text-justify: inter-ideograph;
   }
@@ -50,23 +50,23 @@
 
   .weimo-card-markdown__heading--h1,
   .md-editor__content.weimo-markdown-content h1 {
-    color: var(--markdown-heading-1-color);
-    font-size: var(--markdown-heading-1-font-size);
-    line-height: var(--markdown-heading-1-line-height);
+    color: var(--md-h1-color);
+    font-size: var(--md-h1-font-size);
+    line-height: var(--md-h1-line-height);
   }
 
 
   .weimo-card-markdown__blockquote,
   .md-editor__content.weimo-markdown-content blockquote {
     margin: 0;
-    padding: 0 var(--markdown-blockquote-padding-inline);
-    color: var(--markdown-blockquote-color);
+    padding: 0 var(--md-quote-pad-inline);
+    color: var(--md-quote-color);
     text-align: left;
   }
 
   .weimo-card-markdown__blockquote .weimo-card-markdown__p,
   .md-editor__content.weimo-markdown-content blockquote p {
-    color: var(--markdown-blockquote-color);
+    color: var(--md-quote-color);
     text-align: left;
   }
 
@@ -98,7 +98,7 @@
   .weimo-card-markdown__list,
   .md-editor__content.weimo-markdown-content :where(ul, ol) {
     margin: 0;
-    padding-left: var(--markdown-list-padding-left);
+    padding-left: var(--md-list-indent);
   }
 
   .weimo-card-markdown__list--ul,
@@ -125,7 +125,7 @@
 
   .weimo-card-markdown__list--ol[data-marker-type="A"],
   .md-editor__content.weimo-markdown-content ol[data-marker-type="A"] {
-    padding-left: var(--markdown-ordered-list-wide-marker-padding-left);
+    padding-left: var(--md-list-wide-marker-indent);
     list-style-type: upper-alpha;
   }
 
@@ -164,31 +164,31 @@
 
   .weimo-card-markdown__list--ol[data-marker-type="a"],
   .md-editor__content.weimo-markdown-content ol[data-marker-type="a"] {
-    padding-left: var(--markdown-ordered-list-wide-marker-padding-left);
+    padding-left: var(--md-list-wide-marker-indent);
     list-style-type: lower-alpha;
   }
 
   .weimo-card-markdown__list--ol[data-marker-type="I"],
   .md-editor__content.weimo-markdown-content ol[type="I"] {
-    padding-left: var(--markdown-ordered-list-wide-marker-padding-left);
+    padding-left: var(--md-list-wide-marker-indent);
     list-style-type: upper-roman;
   }
 
   .weimo-card-markdown__list--ol[data-marker-type="i"],
   .md-editor__content.weimo-markdown-content ol[type="i"] {
-    padding-left: var(--markdown-ordered-list-wide-marker-padding-left);
+    padding-left: var(--md-list-wide-marker-indent);
     list-style-type: lower-roman;
   }
 
   .weimo-card-markdown__list--ol[data-marker-style="paren-upper-roman"],
   .md-editor__content.weimo-markdown-content ol[data-marker-style="paren-upper-roman"] {
-    padding-left: var(--markdown-ordered-list-wide-marker-padding-left);
+    padding-left: var(--md-list-wide-marker-indent);
     list-style-type: weimo-paren-upper-roman;
   }
 
   .weimo-card-markdown__list--ol[data-marker-style="paren-decimal"],
   .md-editor__content.weimo-markdown-content ol[data-marker-style="paren-decimal"] {
-    padding-left: var(--markdown-ordered-list-wide-marker-padding-left);
+    padding-left: var(--md-list-wide-marker-indent);
     list-style-type: weimo-paren-decimal;
   }
 
@@ -237,10 +237,10 @@
 
   .weimo-markdown-content :not(pre) > :where(.weimo-card-markdown__code, code) {
     padding: 2px 6px;
-    border: 1px solid var(--markdown-inline-code-border-color);
-    border-radius: var(--markdown-inline-code-border-radius);
-    font-family: var(--markdown-inline-code-font-family);
-    font-size: var(--markdown-inline-code-font-size);
+    border: 1px solid var(--md-inline-code-border-color);
+    border-radius: var(--md-inline-code-border-radius);
+    font-family: var(--md-inline-code-font-family);
+    font-size: var(--md-inline-code-font-size);
     word-break: break-all;
   }
 
@@ -260,21 +260,21 @@
 
   .weimo-card-markdown__link,
   .md-editor__content.weimo-markdown-content a {
-    color: var(--markdown-link-color);
+    color: var(--md-link-color);
     text-decoration: underline;
     text-underline-offset: 0.2em;
   }
 
   .weimo-card-markdown__link-text {
-    color: var(--markdown-link-color);
+    color: var(--md-link-color);
   }
 
 
   .weimo-card-markdown__image-placeholder {
     padding: 2px 6px;
-    border-radius: var(--markdown-image-placeholder-border-radius);
-    color: var(--markdown-image-placeholder-color);
-    font-size: var(--markdown-image-placeholder-font-size);
+    border-radius: var(--md-img-placeholder-border-radius);
+    color: var(--md-img-placeholder-color);
+    font-size: var(--md-img-placeholder-font-size);
   }
 
   .weimo-card-markdown__image,
@@ -283,14 +283,14 @@
     max-width: 100%;
     height: auto;
     margin-inline: auto;
-    border-radius: var(--markdown-image-border-radius);
+    border-radius: var(--md-img-border-radius);
   }
 
   .weimo-card-markdown__list-image-pair {
     display: grid;
     grid-template-columns: minmax(0, 1fr) fit-content(50%);
     align-items: start;
-    column-gap: var(--markdown-list-image-gap);
+    column-gap: var(--md-list-img-gap);
   }
 
   .weimo-card-markdown__list-image-pair > .weimo-card-markdown__list {
@@ -306,7 +306,7 @@
     display: grid;
     grid-template-columns: minmax(0, 1fr) fit-content(50%);
     align-items: start;
-    column-gap: var(--markdown-list-image-gap);
+    column-gap: var(--md-list-img-gap);
   }
 
   .md-editor__content.weimo-markdown-content[data-list-image-layout="true"] > * {
@@ -334,8 +334,8 @@
     max-width: 100%;
     margin-inline: auto;
     overflow-x: auto;
-    border: 1px solid var(--markdown-table-frame-border-color);
-    border-radius: var(--markdown-table-border-radius);
+    border: 1px solid var(--md-tbl-frame-border-color);
+    border-radius: var(--md-tbl-border-radius);
   }
 
   .md-editor__content.weimo-markdown-content .tableWrapper {
@@ -343,21 +343,21 @@
     max-width: 100%;
     margin-inline: auto;
     overflow-x: auto;
-    border: 1px solid var(--markdown-table-frame-border-color);
-    border-radius: var(--markdown-table-border-radius);
+    border: 1px solid var(--md-tbl-frame-border-color);
+    border-radius: var(--md-tbl-border-radius);
   }
 
   .weimo-card-markdown__table,
   .md-editor__content.weimo-markdown-content table {
     width: max-content;
     border-collapse: collapse;
-    font-size: var(--markdown-table-font-size);
+    font-size: var(--md-tbl-font-size);
   }
 
   .weimo-card-markdown__table-cell,
   .md-editor__content.weimo-markdown-content :where(td, th) {
     padding: 6px 8px;
-    border-bottom: 1px solid var(--markdown-table-cell-border-color);
+    border-bottom: 1px solid var(--md-tbl-cell-border-color);
     word-break: break-all;
     text-align: left;
     vertical-align: top;
@@ -365,12 +365,12 @@
 
   .weimo-card-markdown__table-cell + .weimo-card-markdown__table-cell,
   .md-editor__content.weimo-markdown-content :where(td, th) + :where(td, th) {
-    border-left: 1px solid var(--markdown-table-cell-border-color);
+    border-left: 1px solid var(--md-tbl-cell-border-color);
   }
 
   .weimo-card-markdown__table-cell--header,
   .md-editor__content.weimo-markdown-content th {
-    color: var(--markdown-table-header-color);
+    color: var(--md-tbl-header-color);
     font-weight: 600;
   }
 
@@ -385,7 +385,7 @@
 
   .weimo-markdown-content .tiptap-mathematics-render {
     display: inline-block;
-    border-radius: var(--markdown-math-border-radius);
+    border-radius: var(--md-math-border-radius);
   }
 
   .weimo-markdown-content .tiptap-mathematics-render:not([data-type="block-math"]) {
@@ -399,7 +399,7 @@
   }
 
   .weimo-markdown-content .tiptap-mathematics-render--editable:hover {
-    background: var(--markdown-math-hover-background);
+    background: var(--md-math-hover-bg);
   }
 
   .weimo-markdown-content .tiptap-mathematics-render[data-type="block-math"],
