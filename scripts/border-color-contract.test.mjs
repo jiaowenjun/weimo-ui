@@ -408,8 +408,7 @@ assert.ok(
     docsDefinitionSource.includes("frame: 'plain',") &&
     docsDefinitionSource.includes("import { TokenPreviewCard } from '../../components/token-preview-card'") &&
     docsDefinitionSource.includes("from '../../components/border-radius'") &&
-    docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">圆角</h2>') &&
-    docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">边框色</h2>') &&
+    !docsDefinitionSource.includes('token-preview-card-demo__category') &&
     docsDefinitionSource.includes('borderRadiusScales.map') &&
     docsDefinitionSource.includes('const borderColorToneOrder = [') &&
     docsDefinitionSource.includes("'default',\n  'disable',\n  'divider',\n  'emphasis',\n  'accent',\n  'danger',") &&
@@ -418,7 +417,12 @@ assert.ok(
     docsDefinitionSource.includes('getBorderColorClassName(tone)') &&
     docsDefinitionSource.includes('getBorderColorToken(tone)') &&
     docsDefinitionSource.includes('<TokenPreviewCard') &&
-    docsDefinitionSource.includes('label={item.label}') &&
+    docsDefinitionSource.includes('items={borderRadiusScales.map((scale) => ({') &&
+    docsDefinitionSource.includes('token: getBorderRadiusToken(scale),') &&
+    docsDefinitionSource.includes('value: getBorderRadiusValue(scale),') &&
+    docsDefinitionSource.includes('label="圆角"') &&
+    docsDefinitionSource.includes('className="border-radius-preview__samples"') &&
+    docsDefinitionSource.includes('border-radius-preview__sample') &&
     docsDefinitionSource.includes('darkValue: borderColorToneMap[tone].value.dark,') &&
     docsDefinitionSource.includes('token: getBorderColorToken(tone),') &&
     docsDefinitionSource.includes('value: borderColorToneMap[tone].value.light,') &&

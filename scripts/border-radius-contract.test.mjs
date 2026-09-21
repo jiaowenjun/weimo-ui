@@ -161,12 +161,13 @@ assert.ok(
     docsDefinitionSource.includes('getBorderRadiusToken(scale)') &&
     docsDefinitionSource.includes('getBorderRadiusValue(scale)') &&
     docsDefinitionSource.includes('<TokenPreviewCard') &&
-    docsDefinitionSource.includes('label={item.label}') &&
-    docsDefinitionSource.includes('token={getBorderRadiusToken(scale)}') &&
-    docsDefinitionSource.includes('value={getBorderRadiusValue(scale)}') &&
+    docsDefinitionSource.includes('items={borderRadiusScales.map((scale) => ({') &&
+    docsDefinitionSource.includes('token: getBorderRadiusToken(scale),') &&
+    docsDefinitionSource.includes('value: getBorderRadiusValue(scale),') &&
+    docsDefinitionSource.includes('label="圆角"') &&
+    docsDefinitionSource.includes('border-radius-preview__samples') &&
     docsDefinitionSource.includes('border-radius-preview__sample') &&
-    docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">圆角</h2>') &&
-    docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">边框色</h2>') &&
+    !docsDefinitionSource.includes('token-preview-card-demo__category') &&
     !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     !docsDefinitionSource.includes('summary:') &&
     !docsDefinitionSource.includes('border-radius-preview__row') &&
@@ -179,7 +180,8 @@ assert.ok(
 const sampleBlock = blockFor(appCss, '.border-radius-preview__sample')
 
 assert.ok(
-  appCss.includes('.border-radius-preview__sample') &&
+  appCss.includes('.border-radius-preview__samples') &&
+    appCss.includes('.border-radius-preview__sample') &&
     !appCss.includes('.border-radius-preview__row') &&
     !appCss.includes('.border-radius-preview__notes') &&
     !appCss.includes('.border-radius-preview__identity') &&
@@ -188,7 +190,7 @@ assert.ok(
   'App.css must include only the BorderRadius-specific preview-effect styles.',
 )
 assert.ok(
-  sampleBlock.includes('border: 1px solid var(--color-border-emphasis);') &&
+  sampleBlock.includes('border: 2px solid var(--color-border-emphasis);') &&
     !sampleBlock.includes('background:') &&
     !sampleBlock.includes('box-shadow:'),
   'BorderRadius preview samples must use the emphasis border color so the radius outline stays readable.',

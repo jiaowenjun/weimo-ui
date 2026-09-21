@@ -82,28 +82,23 @@ const borderColorSearchAliases = borderColorTones.flatMap((tone) => {
 function BorderColorPreview() {
   return (
     <>
-      <h2 className="token-preview-card-demo__category">圆角</h2>
-
-      {borderRadiusScales.map((scale) => {
-        const item = borderRadiusScaleMap[scale]
-
-        return (
-          <TokenPreviewCard
-            key={scale}
-            label={item.label}
-            token={getBorderRadiusToken(scale)}
-            value={getBorderRadiusValue(scale)}
-          >
+      <TokenPreviewCard
+        items={borderRadiusScales.map((scale) => ({
+          token: getBorderRadiusToken(scale),
+          value: getBorderRadiusValue(scale),
+        }))}
+        label="圆角"
+      >
+        <div aria-hidden="true" className="border-radius-preview__samples">
+          {borderRadiusScales.map((scale) => (
             <div
               className="border-radius-preview__sample"
+              key={scale}
               style={{ borderRadius: `var(${getBorderRadiusToken(scale)})` }}
-              aria-hidden="true"
             />
-          </TokenPreviewCard>
-        )
-      })}
-
-      <h2 className="token-preview-card-demo__category">边框色</h2>
+          ))}
+        </div>
+      </TokenPreviewCard>
 
       <TokenPreviewCard
         items={borderColorToneOrder.map((tone) => ({

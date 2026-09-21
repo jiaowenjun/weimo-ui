@@ -187,11 +187,7 @@ assert.ok(
   'Transparent color and blur previews must share one TokenPreviewCard surface layout.',
 )
 
-for (const selector of [
-  '.bg-color-preview__sample',
-  '.border-radius-preview__sample',
-  '.pressable-preview__sample',
-]) {
+for (const selector of ['.bg-color-preview__sample', '.pressable-preview__sample']) {
   const escapedSelector = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
   assert.match(
@@ -337,8 +333,9 @@ assert.ok(
 
 assert.ok(
   !existsSync(join(root, 'src/docs/component-definitions/border-radius.tsx')) &&
-    borderColorDefinitionSource.includes('>圆角</h2>') &&
-    borderColorDefinitionSource.includes('>边框色</h2>') &&
+    !borderColorDefinitionSource.includes('token-preview-card-demo__category') &&
+    borderColorDefinitionSource.includes('label="圆角"') &&
+    borderColorDefinitionSource.includes('label="边框色"') &&
     borderColorDefinitionSource.includes('borderRadiusScaleMap') &&
     borderColorDefinitionSource.includes('borderColorToneMap'),
   'BorderRadius and BorderColor docs must share the grouped Border detail page.',
