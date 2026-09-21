@@ -320,16 +320,22 @@ for (const snippet of [
 }
 
 for (const snippet of [
+  "import { useState } from 'react'",
   "import { GlassSurface } from '../../components/glass-surface'",
   "import { ComponentPreviewCard } from '../../components/component-preview-card'",
+  "from '../../components/coss/slider'",
+  '<SliderControl>',
+  '<SliderTrack>',
+  '<SliderIndicator />',
+  '<SliderThumb aria-label="背景灰度" />',
   "id: 'surface'",
   '静态卡片、亮度自适应玻璃层与抬升浮层的材质总览',
-  'glassSurfacePreviewBackgroundBands',
-  'glass-surface-preview__scroll-viewport',
-  'glass-surface-preview__scroll-content',
-  'glass-surface-preview__band',
+  'const [glassBackgroundGray, setGlassBackgroundGray] = useState(12)',
+  'onValueChange={setGlassBackgroundGray}',
+  'aria-label="背景灰度"',
+  'backgroundColor: `hsl(0 0% ${glassBackgroundGray}%)`',
   'glass-surface-preview__fixed',
-  '<ComponentPreviewCard label="玻璃材质">',
+  'label="玻璃材质"',
   '<GlassSurface className="glass-surface-preview__tile">',
   "frame: 'plain',",
 ]) {
@@ -344,25 +350,26 @@ assert.ok(
     !glassSurfaceDefinitionSource.includes('surface-backdrop'),
   'GlassSurface docs definition must keep the label title bar without token rows or preview backdrop.',
 )
+assert.ok(
+  !glassSurfaceDefinitionSource.includes('glassSurfacePreviewBackgroundBands') &&
+    !glassSurfaceDefinitionSource.includes('glass-surface-preview__scroll') &&
+    !glassSurfaceDefinitionSource.includes('glass-surface-preview__band'),
+  'GlassSurface demo background must be a non-scrollable solid gray driven by the title-bar slider.',
+)
 
 for (const snippet of [
   '.glass-surface-preview',
   'position: relative;',
   'width: 100%;',
-  'height: min(340px, 70svh);',
+  'height: 180px;',
   'overflow: hidden;',
-  '.glass-surface-preview__scroll-viewport',
-  'overflow-y: auto;',
-  '.glass-surface-preview__scroll-content',
-  'background: linear-gradient(180deg,',
-  '.glass-surface-preview__band',
-  'position: absolute;',
+  '.glass-surface-preview__slider',
+  'width: 140px;',
   '.glass-surface-preview__fixed',
   'position: absolute;',
   'inset: 0;',
   'pointer-events: none;',
   '.glass-surface-preview__tile',
-  'align-content: center;',
   'justify-items: center;',
   'text-align: center;',
   'pointer-events: auto;',
@@ -377,20 +384,9 @@ assertOmits(
   'GlassSurface preview renders inside ComponentPreviewCard and must not keep preview-stage special cases.',
 )
 assertOmits(
-  glassSurfaceDefinitionSource,
-  'glass-surface-preview__scroll-scene',
-  'GlassSurface docs preview must not add a redundant nested scene frame.',
-)
-assertOmits(
   appCss,
-  '.glass-surface-preview__scroll-scene',
-  'GlassSurface preview CSS must not keep the redundant nested scene frame.',
-)
-const scrollViewportIndex = glassSurfaceDefinitionSource.indexOf(
-  'className="glass-surface-preview__scroll-viewport"',
-)
-const scrollContentIndex = glassSurfaceDefinitionSource.indexOf(
-  'className="glass-surface-preview__scroll-content"',
+  '.glass-surface-preview__scroll',
+  'GlassSurface preview CSS must drop the removed scrollable gradient scene.',
 )
 const fixedOverlayIndex = glassSurfaceDefinitionSource.indexOf(
   'className="glass-surface-preview__fixed"',
@@ -399,11 +395,8 @@ const tileIndex = glassSurfaceDefinitionSource.indexOf(
   '<GlassSurface className="glass-surface-preview__tile">',
 )
 assert.ok(
-  scrollViewportIndex > -1 &&
-    scrollContentIndex > scrollViewportIndex &&
-    fixedOverlayIndex > scrollContentIndex &&
-    tileIndex > fixedOverlayIndex,
-  'GlassSurface preview tile must be a fixed overlay sibling after the scroll content.',
+  fixedOverlayIndex > -1 && tileIndex > fixedOverlayIndex,
+  'GlassSurface preview tile must be a centered overlay child of the solid gray background.',
 )
 assert.ok(
   !glassSurfaceDefinitionSource.includes('glass-surface-preview__sticky'),

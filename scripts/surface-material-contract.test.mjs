@@ -150,11 +150,23 @@ assert.ok(
     !appCss.includes('.popup-surface-preview__tile[data-level="tooltip"]'),
   'PopupSurface demo must render only the modal tile; the tooltip level stays a component feature, not a docs sample.',
 )
+const glassSurfaceTileOnlyBlock = blockFor(appCss, '.glass-surface-preview__tile')
 assert.ok(
   appCss.includes(
-    '.card-surface-preview__tile,\n.popup-surface-preview__tile {\n  display: grid;\n  gap: 6px;\n  width: min(100%, 260px);\n  padding: 18px;\n  justify-items: center;\n  text-align: center;\n}',
-  ),
-  'CardSurface and PopupSurface demo tiles must center their caption text.',
+    '.card-surface-preview__tile,\n.glass-surface-preview__tile,\n.popup-surface-preview__tile {\n  display: grid;\n  gap: 6px;\n  width: min(100%, 260px);\n  padding: 18px;\n  justify-items: center;\n  text-align: center;\n}',
+  ) &&
+    !glassSurfaceTileOnlyBlock.includes('min-height') &&
+    !glassSurfaceTileOnlyBlock.includes('align-content'),
+  'All three Surface demo tiles must share one size box: no glass-only min-height, identical padding and caption line heights.',
+)
+assert.ok(
+  appCss.includes(
+    '.card-surface-preview,\n.popup-surface-preview {\n  display: flex;\n  width: 100%;\n  height: 180px;\n  align-items: center;\n  justify-content: center;\n  gap: 16px;\n  padding: 18px;\n}',
+  ) &&
+    appCss.includes(
+      '.glass-surface-preview {\n  position: relative;\n  width: 100%;\n  height: 180px;\n  overflow: hidden;\n}',
+    ),
+  'Surface page demo containers must keep identical 180px preview areas.',
 )
 
 for (const snippet of [

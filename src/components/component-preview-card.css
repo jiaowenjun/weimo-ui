@@ -12,6 +12,19 @@
     gap: 4px;
   }
 
+  .component-preview-card__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .component-preview-card__action {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+  }
+
   .component-preview-card__label {
     color: var(--color-text-primary);
     font-size: var(--font-size-sm);

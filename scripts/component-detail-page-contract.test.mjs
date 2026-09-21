@@ -339,11 +339,8 @@ assert.ok(
     componentDefinitionsSource.includes("import { GlassSurface } from '../../components/glass-surface'") &&
     componentDefinitionsSource.includes("id: 'surface'") &&
     componentDefinitionsSource.includes('静态卡片、亮度自适应玻璃层与抬升浮层的材质总览') &&
-    componentDefinitionsSource.includes('glassSurfacePreviewBackgroundBands') &&
-    !componentDefinitionsSource.includes('glass-surface-preview__scroll-scene') &&
-    componentDefinitionsSource.includes('glass-surface-preview__scroll-viewport') &&
-    componentDefinitionsSource.includes('glass-surface-preview__scroll-content') &&
-    componentDefinitionsSource.includes('glass-surface-preview__band') &&
+    componentDefinitionsSource.includes('onValueChange={setGlassBackgroundGray}') &&
+    !componentDefinitionsSource.includes('glass-surface-preview__scroll') &&
     componentDefinitionsSource.includes('glass-surface-preview__fixed') &&
     componentDefinitionsSource.includes('<GlassSurface className="glass-surface-preview__tile">') &&
     !componentDefinitionsSource.includes('glass-surface-preview__sticky'),

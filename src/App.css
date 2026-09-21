@@ -1027,30 +1027,12 @@
 .glass-surface-preview {
   position: relative;
   width: 100%;
-  height: min(340px, 70svh);
+  height: 180px;
   overflow: hidden;
-  background: #10131a;
 }
 
-.glass-surface-preview__scroll-viewport {
-  position: absolute;
-  inset: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  scrollbar-gutter: stable;
-}
-
-.glass-surface-preview__scroll-content {
-  position: relative;
-  min-height: 760px;
-  background: linear-gradient(180deg, #0f172a 0%, #334155 34%, #cbd5e1 68%, #f8fafc 100%);
-}
-
-.glass-surface-preview__band {
-  position: absolute;
-  inset-inline: 0;
-  z-index: 0;
-  display: block;
+.glass-surface-preview__slider {
+  width: 140px;
 }
 
 .glass-surface-preview__fixed {
@@ -1058,21 +1040,24 @@
   inset: 0;
   z-index: 1;
   display: grid;
-  padding: 48px 16px;
+  padding: 16px;
   place-items: center;
   pointer-events: none;
 }
 
-.glass-surface-preview__tile {
+.card-surface-preview__tile,
+.glass-surface-preview__tile,
+.popup-surface-preview__tile {
   display: grid;
+  gap: 6px;
   width: min(100%, 260px);
-  min-width: 0;
-  min-height: 112px;
-  align-content: center;
+  padding: 18px;
   justify-items: center;
   text-align: center;
-  gap: 6px;
-  padding: 16px;
+}
+
+.glass-surface-preview__tile {
+  min-width: 0;
   border-radius: var(--radius);
   pointer-events: auto;
 }
@@ -1089,33 +1074,25 @@
   color: inherit;
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
+  line-height: 1.2;
 }
 
 .glass-surface-preview__meta {
   color: var(--glass-surface-muted-color);
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
+  line-height: 1.4;
 }
 
 .card-surface-preview,
 .popup-surface-preview {
   display: flex;
   width: 100%;
-  min-height: 180px;
+  height: 180px;
   align-items: center;
   justify-content: center;
   gap: 16px;
   padding: 18px;
-}
-
-.card-surface-preview__tile,
-.popup-surface-preview__tile {
-  display: grid;
-  gap: 6px;
-  width: min(100%, 260px);
-  padding: 18px;
-  justify-items: center;
-  text-align: center;
 }
 
 .card-surface-preview__title,

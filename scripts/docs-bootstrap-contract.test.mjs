@@ -295,12 +295,9 @@ for (const snippet of [
   '普通背景',
   'function GhostIconButtonPreviewGroup({ disabled }: { disabled: boolean })',
   '<GhostIconButton aria-label="菜单" disabled={disabled}>',
-  'glassSurfacePreviewBackgroundBands',
-  'glass-surface-preview__scroll-viewport',
-  'glass-surface-preview__scroll-content',
-  'glass-surface-preview__band',
   'glass-surface-preview__fixed',
   '<GlassSurface className="glass-surface-preview__tile">',
+  'onValueChange={setGlassBackgroundGray}',
 ]) {
   assert.ok(
     componentDefinitionsSource.includes(snippet),

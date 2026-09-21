@@ -144,6 +144,12 @@ assert.ok(
     cardSource.includes('<div className="component-preview-card__meta">'),
   'ComponentPreviewCard must always render the label title bar: only the token rows are optional.',
 )
+assert.ok(
+  cardSource.includes('action?: ReactNode') &&
+    cardSource.includes('className="component-preview-card__title"') &&
+    cardSource.includes('className="component-preview-card__action"'),
+  'ComponentPreviewCard must support an optional action slot on the right of the label title bar.',
+)
 
 const cardSwatchBlock = blockFor(cardCss, '.component-preview-card__value-swatch')
 

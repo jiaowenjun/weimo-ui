@@ -97,4 +97,18 @@ describe('ComponentPreviewCard', () => {
     expect(meta?.children).toHaveLength(1)
     expect(screen.getByTestId('bare-preview').parentElement).toBe(card)
   })
+
+  it('renders an optional action control on the right of the label title bar', () => {
+    const { container } = render(
+      <ComponentPreviewCard action={<button type="button">调节</button>} label="玻璃材质">
+        <div />
+      </ComponentPreviewCard>,
+    )
+
+    const title = container.querySelector('.component-preview-card__title')
+    const action = container.querySelector('.component-preview-card__action')
+
+    expect(title?.querySelector('.component-preview-card__label')).toHaveTextContent('玻璃材质')
+    expect(action?.contains(screen.getByRole('button', { name: '调节' }))).toBe(true)
+  })
 })
