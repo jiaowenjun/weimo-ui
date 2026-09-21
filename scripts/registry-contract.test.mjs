@@ -195,7 +195,7 @@ const promotedRegistryNames = [
   'pressable',
   'text-color',
   'font-size',
-  'token-preview-card',
+  'component-preview-card',
   'border-color',
   'border-radius',
   'card-surface',

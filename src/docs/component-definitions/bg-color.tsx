@@ -20,7 +20,7 @@ import {
   heatColorMap,
 } from '../../components/heat-color'
 import { pressableToneMap, pressableTones } from '../../components/pressable'
-import { TokenPreviewCard } from '../../components/token-preview-card'
+import { ComponentPreviewCard } from '../../components/component-preview-card'
 import type { ComponentDefinition } from '../component-docs'
 import { sortByThemeLightness, useIsDarkTheme } from '../token-preview-color'
 
@@ -70,14 +70,14 @@ function BgColorPreview() {
 
         return (
           <Fragment key={group.label}>
-            <h2 className="token-preview-card-demo__category">{group.label}</h2>
+            <h2 className="component-preview-card-demo__category">{group.label}</h2>
 
             {orderedTones.map((tone) => {
               const item = bgColorToneMap[tone]
               const isTransparent = hasTransparentBgColorValue(item)
 
               return (
-                <TokenPreviewCard
+                <ComponentPreviewCard
                   darkValue={item.value.dark}
                   key={tone}
                   label={
@@ -94,12 +94,12 @@ function BgColorPreview() {
                     </button>
                   ) : isTransparent ? (
                     <div
-                      className="token-preview-card__surface-preview"
+                      className="component-preview-card__surface-preview"
                       aria-hidden="true"
                     >
-                      <span className="token-preview-card__surface-backdrop" />
+                      <span className="component-preview-card__surface-backdrop" />
                       <span
-                        className={`token-preview-card__surface ${getBgColorClassName(tone)}`}
+                        className={`component-preview-card__surface ${getBgColorClassName(tone)}`}
                       />
                     </div>
                   ) : (
@@ -109,34 +109,34 @@ function BgColorPreview() {
                       />
                     </div>
                   )}
-                </TokenPreviewCard>
+                </ComponentPreviewCard>
               )
             })}
           </Fragment>
         )
       })}
 
-      <h2 className="token-preview-card-demo__category">背景模糊度</h2>
+      <h2 className="component-preview-card-demo__category">背景模糊度</h2>
 
       {bgBlurTones.map((tone) => {
         const item = bgBlurToneMap[tone]
 
         return (
-          <TokenPreviewCard
+          <ComponentPreviewCard
             key={tone}
             label={item.label}
             token={getBgBlurBlurToken(tone)}
             value={getBgBlurBlurValue(tone)}
           >
-            <div className="token-preview-card__surface-preview" aria-hidden="true">
-              <span className="token-preview-card__surface-backdrop" />
-              <span className={`token-preview-card__surface ${getBgBlurClassName(tone)}`} />
+            <div className="component-preview-card__surface-preview" aria-hidden="true">
+              <span className="component-preview-card__surface-backdrop" />
+              <span className={`component-preview-card__surface ${getBgBlurClassName(tone)}`} />
             </div>
-          </TokenPreviewCard>
+          </ComponentPreviewCard>
         )
       })}
 
-      <TokenPreviewCard
+      <ComponentPreviewCard
         items={heatColorLevels.map((level) => {
           const item = heatColorMap[level]
 
@@ -156,7 +156,7 @@ function BgColorPreview() {
             />
           ))}
         </div>
-      </TokenPreviewCard>
+      </ComponentPreviewCard>
     </>
   )
 }

@@ -5,7 +5,6 @@ import { componentDocs } from './docs/component-docs'
 import { DocsShell } from './docs/docs-shell'
 import { ComponentDetailPage } from './docs/pages/component-detail-page'
 import { componentPath, routerBasename } from './docs/routes'
-import { TokenPreviewCardWidthPage } from './dev/token-preview-card-width-page'
 
 const defaultComponentPath = componentPath(componentDocs[0].id)
 
@@ -18,7 +17,6 @@ function App() {
           <Route element={<ComponentDetailPage />} path="components/:componentId" />
           <Route element={<Navigate replace to={defaultComponentPath} />} path="*" />
         </Route>
-        <Route element={<TokenPreviewCardWidthPage />} path="dev/token-preview-card" />
       </Routes>
     </BrowserRouter>
   )

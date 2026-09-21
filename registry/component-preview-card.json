@@ -1,6 +1,6 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-  "name": "token-preview-card",
+  "name": "component-preview-card",
   "type": "registry:ui",
   "title": "Token Preview Card",
   "description": "A compact card for inspecting a token label, name, theme-aware value, and rendered effect together.",
@@ -15,14 +15,14 @@
   ],
   "files": [
     {
-      "path": "src/components/token-preview-card.tsx",
+      "path": "src/components/component-preview-card.tsx",
       "type": "registry:ui",
-      "target": "@ui/token-preview-card.tsx"
+      "target": "@ui/component-preview-card.tsx"
     },
     {
-      "path": "src/components/token-preview-card.css",
+      "path": "src/components/component-preview-card.css",
       "type": "registry:ui",
-      "target": "@ui/token-preview-card.css"
+      "target": "@ui/component-preview-card.css"
     }
   ]
 }

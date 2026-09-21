@@ -33,7 +33,7 @@
   align-content: start;
 }
 
-.token-preview-card-demo__category {
+.component-preview-card-demo__category {
   grid-column: 1 / -1;
   margin: 10px 0 0;
   color: var(--color-text-secondary);
@@ -42,7 +42,7 @@
   line-height: 1.2;
 }
 
-.token-preview-card-demo__category:first-child {
+.component-preview-card-demo__category:first-child {
   margin-top: 0;
 }
 
@@ -1114,6 +1114,8 @@
 
 .card-surface-preview__tile,
 .popup-surface-preview__tile {
+  position: relative;
+  z-index: 1;
   display: grid;
   gap: 6px;
   width: min(100%, 260px);

@@ -129,12 +129,30 @@ assert.ok(
 
 for (const snippet of [
   "import { CardSurface } from '../../components/card-surface'",
+  "import { ComponentPreviewCard } from '../../components/component-preview-card'",
   "id: 'card-surface'",
   '静态实体卡片材质',
+  '<ComponentPreviewCard items={cardSurfaceMaterialTokens} label="卡片材质">',
+  '<span className="component-preview-card__surface-backdrop" />',
   '<CardSurface className="card-surface-preview__tile">',
+  "token: getTextColorToken('primary')",
+  "token: getBgColorToken('card')",
+  "token: '--shadow-card'",
+  "frame: 'plain',",
 ]) {
   assert.ok(cardDefinitionSource.includes(snippet), `CardSurface docs definition must include ${snippet}.`)
 }
+assert.ok(
+  cardDefinitionSource.indexOf("token: getTextColorToken('primary')") <
+    cardDefinitionSource.indexOf("token: getBorderColorToken('default')") &&
+    cardDefinitionSource.indexOf("token: getBorderColorToken('default')") <
+      cardDefinitionSource.indexOf("token: getBorderRadiusToken('base')") &&
+    cardDefinitionSource.indexOf("token: getBorderRadiusToken('base')") <
+      cardDefinitionSource.indexOf("token: getBgColorToken('card')") &&
+    cardDefinitionSource.indexOf("token: getBgColorToken('card')") <
+      cardDefinitionSource.indexOf("token: '--shadow-card'"),
+  'CardSurface docs definition must list material tokens in card-surface.css declaration order.',
+)
 
 for (const snippet of [
   "from './card-surface'",

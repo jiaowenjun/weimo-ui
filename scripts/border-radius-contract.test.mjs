@@ -155,26 +155,26 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'border-color'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { TokenPreviewCard } from '../../components/token-preview-card'") &&
+    docsDefinitionSource.includes("import { ComponentPreviewCard } from '../../components/component-preview-card'") &&
     docsDefinitionSource.includes('borderRadiusScales.map') &&
     docsDefinitionSource.includes('borderRadiusScaleMap[scale]') &&
     docsDefinitionSource.includes('getBorderRadiusToken(scale)') &&
     docsDefinitionSource.includes('getBorderRadiusValue(scale)') &&
-    docsDefinitionSource.includes('<TokenPreviewCard') &&
+    docsDefinitionSource.includes('<ComponentPreviewCard') &&
     docsDefinitionSource.includes('items={borderRadiusScales.map((scale) => ({') &&
     docsDefinitionSource.includes('token: getBorderRadiusToken(scale),') &&
     docsDefinitionSource.includes('value: getBorderRadiusValue(scale),') &&
     docsDefinitionSource.includes('label="圆角"') &&
     docsDefinitionSource.includes('border-radius-preview__samples') &&
     docsDefinitionSource.includes('border-radius-preview__sample') &&
-    !docsDefinitionSource.includes('token-preview-card-demo__category') &&
+    !docsDefinitionSource.includes('component-preview-card-demo__category') &&
     !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     !docsDefinitionSource.includes('summary:') &&
     !docsDefinitionSource.includes('border-radius-preview__row') &&
     !docsDefinitionSource.includes('border-radius-preview__notes') &&
     !docsDefinitionSource.includes('border-radius-preview__description') &&
     !docsDefinitionSource.includes('--radius-card'),
-  'Border docs definition must render the BorderRadius group with TokenPreviewCard.',
+  'Border docs definition must render the BorderRadius group with ComponentPreviewCard.',
 )
 
 const sampleBlock = blockFor(appCss, '.border-radius-preview__sample')

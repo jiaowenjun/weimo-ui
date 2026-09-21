@@ -10,7 +10,7 @@ function resultIds(query: string) {
 describe('component docs search', () => {
   it('finds localized token pages by stable English identifiers', () => {
     expect(resultIds('BgColor')).toContain('bg-color')
-    expect(resultIds('text-color')).toContain('font-size')
+    expect(resultIds('text-color')).toContain('text')
     expect(resultIds('Md')).toContain('md')
     expect(resultIds('Markdown')).toContain('md')
     expect(resultIds('Markdown渲染')).toContain('md')
@@ -29,9 +29,9 @@ describe('component docs search', () => {
     expect(resultIds('背景')).toContain('bg-color')
     expect(resultIds('背景色')).toContain('bg-color')
     expect(resultIds('背景模糊度')).toContain('bg-color')
-    expect(resultIds('文字')).toContain('font-size')
-    expect(resultIds('字体')).toContain('font-size')
-    expect(resultIds('字号')).toContain('font-size')
+    expect(resultIds('文字')).toContain('text')
+    expect(resultIds('字体')).toContain('text')
+    expect(resultIds('字号')).toContain('text')
     expect(resultIds('边框')).toContain('border-color')
     expect(resultIds('边框色')).toContain('border-color')
     expect(resultIds('边框圆角')).toContain('border-color')

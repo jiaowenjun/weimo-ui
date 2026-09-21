@@ -57,7 +57,7 @@ const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const docsDefinitionSource = readProjectFile('src/docs/component-definitions/bg-color.tsx')
 const appCss = readProjectFile('src/App.css')
-const tokenPreviewCardCss = readProjectFile('src/components/token-preview-card.css')
+const tokenPreviewCardCss = readProjectFile('src/components/component-preview-card.css')
 const tokensCss = readProjectFile('src/styles/tokens.css')
 const glassSurfaceCss = readProjectFile('src/components/glass-surface.css')
 const chipSurfaceCss = readProjectFile('src/components/chip-surface.css')
@@ -71,15 +71,15 @@ const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const registryItem = rootRegistry.items.find((item) => item.name === 'bg-blur')
 const sampleBlock = blockFor(
   tokenPreviewCardCss,
-  '.token-preview-card > .token-preview-card__meta ~ *',
+  '.component-preview-card > .component-preview-card__meta ~ *',
 )
 const backdropBlock = blockFor(
   tokenPreviewCardCss,
-  '.token-preview-card .token-preview-card__surface-backdrop',
+  '.component-preview-card .component-preview-card__surface-backdrop',
 )
 const surfaceBlock = blockFor(
   tokenPreviewCardCss,
-  '.token-preview-card .token-preview-card__surface',
+  '.component-preview-card .component-preview-card__surface',
 )
 
 assert.equal(
@@ -253,20 +253,20 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'bg-color'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { TokenPreviewCard } from '../../components/token-preview-card'") &&
+    docsDefinitionSource.includes("import { ComponentPreviewCard } from '../../components/component-preview-card'") &&
     docsDefinitionSource.includes('bgBlurTones.map') &&
     docsDefinitionSource.includes('bgBlurToneMap[tone]') &&
     docsDefinitionSource.includes('getBgBlurClassName(tone)') &&
     docsDefinitionSource.includes('getBgBlurBlurToken(tone)') &&
     docsDefinitionSource.includes('getBgBlurBlurValue(tone)') &&
-    docsDefinitionSource.includes('<TokenPreviewCard') &&
+    docsDefinitionSource.includes('<ComponentPreviewCard') &&
     docsDefinitionSource.includes('label={item.label}') &&
     docsDefinitionSource.includes('token={getBgBlurBlurToken(tone)}') &&
     docsDefinitionSource.includes('value={getBgBlurBlurValue(tone)}') &&
-    docsDefinitionSource.includes('token-preview-card__surface-preview') &&
-    docsDefinitionSource.includes('token-preview-card__surface-backdrop') &&
-    docsDefinitionSource.includes('token-preview-card__surface') &&
-    docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">背景模糊度</h2>') &&
+    docsDefinitionSource.includes('component-preview-card__surface-preview') &&
+    docsDefinitionSource.includes('component-preview-card__surface-backdrop') &&
+    docsDefinitionSource.includes('component-preview-card__surface') &&
+    docsDefinitionSource.includes('<h2 className="component-preview-card-demo__category">背景模糊度</h2>') &&
     !docsDefinitionSource.includes('bg-blur-preview__group') &&
     !docsDefinitionSource.includes('bg-blur-preview__stage') &&
     !docsDefinitionSource.includes('summary:'),
@@ -298,7 +298,7 @@ assert.ok(
   sampleBlock.includes('position: relative;') &&
     sampleBlock.includes('overflow: hidden;') &&
     sampleBlock.includes('isolation: isolate;'),
-  'TokenPreviewCard must provide the stable preview clipping context used by BgBlur.',
+  'ComponentPreviewCard must provide the stable preview clipping context used by BgBlur.',
 )
 assert.ok(
   backdropBlock.includes('position: absolute;') &&
@@ -309,7 +309,7 @@ assert.ok(
     surfaceBlock.includes('border-radius: var(--radius-sm);') &&
     !surfaceBlock.includes('border:') &&
     !surfaceBlock.includes('background:'),
-  'TokenPreviewCard must own the shared backdrop and surface presentation used by BgBlur.',
+  'ComponentPreviewCard must own the shared backdrop and surface presentation used by BgBlur.',
 )
 
 assert.ok(registryItem, 'registry.json must include the bg-blur registry item.')

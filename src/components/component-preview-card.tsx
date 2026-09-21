@@ -4,7 +4,7 @@ import type { ComponentPropsWithoutRef, ComponentRef, ReactNode, RefObject } fro
 import { CardSurface } from './card-surface'
 import { cn } from './lib/utils'
 
-import './token-preview-card.css'
+import './component-preview-card.css'
 
 const colorValuePattern =
   /^(?:#(?:[0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})|(?:hsl|hsla|rgb|rgba|oklch|oklab|lch|lab|hwb|color)\()/i
@@ -56,7 +56,7 @@ function renderTokenValue(value: ReactNode, swatchClassName: string) {
 
   return (
     <>
-      <span className="token-preview-card__value-text">{value}</span>
+      <span className="component-preview-card__value-text">{value}</span>
       <span aria-hidden="true" className={swatchClassName} style={{ background }} />
     </>
   )
@@ -73,11 +73,11 @@ function useCollapseValueTextWhenTokenWraps(rowRef: RefObject<ComponentRef<'div'
       return
     }
 
-    const tokenEl = row.querySelector<HTMLElement>('.token-preview-card__token')
-    const valueEl = row.querySelector<HTMLElement>('.token-preview-card__value')
-    const collapsedClass = 'token-preview-card__row--value-text-collapsed'
+    const tokenEl = row.querySelector<HTMLElement>('.component-preview-card__token')
+    const valueEl = row.querySelector<HTMLElement>('.component-preview-card__value')
+    const collapsedClass = 'component-preview-card__row--value-text-collapsed'
 
-    if (!tokenEl || !valueEl || !row.querySelector('.token-preview-card__value-swatch')) {
+    if (!tokenEl || !valueEl || !row.querySelector('.component-preview-card__value-swatch')) {
       return
     }
 
@@ -111,23 +111,23 @@ function useCollapseValueTextWhenTokenWraps(rowRef: RefObject<ComponentRef<'div'
   }, [rowRef])
 }
 
-function TokenPreviewRow(row: TokenPreviewCardItem) {
+function TokenPreviewRow(row: ComponentPreviewCardItem) {
   const rowRef = useRef<ComponentRef<'div'>>(null)
   useCollapseValueTextWhenTokenWraps(rowRef)
 
   return (
-    <div className="token-preview-card__row" ref={rowRef}>
-      <code className="token-preview-card__token">{row.token}</code>
-      <code className="token-preview-card__value">
+    <div className="component-preview-card__row" ref={rowRef}>
+      <code className="component-preview-card__token">{row.token}</code>
+      <code className="component-preview-card__value">
         {row.darkValue === undefined ? (
-          renderTokenValue(row.value, 'token-preview-card__value-swatch')
+          renderTokenValue(row.value, 'component-preview-card__value-swatch')
         ) : (
           <>
-            <span className="token-preview-card__value--light">
-              {renderTokenValue(row.value, 'token-preview-card__value-swatch')}
+            <span className="component-preview-card__value--light">
+              {renderTokenValue(row.value, 'component-preview-card__value-swatch')}
             </span>
-            <span className="token-preview-card__value--dark">
-              {renderTokenValue(row.darkValue, 'token-preview-card__value-swatch')}
+            <span className="component-preview-card__value--dark">
+              {renderTokenValue(row.darkValue, 'component-preview-card__value-swatch')}
             </span>
           </>
         )}
@@ -136,25 +136,25 @@ function TokenPreviewRow(row: TokenPreviewCardItem) {
   )
 }
 
-export type TokenPreviewCardItem = {
+export type ComponentPreviewCardItem = {
   darkValue?: ReactNode
   token: string
   value: ReactNode
 }
 
-export type TokenPreviewCardProps = Omit<
+export type ComponentPreviewCardProps = Omit<
   ComponentPropsWithoutRef<typeof CardSurface>,
   'children'
 > & {
   children: ReactNode
   darkValue?: ReactNode
-  items?: readonly TokenPreviewCardItem[]
+  items?: readonly ComponentPreviewCardItem[]
   label: ReactNode
   token?: string
   value?: ReactNode
 }
 
-export function TokenPreviewCard({
+export function ComponentPreviewCard({
   children,
   className,
   darkValue,
@@ -163,14 +163,14 @@ export function TokenPreviewCard({
   token,
   value,
   ...props
-}: TokenPreviewCardProps) {
-  const rows: readonly TokenPreviewCardItem[] =
+}: ComponentPreviewCardProps) {
+  const rows: readonly ComponentPreviewCardItem[] =
     items ?? (token === undefined || value === undefined ? [] : [{ darkValue, token, value }])
 
   return (
-    <CardSurface className={cn('token-preview-card', className)} {...props}>
-      <div className="token-preview-card__meta">
-        <span className="token-preview-card__label">{label}</span>
+    <CardSurface className={cn('component-preview-card', className)} {...props}>
+      <div className="component-preview-card__meta">
+        <span className="component-preview-card__label">{label}</span>
         {rows.map((row) => (
           <TokenPreviewRow darkValue={row.darkValue} key={row.token} token={row.token} value={row.value} />
         ))}

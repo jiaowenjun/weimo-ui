@@ -382,7 +382,7 @@ assert.ok(
 )
 assert.ok(
   borderColorDefinitionSource.includes("frame: 'plain',") &&
-    borderColorDefinitionSource.includes('<TokenPreviewCard') &&
+    borderColorDefinitionSource.includes('<ComponentPreviewCard') &&
     !borderColorDefinitionSource.includes('<TokenPreviewDetails') &&
     borderColorDefinitionSource.includes('...contexts.flatMap') &&
     borderColorDefinitionSource.includes('--glass-surface-border') &&

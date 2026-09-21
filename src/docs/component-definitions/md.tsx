@@ -1,6 +1,6 @@
 import { CardPanel } from '../../components/coss/card'
 import { Md } from '../../components/md'
-import { TokenPreviewCard } from '../../components/token-preview-card'
+import { ComponentPreviewCard } from '../../components/component-preview-card'
 import type { ComponentDefinition } from '../component-docs'
 import { mdRenderSample } from './markdown-sample'
 
@@ -304,7 +304,7 @@ function MdStylePreview() {
       </CardPanel>
 
       {markdownStyleTokenGroups.map((group) => (
-        <TokenPreviewCard
+        <ComponentPreviewCard
           items={group.tokens.map((token) => {
             const item = getMarkdownStyleToken(token)
 
@@ -322,7 +322,7 @@ function MdStylePreview() {
               {renderMarkdownTokenGroupPreview(group)}
             </div>
           </div>
-        </TokenPreviewCard>
+        </ComponentPreviewCard>
       ))}
     </>
   )

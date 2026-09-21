@@ -250,7 +250,7 @@ assert.ok(
 for (const snippet of [
   "import { Md } from '../../components/md'",
   "import { CardPanel } from '../../components/coss/card'",
-  "import { TokenPreviewCard } from '../../components/token-preview-card'",
+  "import { ComponentPreviewCard } from '../../components/component-preview-card'",
   "import { mdRenderSample } from './markdown-sample'",
   "id: 'md'",
   "frame: 'plain',",
@@ -258,7 +258,7 @@ for (const snippet of [
   'markdownStyleTokenGroups',
   'getMarkdownStyleToken',
   'renderMarkdownTokenGroupPreview',
-  '<TokenPreviewCard',
+  '<ComponentPreviewCard',
   'items={group.tokens.map((token) => {',
   "darkValue: typeof item.value === 'string' ? undefined : item.value.dark",
   'token: item.token',
@@ -306,9 +306,9 @@ assert.deepEqual(
   'Md docs must group tokens by each rendered Markdown semantic node.',
 )
 assert.equal(
-  [...definitionSource.matchAll(/<TokenPreviewCard/g)].length,
+  [...definitionSource.matchAll(/<ComponentPreviewCard/g)].length,
   1,
-  'Md docs must render every semantic group through the shared TokenPreviewCard map.',
+  'Md docs must render every semantic group through the shared ComponentPreviewCard map.',
 )
 assert.deepEqual(
   [...markdownGroupSource.matchAll(/'(--md-[a-z0-9-]+)'/g)]
@@ -1285,7 +1285,7 @@ assert.ok(
     !mdGroupEffectBlock.includes('border:') &&
     !mdGroupEffectBlock.includes('background:') &&
     !mdGroupEffectBlock.includes('box-shadow:'),
-  'Md token groups must use a borderless, background-free TokenPreviewCard preview area.',
+  'Md token groups must use a borderless, background-free ComponentPreviewCard preview area.',
 )
 const mdContentWrapperBlock = cssBlockFor(appCss, '.md-style-preview__content-wrapper')
 assert.ok(

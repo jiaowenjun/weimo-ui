@@ -56,7 +56,7 @@ const textColorCss = readProjectFile('src/components/text-color.css')
 const tokensCss = readProjectFile('src/styles/tokens.css')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinitionSource = readProjectFile('src/docs/component-definitions/font-size.tsx')
+const docsDefinitionSource = readProjectFile('src/docs/component-definitions/text.tsx')
 const appCss = readProjectFile('src/App.css')
 const rootRegistry = readJson('registry.json')
 const styleRegistry = readJson('registry/style.json')
@@ -237,9 +237,9 @@ assert.ok(
   'component definitions index must not expose a separate TextColor detail page.',
 )
 assert.ok(
-  docsDefinitionSource.includes("id: 'font-size'") &&
+  docsDefinitionSource.includes("id: 'text'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { TokenPreviewCard } from '../../components/token-preview-card'") &&
+    docsDefinitionSource.includes("import { ComponentPreviewCard } from '../../components/component-preview-card'") &&
     docsDefinitionSource.includes('const previewTextColorTones = textColorTones.filter((tone) => tone !== \'inherit\')') &&
     docsDefinitionSource.includes('textColorToneMap[tone]') &&
     docsDefinitionSource.includes('function FontPreview()') &&
@@ -249,14 +249,14 @@ assert.ok(
     docsDefinitionSource.includes('textColorToneOrder.filter((tone) =>') &&
     docsDefinitionSource.includes('getTextColorClassName(tone)') &&
     docsDefinitionSource.includes('getTextColorToken(tone)') &&
-    docsDefinitionSource.includes('<TokenPreviewCard') &&
+    docsDefinitionSource.includes('<ComponentPreviewCard') &&
     docsDefinitionSource.includes('darkValue: textColorToneMap[tone].value.dark,') &&
     docsDefinitionSource.includes('token: getTextColorToken(tone),') &&
     docsDefinitionSource.includes('value: textColorToneMap[tone].value.light,') &&
     docsDefinitionSource.includes('label="字色"') &&
     docsDefinitionSource.includes('className="text-color-preview__samples"') &&
     docsDefinitionSource.includes('text-color-preview__sample') &&
-    !docsDefinitionSource.includes('token-preview-card-demo__category') &&
+    !docsDefinitionSource.includes('component-preview-card-demo__category') &&
     !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     !docsDefinitionSource.includes('summary:') &&
     !docsDefinitionSource.includes('text-color-preview__row') &&

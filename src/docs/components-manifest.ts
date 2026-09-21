@@ -50,6 +50,15 @@ export type ComponentManifestItem = PublicComponentManifestItem
 
 export const componentManifest = [
   {
+    id: 'component-preview-card',
+    name: 'ComponentPreviewCard',
+    registryName: 'component-preview-card',
+    packageExport: './components/component-preview-card',
+    group: 'token-style',
+    docs: false,
+    registry: true,
+  },
+  {
     id: 'md',
     name: 'Markdown渲染',
     exportName: 'Md',
@@ -57,15 +66,6 @@ export const componentManifest = [
     packageExport: './components/md',
     group: 'token-style',
     docs: true,
-    registry: true,
-  },
-  {
-    id: 'token-preview-card',
-    name: 'TokenPreviewCard',
-    registryName: 'token-preview-card',
-    packageExport: './components/token-preview-card',
-    group: 'token-style',
-    docs: false,
     registry: true,
   },
   {
@@ -87,7 +87,7 @@ export const componentManifest = [
     registry: true,
   },
   {
-    id: 'font-size',
+    id: 'text',
     name: '文字',
     registryName: 'font-size',
     packageExport: './components/font-size',

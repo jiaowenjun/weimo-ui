@@ -30,17 +30,17 @@ const detailPageSource = readProjectFile('src/docs/pages/component-detail-page.t
 const docsShellSource = readProjectFile('src/docs/docs-shell.tsx')
 const searchSource = readProjectFile('src/docs/search-component-docs.ts')
 const colorSource = readProjectFile('src/docs/token-preview-color.ts')
-const cardSource = readProjectFile('src/components/token-preview-card.tsx')
-const cardCss = readProjectFile('src/components/token-preview-card.css')
-const cardRegistry = JSON.parse(readProjectFile('registry/token-preview-card.json'))
+const cardSource = readProjectFile('src/components/component-preview-card.tsx')
+const cardCss = readProjectFile('src/components/component-preview-card.css')
+const cardRegistry = JSON.parse(readProjectFile('registry/component-preview-card.json'))
 const appCss = readProjectFile('src/App.css')
 const previewBlock = blockFor(
   cardCss,
-  '.token-preview-card > .token-preview-card__meta ~ *',
+  '.component-preview-card > .component-preview-card__meta ~ *',
 )
 const transparentSurfaceBlock = blockFor(
   cardCss,
-  '.token-preview-card .token-preview-card__surface',
+  '.component-preview-card .component-preview-card__surface',
 )
 const backgroundSampleBlock = blockFor(appCss, '.bg-color-preview__sample')
 const borderSampleBlock = blockFor(appCss, '.border-color-preview__sample')
@@ -82,41 +82,41 @@ assert.ok(
 
 for (const snippet of [
   "import { CardSurface } from './card-surface'",
-  'export type TokenPreviewCardProps',
-  'export function TokenPreviewCard',
+  'export type ComponentPreviewCardProps',
+  'export function ComponentPreviewCard',
   'darkValue?: ReactNode',
-  'className="token-preview-card__meta"',
-  'className="token-preview-card__label"',
-  'className="token-preview-card__token"',
-  'className="token-preview-card__value"',
-  'className="token-preview-card__value--light"',
-  'className="token-preview-card__value--dark"',
+  'className="component-preview-card__meta"',
+  'className="component-preview-card__label"',
+  'className="component-preview-card__token"',
+  'className="component-preview-card__value"',
+  'className="component-preview-card__value--light"',
+  'className="component-preview-card__value--dark"',
   '{children}',
 ]) {
-  assert.ok(cardSource.includes(snippet), `TokenPreviewCard must include ${snippet}.`)
+  assert.ok(cardSource.includes(snippet), `ComponentPreviewCard must include ${snippet}.`)
 }
 
 for (const selector of [
-  '.token-preview-card',
-  '.token-preview-card__meta',
-  '.token-preview-card__label',
-  '.token-preview-card__token',
-  '.token-preview-card__value',
-  '.token-preview-card__value--dark',
-  '.dark .token-preview-card__value--light',
+  '.component-preview-card',
+  '.component-preview-card__meta',
+  '.component-preview-card__label',
+  '.component-preview-card__token',
+  '.component-preview-card__value',
+  '.component-preview-card__value--dark',
+  '.dark .component-preview-card__value--light',
 ]) {
-  assert.ok(cardCss.includes(selector), `TokenPreviewCard styles must include ${selector}.`)
+  assert.ok(cardCss.includes(selector), `ComponentPreviewCard styles must include ${selector}.`)
 }
 
-const cardRowBlock = blockFor(cardCss, '.token-preview-card__row')
+const cardRowBlock = blockFor(cardCss, '.component-preview-card__row')
 
 assert.ok(
-  cardCss.includes('.token-preview-card__meta {\n    display: grid;') &&
-    cardSource.includes('<code className="token-preview-card__token">{row.token}</code>') &&
-    cardSource.includes('<code className="token-preview-card__value">') &&
-    cardSource.includes('className="token-preview-card__row"') &&
+  cardCss.includes('.component-preview-card__meta {\n    display: grid;') &&
+    cardSource.includes('<code className="component-preview-card__token">{row.token}</code>') &&
+    cardSource.includes('<code className="component-preview-card__value">') &&
+    cardSource.includes('className="component-preview-card__row"') &&
     !cardCss.includes('margin-left: auto;'),
-  'TokenPreviewCard must place the label above one two-column token-name/value row.',
+  'ComponentPreviewCard must place the label above one two-column token-name/value row.',
 )
 assert.ok(
   cardRowBlock.includes('display: grid;') &&
@@ -124,29 +124,29 @@ assert.ok(
       'grid-template-columns: minmax(min-content, max-content) minmax(max-content, 1fr);',
     ) &&
     cardRowBlock.includes('gap: 2em;') &&
-    cardCss.includes('.token-preview-card__token {\n    text-align: left;') &&
-    cardCss.includes('.token-preview-card__value {\n    text-align: right;'),
-  'TokenPreviewCard must align the token name left and the value right on every row, keeping the token name on one line whenever it fits beside the value with at least a 2em gap.',
+    cardCss.includes('.component-preview-card__token {\n    text-align: left;') &&
+    cardCss.includes('.component-preview-card__value {\n    text-align: right;'),
+  'ComponentPreviewCard must align the token name left and the value right on every row, keeping the token name on one line whenever it fits beside the value with at least a 2em gap.',
 )
 assert.ok(
-  cardSource.includes('export type TokenPreviewCardItem') &&
-    cardSource.includes('items?: readonly TokenPreviewCardItem[]') &&
+  cardSource.includes('export type ComponentPreviewCardItem') &&
+    cardSource.includes('items?: readonly ComponentPreviewCardItem[]') &&
     cardSource.includes('rows.map((row) => (') &&
     cardSource.includes('key={row.token}') &&
     cardSource.includes(
       "items ?? (token === undefined || value === undefined ? [] : [{ darkValue, token, value }])",
     ) &&
     !cardCss.includes('grid-column:'),
-  'TokenPreviewCard must support multi-token rows through items while keeping the single-token props, without component-level grid placement.',
+  'ComponentPreviewCard must support multi-token rows through items while keeping the single-token props, without component-level grid placement.',
 )
 
-const cardSwatchBlock = blockFor(cardCss, '.token-preview-card__value-swatch')
+const cardSwatchBlock = blockFor(cardCss, '.component-preview-card__value-swatch')
 
 assert.ok(
   cardSource.includes('const colorValuePattern =') &&
     cardSource.includes('function colorValueHasAlpha(') &&
-    cardSource.includes("renderTokenValue(row.value, 'token-preview-card__value-swatch')") &&
-    cardSource.includes("renderTokenValue(row.darkValue, 'token-preview-card__value-swatch')") &&
+    cardSource.includes("renderTokenValue(row.value, 'component-preview-card__value-swatch')") &&
+    cardSource.includes("renderTokenValue(row.darkValue, 'component-preview-card__value-swatch')") &&
     cardSource.includes('const background = colorValueHasAlpha(value.trim())') &&
     cardSource.includes(': `linear-gradient(${value})`') &&
     cardSource.includes('linear-gradient(#fff, #fff)`') &&
@@ -155,7 +155,7 @@ assert.ok(
     cardSwatchBlock.includes('width: 12px;') &&
     cardSwatchBlock.includes('height: 12px;') &&
     cardSwatchBlock.includes('margin-left: 6px;'),
-  'TokenPreviewCard must append a swatch to the right of every color token value in the single and light/dark branches: one opaque gradient layer for opaque colors, and a checkerboard over a gradient-written white base only for colors with alpha.',
+  'ComponentPreviewCard must append a swatch to the right of every color token value in the single and light/dark branches: one opaque gradient layer for opaque colors, and a checkerboard over a gradient-written white base only for colors with alpha.',
 )
 
 assert.ok(
@@ -166,8 +166,8 @@ assert.ok(
     previewBlock.includes('border-radius: var(--radius-sm);') &&
     !previewBlock.includes('border:') &&
     !previewBlock.includes('background:') &&
-    !cardSource.includes('token-preview-card__preview'),
-  'TokenPreviewCard must let each direct preview child grow to its content height with an 80px floor, without a default border or background.',
+    !cardSource.includes('component-preview-card__preview'),
+  'ComponentPreviewCard must let each direct preview child grow to its content height with an 80px floor, without a default border or background.',
 )
 
 assert.ok(
@@ -179,12 +179,12 @@ assert.ok(
 )
 
 assert.ok(
-  cardCss.includes('.token-preview-card .token-preview-card__surface-backdrop {') &&
-    cardCss.includes('.token-preview-card .token-preview-card__surface {') &&
+  cardCss.includes('.component-preview-card .component-preview-card__surface-backdrop {') &&
+    cardCss.includes('.component-preview-card .component-preview-card__surface {') &&
     transparentSurfaceBlock.includes('inset: 10px 12px;') &&
     !transparentSurfaceBlock.includes('border:') &&
     !transparentSurfaceBlock.includes('background:'),
-  'Transparent color and blur previews must share one TokenPreviewCard surface layout.',
+  'Transparent color and blur previews must share one ComponentPreviewCard surface layout.',
 )
 
 for (const selector of [
@@ -202,26 +202,26 @@ for (const selector of [
 }
 
 assert.equal(
-  packageJson.exports?.['./components/token-preview-card'],
-  './src/components/token-preview-card.tsx',
-  'TokenPreviewCard must have a public package export.',
+  packageJson.exports?.['./components/component-preview-card'],
+  './src/components/component-preview-card.tsx',
+  'ComponentPreviewCard must have a public package export.',
 )
 assert.ok(
-  manifestSource.includes("id: 'token-preview-card'") &&
-    manifestSource.includes("name: 'TokenPreviewCard'") &&
-    manifestSource.includes("registryName: 'token-preview-card'") &&
-    manifestSource.includes("packageExport: './components/token-preview-card'") &&
+  manifestSource.includes("id: 'component-preview-card'") &&
+    manifestSource.includes("name: 'ComponentPreviewCard'") &&
+    manifestSource.includes("registryName: 'component-preview-card'") &&
+    manifestSource.includes("packageExport: './components/component-preview-card'") &&
     manifestSource.includes(
-      "packageExport: './components/token-preview-card',\n    group: 'token-style',\n    docs: false,",
+      "packageExport: './components/component-preview-card',\n    group: 'token-style',\n    docs: false,",
     ),
-  'TokenPreviewCard must be listed in the Token / style component catalog as a registry-only entry.',
+  'ComponentPreviewCard must be listed in the Token / style component catalog as a registry-only entry.',
 )
 assert.ok(
-  !existsSync(join(root, 'src/docs/component-definitions/token-preview-card.tsx')) &&
-    !existsSync(join(root, 'src/docs/component-definitions/token-preview-card-demo.tsx')),
-  'the TokenPreviewCard debug docs page must stay removed; each token group has its own detail page.',
+  !existsSync(join(root, 'src/docs/component-definitions/component-preview-card.tsx')) &&
+    !existsSync(join(root, 'src/docs/component-definitions/component-preview-card-demo.tsx')),
+  'the ComponentPreviewCard debug docs page must stay removed; each token group has its own detail page.',
 )
-assert.equal(cardRegistry.name, 'token-preview-card')
+assert.equal(cardRegistry.name, 'component-preview-card')
 assert.equal(cardRegistry.type, 'registry:ui')
 assert.deepEqual(cardRegistry.registryDependencies, [
   '@weimo/style',
@@ -242,13 +242,13 @@ for (const snippet of [
 const semanticTokenDefinitions = [
   'bg-color',
   'border-color',
-  'font-size',
+  'text',
 ]
 
 const tokenPreviewWrappers = {
   'bg-color': 'bg-color-preview',
   'border-color': 'border-color-preview',
-  'font-size': 'font-size-preview',
+  text: 'font-size-preview',
 }
 
 for (const componentId of semanticTokenDefinitions) {
@@ -257,8 +257,8 @@ for (const componentId of semanticTokenDefinitions) {
   assert.ok(
       definitionSource.includes("frame: 'plain',") &&
       definitionSource.includes('searchAliases:') &&
-      definitionSource.includes("import { TokenPreviewCard } from '../../components/token-preview-card'") &&
-      definitionSource.includes('<TokenPreviewCard') &&
+      definitionSource.includes("import { ComponentPreviewCard } from '../../components/component-preview-card'") &&
+      definitionSource.includes('<ComponentPreviewCard') &&
       !definitionSource.includes('description={item.description}') &&
       !definitionSource.includes('uiUsage={item.uiUsage}') &&
       !definitionSource.includes('bijiUsage={item.bijiUsage}') &&
@@ -280,7 +280,7 @@ assert.ok(
 
 const bgColorDefinitionSource = readProjectFile('src/docs/component-definitions/bg-color.tsx')
 const borderColorDefinitionSource = readProjectFile('src/docs/component-definitions/border-color.tsx')
-const fontSizeDefinitionSource = readProjectFile('src/docs/component-definitions/font-size.tsx')
+const textDefinitionSource = readProjectFile('src/docs/component-definitions/text.tsx')
 
 assert.ok(
   !borderColorDefinitionSource.includes('<TokenPreviewDetails') &&
@@ -293,7 +293,7 @@ const mdDefinitionSource = readProjectFile('src/docs/component-definitions/md.ts
 assert.ok(
   mdDefinitionSource.includes("frame: 'plain',") &&
     mdDefinitionSource.includes('searchAliases:') &&
-    mdDefinitionSource.includes('<TokenPreviewCard') &&
+    mdDefinitionSource.includes('<ComponentPreviewCard') &&
     mdDefinitionSource.includes('<CardPanel className="md-style-preview__scene"') &&
     mdDefinitionSource.includes('<Md content={mdRenderSample} />') &&
     !mdDefinitionSource.includes('className="md-style-preview"') &&
@@ -320,24 +320,24 @@ assert.ok(
 assert.ok(
   !existsSync(join(root, 'src/docs/component-definitions/heat-color.tsx')) &&
     bgColorDefinitionSource.includes('heatColorLevels.map') &&
-    bgColorDefinitionSource.includes('<TokenPreviewCard') &&
+    bgColorDefinitionSource.includes('<ComponentPreviewCard') &&
     bgColorDefinitionSource.includes('heat-color-preview__swatch') &&
     bgColorDefinitionSource.includes('label="热力图"'),
-  'HeatColor docs must stay merged into the BgColor detail page under the grouped TokenPreviewCard.',
+  'HeatColor docs must stay merged into the BgColor detail page under the grouped ComponentPreviewCard.',
 )
 
 assert.ok(
   !existsSync(join(root, 'src/docs/component-definitions/text-color.tsx')) &&
-    fontSizeDefinitionSource.includes('label="字色"') &&
-    fontSizeDefinitionSource.includes('label="字号"') &&
-    fontSizeDefinitionSource.includes('textColorToneMap') &&
-    fontSizeDefinitionSource.includes('fontSizeScaleMap'),
+    textDefinitionSource.includes('label="字色"') &&
+    textDefinitionSource.includes('label="字号"') &&
+    textDefinitionSource.includes('textColorToneMap') &&
+    textDefinitionSource.includes('fontSizeScaleMap'),
   'TextColor and FontSize docs must share the grouped Font detail page.',
 )
 
 assert.ok(
   !existsSync(join(root, 'src/docs/component-definitions/border-radius.tsx')) &&
-    !borderColorDefinitionSource.includes('token-preview-card-demo__category') &&
+    !borderColorDefinitionSource.includes('component-preview-card-demo__category') &&
     borderColorDefinitionSource.includes('label="圆角"') &&
     borderColorDefinitionSource.includes('label="边框色"') &&
     borderColorDefinitionSource.includes('borderRadiusScaleMap') &&

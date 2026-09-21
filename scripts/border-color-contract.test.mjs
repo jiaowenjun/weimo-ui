@@ -406,9 +406,9 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'border-color'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { TokenPreviewCard } from '../../components/token-preview-card'") &&
+    docsDefinitionSource.includes("import { ComponentPreviewCard } from '../../components/component-preview-card'") &&
     docsDefinitionSource.includes("from '../../components/border-radius'") &&
-    !docsDefinitionSource.includes('token-preview-card-demo__category') &&
+    !docsDefinitionSource.includes('component-preview-card-demo__category') &&
     docsDefinitionSource.includes('borderRadiusScales.map') &&
     docsDefinitionSource.includes('const borderColorToneOrder = [') &&
     docsDefinitionSource.includes("'default',\n  'disable',\n  'divider',\n  'emphasis',\n  'accent',\n  'danger',") &&
@@ -416,7 +416,7 @@ assert.ok(
     docsDefinitionSource.includes('borderColorToneMap[tone]') &&
     docsDefinitionSource.includes('getBorderColorClassName(tone)') &&
     docsDefinitionSource.includes('getBorderColorToken(tone)') &&
-    docsDefinitionSource.includes('<TokenPreviewCard') &&
+    docsDefinitionSource.includes('<ComponentPreviewCard') &&
     docsDefinitionSource.includes('items={borderRadiusScales.map((scale) => ({') &&
     docsDefinitionSource.includes('token: getBorderRadiusToken(scale),') &&
     docsDefinitionSource.includes('value: getBorderRadiusValue(scale),') &&

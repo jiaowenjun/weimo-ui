@@ -45,7 +45,7 @@ const cossCardCss = readProjectFile('src/components/coss/card.css')
 const tokensCss = readProjectFile('src/styles/tokens.css')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinitionSource = readProjectFile('src/docs/component-definitions/font-size.tsx')
+const docsDefinitionSource = readProjectFile('src/docs/component-definitions/text.tsx')
 const appCss = readProjectFile('src/App.css')
 const rootRegistry = readJson('registry.json')
 const styleRegistry = readJson('registry/style.json')
@@ -144,24 +144,24 @@ assert.ok(
 assert.deepEqual(rootStyleItem, styleRegistry, 'registry.json style item must match registry/style.json.')
 
 assert.ok(
-  manifestSource.includes("id: 'font-size'") &&
+  manifestSource.includes("id: 'text'") &&
     manifestSource.includes("name: '文字'") &&
     manifestSource.includes("registryName: 'font-size'") &&
     manifestSource.includes("packageExport: './components/font-size'") &&
     manifestSource.includes("group: 'token-style'"),
-  'component manifest must list FontSize as a public registry-backed token utility.',
+  'component manifest must list the 文字 page as a public registry-backed token utility.',
 )
 assert.ok(
-  definitionsIndexSource.includes("import { fontSizeDefinition } from './font-size'") &&
-    definitionsIndexSource.includes("'font-size': fontSizeDefinition"),
-  'component definitions index must wire the FontSize detail definition.',
+  definitionsIndexSource.includes("import { textDefinition } from './text'") &&
+    definitionsIndexSource.includes('text: textDefinition'),
+  'component definitions index must wire the 文字 (text) detail definition.',
 )
 assert.ok(
-  docsDefinitionSource.includes("id: 'font-size'") &&
+  docsDefinitionSource.includes("id: 'text'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { TokenPreviewCard } from '../../components/token-preview-card'") &&
+    docsDefinitionSource.includes("import { ComponentPreviewCard } from '../../components/component-preview-card'") &&
     docsDefinitionSource.includes("from '../../components/text-color'") &&
-    !docsDefinitionSource.includes('token-preview-card-demo__category') &&
+    !docsDefinitionSource.includes('component-preview-card-demo__category') &&
     docsDefinitionSource.includes('fontFamilyTokens.map') &&
     docsDefinitionSource.includes("'--font-sans'") &&
     docsDefinitionSource.includes("'--font-mono'") &&
@@ -176,7 +176,7 @@ assert.ok(
     docsDefinitionSource.includes('getFontSizeClassName(scale)') &&
     docsDefinitionSource.includes('getFontSizeToken(scale)') &&
     docsDefinitionSource.includes('getFontSizeValue(scale)') &&
-    docsDefinitionSource.includes('<TokenPreviewCard') &&
+    docsDefinitionSource.includes('<ComponentPreviewCard') &&
     docsDefinitionSource.includes('items={fontSizeScales.map((scale) => ({') &&
     docsDefinitionSource.includes('token: getFontSizeToken(scale),') &&
     docsDefinitionSource.includes('value: getFontSizeValue(scale),') &&
@@ -189,7 +189,7 @@ assert.ok(
     !docsDefinitionSource.includes('summary:') &&
     !docsDefinitionSource.includes('font-size-preview__row') &&
     !docsDefinitionSource.includes('font-size-preview__description'),
-  'Font docs definition must group TextColor, FontSize, and FontFamily TokenPreviewCards.',
+  'Font docs definition must group TextColor, FontSize, and FontFamily ComponentPreviewCards.',
 )
 
 assert.ok(

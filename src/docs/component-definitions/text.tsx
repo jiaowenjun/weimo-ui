@@ -16,7 +16,7 @@ import {
   textColorToneMap,
   textColorTones,
 } from '../../components/text-color'
-import { TokenPreviewCard } from '../../components/token-preview-card'
+import { ComponentPreviewCard } from '../../components/component-preview-card'
 import type { ComponentDefinition } from '../component-docs'
 
 const previewTextColorTones = textColorTones.filter((tone) => tone !== 'inherit')
@@ -54,7 +54,7 @@ function FontPreview() {
 
   return (
     <>
-      <TokenPreviewCard
+      <ComponentPreviewCard
         items={orderedTextColorTones.map((tone) => ({
           darkValue: textColorToneMap[tone].value.dark,
           token: getTextColorToken(tone),
@@ -69,9 +69,9 @@ function FontPreview() {
             </p>
           ))}
         </div>
-      </TokenPreviewCard>
+      </ComponentPreviewCard>
 
-      <TokenPreviewCard
+      <ComponentPreviewCard
         items={fontSizeScales.map((scale) => ({
           token: getFontSizeToken(scale),
           value: getFontSizeValue(scale),
@@ -92,9 +92,9 @@ function FontPreview() {
             </p>
           ))}
         </div>
-      </TokenPreviewCard>
+      </ComponentPreviewCard>
 
-      <TokenPreviewCard
+      <ComponentPreviewCard
         items={fontFamilyTokens.map((font) => ({
           token: font.token,
           value: font.value,
@@ -108,9 +108,9 @@ function FontPreview() {
             </div>
           ))}
         </div>
-      </TokenPreviewCard>
+      </ComponentPreviewCard>
 
-      <TokenPreviewCard
+      <ComponentPreviewCard
         darkValue={bgColorToneMap.selection.value.dark}
         label={bgColorToneMap.selection.label}
         token={getBgColorToken('selection')}
@@ -127,13 +127,13 @@ function FontPreview() {
             时，会铺上这层柔和的强调底色；也可以直接拖选这段话试试。
           </span>
         </p>
-      </TokenPreviewCard>
+      </ComponentPreviewCard>
     </>
   )
 }
 
-export const fontSizeDefinition = {
-  id: 'font-size',
+export const textDefinition = {
+  id: 'text',
   status: 'Ready',
   frame: 'plain',
   searchAliases: fontSizeScales.flatMap((scale) => {

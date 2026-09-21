@@ -11,7 +11,7 @@ import {
   getBorderRadiusToken,
   getBorderRadiusValue,
 } from '../../components/border-radius'
-import { TokenPreviewCard } from '../../components/token-preview-card'
+import { ComponentPreviewCard } from '../../components/component-preview-card'
 import type { ComponentDefinition } from '../component-docs'
 
 type BorderContextToken = {
@@ -82,7 +82,7 @@ const borderColorSearchAliases = borderColorTones.flatMap((tone) => {
 function BorderColorPreview() {
   return (
     <>
-      <TokenPreviewCard
+      <ComponentPreviewCard
         items={borderRadiusScales.map((scale) => ({
           token: getBorderRadiusToken(scale),
           value: getBorderRadiusValue(scale),
@@ -98,9 +98,9 @@ function BorderColorPreview() {
             />
           ))}
         </div>
-      </TokenPreviewCard>
+      </ComponentPreviewCard>
 
-      <TokenPreviewCard
+      <ComponentPreviewCard
         items={borderColorToneOrder.map((tone) => ({
           darkValue: borderColorToneMap[tone].value.dark,
           token: getBorderColorToken(tone),
@@ -116,7 +116,7 @@ function BorderColorPreview() {
             />
           ))}
         </div>
-      </TokenPreviewCard>
+      </ComponentPreviewCard>
     </>
   )
 }

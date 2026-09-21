@@ -108,9 +108,9 @@ const bgColorCss = readProjectFile('src/components/bg-color.css')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const docsDefinitionSource = readProjectFile('src/docs/component-definitions/bg-color.tsx')
-const fontSizeDocsSource = readProjectFile('src/docs/component-definitions/font-size.tsx')
+const textDocsSource = readProjectFile('src/docs/component-definitions/text.tsx')
 const appCss = readProjectFile('src/App.css')
-const tokenPreviewCardCss = readProjectFile('src/components/token-preview-card.css')
+const tokenPreviewCardCss = readProjectFile('src/components/component-preview-card.css')
 const tokensCss = readProjectFile('src/styles/tokens.css')
 const dialogCss = readProjectFile('src/components/coss/dialog.css')
 const commandCss = readProjectFile('src/components/coss/command.css')
@@ -124,11 +124,11 @@ const sampleBlock = firstBlockFor(appCss, '.bg-color-preview__sample')
 const sampleFillBlock = firstBlockFor(appCss, '.bg-color-preview__sample-fill')
 const surfaceBackdropBlock = firstBlockFor(
   tokenPreviewCardCss,
-  '.token-preview-card .token-preview-card__surface-backdrop',
+  '.component-preview-card .component-preview-card__surface-backdrop',
 )
 const surfaceBlock = firstBlockFor(
   tokenPreviewCardCss,
-  '.token-preview-card .token-preview-card__surface',
+  '.component-preview-card .component-preview-card__surface',
 )
 
 assert.equal(
@@ -365,18 +365,18 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'bg-color'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { TokenPreviewCard } from '../../components/token-preview-card'") &&
+    docsDefinitionSource.includes("import { ComponentPreviewCard } from '../../components/component-preview-card'") &&
     docsDefinitionSource.includes("import { pressableToneMap, pressableTones } from '../../components/pressable'") &&
     docsDefinitionSource.includes("from '../../components/bg-blur'") &&
     docsDefinitionSource.includes('bgColorPreviewGroups.map') &&
-    docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">') &&
+    docsDefinitionSource.includes('<h2 className="component-preview-card-demo__category">') &&
     docsDefinitionSource.includes('group.tones') &&
     docsDefinitionSource.includes('bgColorPreviewTones') &&
     docsDefinitionSource.includes('orderedTones.map') &&
     docsDefinitionSource.includes('bgColorToneMap[tone]') &&
     docsDefinitionSource.includes('getBgColorClassName(tone)') &&
     docsDefinitionSource.includes('getBgColorToken(tone)') &&
-    docsDefinitionSource.includes('<TokenPreviewCard') &&
+    docsDefinitionSource.includes('<ComponentPreviewCard') &&
     docsDefinitionSource.includes('darkValue={item.value.dark}') &&
     docsDefinitionSource.includes('pressableFeedback.label') &&
     docsDefinitionSource.includes('token={getBgColorToken(tone)}') &&
@@ -387,21 +387,21 @@ assert.ok(
       'className={`bg-color-preview__sample-fill ${getBgColorClassName(tone)}`}',
     ) &&
     docsDefinitionSource.includes('const isTransparent = hasTransparentBgColorValue(item)') &&
-    docsDefinitionSource.includes('token-preview-card__surface-preview') &&
-    docsDefinitionSource.includes('token-preview-card__surface-backdrop') &&
-    docsDefinitionSource.includes('token-preview-card__surface') &&
+    docsDefinitionSource.includes('component-preview-card__surface-preview') &&
+    docsDefinitionSource.includes('component-preview-card__surface-backdrop') &&
+    docsDefinitionSource.includes('component-preview-card__surface') &&
     docsDefinitionSource.includes(
-      'className={`token-preview-card__surface ${getBgColorClassName(tone)}`}',
+      'className={`component-preview-card__surface ${getBgColorClassName(tone)}`}',
     ) &&
     docsDefinitionSource.includes('pressable-preview__sample') &&
     docsDefinitionSource.includes('tone === pressableFeedback.bgColorTone') &&
-    docsDefinitionSource.includes('<h2 className="token-preview-card-demo__category">背景模糊度</h2>') &&
+    docsDefinitionSource.includes('<h2 className="component-preview-card-demo__category">背景模糊度</h2>') &&
     docsDefinitionSource.includes('bgBlurTones.map') &&
     !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     !docsDefinitionSource.includes('summary:') &&
     !docsDefinitionSource.includes('bg-color-preview__group') &&
     !docsDefinitionSource.includes('bg-color-preview__description'),
-  'BgColor docs definition must render one concise TokenPreviewCard per tone.',
+  'BgColor docs definition must render one concise ComponentPreviewCard per tone.',
 )
 assert.ok(
   docsDefinitionSource.includes('function hasTransparentBgColorValue') &&
@@ -480,12 +480,12 @@ const selectionSampleBlock = blockFor(appCss, '.bg-color-preview__selection-samp
 const selectionHighlightBlock = blockFor(appCss, '.bg-color-preview__selection-highlight')
 const selectionPseudoBlock = blockFor(appCss, '.bg-color-preview__selection-sample ::selection')
 assert.ok(
-  fontSizeDocsSource.includes("from '../../components/bg-color'") &&
-    fontSizeDocsSource.includes('bgColorToneMap.selection') &&
-    fontSizeDocsSource.includes('bg-color-preview__selection-sample') &&
-    fontSizeDocsSource.includes('bg-color-preview__selection-copy') &&
-    fontSizeDocsSource.includes('bg-color-preview__selection-highlight') &&
-    fontSizeDocsSource.includes(
+  textDocsSource.includes("from '../../components/bg-color'") &&
+    textDocsSource.includes('bgColorToneMap.selection') &&
+    textDocsSource.includes('bg-color-preview__selection-sample') &&
+    textDocsSource.includes('bg-color-preview__selection-copy') &&
+    textDocsSource.includes('bg-color-preview__selection-highlight') &&
+    textDocsSource.includes(
       "className={`bg-color-preview__selection-highlight ${getBgColorClassName('selection')}`}",
     ) &&
     !docsDefinitionSource.includes("tone === 'selection'") &&
@@ -510,7 +510,7 @@ assert.ok(
     surfaceBlock.includes('border-radius: var(--radius-sm);') &&
     !surfaceBlock.includes('border:') &&
     !surfaceBlock.includes('background:'),
-  'Transparent BgColor samples must use the shared TokenPreviewCard surface geometry.',
+  'Transparent BgColor samples must use the shared ComponentPreviewCard surface geometry.',
 )
 assert.ok(
   surfaceBackdropBlock.includes('position: absolute;') &&
@@ -519,7 +519,7 @@ assert.ok(
     surfaceBackdropBlock.includes('repeating-linear-gradient') &&
     surfaceBackdropBlock.includes('hsl(0 0% 100% / 0.68) 0 14px') &&
     surfaceBackdropBlock.includes('hsl(0 0% 100% / 0.16) 14px 28px'),
-  'Transparent BgColor samples must use the shared TokenPreviewCard backdrop.',
+  'Transparent BgColor samples must use the shared ComponentPreviewCard backdrop.',
 )
 assert.ok(
   !docsDefinitionSource.includes('bg-color-preview__sample-text') &&
