@@ -187,7 +187,11 @@ assert.ok(
   'Transparent color and blur previews must share one TokenPreviewCard surface layout.',
 )
 
-for (const selector of ['.bg-color-preview__sample', '.pressable-preview__sample']) {
+for (const selector of [
+  '.bg-color-preview__sample',
+  '.bg-color-preview__selection-sample',
+  '.pressable-preview__sample',
+]) {
   const escapedSelector = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
   assert.match(

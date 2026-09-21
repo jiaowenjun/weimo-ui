@@ -37,10 +37,6 @@ const bgColorPreviewGroups = [
     label: '组件状态',
     tones: ['selected', 'chip'],
   },
-  {
-    label: '内容高亮',
-    tones: ['selection'],
-  },
 ] as const satisfies readonly {
   label: string
   tones: readonly BgColorTone[]

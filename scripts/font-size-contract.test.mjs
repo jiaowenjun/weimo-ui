@@ -193,6 +193,18 @@ assert.ok(
 )
 
 assert.ok(
+  docsDefinitionSource.includes("from '../../components/bg-color'") &&
+    docsDefinitionSource.includes('bgColorToneMap.selection') &&
+    docsDefinitionSource.includes("token={getBgColorToken('selection')}") &&
+    docsDefinitionSource.includes('label={bgColorToneMap.selection.label}') &&
+    docsDefinitionSource.includes('darkValue={bgColorToneMap.selection.value.dark}') &&
+    docsDefinitionSource.includes('bg-color-preview__selection-sample') &&
+    docsDefinitionSource.includes('bgColorToneMap.selection.label,') &&
+    docsDefinitionSource.includes('bgColorToneMap.selection.token,'),
+  'Font docs page must host the BgColor selection tone as the selected-text preview card with its search aliases.',
+)
+
+assert.ok(
   appCss.includes('.typography-preview__samples {\n  display: grid;') &&
   appCss.includes('.typography-preview__sample {\n  min-width: 0;\n  color: var(--color-text-primary);\n  font-size: var(--font-size-lg);\n  line-height: 1.4;\n  overflow-wrap: anywhere;\n  text-align: center;\n}') &&
     appCss.includes('.typography-preview__sample--font-sans') &&

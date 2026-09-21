@@ -58,7 +58,6 @@ const expectedToneGroups = [
   ['基础表面', ['page', 'card', 'raised']],
   ['动作与反馈', ['primary', 'hover', 'hover-on-hover']],
   ['组件状态', ['selected', 'chip']],
-  ['内容高亮', ['selection']],
 ]
 
 const excludedTokens = [
@@ -109,6 +108,7 @@ const bgColorCss = readProjectFile('src/components/bg-color.css')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const docsDefinitionSource = readProjectFile('src/docs/component-definitions/bg-color.tsx')
+const fontSizeDocsSource = readProjectFile('src/docs/component-definitions/font-size.tsx')
 const appCss = readProjectFile('src/App.css')
 const tokenPreviewCardCss = readProjectFile('src/components/token-preview-card.css')
 const tokensCss = readProjectFile('src/styles/tokens.css')
@@ -475,6 +475,35 @@ assert.ok(
     sampleFillBlock.includes('inset: 0;') &&
     sampleFillBlock.includes('z-index: 1;'),
   'BgColor sample fill must sit above the optional striped backdrop.',
+)
+const selectionSampleBlock = blockFor(appCss, '.bg-color-preview__selection-sample')
+const selectionHighlightBlock = blockFor(appCss, '.bg-color-preview__selection-highlight')
+const selectionPseudoBlock = blockFor(appCss, '.bg-color-preview__selection-sample ::selection')
+assert.ok(
+  fontSizeDocsSource.includes("from '../../components/bg-color'") &&
+    fontSizeDocsSource.includes('bgColorToneMap.selection') &&
+    fontSizeDocsSource.includes('bg-color-preview__selection-sample') &&
+    fontSizeDocsSource.includes('bg-color-preview__selection-copy') &&
+    fontSizeDocsSource.includes('bg-color-preview__selection-highlight') &&
+    fontSizeDocsSource.includes(
+      "className={`bg-color-preview__selection-highlight ${getBgColorClassName('selection')}`}",
+    ) &&
+    !docsDefinitionSource.includes("tone === 'selection'") &&
+    !docsDefinitionSource.includes('bg-color-preview__selection') &&
+    !docsDefinitionSource.includes('内容高亮'),
+  'The selection tone must preview the real selected-text rendering on the Font docs page instead of a generic translucent swatch on the BgColor page.',
+)
+assert.ok(
+  selectionPseudoBlock.includes('background: var(--color-bg-selection);'),
+  'The selected-text sample must support live drag selection with the real token.',
+)
+assert.ok(
+  selectionSampleBlock.includes('height: 80px;') &&
+    selectionSampleBlock.includes('color: var(--color-text-primary);') &&
+    selectionSampleBlock.includes('user-select: text;') &&
+    selectionHighlightBlock.includes('padding-block: 0.4em;') &&
+    !selectionHighlightBlock.includes('border-radius:'),
+  'The selection sample must render real text with a full-line-height highlight band and no rounded corners.',
 )
 assert.ok(
   surfaceBlock.includes('inset: 10px 12px;') &&

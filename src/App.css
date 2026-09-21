@@ -806,6 +806,32 @@
   height: 100%;
 }
 
+.bg-color-preview__selection-sample {
+  display: flex;
+  height: 80px;
+  align-items: center;
+  padding-inline: 14px;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-md);
+  line-height: 1.8;
+  user-select: text;
+}
+
+.bg-color-preview__selection-copy {
+  display: block;
+  cursor: text;
+}
+
+.bg-color-preview__selection-highlight {
+  padding-block: 0.4em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.bg-color-preview__selection-sample ::selection {
+  background: var(--color-bg-selection);
+}
+
 .pressable-preview__sample {
   display: flex;
   height: 80px;
