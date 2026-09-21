@@ -81,4 +81,18 @@ describe('ComponentPreviewCard', () => {
       container.querySelector('.component-preview-card'),
     )
   })
+
+  it('omits the meta area entirely when no label or tokens are provided', () => {
+    const { container } = render(
+      <ComponentPreviewCard>
+        <div data-testid="bare-preview" />
+      </ComponentPreviewCard>,
+    )
+
+    const card = container.querySelector('.component-preview-card')
+
+    expect(card).toHaveClass('card-surface')
+    expect(card?.querySelector('.component-preview-card__meta')).toBeNull()
+    expect(screen.getByTestId('bare-preview').parentElement).toBe(card)
+  })
 })

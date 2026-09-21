@@ -149,7 +149,7 @@ export type ComponentPreviewCardProps = Omit<
   children: ReactNode
   darkValue?: ReactNode
   items?: readonly ComponentPreviewCardItem[]
-  label: ReactNode
+  label?: ReactNode
   token?: string
   value?: ReactNode
 }
@@ -166,15 +166,20 @@ export function ComponentPreviewCard({
 }: ComponentPreviewCardProps) {
   const rows: readonly ComponentPreviewCardItem[] =
     items ?? (token === undefined || value === undefined ? [] : [{ darkValue, token, value }])
+  const hasMeta = label !== undefined || rows.length > 0
 
   return (
     <CardSurface className={cn('component-preview-card', className)} {...props}>
-      <div className="component-preview-card__meta">
-        <span className="component-preview-card__label">{label}</span>
-        {rows.map((row) => (
-          <TokenPreviewRow darkValue={row.darkValue} key={row.token} token={row.token} value={row.value} />
-        ))}
-      </div>
+      {hasMeta ? (
+        <div className="component-preview-card__meta">
+          {label === undefined ? null : (
+            <span className="component-preview-card__label">{label}</span>
+          )}
+          {rows.map((row) => (
+            <TokenPreviewRow darkValue={row.darkValue} key={row.token} token={row.token} value={row.value} />
+          ))}
+        </div>
+      ) : null}
       {children}
     </CardSurface>
   )

@@ -1101,7 +1101,6 @@
   font-size: var(--font-size-xs);
 }
 
-.card-surface-preview,
 .popup-surface-preview {
   display: flex;
   width: 100%;
@@ -1114,8 +1113,6 @@
 
 .card-surface-preview__tile,
 .popup-surface-preview__tile {
-  position: relative;
-  z-index: 1;
   display: grid;
   gap: 6px;
   width: min(100%, 260px);
