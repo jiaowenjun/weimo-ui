@@ -53,6 +53,7 @@ const standaloneRegistryItem = readJson('registry/font-size.json')
 const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const registryItem = rootRegistry.items.find((item) => item.name === 'font-size')
 const sampleBlock = blockFor(appCss, '.font-size-preview__sample')
+const samplesBlock = blockFor(appCss, '.font-size-preview__samples')
 
 assert.equal(
   packageJson.exports?.['./components/font-size'],
@@ -203,7 +204,6 @@ assert.ok(
 assert.ok(
   appCss.includes('.font-size-preview__sample') &&
     appCss.includes('.font-size-preview__samples {\n  display: flex;') &&
-    appCss.includes('gap: 24px;') &&
     !appCss.includes('.font-size-preview__row {') &&
     !appCss.includes('.font-size-preview__identity') &&
     !appCss.includes('.font-size-preview__description') &&
@@ -213,13 +213,16 @@ assert.ok(
 assert.ok(
   appCss.includes('.font-size-preview__samples {\n  display: flex;\n  align-items: baseline;') &&
     appCss.includes('.font-size-preview__sample--base {\n  text-decoration: underline;') &&
-    appCss.includes('gap: 24px;') &&
+    samplesBlock.includes('flex-wrap: wrap;') &&
+    samplesBlock.includes('justify-content: space-evenly;') &&
+    samplesBlock.includes('gap: 12px;') &&
     sampleBlock.includes('font-family: var(--font-sans);') &&
-    sampleBlock.includes('overflow-wrap: anywhere;') &&
+    sampleBlock.includes('white-space: nowrap;') &&
     sampleBlock.includes('line-height: 1.15;') &&
+    !sampleBlock.includes('overflow-wrap: anywhere;') &&
     !sampleBlock.includes('height: 80px;') &&
     !sampleBlock.includes('align-items: center;'),
-  'FontSize preview samples must baseline-align one row of glyphs with shared font family and safe wrapping.',
+  'FontSize preview samples must baseline-align glyphs with a shared font family, wrapping whole samples onto new rows (never splitting one glyph pair) with a 12px minimum gap that grows with free space.',
 )
 
 assert.ok(registryItem, 'registry.json must include the font-size registry item.')
