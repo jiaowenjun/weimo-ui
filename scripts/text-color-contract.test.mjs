@@ -274,14 +274,15 @@ assert.ok(
 assert.ok(
   appCss.includes('.text-color-preview__samples {\n  display: flex;\n  align-items: baseline;') &&
     samplesBlock.includes('flex-wrap: wrap;') &&
-    samplesBlock.includes('justify-content: space-evenly;') &&
-    samplesBlock.includes('gap: 12px;') &&
+    samplesBlock.includes('justify-content: center;') &&
+    samplesBlock.includes('row-gap: 12px;') &&
+    samplesBlock.includes('column-gap: clamp(12px, 4%, 24px);') &&
     sampleBlock.includes('font-size: 1.75rem;') &&
     sampleBlock.includes('font-weight: 600;') &&
     sampleBlock.includes('white-space: nowrap;') &&
     !sampleBlock.includes('overflow-wrap: anywhere;') &&
     !sampleBlock.includes('height: 80px;'),
-  'TextColor preview samples must baseline-align colored glyphs, wrapping whole samples onto new rows (never splitting one glyph pair) with a 12px minimum gap that grows with free space.',
+  'TextColor preview samples must baseline-align colored glyphs, wrapping whole samples onto new rows (never splitting one glyph pair) with a gap that starts at 12px, grows with width, and never exceeds 24px.',
 )
 assert.ok(
   !appCss.includes('grid-template-columns: minmax(112px, 0.8fr) minmax(180px, 1.4fr) minmax(150px, 0.9fr) minmax(180px, 1.2fr);'),

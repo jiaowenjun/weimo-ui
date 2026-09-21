@@ -214,15 +214,16 @@ assert.ok(
   appCss.includes('.font-size-preview__samples {\n  display: flex;\n  align-items: baseline;') &&
     appCss.includes('.font-size-preview__sample--base {\n  text-decoration: underline;') &&
     samplesBlock.includes('flex-wrap: wrap;') &&
-    samplesBlock.includes('justify-content: space-evenly;') &&
-    samplesBlock.includes('gap: 12px;') &&
+    samplesBlock.includes('justify-content: center;') &&
+    samplesBlock.includes('row-gap: 12px;') &&
+    samplesBlock.includes('column-gap: clamp(12px, 4%, 24px);') &&
     sampleBlock.includes('font-family: var(--font-sans);') &&
     sampleBlock.includes('white-space: nowrap;') &&
     sampleBlock.includes('line-height: 1.15;') &&
     !sampleBlock.includes('overflow-wrap: anywhere;') &&
     !sampleBlock.includes('height: 80px;') &&
     !sampleBlock.includes('align-items: center;'),
-  'FontSize preview samples must baseline-align glyphs with a shared font family, wrapping whole samples onto new rows (never splitting one glyph pair) with a 12px minimum gap that grows with free space.',
+  'FontSize preview samples must baseline-align glyphs with a shared font family, wrapping whole samples onto new rows (never splitting one glyph pair) with a gap that starts at 12px, grows with width, and never exceeds 24px.',
 )
 
 assert.ok(registryItem, 'registry.json must include the font-size registry item.')

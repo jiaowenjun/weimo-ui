@@ -850,8 +850,9 @@
   align-items: baseline;
   flex-wrap: wrap;
   align-content: center;
-  justify-content: space-evenly;
-  gap: 12px;
+  justify-content: center;
+  row-gap: 12px;
+  column-gap: clamp(12px, 4%, 24px);
   padding: 24px 16px;
 }
 
@@ -869,8 +870,9 @@
   align-items: baseline;
   flex-wrap: wrap;
   align-content: center;
-  justify-content: space-evenly;
-  gap: 12px;
+  justify-content: center;
+  row-gap: 12px;
+  column-gap: clamp(12px, 4%, 24px);
   padding: 24px 16px;
 }
 
