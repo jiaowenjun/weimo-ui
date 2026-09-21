@@ -45,7 +45,7 @@ const cossCardCss = readProjectFile('src/components/coss/card.css')
 const tokensCss = readProjectFile('src/styles/tokens.css')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinitionSource = readProjectFile('src/docs/component-definitions/text.tsx')
+const docsDefinitionSource = readProjectFile('src/docs/component-definitions/text-tokens.tsx')
 const appCss = readProjectFile('src/App.css')
 const rootRegistry = readJson('registry.json')
 const styleRegistry = readJson('registry/style.json')
@@ -144,7 +144,7 @@ assert.ok(
 assert.deepEqual(rootStyleItem, styleRegistry, 'registry.json style item must match registry/style.json.')
 
 assert.ok(
-  manifestSource.includes("id: 'text'") &&
+  manifestSource.includes("id: 'text-tokens'") &&
     manifestSource.includes("name: '文字'") &&
     manifestSource.includes("registryName: 'font-size'") &&
     manifestSource.includes("packageExport: './components/font-size'") &&
@@ -152,12 +152,12 @@ assert.ok(
   'component manifest must list the 文字 page as a public registry-backed token utility.',
 )
 assert.ok(
-  definitionsIndexSource.includes("import { textDefinition } from './text'") &&
-    definitionsIndexSource.includes('text: textDefinition'),
+  definitionsIndexSource.includes("import { textTokensDefinition } from './text-tokens'") &&
+    definitionsIndexSource.includes("'text-tokens': textTokensDefinition"),
   'component definitions index must wire the 文字 (text) detail definition.',
 )
 assert.ok(
-  docsDefinitionSource.includes("id: 'text'") &&
+  docsDefinitionSource.includes("id: 'text-tokens'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
     docsDefinitionSource.includes("import { ComponentPreviewCard } from '../../components/component-preview-card'") &&
     docsDefinitionSource.includes("from '../../components/text-color'") &&

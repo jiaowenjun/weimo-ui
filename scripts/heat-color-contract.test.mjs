@@ -40,7 +40,7 @@ const heatColorSource = readProjectFile('src/components/heatmap/heat-color.tsx')
 const heatColorCss = readProjectFile('src/components/heat-color.css')
 const heatmapCss = readProjectFile('src/components/heatmap/heatmap.css')
 const heatmapSource = readProjectFile('src/components/heatmap/heatmap.tsx')
-const bgColorDocsDefinitionSource = readProjectFile('src/docs/component-definitions/bg-color.tsx')
+const backgroundTokensDocsDefinitionSource = readProjectFile('src/docs/component-definitions/background-tokens.tsx')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const appCss = readProjectFile('src/App.css')
@@ -170,28 +170,28 @@ assert.ok(
   'HeatColor must remain public without exposing a separate detail page.',
 )
 assert.ok(
-  bgColorDocsDefinitionSource.includes("from '../../components/heat-color'") &&
-    bgColorDocsDefinitionSource.includes("from '../../components/component-preview-card'") &&
-    bgColorDocsDefinitionSource.includes('heatColorLevels.map') &&
-    bgColorDocsDefinitionSource.includes('heatColorMap[level]') &&
-    bgColorDocsDefinitionSource.includes('getHeatColorClassName(level)') &&
-    bgColorDocsDefinitionSource.includes('getHeatColorToken(level)') &&
-    bgColorDocsDefinitionSource.includes('darkValue: item.value.dark') &&
-    bgColorDocsDefinitionSource.includes('label="热力图"') &&
-    bgColorDocsDefinitionSource.includes('token: getHeatColorToken(level)') &&
-    bgColorDocsDefinitionSource.includes('value: item.value.light') &&
-    bgColorDocsDefinitionSource.includes('heat-color-preview__group') &&
-    bgColorDocsDefinitionSource.includes('heat-color-preview__swatch') &&
-    bgColorDocsDefinitionSource.includes('<ComponentPreviewCard') &&
-    bgColorDocsDefinitionSource.includes("'HeatColor'") &&
-    bgColorDocsDefinitionSource.includes("'热力图'") &&
-    !bgColorDocsDefinitionSource.includes('<HeatColor'),
+  backgroundTokensDocsDefinitionSource.includes("from '../../components/heat-color'") &&
+    backgroundTokensDocsDefinitionSource.includes("from '../../components/component-preview-card'") &&
+    backgroundTokensDocsDefinitionSource.includes('heatColorLevels.map') &&
+    backgroundTokensDocsDefinitionSource.includes('heatColorMap[level]') &&
+    backgroundTokensDocsDefinitionSource.includes('getHeatColorClassName(level)') &&
+    backgroundTokensDocsDefinitionSource.includes('getHeatColorToken(level)') &&
+    backgroundTokensDocsDefinitionSource.includes('darkValue: item.value.dark') &&
+    backgroundTokensDocsDefinitionSource.includes('label="热力图"') &&
+    backgroundTokensDocsDefinitionSource.includes('token: getHeatColorToken(level)') &&
+    backgroundTokensDocsDefinitionSource.includes('value: item.value.light') &&
+    backgroundTokensDocsDefinitionSource.includes('heat-color-preview__group') &&
+    backgroundTokensDocsDefinitionSource.includes('heat-color-preview__swatch') &&
+    backgroundTokensDocsDefinitionSource.includes('<ComponentPreviewCard') &&
+    backgroundTokensDocsDefinitionSource.includes("'HeatColor'") &&
+    backgroundTokensDocsDefinitionSource.includes("'热力图'") &&
+    !backgroundTokensDocsDefinitionSource.includes('<HeatColor'),
   'BgColor docs must render the Heatmap tokens as one searchable ComponentPreviewCard.',
 )
 assert.ok(
   tokenGridBlock.includes('display: grid;') &&
     tokenGridBlock.includes('grid-template-columns: minmax(0, 1fr);') &&
-    !bgColorDocsDefinitionSource.includes('className="heat-color-preview"'),
+    !backgroundTokensDocsDefinitionSource.includes('className="heat-color-preview"'),
   'HeatColor cards must use the content-level token grid without a preview wrapper.',
 )
 assert.ok(

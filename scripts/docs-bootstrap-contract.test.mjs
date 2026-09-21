@@ -42,8 +42,8 @@ const componentDefinitionSources = {
   'heatmap': readProjectFile(
     'src/docs/component-definitions/heatmap.tsx',
   ),
-  'bg-color': readProjectFile('src/docs/component-definitions/bg-color.tsx'),
-  'border-color': readProjectFile('src/docs/component-definitions/border-color.tsx'),
+  'background-tokens': readProjectFile('src/docs/component-definitions/background-tokens.tsx'),
+  'border-tokens': readProjectFile('src/docs/component-definitions/border-tokens.tsx'),
   'glass-icon-button': readProjectFile('src/docs/component-definitions/glass-icon-button.tsx'),
   'ghost-icon-button': readProjectFile('src/docs/component-definitions/ghost-icon-button.tsx'),
   menu: readProjectFile('src/docs/component-definitions/menu.tsx'),
@@ -189,8 +189,8 @@ for (const componentId of [
   'tag-bread',
   'stat-group',
   'heatmap',
-  'bg-color',
-  'border-color',
+  'background-tokens',
+  'border-tokens',
   'ghost-icon-button',
   'glass-icon-button',
   'menu',
@@ -223,8 +223,8 @@ for (const snippet of [
   "id: 'heatmap'",
   "id: 'heat-color'",
   "id: 'bg-blur'",
-  "id: 'bg-color'",
-  "id: 'border-color'",
+  "id: 'background-tokens'",
+  "id: 'border-tokens'",
   './components/heatmap',
   './components/heat-color',
   './components/bg-blur',
@@ -351,16 +351,16 @@ assert.ok(
 
 assert.ok(
   !existsSync(join(root, 'src/docs/component-definitions/bg-blur.tsx')) &&
-    componentDefinitionSources['bg-color'].includes('bgBlurTones.map') &&
-    componentDefinitionSources['bg-color'].includes('>背景模糊度</h2>'),
+    componentDefinitionSources['background-tokens'].includes('bgBlurTones.map') &&
+    componentDefinitionSources['background-tokens'].includes('>背景模糊度</h2>'),
   'BgBlur docs must be merged into the Background detail page.',
 )
 
 assert.ok(
   !existsSync(join(root, 'src/docs/component-definitions/heat-color.tsx')) &&
-    componentDefinitionSources['bg-color'].includes('heatColorLevels.map') &&
-    componentDefinitionSources['bg-color'].includes('<ComponentPreviewCard') &&
-    componentDefinitionSources['bg-color'].includes('label="热力图"'),
+    componentDefinitionSources['background-tokens'].includes('heatColorLevels.map') &&
+    componentDefinitionSources['background-tokens'].includes('<ComponentPreviewCard') &&
+    componentDefinitionSources['background-tokens'].includes('label="热力图"'),
   'HeatColor docs must be merged into the BgColor Heatmap group.',
 )
 

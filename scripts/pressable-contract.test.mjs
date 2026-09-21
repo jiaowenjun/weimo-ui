@@ -31,7 +31,7 @@ const packageJson = readJson('package.json')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const pressableSource = readProjectFile('src/components/pressable.ts')
-const bgColorDocsDefinitionSource = readProjectFile('src/docs/component-definitions/bg-color.tsx')
+const backgroundTokensDocsDefinitionSource = readProjectFile('src/docs/component-definitions/background-tokens.tsx')
 const appCss = readProjectFile('src/App.css')
 const registrySmokeSource = readProjectFile('scripts/registry-smoke.test.mjs')
 const rootRegistry = readJson('registry.json')
@@ -94,13 +94,13 @@ assert.ok(
 assert.ok(
   !existsSync(join(root, 'src/docs/component-definitions/pressable.tsx')) &&
     !existsSync(join(root, 'src/docs/component-definitions/pressable-demo.tsx')) &&
-    bgColorDocsDefinitionSource.includes("import { pressableToneMap, pressableTones } from '../../components/pressable'") &&
-    bgColorDocsDefinitionSource.includes('const pressableFeedback = pressableToneMap.feedback') &&
-    bgColorDocsDefinitionSource.includes('tone === pressableFeedback.bgColorTone') &&
-    bgColorDocsDefinitionSource.includes('pressable-preview__sample') &&
-    bgColorDocsDefinitionSource.includes('悬停 / 按压查看反馈色') &&
-    bgColorDocsDefinitionSource.includes("'Pressable'") &&
-    bgColorDocsDefinitionSource.includes('pressableTones.flatMap'),
+    backgroundTokensDocsDefinitionSource.includes("import { pressableToneMap, pressableTones } from '../../components/pressable'") &&
+    backgroundTokensDocsDefinitionSource.includes('const pressableFeedback = pressableToneMap.feedback') &&
+    backgroundTokensDocsDefinitionSource.includes('tone === pressableFeedback.bgColorTone') &&
+    backgroundTokensDocsDefinitionSource.includes('pressable-preview__sample') &&
+    backgroundTokensDocsDefinitionSource.includes('悬停 / 按压查看反馈色') &&
+    backgroundTokensDocsDefinitionSource.includes("'Pressable'") &&
+    backgroundTokensDocsDefinitionSource.includes('pressableTones.flatMap'),
   'BgColor docs must absorb the interactive Pressable preview and search metadata.',
 )
 
@@ -123,7 +123,7 @@ for (const forbiddenPressedPreviewSnippet of [
   'setLockedSampleKey',
 ]) {
   assert.ok(
-    !bgColorDocsDefinitionSource.includes(forbiddenPressedPreviewSnippet),
+    !backgroundTokensDocsDefinitionSource.includes(forbiddenPressedPreviewSnippet),
     `Merged Pressable docs must not invent a persistent pressed state through ${forbiddenPressedPreviewSnippet}.`,
   )
 }
@@ -135,15 +135,15 @@ for (const [tone, bgColorTone, token, className] of expectedTones) {
 }
 
 assert.ok(
-  bgColorDocsDefinitionSource.includes('pressableToneMap.feedback') &&
-    bgColorDocsDefinitionSource.includes('pressable-preview__sample') &&
-    !bgColorDocsDefinitionSource.includes("'pressable-hover'") &&
-    !bgColorDocsDefinitionSource.includes("'pressable-hover-strong'") &&
-    !bgColorDocsDefinitionSource.includes("'pressable-hover-inverse'") &&
-    !bgColorDocsDefinitionSource.includes("'pressable-active-inverse'") &&
-    !bgColorDocsDefinitionSource.includes("'surface'") &&
-    !bgColorDocsDefinitionSource.includes("'overlay'") &&
-    !bgColorDocsDefinitionSource.includes("'pressable-overlay'"),
+  backgroundTokensDocsDefinitionSource.includes('pressableToneMap.feedback') &&
+    backgroundTokensDocsDefinitionSource.includes('pressable-preview__sample') &&
+    !backgroundTokensDocsDefinitionSource.includes("'pressable-hover'") &&
+    !backgroundTokensDocsDefinitionSource.includes("'pressable-hover-strong'") &&
+    !backgroundTokensDocsDefinitionSource.includes("'pressable-hover-inverse'") &&
+    !backgroundTokensDocsDefinitionSource.includes("'pressable-active-inverse'") &&
+    !backgroundTokensDocsDefinitionSource.includes("'surface'") &&
+    !backgroundTokensDocsDefinitionSource.includes("'overlay'") &&
+    !backgroundTokensDocsDefinitionSource.includes("'pressable-overlay'"),
   'BgColor detail page must own the single feedback preview without restoring removed tones.',
 )
 

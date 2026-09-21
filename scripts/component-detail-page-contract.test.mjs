@@ -80,7 +80,7 @@ const imageViewDefinitionSource = readProjectFile('src/docs/component-definition
 const glassIconButtonDefinitionSource = readProjectFile('src/docs/component-definitions/glass-icon-button.tsx')
 const ghostIconButtonDefinitionSource = readProjectFile('src/docs/component-definitions/ghost-icon-button.tsx')
 const textButtonDefinitionSource = readProjectFile('src/docs/component-definitions/text-button.tsx')
-const borderColorDefinitionSource = readProjectFile('src/docs/component-definitions/border-color.tsx')
+const borderTokensDefinitionSource = readProjectFile('src/docs/component-definitions/border-tokens.tsx')
 const componentDefinitionsSource = readProjectFile('src/docs/component-definitions/card.tsx') +
   readProjectFile('src/docs/component-definitions/canvas-transparency.tsx') +
   mdRenderDefinitionSource +
@@ -94,7 +94,7 @@ const componentDefinitionsSource = readProjectFile('src/docs/component-definitio
   glassIconButtonDefinitionSource +
   ghostIconButtonDefinitionSource +
   textButtonDefinitionSource +
-  borderColorDefinitionSource +
+  borderTokensDefinitionSource +
   readProjectFile('src/docs/component-definitions/menu.tsx') +
   readProjectFile('src/docs/component-definitions/md-editor.tsx') +
   readProjectFile('src/docs/component-definitions/tag-tree.tsx') +
@@ -381,12 +381,12 @@ assert.ok(
   'GlassIconButton detail page must render a manual disabled-state transition preview across light and dark backgrounds.',
 )
 assert.ok(
-  borderColorDefinitionSource.includes("frame: 'plain',") &&
-    borderColorDefinitionSource.includes('<ComponentPreviewCard') &&
-    !borderColorDefinitionSource.includes('<TokenPreviewDetails') &&
-    borderColorDefinitionSource.includes('...contexts.flatMap') &&
-    borderColorDefinitionSource.includes('--glass-surface-border') &&
-    borderColorDefinitionSource.includes('--color-border-divider-menu-on-light'),
+  borderTokensDefinitionSource.includes("frame: 'plain',") &&
+    borderTokensDefinitionSource.includes('<ComponentPreviewCard') &&
+    !borderTokensDefinitionSource.includes('<TokenPreviewDetails') &&
+    borderTokensDefinitionSource.includes('...contexts.flatMap') &&
+    borderTokensDefinitionSource.includes('--glass-surface-border') &&
+    borderTokensDefinitionSource.includes('--color-border-divider-menu-on-light'),
   'BorderColor detail page must keep background-aware token variants searchable without rendering redundant prose.',
 )
 assert.ok(

@@ -40,7 +40,7 @@ const borderRadiusSource = readProjectFile('src/components/border-radius.ts')
 const menuCss = readProjectFile('src/components/menu.css')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinitionSource = readProjectFile('src/docs/component-definitions/border-color.tsx')
+const docsDefinitionSource = readProjectFile('src/docs/component-definitions/border-tokens.tsx')
 const appCss = readProjectFile('src/App.css')
 const tokensCss = readProjectFile('src/styles/tokens.css')
 const rootRegistry = readJson('registry.json')
@@ -153,7 +153,7 @@ assert.ok(
   'component definitions index must not expose a separate BorderRadius detail page.',
 )
 assert.ok(
-  docsDefinitionSource.includes("id: 'border-color'") &&
+  docsDefinitionSource.includes("id: 'border-tokens'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
     docsDefinitionSource.includes("import { ComponentPreviewCard } from '../../components/component-preview-card'") &&
     docsDefinitionSource.includes('borderRadiusScales.map') &&

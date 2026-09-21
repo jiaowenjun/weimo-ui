@@ -31,14 +31,14 @@ type RootRegistry = {
 }
 
 const conceptualTokenModules = new Set([
+  'background-tokens',
   'bg-blur',
-  'bg-color',
-  'border-color',
   'border-radius',
-  'text',
+  'border-tokens',
   'heat-color',
   'pressable',
   'text-color',
+  'text-tokens',
 ])
 
 describe('public component catalog', () => {

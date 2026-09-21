@@ -55,7 +55,7 @@ const bgBlurSource = readProjectFile('src/components/bg-blur.ts')
 const bgBlurCss = readProjectFile('src/components/bg-blur.css')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinitionSource = readProjectFile('src/docs/component-definitions/bg-color.tsx')
+const docsDefinitionSource = readProjectFile('src/docs/component-definitions/background-tokens.tsx')
 const appCss = readProjectFile('src/App.css')
 const tokenPreviewCardCss = readProjectFile('src/components/component-preview-card.css')
 const tokensCss = readProjectFile('src/styles/tokens.css')
@@ -251,7 +251,7 @@ assert.ok(
   'component definitions index must remove the merged BgBlur detail page and old Blur alias.',
 )
 assert.ok(
-  docsDefinitionSource.includes("id: 'bg-color'") &&
+  docsDefinitionSource.includes("id: 'background-tokens'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
     docsDefinitionSource.includes("import { ComponentPreviewCard } from '../../components/component-preview-card'") &&
     docsDefinitionSource.includes('bgBlurTones.map') &&

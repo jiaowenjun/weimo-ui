@@ -89,7 +89,7 @@ const sidebarShellCss = readProjectFile('src/components/sidebar/sidebar-shell.cs
 const tagTreeCss = readProjectFile('src/components/tag-tree/tag-tree.css')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinitionSource = readProjectFile('src/docs/component-definitions/border-color.tsx')
+const docsDefinitionSource = readProjectFile('src/docs/component-definitions/border-tokens.tsx')
 const appCss = readProjectFile('src/App.css')
 const tokensCss = readProjectFile('src/styles/tokens.css')
 const rootRegistry = readJson('registry.json')
@@ -392,19 +392,19 @@ assert.ok(
 assert.deepEqual(rootStyleItem, styleRegistry, 'Root registry style item must match registry/style.json.')
 
 assert.ok(
-  manifestSource.includes("id: 'border-color'") &&
+  manifestSource.includes("id: 'border-tokens'") &&
     manifestSource.includes("name: '边框'") &&
     manifestSource.includes("registryName: 'border-color'") &&
     manifestSource.includes("packageExport: './components/border-color'"),
   'component manifest must list BorderColor as a public registry-backed utility.',
 )
 assert.ok(
-  definitionsIndexSource.includes("import { borderColorDefinition } from './border-color'") &&
-    definitionsIndexSource.includes("'border-color': borderColorDefinition"),
-  'component definitions index must wire the BorderColor detail definition.',
+  definitionsIndexSource.includes("import { borderTokensDefinition } from './border-tokens'") &&
+    definitionsIndexSource.includes("'border-tokens': borderTokensDefinition"),
+  'component definitions index must wire the 边框 (border-tokens) detail definition.',
 )
 assert.ok(
-  docsDefinitionSource.includes("id: 'border-color'") &&
+  docsDefinitionSource.includes("id: 'border-tokens'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
     docsDefinitionSource.includes("import { ComponentPreviewCard } from '../../components/component-preview-card'") &&
     docsDefinitionSource.includes("from '../../components/border-radius'") &&

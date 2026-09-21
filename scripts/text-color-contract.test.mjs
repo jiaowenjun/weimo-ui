@@ -56,7 +56,7 @@ const textColorCss = readProjectFile('src/components/text-color.css')
 const tokensCss = readProjectFile('src/styles/tokens.css')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinitionSource = readProjectFile('src/docs/component-definitions/text.tsx')
+const docsDefinitionSource = readProjectFile('src/docs/component-definitions/text-tokens.tsx')
 const appCss = readProjectFile('src/App.css')
 const rootRegistry = readJson('registry.json')
 const styleRegistry = readJson('registry/style.json')
@@ -237,7 +237,7 @@ assert.ok(
   'component definitions index must not expose a separate TextColor detail page.',
 )
 assert.ok(
-  docsDefinitionSource.includes("id: 'text'") &&
+  docsDefinitionSource.includes("id: 'text-tokens'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
     docsDefinitionSource.includes("import { ComponentPreviewCard } from '../../components/component-preview-card'") &&
     docsDefinitionSource.includes('const previewTextColorTones = textColorTones.filter((tone) => tone !== \'inherit\')') &&

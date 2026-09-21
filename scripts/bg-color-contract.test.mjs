@@ -107,8 +107,8 @@ const bgColorSource = readProjectFile('src/components/bg-color.ts')
 const bgColorCss = readProjectFile('src/components/bg-color.css')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinitionSource = readProjectFile('src/docs/component-definitions/bg-color.tsx')
-const textDocsSource = readProjectFile('src/docs/component-definitions/text.tsx')
+const docsDefinitionSource = readProjectFile('src/docs/component-definitions/background-tokens.tsx')
+const textDocsSource = readProjectFile('src/docs/component-definitions/text-tokens.tsx')
 const appCss = readProjectFile('src/App.css')
 const tokenPreviewCardCss = readProjectFile('src/components/component-preview-card.css')
 const tokensCss = readProjectFile('src/styles/tokens.css')
@@ -351,19 +351,19 @@ for (const [source, selector] of [
 assert.deepEqual(rootStyleItem, styleRegistry, 'Root registry style item must match registry/style.json.')
 
 assert.ok(
-  manifestSource.includes("id: 'bg-color'") &&
+  manifestSource.includes("id: 'background-tokens'") &&
     manifestSource.includes("name: '背景'") &&
     manifestSource.includes("registryName: 'bg-color'") &&
     manifestSource.includes("packageExport: './components/bg-color'"),
   'component manifest must list BgColor as a public registry-backed utility.',
 )
 assert.ok(
-  definitionsIndexSource.includes("import { bgColorDefinition } from './bg-color'") &&
-    definitionsIndexSource.includes("'bg-color': bgColorDefinition"),
-  'component definitions index must wire the BgColor detail definition.',
+  definitionsIndexSource.includes("import { backgroundTokensDefinition } from './background-tokens'") &&
+    definitionsIndexSource.includes("'background-tokens': backgroundTokensDefinition"),
+  'component definitions index must wire the 背景 (background-tokens) detail definition.',
 )
 assert.ok(
-  docsDefinitionSource.includes("id: 'bg-color'") &&
+  docsDefinitionSource.includes("id: 'background-tokens'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
     docsDefinitionSource.includes("import { ComponentPreviewCard } from '../../components/component-preview-card'") &&
     docsDefinitionSource.includes("import { pressableToneMap, pressableTones } from '../../components/pressable'") &&

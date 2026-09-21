@@ -121,8 +121,8 @@ function BorderColorPreview() {
   )
 }
 
-export const borderColorDefinition = {
-  id: 'border-color',
+export const borderTokensDefinition = {
+  id: 'border-tokens',
   status: 'Ready',
   frame: 'plain',
   searchAliases: borderColorSearchAliases.concat(

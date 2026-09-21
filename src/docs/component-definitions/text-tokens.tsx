@@ -132,8 +132,8 @@ function FontPreview() {
   )
 }
 
-export const textDefinition = {
-  id: 'text',
+export const textTokensDefinition = {
+  id: 'text-tokens',
   status: 'Ready',
   frame: 'plain',
   searchAliases: fontSizeScales.flatMap((scale) => {

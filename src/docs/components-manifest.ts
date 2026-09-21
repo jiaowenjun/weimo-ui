@@ -87,7 +87,7 @@ export const componentManifest = [
     registry: true,
   },
   {
-    id: 'text',
+    id: 'text-tokens',
     name: '文字',
     registryName: 'font-size',
     packageExport: './components/font-size',
@@ -105,7 +105,7 @@ export const componentManifest = [
     registry: true,
   },
   {
-    id: 'bg-color',
+    id: 'background-tokens',
     name: '背景',
     registryName: 'bg-color',
     packageExport: './components/bg-color',
@@ -123,7 +123,7 @@ export const componentManifest = [
     registry: true,
   },
   {
-    id: 'border-color',
+    id: 'border-tokens',
     name: '边框',
     registryName: 'border-color',
     packageExport: './components/border-color',

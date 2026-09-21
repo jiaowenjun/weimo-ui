@@ -139,6 +139,12 @@ assert.ok(
     !cardCss.includes('grid-column:'),
   'ComponentPreviewCard must support multi-token rows through items while keeping the single-token props, without component-level grid placement.',
 )
+assert.ok(
+  cardSource.includes('label?: ReactNode') &&
+    cardSource.includes('const hasMeta = label !== undefined || rows.length > 0') &&
+    cardSource.includes('label === undefined ? null : ('),
+  'ComponentPreviewCard must keep the meta area optional: no label and no token rows means no meta wrapper, children render directly in the card.',
+)
 
 const cardSwatchBlock = blockFor(cardCss, '.component-preview-card__value-swatch')
 
@@ -240,15 +246,15 @@ for (const snippet of [
 }
 
 const semanticTokenDefinitions = [
-  'bg-color',
-  'border-color',
-  'text',
+  'background-tokens',
+  'border-tokens',
+  'text-tokens',
 ]
 
 const tokenPreviewWrappers = {
-  'bg-color': 'bg-color-preview',
-  'border-color': 'border-color-preview',
-  text: 'font-size-preview',
+  'background-tokens': 'bg-color-preview',
+  'border-tokens': 'border-color-preview',
+  'text-tokens': 'font-size-preview',
 }
 
 for (const componentId of semanticTokenDefinitions) {
@@ -278,13 +284,13 @@ assert.ok(
   'token cards must be direct app-shell__content children and use the content-level grid.',
 )
 
-const bgColorDefinitionSource = readProjectFile('src/docs/component-definitions/bg-color.tsx')
-const borderColorDefinitionSource = readProjectFile('src/docs/component-definitions/border-color.tsx')
-const textDefinitionSource = readProjectFile('src/docs/component-definitions/text.tsx')
+const backgroundTokensDefinitionSource = readProjectFile('src/docs/component-definitions/background-tokens.tsx')
+const borderTokensDefinitionSource = readProjectFile('src/docs/component-definitions/border-tokens.tsx')
+const textTokensDefinitionSource = readProjectFile('src/docs/component-definitions/text-tokens.tsx')
 
 assert.ok(
-  !borderColorDefinitionSource.includes('<TokenPreviewDetails') &&
-    borderColorDefinitionSource.includes('...contexts.flatMap'),
+  !borderTokensDefinitionSource.includes('<TokenPreviewDetails') &&
+    borderTokensDefinitionSource.includes('...contexts.flatMap'),
   'BorderColor must hide related-token prose while keeping those tokens searchable.',
 )
 
@@ -303,44 +309,44 @@ assert.ok(
 
 assert.ok(
   !existsSync(join(root, 'src/docs/component-definitions/bg-blur.tsx')) &&
-    bgColorDefinitionSource.includes('>背景模糊度</h2>') &&
-    bgColorDefinitionSource.includes('bgBlurTones.map') &&
-    bgColorDefinitionSource.includes('item.backgroundToken'),
+    backgroundTokensDefinitionSource.includes('>背景模糊度</h2>') &&
+    backgroundTokensDefinitionSource.includes('bgBlurTones.map') &&
+    backgroundTokensDefinitionSource.includes('item.backgroundToken'),
   'BgBlur and BgColor docs must share the grouped Background detail page.',
 )
 
 assert.ok(
   !existsSync(join(root, 'src/docs/component-definitions/pressable.tsx')) &&
     !existsSync(join(root, 'src/docs/component-definitions/pressable-demo.tsx')) &&
-    bgColorDefinitionSource.includes('pressableToneMap') &&
-    bgColorDefinitionSource.includes('pressable-preview__sample'),
+    backgroundTokensDefinitionSource.includes('pressableToneMap') &&
+    backgroundTokensDefinitionSource.includes('pressable-preview__sample'),
   'Pressable docs must stay merged into the BgColor detail page.',
 )
 
 assert.ok(
   !existsSync(join(root, 'src/docs/component-definitions/heat-color.tsx')) &&
-    bgColorDefinitionSource.includes('heatColorLevels.map') &&
-    bgColorDefinitionSource.includes('<ComponentPreviewCard') &&
-    bgColorDefinitionSource.includes('heat-color-preview__swatch') &&
-    bgColorDefinitionSource.includes('label="热力图"'),
+    backgroundTokensDefinitionSource.includes('heatColorLevels.map') &&
+    backgroundTokensDefinitionSource.includes('<ComponentPreviewCard') &&
+    backgroundTokensDefinitionSource.includes('heat-color-preview__swatch') &&
+    backgroundTokensDefinitionSource.includes('label="热力图"'),
   'HeatColor docs must stay merged into the BgColor detail page under the grouped ComponentPreviewCard.',
 )
 
 assert.ok(
   !existsSync(join(root, 'src/docs/component-definitions/text-color.tsx')) &&
-    textDefinitionSource.includes('label="字色"') &&
-    textDefinitionSource.includes('label="字号"') &&
-    textDefinitionSource.includes('textColorToneMap') &&
-    textDefinitionSource.includes('fontSizeScaleMap'),
+    textTokensDefinitionSource.includes('label="字色"') &&
+    textTokensDefinitionSource.includes('label="字号"') &&
+    textTokensDefinitionSource.includes('textColorToneMap') &&
+    textTokensDefinitionSource.includes('fontSizeScaleMap'),
   'TextColor and FontSize docs must share the grouped Font detail page.',
 )
 
 assert.ok(
   !existsSync(join(root, 'src/docs/component-definitions/border-radius.tsx')) &&
-    !borderColorDefinitionSource.includes('component-preview-card-demo__category') &&
-    borderColorDefinitionSource.includes('label="圆角"') &&
-    borderColorDefinitionSource.includes('label="边框色"') &&
-    borderColorDefinitionSource.includes('borderRadiusScaleMap') &&
-    borderColorDefinitionSource.includes('borderColorToneMap'),
+    !borderTokensDefinitionSource.includes('component-preview-card-demo__category') &&
+    borderTokensDefinitionSource.includes('label="圆角"') &&
+    borderTokensDefinitionSource.includes('label="边框色"') &&
+    borderTokensDefinitionSource.includes('borderRadiusScaleMap') &&
+    borderTokensDefinitionSource.includes('borderColorToneMap'),
   'BorderRadius and BorderColor docs must share the grouped Border detail page.',
 )

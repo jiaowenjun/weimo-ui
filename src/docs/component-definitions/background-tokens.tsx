@@ -161,8 +161,8 @@ function BgColorPreview() {
   )
 }
 
-export const bgColorDefinition = {
-  id: 'bg-color',
+export const backgroundTokensDefinition = {
+  id: 'background-tokens',
   status: 'Ready',
   frame: 'plain',
   searchAliases: bgColorPreviewTones.flatMap((tone) => {
