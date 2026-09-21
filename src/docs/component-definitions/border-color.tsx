@@ -45,9 +45,9 @@ const borderContextTokens: Partial<Record<BorderColorTone, readonly BorderContex
     },
   ],
   default: [
-    { label: '主题默认', token: '--gls-surface-border' },
-    { label: '亮背景', token: '--gls-surface-border-on-light' },
-    { label: '暗背景', token: '--gls-surface-border-on-dark' },
+    { label: '主题默认', token: '--glass-surface-border' },
+    { label: '亮背景', token: '--glass-surface-border-on-light' },
+    { label: '暗背景', token: '--glass-surface-border-on-dark' },
   ],
 }
 

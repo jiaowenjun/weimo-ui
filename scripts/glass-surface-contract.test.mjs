@@ -491,20 +491,20 @@ assertOmits(
 for (const snippet of [
   '.glass-surface {',
   '@property --glass-surface-fg-opacity',
-  '--glass-surface-muted-color: var(--gls-surface-muted-fg);',
+  '--glass-surface-muted-color: var(--glass-surface-muted-fg);',
   '--glass-surface-hover-bg: color-mix(in srgb, currentColor 12%, transparent);',
-  'border: 1px solid var(--gls-surface-border);',
-  'backdrop-filter: blur(var(--gls-blur));',
-  '-webkit-backdrop-filter: blur(var(--gls-blur));',
-  'color: var(--gls-surface-fg);',
+  'border: 1px solid var(--glass-surface-border);',
+  'backdrop-filter: blur(var(--glass-blur));',
+  '-webkit-backdrop-filter: blur(var(--glass-blur));',
+  'color: var(--glass-surface-fg);',
   '.glass-surface[data-background-tone="light"]',
-  '--gls-surface-fg: var(--gls-surface-fg-on-light);',
-  '--glass-surface-muted-color: var(--gls-surface-muted-fg-on-light);',
-  '--gls-surface-border: var(--gls-surface-border-on-light);',
+  '--glass-surface-fg: var(--glass-surface-fg-on-light);',
+  '--glass-surface-muted-color: var(--glass-surface-muted-fg-on-light);',
+  '--glass-surface-border: var(--glass-surface-border-on-light);',
   '.glass-surface[data-background-tone="dark"]',
-  '--gls-surface-fg: var(--gls-surface-fg-on-dark);',
-  '--glass-surface-muted-color: var(--gls-surface-muted-fg-on-dark);',
-  '--gls-surface-border: var(--gls-surface-border-on-dark);',
+  '--glass-surface-fg: var(--glass-surface-fg-on-dark);',
+  '--glass-surface-muted-color: var(--glass-surface-muted-fg-on-dark);',
+  '--glass-surface-border: var(--glass-surface-border-on-dark);',
 ]) {
   assertIncludes(glassSurfaceCss, snippet, `GlassSurface CSS must include ${snippet}.`)
 }
@@ -520,15 +520,15 @@ assertOmits(
 )
 
 for (const [tokenName, lightValue, darkValue] of [
-  ['gls-surface-border', 'hsl(0 0% 80%)', 'hsl(0 0% 38%)'],
-  ['gls-surface-border-on-light', 'hsl(0 0% 80%)'],
-  ['gls-surface-border-on-dark', 'hsl(0 0% 38%)'],
-  ['gls-surface-fg', 'hsl(222.2 47.4% 11.2% / 0.9)', 'hsl(0 0% 79.2%)'],
-  ['gls-surface-muted-fg', 'hsl(215.3 25% 26.7% / 0.68)', 'hsl(0 0% 100% / 0.68)'],
-  ['gls-surface-fg-on-light', 'hsl(222.2 47.4% 11.2% / 0.9)'],
-  ['gls-surface-muted-fg-on-light', 'hsl(215.3 25% 26.7% / 0.68)'],
-  ['gls-surface-fg-on-dark', 'hsl(0 0% 100% / 0.9)'],
-  ['gls-surface-muted-fg-on-dark', 'hsl(0 0% 100% / 0.72)'],
+  ['glass-surface-border', 'hsl(0 0% 80%)', 'hsl(0 0% 38%)'],
+  ['glass-surface-border-on-light', 'hsl(0 0% 80%)'],
+  ['glass-surface-border-on-dark', 'hsl(0 0% 38%)'],
+  ['glass-surface-fg', 'hsl(222.2 47.4% 11.2% / 0.9)', 'hsl(0 0% 79.2%)'],
+  ['glass-surface-muted-fg', 'hsl(215.3 25% 26.7% / 0.68)', 'hsl(0 0% 100% / 0.68)'],
+  ['glass-surface-fg-on-light', 'hsl(222.2 47.4% 11.2% / 0.9)'],
+  ['glass-surface-muted-fg-on-light', 'hsl(215.3 25% 26.7% / 0.68)'],
+  ['glass-surface-fg-on-dark', 'hsl(0 0% 100% / 0.9)'],
+  ['glass-surface-muted-fg-on-dark', 'hsl(0 0% 100% / 0.72)'],
 ].map(([tokenName, lightValue, darkValue = lightValue]) => [tokenName, lightValue, darkValue])) {
   assertIncludes(
     tokensCss,

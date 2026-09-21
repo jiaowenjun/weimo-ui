@@ -45,6 +45,10 @@
     text-align: right;
   }
 
+  .token-preview-card__row--value-text-collapsed .token-preview-card__value-text {
+    display: none;
+  }
+
   .token-preview-card > .token-preview-card__meta ~ * {
     position: relative;
     overflow: hidden;

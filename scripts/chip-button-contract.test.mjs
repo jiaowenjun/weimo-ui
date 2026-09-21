@@ -161,7 +161,7 @@ for (const [block, snippet, message] of [
   [glassLayerBlock, 'opacity var(--chip-surface-state-transition-duration) cubic-bezier(0.2, 0, 0, 1)', 'ChipButton glass layer opacity transition must use the shared state duration variable.'],
   [glassLayerBlock, 'transform var(--chip-surface-state-transition-duration) cubic-bezier(0.2, 0, 0, 1)', 'ChipButton glass layer transform transition must use the shared state duration variable.'],
   [glassBaseBlock, 'border-color: var(--color-border);', 'ChipButton glass state must transition to the shared default border.'],
-  [glassBaseBlock, 'backdrop-filter: blur(var(--gls-blur));', 'ChipButton glass state must use shared glass blur.'],
+  [glassBaseBlock, 'backdrop-filter: blur(var(--glass-blur));', 'ChipButton glass state must use shared glass blur.'],
   [defaultStateBeforeBlock, 'opacity: 1;', 'ChipButton default state must show default layer.'],
   [defaultStateAfterBlock, 'opacity: 0;', 'ChipButton default state must hide glass layer.'],
   [glassStateBeforeBlock, 'opacity: 0;', 'ChipButton glass state must hide default layer.'],

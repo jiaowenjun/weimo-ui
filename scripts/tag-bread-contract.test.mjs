@@ -200,8 +200,8 @@ assert.ok(
   !glassLayerBlock.includes('background: var(--glass-gradient);') && !surfaceCss.includes('--glass-gradient'),
   'TagBread glass layer must not depend on a shared glass background gradient token.',
 )
-assertIncludes(glassSurfaceBlock, 'backdrop-filter: blur(var(--gls-blur));', 'TagBread must enable the glass blur.')
-assertIncludes(glassSurfaceBlock, '-webkit-backdrop-filter: blur(var(--gls-blur));', 'TagBread must support Safari glass blur.')
+assertIncludes(glassSurfaceBlock, 'backdrop-filter: blur(var(--glass-blur));', 'TagBread must enable the glass blur.')
+assertIncludes(glassSurfaceBlock, '-webkit-backdrop-filter: blur(var(--glass-blur));', 'TagBread must support Safari glass blur.')
 assert.ok(
   !glassSurfaceBlock.includes('box-shadow') && !surfaceCss.includes('--glass-shadow'),
   'TagBread glass surface must not use glass shadow effects.',

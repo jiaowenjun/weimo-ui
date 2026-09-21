@@ -156,7 +156,7 @@ for (const [block, snippet, message] of [
   [surfaceBlock, 'inline-size var(--animated-inline-size-transition-duration) cubic-bezier(0.2, 0, 0, 1)', 'ChipSurface must animate measured inline-size changes.'],
   [surfaceBeforeBlock, 'background: var(--color-bg-chip);', 'ChipSurface default layer must use the brand chip surface token.'],
   [surfaceGlassBlock, 'border-color: var(--color-border);', 'ChipSurface glass variant must use the shared default border token.'],
-  [surfaceGlassBlock, 'backdrop-filter: blur(var(--gls-blur));', 'ChipSurface glass variant must use the shared blur.'],
+  [surfaceGlassBlock, 'backdrop-filter: blur(var(--glass-blur));', 'ChipSurface glass variant must use the shared blur.'],
   [surfaceInteractiveBlock, 'cursor: pointer;', 'Only interactive ChipSurface callers must get pointer cursor.'],
   [surfaceInteractiveBlock, 'appearance: none;', 'Only interactive ChipSurface callers must reset native appearance.'],
   [surfaceHoverBlock, 'background: var(--chip-surface-hover-background);', 'Interactive ChipSurface hover must retint visible layers.'],
@@ -248,7 +248,7 @@ assert.ok(
 assert.ok(
   !tagBreadCss.includes('background: var(--glass-gradient);') &&
     !tagBreadCss.includes('box-shadow: var(--glass-shadow);') &&
-    !tagBreadCss.includes('backdrop-filter: blur(var(--gls-blur))'),
+    !tagBreadCss.includes('backdrop-filter: blur(var(--glass-blur))'),
   'TagBread CSS must not duplicate glass material after moving to ChipSurface.',
 )
 

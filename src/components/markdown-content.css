@@ -334,8 +334,8 @@
     max-width: 100%;
     margin-inline: auto;
     overflow-x: auto;
-    border: 1px solid var(--md-tbl-frame-border-color);
-    border-radius: var(--md-tbl-border-radius);
+    border: 1px solid var(--md-table-frame-border-color);
+    border-radius: var(--md-table-border-radius);
   }
 
   .md-editor__content.weimo-markdown-content .tableWrapper {
@@ -343,21 +343,21 @@
     max-width: 100%;
     margin-inline: auto;
     overflow-x: auto;
-    border: 1px solid var(--md-tbl-frame-border-color);
-    border-radius: var(--md-tbl-border-radius);
+    border: 1px solid var(--md-table-frame-border-color);
+    border-radius: var(--md-table-border-radius);
   }
 
   .weimo-card-markdown__table,
   .md-editor__content.weimo-markdown-content table {
     width: max-content;
     border-collapse: collapse;
-    font-size: var(--md-tbl-font-size);
+    font-size: var(--md-table-font-size);
   }
 
   .weimo-card-markdown__table-cell,
   .md-editor__content.weimo-markdown-content :where(td, th) {
     padding: 6px 8px;
-    border-bottom: 1px solid var(--md-tbl-cell-border-color);
+    border-bottom: 1px solid var(--md-table-cell-border-color);
     word-break: break-all;
     text-align: left;
     vertical-align: top;
@@ -365,12 +365,12 @@
 
   .weimo-card-markdown__table-cell + .weimo-card-markdown__table-cell,
   .md-editor__content.weimo-markdown-content :where(td, th) + :where(td, th) {
-    border-left: 1px solid var(--md-tbl-cell-border-color);
+    border-left: 1px solid var(--md-table-cell-border-color);
   }
 
   .weimo-card-markdown__table-cell--header,
   .md-editor__content.weimo-markdown-content th {
-    color: var(--md-tbl-header-color);
+    color: var(--md-table-header-color);
     font-weight: 600;
   }
 

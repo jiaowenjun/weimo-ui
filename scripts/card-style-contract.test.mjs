@@ -537,7 +537,7 @@ for (const [block, label] of [
 ]) {
   assertIncludes(
     block,
-    'border: 1px solid var(--md-tbl-frame-border-color);',
+    'border: 1px solid var(--md-table-frame-border-color);',
     `${label} must use the node-semantic Markdown table border token.`,
   )
   assert.ok(

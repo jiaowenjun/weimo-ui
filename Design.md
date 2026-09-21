@@ -25,7 +25,7 @@
 ## 3. 视觉层级
 
 - 静态内容面板优先使用 `--color-surface-card` 和 `--shadow-card`。
-- 浮动层优先使用 `--glass-gradient`、`--gls-blur` 和 `--glass-shadow`。
+- 浮动层优先使用 `--glass-gradient`、`--glass-blur` 和 `--glass-shadow`。
 - 视觉效果服务于层级，不服务于装饰。
 
 ## 4. 组件边界

@@ -81,9 +81,9 @@ const markdownColorTokens = [
   ['--md-inline-code-border-color', 'hsl(0 0% 88%)', 'hsl(0 0% 28%)'],
   ['--md-link-color', 'hsl(0 0% 15%)', 'hsl(0 0% 96%)'],
   ['--md-img-placeholder-color', 'hsl(0 0% 74%)', 'hsl(0 0% 35%)'],
-  ['--md-tbl-frame-border-color', 'hsl(0 0% 88%)', 'hsl(0 0% 28%)'],
-  ['--md-tbl-cell-border-color', 'hsl(0 0% 88%)', 'hsl(0 0% 28%)'],
-  ['--md-tbl-header-color', 'hsl(0 0% 28%)', 'hsl(0 0% 64%)'],
+  ['--md-table-frame-border-color', 'hsl(0 0% 88%)', 'hsl(0 0% 28%)'],
+  ['--md-table-cell-border-color', 'hsl(0 0% 88%)', 'hsl(0 0% 28%)'],
+  ['--md-table-header-color', 'hsl(0 0% 28%)', 'hsl(0 0% 64%)'],
   ['--md-math-hover-bg', 'hsl(40 12% 96%)', 'hsl(0 0% 20%)'],
 ]
 const markdownStaticTokens = [
@@ -101,8 +101,8 @@ const markdownStaticTokens = [
   ['--md-img-placeholder-border-radius', '8px'],
   ['--md-img-border-radius', '8px'],
   ['--md-list-img-gap', '1em'],
-  ['--md-tbl-border-radius', '8px'],
-  ['--md-tbl-font-size', '13px'],
+  ['--md-table-border-radius', '8px'],
+  ['--md-table-font-size', '13px'],
   ['--md-math-border-radius', '8px'],
 ]
 const markdownTokenNames = [

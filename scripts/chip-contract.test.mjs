@@ -143,7 +143,7 @@ for (const [block, snippet, message] of [
   [defaultVariantBeforeBlock, 'opacity: 1;', 'Chip default variant must show default layer.'],
   [defaultVariantAfterBlock, 'opacity: 0;', 'Chip default variant must hide glass layer.'],
   [glassVariantBlock, 'border-color: var(--color-border);', 'Chip glass variant must use the shared default border token.'],
-  [glassVariantBlock, 'backdrop-filter: blur(var(--gls-blur));', 'Chip glass variant must use shared glass blur.'],
+  [glassVariantBlock, 'backdrop-filter: blur(var(--glass-blur));', 'Chip glass variant must use shared glass blur.'],
   [glassVariantBeforeBlock, 'opacity: 0;', 'Chip glass variant must hide default layer.'],
   [glassVariantAfterBlock, 'opacity: 1;', 'Chip glass variant must show glass layer.'],
   [smallTextBlock, 'font-size: var(--font-size-sm);', 'Chip small text size must use the shared small token.'],

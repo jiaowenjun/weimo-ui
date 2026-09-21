@@ -76,9 +76,9 @@
   .icon-button--glass:disabled {
     --icon-button-disabled-fg: var(--color-text-disabled);
     --icon-button-disabled-border: var(--color-border-disabled);
-    --gls-surface-fg: var(--icon-button-disabled-fg);
-    --gls-surface-fg-on-light: var(--icon-button-disabled-fg);
-    --gls-surface-fg-on-dark: var(--icon-button-disabled-fg);
+    --glass-surface-fg: var(--icon-button-disabled-fg);
+    --glass-surface-fg-on-light: var(--icon-button-disabled-fg);
+    --glass-surface-fg-on-dark: var(--icon-button-disabled-fg);
 
     border-color: var(--icon-button-disabled-border);
   }

@@ -1,4 +1,5 @@
-import type { ComponentPropsWithoutRef, ReactNode } from 'react'
+import { useLayoutEffect, useRef } from 'react'
+import type { ComponentPropsWithoutRef, ComponentRef, ReactNode, RefObject } from 'react'
 
 import { CardSurface } from './card-surface'
 import { cn } from './lib/utils'
@@ -15,7 +16,7 @@ function renderTokenValue(value: ReactNode, swatchClassName: string) {
 
   return (
     <>
-      {value}
+      <span className="token-preview-card__value-text">{value}</span>
       <span
         aria-hidden="true"
         className={swatchClassName}
@@ -24,6 +25,80 @@ function renderTokenValue(value: ReactNode, swatchClassName: string) {
         }}
       />
     </>
+  )
+}
+
+// 隐藏值文本的判定必须是状态无关的纯函数:若"值文本 + 2em 间隙 + token 单行宽"放不下,
+// 就隐藏值文本(只留色块)。不能直接检测 token 当前是否换行——隐藏会反过来扩大 token
+// 列宽,可能让 token 恢复单行又触发显示,在临界宽度形成显示/隐藏振荡。
+function useCollapseValueTextWhenTokenWraps(rowRef: RefObject<ComponentRef<'div'> | null>) {
+  useLayoutEffect(() => {
+    const row = rowRef.current
+
+    if (!row || typeof ResizeObserver === 'undefined') {
+      return
+    }
+
+    const tokenEl = row.querySelector<HTMLElement>('.token-preview-card__token')
+    const valueEl = row.querySelector<HTMLElement>('.token-preview-card__value')
+    const collapsedClass = 'token-preview-card__row--value-text-collapsed'
+
+    if (!tokenEl || !valueEl || !row.querySelector('.token-preview-card__value-swatch')) {
+      return
+    }
+
+    const measureNowrapWidth = (el: HTMLElement) => {
+      const previous = el.style.whiteSpace
+      el.style.whiteSpace = 'nowrap'
+      const width = el.scrollWidth
+      el.style.whiteSpace = previous
+      return width
+    }
+
+    const sync = () => {
+      const wasCollapsed = row.classList.contains(collapsedClass)
+
+      if (wasCollapsed) {
+        row.classList.remove(collapsedClass)
+      }
+
+      const gap = Number.parseFloat(getComputedStyle(row).columnGap) || 0
+      const needed = measureNowrapWidth(tokenEl) + gap + measureNowrapWidth(valueEl)
+      row.classList.toggle(collapsedClass, row.getBoundingClientRect().width + 1 < needed)
+    }
+
+    sync()
+
+    const observer = new ResizeObserver(sync)
+    observer.observe(row)
+    observer.observe(tokenEl)
+
+    return () => observer.disconnect()
+  }, [rowRef])
+}
+
+function TokenPreviewRow(row: TokenPreviewCardItem) {
+  const rowRef = useRef<ComponentRef<'div'>>(null)
+  useCollapseValueTextWhenTokenWraps(rowRef)
+
+  return (
+    <div className="token-preview-card__row" ref={rowRef}>
+      <code className="token-preview-card__token">{row.token}</code>
+      <code className="token-preview-card__value">
+        {row.darkValue === undefined ? (
+          renderTokenValue(row.value, 'token-preview-card__value-swatch')
+        ) : (
+          <>
+            <span className="token-preview-card__value--light">
+              {renderTokenValue(row.value, 'token-preview-card__value-swatch')}
+            </span>
+            <span className="token-preview-card__value--dark">
+              {renderTokenValue(row.darkValue, 'token-preview-card__value-swatch')}
+            </span>
+          </>
+        )}
+      </code>
+    </div>
   )
 }
 
@@ -63,23 +138,7 @@ export function TokenPreviewCard({
       <div className="token-preview-card__meta">
         <span className="token-preview-card__label">{label}</span>
         {rows.map((row) => (
-          <div className="token-preview-card__row" key={row.token}>
-            <code className="token-preview-card__token">{row.token}</code>
-            <code className="token-preview-card__value">
-              {row.darkValue === undefined ? (
-                renderTokenValue(row.value, 'token-preview-card__value-swatch')
-              ) : (
-                <>
-                  <span className="token-preview-card__value--light">
-                    {renderTokenValue(row.value, 'token-preview-card__value-swatch')}
-                  </span>
-                  <span className="token-preview-card__value--dark">
-                    {renderTokenValue(row.darkValue, 'token-preview-card__value-swatch')}
-                  </span>
-                </>
-              )}
-            </code>
-          </div>
+          <TokenPreviewRow darkValue={row.darkValue} key={row.token} token={row.token} value={row.value} />
         ))}
       </div>
       {children}

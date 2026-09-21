@@ -117,27 +117,27 @@ const markdownStyleTokens = [
     value: '1em',
   },
   {
-    token: '--md-tbl-frame-border-color',
+    token: '--md-table-frame-border-color',
     role: '表格外框颜色',
     value: { light: 'hsl(0 0% 88%)', dark: 'hsl(0 0% 28%)' },
   },
   {
-    token: '--md-tbl-cell-border-color',
+    token: '--md-table-cell-border-color',
     role: '表格单元格边框颜色',
     value: { light: 'hsl(0 0% 88%)', dark: 'hsl(0 0% 28%)' },
   },
   {
-    token: '--md-tbl-border-radius',
+    token: '--md-table-border-radius',
     role: '表格圆角',
     value: '8px',
   },
   {
-    token: '--md-tbl-font-size',
+    token: '--md-table-font-size',
     role: '表格字号',
     value: '13px',
   },
   {
-    token: '--md-tbl-header-color',
+    token: '--md-table-header-color',
     role: '表头文字颜色',
     value: { light: 'hsl(0 0% 28%)', dark: 'hsl(0 0% 64%)' },
   },
@@ -210,11 +210,11 @@ const markdownStyleTokenGroups = [
   {
     label: '表格',
     tokens: [
-      '--md-tbl-frame-border-color',
-      '--md-tbl-border-radius',
-      '--md-tbl-font-size',
-      '--md-tbl-cell-border-color',
-      '--md-tbl-header-color',
+      '--md-table-frame-border-color',
+      '--md-table-border-radius',
+      '--md-table-font-size',
+      '--md-table-cell-border-color',
+      '--md-table-header-color',
     ],
   },
   {

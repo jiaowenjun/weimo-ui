@@ -1,6 +1,6 @@
 .bg-blur--glass {
-  backdrop-filter: blur(var(--gls-blur));
-  -webkit-backdrop-filter: blur(var(--gls-blur));
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
 }
 
 .bg-blur--backdrop {

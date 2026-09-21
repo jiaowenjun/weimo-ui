@@ -71,18 +71,50 @@ function ResizableSlot() {
   )
 }
 
-function useDarkTheme() {
-  const [dark, setDark] = useState(() => document.documentElement.classList.contains('dark'))
+type Theme = 'light' | 'dark' | 'system'
+
+function nextTheme(theme: Theme): Theme {
+  switch (theme) {
+    case 'light':
+      return 'dark'
+    case 'dark':
+      return 'system'
+    case 'system':
+      return 'light'
+  }
+}
+
+const themeLabels: Record<Theme, string> = {
+  dark: '主题:暗色',
+  light: '主题:亮色',
+  system: '主题:跟随系统',
+}
+
+function useTheme() {
+  const [theme, setTheme] = useState<Theme>('system')
 
   useEffect(() => {
-    document.documentElement.classList.toggle('dark', dark)
-  }, [dark])
+    if (theme !== 'system') {
+      document.documentElement.classList.toggle('dark', theme === 'dark')
+      return
+    }
 
-  return [dark, setDark] as const
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    const syncSystemTheme = () => {
+      document.documentElement.classList.toggle('dark', mediaQuery.matches)
+    }
+
+    syncSystemTheme()
+    mediaQuery.addEventListener('change', syncSystemTheme)
+
+    return () => mediaQuery.removeEventListener('change', syncSystemTheme)
+  }, [theme])
+
+  return [theme, setTheme] as const
 }
 
 export function TokenPreviewCardWidthPage() {
-  const [dark, setDark] = useDarkTheme()
+  const [theme, setTheme] = useTheme()
 
   return (
     <main className="width-test">
@@ -95,8 +127,8 @@ export function TokenPreviewCardWidthPage() {
           两列在窄容器下的换行位置、行间基线与列对齐、色板(swatch)与右对齐值的表现。
         </p>
         <div className="width-test__toolbar">
-          <button onClick={() => setDark(!dark)} type="button">
-            {dark ? '切换到亮色主题' : '切换到暗色主题'}
+          <button onClick={() => setTheme(nextTheme(theme))} type="button">
+            {themeLabels[theme]}
           </button>
           <Link to="/">返回文档首页</Link>
         </div>
