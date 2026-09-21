@@ -29,13 +29,13 @@ const fontFamilyTokens = [
   {
     label: '无衬线字体',
     token: '--font-sans',
-    value: '"Segoe UI"',
+    value: 'Segoe UI',
     className: 'typography-preview__sample--font-sans',
   },
   {
     label: '等宽字体',
     token: '--font-mono',
-    value: '"SFMono-Regular"',
+    value: 'SFMono-Regular',
     className: 'typography-preview__sample--font-mono',
   },
 ] as const
