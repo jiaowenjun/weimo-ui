@@ -67,9 +67,6 @@ function SurfaceDemo() {
             <span className="popup-surface-preview__title">Modal Surface</span>
             <span className="popup-surface-preview__meta">抬升浮层主体材质</span>
           </PopupSurface>
-          <PopupSurface className="popup-surface-preview__tile" level="tooltip">
-            <span className="popup-surface-preview__title">Tooltip Surface</span>
-          </PopupSurface>
         </div>
       </ComponentPreviewCard>
     </>

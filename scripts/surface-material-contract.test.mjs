@@ -136,7 +136,6 @@ for (const snippet of [
   '<CardSurface className="card-surface-preview__tile">',
   '<ComponentPreviewCard label="浮层材质">',
   '<PopupSurface className="popup-surface-preview__tile">',
-  '<PopupSurface className="popup-surface-preview__tile" level="tooltip">',
   '抬升浮层主体材质',
   "frame: 'plain',",
 ]) {
@@ -145,6 +144,11 @@ for (const snippet of [
 assert.ok(
   !surfaceDefinitionSource.includes('items=') && !surfaceDefinitionSource.includes('surface-backdrop'),
   'Surface docs definition must keep the label title bar without token rows or preview backdrop.',
+)
+assert.ok(
+  !surfaceDefinitionSource.includes('level="tooltip"') &&
+    !appCss.includes('.popup-surface-preview__tile[data-level="tooltip"]'),
+  'PopupSurface demo must render only the modal tile; the tooltip level stays a component feature, not a docs sample.',
 )
 assert.ok(
   appCss.includes(
