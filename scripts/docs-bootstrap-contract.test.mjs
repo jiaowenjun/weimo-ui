@@ -47,9 +47,7 @@ const componentDefinitionSources = {
   'glass-icon-button': readProjectFile('src/docs/component-definitions/glass-icon-button.tsx'),
   'ghost-icon-button': readProjectFile('src/docs/component-definitions/ghost-icon-button.tsx'),
   menu: readProjectFile('src/docs/component-definitions/menu.tsx'),
-  'glass-surface': readProjectFile(
-    'src/docs/component-definitions/glass-surface.tsx',
-  ),
+  surface: readProjectFile('src/docs/component-definitions/surface.tsx'),
   'md-editor': [
     readProjectFile('src/docs/component-definitions/md-editor.tsx'),
     readProjectFile('src/docs/component-definitions/md-editor-demos.tsx'),
@@ -194,7 +192,7 @@ for (const componentId of [
   'ghost-icon-button',
   'glass-icon-button',
   'menu',
-  'glass-surface',
+  'surface',
   'tag-tree',
   'top-bar',
   'sidebar',
@@ -213,7 +211,7 @@ for (const snippet of [
   "id: 'ghost-icon-button'",
   "id: 'glass-icon-button'",
   "id: 'menu'",
-  "id: 'glass-surface'",
+  "id: 'surface'",
   "id: 'tag-tree'",
   "id: 'top-bar'",
   "id: 'sidebar'",

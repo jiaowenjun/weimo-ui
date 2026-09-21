@@ -49,7 +49,7 @@ const componentDefinitionsIndexSource = readProjectFile(
   'src/docs/component-definitions/index.ts',
 )
 const glassSurfaceDefinitionSource = readProjectFile(
-  'src/docs/component-definitions/glass-surface.tsx',
+  'src/docs/component-definitions/surface.tsx',
 )
 const glassSurfaceSource = readProjectFile('src/components/glass-surface.tsx')
 const glassSurfaceModelSource = readProjectFile(
@@ -298,7 +298,7 @@ for (const snippet of [
   "registryName: 'glass-surface'",
   "packageExport: './components/glass-surface'",
   "group: 'surface-material'",
-  'docs: true',
+  'docs: false',
   'registry: true',
 ]) {
   assertIncludes(
@@ -309,8 +309,8 @@ for (const snippet of [
 }
 
 for (const snippet of [
-  "import { glassSurfaceDefinition } from './glass-surface'",
-  "'glass-surface': glassSurfaceDefinition",
+  "import { surfaceDefinition } from './surface'",
+  'surface: surfaceDefinition',
 ]) {
   assertIncludes(
     componentDefinitionsIndexSource,
@@ -321,14 +321,17 @@ for (const snippet of [
 
 for (const snippet of [
   "import { GlassSurface } from '../../components/glass-surface'",
-  "id: 'glass-surface'",
-  '运行时读取组件背后的背景亮度',
+  "import { ComponentPreviewCard } from '../../components/component-preview-card'",
+  "id: 'surface'",
+  '静态卡片、亮度自适应玻璃层与抬升浮层的材质总览',
   'glassSurfacePreviewBackgroundBands',
   'glass-surface-preview__scroll-viewport',
   'glass-surface-preview__scroll-content',
   'glass-surface-preview__band',
   'glass-surface-preview__fixed',
+  '<ComponentPreviewCard label="玻璃材质">',
   '<GlassSurface className="glass-surface-preview__tile">',
+  "frame: 'plain',",
 ]) {
   assertIncludes(
     glassSurfaceDefinitionSource,
@@ -336,14 +339,17 @@ for (const snippet of [
     `GlassSurface docs definition must include ${snippet}.`,
   )
 }
+assert.ok(
+  !glassSurfaceDefinitionSource.includes('items=') &&
+    !glassSurfaceDefinitionSource.includes('surface-backdrop'),
+  'GlassSurface docs definition must keep the label title bar without token rows or preview backdrop.',
+)
 
 for (const snippet of [
-  ".preview-stage[data-component-id='glass-surface']",
   '.glass-surface-preview',
   'position: relative;',
   'width: 100%;',
   'height: min(340px, 70svh);',
-  'min-height: 100%;',
   'overflow: hidden;',
   '.glass-surface-preview__scroll-viewport',
   'overflow-y: auto;',
@@ -356,30 +362,19 @@ for (const snippet of [
   'inset: 0;',
   'pointer-events: none;',
   '.glass-surface-preview__tile',
+  'align-content: center;',
+  'justify-items: center;',
+  'text-align: center;',
   'pointer-events: auto;',
   '.glass-surface-preview__tile[data-background-tone="light"]',
   '.glass-surface-preview__tile[data-background-tone="dark"]',
 ]) {
   assertIncludes(appCss, snippet, `GlassSurface preview CSS must include ${snippet}.`)
 }
-const glassSurfacePreviewStageBlock = cssBlockFor(
+assertOmits(
   appCss,
   ".preview-stage[data-component-id='glass-surface']",
-)
-assert.ok(
-  glassSurfacePreviewStageBlock.includes('padding: 0;') &&
-    glassSurfacePreviewStageBlock.includes('overflow: hidden;'),
-  'GlassSurface preview stage must remove padding and clip gradient overflow at the rounded frame.',
-)
-assertOmits(
-  appCss,
-  '--preview-stage-padding',
-  'GlassSurface preview must fill the stage by removing stage padding, not by padding compensation variables.',
-)
-assertOmits(
-  appCss,
-  'calc(0px - var(--preview-stage-padding))',
-  'GlassSurface preview must not use negative margins to fill the preview frame.',
+  'GlassSurface preview renders inside ComponentPreviewCard and must not keep preview-stage special cases.',
 )
 assertOmits(
   glassSurfaceDefinitionSource,

@@ -82,17 +82,19 @@ describe('ComponentPreviewCard', () => {
     )
   })
 
-  it('omits the meta area entirely when no label or tokens are provided', () => {
+  it('keeps the label title bar when no token rows are provided', () => {
     const { container } = render(
-      <ComponentPreviewCard>
+      <ComponentPreviewCard label="卡片材质">
         <div data-testid="bare-preview" />
       </ComponentPreviewCard>,
     )
 
     const card = container.querySelector('.component-preview-card')
+    const meta = card?.querySelector('.component-preview-card__meta')
 
-    expect(card).toHaveClass('card-surface')
-    expect(card?.querySelector('.component-preview-card__meta')).toBeNull()
+    expect(meta?.querySelector('.component-preview-card__label')).toHaveTextContent('卡片材质')
+    expect(card?.querySelectorAll('.component-preview-card__row')).toHaveLength(0)
+    expect(meta?.children).toHaveLength(1)
     expect(screen.getByTestId('bare-preview').parentElement).toBe(card)
   })
 })

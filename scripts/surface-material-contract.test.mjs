@@ -35,13 +35,13 @@ const rootRegistry = readJson('registry.json')
 const rootItemsByName = new Map(rootRegistry.items.map((item) => [item.name, item]))
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
+const appCss = readProjectFile('src/App.css')
 
 const cardSurfaceSource = readProjectFile('src/components/card-surface.tsx')
 const cardSurfaceCss = readProjectFile('src/components/card-surface.css')
-const cardDefinitionSource = readProjectFile('src/docs/component-definitions/card-surface.tsx')
+const surfaceDefinitionSource = readProjectFile('src/docs/component-definitions/surface.tsx')
 const popupSurfaceSource = readProjectFile('src/components/popup-surface.tsx')
 const popupSurfaceCss = readProjectFile('src/components/popup-surface.css')
-const popupDefinitionSource = readProjectFile('src/docs/component-definitions/popup-surface.tsx')
 
 const cardResolverSource = readProjectFile('src/components/card-resolvers.tsx')
 const sharedCardCss = readProjectFile('src/components/card.css')
@@ -72,29 +72,27 @@ assert.ok(
 )
 
 for (const snippet of [
-  "id: 'card-surface'",
-  "name: 'CardSurface'",
+  "id: 'surface'",
+  "name: 'Surface'",
   "registryName: 'card-surface'",
   "packageExport: './components/card-surface'",
   "group: 'surface-material'",
+  "id: 'glass-surface'",
   "id: 'popup-surface'",
-  "name: 'PopupSurface'",
   "registryName: 'popup-surface'",
   "packageExport: './components/popup-surface'",
 ]) {
   assert.ok(manifestSource.includes(snippet), `components-manifest.ts must include ${snippet}.`)
 }
 assert.ok(
-  manifestSource.indexOf("id: 'card-surface'") < manifestSource.indexOf("id: 'glass-surface'") &&
-    manifestSource.indexOf("id: 'glass-surface'") < manifestSource.indexOf("id: 'popup-surface'"),
-  'Surface / 材质 components must stay sorted by component name.',
+  manifestSource.indexOf("id: 'glass-surface'") < manifestSource.indexOf("id: 'popup-surface'") &&
+    manifestSource.indexOf("id: 'popup-surface'") < manifestSource.indexOf("id: 'surface'"),
+  'Surface / 材质 manifest entries must stay sorted by component name.',
 )
 
 for (const snippet of [
-  "import { cardSurfaceDefinition } from './card-surface'",
-  "'card-surface': cardSurfaceDefinition",
-  "import { popupSurfaceDefinition } from './popup-surface'",
-  "'popup-surface': popupSurfaceDefinition",
+  "import { surfaceDefinition } from './surface'",
+  'surface: surfaceDefinition',
 ]) {
   assert.ok(definitionsIndexSource.includes(snippet), `component definitions index must include ${snippet}.`)
 }
@@ -129,20 +127,30 @@ assert.ok(
 
 for (const snippet of [
   "import { CardSurface } from '../../components/card-surface'",
+  "import { PopupSurface } from '../../components/popup-surface'",
   "import { ComponentPreviewCard } from '../../components/component-preview-card'",
-  "id: 'card-surface'",
+  "id: 'surface'",
   '静态实体卡片材质',
-  '<ComponentPreviewCard>',
+  '<ComponentPreviewCard label="卡片材质">',
+  '<div aria-hidden="true" className="card-surface-preview">',
   '<CardSurface className="card-surface-preview__tile">',
+  '<ComponentPreviewCard label="浮层材质">',
+  '<PopupSurface className="popup-surface-preview__tile">',
+  '<PopupSurface className="popup-surface-preview__tile" level="tooltip">',
+  '抬升浮层主体材质',
   "frame: 'plain',",
 ]) {
-  assert.ok(cardDefinitionSource.includes(snippet), `CardSurface docs definition must include ${snippet}.`)
+  assert.ok(surfaceDefinitionSource.includes(snippet), `Surface docs definition must include ${snippet}.`)
 }
 assert.ok(
-  !cardDefinitionSource.includes('label=') &&
-    !cardDefinitionSource.includes('items=') &&
-    !cardDefinitionSource.includes('surface-backdrop'),
-  'CardSurface docs definition must render the bare CardSurface demo without token rows, label, or preview backdrop.',
+  !surfaceDefinitionSource.includes('items=') && !surfaceDefinitionSource.includes('surface-backdrop'),
+  'Surface docs definition must keep the label title bar without token rows or preview backdrop.',
+)
+assert.ok(
+  appCss.includes(
+    '.card-surface-preview__tile,\n.popup-surface-preview__tile {\n  display: grid;\n  gap: 6px;\n  width: min(100%, 260px);\n  padding: 18px;\n  justify-items: center;\n  text-align: center;\n}',
+  ),
+  'CardSurface and PopupSurface demo tiles must center their caption text.',
 )
 
 for (const snippet of [
@@ -218,16 +226,6 @@ assert.ok(
   !popupSurfaceCss.includes('backdrop-filter') && !popupSurfaceBlock.includes('padding:'),
   'PopupSurface must own popup material only, not backdrop blur or layout padding.',
 )
-for (const snippet of [
-  "import { PopupSurface } from '../../components/popup-surface'",
-  "id: 'popup-surface'",
-  '抬升浮层主体材质',
-  '<PopupSurface className="popup-surface-preview__tile">',
-  '<PopupSurface className="popup-surface-preview__tile" level="tooltip">',
-]) {
-  assert.ok(popupDefinitionSource.includes(snippet), `PopupSurface docs definition must include ${snippet}.`)
-}
-
 assert.ok(
   dialogSource.includes("from '../popup-surface'") &&
     dialogSource.includes("getPopupSurfaceClassName('modal', 'coss-dialog__popup', className)"),

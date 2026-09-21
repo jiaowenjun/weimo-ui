@@ -140,10 +140,9 @@ assert.ok(
   'ComponentPreviewCard must support multi-token rows through items while keeping the single-token props, without component-level grid placement.',
 )
 assert.ok(
-  cardSource.includes('label?: ReactNode') &&
-    cardSource.includes('const hasMeta = label !== undefined || rows.length > 0') &&
-    cardSource.includes('label === undefined ? null : ('),
-  'ComponentPreviewCard must keep the meta area optional: no label and no token rows means no meta wrapper, children render directly in the card.',
+  cardSource.includes('label: ReactNode') &&
+    cardSource.includes('<div className="component-preview-card__meta">'),
+  'ComponentPreviewCard must always render the label title bar: only the token rows are optional.',
 )
 
 const cardSwatchBlock = blockFor(cardCss, '.component-preview-card__value-swatch')

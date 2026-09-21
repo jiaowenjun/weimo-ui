@@ -3,9 +3,7 @@ import { mdDefinition } from './md'
 import { textTokensDefinition } from './text-tokens'
 import { backgroundTokensDefinition } from './background-tokens'
 import { borderTokensDefinition } from './border-tokens'
-import { cardSurfaceDefinition } from './card-surface'
-import { glassSurfaceDefinition } from './glass-surface'
-import { popupSurfaceDefinition } from './popup-surface'
+import { surfaceDefinition } from './surface'
 import { actionDialogDefinition } from './action-dialog'
 import { ghostIconButtonDefinition } from './ghost-icon-button'
 import { glassIconButtonDefinition } from './glass-icon-button'
@@ -47,9 +45,7 @@ export const componentDefinitionsById = {
   'text-tokens': textTokensDefinition,
   'background-tokens': backgroundTokensDefinition,
   'border-tokens': borderTokensDefinition,
-  'card-surface': cardSurfaceDefinition,
-  'glass-surface': glassSurfaceDefinition,
-  'popup-surface': popupSurfaceDefinition,
+  surface: surfaceDefinition,
   'action-dialog': actionDialogDefinition,
   'ghost-icon-button': ghostIconButtonDefinition,
   'glass-icon-button': glassIconButtonDefinition,

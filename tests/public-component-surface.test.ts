@@ -37,6 +37,7 @@ const conceptualTokenModules = new Set([
   'border-tokens',
   'heat-color',
   'pressable',
+  'surface',
   'text-color',
   'text-tokens',
 ])

@@ -86,7 +86,7 @@ const componentDefinitionsSource = readProjectFile('src/docs/component-definitio
   mdRenderDefinitionSource +
   readProjectFile('src/docs/component-definitions/md-view.tsx') +
   imageViewDefinitionSource +
-  readProjectFile('src/docs/component-definitions/glass-surface.tsx') +
+  readProjectFile('src/docs/component-definitions/surface.tsx') +
   readProjectFile('src/docs/component-definitions/tag-picker.tsx') +
   readProjectFile('src/docs/component-definitions/tag-bar.tsx') +
   readProjectFile('src/docs/component-definitions/stat-group.tsx') +
@@ -145,8 +145,8 @@ assert.ok(
   'Internal ChipButton detail docs definition must exist.',
 )
 assert.ok(
-  existsSync(join(root, 'src/docs/component-definitions/glass-surface.tsx')),
-  'GlassSurface detail docs definition must exist.',
+  existsSync(join(root, 'src/docs/component-definitions/surface.tsx')),
+  'Surface detail docs definition must exist.',
 )
 
 for (const snippet of [
@@ -225,12 +225,12 @@ for (const snippet of [
   "id: 'chip'",
   "id: 'chip-button'",
   "id: 'image-view'",
-  "id: 'glass-surface'",
   "id: 'tag-bar'",
   "id: 'md-view'",
   "id: 'math-editor'",
   "id: 'text-button'",
   "id: 'canvas-transparency'",
+  "id: 'surface'",
 ]) {
   assert.ok(componentDefinitionsSource.includes(snippet), `internal definition source must include ${snippet}.`)
 }
@@ -336,9 +336,9 @@ assertDecodablePngDataUrl(
   'ImageView detail preview sample image',
 )
 assert.ok(
-  componentDefinitionsSource.includes("import { GlassSurface } from '../../components/glass-surface'") &&
-    componentDefinitionsSource.includes("id: 'glass-surface'") &&
-    componentDefinitionsSource.includes('运行时读取组件背后的背景亮度') &&
+    componentDefinitionsSource.includes("import { GlassSurface } from '../../components/glass-surface'") &&
+    componentDefinitionsSource.includes("id: 'surface'") &&
+    componentDefinitionsSource.includes('静态卡片、亮度自适应玻璃层与抬升浮层的材质总览') &&
     componentDefinitionsSource.includes('glassSurfacePreviewBackgroundBands') &&
     !componentDefinitionsSource.includes('glass-surface-preview__scroll-scene') &&
     componentDefinitionsSource.includes('glass-surface-preview__scroll-viewport') &&

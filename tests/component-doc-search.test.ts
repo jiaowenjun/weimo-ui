@@ -11,6 +11,9 @@ describe('component docs search', () => {
   it('finds localized token pages by stable English identifiers', () => {
     expect(resultIds('BgColor')).toContain('background-tokens')
     expect(resultIds('text-color')).toContain('text-tokens')
+    expect(resultIds('CardSurface')).toContain('surface')
+    expect(resultIds('GlassSurface')).toContain('surface')
+    expect(resultIds('PopupSurface')).toContain('surface')
     expect(resultIds('Md')).toContain('md')
     expect(resultIds('Markdown')).toContain('md')
     expect(resultIds('Markdown渲染')).toContain('md')
