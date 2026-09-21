@@ -9,21 +9,55 @@ import './token-preview-card.css'
 const colorValuePattern =
   /^(?:#(?:[0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})|(?:hsl|hsla|rgb|rgba|oklch|oklab|lch|lab|hwb|color)\()/i
 
+function colorValueHasAlpha(value: string) {
+  if (value.startsWith('#')) {
+    const digits = value.slice(1)
+    if (digits.length === 4) {
+      return digits[3].toLowerCase() !== 'f'
+    }
+    if (digits.length === 8) {
+      return digits.slice(6).toLowerCase() !== 'ff'
+    }
+    return false
+  }
+
+  const slashAlpha = value.match(/\/\s*([^)]+)/)
+
+  if (slashAlpha) {
+    const alpha = slashAlpha[1].trim().endsWith('%')
+      ? Number.parseFloat(slashAlpha[1]) / 100
+      : Number.parseFloat(slashAlpha[1])
+    return Number.isFinite(alpha) && alpha < 1
+  }
+
+  const legacyAlpha = value.match(/^(?:rgba|hsla)\([^)]*,\s*([^),\s]+)\s*\)$/i)
+
+  if (legacyAlpha) {
+    const alpha = legacyAlpha[1].trim().endsWith('%')
+      ? Number.parseFloat(legacyAlpha[1]) / 100
+      : Number.parseFloat(legacyAlpha[1])
+    return Number.isFinite(alpha) && alpha < 1
+  }
+
+  return false
+}
+
 function renderTokenValue(value: ReactNode, swatchClassName: string) {
   if (typeof value !== 'string' || !colorValuePattern.test(value.trim())) {
     return value
   }
 
+  // 不透明色只用单层渐变:白色 background-color 层叠多层背景 + border-radius 时,
+  // 圆角光栅化会让白底在边缘透出亮环(暗色卡片上明显)。带 alpha 的色值才需要
+  // 棋盘格,且白底也写成渐变层,让所有背景层走同一条光栅化路径。
+  const background = colorValueHasAlpha(value.trim())
+    ? `linear-gradient(${value}), repeating-linear-gradient(45deg, hsl(0 0% 50% / 0.16) 0 4px, transparent 4px 8px), repeating-linear-gradient(-45deg, hsl(0 0% 50% / 0.16) 0 4px, transparent 4px 8px), linear-gradient(#fff, #fff)`
+    : `linear-gradient(${value})`
+
   return (
     <>
       <span className="token-preview-card__value-text">{value}</span>
-      <span
-        aria-hidden="true"
-        className={swatchClassName}
-        style={{
-          background: `linear-gradient(${value}), repeating-linear-gradient(45deg, hsl(0 0% 50% / 0.16) 0 4px, transparent 4px 8px), repeating-linear-gradient(-45deg, hsl(0 0% 50% / 0.16) 0 4px, transparent 4px 8px), #fff`,
-        }}
-      />
+      <span aria-hidden="true" className={swatchClassName} style={{ background }} />
     </>
   )
 }

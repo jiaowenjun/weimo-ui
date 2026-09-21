@@ -144,15 +144,18 @@ const cardSwatchBlock = blockFor(cardCss, '.token-preview-card__value-swatch')
 
 assert.ok(
   cardSource.includes('const colorValuePattern =') &&
+    cardSource.includes('function colorValueHasAlpha(') &&
     cardSource.includes("renderTokenValue(row.value, 'token-preview-card__value-swatch')") &&
     cardSource.includes("renderTokenValue(row.darkValue, 'token-preview-card__value-swatch')") &&
-    cardSource.includes('background: `linear-gradient(${value}),') &&
+    cardSource.includes('const background = colorValueHasAlpha(value.trim())') &&
+    cardSource.includes(': `linear-gradient(${value})`') &&
+    cardSource.includes('linear-gradient(#fff, #fff)`') &&
     cardSource.includes('aria-hidden="true"') &&
     cardSwatchBlock.includes('display: inline-block;') &&
     cardSwatchBlock.includes('width: 12px;') &&
     cardSwatchBlock.includes('height: 12px;') &&
     cardSwatchBlock.includes('margin-left: 6px;'),
-  'TokenPreviewCard must append a checkerboard-backed swatch to the right of every color token value in the single and light/dark branches.',
+  'TokenPreviewCard must append a swatch to the right of every color token value in the single and light/dark branches: one opaque gradient layer for opaque colors, and a checkerboard over a gradient-written white base only for colors with alpha.',
 )
 
 assert.ok(
