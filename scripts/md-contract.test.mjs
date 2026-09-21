@@ -78,7 +78,7 @@ const markdownColorTokens = [
   ['--md-paragraph-color', 'hsl(0 0% 9%)', 'hsl(0 0% 98%)'],
   ['--md-h1-color', 'hsl(0 0% 9%)', 'hsl(0 0% 98%)'],
   ['--md-quote-color', 'hsl(0 0% 28%)', 'hsl(0 0% 64%)'],
-  ['--md-inline-code-border-color', 'hsl(0 0% 88%)', 'hsl(0 0% 28%)'],
+  ['--md-code-border-color', 'hsl(0 0% 88%)', 'hsl(0 0% 28%)'],
   ['--md-link-color', 'hsl(0 0% 15%)', 'hsl(0 0% 96%)'],
   ['--md-img-placeholder-color', 'hsl(0 0% 74%)', 'hsl(0 0% 35%)'],
   ['--md-table-frame-border-color', 'hsl(0 0% 88%)', 'hsl(0 0% 28%)'],
@@ -94,9 +94,9 @@ const markdownStaticTokens = [
   ['--md-quote-pad-inline', '20px'],
   ['--md-list-indent', '1.35em'],
   ['--md-list-wide-marker-indent', '2em'],
-  ['--md-inline-code-font-family', '"SFMono-Regular", "Cascadia Code", "Liberation Mono", Menlo, Consolas, monospace'],
-  ['--md-inline-code-font-size', '14px'],
-  ['--md-inline-code-border-radius', '8px'],
+  ['--md-code-font-family', '"SFMono-Regular", "Cascadia Code", "Liberation Mono", Menlo, Consolas, monospace'],
+  ['--md-code-font-size', '14px'],
+  ['--md-code-border-radius', '8px'],
   ['--md-img-placeholder-font-size', '14px'],
   ['--md-img-placeholder-border-radius', '8px'],
   ['--md-img-border-radius', '8px'],
@@ -342,8 +342,8 @@ assert.ok(
     !definitionSource.includes('heading--h2/h3') &&
     !definitionSource.includes("token: '--radius-xs'") &&
     !definitionSource.includes("preview: 'radius-xs'") &&
-    !definitionSource.includes('--md-inline-code-size') &&
-    !definitionSource.includes('--weimo-md-inline-code-size') &&
+    !definitionSource.includes('--md-code-size') &&
+    !definitionSource.includes('--weimo-md-code-size') &&
     !definitionSource.includes('--color-bg-md-math-hover') &&
     !definitionSource.includes("token: '--color-bg-page'") &&
     !definitionSource.includes("preview: 'bg-page'") &&

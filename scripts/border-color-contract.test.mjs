@@ -363,7 +363,7 @@ assert.ok(
     !markdownContentCss.includes('--md-divider-color') &&
     markdownContentCss.includes('border-bottom: 1px solid var(--md-table-cell-border-color);') &&
     markdownContentCss.includes('border-left: 1px solid var(--md-table-cell-border-color);') &&
-    markdownInlineCodeSurfaceBlock.includes('border: 1px solid var(--md-inline-code-border-color);') &&
+    markdownInlineCodeSurfaceBlock.includes('border: 1px solid var(--md-code-border-color);') &&
     markdownTableScrollBlock.includes('border: 1px solid var(--md-table-frame-border-color);') &&
     markdownEditorTableWrapperBlock.includes('border: 1px solid var(--md-table-frame-border-color);'),
   'Markdown dividers, inline code, and tables must use separate node-semantic border tokens.',

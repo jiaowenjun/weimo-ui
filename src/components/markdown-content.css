@@ -237,10 +237,10 @@
 
   .weimo-markdown-content :not(pre) > :where(.weimo-card-markdown__code, code) {
     padding: 2px 6px;
-    border: 1px solid var(--md-inline-code-border-color);
-    border-radius: var(--md-inline-code-border-radius);
-    font-family: var(--md-inline-code-font-family);
-    font-size: var(--md-inline-code-font-size);
+    border: 1px solid var(--md-code-border-color);
+    border-radius: var(--md-code-border-radius);
+    font-family: var(--md-code-font-family);
+    font-size: var(--md-code-font-size);
     word-break: break-all;
   }
 

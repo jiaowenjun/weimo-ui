@@ -455,15 +455,15 @@ assertIncludes(
   'Markdown root must use its node-semantic content line height.',
 )
 assert.ok(
-  markdownInlineCodeSurfaceBlock.includes('font-size: var(--md-inline-code-font-size);') &&
+  markdownInlineCodeSurfaceBlock.includes('font-size: var(--md-code-font-size);') &&
     markdownImagePlaceholderBlock.includes('font-size: var(--md-img-placeholder-font-size);') &&
-    !markdownContentCss.includes('--md-inline-code-size') &&
-    !markdownContentCss.includes('--weimo-md-inline-code-size'),
+    !markdownContentCss.includes('--md-code-size') &&
+    !markdownContentCss.includes('--weimo-md-code-size'),
   'Markdown inline code and image placeholders must use separate node-semantic size tokens.',
 )
 assertIncludes(
   markdownInlineCodeSurfaceBlock,
-  'border: 1px solid var(--md-inline-code-border-color);',
+  'border: 1px solid var(--md-code-border-color);',
   'Markdown inline code must use its node-semantic border token.',
 )
 assert.ok(

@@ -64,10 +64,10 @@
   --md-quote-pad-inline: 20px;
   --md-list-indent: 1.35em;
   --md-list-wide-marker-indent: 2em;
-  --md-inline-code-font-family: "SFMono-Regular", "Cascadia Code", "Liberation Mono", Menlo, Consolas, monospace;
-  --md-inline-code-font-size: 14px;
-  --md-inline-code-border-color: hsl(0 0% 88%);
-  --md-inline-code-border-radius: 8px;
+  --md-code-font-family: "SFMono-Regular", "Cascadia Code", "Liberation Mono", Menlo, Consolas, monospace;
+  --md-code-font-size: 14px;
+  --md-code-border-color: hsl(0 0% 88%);
+  --md-code-border-radius: 8px;
   --md-link-color: hsl(0 0% 15%);
   --md-img-placeholder-color: hsl(0 0% 74%);
   --md-img-placeholder-font-size: 14px;
@@ -194,7 +194,7 @@
   --md-paragraph-color: hsl(0 0% 98%);
   --md-h1-color: hsl(0 0% 98%);
   --md-quote-color: hsl(0 0% 64%);
-  --md-inline-code-border-color: hsl(0 0% 28%);
+  --md-code-border-color: hsl(0 0% 28%);
   --md-link-color: hsl(0 0% 96%);
   --md-img-placeholder-color: hsl(0 0% 35%);
   --md-table-frame-border-color: hsl(0 0% 28%);

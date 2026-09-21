@@ -67,22 +67,22 @@ const markdownStyleTokens = [
     value: '2em',
   },
   {
-    token: '--md-inline-code-font-family',
+    token: '--md-code-font-family',
     role: '行内代码字体',
     value: 'SFMono-Regular',
   },
   {
-    token: '--md-inline-code-font-size',
+    token: '--md-code-font-size',
     role: '行内代码字号',
     value: '14px',
   },
   {
-    token: '--md-inline-code-border-color',
+    token: '--md-code-border-color',
     role: '行内代码边框颜色',
     value: { light: 'hsl(0 0% 88%)', dark: 'hsl(0 0% 28%)' },
   },
   {
-    token: '--md-inline-code-border-radius',
+    token: '--md-code-border-radius',
     role: '行内代码圆角',
     value: '8px',
   },
@@ -190,10 +190,10 @@ const markdownStyleTokenGroups = [
   {
     label: '代码',
     tokens: [
-      '--md-inline-code-font-family',
-      '--md-inline-code-font-size',
-      '--md-inline-code-border-color',
-      '--md-inline-code-border-radius',
+      '--md-code-font-family',
+      '--md-code-font-size',
+      '--md-code-border-color',
+      '--md-code-border-radius',
     ],
   },
   { label: '链接', tokens: ['--md-link-color'] },
