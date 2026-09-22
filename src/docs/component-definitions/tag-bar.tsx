@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import { ComponentPreviewCard } from '../../components/component-preview-card'
 import { TagBar } from '../../components/tag-bar'
 import { TextButton } from '../../components/text-button'
 import type { ComponentDefinition } from '../component-docs'
@@ -32,23 +33,25 @@ function TagBarDemo() {
   const [tags, setTags] = useState(['写作/日记', '研究/论文'])
 
   return (
-    <div className="tag-bar-preview">
-      <div className="tag-bar-preview__panel">
-        <TagBar
-          editable={editable}
-          onTagsChange={setTags}
-          tagOptions={tagOptions}
-          tags={tags}
-        />
-        <div className="tag-bar-preview__controls">
-          <TextButton
-            onClick={() => setEditable((currentEditable) => !currentEditable)}
-          >
-            {editable ? '切换到展示态' : '切换到编辑态'}
-          </TextButton>
+    <ComponentPreviewCard label="标签栏">
+      <div className="tag-bar-preview">
+        <div className="tag-bar-preview__panel">
+          <TagBar
+            editable={editable}
+            onTagsChange={setTags}
+            tagOptions={tagOptions}
+            tags={tags}
+          />
+          <div className="tag-bar-preview__controls">
+            <TextButton
+              onClick={() => setEditable((currentEditable) => !currentEditable)}
+            >
+              {editable ? '切换到展示态' : '切换到编辑态'}
+            </TextButton>
+          </div>
         </div>
       </div>
-    </div>
+    </ComponentPreviewCard>
   )
 }
 
@@ -56,5 +59,6 @@ export const tagBarDefinition = {
   id: 'tag-bar',
   summary: '内部共享标签栏，可在展示态和编辑态之间切换',
   status: 'Preview',
+  frame: 'plain',
   preview: () => <TagBarDemo />,
 } satisfies ComponentDefinition

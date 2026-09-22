@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { Card } from '../../components/card'
 import type { CardDraft } from '../../components/card'
+import { ComponentPreviewCard } from '../../components/component-preview-card'
 import type { ComponentDefinition } from '../component-docs'
 import { mdRenderSample } from './markdown-sample'
 
@@ -26,16 +27,18 @@ function CardDemo() {
   })
 
   return (
-    <div className="card-docs-preview">
-      <Card
-        note={note}
-        onSave={(draft) => {
-          setNote((current) => applyDraftToNote(current, draft))
-        }}
-        labels={{ placeholder: '写点什么...' }}
-        tagOptions={editableTagOptions}
-      />
-    </div>
+    <ComponentPreviewCard label="笔记卡片">
+      <div className="card-docs-preview">
+        <Card
+          note={note}
+          onSave={(draft) => {
+            setNote((current) => applyDraftToNote(current, draft))
+          }}
+          labels={{ placeholder: '写点什么...' }}
+          tagOptions={editableTagOptions}
+        />
+      </div>
+    </ComponentPreviewCard>
   )
 }
 
@@ -43,5 +46,6 @@ export const cardDefinition = {
   id: 'card',
   summary: '内部管理展示态与编辑态的 v2 笔记卡片',
   status: 'Preview',
+  frame: 'plain',
   preview: () => <CardDemo />,
 } satisfies ComponentDefinition

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import { ComponentPreviewCard } from '../../components/component-preview-card'
 import {
   Heatmap,
   formatHeatmapDateKey,
@@ -41,13 +42,15 @@ function HeatmapDemo({
   const [activeDate, setActiveDate] = useState(initialDate)
 
   return (
-    <div className="heatmap-preview">
-      <Heatmap
-        activeDate={activeDate}
-        dailyCounts={counts}
-        onDateSelect={(date) => setActiveDate(date)}
-      />
-    </div>
+    <ComponentPreviewCard label="热力图">
+      <div className="heatmap-preview">
+        <Heatmap
+          activeDate={activeDate}
+          dailyCounts={counts}
+          onDateSelect={(date) => setActiveDate(date)}
+        />
+      </div>
+    </ComponentPreviewCard>
   )
 }
 
@@ -55,5 +58,6 @@ export const heatmapDefinition = {
   id: 'heatmap',
   summary: '复刻 Skyline 侧边栏日期热力图的可点击筛选组件',
   status: 'Ready',
+  frame: 'plain',
   preview: () => <HeatmapDemo />,
 } satisfies ComponentDefinition

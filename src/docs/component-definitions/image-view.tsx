@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import { ComponentPreviewCard } from '../../components/component-preview-card'
 import { ImageView, ImageViewDisplayModeMenu, type ImageViewDisplayMode } from '../../components/image-view'
 import type { ComponentDefinition } from '../component-docs'
 
@@ -12,36 +13,38 @@ function ImageViewPreview() {
   const [displayMode, setDisplayMode] = useState<ImageViewDisplayMode>('fit-width')
 
   return (
-    <div className="image-view-docs-preview">
-      <ImageView
-        alt="OCR source document preview"
-        imageHeight={480}
-        imageWidth={640}
-        src={sampleImage}
-      />
-      <ImageView
-        alt="Not an image preview"
-        imageHeight={1}
-        imageWidth={1}
-        src={nonImageSource}
-      />
-      <ImageView placeholder="等待上传或识别图片" />
-      <div className="image-view-docs-preview__detail-shell">
-        <div className="image-view-docs-preview__detail-toolbar">
-          <ImageViewDisplayModeMenu
-            displayMode={displayMode}
-            onDisplayModeChange={setDisplayMode}
-          />
-        </div>
+    <ComponentPreviewCard label="图片视图">
+      <div className="image-view-docs-preview">
         <ImageView
-          alt="OCR source document detail"
-          className="image-view-docs-preview__detail"
-          displayMode={displayMode}
-          open
+          alt="OCR source document preview"
+          imageHeight={480}
+          imageWidth={640}
           src={sampleImage}
         />
+        <ImageView
+          alt="Not an image preview"
+          imageHeight={1}
+          imageWidth={1}
+          src={nonImageSource}
+        />
+        <ImageView placeholder="等待上传或识别图片" />
+        <div className="image-view-docs-preview__detail-shell">
+          <div className="image-view-docs-preview__detail-toolbar">
+            <ImageViewDisplayModeMenu
+              displayMode={displayMode}
+              onDisplayModeChange={setDisplayMode}
+            />
+          </div>
+          <ImageView
+            alt="OCR source document detail"
+            className="image-view-docs-preview__detail"
+            displayMode={displayMode}
+            open
+            src={sampleImage}
+          />
+        </div>
       </div>
-    </div>
+    </ComponentPreviewCard>
   )
 }
 
@@ -49,5 +52,6 @@ export const imageViewDefinition = {
   id: 'image-view',
   summary: '内部共享图片组件，为 OCR 校对等场景提供稳定比例预览，并提供 100%、适应宽度、适应高度三种详情模式',
   status: 'Preview',
+  frame: 'plain',
   preview: () => <ImageViewPreview />,
 } satisfies ComponentDefinition

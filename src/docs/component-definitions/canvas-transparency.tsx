@@ -1,4 +1,5 @@
 import { CanvasTransparency } from '../../components/canvas-transparency'
+import { ComponentPreviewCard } from '../../components/component-preview-card'
 import type { ComponentDefinition } from '../component-docs'
 
 const sampleGeometry = `data:image/svg+xml;utf8,${encodeURIComponent(`
@@ -19,10 +20,15 @@ export const canvasTransparencyDefinition = {
   id: 'canvas-transparency',
   summary: '基于角点背景采样生成亮暗主题透明 PNG，最多缓存 32 组处理结果及已解码资源，由共享缓存管理对象 URL 生命周期',
   status: 'Ready',
+  frame: 'plain',
   preview: () => (
-    <CanvasTransparency
-      alt="几何图透明化结果"
-      src={sampleGeometry}
-    />
+    <ComponentPreviewCard label="画布透明化">
+      <div className="canvas-transparency-docs-preview">
+        <CanvasTransparency
+          alt="几何图透明化结果"
+          src={sampleGeometry}
+        />
+      </div>
+    </ComponentPreviewCard>
   ),
 } satisfies ComponentDefinition

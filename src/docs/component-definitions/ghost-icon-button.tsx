@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Menu } from 'lucide-react'
 
+import { ComponentPreviewCard } from '../../components/component-preview-card'
 import { GhostIconButton } from '../../components/ghost-icon-button'
 import { TextButton } from '../../components/text-button'
 import type { ComponentDefinition } from '../component-docs'
@@ -22,23 +23,25 @@ function GhostIconButtonPreview() {
   const [disabled, setDisabled] = useState(false)
 
   return (
-    <div className="icon-preview-shell">
-      <div className="icon-preview__controls">
-        <TextButton
-          aria-pressed={disabled}
-          className="icon-preview__toggle"
-          onClick={() => setDisabled((current) => !current)}
-        >
-          {disabled ? '启用按钮' : '禁用按钮'}
-        </TextButton>
+    <ComponentPreviewCard label="幽灵图标按钮">
+      <div className="icon-preview-shell">
+        <div className="icon-preview__controls">
+          <TextButton
+            aria-pressed={disabled}
+            className="icon-preview__toggle"
+            onClick={() => setDisabled((current) => !current)}
+          >
+            {disabled ? '启用按钮' : '禁用按钮'}
+          </TextButton>
+        </div>
+        <div className="icon-preview icon-preview--plain" aria-label="GhostIconButton 普通背景预览">
+          <section className="icon-preview__scene icon-preview__scene--plain">
+            <span className="icon-preview__scene-title">普通背景</span>
+            <GhostIconButtonPreviewGroup disabled={disabled} />
+          </section>
+        </div>
       </div>
-      <div className="icon-preview icon-preview--plain" aria-label="GhostIconButton 普通背景预览">
-        <section className="icon-preview__scene icon-preview__scene--plain">
-          <span className="icon-preview__scene-title">普通背景</span>
-          <GhostIconButtonPreviewGroup disabled={disabled} />
-        </section>
-      </div>
-    </div>
+    </ComponentPreviewCard>
   )
 }
 
@@ -46,5 +49,6 @@ export const ghostIconButtonDefinition = {
   id: 'ghost-icon-button',
   summary: '透明圆形图标按钮，使用共享 hover/active 反馈 token',
   status: 'Ready',
+  frame: 'plain',
   preview: () => <GhostIconButtonPreview />,
 } satisfies ComponentDefinition

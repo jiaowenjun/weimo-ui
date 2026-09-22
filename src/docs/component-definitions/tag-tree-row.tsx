@@ -1,5 +1,6 @@
 import { CalendarDays, Folder } from 'lucide-react'
 
+import { ComponentPreviewCard } from '../../components/component-preview-card'
 import type { AnimatedTagTreeRow } from '../../components/tag-tree/tag-tree-model'
 import { TagTreeRow } from '../../components/tag-tree/tag-tree-row'
 import type { ComponentDefinition } from '../component-docs'
@@ -28,31 +29,33 @@ const childRow: AnimatedTagTreeRow = {
 
 function TagTreeRowDemo() {
   return (
-    <div className="internal-tag-tree-row-preview tag-tree" role="tree" aria-label="TagTreeRow preview">
-      <TagTreeRow
-        onMenuAction={() => {}}
-        onSelect={() => {}}
-        onToggle={() => {}}
-        row={rootRow}
-        rowMenuEnabled
-        variant="default"
-      />
-      <TagTreeRow
-        onMenuAction={() => {}}
-        onSelect={() => {}}
-        onToggle={() => {}}
-        row={childRow}
-        rowMenuEnabled
-        variant="default"
-      />
-      <TagTreeRow
-        onSelect={() => {}}
-        onToggle={() => {}}
-        row={{ ...childRow, tag: 'writing/ideas', label: '灵感', selected: false }}
-        rowMenuEnabled={false}
-        variant="no-action"
-      />
-    </div>
+    <ComponentPreviewCard label="标签树行">
+      <div className="internal-tag-tree-row-preview tag-tree" role="tree" aria-label="TagTreeRow preview">
+        <TagTreeRow
+          onMenuAction={() => {}}
+          onSelect={() => {}}
+          onToggle={() => {}}
+          row={rootRow}
+          rowMenuEnabled
+          variant="default"
+        />
+        <TagTreeRow
+          onMenuAction={() => {}}
+          onSelect={() => {}}
+          onToggle={() => {}}
+          row={childRow}
+          rowMenuEnabled
+          variant="default"
+        />
+        <TagTreeRow
+          onSelect={() => {}}
+          onToggle={() => {}}
+          row={{ ...childRow, tag: 'writing/ideas', label: '灵感', selected: false }}
+          rowMenuEnabled={false}
+          variant="no-action"
+        />
+      </div>
+    </ComponentPreviewCard>
   )
 }
 
@@ -60,5 +63,6 @@ export const tagTreeRowDefinition = {
   id: 'tag-tree-row',
   summary: 'TagTree 的内部行组件，负责缩进引导线、选择态、展开按钮和行操作菜单',
   status: 'Ready',
+  frame: 'plain',
   preview: () => <TagTreeRowDemo />,
 } satisfies ComponentDefinition

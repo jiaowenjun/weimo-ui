@@ -1,3 +1,4 @@
+import { ComponentPreviewCard } from '../../components/component-preview-card'
 import { StatGroup } from '../../components/stat-group'
 import type { ComponentDefinition } from '../component-docs'
 
@@ -23,5 +24,10 @@ export const statGroupDefinition = {
   id: 'stat-group',
   summary: '复刻 Skyline 侧边栏统计区的笔记、字数、天数三栏',
   status: 'Ready',
-  preview: () => <StatGroup items={sidebarStatsItems} aria-label="笔记统计" />,
+  frame: 'plain',
+  preview: () => (
+    <ComponentPreviewCard label="统计组">
+      <StatGroup items={sidebarStatsItems} aria-label="笔记统计" />
+    </ComponentPreviewCard>
+  ),
 } satisfies ComponentDefinition

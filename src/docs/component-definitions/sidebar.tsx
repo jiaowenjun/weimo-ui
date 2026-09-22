@@ -1,3 +1,4 @@
+import { ComponentPreviewCard } from '../../components/component-preview-card'
 import { SideBarDrawerPreview } from './sidebar-preview'
 import type { ComponentDefinition } from '../component-docs'
 
@@ -20,10 +21,13 @@ export const sidebarDefinition = {
   id: 'sidebar',
   summary: '桌面纯色常驻侧栏，移动端磨砂抽屉',
   status: 'Preview',
+  frame: 'plain',
   preview: () => (
-    <div className="sidebar-preview">
-      {renderSideBarBlankPreview()}
-      <SideBarDrawerPreview />
-    </div>
+    <ComponentPreviewCard label="侧边栏">
+      <div className="sidebar-preview">
+        {renderSideBarBlankPreview()}
+        <SideBarDrawerPreview />
+      </div>
+    </ComponentPreviewCard>
   ),
 } satisfies ComponentDefinition

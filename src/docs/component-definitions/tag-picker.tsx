@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { ChipButton } from '../../components/chip-button'
+import { ComponentPreviewCard } from '../../components/component-preview-card'
 import {
   TagPicker,
   type TagPickerApplyPayload,
@@ -75,33 +76,35 @@ function TagPickerDemo({
   }
 
   return (
-    <div className="tag-picker-preview">
-      <div className="tag-picker-preview__panel">
-        <div className="tag-picker-preview__tags" aria-label="笔记标签">
-          {tagSlots.map((tag, index) => (
-            tag ? (
-              <ChipButton key={`${tag}-${index}`} onClick={() => openTagPicker(index)}>
-                {tag}
-              </ChipButton>
-            ) : (
-              <ChipButton key={`new-${index}`} onClick={() => openTagPicker(index)} prefix="+">
-                标签
-              </ChipButton>
-            )
-          ))}
+    <ComponentPreviewCard label="标签选择器">
+      <div className="tag-picker-preview">
+        <div className="tag-picker-preview__panel">
+          <div className="tag-picker-preview__tags" aria-label="笔记标签">
+            {tagSlots.map((tag, index) => (
+              tag ? (
+                <ChipButton key={`${tag}-${index}`} onClick={() => openTagPicker(index)}>
+                  {tag}
+                </ChipButton>
+              ) : (
+                <ChipButton key={`new-${index}`} onClick={() => openTagPicker(index)} prefix="+">
+                  标签
+                </ChipButton>
+              )
+            ))}
+          </div>
         </div>
+        <TagPicker
+          initialDraft={activeTag || initialDraft}
+          mode={pickerMode}
+          onApply={handleApply}
+          onOpenChange={setOpen}
+          open={open}
+          selectedTags={selectedTags}
+          tagOptions={tagOptions}
+          targetTag={activeTag || targetTag}
+        />
       </div>
-      <TagPicker
-        initialDraft={activeTag || initialDraft}
-        mode={pickerMode}
-        onApply={handleApply}
-        onOpenChange={setOpen}
-        open={open}
-        selectedTags={selectedTags}
-        tagOptions={tagOptions}
-        targetTag={activeTag || targetTag}
-      />
-    </div>
+    </ComponentPreviewCard>
   )
 }
 
@@ -109,5 +112,6 @@ export const tagPickerDefinition = {
   id: 'tag-picker',
   summary: '复刻 Skyline 标签选择器的 Dialog 组件，支持新增、替换和选择已有标签',
   status: 'Ready',
+  frame: 'plain',
   preview: () => <TagPickerDemo />,
 } satisfies ComponentDefinition

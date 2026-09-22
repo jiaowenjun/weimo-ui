@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Menu } from 'lucide-react'
 
+import { ComponentPreviewCard } from '../../components/component-preview-card'
 import { GlassIconButton } from '../../components/glass-icon-button'
 import { TextButton } from '../../components/text-button'
 import type { ComponentDefinition } from '../component-docs'
@@ -29,27 +30,29 @@ function GlassIconButtonPreview() {
   const [disabled, setDisabled] = useState(false)
 
   return (
-    <div className="icon-preview-shell">
-      <div className="icon-preview__controls">
-        <TextButton
-          aria-pressed={disabled}
-          className="icon-preview__toggle"
-          onClick={() => setDisabled((current) => !current)}
-        >
-          {disabled ? '启用按钮' : '禁用按钮'}
-        </TextButton>
-      </div>
-      <div className="icon-preview" aria-label="GlassIconButton 背景色预览">
-        {glassIconButtonPreviewScenes.map((scene) => (
-          <section
-            className={`icon-preview__scene icon-preview__scene--${scene.id}`}
-            key={scene.id}
+    <ComponentPreviewCard label="玻璃图标按钮">
+      <div className="icon-preview-shell">
+        <div className="icon-preview__controls">
+          <TextButton
+            aria-pressed={disabled}
+            className="icon-preview__toggle"
+            onClick={() => setDisabled((current) => !current)}
           >
-            <GlassIconButtonPreviewGroup disabled={disabled} />
-          </section>
-        ))}
+            {disabled ? '启用按钮' : '禁用按钮'}
+          </TextButton>
+        </div>
+        <div className="icon-preview" aria-label="GlassIconButton 背景色预览">
+          {glassIconButtonPreviewScenes.map((scene) => (
+            <section
+              className={`icon-preview__scene icon-preview__scene--${scene.id}`}
+              key={scene.id}
+            >
+              <GlassIconButtonPreviewGroup disabled={disabled} />
+            </section>
+          ))}
+        </div>
       </div>
-    </div>
+    </ComponentPreviewCard>
   )
 }
 
@@ -57,5 +60,6 @@ export const glassIconButtonDefinition = {
   id: 'glass-icon-button',
   summary: '玻璃质感圆形图标按钮，自动感知背景并调整字色与 hover 反馈',
   status: 'Ready',
+  frame: 'plain',
   preview: () => <GlassIconButtonPreview />,
 } satisfies ComponentDefinition

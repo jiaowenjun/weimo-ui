@@ -6,6 +6,7 @@ import {
 } from 'lucide-react'
 import { useRef } from 'react'
 
+import { ComponentPreviewCard } from '../../components/component-preview-card'
 import { GhostIconButton } from '../../components/ghost-icon-button'
 import {
   ActionMenu,
@@ -104,15 +105,17 @@ function MenuPreviewScenario({
 
 function renderMenuDemo() {
   return (
-    <div className="menu-preview">
-      {MENU_PREVIEW_SCENARIOS.map((scenario) => (
-        <MenuPreviewScenario
-          key={scenario.key}
-          label={scenario.label}
-          tone={scenario.tone}
-        />
-      ))}
-    </div>
+    <ComponentPreviewCard label="操作菜单">
+      <div className="menu-preview">
+        {MENU_PREVIEW_SCENARIOS.map((scenario) => (
+          <MenuPreviewScenario
+            key={scenario.key}
+            label={scenario.label}
+            tone={scenario.tone}
+          />
+        ))}
+      </div>
+    </ComponentPreviewCard>
   )
 }
 
@@ -120,5 +123,6 @@ export const menuDefinition = {
   id: 'menu',
   summary: 'Coss/Base UI 行为的磨砂弹出操作菜单',
   status: 'Ready',
+  frame: 'plain',
   preview: () => renderMenuDemo(),
 } satisfies ComponentDefinition

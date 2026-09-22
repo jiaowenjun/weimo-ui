@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import { ComponentPreviewCard } from '../../components/component-preview-card'
 import {
   ModeButton,
   type ModeButtonMode,
@@ -16,22 +17,24 @@ function ModeButtonDemo() {
   }
 
   return (
-    <div
-      className="internal-mode-button-preview"
-      aria-label="ModeButton preview"
-    >
-      <ModeButton
-        mode={mode}
-        onModeChange={setMode}
-        buttonProps={{ size: 'sm' }}
-      />
-      <TextButton
-        className="internal-mode-button-preview__toggle"
-        onClick={toggleMode}
+    <ComponentPreviewCard label="模式按钮">
+      <div
+        className="internal-mode-button-preview"
+        aria-label="ModeButton preview"
       >
-        {editing ? '切换到展示态' : '切换到编辑态'}
-      </TextButton>
-    </div>
+        <ModeButton
+          mode={mode}
+          onModeChange={setMode}
+          buttonProps={{ size: 'sm' }}
+        />
+        <TextButton
+          className="internal-mode-button-preview__toggle"
+          onClick={toggleMode}
+        >
+          {editing ? '切换到展示态' : '切换到编辑态'}
+        </TextButton>
+      </div>
+    </ComponentPreviewCard>
   )
 }
 
@@ -39,5 +42,6 @@ export const modeButtonDefinition = {
   id: 'mode-button',
   summary: '内部模式图标按钮，统一菜单进入编辑态与关闭编辑态',
   status: 'Ready',
+  frame: 'plain',
   preview: () => <ModeButtonDemo />,
 } satisfies ComponentDefinition

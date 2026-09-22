@@ -3,6 +3,7 @@ import type { ReactNode } from 'react'
 
 import { CardComposer } from '../../components/card-composer'
 import type { CardDraft, CardProps } from '../../components/card'
+import { ComponentPreviewCard } from '../../components/component-preview-card'
 import type { ComponentDefinition } from '../component-docs'
 
 const composerTagOptions = ['笔记', '草稿', '灵感', 'weimo']
@@ -26,18 +27,20 @@ function CardComposerDemo() {
   })
 
   return (
-    <div className="card-composer-docs-preview">
-      <CardComposer
-        clientId="docs-card-composer"
-        initialMode="edit"
-        labels={{ placeholder: '写点什么...' }}
-        note={note}
-        onSave={(draft) => {
-          setNote((current) => applyDraftToNote(current, draft))
-        }}
-        tagOptions={composerTagOptions}
-      />
-    </div>
+    <ComponentPreviewCard label="新建草稿壳层">
+      <div className="card-composer-docs-preview">
+        <CardComposer
+          clientId="docs-card-composer"
+          initialMode="edit"
+          labels={{ placeholder: '写点什么...' }}
+          note={note}
+          onSave={(draft) => {
+            setNote((current) => applyDraftToNote(current, draft))
+          }}
+          tagOptions={composerTagOptions}
+        />
+      </div>
+    </ComponentPreviewCard>
   )
 }
 
@@ -45,6 +48,7 @@ export const cardComposerDefinition = {
   id: 'card-composer',
   summary: '用于新建草稿的 Card 组合壳层，复用 Card 编辑态与高度过渡',
   status: 'Preview',
+  frame: 'plain',
   preview: () => <CardComposerDemo />,
 } satisfies ComponentDefinition
 

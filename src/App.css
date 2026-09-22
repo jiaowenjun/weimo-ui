@@ -179,6 +179,14 @@
   background: color-mix(in srgb, var(--color-bg-raised) 70%, transparent);
 }
 
+.image-uploader-docs-preview {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  align-content: center;
+  gap: 12px;
+}
+
 .image-uploader-docs-preview__actions {
   display: flex;
   width: 100%;
@@ -186,6 +194,14 @@
   justify-content: center;
   gap: 12px;
   padding-top: 12px;
+}
+
+.canvas-transparency-docs-preview,
+.ocr-detail-docs-preview {
+  display: grid;
+  width: 100%;
+  min-height: 100%;
+  place-items: center;
 }
 
 .md-view-docs-preview {
@@ -1096,6 +1112,12 @@
 /* --shadow-overlay(0 28px 80px)向下延伸约 68px,超出预览区上下各 50px 的可用空间;
    预览窗默认裁切是给衬底演示定的,浮层瓦片需要把真实阴影画进卡片 padding(距卡片边缘 67px)。 */
 .component-preview-card > .component-preview-card__meta ~ .popup-surface-preview {
+  overflow: visible;
+}
+
+/* 常开的菜单弹层以 transform 锚点为包含块,默认会被预览窗裁切;
+   操作菜单演示需要完整画出弹层与子菜单(与浮层瓦片同理)。 */
+.component-preview-card > .component-preview-card__meta ~ .menu-preview {
   overflow: visible;
 }
 

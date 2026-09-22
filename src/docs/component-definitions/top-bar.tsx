@@ -1,5 +1,6 @@
 import { Menu, Search } from 'lucide-react'
 
+import { ComponentPreviewCard } from '../../components/component-preview-card'
 import { GlassIconButton } from '../../components/glass-icon-button'
 import { GhostIconButton } from '../../components/ghost-icon-button'
 import { TopBar } from '../../components/top-bar'
@@ -33,11 +34,14 @@ export const topBarDefinition = {
   id: 'top-bar',
   summary: '响应式顶部工具栏，承载调用方提供的操作',
   status: 'Preview',
+  frame: 'plain',
   preview: () => (
-    <TopBar
-      className="top-bar-preview"
-      leftSlot={renderTopBarSidebarButton()}
-      rightSlot={renderTopBarSearchButton()}
-    />
+    <ComponentPreviewCard label="顶部工具栏">
+      <TopBar
+        className="top-bar-preview"
+        leftSlot={renderTopBarSidebarButton()}
+        rightSlot={renderTopBarSearchButton()}
+      />
+    </ComponentPreviewCard>
   ),
 } satisfies ComponentDefinition

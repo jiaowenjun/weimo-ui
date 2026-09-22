@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import { ComponentPreviewCard } from '../../components/component-preview-card'
 import { OcrDetail } from '../../components/ocr-detail'
 import { TextButton } from '../../components/text-button'
 import type { ComponentDefinition } from '../component-docs'
@@ -56,23 +57,25 @@ function OcrDetailPreview() {
   const [title, setTitle] = useState('OCR 校对题目')
 
   return (
-    <div className="ocr-detail-docs-preview">
-      <TextButton onClick={() => setOpen(true)} type="button">
-        打开 OCR 校对
-      </TextButton>
-      <OcrDetail
-        imageSrc={sampleOcrImage}
-        onChange={(nextMarkdown, draft) => {
-          setMarkdown(nextMarkdown)
-          setTitle(draft.title)
-        }}
-        onOpenChange={setOpen}
-        open={open}
-        tags={['OCR', '校对']}
-        title={title}
-        value={markdown}
-      />
-    </div>
+    <ComponentPreviewCard label="OCR 校对">
+      <div className="ocr-detail-docs-preview">
+        <TextButton onClick={() => setOpen(true)} type="button">
+          打开 OCR 校对
+        </TextButton>
+        <OcrDetail
+          imageSrc={sampleOcrImage}
+          onChange={(nextMarkdown, draft) => {
+            setMarkdown(nextMarkdown)
+            setTitle(draft.title)
+          }}
+          onOpenChange={setOpen}
+          open={open}
+          tags={['OCR', '校对']}
+          title={title}
+          value={markdown}
+        />
+      </div>
+    </ComponentPreviewCard>
   )
 }
 
@@ -80,5 +83,6 @@ export const ocrDetailDefinition = {
   id: 'ocr-detail',
   summary: '用于 OCR 校对的全屏弹窗，左侧自然尺寸查看图片，右侧用 Card 编辑 Markdown',
   status: 'Ready',
+  frame: 'plain',
   preview: () => <OcrDetailPreview />,
 } satisfies ComponentDefinition

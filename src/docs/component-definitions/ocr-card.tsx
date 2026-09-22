@@ -1,3 +1,4 @@
+import { ComponentPreviewCard } from '../../components/component-preview-card'
 import { OcrCard } from '../../components/ocr-card'
 import type { ComponentDefinition } from '../component-docs'
 
@@ -29,23 +30,25 @@ const ocrCardTagOptions = ['OCR', '扫描件', '票据', '待校对']
 
 function OcrCardPreview() {
   return (
-    <div className="ocr-card-docs-preview">
-      <OcrCard
-        aria-label="OCR card preview"
-        note={{
-          createdAtText: 'OCR 图片',
-          imageAlt: 'OCR scanned document preview',
-          imageHeight: 480,
-          imageSrc: sampleOcrCardImage,
-          imageWidth: 640,
-          markdown: sampleOcrMarkdown,
-          tags: ['OCR', '扫描件'],
-        }}
-        onDelete={() => {}}
-        onSave={() => {}}
-        tagOptions={ocrCardTagOptions}
-      />
-    </div>
+    <ComponentPreviewCard label="OCR 卡片">
+      <div className="ocr-card-docs-preview">
+        <OcrCard
+          aria-label="OCR card preview"
+          note={{
+            createdAtText: 'OCR 图片',
+            imageAlt: 'OCR scanned document preview',
+            imageHeight: 480,
+            imageSrc: sampleOcrCardImage,
+            imageWidth: 640,
+            markdown: sampleOcrMarkdown,
+            tags: ['OCR', '扫描件'],
+          }}
+          onDelete={() => {}}
+          onSave={() => {}}
+          tagOptions={ocrCardTagOptions}
+        />
+      </div>
+    </ComponentPreviewCard>
   )
 }
 
@@ -53,5 +56,6 @@ export const ocrCardDefinition = {
   id: 'ocr-card',
   summary: '复用 Card 编辑壳层的 OCR 卡片，有识别结果时通过操作菜单校对 Markdown，否则展示原图',
   status: 'Ready',
+  frame: 'plain',
   preview: () => <OcrCardPreview />,
 } satisfies ComponentDefinition
