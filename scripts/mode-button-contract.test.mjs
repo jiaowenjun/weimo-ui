@@ -25,7 +25,7 @@ function cssBlockFor(source, selector) {
 const componentSource = readProjectFile('src/components/mode-button.tsx')
 const componentCss = readProjectFile('src/components/mode-button.css')
 const docsDefinitionSource = readProjectFile(
-  'src/docs/component-definitions/mode-button.tsx',
+  'src/docs/component-definitions/button.tsx',
 )
 const componentDefinitionsIndexSource = readProjectFile(
   'src/docs/component-definitions/index.ts',
@@ -145,9 +145,10 @@ for (const snippet of [
   '展示态',
   '切换到展示态',
   '切换到编辑态',
-  "id: 'mode-button'",
-  "summary: '内部模式图标按钮，统一菜单进入编辑态与关闭编辑态'",
-  'preview: () => <ModeButtonDemo />',
+  "id: 'button'",
+  "summary: '文本按钮、幽灵/玻璃图标按钮与模式按钮的按钮总览'",
+  'preview: () => <ButtonDemo />',
+  '<ModeButtonDemo />',
 ]) {
   assert.ok(docsDefinitionSource.includes(snippet), `docs definition must include ${snippet}.`)
 }
@@ -162,7 +163,7 @@ for (const snippet of [
   "name: 'ModeButton'",
   "registryName: 'mode-button'",
   "packageExport: './components/mode-button'",
-  'docs: true',
+  'docs: false',
   'registry: true',
 ]) {
   assert.ok(manifestSource.includes(snippet), `components manifest must include ${snippet}.`)
@@ -174,12 +175,11 @@ assert.ok(
 
 assert.ok(
   componentDefinitionsIndexSource.includes(
-    "import { modeButtonDefinition } from './mode-button'",
+    "import { buttonDefinition } from './button'",
   ) &&
-    componentDefinitionsIndexSource.includes(
-      "'mode-button': modeButtonDefinition",
-    ),
-  'ModeButton definition must be registered by component-definitions/index.ts.',
+    componentDefinitionsIndexSource.includes('button: buttonDefinition') &&
+    !componentDefinitionsIndexSource.includes('mode-button'),
+  'ModeButton preview must be registered through the merged Button definition in component-definitions/index.ts.',
 )
 
 for (const selector of [

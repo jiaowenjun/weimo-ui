@@ -44,8 +44,7 @@ const componentDefinitionSources = {
   ),
   'background-tokens': readProjectFile('src/docs/component-definitions/background-tokens.tsx'),
   'border-tokens': readProjectFile('src/docs/component-definitions/border-tokens.tsx'),
-  'glass-icon-button': readProjectFile('src/docs/component-definitions/glass-icon-button.tsx'),
-  'ghost-icon-button': readProjectFile('src/docs/component-definitions/ghost-icon-button.tsx'),
+  button: readProjectFile('src/docs/component-definitions/button.tsx'),
   menu: readProjectFile('src/docs/component-definitions/menu.tsx'),
   surface: readProjectFile('src/docs/component-definitions/surface.tsx'),
   'md-editor': [
@@ -189,8 +188,7 @@ for (const componentId of [
   'heatmap',
   'background-tokens',
   'border-tokens',
-  'ghost-icon-button',
-  'glass-icon-button',
+  'button',
   'menu',
   'surface',
   'tag-tree',
@@ -210,6 +208,7 @@ for (const snippet of [
   "id: 'stat-group'",
   "id: 'ghost-icon-button'",
   "id: 'glass-icon-button'",
+  "id: 'button'",
   "id: 'menu'",
   "id: 'surface'",
   "id: 'tag-tree'",
@@ -306,20 +305,19 @@ for (const snippet of [
 }
 
 assert.ok(
-  !componentDefinitionSources['glass-icon-button'].includes('title:') &&
-    !componentDefinitionSources['glass-icon-button'].includes('icon-preview__scene-title') &&
-    !componentDefinitionSources['glass-icon-button'].includes('scene.title'),
-  'GlassIconButton docs preview must remove redundant scene title text from the preview frame.',
+  !componentDefinitionSources.button.includes('title:') &&
+    !componentDefinitionSources.button.includes('icon-preview__scene-title') &&
+    !componentDefinitionSources.button.includes('scene.title'),
+  'Button page icon previews must remove redundant scene title text from the preview frame.',
 )
 
 assert.ok(
-  !componentDefinitionSources['ghost-icon-button'].includes('ghostIconButtonPreviewScenes') &&
-    !componentDefinitionSources['ghost-icon-button'].includes("title: '亮色单色背景'") &&
-    !componentDefinitionSources['ghost-icon-button'].includes("title: '亮色多色彩渐变背景'") &&
-    !componentDefinitionSources['ghost-icon-button'].includes("title: '暗色单色背景'") &&
-    !componentDefinitionSources['ghost-icon-button'].includes("title: '暗色多色彩渐变背景'") &&
-    !componentDefinitionSources['ghost-icon-button'].includes('scene.id'),
-  'GhostIconButton docs preview must use one ordinary background instead of multiple background scenes.',
+  !componentDefinitionSources.button.includes('ghostIconButtonPreviewScenes') &&
+    !componentDefinitionSources.button.includes("title: '亮色单色背景'") &&
+    !componentDefinitionSources.button.includes("title: '亮色多色彩渐变背景'") &&
+    !componentDefinitionSources.button.includes("title: '暗色单色背景'") &&
+    !componentDefinitionSources.button.includes("title: '暗色多色彩渐变背景'"),
+  'Button page ghost icon preview must use one ordinary background instead of multiple background scenes.',
 )
 
 assert.ok(

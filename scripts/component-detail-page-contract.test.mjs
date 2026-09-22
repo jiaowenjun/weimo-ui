@@ -77,9 +77,7 @@ const docsShellSource = readProjectFile('src/docs/docs-shell.tsx')
 const componentDocsSource = readProjectFile('src/docs/component-docs.tsx')
 const mdRenderDefinitionSource = readProjectFile('src/docs/component-definitions/md-render.tsx')
 const imageViewDefinitionSource = readProjectFile('src/docs/component-definitions/image-view.tsx')
-const glassIconButtonDefinitionSource = readProjectFile('src/docs/component-definitions/glass-icon-button.tsx')
-const ghostIconButtonDefinitionSource = readProjectFile('src/docs/component-definitions/ghost-icon-button.tsx')
-const textButtonDefinitionSource = readProjectFile('src/docs/component-definitions/text-button.tsx')
+const buttonDefinitionSource = readProjectFile('src/docs/component-definitions/button.tsx')
 const borderTokensDefinitionSource = readProjectFile('src/docs/component-definitions/border-tokens.tsx')
 const componentDefinitionsSource = readProjectFile('src/docs/component-definitions/card.tsx') +
   readProjectFile('src/docs/component-definitions/canvas-transparency.tsx') +
@@ -91,9 +89,7 @@ const componentDefinitionsSource = readProjectFile('src/docs/component-definitio
   readProjectFile('src/docs/component-definitions/tag-bar.tsx') +
   readProjectFile('src/docs/component-definitions/stat-group.tsx') +
   readProjectFile('src/docs/component-definitions/heatmap.tsx') +
-  glassIconButtonDefinitionSource +
-  ghostIconButtonDefinitionSource +
-  textButtonDefinitionSource +
+  buttonDefinitionSource +
   borderTokensDefinitionSource +
   readProjectFile('src/docs/component-definitions/menu.tsx') +
   readProjectFile('src/docs/component-definitions/md-editor.tsx') +
@@ -228,7 +224,7 @@ for (const snippet of [
   "id: 'tag-bar'",
   "id: 'md-view'",
   "id: 'math-editor'",
-  "id: 'text-button'",
+  "id: 'button'",
   "id: 'canvas-transparency'",
   "id: 'surface'",
 ]) {
@@ -347,35 +343,36 @@ assert.ok(
   'GlassSurface detail page must render a scrollable dark-to-light adaptive material preview.',
 )
 assert.ok(
-    glassIconButtonDefinitionSource.includes("import { GlassIconButton } from '../../components/glass-icon-button'") &&
-    glassIconButtonDefinitionSource.includes("import { useState } from 'react'") &&
-    glassIconButtonDefinitionSource.includes("import { TextButton } from '../../components/text-button'") &&
-    glassIconButtonDefinitionSource.includes("id: 'glass-icon-button'") &&
-    glassIconButtonDefinitionSource.includes('glassIconButtonPreviewScenes') &&
-    glassIconButtonDefinitionSource.includes("id: 'light-solid'") &&
-    glassIconButtonDefinitionSource.includes("id: 'light-gradient'") &&
-    glassIconButtonDefinitionSource.includes("id: 'dark-solid'") &&
-    glassIconButtonDefinitionSource.includes("id: 'dark-gradient'") &&
-    !glassIconButtonDefinitionSource.includes('title:') &&
-    !glassIconButtonDefinitionSource.includes('icon-preview__scene-title') &&
-    !glassIconButtonDefinitionSource.includes('scene.title') &&
-    glassIconButtonDefinitionSource.includes('function GlassIconButtonPreview()') &&
-    glassIconButtonDefinitionSource.includes('const [disabled, setDisabled] = useState(false)') &&
-    glassIconButtonDefinitionSource.includes('setDisabled((current) => !current)') &&
-    glassIconButtonDefinitionSource.includes('aria-pressed={disabled}') &&
-    glassIconButtonDefinitionSource.includes("className=\"icon-preview-shell\"") &&
-    glassIconButtonDefinitionSource.includes("className=\"icon-preview__controls\"") &&
-    glassIconButtonDefinitionSource.includes('<TextButton') &&
-    !glassIconButtonDefinitionSource.includes("from '../../components/coss/button'") &&
-    !glassIconButtonDefinitionSource.includes("variant=\"outline\"") &&
-    glassIconButtonDefinitionSource.includes('className={`icon-preview__scene icon-preview__scene--${scene.id}`}') &&
-    (glassIconButtonDefinitionSource.match(/<GlassIconButton\b[^>\n]*disabled=\{disabled\}/g) ?? []).length === 2 &&
-    !glassIconButtonDefinitionSource.includes('状态切换菜单') &&
-    glassIconButtonDefinitionSource.includes('preview: () => <GlassIconButtonPreview />') &&
+    buttonDefinitionSource.includes("import { GlassIconButton } from '../../components/glass-icon-button'") &&
+    buttonDefinitionSource.includes("import { useState } from 'react'") &&
+    buttonDefinitionSource.includes("import { TextButton } from '../../components/text-button'") &&
+    buttonDefinitionSource.includes("id: 'button'") &&
+    buttonDefinitionSource.includes('glassIconButtonPreviewScenes') &&
+    buttonDefinitionSource.includes("id: 'light-solid'") &&
+    buttonDefinitionSource.includes("id: 'light-gradient'") &&
+    buttonDefinitionSource.includes("id: 'dark-solid'") &&
+    buttonDefinitionSource.includes("id: 'dark-gradient'") &&
+    !buttonDefinitionSource.includes('title:') &&
+    !buttonDefinitionSource.includes('icon-preview__scene-title') &&
+    !buttonDefinitionSource.includes('scene.title') &&
+    buttonDefinitionSource.includes('function GlassIconButtonPreview()') &&
+    buttonDefinitionSource.includes('const [disabled, setDisabled] = useState(false)') &&
+    buttonDefinitionSource.includes('setDisabled((current) => !current)') &&
+    buttonDefinitionSource.includes('aria-pressed={disabled}') &&
+    buttonDefinitionSource.includes("className=\"icon-preview-shell\"") &&
+    buttonDefinitionSource.includes("className=\"icon-preview__controls\"") &&
+    buttonDefinitionSource.includes('<TextButton') &&
+    !buttonDefinitionSource.includes("from '../../components/coss/button'") &&
+    !buttonDefinitionSource.includes("variant=\"outline\"") &&
+    buttonDefinitionSource.includes('className={`icon-preview__scene icon-preview__scene--${scene.id}`}') &&
+    (buttonDefinitionSource.match(/<GlassIconButton\b[^>\n]*disabled=\{disabled\}/g) ?? []).length === 2 &&
+    !buttonDefinitionSource.includes('状态切换菜单') &&
+    buttonDefinitionSource.includes('preview: () => <ButtonDemo />') &&
+    buttonDefinitionSource.includes('<GlassIconButtonPreview />') &&
     !componentDefinitionsSource.includes("from '../../components/icon-button'") &&
     !componentDefinitionsSource.includes("id: 'icon-button'") &&
     !componentDefinitionsSource.includes('<IconButton'),
-  'GlassIconButton detail page must render a manual disabled-state transition preview across light and dark backgrounds.',
+  'Button page glass icon card must render a manual disabled-state transition preview across light and dark backgrounds.',
 )
 assert.ok(
   borderTokensDefinitionSource.includes("frame: 'plain',") &&
@@ -387,32 +384,30 @@ assert.ok(
   'BorderColor detail page must keep background-aware token variants searchable without rendering redundant prose.',
 )
 assert.ok(
-    ghostIconButtonDefinitionSource.includes("import { GhostIconButton } from '../../components/ghost-icon-button'") &&
-    ghostIconButtonDefinitionSource.includes("import { useState } from 'react'") &&
-    ghostIconButtonDefinitionSource.includes("import { TextButton } from '../../components/text-button'") &&
-    ghostIconButtonDefinitionSource.includes("id: 'ghost-icon-button'") &&
-    ghostIconButtonDefinitionSource.includes('function GhostIconButtonPreview()') &&
-    ghostIconButtonDefinitionSource.includes('const [disabled, setDisabled] = useState(false)') &&
-    ghostIconButtonDefinitionSource.includes('setDisabled((current) => !current)') &&
-    ghostIconButtonDefinitionSource.includes('aria-pressed={disabled}') &&
-    ghostIconButtonDefinitionSource.includes("className=\"icon-preview-shell\"") &&
-    ghostIconButtonDefinitionSource.includes("className=\"icon-preview__controls\"") &&
-    ghostIconButtonDefinitionSource.includes('<TextButton') &&
-    !ghostIconButtonDefinitionSource.includes("from '../../components/coss/button'") &&
-    !ghostIconButtonDefinitionSource.includes("variant=\"outline\"") &&
-    ghostIconButtonDefinitionSource.includes('className="icon-preview icon-preview--plain"') &&
-    ghostIconButtonDefinitionSource.includes('className="icon-preview__scene icon-preview__scene--plain"') &&
-    ghostIconButtonDefinitionSource.includes('普通背景') &&
-    (ghostIconButtonDefinitionSource.match(/<GhostIconButton\b[^>\n]*disabled=\{disabled\}/g) ?? []).length === 2 &&
-    !ghostIconButtonDefinitionSource.includes('状态切换菜单') &&
-    ghostIconButtonDefinitionSource.includes('preview: () => <GhostIconButtonPreview />') &&
-    !ghostIconButtonDefinitionSource.includes('ghostIconButtonPreviewScenes') &&
-    !ghostIconButtonDefinitionSource.includes("title: '亮色单色背景'") &&
-    !ghostIconButtonDefinitionSource.includes("title: '亮色多色彩渐变背景'") &&
-    !ghostIconButtonDefinitionSource.includes("title: '暗色单色背景'") &&
-    !ghostIconButtonDefinitionSource.includes("title: '暗色多色彩渐变背景'") &&
-    !ghostIconButtonDefinitionSource.includes('scene.id'),
-  'GhostIconButton detail page must render one manual disabled-state transition preview on an ordinary background.',
+    buttonDefinitionSource.includes("import { GhostIconButton } from '../../components/ghost-icon-button'") &&
+    buttonDefinitionSource.includes("import { useState } from 'react'") &&
+    buttonDefinitionSource.includes("import { TextButton } from '../../components/text-button'") &&
+    buttonDefinitionSource.includes('function GhostIconButtonPreview()') &&
+    buttonDefinitionSource.includes('const [disabled, setDisabled] = useState(false)') &&
+    buttonDefinitionSource.includes('setDisabled((current) => !current)') &&
+    buttonDefinitionSource.includes('aria-pressed={disabled}') &&
+    buttonDefinitionSource.includes("className=\"icon-preview-shell\"") &&
+    buttonDefinitionSource.includes("className=\"icon-preview__controls\"") &&
+    buttonDefinitionSource.includes('<TextButton') &&
+    !buttonDefinitionSource.includes("from '../../components/coss/button'") &&
+    !buttonDefinitionSource.includes("variant=\"outline\"") &&
+    buttonDefinitionSource.includes('className="icon-preview icon-preview--plain"') &&
+    buttonDefinitionSource.includes('className="icon-preview__scene icon-preview__scene--plain"') &&
+    buttonDefinitionSource.includes('普通背景') &&
+    (buttonDefinitionSource.match(/<GhostIconButton\b[^>\n]*disabled=\{disabled\}/g) ?? []).length === 2 &&
+    !buttonDefinitionSource.includes('状态切换菜单') &&
+    buttonDefinitionSource.includes('<GhostIconButtonPreview />') &&
+    !buttonDefinitionSource.includes('ghostIconButtonPreviewScenes') &&
+    !buttonDefinitionSource.includes("title: '亮色单色背景'") &&
+    !buttonDefinitionSource.includes("title: '亮色多色彩渐变背景'") &&
+    !buttonDefinitionSource.includes("title: '暗色单色背景'") &&
+    !buttonDefinitionSource.includes("title: '暗色多色彩渐变背景'"),
+  'Button page ghost icon card must render one manual disabled-state transition preview on an ordinary background.',
 )
 assert.ok(
   css.includes('.icon-preview-shell') &&

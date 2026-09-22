@@ -5,11 +5,8 @@ import { backgroundTokensDefinition } from './background-tokens'
 import { borderTokensDefinition } from './border-tokens'
 import { surfaceDefinition } from './surface'
 import { actionDialogDefinition } from './action-dialog'
-import { ghostIconButtonDefinition } from './ghost-icon-button'
-import { glassIconButtonDefinition } from './glass-icon-button'
 import { menuDefinition } from './menu'
-import { modeButtonDefinition } from './mode-button'
-import { textButtonDefinition } from './text-button'
+import { buttonDefinition } from './button'
 import { bottomBarDefinition } from './bottom-bar'
 import { cardToolBarDefinition } from './card-tool-bar'
 import { cardTopBarDefinition } from './card-top-bar'
@@ -47,11 +44,8 @@ export const componentDefinitionsById = {
   'border-tokens': borderTokensDefinition,
   surface: surfaceDefinition,
   'action-dialog': actionDialogDefinition,
-  'ghost-icon-button': ghostIconButtonDefinition,
-  'glass-icon-button': glassIconButtonDefinition,
   menu: menuDefinition,
-  'mode-button': modeButtonDefinition,
-  'text-button': textButtonDefinition,
+  button: buttonDefinition,
   'bottom-bar': bottomBarDefinition,
   'card-tool-bar': cardToolBarDefinition,
   'card-top-bar': cardTopBarDefinition,

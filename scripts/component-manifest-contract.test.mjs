@@ -135,8 +135,11 @@ assert.deepEqual(
     'border-radius',
     'glass-surface',
     'popup-surface',
+    'ghost-icon-button',
+    'glass-icon-button',
+    'mode-button',
   ],
-  'Merged token utilities and surface materials must remain public without separate docs pages.',
+  'Merged token utilities, surface materials, and button variants must remain public without separate docs pages.',
 )
 
 assert.equal(

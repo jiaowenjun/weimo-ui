@@ -35,11 +35,9 @@ const rootRegistry = readJson('registry.json')
 const standaloneRegistryItem = readJson('registry/text-button.json')
 const source = readProjectFile('src/components/text-button.tsx')
 const css = readProjectFile('src/components/text-button.css')
-const docsSource = readProjectFile('src/docs/component-definitions/text-button.tsx')
+const docsSource = readProjectFile('src/docs/component-definitions/button.tsx')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
-const glassIconButtonDocsSource = readProjectFile('src/docs/component-definitions/glass-icon-button.tsx')
-const ghostIconButtonDocsSource = readProjectFile('src/docs/component-definitions/ghost-icon-button.tsx')
 const appCss = readProjectFile('src/App.css')
 const registryItem = rootRegistry.items.find((item) => item.name === 'text-button')
 
@@ -146,38 +144,50 @@ assert.ok(
 
 for (const snippet of [
   "import { TextButton } from '../../components/text-button'",
-  "id: 'text-button'",
-  "summary: '文本操作按钮，封装普通边框、hover/active 与 disabled token'",
-  'preview: () => <TextButtonPreview />',
+  "id: 'button'",
+  "summary: '文本按钮、幽灵/玻璃图标按钮与模式按钮的按钮总览'",
+  'preview: () => <ButtonDemo />',
+  '<TextButtonPreview />',
 ]) {
-  assertIncludes(docsSource, snippet, `TextButton docs definition must include ${snippet}.`)
+  assertIncludes(docsSource, snippet, `Button docs definition must include ${snippet}.`)
 }
 assertIncludes(
   definitionsIndexSource,
-  "import { textButtonDefinition } from './text-button'",
-  'TextButton definition must be imported from component-definitions/index.ts.',
+  "import { buttonDefinition } from './button'",
+  'Button definition must be imported from component-definitions/index.ts.',
 )
 assertIncludes(
   definitionsIndexSource,
-  "'text-button': textButtonDefinition",
-  'TextButton definition must be mapped by id.',
+  'button: buttonDefinition',
+  'Button definition must be mapped by id.',
 )
 assert.ok(
-  manifestSource.includes("id: 'text-button'") &&
-    manifestSource.includes("name: 'TextButton'") &&
+  manifestSource.includes("id: 'button'") &&
+    manifestSource.includes("name: '按钮'") &&
     manifestSource.includes("registryName: 'text-button'") &&
     manifestSource.includes("packageExport: './components/text-button'") &&
     manifestSource.includes("group: 'controls-overlays'"),
-  'TextButton must be listed as a public controls component in the manifest.',
+  'TextButton must stay listed as a public controls component through the merged Button page.',
 )
 assert.ok(
-  glassIconButtonDocsSource.includes("import { TextButton } from '../../components/text-button'") &&
-    ghostIconButtonDocsSource.includes("import { TextButton } from '../../components/text-button'") &&
-    glassIconButtonDocsSource.includes('<TextButton') &&
-    ghostIconButtonDocsSource.includes('<TextButton') &&
-    !glassIconButtonDocsSource.includes("from '../../components/coss/button'") &&
-    !ghostIconButtonDocsSource.includes("from '../../components/coss/button'") &&
-    !glassIconButtonDocsSource.includes('variant="outline"') &&
-    !ghostIconButtonDocsSource.includes('variant="outline"'),
-  'IconButton detail disabled toggles must use the shared TextButton instead of a local coss Button.',
+  !manifestSource.includes("id: 'text-button'"),
+  'TextButton manifest entry must be merged into the Button page instead of staying standalone.',
+)
+for (const removedFilePath of [
+  'src/docs/component-definitions/text-button.tsx',
+  'src/docs/component-definitions/ghost-icon-button.tsx',
+  'src/docs/component-definitions/glass-icon-button.tsx',
+  'src/docs/component-definitions/mode-button.tsx',
+]) {
+  assert.ok(
+    !existsSync(join(root, removedFilePath)),
+    `${removedFilePath} must be merged into button.tsx.`,
+  )
+}
+assert.ok(
+  docsSource.includes("import { TextButton } from '../../components/text-button'") &&
+    docsSource.includes('<TextButton') &&
+    !docsSource.includes("from '../../components/coss/button'") &&
+    !docsSource.includes('variant="outline"'),
+  'Button page disabled toggles must use the shared TextButton instead of a local coss Button.',
 )
