@@ -1076,14 +1076,6 @@
   pointer-events: auto;
 }
 
-.glass-surface-preview__tile[data-background-tone="light"] {
-  outline: 1px solid rgb(15 23 42 / 0.12);
-}
-
-.glass-surface-preview__tile[data-background-tone="dark"] {
-  outline: 1px solid rgb(255 255 255 / 0.16);
-}
-
 .glass-surface-preview__title {
   color: inherit;
   font-size: var(--font-size-base);

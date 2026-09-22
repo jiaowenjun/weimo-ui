@@ -387,11 +387,14 @@ for (const snippet of [
   'justify-items: center;',
   'text-align: center;',
   'pointer-events: auto;',
-  '.glass-surface-preview__tile[data-background-tone="light"]',
-  '.glass-surface-preview__tile[data-background-tone="dark"]',
 ]) {
   assertIncludes(appCss, snippet, `GlassSurface preview CSS must include ${snippet}.`)
 }
+assertOmits(
+  appCss,
+  '.glass-surface-preview__tile[data-background-tone',
+  'GlassSurface preview tile must not stack tone outlines on top of the 1px component border.',
+)
 assertOmits(
   appCss,
   ".preview-stage[data-component-id='glass-surface']",
