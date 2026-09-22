@@ -7,12 +7,7 @@ import { surfaceDefinition } from './surface'
 import { actionDialogDefinition } from './action-dialog'
 import { menuDefinition } from './menu'
 import { buttonDefinition } from './button'
-import { bottomBarDefinition } from './bottom-bar'
-import { cardToolBarDefinition } from './card-tool-bar'
-import { cardTopBarDefinition } from './card-top-bar'
-import { floatBarDefinition } from './float-bar'
-import { sidebarDefinition } from './sidebar'
-import { topBarDefinition } from './top-bar'
+import { barDefinition } from './bar'
 import { tagDefinition } from './tag'
 import { capsuleDefinition } from './capsule'
 import { cardDefinition } from './card'
@@ -41,12 +36,7 @@ export const componentDefinitionsById = {
   'action-dialog': actionDialogDefinition,
   menu: menuDefinition,
   button: buttonDefinition,
-  'bottom-bar': bottomBarDefinition,
-  'card-tool-bar': cardToolBarDefinition,
-  'card-top-bar': cardTopBarDefinition,
-  'float-bar': floatBarDefinition,
-  sidebar: sidebarDefinition,
-  'top-bar': topBarDefinition,
+  bar: barDefinition,
   tag: tagDefinition,
   capsule: capsuleDefinition,
   card: cardDefinition,

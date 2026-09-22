@@ -92,12 +92,7 @@ const componentDefinitionsSource = readProjectFile('src/docs/component-definitio
   borderTokensDefinitionSource +
   readProjectFile('src/docs/component-definitions/menu.tsx') +
   readProjectFile('src/docs/component-definitions/md-editor.tsx') +
-  readProjectFile('src/docs/component-definitions/top-bar.tsx') +
-  readProjectFile('src/docs/component-definitions/sidebar.tsx') +
-  readProjectFile('src/docs/component-definitions/float-bar.tsx') +
-  readProjectFile('src/docs/component-definitions/bottom-bar.tsx') +
-  readProjectFile('src/docs/component-definitions/card-top-bar.tsx') +
-  readProjectFile('src/docs/component-definitions/card-tool-bar.tsx') +
+  readProjectFile('src/docs/component-definitions/bar.tsx') +
   readProjectFile('src/docs/component-definitions/action-dialog.tsx') +
   readProjectFile('src/docs/component-definitions/capsule.tsx') +
   readProjectFile('src/docs/component-definitions/math-editor.tsx')
@@ -204,10 +199,7 @@ assert.ok(
 )
 
 for (const snippet of [
-  "id: 'float-bar'",
-  "id: 'bottom-bar'",
-  "id: 'card-top-bar'",
-  "id: 'card-tool-bar'",
+  "id: 'bar'",
   "id: 'action-dialog'",
   "id: 'tag'",
   "id: 'capsule'",

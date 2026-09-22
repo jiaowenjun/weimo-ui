@@ -37,7 +37,7 @@ function assertNotIncludes(source, snippet, message) {
 const componentSource = readProjectFile('src/components/card-tool-bar.tsx')
 const componentCss = readProjectFile('src/components/card-tool-bar.css')
 const docsDefinitionSource = readProjectFile(
-  'src/docs/component-definitions/card-tool-bar.tsx',
+  'src/docs/component-definitions/bar.tsx',
 )
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
@@ -124,13 +124,12 @@ assertNotIncludes(
 
 for (const snippet of [
   "import { useState } from 'react'",
-  "import { Heading1, List, Quote } from 'lucide-react'",
+  "import { Check, Heading1, List, Menu, Plus, Quote, Search, X } from 'lucide-react'",
   "import { CardToolBar } from '../../components/card-tool-bar'",
   "import { Button } from '../../components/coss/button'",
   "import { Toolbar, ToolbarButton, ToolbarGroup } from '../../components/coss/toolbar'",
   "import { TextButton } from '../../components/text-button'",
-  "id: 'card-tool-bar'",
-  "summary: '内部卡片工具栏，统一编辑工具栏与保存动作'",
+  "id: 'bar'",
   "const [saveDisabled, setSaveDisabled] = useState(false)",
   '<CardToolBar',
   'toolbarSlot={',
@@ -144,20 +143,21 @@ for (const snippet of [
   '<TextButton',
   '禁用保存',
   '启用保存',
-  'preview: () => <CardToolBarDemo />',
+  'preview: () => <BarDemo />',
+  '<CardToolBarDemo />',
 ]) {
   assertIncludes(docsDefinitionSource, snippet, `CardToolBar docs must include ${snippet}.`)
 }
 
 assertIncludes(
   definitionsIndexSource,
-  "import { cardToolBarDefinition } from './card-tool-bar'",
-  'CardToolBar definition must be imported by component-definitions/index.ts.',
+  "import { barDefinition } from './bar'",
+  'Bar definition must be imported by component-definitions/index.ts.',
 )
 assertIncludes(
   definitionsIndexSource,
-  "'card-tool-bar': cardToolBarDefinition",
-  'CardToolBar definition must be registered by component-definitions/index.ts.',
+  'bar: barDefinition',
+  'Bar definition must be registered by component-definitions/index.ts.',
 )
 
 for (const snippet of [
@@ -165,6 +165,7 @@ for (const snippet of [
   "name: 'CardToolBar'",
   "registryName: 'card-tool-bar'",
   "packageExport: './components/card-tool-bar'",
+  'docs: false',
   'registry: true',
 ]) {
   assertIncludes(manifestSource, snippet, `components manifest must include ${snippet}.`)

@@ -186,7 +186,7 @@ assert.ok(
   'Card must let CardTopBar own the display mode action control.',
 )
 
-const docsDefinitionSource = readProjectFile('src/docs/component-definitions/card-top-bar.tsx')
+const docsDefinitionSource = readProjectFile('src/docs/component-definitions/bar.tsx')
 const componentDefinitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const appCss = readProjectFile('src/App.css')
@@ -196,10 +196,18 @@ for (const snippet of [
   "name: 'CardTopBar'",
   "registryName: 'card-top-bar'",
   "packageExport: './components/card-top-bar'",
+  'docs: false',
   'registry: true',
 ]) {
   assert.ok(manifestSource.includes(snippet), `components manifest must include ${snippet}.`)
 }
+assert.ok(
+  manifestSource.includes("id: 'bar'") &&
+    manifestSource.includes("name: '浮动栏'") &&
+    manifestSource.includes("exportName: 'FloatBar'") &&
+    manifestSource.includes("registryName: 'float-bar'"),
+  'components manifest must list the merged floating Bar page.',
+)
 assert.ok(
   !manifestSource.includes("internalGroup: 'layout'"),
   'components manifest must not keep internal layout grouping.',
@@ -207,17 +215,17 @@ assert.ok(
 
 assert.ok(
   componentDefinitionsIndexSource.includes(
-    "import { cardTopBarDefinition } from './card-top-bar'",
-  ) && componentDefinitionsIndexSource.includes("'card-top-bar': cardTopBarDefinition"),
-  'CardTopBar definition must be registered by component-definitions/index.ts.',
+    "import { barDefinition } from './bar'",
+  ) && componentDefinitionsIndexSource.includes('bar: barDefinition'),
+  'CardTopBar preview must be registered through the merged Bar definition in component-definitions/index.ts.',
 )
 
 for (const snippet of [
   "import { useState } from 'react'",
   "import { CardTopBar } from '../../components/card-top-bar'",
   "import { TextButton } from '../../components/text-button'",
-  "id: 'card-top-bar'",
-  "summary: '内部卡片顶部栏，统一展示态与 Card 编辑态'",
+  "id: 'bar'",
+  "summary: '底部操作栏、卡片工具栏、卡片顶部栏、浮动工具栏、侧边栏与顶部工具栏总览'",
   "useState<'display' | 'edit'>('display')",
   'setMode((current) => (current ===',
   '<TextButton',
@@ -228,7 +236,7 @@ for (const snippet of [
   'onCancel={exitEdit}',
   '切换到编辑态',
   '切换到展示态',
-  'preview: () => <CardTopBarDemo />',
+  '<CardTopBarDemo />',
 ]) {
   assert.ok(docsDefinitionSource.includes(snippet), `CardTopBar docs definition must include ${snippet}.`)
 }
@@ -236,7 +244,6 @@ for (const snippet of [
   "import { Ellipsis, X } from 'lucide-react'",
   "import { IconButton } from '../../components/icon-button'",
   "import { ActionMenu } from '../../components/menu'",
-  "import { Button } from '../../components/coss/button'",
   'const [menuOpen, setMenuOpen] = useState(false)',
   'const actionSlot = (',
   'actionSlot={actionSlot}',
@@ -245,11 +252,6 @@ for (const snippet of [
 ]) {
   assert.ok(!docsDefinitionSource.includes(snippet), `CardTopBar docs definition must not include ${snippet}.`)
 }
-assert.ok(
-  docsDefinitionSource.indexOf('<CardTopBar') <
-    docsDefinitionSource.indexOf('<TextButton'),
-  'CardTopBar docs preview must render the external toggle button below the top bar.',
-)
 
 for (const selector of [
   '.internal-card-top-bar-preview',

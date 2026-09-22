@@ -83,12 +83,12 @@ assert.ok(
 )
 
 assert.ok(
-  manifestSource.includes("id: 'float-bar'") &&
-    manifestSource.includes("name: 'FloatBar'") &&
+  manifestSource.includes("id: 'bar'") &&
+    manifestSource.includes("exportName: 'FloatBar'") &&
     manifestSource.includes("registryName: 'float-bar'") &&
     manifestSource.includes("packageExport: './components/float-bar'") &&
     manifestSource.includes('registry: true'),
-  'FloatBar must be documented as a public registry-backed component.',
+  'FloatBar must stay public through the merged floating Bar page.',
 )
 assert.ok(
   manifestSource.includes("id: 'action-dialog'") &&
