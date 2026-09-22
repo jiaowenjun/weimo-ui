@@ -16,9 +16,7 @@ import { mathEditorDefinition } from './math-editor'
 import { mdEditorDefinition } from './md-editor'
 import { mdRenderDefinition } from './md-render'
 import { mdViewDefinition } from './md-view'
-import { ocrCardDefinition } from './ocr-card'
-import { ocrComposerDefinition } from './ocr-composer'
-import { ocrDetailDefinition } from './ocr-detail'
+import { ocrDefinition } from './ocr'
 import { imageDefinition } from './image'
 import { statDefinition } from './stat'
 import type { ComponentId } from '../components-manifest'
@@ -42,9 +40,7 @@ export const componentDefinitionsById = {
   'md-editor': mdEditorDefinition,
   'md-render': mdRenderDefinition,
   'md-view': mdViewDefinition,
-  'ocr-card': ocrCardDefinition,
-  'ocr-composer': ocrComposerDefinition,
-  'ocr-detail': ocrDetailDefinition,
+  ocr: ocrDefinition,
   image: imageDefinition,
   stat: statDefinition,
 } satisfies Record<ComponentId, ComponentDefinition>

@@ -35,7 +35,7 @@ const source = readProjectFile('src/components/ocr-composer.tsx')
 const css = readProjectFile('src/components/ocr-composer.css')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const definitionSource = readProjectFile('src/docs/component-definitions/ocr-composer.tsx')
+const definitionSource = readProjectFile('src/docs/component-definitions/ocr.tsx')
 const registry = readJson('registry.json')
 const standaloneRegistryItem = readJson('registry/ocr-composer.json')
 const rootRegistryItem = registry.items.find((item) => item.name === 'ocr-composer')
@@ -219,23 +219,23 @@ for (const snippet of [
   "registryName: 'ocr-composer'",
   "packageExport: './components/ocr-composer'",
   "group: 'media-ocr'",
+  'docs: false',
 ]) {
   assert.ok(manifestSource.includes(snippet), `OcrComposer manifest must include: ${snippet}`)
 }
 
-for (const snippet of [
-  "import { ocrComposerDefinition } from './ocr-composer'",
-  "'ocr-composer': ocrComposerDefinition",
-]) {
-  assert.ok(definitionsIndexSource.includes(snippet), `OcrComposer docs index must include: ${snippet}`)
-}
+assert.ok(
+  definitionsIndexSource.includes("import { ocrDefinition } from './ocr'") &&
+    definitionsIndexSource.includes('ocr: ocrDefinition') &&
+    !definitionsIndexSource.includes('ocr-composer'),
+  'OcrComposer preview must be wired through the merged OCR definition.',
+)
 
 for (const snippet of [
   "import { OcrComposer } from '../../components/ocr-composer'",
   "import type { OcrComposerDraft } from '../../components/ocr-composer'",
-  "id: 'ocr-composer'",
-  "summary: '复用 CardComposer 外观的 OCR 图片上传草稿壳层，正文区域替换为 ImageUploader'",
-  'preview: () => <OcrComposerDemo />',
+  "id: 'ocr'",
+  '<OcrComposerDemo />',
 ]) {
   assert.ok(definitionSource.includes(snippet), `OcrComposer docs must include: ${snippet}`)
 }

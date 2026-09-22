@@ -1,9 +1,87 @@
 import { useState } from 'react'
 
 import { ComponentPreviewCard } from '../../components/component-preview-card'
+import { OcrCard } from '../../components/ocr-card'
+import { OcrComposer } from '../../components/ocr-composer'
+import type { OcrComposerDraft } from '../../components/ocr-composer'
 import { OcrDetail } from '../../components/ocr-detail'
 import { TextButton } from '../../components/text-button'
 import type { ComponentDefinition } from '../component-docs'
+
+const sampleOcrCardImage = `data:image/svg+xml;utf8,${encodeURIComponent(`
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480">
+  <rect width="640" height="480" fill="#f8fafc"/>
+  <rect x="88" y="68" width="464" height="344" rx="18" fill="#fff" stroke="#d4d4d8" stroke-width="2"/>
+  <rect x="136" y="124" width="210" height="18" rx="9" fill="#18181b"/>
+  <rect x="136" y="178" width="368" height="12" rx="6" fill="#a1a1aa"/>
+  <rect x="136" y="212" width="320" height="12" rx="6" fill="#d4d4d8"/>
+  <rect x="136" y="246" width="384" height="12" rx="6" fill="#d4d4d8"/>
+  <rect x="136" y="306" width="152" height="64" rx="10" fill="#eef2ff"/>
+</svg>
+`)}`
+
+const sampleOcrMarkdown = [
+  '## OCR 识别结果',
+  '',
+  '| 项目 | 内容 |',
+  '| --- | --- |',
+  '| 编号 | INV-2026-0708 |',
+  '| 金额 | 128.00 |',
+  '',
+  '- 支持 markdown 渲染',
+  '- 可切换查看原始图片',
+].join('\n')
+
+const ocrCardTagOptions = ['OCR', '扫描件', '票据', '待校对']
+
+function OcrCardPreview() {
+  return (
+    <ComponentPreviewCard label="OCR 卡片">
+      <div className="ocr-card-docs-preview">
+        <OcrCard
+          aria-label="OCR card preview"
+          note={{
+            createdAtText: 'OCR 图片',
+            imageAlt: 'OCR scanned document preview',
+            imageHeight: 480,
+            imageSrc: sampleOcrCardImage,
+            imageWidth: 640,
+            markdown: sampleOcrMarkdown,
+            tags: ['OCR', '扫描件'],
+          }}
+          onDelete={() => {}}
+          onSave={() => {}}
+          tagOptions={ocrCardTagOptions}
+        />
+      </div>
+    </ComponentPreviewCard>
+  )
+}
+
+const ocrComposerTagOptions = ['OCR', '票据', '资料', '待校对']
+
+function OcrComposerDemo() {
+  const [file, setFile] = useState<File | null>(null)
+  const [tags, setTags] = useState<string[]>([])
+
+  return (
+    <ComponentPreviewCard label="OCR 上传">
+      <div className="card-composer-docs-preview ocr-composer-docs-preview">
+        <OcrComposer
+          clientId="docs-ocr-composer"
+          file={file}
+          onFileChange={setFile}
+          onSave={() => {}}
+          onTagsChange={setTags}
+          tagOptions={ocrComposerTagOptions}
+          tags={tags}
+        />
+      </div>
+    </ComponentPreviewCard>
+  )
+}
+
+void (null as unknown as OcrComposerDraft)
 
 const sampleOcrImage =
   'data:image/png;base64,' +
@@ -79,10 +157,30 @@ function OcrDetailPreview() {
   )
 }
 
-export const ocrDetailDefinition = {
-  id: 'ocr-detail',
-  summary: '用于 OCR 校对的全屏弹窗，左侧自然尺寸查看图片，右侧用 Card 编辑 Markdown',
+// Docs definitions intentionally colocate preview components with exported page metadata.
+// eslint-disable-next-line react-refresh/only-export-components
+function OcrDemo() {
+  return (
+    <>
+      <OcrCardPreview />
+      <OcrComposerDemo />
+      <OcrDetailPreview />
+    </>
+  )
+}
+
+export const ocrDefinition = {
+  id: 'ocr',
+  summary: 'OCR 卡片、OCR 上传与 OCR 校对的 OCR 总览',
   status: 'Ready',
   frame: 'plain',
-  preview: () => <OcrDetailPreview />,
+  searchAliases: [
+    'OcrCard',
+    'OcrComposer',
+    'OcrDetail',
+    'OCR 卡片',
+    'OCR 上传',
+    'OCR 校对',
+  ],
+  preview: () => <OcrDemo />,
 } satisfies ComponentDefinition

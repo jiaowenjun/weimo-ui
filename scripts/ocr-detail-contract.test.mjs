@@ -43,7 +43,7 @@ function sourceBetween(source, startSnippet, endSnippet) {
 const packageJson = readJson('package.json')
 const manifest = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndex = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinition = readProjectFile('src/docs/component-definitions/ocr-detail.tsx')
+const docsDefinition = readProjectFile('src/docs/component-definitions/ocr.tsx')
 const ocrDetailSource = readProjectFile('src/components/ocr-detail.tsx')
 const ocrDetailCss = readProjectFile('src/components/ocr-detail.css')
 const rootRegistry = readJson('registry.json')
@@ -65,12 +65,14 @@ assert.ok(
     manifest.includes("name: 'OcrDetail'") &&
     manifest.includes("registryName: 'ocr-detail'") &&
     manifest.includes("packageExport: './components/ocr-detail'") &&
-    manifest.includes("group: 'media-ocr'"),
+    manifest.includes("group: 'media-ocr'") &&
+    manifest.includes('docs: false'),
   'Component manifest must list OcrDetail as a public registry-backed media/OCR component.',
 )
 assert.ok(
-  definitionsIndex.includes("import { ocrDetailDefinition } from './ocr-detail'") &&
-    definitionsIndex.includes("'ocr-detail': ocrDetailDefinition"),
+  definitionsIndex.includes("import { ocrDefinition } from './ocr'") &&
+    definitionsIndex.includes('ocr: ocrDefinition') &&
+    !definitionsIndex.includes('ocr-detail'),
   'OcrDetail docs definition must be wired into component-definitions/index.ts.',
 )
 
@@ -292,8 +294,7 @@ for (const filePath of [
 
 for (const snippet of [
   "import { OcrDetail } from '../../components/ocr-detail'",
-  "id: 'ocr-detail'",
-  "summary: '用于 OCR 校对的全屏弹窗，左侧自然尺寸查看图片，右侧用 Card 编辑 Markdown'",
+  "id: 'ocr'",
   '<OcrDetail',
   'imageSrc={sampleOcrImage}',
   'title={title}',

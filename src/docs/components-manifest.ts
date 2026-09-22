@@ -415,8 +415,9 @@ export const componentManifest = [
     registry: true,
   },
   {
-    id: 'ocr-card',
-    name: 'OcrCard',
+    id: 'ocr',
+    name: 'OCR',
+    exportName: 'OcrCard',
     registryName: 'ocr-card',
     packageExport: './components/ocr-card',
     group: 'media-ocr',
@@ -429,7 +430,7 @@ export const componentManifest = [
     registryName: 'ocr-composer',
     packageExport: './components/ocr-composer',
     group: 'media-ocr',
-    docs: true,
+    docs: false,
     registry: true,
   },
   {
@@ -438,7 +439,7 @@ export const componentManifest = [
     registryName: 'ocr-detail',
     packageExport: './components/ocr-detail',
     group: 'media-ocr',
-    docs: true,
+    docs: false,
     registry: true,
   },
   {

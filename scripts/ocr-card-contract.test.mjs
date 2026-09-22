@@ -24,7 +24,7 @@ function assertIncludes(source, snippet, message) {
 const packageJson = readJson('package.json')
 const manifest = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndex = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinition = readProjectFile('src/docs/component-definitions/ocr-card.tsx')
+const docsDefinition = readProjectFile('src/docs/component-definitions/ocr.tsx')
 const source = readProjectFile('src/components/ocr-card.tsx')
 const css = readProjectFile('src/components/ocr-card.css')
 const appCss = readProjectFile('src/App.css')
@@ -43,18 +43,20 @@ assert.ok(
 )
 
 assert.ok(
-  manifest.includes("id: 'ocr-card'") &&
-    manifest.includes("name: 'OcrCard'") &&
+  manifest.includes("id: 'ocr'") &&
+    manifest.includes("name: 'OCR'") &&
+    manifest.includes("exportName: 'OcrCard'") &&
     manifest.includes("registryName: 'ocr-card'") &&
     manifest.includes("packageExport: './components/ocr-card'") &&
     manifest.includes("group: 'media-ocr'") &&
     manifest.includes('registry: true'),
-  'Component manifest must list OcrCard as a public media/OCR registry-backed component.',
+  'Component manifest must list OcrCard through the merged OCR page.',
 )
 assert.ok(
-  definitionsIndex.includes("import { ocrCardDefinition } from './ocr-card'") &&
-    definitionsIndex.includes("'ocr-card': ocrCardDefinition"),
-  'OcrCard docs definition must be wired into component-definitions/index.ts.',
+  definitionsIndex.includes("import { ocrDefinition } from './ocr'") &&
+    definitionsIndex.includes('ocr: ocrDefinition') &&
+    !definitionsIndex.includes('ocr-card'),
+  'OcrCard preview must be wired into component-definitions/index.ts through the merged OCR definition.',
 )
 
 for (const snippet of [
@@ -269,8 +271,7 @@ assert.ok(
 
 for (const snippet of [
   "import { OcrCard } from '../../components/ocr-card'",
-  "id: 'ocr-card'",
-  "summary: '复用 Card 编辑壳层的 OCR 卡片，有识别结果时通过操作菜单校对 Markdown，否则展示原图'",
+  "id: 'ocr'",
   "status: 'Ready'",
   'const sampleOcrMarkdown =',
   'className="ocr-card-docs-preview"',
@@ -284,7 +285,7 @@ for (const snippet of [
   'onSave={() => {}}',
   'tagOptions={ocrCardTagOptions}',
 ]) {
-  assertIncludes(docsDefinition, snippet, `OcrCard docs definition must include ${snippet}.`)
+  assertIncludes(docsDefinition, snippet, `OcrCard docs must include ${snippet}.`)
 }
 
 for (const snippet of [
