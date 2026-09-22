@@ -13,11 +13,7 @@ import { cardTopBarDefinition } from './card-top-bar'
 import { floatBarDefinition } from './float-bar'
 import { sidebarDefinition } from './sidebar'
 import { topBarDefinition } from './top-bar'
-import { tagBarDefinition } from './tag-bar'
-import { tagBreadDefinition } from './tag-bread'
-import { tagPickerDefinition } from './tag-picker'
-import { tagTreeDefinition } from './tag-tree'
-import { tagTreeRowDefinition } from './tag-tree-row'
+import { tagDefinition } from './tag'
 import { capsuleDefinition } from './capsule'
 import { cardDefinition } from './card'
 import { cardComposerDefinition } from './card-composer'
@@ -51,11 +47,7 @@ export const componentDefinitionsById = {
   'float-bar': floatBarDefinition,
   sidebar: sidebarDefinition,
   'top-bar': topBarDefinition,
-  'tag-bar': tagBarDefinition,
-  'tag-bread': tagBreadDefinition,
-  'tag-picker': tagPickerDefinition,
-  'tag-tree': tagTreeDefinition,
-  'tag-tree-row': tagTreeRowDefinition,
+  tag: tagDefinition,
   capsule: capsuleDefinition,
   card: cardDefinition,
   'card-composer': cardComposerDefinition,

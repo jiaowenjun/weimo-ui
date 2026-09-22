@@ -36,8 +36,7 @@ const sidebarPreviewSource = readProjectFile(
 )
 const componentDefinitionSources = {
   'card': readProjectFile('src/docs/component-definitions/card.tsx'),
-  'tag-picker': readProjectFile('src/docs/component-definitions/tag-picker.tsx'),
-  'tag-bread': readProjectFile('src/docs/component-definitions/tag-bread.tsx'),
+  tag: readProjectFile('src/docs/component-definitions/tag.tsx'),
   'stat-group': readProjectFile('src/docs/component-definitions/stat-group.tsx'),
   'heatmap': readProjectFile(
     'src/docs/component-definitions/heatmap.tsx',
@@ -53,9 +52,6 @@ const componentDefinitionSources = {
   ].join('\n'),
   'md-render': readProjectFile('src/docs/component-definitions/md-render.tsx'),
   'md-view': readProjectFile('src/docs/component-definitions/md-view.tsx'),
-  'tag-tree': readProjectFile(
-    'src/docs/component-definitions/tag-tree.tsx',
-  ),
   capsule: readProjectFile('src/docs/component-definitions/capsule.tsx'),
   'top-bar': readProjectFile(
     'src/docs/component-definitions/top-bar.tsx',
@@ -181,8 +177,7 @@ for (const snippet of [
 
 for (const componentId of [
   'card',
-  'tag-picker',
-  'tag-bread',
+  'tag',
   'stat-group',
   'heatmap',
   'background-tokens',
@@ -190,7 +185,6 @@ for (const componentId of [
   'button',
   'menu',
   'surface',
-  'tag-tree',
   'top-bar',
   'sidebar',
 ]) {
@@ -202,6 +196,7 @@ for (const componentId of [
 
 for (const snippet of [
   "id: 'card'",
+  "id: 'tag'",
   "id: 'tag-picker'",
   "id: 'tag-bread'",
   "id: 'stat-group'",
@@ -258,7 +253,6 @@ for (const snippet of [
   'note={note}',
   'TagPickerDemo',
   'function TagBreadDemo',
-  "import { Hash } from 'lucide-react'",
   '<TagBread tag="文学/古代/诗词"',
   'className={getChipSurfaceClassName(',
   "'tag-bread-docs-preview__ellipsis'",
@@ -392,11 +386,11 @@ for (const snippet of [
 }
 
 assert.ok(
-  !componentDefinitionSources['tag-picker'].includes("from '../../components/coss/button'") &&
-  componentDefinitionSources['tag-picker'].includes("from '../../components/chip-button'") &&
-  !componentDefinitionSources['tag-picker'].includes('tag-picker-preview__trigger') &&
-  !componentDefinitionSources['tag-picker'].includes('<Button') &&
-  !componentDefinitionSources['tag-picker'].includes('选择标签'),
+  !componentDefinitionSources.tag.includes("from '../../components/coss/button'") &&
+  componentDefinitionSources.tag.includes("from '../../components/chip-button'") &&
+  !componentDefinitionSources.tag.includes('tag-picker-preview__trigger') &&
+  !componentDefinitionSources.tag.includes('<Button') &&
+  !componentDefinitionSources.tag.includes('选择标签'),
   'TagPicker docs preview must remove the standalone select-tag button and use internal ChipButton chips.',
 )
 assert.ok(

@@ -13,7 +13,7 @@ function readProjectFile(relativePath) {
 
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const definitionSource = readProjectFile('src/docs/component-definitions/tag-picker.tsx')
+const definitionSource = readProjectFile('src/docs/component-definitions/tag.tsx')
 const registryItem = JSON.parse(readProjectFile('registry/tag-picker.json'))
 const rootRegistry = JSON.parse(readProjectFile('registry.json'))
 const rootItem = rootRegistry.items.find((item) => item.name === 'tag-picker')
@@ -25,17 +25,19 @@ assert.ok(
   manifestSource.includes("name: 'TagPicker'") &&
   manifestSource.includes("registryName: 'tag-picker'") &&
   manifestSource.includes("packageExport: './components/tag-picker'") &&
+  manifestSource.includes('docs: false') &&
   !manifestSource.includes("@/components/ui/tag-picker") &&
   !manifestSource.includes("ui/components/tag-picker"),
-  'components-manifest.ts must list TagPicker without detail-page import snippets.',
+  'components-manifest.ts must keep TagPicker registry-only after the Tag page merge.',
 )
 assert.ok(
-  definitionsIndexSource.includes("import { tagPickerDefinition } from './tag-picker'") &&
-  definitionsIndexSource.includes("'tag-picker': tagPickerDefinition"),
-  'component-definitions index must export tagPickerDefinition.',
+  definitionsIndexSource.includes("import { tagDefinition } from './tag'") &&
+  definitionsIndexSource.includes('tag: tagDefinition') &&
+  !definitionsIndexSource.includes('tag-picker'),
+  'component-definitions index must export the merged Tag definition for TagPicker.',
 )
 assert.ok(
-  definitionSource.includes("id: 'tag-picker'") &&
+  definitionSource.includes("id: 'tag'") &&
   definitionSource.includes('summary:') &&
   definitionSource.includes('status:') &&
   definitionSource.includes('preview:') &&

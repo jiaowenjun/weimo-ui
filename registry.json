@@ -1192,37 +1192,6 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "type": "registry:ui",
-      "dependencies": [],
-      "name": "tag-bar",
-      "title": "Tag Bar",
-      "description": "A compact tag bar for displaying and editing tag chips.",
-      "categories": [
-        "tag",
-        "toolbar"
-      ],
-      "registryDependencies": [
-        "@weimo/style",
-        "@weimo/utils",
-        "@weimo/float-bar",
-        "@weimo/chip-button",
-        "@weimo/tag-picker"
-      ],
-      "files": [
-        {
-          "path": "src/components/tag-bar.tsx",
-          "type": "registry:ui",
-          "target": "@ui/tag-bar.tsx"
-        },
-        {
-          "path": "src/components/tag-bar.css",
-          "type": "registry:ui",
-          "target": "@ui/tag-bar.css"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "tag-bread",
       "type": "registry:ui",
       "title": "Tag Bread",
@@ -1579,6 +1548,37 @@
           "path": "src/components/icon-button.css",
           "type": "registry:ui",
           "target": "@ui/icon-button.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [],
+      "name": "tag-bar",
+      "title": "Tag Bar",
+      "description": "A compact tag bar for displaying and editing tag chips.",
+      "categories": [
+        "tag",
+        "toolbar"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/float-bar",
+        "@weimo/chip-button",
+        "@weimo/tag-picker"
+      ],
+      "files": [
+        {
+          "path": "src/components/tag-bar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/tag-bar.tsx"
+        },
+        {
+          "path": "src/components/tag-bar.css",
+          "type": "registry:ui",
+          "target": "@ui/tag-bar.css"
         }
       ]
     },

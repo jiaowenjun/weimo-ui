@@ -44,7 +44,7 @@ const cossBreadcrumbCss = readProjectFile('src/components/coss/breadcrumb.css')
 const packageJson = readJson('package.json')
 const manifest = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndex = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinition = readProjectFile('src/docs/component-definitions/tag-bread.tsx')
+const docsDefinition = readProjectFile('src/docs/component-definitions/tag.tsx')
 const rootRegistry = readJson('registry.json')
 const standaloneRegistry = readJson('registry/tag-bread.json')
 const registryItem = rootRegistry.items.find((item) => item.name === 'tag-bread')
@@ -87,13 +87,15 @@ assert.ok(
   manifest.includes("id: 'tag-bread'") &&
     manifest.includes("name: 'TagBread'") &&
     manifest.includes("registryName: 'tag-bread'") &&
-    manifest.includes("packageExport: './components/tag-bread'"),
-  'Component manifest must list TagBread as a public registry-backed component.',
+    manifest.includes("packageExport: './components/tag-bread'") &&
+    manifest.includes('docs: false'),
+  'Component manifest must keep TagBread registry-only after the Tag page merge.',
 )
 assert.ok(
-  definitionsIndex.includes("import { tagBreadDefinition } from './tag-bread'") &&
-    definitionsIndex.includes("'tag-bread': tagBreadDefinition"),
-  'TagBread docs definition must be wired into component-definitions/index.ts.',
+  definitionsIndex.includes("import { tagDefinition } from './tag'") &&
+    definitionsIndex.includes('tag: tagDefinition') &&
+    !definitionsIndex.includes('tag-bread'),
+  'TagBread preview must be wired into component-definitions/index.ts through the merged Tag definition.',
 )
 
 for (const snippet of [
@@ -263,7 +265,7 @@ assert.ok(
 
 assert.ok(
     docsDefinition.includes("import { TagBread } from '../../components/tag-bread'") &&
-    docsDefinition.includes("import { Hash } from 'lucide-react'") &&
+    docsDefinition.includes("import { CalendarDays, Folder, Hash } from 'lucide-react'") &&
     docsDefinition.includes("from '../../components/chip-surface-model'") &&
     docsDefinition.includes('const tagBreadDocsSurfaceAttributes = getChipSurfaceAttributes({') &&
     docsDefinition.includes("variant: 'glass'") &&
@@ -286,7 +288,7 @@ assert.ok(
     docsDefinition.includes('MenuTrigger,') &&
     docsDefinition.includes("} from '../../components/menu'") &&
     !docsDefinition.includes('TagBreadItem') &&
-    docsDefinition.includes("id: 'tag-bread'") &&
+    docsDefinition.includes("id: 'tag'") &&
     docsDefinition.includes('summary:') &&
     docsDefinition.includes('function TagBreadDemo') &&
     docsDefinition.includes('className="tag-bread-docs-preview"') &&

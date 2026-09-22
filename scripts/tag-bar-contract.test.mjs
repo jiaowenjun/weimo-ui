@@ -36,7 +36,7 @@ function assertNotIncludes(source, snippet, message) {
 
 const componentSource = readProjectFile('src/components/tag-bar.tsx')
 const cssSource = readProjectFile('src/components/tag-bar.css')
-const docsSource = readProjectFile('src/docs/component-definitions/tag-bar.tsx')
+const docsSource = readProjectFile('src/docs/component-definitions/tag.tsx')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const appCssSource = readProjectFile('src/App.css')
@@ -431,7 +431,9 @@ assert.ok(
   docsSource.includes("import { useState } from 'react'") &&
     docsSource.includes("import { TagBar } from '../../components/tag-bar'") &&
     docsSource.includes("import { TextButton } from '../../components/text-button'") &&
-    docsSource.includes("id: 'tag-bar'") &&
+    docsSource.includes("id: 'tag'") &&
+    docsSource.includes('preview: () => <TagDemo />') &&
+    docsSource.includes('<TagBarDemo />') &&
     docsSource.includes('summary:') &&
     docsSource.includes('status:') &&
     docsSource.includes('preview:') &&
@@ -446,7 +448,7 @@ assert.ok(
     docsSource.includes('tags={tags}') &&
     docsSource.includes('<TextButton') &&
     docsSource.includes("editable ? '切换到展示态' : '切换到编辑态'"),
-  'TagBar docs definition must provide a local state preview with a mode toggle.',
+  'Tag docs definition must provide a local state TagBar preview with a mode toggle.',
 )
 assert.ok(
   !docsSource.includes("import { Button } from '../../components/coss/button'") &&
@@ -454,18 +456,21 @@ assert.ok(
   'TagBar docs mode toggle must not use coss Button.',
 )
 assert.ok(
-  definitionsIndexSource.includes("import { tagBarDefinition } from './tag-bar'") &&
-    definitionsIndexSource.includes("'tag-bar': tagBarDefinition"),
-  'Component definitions index must export the TagBar docs definition.',
+  definitionsIndexSource.includes("import { tagDefinition } from './tag'") &&
+    definitionsIndexSource.includes('tag: tagDefinition') &&
+    !definitionsIndexSource.includes('tag-bar'),
+  'Component definitions index must export the merged Tag docs definition.',
 )
 assert.ok(
-  manifestSource.includes("id: 'tag-bar'") &&
-    manifestSource.includes("name: 'TagBar'") &&
+  manifestSource.includes("id: 'tag'") &&
+    manifestSource.includes("name: '标签'") &&
+    manifestSource.includes("exportName: 'TagBar'") &&
     manifestSource.includes("registryName: 'tag-bar'") &&
     manifestSource.includes("packageExport: './components/tag-bar'") &&
     manifestSource.includes('registry: true') &&
+    !manifestSource.includes("id: 'tag-bar',") &&
     !manifestSource.includes("internalGroup: 'tag-tree'"),
-  'Component manifest must list TagBar as a public registry component.',
+  'Component manifest must list TagBar as a public registry component through the merged Tag page.',
 )
 
 for (const [block, snippet, message] of [

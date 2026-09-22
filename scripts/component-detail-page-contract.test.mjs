@@ -85,15 +85,13 @@ const componentDefinitionsSource = readProjectFile('src/docs/component-definitio
   readProjectFile('src/docs/component-definitions/md-view.tsx') +
   imageViewDefinitionSource +
   readProjectFile('src/docs/component-definitions/surface.tsx') +
-  readProjectFile('src/docs/component-definitions/tag-picker.tsx') +
-  readProjectFile('src/docs/component-definitions/tag-bar.tsx') +
+  readProjectFile('src/docs/component-definitions/tag.tsx') +
   readProjectFile('src/docs/component-definitions/stat-group.tsx') +
   readProjectFile('src/docs/component-definitions/heatmap.tsx') +
   buttonDefinitionSource +
   borderTokensDefinitionSource +
   readProjectFile('src/docs/component-definitions/menu.tsx') +
   readProjectFile('src/docs/component-definitions/md-editor.tsx') +
-  readProjectFile('src/docs/component-definitions/tag-tree.tsx') +
   readProjectFile('src/docs/component-definitions/top-bar.tsx') +
   readProjectFile('src/docs/component-definitions/sidebar.tsx') +
   readProjectFile('src/docs/component-definitions/float-bar.tsx') +
@@ -101,7 +99,6 @@ const componentDefinitionsSource = readProjectFile('src/docs/component-definitio
   readProjectFile('src/docs/component-definitions/card-top-bar.tsx') +
   readProjectFile('src/docs/component-definitions/card-tool-bar.tsx') +
   readProjectFile('src/docs/component-definitions/action-dialog.tsx') +
-  readProjectFile('src/docs/component-definitions/tag-tree-row.tsx') +
   readProjectFile('src/docs/component-definitions/capsule.tsx') +
   readProjectFile('src/docs/component-definitions/math-editor.tsx')
 const css = readProjectFile('src/App.css')
@@ -212,10 +209,9 @@ for (const snippet of [
   "id: 'card-top-bar'",
   "id: 'card-tool-bar'",
   "id: 'action-dialog'",
-  "id: 'tag-tree-row'",
+  "id: 'tag'",
   "id: 'capsule'",
   "id: 'image-view'",
-  "id: 'tag-bar'",
   "id: 'md-view'",
   "id: 'math-editor'",
   "id: 'button'",

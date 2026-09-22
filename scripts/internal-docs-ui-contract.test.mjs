@@ -18,7 +18,7 @@ const detailSource = readProjectFile('src/docs/pages/component-detail-page.tsx')
 const actionDialogDefinitionSource = readProjectFile('src/docs/component-definitions/action-dialog.tsx')
 const cardTopBarDefinitionSource = readProjectFile('src/docs/component-definitions/card-top-bar.tsx')
 const mathDialogDefinitionSource = readProjectFile('src/docs/component-definitions/math-editor.tsx')
-const tagTreeRowDefinitionSource = readProjectFile('src/docs/component-definitions/tag-tree-row.tsx')
+const tagTreeRowDefinitionSource = readProjectFile('src/docs/component-definitions/tag.tsx')
 const css = readProjectFile('src/App.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 
