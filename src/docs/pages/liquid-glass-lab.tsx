@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Play, Star } from 'lucide-react'
 
 import { useGlassSurfaceBackgroundToneRef } from '../../components/glass-surface'
@@ -35,7 +35,7 @@ function AutoToneTile() {
       className="lg-glass lg-tile"
       data-elevation="popover"
       data-material="regular"
-      data-tone={backgroundTone ?? 'light'}
+      data-tone={backgroundTone ?? 'unknown'}
       ref={setElementRef}
     >
       <strong>tone = auto</strong>
@@ -56,10 +56,6 @@ export function LiquidGlassLabPage() {
 
   const darkMediaUrl = useMemo(() => buildMediaSvgUrl('dark'), [])
   const lightMediaUrl = useMemo(() => buildMediaSvgUrl('light'), [])
-
-  useEffect(() => {
-    document.title = '液态玻璃实验 - Weimo UI'
-  }, [])
 
   return (
     <div className="lg-lab">
@@ -133,8 +129,8 @@ export function LiquidGlassLabPage() {
       <section className="lg-lab__scene">
         <h2 className="lg-lab__scene-title">clear × 富媒体</h2>
         <p className="lg-lab__note">
-          clear 高度通透：blur(12px)、tint 6%。亮色媒体上建议叠 35%
-          黑色 dim 层保障前景可读，暗色媒体上无需 dim。
+          clear 高度通透：blur(12px)、tint 6%。亮色媒体上建议在媒体与玻璃之间叠
+          35% 黑色 dim 层（压暗玻璃透出的内容）保障前景可读，暗色媒体上无需 dim。
         </p>
         <div className="lg-lab__grid-2">
           <div className="lg-media">
@@ -150,9 +146,11 @@ export function LiquidGlassLabPage() {
               <Star size={14} />
               无 dim
             </span>
-            <span className="lg-glass lg-pill lg-glass--dim lg-pill--alt" data-elevation="control" data-material="clear">
-              <Star size={14} />
-              含 dim
+            <span className="lg-pill-wrap">
+              <span className="lg-glass lg-pill" data-elevation="control" data-material="clear">
+                <Star size={14} />
+                含 dim
+              </span>
             </span>
           </div>
         </div>

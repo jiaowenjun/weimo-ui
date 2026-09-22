@@ -64,7 +64,9 @@
   --lg-blur: 20px;
   --lg-saturate: 1.2;
   --lg-edge-color: transparent;
-  --lg-elevation-shadow: none;
+  /* 不能用 none：none 不是合法 <shadow> 项，会让整条 box-shadow 列表失效，
+     control 挡的 inset 边缘高光因此消失。透明零阴影保持列表合法。 */
+  --lg-elevation-shadow: 0 0 0 0 hsl(0 0% 0% / 0);
 
   box-sizing: border-box;
   border: 1px solid transparent;
@@ -89,6 +91,14 @@
   --lg-edge-color: hsl(0 0% 100% / 0.16);
 }
 
+/* 采样未判定时的中性挡位：与「未判定」状态文本一致，不冒充 light/dark */
+.lg-glass[data-material='regular'][data-tone='unknown'] {
+  color: hsl(0 0% 100% / 0.92);
+  background: hsl(222 12% 18% / 0.45);
+  border-color: hsl(0 0% 100% / 0.24);
+  --lg-edge-color: hsl(0 0% 100% / 0.14);
+}
+
 .lg-glass[data-material='clear'] {
   --lg-blur: 12px;
   --lg-saturate: 1.05;
@@ -99,9 +109,25 @@
   --lg-edge-color: hsl(0 0% 100% / 0.35);
 }
 
-/* 亮色媒体上的 clear：叠官方建议的 35% 黑色 dim 层 */
-.lg-glass--dim {
-  background-image: linear-gradient(hsl(0 0% 0% / 0.35), hsl(0 0% 0% / 0.35));
+/* 亮色媒体上的 clear：dim 是媒体与玻璃之间的后置层，画在胶囊座上而不是玻璃自身——
+   backdrop-filter 连同 dim 层一起采样，玻璃真正「透过」压暗后的媒体 */
+.lg-pill-wrap {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 2;
+}
+
+.lg-pill-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -14px;
+  background: hsl(0 0% 0% / 0.35);
+  border-radius: 999px;
+}
+
+.lg-pill-wrap .lg-pill {
+  position: relative;
 }
 
 .lg-glass[data-elevation='bar'] {
@@ -255,11 +281,6 @@
   font-size: 13px;
   font-weight: var(--font-weight-semibold, 600);
   line-height: 1;
-}
-
-.lg-pill--alt {
-  right: 16px;
-  left: auto;
 }
 
 /* === 场景三：纯色背景基线 === */
@@ -418,5 +439,128 @@
 @media (prefers-reduced-motion: reduce) {
   .lg-marquee__track {
     animation: none;
+  }
+}
+
+/* === 窄屏：单列布局、胶囊堆叠、工具栏换行、slider 收缩 === */
+@media (max-width: 639px) {
+  .lg-lab__grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .lg-marquee__track--large > span {
+    font-size: 22px;
+  }
+
+  .lg-toolbar {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .lg-pill-wrap {
+    right: auto;
+    bottom: 72px;
+    left: 16px;
+  }
+
+  .lg-lab__slider-row {
+    flex-wrap: wrap;
+  }
+
+  .lg-lab__slider {
+    width: 100%;
+    max-width: 280px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .lg-elev-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .lg-elev-cell {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .lg-elev-cell .lg-tile {
+    padding: 8px 14px;
+  }
+}
+
+/* === 环境降级（系统级真实开关，非演示状态） === */
+
+/* 不支持 backdrop-filter 时退回实体底色，保住前景可读性 */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .lg-glass[data-material='regular'][data-tone='light'] {
+    background: hsl(0 0% 100% / 0.94);
+  }
+
+  .lg-glass[data-material='regular'][data-tone='dark'] {
+    background: hsl(222 16% 9% / 0.94);
+  }
+
+  .lg-glass[data-material='regular'][data-tone='unknown'] {
+    background: hsl(222 12% 14% / 0.94);
+  }
+
+  .lg-glass[data-material='clear'] {
+    color: hsl(0 0% 100% / 0.95);
+    background: hsl(222 14% 10% / 0.92);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .lg-glass[data-material='regular'][data-tone='light'] {
+    background: hsl(0 0% 100% / 0.94);
+  }
+
+  .lg-glass[data-material='regular'][data-tone='dark'] {
+    background: hsl(222 16% 9% / 0.94);
+  }
+
+  .lg-glass[data-material='regular'][data-tone='unknown'] {
+    background: hsl(222 12% 14% / 0.94);
+  }
+
+  .lg-glass[data-material='clear'] {
+    color: hsl(0 0% 100% / 0.95);
+    background: hsl(222 14% 10% / 0.92);
+  }
+}
+
+@media (prefers-contrast: more) {
+  .lg-glass[data-material='regular'][data-tone='light'] {
+    color: hsl(222.2 47.4% 8%);
+    background: hsl(0 0% 100% / 0.6);
+    border-color: hsl(222 47% 11% / 0.4);
+  }
+
+  .lg-glass[data-material='regular'][data-tone='dark'] {
+    color: hsl(0 0% 100%);
+    background: hsl(222 16% 9% / 0.6);
+    border-color: hsl(0 0% 100% / 0.5);
+  }
+
+  .lg-glass[data-material='clear'] {
+    color: hsl(0 0% 100%);
+    background: hsl(0 0% 0% / 0.3);
+    border-color: hsl(0 0% 100% / 0.6);
+  }
+}
+
+@media (forced-colors: active) {
+  .lg-glass {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: Canvas;
+    border: 1px solid CanvasText;
+    box-shadow: none;
+    color: CanvasText;
+  }
+
+  .lg-pill-wrap::before {
+    background: none;
   }
 }
