@@ -2221,88 +2221,6 @@
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "type": "registry:ui",
       "dependencies": [
-        "lucide-react"
-      ],
-      "name": "math-editor",
-      "title": "Math Editor",
-      "description": "A dialog editor for inline and block LaTeX formulas used by MdEditor.",
-      "categories": [
-        "markdown",
-        "overlay"
-      ],
-      "registryDependencies": [
-        "@weimo/style",
-        "@weimo/utils",
-        "@weimo/action-dialog",
-        "@weimo/glass-icon-button"
-      ],
-      "files": [
-        {
-          "path": "src/components/math-editor.tsx",
-          "type": "registry:ui",
-          "target": "@ui/math-editor.tsx"
-        },
-        {
-          "path": "src/components/md-editor/math-editor.tsx",
-          "type": "registry:ui",
-          "target": "@ui/md-editor/math-editor.tsx"
-        },
-        {
-          "path": "src/components/coss/dialog.tsx",
-          "type": "registry:ui",
-          "target": "@ui/coss/dialog.tsx"
-        },
-        {
-          "path": "src/components/coss/dialog.css",
-          "type": "registry:ui",
-          "target": "@ui/coss/dialog.css"
-        },
-        {
-          "path": "src/components/glass-icon-button.tsx",
-          "type": "registry:ui",
-          "target": "@ui/glass-icon-button.tsx"
-        },
-        {
-          "path": "src/components/icon-button-model.ts",
-          "type": "registry:ui",
-          "target": "@ui/icon-button-model.ts"
-        },
-        {
-          "path": "src/components/icon-button.css",
-          "type": "registry:ui",
-          "target": "@ui/icon-button.css"
-        },
-        {
-          "path": "src/components/glass-surface.tsx",
-          "type": "registry:ui",
-          "target": "@ui/glass-surface.tsx"
-        },
-        {
-          "path": "src/components/glass-surface-model.ts",
-          "type": "registry:ui",
-          "target": "@ui/glass-surface-model.ts"
-        },
-        {
-          "path": "src/components/glass-surface.css",
-          "type": "registry:ui",
-          "target": "@ui/glass-surface.css"
-        },
-        {
-          "path": "src/components/popup-surface.tsx",
-          "type": "registry:ui",
-          "target": "@ui/popup-surface.tsx"
-        },
-        {
-          "path": "src/components/popup-surface.css",
-          "type": "registry:ui",
-          "target": "@ui/popup-surface.css"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "type": "registry:ui",
-      "dependencies": [
         "@base-ui/react",
         "@tiptap/core",
         "@tiptap/pm",
@@ -2534,6 +2452,88 @@
           "path": "src/components/icon-button.css",
           "type": "registry:ui",
           "target": "@ui/icon-button.css"
+        },
+        {
+          "path": "src/components/popup-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/popup-surface.tsx"
+        },
+        {
+          "path": "src/components/popup-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/popup-surface.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "name": "math-editor",
+      "title": "Math Editor",
+      "description": "A dialog editor for inline and block LaTeX formulas used by MdEditor.",
+      "categories": [
+        "markdown",
+        "overlay"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/action-dialog",
+        "@weimo/glass-icon-button"
+      ],
+      "files": [
+        {
+          "path": "src/components/math-editor.tsx",
+          "type": "registry:ui",
+          "target": "@ui/math-editor.tsx"
+        },
+        {
+          "path": "src/components/md-editor/math-editor.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/math-editor.tsx"
+        },
+        {
+          "path": "src/components/coss/dialog.tsx",
+          "type": "registry:ui",
+          "target": "@ui/coss/dialog.tsx"
+        },
+        {
+          "path": "src/components/coss/dialog.css",
+          "type": "registry:ui",
+          "target": "@ui/coss/dialog.css"
+        },
+        {
+          "path": "src/components/glass-icon-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-icon-button.tsx"
+        },
+        {
+          "path": "src/components/icon-button-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/icon-button-model.ts"
+        },
+        {
+          "path": "src/components/icon-button.css",
+          "type": "registry:ui",
+          "target": "@ui/icon-button.css"
+        },
+        {
+          "path": "src/components/glass-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.tsx"
+        },
+        {
+          "path": "src/components/glass-surface-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface-model.ts"
+        },
+        {
+          "path": "src/components/glass-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.css"
         },
         {
           "path": "src/components/popup-surface.tsx",

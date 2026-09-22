@@ -50,7 +50,7 @@ const markdownContentCss = readProjectFile('src/components/markdown-content.css'
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionSource = readProjectFile('src/docs/component-definitions/md.tsx')
 const mdRenderDefinitionSource = readProjectFile(
-  'src/docs/component-definitions/md-render.tsx',
+  'src/docs/component-definitions/markdown.tsx',
 )
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const appCss = readProjectFile('src/App.css')

@@ -43,12 +43,10 @@ const componentDefinitionSources = {
   button: readProjectFile('src/docs/component-definitions/button.tsx'),
   menu: readProjectFile('src/docs/component-definitions/menu.tsx'),
   surface: readProjectFile('src/docs/component-definitions/surface.tsx'),
-  'md-editor': [
-    readProjectFile('src/docs/component-definitions/md-editor.tsx'),
+  markdown: [
+    readProjectFile('src/docs/component-definitions/markdown.tsx'),
     readProjectFile('src/docs/component-definitions/md-editor-demos.tsx'),
   ].join('\n'),
-  'md-render': readProjectFile('src/docs/component-definitions/md-render.tsx'),
-  'md-view': readProjectFile('src/docs/component-definitions/md-view.tsx'),
   bar: readProjectFile('src/docs/component-definitions/bar.tsx'),
   capsule: readProjectFile('src/docs/component-definitions/capsule.tsx'),
 }
@@ -542,7 +540,7 @@ assert.ok(
   'overview-only gallery preview code and tests must be removed.',
 )
 
-for (const componentId of ['card', 'md-editor', 'md-view', 'md-render']) {
+for (const componentId of ['card', 'markdown']) {
   assert.ok(
     !componentDefinitionSources[componentId].includes('galleryPreview') &&
       !componentDefinitionSources[componentId].includes('gallery-preview-sample'),

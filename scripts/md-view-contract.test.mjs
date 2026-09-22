@@ -29,7 +29,7 @@ function cssBlockFor(source, selector) {
 const componentSource = readProjectFile('src/components/md-view.tsx')
 const mdViewCssSource = readProjectFile('src/components/md-view.css')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
-const definitionSource = readProjectFile('src/docs/component-definitions/md-view.tsx')
+const definitionSource = readProjectFile('src/docs/component-definitions/markdown.tsx')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const cssSource = readProjectFile('src/App.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
@@ -306,15 +306,17 @@ assert.ok(
     manifestSource.includes("name: 'MdView'") &&
     manifestSource.includes("registryName: 'md-view'") &&
     manifestSource.includes("packageExport: './components/md-view'") &&
+    manifestSource.includes('docs: false') &&
     manifestSource.includes('registry: true') &&
     !manifestSource.includes("internalGroup: 'editor'"),
   'components-manifest.ts must include MdView as a public registry component.',
 )
 
 assert.ok(
-  definitionsIndexSource.includes("import { mdViewDefinition } from './md-view'") &&
-    definitionsIndexSource.includes("'md-view': mdViewDefinition"),
-  'component-definitions/index.ts must register mdViewDefinition.',
+  definitionsIndexSource.includes("import { markdownDefinition } from './markdown'") &&
+    definitionsIndexSource.includes('markdown: markdownDefinition') &&
+    !definitionsIndexSource.includes('md-view'),
+  'component-definitions/index.ts must register the merged Markdown definition for MdView.',
 )
 
 for (const snippet of [
@@ -351,7 +353,7 @@ for (const snippet of [
   'value={markdown}',
   'onChange={setMarkdown}',
   'ref={previewSurfaceRef}',
-  'preview: () => <MdViewDemo />',
+  '<MdViewDemo />',
   'className="md-view-docs-preview__raw"',
   'className="md-view-docs-preview__raw-label"',
   'className="md-view-docs-preview__raw-content"',

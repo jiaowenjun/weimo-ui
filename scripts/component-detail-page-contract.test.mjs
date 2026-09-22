@@ -75,13 +75,12 @@ function assertDecodablePngDataUrl(dataUrl, message) {
 const detailPageSource = readProjectFile('src/docs/pages/component-detail-page.tsx')
 const docsShellSource = readProjectFile('src/docs/docs-shell.tsx')
 const componentDocsSource = readProjectFile('src/docs/component-docs.tsx')
-const mdRenderDefinitionSource = readProjectFile('src/docs/component-definitions/md-render.tsx')
+const mdRenderDefinitionSource = readProjectFile('src/docs/component-definitions/markdown.tsx')
 const imageViewDefinitionSource = readProjectFile('src/docs/component-definitions/image.tsx')
 const buttonDefinitionSource = readProjectFile('src/docs/component-definitions/button.tsx')
 const borderTokensDefinitionSource = readProjectFile('src/docs/component-definitions/border-tokens.tsx')
 const componentDefinitionsSource = readProjectFile('src/docs/component-definitions/card.tsx') +
   mdRenderDefinitionSource +
-  readProjectFile('src/docs/component-definitions/md-view.tsx') +
   imageViewDefinitionSource +
   readProjectFile('src/docs/component-definitions/surface.tsx') +
   readProjectFile('src/docs/component-definitions/tag.tsx') +
@@ -89,11 +88,10 @@ const componentDefinitionsSource = readProjectFile('src/docs/component-definitio
   buttonDefinitionSource +
   borderTokensDefinitionSource +
   readProjectFile('src/docs/component-definitions/menu.tsx') +
-  readProjectFile('src/docs/component-definitions/md-editor.tsx') +
   readProjectFile('src/docs/component-definitions/bar.tsx') +
   readProjectFile('src/docs/component-definitions/action-dialog.tsx') +
   readProjectFile('src/docs/component-definitions/capsule.tsx') +
-  readProjectFile('src/docs/component-definitions/math-editor.tsx')
+  mdRenderDefinitionSource
 const css = readProjectFile('src/App.css')
 const iconPreviewSceneBlock = blockFor(css, '.icon-preview__scene')
 const iconPreviewSceneTitleBlock = blockFor(css, '.icon-preview__scene-title')
@@ -202,8 +200,7 @@ for (const snippet of [
   "id: 'tag'",
   "id: 'capsule'",
   "id: 'image'",
-  "id: 'md-view'",
-  "id: 'math-editor'",
+  "id: 'markdown'",
   "id: 'button'",
   "id: 'surface'",
 ]) {
@@ -232,7 +229,7 @@ assert.ok(
 
 assert.ok(
   mdRenderDefinitionSource.includes("import { MdRender } from '../../components/md-render'") &&
-    mdRenderDefinitionSource.includes("id: 'md-render'") &&
+    mdRenderDefinitionSource.includes("id: 'markdown'") &&
     mdRenderDefinitionSource.includes('const [markdown, setMarkdown] = useState(mdRenderSample)') &&
     mdRenderDefinitionSource.includes('content={markdown}'),
   'MdRender detail page must render the standalone markdown preview component with the shared markdown sample.',
@@ -252,7 +249,7 @@ assert.ok(
     mdRenderDefinitionSource.includes('resizeSourceTextarea(event.currentTarget)') &&
     mdRenderDefinitionSource.includes('className="md-render-docs-preview__rendered"') &&
     mdRenderDefinitionSource.includes('content={markdown}') &&
-    mdRenderDefinitionSource.includes('preview: () => <MdRenderPreview />'),
+    mdRenderDefinitionSource.includes('<MdRenderPreview />'),
   'MdRender detail preview must show editable auto-growing markdown source beside a live rendered result.',
 )
 for (const selector of [

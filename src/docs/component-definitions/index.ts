@@ -12,10 +12,7 @@ import { tagDefinition } from './tag'
 import { capsuleDefinition } from './capsule'
 import { cardDefinition } from './card'
 import { cardComposerDefinition } from './card-composer'
-import { mathEditorDefinition } from './math-editor'
-import { mdEditorDefinition } from './md-editor'
-import { mdRenderDefinition } from './md-render'
-import { mdViewDefinition } from './md-view'
+import { markdownDefinition } from './markdown'
 import { ocrDefinition } from './ocr'
 import { imageDefinition } from './image'
 import { statDefinition } from './stat'
@@ -36,10 +33,7 @@ export const componentDefinitionsById = {
   capsule: capsuleDefinition,
   card: cardDefinition,
   'card-composer': cardComposerDefinition,
-  'math-editor': mathEditorDefinition,
-  'md-editor': mdEditorDefinition,
-  'md-render': mdRenderDefinition,
-  'md-view': mdViewDefinition,
+  markdown: markdownDefinition,
   ocr: ocrDefinition,
   image: imageDefinition,
   stat: statDefinition,
