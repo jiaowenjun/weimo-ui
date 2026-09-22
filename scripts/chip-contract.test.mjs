@@ -35,7 +35,7 @@ const rootRegistry = readJson('registry.json')
 const source = readProjectFile('src/components/chip.tsx')
 const css = readProjectFile('src/components/chip.css')
 const surfaceCss = readProjectFile('src/components/chip-surface.css')
-const docsSource = readProjectFile('src/docs/component-definitions/chip.tsx')
+const docsSource = readProjectFile('src/docs/component-definitions/capsule.tsx')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const appCss = readProjectFile('src/App.css')
@@ -185,8 +185,10 @@ assert.ok(
 assert.ok(
   docsSource.includes("import { Hash, X } from 'lucide-react'") &&
     docsSource.includes("import { Chip } from '../../components/chip'") &&
-    docsSource.includes("id: 'chip'") &&
+    docsSource.includes("id: 'capsule'") &&
     docsSource.includes('function ChipDemo') &&
+    docsSource.includes('preview: () => <CapsuleDemo />') &&
+    docsSource.includes('<ChipDemo />') &&
     docsSource.includes('className="internal-chip-preview"') &&
     docsSource.includes('className="internal-chip-preview__row"') &&
     docsSource.includes('content="写作/日记"') &&
@@ -198,19 +200,31 @@ assert.ok(
     docsSource.includes('suffix={') &&
     docsSource.includes('<button className="internal-chip-preview__action" type="button">') &&
     docsSource.includes('<X aria-hidden="true" />'),
-  'Chip docs definition must show internal slot, variant, and text-size examples.',
+  'Capsule docs definition must show internal slot, variant, and text-size examples.',
 )
 assert.ok(
-  definitionsIndexSource.includes("import { chipDefinition } from './chip'") &&
-    definitionsIndexSource.includes("chip: chipDefinition"),
-  'Component definitions index must register Chip.',
+  definitionsIndexSource.includes("import { capsuleDefinition } from './capsule'") &&
+    definitionsIndexSource.includes('capsule: capsuleDefinition') &&
+    !definitionsIndexSource.includes("from './chip'"),
+  'Component definitions index must register the merged Capsule page.',
 )
 assert.ok(
-  manifestSource.includes("id: 'chip'") &&
-    manifestSource.includes("name: 'Chip'") &&
+  manifestSource.includes("id: 'capsule'") &&
+    manifestSource.includes("name: '胶囊'") &&
+    manifestSource.includes("exportName: 'Chip'") &&
     manifestSource.includes("registryName: 'chip'") &&
     manifestSource.includes("packageExport: './components/chip'") &&
     manifestSource.includes('registry: true') &&
+    !manifestSource.includes("id: 'chip',") &&
     !manifestSource.includes("internalGroup: 'tag-tree'"),
-  'Component manifest must list Chip as a public registry component.',
+  'Component manifest must list Chip as a public registry component through the merged Capsule page.',
 )
+for (const removedFilePath of [
+  'src/docs/component-definitions/chip.tsx',
+  'src/docs/component-definitions/chip-button.tsx',
+]) {
+  assert.ok(
+    !existsSync(join(root, removedFilePath)),
+    `${removedFilePath} must be merged into capsule.tsx.`,
+  )
+}

@@ -13,13 +13,12 @@ import { cardTopBarDefinition } from './card-top-bar'
 import { floatBarDefinition } from './float-bar'
 import { sidebarDefinition } from './sidebar'
 import { topBarDefinition } from './top-bar'
-import { chipDefinition } from './chip'
-import { chipButtonDefinition } from './chip-button'
 import { tagBarDefinition } from './tag-bar'
 import { tagBreadDefinition } from './tag-bread'
 import { tagPickerDefinition } from './tag-picker'
 import { tagTreeDefinition } from './tag-tree'
 import { tagTreeRowDefinition } from './tag-tree-row'
+import { capsuleDefinition } from './capsule'
 import { cardDefinition } from './card'
 import { cardComposerDefinition } from './card-composer'
 import { mathEditorDefinition } from './math-editor'
@@ -52,13 +51,12 @@ export const componentDefinitionsById = {
   'float-bar': floatBarDefinition,
   sidebar: sidebarDefinition,
   'top-bar': topBarDefinition,
-  chip: chipDefinition,
-  'chip-button': chipButtonDefinition,
   'tag-bar': tagBarDefinition,
   'tag-bread': tagBreadDefinition,
   'tag-picker': tagPickerDefinition,
   'tag-tree': tagTreeDefinition,
   'tag-tree-row': tagTreeRowDefinition,
+  capsule: capsuleDefinition,
   card: cardDefinition,
   'card-composer': cardComposerDefinition,
   'math-editor': mathEditorDefinition,

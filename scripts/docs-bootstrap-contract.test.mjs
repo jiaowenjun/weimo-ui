@@ -56,8 +56,7 @@ const componentDefinitionSources = {
   'tag-tree': readProjectFile(
     'src/docs/component-definitions/tag-tree.tsx',
   ),
-  chip: readProjectFile('src/docs/component-definitions/chip.tsx'),
-  'chip-button': readProjectFile('src/docs/component-definitions/chip-button.tsx'),
+  capsule: readProjectFile('src/docs/component-definitions/capsule.tsx'),
   'top-bar': readProjectFile(
     'src/docs/component-definitions/top-bar.tsx',
   ),
@@ -596,8 +595,8 @@ assert.ok(
   'Card docs definition must exist.',
 )
 assert.ok(
-  existsSync(join(root, 'src/docs/component-definitions/chip-button.tsx')),
-  'ChipButton docs definition must exist.',
+  existsSync(join(root, 'src/docs/component-definitions/capsule.tsx')),
+  'Merged Capsule docs definition must exist.',
 )
 
 for (const [source, label] of [

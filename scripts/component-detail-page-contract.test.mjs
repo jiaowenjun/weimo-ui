@@ -102,8 +102,7 @@ const componentDefinitionsSource = readProjectFile('src/docs/component-definitio
   readProjectFile('src/docs/component-definitions/card-tool-bar.tsx') +
   readProjectFile('src/docs/component-definitions/action-dialog.tsx') +
   readProjectFile('src/docs/component-definitions/tag-tree-row.tsx') +
-  readProjectFile('src/docs/component-definitions/chip.tsx') +
-  readProjectFile('src/docs/component-definitions/chip-button.tsx') +
+  readProjectFile('src/docs/component-definitions/capsule.tsx') +
   readProjectFile('src/docs/component-definitions/math-editor.tsx')
 const css = readProjectFile('src/App.css')
 const iconPreviewSceneBlock = blockFor(css, '.icon-preview__scene')
@@ -133,12 +132,8 @@ assert.ok(
   'Removed TagEditBar detail docs definition must not exist.',
 )
 assert.ok(
-  existsSync(join(root, 'src/docs/component-definitions/chip.tsx')),
-  'Internal Chip detail docs definition must exist.',
-)
-assert.ok(
-  existsSync(join(root, 'src/docs/component-definitions/chip-button.tsx')),
-  'Internal ChipButton detail docs definition must exist.',
+  existsSync(join(root, 'src/docs/component-definitions/capsule.tsx')),
+  'Merged Capsule detail docs definition must exist.',
 )
 assert.ok(
   existsSync(join(root, 'src/docs/component-definitions/surface.tsx')),
@@ -218,8 +213,7 @@ for (const snippet of [
   "id: 'card-tool-bar'",
   "id: 'action-dialog'",
   "id: 'tag-tree-row'",
-  "id: 'chip'",
-  "id: 'chip-button'",
+  "id: 'capsule'",
   "id: 'image-view'",
   "id: 'tag-bar'",
   "id: 'md-view'",

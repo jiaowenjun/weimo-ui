@@ -48,7 +48,7 @@ const source = readProjectFile('src/components/chip-button.tsx')
 const css = readProjectFile('src/components/chip-button.css')
 const surfaceCss = readProjectFile('src/components/chip-surface.css')
 const tokensCss = readProjectFile('src/styles/tokens.css')
-const docsSource = readProjectFile('src/docs/component-definitions/chip-button.tsx')
+const docsSource = readProjectFile('src/docs/component-definitions/capsule.tsx')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const appCss = readProjectFile('src/App.css')
@@ -230,7 +230,7 @@ assert.ok(
   docsSource.includes("import { useLayoutEffect, useRef, useState } from 'react'") &&
     docsSource.includes("import { ChipButton } from '../../components/chip-button'") &&
     docsSource.includes("import { TextButton } from '../../components/text-button'") &&
-    docsSource.includes("id: 'chip-button'") &&
+    docsSource.includes("id: 'capsule'") &&
     docsSource.includes("const [state, setState] = useState<'default' | 'glass'>('default')") &&
     docsSource.includes("const [widthMode, setWidthMode] = useState<'short' | 'long'>('short')") &&
     docsSource.includes('const widthMeasureRef = useRef<HTMLSpanElement | null>(null)') &&
@@ -262,16 +262,18 @@ assert.ok(
   'ChipButton docs text toggles must not use coss Button.',
 )
 assert.ok(
-  definitionsIndexSource.includes("import { chipButtonDefinition } from './chip-button'") &&
-    definitionsIndexSource.includes("'chip-button': chipButtonDefinition"),
-  'Component definitions index must register ChipButton.',
+  definitionsIndexSource.includes("import { capsuleDefinition } from './capsule'") &&
+    definitionsIndexSource.includes('capsule: capsuleDefinition') &&
+    !definitionsIndexSource.includes('chip-button'),
+  'Component definitions index must register ChipButton through the merged Capsule page.',
 )
 assert.ok(
   manifestSource.includes("id: 'chip-button'") &&
     manifestSource.includes("name: 'ChipButton'") &&
     manifestSource.includes("registryName: 'chip-button'") &&
     manifestSource.includes("packageExport: './components/chip-button'") &&
+    manifestSource.includes('docs: false') &&
     manifestSource.includes('registry: true') &&
     !manifestSource.includes("internalGroup: 'tag-tree'"),
-  'Component manifest must list ChipButton as a public registry component.',
+  'Component manifest must keep ChipButton registry-only after the Capsule page merge.',
 )

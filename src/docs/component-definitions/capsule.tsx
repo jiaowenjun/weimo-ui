@@ -1,9 +1,40 @@
 import { useLayoutEffect, useRef, useState } from 'react'
+import { Hash, X } from 'lucide-react'
 
+import { Chip } from '../../components/chip'
 import { ChipButton } from '../../components/chip-button'
 import { ComponentPreviewCard } from '../../components/component-preview-card'
 import { TextButton } from '../../components/text-button'
 import type { ComponentDefinition } from '../component-docs'
+
+function ChipDemo() {
+  return (
+    <ComponentPreviewCard label="标签胶囊">
+      <div className="internal-chip-preview">
+        <div className="internal-chip-preview__row" aria-label="Chip 变体预览">
+          <Chip content="写作/日记" prefix={<Hash aria-hidden="true" />} variant="default" />
+          <Chip content="玻璃态" prefix={<Hash aria-hidden="true" />} variant="glass" />
+        </div>
+        <div className="internal-chip-preview__row" aria-label="Chip 字号预览">
+          <Chip content="小字号" textSize="sm" />
+          <Chip content="基础字号" textSize="base" />
+        </div>
+        <div className="internal-chip-preview__row" aria-label="Chip slot 预览">
+          <Chip
+            content="可关闭标签"
+            prefix={<Hash aria-hidden="true" />}
+            suffix={
+              <button className="internal-chip-preview__action" type="button">
+                <X aria-hidden="true" />
+              </button>
+            }
+            variant="glass"
+          />
+        </div>
+      </div>
+    </ComponentPreviewCard>
+  )
+}
 
 function ChipButtonDemo() {
   const [state, setState] = useState<'default' | 'glass'>('default')
@@ -76,10 +107,27 @@ function ChipButtonDemo() {
   )
 }
 
-export const chipButtonDefinition = {
-  id: 'chip-button',
-  summary: '内部状态化标签胶囊，可在默认态和玻璃态之间平滑过渡',
+// Docs definitions intentionally colocate preview components with exported page metadata.
+// eslint-disable-next-line react-refresh/only-export-components
+function CapsuleDemo() {
+  return (
+    <>
+      <ChipDemo />
+      <ChipButtonDemo />
+    </>
+  )
+}
+
+export const capsuleDefinition = {
+  id: 'capsule',
+  summary: '标签胶囊与状态化标签胶囊的胶囊总览',
   status: 'Preview',
   frame: 'plain',
-  preview: () => <ChipButtonDemo />,
+  searchAliases: [
+    'Chip',
+    'ChipButton',
+    '标签胶囊',
+    '状态标签胶囊',
+  ],
+  preview: () => <CapsuleDemo />,
 } satisfies ComponentDefinition

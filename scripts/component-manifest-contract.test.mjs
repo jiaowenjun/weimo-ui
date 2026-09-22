@@ -138,8 +138,9 @@ assert.deepEqual(
     'ghost-icon-button',
     'glass-icon-button',
     'mode-button',
+    'chip-button',
   ],
-  'Merged token utilities, surface materials, and button variants must remain public without separate docs pages.',
+  'Merged token utilities, surface materials, and button/chip variants must remain public without separate docs pages.',
 )
 
 assert.equal(
