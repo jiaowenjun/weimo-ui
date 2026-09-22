@@ -21,7 +21,7 @@ const source = readProjectFile('src/components/canvas-transparency.tsx')
 const cacheSource = readProjectFile('src/components/canvas-transparency-cache.ts')
 const modelSource = readProjectFile('src/components/canvas-transparency-model.ts')
 const docsDefinition = readProjectFile(
-  'src/docs/component-definitions/canvas-transparency.tsx',
+  'src/docs/component-definitions/image.tsx',
 )
 const definitionsIndex = readProjectFile('src/docs/component-definitions/index.ts')
 const manifest = readProjectFile('src/docs/components-manifest.ts')
@@ -53,17 +53,15 @@ assert.ok(
     manifest.includes("name: 'CanvasTransparency'") &&
     manifest.includes("registryName: 'canvas-transparency'") &&
     manifest.includes("packageExport: './components/canvas-transparency'") &&
-    manifest.includes("group: 'media-ocr'"),
-  'Component manifest must list CanvasTransparency in the media-ocr group.',
+    manifest.includes("group: 'media-ocr'") &&
+    manifest.includes('docs: false'),
+  'Component manifest must keep CanvasTransparency registry-only in the media-ocr group after the Image page merge.',
 )
 assert.ok(
-  definitionsIndex.includes(
-    "import { canvasTransparencyDefinition } from './canvas-transparency'",
-  ) &&
-    definitionsIndex.includes(
-      "'canvas-transparency': canvasTransparencyDefinition",
-    ),
-  'CanvasTransparency docs definition must be wired into the definitions index.',
+  definitionsIndex.includes("import { imageDefinition } from './image'") &&
+    definitionsIndex.includes('image: imageDefinition') &&
+    !definitionsIndex.includes('canvas-transparency'),
+  'CanvasTransparency preview must be wired into the definitions index through the merged Image definition.',
 )
 
 for (const snippet of [
@@ -186,13 +184,13 @@ for (const snippet of [
 }
 
 assert.ok(
-  docsDefinition.includes("id: 'canvas-transparency'") &&
+  docsDefinition.includes("id: 'image'") &&
     docsDefinition.includes('<CanvasTransparency') &&
-    docsDefinition.includes('最多缓存 32 组处理结果') &&
+    docsDefinition.includes('<CanvasTransparencyDemo />') &&
     !docsDefinition.includes("name: 'tone'") &&
     !docsDefinition.includes('tone=') &&
     docsDefinition.includes("status: 'Ready'"),
-  'CanvasTransparency detail docs must rely on automatic theme detection.',
+  'CanvasTransparency preview inside the Image page must rely on automatic theme detection.',
 )
 
 assert.ok(registryItem, 'Root registry must include @weimo/canvas-transparency.')

@@ -148,9 +148,11 @@ assert.deepEqual(
     'tag-picker',
     'tag-tree',
     'tag-tree-row',
+    'canvas-transparency',
+    'image-uploader',
     'heatmap',
   ],
-  'Merged token utilities, surface materials, and bar/button/chip/tag/stat variants must remain public without separate docs pages.',
+  'Merged token utilities, surface materials, and bar/button/chip/tag/image/stat variants must remain public without separate docs pages.',
 )
 
 assert.equal(

@@ -16,12 +16,10 @@ import { mathEditorDefinition } from './math-editor'
 import { mdEditorDefinition } from './md-editor'
 import { mdRenderDefinition } from './md-render'
 import { mdViewDefinition } from './md-view'
-import { canvasTransparencyDefinition } from './canvas-transparency'
-import { imageUploaderDefinition } from './image-uploader'
-import { imageViewDefinition } from './image-view'
 import { ocrCardDefinition } from './ocr-card'
 import { ocrComposerDefinition } from './ocr-composer'
 import { ocrDetailDefinition } from './ocr-detail'
+import { imageDefinition } from './image'
 import { statDefinition } from './stat'
 import type { ComponentId } from '../components-manifest'
 import type { ComponentDefinition } from '../component-docs'
@@ -44,11 +42,9 @@ export const componentDefinitionsById = {
   'md-editor': mdEditorDefinition,
   'md-render': mdRenderDefinition,
   'md-view': mdViewDefinition,
-  'canvas-transparency': canvasTransparencyDefinition,
-  'image-uploader': imageUploaderDefinition,
-  'image-view': imageViewDefinition,
   'ocr-card': ocrCardDefinition,
   'ocr-composer': ocrComposerDefinition,
   'ocr-detail': ocrDetailDefinition,
+  image: imageDefinition,
   stat: statDefinition,
 } satisfies Record<ComponentId, ComponentDefinition>

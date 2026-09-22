@@ -35,7 +35,7 @@ const css = readProjectFile('src/components/image-uploader.css')
 const packageJson = readJson('package.json')
 const manifest = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndex = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinition = readProjectFile('src/docs/component-definitions/image-uploader.tsx')
+const docsDefinition = readProjectFile('src/docs/component-definitions/image.tsx')
 const rootRegistry = readJson('registry.json')
 const standaloneRegistry = readJson('registry/image-uploader.json')
 const registryItem = rootRegistry.items.find((item) => item.name === 'image-uploader')
@@ -65,13 +65,15 @@ assert.ok(
   manifest.includes("id: 'image-uploader'") &&
     manifest.includes("name: 'ImageUploader'") &&
     manifest.includes("registryName: 'image-uploader'") &&
-    manifest.includes("packageExport: './components/image-uploader'"),
-  'Component manifest must list ImageUploader as a public registry-backed component.',
+    manifest.includes("packageExport: './components/image-uploader'") &&
+    manifest.includes('docs: false'),
+  'Component manifest must keep ImageUploader registry-only after the Image page merge.',
 )
 assert.ok(
-  definitionsIndex.includes("import { imageUploaderDefinition } from './image-uploader'") &&
-    definitionsIndex.includes("'image-uploader': imageUploaderDefinition"),
-  'ImageUploader docs definition must be wired into component-definitions/index.ts.',
+  definitionsIndex.includes("import { imageDefinition } from './image'") &&
+    definitionsIndex.includes('image: imageDefinition') &&
+    !definitionsIndex.includes('image-uploader'),
+  'ImageUploader preview must be wired into component-definitions/index.ts through the merged Image definition.',
 )
 
 for (const snippet of [
@@ -385,8 +387,7 @@ for (const snippet of [
   "import { useState } from 'react'",
   "import { GlassIconButton } from '../../components/glass-icon-button'",
   "import { ImageUploader, type ImageUploaderActionApi } from '../../components/image-uploader'",
-  "id: 'image-uploader'",
-  "summary: '受控图片上传区域，支持拖放、选择、粘贴和调用者自定义按钮'",
+  "id: 'image'",
   'function ImageUploaderPreview()',
   'const [file, setFile] = useState<File | null>(null)',
   'const [actions, setActions] = useState<ImageUploaderActionApi | null>(null)',
@@ -412,7 +413,7 @@ for (const snippet of [
   'disabled={!actions?.canCheck}',
   'onClick={() => actions?.check()}',
   '<Check aria-hidden="true" />',
-  'preview: () => <ImageUploaderPreview />',
+  '<ImageUploaderPreview />',
 ]) {
   assertIncludes(docsDefinition, snippet, `ImageUploader docs must include ${snippet}.`)
 }

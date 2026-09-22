@@ -41,7 +41,7 @@ function assertNotExists(relativePath, message) {
 const packageJson = readJson('package.json')
 const manifest = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndex = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinition = readProjectFile('src/docs/component-definitions/image-view.tsx')
+const docsDefinition = readProjectFile('src/docs/component-definitions/image.tsx')
 const imageViewSource = readProjectFile('src/components/image-view.tsx')
 const imageViewCss = readProjectFile('src/components/image-view.css')
 const ocrDetailSource = readProjectFile('src/components/ocr-detail.tsx')
@@ -86,12 +86,13 @@ for (const relativePath of [
 }
 
 assert.ok(
-  manifest.includes("id: 'image-view'") &&
-    manifest.includes("name: 'ImageView'") &&
+  manifest.includes("id: 'image'") &&
+    manifest.includes("name: '图片'") &&
+    manifest.includes("exportName: 'ImageView'") &&
     manifest.includes("registryName: 'image-view'") &&
     manifest.includes("packageExport: './components/image-view'") &&
     manifest.includes("group: 'media-ocr'"),
-  'Component manifest must list ImageView as the only public image-detail viewing component.',
+  'Component manifest must list ImageView through the merged Image page as the only public image-detail viewing component.',
 )
 for (const snippet of [
   "id: 'image-detail'",
@@ -104,9 +105,9 @@ for (const snippet of [
   assert.ok(!manifest.includes(snippet), `Component manifest must not include removed ${snippet}.`)
 }
 assert.ok(
-  definitionsIndex.includes("import { imageViewDefinition } from './image-view'") &&
-    definitionsIndex.includes("'image-view': imageViewDefinition"),
-  'ImageView docs definition must be wired into component-definitions/index.ts.',
+  definitionsIndex.includes("import { imageDefinition } from './image'") &&
+    definitionsIndex.includes('image: imageDefinition'),
+  'ImageView preview must be wired into component-definitions/index.ts through the merged Image definition.',
 )
 for (const snippet of [
   "import { imageDetailDefinition } from './image-detail'",
@@ -320,8 +321,7 @@ assert.ok(
 for (const snippet of [
   "import { useState } from 'react'",
   "import { ImageView, ImageViewDisplayModeMenu, type ImageViewDisplayMode } from '../../components/image-view'",
-  "id: 'image-view'",
-  '提供 100%、适应宽度、适应高度三种详情模式',
+  "id: 'image'",
   "const [displayMode, setDisplayMode] = useState<ImageViewDisplayMode>('fit-width')",
   '<ImageViewDisplayModeMenu',
   'displayMode={displayMode}',
@@ -331,6 +331,8 @@ for (const snippet of [
   'displayMode={displayMode}',
   'open',
   'src={sampleImage}',
+  'preview: () => <ImageDemo />',
+  '<ImageViewPreview />',
 ]) {
   assertIncludes(docsDefinition, snippet, `ImageView docs must include ${snippet}.`)
 }

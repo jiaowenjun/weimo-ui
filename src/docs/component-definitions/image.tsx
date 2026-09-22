@@ -1,6 +1,10 @@
 import { useState } from 'react'
+import { Check, Clipboard, FileImage, X } from 'lucide-react'
 
+import { CanvasTransparency } from '../../components/canvas-transparency'
 import { ComponentPreviewCard } from '../../components/component-preview-card'
+import { GlassIconButton } from '../../components/glass-icon-button'
+import { ImageUploader, type ImageUploaderActionApi } from '../../components/image-uploader'
 import { ImageView, ImageViewDisplayModeMenu, type ImageViewDisplayMode } from '../../components/image-view'
 import type { ComponentDefinition } from '../component-docs'
 
@@ -48,10 +52,112 @@ function ImageViewPreview() {
   )
 }
 
-export const imageViewDefinition = {
-  id: 'image-view',
-  summary: '内部共享图片组件，为 OCR 校对等场景提供稳定比例预览，并提供 100%、适应宽度、适应高度三种详情模式',
-  status: 'Preview',
+function ImageUploaderPreview() {
+  const [file, setFile] = useState<File | null>(null)
+  const [actions, setActions] = useState<ImageUploaderActionApi | null>(null)
+
+  return (
+    <ComponentPreviewCard label="图片上传">
+      <div className="image-uploader-docs-preview">
+        <ImageUploader
+          aria-label="图片上传区域预览"
+          file={file}
+          onActionsChange={setActions}
+          onCheck={() => {}}
+          onFileChange={setFile}
+        />
+        <span className="image-uploader-docs-preview__actions">
+          {!actions?.hasFile ? (
+            <>
+              <GlassIconButton
+                aria-label="选择文件"
+                onClick={() => actions?.select()}
+              >
+                <FileImage aria-hidden="true" />
+              </GlassIconButton>
+              <GlassIconButton
+                aria-label="粘贴图片"
+                disabled={!actions?.canPasteClipboardImage}
+                onClick={() => actions?.paste()}
+              >
+                <Clipboard aria-hidden="true" />
+              </GlassIconButton>
+            </>
+          ) : (
+            <>
+              <GlassIconButton
+                aria-label="清除图片"
+                onClick={() => actions?.close()}
+              >
+                <X aria-hidden="true" />
+              </GlassIconButton>
+              <GlassIconButton
+                aria-label="确认图片"
+                disabled={!actions?.canCheck}
+                onClick={() => actions?.check()}
+              >
+                <Check aria-hidden="true" />
+              </GlassIconButton>
+            </>
+          )}
+        </span>
+      </div>
+    </ComponentPreviewCard>
+  )
+}
+
+const sampleGeometry = `data:image/svg+xml;utf8,${encodeURIComponent(`
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 240">
+    <rect width="360" height="240" fill="#fff" />
+    <g fill="none" stroke="#111" stroke-width="4">
+      <ellipse cx="180" cy="120" rx="130" ry="76" />
+      <path d="M50 120h260M180 44v152M92 65l176 110" />
+    </g>
+    <g fill="#111" font-family="sans-serif" font-size="18">
+      <text x="316" y="126">x</text>
+      <text x="187" y="39">y</text>
+    </g>
+  </svg>
+`)}`
+
+// eslint-disable-next-line react-refresh/only-export-components
+function CanvasTransparencyDemo() {
+  return (
+    <ComponentPreviewCard label="画布透明化">
+      <div className="canvas-transparency-docs-preview">
+        <CanvasTransparency
+          alt="几何图透明化结果"
+          src={sampleGeometry}
+        />
+      </div>
+    </ComponentPreviewCard>
+  )
+}
+
+// Docs definitions intentionally colocate preview components with exported page metadata.
+// eslint-disable-next-line react-refresh/only-export-components
+function ImageDemo() {
+  return (
+    <>
+      <ImageViewPreview />
+      <ImageUploaderPreview />
+      <CanvasTransparencyDemo />
+    </>
+  )
+}
+
+export const imageDefinition = {
+  id: 'image',
+  summary: '图片视图、图片上传与画布透明化的图片总览',
+  status: 'Ready',
   frame: 'plain',
-  preview: () => <ImageViewPreview />,
+  searchAliases: [
+    'ImageView',
+    'ImageUploader',
+    'CanvasTransparency',
+    '图片视图',
+    '图片上传',
+    '画布透明化',
+  ],
+  preview: () => <ImageDemo />,
 } satisfies ComponentDefinition

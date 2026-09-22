@@ -76,11 +76,10 @@ const detailPageSource = readProjectFile('src/docs/pages/component-detail-page.t
 const docsShellSource = readProjectFile('src/docs/docs-shell.tsx')
 const componentDocsSource = readProjectFile('src/docs/component-docs.tsx')
 const mdRenderDefinitionSource = readProjectFile('src/docs/component-definitions/md-render.tsx')
-const imageViewDefinitionSource = readProjectFile('src/docs/component-definitions/image-view.tsx')
+const imageViewDefinitionSource = readProjectFile('src/docs/component-definitions/image.tsx')
 const buttonDefinitionSource = readProjectFile('src/docs/component-definitions/button.tsx')
 const borderTokensDefinitionSource = readProjectFile('src/docs/component-definitions/border-tokens.tsx')
 const componentDefinitionsSource = readProjectFile('src/docs/component-definitions/card.tsx') +
-  readProjectFile('src/docs/component-definitions/canvas-transparency.tsx') +
   mdRenderDefinitionSource +
   readProjectFile('src/docs/component-definitions/md-view.tsx') +
   imageViewDefinitionSource +
@@ -202,11 +201,10 @@ for (const snippet of [
   "id: 'action-dialog'",
   "id: 'tag'",
   "id: 'capsule'",
-  "id: 'image-view'",
+  "id: 'image'",
   "id: 'md-view'",
   "id: 'math-editor'",
   "id: 'button'",
-  "id: 'canvas-transparency'",
   "id: 'surface'",
 ]) {
   assert.ok(componentDefinitionsSource.includes(snippet), `internal definition source must include ${snippet}.`)
@@ -282,9 +280,8 @@ assert.ok(
 
 assert.ok(
   imageViewDefinitionSource.includes("import { ImageView, ImageViewDisplayModeMenu, type ImageViewDisplayMode } from '../../components/image-view'") &&
-    imageViewDefinitionSource.includes("id: 'image-view'") &&
+    imageViewDefinitionSource.includes("id: 'image'") &&
     imageViewDefinitionSource.includes("const sampleImage = 'data:image/png;base64,") &&
-    !imageViewDefinitionSource.includes('data:image/svg+xml') &&
     imageViewDefinitionSource.includes('src={sampleImage}') &&
     (imageViewDefinitionSource.match(/src=\{sampleImage\}/g) ?? []).length === 2 &&
     imageViewDefinitionSource.includes('imageWidth={640}') &&
