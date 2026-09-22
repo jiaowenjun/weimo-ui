@@ -789,7 +789,6 @@
   overflow: hidden;
   isolation: isolate;
   height: 80px;
-  border-radius: var(--radius-sm);
 }
 
 .bg-color-preview__sample-fill {
@@ -1269,7 +1268,6 @@
   justify-content: center;
   overflow: hidden;
   padding: 16px;
-  border-radius: var(--radius-sm);
   color: var(--color-text-primary);
 }
 

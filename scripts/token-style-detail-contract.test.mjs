@@ -174,7 +174,7 @@ assert.ok(
     !previewBlock.includes('\n    height: 80px;') &&
     previewBlock.includes('overflow: hidden;') &&
     previewBlock.includes('isolation: isolate;') &&
-    previewBlock.includes('border-radius: var(--radius-sm);') &&
+    previewBlock.includes('border-radius: var(--radius);') &&
     !previewBlock.includes('border:') &&
     !previewBlock.includes('background:') &&
     !cardSource.includes('component-preview-card__preview'),

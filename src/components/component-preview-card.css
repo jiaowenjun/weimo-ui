@@ -68,7 +68,7 @@
     isolation: isolate;
     width: 100%;
     min-height: 80px;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius);
   }
 
   .component-preview-card .component-preview-card__surface-backdrop {
