@@ -92,7 +92,8 @@ assert.ok(
 )
 assert.ok(
   manifestSource.includes("id: 'action-dialog'") &&
-    manifestSource.includes("name: 'ActionDialog'") &&
+    manifestSource.includes("name: '对话框'") &&
+    manifestSource.includes("exportName: 'ActionDialog'") &&
     manifestSource.includes("registryName: 'action-dialog'") &&
     manifestSource.includes("packageExport: './components/action-dialog'") &&
     manifestSource.includes('registry: true'),

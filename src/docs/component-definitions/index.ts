@@ -5,8 +5,8 @@ import { backgroundTokensDefinition } from './background-tokens'
 import { borderTokensDefinition } from './border-tokens'
 import { surfaceDefinition } from './surface'
 import { actionDialogDefinition } from './action-dialog'
-import { menuDefinition } from './menu'
 import { buttonDefinition } from './button'
+import { menuDefinition } from './menu'
 import { barDefinition } from './bar'
 import { tagDefinition } from './tag'
 import { capsuleDefinition } from './capsule'
@@ -25,8 +25,8 @@ export const componentDefinitionsById = {
   'border-tokens': borderTokensDefinition,
   surface: surfaceDefinition,
   'action-dialog': actionDialogDefinition,
-  menu: menuDefinition,
   button: buttonDefinition,
+  menu: menuDefinition,
   bar: barDefinition,
   tag: tagDefinition,
   capsule: capsuleDefinition,

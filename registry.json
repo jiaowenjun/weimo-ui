@@ -609,6 +609,135 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "ghost-icon-button",
+      "type": "registry:ui",
+      "title": "Ghost Icon Button",
+      "description": "A circular transparent icon button with shared hover scale and feedback background.",
+      "categories": [
+        "action"
+      ],
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/ghost-icon-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/ghost-icon-button.tsx"
+        },
+        {
+          "path": "src/components/icon-button-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/icon-button-model.ts"
+        },
+        {
+          "path": "src/components/icon-button.css",
+          "type": "registry:ui",
+          "target": "@ui/icon-button.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "glass-icon-button",
+      "type": "registry:ui",
+      "title": "Glass Icon Button",
+      "description": "A circular glass icon button that samples the background and adapts foreground and hover feedback.",
+      "categories": [
+        "action"
+      ],
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/glass-icon-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-icon-button.tsx"
+        },
+        {
+          "path": "src/components/icon-button-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/icon-button-model.ts"
+        },
+        {
+          "path": "src/components/icon-button.css",
+          "type": "registry:ui",
+          "target": "@ui/icon-button.css"
+        },
+        {
+          "path": "src/components/glass-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.tsx"
+        },
+        {
+          "path": "src/components/glass-surface-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface-model.ts"
+        },
+        {
+          "path": "src/components/glass-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "name": "mode-button",
+      "title": "Mode Button",
+      "description": "An icon mode button that switches between display and edit actions.",
+      "categories": [
+        "action"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/ghost-icon-button",
+        "@weimo/menu"
+      ],
+      "files": [
+        {
+          "path": "src/components/mode-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/mode-button.tsx"
+        },
+        {
+          "path": "src/components/mode-button.css",
+          "type": "registry:ui",
+          "target": "@ui/mode-button.css"
+        },
+        {
+          "path": "src/components/ghost-icon-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/ghost-icon-button.tsx"
+        },
+        {
+          "path": "src/components/icon-button-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/icon-button-model.ts"
+        },
+        {
+          "path": "src/components/icon-button.css",
+          "type": "registry:ui",
+          "target": "@ui/icon-button.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "type": "registry:ui",
       "dependencies": [
         "@base-ui/react",
@@ -693,15 +822,12 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "name": "ghost-icon-button",
+      "name": "text-button",
       "type": "registry:ui",
-      "title": "Ghost Icon Button",
-      "description": "A circular transparent icon button with shared hover scale and feedback background.",
+      "title": "Text Button",
+      "description": "A small bordered text button with shared hover, active, and disabled token feedback.",
       "categories": [
         "action"
-      ],
-      "dependencies": [
-        "class-variance-authority"
       ],
       "registryDependencies": [
         "@weimo/style",
@@ -709,68 +835,14 @@
       ],
       "files": [
         {
-          "path": "src/components/ghost-icon-button.tsx",
+          "path": "src/components/text-button.tsx",
           "type": "registry:ui",
-          "target": "@ui/ghost-icon-button.tsx"
+          "target": "@ui/text-button.tsx"
         },
         {
-          "path": "src/components/icon-button-model.ts",
+          "path": "src/components/text-button.css",
           "type": "registry:ui",
-          "target": "@ui/icon-button-model.ts"
-        },
-        {
-          "path": "src/components/icon-button.css",
-          "type": "registry:ui",
-          "target": "@ui/icon-button.css"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "name": "glass-icon-button",
-      "type": "registry:ui",
-      "title": "Glass Icon Button",
-      "description": "A circular glass icon button that samples the background and adapts foreground and hover feedback.",
-      "categories": [
-        "action"
-      ],
-      "dependencies": [
-        "class-variance-authority"
-      ],
-      "registryDependencies": [
-        "@weimo/style",
-        "@weimo/utils"
-      ],
-      "files": [
-        {
-          "path": "src/components/glass-icon-button.tsx",
-          "type": "registry:ui",
-          "target": "@ui/glass-icon-button.tsx"
-        },
-        {
-          "path": "src/components/icon-button-model.ts",
-          "type": "registry:ui",
-          "target": "@ui/icon-button-model.ts"
-        },
-        {
-          "path": "src/components/icon-button.css",
-          "type": "registry:ui",
-          "target": "@ui/icon-button.css"
-        },
-        {
-          "path": "src/components/glass-surface.tsx",
-          "type": "registry:ui",
-          "target": "@ui/glass-surface.tsx"
-        },
-        {
-          "path": "src/components/glass-surface-model.ts",
-          "type": "registry:ui",
-          "target": "@ui/glass-surface-model.ts"
-        },
-        {
-          "path": "src/components/glass-surface.css",
-          "type": "registry:ui",
-          "target": "@ui/glass-surface.css"
+          "target": "@ui/text-button.css"
         }
       ]
     },
@@ -823,78 +895,6 @@
           "path": "src/components/glass-surface.css",
           "type": "registry:ui",
           "target": "@ui/glass-surface.css"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "type": "registry:ui",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "name": "mode-button",
-      "title": "Mode Button",
-      "description": "An icon mode button that switches between display and edit actions.",
-      "categories": [
-        "action"
-      ],
-      "registryDependencies": [
-        "@weimo/style",
-        "@weimo/utils",
-        "@weimo/ghost-icon-button",
-        "@weimo/menu"
-      ],
-      "files": [
-        {
-          "path": "src/components/mode-button.tsx",
-          "type": "registry:ui",
-          "target": "@ui/mode-button.tsx"
-        },
-        {
-          "path": "src/components/mode-button.css",
-          "type": "registry:ui",
-          "target": "@ui/mode-button.css"
-        },
-        {
-          "path": "src/components/ghost-icon-button.tsx",
-          "type": "registry:ui",
-          "target": "@ui/ghost-icon-button.tsx"
-        },
-        {
-          "path": "src/components/icon-button-model.ts",
-          "type": "registry:ui",
-          "target": "@ui/icon-button-model.ts"
-        },
-        {
-          "path": "src/components/icon-button.css",
-          "type": "registry:ui",
-          "target": "@ui/icon-button.css"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "name": "text-button",
-      "type": "registry:ui",
-      "title": "Text Button",
-      "description": "A small bordered text button with shared hover, active, and disabled token feedback.",
-      "categories": [
-        "action"
-      ],
-      "registryDependencies": [
-        "@weimo/style",
-        "@weimo/utils"
-      ],
-      "files": [
-        {
-          "path": "src/components/text-button.tsx",
-          "type": "registry:ui",
-          "target": "@ui/text-button.tsx"
-        },
-        {
-          "path": "src/components/text-button.css",
-          "type": "registry:ui",
-          "target": "@ui/text-button.css"
         }
       ]
     },
