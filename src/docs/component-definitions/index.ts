@@ -10,9 +10,8 @@ import { buttonDefinition } from './button'
 import { barDefinition } from './bar'
 import { tagDefinition } from './tag'
 import { capsuleDefinition } from './capsule'
-import { cardDefinition } from './card'
-import { cardComposerDefinition } from './card-composer'
 import { markdownDefinition } from './markdown'
+import { taggedCardDefinition } from './tagged-card'
 import { ocrDefinition } from './ocr'
 import { imageDefinition } from './image'
 import { statDefinition } from './stat'
@@ -31,9 +30,8 @@ export const componentDefinitionsById = {
   bar: barDefinition,
   tag: tagDefinition,
   capsule: capsuleDefinition,
-  card: cardDefinition,
-  'card-composer': cardComposerDefinition,
   markdown: markdownDefinition,
+  'tagged-card': taggedCardDefinition,
   ocr: ocrDefinition,
   image: imageDefinition,
   stat: statDefinition,

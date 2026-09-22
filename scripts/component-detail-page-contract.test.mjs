@@ -79,7 +79,7 @@ const mdRenderDefinitionSource = readProjectFile('src/docs/component-definitions
 const imageViewDefinitionSource = readProjectFile('src/docs/component-definitions/image.tsx')
 const buttonDefinitionSource = readProjectFile('src/docs/component-definitions/button.tsx')
 const borderTokensDefinitionSource = readProjectFile('src/docs/component-definitions/border-tokens.tsx')
-const componentDefinitionsSource = readProjectFile('src/docs/component-definitions/card.tsx') +
+const componentDefinitionsSource = readProjectFile('src/docs/component-definitions/tagged-card.tsx') +
   mdRenderDefinitionSource +
   imageViewDefinitionSource +
   readProjectFile('src/docs/component-definitions/surface.tsx') +
@@ -112,8 +112,8 @@ assert.ok(
   'Removed EditableCard detail docs definition must not exist.',
 )
 assert.ok(
-  existsSync(join(root, 'src/docs/component-definitions/card.tsx')),
-  'Card detail docs definition must exist.',
+  existsSync(join(root, 'src/docs/component-definitions/tagged-card.tsx')),
+  'Merged tagged-card detail docs definition must exist.',
 )
 assert.ok(
   !existsSync(join(root, 'src/docs/component-definitions/tag-edit-bar.tsx')),

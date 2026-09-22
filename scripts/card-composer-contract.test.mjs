@@ -20,7 +20,7 @@ const cssSource = readProjectFile('src/components/card-composer.css')
 const appCss = readProjectFile('src/App.css')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const definitionSource = readProjectFile('src/docs/component-definitions/card-composer.tsx')
+const definitionSource = readProjectFile('src/docs/component-definitions/tagged-card.tsx')
 const registry = JSON.parse(readProjectFile('registry.json'))
 const registryItem = readProjectFile('registry/card-composer.json')
 
@@ -169,27 +169,24 @@ for (const snippet of [
   "registryName: 'card-composer'",
   "packageExport: './components/card-composer'",
   "group: 'content-markdown'",
+  'docs: false',
 ]) {
   assert.ok(manifestSource.includes(snippet), `CardComposer manifest must include: ${snippet}`)
 }
 
-for (const snippet of [
-  "import { cardComposerDefinition } from './card-composer'",
-  "'card-composer': cardComposerDefinition",
-]) {
-  assert.ok(
-    definitionsIndexSource.includes(snippet),
-    `CardComposer definition index must include: ${snippet}`,
-  )
-}
+assert.ok(
+  definitionsIndexSource.includes("import { taggedCardDefinition } from './tagged-card'") &&
+    definitionsIndexSource.includes("'tagged-card': taggedCardDefinition") &&
+    !definitionsIndexSource.includes('card-composer'),
+  'CardComposer preview must be wired through the merged tagged-card definition.',
+)
 
 for (const snippet of [
   "import { CardComposer } from '../../components/card-composer'",
   "import type { CardDraft, CardProps } from '../../components/card'",
   'className="card-composer-docs-preview"',
-  "id: 'card-composer'",
-  "summary: '用于新建草稿的 Card 组合壳层，复用 Card 编辑态与高度过渡'",
-  'preview: () => <CardComposerDemo />',
+  "id: 'tagged-card'",
+  '<CardComposerDemo />',
 ]) {
   assert.ok(definitionSource.includes(snippet), `CardComposer docs must include: ${snippet}`)
 }

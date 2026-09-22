@@ -1642,6 +1642,476 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "card-composer",
+      "type": "registry:ui",
+      "title": "Card Composer",
+      "description": "A new-note composer shell that reuses Card editing, focus, and height-transition behavior.",
+      "categories": [
+        "surface",
+        "editor"
+      ],
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/card",
+        "@weimo/ghost-icon-button"
+      ],
+      "files": [
+        {
+          "path": "src/components/card-composer.tsx",
+          "type": "registry:ui",
+          "target": "@ui/card-composer.tsx"
+        },
+        {
+          "path": "src/components/composer-shell.tsx",
+          "type": "registry:ui",
+          "target": "@ui/composer-shell.tsx"
+        },
+        {
+          "path": "src/components/card-composer.css",
+          "type": "registry:ui",
+          "target": "@ui/card-composer.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react",
+        "@tiptap/core",
+        "@tiptap/pm",
+        "@tiptap/react",
+        "@tiptap/starter-kit",
+        "@tiptap/markdown",
+        "@tiptap/extension-list",
+        "@tiptap/extension-placeholder",
+        "@tiptap/extension-task-list",
+        "@tiptap/extension-task-item",
+        "@tiptap/extension-table",
+        "@tiptap/extension-table-row",
+        "@tiptap/extension-table-header",
+        "@tiptap/extension-table-cell",
+        "@tiptap/extension-mathematics",
+        "lucide-react"
+      ],
+      "name": "md-editor",
+      "title": "Md Editor",
+      "description": "A controlled markdown editor with TipTap, math editing, toolbar actions, and save shortcuts.",
+      "categories": [
+        "markdown",
+        "input"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/action-dialog",
+        "@weimo/menu",
+        "@weimo/glass-icon-button"
+      ],
+      "files": [
+        {
+          "path": "src/components/md-editor.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-editor.tsx"
+        },
+        {
+          "path": "src/components/md-editor/index.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/index.tsx"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-types.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-types.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor.tsx"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-content-format.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-content-format.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-toolbar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-toolbar.tsx"
+        },
+        {
+          "path": "src/components/md-editor/use-md-editor.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/use-md-editor.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-extensions.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-extensions.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-option-grid.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-option-grid.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-list-image-layout.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-list-image-layout.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-table.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-table.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-ordered-list.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-ordered-list.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-block-math.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-block-math.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-inline-math.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-inline-math.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-math-view.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-math-view.tsx"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-math-conversion.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-math-conversion.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-centered-quote.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-centered-quote.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-image.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-image.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-image-view.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-image-view.tsx"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-markdown.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-markdown.ts"
+        },
+        {
+          "path": "src/components/md-editor/md-editor-save-keymap.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor-save-keymap.ts"
+        },
+        {
+          "path": "src/components/md-editor/math-editor.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/math-editor.tsx"
+        },
+        {
+          "path": "src/components/md-editor/md-editor.css",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/md-editor.css"
+        },
+        {
+          "path": "src/components/markdown-centered-quote.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-centered-quote.ts"
+        },
+        {
+          "path": "src/components/markdown-image-size.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-image-size.ts"
+        },
+        {
+          "path": "src/components/markdown-image-renderer.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-image-renderer.ts"
+        },
+        {
+          "path": "src/components/markdown-parenthesized-list.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-parenthesized-list.ts"
+        },
+        {
+          "path": "src/components/markdown-option-grid.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-option-grid.ts"
+        },
+        {
+          "path": "src/components/markdown-content.css",
+          "type": "registry:ui",
+          "target": "@ui/markdown-content.css"
+        },
+        {
+          "path": "src/components/coss/button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/coss/button.tsx"
+        },
+        {
+          "path": "src/components/coss/button.css",
+          "type": "registry:ui",
+          "target": "@ui/coss/button.css"
+        },
+        {
+          "path": "src/components/coss/toolbar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/coss/toolbar.tsx"
+        },
+        {
+          "path": "src/components/coss/tooltip.tsx",
+          "type": "registry:ui",
+          "target": "@ui/coss/tooltip.tsx"
+        },
+        {
+          "path": "src/components/coss/tooltip.css",
+          "type": "registry:ui",
+          "target": "@ui/coss/tooltip.css"
+        },
+        {
+          "path": "src/components/glass-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.tsx"
+        },
+        {
+          "path": "src/components/glass-surface-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface-model.ts"
+        },
+        {
+          "path": "src/components/glass-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.css"
+        },
+        {
+          "path": "src/components/glass-icon-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-icon-button.tsx"
+        },
+        {
+          "path": "src/components/icon-button-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/icon-button-model.ts"
+        },
+        {
+          "path": "src/components/icon-button.css",
+          "type": "registry:ui",
+          "target": "@ui/icon-button.css"
+        },
+        {
+          "path": "src/components/popup-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/popup-surface.tsx"
+        },
+        {
+          "path": "src/components/popup-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/popup-surface.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "name": "math-editor",
+      "title": "Math Editor",
+      "description": "A dialog editor for inline and block LaTeX formulas used by MdEditor.",
+      "categories": [
+        "markdown",
+        "overlay"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/action-dialog",
+        "@weimo/glass-icon-button"
+      ],
+      "files": [
+        {
+          "path": "src/components/math-editor.tsx",
+          "type": "registry:ui",
+          "target": "@ui/math-editor.tsx"
+        },
+        {
+          "path": "src/components/md-editor/math-editor.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-editor/math-editor.tsx"
+        },
+        {
+          "path": "src/components/coss/dialog.tsx",
+          "type": "registry:ui",
+          "target": "@ui/coss/dialog.tsx"
+        },
+        {
+          "path": "src/components/coss/dialog.css",
+          "type": "registry:ui",
+          "target": "@ui/coss/dialog.css"
+        },
+        {
+          "path": "src/components/glass-icon-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-icon-button.tsx"
+        },
+        {
+          "path": "src/components/icon-button-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/icon-button-model.ts"
+        },
+        {
+          "path": "src/components/icon-button.css",
+          "type": "registry:ui",
+          "target": "@ui/icon-button.css"
+        },
+        {
+          "path": "src/components/glass-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.tsx"
+        },
+        {
+          "path": "src/components/glass-surface-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface-model.ts"
+        },
+        {
+          "path": "src/components/glass-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.css"
+        },
+        {
+          "path": "src/components/popup-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/popup-surface.tsx"
+        },
+        {
+          "path": "src/components/popup-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/popup-surface.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [
+        "react-markdown",
+        "remark-gfm",
+        "remark-math",
+        "remark-breaks",
+        "rehype-raw",
+        "rehype-sanitize",
+        "rehype-katex",
+        "katex"
+      ],
+      "name": "md-render",
+      "title": "Md Render",
+      "description": "A markdown renderer with Weimo markdown styling, math, tables, and centered quote support.",
+      "categories": [
+        "markdown",
+        "display"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/md-render.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-render.tsx"
+        },
+        {
+          "path": "src/components/markdown-option-grid.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-option-grid.ts"
+        },
+        {
+          "path": "src/components/markdown-parenthesized-list.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-parenthesized-list.ts"
+        },
+        {
+          "path": "src/components/markdown-sanitize.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-sanitize.ts"
+        },
+        {
+          "path": "src/components/markdown-centered-quote.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-centered-quote.ts"
+        },
+        {
+          "path": "src/components/markdown-image-size.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-image-size.ts"
+        },
+        {
+          "path": "src/components/markdown-image-renderer.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown-image-renderer.ts"
+        },
+        {
+          "path": "src/components/markdown-content.css",
+          "type": "registry:ui",
+          "target": "@ui/markdown-content.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [
+        "remark-gfm",
+        "remark-math",
+        "remark-parse",
+        "remark-stringify",
+        "unified"
+      ],
+      "name": "md-view",
+      "title": "Md View",
+      "description": "A markdown view/edit bridge that swaps MdRender and MdEditor while preserving measured height.",
+      "categories": [
+        "markdown",
+        "display",
+        "input"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/md-editor",
+        "@weimo/md-render"
+      ],
+      "files": [
+        {
+          "path": "src/components/md-view.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-view.tsx"
+        },
+        {
+          "path": "src/components/md-view.css",
+          "type": "registry:ui",
+          "target": "@ui/md-view.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "card",
       "type": "registry:ui",
       "title": "Card",
@@ -2178,476 +2648,6 @@
           "path": "src/components/popup-surface.css",
           "type": "registry:ui",
           "target": "@ui/popup-surface.css"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "name": "card-composer",
-      "type": "registry:ui",
-      "title": "Card Composer",
-      "description": "A new-note composer shell that reuses Card editing, focus, and height-transition behavior.",
-      "categories": [
-        "surface",
-        "editor"
-      ],
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "@weimo/style",
-        "@weimo/card",
-        "@weimo/ghost-icon-button"
-      ],
-      "files": [
-        {
-          "path": "src/components/card-composer.tsx",
-          "type": "registry:ui",
-          "target": "@ui/card-composer.tsx"
-        },
-        {
-          "path": "src/components/composer-shell.tsx",
-          "type": "registry:ui",
-          "target": "@ui/composer-shell.tsx"
-        },
-        {
-          "path": "src/components/card-composer.css",
-          "type": "registry:ui",
-          "target": "@ui/card-composer.css"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "type": "registry:ui",
-      "dependencies": [
-        "@base-ui/react",
-        "@tiptap/core",
-        "@tiptap/pm",
-        "@tiptap/react",
-        "@tiptap/starter-kit",
-        "@tiptap/markdown",
-        "@tiptap/extension-list",
-        "@tiptap/extension-placeholder",
-        "@tiptap/extension-task-list",
-        "@tiptap/extension-task-item",
-        "@tiptap/extension-table",
-        "@tiptap/extension-table-row",
-        "@tiptap/extension-table-header",
-        "@tiptap/extension-table-cell",
-        "@tiptap/extension-mathematics",
-        "lucide-react"
-      ],
-      "name": "md-editor",
-      "title": "Md Editor",
-      "description": "A controlled markdown editor with TipTap, math editing, toolbar actions, and save shortcuts.",
-      "categories": [
-        "markdown",
-        "input"
-      ],
-      "registryDependencies": [
-        "@weimo/style",
-        "@weimo/utils",
-        "@weimo/action-dialog",
-        "@weimo/menu",
-        "@weimo/glass-icon-button"
-      ],
-      "files": [
-        {
-          "path": "src/components/md-editor.tsx",
-          "type": "registry:ui",
-          "target": "@ui/md-editor.tsx"
-        },
-        {
-          "path": "src/components/md-editor/index.tsx",
-          "type": "registry:ui",
-          "target": "@ui/md-editor/index.tsx"
-        },
-        {
-          "path": "src/components/md-editor/md-editor-types.ts",
-          "type": "registry:ui",
-          "target": "@ui/md-editor/md-editor-types.ts"
-        },
-        {
-          "path": "src/components/md-editor/md-editor.tsx",
-          "type": "registry:ui",
-          "target": "@ui/md-editor/md-editor.tsx"
-        },
-        {
-          "path": "src/components/md-editor/md-editor-content-format.ts",
-          "type": "registry:ui",
-          "target": "@ui/md-editor/md-editor-content-format.ts"
-        },
-        {
-          "path": "src/components/md-editor/md-editor-toolbar.tsx",
-          "type": "registry:ui",
-          "target": "@ui/md-editor/md-editor-toolbar.tsx"
-        },
-        {
-          "path": "src/components/md-editor/use-md-editor.ts",
-          "type": "registry:ui",
-          "target": "@ui/md-editor/use-md-editor.ts"
-        },
-        {
-          "path": "src/components/md-editor/md-editor-extensions.ts",
-          "type": "registry:ui",
-          "target": "@ui/md-editor/md-editor-extensions.ts"
-        },
-        {
-          "path": "src/components/md-editor/md-editor-option-grid.ts",
-          "type": "registry:ui",
-          "target": "@ui/md-editor/md-editor-option-grid.ts"
-        },
-        {
-          "path": "src/components/md-editor/md-editor-list-image-layout.ts",
-          "type": "registry:ui",
-          "target": "@ui/md-editor/md-editor-list-image-layout.ts"
-        },
-        {
-          "path": "src/components/md-editor/md-editor-table.ts",
-          "type": "registry:ui",
-          "target": "@ui/md-editor/md-editor-table.ts"
-        },
-        {
-          "path": "src/components/md-editor/md-editor-ordered-list.ts",
-          "type": "registry:ui",
-          "target": "@ui/md-editor/md-editor-ordered-list.ts"
-        },
-        {
-          "path": "src/components/md-editor/md-editor-block-math.ts",
-          "type": "registry:ui",
-          "target": "@ui/md-editor/md-editor-block-math.ts"
-        },
-        {
-          "path": "src/components/md-editor/md-editor-inline-math.ts",
-          "type": "registry:ui",
-          "target": "@ui/md-editor/md-editor-inline-math.ts"
-        },
-        {
-          "path": "src/components/md-editor/md-editor-math-view.tsx",
-          "type": "registry:ui",
-          "target": "@ui/md-editor/md-editor-math-view.tsx"
-        },
-        {
-          "path": "src/components/md-editor/md-editor-math-conversion.ts",
-          "type": "registry:ui",
-          "target": "@ui/md-editor/md-editor-math-conversion.ts"
-        },
-        {
-          "path": "src/components/md-editor/md-editor-centered-quote.ts",
-          "type": "registry:ui",
-          "target": "@ui/md-editor/md-editor-centered-quote.ts"
-        },
-        {
-          "path": "src/components/md-editor/md-editor-image.ts",
-          "type": "registry:ui",
-          "target": "@ui/md-editor/md-editor-image.ts"
-        },
-        {
-          "path": "src/components/md-editor/md-editor-image-view.tsx",
-          "type": "registry:ui",
-          "target": "@ui/md-editor/md-editor-image-view.tsx"
-        },
-        {
-          "path": "src/components/md-editor/md-editor-markdown.ts",
-          "type": "registry:ui",
-          "target": "@ui/md-editor/md-editor-markdown.ts"
-        },
-        {
-          "path": "src/components/md-editor/md-editor-save-keymap.ts",
-          "type": "registry:ui",
-          "target": "@ui/md-editor/md-editor-save-keymap.ts"
-        },
-        {
-          "path": "src/components/md-editor/math-editor.tsx",
-          "type": "registry:ui",
-          "target": "@ui/md-editor/math-editor.tsx"
-        },
-        {
-          "path": "src/components/md-editor/md-editor.css",
-          "type": "registry:ui",
-          "target": "@ui/md-editor/md-editor.css"
-        },
-        {
-          "path": "src/components/markdown-centered-quote.ts",
-          "type": "registry:ui",
-          "target": "@ui/markdown-centered-quote.ts"
-        },
-        {
-          "path": "src/components/markdown-image-size.ts",
-          "type": "registry:ui",
-          "target": "@ui/markdown-image-size.ts"
-        },
-        {
-          "path": "src/components/markdown-image-renderer.ts",
-          "type": "registry:ui",
-          "target": "@ui/markdown-image-renderer.ts"
-        },
-        {
-          "path": "src/components/markdown-parenthesized-list.ts",
-          "type": "registry:ui",
-          "target": "@ui/markdown-parenthesized-list.ts"
-        },
-        {
-          "path": "src/components/markdown-option-grid.ts",
-          "type": "registry:ui",
-          "target": "@ui/markdown-option-grid.ts"
-        },
-        {
-          "path": "src/components/markdown-content.css",
-          "type": "registry:ui",
-          "target": "@ui/markdown-content.css"
-        },
-        {
-          "path": "src/components/coss/button.tsx",
-          "type": "registry:ui",
-          "target": "@ui/coss/button.tsx"
-        },
-        {
-          "path": "src/components/coss/button.css",
-          "type": "registry:ui",
-          "target": "@ui/coss/button.css"
-        },
-        {
-          "path": "src/components/coss/toolbar.tsx",
-          "type": "registry:ui",
-          "target": "@ui/coss/toolbar.tsx"
-        },
-        {
-          "path": "src/components/coss/tooltip.tsx",
-          "type": "registry:ui",
-          "target": "@ui/coss/tooltip.tsx"
-        },
-        {
-          "path": "src/components/coss/tooltip.css",
-          "type": "registry:ui",
-          "target": "@ui/coss/tooltip.css"
-        },
-        {
-          "path": "src/components/glass-surface.tsx",
-          "type": "registry:ui",
-          "target": "@ui/glass-surface.tsx"
-        },
-        {
-          "path": "src/components/glass-surface-model.ts",
-          "type": "registry:ui",
-          "target": "@ui/glass-surface-model.ts"
-        },
-        {
-          "path": "src/components/glass-surface.css",
-          "type": "registry:ui",
-          "target": "@ui/glass-surface.css"
-        },
-        {
-          "path": "src/components/glass-icon-button.tsx",
-          "type": "registry:ui",
-          "target": "@ui/glass-icon-button.tsx"
-        },
-        {
-          "path": "src/components/icon-button-model.ts",
-          "type": "registry:ui",
-          "target": "@ui/icon-button-model.ts"
-        },
-        {
-          "path": "src/components/icon-button.css",
-          "type": "registry:ui",
-          "target": "@ui/icon-button.css"
-        },
-        {
-          "path": "src/components/popup-surface.tsx",
-          "type": "registry:ui",
-          "target": "@ui/popup-surface.tsx"
-        },
-        {
-          "path": "src/components/popup-surface.css",
-          "type": "registry:ui",
-          "target": "@ui/popup-surface.css"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "type": "registry:ui",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "name": "math-editor",
-      "title": "Math Editor",
-      "description": "A dialog editor for inline and block LaTeX formulas used by MdEditor.",
-      "categories": [
-        "markdown",
-        "overlay"
-      ],
-      "registryDependencies": [
-        "@weimo/style",
-        "@weimo/utils",
-        "@weimo/action-dialog",
-        "@weimo/glass-icon-button"
-      ],
-      "files": [
-        {
-          "path": "src/components/math-editor.tsx",
-          "type": "registry:ui",
-          "target": "@ui/math-editor.tsx"
-        },
-        {
-          "path": "src/components/md-editor/math-editor.tsx",
-          "type": "registry:ui",
-          "target": "@ui/md-editor/math-editor.tsx"
-        },
-        {
-          "path": "src/components/coss/dialog.tsx",
-          "type": "registry:ui",
-          "target": "@ui/coss/dialog.tsx"
-        },
-        {
-          "path": "src/components/coss/dialog.css",
-          "type": "registry:ui",
-          "target": "@ui/coss/dialog.css"
-        },
-        {
-          "path": "src/components/glass-icon-button.tsx",
-          "type": "registry:ui",
-          "target": "@ui/glass-icon-button.tsx"
-        },
-        {
-          "path": "src/components/icon-button-model.ts",
-          "type": "registry:ui",
-          "target": "@ui/icon-button-model.ts"
-        },
-        {
-          "path": "src/components/icon-button.css",
-          "type": "registry:ui",
-          "target": "@ui/icon-button.css"
-        },
-        {
-          "path": "src/components/glass-surface.tsx",
-          "type": "registry:ui",
-          "target": "@ui/glass-surface.tsx"
-        },
-        {
-          "path": "src/components/glass-surface-model.ts",
-          "type": "registry:ui",
-          "target": "@ui/glass-surface-model.ts"
-        },
-        {
-          "path": "src/components/glass-surface.css",
-          "type": "registry:ui",
-          "target": "@ui/glass-surface.css"
-        },
-        {
-          "path": "src/components/popup-surface.tsx",
-          "type": "registry:ui",
-          "target": "@ui/popup-surface.tsx"
-        },
-        {
-          "path": "src/components/popup-surface.css",
-          "type": "registry:ui",
-          "target": "@ui/popup-surface.css"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "type": "registry:ui",
-      "dependencies": [
-        "react-markdown",
-        "remark-gfm",
-        "remark-math",
-        "remark-breaks",
-        "rehype-raw",
-        "rehype-sanitize",
-        "rehype-katex",
-        "katex"
-      ],
-      "name": "md-render",
-      "title": "Md Render",
-      "description": "A markdown renderer with Weimo markdown styling, math, tables, and centered quote support.",
-      "categories": [
-        "markdown",
-        "display"
-      ],
-      "registryDependencies": [
-        "@weimo/style",
-        "@weimo/utils"
-      ],
-      "files": [
-        {
-          "path": "src/components/md-render.tsx",
-          "type": "registry:ui",
-          "target": "@ui/md-render.tsx"
-        },
-        {
-          "path": "src/components/markdown-option-grid.ts",
-          "type": "registry:ui",
-          "target": "@ui/markdown-option-grid.ts"
-        },
-        {
-          "path": "src/components/markdown-parenthesized-list.ts",
-          "type": "registry:ui",
-          "target": "@ui/markdown-parenthesized-list.ts"
-        },
-        {
-          "path": "src/components/markdown-sanitize.ts",
-          "type": "registry:ui",
-          "target": "@ui/markdown-sanitize.ts"
-        },
-        {
-          "path": "src/components/markdown-centered-quote.ts",
-          "type": "registry:ui",
-          "target": "@ui/markdown-centered-quote.ts"
-        },
-        {
-          "path": "src/components/markdown-image-size.ts",
-          "type": "registry:ui",
-          "target": "@ui/markdown-image-size.ts"
-        },
-        {
-          "path": "src/components/markdown-image-renderer.ts",
-          "type": "registry:ui",
-          "target": "@ui/markdown-image-renderer.ts"
-        },
-        {
-          "path": "src/components/markdown-content.css",
-          "type": "registry:ui",
-          "target": "@ui/markdown-content.css"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "type": "registry:ui",
-      "dependencies": [
-        "remark-gfm",
-        "remark-math",
-        "remark-parse",
-        "remark-stringify",
-        "unified"
-      ],
-      "name": "md-view",
-      "title": "Md View",
-      "description": "A markdown view/edit bridge that swaps MdRender and MdEditor while preserving measured height.",
-      "categories": [
-        "markdown",
-        "display",
-        "input"
-      ],
-      "registryDependencies": [
-        "@weimo/style",
-        "@weimo/utils",
-        "@weimo/md-editor",
-        "@weimo/md-render"
-      ],
-      "files": [
-        {
-          "path": "src/components/md-view.tsx",
-          "type": "registry:ui",
-          "target": "@ui/md-view.tsx"
-        },
-        {
-          "path": "src/components/md-view.css",
-          "type": "registry:ui",
-          "target": "@ui/md-view.css"
         }
       ]
     },

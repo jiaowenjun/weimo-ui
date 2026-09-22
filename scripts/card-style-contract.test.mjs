@@ -695,7 +695,7 @@ assert.ok(
 )
 assert.ok(
   docsMarkdownSampleSource.includes('export const mdRenderSample') &&
-    existsSync(join(root, 'src/docs/component-definitions/card.tsx')),
+    existsSync(join(root, 'src/docs/component-definitions/tagged-card.tsx')),
   'Shared markdown docs preview sample must remain with Card docs.',
 )
 assert.deepEqual(

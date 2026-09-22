@@ -35,7 +35,7 @@ const sidebarPreviewSource = readProjectFile(
   'src/docs/component-definitions/sidebar-preview.tsx',
 )
 const componentDefinitionSources = {
-  'card': readProjectFile('src/docs/component-definitions/card.tsx'),
+  'tagged-card': readProjectFile('src/docs/component-definitions/tagged-card.tsx'),
   tag: readProjectFile('src/docs/component-definitions/tag.tsx'),
   stat: readProjectFile('src/docs/component-definitions/stat.tsx'),
   'background-tokens': readProjectFile('src/docs/component-definitions/background-tokens.tsx'),
@@ -168,7 +168,7 @@ for (const snippet of [
 }
 
 for (const componentId of [
-  'card',
+  'tagged-card',
   'tag',
   'stat',
   'background-tokens',
@@ -185,7 +185,7 @@ for (const componentId of [
 }
 
 for (const snippet of [
-  "id: 'card'",
+  "id: 'tagged-card'",
   "id: 'tag'",
   "id: 'tag-picker'",
   "id: 'tag-bread'",
@@ -540,7 +540,7 @@ assert.ok(
   'overview-only gallery preview code and tests must be removed.',
 )
 
-for (const componentId of ['card', 'markdown']) {
+for (const componentId of ['tagged-card', 'markdown']) {
   assert.ok(
     !componentDefinitionSources[componentId].includes('galleryPreview') &&
       !componentDefinitionSources[componentId].includes('gallery-preview-sample'),
@@ -575,8 +575,8 @@ for (const snippet of [
 }
 
 assert.ok(
-  existsSync(join(root, 'src/docs/component-definitions/card.tsx')),
-  'Card docs definition must exist.',
+  existsSync(join(root, 'src/docs/component-definitions/tagged-card.tsx')),
+  'Merged tagged-card docs definition must exist.',
 )
 assert.ok(
   existsSync(join(root, 'src/docs/component-definitions/capsule.tsx')),
