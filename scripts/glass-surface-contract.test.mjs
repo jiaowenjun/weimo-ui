@@ -340,14 +340,17 @@ for (const snippet of [
   'onValueChange={setGlassBackgroundGray}',
   'aria-label="背景灰度"',
   'const glassGradientStops',
+  'const glassStripeWidth = 48',
+  'const glassStripePeriod = glassGradientStops.length * glassStripeWidth',
   'function glassHslToRgb(',
   'function getGlassPreviewBackground(',
   'const colorfulness = progress <= 0 || progress >= 1 ? 0 : Math.sin(Math.PI * progress)',
   'const boundedGray =',
   'colorfulness === 0 ? gray : Math.min(Math.max(gray + spread * colorfulness, 3), 97)',
-  'return `rgb(${red}, ${green}, ${blue})`',
-  'return `linear-gradient(135deg, ${stops.join(\', \')})`',
-  'background: getGlassPreviewBackground(glassBackgroundGray)',
+  'return `rgb(${red}, ${green}, ${blue}) ${index * glassStripeWidth}px ${(index + 1) * glassStripeWidth}px`',
+  'backgroundImage: `repeating-linear-gradient(90deg, ${stripes.join(\', \')})`',
+  'backgroundPositionX: `${-progress * glassStripePeriod}px`',
+  'style={getGlassPreviewBackground(glassBackgroundGray)}',
   'glass-surface-preview__fixed',
   'label="玻璃材质"',
   '<GlassSurface className="glass-surface-preview__tile">',
@@ -368,7 +371,7 @@ assert.ok(
   !glassSurfaceDefinitionSource.includes('glassSurfacePreviewBackgroundBands') &&
     !glassSurfaceDefinitionSource.includes('glass-surface-preview__scroll') &&
     !glassSurfaceDefinitionSource.includes('glass-surface-preview__band'),
-  'GlassSurface demo background must be a non-scrollable solid gray driven by the title-bar slider.',
+  'GlassSurface demo background must stay the slider-driven stripe backdrop and must not resurrect the scrollable band scene.',
 )
 
 for (const snippet of [
