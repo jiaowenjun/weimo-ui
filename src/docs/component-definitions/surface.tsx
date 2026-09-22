@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import { bgColorToneMap } from '../../components/bg-color'
 import { CardSurface } from '../../components/card-surface'
 import { GlassSurface } from '../../components/glass-surface'
 import { PopupSurface } from '../../components/popup-surface'
@@ -12,11 +13,16 @@ import {
   SliderTrack,
 } from '../../components/coss/slider'
 import type { ComponentDefinition } from '../component-docs'
+import { parseColorLightness } from '../token-preview-color'
+
+// slider 端点取 ComponentPreviewCard（CardSurface）两种主题的卡片底色灰度。
+const glassBackgroundGrayDark = parseColorLightness(bgColorToneMap.card.value.dark)?.lightness ?? 12
+const glassBackgroundGrayLight = parseColorLightness(bgColorToneMap.card.value.light)?.lightness ?? 100
 
 // Docs definitions intentionally colocate preview components with exported page metadata.
 // eslint-disable-next-line react-refresh/only-export-components
 function SurfaceDemo() {
-  const [glassBackgroundGray, setGlassBackgroundGray] = useState(12)
+  const [glassBackgroundGray, setGlassBackgroundGray] = useState(glassBackgroundGrayDark)
 
   return (
     <>
@@ -33,7 +39,8 @@ function SurfaceDemo() {
         action={
           <Slider
             className="glass-surface-preview__slider"
-            max={100}
+            max={glassBackgroundGrayLight}
+            min={glassBackgroundGrayDark}
             onValueChange={setGlassBackgroundGray}
             step={1}
             value={glassBackgroundGray}
@@ -55,7 +62,7 @@ function SurfaceDemo() {
           <div className="glass-surface-preview__fixed">
             <GlassSurface className="glass-surface-preview__tile">
               <span className="glass-surface-preview__title">Glass Surface</span>
-              <span className="glass-surface-preview__meta">data-background-tone</span>
+              <span className="glass-surface-preview__meta">前景色随背景亮度自适应明暗</span>
             </GlassSurface>
           </div>
         </div>
