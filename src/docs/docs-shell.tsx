@@ -10,7 +10,6 @@ import {
 } from 'lucide-react'
 import {
   Outlet,
-  useLocation,
   useMatch,
   useNavigate,
 } from 'react-router'
@@ -107,19 +106,12 @@ function nextTheme(current: Theme): Theme {
   }
 }
 
-// 不在组件目录内的路由（实验页等）的页面标题，由 shell 统一设置，
-// 避免页面自身的设置在挂载后被 shell 的默认标题覆盖。
-const nonCatalogRouteTitles: Record<string, string> = {
-  '/lab/liquid-glass': '液态玻璃实验',
-}
-
 export function DocsShell() {
   const [theme, setTheme] = useState<Theme>('system')
   const [searchOpen, setSearchOpen] = useState(false)
   const [query, setQuery] = useState('')
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const navigate = useNavigate()
-  const location = useLocation()
   const componentMatch = useMatch('/components/:componentId')
   const activeComponentId = componentMatch?.params.componentId
   const selected = activeComponentId
@@ -172,13 +164,8 @@ export function DocsShell() {
   }, [])
 
   useEffect(() => {
-    const routeTitle = nonCatalogRouteTitles[location.pathname]
-    document.title = selected
-      ? `${selected.name} - Weimo UI`
-      : routeTitle
-        ? `${routeTitle} - Weimo UI`
-        : 'Weimo UI'
-  }, [selected, location.pathname])
+    document.title = selected ? `${selected.name} - Weimo UI` : 'Weimo UI'
+  }, [selected])
 
   const filteredDocs = useMemo(() => {
     const normalized = query.trim().toLowerCase()
