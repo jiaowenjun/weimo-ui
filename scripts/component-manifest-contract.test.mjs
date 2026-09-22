@@ -148,8 +148,9 @@ assert.deepEqual(
     'tag-picker',
     'tag-tree',
     'tag-tree-row',
+    'heatmap',
   ],
-  'Merged token utilities, surface materials, and bar/button/chip/tag variants must remain public without separate docs pages.',
+  'Merged token utilities, surface materials, and bar/button/chip/tag/stat variants must remain public without separate docs pages.',
 )
 
 assert.equal(

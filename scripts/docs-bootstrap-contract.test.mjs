@@ -37,10 +37,7 @@ const sidebarPreviewSource = readProjectFile(
 const componentDefinitionSources = {
   'card': readProjectFile('src/docs/component-definitions/card.tsx'),
   tag: readProjectFile('src/docs/component-definitions/tag.tsx'),
-  'stat-group': readProjectFile('src/docs/component-definitions/stat-group.tsx'),
-  'heatmap': readProjectFile(
-    'src/docs/component-definitions/heatmap.tsx',
-  ),
+  stat: readProjectFile('src/docs/component-definitions/stat.tsx'),
   'background-tokens': readProjectFile('src/docs/component-definitions/background-tokens.tsx'),
   'border-tokens': readProjectFile('src/docs/component-definitions/border-tokens.tsx'),
   button: readProjectFile('src/docs/component-definitions/button.tsx'),
@@ -175,8 +172,7 @@ for (const snippet of [
 for (const componentId of [
   'card',
   'tag',
-  'stat-group',
-  'heatmap',
+  'stat',
   'background-tokens',
   'border-tokens',
   'button',
@@ -195,7 +191,7 @@ for (const snippet of [
   "id: 'tag'",
   "id: 'tag-picker'",
   "id: 'tag-bread'",
-  "id: 'stat-group'",
+  "id: 'stat'",
   "id: 'ghost-icon-button'",
   "id: 'glass-icon-button'",
   "id: 'button'",
@@ -318,16 +314,16 @@ assert.ok(
   !heatmapPreviewBlock.includes('flex-direction: column;') &&
   !heatmapPreviewBlock.includes('gap: 12px;') &&
   !appCss.includes('.heatmap-preview .sidebar-preview__panel.weimo-sidebar') &&
-  !componentDefinitionSources['heatmap'].includes(
+  !componentDefinitionSources.stat.includes(
     'sidebar-preview__panel weimo-sidebar',
   ),
   'Heatmap docs preview must center the grid directly without wrapping it in the sidebar shell.',
 )
 
 assert.ok(
-  !componentDefinitionSources['heatmap'].includes('HeatColor') &&
-    !componentDefinitionSources['heatmap'].includes('<HeatColor') &&
-    !componentDefinitionSources['heatmap'].includes('HeatColor.'),
+  !componentDefinitionSources.stat.includes('HeatColor') &&
+    !componentDefinitionSources.stat.includes('<HeatColor') &&
+    !componentDefinitionSources.stat.includes('HeatColor.'),
   'Heatmap component docs must leave token previews to the BgColor detail page.',
 )
 

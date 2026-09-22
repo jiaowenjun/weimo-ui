@@ -31,7 +31,7 @@ const css = readProjectFile('src/components/stat-group.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 const manifest = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndex = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinition = readProjectFile('src/docs/component-definitions/stat-group.tsx')
+const docsDefinition = readProjectFile('src/docs/component-definitions/stat.tsx')
 const rootRegistry = JSON.parse(readProjectFile('registry.json'))
 const standaloneRegistry = JSON.parse(readProjectFile('registry/stat-group.json'))
 const registryItem = rootRegistry.items.find((item) => item.name === 'stat-group')
@@ -125,28 +125,32 @@ assert.equal(
   'package.json must export StatGroup.',
 )
 assert.ok(
-  manifest.includes("id: 'stat-group'") &&
-    manifest.includes("name: 'StatGroup'") &&
+  manifest.includes("id: 'stat'") &&
+    manifest.includes("name: '统计'") &&
+    manifest.includes("exportName: 'StatGroup'") &&
     manifest.includes("registryName: 'stat-group'") &&
-    manifest.includes("packageExport: './components/stat-group'"),
-  'Component manifest must include StatGroup.',
+    manifest.includes("packageExport: './components/stat-group'") &&
+    !manifest.includes("id: 'stat-group',"),
+  'Component manifest must list StatGroup through the merged Stat page.',
 )
 assert.ok(
-  definitionsIndex.includes("import { statGroupDefinition } from './stat-group'") &&
-    definitionsIndex.includes("'stat-group': statGroupDefinition"),
-  'StatGroup docs definition must be wired into component-definitions/index.ts.',
+  definitionsIndex.includes("import { statDefinition } from './stat'") &&
+    definitionsIndex.includes('stat: statDefinition') &&
+    !definitionsIndex.includes('stat-group'),
+  'Stat docs definition must be wired into component-definitions/index.ts.',
 )
 assert.ok(
   docsDefinition.includes("import { StatGroup } from '../../components/stat-group'") &&
-    docsDefinition.includes("id: 'stat-group'") &&
+    docsDefinition.includes("id: 'stat'") &&
     docsDefinition.includes('const wordMetric = formatWordCountMetric(12345)') &&
     docsDefinition.includes('items={sidebarStatsItems}') &&
     docsDefinition.includes("label: '笔记'") &&
     docsDefinition.includes('value: wordMetric.value') &&
     docsDefinition.includes('label: wordMetric.label') &&
     docsDefinition.includes("label: '天'") &&
+    docsDefinition.includes('preview: () => <StatDemo />') &&
     !docsDefinition.includes('label: getWordCountUnit'),
-  'StatGroup docs page must render the Skyline trio from preformatted display metrics.',
+  'Stat page must render the Skyline trio from preformatted display metrics.',
 )
 assert.ok(registryItem, 'Root registry must include the @weimo/stat-group item.')
 assert.deepEqual(

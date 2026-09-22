@@ -22,8 +22,7 @@ import { imageViewDefinition } from './image-view'
 import { ocrCardDefinition } from './ocr-card'
 import { ocrComposerDefinition } from './ocr-composer'
 import { ocrDetailDefinition } from './ocr-detail'
-import { heatmapDefinition } from './heatmap'
-import { statGroupDefinition } from './stat-group'
+import { statDefinition } from './stat'
 import type { ComponentId } from '../components-manifest'
 import type { ComponentDefinition } from '../component-docs'
 
@@ -51,6 +50,5 @@ export const componentDefinitionsById = {
   'ocr-card': ocrCardDefinition,
   'ocr-composer': ocrComposerDefinition,
   'ocr-detail': ocrDetailDefinition,
-  heatmap: heatmapDefinition,
-  'stat-group': statGroupDefinition,
+  stat: statDefinition,
 } satisfies Record<ComponentId, ComponentDefinition>

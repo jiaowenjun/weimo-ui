@@ -86,8 +86,7 @@ const componentDefinitionsSource = readProjectFile('src/docs/component-definitio
   imageViewDefinitionSource +
   readProjectFile('src/docs/component-definitions/surface.tsx') +
   readProjectFile('src/docs/component-definitions/tag.tsx') +
-  readProjectFile('src/docs/component-definitions/stat-group.tsx') +
-  readProjectFile('src/docs/component-definitions/heatmap.tsx') +
+  readProjectFile('src/docs/component-definitions/stat.tsx') +
   buttonDefinitionSource +
   borderTokensDefinitionSource +
   readProjectFile('src/docs/component-definitions/menu.tsx') +
