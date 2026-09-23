@@ -7,4 +7,9 @@
     background: var(--color-bg-card);
     box-shadow: var(--shadow-card);
   }
+
+  /* 无边框变体只把描边置透明：1px 几何保留，与有边框实例并排时内边距节奏一致。 */
+  .card-surface--borderless {
+    border-color: transparent;
+  }
 }

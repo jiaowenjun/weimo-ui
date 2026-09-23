@@ -15,6 +15,7 @@ type GlassSurfaceScrollParent = HTMLElement | Window
 export { getGlassSurfaceClassName }
 
 export type GlassSurfaceProps = ComponentPropsWithoutRef<'div'> & {
+  bordered?: boolean
   observe?: boolean
 }
 
@@ -113,6 +114,7 @@ function useGlassSurfaceBackgroundToneForElement<ElementType extends HTMLElement
 }
 
 export function GlassSurface({
+  bordered = true,
   className,
   observe = true,
   ...props
@@ -122,7 +124,10 @@ export function GlassSurface({
 
   return (
     <div
-      className={getGlassSurfaceClassName(className)}
+      className={getGlassSurfaceClassName(
+        bordered ? undefined : 'glass-surface--borderless',
+        className,
+      )}
       data-background-tone={backgroundTone ?? undefined}
       ref={setElementRef}
       {...props}

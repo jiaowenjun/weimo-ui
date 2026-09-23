@@ -271,7 +271,7 @@ for (const snippet of [
   'function GhostIconButtonPreviewGroup({ disabled }: { disabled: boolean })',
   '<GhostIconButton aria-label="菜单" disabled={disabled}>',
   'glass-surface-preview__fixed',
-  '<GlassSurface className="glass-surface-preview__tile">',
+  '<GlassSurface bordered={bordered} className="glass-surface-preview__tile">',
   '<GlassPreviewCard',
   'label="玻璃图标按钮"',
 ]) {

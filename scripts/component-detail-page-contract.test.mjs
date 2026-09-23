@@ -313,13 +313,13 @@ assert.ok(
     componentDefinitionsSource.includes('<GlassPreviewCard') &&
     !componentDefinitionsSource.includes('glass-surface-preview__scroll') &&
     componentDefinitionsSource.includes('glass-surface-preview__fixed') &&
-    componentDefinitionsSource.includes('<GlassSurface className="glass-surface-preview__tile">') &&
+    componentDefinitionsSource.includes('<GlassSurface bordered={bordered} className="glass-surface-preview__tile">') &&
     !componentDefinitionsSource.includes('glass-surface-preview__sticky'),
   'GlassSurface detail page must render a slider-driven dark-to-light adaptive material preview via the shared GlassPreviewCard.',
 )
 assert.ok(
     buttonDefinitionSource.includes("import { GlassIconButton } from '../../components/glass-icon-button'") &&
-    buttonDefinitionSource.includes("import { Switch } from '../../components/coss/switch'") &&
+    buttonDefinitionSource.includes("import { PreviewToggle } from '../preview-toggle'") &&
     buttonDefinitionSource.includes("import { useState } from 'react'") &&
     buttonDefinitionSource.includes("import { TextButton } from '../../components/text-button'") &&
     buttonDefinitionSource.includes("id: 'button'") &&

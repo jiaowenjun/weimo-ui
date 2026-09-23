@@ -13,7 +13,13 @@
     border: 1px solid var(--glass-surface-border);
     backdrop-filter: blur(var(--glass-blur));
     -webkit-backdrop-filter: blur(var(--glass-blur));
-    transition: color 160ms ease;
+    transition: color 160ms ease, border-color 160ms ease;
+  }
+
+  /* 无边框变体只把描边置透明：1px 几何保留，与有边框实例并排时内边距节奏一致，
+     且开关切换可走 border-color 过渡。 */
+  .glass-surface--borderless {
+    border-color: transparent;
   }
 
   .glass-surface[data-background-tone="light"] {

@@ -102,10 +102,12 @@ for (const snippet of [
   "import { cn } from './lib/utils'",
   "import './card-surface.css'",
   'export type CardSurfaceProps',
+  'bordered?: boolean',
   'export function getCardSurfaceClassName(...className: ClassValue[])',
   "return cn('card-surface', className)",
   'export function CardSurface',
-  'className={getCardSurfaceClassName(className)}',
+  'bordered = true',
+  "bordered ? undefined : 'card-surface--borderless'",
 ]) {
   assert.ok(cardSurfaceSource.includes(snippet), `CardSurface source must include ${snippet}.`)
 }
@@ -124,22 +126,52 @@ assert.ok(
   !cardSurfaceBlock.includes('padding:') && !cardSurfaceCss.includes('backdrop-filter'),
   'CardSurface must own material only, not layout padding or blur.',
 )
+assert.ok(
+  blockFor(cardSurfaceCss, '.card-surface--borderless').includes('border-color: transparent;') &&
+    !cardSurfaceCss.includes('border: none') &&
+    !cardSurfaceCss.includes('border-width: 0'),
+  'CardSurface borderless variant must keep the 1px transparent border geometry instead of dropping the border box.',
+)
 
 for (const snippet of [
   "import { CardSurface } from '../../components/card-surface'",
   "import { PopupSurface } from '../../components/popup-surface'",
   "import { ComponentPreviewCard } from '../../components/component-preview-card'",
+  "import { SurfaceBorderToggle } from '../preview-toggle'",
   "id: 'surface'",
   '静态实体卡片材质',
-  '<ComponentPreviewCard label="卡片材质">',
+  'function CardSurfacePreview()',
+  'label="卡片材质"',
   '<div aria-hidden="true" className="card-surface-preview">',
-  '<CardSurface className="card-surface-preview__tile">',
-  '<ComponentPreviewCard label="浮层材质">',
-  '<PopupSurface className="popup-surface-preview__tile">',
+  '<CardSurface bordered={bordered} className="card-surface-preview__tile">',
+  '<GlassSurface bordered={bordered} className="glass-surface-preview__tile">',
+  'function PopupSurfacePreview()',
+  'label="浮层材质"',
+  '<PopupSurface bordered={bordered} className="popup-surface-preview__tile">',
   '抬升浮层主体材质',
+  '<SurfaceBorderToggle bordered={bordered} onBorderedChange={setBordered} />',
   "frame: 'plain',",
 ]) {
   assert.ok(surfaceDefinitionSource.includes(snippet), `Surface docs definition must include ${snippet}.`)
+}
+
+// 标题栏开关（可见状态标签 + Switch）抽到 docs 共享组件：材质页三张卡的边框开关
+// 与按钮页启用/模式开关共用，契约锁共享文件。
+const previewToggleSource = readProjectFile('src/docs/preview-toggle.tsx')
+
+for (const snippet of [
+  "import { Switch } from '../components/coss/switch'",
+  'export function PreviewToggle(',
+  'ariaLabel: string',
+  'label: ReactNode',
+  'aria-label={ariaLabel}',
+  'checked={checked}',
+  'onCheckedChange={onCheckedChange}',
+  'export function SurfaceBorderToggle(',
+  'ariaLabel="显示边框"',
+  "label={bordered ? '有边框' : '无边框'}",
+]) {
+  assert.ok(previewToggleSource.includes(snippet), `PreviewToggle shared component must include ${snippet}.`)
 }
 assert.ok(
   !surfaceDefinitionSource.includes('items=') && !surfaceDefinitionSource.includes('surface-backdrop'),
@@ -221,9 +253,12 @@ for (const snippet of [
   "import './popup-surface.css'",
   "export type PopupSurfaceLevel = 'modal' | 'tooltip'",
   'export type PopupSurfaceProps',
+  'bordered?: boolean',
   'export function getPopupSurfaceClassName(',
   "return cn('popup-surface', className)",
   'export function PopupSurface',
+  'bordered = true',
+  "bordered ? undefined : 'popup-surface--borderless'",
   "data-level={level === 'modal' ? undefined : level}",
 ]) {
   assert.ok(popupSurfaceSource.includes(snippet), `PopupSurface source must include ${snippet}.`)
@@ -243,6 +278,12 @@ assert.ok(
   tooltipSurfaceBlock.includes('border-radius: var(--radius-sm);') &&
     tooltipSurfaceBlock.includes('box-shadow: var(--shadow-tooltip);'),
   'PopupSurface tooltip level must use tooltip radius and shadow.',
+)
+assert.ok(
+  blockFor(popupSurfaceCss, '.popup-surface--borderless').includes('border-color: transparent;') &&
+    !popupSurfaceCss.includes('border: none') &&
+    !popupSurfaceCss.includes('border-width: 0'),
+  'PopupSurface borderless variant must keep the 1px transparent border geometry instead of dropping the border box.',
 )
 assert.ok(
   !popupSurfaceCss.includes('backdrop-filter') && !popupSurfaceBlock.includes('padding:'),

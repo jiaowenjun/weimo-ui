@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { Menu } from 'lucide-react'
 
 import { ComponentPreviewCard } from '../../components/component-preview-card'
-import { Switch } from '../../components/coss/switch'
 import { GhostIconButton } from '../../components/ghost-icon-button'
 import { GlassIconButton } from '../../components/glass-icon-button'
 import {
@@ -12,6 +11,7 @@ import {
 import { TextButton } from '../../components/text-button'
 import type { ComponentDefinition } from '../component-docs'
 import { GlassPreviewCard } from '../glass-preview-card'
+import { PreviewToggle } from '../preview-toggle'
 
 function TextButtonPreview() {
   const [disabled, setDisabled] = useState(false)
@@ -19,16 +19,12 @@ function TextButtonPreview() {
   return (
     <ComponentPreviewCard
       action={
-        <span className="preview-toggle">
-          <span className="preview-toggle__label">
-            {disabled ? '禁用' : '启用'}
-          </span>
-          <Switch
-            aria-label="启用"
-            checked={!disabled}
-            onCheckedChange={(checked) => setDisabled(!checked)}
-          />
-        </span>
+        <PreviewToggle
+          ariaLabel="启用"
+          checked={!disabled}
+          label={disabled ? '禁用' : '启用'}
+          onCheckedChange={(checked) => setDisabled(!checked)}
+        />
       }
       label="文本按钮"
     >
@@ -58,16 +54,12 @@ function GhostIconButtonPreview() {
   return (
     <ComponentPreviewCard
       action={
-        <span className="preview-toggle">
-          <span className="preview-toggle__label">
-            {disabled ? '禁用' : '启用'}
-          </span>
-          <Switch
-            aria-label="启用"
-            checked={!disabled}
-            onCheckedChange={(checked) => setDisabled(!checked)}
-          />
-        </span>
+        <PreviewToggle
+          ariaLabel="启用"
+          checked={!disabled}
+          label={disabled ? '禁用' : '启用'}
+          onCheckedChange={(checked) => setDisabled(!checked)}
+        />
       }
       label="幽灵图标按钮"
     >
@@ -97,16 +89,12 @@ function GlassIconButtonPreview() {
   return (
     <GlassPreviewCard
       action={
-        <span className="preview-toggle">
-          <span className="preview-toggle__label">
-            {disabled ? '禁用' : '启用'}
-          </span>
-          <Switch
-            aria-label="启用"
-            checked={!disabled}
-            onCheckedChange={(checked) => setDisabled(!checked)}
-          />
-        </span>
+        <PreviewToggle
+          ariaLabel="启用"
+          checked={!disabled}
+          label={disabled ? '禁用' : '启用'}
+          onCheckedChange={(checked) => setDisabled(!checked)}
+        />
       }
       label="玻璃图标按钮"
     >
@@ -126,16 +114,12 @@ function ModeButtonDemo() {
   return (
     <ComponentPreviewCard
       action={
-        <span className="preview-toggle">
-          <span className="preview-toggle__label">
-            {editing ? '编辑态' : '默认态'}
-          </span>
-          <Switch
-            aria-label="切换编辑态"
-            checked={editing}
-            onCheckedChange={toggleMode}
-          />
-        </span>
+        <PreviewToggle
+          ariaLabel="切换编辑态"
+          checked={editing}
+          label={editing ? '编辑态' : '默认态'}
+          onCheckedChange={toggleMode}
+        />
       }
       label="模式按钮"
     >

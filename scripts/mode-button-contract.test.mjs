@@ -138,7 +138,7 @@ for (const snippet of [
   'function toggleMode(checked: boolean)',
   '<ModeButton',
   '<TextButton',
-  '<Switch',
+  '<PreviewToggle',
   'mode={mode}',
   'onModeChange={setMode}',
   "buttonProps={{ size: 'sm' }}",

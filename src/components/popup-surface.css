@@ -7,6 +7,11 @@
     box-shadow: var(--shadow-overlay);
   }
 
+  /* 无边框变体只把描边置透明：1px 几何保留，与有边框实例并排时内边距节奏一致。 */
+  .popup-surface--borderless {
+    border-color: transparent;
+  }
+
   .popup-surface[data-level="tooltip"] {
     border-radius: var(--radius-sm);
     box-shadow: var(--shadow-tooltip);

@@ -332,14 +332,21 @@ assertOmits(
 )
 
 for (const snippet of [
+  "import { useState } from 'react'",
   "import { GlassSurface } from '../../components/glass-surface'",
   "import { ComponentPreviewCard } from '../../components/component-preview-card'",
+  "import { SurfaceBorderToggle } from '../preview-toggle'",
   "from '../glass-preview-card'",
   "id: 'surface'",
   '静态卡片、亮度自适应玻璃层与抬升浮层的材质总览',
-  '<GlassPreviewCard canvasClassName="glass-surface-preview" label="玻璃材质">',
+  'function GlassSurfacePreview()',
+  'const [bordered, setBordered] = useState(true)',
+  'canvasClassName="glass-surface-preview"',
+  'label="玻璃材质"',
+  '<SurfaceBorderToggle bordered={bordered} onBorderedChange={setBordered} />',
   'glass-surface-preview__fixed',
-  '<GlassSurface className="glass-surface-preview__tile">',
+  '<GlassSurface bordered={bordered} className="glass-surface-preview__tile">',
+  "'无边框',",
   "frame: 'plain',",
 ]) {
   assertIncludes(
@@ -480,7 +487,7 @@ const fixedOverlayIndex = glassSurfaceDefinitionSource.indexOf(
   'className="glass-surface-preview__fixed"',
 )
 const tileIndex = glassSurfaceDefinitionSource.indexOf(
-  '<GlassSurface className="glass-surface-preview__tile">',
+  '<GlassSurface bordered={bordered} className="glass-surface-preview__tile">',
 )
 assert.ok(
   fixedOverlayIndex > -1 && tileIndex > fixedOverlayIndex,
@@ -500,6 +507,8 @@ for (const snippet of [
   'export function useGlassSurfaceBackgroundTone',
   'export function useGlassSurfaceBackgroundToneRef',
   'export function GlassSurface',
+  'bordered?: boolean',
+  'bordered = true',
   'observe = true',
   'const [element, setElement] = useState<ElementType | null>(null)',
   'const setElementRef = useCallback((nextElement: ElementType | null) => {',
@@ -507,7 +516,7 @@ for (const snippet of [
   'return { backgroundTone, setElementRef }',
   'useGlassSurfaceBackgroundToneRef<HTMLDivElement>(observe)',
   'data-background-tone={backgroundTone ?? undefined}',
-  "className={getGlassSurfaceClassName(className)}",
+  "bordered ? undefined : 'glass-surface--borderless'",
   'ref={setElementRef}',
   'resolveElementBackgroundTone(element)',
   'getGlassSurfaceScrollParents(element)',
@@ -573,6 +582,9 @@ for (const snippet of [
   'backdrop-filter: blur(var(--glass-blur));',
   '-webkit-backdrop-filter: blur(var(--glass-blur));',
   'color: var(--glass-surface-fg);',
+  'transition: color 160ms ease, border-color 160ms ease;',
+  '.glass-surface--borderless {',
+  'border-color: transparent;',
   '.glass-surface[data-background-tone="light"]',
   '--glass-surface-fg: var(--glass-surface-fg-on-light);',
   '--glass-surface-muted-color: var(--glass-surface-muted-fg-on-light);',
@@ -589,6 +601,13 @@ assertOmits(
   'border: 1px solid var(--color-border);',
   'GlassSurface border must use its adaptive border token instead of the global theme border.',
 )
+for (const removedBorderReset of ['border: none', 'border: 0', 'border-width: 0']) {
+  assertOmits(
+    glassSurfaceCss,
+    removedBorderReset,
+    `GlassSurface borderless variant must keep the 1px transparent border geometry instead of ${removedBorderReset}.`,
+  )
+}
 assertOmits(
   glassSurfaceCss,
   '--smart-glass-surface',

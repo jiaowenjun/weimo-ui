@@ -5,16 +5,25 @@ import { cn } from './lib/utils'
 
 import './card-surface.css'
 
-export type CardSurfaceProps = ComponentPropsWithoutRef<'div'>
+export type CardSurfaceProps = ComponentPropsWithoutRef<'div'> & {
+  bordered?: boolean
+}
 
 export function getCardSurfaceClassName(...className: ClassValue[]) {
   return cn('card-surface', className)
 }
 
-export function CardSurface({ className, ...props }: CardSurfaceProps) {
+export function CardSurface({
+  bordered = true,
+  className,
+  ...props
+}: CardSurfaceProps) {
   return (
     <div
-      className={getCardSurfaceClassName(className)}
+      className={getCardSurfaceClassName(
+        bordered ? undefined : 'card-surface--borderless',
+        className,
+      )}
       {...props}
     />
   )
