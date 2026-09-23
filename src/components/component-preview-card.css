@@ -72,6 +72,15 @@
     border-radius: var(--radius);
   }
 
+  .component-preview-card--align-center > .component-preview-card__meta ~ * {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
   .component-preview-card .component-preview-card__surface-backdrop {
     position: absolute;
     inset: -16px;

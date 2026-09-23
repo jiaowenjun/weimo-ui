@@ -39,6 +39,7 @@ const docsSource = readProjectFile('src/docs/component-definitions/capsule.tsx')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const appCss = readProjectFile('src/App.css')
+const previewCardCss = readProjectFile('src/components/component-preview-card.css')
 
 const baseBlock = cssBlockFor(surfaceCss, '.chip-surface')
 const defaultLayerBlock = cssBlockFor(surfaceCss, '.chip-surface::before')
@@ -58,8 +59,11 @@ const reducedMotionBlock = cssBlockFor(
     .chip-surface::before,
     .chip-surface::after`,
 )
-const previewBlock = cssBlockFor(appCss, '.internal-chip-preview')
-const previewRowBlock = cssBlockFor(appCss, '.internal-chip-preview__row')
+const previewActionBlock = cssBlockFor(appCss, '.internal-chip-preview__action')
+const previewAlignBlock = cssBlockFor(
+  previewCardCss,
+  '.component-preview-card--align-center > .component-preview-card__meta ~ *',
+)
 
 assert.ok(
   packageJson.scripts?.test?.includes('scripts/chip-contract.test.mjs'),
@@ -158,8 +162,11 @@ for (const [block, snippet, message] of [
   [contentBlock, 'text-overflow: clip;', 'Chip content overflow must be clipped without an ellipsis.'],
   [contentBlock, 'white-space: nowrap;', 'Chip content must stay on one line when clipped.'],
   [reducedMotionBlock, 'transition-duration: 1ms;', 'Chip must respect reduced motion.'],
-  [previewBlock, 'display: grid;', 'Chip docs preview must arrange internal examples.'],
-  [previewRowBlock, 'display: flex;', 'Chip docs preview rows must lay chips side by side.'],
+  [previewActionBlock, 'width: 16px;', 'Chip closable demo action must stay a compact hit target.'],
+  [previewAlignBlock, 'display: flex;', 'Aligned preview card bodies must lay inline examples in one flow.'],
+  [previewAlignBlock, 'align-content: center;', 'Aligned preview card bodies must center wrapped example rows.'],
+  [previewAlignBlock, 'align-items: center;', 'Chip docs examples must be vertically centered in the preview area.'],
+  [previewAlignBlock, 'justify-content: center;', 'Chip docs examples must be horizontally centered in the preview area.'],
 ]) {
   assertIncludes(block, snippet, message)
 }
@@ -199,8 +206,7 @@ assert.ok(
     docsSource.includes('function ClosableChipDemo') &&
     docsSource.includes('<ClosableChipDemo />') &&
     docsSource.includes('label="可关闭胶囊"') &&
-    docsSource.includes('className="internal-chip-preview"') &&
-    docsSource.includes('className="internal-chip-preview__row"') &&
+    docsSource.includes('align="center"') &&
     docsSource.includes('content="写作/日记"') &&
     docsSource.includes('variant="default"') &&
     docsSource.includes('variant="glass"') &&
@@ -211,6 +217,13 @@ assert.ok(
     docsSource.includes('<button className="internal-chip-preview__action" type="button">') &&
     docsSource.includes('<X aria-hidden="true" />'),
   'Capsule docs definition must show text-size, glass, default, and closable chip examples in split cards.',
+)
+assert.ok(
+  !docsSource.includes('className="internal-chip-preview"') &&
+    !docsSource.includes('className="internal-chip-preview__row"') &&
+    !appCss.includes('.internal-chip-preview__row') &&
+    !/\.internal-chip-preview\s*\{/.test(appCss),
+  'Chip docs cards must inherit ComponentPreviewCard default layout without custom wrapper styles.',
 )
 assert.ok(
   definitionsIndexSource.includes("import { capsuleDefinition } from './capsule'") &&

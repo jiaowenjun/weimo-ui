@@ -9,12 +9,10 @@ import type { ComponentDefinition } from '../component-docs'
 
 function ChipTextSizeDemo() {
   return (
-    <ComponentPreviewCard label="胶囊字号">
-      <div className="internal-chip-preview">
-        <div className="internal-chip-preview__row" aria-label="Chip 字号预览">
-          <Chip content="小字号" textSize="sm" />
-          <Chip content="基础字号" textSize="base" />
-        </div>
+    <ComponentPreviewCard align="center" label="胶囊字号">
+      <div aria-label="Chip 字号预览">
+        <Chip content="小字号" textSize="sm" />
+        <Chip content="基础字号" textSize="base" />
       </div>
     </ComponentPreviewCard>
   )
@@ -22,11 +20,9 @@ function ChipTextSizeDemo() {
 
 function GlassChipDemo() {
   return (
-    <ComponentPreviewCard label="玻璃态胶囊">
-      <div className="internal-chip-preview">
-        <div className="internal-chip-preview__row" aria-label="Chip 玻璃态预览">
-          <Chip content="玻璃态" prefix={<Hash aria-hidden="true" />} variant="glass" />
-        </div>
+    <ComponentPreviewCard align="center" label="玻璃态胶囊">
+      <div aria-label="Chip 玻璃态预览">
+        <Chip content="玻璃态" prefix={<Hash aria-hidden="true" />} variant="glass" />
       </div>
     </ComponentPreviewCard>
   )
@@ -34,11 +30,9 @@ function GlassChipDemo() {
 
 function ChipDemo() {
   return (
-    <ComponentPreviewCard label="标签胶囊">
-      <div className="internal-chip-preview">
-        <div className="internal-chip-preview__row" aria-label="Chip 默认变体预览">
-          <Chip content="写作/日记" prefix={<Hash aria-hidden="true" />} variant="default" />
-        </div>
+    <ComponentPreviewCard align="center" label="标签胶囊">
+      <div aria-label="Chip 默认变体预览">
+        <Chip content="写作/日记" prefix={<Hash aria-hidden="true" />} variant="default" />
       </div>
     </ComponentPreviewCard>
   )
@@ -46,20 +40,18 @@ function ChipDemo() {
 
 function ClosableChipDemo() {
   return (
-    <ComponentPreviewCard label="可关闭胶囊">
-      <div className="internal-chip-preview">
-        <div className="internal-chip-preview__row" aria-label="Chip 可关闭预览">
-          <Chip
-            content="可关闭标签"
-            prefix={<Hash aria-hidden="true" />}
-            suffix={
-              <button className="internal-chip-preview__action" type="button">
-                <X aria-hidden="true" />
-              </button>
-            }
-            variant="glass"
-          />
-        </div>
+    <ComponentPreviewCard align="center" label="可关闭胶囊">
+      <div aria-label="Chip 可关闭预览">
+        <Chip
+          content="可关闭标签"
+          prefix={<Hash aria-hidden="true" />}
+          suffix={
+            <button className="internal-chip-preview__action" type="button">
+              <X aria-hidden="true" />
+            </button>
+          }
+          variant="glass"
+        />
       </div>
     </ComponentPreviewCard>
   )

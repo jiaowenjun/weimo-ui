@@ -147,6 +147,7 @@ export type ComponentPreviewCardProps = Omit<
   'children'
 > & {
   action?: ReactNode
+  align?: 'start' | 'center'
   children: ReactNode
   darkValue?: ReactNode
   items?: readonly ComponentPreviewCardItem[]
@@ -157,6 +158,7 @@ export type ComponentPreviewCardProps = Omit<
 
 export function ComponentPreviewCard({
   action,
+  align = 'start',
   children,
   className,
   darkValue,
@@ -170,7 +172,14 @@ export function ComponentPreviewCard({
     items ?? (token === undefined || value === undefined ? [] : [{ darkValue, token, value }])
 
   return (
-    <CardSurface className={cn('component-preview-card', className)} {...props}>
+    <CardSurface
+      className={cn(
+        'component-preview-card',
+        align === 'center' && 'component-preview-card--align-center',
+        className,
+      )}
+      {...props}
+    >
       <div className="component-preview-card__meta">
         <div className="component-preview-card__title">
           <span className="component-preview-card__label">{label}</span>

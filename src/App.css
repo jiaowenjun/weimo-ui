@@ -907,23 +907,6 @@
   font-size: var(--font-size-sm);
 }
 
-.internal-chip-preview {
-  display: grid;
-  width: 100%;
-  min-height: 100%;
-  place-content: center;
-  justify-items: start;
-  gap: 12px;
-}
-
-.internal-chip-preview__row {
-  display: flex;
-  min-width: 0;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-tag-gap);
-}
-
 .internal-chip-preview__action {
   display: inline-flex;
   width: 16px;
