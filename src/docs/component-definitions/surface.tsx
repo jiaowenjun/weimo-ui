@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { CSSProperties } from 'react'
 
 import { bgColorToneMap } from '../../components/bg-color'
@@ -6,13 +6,6 @@ import { CardSurface } from '../../components/card-surface'
 import { GlassSurface } from '../../components/glass-surface'
 import { PopupSurface } from '../../components/popup-surface'
 import { ComponentPreviewCard } from '../../components/component-preview-card'
-import {
-  Slider,
-  SliderControl,
-  SliderIndicator,
-  SliderThumb,
-  SliderTrack,
-} from '../../components/coss/slider'
 import type { ComponentDefinition } from '../component-docs'
 import { parseColorLightness } from '../token-preview-color'
 
@@ -86,17 +79,77 @@ function getGlassPreviewBackground(gray: number): CSSProperties {
   }
 }
 
+// 自研滑块：透明原生 range input 作交互层（拖动/点击跳变/键盘步进/ARIA 全由浏览器
+// 承担），自绘轨道、指示条与滑块的几何全部由 --fill 一个自定义属性驱动。
+// 平滑移动是纯 CSS transition（见 App.css 的 .gray-slider）；按住（:active）期间
+// 禁用过渡，保证拖动逐帧跟手，主题重置发生在未按住时才播放动画。
+// eslint-disable-next-line react-refresh/only-export-components
+function GraySlider({
+  ariaLabel,
+  max,
+  min,
+  onValueChange,
+  value,
+}: {
+  ariaLabel: string
+  max: number
+  min: number
+  onValueChange: (value: number) => void
+  value: number
+}) {
+  const fill = (value - min) / (max - min)
+
+  return (
+    <div className="gray-slider" style={{ '--fill': fill } as CSSProperties}>
+      <input
+        aria-label={ariaLabel}
+        className="gray-slider__input"
+        max={max}
+        min={min}
+        onChange={(event) => onValueChange(Number(event.target.value))}
+        step={1}
+        type="range"
+        value={value}
+      />
+      <div aria-hidden="true" className="gray-slider__track">
+        <div className="gray-slider__indicator" />
+      </div>
+      <div aria-hidden="true" className="gray-slider__thumb" />
+    </div>
+  )
+}
+
 // Docs definitions intentionally colocate preview components with exported page metadata.
 // eslint-disable-next-line react-refresh/only-export-components
 function SurfaceDemo() {
   // 刷新时的初始灰度跟随页面主题：亮色落在亮卡底端点，暗色落在暗卡底端点。
   // docs-shell 首次挂载前 .dark class 尚未写入（useEffect 时序），直接按 system
-  // 偏好预判，与 shell 挂载后的主题一致；之后的主题切换不移动滑块。
+  // 偏好预判，与 shell 挂载后的主题一致。
   const [glassBackgroundGray, setGlassBackgroundGray] = useState(() =>
     typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches
       ? glassBackgroundGrayDark
       : glassBackgroundGrayLight,
   )
+
+  // 主题切换后滑块自动归位：亮色主题回到亮卡底端点（滑块右端），暗色主题回到暗
+  // 卡底端点（左端）。手动切换与跟随系统最终都写 <html> 的 .dark class，观察该
+  // class 变化即可覆盖两条路径；setState 只在观察者回调里异步执行。
+  useEffect(() => {
+    const syncThemeEndpoint = () => {
+      setGlassBackgroundGray(
+        document.documentElement.classList.contains('dark')
+          ? glassBackgroundGrayDark
+          : glassBackgroundGrayLight,
+      )
+    }
+    const themeObserver = new MutationObserver(syncThemeEndpoint)
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    })
+
+    return () => themeObserver.disconnect()
+  }, [])
 
   return (
     <>
@@ -111,21 +164,13 @@ function SurfaceDemo() {
 
       <ComponentPreviewCard
         action={
-          <Slider
-            className="glass-surface-preview__slider"
+          <GraySlider
+            ariaLabel="背景灰度"
             max={glassBackgroundGrayLight}
             min={glassBackgroundGrayDark}
             onValueChange={setGlassBackgroundGray}
-            step={1}
             value={glassBackgroundGray}
-          >
-            <SliderControl>
-              <SliderTrack>
-                <SliderIndicator />
-                <SliderThumb aria-label="背景灰度" />
-              </SliderTrack>
-            </SliderControl>
-          </Slider>
+          />
         }
         label="玻璃材质"
       >

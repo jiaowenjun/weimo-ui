@@ -319,15 +319,22 @@ for (const snippet of [
   )
 }
 
+for (const removedFilePath of [
+  'src/components/coss/slider.tsx',
+  'src/components/coss/slider.css',
+]) {
+  assert.ok(!existsSync(join(root, removedFilePath)), `${removedFilePath} must be removed.`)
+}
+assertOmits(
+  glassSurfaceDefinitionSource,
+  'coss/slider',
+  'GlassSurface docs definition must use the self-built GraySlider instead of the removed coss Slider.',
+)
+
 for (const snippet of [
-  "import { useState } from 'react'",
+  "import { useEffect, useState } from 'react'",
   "import { GlassSurface } from '../../components/glass-surface'",
   "import { ComponentPreviewCard } from '../../components/component-preview-card'",
-  "from '../../components/coss/slider'",
-  '<SliderControl>',
-  '<SliderTrack>',
-  '<SliderIndicator />',
-  '<SliderThumb aria-label="背景灰度" />',
   "id: 'surface'",
   '静态卡片、亮度自适应玻璃层与抬升浮层的材质总览',
   "from '../../components/bg-color'",
@@ -335,10 +342,17 @@ for (const snippet of [
   'parseColorLightness(bgColorToneMap.card.value.light)?.lightness ?? 100',
   "window.matchMedia('(prefers-color-scheme: dark)').matches",
   '? glassBackgroundGrayDark\n      : glassBackgroundGrayLight',
+  'const syncThemeEndpoint = () => {',
+  'const themeObserver = new MutationObserver(syncThemeEndpoint)',
+  'themeObserver.observe(document.documentElement, {',
+  'function GraySlider(',
+  'ariaLabel="背景灰度"',
+  'type="range"',
+  'className="gray-slider"',
+  "style={{ '--fill': fill } as CSSProperties}",
   'min={glassBackgroundGrayDark}',
   'max={glassBackgroundGrayLight}',
   'onValueChange={setGlassBackgroundGray}',
-  'aria-label="背景灰度"',
   'const glassGradientStops',
   'const glassStripeWidth = 48',
   'const glassStripePeriod = glassGradientStops.length * glassStripeWidth',
@@ -380,8 +394,19 @@ for (const snippet of [
   'width: 100%;',
   'height: 180px;',
   'overflow: hidden;',
-  '.glass-surface-preview__slider',
+  '.gray-slider',
   'width: 140px;',
+  '.gray-slider__input',
+  'touch-action: none;',
+  '.gray-slider__track',
+  '.gray-slider__indicator',
+  'transition: inline-size 300ms ease-out;',
+  '.gray-slider__thumb',
+  'transition: inset-inline-start 300ms ease-out;',
+  '.gray-slider:active .gray-slider__indicator,',
+  '.gray-slider:active .gray-slider__thumb',
+  'transition: none;',
+  '.gray-slider__input:focus-visible ~ .gray-slider__thumb',
   '.glass-surface-preview__fixed',
   'position: absolute;',
   'inset: 0;',
