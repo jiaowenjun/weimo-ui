@@ -89,6 +89,7 @@ const componentDefinitionsSource = readProjectFile('src/docs/component-definitio
   borderTokensDefinitionSource +
   readProjectFile('src/docs/component-definitions/menu.tsx') +
   readProjectFile('src/docs/component-definitions/bar.tsx') +
+  readProjectFile('src/docs/component-definitions/page-layout.tsx') +
   readProjectFile('src/docs/component-definitions/action-dialog.tsx') +
   readProjectFile('src/docs/component-definitions/capsule.tsx') +
   mdRenderDefinitionSource

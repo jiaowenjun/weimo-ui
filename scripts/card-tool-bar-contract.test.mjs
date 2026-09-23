@@ -124,7 +124,7 @@ assertNotIncludes(
 
 for (const snippet of [
   "import { useState } from 'react'",
-  "import { Check, Heading1, List, Menu, Plus, Quote, Search, X } from 'lucide-react'",
+  "import { Check, Heading1, List, Plus, Quote, Search, X } from 'lucide-react'",
   "import { CardToolBar } from '../../components/card-tool-bar'",
   "import { Button } from '../../components/coss/button'",
   "import { Toolbar, ToolbarButton, ToolbarGroup } from '../../components/coss/toolbar'",

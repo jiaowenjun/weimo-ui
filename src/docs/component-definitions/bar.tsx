@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Check, Heading1, List, Menu, Plus, Quote, Search, X } from 'lucide-react'
+import { Check, Heading1, List, Plus, Quote, Search, X } from 'lucide-react'
 
 import { BottomBar } from '../../components/bottom-bar'
 import { CardToolBar } from '../../components/card-tool-bar'
@@ -8,13 +8,10 @@ import { ComponentPreviewCard } from '../../components/component-preview-card'
 import { FloatBar } from '../../components/float-bar'
 import { GlassIconButton } from '../../components/glass-icon-button'
 import { GhostIconButton } from '../../components/ghost-icon-button'
-import { TopBar } from '../../components/top-bar'
 import { Button } from '../../components/coss/button'
 import { Toolbar, ToolbarButton, ToolbarGroup } from '../../components/coss/toolbar'
 import { TextButton } from '../../components/text-button'
 import type { ComponentDefinition } from '../component-docs'
-
-import { SideBarDrawerPreview } from './sidebar-preview'
 
 function BottomBarDemo() {
   return (
@@ -169,70 +166,6 @@ function FloatBarDemo() {
   )
 }
 
-function renderSideBarBlankPreview({
-  tone = 'default',
-}: { tone?: 'compact' | 'default' } = {}) {
-  return (
-    <div
-      aria-label="空白常驻侧边栏预览"
-      className="sidebar-preview__panel weimo-sidebar weimo-sidebar--normal"
-      data-preview-tone={tone}
-      role="img"
-    >
-      <strong className="sidebar-preview__title">常驻侧边栏</strong>
-    </div>
-  )
-}
-
-// eslint-disable-next-line react-refresh/only-export-components
-function SideBarDemo() {
-  return (
-    <ComponentPreviewCard label="侧边栏">
-      <div className="sidebar-preview">
-        {renderSideBarBlankPreview()}
-        <SideBarDrawerPreview />
-      </div>
-    </ComponentPreviewCard>
-  )
-}
-
-function renderTopBarSidebarButton({
-  ghost = false,
-}: { ghost?: boolean } = {}) {
-  const Button = ghost ? GhostIconButton : GlassIconButton
-
-  return (
-    <Button aria-label="打开侧边栏">
-      <Menu />
-    </Button>
-  )
-}
-
-function renderTopBarSearchButton({
-  ghost = false,
-}: { ghost?: boolean } = {}) {
-  const Button = ghost ? GhostIconButton : GlassIconButton
-
-  return (
-    <Button aria-label="搜索">
-      <Search />
-    </Button>
-  )
-}
-
-// eslint-disable-next-line react-refresh/only-export-components
-function TopBarDemo() {
-  return (
-    <ComponentPreviewCard label="顶部工具栏">
-      <TopBar
-        className="top-bar-preview"
-        leftSlot={renderTopBarSidebarButton()}
-        rightSlot={renderTopBarSearchButton()}
-      />
-    </ComponentPreviewCard>
-  )
-}
-
 // Docs definitions intentionally colocate preview components with exported page metadata.
 // eslint-disable-next-line react-refresh/only-export-components
 function BarDemo() {
@@ -242,15 +175,13 @@ function BarDemo() {
       <CardToolBarDemo />
       <CardTopBarDemo />
       <FloatBarDemo />
-      <SideBarDemo />
-      <TopBarDemo />
     </>
   )
 }
 
 export const barDefinition = {
   id: 'bar',
-  summary: '底部操作栏、卡片工具栏、卡片顶部栏、浮动工具栏、侧边栏与顶部工具栏总览',
+  summary: '底部操作栏、卡片工具栏、卡片顶部栏与浮动工具栏总览',
   status: 'Ready',
   frame: 'plain',
   searchAliases: [
@@ -258,14 +189,10 @@ export const barDefinition = {
     'CardToolBar',
     'CardTopBar',
     'FloatBar',
-    'SideBar',
-    'TopBar',
     '底部操作栏',
     '卡片工具栏',
     '卡片顶部栏',
     '浮动工具栏',
-    '侧边栏',
-    '顶部工具栏',
   ],
   preview: () => <BarDemo />,
 } satisfies ComponentDefinition

@@ -225,7 +225,7 @@ for (const snippet of [
   "import { CardTopBar } from '../../components/card-top-bar'",
   "import { TextButton } from '../../components/text-button'",
   "id: 'bar'",
-  "summary: '底部操作栏、卡片工具栏、卡片顶部栏、浮动工具栏、侧边栏与顶部工具栏总览'",
+  "summary: '底部操作栏、卡片工具栏、卡片顶部栏与浮动工具栏总览'",
   "useState<'display' | 'edit'>('display')",
   'setMode((current) => (current ===',
   '<TextButton',

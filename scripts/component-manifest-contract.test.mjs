@@ -141,7 +141,6 @@ assert.deepEqual(
     'bottom-bar',
     'card-tool-bar',
     'card-top-bar',
-    'sidebar',
     'top-bar',
     'chip-button',
     'tag-bread',

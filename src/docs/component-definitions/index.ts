@@ -8,6 +8,7 @@ import { actionDialogDefinition } from './action-dialog'
 import { buttonDefinition } from './button'
 import { menuDefinition } from './menu'
 import { barDefinition } from './bar'
+import { pageLayoutDefinition } from './page-layout'
 import { tagDefinition } from './tag'
 import { capsuleDefinition } from './capsule'
 import { markdownDefinition } from './markdown'
@@ -28,6 +29,7 @@ export const componentDefinitionsById = {
   button: buttonDefinition,
   menu: menuDefinition,
   bar: barDefinition,
+  'page-layout': pageLayoutDefinition,
   tag: tagDefinition,
   capsule: capsuleDefinition,
   markdown: markdownDefinition,

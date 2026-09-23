@@ -1021,6 +1021,60 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "top-bar",
+      "type": "registry:ui",
+      "title": "Top Bar",
+      "description": "A fixed-position blank glass top panel that renders caller-owned children.",
+      "categories": [
+        "navigation"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/top-bar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/top-bar.tsx"
+        },
+        {
+          "path": "src/components/top-bar.css",
+          "type": "registry:ui",
+          "target": "@ui/top-bar.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [],
+      "name": "float-bar",
+      "title": "Float Bar",
+      "description": "A floating toolbar shell with left, center, and right slots.",
+      "categories": [
+        "layout",
+        "toolbar"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/float-bar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/float-bar.tsx"
+        },
+        {
+          "path": "src/components/float-bar.css",
+          "type": "registry:ui",
+          "target": "@ui/float-bar.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "sidebar",
       "type": "registry:ui",
       "title": "Sidebar",
@@ -1075,60 +1129,6 @@
           "path": "src/components/card-surface.css",
           "type": "registry:ui",
           "target": "@ui/card-surface.css"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "name": "top-bar",
-      "type": "registry:ui",
-      "title": "Top Bar",
-      "description": "A fixed-position blank glass top panel that renders caller-owned children.",
-      "categories": [
-        "navigation"
-      ],
-      "registryDependencies": [
-        "@weimo/style",
-        "@weimo/utils"
-      ],
-      "files": [
-        {
-          "path": "src/components/top-bar.tsx",
-          "type": "registry:ui",
-          "target": "@ui/top-bar.tsx"
-        },
-        {
-          "path": "src/components/top-bar.css",
-          "type": "registry:ui",
-          "target": "@ui/top-bar.css"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "type": "registry:ui",
-      "dependencies": [],
-      "name": "float-bar",
-      "title": "Float Bar",
-      "description": "A floating toolbar shell with left, center, and right slots.",
-      "categories": [
-        "layout",
-        "toolbar"
-      ],
-      "registryDependencies": [
-        "@weimo/style",
-        "@weimo/utils"
-      ],
-      "files": [
-        {
-          "path": "src/components/float-bar.tsx",
-          "type": "registry:ui",
-          "target": "@ui/float-bar.tsx"
-        },
-        {
-          "path": "src/components/float-bar.css",
-          "type": "registry:ui",
-          "target": "@ui/float-bar.css"
         }
       ]
     },

@@ -48,6 +48,7 @@ const componentDefinitionSources = {
     readProjectFile('src/docs/component-definitions/md-editor-demos.tsx'),
   ].join('\n'),
   bar: readProjectFile('src/docs/component-definitions/bar.tsx'),
+  'page-layout': readProjectFile('src/docs/component-definitions/page-layout.tsx'),
   capsule: readProjectFile('src/docs/component-definitions/capsule.tsx'),
 }
 const componentDefinitionsSource = [
@@ -175,6 +176,7 @@ for (const componentId of [
   'menu',
   'surface',
   'bar',
+  'page-layout',
 ]) {
   assert.ok(
     componentDefinitionsIndexSource.includes(`from './${componentId}'`),
@@ -195,7 +197,7 @@ for (const snippet of [
   "id: 'surface'",
   "id: 'tag-tree'",
   "id: 'top-bar'",
-  "id: 'sidebar'",
+  "id: 'page-layout'",
   './components/stat-group',
   './components/tag-picker',
   './components/tag-bread',
@@ -412,7 +414,7 @@ for (const snippet of [
   '<SideBarDrawerPreview />',
 ]) {
   assert.ok(
-    componentDefinitionSources.bar.includes(snippet),
+    componentDefinitionSources['page-layout'].includes(snippet),
     `SideBar component definition must include ${snippet}.`,
   )
 }
@@ -438,10 +440,10 @@ for (const snippet of [
 }
 
 assert.ok(
-  !componentDefinitionSources.bar.includes('preview: ({ onOpenSidebar })') &&
-  !componentDefinitionSources.bar.includes('preview: ({onOpenSidebar})') &&
-  !componentDefinitionSources.bar.includes('onClick={onOpenSidebar}') &&
-  !sidebarPreviewSource.includes('onOpenSidebar'),
+  !componentDefinitionSources['page-layout'].includes('preview: ({ onOpenSidebar })') &&
+    !componentDefinitionSources['page-layout'].includes('preview: ({onOpenSidebar})') &&
+    !componentDefinitionSources['page-layout'].includes('onClick={onOpenSidebar}') &&
+    !sidebarPreviewSource.includes('onOpenSidebar'),
   'SideBar preview drawer trigger must use local preview drawer state, not the docs shell sidebar.',
 )
 
