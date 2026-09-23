@@ -184,7 +184,7 @@ assert.ok(
 assert.ok(
   !backgroundSampleBlock.includes('border:') &&
     !backgroundSampleBlock.includes('background:') &&
-    borderSampleBlock.includes('border: 2px solid;') &&
+    borderSampleBlock.includes('border: 1px solid;') &&
     !borderSampleBlock.includes('background:'),
   'Background and border previews must leave their visible color to the token-specific utility class.',
 )

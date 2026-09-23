@@ -117,6 +117,7 @@ const mdViewDocsPreviewFrameBlock = blockFor(appCss, '.md-view-docs-preview__fra
 const tagTreePreviewPanelBlock = firstBlockFor(appCss, '.tag-tree-preview__panel')
 const tagBarPreviewPanelBlock = blockFor(appCss, '.tag-bar-preview__panel')
 const sampleBlock = blockFor(appCss, '.border-color-preview__sample')
+const samplesBlock = blockFor(appCss, '.border-color-preview__samples')
 
 assert.equal(
   packageJson.exports?.['./components/border-color'],
@@ -455,13 +456,20 @@ assert.ok(
 )
 assert.ok(
   appCss.includes('.border-color-preview__samples {\n  display: flex;') &&
-    sampleBlock.includes('width: 48px;') &&
-    sampleBlock.includes('height: 48px;') &&
-    sampleBlock.includes('border: 2px solid;') &&
+    samplesBlock.includes('flex-wrap: wrap;') &&
+    samplesBlock.includes('align-content: center;') &&
+    samplesBlock.includes('row-gap: 12px;') &&
+    samplesBlock.includes('column-gap: clamp(12px, 4%, 24px);') &&
+    sampleBlock.includes(
+      'width: clamp(24px, calc((100% - 5 * clamp(12px, 4%, 24px)) / 6), 48px);',
+    ) &&
+    sampleBlock.includes('aspect-ratio: 1;') &&
+    sampleBlock.includes('border: 1px solid;') &&
     sampleBlock.includes('border-radius: var(--radius-sm);') &&
+    !sampleBlock.includes('height:') &&
     !sampleBlock.includes('background:') &&
     !sampleBlock.includes('box-shadow:'),
-  'BorderColor preview samples must show one centered row of rounded-square borders in the applied border color.',
+  'BorderColor preview samples must stay square via aspect-ratio 1 with a 24-48px fluid size and 12-24px gaps, one centered row while six squares fit.',
 )
 
 assert.ok(registryItem, 'registry.json must include the border-color registry item.')

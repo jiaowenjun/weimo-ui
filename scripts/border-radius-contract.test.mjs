@@ -178,6 +178,7 @@ assert.ok(
 )
 
 const sampleBlock = blockFor(appCss, '.border-radius-preview__sample')
+const samplesBlock = blockFor(appCss, '.border-radius-preview__samples')
 
 assert.ok(
   appCss.includes('.border-radius-preview__samples') &&
@@ -190,12 +191,19 @@ assert.ok(
   'App.css must include only the BorderRadius-specific preview-effect styles.',
 )
 assert.ok(
-  sampleBlock.includes('width: 48px;') &&
-    sampleBlock.includes('height: 48px;') &&
-    sampleBlock.includes('border: 2px solid var(--color-border-emphasis);') &&
+  samplesBlock.includes('flex-wrap: wrap;') &&
+    samplesBlock.includes('align-content: center;') &&
+    samplesBlock.includes('row-gap: 12px;') &&
+    samplesBlock.includes('column-gap: clamp(12px, 4%, 24px);') &&
+    sampleBlock.includes(
+      'width: clamp(24px, calc((100% - 3 * clamp(12px, 4%, 24px)) / 4), 48px);',
+    ) &&
+    sampleBlock.includes('aspect-ratio: 1;') &&
+    sampleBlock.includes('border: 1px solid var(--color-border-emphasis);') &&
+    !sampleBlock.includes('height:') &&
     !sampleBlock.includes('background:') &&
     !sampleBlock.includes('box-shadow:'),
-  'BorderRadius preview samples must stay height-aligned with the BorderColor preview samples (48px squares).',
+  'BorderRadius preview samples must stay square via aspect-ratio 1 with a 24-48px fluid size and 12-24px gaps, mirroring the BorderColor preview samples.',
 )
 
 assert.ok(registryItem, 'registry.json must include the border-radius registry item.')

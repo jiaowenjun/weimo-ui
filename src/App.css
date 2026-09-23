@@ -867,16 +867,20 @@
 
 .border-color-preview__samples {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  align-content: center;
   justify-content: center;
-  gap: 24px;
+  row-gap: 12px;
+  column-gap: clamp(12px, 4%, 24px);
   padding: 24px 16px;
 }
 
 .border-color-preview__sample {
-  width: 48px;
-  height: 48px;
-  border: 2px solid;
+  /* 六个方块均分扣掉 5 个 gap 后的剩余宽度，与 column-gap 共用同一 clamp，保证单行恰好铺满 */
+  width: clamp(24px, calc((100% - 5 * clamp(12px, 4%, 24px)) / 6), 48px);
+  aspect-ratio: 1;
+  border: 1px solid;
   border-radius: var(--radius-sm);
 }
 
@@ -960,16 +964,20 @@
 
 .border-radius-preview__samples {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  align-content: center;
   justify-content: center;
-  gap: 24px;
+  row-gap: 12px;
+  column-gap: clamp(12px, 4%, 24px);
   padding: 24px 16px;
 }
 
 .border-radius-preview__sample {
-  width: 48px;
-  height: 48px;
-  border: 2px solid var(--color-border-emphasis);
+  /* 四个方块均分扣掉 3 个 gap 后的剩余宽度，与 column-gap 共用同一 clamp，保证单行恰好铺满 */
+  width: clamp(24px, calc((100% - 3 * clamp(12px, 4%, 24px)) / 4), 48px);
+  aspect-ratio: 1;
+  border: 1px solid var(--color-border-emphasis);
 }
 
 .tag-picker-preview {
