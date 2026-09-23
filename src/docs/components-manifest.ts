@@ -160,7 +160,7 @@ export const componentManifest = [
   },
   {
     id: 'surface',
-    name: 'Surface',
+    name: '材质',
     registryName: 'card-surface',
     packageExport: './components/card-surface',
     group: 'surface-material',

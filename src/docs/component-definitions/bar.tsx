@@ -171,10 +171,10 @@ function FloatBarDemo() {
 function BarDemo() {
   return (
     <>
+      <FloatBarDemo />
       <BottomBarDemo />
       <CardToolBarDemo />
       <CardTopBarDemo />
-      <FloatBarDemo />
     </>
   )
 }
