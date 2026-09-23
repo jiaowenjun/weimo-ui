@@ -93,6 +93,7 @@ for (const snippet of [
   "export type ChipTextSize = 'sm' | 'base'",
   'type ChipContent = Exclude<ReactNode, boolean | null | undefined>',
   "export type ChipProps = Omit<ComponentPropsWithoutRef<'span'>, 'children' | 'content' | 'prefix'> & {",
+  'bordered?: boolean',
   'prefix?: ReactNode',
   'content: ChipContent',
   'suffix?: ReactNode',
@@ -101,10 +102,15 @@ for (const snippet of [
   'function isEmptyChipSlot(slot: ReactNode)',
   "throw new Error('Chip content cannot be empty.')",
   'export function Chip',
+  'bordered = true',
   "variant = 'default'",
   "textSize = 'sm'",
-  "getChipSurfaceClassName('chip', className)",
-  'getChipSurfaceAttributes({ variant, textSize })',
+  "import { useGlassSurfaceBackgroundToneRef } from './glass-surface'",
+  "import './glass-surface.css'",
+  "isGlassVariant && 'glass-surface',",
+  'isGlassVariant ? backgroundTone ?? undefined : undefined',
+  "getChipSurfaceClassName(",
+  'getChipSurfaceAttributes({ bordered, variant, textSize })',
   'useAnimatedInlineSize([',
   'style={getAnimatedInlineSizeStyle(style, inlineSize)}',
   '<AnimatedInlineSizeMeasure measureRef={measureRef}>',
@@ -146,7 +152,8 @@ for (const [block, snippet, message] of [
   [glassLayerBlock, 'opacity var(--chip-surface-state-transition-duration) cubic-bezier(0.2, 0, 0, 1)', 'Chip glass layer opacity transition must use the shared state duration variable.'],
   [defaultVariantBeforeBlock, 'opacity: 1;', 'Chip default variant must show default layer.'],
   [defaultVariantAfterBlock, 'opacity: 0;', 'Chip default variant must hide glass layer.'],
-  [glassVariantBlock, 'border-color: var(--color-border);', 'Chip glass variant must use the shared default border token.'],
+  [glassVariantBlock, 'color: var(--glass-surface-fg);', 'Chip glass variant must use the standard glass surface adaptive foreground.'],
+  [glassVariantBlock, 'border-color: var(--glass-surface-border);', 'Chip glass variant must use the standard glass surface border token.'],
   [glassVariantBlock, 'backdrop-filter: blur(var(--glass-blur));', 'Chip glass variant must use shared glass blur.'],
   [glassVariantBeforeBlock, 'opacity: 0;', 'Chip glass variant must hide default layer.'],
   [glassVariantAfterBlock, 'opacity: 1;', 'Chip glass variant must show glass layer.'],
@@ -192,6 +199,8 @@ assert.ok(
 assert.ok(
   docsSource.includes("import { Hash, X } from 'lucide-react'") &&
     docsSource.includes("import { Chip } from '../../components/chip'") &&
+    docsSource.includes("import { GlassPreviewCard } from '../glass-preview-card'") &&
+    docsSource.includes("import { SurfaceBorderToggle } from '../preview-toggle'") &&
     docsSource.includes("id: 'capsule'") &&
     docsSource.includes('preview: () => <CapsuleDemo />') &&
     docsSource.includes('function ChipTextSizeDemo') &&
@@ -200,6 +209,9 @@ assert.ok(
     docsSource.includes('function GlassChipDemo') &&
     docsSource.includes('<GlassChipDemo />') &&
     docsSource.includes('label="玻璃态胶囊"') &&
+    docsSource.includes('<GlassPreviewCard') &&
+    docsSource.includes('<SurfaceBorderToggle bordered={bordered} onBorderedChange={setBordered} />') &&
+    docsSource.includes('bordered={bordered}') &&
     docsSource.includes('function ChipDemo') &&
     docsSource.includes('<ChipDemo />') &&
     docsSource.includes('label="标签胶囊"') &&

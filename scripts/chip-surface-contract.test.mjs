@@ -50,6 +50,7 @@ const surfaceBlock = blockFor(surfaceCss, '.chip-surface')
 const surfaceBeforeBlock = blockFor(surfaceCss, '.chip-surface::before')
 const surfaceAfterBlock = blockFor(surfaceCss, '.chip-surface::after')
 const surfaceGlassBlock = blockFor(surfaceCss, '.chip-surface[data-variant="glass"]')
+const surfaceBorderlessBlock = blockFor(surfaceCss, '.chip-surface[data-bordered="false"]')
 const surfaceInteractiveBlock = blockFor(surfaceCss, '.chip-surface[data-interactive="true"]')
 const surfaceHoverBlock = blockFor(
   surfaceCss,
@@ -97,14 +98,17 @@ for (const snippet of [
   "export type ChipSurfaceVariant = 'default' | 'glass'",
   "export type ChipSurfaceTextSize = 'sm' | 'base'",
   'export type ChipSurfaceOptions = {',
+  'bordered?: boolean',
   'variant?: ChipSurfaceVariant',
   'textSize?: ChipSurfaceTextSize',
   'interactive?: boolean',
   'export function getChipSurfaceClassName(...className: ClassValue[])',
   "return cn('chip-surface', className)",
   'export function getChipSurfaceAttributes',
+  'bordered = true',
   "variant = 'default'",
   "textSize = 'sm'",
+  "'data-bordered': bordered ? undefined : 'false'",
   "'data-variant': variant",
   "'data-text-size': textSize",
   "'data-interactive': interactive ? 'true' : undefined",
@@ -155,8 +159,10 @@ for (const [block, snippet, message] of [
   [surfaceBlock, 'transition:', 'ChipSurface must own state transition declarations.'],
   [surfaceBlock, 'inline-size var(--animated-inline-size-transition-duration) cubic-bezier(0.2, 0, 0, 1)', 'ChipSurface must animate measured inline-size changes.'],
   [surfaceBeforeBlock, 'background: var(--color-bg-chip);', 'ChipSurface default layer must use the brand chip surface token.'],
-  [surfaceGlassBlock, 'border-color: var(--color-border);', 'ChipSurface glass variant must use the shared default border token.'],
+  [surfaceGlassBlock, 'color: var(--glass-surface-fg);', 'ChipSurface glass variant must use the standard glass surface adaptive foreground.'],
+  [surfaceGlassBlock, 'border-color: var(--glass-surface-border);', 'ChipSurface glass variant must use the standard glass surface border token.'],
   [surfaceGlassBlock, 'backdrop-filter: blur(var(--glass-blur));', 'ChipSurface glass variant must use the shared blur.'],
+  [surfaceBorderlessBlock, 'border-color: transparent;', 'ChipSurface borderless mode must hide the variant border without changing capsule metrics.'],
   [surfaceInteractiveBlock, 'cursor: pointer;', 'Only interactive ChipSurface callers must get pointer cursor.'],
   [surfaceInteractiveBlock, 'appearance: none;', 'Only interactive ChipSurface callers must reset native appearance.'],
   [surfaceHoverBlock, 'background: var(--chip-surface-hover-background);', 'Interactive ChipSurface hover must retint visible layers.'],
@@ -208,8 +214,10 @@ for (const [source, label] of [
 }
 
 assert.ok(
-  chipSource.includes("getChipSurfaceClassName('chip', className)") &&
-    chipSource.includes('getChipSurfaceAttributes({ variant, textSize })') &&
+  chipSource.includes("import { useGlassSurfaceBackgroundToneRef } from './glass-surface'") &&
+    chipSource.includes("import './glass-surface.css'") &&
+    chipSource.includes("isGlassVariant && 'glass-surface',") &&
+    chipSource.includes('getChipSurfaceAttributes({ bordered, variant, textSize })') &&
     chipSource.includes('useAnimatedInlineSize') &&
     chipSource.includes('<AnimatedInlineSizeMeasure measureRef={measureRef}>') &&
     chipSource.includes('getAnimatedInlineSizeStyle(style, inlineSize)') &&
@@ -218,8 +226,10 @@ assert.ok(
   'Chip must use shared surface classes and animated inline-size while preserving its slot API.',
 )
 assert.ok(
-  chipButtonSource.includes("getChipSurfaceClassName('chip-button', 'chip-button--button', className)") &&
-    chipButtonSource.includes('getChipSurfaceAttributes({ variant: state, interactive: true })') &&
+  chipButtonSource.includes("isGlassState && 'glass-surface',") &&
+    chipButtonSource.includes("import { useGlassSurfaceBackgroundToneRef } from './glass-surface'") &&
+    chipButtonSource.includes("import './glass-surface.css'") &&
+    chipButtonSource.includes("getChipSurfaceAttributes({ variant: state, interactive: true })") &&
     chipButtonSource.includes('animateWidth = false') &&
     chipButtonSource.includes('style={animateWidth ? getAnimatedInlineSizeStyle(style, inlineSize) : style}') &&
     chipButtonSource.includes('data-state={state}') &&
@@ -236,7 +246,9 @@ assert.ok(
   'ChipButton hover and active behavior must come from interactive ChipSurface, not duplicated CSS.',
 )
 assert.ok(
-  tagBreadSource.includes("getChipSurfaceClassName('tag-bread', className)") &&
+  tagBreadSource.includes("getChipSurfaceClassName('glass-surface', 'tag-bread', className)") &&
+    tagBreadSource.includes("useGlassSurfaceBackgroundToneRef<HTMLElement>(true)") &&
+    tagBreadSource.includes("import './glass-surface.css'") &&
     tagBreadSource.includes("getChipSurfaceAttributes({ variant: 'glass', textSize: 'base' })") &&
     tagBreadSource.includes('useAnimatedInlineSize(tag)') &&
     tagBreadSource.includes('<AnimatedInlineSizeMeasure measureRef={measureRef}>') &&

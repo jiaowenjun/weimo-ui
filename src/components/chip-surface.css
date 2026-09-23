@@ -61,7 +61,8 @@
   }
 
   .chip-surface[data-variant="glass"] {
-    border-color: var(--color-border);
+    color: var(--glass-surface-fg);
+    border-color: var(--glass-surface-border);
     backdrop-filter: blur(var(--glass-blur));
     -webkit-backdrop-filter: blur(var(--glass-blur));
   }
@@ -72,6 +73,10 @@
 
   .chip-surface[data-variant="glass"]::after {
     opacity: 1;
+  }
+
+  .chip-surface[data-bordered="false"] {
+    border-color: transparent;
   }
 
   .chip-surface[data-text-size="sm"] {

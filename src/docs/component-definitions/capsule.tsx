@@ -6,6 +6,8 @@ import { ChipButton } from '../../components/chip-button'
 import { ComponentPreviewCard } from '../../components/component-preview-card'
 import { TextButton } from '../../components/text-button'
 import type { ComponentDefinition } from '../component-docs'
+import { GlassPreviewCard } from '../glass-preview-card'
+import { SurfaceBorderToggle } from '../preview-toggle'
 
 function ChipTextSizeDemo() {
   return (
@@ -19,12 +21,22 @@ function ChipTextSizeDemo() {
 }
 
 function GlassChipDemo() {
+  const [bordered, setBordered] = useState(true)
+
   return (
-    <ComponentPreviewCard align="center" label="玻璃态胶囊">
-      <div aria-label="Chip 玻璃态预览">
-        <Chip content="玻璃态" prefix={<Hash aria-hidden="true" />} variant="glass" />
-      </div>
-    </ComponentPreviewCard>
+    <GlassPreviewCard
+      action={
+        <SurfaceBorderToggle bordered={bordered} onBorderedChange={setBordered} />
+      }
+      label="玻璃态胶囊"
+    >
+      <Chip
+        bordered={bordered}
+        content="玻璃态"
+        prefix={<Hash aria-hidden="true" />}
+        variant="glass"
+      />
+    </GlassPreviewCard>
   )
 }
 

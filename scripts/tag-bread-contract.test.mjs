@@ -139,7 +139,9 @@ for (const snippet of [
   'event.preventDefault()',
   'onSelect?.(path)',
   'const isPage = index === crumbs.length - 1',
-  "getChipSurfaceClassName('tag-bread', className)",
+  "getChipSurfaceClassName('glass-surface', 'tag-bread', className)",
+  "useGlassSurfaceBackgroundToneRef<HTMLElement>(true)",
+  "import './glass-surface.css'",
   "getChipSurfaceAttributes({ variant: 'glass', textSize: 'base' })",
   'useAnimatedInlineSize(tag)',
   '<AnimatedInlineSizeMeasure measureRef={measureRef}>',
@@ -196,7 +198,7 @@ assertIncludes(rootBlock, 'max-width: 100%;', 'TagBread root must fit narrow con
 assertIncludes(rootBlock, 'justify-content: flex-start;', 'TagBread must keep its prefix and breadcrumb trail left-aligned during width transitions.')
 assertIncludes(rootBlock, '--animated-inline-size-transition-duration: 180ms;', 'TagBread must inherit the shared 180ms width transition duration.')
 assertIncludes(rootBlock, 'inline-size var(--animated-inline-size-transition-duration) cubic-bezier(0.2, 0, 0, 1)', 'TagBread must animate measured breadcrumb-width changes through ChipSurface.')
-assertIncludes(glassSurfaceBlock, 'border-color: var(--color-border);', 'TagBread must use the shared default border token.')
+assertIncludes(glassSurfaceBlock, 'border-color: var(--glass-surface-border);', 'TagBread must use the standard glass surface border token.')
 assertIncludes(rootBlock, 'border-radius: var(--radius-round);', 'TagBread glass surface must be pill-shaped.')
 assert.ok(
   !glassLayerBlock.includes('background: var(--glass-gradient);') && !surfaceCss.includes('--glass-gradient'),
@@ -361,6 +363,9 @@ assert.deepEqual(
     'src/components/animated-inline-size.css',
     'src/components/coss/breadcrumb.tsx',
     'src/components/coss/breadcrumb.css',
+    'src/components/glass-surface.tsx',
+    'src/components/glass-surface-model.ts',
+    'src/components/glass-surface.css',
   ],
   'TagBread registry item must ship the component, sidecar CSS, shared chip surface internals, and local coss Breadcrumb.',
 )

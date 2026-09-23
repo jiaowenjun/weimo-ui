@@ -1189,6 +1189,21 @@
           "path": "src/components/animated-inline-size.css",
           "type": "registry:ui",
           "target": "@ui/animated-inline-size.css"
+        },
+        {
+          "path": "src/components/glass-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.tsx"
+        },
+        {
+          "path": "src/components/glass-surface-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface-model.ts"
+        },
+        {
+          "path": "src/components/glass-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.css"
         }
       ]
     },
@@ -1260,6 +1275,21 @@
           "path": "src/components/coss/breadcrumb.css",
           "type": "registry:ui",
           "target": "@ui/coss/breadcrumb.css"
+        },
+        {
+          "path": "src/components/glass-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.tsx"
+        },
+        {
+          "path": "src/components/glass-surface-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface-model.ts"
+        },
+        {
+          "path": "src/components/glass-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.css"
         }
       ]
     },
@@ -1639,6 +1669,21 @@
           "path": "src/components/animated-inline-size.css",
           "type": "registry:ui",
           "target": "@ui/animated-inline-size.css"
+        },
+        {
+          "path": "src/components/glass-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.tsx"
+        },
+        {
+          "path": "src/components/glass-surface-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface-model.ts"
+        },
+        {
+          "path": "src/components/glass-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/glass-surface.css"
         }
       ]
     },
