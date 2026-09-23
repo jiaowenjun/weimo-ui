@@ -93,8 +93,6 @@ const componentDefinitionsSource = readProjectFile('src/docs/component-definitio
   readProjectFile('src/docs/component-definitions/capsule.tsx') +
   mdRenderDefinitionSource
 const css = readProjectFile('src/App.css')
-const iconPreviewSceneBlock = blockFor(css, '.icon-preview__scene')
-const iconPreviewSceneTitleBlock = blockFor(css, '.icon-preview__scene-title')
 const iconPreviewRowBlock = blockFor(css, '.icon-preview__row')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 
@@ -319,14 +317,22 @@ assert.ok(
 )
 assert.ok(
     buttonDefinitionSource.includes("import { GlassIconButton } from '../../components/glass-icon-button'") &&
-    buttonDefinitionSource.includes("import { useState } from 'react'") &&
+    buttonDefinitionSource.includes("import { useEffect, useState } from 'react'") &&
     buttonDefinitionSource.includes("import { TextButton } from '../../components/text-button'") &&
     buttonDefinitionSource.includes("id: 'button'") &&
-    buttonDefinitionSource.includes('glassIconButtonPreviewScenes') &&
-    buttonDefinitionSource.includes("id: 'light-solid'") &&
-    buttonDefinitionSource.includes("id: 'light-gradient'") &&
-    buttonDefinitionSource.includes("id: 'dark-solid'") &&
-    buttonDefinitionSource.includes("id: 'dark-gradient'") &&
+    !buttonDefinitionSource.includes('glassIconButtonPreviewScenes') &&
+    buttonDefinitionSource.includes("from '../glass-preview'") &&
+    buttonDefinitionSource.includes("from '../gray-slider'") &&
+    buttonDefinitionSource.includes('<GraySlider') &&
+    buttonDefinitionSource.includes('ariaLabel="背景灰度"') &&
+    buttonDefinitionSource.includes('onValueChange={setGlassIconBackgroundGray}') &&
+    buttonDefinitionSource.includes('window.matchMedia(\'(prefers-color-scheme: dark)\').matches') &&
+    buttonDefinitionSource.includes('new MutationObserver(') &&
+    buttonDefinitionSource.includes('className="icon-button-preview"') &&
+    buttonDefinitionSource.includes('style={getGlassPreviewBackground(glassIconBackgroundGray)}') &&
+    !buttonDefinitionSource.includes('icon-preview__scene--light-gradient') &&
+    !buttonDefinitionSource.includes('icon-preview__scene--dark-solid') &&
+    !buttonDefinitionSource.includes('icon-preview__scene--dark-gradient') &&
     !buttonDefinitionSource.includes('title:') &&
     !buttonDefinitionSource.includes('icon-preview__scene-title') &&
     !buttonDefinitionSource.includes('scene.title') &&
@@ -334,12 +340,13 @@ assert.ok(
     buttonDefinitionSource.includes('const [disabled, setDisabled] = useState(false)') &&
     buttonDefinitionSource.includes('setDisabled((current) => !current)') &&
     buttonDefinitionSource.includes('aria-pressed={disabled}') &&
-    buttonDefinitionSource.includes("className=\"icon-preview-shell\"") &&
-    buttonDefinitionSource.includes("className=\"icon-preview__controls\"") &&
+    buttonDefinitionSource.includes('action={') &&
+    !buttonDefinitionSource.includes('icon-preview-shell') &&
+    !buttonDefinitionSource.includes('icon-preview__controls') &&
     buttonDefinitionSource.includes('<TextButton') &&
     !buttonDefinitionSource.includes("from '../../components/coss/button'") &&
     !buttonDefinitionSource.includes("variant=\"outline\"") &&
-    buttonDefinitionSource.includes('className={`icon-preview__scene icon-preview__scene--${scene.id}`}') &&
+    !buttonDefinitionSource.includes('className={`icon-preview__scene icon-preview__scene--${scene.id}`}') &&
     (buttonDefinitionSource.match(/<GlassIconButton\b[^>\n]*disabled=\{disabled\}/g) ?? []).length === 2 &&
     !buttonDefinitionSource.includes('状态切换菜单') &&
     buttonDefinitionSource.includes('preview: () => <ButtonDemo />') &&
@@ -347,7 +354,7 @@ assert.ok(
     !componentDefinitionsSource.includes("from '../../components/icon-button'") &&
     !componentDefinitionsSource.includes("id: 'icon-button'") &&
     !componentDefinitionsSource.includes('<IconButton'),
-  'Button page glass icon card must render a manual disabled-state transition preview across light and dark backgrounds.',
+  'Button page glass icon card must mimic the Surface glass card: gray slider in the title bar and the sliding striped glass background in the preview.',
 )
 assert.ok(
   borderTokensDefinitionSource.includes("frame: 'plain',") &&
@@ -360,19 +367,19 @@ assert.ok(
 )
 assert.ok(
     buttonDefinitionSource.includes("import { GhostIconButton } from '../../components/ghost-icon-button'") &&
-    buttonDefinitionSource.includes("import { useState } from 'react'") &&
+    buttonDefinitionSource.includes("import { useEffect, useState } from 'react'") &&
     buttonDefinitionSource.includes("import { TextButton } from '../../components/text-button'") &&
     buttonDefinitionSource.includes('function GhostIconButtonPreview()') &&
     buttonDefinitionSource.includes('const [disabled, setDisabled] = useState(false)') &&
     buttonDefinitionSource.includes('setDisabled((current) => !current)') &&
     buttonDefinitionSource.includes('aria-pressed={disabled}') &&
-    buttonDefinitionSource.includes("className=\"icon-preview-shell\"") &&
-    buttonDefinitionSource.includes("className=\"icon-preview__controls\"") &&
+    buttonDefinitionSource.includes('action={') &&
+    !buttonDefinitionSource.includes('icon-preview-shell') &&
+    !buttonDefinitionSource.includes('icon-preview__controls') &&
     buttonDefinitionSource.includes('<TextButton') &&
     !buttonDefinitionSource.includes("from '../../components/coss/button'") &&
     !buttonDefinitionSource.includes("variant=\"outline\"") &&
-    buttonDefinitionSource.includes('className="icon-preview icon-preview--plain"') &&
-    buttonDefinitionSource.includes('className="icon-preview__scene icon-preview__scene--plain"') &&
+    buttonDefinitionSource.includes('className="icon-button-preview"') &&
     buttonDefinitionSource.includes('普通背景') &&
     (buttonDefinitionSource.match(/<GhostIconButton\b[^>\n]*disabled=\{disabled\}/g) ?? []).length === 2 &&
     !buttonDefinitionSource.includes('状态切换菜单') &&
@@ -385,21 +392,18 @@ assert.ok(
   'Button page ghost icon card must render one manual disabled-state transition preview on an ordinary background.',
 )
 assert.ok(
-  css.includes('.icon-preview-shell') &&
-    css.includes('.icon-preview__controls') &&
-    css.includes('.icon-preview-shell .icon-preview'),
-  'IconButton detail previews must include shell and control styles for the manual disabled-state toggle.',
+  !css.includes('.icon-preview-shell') &&
+    !css.includes('.icon-preview__controls') &&
+    !css.includes('.icon-preview__toggle'),
+  'IconButton detail previews must host the manual disabled-state toggle in the card title bar action slot, not in a preview shell.',
 )
 assert.ok(
-  !iconPreviewSceneBlock.includes('grid-template-rows: auto minmax(0, 1fr);') &&
-    iconPreviewSceneTitleBlock.includes('grid-area: 1 / 1;') &&
-    iconPreviewSceneTitleBlock.includes('align-self: start;') &&
-    iconPreviewSceneTitleBlock.includes('justify-self: start;') &&
-    iconPreviewRowBlock.includes('grid-area: 1 / 1;') &&
+  !css.includes('.icon-preview__scene') &&
+    !css.includes('.icon-preview--plain') &&
     iconPreviewRowBlock.includes('align-self: center;') &&
     iconPreviewRowBlock.includes('justify-self: center;') &&
     iconPreviewRowBlock.includes('justify-content: center;') &&
     !css.includes('.icon-preview--plain .icon-preview__scene') &&
     !css.includes('.icon-preview--plain .icon-preview__row'),
-  'IconButton detail preview scenes must center GhostIconButton and GlassIconButton rows against the whole scene frame.',
+  'IconButton detail previews must center button rows on the borderless card preview canvas without scene frames.',
 )

@@ -129,7 +129,7 @@ assert.ok(
 )
 
 for (const snippet of [
-  "import { useState } from 'react'",
+  "import { useEffect, useState } from 'react'",
   "import { TextButton } from '../../components/text-button'",
   'ModeButton,',
   'type ModeButtonMode,',
@@ -141,10 +141,7 @@ for (const snippet of [
   'mode={mode}',
   'onModeChange={setMode}',
   "buttonProps={{ size: 'sm' }}",
-  '编辑态',
-  '展示态',
-  '切换到展示态',
-  '切换到编辑态',
+  '切换',
   "id: 'button'",
   "summary: '文本按钮、幽灵/玻璃图标按钮与模式按钮的按钮总览'",
   'preview: () => <ButtonDemo />',
@@ -182,12 +179,11 @@ assert.ok(
   'ModeButton preview must be registered through the merged Button definition in component-definitions/index.ts.',
 )
 
-for (const selector of [
-  '.internal-mode-button-preview',
-  '.internal-mode-button-preview__toggle',
-]) {
-  assert.ok(appCss.includes(selector), `App.css must include ${selector}.`)
-}
+assert.ok(
+  appCss.includes('.internal-mode-button-preview') &&
+    !appCss.includes('.internal-mode-button-preview__toggle'),
+  'App.css must keep the centered ModeButton preview while the toggle lives in the card title bar action slot.',
+)
 
 assert.ok(
   !docsDefinitionSource.includes('internal-mode-button-preview__surface'),

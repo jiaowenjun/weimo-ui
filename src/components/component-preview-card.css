@@ -23,6 +23,7 @@
     display: inline-flex;
     flex: none;
     align-items: center;
+    gap: 12px;
   }
 
   .component-preview-card__label {

@@ -335,24 +335,39 @@ for (const snippet of [
   "import { useEffect, useState } from 'react'",
   "import { GlassSurface } from '../../components/glass-surface'",
   "import { ComponentPreviewCard } from '../../components/component-preview-card'",
+  "from '../glass-preview'",
+  "from '../gray-slider'",
   "id: 'surface'",
   '静态卡片、亮度自适应玻璃层与抬升浮层的材质总览',
-  "from '../../components/bg-color'",
-  'parseColorLightness(bgColorToneMap.card.value.dark)?.lightness ?? 12',
-  'parseColorLightness(bgColorToneMap.card.value.light)?.lightness ?? 100',
   "window.matchMedia('(prefers-color-scheme: dark)').matches",
   '? glassBackgroundGrayDark\n      : glassBackgroundGrayLight',
   'const syncThemeEndpoint = () => {',
   'const themeObserver = new MutationObserver(syncThemeEndpoint)',
   'themeObserver.observe(document.documentElement, {',
-  'function GraySlider(',
   'ariaLabel="背景灰度"',
-  'type="range"',
-  'className="gray-slider"',
-  "style={{ '--fill': fill } as CSSProperties}",
   'min={glassBackgroundGrayDark}',
   'max={glassBackgroundGrayLight}',
   'onValueChange={setGlassBackgroundGray}',
+  'style={getGlassPreviewBackground(glassBackgroundGray)}',
+  'glass-surface-preview__fixed',
+  'label="玻璃材质"',
+  '<GlassSurface className="glass-surface-preview__tile">',
+  "frame: 'plain',",
+]) {
+  assertIncludes(
+    glassSurfaceDefinitionSource,
+    snippet,
+    `GlassSurface docs definition must include ${snippet}.`,
+  )
+}
+
+// 条纹背景机制与自研滑块抽到 docs 共享模块（Surface 页与按钮页玻璃卡共用），契约随之锁共享文件。
+const glassPreviewModuleSource = readProjectFile('src/docs/glass-preview.ts')
+
+for (const snippet of [
+  "from '../components/bg-color'",
+  'parseColorLightness(bgColorToneMap.card.value.dark)?.lightness ?? 12',
+  'parseColorLightness(bgColorToneMap.card.value.light)?.lightness ?? 100',
   'const glassGradientStops',
   'const glassStripeWidth = 48',
   'const glassStripePeriod = glassGradientStops.length * glassStripeWidth',
@@ -364,16 +379,26 @@ for (const snippet of [
   'return `rgb(${red}, ${green}, ${blue}) ${index * glassStripeWidth}px ${(index + 1) * glassStripeWidth}px`',
   'backgroundImage: `repeating-linear-gradient(90deg, ${stripes.join(\', \')})`',
   'backgroundPositionX: `${-progress * glassStripePeriod}px`',
-  'style={getGlassPreviewBackground(glassBackgroundGray)}',
-  'glass-surface-preview__fixed',
-  'label="玻璃材质"',
-  '<GlassSurface className="glass-surface-preview__tile">',
-  "frame: 'plain',",
 ]) {
   assertIncludes(
-    glassSurfaceDefinitionSource,
+    glassPreviewModuleSource,
     snippet,
-    `GlassSurface docs definition must include ${snippet}.`,
+    `Glass preview shared module must include ${snippet}.`,
+  )
+}
+
+const graySliderModuleSource = readProjectFile('src/docs/gray-slider.tsx')
+
+for (const snippet of [
+  'function GraySlider(',
+  'type="range"',
+  'className="gray-slider"',
+  "style={{ '--fill': fill } as CSSProperties}",
+]) {
+  assertIncludes(
+    graySliderModuleSource,
+    snippet,
+    `GraySlider shared module must include ${snippet}.`,
   )
 }
 assert.ok(

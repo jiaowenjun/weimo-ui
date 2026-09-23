@@ -58,8 +58,6 @@ const docsOutletContextSource = readProjectFile('src/docs/docs-outlet-context.ts
 const detailPageSource = readProjectFile('src/docs/pages/component-detail-page.tsx')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 const heatmapPreviewBlock = blockFor(appCss, '.heatmap-preview')
-const iconPreviewSceneBlock = blockFor(appCss, '.icon-preview__scene')
-const iconPreviewSceneTitleBlock = blockFor(appCss, '.icon-preview__scene-title')
 const iconPreviewRowBlock = blockFor(appCss, '.icon-preview__row')
 
 assert.ok(
@@ -264,16 +262,10 @@ for (const snippet of [
   '<StatGroup items={sidebarStatsItems}',
   'sidebar-preview__panel weimo-sidebar weimo-sidebar--normal',
   'className="top-bar-preview"',
-  'glassIconButtonPreviewScenes',
-  "id: 'light-solid'",
-  "id: 'light-gradient'",
-  "id: 'dark-solid'",
-  "id: 'dark-gradient'",
-  'className={`icon-preview__scene icon-preview__scene--${scene.id}`}',
+  'style={getGlassPreviewBackground(glassIconBackgroundGray)}',
   'function GlassIconButtonPreviewGroup({ disabled }: { disabled: boolean })',
   '<GlassIconButton aria-label="菜单" disabled={disabled}>',
-  'className="icon-preview icon-preview--plain"',
-  'className="icon-preview__scene icon-preview__scene--plain"',
+  'className="icon-button-preview"',
   '普通背景',
   'function GhostIconButtonPreviewGroup({ disabled }: { disabled: boolean })',
   '<GhostIconButton aria-label="菜单" disabled={disabled}>',
@@ -296,6 +288,7 @@ assert.ok(
 
 assert.ok(
   !componentDefinitionSources.button.includes('ghostIconButtonPreviewScenes') &&
+    !componentDefinitionSources.button.includes('glassIconButtonPreviewScenes') &&
     !componentDefinitionSources.button.includes("title: '亮色单色背景'") &&
     !componentDefinitionSources.button.includes("title: '亮色多色彩渐变背景'") &&
     !componentDefinitionSources.button.includes("title: '暗色单色背景'") &&
@@ -384,26 +377,24 @@ assert.ok(
   'TagPicker docs preview must remove the standalone select-tag button and use internal ChipButton chips.',
 )
 assert.ok(
-  appCss.includes('.icon-preview__scene--light-solid') &&
-    appCss.includes('.icon-preview__scene--light-gradient') &&
-    appCss.includes('.icon-preview__scene--dark-solid') &&
-    appCss.includes('.icon-preview__scene--dark-gradient') &&
-    appCss.includes('--icon-preview-text: hsl(222.2 47.4% 11.2% / 0.9);') &&
-    appCss.includes('--icon-preview-text: hsl(0 0% 100% / 0.9);'),
-  'Icon button docs previews must define light and dark background scene styles.',
+  !appCss.includes('.icon-preview__scene--light-solid') &&
+    !appCss.includes('.icon-preview__scene--light-gradient') &&
+    !appCss.includes('.icon-preview__scene--dark-solid') &&
+    !appCss.includes('.icon-preview__scene--dark-gradient') &&
+    appCss.includes('.icon-button-preview') &&
+    !appCss.includes('--icon-preview-text: hsl(222.2 47.4% 11.2% / 0.9);') &&
+    !appCss.includes('--icon-preview-text: hsl(0 0% 100% / 0.9);'),
+  'Icon button docs previews must host both icon cards on the shared borderless preview canvas instead of scene swatches.',
 )
 assert.ok(
-  !iconPreviewSceneBlock.includes('grid-template-rows: auto minmax(0, 1fr);') &&
-    iconPreviewSceneTitleBlock.includes('grid-area: 1 / 1;') &&
-    iconPreviewSceneTitleBlock.includes('align-self: start;') &&
-    iconPreviewSceneTitleBlock.includes('justify-self: start;') &&
-    iconPreviewRowBlock.includes('grid-area: 1 / 1;') &&
+  !appCss.includes('.icon-preview__scene') &&
+    !appCss.includes('.icon-preview--plain') &&
     iconPreviewRowBlock.includes('align-self: center;') &&
     iconPreviewRowBlock.includes('justify-self: center;') &&
     iconPreviewRowBlock.includes('justify-content: center;') &&
     !appCss.includes('.icon-preview--plain .icon-preview__scene') &&
     !appCss.includes('.icon-preview--plain .icon-preview__row'),
-  'IconButton docs preview scenes must center their button rows against the whole scene frame across GhostIconButton and GlassIconButton.',
+  'IconButton docs previews must center their button rows on the borderless card preview canvas.',
 )
 assert.match(
   appCss,
