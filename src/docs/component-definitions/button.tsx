@@ -21,7 +21,7 @@ function TextButtonPreview() {
       action={
         <span className="preview-toggle">
           <span className="preview-toggle__label">
-            {disabled ? '已禁用' : '已启用'}
+            {disabled ? '禁用' : '启用'}
           </span>
           <Switch
             aria-label="启用"
@@ -60,7 +60,7 @@ function GhostIconButtonPreview() {
       action={
         <span className="preview-toggle">
           <span className="preview-toggle__label">
-            {disabled ? '已禁用' : '已启用'}
+            {disabled ? '禁用' : '启用'}
           </span>
           <Switch
             aria-label="启用"
@@ -99,7 +99,7 @@ function GlassIconButtonPreview() {
       action={
         <span className="preview-toggle">
           <span className="preview-toggle__label">
-            {disabled ? '已禁用' : '已启用'}
+            {disabled ? '禁用' : '启用'}
           </span>
           <Switch
             aria-label="启用"
