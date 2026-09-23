@@ -384,6 +384,19 @@
   gap: 12px;
 }
 
+/* 标题栏 Switch 控件与其可见标签 */
+.preview-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.preview-toggle__label {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  line-height: 1.2;
+}
+
 .internal-float-preview,
 .internal-bottom-preview,
 .internal-card-top-bar-preview,

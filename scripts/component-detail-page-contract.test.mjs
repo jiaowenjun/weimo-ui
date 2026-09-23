@@ -317,6 +317,7 @@ assert.ok(
 )
 assert.ok(
     buttonDefinitionSource.includes("import { GlassIconButton } from '../../components/glass-icon-button'") &&
+    buttonDefinitionSource.includes("import { Switch } from '../../components/coss/switch'") &&
     buttonDefinitionSource.includes("import { useEffect, useState } from 'react'") &&
     buttonDefinitionSource.includes("import { TextButton } from '../../components/text-button'") &&
     buttonDefinitionSource.includes("id: 'button'") &&
@@ -338,8 +339,8 @@ assert.ok(
     !buttonDefinitionSource.includes('scene.title') &&
     buttonDefinitionSource.includes('function GlassIconButtonPreview()') &&
     buttonDefinitionSource.includes('const [disabled, setDisabled] = useState(false)') &&
-    buttonDefinitionSource.includes('setDisabled((current) => !current)') &&
-    buttonDefinitionSource.includes('aria-pressed={disabled}') &&
+    buttonDefinitionSource.includes('setDisabled(!checked)') &&
+    buttonDefinitionSource.includes('checked={!disabled}') &&
     buttonDefinitionSource.includes('action={') &&
     !buttonDefinitionSource.includes('icon-preview-shell') &&
     !buttonDefinitionSource.includes('icon-preview__controls') &&
@@ -371,8 +372,8 @@ assert.ok(
     buttonDefinitionSource.includes("import { TextButton } from '../../components/text-button'") &&
     buttonDefinitionSource.includes('function GhostIconButtonPreview()') &&
     buttonDefinitionSource.includes('const [disabled, setDisabled] = useState(false)') &&
-    buttonDefinitionSource.includes('setDisabled((current) => !current)') &&
-    buttonDefinitionSource.includes('aria-pressed={disabled}') &&
+    buttonDefinitionSource.includes('setDisabled(!checked)') &&
+    buttonDefinitionSource.includes('checked={!disabled}') &&
     buttonDefinitionSource.includes('action={') &&
     !buttonDefinitionSource.includes('icon-preview-shell') &&
     !buttonDefinitionSource.includes('icon-preview__controls') &&
