@@ -99,10 +99,6 @@
   background: var(--color-bg-page);
 }
 
-.preview-stage[data-component-id='menu'] {
-  min-height: 520px;
-}
-
 .preview-stage > * {
   max-width: 100%;
 }
@@ -515,55 +511,12 @@
 }
 
 .menu-preview {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  width: min(100%, 960px);
-  min-height: 100%;
-  align-items: stretch;
-  justify-self: center;
-  gap: 16px;
-  padding: 8px;
-}
-
-.menu-preview__scenario {
-  position: relative;
   display: flex;
-  min-height: 340px;
-  align-items: flex-start;
+  width: 100%;
+  min-height: 100%;
+  align-items: center;
   justify-content: center;
-  padding: 54px 18px 22px;
-  overflow: visible;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-}
-
-.menu-preview__menu-anchor {
-  transform: translate(60px, -45px);
-}
-
-.menu-preview__scenario[data-tone="light"] {
-  color: hsl(222 47% 11%);
-  background: #f8fafc;
-}
-
-.menu-preview__scenario[data-tone="dark"] {
-  color: hsl(210 40% 98%);
-  background: #111827;
-}
-
-.menu-preview__label {
-  position: absolute;
-  inset-block-start: 16px;
-  inset-inline-start: 16px;
-  font-size: var(--font-size-xs);
-  font-weight: 560;
-  line-height: 1.2;
-  opacity: 0.72;
-}
-
-.menu-preview .weimo-menu__popup svg {
-  width: 16px;
-  height: 16px;
+  padding: 16px;
 }
 
 .tag-tree-preview {
@@ -1118,12 +1071,6 @@
 /* --shadow-overlay(0 28px 80px)向下延伸约 68px,超出预览区上下各 50px 的可用空间;
    预览窗默认裁切是给衬底演示定的,浮层瓦片需要把真实阴影画进卡片 padding(距卡片边缘 67px)。 */
 .component-preview-card > .component-preview-card__meta ~ .popup-surface-preview {
-  overflow: visible;
-}
-
-/* 常开的菜单弹层以 transform 锚点为包含块,默认会被预览窗裁切;
-   操作菜单演示需要完整画出弹层与子菜单(与浮层瓦片同理)。 */
-.component-preview-card > .component-preview-card__meta ~ .menu-preview {
   overflow: visible;
 }
 

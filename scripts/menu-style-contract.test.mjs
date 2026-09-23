@@ -35,17 +35,6 @@ const transitionBlock = cssBlockFor(
   '.weimo-menu__popup[data-starting-style],\n  .weimo-menu__popup[data-ending-style]',
 )
 const menuPreviewBlock = cssBlockFor(appCss, '.menu-preview')
-const menuPreviewScenarioBlock = cssBlockFor(appCss, '.menu-preview__scenario')
-const menuPreviewMenuAnchorBlock = cssBlockFor(appCss, '.menu-preview__menu-anchor')
-const menuPreviewLightBlock = cssBlockFor(
-  appCss,
-  '.menu-preview__scenario[data-tone="light"]',
-)
-const menuPreviewDarkBlock = cssBlockFor(
-  appCss,
-  '.menu-preview__scenario[data-tone="dark"]',
-)
-const menuPreviewStageBlock = cssBlockFor(appCss, ".preview-stage[data-component-id='menu']")
 const itemBlock = cssBlockFor(menuCss, '.weimo-menu__item')
 const menuPopupLightToneBlock = cssBlockFor(menuCss, '.weimo-menu__popup[data-background-tone="light"]')
 const menuPopupDarkToneBlock = cssBlockFor(menuCss, '.weimo-menu__popup[data-background-tone="dark"]')
@@ -93,32 +82,25 @@ assert.ok(popupBlock.includes('cubic-bezier(0.34, 1.56, 0.64, 1)'), 'Menu popup 
 assert.ok(transitionBlock.includes('transform: scale(0.7);'), 'Menu popup must start and end from skyline scale(0.7).')
 assert.ok(menuCss.includes('cubic-bezier(0.4, 0, 1, 1)'), 'Menu popup must use the skyline exit curve.')
 assert.ok(
-  menuDefinitionSource.includes("import { useRef } from 'react'") &&
-    menuDefinitionSource.includes('const MENU_PREVIEW_SCENARIOS = [') &&
-    menuDefinitionSource.includes("tone: 'light'") &&
-    menuDefinitionSource.includes("tone: 'dark'") &&
-    !menuDefinitionSource.includes("tone: 'mixed'") &&
-    !menuDefinitionSource.includes("label: '混合背景'") &&
-    menuDefinitionSource.includes('MENU_PREVIEW_SCENARIOS.map') &&
-    menuDefinitionSource.includes('className="menu-preview__menu-anchor"') &&
-    menuDefinitionSource.includes('rootProps={{ defaultOpen: true, modal: false }}') &&
+  menuDefinitionSource.includes('const MENU_PREVIEW_ITEMS') &&
+    menuDefinitionSource.includes('<ComponentPreviewCard label="操作菜单">') &&
+    menuDefinitionSource.includes('className="menu-preview"') &&
+    !menuDefinitionSource.includes('rootProps') &&
+    !menuDefinitionSource.includes('portalProps') &&
+    !menuDefinitionSource.includes('defaultOpen') &&
+    !menuDefinitionSource.includes('menu-preview__scenario') &&
     menuDefinitionSource.includes('render: <GhostIconButton aria-label="更多操作" size="sm" />'),
-  'Menu detail preview must render open ActionMenu diagnostics with a locally offset trigger in each background scenario.',
+  'Menu detail preview must render a single closed three-dot ActionMenu trigger on the default ComponentPreviewCard background, with the popup portalled to body like real usages.',
 )
 assert.ok(
-  menuPreviewBlock.includes('grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));') &&
-    menuPreviewScenarioBlock.includes('min-height: 340px;') &&
-    menuPreviewScenarioBlock.includes('position: relative;') &&
-    menuPreviewScenarioBlock.includes('padding: 54px 18px 22px;') &&
-    menuPreviewMenuAnchorBlock.includes('transform: translate(60px, -45px);') &&
-    !menuPreviewMenuAnchorBlock.includes('position: absolute;') &&
-    !menuPreviewMenuAnchorBlock.includes('inset-block-start') &&
-    !menuPreviewMenuAnchorBlock.includes('inset-inline-end') &&
-    menuPreviewLightBlock.includes('background: #f8fafc;') &&
-    menuPreviewDarkBlock.includes('background: #111827;') &&
-    !appCss.includes('.menu-preview__scenario[data-tone="mixed"]') &&
-    menuPreviewStageBlock.includes('min-height: 520px;'),
-  'Menu detail preview stage must keep only the light and dark background examples while offsetting only the trigger by 60px horizontally and 45px upward.',
+  menuPreviewBlock.includes('align-items: center;') &&
+    menuPreviewBlock.includes('justify-content: center;') &&
+    !appCss.includes('.menu-preview__scenario') &&
+    !appCss.includes('.menu-preview__menu-anchor') &&
+    !appCss.includes('.menu-preview__label') &&
+    !appCss.includes(".preview-stage[data-component-id='menu']") &&
+    !appCss.includes('.component-preview-card__meta ~ .menu-preview'),
+  'Menu detail preview must keep a single centered canvas on the default preview background with no tone tiles, trigger offsets, or stage overrides.',
 )
 assert.ok(itemBlock.includes('min-height: 38px;'), 'Menu items must keep skyline-like dense row height.')
 assert.ok(itemIconBlock.includes('width: 16px;'), 'Menu item and submenu trigger icons must share the same 16px width.')
