@@ -214,7 +214,7 @@ assert.ok(
 )
 assert.ok(
   tokensCss.includes('--color-bg-chip: hsl(40 12% 96%);') &&
-    tokensCss.includes('--color-bg-chip: hsl(0 0% 13%);'),
+    tokensCss.includes('--color-bg-chip: hsl(0 0% 17%);'),
   'ChipButton brand chip surface token must derive from the local neutral brand theme by default.',
 )
 assert.ok(

@@ -204,7 +204,7 @@
           "color-border-disabled": "hsl(0 0% 24%)",
           "color-border-disabled-on-light": "hsl(0 0% 92%)",
           "color-border-disabled-on-dark": "hsl(0 0% 24%)",
-          "color-bg-chip": "hsl(0 0% 13%)",
+          "color-bg-chip": "hsl(0 0% 17%)",
           "color-bg-selection": "hsl(var(--primary) / 0.2)",
           "color-heat-0": "hsl(0 0% 19%)",
           "color-heat-1": "hsl(23 31% 22%)",

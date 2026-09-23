@@ -400,7 +400,6 @@
   line-height: 1.2;
 }
 
-.internal-float-preview,
 .internal-bottom-preview,
 .internal-card-top-bar-preview,
 .internal-card-tool-bar-preview,
@@ -425,10 +424,12 @@
   gap: 6px;
 }
 
+/* FloatBar 组件自身绝对贴顶定位；文档示例改回画布网格流，
+   由 place-items 完成水平垂直居中，两侧留出空隙 */
 .internal-float-preview {
-  position: relative;
-  min-height: 48px;
-  overflow: hidden;
+  position: static;
+  justify-self: stretch;
+  margin-inline: 24px;
 }
 
 .internal-bottom-preview__surface {

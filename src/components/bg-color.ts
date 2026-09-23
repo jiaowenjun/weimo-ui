@@ -90,7 +90,7 @@ export const bgColorToneMap = {
     token: '--color-bg-chip',
     value: {
       light: 'hsl(40 12% 96%)',
-      dark: 'hsl(0 0% 13%)',
+      dark: 'hsl(0 0% 17%)',
     },
     className: 'bg-color--chip',
     description: '标签、筛选 chip 和轻量标记的柔和填充色。',
