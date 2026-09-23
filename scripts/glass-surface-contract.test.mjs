@@ -332,13 +332,34 @@ assertOmits(
 )
 
 for (const snippet of [
-  "import { useEffect, useState } from 'react'",
   "import { GlassSurface } from '../../components/glass-surface'",
   "import { ComponentPreviewCard } from '../../components/component-preview-card'",
-  "from '../glass-preview'",
-  "from '../gray-slider'",
+  "from '../glass-preview-card'",
   "id: 'surface'",
   '静态卡片、亮度自适应玻璃层与抬升浮层的材质总览',
+  '<GlassPreviewCard canvasClassName="glass-surface-preview" label="玻璃材质">',
+  'glass-surface-preview__fixed',
+  '<GlassSurface className="glass-surface-preview__tile">',
+  "frame: 'plain',",
+]) {
+  assertIncludes(
+    glassSurfaceDefinitionSource,
+    snippet,
+    `GlassSurface docs definition must include ${snippet}.`,
+  )
+}
+
+// 滑块 + 主题归位 + 条纹背景的玻璃卡外壳抽到 GlassPreviewCard 共享组件
+// （Surface 页玻璃材质卡与按钮页玻璃图标按钮卡共用），契约锁共享组件源。
+const glassPreviewCardModuleSource = readProjectFile(
+  'src/docs/glass-preview-card.tsx',
+)
+
+for (const snippet of [
+  'function GlassPreviewCard(',
+  "from '../components/component-preview-card'",
+  "from './glass-preview'",
+  "from './gray-slider'",
   "window.matchMedia('(prefers-color-scheme: dark)').matches",
   '? glassBackgroundGrayDark\n      : glassBackgroundGrayLight',
   'const syncThemeEndpoint = () => {',
@@ -348,16 +369,13 @@ for (const snippet of [
   'min={glassBackgroundGrayDark}',
   'max={glassBackgroundGrayLight}',
   'onValueChange={setGlassBackgroundGray}',
+  "className={cn('glass-preview-card__canvas', canvasClassName)}",
   'style={getGlassPreviewBackground(glassBackgroundGray)}',
-  'glass-surface-preview__fixed',
-  'label="玻璃材质"',
-  '<GlassSurface className="glass-surface-preview__tile">',
-  "frame: 'plain',",
 ]) {
   assertIncludes(
-    glassSurfaceDefinitionSource,
+    glassPreviewCardModuleSource,
     snippet,
-    `GlassSurface docs definition must include ${snippet}.`,
+    `GlassPreviewCard shared component must include ${snippet}.`,
   )
 }
 

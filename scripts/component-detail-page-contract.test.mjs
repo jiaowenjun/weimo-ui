@@ -308,29 +308,25 @@ assert.ok(
     componentDefinitionsSource.includes("import { GlassSurface } from '../../components/glass-surface'") &&
     componentDefinitionsSource.includes("id: 'surface'") &&
     componentDefinitionsSource.includes('静态卡片、亮度自适应玻璃层与抬升浮层的材质总览') &&
-    componentDefinitionsSource.includes('onValueChange={setGlassBackgroundGray}') &&
+    componentDefinitionsSource.includes("from '../glass-preview-card'") &&
+    componentDefinitionsSource.includes('<GlassPreviewCard') &&
     !componentDefinitionsSource.includes('glass-surface-preview__scroll') &&
     componentDefinitionsSource.includes('glass-surface-preview__fixed') &&
     componentDefinitionsSource.includes('<GlassSurface className="glass-surface-preview__tile">') &&
     !componentDefinitionsSource.includes('glass-surface-preview__sticky'),
-  'GlassSurface detail page must render a scrollable dark-to-light adaptive material preview.',
+  'GlassSurface detail page must render a slider-driven dark-to-light adaptive material preview via the shared GlassPreviewCard.',
 )
 assert.ok(
     buttonDefinitionSource.includes("import { GlassIconButton } from '../../components/glass-icon-button'") &&
     buttonDefinitionSource.includes("import { Switch } from '../../components/coss/switch'") &&
-    buttonDefinitionSource.includes("import { useEffect, useState } from 'react'") &&
+    buttonDefinitionSource.includes("import { useState } from 'react'") &&
     buttonDefinitionSource.includes("import { TextButton } from '../../components/text-button'") &&
     buttonDefinitionSource.includes("id: 'button'") &&
     !buttonDefinitionSource.includes('glassIconButtonPreviewScenes') &&
-    buttonDefinitionSource.includes("from '../glass-preview'") &&
-    buttonDefinitionSource.includes("from '../gray-slider'") &&
-    buttonDefinitionSource.includes('<GraySlider') &&
-    buttonDefinitionSource.includes('ariaLabel="背景灰度"') &&
-    buttonDefinitionSource.includes('onValueChange={setGlassIconBackgroundGray}') &&
-    buttonDefinitionSource.includes('window.matchMedia(\'(prefers-color-scheme: dark)\').matches') &&
-    buttonDefinitionSource.includes('new MutationObserver(') &&
+    buttonDefinitionSource.includes("from '../glass-preview-card'") &&
+    buttonDefinitionSource.includes('<GlassPreviewCard') &&
+    buttonDefinitionSource.includes('label="玻璃图标按钮"') &&
     buttonDefinitionSource.includes('className="icon-button-preview"') &&
-    buttonDefinitionSource.includes('style={getGlassPreviewBackground(glassIconBackgroundGray)}') &&
     !buttonDefinitionSource.includes('icon-preview__scene--light-gradient') &&
     !buttonDefinitionSource.includes('icon-preview__scene--dark-solid') &&
     !buttonDefinitionSource.includes('icon-preview__scene--dark-gradient') &&
@@ -355,7 +351,7 @@ assert.ok(
     !componentDefinitionsSource.includes("from '../../components/icon-button'") &&
     !componentDefinitionsSource.includes("id: 'icon-button'") &&
     !componentDefinitionsSource.includes('<IconButton'),
-  'Button page glass icon card must mimic the Surface glass card: gray slider in the title bar and the sliding striped glass background in the preview.',
+  'Button page glass icon card must reuse the shared GlassPreviewCard (slider + striped glass background) from the Surface glass card.',
 )
 assert.ok(
   borderTokensDefinitionSource.includes("frame: 'plain',") &&
@@ -368,7 +364,7 @@ assert.ok(
 )
 assert.ok(
     buttonDefinitionSource.includes("import { GhostIconButton } from '../../components/ghost-icon-button'") &&
-    buttonDefinitionSource.includes("import { useEffect, useState } from 'react'") &&
+    buttonDefinitionSource.includes("import { useState } from 'react'") &&
     buttonDefinitionSource.includes("import { TextButton } from '../../components/text-button'") &&
     buttonDefinitionSource.includes('function GhostIconButtonPreview()') &&
     buttonDefinitionSource.includes('const [disabled, setDisabled] = useState(false)') &&

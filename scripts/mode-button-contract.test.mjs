@@ -129,7 +129,7 @@ assert.ok(
 )
 
 for (const snippet of [
-  "import { useEffect, useState } from 'react'",
+  "import { useState } from 'react'",
   "import { TextButton } from '../../components/text-button'",
   'ModeButton,',
   'type ModeButtonMode,',
@@ -181,9 +181,10 @@ assert.ok(
 )
 
 assert.ok(
-  appCss.includes('.internal-mode-button-preview') &&
-    !appCss.includes('.internal-mode-button-preview__toggle'),
-  'App.css must keep the centered ModeButton preview while the toggle lives in the card title bar action slot.',
+  !appCss.includes('.internal-mode-button-preview') &&
+    !docsDefinitionSource.includes('internal-mode-button-preview') &&
+    docsDefinitionSource.includes('className="icon-button-preview"'),
+  'ModeButton preview must drop its custom style and share the borderless icon-button preview canvas.',
 )
 
 assert.ok(
@@ -194,14 +195,6 @@ assert.ok(
 assert.ok(
   !appCss.includes('.internal-mode-button-preview__surface'),
   'ModeButton preview CSS must not keep the redundant nested surface.',
-)
-
-const previewBlock = cssBlockFor(appCss, '.internal-mode-button-preview')
-assert.ok(
-  previewBlock.includes('gap: 12px;') &&
-    previewBlock.includes('align-content: center;') &&
-    previewBlock.includes('justify-items: center;'),
-  'ModeButton preview root must center the controls without drawing a nested border.',
 )
 
 assert.ok(

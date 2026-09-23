@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Menu } from 'lucide-react'
 
 import { ComponentPreviewCard } from '../../components/component-preview-card'
@@ -11,12 +11,7 @@ import {
 } from '../../components/mode-button'
 import { TextButton } from '../../components/text-button'
 import type { ComponentDefinition } from '../component-docs'
-import {
-  getGlassPreviewBackground,
-  glassBackgroundGrayDark,
-  glassBackgroundGrayLight,
-} from '../glass-preview'
-import { GraySlider } from '../gray-slider'
+import { GlassPreviewCard } from '../glass-preview-card'
 
 function TextButtonPreview() {
   const [disabled, setDisabled] = useState(false)
@@ -98,63 +93,25 @@ function GlassIconButtonPreviewGroup({ disabled }: { disabled: boolean }) {
 
 function GlassIconButtonPreview() {
   const [disabled, setDisabled] = useState(false)
-  // 与 Surface 页玻璃材质卡同款：初始灰度跟随系统主题，主题切换后滑块归位端点。
-  const [glassIconBackgroundGray, setGlassIconBackgroundGray] = useState(() =>
-    typeof window !== 'undefined' &&
-    window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? glassBackgroundGrayDark
-      : glassBackgroundGrayLight,
-  )
-
-  useEffect(() => {
-    const syncGlassIconGrayEndpoint = () => {
-      setGlassIconBackgroundGray(
-        document.documentElement.classList.contains('dark')
-          ? glassBackgroundGrayDark
-          : glassBackgroundGrayLight,
-      )
-    }
-    const themeObserver = new MutationObserver(syncGlassIconGrayEndpoint)
-    themeObserver.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class'],
-    })
-
-    return () => themeObserver.disconnect()
-  }, [])
 
   return (
-    <ComponentPreviewCard
+    <GlassPreviewCard
       action={
-        <>
-          <GraySlider
-            ariaLabel="背景灰度"
-            max={glassBackgroundGrayLight}
-            min={glassBackgroundGrayDark}
-            onValueChange={setGlassIconBackgroundGray}
-            value={glassIconBackgroundGray}
-          />
-          <span className="preview-toggle">
-            <span className="preview-toggle__label">
-              {disabled ? '已禁用' : '已启用'}
-            </span>
-            <Switch
-              aria-label="启用"
-              checked={!disabled}
-              onCheckedChange={(checked) => setDisabled(!checked)}
-            />
+        <span className="preview-toggle">
+          <span className="preview-toggle__label">
+            {disabled ? '已禁用' : '已启用'}
           </span>
-        </>
+          <Switch
+            aria-label="启用"
+            checked={!disabled}
+            onCheckedChange={(checked) => setDisabled(!checked)}
+          />
+        </span>
       }
       label="玻璃图标按钮"
     >
-      <div
-        className="icon-button-preview"
-        style={getGlassPreviewBackground(glassIconBackgroundGray)}
-      >
-        <GlassIconButtonPreviewGroup disabled={disabled} />
-      </div>
-    </ComponentPreviewCard>
+      <GlassIconButtonPreviewGroup disabled={disabled} />
+    </GlassPreviewCard>
   )
 }
 
@@ -182,10 +139,7 @@ function ModeButtonDemo() {
       }
       label="模式按钮"
     >
-      <div
-        className="internal-mode-button-preview"
-        aria-label="ModeButton preview"
-      >
+      <div className="icon-button-preview" aria-label="ModeButton preview">
         <ModeButton
           mode={mode}
           onModeChange={setMode}
