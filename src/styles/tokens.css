@@ -52,6 +52,10 @@
   --radius-sm: 8px;
   --radius-round: 999px;
 
+  /* === 动效 === */
+  --press-scale: 1.05;
+  --popup-open-scale: 1.02;
+
   /* === Markdown 渲染 === */
   --md-color: hsl(0 0% 9%);
   --md-font-size: 16px;

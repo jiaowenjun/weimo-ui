@@ -111,13 +111,16 @@ for (const [block, snippet, message] of [
   [baseBlock, 'white-space: nowrap;', 'TextButton labels must stay on one line.'],
   [baseBlock, 'cursor: pointer;', 'TextButton must show pointer affordance while enabled.'],
   [baseBlock, 'transition:', 'TextButton must transition state feedback.'],
+  [baseBlock, 'transform 150ms ease', 'TextButton must transition press feedback like icon buttons.'],
   [baseBlock, 'border-color 160ms ease', 'TextButton must transition border feedback.'],
   [baseBlock, 'background 160ms ease', 'TextButton must transition background feedback.'],
   [baseBlock, 'color 160ms ease', 'TextButton must transition disabled text feedback.'],
   [hoverBlock, 'border-color: var(--color-border-emphasis);', 'TextButton hover must emphasize the border.'],
   [hoverBlock, 'background: var(--color-bg-hover);', 'TextButton hover must use the shared feedback background.'],
   [activeBlock, 'background: var(--color-bg-hover);', 'TextButton active must keep the shared feedback background.'],
+  [activeBlock, 'transform: scale(var(--press-scale));', 'TextButton active must press with the shared scale token.'],
   [disabledBlock, 'cursor: default;', 'TextButton disabled state must remove pointer affordance.'],
+  [disabledBlock, 'transform: none;', 'TextButton disabled state must drop press transforms.'],
   [disabledBlock, 'color: var(--color-text-disabled);', 'TextButton disabled state must use the shared disabled text token.'],
   [disabledBlock, 'border-color: var(--color-border-disabled);', 'TextButton disabled state must use the shared disabled border token.'],
   [disabledBlock, 'background: var(--color-bg-card);', 'TextButton disabled state must keep the ordinary card surface.'],
@@ -140,6 +143,10 @@ assert.ok(
     !css.includes('.text-button:hover {') &&
     !css.includes('.text-button:active {'),
   'TextButton hover and active selectors must exclude disabled buttons.',
+)
+assert.ok(
+  css.includes('@media (hover: hover) and (pointer: fine)'),
+  'TextButton hover feedback must stay behind the fine-pointer media query like icon buttons.',
 )
 
 for (const snippet of [

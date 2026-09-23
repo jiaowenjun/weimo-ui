@@ -91,6 +91,8 @@
           "radius-xs": "4px",
           "radius-sm": "8px",
           "radius-round": "999px",
+          "press-scale": "1.05",
+          "popup-open-scale": "1.02",
           "md-color": "hsl(0 0% 9%)",
           "md-font-size": "16px",
           "md-line-height": "1.6",

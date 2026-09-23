@@ -16,22 +16,27 @@
     white-space: nowrap;
     cursor: pointer;
     transition:
+      transform 150ms ease,
       border-color 160ms ease,
       background 160ms ease,
       color 160ms ease;
   }
 
-  .text-button:not(:disabled):hover {
-    border-color: var(--color-border-emphasis);
-    background: var(--color-bg-hover);
+  @media (hover: hover) and (pointer: fine) {
+    .text-button:not(:disabled):hover {
+      border-color: var(--color-border-emphasis);
+      background: var(--color-bg-hover);
+    }
   }
 
   .text-button:not(:disabled):active {
     background: var(--color-bg-hover);
+    transform: scale(var(--press-scale));
   }
 
   .text-button:disabled {
     cursor: default;
+    transform: none;
     color: var(--color-text-disabled);
     border-color: var(--color-border-disabled);
     background: var(--color-bg-card);

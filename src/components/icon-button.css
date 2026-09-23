@@ -1,7 +1,7 @@
 @layer components {
   .icon-button {
-    --icon-button-active-scale: 1.05;
-    --icon-button-popup-open-scale: 1.02;
+    --icon-button-active-scale: var(--press-scale);
+    --icon-button-popup-open-scale: var(--popup-open-scale);
     --icon-button-ghost-hover-bg: var(--color-bg-hover);
 
     display: inline-flex;
