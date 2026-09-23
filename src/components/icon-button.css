@@ -1,7 +1,7 @@
 @layer components {
   .icon-button {
-    --icon-button-hover-scale: 0.94;
-    --icon-button-active-scale: 0.97;
+    --icon-button-active-scale: 1.05;
+    --icon-button-popup-open-scale: 1.02;
     --icon-button-ghost-hover-bg: var(--color-bg-hover);
 
     display: inline-flex;
@@ -95,10 +95,6 @@
 
   /* === Hover === */
   @media (hover: hover) and (pointer: fine) {
-    .icon-button:not(:disabled):hover {
-      transform: scale(var(--icon-button-hover-scale));
-    }
-
     .icon-button--glass:not(:disabled):hover {
       --icon-button-glass-hover-opacity: 1;
     }
@@ -110,7 +106,7 @@
 
   /* Base UI popup triggers keep this attribute while their popup is open. */
   .icon-button[data-popup-open] {
-    transform: scale(var(--icon-button-hover-scale));
+    transform: scale(var(--icon-button-popup-open-scale));
   }
 
   .icon-button--glass[data-popup-open] {
