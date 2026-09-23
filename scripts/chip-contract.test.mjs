@@ -186,9 +186,19 @@ assert.ok(
   docsSource.includes("import { Hash, X } from 'lucide-react'") &&
     docsSource.includes("import { Chip } from '../../components/chip'") &&
     docsSource.includes("id: 'capsule'") &&
-    docsSource.includes('function ChipDemo') &&
     docsSource.includes('preview: () => <CapsuleDemo />') &&
+    docsSource.includes('function ChipTextSizeDemo') &&
+    docsSource.includes('<ChipTextSizeDemo />') &&
+    docsSource.includes('label="胶囊字号"') &&
+    docsSource.includes('function GlassChipDemo') &&
+    docsSource.includes('<GlassChipDemo />') &&
+    docsSource.includes('label="玻璃态胶囊"') &&
+    docsSource.includes('function ChipDemo') &&
     docsSource.includes('<ChipDemo />') &&
+    docsSource.includes('label="标签胶囊"') &&
+    docsSource.includes('function ClosableChipDemo') &&
+    docsSource.includes('<ClosableChipDemo />') &&
+    docsSource.includes('label="可关闭胶囊"') &&
     docsSource.includes('className="internal-chip-preview"') &&
     docsSource.includes('className="internal-chip-preview__row"') &&
     docsSource.includes('content="写作/日记"') &&
@@ -200,7 +210,7 @@ assert.ok(
     docsSource.includes('suffix={') &&
     docsSource.includes('<button className="internal-chip-preview__action" type="button">') &&
     docsSource.includes('<X aria-hidden="true" />'),
-  'Capsule docs definition must show internal slot, variant, and text-size examples.',
+  'Capsule docs definition must show text-size, glass, default, and closable chip examples in split cards.',
 )
 assert.ok(
   definitionsIndexSource.includes("import { capsuleDefinition } from './capsule'") &&

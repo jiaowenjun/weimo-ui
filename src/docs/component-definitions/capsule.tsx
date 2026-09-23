@@ -7,19 +7,48 @@ import { ComponentPreviewCard } from '../../components/component-preview-card'
 import { TextButton } from '../../components/text-button'
 import type { ComponentDefinition } from '../component-docs'
 
-function ChipDemo() {
+function ChipTextSizeDemo() {
   return (
-    <ComponentPreviewCard label="标签胶囊">
+    <ComponentPreviewCard label="胶囊字号">
       <div className="internal-chip-preview">
-        <div className="internal-chip-preview__row" aria-label="Chip 变体预览">
-          <Chip content="写作/日记" prefix={<Hash aria-hidden="true" />} variant="default" />
-          <Chip content="玻璃态" prefix={<Hash aria-hidden="true" />} variant="glass" />
-        </div>
         <div className="internal-chip-preview__row" aria-label="Chip 字号预览">
           <Chip content="小字号" textSize="sm" />
           <Chip content="基础字号" textSize="base" />
         </div>
-        <div className="internal-chip-preview__row" aria-label="Chip slot 预览">
+      </div>
+    </ComponentPreviewCard>
+  )
+}
+
+function GlassChipDemo() {
+  return (
+    <ComponentPreviewCard label="玻璃态胶囊">
+      <div className="internal-chip-preview">
+        <div className="internal-chip-preview__row" aria-label="Chip 玻璃态预览">
+          <Chip content="玻璃态" prefix={<Hash aria-hidden="true" />} variant="glass" />
+        </div>
+      </div>
+    </ComponentPreviewCard>
+  )
+}
+
+function ChipDemo() {
+  return (
+    <ComponentPreviewCard label="标签胶囊">
+      <div className="internal-chip-preview">
+        <div className="internal-chip-preview__row" aria-label="Chip 默认变体预览">
+          <Chip content="写作/日记" prefix={<Hash aria-hidden="true" />} variant="default" />
+        </div>
+      </div>
+    </ComponentPreviewCard>
+  )
+}
+
+function ClosableChipDemo() {
+  return (
+    <ComponentPreviewCard label="可关闭胶囊">
+      <div className="internal-chip-preview">
+        <div className="internal-chip-preview__row" aria-label="Chip 可关闭预览">
           <Chip
             content="可关闭标签"
             prefix={<Hash aria-hidden="true" />}
@@ -112,7 +141,10 @@ function ChipButtonDemo() {
 function CapsuleDemo() {
   return (
     <>
+      <ChipTextSizeDemo />
+      <GlassChipDemo />
       <ChipDemo />
+      <ClosableChipDemo />
       <ChipButtonDemo />
     </>
   )
