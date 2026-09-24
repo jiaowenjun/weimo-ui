@@ -10,16 +10,16 @@
     --glass-surface-hover-bg: color-mix(in srgb, currentColor 12%, transparent);
 
     color: var(--glass-surface-fg);
-    border: 1px solid var(--glass-surface-border);
+    border: 1px solid transparent;
     backdrop-filter: blur(var(--glass-blur));
     -webkit-backdrop-filter: blur(var(--glass-blur));
     transition: color 160ms ease, border-color 160ms ease;
   }
 
-  /* 无边框变体只把描边置透明：1px 几何保留，与有边框实例并排时内边距节奏一致，
-     且开关切换可走 border-color 过渡。 */
-  .glass-surface--borderless {
-    border-color: transparent;
+  /* 描边为 opt-in：基类默认透明（1px 几何保留，与有边框实例并排时内边距节奏一致，
+     边框开关切换可走 border-color 过渡），下游材质调用者自动继承无边框默认。 */
+  .glass-surface--bordered {
+    border-color: var(--glass-surface-border);
   }
 
   .glass-surface[data-background-tone="light"] {

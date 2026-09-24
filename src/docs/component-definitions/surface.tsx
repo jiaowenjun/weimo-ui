@@ -9,7 +9,7 @@ import { GlassPreviewCard } from '../glass-preview-card'
 import { SurfaceBorderToggle } from '../preview-toggle'
 
 function CardSurfacePreview() {
-  const [bordered, setBordered] = useState(true)
+  const [bordered, setBordered] = useState(false)
 
   return (
     <ComponentPreviewCard
@@ -30,7 +30,7 @@ function CardSurfacePreview() {
 }
 
 function GlassSurfacePreview() {
-  const [bordered, setBordered] = useState(true)
+  const [bordered, setBordered] = useState(false)
 
   return (
     <GlassPreviewCard
@@ -48,7 +48,7 @@ function GlassSurfacePreview() {
 }
 
 function PopupSurfacePreview() {
-  const [bordered, setBordered] = useState(true)
+  const [bordered, setBordered] = useState(false)
 
   return (
     <ComponentPreviewCard

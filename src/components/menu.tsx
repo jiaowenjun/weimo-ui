@@ -102,7 +102,11 @@ export function MenuPopup({
         sticky={sticky}
       >
         <BaseMenu.Popup
-          className={getGlassSurfaceClassName('weimo-menu__popup', className)}
+          className={getGlassSurfaceClassName(
+            'weimo-menu__popup',
+            'glass-surface--bordered',
+            className,
+          )}
           data-background-tone={backgroundTone ?? undefined}
           data-slot="menu-popup"
           ref={setElementRef}

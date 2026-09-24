@@ -12,10 +12,12 @@ import './icon-button.css'
 
 export type GlassIconButtonProps = ComponentPropsWithoutRef<'button'> & {
   size?: IconButtonSize
+  bordered?: boolean
 }
 
 export const GlassIconButton = forwardRef<HTMLButtonElement, GlassIconButtonProps>(function GlassIconButton(
   {
+    bordered = false,
     className,
     size,
     type = 'button',
@@ -35,7 +37,11 @@ export const GlassIconButton = forwardRef<HTMLButtonElement, GlassIconButtonProp
   return (
     <button
       {...props}
-      className={getGlassSurfaceClassName(getIconButtonClassName('glass', size), className)}
+      className={getGlassSurfaceClassName(
+        getIconButtonClassName('glass', size),
+        bordered ? 'glass-surface--bordered' : undefined,
+        className,
+      )}
       data-background-tone={backgroundTone ?? undefined}
       ref={setElementRef}
       type={type}

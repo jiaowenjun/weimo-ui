@@ -24,7 +24,8 @@
   }
 
   /* 悬停蒙层内收 4px（默认档）：高亮圆与组描边之间留出等距玻璃环——
-     上下与端帽径向同为 3px 玻璃 + 1px 描边，相邻高亮圆间距 8px。 */
+     上下与端帽径向同为 3px 玻璃 + 1px 描边，相邻高亮圆间距 8px。
+     描边仅 bordered 时可见，几何间距与边框开关无关。 */
   .glass-icon-button-group > .icon-button--glass::after {
     inset: 4px;
   }
@@ -56,16 +57,16 @@
 
   /* 组是 div 无 :disabled 伪类，从子按钮推导禁用态：全部按钮禁用时，
      组描边对齐玻璃图标按钮的禁用边框 token（icon-button--glass:disabled 同款），
-     走 .glass-surface 的 border-color 过渡动画切换。 */
-  .glass-icon-button-group:not(:has(> .icon-button--glass:not(:disabled))) {
+     走 .glass-surface 的 border-color 过渡动画切换；描边同样仅在 opt-in 边框组上出现。 */
+  .glass-icon-button-group.glass-surface--bordered:not(:has(> .icon-button--glass:not(:disabled))) {
     border-color: var(--color-border-disabled);
   }
 
-  .glass-icon-button-group[data-background-tone='light']:not(:has(> .icon-button--glass:not(:disabled))) {
+  .glass-icon-button-group.glass-surface--bordered[data-background-tone='light']:not(:has(> .icon-button--glass:not(:disabled))) {
     border-color: var(--color-border-disabled-on-light);
   }
 
-  .glass-icon-button-group[data-background-tone='dark']:not(:has(> .icon-button--glass:not(:disabled))) {
+  .glass-icon-button-group.glass-surface--bordered[data-background-tone='dark']:not(:has(> .icon-button--glass:not(:disabled))) {
     border-color: var(--color-border-disabled-on-dark);
   }
 }

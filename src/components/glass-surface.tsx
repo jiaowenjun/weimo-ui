@@ -114,7 +114,7 @@ function useGlassSurfaceBackgroundToneForElement<ElementType extends HTMLElement
 }
 
 export function GlassSurface({
-  bordered = true,
+  bordered = false,
   className,
   observe = true,
   ...props
@@ -125,7 +125,7 @@ export function GlassSurface({
   return (
     <div
       className={getGlassSurfaceClassName(
-        bordered ? undefined : 'glass-surface--borderless',
+        bordered ? 'glass-surface--bordered' : undefined,
         className,
       )}
       data-background-tone={backgroundTone ?? undefined}

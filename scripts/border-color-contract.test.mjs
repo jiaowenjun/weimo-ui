@@ -86,6 +86,8 @@ const mdEditorCss = readProjectFile('src/components/md-editor/md-editor.css')
 const markdownContentCss = readProjectFile('src/components/markdown-content.css')
 const menuCss = readProjectFile('src/components/menu.css')
 const sidebarShellCss = readProjectFile('src/components/sidebar/sidebar-shell.css')
+// 普通侧边栏经由 card-surface 继承无边框默认；抽屉变体不挂材质类，描边自持。
+const sidebarDrawerBlock = blockFor(sidebarShellCss, '.weimo-sidebar--drawer')
 const tagTreeCss = readProjectFile('src/components/tag-tree/tag-tree.css')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
@@ -98,9 +100,10 @@ const standaloneRegistryItem = readJson('registry/border-color.json')
 const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const registryItem = rootRegistry.items.find((item) => item.name === 'border-color')
 const cossButtonFocusBlock = blockFor(cossButtonCss, '.coss-button:focus-visible')
+// 卡片材质默认无边框后，coss 卡 hover/focus-within 强调描边只落在 opt-in 边框实例上。
 const cossCardInteractiveBlock = blockFor(
   cossCardCss,
-  '.coss-card--interactive:hover,\n  .coss-card--interactive:focus-within',
+  '.coss-card--interactive.card-surface--bordered:hover,\n  .coss-card--interactive.card-surface--bordered:focus-within',
 )
 const cossTabsFocusBlock = blockFor(cossTabsCss, '.coss-tabs__tab:focus-visible')
 const markdownInlineCodeSurfaceBlock = blockFor(
@@ -370,13 +373,12 @@ assert.ok(
   'Markdown dividers, inline code, and tables must use separate node-semantic border tokens.',
 )
 assert.ok(
-    cardSurfaceCss.includes('border: 1px solid var(--color-border);') &&
-    popupSurfaceCss.includes('border: 1px solid var(--color-border);') &&
+    cardSurfaceCss.includes('border-color: var(--color-border);') &&
+    popupSurfaceCss.includes('border-color: var(--color-border);') &&
     !glassSurfaceCss.includes('var(--color-border-divider)') &&
     !chipSurfaceCss.includes('var(--color-border-divider)') &&
     cossButtonCss.includes('border-color: var(--color-border);') &&
-    sidebarShellCss.includes('border: 1px solid var(--color-border);') &&
-    sidebarShellCss.includes('border-color: var(--color-border);') &&
+    sidebarDrawerBlock.includes('border: 1px solid var(--color-border);') &&
     demoBlockPanelBlock.includes('border: 1px solid var(--color-border);') &&
     mdViewDocsPreviewFrameBlock.includes('border: 1px solid var(--color-border);') &&
     tagTreePreviewPanelBlock.includes('border: 1px solid var(--color-border);') &&
@@ -384,9 +386,9 @@ assert.ok(
   'Default BorderColor usage must cover surface/container outer borders and docs preview frames.',
 )
 assert.ok(
-  glassSurfaceCss.includes('border: 1px solid var(--glass-surface-border);') &&
+  glassSurfaceCss.includes('border-color: var(--glass-surface-border);') &&
     !glassSurfaceCss.includes('border: 1px solid var(--color-border);'),
-  'GlassSurface must use its background-aware border token instead of the fixed default BorderColor token.',
+  'GlassSurface must use its background-aware border token (on the opt-in --bordered modifier) instead of the fixed default BorderColor token.',
 )
 
 assert.deepEqual(rootStyleItem, styleRegistry, 'Root registry style item must match registry/style.json.')

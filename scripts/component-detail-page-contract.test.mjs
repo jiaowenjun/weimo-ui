@@ -347,7 +347,8 @@ assert.ok(
     !buttonDefinitionSource.includes("from '../../components/coss/button'") &&
     !buttonDefinitionSource.includes("variant=\"outline\"") &&
     !buttonDefinitionSource.includes('className={`icon-preview__scene icon-preview__scene--${scene.id}`}') &&
-    (buttonDefinitionSource.match(/<GlassIconButton\b[^>\n]*disabled=\{disabled\}/g) ?? []).length === 2 &&
+    (buttonDefinitionSource.match(/<GlassIconButton\b[^>\n]*disabled=\{disabled\}/g) ?? []).length === 4 &&
+    buttonDefinitionSource.includes('<GlassIconButton aria-label="带边框菜单" bordered disabled={disabled}>') &&
     !buttonDefinitionSource.includes('状态切换菜单') &&
     buttonDefinitionSource.includes('preview: () => <ButtonDemo />') &&
     buttonDefinitionSource.includes('<GlassIconButtonPreview />') &&

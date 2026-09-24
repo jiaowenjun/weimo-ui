@@ -22,7 +22,7 @@ export function getPopupSurfaceClassName(
 }
 
 export function PopupSurface({
-  bordered = true,
+  bordered = false,
   className,
   level = 'modal',
   ...props
@@ -31,7 +31,7 @@ export function PopupSurface({
     <div
       className={getPopupSurfaceClassName(
         level,
-        bordered ? undefined : 'popup-surface--borderless',
+        bordered ? 'popup-surface--bordered' : undefined,
         className,
       )}
       data-level={level === 'modal' ? undefined : level}

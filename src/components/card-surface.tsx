@@ -14,14 +14,14 @@ export function getCardSurfaceClassName(...className: ClassValue[]) {
 }
 
 export function CardSurface({
-  bordered = true,
+  bordered = false,
   className,
   ...props
 }: CardSurfaceProps) {
   return (
     <div
       className={getCardSurfaceClassName(
-        bordered ? undefined : 'card-surface--borderless',
+        bordered ? 'card-surface--bordered' : undefined,
         className,
       )}
       {...props}

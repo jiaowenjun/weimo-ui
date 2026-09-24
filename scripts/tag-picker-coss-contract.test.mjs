@@ -108,7 +108,9 @@ assert.ok(
 assert.ok(
   inputGroupSource.includes("getGlassSurfaceClassName('coss-input-group', className)") &&
     !inputGroupSource.includes('getGlassSurfaceAttributes') &&
-    glassSurfaceBlock.includes('border: 1px solid var(--glass-surface-border);') &&
+    glassSurfaceBlock.includes('border: 1px solid transparent;') &&
+    glassSurfaceCss.includes('.glass-surface--bordered {') &&
+    glassSurfaceCss.includes('border-color: var(--glass-surface-border);') &&
     !glassSurfaceBlock.includes('background: var(--glass-gradient);') &&
     !glassSurfaceBlock.includes('linear-gradient') &&
     !glassSurfaceCss.includes('box-shadow:') &&

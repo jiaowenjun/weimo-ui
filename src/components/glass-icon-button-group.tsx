@@ -12,10 +12,12 @@ import './glass-icon-button-group.css'
 
 export type GlassIconButtonGroupProps = Omit<ComponentPropsWithoutRef<'div'>, 'children'> & {
   children: ReactNode
+  bordered?: boolean
 }
 
 export const GlassIconButtonGroup = forwardRef<HTMLDivElement, GlassIconButtonGroupProps>(function GlassIconButtonGroup(
   {
+    bordered = false,
     children,
     className,
     role,
@@ -36,7 +38,11 @@ export const GlassIconButtonGroup = forwardRef<HTMLDivElement, GlassIconButtonGr
     <div
       {...props}
       role={role ?? 'group'}
-      className={getGlassSurfaceClassName('glass-icon-button-group', className)}
+      className={getGlassSurfaceClassName(
+        'glass-icon-button-group',
+        bordered ? 'glass-surface--bordered' : undefined,
+        className,
+      )}
       data-background-tone={backgroundTone ?? undefined}
       ref={setElementRef}
     >

@@ -87,6 +87,12 @@ function GlassIconButtonPreviewGroup({ disabled }: { disabled: boolean }) {
       <GlassIconButton aria-label="小号菜单" disabled={disabled} size="sm">
         <Menu />
       </GlassIconButton>
+      <GlassIconButton aria-label="带边框菜单" bordered disabled={disabled}>
+        <Menu />
+      </GlassIconButton>
+      <GlassIconButton aria-label="小号带边框菜单" bordered disabled={disabled} size="sm">
+        <Menu />
+      </GlassIconButton>
     </div>
   )
 }
@@ -127,6 +133,14 @@ function GlassIconButtonGroupPreviewGroup({ disabled }: { disabled: boolean }) {
           <Share />
         </GlassIconGroupButton>
         <GlassIconGroupButton aria-label="小号更多" disabled={disabled} size="sm">
+          <Ellipsis />
+        </GlassIconGroupButton>
+      </GlassIconButtonGroup>
+      <GlassIconButtonGroup aria-label="带边框玻璃图标按钮组" bordered>
+        <GlassIconGroupButton aria-label="带边框分享" disabled={disabled}>
+          <Share />
+        </GlassIconGroupButton>
+        <GlassIconGroupButton aria-label="带边框更多" disabled={disabled}>
           <Ellipsis />
         </GlassIconGroupButton>
       </GlassIconButtonGroup>

@@ -21,8 +21,14 @@
 
   .coss-card--interactive:hover,
   .coss-card--interactive:focus-within {
-    border-color: var(--color-border-emphasis);
     box-shadow: var(--shadow-card-interactive);
+  }
+
+  /* 卡片材质默认无边框：hover/focus-within 的强调描边仅在 opt-in 边框实例上叠加，
+     无边框实例靠抬升阴影反馈。 */
+  .coss-card--interactive.card-surface--bordered:hover,
+  .coss-card--interactive.card-surface--bordered:focus-within {
+    border-color: var(--color-border-emphasis);
   }
 
   .coss-card--strip {

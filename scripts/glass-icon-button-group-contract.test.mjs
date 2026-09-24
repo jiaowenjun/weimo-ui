@@ -42,6 +42,7 @@ const rootGroupItem = rootRegistry.items.find(
 )
 const componentManifestSource = readProjectFile('src/docs/components-manifest.ts')
 const groupSource = readProjectFile('src/components/glass-icon-button-group.tsx')
+const glassIconButtonSource = readProjectFile('src/components/glass-icon-button.tsx')
 const groupCss = readProjectFile('src/components/glass-icon-button-group.css')
 const iconButtonCss = readProjectFile('src/components/icon-button.css')
 const buttonDocsSource = readProjectFile('src/docs/component-definitions/button.tsx')
@@ -104,8 +105,10 @@ for (const snippet of [
   "import './glass-icon-button-group.css'",
   'export type GlassIconButtonGroupProps',
   'export const GlassIconButtonGroup =',
-  'role ?? \'group\'',
-  "getGlassSurfaceClassName('glass-icon-button-group', className)",
+  'bordered?: boolean',
+  'bordered = false',
+  "role ?? 'group'",
+  `getGlassSurfaceClassName(\n        'glass-icon-button-group',\n        bordered ? 'glass-surface--bordered' : undefined,\n        className,\n      )`,
   'data-background-tone={backgroundTone ?? undefined}',
   'export type GlassIconGroupButtonProps',
   'export const GlassIconGroupButton =',
@@ -226,18 +229,19 @@ for (const snippet of [
 }
 
 // 组无 :disabled 伪类,经 :has 从子按钮推导:全部按钮禁用时组描边
-// 对齐玻璃图标按钮的禁用边框 token(icon-button--glass:disabled 同款三档)。
+// 对齐玻璃图标按钮的禁用边框 token(icon-button--glass:disabled 同款三档);
+// .glass-surface--bordered 修饰类保证描边只出现在 opt-in 边框组上(默认无边框)。
 const groupDisabledBorderBlocks = [
   [
-    '.glass-icon-button-group:not(:has(> .icon-button--glass:not(:disabled)))',
+    '.glass-icon-button-group.glass-surface--bordered:not(:has(> .icon-button--glass:not(:disabled)))',
     'border-color: var(--color-border-disabled);',
   ],
   [
-    ".glass-icon-button-group[data-background-tone='light']:not(:has(> .icon-button--glass:not(:disabled)))",
+    ".glass-icon-button-group.glass-surface--bordered[data-background-tone='light']:not(:has(> .icon-button--glass:not(:disabled)))",
     'border-color: var(--color-border-disabled-on-light);',
   ],
   [
-    ".glass-icon-button-group[data-background-tone='dark']:not(:has(> .icon-button--glass:not(:disabled)))",
+    ".glass-icon-button-group.glass-surface--bordered[data-background-tone='dark']:not(:has(> .icon-button--glass:not(:disabled)))",
     'border-color: var(--color-border-disabled-on-dark);',
   ],
 ]
@@ -257,6 +261,33 @@ assertIncludes(
   'icon-button--glass hover overlay must keep consuming the inherited glass-surface hover token.',
 )
 
+// 玻璃材质基类默认无边框:玻璃图标按钮的禁用描边必须落在 .glass-surface--bordered
+// 修饰类上,无边框实例在任何状态都保持透明描边。
+for (const snippet of [
+  'bordered?: boolean',
+  'bordered = false',
+  "bordered ? 'glass-surface--bordered' : undefined",
+]) {
+  assertIncludes(
+    glassIconButtonSource,
+    snippet,
+    `GlassIconButton must default to borderless and only stroke when bordered is set: ${snippet}.`,
+  )
+}
+const glassDisabledBlock = cssBlockFor(iconButtonCss, '.icon-button--glass:disabled')
+
+assert.ok(
+  !glassDisabledBlock.includes('border-color'),
+  'The base .icon-button--glass:disabled block must not set border-color; borderless instances would lose the transparent stroke.',
+)
+assert.ok(
+  cssBlockFor(
+    iconButtonCss,
+    '.icon-button--glass.glass-surface--bordered:disabled',
+  ).includes('border-color: var(--icon-button-disabled-border);'),
+  'The glass icon button disabled stroke must only land on bordered instances via the .glass-surface--bordered modifier.',
+)
+
 for (const snippet of [
   "import {\n  GlassIconButtonGroup,\n  GlassIconGroupButton,\n} from '../../components/glass-icon-button-group'",
   'function GlassIconButtonGroupPreviewGroup(',
@@ -268,6 +299,7 @@ for (const snippet of [
   'aria-label="GlassIconButtonGroup 玻璃按钮组预览"',
   '<GlassIconButtonGroup aria-label="玻璃图标按钮组">',
   '<GlassIconButtonGroup aria-label="小号玻璃图标按钮组">',
+  '<GlassIconButtonGroup aria-label="带边框玻璃图标按钮组" bordered>',
   "'玻璃图标按钮组',",
   "'GlassIconButtonGroup',",
 ]) {
@@ -280,8 +312,8 @@ for (const snippet of [
 
 assert.equal(
   (buttonDocsSource.match(/<GlassIconGroupButton\b[^>\n]*disabled=\{disabled\}/g) ?? []).length,
-  4,
-  'Button docs group preview must demo a two-button default group and a two-button sm group, all wired to the disabled toggle.',
+  6,
+  'Button docs group preview must demo the borderless default group, the two-button sm group, and the bordered group, all wired to the disabled toggle.',
 )
 assert.equal(
   (buttonDocsSource.match(/<GlassIconGroupButton\b[^>\n]*size="sm"/g) ?? []).length,

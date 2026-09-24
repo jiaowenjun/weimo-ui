@@ -49,7 +49,9 @@ const glassSurfaceBlock = cssBlockFor(glassSurfaceCss, '.glass-surface')
 
 assert.ok(
   menuSource.includes("from './glass-surface'") &&
-    menuSource.includes("getGlassSurfaceClassName('weimo-menu__popup', className)") &&
+    menuSource.includes(
+      "getGlassSurfaceClassName(\n            'weimo-menu__popup',\n            'glass-surface--bordered',\n            className,\n          )",
+    ) &&
     menuSource.includes('useGlassSurfaceBackgroundToneRef<HTMLDivElement>(true)') &&
     menuSource.includes('data-background-tone={backgroundTone ?? undefined}') &&
     menuSource.includes('ref={setElementRef}') &&
@@ -67,8 +69,10 @@ assert.ok(
 assert.ok(!glassSurfaceBlock.includes('background: var(--glass-gradient);'), 'GlassSurface must not use the Weimo glass gradient.')
 assert.ok(!glassSurfaceBlock.includes('linear-gradient'), 'GlassSurface must not use a gradient background.')
 assert.ok(
-  glassSurfaceBlock.includes('border: 1px solid var(--glass-surface-border);'),
-  'GlassSurface must use its background-aware border token.',
+  glassSurfaceBlock.includes('border: 1px solid transparent;') &&
+    glassSurfaceCss.includes('.glass-surface--bordered {') &&
+    glassSurfaceCss.includes('border-color: var(--glass-surface-border);'),
+  'GlassSurface must keep its stroke opt-in on the --bordered modifier using the background-aware border token.',
 )
 assert.ok(!glassSurfaceCss.includes('box-shadow:'), 'GlassSurface must not use inner or outer shadow effects.')
 assert.ok(!glassSurfaceCss.includes('--glass-shadow'), 'GlassSurface must not depend on glass shadow tokens.')

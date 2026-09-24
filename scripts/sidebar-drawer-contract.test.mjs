@@ -206,7 +206,7 @@ for (const block of [sidebarDrawerViewportBlock, sidebarDrawerStageBlock, sideba
 }
 assert.match(
   sidebarDrawerBlock,
-  /border-color:\s*var\(--color-border\);/,
+  /border:\s*1px solid var\(--color-border\);/,
   'Drawer sidebar must keep the default border so the floating panel edge remains visible.',
 )
 assert.match(

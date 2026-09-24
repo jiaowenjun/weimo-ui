@@ -91,7 +91,10 @@
     --glass-surface-fg: var(--icon-button-disabled-fg);
     --glass-surface-fg-on-light: var(--icon-button-disabled-fg);
     --glass-surface-fg-on-dark: var(--icon-button-disabled-fg);
+  }
 
+  /* 禁用描边仅落在 opt-in 边框实例上；基类默认保持透明（1px 几何不变）。 */
+  .icon-button--glass.glass-surface--bordered:disabled {
     border-color: var(--icon-button-disabled-border);
   }
 

@@ -106,8 +106,8 @@ for (const snippet of [
   'export function getCardSurfaceClassName(...className: ClassValue[])',
   "return cn('card-surface', className)",
   'export function CardSurface',
-  'bordered = true',
-  "bordered ? undefined : 'card-surface--borderless'",
+  'bordered = false',
+  "bordered ? 'card-surface--bordered' : undefined",
 ]) {
   assert.ok(cardSurfaceSource.includes(snippet), `CardSurface source must include ${snippet}.`)
 }
@@ -115,7 +115,7 @@ const cardSurfaceBlock = blockFor(cardSurfaceCss, '.card-surface')
 for (const snippet of [
   'box-sizing: border-box;',
   'color: var(--color-text-primary);',
-  'border: 1px solid var(--color-border);',
+  'border: 1px solid transparent;',
   'border-radius: var(--radius);',
   'background: var(--color-bg-card);',
   'box-shadow: var(--shadow-card);',
@@ -127,10 +127,10 @@ assert.ok(
   'CardSurface must own material only, not layout padding or blur.',
 )
 assert.ok(
-  blockFor(cardSurfaceCss, '.card-surface--borderless').includes('border-color: transparent;') &&
+  blockFor(cardSurfaceCss, '.card-surface--bordered').includes('border-color: var(--color-border);') &&
     !cardSurfaceCss.includes('border: none') &&
     !cardSurfaceCss.includes('border-width: 0'),
-  'CardSurface borderless variant must keep the 1px transparent border geometry instead of dropping the border box.',
+  'CardSurface stroke must be opt-in via --bordered while the base keeps the 1px transparent border geometry.',
 )
 
 for (const snippet of [
@@ -258,8 +258,8 @@ for (const snippet of [
   'export function getPopupSurfaceClassName(',
   "return cn('popup-surface', className)",
   'export function PopupSurface',
-  'bordered = true',
-  "bordered ? undefined : 'popup-surface--borderless'",
+  'bordered = false',
+  "bordered ? 'popup-surface--bordered' : undefined",
   "data-level={level === 'modal' ? undefined : level}",
 ]) {
   assert.ok(popupSurfaceSource.includes(snippet), `PopupSurface source must include ${snippet}.`)
@@ -267,7 +267,7 @@ for (const snippet of [
 const popupSurfaceBlock = blockFor(popupSurfaceCss, '.popup-surface')
 for (const snippet of [
   'color: var(--color-text-primary);',
-  'border: 1px solid var(--color-border);',
+  'border: 1px solid transparent;',
   'border-radius: var(--radius);',
   'background: var(--color-bg-card);',
   'box-shadow: var(--shadow-overlay);',
@@ -281,10 +281,10 @@ assert.ok(
   'PopupSurface tooltip level must use tooltip radius and shadow.',
 )
 assert.ok(
-  blockFor(popupSurfaceCss, '.popup-surface--borderless').includes('border-color: transparent;') &&
+  blockFor(popupSurfaceCss, '.popup-surface--bordered').includes('border-color: var(--color-border);') &&
     !popupSurfaceCss.includes('border: none') &&
     !popupSurfaceCss.includes('border-width: 0'),
-  'PopupSurface borderless variant must keep the 1px transparent border geometry instead of dropping the border box.',
+  'PopupSurface stroke must be opt-in via --bordered while the base keeps the 1px transparent border geometry.',
 )
 assert.ok(
   !popupSurfaceCss.includes('backdrop-filter') && !popupSurfaceBlock.includes('padding:'),

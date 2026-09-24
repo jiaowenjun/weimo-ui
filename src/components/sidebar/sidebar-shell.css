@@ -40,7 +40,6 @@
 
   width: fit-content;
   color: var(--color-text-primary);
-  border: 1px solid var(--color-border);
   border-radius: var(--radius);
   scrollbar-width: none;
 }
@@ -129,6 +128,8 @@
   );
 }
 
+/* 抽屉变体不挂 card-surface 类（自带卡片材质的独立复刻），描边自持；
+   普通变体经由 card-surface 继承材质的无边框默认。 */
 .weimo-sidebar--drawer {
   position: relative;
   z-index: 1;
@@ -137,7 +138,7 @@
   min-height: 0;
   overflow-x: hidden;
   overflow-y: auto;
-  border-color: var(--color-border);
+  border: 1px solid var(--color-border);
   background: var(--color-bg-card);
   pointer-events: auto;
   outline: none;
