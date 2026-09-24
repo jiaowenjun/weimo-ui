@@ -225,6 +225,30 @@ for (const snippet of [
   )
 }
 
+// 组无 :disabled 伪类,经 :has 从子按钮推导:全部按钮禁用时组描边
+// 对齐玻璃图标按钮的禁用边框 token(icon-button--glass:disabled 同款三档)。
+const groupDisabledBorderBlocks = [
+  [
+    '.glass-icon-button-group:not(:has(> .icon-button--glass:not(:disabled)))',
+    'border-color: var(--color-border-disabled);',
+  ],
+  [
+    ".glass-icon-button-group[data-background-tone='light']:not(:has(> .icon-button--glass:not(:disabled)))",
+    'border-color: var(--color-border-disabled-on-light);',
+  ],
+  [
+    ".glass-icon-button-group[data-background-tone='dark']:not(:has(> .icon-button--glass:not(:disabled)))",
+    'border-color: var(--color-border-disabled-on-dark);',
+  ],
+]
+
+for (const [selector, snippet] of groupDisabledBorderBlocks) {
+  assert.ok(
+    cssBlockFor(groupCss, selector).includes(snippet),
+    `GlassIconButtonGroup disabled border must mirror the glass icon button token: ${selector} must set ${snippet}`,
+  )
+}
+
 // 悬停反馈与玻璃图标按钮同源:组内按钮复用 icon-button--glass 的 ::after 蒙层,
 // 蒙层色取组上继承的 --glass-surface-hover-bg(currentColor 12%),缺省才回落主题色。
 assertIncludes(

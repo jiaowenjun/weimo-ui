@@ -53,4 +53,19 @@
   .glass-icon-button-group[data-background-tone='dark'] > .icon-button--glass:disabled {
     color: var(--color-text-disabled-on-dark);
   }
+
+  /* 组是 div 无 :disabled 伪类，从子按钮推导禁用态：全部按钮禁用时，
+     组描边对齐玻璃图标按钮的禁用边框 token（icon-button--glass:disabled 同款），
+     走 .glass-surface 的 border-color 过渡动画切换。 */
+  .glass-icon-button-group:not(:has(> .icon-button--glass:not(:disabled))) {
+    border-color: var(--color-border-disabled);
+  }
+
+  .glass-icon-button-group[data-background-tone='light']:not(:has(> .icon-button--glass:not(:disabled))) {
+    border-color: var(--color-border-disabled-on-light);
+  }
+
+  .glass-icon-button-group[data-background-tone='dark']:not(:has(> .icon-button--glass:not(:disabled))) {
+    border-color: var(--color-border-disabled-on-dark);
+  }
 }
