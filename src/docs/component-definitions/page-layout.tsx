@@ -65,6 +65,7 @@ function TopBarDemo() {
               bordered={false}
               className="top-bar-preview__title"
               content="页面标题"
+              textSize="lg"
               variant="glass"
             />
           </>

@@ -209,6 +209,7 @@ export function DocsShell() {
           bordered={false}
           className="docs-top-bar__title"
           content={selected.name}
+          textSize="lg"
           variant="glass"
         />
       ) : null}
