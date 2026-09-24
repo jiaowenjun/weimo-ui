@@ -158,6 +158,10 @@ for (const snippet of [
 ]) {
   assertIncludes(docsSource, snippet, `Button docs definition must include ${snippet}.`)
 }
+assert.ok(
+  docsSource.includes('<ComponentPreviewCard') && docsSource.includes('align="center"'),
+  'TextButton demo card must center its example vertically via the shared align="center" canvas.',
+)
 assertIncludes(
   definitionsIndexSource,
   "import { buttonDefinition } from './button'",

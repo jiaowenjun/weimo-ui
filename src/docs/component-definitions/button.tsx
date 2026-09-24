@@ -26,6 +26,7 @@ function TextButtonPreview() {
           onCheckedChange={(checked) => setDisabled(!checked)}
         />
       }
+      align="center"
       label="文本按钮"
     >
       <div className="text-button-preview" aria-label="TextButton 状态预览">
