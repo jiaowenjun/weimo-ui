@@ -42,9 +42,6 @@ export function BaseCard({
           data-meta-collapsible={metaCollapsible ? 'true' : undefined}
         >
           <span className="base-card__title">{title}</span>
-          {actionSlot === undefined ? null : (
-            <div className="base-card__header-action">{actionSlot}</div>
-          )}
           {meta === undefined || !metaCollapsible ? null : (
             <GhostIconButton
               aria-expanded={metaExpanded}
@@ -56,6 +53,9 @@ export function BaseCard({
             >
               <ChevronRight aria-hidden="true" />
             </GhostIconButton>
+          )}
+          {actionSlot === undefined ? null : (
+            <div className="base-card__header-action">{actionSlot}</div>
           )}
         </header>
       )}

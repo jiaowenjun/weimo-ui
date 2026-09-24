@@ -80,7 +80,7 @@ function BaseCardDemo() {
         title="卡片标题"
       >
         <p className="base-card-docs-preview__body">
-          元信息区默认折叠,点击标题栏最右端按钮展开;折叠时图标为 chevron-right,展开时旋转为 chevron-down。
+          元信息区默认折叠,点击标题栏右侧动作区前的按钮展开;折叠时图标为 chevron-right,展开时旋转为 chevron-down。
         </p>
       </BaseCard>
       <BaseCard
