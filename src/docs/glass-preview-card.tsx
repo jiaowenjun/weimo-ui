@@ -3,12 +3,12 @@ import type { ReactNode } from 'react'
 
 import { ComponentPreviewCard } from '../components/component-preview-card'
 import { cn } from '../components/lib/utils'
+import { Slider } from '../components/slider'
 import {
   getGlassPreviewBackground,
   glassBackgroundGrayDark,
   glassBackgroundGrayLight,
 } from './glass-preview'
-import { GraySlider } from './gray-slider'
 
 // Surface 页「玻璃材质」卡与按钮页「玻璃图标按钮」卡的公共外壳：
 // ComponentPreviewCard + 标题栏灰度滑块 + 可滑动竖条纹玻璃背景。
@@ -59,7 +59,7 @@ export function GlassPreviewCard({
     <ComponentPreviewCard
       action={
         <>
-          <GraySlider
+          <Slider
             ariaLabel="背景灰度"
             max={glassBackgroundGrayLight}
             min={glassBackgroundGrayDark}

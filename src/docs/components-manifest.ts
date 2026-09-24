@@ -215,6 +215,16 @@ export const componentManifest = [
     registry: true,
   },
   {
+    id: 'slider',
+    name: '滑块',
+    exportName: 'Slider',
+    registryName: 'slider',
+    packageExport: './components/slider',
+    group: 'controls-overlays',
+    docs: true,
+    registry: true,
+  },
+  {
     id: 'menu',
     name: '菜单',
     exportName: 'Menu',

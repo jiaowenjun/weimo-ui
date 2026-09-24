@@ -504,6 +504,22 @@
   padding: 16px;
 }
 
+.slider-preview {
+  display: flex;
+  width: 100%;
+  min-height: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px;
+}
+
+/* 数值读数：tabular 数字 + 固定最小宽，拖动时滑块不随位数变化抖动 */
+.slider-preview__value {
+  min-width: 3ch;
+  font-variant-numeric: tabular-nums;
+}
+
 .tag-tree-preview {
   display: flex;
   width: 100%;
@@ -934,73 +950,6 @@
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
   line-height: 1.4;
-}
-
-/* 自研灰度滑块（Surface 页玻璃材质卡）：外观对齐原 coss Slider（轨道 4px、
-   滑块 14px、控制区高 20px），交互层是覆盖整个控制区的透明原生 range input。
-   thumb 与 indicator 的几何由 --fill 一个自定义属性驱动；平滑移动 = 纯 CSS
-   transition，按住（:active）期间禁用过渡保证拖动逐帧跟手。 */
-.gray-slider {
-  position: relative;
-  width: 140px;
-  height: 20px;
-}
-
-.gray-slider__input {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  opacity: 0;
-  cursor: pointer;
-  touch-action: none;
-}
-
-.gray-slider__track {
-  position: absolute;
-  inset-block-start: 50%;
-  width: 100%;
-  height: 4px;
-  translate: 0 -50%;
-  border-radius: var(--radius-round);
-  background: var(--color-border);
-  pointer-events: none;
-}
-
-.gray-slider__indicator {
-  position: absolute;
-  inset-block: 0;
-  inset-inline-start: 0;
-  /* 滑块中心行程 = 轨道宽 − 滑块宽（与 Base UI 的 inset 定位几何一致） */
-  inline-size: calc(7px + (100% - 14px) * var(--fill));
-  border-radius: inherit;
-  background: var(--color-bg-primary);
-  transition: inline-size 300ms ease-out;
-}
-
-.gray-slider__thumb {
-  position: absolute;
-  inset-block-start: 50%;
-  inset-inline-start: calc(7px + (100% - 14px) * var(--fill));
-  width: 14px;
-  height: 14px;
-  border: 2px solid var(--color-bg-card);
-  border-radius: var(--radius-round);
-  background: var(--color-bg-primary);
-  translate: -50% -50%;
-  transition: inset-inline-start 300ms ease-out;
-  pointer-events: none;
-}
-
-.gray-slider:active .gray-slider__indicator,
-.gray-slider:active .gray-slider__thumb {
-  transition: none;
-}
-
-.gray-slider__input:focus-visible ~ .gray-slider__thumb {
-  outline: 2px solid var(--color-border-emphasis);
-  outline-offset: 2px;
 }
 
 .card-surface-preview,

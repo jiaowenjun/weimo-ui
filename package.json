@@ -50,6 +50,7 @@
     "./components/coss/input-group": "./src/components/coss/input-group.tsx",
     "./components/coss/tabs": "./src/components/coss/tabs.tsx",
     "./components/coss/scroll-area": "./src/components/coss/scroll-area.tsx",
+    "./components/slider": "./src/components/slider.tsx",
     "./components/menu": "./src/components/menu.tsx",
     "./components/tag-bread": "./src/components/tag-bread.tsx",
     "./components/sidebar": "./src/components/sidebar/index.tsx",

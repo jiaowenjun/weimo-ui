@@ -6,6 +6,7 @@ import { borderTokensDefinition } from './border-tokens'
 import { surfaceDefinition } from './surface'
 import { actionDialogDefinition } from './action-dialog'
 import { buttonDefinition } from './button'
+import { sliderDefinition } from './slider'
 import { menuDefinition } from './menu'
 import { barDefinition } from './bar'
 import { pageLayoutDefinition } from './page-layout'
@@ -27,6 +28,7 @@ export const componentDefinitionsById = {
   surface: surfaceDefinition,
   'action-dialog': actionDialogDefinition,
   button: buttonDefinition,
+  slider: sliderDefinition,
   menu: menuDefinition,
   bar: barDefinition,
   'page-layout': pageLayoutDefinition,

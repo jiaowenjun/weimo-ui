@@ -850,6 +850,31 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "Slider",
+      "description": "A self-built range slider that keeps a transparent native input as the interaction layer and paints the track, indicator, and thumb from a single --fill custom property.",
+      "categories": [
+        "input"
+      ],
+      "registryDependencies": [
+        "@weimo/style"
+      ],
+      "files": [
+        {
+          "path": "src/components/slider.tsx",
+          "type": "registry:ui",
+          "target": "@ui/slider.tsx"
+        },
+        {
+          "path": "src/components/slider.css",
+          "type": "registry:ui",
+          "target": "@ui/slider.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "menu",
       "type": "registry:ui",
       "title": "Menu",

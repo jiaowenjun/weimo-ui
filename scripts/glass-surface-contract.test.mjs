@@ -56,6 +56,7 @@ const glassSurfaceModelSource = readProjectFile(
   'src/components/glass-surface-model.ts',
 )
 const glassSurfaceCss = readProjectFile('src/components/glass-surface.css')
+const sliderCss = readProjectFile('src/components/slider.css')
 const appCss = readProjectFile('src/App.css')
 const tokensCss = readProjectFile('src/styles/tokens.css')
 const glassSurfaceModelContractModule = await import(
@@ -322,13 +323,14 @@ for (const snippet of [
 for (const removedFilePath of [
   'src/components/coss/slider.tsx',
   'src/components/coss/slider.css',
+  'src/docs/gray-slider.tsx',
 ]) {
   assert.ok(!existsSync(join(root, removedFilePath)), `${removedFilePath} must be removed.`)
 }
 assertOmits(
   glassSurfaceDefinitionSource,
   'coss/slider',
-  'GlassSurface docs definition must use the self-built GraySlider instead of the removed coss Slider.',
+  'GlassSurface docs definition must use the self-built Slider instead of the removed coss Slider.',
 )
 
 for (const snippet of [
@@ -366,7 +368,7 @@ for (const snippet of [
   'function GlassPreviewCard(',
   "from '../components/component-preview-card'",
   "from './glass-preview'",
-  "from './gray-slider'",
+  "from '../components/slider'",
   "window.matchMedia('(prefers-color-scheme: dark)').matches",
   '? glassBackgroundGrayDark\n      : glassBackgroundGrayLight',
   'const syncThemeEndpoint = () => {',
@@ -412,18 +414,18 @@ for (const snippet of [
   )
 }
 
-const graySliderModuleSource = readProjectFile('src/docs/gray-slider.tsx')
+const sliderModuleSource = readProjectFile('src/components/slider.tsx')
 
 for (const snippet of [
-  'function GraySlider(',
+  'function Slider(',
   'type="range"',
-  'className="gray-slider"',
+  'className="slider"',
   "style={{ '--fill': fill } as CSSProperties}",
 ]) {
   assertIncludes(
-    graySliderModuleSource,
+    sliderModuleSource,
     snippet,
-    `GraySlider shared module must include ${snippet}.`,
+    `Slider component module must include ${snippet}.`,
   )
 }
 assert.ok(
@@ -444,19 +446,6 @@ for (const snippet of [
   'width: 100%;',
   'height: 180px;',
   'overflow: hidden;',
-  '.gray-slider',
-  'width: 140px;',
-  '.gray-slider__input',
-  'touch-action: none;',
-  '.gray-slider__track',
-  '.gray-slider__indicator',
-  'transition: inline-size 300ms ease-out;',
-  '.gray-slider__thumb',
-  'transition: inset-inline-start 300ms ease-out;',
-  '.gray-slider:active .gray-slider__indicator,',
-  '.gray-slider:active .gray-slider__thumb',
-  'transition: none;',
-  '.gray-slider__input:focus-visible ~ .gray-slider__thumb',
   '.glass-surface-preview__fixed',
   'position: absolute;',
   'inset: 0;',
@@ -467,6 +456,24 @@ for (const snippet of [
   'pointer-events: auto;',
 ]) {
   assertIncludes(appCss, snippet, `GlassSurface preview CSS must include ${snippet}.`)
+}
+
+for (const snippet of [
+  '.slider',
+  'width: 140px;',
+  '.slider__input',
+  'touch-action: none;',
+  '.slider__track',
+  '.slider__indicator',
+  'transition: inline-size 300ms ease-out;',
+  '.slider__thumb',
+  'transition: inset-inline-start 300ms ease-out;',
+  '.slider:active .slider__indicator,',
+  '.slider:active .slider__thumb',
+  'transition: none;',
+  '.slider__input:focus-visible ~ .slider__thumb',
+]) {
+  assertIncludes(sliderCss, snippet, `Slider component CSS must include ${snippet}.`)
 }
 assertOmits(
   appCss,
