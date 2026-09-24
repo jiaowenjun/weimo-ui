@@ -1,0 +1,43 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "type": "registry:ui",
+  "dependencies": [],
+  "name": "base-card",
+  "title": "Base Card",
+  "description": "A minimal card shell on the card surface material, matching Card's radius and padding, with a temporary debug dashed outline around the content area.",
+  "categories": [
+    "layout",
+    "surface"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/base-card.tsx",
+      "type": "registry:ui",
+      "target": "@ui/base-card.tsx"
+    },
+    {
+      "path": "src/components/base-card.css",
+      "type": "registry:ui",
+      "target": "@ui/base-card.css"
+    },
+    {
+      "path": "src/components/card-surface.tsx",
+      "type": "registry:ui",
+      "target": "@ui/card-surface.tsx"
+    },
+    {
+      "path": "src/components/card-surface.css",
+      "type": "registry:ui",
+      "target": "@ui/card-surface.css"
+    },
+    {
+      "path": "src/lib/utils.ts",
+      "type": "registry:lib",
+      "target": "@ui/lib/utils.ts"
+    }
+  ]
+}

@@ -514,6 +514,28 @@
   padding: 16px;
 }
 
+/* 基础卡片页:预览不套 ComponentPreviewCard,BaseCard 直接作为页面内容渲染 */
+.base-card-docs-preview {
+  gap: 4px;
+}
+
+.base-card-docs-preview__title {
+  font-size: var(--font-size-base);
+  font-weight: 650;
+}
+
+.base-card-docs-preview__body {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-base);
+  line-height: var(--font-line-height-reading);
+}
+
+.base-card-docs-preview__note {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--font-line-height-reading);
+}
+
 .slider-preview {
   display: flex;
   width: 100%;

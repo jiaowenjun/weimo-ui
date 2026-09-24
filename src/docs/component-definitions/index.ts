@@ -13,6 +13,7 @@ import { pageLayoutDefinition } from './page-layout'
 import { tagDefinition } from './tag'
 import { capsuleDefinition } from './capsule'
 import { markdownDefinition } from './markdown'
+import { baseCardDefinition } from './base-card'
 import { taggedCardDefinition } from './tagged-card'
 import { ocrDefinition } from './ocr'
 import { imageDefinition } from './image'
@@ -35,6 +36,7 @@ export const componentDefinitionsById = {
   tag: tagDefinition,
   capsule: capsuleDefinition,
   markdown: markdownDefinition,
+  'base-card': baseCardDefinition,
   'tagged-card': taggedCardDefinition,
   ocr: ocrDefinition,
   image: imageDefinition,

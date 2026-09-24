@@ -402,6 +402,16 @@ export const componentManifest = [
     registry: true,
   },
   {
+    id: 'base-card',
+    name: '基础卡片',
+    exportName: 'BaseCard',
+    registryName: 'base-card',
+    packageExport: './components/base-card',
+    group: 'content-markdown',
+    docs: true,
+    registry: true,
+  },
+  {
     id: 'tagged-card',
     name: '带标签卡片',
     exportName: 'Card',

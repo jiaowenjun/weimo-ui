@@ -23,6 +23,7 @@
     "README.md"
   ],
   "exports": {
+    "./components/base-card": "./src/components/base-card.tsx",
     "./components/card": "./src/components/card.tsx",
     "./components/card-composer": "./src/components/card-composer.tsx",
     "./components/canvas-transparency": "./src/components/canvas-transparency.tsx",

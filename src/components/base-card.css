@@ -1,0 +1,20 @@
+@layer components {
+  .base-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-card-pad);
+  }
+
+  /* DEBUG 布局观察层(临时):虚线描出内容区(content box)边界——距外边框一个
+     padding 间隔。绝对定位相对于 padding box,故 inset 取 padding 值。
+     不影响布局与交互;隐藏方法:注释掉下面整条规则即可,无需改动组件结构。 */
+  .base-card::before {
+    content: '';
+    position: absolute;
+    inset: var(--space-card-pad);
+    border: 1px dashed var(--color-border-emphasis);
+    border-radius: var(--radius-xs);
+    pointer-events: none;
+  }
+}
