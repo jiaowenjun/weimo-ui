@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef } from 'react'
 import type { ComponentPropsWithoutRef, ComponentRef, ReactNode, RefObject } from 'react'
 
-import { CardSurface } from './card-surface'
+import { BaseCard } from './base-card'
 import { cn } from './lib/utils'
 
 import './component-preview-card.css'
@@ -143,25 +143,29 @@ export type ComponentPreviewCardItem = {
 }
 
 export type ComponentPreviewCardProps = Omit<
-  ComponentPropsWithoutRef<typeof CardSurface>,
-  'children'
+  ComponentPropsWithoutRef<typeof BaseCard>,
+  'actionSlot' | 'children' | 'footerSlot' | 'meta' | 'title'
 > & {
   action?: ReactNode
   align?: 'start' | 'center'
   children: ReactNode
   darkValue?: ReactNode
+  footer?: ReactNode
   items?: readonly ComponentPreviewCardItem[]
   label: ReactNode
   token?: string
   value?: ReactNode
 }
 
+// 预览卡 = BaseCard 壳(卡片材质、圆角、内边距、分区 1em 间隔与 DEBUG 观察层)
+// + 可选 token 行信息区 + 统一节奏的内容画布。
 export function ComponentPreviewCard({
   action,
   align = 'start',
   children,
   className,
   darkValue,
+  footer,
   items,
   label,
   token,
@@ -172,26 +176,25 @@ export function ComponentPreviewCard({
     items ?? (token === undefined || value === undefined ? [] : [{ darkValue, token, value }])
 
   return (
-    <CardSurface
+    <BaseCard
+      actionSlot={action}
       className={cn(
         'component-preview-card',
         align === 'center' && 'component-preview-card--align-center',
         className,
       )}
+      footerSlot={footer}
+      meta={
+        rows.length > 0 ? (
+          rows.map((row) => (
+            <TokenPreviewRow darkValue={row.darkValue} key={row.token} token={row.token} value={row.value} />
+          ))
+        ) : undefined
+      }
+      title={label}
       {...props}
     >
-      <div className="component-preview-card__meta">
-        <div className="component-preview-card__title">
-          <span className="component-preview-card__label">{label}</span>
-          {action === undefined ? null : (
-            <div className="component-preview-card__action">{action}</div>
-          )}
-        </div>
-        {rows.map((row) => (
-          <TokenPreviewRow darkValue={row.darkValue} key={row.token} token={row.token} value={row.value} />
-        ))}
-      </div>
       {children}
-    </CardSurface>
+    </BaseCard>
   )
 }

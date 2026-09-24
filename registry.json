@@ -2751,7 +2751,7 @@
       "registryDependencies": [
         "@weimo/style",
         "@weimo/utils",
-        "@weimo/card-surface"
+        "@weimo/base-card"
       ],
       "files": [
         {

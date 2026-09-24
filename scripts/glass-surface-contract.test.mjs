@@ -389,6 +389,7 @@ for (const snippet of [
   'onValueChange={setGlassBackgroundGray}',
   'className="glass-preview-card__canvas"',
   'style={getGlassPreviewBackground(glassBackgroundGray)}',
+  'footer={',
   'glass-preview-card__slider-row',
 ]) {
   assertIncludes(
@@ -397,6 +398,12 @@ for (const snippet of [
     `GlassPreviewCard shared component must include ${snippet}.`,
   )
 }
+assert.ok(
+  glassPreviewCardModuleSource.includes('footer={') &&
+    glassPreviewCardModuleSource.indexOf('footer={') <
+      glassPreviewCardModuleSource.indexOf('className="glass-preview-card__canvas"'),
+  'GlassPreviewCard slider row must live in the BaseCard footer slot, not inside the striped canvas content.',
+)
 
 // 条纹背景机制与自研滑块抽到 docs 共享模块（Surface 页与按钮页玻璃卡共用），契约随之锁共享文件。
 const glassPreviewModuleSource = readProjectFile('src/docs/glass-preview.ts')
@@ -454,13 +461,16 @@ for (const snippet of [
   '.glass-preview-card__canvas {\n  display: grid;\n  padding: 16px;\n  place-items: center;\n}',
   '.glass-preview-card__slider-row',
   'justify-content: center;',
-  'min-height: 0;',
   '.glass-surface-preview__tile',
   'justify-items: center;',
   'text-align: center;',
 ]) {
   assertIncludes(appCss, snippet, `GlassSurface preview CSS must include ${snippet}.`)
 }
+assert.ok(
+  !appCss.includes('.glass-preview-card__slider-row {\n  display: flex;\n  justify-content: center;\n  min-height: 0;'),
+  'The slider row must not keep the old canvas-rhythm min-height override now that it lives in the BaseCard footer.',
+)
 
 assertOmits(
   appCss,

@@ -39,7 +39,7 @@ const previewCardDefinitionSource = readProjectFile(
 const appCss = readProjectFile('src/App.css')
 const previewBlock = blockFor(
   cardCss,
-  '.component-preview-card > .component-preview-card__meta ~ *',
+  '.component-preview-card .base-card__content',
 )
 const transparentSurfaceBlock = blockFor(
   cardCss,
@@ -84,12 +84,12 @@ assert.ok(
 )
 
 for (const snippet of [
-  "import { CardSurface } from './card-surface'",
+  "import { BaseCard } from './base-card'",
   'export type ComponentPreviewCardProps',
   'export function ComponentPreviewCard',
   'darkValue?: ReactNode',
-  'className="component-preview-card__meta"',
-  'className="component-preview-card__label"',
+  'title={label}',
+  'actionSlot={action}',
   'className="component-preview-card__token"',
   'className="component-preview-card__value"',
   'className="component-preview-card__value--light"',
@@ -101,8 +101,8 @@ for (const snippet of [
 
 for (const selector of [
   '.component-preview-card',
-  '.component-preview-card__meta',
-  '.component-preview-card__label',
+  '.component-preview-card .base-card__meta',
+  '.component-preview-card .base-card__content',
   '.component-preview-card__token',
   '.component-preview-card__value',
   '.component-preview-card__value--dark',
@@ -114,7 +114,7 @@ for (const selector of [
 const cardRowBlock = blockFor(cardCss, '.component-preview-card__row')
 
 assert.ok(
-  cardCss.includes('.component-preview-card__meta {\n    display: grid;') &&
+  cardCss.includes('.component-preview-card .base-card__meta {\n    display: grid;') &&
     cardSource.includes('<code className="component-preview-card__token">{row.token}</code>') &&
     cardSource.includes('<code className="component-preview-card__value">') &&
     cardSource.includes('className="component-preview-card__row"') &&
@@ -144,14 +144,19 @@ assert.ok(
 )
 assert.ok(
   cardSource.includes('label: ReactNode') &&
-    cardSource.includes('<div className="component-preview-card__meta">'),
+    cardSource.includes('title={label}'),
   'ComponentPreviewCard must always render the label title bar: only the token rows are optional.',
 )
 assert.ok(
   cardSource.includes('action?: ReactNode') &&
-    cardSource.includes('className="component-preview-card__title"') &&
-    cardSource.includes('className="component-preview-card__action"'),
-  'ComponentPreviewCard must support an optional action slot on the right of the label title bar.',
+    cardSource.includes('actionSlot={action}') &&
+    cardSource.includes('meta={'),
+  'ComponentPreviewCard must support an optional action slot on the right of the label title bar via the BaseCard header.',
+)
+assert.ok(
+  cardSource.includes('footer?: ReactNode') &&
+    cardSource.includes('footerSlot={footer}'),
+  'ComponentPreviewCard must expose an optional footer mapped onto the BaseCard footer slot.',
 )
 
 const cardSwatchBlock = blockFor(cardCss, '.component-preview-card__value-swatch')
@@ -245,7 +250,7 @@ assert.equal(cardRegistry.type, 'registry:ui')
 assert.deepEqual(cardRegistry.registryDependencies, [
   '@weimo/style',
   '@weimo/utils',
-  '@weimo/card-surface',
+  '@weimo/base-card',
 ])
 
 for (const snippet of [

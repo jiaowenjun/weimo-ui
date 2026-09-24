@@ -203,7 +203,7 @@ assert.ok(
 )
 assert.ok(
   appCss.includes(
-    '.component-preview-card > .component-preview-card__meta ~ .popup-surface-preview {\n  overflow: visible;\n}',
+    '.component-preview-card:has(.popup-surface-preview) .base-card__content {\n  overflow: visible;\n}',
   ),
   'PopupSurface demo must opt out of the preview-window clip so the real --shadow-overlay renders into the card padding.',
 )

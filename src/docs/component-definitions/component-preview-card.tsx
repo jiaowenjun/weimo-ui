@@ -2,7 +2,6 @@ import { useState } from 'react'
 
 import { bgColorToneMap } from '../../components/bg-color'
 import { borderRadiusScaleMap } from '../../components/border-radius'
-import { Chip } from '../../components/chip'
 import { ComponentPreviewCard } from '../../components/component-preview-card'
 import { GlassSurface } from '../../components/glass-surface'
 import { TextButton } from '../../components/text-button'
@@ -10,12 +9,12 @@ import type { ComponentDefinition } from '../component-docs'
 import { GlassPreviewCard } from '../glass-preview-card'
 import { PreviewToggle } from '../preview-toggle'
 
-// 示例 token 行直接取真实 token 表：预览卡自身的材质（卡片底色 + 基础圆角）。
+// 示例 token 行直接取真实 token 表（通用 hover 底色 + 基础圆角）。
 const previewCardItems = [
   {
-    token: bgColorToneMap.card.token,
-    value: bgColorToneMap.card.value.light,
-    darkValue: bgColorToneMap.card.value.dark,
+    token: bgColorToneMap.hover.token,
+    value: bgColorToneMap.hover.value.light,
+    darkValue: bgColorToneMap.hover.value.dark,
   },
   {
     token: borderRadiusScaleMap.base.token,
@@ -27,6 +26,8 @@ const previewCardItems = [
 // eslint-disable-next-line react-refresh/only-export-components
 function PreviewCardDemo() {
   const [showTokenRows, setShowTokenRows] = useState(true)
+  const [debugBorder, setDebugBorder] = useState(true)
+  const debugClassName = `base-card-debug${debugBorder ? '' : ' base-card-debug--hidden'}`
 
   return (
     <>
@@ -40,18 +41,26 @@ function PreviewCardDemo() {
           />
         }
         align="center"
+        className={debugClassName}
         items={showTokenRows ? previewCardItems : undefined}
         label="组件预览卡"
       >
         <TextButton>内容区示例</TextButton>
-        <Chip content="示例胶囊" />
       </ComponentPreviewCard>
-      <GlassPreviewCard label="玻璃预览卡">
+      <GlassPreviewCard className={debugClassName} label="玻璃预览卡">
         <GlassSurface className="glass-surface-preview__tile">
           <span className="glass-surface-preview__title">Glass Preview</span>
           <span className="glass-surface-preview__meta">拖动灰度滑块验证玻璃材质</span>
         </GlassSurface>
       </GlassPreviewCard>
+      <div className="docs-debug-toggle">
+        <PreviewToggle
+          ariaLabel="切换 DEBUG 边框显示"
+          checked={debugBorder}
+          label={debugBorder ? '已显示 DEBUG 边框' : '已隐藏 DEBUG 边框'}
+          onCheckedChange={setDebugBorder}
+        />
+      </div>
     </>
   )
 }

@@ -71,7 +71,7 @@ const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const registryItem = rootRegistry.items.find((item) => item.name === 'bg-blur')
 const sampleBlock = blockFor(
   tokenPreviewCardCss,
-  '.component-preview-card > .component-preview-card__meta ~ *',
+  '.component-preview-card .base-card__content',
 )
 const backdropBlock = blockFor(
   tokenPreviewCardCss,

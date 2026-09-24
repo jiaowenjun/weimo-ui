@@ -15,10 +15,12 @@ import {
 export function GlassPreviewCard({
   action,
   children,
+  className,
   label,
 }: {
   action?: ReactNode
   children: ReactNode
+  className?: string
   label: ReactNode
 }) {
   // 刷新时的初始灰度跟随页面主题：亮色落在亮卡底端点，暗色落在暗卡底端点。
@@ -52,21 +54,27 @@ export function GlassPreviewCard({
   }, [])
 
   return (
-    <ComponentPreviewCard action={action} label={label}>
+    <ComponentPreviewCard
+      action={action}
+      className={className}
+      footer={
+        <div className="glass-preview-card__slider-row">
+          <Slider
+            ariaLabel="背景灰度"
+            max={glassBackgroundGrayLight}
+            min={glassBackgroundGrayDark}
+            onValueChange={setGlassBackgroundGray}
+            value={glassBackgroundGray}
+          />
+        </div>
+      }
+      label={label}
+    >
       <div
         className="glass-preview-card__canvas"
         style={getGlassPreviewBackground(glassBackgroundGray)}
       >
         {children}
-      </div>
-      <div className="glass-preview-card__slider-row">
-        <Slider
-          ariaLabel="背景灰度"
-          max={glassBackgroundGrayLight}
-          min={glassBackgroundGrayDark}
-          onValueChange={setGlassBackgroundGray}
-          value={glassBackgroundGray}
-        />
       </div>
     </ComponentPreviewCard>
   )

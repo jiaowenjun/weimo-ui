@@ -1,36 +1,15 @@
 @layer components {
+  /* 预览卡基于 BaseCard 壳:材质、圆角、内边距、分区 1em 间隔与 DEBUG 观察层
+     均由 base-card.css 提供,这里只补 token 行网格与统一的内容画布节奏。 */
   .component-preview-card {
-    display: grid;
     min-width: 0;
-    gap: 8px;
-    padding: 16px;
   }
 
-  .component-preview-card__meta {
+  /* token 行信息区:标题栏(BaseCard header)下方,逐行铺开 */
+  .component-preview-card .base-card__meta {
     display: grid;
     min-width: 0;
     gap: 4px;
-  }
-
-  .component-preview-card__title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-  }
-
-  .component-preview-card__action {
-    display: inline-flex;
-    flex: none;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .component-preview-card__label {
-    color: var(--color-text-primary);
-    font-size: var(--font-size-sm);
-    font-weight: 650;
-    line-height: 1.2;
   }
 
   .component-preview-card__row {
@@ -63,7 +42,8 @@
     display: none;
   }
 
-  .component-preview-card > .component-preview-card__meta ~ * {
+  /* 内容画布:BaseCard 内容区作为统一画布,80px 高度地板 + 圆角裁切 */
+  .component-preview-card .base-card__content {
     position: relative;
     overflow: hidden;
     isolation: isolate;
@@ -72,8 +52,9 @@
     border-radius: var(--radius);
   }
 
-  .component-preview-card--align-center > .component-preview-card__meta ~ * {
+  .component-preview-card--align-center .base-card__content {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     align-content: center;
     align-items: center;

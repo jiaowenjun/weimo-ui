@@ -62,7 +62,7 @@ const reducedMotionBlock = cssBlockFor(
 )
 const previewAlignBlock = cssBlockFor(
   previewCardCss,
-  '.component-preview-card--align-center > .component-preview-card__meta ~ *',
+  '.component-preview-card--align-center .base-card__content',
 )
 
 assert.ok(

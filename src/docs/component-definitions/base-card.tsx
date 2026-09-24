@@ -46,7 +46,7 @@ function renderTitleBarAction() {
 // eslint-disable-next-line react-refresh/only-export-components
 function BaseCardDemo() {
   const [debugBorder, setDebugBorder] = useState(true)
-  const cardClassName = `base-card-docs-preview${debugBorder ? '' : ' base-card-docs-preview--debug-hidden'}`
+  const cardClassName = `base-card-docs-preview base-card-debug${debugBorder ? '' : ' base-card-debug--hidden'}`
 
   return (
     <>
@@ -58,8 +58,7 @@ function BaseCardDemo() {
           基础卡片在卡片材质上提供与笔记卡片一致的圆角与内边距,不包含顶栏、正文、标签等任何业务结构。
         </p>
         <p className="base-card-docs-preview__note">
-          DEBUG 边框用于观察卡片布局,可用页面底部开关临时隐藏;注释掉
-          base-card.css 中的 ::before 规则可永久移除。
+          DEBUG 分区观察边框可用页面底部开关显示或隐藏。
         </p>
       </BaseCard>
       <BaseCard
@@ -95,7 +94,7 @@ function BaseCardDemo() {
           标题栏+元信息区+底部栏变体在内容区之后追加一个底部栏(如标签栏),高度由内容自然撑开。
         </p>
       </BaseCard>
-      <div className="base-card-docs-preview__toggle">
+      <div className="docs-debug-toggle">
         <PreviewToggle
           ariaLabel="切换 DEBUG 边框显示"
           checked={debugBorder}
@@ -110,7 +109,7 @@ function BaseCardDemo() {
 export const baseCardDefinition = {
   id: 'base-card',
   summary:
-    '卡片材质上的最小卡片壳层:与 Card 一致的圆角与内边距,可选标题栏、元信息区、操作区与底部栏,内容区带临时 DEBUG 边框',
+    '卡片材质上的最小卡片壳层:与 Card 一致的圆角与内边距,可选标题栏、元信息区、操作区与底部栏,分区 DEBUG 观察边框随页面开关演示',
   status: 'Preview',
   frame: 'plain',
   searchAliases: ['BaseCard', '卡片壳层', '标题栏', '元信息区', '底部栏'],
