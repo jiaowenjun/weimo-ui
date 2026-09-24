@@ -37,7 +37,7 @@ function assertNotIncludes(source, snippet, message) {
 const componentSource = readProjectFile('src/components/card-tool-bar.tsx')
 const componentCss = readProjectFile('src/components/card-tool-bar.css')
 const docsDefinitionSource = readProjectFile(
-  'src/docs/component-definitions/bar.tsx',
+  'src/docs/component-definitions/tagged-card.tsx',
 )
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
@@ -124,12 +124,12 @@ assertNotIncludes(
 
 for (const snippet of [
   "import { useState } from 'react'",
-  "import { Check, Heading1, List, Plus, Quote, Search, X } from 'lucide-react'",
+  "import { Heading1, List, Quote } from 'lucide-react'",
   "import { CardToolBar } from '../../components/card-tool-bar'",
   "import { Button } from '../../components/coss/button'",
   "import { Toolbar, ToolbarButton, ToolbarGroup } from '../../components/coss/toolbar'",
   "import { TextButton } from '../../components/text-button'",
-  "id: 'bar'",
+  "id: 'tagged-card'",
   "const [saveDisabled, setSaveDisabled] = useState(false)",
   '<CardToolBar',
   'toolbarSlot={',
@@ -143,7 +143,7 @@ for (const snippet of [
   '<TextButton',
   '禁用保存',
   '启用保存',
-  'preview: () => <BarDemo />',
+  'preview: () => <TaggedCardDemo />',
   '<CardToolBarDemo />',
 ]) {
   assertIncludes(docsDefinitionSource, snippet, `CardToolBar docs must include ${snippet}.`)

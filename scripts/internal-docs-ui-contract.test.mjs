@@ -16,9 +16,11 @@ function readProjectFile(relativePath) {
 const shellSource = readProjectFile('src/docs/docs-shell.tsx')
 const detailSource = readProjectFile('src/docs/pages/component-detail-page.tsx')
 const actionDialogDefinitionSource = readProjectFile('src/docs/component-definitions/action-dialog.tsx')
-const cardTopBarDefinitionSource = readProjectFile('src/docs/component-definitions/bar.tsx')
+const cardTopBarDefinitionSource = readProjectFile('src/docs/component-definitions/tagged-card.tsx')
 const mathDialogDefinitionSource = readProjectFile('src/docs/component-definitions/markdown.tsx')
 const tagTreeRowDefinitionSource = readProjectFile('src/docs/component-definitions/tag.tsx')
+const barDefinitionSource = readProjectFile('src/docs/component-definitions/bar.tsx')
+const pageLayoutDefinitionSource = readProjectFile('src/docs/component-definitions/page-layout.tsx')
 const css = readProjectFile('src/App.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 
@@ -168,12 +170,76 @@ assert.ok(
 )
 
 for (const [snippet, message] of [
-  ['position: relative;', 'FloatBar docs preview must anchor absolute FloatBar inside the preview panel.'],
-  ['min-height: 48px;', 'FloatBar docs preview must keep enough height for its absolutely positioned toolbar.'],
-  ['overflow: hidden;', 'FloatBar docs preview must prevent the absolute FloatBar from spilling outside the preview panel.'],
+  ['position: static;', 'FloatBar docs preview must return the self-anchored FloatBar into canvas grid flow.'],
+  ['justify-self: stretch;', 'FloatBar docs preview must stretch across the preview grid column.'],
+  ['margin-inline: 24px;', 'FloatBar docs preview must keep side gaps from the preview edges.'],
 ]) {
   assert.ok(internalFloatPreviewBlock.includes(snippet), message)
 }
+
+// 浮动工具栏、底部操作栏与顶部工具栏演示的材质规则：按钮一律玻璃图标按钮，文字一律玻璃态胶囊。
+// 玻璃图标按钮与玻璃态胶囊的边框展示不做限制（有边框、无边框都支持），
+// 因此这里只锁组件种类与 variant，不断言 bordered 的有无或取值。
+function sliceDemoSource(source, startMarker, endMarker, label) {
+  const start = source.indexOf(startMarker)
+
+  assert.notEqual(start, -1, `bar.tsx must keep the ${label} component.`)
+
+  const end = source.indexOf(endMarker, start)
+
+  assert.notEqual(end, -1, `bar.tsx ${label} block must end before the next demo component.`)
+
+  return source.slice(start, end)
+}
+
+function assertGlassToolbarDemo(demoSource, label) {
+  const chipCount = (demoSource.match(/<Chip\b/g) ?? []).length
+  const glassVariantCount = (demoSource.match(/variant="glass"/g) ?? []).length
+
+  assert.ok(
+    chipCount > 0 &&
+      glassVariantCount >= chipCount &&
+      !demoSource.includes('internal-preview__text') &&
+      !demoSource.includes('internal-preview__title'),
+    `${label} docs demo must render every text label as a glass-variant Chip instead of raw preview text spans.`,
+  )
+
+  assert.ok(
+    (demoSource.match(/<GlassIconButton\b/g) ?? []).length > 0 &&
+      !demoSource.includes('GhostIconButton') &&
+      !demoSource.includes('<IconButton') &&
+      !demoSource.includes('<TextButton') &&
+      !demoSource.includes('<ChipButton') &&
+      !demoSource.includes('<button'),
+    `${label} docs demo must use GlassIconButton for every toolbar button.`,
+  )
+}
+
+const bottomBarDemoSource = sliceDemoSource(
+  barDefinitionSource,
+  'function BottomBarDemo()',
+  'function FloatBarDemo()',
+  'BottomBarDemo',
+)
+const floatBarDemoSource = sliceDemoSource(
+  barDefinitionSource,
+  'function FloatBarDemo()',
+  '// Docs definitions intentionally colocate',
+  'FloatBarDemo',
+)
+
+// 顶部工具栏的按钮经 renderTopBarSidebarButton/renderTopBarSearchButton 渲染，
+// 因此切块从第一个 render helper 起到 TopBarDemo 结束，保证断言能覆盖到按钮本体。
+const topBarDemoSource = sliceDemoSource(
+  pageLayoutDefinitionSource,
+  'function renderTopBarSidebarButton',
+  '// Docs definitions intentionally colocate',
+  'TopBarDemo',
+)
+
+assertGlassToolbarDemo(bottomBarDemoSource, 'BottomBar')
+assertGlassToolbarDemo(floatBarDemoSource, 'FloatBar')
+assertGlassToolbarDemo(topBarDemoSource, 'TopBar')
 
 assert.ok(
   packageJson.scripts?.test?.includes('scripts/internal-docs-ui-contract.test.mjs'),

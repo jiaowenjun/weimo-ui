@@ -1,10 +1,11 @@
 import { Menu, Search } from 'lucide-react'
 
+import { Chip } from '../../components/chip'
 import { ComponentPreviewCard } from '../../components/component-preview-card'
 import { GlassIconButton } from '../../components/glass-icon-button'
-import { GhostIconButton } from '../../components/ghost-icon-button'
 import { TopBar } from '../../components/top-bar'
 import type { ComponentDefinition } from '../component-docs'
+import { GlassPreviewCard } from '../glass-preview-card'
 
 import { SideBarDrawerPreview } from './sidebar-preview'
 
@@ -35,40 +36,42 @@ function SideBarDemo() {
   )
 }
 
-function renderTopBarSidebarButton({
-  ghost = false,
-}: { ghost?: boolean } = {}) {
-  const Button = ghost ? GhostIconButton : GlassIconButton
-
+function renderTopBarSidebarButton() {
   return (
-    <Button aria-label="打开侧边栏">
+    <GlassIconButton aria-label="打开侧边栏">
       <Menu />
-    </Button>
+    </GlassIconButton>
   )
 }
 
-function renderTopBarSearchButton({
-  ghost = false,
-}: { ghost?: boolean } = {}) {
-  const Button = ghost ? GlassIconButton : GhostIconButton
-
+function renderTopBarSearchButton() {
   return (
-    <Button aria-label="搜索">
+    <GlassIconButton aria-label="搜索">
       <Search />
-    </Button>
+    </GlassIconButton>
   )
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
 function TopBarDemo() {
   return (
-    <ComponentPreviewCard label="顶部工具栏">
+    <GlassPreviewCard label="顶部工具栏">
       <TopBar
         className="top-bar-preview"
-        leftSlot={renderTopBarSidebarButton()}
+        leftSlot={
+          <>
+            {renderTopBarSidebarButton()}
+            <Chip
+              bordered={false}
+              className="top-bar-preview__title"
+              content="页面标题"
+              variant="glass"
+            />
+          </>
+        }
         rightSlot={renderTopBarSearchButton()}
       />
-    </ComponentPreviewCard>
+    </GlassPreviewCard>
   )
 }
 

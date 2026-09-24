@@ -1,10 +1,10 @@
-import { Check, Plus, Search, X } from 'lucide-react'
+import { Check, Hash, Plus, Search, X } from 'lucide-react'
 
 import { BottomBar } from '../../components/bottom-bar'
+import { Chip } from '../../components/chip'
 import { ComponentPreviewCard } from '../../components/component-preview-card'
 import { FloatBar } from '../../components/float-bar'
 import { GlassIconButton } from '../../components/glass-icon-button'
-import { GhostIconButton } from '../../components/ghost-icon-button'
 import type { ComponentDefinition } from '../component-docs'
 import { GlassPreviewCard } from '../glass-preview-card'
 
@@ -16,12 +16,14 @@ function BottomBarDemo() {
           <p>正文区域</p>
           <BottomBar
             aria-label="底部操作栏预览"
-            leftSlot={<span className="internal-preview__text">2 个标签待保存</span>}
+            leftSlot={
+              <Chip bordered={false} content="2 个标签待保存" variant="glass" />
+            }
             rightSlot={
               <span className="internal-preview__actions">
-                <GhostIconButton aria-label="新增" size="sm">
+                <GlassIconButton aria-label="新增" size="sm">
                   <Plus />
-                </GhostIconButton>
+                </GlassIconButton>
                 <GlassIconButton aria-label="保存" size="sm">
                   <Check />
                 </GlassIconButton>
@@ -40,19 +42,26 @@ function FloatBarDemo() {
       <FloatBar
         aria-label="浮动工具栏预览"
         className="internal-float-preview"
-        leftSlot={<span className="internal-preview__text"># 写作</span>}
-        centerSlot={<span className="internal-preview__title">编辑标签</span>}
+        leftSlot={
+          <Chip
+            bordered={false}
+            content="写作"
+            prefix={<Hash aria-hidden="true" />}
+            variant="glass"
+          />
+        }
+        centerSlot={<Chip bordered={false} content="编辑标签" variant="glass" />}
         rightSlot={
           <span className="internal-preview__actions">
-            <GhostIconButton aria-label="搜索" size="sm">
+            <GlassIconButton aria-label="搜索" size="sm">
               <Search />
-            </GhostIconButton>
+            </GlassIconButton>
             <GlassIconButton aria-label="确认" size="sm">
               <Check />
             </GlassIconButton>
-            <GhostIconButton aria-label="关闭" size="sm">
+            <GlassIconButton aria-label="关闭" size="sm">
               <X />
-            </GhostIconButton>
+            </GlassIconButton>
           </span>
         }
       />

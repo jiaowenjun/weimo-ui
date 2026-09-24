@@ -186,7 +186,7 @@ assert.ok(
   'Card must let CardTopBar own the display mode action control.',
 )
 
-const docsDefinitionSource = readProjectFile('src/docs/component-definitions/bar.tsx')
+const docsDefinitionSource = readProjectFile('src/docs/component-definitions/tagged-card.tsx')
 const componentDefinitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const appCss = readProjectFile('src/App.css')
@@ -215,17 +215,17 @@ assert.ok(
 
 assert.ok(
   componentDefinitionsIndexSource.includes(
-    "import { barDefinition } from './bar'",
-  ) && componentDefinitionsIndexSource.includes('bar: barDefinition'),
-  'CardTopBar preview must be registered through the merged Bar definition in component-definitions/index.ts.',
+    "import { taggedCardDefinition } from './tagged-card'",
+  ) && componentDefinitionsIndexSource.includes("'tagged-card': taggedCardDefinition"),
+  'CardTopBar preview must be registered through the merged tagged-card definition in component-definitions/index.ts.',
 )
 
 for (const snippet of [
   "import { useState } from 'react'",
   "import { CardTopBar } from '../../components/card-top-bar'",
   "import { TextButton } from '../../components/text-button'",
-  "id: 'bar'",
-  "summary: '底部操作栏、卡片工具栏、卡片顶部栏与浮动工具栏总览'",
+  "id: 'tagged-card'",
+  "summary: '笔记卡片、新建草稿壳层、卡片工具栏与卡片顶部栏总览'",
   "useState<'display' | 'edit'>('display')",
   'setMode((current) => (current ===',
   '<TextButton',

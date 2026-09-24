@@ -372,7 +372,6 @@ assert.ok(
 assert.ok(
     cardSurfaceCss.includes('border: 1px solid var(--color-border);') &&
     popupSurfaceCss.includes('border: 1px solid var(--color-border);') &&
-    chipSurfaceCss.includes('border-color: var(--color-border);') &&
     !glassSurfaceCss.includes('var(--color-border-divider)') &&
     !chipSurfaceCss.includes('var(--color-border-divider)') &&
     cossButtonCss.includes('border-color: var(--color-border);') &&

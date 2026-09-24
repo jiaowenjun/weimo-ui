@@ -411,13 +411,6 @@
   place-items: center;
 }
 
-.internal-preview__text,
-.internal-preview__title {
-  color: var(--color-text-primary);
-  font-size: var(--font-size-sm);
-  font-weight: 560;
-}
-
 .internal-preview__actions {
   display: inline-flex;
   align-items: center;
@@ -581,12 +574,8 @@
   padding: 0;
 }
 
-.top-bar-preview .float-bar__frame {
-  min-height: 46px;
-  width: 100%;
-  max-width: none;
-  border: 1px dashed var(--color-border);
-  border-radius: var(--radius);
+.top-bar-preview__title {
+  font-weight: 600;
 }
 
 .sidebar-preview {
