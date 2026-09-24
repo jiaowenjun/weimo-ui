@@ -9,6 +9,7 @@ export const iconButtonVariants = cva('icon-button', {
     size: {
       default: 'icon-button--md',
       sm: 'icon-button--sm',
+      xs: 'icon-button--xs',
     },
   },
   defaultVariants: {

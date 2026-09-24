@@ -381,7 +381,7 @@ assert.ok(
     !buttonDefinitionSource.includes("variant=\"outline\"") &&
     buttonDefinitionSource.includes('className="icon-button-preview"') &&
     buttonDefinitionSource.includes('普通背景') &&
-    (buttonDefinitionSource.match(/<GhostIconButton\b[^>\n]*disabled=\{disabled\}/g) ?? []).length === 2 &&
+    (buttonDefinitionSource.match(/<GhostIconButton\b[^>\n]*disabled=\{disabled\}/g) ?? []).length === 3 &&
     !buttonDefinitionSource.includes('状态切换菜单') &&
     buttonDefinitionSource.includes('<GhostIconButtonPreview />') &&
     !buttonDefinitionSource.includes('ghostIconButtonPreviewScenes') &&

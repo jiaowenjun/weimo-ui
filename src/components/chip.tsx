@@ -16,7 +16,7 @@ import './chip.css'
 import './glass-surface.css'
 
 export type ChipVariant = 'default' | 'glass'
-export type ChipTextSize = 'sm' | 'base'
+export type ChipTextSize = 'sm' | 'base' | 'lg'
 
 type ChipContent = Exclude<ReactNode, boolean | null | undefined>
 

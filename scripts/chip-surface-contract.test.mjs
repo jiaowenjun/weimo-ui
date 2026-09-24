@@ -62,6 +62,10 @@ const surfaceActiveBlock = blockFor(
   `.chip-surface[data-interactive="true"]:active::before,
   .chip-surface[data-interactive="true"]:active::after`,
 )
+const surfaceActiveTransformBlock = blockFor(
+  surfaceCss,
+  '.chip-surface[data-interactive="true"]:active',
+)
 const surfaceSlotBlock = blockFor(surfaceCss, '.chip-surface__slot')
 const animatedMeasureBlock = blockFor(animatedCss, '.animated-inline-size__measure')
 const animatedMeasureChildBlock = blockFor(animatedCss, '.animated-inline-size__measure > *')
@@ -96,7 +100,7 @@ for (const snippet of [
   "import type { ClassValue } from 'clsx'",
   "import { cn } from './lib/utils'",
   "export type ChipSurfaceVariant = 'default' | 'glass'",
-  "export type ChipSurfaceTextSize = 'sm' | 'base'",
+  "export type ChipSurfaceTextSize = 'sm' | 'base' | 'lg'",
   'export type ChipSurfaceOptions = {',
   'bordered?: boolean',
   'variant?: ChipSurfaceVariant',
@@ -165,6 +169,7 @@ for (const [block, snippet, message] of [
   [surfaceBorderlessBlock, 'border-color: transparent;', 'ChipSurface borderless mode must hide the variant border without changing capsule metrics.'],
   [surfaceInteractiveBlock, 'cursor: pointer;', 'Only interactive ChipSurface callers must get pointer cursor.'],
   [surfaceInteractiveBlock, 'appearance: none;', 'Only interactive ChipSurface callers must reset native appearance.'],
+  [surfaceActiveTransformBlock, 'transform: scale(var(--press-scale));', 'Interactive ChipSurface active must press with the shared scale token like icon buttons.'],
   [surfaceHoverBlock, 'background: var(--chip-surface-hover-background);', 'Interactive ChipSurface hover must retint visible layers.'],
   [surfaceActiveBlock, 'background: var(--chip-surface-active-background);', 'Interactive ChipSurface active must retint visible layers.'],
   [surfaceSlotBlock, 'align-self: center;', 'ChipSurface prefix and suffix slots must be vertically centered instead of baseline-aligned.'],

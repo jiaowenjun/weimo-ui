@@ -3,7 +3,7 @@ import type { ClassValue } from 'clsx'
 import { cn } from './lib/utils'
 
 export type ChipSurfaceVariant = 'default' | 'glass'
-export type ChipSurfaceTextSize = 'sm' | 'base'
+export type ChipSurfaceTextSize = 'sm' | 'base' | 'lg'
 
 export type ChipSurfaceOptions = {
   bordered?: boolean

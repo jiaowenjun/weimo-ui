@@ -24,7 +24,7 @@
     line-height: 1;
     transition:
       inline-size var(--animated-inline-size-transition-duration) cubic-bezier(0.2, 0, 0, 1),
-      border-color var(--chip-surface-state-transition-duration) cubic-bezier(0.2, 0, 0, 1),
+      border-color var(--chip-surface-state-transition-duration) ease,
       transform 150ms ease,
       color var(--chip-surface-state-transition-duration) ease;
   }
@@ -37,8 +37,9 @@
     background: var(--color-bg-chip);
     content: '';
     transition:
-      opacity var(--chip-surface-state-transition-duration) cubic-bezier(0.2, 0, 0, 1),
-      transform var(--chip-surface-state-transition-duration) cubic-bezier(0.2, 0, 0, 1);
+      opacity var(--chip-surface-state-transition-duration) ease,
+      transform var(--chip-surface-state-transition-duration) ease,
+      background-color var(--chip-surface-state-transition-duration) ease;
   }
 
   .chip-surface::after {
@@ -48,8 +49,9 @@
     border-radius: inherit;
     content: '';
     transition:
-      opacity var(--chip-surface-state-transition-duration) cubic-bezier(0.2, 0, 0, 1),
-      transform var(--chip-surface-state-transition-duration) cubic-bezier(0.2, 0, 0, 1);
+      opacity var(--chip-surface-state-transition-duration) ease,
+      transform var(--chip-surface-state-transition-duration) ease,
+      background-color var(--chip-surface-state-transition-duration) ease;
   }
 
   .chip-surface[data-variant="default"]::before {
@@ -65,6 +67,11 @@
     border-color: var(--glass-surface-border);
     backdrop-filter: blur(var(--glass-blur));
     -webkit-backdrop-filter: blur(var(--glass-blur));
+
+    /* 玻璃态 hover/active 走 glass-surface 的 12% currentColor 色调：元素自身的
+       backdrop-filter 材质不动，::after 空层淡入色调，与 GlassIconButton 同构 */
+    --chip-surface-hover-background: var(--glass-surface-hover-bg);
+    --chip-surface-active-background: var(--glass-surface-hover-bg);
   }
 
   .chip-surface[data-variant="glass"]::before {
@@ -85,6 +92,10 @@
 
   .chip-surface[data-text-size="base"] {
     font-size: var(--font-size-base);
+  }
+
+  .chip-surface[data-text-size="lg"] {
+    font-size: var(--font-size-lg);
   }
 
   .chip-surface__slot {
@@ -126,7 +137,7 @@
   }
 
   .chip-surface[data-interactive="true"]:active {
-    transform: scale(0.97);
+    transform: scale(var(--press-scale));
   }
 
   .chip-surface[data-interactive="true"]:active::before,

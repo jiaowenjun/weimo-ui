@@ -81,15 +81,18 @@ const reducedMotionBlock = cssBlockFor(
     .chip-surface::before,
     .chip-surface::after`,
 )
-const previewBlock = cssBlockFor(appCss, '.chip-button-preview')
-const previewPanelBlock = cssBlockFor(appCss, '.chip-button-preview__panel')
-const previewRowBlock = cssBlockFor(appCss, '.chip-button-preview__row')
 const previewWidthExampleBlock = cssBlockFor(appCss, '.chip-button-preview__width-example')
 const previewWidthSlotBlock = cssBlockFor(appCss, '.chip-button-preview__width-slot')
 const previewWidthSlotChipBlock = cssBlockFor(appCss, '.chip-button-preview__width-slot .chip-button')
 const previewWidthMeasureBlock = cssBlockFor(appCss, '.chip-button-preview__width-measure')
 const previewWidthMeasureChipBlock = cssBlockFor(appCss, '.chip-button-preview__width-measure .chip-button')
-const previewControlsBlock = cssBlockFor(appCss, '.chip-button-preview__controls')
+assert.ok(
+  !appCss.includes('.chip-button-preview__controls') &&
+    !/\.chip-button-preview\s*\{/.test(appCss) &&
+    !appCss.includes('.chip-button-preview__panel') &&
+    !appCss.includes('.chip-button-preview__row'),
+  'ChipButton preview cards must inherit ComponentPreviewCard default layout; only the width-demo mechanism keeps custom CSS.',
+)
 
 assert.ok(
   packageJson.scripts?.test?.includes('scripts/chip-button-contract.test.mjs'),
@@ -153,13 +156,15 @@ for (const [block, snippet, message] of [
   [baseBlock, '--chip-surface-active-background: var(--color-bg-hover);', 'ChipButton must keep a stable shared active background token for visual layers.'],
   [baseBlock, 'transition:', 'ChipButton must transition state changes.'],
   [baseBlock, 'inline-size var(--animated-inline-size-transition-duration) cubic-bezier(0.2, 0, 0, 1)', 'ChipButton must be able to animate measured content-width changes without custom CSS.'],
-  [baseBlock, 'border-color var(--chip-surface-state-transition-duration) cubic-bezier(0.2, 0, 0, 1)', 'ChipButton border transition must use the shared state duration variable.'],
+  [baseBlock, 'border-color var(--chip-surface-state-transition-duration) ease', 'ChipButton border transition must use the shared state duration variable.'],
   [baseBlock, 'color var(--chip-surface-state-transition-duration) ease', 'ChipButton color transition must use the shared state duration variable.'],
   [defaultLayerBlock, 'background: var(--color-bg-chip);', 'ChipButton default layer must use the shared brand chip surface.'],
-  [defaultLayerBlock, 'opacity var(--chip-surface-state-transition-duration) cubic-bezier(0.2, 0, 0, 1)', 'ChipButton default layer opacity transition must use the shared state duration variable.'],
-  [defaultLayerBlock, 'transform var(--chip-surface-state-transition-duration) cubic-bezier(0.2, 0, 0, 1)', 'ChipButton default layer transform transition must use the shared state duration variable.'],
-  [glassLayerBlock, 'opacity var(--chip-surface-state-transition-duration) cubic-bezier(0.2, 0, 0, 1)', 'ChipButton glass layer opacity transition must use the shared state duration variable.'],
-  [glassLayerBlock, 'transform var(--chip-surface-state-transition-duration) cubic-bezier(0.2, 0, 0, 1)', 'ChipButton glass layer transform transition must use the shared state duration variable.'],
+  [defaultLayerBlock, 'opacity var(--chip-surface-state-transition-duration) ease', 'ChipButton default layer opacity transition must use the shared state duration variable.'],
+  [defaultLayerBlock, 'transform var(--chip-surface-state-transition-duration) ease', 'ChipButton default layer transform transition must use the shared state duration variable.'],
+  [defaultLayerBlock, 'background-color var(--chip-surface-state-transition-duration) ease', 'ChipButton default layer hover repaint must fade like icon buttons.'],
+  [glassLayerBlock, 'opacity var(--chip-surface-state-transition-duration) ease', 'ChipButton glass layer opacity transition must use the shared state duration variable.'],
+  [glassLayerBlock, 'transform var(--chip-surface-state-transition-duration) ease', 'ChipButton glass layer transform transition must use the shared state duration variable.'],
+  [glassLayerBlock, 'background-color var(--chip-surface-state-transition-duration) ease', 'ChipButton glass layer hover tint must fade like icon buttons.'],
   [glassBaseBlock, 'border-color: var(--glass-surface-border);', 'ChipButton glass state must transition to the standard glass surface border.'],
   [glassBaseBlock, 'backdrop-filter: blur(var(--glass-blur));', 'ChipButton glass state must use shared glass blur.'],
   [defaultStateBeforeBlock, 'opacity: 1;', 'ChipButton default state must show default layer.'],
@@ -177,9 +182,6 @@ for (const [block, snippet, message] of [
   [textBlock, 'text-overflow: clip;', 'ChipButton text overflow must be clipped without an ellipsis.'],
   [textBlock, 'white-space: nowrap;', 'ChipButton text must stay on one line when clipped.'],
   [reducedMotionBlock, 'transition-duration: 1ms;', 'ChipButton must respect reduced motion.'],
-  [previewBlock, 'display: grid;', 'ChipButton preview must center contents.'],
-  [previewPanelBlock, 'border: 1px solid var(--color-border);', 'ChipButton preview must use an internal docs panel.'],
-  [previewRowBlock, 'display: flex;', 'ChipButton preview row must lay out chips side by side.'],
   [previewWidthExampleBlock, 'position: relative;', 'ChipButton width example must anchor its hidden measurement chip.'],
   [previewWidthExampleBlock, 'display: inline-grid;', 'ChipButton width example must keep the animated slot inline.'],
   [previewWidthSlotBlock, '--chip-button-preview-width-transition-duration: 180ms;', 'ChipButton width example must use the standard 180ms transition duration.'],
@@ -193,7 +195,6 @@ for (const [block, snippet, message] of [
   [previewWidthMeasureBlock, 'pointer-events: none;', 'ChipButton width measurement chip must not intercept interactions.'],
   [previewWidthMeasureChipBlock, 'width: max-content;', 'ChipButton width measurement chip must measure the unconstrained capsule width.'],
   [previewWidthMeasureChipBlock, 'max-width: none;', 'ChipButton width measurement chip must not inherit preview constraints.'],
-  [previewControlsBlock, 'justify-self: center;', 'ChipButton preview toggle must be centered.'],
 ]) {
   assertIncludes(block, snippet, message)
 }
@@ -229,7 +230,7 @@ assert.ok(
 assert.ok(
   docsSource.includes("import { useLayoutEffect, useRef, useState } from 'react'") &&
     docsSource.includes("import { ChipButton } from '../../components/chip-button'") &&
-    docsSource.includes("import { TextButton } from '../../components/text-button'") &&
+    docsSource.includes("import { PreviewToggle, SurfaceBorderToggle } from '../preview-toggle'") &&
     docsSource.includes("id: 'capsule'") &&
     docsSource.includes("const [state, setState] = useState<'default' | 'glass'>('default')") &&
     docsSource.includes("const [widthMode, setWidthMode] = useState<'short' | 'long'>('short')") &&
@@ -251,9 +252,10 @@ assert.ok(
     docsSource.includes('className="chip-button-preview__width-measure"') &&
     docsSource.includes('ref={widthMeasureRef}') &&
     docsSource.includes('aria-label="ChipButton 宽度变化预览"') &&
-    docsSource.includes('<TextButton') &&
-    docsSource.includes("state === 'default' ? '切换到玻璃态' : '切换到默认态'") &&
-    docsSource.includes("widthMode === 'short' ? '切换到长标签' : '切换到短标签'"),
+    docsSource.includes("checked={state === 'glass'}") &&
+    docsSource.includes("label={state === 'glass' ? '玻璃态' : '默认态'}") &&
+    docsSource.includes("checked={widthMode === 'long'}") &&
+    docsSource.includes("label={widthMode === 'long' ? '长标签' : '短标签'}"),
   'ChipButton docs definition must include an internal preview with state and width-change toggles.',
 )
 assert.ok(

@@ -51,6 +51,7 @@ const glassVariantBeforeBlock = cssBlockFor(surfaceCss, '.chip-surface[data-vari
 const glassVariantAfterBlock = cssBlockFor(surfaceCss, '.chip-surface[data-variant="glass"]::after')
 const smallTextBlock = cssBlockFor(surfaceCss, '.chip-surface[data-text-size="sm"]')
 const baseTextBlock = cssBlockFor(surfaceCss, '.chip-surface[data-text-size="base"]')
+const lgTextBlock = cssBlockFor(surfaceCss, '.chip-surface[data-text-size="lg"]')
 const slotBlock = cssBlockFor(surfaceCss, '.chip-surface__slot')
 const contentBlock = cssBlockFor(surfaceCss, '.chip-surface__content')
 const reducedMotionBlock = cssBlockFor(
@@ -59,7 +60,6 @@ const reducedMotionBlock = cssBlockFor(
     .chip-surface::before,
     .chip-surface::after`,
 )
-const previewActionBlock = cssBlockFor(appCss, '.internal-chip-preview__action')
 const previewAlignBlock = cssBlockFor(
   previewCardCss,
   '.component-preview-card--align-center > .component-preview-card__meta ~ *',
@@ -90,7 +90,7 @@ for (const snippet of [
   "from './chip-surface-model'",
   "import './chip.css'",
   "export type ChipVariant = 'default' | 'glass'",
-  "export type ChipTextSize = 'sm' | 'base'",
+  "export type ChipTextSize = 'sm' | 'base' | 'lg'",
   'type ChipContent = Exclude<ReactNode, boolean | null | undefined>',
   "export type ChipProps = Omit<ComponentPropsWithoutRef<'span'>, 'children' | 'content' | 'prefix'> & {",
   'bordered?: boolean',
@@ -145,20 +145,24 @@ for (const [block, snippet, message] of [
   [baseBlock, '--animated-inline-size-transition-duration: 180ms;', 'Chip width transitions must use the shared 180ms duration.'],
   [baseBlock, '--chip-surface-state-transition-duration: 180ms;', 'Chip state transitions must stay independent from width transitions.'],
   [baseBlock, 'inline-size var(--animated-inline-size-transition-duration) cubic-bezier(0.2, 0, 0, 1)', 'Chip must animate measured content-width changes.'],
-  [baseBlock, 'border-color var(--chip-surface-state-transition-duration) cubic-bezier(0.2, 0, 0, 1)', 'Chip border transition must use the shared state duration variable.'],
+  [baseBlock, 'border-color var(--chip-surface-state-transition-duration) ease', 'Chip border transition must use the shared state duration variable.'],
   [baseBlock, 'color var(--chip-surface-state-transition-duration) ease', 'Chip color transition must use the shared state duration variable.'],
   [defaultLayerBlock, 'background: var(--color-bg-chip);', 'Chip default layer must use the shared brand chip surface.'],
-  [defaultLayerBlock, 'opacity var(--chip-surface-state-transition-duration) cubic-bezier(0.2, 0, 0, 1)', 'Chip default layer opacity transition must use the shared state duration variable.'],
-  [glassLayerBlock, 'opacity var(--chip-surface-state-transition-duration) cubic-bezier(0.2, 0, 0, 1)', 'Chip glass layer opacity transition must use the shared state duration variable.'],
+  [defaultLayerBlock, 'opacity var(--chip-surface-state-transition-duration) ease', 'Chip default layer opacity transition must use the shared state duration variable.'],
+  [defaultLayerBlock, 'background-color var(--chip-surface-state-transition-duration) ease', 'Chip default layer hover repaint must fade like icon buttons.'],
+  [glassLayerBlock, 'opacity var(--chip-surface-state-transition-duration) ease', 'Chip glass layer opacity transition must use the shared state duration variable.'],
+  [glassLayerBlock, 'background-color var(--chip-surface-state-transition-duration) ease', 'Chip glass layer hover tint must fade like icon buttons.'],
   [defaultVariantBeforeBlock, 'opacity: 1;', 'Chip default variant must show default layer.'],
   [defaultVariantAfterBlock, 'opacity: 0;', 'Chip default variant must hide glass layer.'],
   [glassVariantBlock, 'color: var(--glass-surface-fg);', 'Chip glass variant must use the standard glass surface adaptive foreground.'],
   [glassVariantBlock, 'border-color: var(--glass-surface-border);', 'Chip glass variant must use the standard glass surface border token.'],
   [glassVariantBlock, 'backdrop-filter: blur(var(--glass-blur));', 'Chip glass variant must use shared glass blur.'],
+  [glassVariantBlock, '--chip-surface-hover-background: var(--glass-surface-hover-bg);', 'Chip glass variant hover tint must use the glass surface currentColor mix instead of the fixed bg-hover token.'],
   [glassVariantBeforeBlock, 'opacity: 0;', 'Chip glass variant must hide default layer.'],
   [glassVariantAfterBlock, 'opacity: 1;', 'Chip glass variant must show glass layer.'],
   [smallTextBlock, 'font-size: var(--font-size-sm);', 'Chip small text size must use the shared small token.'],
   [baseTextBlock, 'font-size: var(--font-size-base);', 'Chip base text size must use the shared base token.'],
+  [lgTextBlock, 'font-size: var(--font-size-lg);', 'Chip lg text size must use the shared title token.'],
   [slotBlock, 'display: inline-flex;', 'Chip slots must support icons, strings, and nested controls.'],
   [slotBlock, 'flex: none;', 'Chip optional slots must not shrink the required content.'],
   [slotBlock, 'align-self: center;', 'Chip prefix and suffix slots must be vertically centered instead of baseline-aligned.'],
@@ -169,7 +173,6 @@ for (const [block, snippet, message] of [
   [contentBlock, 'text-overflow: clip;', 'Chip content overflow must be clipped without an ellipsis.'],
   [contentBlock, 'white-space: nowrap;', 'Chip content must stay on one line when clipped.'],
   [reducedMotionBlock, 'transition-duration: 1ms;', 'Chip must respect reduced motion.'],
-  [previewActionBlock, 'width: 16px;', 'Chip closable demo action must stay a compact hit target.'],
   [previewAlignBlock, 'display: flex;', 'Aligned preview card bodies must lay inline examples in one flow.'],
   [previewAlignBlock, 'align-content: center;', 'Aligned preview card bodies must center wrapped example rows.'],
   [previewAlignBlock, 'align-items: center;', 'Chip docs examples must be vertically centered in the preview area.'],
@@ -200,7 +203,7 @@ assert.ok(
   docsSource.includes("import { Hash, X } from 'lucide-react'") &&
     docsSource.includes("import { Chip } from '../../components/chip'") &&
     docsSource.includes("import { GlassPreviewCard } from '../glass-preview-card'") &&
-    docsSource.includes("import { SurfaceBorderToggle } from '../preview-toggle'") &&
+    docsSource.includes("import { PreviewToggle, SurfaceBorderToggle } from '../preview-toggle'") &&
     docsSource.includes("id: 'capsule'") &&
     docsSource.includes('preview: () => <CapsuleDemo />') &&
     docsSource.includes('function ChipTextSizeDemo') &&
@@ -212,23 +215,25 @@ assert.ok(
     docsSource.includes('<GlassPreviewCard') &&
     docsSource.includes('<SurfaceBorderToggle bordered={bordered} onBorderedChange={setBordered} />') &&
     docsSource.includes('bordered={bordered}') &&
-    docsSource.includes('function ChipDemo') &&
-    docsSource.includes('<ChipDemo />') &&
-    docsSource.includes('label="标签胶囊"') &&
-    docsSource.includes('function ClosableChipDemo') &&
-    docsSource.includes('<ClosableChipDemo />') &&
-    docsSource.includes('label="可关闭胶囊"') &&
+    docsSource.includes('function PrefixChipDemo') &&
+    docsSource.includes('<PrefixChipDemo />') &&
+    docsSource.includes('label="前缀胶囊"') &&
+    docsSource.includes('function SuffixChipDemo') &&
+    docsSource.includes('<SuffixChipDemo />') &&
+    docsSource.includes('label="后缀胶囊"') &&
     docsSource.includes('align="center"') &&
     docsSource.includes('content="写作/日记"') &&
     docsSource.includes('variant="default"') &&
     docsSource.includes('variant="glass"') &&
     docsSource.includes('textSize="sm"') &&
     docsSource.includes('textSize="base"') &&
+    docsSource.includes('textSize="lg"') &&
     docsSource.includes('prefix={<Hash aria-hidden="true" />}') &&
+    docsSource.includes("import { GhostIconButton } from '../../components/ghost-icon-button'") &&
     docsSource.includes('suffix={') &&
-    docsSource.includes('<button className="internal-chip-preview__action" type="button">') &&
+    docsSource.includes('<GhostIconButton aria-label="移除标签" size="xs">') &&
     docsSource.includes('<X aria-hidden="true" />'),
-  'Capsule docs definition must show text-size, glass, default, and closable chip examples in split cards.',
+  'Capsule docs definition must show text-size, glass, prefix, and suffix chip examples in split cards.',
 )
 assert.ok(
   !docsSource.includes('className="internal-chip-preview"') &&
@@ -236,6 +241,10 @@ assert.ok(
     !appCss.includes('.internal-chip-preview__row') &&
     !/\.internal-chip-preview\s*\{/.test(appCss),
   'Chip docs cards must inherit ComponentPreviewCard default layout without custom wrapper styles.',
+)
+assert.ok(
+  !appCss.includes('.internal-chip-preview__action'),
+  'Chip suffix demo action must come from the shared GhostIconButton xs size instead of custom preview CSS.',
 )
 assert.ok(
   definitionsIndexSource.includes("import { capsuleDefinition } from './capsule'") &&

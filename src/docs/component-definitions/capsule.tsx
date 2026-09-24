@@ -4,10 +4,10 @@ import { Hash, X } from 'lucide-react'
 import { Chip } from '../../components/chip'
 import { ChipButton } from '../../components/chip-button'
 import { ComponentPreviewCard } from '../../components/component-preview-card'
-import { TextButton } from '../../components/text-button'
+import { GhostIconButton } from '../../components/ghost-icon-button'
 import type { ComponentDefinition } from '../component-docs'
 import { GlassPreviewCard } from '../glass-preview-card'
-import { SurfaceBorderToggle } from '../preview-toggle'
+import { PreviewToggle, SurfaceBorderToggle } from '../preview-toggle'
 
 function ChipTextSizeDemo() {
   return (
@@ -15,6 +15,7 @@ function ChipTextSizeDemo() {
       <div aria-label="Chip 字号预览">
         <Chip content="小字号" textSize="sm" />
         <Chip content="基础字号" textSize="base" />
+        <Chip content="标题字号" textSize="lg" />
       </div>
     </ComponentPreviewCard>
   )
@@ -30,37 +31,45 @@ function GlassChipDemo() {
       }
       label="玻璃态胶囊"
     >
-      <Chip
-        bordered={bordered}
-        content="玻璃态"
-        prefix={<Hash aria-hidden="true" />}
-        variant="glass"
-      />
+      <div className="icon-preview__row" aria-label="Chip 玻璃态字号预览">
+        <Chip bordered={bordered} content="小字号" textSize="sm" variant="glass" />
+        <Chip bordered={bordered} content="基础字号" textSize="base" variant="glass" />
+        <Chip bordered={bordered} content="标题字号" textSize="lg" variant="glass" />
+      </div>
     </GlassPreviewCard>
   )
 }
 
-function ChipDemo() {
+function PrefixChipDemo() {
   return (
-    <ComponentPreviewCard align="center" label="标签胶囊">
-      <div aria-label="Chip 默认变体预览">
+    <ComponentPreviewCard align="center" label="前缀胶囊">
+      <div aria-label="Chip 前缀预览">
         <Chip content="写作/日记" prefix={<Hash aria-hidden="true" />} variant="default" />
+        <Chip content="写作/日记" prefix={<Hash aria-hidden="true" />} variant="glass" />
       </div>
     </ComponentPreviewCard>
   )
 }
 
-function ClosableChipDemo() {
+function SuffixChipDemo() {
   return (
-    <ComponentPreviewCard align="center" label="可关闭胶囊">
-      <div aria-label="Chip 可关闭预览">
+    <ComponentPreviewCard align="center" label="后缀胶囊">
+      <div aria-label="Chip 后缀预览">
         <Chip
           content="可关闭标签"
-          prefix={<Hash aria-hidden="true" />}
           suffix={
-            <button className="internal-chip-preview__action" type="button">
+            <GhostIconButton aria-label="移除标签" size="xs">
               <X aria-hidden="true" />
-            </button>
+            </GhostIconButton>
+          }
+          variant="default"
+        />
+        <Chip
+          content="可关闭标签"
+          suffix={
+            <GhostIconButton aria-label="移除标签" size="xs">
+              <X aria-hidden="true" />
+            </GhostIconButton>
           }
           variant="glass"
         />
@@ -70,7 +79,40 @@ function ClosableChipDemo() {
 }
 
 function ChipButtonDemo() {
+  return (
+    <ComponentPreviewCard align="center" label="胶囊按钮">
+      <div aria-label="ChipButton 默认态与玻璃态预览">
+        <ChipButton state="default">默认态</ChipButton>
+        <ChipButton state="glass">玻璃态</ChipButton>
+      </div>
+    </ComponentPreviewCard>
+  )
+}
+
+function StateToggleChipButtonDemo() {
   const [state, setState] = useState<'default' | 'glass'>('default')
+
+  return (
+    <ComponentPreviewCard
+      action={
+        <PreviewToggle
+          ariaLabel="切换玻璃态"
+          checked={state === 'glass'}
+          label={state === 'glass' ? '玻璃态' : '默认态'}
+          onCheckedChange={(checked) => setState(checked ? 'glass' : 'default')}
+        />
+      }
+      align="center"
+      label="状态切换胶囊"
+    >
+      <div aria-label="ChipButton 状态预览">
+        <ChipButton state={state}>写作/日记</ChipButton>
+      </div>
+    </ComponentPreviewCard>
+  )
+}
+
+function WidthToggleChipButtonDemo() {
   const [widthMode, setWidthMode] = useState<'short' | 'long'>('short')
   const widthMeasureRef = useRef<HTMLSpanElement | null>(null)
   const [widthPreviewSize, setWidthPreviewSize] = useState<number | null>(null)
@@ -90,51 +132,33 @@ function ChipButtonDemo() {
   }, [widthPreviewLabel])
 
   return (
-    <ComponentPreviewCard label="状态标签胶囊">
-      <div className="chip-button-preview">
-        <div className="chip-button-preview__panel">
-          <div className="chip-button-preview__row" aria-label="ChipButton 状态预览">
-            <ChipButton state={state}>写作/日记</ChipButton>
-            <ChipButton state="default">默认态</ChipButton>
-            <ChipButton state="glass">玻璃态</ChipButton>
-          </div>
-          <div
-            className="chip-button-preview__width-example"
-            aria-label="ChipButton 宽度变化预览"
-          >
-            <span
-              className="chip-button-preview__width-slot"
-              style={widthPreviewStyle}
-            >
-              <ChipButton state="default">{widthPreviewLabel}</ChipButton>
-            </span>
-            <span className="chip-button-preview__width-measure" aria-hidden="true">
-              <span ref={widthMeasureRef}>
-                <ChipButton state="default">{widthPreviewLabel}</ChipButton>
-              </span>
-            </span>
-          </div>
-          <div className="chip-button-preview__controls">
-            <TextButton
-              onClick={() =>
-                setState((currentState) =>
-                  currentState === 'default' ? 'glass' : 'default',
-                )
-              }
-            >
-              {state === 'default' ? '切换到玻璃态' : '切换到默认态'}
-            </TextButton>
-            <TextButton
-              onClick={() =>
-                setWidthMode((currentMode) =>
-                  currentMode === 'short' ? 'long' : 'short',
-                )
-              }
-            >
-              {widthMode === 'short' ? '切换到长标签' : '切换到短标签'}
-            </TextButton>
-          </div>
-        </div>
+    <ComponentPreviewCard
+      action={
+        <PreviewToggle
+          ariaLabel="切换长标签"
+          checked={widthMode === 'long'}
+          label={widthMode === 'long' ? '长标签' : '短标签'}
+          onCheckedChange={(checked) => setWidthMode(checked ? 'long' : 'short')}
+        />
+      }
+      align="center"
+      label="长度切换胶囊"
+    >
+      <div
+        className="chip-button-preview__width-example"
+        aria-label="ChipButton 宽度变化预览"
+      >
+        <span
+          className="chip-button-preview__width-slot"
+          style={widthPreviewStyle}
+        >
+          <ChipButton state="default">{widthPreviewLabel}</ChipButton>
+        </span>
+        <span className="chip-button-preview__width-measure" aria-hidden="true">
+          <span ref={widthMeasureRef}>
+            <ChipButton state="default">{widthPreviewLabel}</ChipButton>
+          </span>
+        </span>
       </div>
     </ComponentPreviewCard>
   )
@@ -147,9 +171,11 @@ function CapsuleDemo() {
     <>
       <ChipTextSizeDemo />
       <GlassChipDemo />
-      <ChipDemo />
-      <ClosableChipDemo />
+      <PrefixChipDemo />
+      <SuffixChipDemo />
       <ChipButtonDemo />
+      <StateToggleChipButtonDemo />
+      <WidthToggleChipButtonDemo />
     </>
   )
 }
@@ -164,6 +190,11 @@ export const capsuleDefinition = {
     'ChipButton',
     '标签胶囊',
     '状态标签胶囊',
+    '状态切换胶囊',
+    '长度切换胶囊',
+    '前缀胶囊',
+    '后缀胶囊',
+    '胶囊按钮',
   ],
   preview: () => <CapsuleDemo />,
 } satisfies ComponentDefinition

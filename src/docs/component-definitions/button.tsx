@@ -44,6 +44,9 @@ function GhostIconButtonPreviewGroup({ disabled }: { disabled: boolean }) {
       <GhostIconButton aria-label="小号菜单" disabled={disabled} size="sm">
         <Menu />
       </GhostIconButton>
+      <GhostIconButton aria-label="极小号菜单" disabled={disabled} size="xs">
+        <Menu />
+      </GhostIconButton>
     </div>
   )
 }
