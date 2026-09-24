@@ -350,9 +350,11 @@
 }
 
 /* GlassPreviewCard 条纹画布：默认与 .icon-button-preview 同节奏，条纹背景由组件内联
-   style 注入。 */
+   style 注入。纵向撑满内容区（预览卡 80px 高度地板），否则矮示例（如 FloatBar 28px）
+   画布下方会露出无条纹空带，看起来像底部被裁切。 */
 .glass-preview-card__canvas {
   display: grid;
+  min-height: 100%;
   padding: 16px;
   place-items: center;
 }

@@ -458,7 +458,7 @@ assert.ok(
 )
 
 for (const snippet of [
-  '.glass-preview-card__canvas {\n  display: grid;\n  padding: 16px;\n  place-items: center;\n}',
+  '.glass-preview-card__canvas {\n  display: grid;\n  min-height: 100%;\n  padding: 16px;\n  place-items: center;\n}',
   '.glass-preview-card__slider-row',
   'justify-content: center;',
   '.glass-surface-preview__tile',

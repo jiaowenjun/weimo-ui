@@ -1,4 +1,4 @@
-import { Check, Hash, Plus, Search, X } from 'lucide-react'
+import { Check, Plus, Search, X } from 'lucide-react'
 
 import { BottomBar } from '../../components/bottom-bar'
 import { Chip } from '../../components/chip'
@@ -43,14 +43,8 @@ function FloatBarDemo() {
         aria-label="浮动工具栏预览"
         className="internal-float-preview"
         leftSlot={
-          <Chip
-            bordered={false}
-            content="写作"
-            prefix={<Hash aria-hidden="true" />}
-            variant="glass"
-          />
+          <Chip bordered={false} content="浮动栏" variant="glass" />
         }
-        centerSlot={<Chip bordered={false} content="编辑标签" variant="glass" />}
         rightSlot={
           <span className="internal-preview__actions">
             <GlassIconButton aria-label="搜索" size="sm">
