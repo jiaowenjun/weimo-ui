@@ -67,6 +67,25 @@ function BaseCardDemo() {
           带标题栏变体在基础卡片上增加标题栏,标题栏与内容区之间保持 1em 纵向间隔,右侧可放置操作按钮。
         </p>
       </BaseCard>
+      <BaseCard
+        actionSlot={
+          <ActionMenu
+            ariaLabel="更多操作"
+            items={TITLE_BAR_MENU_ITEMS}
+            triggerProps={{
+              render: <GhostIconButton aria-label="更多操作" size="sm" />,
+            }}
+          />
+        }
+        aria-label="BaseCard 标题栏元信息区基础卡片预览"
+        className={cardClassName}
+        meta="3 条笔记 · 今天 14:06 更新"
+        title="卡片标题"
+      >
+        <p className="base-card-docs-preview__body">
+          标题栏+元信息区变体在标题栏下方增加元信息行,三个区域之间均保持 1em 纵向间隔。
+        </p>
+      </BaseCard>
       <div className="base-card-docs-preview__toggle">
         <PreviewToggle
           ariaLabel="切换 DEBUG 边框显示"
@@ -82,9 +101,9 @@ function BaseCardDemo() {
 export const baseCardDefinition = {
   id: 'base-card',
   summary:
-    '卡片材质上的最小卡片壳层:与 Card 一致的圆角与内边距,可选标题栏与操作区,内容区带临时 DEBUG 边框',
+    '卡片材质上的最小卡片壳层:与 Card 一致的圆角与内边距,可选标题栏、元信息区与操作区,内容区带临时 DEBUG 边框',
   status: 'Preview',
   frame: 'plain',
-  searchAliases: ['BaseCard', '卡片壳层', '标题栏'],
+  searchAliases: ['BaseCard', '卡片壳层', '标题栏', '元信息区'],
   preview: () => <BaseCardDemo />,
 } satisfies ComponentDefinition

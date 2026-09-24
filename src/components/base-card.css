@@ -34,6 +34,15 @@
     flex: none;
   }
 
+  /* 元信息区默认字体取自 ComponentPreviewCard 的 token 信息区(__token/__value) */
+  .base-card__meta {
+    position: relative;
+    color: var(--color-text-secondary);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-xs);
+    line-height: 1.4;
+  }
+
   .base-card__content {
     position: relative;
     display: flex;
@@ -42,9 +51,10 @@
     min-width: 0;
   }
 
-  /* DEBUG 布局观察层(临时):边框分别描出标题栏与内容区(padding 以内)的边界,
-     不影响布局与交互。隐藏方法:注释掉下面整条规则即可,无需改动组件结构。 */
+  /* DEBUG 布局观察层(临时):边框分别描出标题栏、元信息区与内容区(padding 以内)
+     的边界,不影响布局与交互。隐藏方法:注释掉下面整条规则即可,无需改动组件结构。 */
   .base-card__header::before,
+  .base-card__meta::before,
   .base-card__content::before {
     content: '';
     position: absolute;
