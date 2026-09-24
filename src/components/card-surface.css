@@ -13,4 +13,16 @@
   .card-surface--bordered {
     border-color: var(--color-border);
   }
+
+  /* 嵌套卡片自动显示描边：内外卡片同底色同阴影，隔着内容容器时边界难辨，
+     内层卡片自动取默认边框 token 区分；与 --bordered 同色，深度不限。 */
+  .card-surface .card-surface {
+    border-color: var(--color-border);
+  }
+
+  /* 显式无边框 opt-out：须排在嵌套规则之后（同特异性靠源顺序取胜），
+     让 bordered={false} 在嵌套场景也能强制无边框。 */
+  .card-surface.card-surface--borderless {
+    border-color: transparent;
+  }
 }

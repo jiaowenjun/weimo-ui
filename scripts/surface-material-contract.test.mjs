@@ -105,9 +105,11 @@ for (const snippet of [
   'bordered?: boolean',
   'export function getCardSurfaceClassName(...className: ClassValue[])',
   "return cn('card-surface', className)",
+  'export function getCardSurfaceBorderClassName(bordered: boolean | undefined)',
+  'if (bordered === undefined) return undefined',
+  "return bordered ? 'card-surface--bordered' : 'card-surface--borderless'",
   'export function CardSurface',
-  'bordered = false',
-  "bordered ? 'card-surface--bordered' : undefined",
+  'getCardSurfaceBorderClassName(bordered),',
 ]) {
   assert.ok(cardSurfaceSource.includes(snippet), `CardSurface source must include ${snippet}.`)
 }
@@ -131,6 +133,18 @@ assert.ok(
     !cardSurfaceCss.includes('border: none') &&
     !cardSurfaceCss.includes('border-width: 0'),
   'CardSurface stroke must be opt-in via --bordered while the base keeps the 1px transparent border geometry.',
+)
+assert.ok(
+  blockFor(cardSurfaceCss, '.card-surface .card-surface').includes('border-color: var(--color-border);'),
+  'Nested card surfaces must auto-stroke with the default border token so users can tell nested card boundaries apart.',
+)
+// 显式无边框 opt-out 必须排在嵌套规则之后:同特异性靠源顺序取胜,
+// 否则 bordered={false} 在嵌套场景(如材质页开关演示)无法强制无边框。
+assert.ok(
+  blockFor(cardSurfaceCss, '.card-surface.card-surface--borderless').includes('border-color: transparent;') &&
+    cardSurfaceCss.indexOf('.card-surface .card-surface {') <
+      cardSurfaceCss.indexOf('.card-surface.card-surface--borderless {'),
+  'The explicit borderless opt-out must come after the nested auto-stroke rule so bordered={false} still wins when nested.',
 )
 
 for (const snippet of [
