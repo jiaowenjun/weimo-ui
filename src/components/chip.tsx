@@ -90,7 +90,11 @@ export function Chip({
       </span>
       <AnimatedInlineSizeMeasure measureRef={measureRef}>
         <span
-          className={getChipSurfaceClassName('chip')}
+          className={getChipSurfaceClassName(
+            isGlassVariant && 'glass-surface',
+            'chip',
+            className,
+          )}
           {...chipSurfaceAttributes}
         >
           {isEmptyChipSlot(prefix) ? null : (
