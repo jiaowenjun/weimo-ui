@@ -50,15 +50,6 @@ export type ComponentManifestItem = PublicComponentManifestItem
 
 export const componentManifest = [
   {
-    id: 'component-preview-card',
-    name: 'ComponentPreviewCard',
-    registryName: 'component-preview-card',
-    packageExport: './components/component-preview-card',
-    group: 'token-style',
-    docs: false,
-    registry: true,
-  },
-  {
     id: 'md',
     name: 'Markdown渲染',
     exportName: 'Md',
@@ -417,6 +408,16 @@ export const componentManifest = [
     exportName: 'Card',
     registryName: 'card',
     packageExport: './components/card',
+    group: 'content-markdown',
+    docs: true,
+    registry: true,
+  },
+  {
+    id: 'component-preview-card',
+    name: '预览卡片',
+    exportName: 'ComponentPreviewCard',
+    registryName: 'component-preview-card',
+    packageExport: './components/component-preview-card',
     group: 'content-markdown',
     docs: true,
     registry: true,

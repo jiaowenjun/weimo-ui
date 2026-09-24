@@ -33,6 +33,9 @@ const colorSource = readProjectFile('src/docs/token-preview-color.ts')
 const cardSource = readProjectFile('src/components/component-preview-card.tsx')
 const cardCss = readProjectFile('src/components/component-preview-card.css')
 const cardRegistry = JSON.parse(readProjectFile('registry/component-preview-card.json'))
+const previewCardDefinitionSource = readProjectFile(
+  'src/docs/component-definitions/component-preview-card.tsx',
+)
 const appCss = readProjectFile('src/App.css')
 const previewBlock = blockFor(
   cardCss,
@@ -219,18 +222,23 @@ assert.equal(
 )
 assert.ok(
   manifestSource.includes("id: 'component-preview-card'") &&
-    manifestSource.includes("name: 'ComponentPreviewCard'") &&
+    manifestSource.includes("name: '预览卡片'") &&
+    manifestSource.includes("exportName: 'ComponentPreviewCard'") &&
     manifestSource.includes("registryName: 'component-preview-card'") &&
     manifestSource.includes("packageExport: './components/component-preview-card'") &&
     manifestSource.includes(
-      "packageExport: './components/component-preview-card',\n    group: 'token-style',\n    docs: false,",
+      "packageExport: './components/component-preview-card',\n    group: 'content-markdown',\n    docs: true,",
     ),
-  'ComponentPreviewCard must be listed in the Token / style component catalog as a registry-only entry.',
+  'ComponentPreviewCard must be listed in the 内容 / Markdown catalog as the preview card docs page.',
 )
 assert.ok(
-  !existsSync(join(root, 'src/docs/component-definitions/component-preview-card.tsx')) &&
+  existsSync(join(root, 'src/docs/component-definitions/component-preview-card.tsx')) &&
+    previewCardDefinitionSource.includes("import { ComponentPreviewCard } from '../../components/component-preview-card'") &&
+    previewCardDefinitionSource.includes("from '../glass-preview-card'") &&
+    previewCardDefinitionSource.includes('<GlassPreviewCard') &&
+    previewCardDefinitionSource.includes("frame: 'plain',") &&
     !existsSync(join(root, 'src/docs/component-definitions/component-preview-card-demo.tsx')),
-  'the ComponentPreviewCard debug docs page must stay removed; each token group has its own detail page.',
+  'the preview card docs page must live in 内容 / Markdown and show both ComponentPreviewCard and the shared GlassPreviewCard.',
 )
 assert.equal(cardRegistry.name, 'component-preview-card')
 assert.equal(cardRegistry.type, 'registry:ui')

@@ -127,7 +127,6 @@ for (const item of componentManifest) {
 assert.deepEqual(
   componentManifest.filter((item) => !item.docs).map((item) => item.id),
   [
-    'component-preview-card',
     'text-color',
     'pressable',
     'heat-color',

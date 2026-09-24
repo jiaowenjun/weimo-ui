@@ -15,6 +15,7 @@ import { capsuleDefinition } from './capsule'
 import { markdownDefinition } from './markdown'
 import { baseCardDefinition } from './base-card'
 import { taggedCardDefinition } from './tagged-card'
+import { componentPreviewCardDefinition } from './component-preview-card'
 import { ocrDefinition } from './ocr'
 import { imageDefinition } from './image'
 import { statDefinition } from './stat'
@@ -38,6 +39,7 @@ export const componentDefinitionsById = {
   markdown: markdownDefinition,
   'base-card': baseCardDefinition,
   'tagged-card': taggedCardDefinition,
+  'component-preview-card': componentPreviewCardDefinition,
   ocr: ocrDefinition,
   image: imageDefinition,
   stat: statDefinition,
