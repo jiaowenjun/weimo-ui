@@ -86,6 +86,22 @@ for (const snippet of [
   )
 }
 
+// 顶部栏搜索与主题切换收进玻璃图标按钮组,与左侧独立的侧边栏触发按钮保持高度一致。
+for (const snippet of [
+  "import {\n  GlassIconButtonGroup,\n  GlassIconGroupButton,\n} from '../components/glass-icon-button-group'",
+  '<GlassIconButtonGroup aria-label="搜索与主题切换">',
+]) {
+  assert.ok(
+    docsShellSource.includes(snippet),
+    `DocsShell top bar actions must include ${snippet}.`,
+  )
+}
+assert.equal(
+  (docsShellSource.match(/<GlassIconGroupButton\b/g) ?? []).length,
+  2,
+  'DocsShell top bar actions group must hold exactly the search and theme toggle buttons.',
+)
+
 assert.ok(
   !docsShellSource.includes('command-item__icon') &&
     !appCss.includes('.command-item__icon'),
