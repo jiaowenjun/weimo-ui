@@ -131,8 +131,8 @@ const groupBlock = cssBlockFor(groupCss, '.glass-icon-button-group')
 for (const snippet of [
   'display: inline-flex;',
   'align-items: center;',
-  'gap: 4px;',
-  'padding: 4px;',
+  'gap: 0;',
+  'padding: 0;',
   'border-radius: var(--radius-round);',
 ]) {
   assert.ok(
@@ -140,6 +140,58 @@ for (const snippet of [
     `.glass-icon-button-group block must include ${snippet}`,
   )
 }
+
+// 组高度与同级单个图标按钮严格一致:按钮盒纵向外溢 1px 抵消上下玻璃描边占位,
+// 首尾按钮横向外溢 1px 让内收后的悬停圆与端帽半圆同心,中间按钮不重叠。
+const groupButtonBlock = cssBlockFor(groupCss, '.glass-icon-button-group > .icon-button')
+const groupFirstButtonBlock = cssBlockFor(
+  groupCss,
+  '.glass-icon-button-group > .icon-button:first-child',
+)
+const groupLastButtonBlock = cssBlockFor(
+  groupCss,
+  '.glass-icon-button-group > .icon-button:last-child',
+)
+
+assert.ok(
+  groupButtonBlock.includes('margin-block: -1px;'),
+  'Grouped icon buttons must cancel the 1px glass border height so the pill matches a standalone button.',
+)
+assert.ok(
+  groupFirstButtonBlock.includes('margin-inline-start: -1px;'),
+  'The first grouped button must overflow 1px toward the end cap so the inset hover circle stays concentric with it.',
+)
+assert.ok(
+  groupLastButtonBlock.includes('margin-inline-end: -1px;'),
+  'The last grouped button must overflow 1px toward the end cap so the inset hover circle stays concentric with it.',
+)
+
+// 悬停蒙层内收分档:默认档 4px 等距环,sm/xs 维持 2px 紧凑环。
+const groupHoverBlock = cssBlockFor(
+  groupCss,
+  '.glass-icon-button-group > .icon-button--glass::after',
+)
+const groupSmHoverBlock = cssBlockFor(
+  groupCss,
+  '.glass-icon-button-group > .icon-button--sm.icon-button--glass::after',
+)
+const groupXsHoverBlock = cssBlockFor(
+  groupCss,
+  '.glass-icon-button-group > .icon-button--xs.icon-button--glass::after',
+)
+
+assert.ok(
+  groupHoverBlock.includes('inset: 4px;'),
+  'Default-sized grouped hover circles must inset 4px from the button box so the highlight keeps an equidistant 4px gap to the group border.',
+)
+assert.ok(
+  groupSmHoverBlock.includes('inset: 2px;'),
+  'Small grouped hover circles must keep the compact 2px inset ring.',
+)
+assert.ok(
+  groupXsHoverBlock.includes('inset: 2px;'),
+  'Grouped xs hover circles must keep the 2px inset so the highlight stays larger than the 12px icon.',
+)
 
 // 反馈与材质完全继承：组不自建悬停/按压/边框/模糊,半径走共享 round token。
 for (const omittedSnippet of [

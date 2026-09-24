@@ -5,6 +5,10 @@ import { Chip } from '../../components/chip'
 import { ComponentPreviewCard } from '../../components/component-preview-card'
 import { FloatBar } from '../../components/float-bar'
 import { GlassIconButton } from '../../components/glass-icon-button'
+import {
+  GlassIconButtonGroup,
+  GlassIconGroupButton,
+} from '../../components/glass-icon-button-group'
 import type { ComponentDefinition } from '../component-docs'
 import { GlassPreviewCard } from '../glass-preview-card'
 
@@ -50,12 +54,14 @@ function FloatBarDemo() {
             <GlassIconButton aria-label="搜索" size="sm">
               <Search />
             </GlassIconButton>
-            <GlassIconButton aria-label="确认" size="sm">
-              <Check />
-            </GlassIconButton>
-            <GlassIconButton aria-label="关闭" size="sm">
-              <X />
-            </GlassIconButton>
+            <GlassIconButtonGroup aria-label="确认与关闭">
+              <GlassIconGroupButton aria-label="确认" size="sm">
+                <Check />
+              </GlassIconGroupButton>
+              <GlassIconGroupButton aria-label="关闭" size="sm">
+                <X />
+              </GlassIconGroupButton>
+            </GlassIconButtonGroup>
           </span>
         }
       />

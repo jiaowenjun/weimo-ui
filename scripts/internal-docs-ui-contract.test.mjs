@@ -178,6 +178,7 @@ for (const [snippet, message] of [
 }
 
 // 浮动工具栏、底部操作栏与顶部工具栏演示的材质规则：按钮一律玻璃图标按钮，文字一律玻璃态胶囊。
+// 相邻动作可收进 GlassIconButtonGroup（组内为 GlassIconGroupButton，反馈同源）。
 // 玻璃图标按钮与玻璃态胶囊的边框展示不做限制（有边框、无边框都支持），
 // 因此这里只锁组件种类与 variant，不断言 bordered 的有无或取值。
 function sliceDemoSource(source, startMarker, endMarker, label) {
@@ -205,13 +206,14 @@ function assertGlassToolbarDemo(demoSource, label) {
   )
 
   assert.ok(
-    (demoSource.match(/<GlassIconButton\b/g) ?? []).length > 0 &&
+    ((demoSource.match(/<GlassIconButton\b/g) ?? []).length +
+      (demoSource.match(/<GlassIconGroupButton\b/g) ?? []).length) > 0 &&
       !demoSource.includes('GhostIconButton') &&
       !demoSource.includes('<IconButton') &&
       !demoSource.includes('<TextButton') &&
       !demoSource.includes('<ChipButton') &&
       !demoSource.includes('<button'),
-    `${label} docs demo must use GlassIconButton for every toolbar button.`,
+    `${label} docs demo must use GlassIconButton (standalone or grouped) for every toolbar button.`,
   )
 }
 
