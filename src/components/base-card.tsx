@@ -41,23 +41,21 @@ export function BaseCard({
           className="base-card__header"
           data-meta-collapsible={metaCollapsible ? 'true' : undefined}
         >
-          <div className="base-card__title-area">
-            <span className="base-card__title">{title}</span>
-            {meta === undefined || !metaCollapsible ? null : (
-              <GhostIconButton
-                aria-expanded={metaExpanded}
-                aria-label={metaExpanded ? '收起元信息' : '展开元信息'}
-                className="base-card__meta-toggle"
-                data-expanded={metaExpanded ? 'true' : undefined}
-                onClick={() => setMetaExpanded((current) => !current)}
-                size="sm"
-              >
-                <ChevronRight aria-hidden="true" />
-              </GhostIconButton>
-            )}
-          </div>
+          <span className="base-card__title">{title}</span>
           {actionSlot === undefined ? null : (
             <div className="base-card__header-action">{actionSlot}</div>
+          )}
+          {meta === undefined || !metaCollapsible ? null : (
+            <GhostIconButton
+              aria-expanded={metaExpanded}
+              aria-label={metaExpanded ? '收起元信息' : '展开元信息'}
+              className="base-card__meta-toggle"
+              data-expanded={metaExpanded ? 'true' : undefined}
+              onClick={() => setMetaExpanded((current) => !current)}
+              size="sm"
+            >
+              <ChevronRight aria-hidden="true" />
+            </GhostIconButton>
           )}
         </header>
       )}

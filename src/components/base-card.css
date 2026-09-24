@@ -17,17 +17,8 @@
     gap: 12px;
   }
 
-  /* 标题簇占满标题栏主区,折叠按钮紧贴标题文字右侧(不落行中) */
-  .base-card__title-area {
-    display: flex;
-    flex: 1 1 auto;
-    align-items: center;
-    gap: 4px;
-    min-width: 0;
-  }
-
   .base-card__title {
-    flex: 0 1 auto;
+    flex: 1 1 auto;
     min-width: 0;
     overflow: hidden;
     color: var(--color-text-primary);
