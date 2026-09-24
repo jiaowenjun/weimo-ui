@@ -185,7 +185,7 @@ assert.ok(
 const glassSurfaceTileOnlyBlock = blockFor(appCss, '.glass-surface-preview__tile')
 assert.ok(
   appCss.includes(
-    '.card-surface-preview__tile,\n.glass-surface-preview__tile,\n.popup-surface-preview__tile {\n  display: grid;\n  gap: 6px;\n  width: min(100%, 260px);\n  padding: 18px;\n  justify-items: center;\n  text-align: center;\n}',
+    '.card-surface-preview__tile,\n.glass-surface-preview__tile,\n.popup-surface-preview__tile {\n  display: grid;\n  gap: 6px;\n  width: 260px;\n  max-width: 100%;\n  padding: 18px;\n  justify-items: center;\n  text-align: center;\n}',
   ) &&
     !glassSurfaceTileOnlyBlock.includes('min-height') &&
     !glassSurfaceTileOnlyBlock.includes('align-content'),

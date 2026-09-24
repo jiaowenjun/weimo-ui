@@ -955,12 +955,15 @@
   font-size: var(--font-size-sm);
 }
 
+/* 瓦片取定宽 260px 而非 min(100%, 260px)：卡片/浮层瓦片的外包层是 align-center 画布里的收缩 flex 项，
+   百分比宽度在收缩容器内退化成文字内容宽，三个示例尺寸无法统一；max-width 保窄屏收缩。 */
 .card-surface-preview__tile,
 .glass-surface-preview__tile,
 .popup-surface-preview__tile {
   display: grid;
   gap: 6px;
-  width: min(100%, 260px);
+  width: 260px;
+  max-width: 100%;
   padding: 18px;
   justify-items: center;
   text-align: center;
