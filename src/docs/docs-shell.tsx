@@ -23,6 +23,7 @@ import {
   CommandItem,
   CommandList,
 } from '../components/coss/command'
+import { Chip } from '../components/chip'
 import { TopBar } from '../components/top-bar'
 import { GlassIconButton } from '../components/glass-icon-button'
 import { GhostIconButton } from '../components/ghost-icon-button'
@@ -203,7 +204,14 @@ export function DocsShell() {
       >
         <Menu />
       </GlassIconButton>
-      {selected ? <h1 className="docs-top-bar__title">{selected.name}</h1> : null}
+      {selected ? (
+        <Chip
+          bordered={false}
+          className="docs-top-bar__title"
+          content={selected.name}
+          variant="glass"
+        />
+      ) : null}
     </>
   )
   const topBarRightSlot = (

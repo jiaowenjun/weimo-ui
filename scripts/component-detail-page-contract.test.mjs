@@ -98,7 +98,9 @@ const iconPreviewRowBlock = blockFor(css, '.icon-preview__row')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 
 assert.ok(
-  docsShellSource.includes('{selected ? <h1 className="docs-top-bar__title">{selected.name}</h1> : null}') &&
+  docsShellSource.includes('className="docs-top-bar__title"') &&
+    docsShellSource.includes('content={selected.name}') &&
+    docsShellSource.includes('<Chip') &&
     !detailPageSource.includes('<h1') &&
     !detailPageSource.includes('doc-page__header') &&
     !css.includes('.doc-page__title') &&

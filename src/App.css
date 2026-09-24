@@ -51,16 +51,7 @@
 }
 
 .docs-top-bar__title {
-  min-width: 0;
-  margin: 0;
-  overflow: hidden;
-  color: var(--color-text-primary);
-  font-size: var(--font-size-lg);
   font-weight: 600;
-  line-height: 1.2;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  pointer-events: none;
 }
 
 .preview-stage .weimo-card {
