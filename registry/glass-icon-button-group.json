@@ -1,0 +1,54 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "glass-icon-button-group",
+  "type": "registry:ui",
+  "title": "Glass Icon Button Group",
+  "description": "A round-pill glass surface hosting borderless icon buttons that inherit the glass hover overlay and press feedback.",
+  "categories": [
+    "action"
+  ],
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/utils"
+  ],
+  "files": [
+    {
+      "path": "src/components/glass-icon-button-group.tsx",
+      "type": "registry:ui",
+      "target": "@ui/glass-icon-button-group.tsx"
+    },
+    {
+      "path": "src/components/glass-icon-button-group.css",
+      "type": "registry:ui",
+      "target": "@ui/glass-icon-button-group.css"
+    },
+    {
+      "path": "src/components/icon-button-model.ts",
+      "type": "registry:ui",
+      "target": "@ui/icon-button-model.ts"
+    },
+    {
+      "path": "src/components/icon-button.css",
+      "type": "registry:ui",
+      "target": "@ui/icon-button.css"
+    },
+    {
+      "path": "src/components/glass-surface.tsx",
+      "type": "registry:ui",
+      "target": "@ui/glass-surface.tsx"
+    },
+    {
+      "path": "src/components/glass-surface-model.ts",
+      "type": "registry:ui",
+      "target": "@ui/glass-surface-model.ts"
+    },
+    {
+      "path": "src/components/glass-surface.css",
+      "type": "registry:ui",
+      "target": "@ui/glass-surface.css"
+    }
+  ]
+}

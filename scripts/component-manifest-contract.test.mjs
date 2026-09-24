@@ -136,6 +136,7 @@ assert.deepEqual(
     'popup-surface',
     'ghost-icon-button',
     'glass-icon-button',
+    'glass-icon-button-group',
     'mode-button',
     'bottom-bar',
     'card-tool-bar',

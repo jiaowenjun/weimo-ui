@@ -1,9 +1,13 @@
 import { useState } from 'react'
-import { Menu } from 'lucide-react'
+import { Ellipsis, Menu, Share } from 'lucide-react'
 
 import { ComponentPreviewCard } from '../../components/component-preview-card'
 import { GhostIconButton } from '../../components/ghost-icon-button'
 import { GlassIconButton } from '../../components/glass-icon-button'
+import {
+  GlassIconButtonGroup,
+  GlassIconGroupButton,
+} from '../../components/glass-icon-button-group'
 import {
   ModeButton,
   type ModeButtonMode,
@@ -107,6 +111,49 @@ function GlassIconButtonPreview() {
   )
 }
 
+function GlassIconButtonGroupPreviewGroup({ disabled }: { disabled: boolean }) {
+  return (
+    <div className="icon-preview__row" aria-label="GlassIconButtonGroup 玻璃按钮组预览">
+      <GlassIconButtonGroup aria-label="玻璃图标按钮组">
+        <GlassIconGroupButton aria-label="分享" disabled={disabled}>
+          <Share />
+        </GlassIconGroupButton>
+        <GlassIconGroupButton aria-label="更多" disabled={disabled}>
+          <Ellipsis />
+        </GlassIconGroupButton>
+      </GlassIconButtonGroup>
+      <GlassIconButtonGroup aria-label="小号玻璃图标按钮组">
+        <GlassIconGroupButton aria-label="小号分享" disabled={disabled} size="sm">
+          <Share />
+        </GlassIconGroupButton>
+        <GlassIconGroupButton aria-label="小号更多" disabled={disabled} size="sm">
+          <Ellipsis />
+        </GlassIconGroupButton>
+      </GlassIconButtonGroup>
+    </div>
+  )
+}
+
+function GlassIconButtonGroupPreview() {
+  const [disabled, setDisabled] = useState(false)
+
+  return (
+    <GlassPreviewCard
+      action={
+        <PreviewToggle
+          ariaLabel="启用"
+          checked={!disabled}
+          label={disabled ? '禁用' : '启用'}
+          onCheckedChange={(checked) => setDisabled(!checked)}
+        />
+      }
+      label="玻璃图标按钮组"
+    >
+      <GlassIconButtonGroupPreviewGroup disabled={disabled} />
+    </GlassPreviewCard>
+  )
+}
+
 function ModeButtonDemo() {
   const [mode, setMode] = useState<ModeButtonMode>('display')
   const editing = mode === 'edit'
@@ -146,6 +193,7 @@ function ButtonDemo() {
       <TextButtonPreview />
       <GhostIconButtonPreview />
       <GlassIconButtonPreview />
+      <GlassIconButtonGroupPreview />
       <ModeButtonDemo />
     </>
   )
@@ -153,17 +201,19 @@ function ButtonDemo() {
 
 export const buttonDefinition = {
   id: 'button',
-  summary: '文本按钮、幽灵/玻璃图标按钮与模式按钮的按钮总览',
+  summary: '文本按钮、幽灵/玻璃图标按钮、玻璃图标按钮组与模式按钮的按钮总览',
   status: 'Ready',
   frame: 'plain',
   searchAliases: [
     'TextButton',
     'GhostIconButton',
     'GlassIconButton',
+    'GlassIconButtonGroup',
     'ModeButton',
     '文本按钮',
     '幽灵图标按钮',
     '玻璃图标按钮',
+    '玻璃图标按钮组',
     '模式按钮',
   ],
   preview: () => <ButtonDemo />,

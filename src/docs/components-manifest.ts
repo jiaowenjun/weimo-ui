@@ -177,6 +177,15 @@ export const componentManifest = [
     registry: true,
   },
   {
+    id: 'glass-icon-button-group',
+    name: 'GlassIconButtonGroup',
+    registryName: 'glass-icon-button-group',
+    packageExport: './components/glass-icon-button-group',
+    group: 'controls-overlays',
+    docs: false,
+    registry: true,
+  },
+  {
     id: 'mode-button',
     name: 'ModeButton',
     registryName: 'mode-button',
