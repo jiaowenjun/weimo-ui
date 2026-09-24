@@ -12,7 +12,7 @@ import { PreviewToggle, SurfaceBorderToggle } from '../preview-toggle'
 function ChipTextSizeDemo() {
   return (
     <ComponentPreviewCard align="center" label="胶囊字号">
-      <div aria-label="Chip 字号预览">
+      <div className="text-button-preview" aria-label="Chip 字号预览">
         <Chip content="小字号" textSize="sm" />
         <Chip content="基础字号" textSize="base" />
         <Chip content="标题字号" textSize="lg" />
@@ -43,7 +43,7 @@ function GlassChipDemo() {
 function PrefixChipDemo() {
   return (
     <ComponentPreviewCard align="center" label="前缀胶囊">
-      <div aria-label="Chip 前缀预览">
+      <div className="text-button-preview" aria-label="Chip 前缀预览">
         <Chip content="写作/日记" prefix={<Hash aria-hidden="true" />} variant="default" />
         <Chip content="写作/日记" prefix={<Hash aria-hidden="true" />} variant="glass" />
       </div>
@@ -54,7 +54,7 @@ function PrefixChipDemo() {
 function SuffixChipDemo() {
   return (
     <ComponentPreviewCard align="center" label="后缀胶囊">
-      <div aria-label="Chip 后缀预览">
+      <div className="text-button-preview" aria-label="Chip 后缀预览">
         <Chip
           content="可关闭标签"
           suffix={
@@ -81,7 +81,7 @@ function SuffixChipDemo() {
 function ChipButtonDemo() {
   return (
     <ComponentPreviewCard align="center" label="胶囊按钮">
-      <div aria-label="ChipButton 默认态与玻璃态预览">
+      <div className="text-button-preview" aria-label="ChipButton 默认态与玻璃态预览">
         <ChipButton state="default">默认态</ChipButton>
         <ChipButton state="glass">玻璃态</ChipButton>
       </div>

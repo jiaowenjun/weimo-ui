@@ -240,7 +240,15 @@ assert.ok(
     !docsSource.includes('className="internal-chip-preview__row"') &&
     !appCss.includes('.internal-chip-preview__row') &&
     !/\.internal-chip-preview\s*\{/.test(appCss),
-  'Chip docs cards must inherit ComponentPreviewCard default layout without custom wrapper styles.',
+  'Chip docs cards must not revive the removed internal-chip-preview wrapper chrome.',
+)
+const chipPreviewRowBlock = cssBlockFor(appCss, '.text-button-preview')
+assert.ok(
+  ['Chip 字号预览', 'Chip 前缀预览', 'Chip 后缀预览'].every((demoLabel) =>
+    docsSource.includes(`<div className="text-button-preview" aria-label="${demoLabel}">`),
+  ) &&
+    chipPreviewRowBlock.includes('gap: 12px;'),
+  'Capsule chip demo cards must lay out their chips in a shared 12px-gap preview row like the glass capsule card.',
 )
 assert.ok(
   !appCss.includes('.internal-chip-preview__action'),

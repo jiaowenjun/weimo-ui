@@ -264,6 +264,12 @@ assert.ok(
   'ChipButton docs text toggles must not use coss Button.',
 )
 assert.ok(
+  docsSource.includes(
+    '<div className="text-button-preview" aria-label="ChipButton 默认态与玻璃态预览">',
+  ) && appCss.includes('.text-button-preview'),
+  'Capsule chip-button demo card must lay out its buttons in the shared 12px-gap preview row.',
+)
+assert.ok(
   definitionsIndexSource.includes("import { capsuleDefinition } from './capsule'") &&
     definitionsIndexSource.includes('capsule: capsuleDefinition') &&
     !definitionsIndexSource.includes('chip-button'),
