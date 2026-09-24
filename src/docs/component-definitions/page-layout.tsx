@@ -27,12 +27,16 @@ function renderSideBarBlankPreview({
 // eslint-disable-next-line react-refresh/only-export-components
 function SideBarDemo() {
   return (
-    <ComponentPreviewCard label="侧边栏">
-      <div className="sidebar-preview">
-        {renderSideBarBlankPreview()}
-        <SideBarDrawerPreview />
-      </div>
-    </ComponentPreviewCard>
+    <>
+      <ComponentPreviewCard label="常驻侧边栏">
+        <div className="sidebar-preview">{renderSideBarBlankPreview()}</div>
+      </ComponentPreviewCard>
+      <ComponentPreviewCard label="抽屉侧边栏">
+        <div className="sidebar-preview">
+          <SideBarDrawerPreview />
+        </div>
+      </ComponentPreviewCard>
+    </>
   )
 }
 
