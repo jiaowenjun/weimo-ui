@@ -13,13 +13,21 @@
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     height: calc(var(--font-size-sm) * 1.2);
     gap: 12px;
   }
 
-  .base-card__title {
+  /* 标题簇占满标题栏主区,折叠按钮紧贴标题文字右侧(不落行中) */
+  .base-card__title-area {
+    display: flex;
     flex: 1 1 auto;
+    align-items: center;
+    gap: 4px;
+    min-width: 0;
+  }
+
+  .base-card__title {
+    flex: 0 1 auto;
     min-width: 0;
     overflow: hidden;
     color: var(--color-text-primary);
@@ -34,9 +42,51 @@
     flex: none;
   }
 
-  /* 元信息区默认字体取自 ComponentPreviewCard 的 token 信息区(__token/__value) */
+  /* 元信息区折叠按钮(参考 tag-tree__toggle):折叠 chevron-right,
+     展开旋转 90° 成 chevron-down */
+  .base-card__meta-toggle {
+    color: var(--color-text-placeholder);
+    border-radius: var(--radius-round);
+  }
+
+  .base-card__meta-toggle svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    transition: transform 180ms ease;
+  }
+
+  .base-card__meta-toggle[data-expanded="true"] svg {
+    transform: rotate(90deg);
+  }
+
+  /* 元信息区展开/折叠过渡(参考 tag-tree__row 的 height+opacity 200ms ease):
+     高度用 grid-template-rows 0fr↔1fr 过渡(可随内容自适应),折叠态负 margin
+     抵消卡级 1em 间隔,使折叠后标题栏与内容区间距仍为 1em;visibility 参与
+     过渡,折叠动画结束后才移出无障碍树,展开时立即可见 */
+  .base-card__meta-region {
+    display: grid;
+    grid-template-rows: 1fr;
+    transition:
+      grid-template-rows 200ms ease,
+      opacity 200ms ease,
+      margin-top 200ms ease,
+      visibility 200ms;
+  }
+
+  .base-card__meta-region[data-expanded="false"] {
+    grid-template-rows: 0fr;
+    opacity: 0;
+    visibility: hidden;
+    margin-top: calc(-1 * var(--space-card-section-gap));
+  }
+
+  /* 元信息区默认字体取自 ComponentPreviewCard 的 token 信息区(__token/__value);
+     min-height:0 + overflow:hidden 让 0fr 折叠行能压缩到 0 */
   .base-card__meta {
     position: relative;
+    min-height: 0;
+    overflow: hidden;
     color: var(--color-text-secondary);
     font-family: var(--font-mono);
     font-size: var(--font-size-xs);

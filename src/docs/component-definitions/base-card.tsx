@@ -76,10 +76,11 @@ function BaseCardDemo() {
         aria-label="BaseCard 标题栏元信息区基础卡片预览"
         className={cardClassName}
         meta="3 条笔记 · 今天 14:06 更新"
+        metaCollapsible
         title="卡片标题"
       >
         <p className="base-card-docs-preview__body">
-          标题栏+元信息区变体在标题栏下方增加元信息行,三个区域之间均保持 1em 纵向间隔。
+          元信息区默认折叠,点击标题文字右侧按钮展开;折叠时图标为 chevron-right,展开时旋转为 chevron-down。
         </p>
       </BaseCard>
       <BaseCard
@@ -109,7 +110,7 @@ function BaseCardDemo() {
 export const baseCardDefinition = {
   id: 'base-card',
   summary:
-    '卡片材质上的最小卡片壳层:与 Card 一致的圆角与内边距,可选标题栏、元信息区、操作区与底部栏,分区 DEBUG 观察边框随页面开关演示',
+    '卡片材质上的最小卡片壳层:与 Card 一致的圆角与内边距,可选标题栏、可折叠元信息区、操作区与底部栏,分区 DEBUG 观察边框随页面开关演示',
   status: 'Preview',
   frame: 'plain',
   searchAliases: ['BaseCard', '卡片壳层', '标题栏', '元信息区', '底部栏'],

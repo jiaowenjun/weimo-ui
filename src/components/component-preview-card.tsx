@@ -158,7 +158,7 @@ export type ComponentPreviewCardProps = Omit<
 }
 
 // 预览卡 = BaseCard 壳(卡片材质、圆角、内边距、分区 1em 间隔与 DEBUG 观察层)
-// + 可选 token 行信息区 + 统一节奏的内容画布。
+// + 可折叠 token 行信息区(标题文字右侧 chevron,默认折叠) + 统一节奏的内容画布。
 export function ComponentPreviewCard({
   action,
   align = 'start',
@@ -191,6 +191,7 @@ export function ComponentPreviewCard({
           ))
         ) : undefined
       }
+      metaCollapsible
       title={label}
       {...props}
     >

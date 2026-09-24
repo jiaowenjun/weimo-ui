@@ -25,24 +25,15 @@ const previewCardItems = [
 // Docs definitions intentionally colocate preview components with exported page metadata.
 // eslint-disable-next-line react-refresh/only-export-components
 function PreviewCardDemo() {
-  const [showTokenRows, setShowTokenRows] = useState(true)
   const [debugBorder, setDebugBorder] = useState(true)
   const debugClassName = `base-card-debug${debugBorder ? '' : ' base-card-debug--hidden'}`
 
   return (
     <>
       <ComponentPreviewCard
-        action={
-          <PreviewToggle
-            ariaLabel="显示 token 行"
-            checked={showTokenRows}
-            label={showTokenRows ? '显示 token 行' : '隐藏 token 行'}
-            onCheckedChange={setShowTokenRows}
-          />
-        }
         align="center"
         className={debugClassName}
-        items={showTokenRows ? previewCardItems : undefined}
+        items={previewCardItems}
         label="组件预览卡"
       >
         <TextButton>内容区示例</TextButton>
