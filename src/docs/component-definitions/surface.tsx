@@ -16,6 +16,7 @@ function CardSurfacePreview() {
       action={
         <SurfaceBorderToggle bordered={bordered} onBorderedChange={setBordered} />
       }
+      align="center"
       label="卡片材质"
     >
       <div aria-hidden="true" className="card-surface-preview">
@@ -36,15 +37,12 @@ function GlassSurfacePreview() {
       action={
         <SurfaceBorderToggle bordered={bordered} onBorderedChange={setBordered} />
       }
-      canvasClassName="glass-surface-preview"
       label="玻璃材质"
     >
-      <div className="glass-surface-preview__fixed">
-        <GlassSurface bordered={bordered} className="glass-surface-preview__tile">
-          <span className="glass-surface-preview__title">Glass Surface</span>
-          <span className="glass-surface-preview__meta">前景色随背景亮度自适应明暗</span>
-        </GlassSurface>
-      </div>
+      <GlassSurface bordered={bordered} className="glass-surface-preview__tile">
+        <span className="glass-surface-preview__title">Glass Surface</span>
+        <span className="glass-surface-preview__meta">前景色随背景亮度自适应明暗</span>
+      </GlassSurface>
     </GlassPreviewCard>
   )
 }
@@ -57,6 +55,7 @@ function PopupSurfacePreview() {
       action={
         <SurfaceBorderToggle bordered={bordered} onBorderedChange={setBordered} />
       }
+      align="center"
       label="浮层材质"
     >
       <div className="popup-surface-preview">

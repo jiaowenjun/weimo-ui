@@ -192,13 +192,14 @@ assert.ok(
   'All three Surface demo tiles must share one size box: no glass-only min-height, identical padding and caption line heights.',
 )
 assert.ok(
-  appCss.includes(
-    '.card-surface-preview,\n.popup-surface-preview {\n  display: flex;\n  width: 100%;\n  height: 180px;\n  align-items: center;\n  justify-content: center;\n  gap: 16px;\n  padding: 18px;\n}',
-  ) &&
-    appCss.includes(
-      '.glass-surface-preview {\n  position: relative;\n  width: 100%;\n  height: 180px;\n  overflow: hidden;\n}',
-    ),
-  'Surface page demo containers must keep identical 180px preview areas.',
+  !appCss.includes('.card-surface-preview,\n.popup-surface-preview {') &&
+    !appCss.includes('.glass-surface-preview {') &&
+    !appCss.includes('\n  height: 180px;'),
+  'Surface page demo canvases must drop the fixed 180px height and custom canvas padding, inheriting the ComponentPreviewCard default rhythm.',
+)
+assert.ok(
+  surfaceDefinitionSource.includes('align="center"'),
+  'Surface page card/popup canvases must center tiles through the shared align="center" modifier instead of custom flex layout.',
 )
 assert.ok(
   appCss.includes(

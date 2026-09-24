@@ -350,11 +350,21 @@
 }
 
 /* GlassPreviewCard 条纹画布：默认与 .icon-button-preview 同节奏，条纹背景由组件内联
-   style 注入；Surface 页经 canvasClassName 附加 .glass-surface-preview 定高 180px。 */
+   style 注入。 */
 .glass-preview-card__canvas {
   display: grid;
   padding: 16px;
   place-items: center;
+}
+
+/* 灰度滑块：画布下方居中。min-height: 0 压过预览卡 @layer 里「meta 后内容行
+   min-height: 80px」的共享节奏（App.css 无 layer，天然压过 layered 规则），
+   滑块行只保留自身高度 + 底部留白，卡片纵向更紧凑。 */
+.glass-preview-card__slider-row {
+  display: flex;
+  justify-content: center;
+  min-height: 0;
+  padding-bottom: 8px;
 }
 
 .icon-preview__row {
@@ -904,23 +914,6 @@
   font-size: var(--font-size-sm);
 }
 
-.glass-surface-preview {
-  position: relative;
-  width: 100%;
-  height: 180px;
-  overflow: hidden;
-}
-
-.glass-surface-preview__fixed {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  display: grid;
-  padding: 16px;
-  place-items: center;
-  pointer-events: none;
-}
-
 .card-surface-preview__tile,
 .glass-surface-preview__tile,
 .popup-surface-preview__tile {
@@ -935,7 +928,6 @@
 .glass-surface-preview__tile {
   min-width: 0;
   border-radius: var(--radius);
-  pointer-events: auto;
 }
 
 .glass-surface-preview__title {
@@ -952,19 +944,8 @@
   line-height: 1.4;
 }
 
-.card-surface-preview,
-.popup-surface-preview {
-  display: flex;
-  width: 100%;
-  height: 180px;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  padding: 18px;
-}
-
-/* --shadow-overlay(0 28px 80px)向下延伸约 68px,超出预览区上下各 50px 的可用空间;
-   预览窗默认裁切是给衬底演示定的,浮层瓦片需要把真实阴影画进卡片 padding(距卡片边缘 67px)。 */
+/* 画布与瓦片等高后,预览窗默认的 overflow: hidden 会把 --shadow-overlay(0 28px 80px)
+   整体裁掉;浮层卡是页面最后一张卡,真实阴影画进卡片 padding 并透到页底空白处。 */
 .component-preview-card > .component-preview-card__meta ~ .popup-surface-preview {
   overflow: visible;
 }

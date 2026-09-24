@@ -343,10 +343,8 @@ for (const snippet of [
   '静态卡片、亮度自适应玻璃层与抬升浮层的材质总览',
   'function GlassSurfacePreview()',
   'const [bordered, setBordered] = useState(true)',
-  'canvasClassName="glass-surface-preview"',
   'label="玻璃材质"',
   '<SurfaceBorderToggle bordered={bordered} onBorderedChange={setBordered} />',
-  'glass-surface-preview__fixed',
   '<GlassSurface bordered={bordered} className="glass-surface-preview__tile">',
   "'无边框',",
   "frame: 'plain',",
@@ -357,6 +355,17 @@ for (const snippet of [
     `GlassSurface docs definition must include ${snippet}.`,
   )
 }
+
+assertOmits(
+  glassSurfaceDefinitionSource,
+  'canvasClassName',
+  'GlassSurface demo canvas must inherit the GlassPreviewCard default canvas, not a fixed-height custom canvas class.',
+)
+assertOmits(
+  glassSurfaceDefinitionSource,
+  'glass-surface-preview__fixed',
+  'GlassSurface tile must sit directly in the striped canvas instead of the removed fixed overlay wrapper.',
+)
 
 // 滑块 + 主题归位 + 条纹背景的玻璃卡外壳抽到 GlassPreviewCard 共享组件
 // （Surface 页玻璃材质卡与按钮页玻璃图标按钮卡共用），契约锁共享组件源。
@@ -378,8 +387,9 @@ for (const snippet of [
   'min={glassBackgroundGrayDark}',
   'max={glassBackgroundGrayLight}',
   'onValueChange={setGlassBackgroundGray}',
-  "className={cn('glass-preview-card__canvas', canvasClassName)}",
+  'className="glass-preview-card__canvas"',
   'style={getGlassPreviewBackground(glassBackgroundGray)}',
+  'glass-preview-card__slider-row',
 ]) {
   assertIncludes(
     glassPreviewCardModuleSource,
@@ -441,22 +451,32 @@ assert.ok(
 )
 
 for (const snippet of [
-  '.glass-surface-preview',
-  'position: relative;',
-  'width: 100%;',
-  'height: 180px;',
-  'overflow: hidden;',
-  '.glass-surface-preview__fixed',
-  'position: absolute;',
-  'inset: 0;',
-  'pointer-events: none;',
+  '.glass-preview-card__canvas {\n  display: grid;\n  padding: 16px;\n  place-items: center;\n}',
+  '.glass-preview-card__slider-row',
+  'justify-content: center;',
+  'min-height: 0;',
   '.glass-surface-preview__tile',
   'justify-items: center;',
   'text-align: center;',
-  'pointer-events: auto;',
 ]) {
   assertIncludes(appCss, snippet, `GlassSurface preview CSS must include ${snippet}.`)
 }
+
+assertOmits(
+  appCss,
+  '.glass-surface-preview {',
+  'GlassSurface demo canvas block must stay deleted; the demo inherits the shared canvas rhythm.',
+)
+assertOmits(
+  appCss,
+  '\n  height: 180px;',
+  'GlassSurface demo canvas must be content-sized, not fixed at 180px.',
+)
+assertOmits(
+  appCss,
+  '.glass-surface-preview__fixed',
+  'GlassSurface fixed overlay wrapper CSS must stay deleted.',
+)
 
 for (const snippet of [
   '.slider',
@@ -489,16 +509,6 @@ assertOmits(
   appCss,
   '.glass-surface-preview__scroll',
   'GlassSurface preview CSS must drop the removed scrollable gradient scene.',
-)
-const fixedOverlayIndex = glassSurfaceDefinitionSource.indexOf(
-  'className="glass-surface-preview__fixed"',
-)
-const tileIndex = glassSurfaceDefinitionSource.indexOf(
-  '<GlassSurface bordered={bordered} className="glass-surface-preview__tile">',
-)
-assert.ok(
-  fixedOverlayIndex > -1 && tileIndex > fixedOverlayIndex,
-  'GlassSurface preview tile must be a centered overlay child of the solid gray background.',
 )
 assert.ok(
   !glassSurfaceDefinitionSource.includes('glass-surface-preview__sticky'),

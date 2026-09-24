@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
 
 import { ComponentPreviewCard } from '../components/component-preview-card'
-import { cn } from '../components/lib/utils'
 import { Slider } from '../components/slider'
 import {
   getGlassPreviewBackground,
@@ -11,17 +10,14 @@ import {
 } from './glass-preview'
 
 // Surface 页「玻璃材质」卡与按钮页「玻璃图标按钮」卡的公共外壳：
-// ComponentPreviewCard + 标题栏灰度滑块 + 可滑动竖条纹玻璃背景。
-// action 放在滑块右侧（如按钮页的启用 Switch）；canvasClassName 附加到条纹
-// 画布上（Surface 页用它定高 180px）。
+// ComponentPreviewCard + 可滑动竖条纹玻璃背景 + 画布下方居中的灰度滑块。
+// action 渲染在标题栏右侧（如按钮页的启用 Switch）。
 export function GlassPreviewCard({
   action,
-  canvasClassName,
   children,
   label,
 }: {
   action?: ReactNode
-  canvasClassName?: string
   children: ReactNode
   label: ReactNode
 }) {
@@ -56,26 +52,21 @@ export function GlassPreviewCard({
   }, [])
 
   return (
-    <ComponentPreviewCard
-      action={
-        <>
-          <Slider
-            ariaLabel="背景灰度"
-            max={glassBackgroundGrayLight}
-            min={glassBackgroundGrayDark}
-            onValueChange={setGlassBackgroundGray}
-            value={glassBackgroundGray}
-          />
-          {action}
-        </>
-      }
-      label={label}
-    >
+    <ComponentPreviewCard action={action} label={label}>
       <div
-        className={cn('glass-preview-card__canvas', canvasClassName)}
+        className="glass-preview-card__canvas"
         style={getGlassPreviewBackground(glassBackgroundGray)}
       >
         {children}
+      </div>
+      <div className="glass-preview-card__slider-row">
+        <Slider
+          ariaLabel="背景灰度"
+          max={glassBackgroundGrayLight}
+          min={glassBackgroundGrayDark}
+          onValueChange={setGlassBackgroundGray}
+          value={glassBackgroundGray}
+        />
       </div>
     </ComponentPreviewCard>
   )
