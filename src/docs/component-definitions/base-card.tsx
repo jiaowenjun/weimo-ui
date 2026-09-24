@@ -45,7 +45,7 @@ function renderTitleBarAction() {
 // Docs definitions intentionally colocate preview components with exported page metadata.
 // eslint-disable-next-line react-refresh/only-export-components
 function BaseCardDemo() {
-  const [debugBorder, setDebugBorder] = useState(true)
+  const [debugBorder, setDebugBorder] = useState(false)
   const cardClassName = `base-card-docs-preview base-card-debug${debugBorder ? '' : ' base-card-debug--hidden'}`
 
   return (

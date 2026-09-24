@@ -25,7 +25,7 @@ const previewCardItems = [
 // Docs definitions intentionally colocate preview components with exported page metadata.
 // eslint-disable-next-line react-refresh/only-export-components
 function PreviewCardDemo() {
-  const [debugBorder, setDebugBorder] = useState(true)
+  const [debugBorder, setDebugBorder] = useState(false)
   const debugClassName = `base-card-debug${debugBorder ? '' : ' base-card-debug--hidden'}`
 
   return (
