@@ -113,8 +113,9 @@ for (const selector of [
 }
 
 assert.ok(
-  tagTreeRowDefinitionSource.includes('className="internal-tag-tree-row-preview tag-tree"'),
-  'TagTreeRow docs preview must render inside the tag-tree styling scope.',
+  tagTreeRowDefinitionSource.includes('className="internal-tag-tree-row-preview tag-tree"') &&
+    tagTreeRowDefinitionSource.includes('<ComponentPreviewCard align="center" label="标签树行">'),
+  'TagTreeRow docs preview must render centered on the shared align=center canvas inside the tag-tree styling scope.',
 )
 
 assert.ok(

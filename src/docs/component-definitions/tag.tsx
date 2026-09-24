@@ -314,7 +314,7 @@ const childRow: AnimatedTagTreeRow = {
 
 function TagTreeRowDemo() {
   return (
-    <ComponentPreviewCard label="标签树行">
+    <ComponentPreviewCard align="center" label="标签树行">
       <div className="internal-tag-tree-row-preview tag-tree" role="tree" aria-label="TagTreeRow preview">
         <TagTreeRow
           onMenuAction={() => {}}
