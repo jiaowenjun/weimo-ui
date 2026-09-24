@@ -51,11 +51,18 @@
     min-width: 0;
   }
 
-  /* DEBUG 布局观察层(临时):边框分别描出标题栏、元信息区与内容区(padding 以内)
-     的边界,不影响布局与交互。隐藏方法:注释掉下面整条规则即可,无需改动组件结构。 */
+  /* 底部栏:仅一个,高度由内容自然撑开;与内容区的 1em 间隔由卡级 gap 负责 */
+  .base-card__footer {
+    position: relative;
+  }
+
+  /* DEBUG 布局观察层(临时):边框分别描出标题栏、元信息区、内容区与底部栏
+     (padding 以内)的边界,不影响布局与交互。隐藏方法:注释掉下面整条规则即可,
+     无需改动组件结构。 */
   .base-card__header::before,
   .base-card__meta::before,
-  .base-card__content::before {
+  .base-card__content::before,
+  .base-card__footer::before {
     content: '';
     position: absolute;
     inset: 0;

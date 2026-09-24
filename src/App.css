@@ -523,7 +523,8 @@
 /* 页面底部开关关闭时,仅在本演示页隐藏 DEBUG 边框(组件默认仍开启) */
 .base-card-docs-preview--debug-hidden .base-card__header::before,
 .base-card-docs-preview--debug-hidden .base-card__meta::before,
-.base-card-docs-preview--debug-hidden .base-card__content::before {
+.base-card-docs-preview--debug-hidden .base-card__content::before,
+.base-card-docs-preview--debug-hidden .base-card__footer::before {
   content: none;
 }
 

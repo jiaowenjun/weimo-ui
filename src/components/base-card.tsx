@@ -10,6 +10,7 @@ export type BaseCardProps = Omit<
   'title'
 > & {
   actionSlot?: ReactNode
+  footerSlot?: ReactNode
   meta?: ReactNode
   title?: ReactNode
 }
@@ -18,6 +19,7 @@ export function BaseCard({
   actionSlot,
   children,
   className,
+  footerSlot,
   meta,
   title,
   ...props
@@ -37,6 +39,9 @@ export function BaseCard({
       )}
       {meta === undefined ? null : <div className="base-card__meta">{meta}</div>}
       <div className="base-card__content">{children}</div>
+      {footerSlot === undefined ? null : (
+        <div className="base-card__footer">{footerSlot}</div>
+      )}
     </div>
   )
 }

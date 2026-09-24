@@ -7,6 +7,7 @@ import {
   ActionMenu,
   type ActionMenuItem,
 } from '../../components/menu'
+import { TagBar } from '../../components/tag-bar'
 import type { ComponentDefinition } from '../component-docs'
 import { PreviewToggle } from '../preview-toggle'
 
@@ -29,6 +30,18 @@ const TITLE_BAR_MENU_ITEMS = [
   },
 ] satisfies ActionMenuItem[]
 
+function renderTitleBarAction() {
+  return (
+    <ActionMenu
+      ariaLabel="更多操作"
+      items={TITLE_BAR_MENU_ITEMS}
+      triggerProps={{
+        render: <GhostIconButton aria-label="更多操作" size="sm" />,
+      }}
+    />
+  )
+}
+
 // Docs definitions intentionally colocate preview components with exported page metadata.
 // eslint-disable-next-line react-refresh/only-export-components
 function BaseCardDemo() {
@@ -50,15 +63,7 @@ function BaseCardDemo() {
         </p>
       </BaseCard>
       <BaseCard
-        actionSlot={
-          <ActionMenu
-            ariaLabel="更多操作"
-            items={TITLE_BAR_MENU_ITEMS}
-            triggerProps={{
-              render: <GhostIconButton aria-label="更多操作" size="sm" />,
-            }}
-          />
-        }
+        actionSlot={renderTitleBarAction()}
         aria-label="BaseCard 带标题栏基础卡片预览"
         className={cardClassName}
         title="卡片标题"
@@ -68,15 +73,7 @@ function BaseCardDemo() {
         </p>
       </BaseCard>
       <BaseCard
-        actionSlot={
-          <ActionMenu
-            ariaLabel="更多操作"
-            items={TITLE_BAR_MENU_ITEMS}
-            triggerProps={{
-              render: <GhostIconButton aria-label="更多操作" size="sm" />,
-            }}
-          />
-        }
+        actionSlot={renderTitleBarAction()}
         aria-label="BaseCard 标题栏元信息区基础卡片预览"
         className={cardClassName}
         meta="3 条笔记 · 今天 14:06 更新"
@@ -84,6 +81,18 @@ function BaseCardDemo() {
       >
         <p className="base-card-docs-preview__body">
           标题栏+元信息区变体在标题栏下方增加元信息行,三个区域之间均保持 1em 纵向间隔。
+        </p>
+      </BaseCard>
+      <BaseCard
+        actionSlot={renderTitleBarAction()}
+        aria-label="BaseCard 标题栏元信息区底部栏基础卡片预览"
+        className={cardClassName}
+        footerSlot={<TagBar aria-label="标签栏预览" tags={['笔记', '设计', 'weimo']} />}
+        meta="3 条笔记 · 今天 14:06 更新"
+        title="卡片标题"
+      >
+        <p className="base-card-docs-preview__body">
+          标题栏+元信息区+底部栏变体在内容区之后追加一个底部栏(如标签栏),高度由内容自然撑开。
         </p>
       </BaseCard>
       <div className="base-card-docs-preview__toggle">
@@ -101,9 +110,9 @@ function BaseCardDemo() {
 export const baseCardDefinition = {
   id: 'base-card',
   summary:
-    '卡片材质上的最小卡片壳层:与 Card 一致的圆角与内边距,可选标题栏、元信息区与操作区,内容区带临时 DEBUG 边框',
+    '卡片材质上的最小卡片壳层:与 Card 一致的圆角与内边距,可选标题栏、元信息区、操作区与底部栏,内容区带临时 DEBUG 边框',
   status: 'Preview',
   frame: 'plain',
-  searchAliases: ['BaseCard', '卡片壳层', '标题栏', '元信息区'],
+  searchAliases: ['BaseCard', '卡片壳层', '标题栏', '元信息区', '底部栏'],
   preview: () => <BaseCardDemo />,
 } satisfies ComponentDefinition
