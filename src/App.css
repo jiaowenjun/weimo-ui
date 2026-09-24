@@ -514,14 +514,21 @@
   padding: 16px;
 }
 
-/* 基础卡片页:预览不套 ComponentPreviewCard,BaseCard 直接作为页面内容渲染 */
-.base-card-docs-preview {
+/* 基础卡片页:预览不套 ComponentPreviewCard,BaseCard 直接作为页面内容渲染。
+   卡级 gap 留给组件的 1em 标题栏间隔,段间距挂在内容区上。 */
+.base-card-docs-preview .base-card__content {
   gap: 4px;
 }
 
-.base-card-docs-preview__title {
-  font-size: var(--font-size-base);
-  font-weight: 650;
+/* 页面底部开关关闭时,仅在本演示页隐藏 DEBUG 边框(组件默认仍开启) */
+.base-card-docs-preview--debug-hidden .base-card__header::before,
+.base-card-docs-preview--debug-hidden .base-card__content::before {
+  content: none;
+}
+
+.base-card-docs-preview__toggle {
+  display: flex;
+  justify-content: center;
 }
 
 .base-card-docs-preview__body {

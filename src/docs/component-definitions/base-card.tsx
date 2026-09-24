@@ -1,32 +1,90 @@
+import { useState } from 'react'
+import { Copy, Edit3, Trash2 } from 'lucide-react'
+
 import { BaseCard } from '../../components/base-card'
+import { GhostIconButton } from '../../components/ghost-icon-button'
+import {
+  ActionMenu,
+  type ActionMenuItem,
+} from '../../components/menu'
 import type { ComponentDefinition } from '../component-docs'
+import { PreviewToggle } from '../preview-toggle'
+
+const TITLE_BAR_MENU_ITEMS = [
+  {
+    key: 'edit',
+    icon: <Edit3 aria-hidden="true" />,
+    label: '编辑',
+  },
+  {
+    key: 'copy',
+    icon: <Copy aria-hidden="true" />,
+    label: '复制',
+  },
+  {
+    key: 'delete',
+    icon: <Trash2 aria-hidden="true" />,
+    label: '删除',
+    variant: 'destructive' as const,
+  },
+] satisfies ActionMenuItem[]
 
 // Docs definitions intentionally colocate preview components with exported page metadata.
 // eslint-disable-next-line react-refresh/only-export-components
 function BaseCardDemo() {
+  const [debugBorder, setDebugBorder] = useState(true)
+  const cardClassName = `base-card-docs-preview${debugBorder ? '' : ' base-card-docs-preview--debug-hidden'}`
+
   return (
-    <BaseCard
-      aria-label="BaseCard 基础卡片预览"
-      className="base-card-docs-preview"
-    >
-      <p className="base-card-docs-preview__title">卡片标题</p>
-      <p className="base-card-docs-preview__body">
-        基础卡片在卡片材质上提供与笔记卡片一致的圆角与内边距,不包含顶栏、正文、标签等任何业务结构。
-      </p>
-      <p className="base-card-docs-preview__note">
-        内容区的 DEBUG 虚线边框用于观察卡片布局,注释掉 base-card.css 中的
-        .base-card::before 规则即可隐藏。
-      </p>
-    </BaseCard>
+    <>
+      <BaseCard
+        aria-label="BaseCard 基础卡片预览"
+        className={cardClassName}
+      >
+        <p className="base-card-docs-preview__body">
+          基础卡片在卡片材质上提供与笔记卡片一致的圆角与内边距,不包含顶栏、正文、标签等任何业务结构。
+        </p>
+        <p className="base-card-docs-preview__note">
+          DEBUG 边框用于观察卡片布局,可用页面底部开关临时隐藏;注释掉
+          base-card.css 中的 ::before 规则可永久移除。
+        </p>
+      </BaseCard>
+      <BaseCard
+        actionSlot={
+          <ActionMenu
+            ariaLabel="更多操作"
+            items={TITLE_BAR_MENU_ITEMS}
+            triggerProps={{
+              render: <GhostIconButton aria-label="更多操作" size="sm" />,
+            }}
+          />
+        }
+        aria-label="BaseCard 带标题栏基础卡片预览"
+        className={cardClassName}
+        title="卡片标题"
+      >
+        <p className="base-card-docs-preview__body">
+          带标题栏变体在基础卡片上增加标题栏,标题栏与内容区之间保持 1em 纵向间隔,右侧可放置操作按钮。
+        </p>
+      </BaseCard>
+      <div className="base-card-docs-preview__toggle">
+        <PreviewToggle
+          ariaLabel="切换 DEBUG 边框显示"
+          checked={debugBorder}
+          label={debugBorder ? '已显示 DEBUG 边框' : '已隐藏 DEBUG 边框'}
+          onCheckedChange={setDebugBorder}
+        />
+      </div>
+    </>
   )
 }
 
 export const baseCardDefinition = {
   id: 'base-card',
   summary:
-    '卡片材质上的最小卡片壳层:与 Card 一致的圆角与内边距,内容区带临时 DEBUG 虚线边框',
+    '卡片材质上的最小卡片壳层:与 Card 一致的圆角与内边距,可选标题栏与操作区,内容区带临时 DEBUG 边框',
   status: 'Preview',
   frame: 'plain',
-  searchAliases: ['BaseCard', '卡片壳层'],
+  searchAliases: ['BaseCard', '卡片壳层', '标题栏'],
   preview: () => <BaseCardDemo />,
 } satisfies ComponentDefinition

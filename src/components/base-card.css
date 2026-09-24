@@ -1,19 +1,55 @@
 @layer components {
   .base-card {
-    position: relative;
     display: flex;
     flex-direction: column;
+    /* 标题栏与内容区的 1em 纵向间隔,与 Card 的分区间距同 token */
+    gap: var(--space-card-section-gap);
     padding: var(--space-card-pad);
   }
 
-  /* DEBUG 布局观察层(临时):虚线描出内容区(content box)边界——距外边框一个
-     padding 间隔。绝对定位相对于 padding box,故 inset 取 padding 值。
-     不影响布局与交互;隐藏方法:注释掉下面整条规则即可,无需改动组件结构。 */
-  .base-card::before {
+  /* 标题栏行布局参考 ComponentPreviewCard.__title 与 CardTopBar.__header。
+     高度锁定为标题行高:操作按钮垂直居中后向上下溢出可见,不撑开标题栏。 */
+  .base-card__header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: calc(var(--font-size-sm) * 1.2);
+    gap: 12px;
+  }
+
+  .base-card__title {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    color: var(--color-text-primary);
+    font-size: var(--font-size-sm);
+    font-weight: 650;
+    line-height: 1.2;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .base-card__header-action {
+    flex: none;
+  }
+
+  .base-card__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  /* DEBUG 布局观察层(临时):边框分别描出标题栏与内容区(padding 以内)的边界,
+     不影响布局与交互。隐藏方法:注释掉下面整条规则即可,无需改动组件结构。 */
+  .base-card__header::before,
+  .base-card__content::before {
     content: '';
     position: absolute;
-    inset: var(--space-card-pad);
-    border: 1px dashed var(--color-border-emphasis);
+    inset: 0;
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-xs);
     pointer-events: none;
   }
