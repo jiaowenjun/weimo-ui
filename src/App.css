@@ -517,6 +517,12 @@
   gap: 4px;
 }
 
+/* 标题栏三点按钮(ActionMenu 触发器)图标与折叠 chevron 同取 placeholder 色,
+   不随卡片正文色走;参考 tag-tree__menu-trigger 的同款约定 */
+.base-card-docs-preview .base-card__header-action .icon-button {
+  color: var(--color-text-placeholder);
+}
+
 /* DEBUG 布局观察层(临时):outline 描出标题栏、元信息区、内容区与底部栏
    (padding 以内)的边界,不占布局与交互。相比伪元素 border 方案,宿主自身的
    outline 不会被内容画布的 overflow/border-radius 裁掉(伪元素是子盒,圆角
