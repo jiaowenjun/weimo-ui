@@ -213,7 +213,8 @@ export function DocsShell() {
       </button>
       {selected ? (
         <span className="docs-top-bar__title">
-          <LiquidGlassSurface cornerRadius={999} padding="6px 10px">
+          {/* 库只在挂载/窗口 resize 时测量各玻璃层尺寸;标题变化时重新测量。 */}
+          <LiquidGlassSurface key={selected.name} cornerRadius={999} padding="6px 10px">
             <span className="liquid-glass-chip__label liquid-glass-chip__label--lg">
               {selected.name}
             </span>

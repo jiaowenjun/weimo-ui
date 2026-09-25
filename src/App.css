@@ -74,7 +74,14 @@
   height: 29px;
 }
 
-.docs-top-bar__title .liquid-glass-chip__label {
+/* 重测时立即同步尺寸,避免库的 transition: all 从默认 270×69 过渡。 */
+.docs-top-bar__title > :not(.docs-top-bar__title-sizer) {
+  transition-property: transform, opacity, box-shadow !important;
+}
+
+.docs-top-bar__title .liquid-glass-chip__label,
+.docs-top-bar__title-sizer {
+  font-family: system-ui;
   font-weight: 600;
 }
 
