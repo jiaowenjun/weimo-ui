@@ -1079,6 +1079,23 @@
   text-shadow: none;
 }
 
+/* 浮动工具栏(浮动栏页):示例内液态玻璃按钮/胶囊的图标与文字色随画布 tone
+   自适应,容器(LiquidGlassTile)持有 data-background-tone。 */
+.liquid-glass-toolbar-preview {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  color: var(--glass-surface-fg-on-dark);
+}
+
+.liquid-glass-toolbar-preview[data-background-tone='light'] {
+  color: var(--glass-surface-fg-on-light);
+}
+
+.liquid-glass-toolbar-preview[data-background-tone='light'] .liquid-glass-chip__label {
+  text-shadow: none;
+}
+
 /* 画布与示例等高后,预览窗默认的 overflow: hidden 会把真实阴影整体裁掉
    (卡片 --shadow-card 0 2px 8px、浮层 --shadow-overlay 0 28px 80px);
    让阴影画进卡片 padding,浮层卡是页面最后一张卡,阴影透到页底空白处。

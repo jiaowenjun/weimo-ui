@@ -178,10 +178,11 @@ for (const [snippet, message] of [
   assert.ok(internalFloatPreviewBlock.includes(snippet), message)
 }
 
-// 浮动工具栏、底部操作栏与顶部工具栏演示的材质规则：按钮一律磨砂图标按钮，文字一律磨砂态胶囊。
+// 底部操作栏与顶部工具栏演示的材质规则：按钮一律磨砂图标按钮，文字一律磨砂态胶囊。
 // 相邻动作可收进 FrostedIconButtonGroup（组内为 FrostedIconGroupButton，反馈同源）。
 // 磨砂图标按钮与磨砂态胶囊的边框展示不做限制（有边框、无边框都支持），
 // 因此这里只锁组件种类与 variant，不断言 bordered 的有无或取值。
+// 浮动工具栏改走液态玻璃：按钮与胶囊文字一律 LiquidGlassSurface 层（assertLiquidGlassToolbarDemo）。
 function sliceDemoSource(source, startMarker, endMarker, label) {
   const start = source.indexOf(startMarker)
 
@@ -241,8 +242,21 @@ const topBarDemoSource = sliceDemoSource(
 )
 
 assertGlassToolbarDemo(bottomBarDemoSource, 'BottomBar')
-assertGlassToolbarDemo(floatBarDemoSource, 'FloatBar')
 assertGlassToolbarDemo(topBarDemoSource, 'TopBar')
+
+function assertLiquidGlassToolbarDemo(demoSource, label) {
+  const liquidLayerCount = (demoSource.match(/<LiquidGlassSurface cornerRadius=\{999\}/g) ?? []).length
+
+  assert.ok(
+    liquidLayerCount >= 3 &&
+      demoSource.includes('<LiquidGlassTile') &&
+      !demoSource.includes('<Chip') &&
+      !demoSource.includes('FrostedIconButton'),
+    `${label} docs demo must render every button and text capsule as LiquidGlassSurface layers.`,
+  )
+}
+
+assertLiquidGlassToolbarDemo(floatBarDemoSource, 'FloatBar')
 
 assert.ok(
   packageJson.scripts?.test?.includes('scripts/internal-docs-ui-contract.test.mjs'),

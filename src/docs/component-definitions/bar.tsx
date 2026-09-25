@@ -3,15 +3,13 @@ import { Check, Plus, Search, X } from 'lucide-react'
 import { BottomBar } from '../../components/bottom-bar'
 import { CardSurface } from '../../components/card-surface'
 import { Chip } from '../../components/chip'
+import { LiquidGlassSurface } from '../../components/liquid-glass'
 import { ComponentPreviewCard } from '../../components/component-preview-card'
 import { FloatBar } from '../../components/float-bar'
 import { FrostedIconButton } from '../../components/frosted-icon-button'
-import {
-  FrostedIconButtonGroup,
-  FrostedIconGroupButton,
-} from '../../components/frosted-icon-button-group'
 import type { ComponentDefinition } from '../component-docs'
 import { GlassPreviewCard } from '../glass-preview-card'
+import { LiquidGlassTile } from '../liquid-glass-tile'
 
 function BottomBarDemo() {
   return (
@@ -41,31 +39,51 @@ function BottomBarDemo() {
   )
 }
 
+// 浮动工具栏示例改用液态玻璃按钮与液态玻璃胶囊文字(底部/顶部工具栏保持磨砂):
+// 图标钮/按钮组复用按钮页 .liquid-glass-icon-* 尺寸档,胶囊复用 .liquid-glass-chip 档,
+// 图标与文字色随画布 tone 自适应(容器持有 data-background-tone)。
+// eslint-disable-next-line react-refresh/only-export-components
 function FloatBarDemo() {
   return (
     <GlassPreviewCard label="浮动工具栏">
-      <FloatBar
-        aria-label="浮动工具栏预览"
-        className="internal-float-preview"
-        leftSlot={
-          <Chip bordered={false} content="浮动栏" variant="glass" />
-        }
-        rightSlot={
-          <span className="internal-preview__actions">
-            <FrostedIconButton aria-label="搜索" size="sm">
-              <Search />
-            </FrostedIconButton>
-            <FrostedIconButtonGroup aria-label="确认与关闭">
-              <FrostedIconGroupButton aria-label="确认" size="sm">
-                <Check />
-              </FrostedIconGroupButton>
-              <FrostedIconGroupButton aria-label="关闭" size="sm">
-                <X />
-              </FrostedIconGroupButton>
-            </FrostedIconButtonGroup>
-          </span>
-        }
-      />
+      <LiquidGlassTile className="liquid-glass-toolbar-preview">
+        <FloatBar
+          aria-label="浮动工具栏预览"
+          className="internal-float-preview"
+          leftSlot={
+            <span className="liquid-glass-chip liquid-glass-chip--sm">
+              <LiquidGlassSurface cornerRadius={999} padding="6px 10px">
+                <span className="liquid-glass-chip__label liquid-glass-chip__label--sm">浮动栏</span>
+              </LiquidGlassSurface>
+            </span>
+          }
+          rightSlot={
+            <span className="internal-preview__actions">
+              <button
+                aria-label="搜索"
+                className="liquid-glass-icon-button liquid-glass-icon-button--sm"
+                type="button"
+              >
+                <LiquidGlassSurface cornerRadius={999} onClick={() => {}} padding="6px">
+                  <Search />
+                </LiquidGlassSurface>
+              </button>
+              <button
+                aria-label="确认与关闭"
+                className="liquid-glass-icon-button-group liquid-glass-icon-button-group--sm"
+                type="button"
+              >
+                <LiquidGlassSurface cornerRadius={999} onClick={() => {}} padding="6px">
+                  <span className="liquid-glass-icon-button-group__row">
+                    <Check />
+                    <X />
+                  </span>
+                </LiquidGlassSurface>
+              </button>
+            </span>
+          }
+        />
+      </LiquidGlassTile>
     </GlassPreviewCard>
   )
 }

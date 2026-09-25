@@ -18,6 +18,7 @@ const definitionSource = readProjectFile('src/docs/component-definitions/surface
 const tileSource = readProjectFile('src/docs/liquid-glass-tile.tsx')
 const buttonDefinitionSource = readProjectFile('src/docs/component-definitions/button.tsx')
 const capsuleDefinitionSource = readProjectFile('src/docs/component-definitions/capsule.tsx')
+const barDefinitionSource = readProjectFile('src/docs/component-definitions/bar.tsx')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const appCss = readProjectFile('src/App.css')
 const frostedSurfaceSource = readProjectFile('src/components/frosted-surface.tsx')
@@ -111,6 +112,17 @@ for (const snippet of [
   assert.ok(
     capsuleDefinitionSource.includes(snippet),
     `The capsule page liquid glass chip card must include ${snippet}.`,
+  )
+}
+for (const snippet of [
+  'label="浮动工具栏"',
+  '<LiquidGlassTile className="liquid-glass-toolbar-preview">',
+  'liquid-glass-chip--sm',
+  'liquid-glass-icon-button--sm',
+]) {
+  assert.ok(
+    barDefinitionSource.includes(snippet),
+    `The float toolbar liquid glass demo must include ${snippet}.`,
   )
 }
 assert.ok(
