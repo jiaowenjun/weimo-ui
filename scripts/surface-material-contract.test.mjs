@@ -213,9 +213,9 @@ assert.ok(
 )
 assert.ok(
   appCss.includes(
-    '.component-preview-card:has(.card-surface-preview, .popup-surface-preview, .internal-bottom-preview, .liquid-glass-preview, .liquid-glass-toolbar-preview) .base-card__content {\n  overflow: visible;\n',
+    '.component-preview-card:has(.card-surface-preview, .popup-surface-preview, .internal-bottom-preview, .liquid-glass-preview, .liquid-glass-toolbar-preview, .liquid-glass-icon-preview, .liquid-glass-chip-preview) .base-card__content {\n  overflow: visible;\n',
   ),
-  'Card and popup surface demos (plus the bottom-bar canvas on CardSurface, the liquid glass canvas, and the toolbar canvases) must opt out of the preview-window clip so real shadows (--shadow-card / --shadow-overlay / the liquid glass drop shadow) render into the card padding.',
+  'Card and popup surface demos (plus the bottom-bar canvas on CardSurface and every liquid glass canvas — material, toolbars, icon buttons, chips) must opt out of the preview-window clip so real shadows (--shadow-card / --shadow-overlay / the liquid glass drop shadow) render into the card padding.',
 )
 
 for (const snippet of [
