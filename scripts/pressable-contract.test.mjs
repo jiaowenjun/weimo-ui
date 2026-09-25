@@ -97,11 +97,11 @@ assert.ok(
     backgroundTokensDocsDefinitionSource.includes("import { pressableToneMap, pressableTones } from '../../components/pressable'") &&
     backgroundTokensDocsDefinitionSource.includes('const pressableFeedback = pressableToneMap.feedback') &&
     backgroundTokensDocsDefinitionSource.includes('tone === pressableFeedback.bgColorTone') &&
-    backgroundTokensDocsDefinitionSource.includes('pressable-preview__sample') &&
-    backgroundTokensDocsDefinitionSource.includes('悬停 / 按压查看反馈色') &&
+    !backgroundTokensDocsDefinitionSource.includes('pressable-preview__sample') &&
+    !backgroundTokensDocsDefinitionSource.includes('悬停 / 按压查看反馈色') &&
     backgroundTokensDocsDefinitionSource.includes("'Pressable'") &&
     backgroundTokensDocsDefinitionSource.includes('pressableTones.flatMap'),
-  'BgColor docs must absorb the interactive Pressable preview and search metadata.',
+  'BgColor docs must absorb the Pressable label and search metadata with the plain solid-color sample.',
 )
 
 assert.ok(
@@ -136,7 +136,7 @@ for (const [tone, bgColorTone, token, className] of expectedTones) {
 
 assert.ok(
   backgroundTokensDocsDefinitionSource.includes('pressableToneMap.feedback') &&
-    backgroundTokensDocsDefinitionSource.includes('pressable-preview__sample') &&
+    !backgroundTokensDocsDefinitionSource.includes('pressable-preview__sample') &&
     !backgroundTokensDocsDefinitionSource.includes("'pressable-hover'") &&
     !backgroundTokensDocsDefinitionSource.includes("'pressable-hover-strong'") &&
     !backgroundTokensDocsDefinitionSource.includes("'pressable-hover-inverse'") &&
@@ -163,15 +163,12 @@ assert.ok(
 )
 
 assert.ok(
-  appCss.includes('.pressable-preview__sample') &&
-    appCss.includes('.pressable-preview__sample:hover') &&
-    appCss.includes('.pressable-preview__sample:active') &&
-    appCss.includes('background: var(--color-bg-hover);') &&
+  !appCss.includes('.pressable-preview__sample') &&
     !appCss.includes('.pressable-preview__scenario') &&
     !appCss.includes('.pressable-preview__row') &&
     !appCss.includes('.pressable-preview__state-') &&
     !appCss.includes('--smart-glass-preview-stage-bg'),
-  'App.css must include the Pressable-specific interactive preview-effect styles.',
+  'App.css must drop the interactive Pressable preview styles now that the feedback card renders the plain solid sample.',
 )
 
 for (const forbiddenPressedStyle of [

@@ -785,29 +785,6 @@
   background: var(--color-bg-selection);
 }
 
-.pressable-preview__sample {
-  display: flex;
-  height: 80px;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--color-border);
-  color: var(--color-text-primary);
-  font-size: var(--font-size-sm);
-  cursor: pointer;
-  transition:
-    background 160ms ease,
-    transform 160ms ease;
-}
-
-.pressable-preview__sample:hover {
-  background: var(--color-bg-hover);
-}
-
-.pressable-preview__sample:active {
-  background: var(--color-bg-hover);
-  transform: scale(0.98);
-}
-
 .border-color-preview__samples {
   display: flex;
   flex-wrap: wrap;

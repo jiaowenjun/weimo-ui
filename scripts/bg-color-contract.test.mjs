@@ -393,7 +393,7 @@ assert.ok(
     docsDefinitionSource.includes(
       'className={`component-preview-card__surface ${getBgColorClassName(tone)}`}',
     ) &&
-    docsDefinitionSource.includes('pressable-preview__sample') &&
+    !docsDefinitionSource.includes('pressable-preview__sample') &&
     docsDefinitionSource.includes('tone === pressableFeedback.bgColorTone') &&
     docsDefinitionSource.includes('<h2 className="component-preview-card-demo__category">背景模糊度</h2>') &&
     docsDefinitionSource.includes('bgBlurTones.map') &&

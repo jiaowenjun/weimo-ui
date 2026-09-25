@@ -209,7 +209,6 @@ assert.ok(
 for (const selector of [
   '.bg-color-preview__sample',
   '.bg-color-preview__selection-sample',
-  '.pressable-preview__sample',
 ]) {
   const escapedSelector = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
@@ -337,8 +336,8 @@ assert.ok(
   !existsSync(join(root, 'src/docs/component-definitions/pressable.tsx')) &&
     !existsSync(join(root, 'src/docs/component-definitions/pressable-demo.tsx')) &&
     backgroundTokensDefinitionSource.includes('pressableToneMap') &&
-    backgroundTokensDefinitionSource.includes('pressable-preview__sample'),
-  'Pressable docs must stay merged into the BgColor detail page.',
+    !backgroundTokensDefinitionSource.includes('pressable-preview__sample'),
+  'Pressable docs must stay merged into the BgColor detail page as the plain solid sample.',
 )
 
 assert.ok(

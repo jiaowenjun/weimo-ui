@@ -88,11 +88,7 @@ function BgColorPreview() {
                   token={getBgColorToken(tone)}
                   value={item.value.light}
                 >
-                  {tone === pressableFeedback.bgColorTone ? (
-                    <button type="button" className="pressable-preview__sample">
-                      悬停 / 按压查看反馈色
-                    </button>
-                  ) : isTransparent ? (
+                  {isTransparent ? (
                     <div
                       className="component-preview-card__surface-preview"
                       aria-hidden="true"
