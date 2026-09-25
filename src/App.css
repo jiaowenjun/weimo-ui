@@ -934,6 +934,89 @@
   text-shadow: none;
 }
 
+/* 液态玻璃图标按钮/按钮组(按钮页):玻璃层绝对居中于定尺寸按钮盒,
+   尺寸与磨砂图标按钮对齐(默认 44×44/小号 28×28,组 72×36/56×28);
+   图标色随画布 tone 自适应(容器持有 data-background-tone)。 */
+.liquid-glass-icon-preview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  min-width: 0;
+  color: var(--glass-surface-fg-on-dark);
+}
+
+.liquid-glass-icon-preview[data-background-tone='light'] {
+  color: var(--glass-surface-fg-on-light);
+}
+
+.liquid-glass-icon-button,
+.liquid-glass-icon-button-group {
+  position: relative;
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.liquid-glass-icon-button {
+  width: 44px;
+  height: 44px;
+}
+
+.liquid-glass-icon-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+.liquid-glass-icon-button--sm {
+  width: 28px;
+  height: 28px;
+}
+
+.liquid-glass-icon-button--sm svg {
+  width: 16px;
+  height: 16px;
+}
+
+.liquid-glass-icon-button-group {
+  width: 72px;
+  height: 36px;
+}
+
+.liquid-glass-icon-button-group--sm {
+  width: 56px;
+  height: 28px;
+}
+
+.liquid-glass-icon-button-group__row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.liquid-glass-icon-button-group__row svg {
+  width: 20px;
+  height: 20px;
+}
+
+.liquid-glass-icon-button-group--sm .liquid-glass-icon-button-group__row {
+  gap: 12px;
+}
+
+.liquid-glass-icon-button-group--sm .liquid-glass-icon-button-group__row svg {
+  width: 16px;
+  height: 16px;
+}
+
+.liquid-glass-icon-button:disabled,
+.liquid-glass-icon-button-group:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
 /* 画布与示例等高后,预览窗默认的 overflow: hidden 会把真实阴影整体裁掉
    (卡片 --shadow-card 0 2px 8px、浮层 --shadow-overlay 0 28px 80px);
    让阴影画进卡片 padding,浮层卡是页面最后一张卡,阴影透到页底空白处。

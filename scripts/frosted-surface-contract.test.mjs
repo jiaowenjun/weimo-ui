@@ -335,8 +335,7 @@ assertOmits(
 
 for (const snippet of [
   "import { useState } from 'react'",
-  "import type { ReactNode } from 'react'",
-  "import { FrostedSurface, useFrostedSurfaceBackgroundToneRef } from '../../components/frosted-surface'",
+  "import { FrostedSurface } from '../../components/frosted-surface'",
   "import { ComponentPreviewCard } from '../../components/component-preview-card'",
   "import { SurfaceBorderToggle } from '../preview-toggle'",
   "from '../glass-preview-card'",

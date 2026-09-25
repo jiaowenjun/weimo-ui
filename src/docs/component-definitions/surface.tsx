@@ -1,13 +1,13 @@
 import { useState } from 'react'
-import type { ReactNode } from 'react'
 
 import { CardSurface } from '../../components/card-surface'
-import { FrostedSurface, useFrostedSurfaceBackgroundToneRef } from '../../components/frosted-surface'
+import { FrostedSurface } from '../../components/frosted-surface'
 import { PopupSurface } from '../../components/popup-surface'
 import { LiquidGlassSurface } from '../../components/liquid-glass'
 import { ComponentPreviewCard } from '../../components/component-preview-card'
 import type { ComponentDefinition } from '../component-docs'
 import { GlassPreviewCard } from '../glass-preview-card'
+import { LiquidGlassTile } from '../liquid-glass-tile'
 import { SurfaceBorderToggle } from '../preview-toggle'
 
 function CardSurfacePreview() {
@@ -41,31 +41,7 @@ function FrostedSurfacePreview() {
   )
 }
 
-// 液态玻璃内容文字借磨砂材质的 tone 采样自适应明暗(与磨砂材质卡同一
-// 机制与翻转阈值):瓦片持有 data-background-tone,背景转亮时翻深字、覆盖
-// 库默认的深色文字投影,背景转暗时维持白字。材质层本身不参与自适应。
-// eslint-disable-next-line react-refresh/only-export-components
-function LiquidGlassTile({
-  children,
-  className,
-}: {
-  children: ReactNode
-  className?: string
-}) {
-  const { backgroundTone, setElementRef } =
-    useFrostedSurfaceBackgroundToneRef<HTMLDivElement>(true)
-
-  return (
-    <div
-      className={className}
-      data-background-tone={backgroundTone ?? undefined}
-      ref={setElementRef}
-    >
-      {children}
-    </div>
-  )
-}
-
+// 液态玻璃内容色(文字/图标)的 tone 自适应抽到共享 LiquidGlassTile。
 // eslint-disable-next-line react-refresh/only-export-components
 function LiquidGlassPreview() {
   return (

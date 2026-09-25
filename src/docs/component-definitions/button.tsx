@@ -13,9 +13,14 @@ import {
   type ModeButtonMode,
 } from '../../components/mode-button'
 import { TextButton } from '../../components/text-button'
+import { LiquidGlassSurface } from '../../components/liquid-glass'
 import type { ComponentDefinition } from '../component-docs'
 import { GlassPreviewCard } from '../glass-preview-card'
+import { LiquidGlassTile } from '../liquid-glass-tile'
 import { PreviewToggle } from '../preview-toggle'
+
+// 液态玻璃演示点击无实际动作,传 no-op 只为启用库的悬停辉光与按压缩放。
+function noopLiquidGlassClick() {}
 
 function TextButtonPreview() {
   const [disabled, setDisabled] = useState(false)
@@ -168,6 +173,113 @@ function FrostedIconButtonGroupPreview() {
   )
 }
 
+// 液态玻璃图标按钮:玻璃层绝对居中于定尺寸按钮盒(与磨砂图标按钮同尺寸,
+// 默认 44/小号 28),圆形 cornerRadius 999;图标色随画布 tone 自适应。
+// eslint-disable-next-line react-refresh/only-export-components
+function LiquidGlassIconButtonPreviewGroup({ disabled }: { disabled: boolean }) {
+  return (
+    <LiquidGlassTile className="liquid-glass-icon-preview">
+      <button
+        aria-label="菜单"
+        className="liquid-glass-icon-button"
+        disabled={disabled}
+        type="button"
+      >
+        <LiquidGlassSurface cornerRadius={999} onClick={disabled ? undefined : noopLiquidGlassClick} padding="12px">
+          <Menu />
+        </LiquidGlassSurface>
+      </button>
+      <button
+        aria-label="小号菜单"
+        className="liquid-glass-icon-button liquid-glass-icon-button--sm"
+        disabled={disabled}
+        type="button"
+      >
+        <LiquidGlassSurface cornerRadius={999} padding="6px">
+          <Menu />
+        </LiquidGlassSurface>
+      </button>
+    </LiquidGlassTile>
+  )
+}
+
+// eslint-disable-next-line react-refresh/only-export-components
+function LiquidGlassIconButtonPreview() {
+  const [disabled, setDisabled] = useState(false)
+
+  return (
+    <GlassPreviewCard
+      action={
+        <PreviewToggle
+          ariaLabel="启用"
+          checked={!disabled}
+          label={disabled ? '禁用' : '启用'}
+          onCheckedChange={(checked) => setDisabled(!checked)}
+        />
+      }
+      label="液态玻璃图标按钮"
+    >
+      <LiquidGlassIconButtonPreviewGroup disabled={disabled} />
+    </GlassPreviewCard>
+  )
+}
+
+// 液态玻璃图标按钮组:单枚玻璃胶囊承载成组图标(默认 72×36/小号 56×28)。
+// eslint-disable-next-line react-refresh/only-export-components
+function LiquidGlassIconButtonGroupPreviewGroup({ disabled }: { disabled: boolean }) {
+  return (
+    <LiquidGlassTile className="liquid-glass-icon-preview">
+      <button
+        aria-label="液态玻璃图标按钮组"
+        className="liquid-glass-icon-button-group"
+        disabled={disabled}
+        type="button"
+      >
+        <LiquidGlassSurface cornerRadius={999} padding="8px">
+          <span className="liquid-glass-icon-button-group__row">
+            <Share />
+            <Ellipsis />
+          </span>
+        </LiquidGlassSurface>
+      </button>
+      <button
+        aria-label="小号液态玻璃图标按钮组"
+        className="liquid-glass-icon-button-group liquid-glass-icon-button-group--sm"
+        disabled={disabled}
+        type="button"
+      >
+        <LiquidGlassSurface cornerRadius={999} padding="6px">
+          <span className="liquid-glass-icon-button-group__row">
+            <Share />
+            <Ellipsis />
+          </span>
+        </LiquidGlassSurface>
+      </button>
+    </LiquidGlassTile>
+  )
+}
+
+// eslint-disable-next-line react-refresh/only-export-components
+function LiquidGlassIconButtonGroupPreview() {
+  const [disabled, setDisabled] = useState(false)
+
+  return (
+    <GlassPreviewCard
+      action={
+        <PreviewToggle
+          ariaLabel="启用"
+          checked={!disabled}
+          label={disabled ? '禁用' : '启用'}
+          onCheckedChange={(checked) => setDisabled(!checked)}
+        />
+      }
+      label="液态玻璃图标按钮组"
+    >
+      <LiquidGlassIconButtonGroupPreviewGroup disabled={disabled} />
+    </GlassPreviewCard>
+  )
+}
+
 function ModeButtonDemo() {
   const [mode, setMode] = useState<ModeButtonMode>('display')
   const editing = mode === 'edit'
@@ -208,6 +320,8 @@ function ButtonDemo() {
       <GhostIconButtonPreview />
       <FrostedIconButtonPreview />
       <FrostedIconButtonGroupPreview />
+      <LiquidGlassIconButtonPreview />
+      <LiquidGlassIconButtonGroupPreview />
       <ModeButtonDemo />
     </>
   )

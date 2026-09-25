@@ -15,6 +15,8 @@ function readProjectFile(relativePath) {
 
 const componentSource = readProjectFile('src/components/liquid-glass.tsx')
 const definitionSource = readProjectFile('src/docs/component-definitions/surface.tsx')
+const tileSource = readProjectFile('src/docs/liquid-glass-tile.tsx')
+const buttonDefinitionSource = readProjectFile('src/docs/component-definitions/button.tsx')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const appCss = readProjectFile('src/App.css')
 const frostedSurfaceSource = readProjectFile('src/components/frosted-surface.tsx')
@@ -56,7 +58,8 @@ assert.ok(
   componentSource.includes('overLight') &&
     componentSource.includes('displacementScale') &&
     componentSource.includes('cornerRadius') &&
-    componentSource.includes('padding'),
+    componentSource.includes('padding') &&
+    componentSource.includes('onClick'),
   'LiquidGlassSurface must keep forwarding the material effect parameters.',
 )
 
@@ -75,12 +78,28 @@ for (const snippet of [
   'label="液态玻璃材质"',
   '<LiquidGlassSurface',
   "from '../../components/liquid-glass'",
-  "import { FrostedSurface, useFrostedSurfaceBackgroundToneRef } from '../../components/frosted-surface'",
-  'data-background-tone={backgroundTone ?? undefined}',
+  "import { LiquidGlassTile } from '../liquid-glass-tile'",
 ]) {
   assert.ok(
     definitionSource.includes(snippet),
     `The Surface page liquid glass card must include ${snippet}.`,
+  )
+}
+for (const snippet of [
+  "import { useFrostedSurfaceBackgroundToneRef } from '../components/frosted-surface'",
+  'data-background-tone={backgroundTone ?? undefined}',
+]) {
+  assert.ok(tileSource.includes(snippet), `liquid-glass-tile.tsx must include ${snippet}.`)
+}
+for (const snippet of [
+  'label="液态玻璃图标按钮"',
+  'label="液态玻璃图标按钮组"',
+  '<LiquidGlassSurface cornerRadius={999}',
+  "import { LiquidGlassTile } from '../liquid-glass-tile'",
+]) {
+  assert.ok(
+    buttonDefinitionSource.includes(snippet),
+    `The button page liquid glass icon cards must include ${snippet}.`,
   )
 }
 assert.ok(

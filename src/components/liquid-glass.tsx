@@ -32,6 +32,8 @@ export type LiquidGlassSurfaceProps = {
   padding?: string
   /** 监听宿主背景变化并强制玻璃重采样,默认开启 */
   observe?: boolean
+  /** 点击回调;传入后启用库的悬停辉光与按压缩放反馈 */
+  onClick?: () => void
   className?: string
   style?: CSSProperties
 }
@@ -92,6 +94,7 @@ export function LiquidGlassSurface({
   displacementScale,
   elasticity,
   observe = true,
+  onClick,
   overLight,
   padding,
   saturation,
@@ -110,6 +113,7 @@ export function LiquidGlassSurface({
       cornerRadius={cornerRadius}
       displacementScale={displacementScale}
       elasticity={elasticity}
+      onClick={onClick}
       overLight={overLight}
       padding={padding}
       saturation={saturation}
