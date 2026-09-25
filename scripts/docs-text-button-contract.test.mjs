@@ -35,7 +35,6 @@ function assertTextButtonDocsControl(relativePath, labels) {
 for (const [relativePath, labels] of [
   ['src/docs/component-definitions/action-dialog.tsx', ['打开内部对话框']],
   ['src/docs/component-definitions/markdown.tsx', ['打开公式对话框']],
-  ['src/docs/component-definitions/markdown.tsx', ['切到编辑', '切到展示']],
   ['src/docs/component-definitions/button.tsx', ['文本按钮']],
   ['src/docs/component-definitions/tag.tsx', ['切换到编辑态', '切换到展示态']],
 ]) {

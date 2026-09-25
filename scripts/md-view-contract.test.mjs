@@ -35,8 +35,6 @@ const cssSource = readProjectFile('src/App.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 const registryJson = JSON.parse(readProjectFile('registry.json'))
 const previewFrameBlock = cssBlockFor(cssSource, '.md-view-docs-preview__frame')
-const previewMeasureBlock = cssBlockFor(cssSource, '.md-view-docs-preview__measure')
-const previewMeasureValueBlock = cssBlockFor(cssSource, '.md-view-docs-preview__measure-value')
 const previewEditorViewportBlock = cssBlockFor(
   cssSource,
   '.md-view-docs-preview__surface .md-editor__viewport',
@@ -320,49 +318,44 @@ assert.ok(
 )
 
 for (const snippet of [
-  "import { useLayoutEffect, useRef, useState } from 'react'",
-  "import { MdView, type MdViewHandle, type MdViewMode } from '../../components/md-view'",
+  "import { useState } from 'react'",
+  "import { MdView, type MdViewMode } from '../../components/md-view'",
   "import { TextButton } from '../../components/text-button'",
+  "import { PreviewToggle } from '../preview-toggle'",
   "import { mdRenderSample } from './markdown-sample'",
   "const [mode, setMode] = useState<MdViewMode>('view')",
-  'const [markdown, setMarkdown] = useState(initialMarkdown)',
-  'const mdViewRef = useRef<MdViewHandle | null>(null)',
-  'const previewSurfaceRef = useRef<HTMLDivElement | null>(null)',
-  'const [measuredContentHeight, setMeasuredContentHeight] = useState<number | null>(null)',
-  'useLayoutEffect(() => {',
-  'const nextHeight = mdViewRef.current?.getContentHeight()',
-  'Number.isFinite(nextHeight)',
-  'Math.round(nextHeight)',
-  'new ResizeObserver',
-  'previewSurfaceRef.current',
-  '<TextButton',
-  "mode === 'view' ? '切到编辑' : '切到展示'",
-  "aria-label={mode === 'view' ? '切换到 MdView 编辑态' : '切换到 MdView 展示态'}",
-  'className="md-view-docs-preview__measure"',
-  'className="md-view-docs-preview__measure-label"',
-  'className="md-view-docs-preview__measure-value"',
-  'aria-live="polite"',
-  '<output',
-  '内容高度',
-  "{measuredContentHeight === null ? '--' : `${measuredContentHeight}px`}",
+  'const [markdown, setMarkdown] = useState(mdRenderSample)',
+  '<PreviewToggle',
+  'ariaLabel="MdView 编辑模式"',
+  "checked={mode === 'edit'}",
+  "label={mode === 'edit' ? '编辑' : '展示'}",
+  "onCheckedChange={(checked) => setMode(checked ? 'edit' : 'view')}",
   '<MdView',
-  'ref={mdViewRef}',
   'editorBottomSafeArea={100}',
   "editorProps={{ placeholder: '写点什么...' }}",
   'mode={mode}',
   'value={markdown}',
   'onChange={setMarkdown}',
-  'ref={previewSurfaceRef}',
   '<MdViewDemo />',
-  'className="md-view-docs-preview__raw"',
-  'className="md-view-docs-preview__raw-label"',
-  'className="md-view-docs-preview__raw-content"',
-  'Markdown 原始内容',
-  '<pre',
-  '{markdown}',
 ]) {
   assert.ok(definitionSource.includes(snippet), `MdView docs definition must include ${snippet}.`)
 }
+assert.ok(
+  !definitionSource.includes('MdViewHandle') &&
+    !definitionSource.includes('useLayoutEffect') &&
+    !definitionSource.includes('useRef') &&
+    !definitionSource.includes('ResizeObserver') &&
+    !definitionSource.includes('getContentHeight') &&
+    !definitionSource.includes('measuredContentHeight') &&
+    !definitionSource.includes('md-view-docs-preview__measure') &&
+    !definitionSource.includes('md-view-docs-preview__raw') &&
+    !definitionSource.includes('md-view-docs-preview__toolbar') &&
+    !definitionSource.includes('切到编辑') &&
+    !definitionSource.includes('切到展示') &&
+    !definitionSource.includes('内容高度') &&
+    !definitionSource.includes('Markdown 原始内容'),
+  'MdView docs preview must show only the editor/view surface without measurement or raw-source panels.',
+)
 assert.ok(
   !definitionSource.includes("import { Button } from '../../components/coss/button'") &&
     !/<Button\b/.test(definitionSource),
@@ -378,18 +371,23 @@ for (const dependencyName of ['remark-parse', 'remark-stringify', 'unified']) {
 
 for (const selector of [
   '.md-view-docs-preview',
-  '.md-view-docs-preview__toolbar',
   '.md-view-docs-preview__frame',
+  '.md-view-docs-preview__surface',
+  '.md-view-docs-preview__surface .md-editor__viewport',
+]) {
+  assert.ok(cssSource.includes(selector), `App.css must include ${selector}.`)
+}
+
+for (const selector of [
+  '.md-view-docs-preview__toolbar',
   '.md-view-docs-preview__measure',
   '.md-view-docs-preview__measure-label',
   '.md-view-docs-preview__measure-value',
-  '.md-view-docs-preview__surface',
-  '.md-view-docs-preview__surface .md-editor__viewport',
   '.md-view-docs-preview__raw',
   '.md-view-docs-preview__raw-label',
   '.md-view-docs-preview__raw-content',
 ]) {
-  assert.ok(cssSource.includes(selector), `App.css must include ${selector}.`)
+  assert.ok(!cssSource.includes(selector), `App.css must remove unused ${selector}.`)
 }
 
 for (const [block, snippet, message] of [
@@ -419,26 +417,6 @@ for (const [block, snippet, message] of [
 
 for (const [block, snippet, message] of [
   [
-    previewMeasureBlock,
-    'border-bottom: 1px solid var(--color-border-divider);',
-    'MdView preview measurement row must stay visually attached to the preview frame.',
-  ],
-  [
-    previewMeasureBlock,
-    'color: var(--color-text-secondary);',
-    'MdView preview measurement row must use muted supporting text.',
-  ],
-  [
-    previewMeasureValueBlock,
-    'font-variant-numeric: tabular-nums;',
-    'MdView preview measurement value must use tabular numerals so height changes do not jitter.',
-  ],
-  [
-    previewMeasureValueBlock,
-    'color: var(--color-text-primary);',
-    'MdView preview measurement value must be readable as the primary measured value.',
-  ],
-  [
     previewEditorViewportBlock,
     'min-height: 0;',
     'MdView preview editor viewport must neutralize MdEditor minimum height so the shared frame can shrink to content.',
@@ -456,30 +434,6 @@ for (const [block, snippet, message] of [
 ]) {
   assert.ok(block.includes(snippet), message)
 }
-
-const previewRawBlock = cssBlockFor(cssSource, '.md-view-docs-preview__raw')
-const previewRawLabelBlock = cssBlockFor(cssSource, '.md-view-docs-preview__raw-label')
-const previewRawContentBlock = cssBlockFor(cssSource, '.md-view-docs-preview__raw-content')
-
-assert.ok(
-  previewRawBlock.includes('display: grid;') &&
-    previewRawBlock.includes('gap: 6px;') &&
-    previewRawBlock.includes('padding: 10px 12px 12px;') &&
-    previewRawBlock.includes('border-top: 1px solid var(--color-border-divider);'),
-  'App.css must place the MdView raw markdown panel inside the preview frame.',
-)
-assert.ok(
-  previewRawLabelBlock.includes('color: var(--color-text-secondary);') &&
-    previewRawLabelBlock.includes('font-size: 12px;'),
-  'App.css must keep the MdView raw markdown label visually secondary.',
-)
-assert.ok(
-  previewRawContentBlock.includes('overflow: auto;') &&
-    previewRawContentBlock.includes('white-space: pre-wrap;') &&
-    previewRawContentBlock.includes('font-family:') &&
-    previewRawContentBlock.includes('font-size: 12px;'),
-  'App.css must render the MdView raw markdown content as readable wrapped source text.',
-)
 
 assert.ok(
   packageJson.scripts?.test?.includes('scripts/md-view-contract.test.mjs'),

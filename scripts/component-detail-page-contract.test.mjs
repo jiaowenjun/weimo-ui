@@ -231,27 +231,17 @@ assert.ok(
 assert.ok(
   mdRenderDefinitionSource.includes("import { MdRender } from '../../components/md-render'") &&
     mdRenderDefinitionSource.includes("id: 'markdown'") &&
-    mdRenderDefinitionSource.includes('const [markdown, setMarkdown] = useState(mdRenderSample)') &&
-    mdRenderDefinitionSource.includes('content={markdown}'),
+    mdRenderDefinitionSource.includes('function MdRenderPreview()') &&
+    mdRenderDefinitionSource.includes('<MdRenderPreview />') &&
+    mdRenderDefinitionSource.includes('content={mdRenderSample}'),
   'MdRender detail page must render the standalone markdown preview component with the shared markdown sample.',
 )
 assert.ok(
-  mdRenderDefinitionSource.includes("import { useLayoutEffect, useRef, useState } from 'react'") &&
-    mdRenderDefinitionSource.includes('function MdRenderPreview()') &&
-    mdRenderDefinitionSource.includes('const sourceTextareaRef = useRef<HTMLTextAreaElement | null>(null)') &&
-    mdRenderDefinitionSource.includes('function resizeSourceTextarea(textarea: HTMLTextAreaElement | null)') &&
-    mdRenderDefinitionSource.includes("textarea.style.height = 'auto'") &&
-    mdRenderDefinitionSource.includes('textarea.style.height = `${textarea.scrollHeight}px`') &&
-    mdRenderDefinitionSource.includes('const [markdown, setMarkdown] = useState(mdRenderSample)') &&
-    mdRenderDefinitionSource.includes('className="md-render-docs-preview"') &&
-    mdRenderDefinitionSource.includes('className="md-render-docs-preview__source"') &&
-    mdRenderDefinitionSource.includes('className="md-render-docs-preview__textarea"') &&
-    mdRenderDefinitionSource.includes('value={markdown}') &&
-    mdRenderDefinitionSource.includes('resizeSourceTextarea(event.currentTarget)') &&
-    mdRenderDefinitionSource.includes('className="md-render-docs-preview__rendered"') &&
-    mdRenderDefinitionSource.includes('content={markdown}') &&
-    mdRenderDefinitionSource.includes('<MdRenderPreview />'),
-  'MdRender detail preview must show editable auto-growing markdown source beside a live rendered result.',
+  !mdRenderDefinitionSource.includes('md-render-docs-preview') &&
+    !mdRenderDefinitionSource.includes('resizeSourceTextarea') &&
+    !mdRenderDefinitionSource.includes('textarea') &&
+    !mdRenderDefinitionSource.includes('Markdown 原文'),
+  'MdRender detail preview must render only the markdown result without the editable source pane.',
 )
 for (const selector of [
   '.md-render-docs-preview',
@@ -260,21 +250,8 @@ for (const selector of [
   '.md-render-docs-preview__textarea',
   '.md-render-docs-preview__rendered',
 ]) {
-  assert.ok(css.includes(selector), `App.css must include ${selector} styles for MdRender docs comparison.`)
+  assert.ok(!css.includes(selector), `App.css must remove unused ${selector} styles.`)
 }
-const mdRenderPaneBlock = blockFor(css, '.md-render-docs-preview__pane')
-const mdRenderTextareaBlock = blockFor(css, '.md-render-docs-preview__textarea')
-const mdRenderRenderedBlock = blockFor(css, '.md-render-docs-preview__rendered')
-
-assert.ok(
-  !/(?:^|\s)(?:height|max-height|min-height):/.test(mdRenderPaneBlock) &&
-    !/overflow:\s*(?:auto|hidden|scroll)/.test(mdRenderPaneBlock) &&
-    !/(?:^|\s)(?:height|max-height):/.test(mdRenderRenderedBlock) &&
-    !/overflow:\s*(?:auto|hidden|scroll)/.test(mdRenderRenderedBlock) &&
-    !mdRenderTextareaBlock.includes('height: 100%;') &&
-    mdRenderTextareaBlock.includes('overflow: hidden;'),
-  'MdRender detail comparison panes must grow with content instead of introducing internal scrollbars.',
-)
 
 assert.ok(
   imageViewDefinitionSource.includes("import { ImageView, ImageViewDisplayModeMenu, type ImageViewDisplayMode } from '../../components/image-view'") &&

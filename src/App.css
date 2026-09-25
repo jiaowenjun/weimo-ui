@@ -199,41 +199,12 @@
   justify-self: stretch;
 }
 
-.md-view-docs-preview__toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
 .md-view-docs-preview__frame {
   min-width: 0;
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   background: var(--color-bg-card);
   box-shadow: var(--shadow-card);
-}
-
-.md-view-docs-preview__measure {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  min-width: 0;
-  padding: 8px 12px;
-  border-bottom: 1px solid var(--color-border-divider);
-  color: var(--color-text-secondary);
-  font-size: 12px;
-  line-height: 1.4;
-}
-
-.md-view-docs-preview__measure-label {
-  min-width: 0;
-}
-
-.md-view-docs-preview__measure-value {
-  color: var(--color-text-primary);
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
 }
 
 .md-view-docs-preview__surface {
@@ -247,93 +218,6 @@
   padding-inline: 0;
   padding-block-start: 0;
   padding-block-end: var(--md-view-editor-bottom-safe-area, 100px);
-}
-
-.md-view-docs-preview__raw {
-  display: grid;
-  gap: 6px;
-  padding: 10px 12px 12px;
-  border-top: 1px solid var(--color-border-divider);
-}
-
-.md-view-docs-preview__raw-label {
-  color: var(--color-text-secondary);
-  font-size: 12px;
-  line-height: 1.4;
-}
-
-.md-view-docs-preview__raw-content {
-  max-height: 220px;
-  min-width: 0;
-  margin: 0;
-  overflow: auto;
-  color: var(--color-text-primary);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
-    'Courier New', monospace;
-  font-size: 12px;
-  line-height: 1.5;
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-
-.md-render-docs-preview {
-  display: grid;
-  width: 100%;
-  min-width: 0;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  align-self: center;
-  justify-self: stretch;
-}
-
-.md-render-docs-preview__source,
-.md-render-docs-preview__result {
-  display: grid;
-  min-width: 0;
-  gap: 8px;
-}
-
-.md-render-docs-preview__pane-label {
-  color: var(--color-text-secondary);
-  font-size: 12px;
-  line-height: 1.4;
-}
-
-.md-render-docs-preview__pane {
-  min-width: 0;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-bg-card);
-  box-shadow: var(--shadow-card);
-}
-
-.md-render-docs-preview__textarea {
-  box-sizing: border-box;
-  display: block;
-  width: 100%;
-  min-width: 0;
-  resize: none;
-  border: 0;
-  outline: none;
-  overflow: hidden;
-  background: transparent;
-  color: var(--color-text-primary);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
-    'Courier New', monospace;
-  font-size: 13px;
-  line-height: 1.55;
-  padding: 16px;
-}
-
-.md-render-docs-preview__textarea:focus-visible {
-  box-shadow: inset 0 0 0 2px var(--color-border-accent);
-}
-
-.md-render-docs-preview__rendered {
-  box-sizing: border-box;
-  width: 100%;
-  min-width: 0;
-  padding: 16px;
 }
 
 .sidebar-preview {
@@ -1015,6 +899,12 @@
   overflow: visible;
 }
 
+/* 编辑器正文与光标贴着画布边缘,--radius 的圆角曲线会压住首行文本;
+   Markdown 编辑器卡画布圆角收窄到 --radius-xs,圆角只裁到角落极小范围 */
+.component-preview-card:has(.md-editor-docs-preview) .base-card__content {
+  border-radius: var(--radius-xs);
+}
+
 .card-surface-preview__title,
 .popup-surface-preview__title {
   font-size: var(--font-size-base);
@@ -1199,12 +1089,6 @@
 
   .docs-top-bar__title {
     margin-inline-start: calc(var(--size-sidebar-width) + var(--space-gutter) * 1.6);
-  }
-}
-
-@media (max-width: 900px) {
-  .md-render-docs-preview {
-    grid-template-columns: minmax(0, 1fr);
   }
 }
 

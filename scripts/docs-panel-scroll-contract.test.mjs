@@ -33,6 +33,10 @@ const demoPanel = blockFor(css, '.demo-block__panel')
 const previewStage = blockFor(css, '.preview-stage')
 const previewStageChildren = blockFor(css, '.preview-stage > *')
 const mdEditorDocsPreview = blockFor(css, '.md-editor-docs-preview')
+const mdEditorDocsCanvas = blockFor(
+  css,
+  '.component-preview-card:has(.md-editor-docs-preview) .base-card__content',
+)
 const mdViewDocsViewport = blockFor(css, '.md-view-docs-preview__surface .md-editor__viewport')
 
 assert.ok(!css.includes('.component-frame'), 'overview gallery frame styles must be removed.')
@@ -98,6 +102,11 @@ assertDeclaration(
 assert.ok(
   !css.includes('.md-editor-docs-preview .md-editor__viewport'),
   'MdEditor detail preview must show the component natural content-driven viewport height.',
+)
+assertDeclaration(
+  mdEditorDocsCanvas,
+  'border-radius: var(--radius-xs);',
+  'MdEditor docs canvas must use the tighter radius so body text and the caret stay clear of the corner curve.',
 )
 assertDeclaration(
   mdViewDocsViewport,
