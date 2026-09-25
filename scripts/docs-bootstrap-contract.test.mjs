@@ -339,7 +339,7 @@ assert.ok(
 assert.ok(
   !existsSync(join(root, 'src/docs/component-definitions/bg-blur.tsx')) &&
     componentDefinitionSources['background-tokens'].includes('bgBlurTones.map') &&
-    componentDefinitionSources['background-tokens'].includes('>背景模糊度</h2>'),
+    componentDefinitionSources['background-tokens'].includes('label="背景模糊度"'),
   'BgBlur docs must be merged into the Background detail page.',
 )
 

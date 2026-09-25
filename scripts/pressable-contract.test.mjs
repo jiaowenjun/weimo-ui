@@ -95,13 +95,12 @@ assert.ok(
   !existsSync(join(root, 'src/docs/component-definitions/pressable.tsx')) &&
     !existsSync(join(root, 'src/docs/component-definitions/pressable-demo.tsx')) &&
     backgroundTokensDocsDefinitionSource.includes("import { pressableToneMap, pressableTones } from '../../components/pressable'") &&
-    backgroundTokensDocsDefinitionSource.includes('const pressableFeedback = pressableToneMap.feedback') &&
-    backgroundTokensDocsDefinitionSource.includes('tone === pressableFeedback.bgColorTone') &&
+    !backgroundTokensDocsDefinitionSource.includes('pressableFeedback') &&
     !backgroundTokensDocsDefinitionSource.includes('pressable-preview__sample') &&
     !backgroundTokensDocsDefinitionSource.includes('悬停 / 按压查看反馈色') &&
     backgroundTokensDocsDefinitionSource.includes("'Pressable'") &&
     backgroundTokensDocsDefinitionSource.includes('pressableTones.flatMap'),
-  'BgColor docs must absorb the Pressable label and search metadata with the plain solid-color sample.',
+  'BgColor docs must absorb the Pressable search metadata into the merged solid swatch card.',
 )
 
 assert.ok(
@@ -135,7 +134,7 @@ for (const [tone, bgColorTone, token, className] of expectedTones) {
 }
 
 assert.ok(
-  backgroundTokensDocsDefinitionSource.includes('pressableToneMap.feedback') &&
+  backgroundTokensDocsDefinitionSource.includes('pressableToneMap[tone]') &&
     !backgroundTokensDocsDefinitionSource.includes('pressable-preview__sample') &&
     !backgroundTokensDocsDefinitionSource.includes("'pressable-hover'") &&
     !backgroundTokensDocsDefinitionSource.includes("'pressable-hover-strong'") &&

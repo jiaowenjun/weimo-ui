@@ -1,5 +1,3 @@
-import { Fragment } from 'react'
-
 import {
   bgBlurToneMap,
   bgBlurTones,
@@ -21,116 +19,57 @@ import {
 } from '../../components/heat-color'
 import { pressableToneMap, pressableTones } from '../../components/pressable'
 import { ComponentPreviewCard } from '../../components/component-preview-card'
+import { GlassPreviewCard } from '../glass-preview-card'
+import { glassBackgroundGrayMidpoint } from '../glass-preview'
 import type { ComponentDefinition } from '../component-docs'
-import { sortByThemeLightness, useIsDarkTheme } from '../token-preview-color'
+import { useIsDarkTheme } from '../token-preview-color'
 
-const bgColorPreviewGroups = [
-  {
-    label: '基础表面',
-    tones: ['page', 'card', 'raised'],
-  },
-  {
-    label: '动作与反馈',
-    tones: ['primary', 'hover', 'hover-on-hover'],
-  },
-  {
-    label: '组件状态',
-    tones: ['selected', 'chip'],
-  },
-] as const satisfies readonly {
-  label: string
-  tones: readonly BgColorTone[]
-}[]
-
-const bgColorPreviewTones = bgColorPreviewGroups.flatMap(({ tones }) => tones)
-
-function hasTransparentBgColorValue(tone: { value: { light: string; dark: string } }) {
-  const slashAlphaPattern = /\/\s*(?:0?\.\d+|[1-9]\d?%)/
-
-  return [tone.value.light, tone.value.dark].some(
-    (value) => value.includes('rgba(') || value.includes('hsla(') || slashAlphaPattern.test(value),
-  )
-}
+// 合并 swatch 卡固定语义顺序,不做亮度排序;唯一例外:亮主题下 card 与 page 互换,
+// 让色块亮度序列在两主题下都单调(亮 card 100%→page 96%→…,暗 page 7%→card 12%→…)。
+const bgColorSwatchTones = [
+  'page',
+  'card',
+  'selected',
+  'raised',
+  'chip',
+  'hover',
+  'hover-on-hover',
+  'primary',
+] as const satisfies readonly BgColorTone[]
 
 // Docs definitions intentionally colocate preview components with exported page metadata.
 // eslint-disable-next-line react-refresh/only-export-components
 function BgColorPreview() {
   const isDark = useIsDarkTheme()
-  const pressableFeedback = pressableToneMap.feedback
+  const swatchTones = isDark
+    ? bgColorSwatchTones
+    : [bgColorSwatchTones[1], bgColorSwatchTones[0], ...bgColorSwatchTones.slice(2)]
 
   return (
     <>
-      {bgColorPreviewGroups.map((group) => {
-        const orderedTones = sortByThemeLightness(
-          group.tones,
-          (tone) => bgColorToneMap[tone].value,
-          isDark,
-          isDark ? 15 : 94,
-        )
+      <ComponentPreviewCard
+        items={swatchTones.map((tone) => {
+          const item = bgColorToneMap[tone]
 
-        return (
-          <Fragment key={group.label}>
-            <h2 className="component-preview-card-demo__category">{group.label}</h2>
-
-            {orderedTones.map((tone) => {
-              const item = bgColorToneMap[tone]
-              const isTransparent = hasTransparentBgColorValue(item)
-
-              return (
-                <ComponentPreviewCard
-                  darkValue={item.value.dark}
-                  key={tone}
-                  label={
-                    tone === pressableFeedback.bgColorTone
-                      ? `${item.label} / ${pressableFeedback.label}`
-                      : item.label
-                  }
-                  token={getBgColorToken(tone)}
-                  value={item.value.light}
-                >
-                  {isTransparent ? (
-                    <div
-                      className="component-preview-card__surface-preview"
-                      aria-hidden="true"
-                    >
-                      <span className="component-preview-card__surface-backdrop" />
-                      <span
-                        className={`component-preview-card__surface ${getBgColorClassName(tone)}`}
-                      />
-                    </div>
-                  ) : (
-                    <div className="bg-color-preview__sample" aria-hidden="true">
-                      <span
-                        className={`bg-color-preview__sample-fill ${getBgColorClassName(tone)}`}
-                      />
-                    </div>
-                  )}
-                </ComponentPreviewCard>
-              )
-            })}
-          </Fragment>
-        )
-      })}
-
-      <h2 className="component-preview-card-demo__category">背景模糊度</h2>
-
-      {bgBlurTones.map((tone) => {
-        const item = bgBlurToneMap[tone]
-
-        return (
-          <ComponentPreviewCard
-            key={tone}
-            label={item.label}
-            token={getBgBlurBlurToken(tone)}
-            value={getBgBlurBlurValue(tone)}
-          >
-            <div className="component-preview-card__surface-preview" aria-hidden="true">
-              <span className="component-preview-card__surface-backdrop" />
-              <span className={`component-preview-card__surface ${getBgBlurClassName(tone)}`} />
-            </div>
-          </ComponentPreviewCard>
-        )
-      })}
+          return {
+            darkValue: item.value.dark,
+            token: getBgColorToken(tone),
+            value: item.value.light,
+          }
+        })}
+        label="背景色"
+      >
+        <div className="bg-color-preview__swatch-canvas">
+          <div aria-hidden="true" className="bg-color-preview__swatch-group">
+            {swatchTones.map((tone) => (
+              <span
+                className={`bg-color-preview__swatch ${getBgColorClassName(tone)}`}
+                key={tone}
+              />
+            ))}
+          </div>
+        </div>
+      </ComponentPreviewCard>
 
       <ComponentPreviewCard
         items={heatColorLevels.map((level) => {
@@ -153,6 +92,25 @@ function BgColorPreview() {
           ))}
         </div>
       </ComponentPreviewCard>
+
+      <GlassPreviewCard
+        initialGray={glassBackgroundGrayMidpoint}
+        items={bgBlurTones.map((tone) => ({
+          token: getBgBlurBlurToken(tone),
+          value: getBgBlurBlurValue(tone),
+        }))}
+        label="背景模糊度"
+      >
+        <div className="bg-blur-pair">
+          {bgBlurTones.map((tone) => (
+            <span
+              aria-hidden="true"
+              className={`bg-blur-pair__surface ${getBgBlurClassName(tone)}`}
+              key={tone}
+            />
+          ))}
+        </div>
+      </GlassPreviewCard>
     </>
   )
 }
@@ -161,7 +119,7 @@ export const backgroundTokensDefinition = {
   id: 'background-tokens',
   status: 'Ready',
   frame: 'plain',
-  searchAliases: bgColorPreviewTones.flatMap((tone) => {
+  searchAliases: bgColorSwatchTones.flatMap((tone) => {
     const item = bgColorToneMap[tone]
 
     return ['BgColor', '背景', '背景色', tone, item.label, item.token, item.description, item.uiUsage, item.bijiUsage]

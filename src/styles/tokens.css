@@ -108,7 +108,7 @@
   /* === 背景 / 文字 / 边框 token === */
   --color-bg-page: hsl(var(--background));
   --color-bg-card: hsl(var(--card));
-  --color-bg-raised: hsl(var(--muted));
+  --color-bg-raised: hsl(40 10% 93%);
   --color-bg-primary: hsl(var(--primary));
   --color-bg-selected: hsl(var(--muted));
   --color-text-primary: hsl(0 0% 9%);
@@ -129,7 +129,7 @@
   --color-border-disabled-on-light: hsl(0 0% 92%);
   --color-border-disabled-on-dark: hsl(0 0% 24%);
   --color-border-danger: hsl(4 77% 40%);
-  --color-bg-chip: hsl(40 12% 96%);
+  --color-bg-chip: hsl(40 12% 92%);
   --color-bg-selection: hsl(var(--primary) / 0.2);
   --color-bg-backdrop: hsl(214.3 33.3% 4.1% / 0.32);
   --color-heat-0: hsl(0 0% 94%);
@@ -138,7 +138,7 @@
   --color-heat-3: hsl(18 62% 65%);
   --color-heat-4: hsl(18 62% 52%);
   --color-heatmap-today-ring: hsl(18.1 71.9% 46.1% / 0.55);
-  --color-bg-hover: hsl(40 12% 96%);
+  --color-bg-hover: hsl(40 12% 90%);
   --color-bg-nested-hover: hsl(40 12% 88%);
   --color-text-danger: hsl(4 77% 40%);
 }
@@ -160,7 +160,7 @@
   /* === 背景 / 文字 / 边框暗色覆盖 === */
   --color-bg-page: hsl(var(--background));
   --color-bg-card: hsl(var(--card));
-  --color-bg-raised: hsl(var(--muted));
+  --color-bg-raised: hsl(0 0% 17%);
   --color-bg-primary: hsl(var(--primary));
   --color-bg-selected: hsl(var(--muted));
   --color-text-primary: hsl(0 0% 98%);
@@ -181,7 +181,7 @@
   --color-border-disabled-on-light: hsl(0 0% 92%);
   --color-border-disabled-on-dark: hsl(0 0% 24%);
   --color-border-danger: hsl(7 100% 74%);
-  --color-bg-chip: hsl(0 0% 17%);
+  --color-bg-chip: hsl(0 0% 19%);
   --color-bg-selection: hsl(var(--primary) / 0.2);
   --color-heat-0: hsl(0 0% 19%);
   --color-heat-1: hsl(23 31% 22%);
@@ -189,7 +189,7 @@
   --color-heat-3: hsl(23 50% 44%);
   --color-heat-4: hsl(23 68% 56%);
   --color-heatmap-today-ring: hsl(0 0% 100% / 0.38);
-  --color-bg-hover: hsl(0 0% 20%);
+  --color-bg-hover: hsl(0 0% 21%);
   --color-bg-nested-hover: hsl(0 0% 28%);
   --color-text-danger: hsl(7 100% 74%);
 

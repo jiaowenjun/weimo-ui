@@ -743,20 +743,63 @@
   border-radius: var(--radius-sm);
 }
 
-.bg-color-preview__sample {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-  height: 80px;
+.bg-color-preview__swatch-canvas {
+  width: 100%;
+  container-type: inline-size;
 }
 
-.bg-color-preview__sample-fill {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  display: block;
+.bg-color-preview__swatch-group {
+  display: grid;
+  grid-template-columns: repeat(8, 42px);
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  height: 100%;
+  gap: clamp(12px, 2vw, 36px);
+  /* 左右内边距把色块挡在画布 16px 圆角之外 */
+  padding-inline: 16px;
+}
+
+.bg-color-preview__swatch {
+  display: block;
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+}
+
+/* 容器不足 8 枚一行(8×42px+7×36px 间隙+2×16px 内边距=620px)时改两行 4 枚,色块 42~48px 自适应 */
+@container (width < 620px) {
+  .bg-color-preview__swatch-group {
+    grid-template-columns: repeat(4, minmax(42px, 48px));
+  }
+}
+
+/* 背景模糊度卡:玻璃/遮罩两种模糊示例在条纹画布上并排 */
+.bg-blur-pair {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: clamp(24px, 4vw, 48px);
+}
+
+.bg-blur-pair__surface {
+  display: block;
+  flex: 1 1 0;
+  min-width: 0;
+  /* 480×240 封顶(2:1),宽画布上示例不再无限长高,余量居中 */
+  max-width: 480px;
+  aspect-ratio: 2 / 1;
+  border-radius: var(--radius-sm);
+  /* 边框勾勒示例边界,便于观察模糊范围 */
+  border: 1px solid var(--color-border);
+}
+
+/* 两个示例统一样式,只有模糊度取值不同:遮罩示例在演示中不叠加遮罩底色 */
+.bg-blur-pair__surface.bg-blur--backdrop {
+  background: none;
+}
+
+/* 卡片底色与画布同为卡片材质本色,加边框让色块可辨 */
+.bg-color-preview__swatch.bg-color--card {
+  border: 1px solid var(--color-border);
 }
 
 .bg-color-preview__selection-sample {

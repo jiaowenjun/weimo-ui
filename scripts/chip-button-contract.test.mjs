@@ -214,8 +214,8 @@ assert.ok(
   'ChipButton hover and active must not fade visual layers out because that causes dark-mode background flicker.',
 )
 assert.ok(
-  tokensCss.includes('--color-bg-chip: hsl(40 12% 96%);') &&
-    tokensCss.includes('--color-bg-chip: hsl(0 0% 17%);'),
+  tokensCss.includes('--color-bg-chip: hsl(40 12% 92%);') &&
+    tokensCss.includes('--color-bg-chip: hsl(0 0% 19%);'),
   'ChipButton brand chip surface token must derive from the local neutral brand theme by default.',
 )
 assert.ok(

@@ -29,8 +29,8 @@ export const bgColorToneMap = {
     label: '抬升底色',
     token: '--color-bg-raised',
     value: {
-      light: 'hsl(40 10% 94%)',
-      dark: 'hsl(0 0% 15%)',
+      light: 'hsl(40 10% 93%)',
+      dark: 'hsl(0 0% 17%)',
     },
     className: 'bg-color--raised',
     description: '比卡片更弱的抬升面，用于输入区、激活态和骨架动画。',
@@ -53,8 +53,8 @@ export const bgColorToneMap = {
     label: '通用 hover',
     token: '--color-bg-hover',
     value: {
-      light: 'hsl(40 12% 96%)',
-      dark: 'hsl(0 0% 20%)',
+      light: 'hsl(40 12% 90%)',
+      dark: 'hsl(0 0% 21%)',
     },
     className: 'bg-color--hover',
     description: '普通列表项、chip、菜单项、数学节点和轻量按钮的 hover 底色。',
@@ -89,8 +89,8 @@ export const bgColorToneMap = {
     label: 'Chip 底色',
     token: '--color-bg-chip',
     value: {
-      light: 'hsl(40 12% 96%)',
-      dark: 'hsl(0 0% 17%)',
+      light: 'hsl(40 12% 92%)',
+      dark: 'hsl(0 0% 19%)',
     },
     className: 'bg-color--chip',
     description: '标签、筛选 chip 和轻量标记的柔和填充色。',

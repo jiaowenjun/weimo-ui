@@ -45,7 +45,6 @@ const transparentSurfaceBlock = blockFor(
   cardCss,
   '.component-preview-card .component-preview-card__surface',
 )
-const backgroundSampleBlock = blockFor(appCss, '.bg-color-preview__sample')
 const borderSampleBlock = blockFor(appCss, '.border-color-preview__sample')
 
 assert.ok(
@@ -190,11 +189,9 @@ assert.ok(
 )
 
 assert.ok(
-  !backgroundSampleBlock.includes('border:') &&
-    !backgroundSampleBlock.includes('background:') &&
-    borderSampleBlock.includes('border: 1px solid;') &&
+  borderSampleBlock.includes('border: 1px solid;') &&
     !borderSampleBlock.includes('background:'),
-  'Background and border previews must leave their visible color to the token-specific utility class.',
+  'Border previews must leave their visible color to the token-specific utility class.',
 )
 
 assert.ok(
@@ -206,10 +203,7 @@ assert.ok(
   'Transparent color and blur previews must share one ComponentPreviewCard surface layout.',
 )
 
-for (const selector of [
-  '.bg-color-preview__sample',
-  '.bg-color-preview__selection-sample',
-]) {
+for (const selector of ['.bg-color-preview__selection-sample']) {
   const escapedSelector = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
   assert.match(
@@ -326,7 +320,7 @@ assert.ok(
 
 assert.ok(
   !existsSync(join(root, 'src/docs/component-definitions/bg-blur.tsx')) &&
-    backgroundTokensDefinitionSource.includes('>背景模糊度</h2>') &&
+    backgroundTokensDefinitionSource.includes('label="背景模糊度"') &&
     backgroundTokensDefinitionSource.includes('bgBlurTones.map') &&
     backgroundTokensDefinitionSource.includes('item.backgroundToken'),
   'BgBlur and BgColor docs must share the grouped Background detail page.',

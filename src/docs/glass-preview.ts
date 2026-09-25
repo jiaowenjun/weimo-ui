@@ -7,6 +7,9 @@ import { parseColorLightness } from './token-preview-color'
 export const glassBackgroundGrayDark = parseColorLightness(bgColorToneMap.card.value.dark)?.lightness ?? 12
 export const glassBackgroundGrayLight = parseColorLightness(bgColorToneMap.card.value.light)?.lightness ?? 100
 
+// 轨道中点灰度：需要固定起始位置的调用方（如背景模糊度卡）用它让亮暗主题从同一点出发。
+export const glassBackgroundGrayMidpoint = (glassBackgroundGrayDark + glassBackgroundGrayLight) / 2
+
 // 条纹 stop 用 rgb() 输出：GlassSurface 的背景采样只解析 hex 与 rgb()，不识别 hsl()。
 // spread 关于中点对称且从左到右递增：条纹逐根变亮，五条条纹的平均亮度等于滑块灰度值
 // （采样端取 backgroundImage 内全部颜色的均值，与条纹位移无关）。

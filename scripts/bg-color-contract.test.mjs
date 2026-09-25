@@ -45,19 +45,24 @@ function cssVarsIncludeToken(item, token) {
 const expectedTones = [
   ['page', '--color-bg-page', 'bg-color--page', 'hsl(40 16% 96%)', 'hsl(0 0% 7%)'],
   ['card', '--color-bg-card', 'bg-color--card', 'hsl(0 0% 100%)', 'hsl(0 0% 12%)'],
-  ['raised', '--color-bg-raised', 'bg-color--raised', 'hsl(40 10% 94%)', 'hsl(0 0% 15%)'],
+  ['raised', '--color-bg-raised', 'bg-color--raised', 'hsl(40 10% 93%)', 'hsl(0 0% 17%)'],
   ['primary', '--color-bg-primary', 'bg-color--primary', 'hsl(0 0% 15%)', 'hsl(0 0% 96%)'],
-  ['hover', '--color-bg-hover', 'bg-color--hover', 'hsl(40 12% 96%)', 'hsl(0 0% 20%)'],
+  ['hover', '--color-bg-hover', 'bg-color--hover', 'hsl(40 12% 90%)', 'hsl(0 0% 21%)'],
   ['hover-on-hover', '--color-bg-nested-hover', 'bg-color--hover-on-hover', 'hsl(40 12% 88%)', 'hsl(0 0% 28%)'],
   ['selected', '--color-bg-selected', 'bg-color--selected', 'hsl(40 10% 94%)', 'hsl(0 0% 15%)'],
-  ['chip', '--color-bg-chip', 'bg-color--chip', 'hsl(40 12% 96%)', 'hsl(0 0% 17%)'],
+  ['chip', '--color-bg-chip', 'bg-color--chip', 'hsl(40 12% 92%)', 'hsl(0 0% 19%)'],
   ['selection', '--color-bg-selection', 'bg-color--selection', 'hsl(0 0% 15% / 0.2)', 'hsl(0 0% 96% / 0.2)'],
 ]
 
-const expectedToneGroups = [
-  ['基础表面', ['page', 'card', 'raised']],
-  ['动作与反馈', ['primary', 'hover', 'hover-on-hover']],
-  ['组件状态', ['selected', 'chip']],
+const expectedSwatchTones = [
+  'page',
+  'card',
+  'selected',
+  'raised',
+  'chip',
+  'hover',
+  'hover-on-hover',
+  'primary',
 ]
 
 const excludedTokens = [
@@ -75,9 +80,9 @@ const opaqueFeedbackTokens = new Set([
 ])
 
 const expectedOpaqueFeedbackTokenValues = new Map([
-  ['--color-bg-hover', ['hsl(40 12% 96%)', 'hsl(0 0% 20%)']],
+  ['--color-bg-hover', ['hsl(40 12% 90%)', 'hsl(0 0% 21%)']],
   ['--color-bg-nested-hover', ['hsl(40 12% 88%)', 'hsl(0 0% 28%)']],
-  ['--color-bg-chip', ['hsl(40 12% 96%)', 'hsl(0 0% 17%)']],
+  ['--color-bg-chip', ['hsl(40 12% 92%)', 'hsl(0 0% 19%)']],
 ])
 
 function assertOpaqueValue(value, token) {
@@ -120,8 +125,6 @@ const styleRegistry = readJson('registry/style.json')
 const standaloneRegistryItem = readJson('registry/bg-color.json')
 const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const registryItem = rootRegistry.items.find((item) => item.name === 'bg-color')
-const sampleBlock = firstBlockFor(appCss, '.bg-color-preview__sample')
-const sampleFillBlock = firstBlockFor(appCss, '.bg-color-preview__sample-fill')
 const surfaceBackdropBlock = firstBlockFor(
   tokenPreviewCardCss,
   '.component-preview-card .component-preview-card__surface-backdrop',
@@ -368,73 +371,56 @@ assert.ok(
     docsDefinitionSource.includes("import { ComponentPreviewCard } from '../../components/component-preview-card'") &&
     docsDefinitionSource.includes("import { pressableToneMap, pressableTones } from '../../components/pressable'") &&
     docsDefinitionSource.includes("from '../../components/bg-blur'") &&
-    docsDefinitionSource.includes('bgColorPreviewGroups.map') &&
-    docsDefinitionSource.includes('<h2 className="component-preview-card-demo__category">') &&
-    docsDefinitionSource.includes('group.tones') &&
-    docsDefinitionSource.includes('bgColorPreviewTones') &&
-    docsDefinitionSource.includes('orderedTones.map') &&
+    docsDefinitionSource.includes('bgColorSwatchTones') &&
+    docsDefinitionSource.includes('swatchTones.map') &&
+    docsDefinitionSource.includes('useIsDarkTheme()') &&
+    docsDefinitionSource.includes(
+      '[bgColorSwatchTones[1], bgColorSwatchTones[0], ...bgColorSwatchTones.slice(2)]',
+    ) &&
     docsDefinitionSource.includes('bgColorToneMap[tone]') &&
     docsDefinitionSource.includes('getBgColorClassName(tone)') &&
     docsDefinitionSource.includes('getBgColorToken(tone)') &&
     docsDefinitionSource.includes('<ComponentPreviewCard') &&
-    docsDefinitionSource.includes('darkValue={item.value.dark}') &&
-    docsDefinitionSource.includes('pressableFeedback.label') &&
-    docsDefinitionSource.includes('token={getBgColorToken(tone)}') &&
-    docsDefinitionSource.includes('value={item.value.light}') &&
-    docsDefinitionSource.includes('bg-color-preview__sample') &&
-    docsDefinitionSource.includes('bg-color-preview__sample-fill') &&
+    docsDefinitionSource.includes('label="背景色"') &&
+    docsDefinitionSource.includes('bg-color-preview__swatch-canvas') &&
+    docsDefinitionSource.includes('bg-color-preview__swatch-group') &&
+    docsDefinitionSource.includes('bg-color-preview__swatch') &&
     docsDefinitionSource.includes(
-      'className={`bg-color-preview__sample-fill ${getBgColorClassName(tone)}`}',
+      'className={`bg-color-preview__swatch ${getBgColorClassName(tone)}`}',
     ) &&
-    docsDefinitionSource.includes('const isTransparent = hasTransparentBgColorValue(item)') &&
-    docsDefinitionSource.includes('component-preview-card__surface-preview') &&
-    docsDefinitionSource.includes('component-preview-card__surface-backdrop') &&
-    docsDefinitionSource.includes('component-preview-card__surface') &&
-    docsDefinitionSource.includes(
-      'className={`component-preview-card__surface ${getBgColorClassName(tone)}`}',
-    ) &&
+    docsDefinitionSource.includes('darkValue: item.value.dark') &&
+    docsDefinitionSource.includes('token: getBgColorToken(tone)') &&
+    docsDefinitionSource.includes('value: item.value.light') &&
+    !docsDefinitionSource.includes('bgColorPreviewTones') &&
+    !docsDefinitionSource.includes('bgColorStateTones') &&
+    !docsDefinitionSource.includes('orderedSwatchTones') &&
+    !docsDefinitionSource.includes('orderedStateTones') &&
+    !docsDefinitionSource.includes('sortByThemeLightness') &&
+    !docsDefinitionSource.includes('hasTransparentBgColorValue') &&
+    !docsDefinitionSource.includes('bg-color-preview__sample') &&
     !docsDefinitionSource.includes('pressable-preview__sample') &&
-    docsDefinitionSource.includes('tone === pressableFeedback.bgColorTone') &&
-    docsDefinitionSource.includes('<h2 className="component-preview-card-demo__category">背景模糊度</h2>') &&
+    !docsDefinitionSource.includes('pressableFeedback') &&
     docsDefinitionSource.includes('bgBlurTones.map') &&
+    !docsDefinitionSource.includes('背景模糊度</h2>') &&
     !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     !docsDefinitionSource.includes('summary:') &&
     !docsDefinitionSource.includes('bg-color-preview__group') &&
     !docsDefinitionSource.includes('bg-color-preview__description'),
-  'BgColor docs definition must render one concise ComponentPreviewCard per tone.',
-)
-assert.ok(
-  docsDefinitionSource.includes('function hasTransparentBgColorValue') &&
-    docsDefinitionSource.includes('rgba(') &&
-    docsDefinitionSource.includes('hsla(') &&
-    docsDefinitionSource.includes('/\\s*(?:0?\\.\\d+|[1-9]\\d?%)') &&
-    docsDefinitionSource.includes('[tone.value.light, tone.value.dark].some'),
-  'BgColor docs definition must detect semi-transparent tone values before showing the striped backdrop sample.',
+  'BgColor docs definition must merge all eight tones into the single fixed-order swatch card.',
 )
 
-const previewGroupsSource = docsDefinitionSource.slice(
-  docsDefinitionSource.indexOf('const bgColorPreviewGroups'),
-  docsDefinitionSource.indexOf('const bgColorPreviewTones'),
+const previewTonesSource = docsDefinitionSource.slice(
+  docsDefinitionSource.indexOf('const bgColorSwatchTones'),
+  docsDefinitionSource.indexOf('function BgColorPreview'),
 )
 
 assert.deepEqual(
-  [...previewGroupsSource.matchAll(/label: '([^']+)'/g)].map((match) => match[1]),
-  expectedToneGroups.map(([label]) => label),
-  'BgColor docs preview must render the semantic groups in the expected order.',
-)
-assert.deepEqual(
-  [...previewGroupsSource.matchAll(/'([a-z-]+)'/g)].map((match) => match[1]),
-  expectedToneGroups.flatMap(([, tones]) => tones),
-  'BgColor docs preview groups must cover every tone exactly once.',
+  [...previewTonesSource.matchAll(/'([a-z-]+)'/g)].map((match) => match[1]),
+  expectedSwatchTones,
+  'BgColor docs must merge all eight tones into one card in the fixed semantic order.',
 )
 assert.ok(
-  docsDefinitionSource.includes("from '../token-preview-color'") &&
-    docsDefinitionSource.includes('useIsDarkTheme()') &&
-    docsDefinitionSource.includes('sortByThemeLightness('),
-  'BgColor docs preview must use the shared theme-aware lightness ordering.',
-)
-assert.ok(
-  docsDefinitionSource.includes('pressableToneMap.feedback') &&
+  docsDefinitionSource.includes('pressableToneMap[tone]') &&
     docsDefinitionSource.includes('pressableTones.flatMap') &&
     !docsDefinitionSource.includes("'pressable-hover'") &&
     !docsDefinitionSource.includes("'pressable-hover-strong'") &&
@@ -445,8 +431,9 @@ assert.ok(
 )
 
 assert.ok(
-  appCss.includes('.bg-color-preview__sample') &&
-    appCss.includes('.bg-color-preview__sample-fill') &&
+  appCss.includes('.bg-color-preview__swatch-group') &&
+    !appCss.includes('.bg-color-preview__sample') &&
+    !appCss.includes('.bg-color-preview__sample-fill') &&
     !appCss.includes('.bg-color-preview__sample-backdrop') &&
     !appCss.includes('.bg-color-preview__sample-fill--framed') &&
     !appCss.includes('.bg-color-preview__group') &&
@@ -457,24 +444,20 @@ assert.ok(
   'App.css must include only the BgColor-specific preview-effect styles.',
 )
 assert.ok(
-  sampleBlock.includes('position: relative;') &&
-    sampleBlock.includes('isolation: isolate;') &&
-    sampleBlock.includes('height: 80px;') &&
-    !sampleBlock.includes('border:') &&
-    !sampleBlock.includes('background:') &&
-    !sampleBlock.includes('width:') &&
-    !sampleBlock.includes('background-image:') &&
-    !sampleBlock.includes('background-blend-mode:') &&
-    !sampleBlock.includes('background-size:') &&
-    !sampleBlock.includes('background-position:') &&
-    !appCss.includes('.dark .bg-color-preview__sample'),
-  'BgColor preview samples must be filled directly by the token color instead of a backdrop grid or gradient.',
+  firstBlockFor(appCss, '.bg-color-preview__swatch.bg-color--card').includes(
+    'border: 1px solid var(--color-border);',
+  ),
+  'The card-tone swatch must stay visible against the same-material canvas via a token border.',
 )
 assert.ok(
-  sampleFillBlock.includes('position: absolute;') &&
-    sampleFillBlock.includes('inset: 0;') &&
-    sampleFillBlock.includes('z-index: 1;'),
-  'BgColor sample fill must sit above the optional striped backdrop.',
+  firstBlockFor(appCss, '.bg-color-preview__swatch-canvas').includes('container-type: inline-size;') &&
+    firstBlockFor(appCss, '.bg-color-preview__swatch-group').includes('grid-template-columns: repeat(8, 42px);') &&
+    firstBlockFor(appCss, '.bg-color-preview__swatch-group').includes('gap: clamp(12px, 2vw, 36px);') &&
+    firstBlockFor(appCss, '.bg-color-preview__swatch-group').includes('padding-inline: 16px;') &&
+    firstBlockFor(appCss, '@container (width < 620px)').includes(
+      'grid-template-columns: repeat(4, minmax(42px, 48px));',
+    ),
+  'The merged swatch grid must stay 8-per-row on wide canvases and fall back to two clamped rows of 4 (42-48px, 12-36px gap) below the 620px threshold.',
 )
 const selectionSampleBlock = blockFor(appCss, '.bg-color-preview__selection-sample')
 const selectionHighlightBlock = blockFor(appCss, '.bg-color-preview__selection-highlight')

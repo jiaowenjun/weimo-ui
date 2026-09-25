@@ -254,23 +254,32 @@ assert.ok(
   docsDefinitionSource.includes("id: 'background-tokens'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
     docsDefinitionSource.includes("import { ComponentPreviewCard } from '../../components/component-preview-card'") &&
+    docsDefinitionSource.includes("import { GlassPreviewCard } from '../glass-preview-card'") &&
+    docsDefinitionSource.includes("import { glassBackgroundGrayMidpoint } from '../glass-preview'") &&
+    docsDefinitionSource.includes('initialGray={glassBackgroundGrayMidpoint}') &&
     docsDefinitionSource.includes('bgBlurTones.map') &&
     docsDefinitionSource.includes('bgBlurToneMap[tone]') &&
     docsDefinitionSource.includes('getBgBlurClassName(tone)') &&
     docsDefinitionSource.includes('getBgBlurBlurToken(tone)') &&
     docsDefinitionSource.includes('getBgBlurBlurValue(tone)') &&
-    docsDefinitionSource.includes('<ComponentPreviewCard') &&
-    docsDefinitionSource.includes('label={item.label}') &&
-    docsDefinitionSource.includes('token={getBgBlurBlurToken(tone)}') &&
-    docsDefinitionSource.includes('value={getBgBlurBlurValue(tone)}') &&
-    docsDefinitionSource.includes('component-preview-card__surface-preview') &&
-    docsDefinitionSource.includes('component-preview-card__surface-backdrop') &&
-    docsDefinitionSource.includes('component-preview-card__surface') &&
-    docsDefinitionSource.includes('<h2 className="component-preview-card-demo__category">背景模糊度</h2>') &&
+    docsDefinitionSource.includes('<GlassPreviewCard') &&
+    docsDefinitionSource.includes('label="背景模糊度"') &&
+    docsDefinitionSource.includes('token: getBgBlurBlurToken(tone)') &&
+    docsDefinitionSource.includes('value: getBgBlurBlurValue(tone)') &&
+    docsDefinitionSource.includes('bg-blur-pair') &&
+    docsDefinitionSource.includes('bg-blur-pair__surface') &&
+    docsDefinitionSource.includes(
+      'className={`bg-blur-pair__surface ${getBgBlurClassName(tone)}`}',
+    ) &&
+    !docsDefinitionSource.includes('背景模糊度</h2>') &&
+    !docsDefinitionSource.includes('label={item.label}') &&
+    !docsDefinitionSource.includes('component-preview-card__surface') &&
+    !docsDefinitionSource.includes('component-preview-card__surface-preview') &&
+    !docsDefinitionSource.includes('component-preview-card__surface-backdrop') &&
     !docsDefinitionSource.includes('bg-blur-preview__group') &&
     !docsDefinitionSource.includes('bg-blur-preview__stage') &&
     !docsDefinitionSource.includes('summary:'),
-  'Background docs definition must render the BgBlur group from the shared tone map.',
+  'Background docs definition must merge both BgBlur tones into one GlassPreviewCard with side-by-side surfaces.',
 )
 assert.ok(
   !docsDefinitionSource.includes('<span>text</span>') && !docsDefinitionSource.includes('>text<'),
@@ -293,6 +302,17 @@ assert.ok(
     !appCss.includes('.bg-blur-preview__group') &&
     !appCss.includes('.bg-blur-preview__stage'),
   'BgBlur must use the shared token grid without page-specific preview or layout overrides.',
+)
+assert.ok(
+  blockFor(appCss, '.bg-blur-pair').includes('gap: clamp(24px, 4vw, 48px);') &&
+    blockFor(appCss, '.bg-blur-pair').includes('justify-content: center;') &&
+    blockFor(appCss, '.bg-blur-pair__surface').includes('aspect-ratio: 2 / 1;') &&
+    blockFor(appCss, '.bg-blur-pair__surface').includes('max-width: 480px;') &&
+    blockFor(appCss, '.bg-blur-pair__surface').includes(
+      'border: 1px solid var(--color-border);',
+    ) &&
+    blockFor(appCss, '.bg-blur-pair__surface.bg-blur--backdrop').includes('background: none;'),
+  'Both BgBlur demo surfaces must share one style with only the blur value differing.',
 )
 assert.ok(
   sampleBlock.includes('position: relative;') &&
