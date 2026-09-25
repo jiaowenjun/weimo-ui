@@ -93,19 +93,22 @@
   white-space: nowrap;
 }
 
-.docs-liquid-top-bar-actions {
-  position: relative;
+/* 顶栏右侧组:标准液态图标按钮组骨架 + 独立功能按钮变体。搜索/主题两颗
+   按钮各自 onClick,故宿主是 span 组盒、子单元是真实 button 挂 __item 类
+   (hover 圆、整组按压缩放、触屏保护、reduced-motion 全部继承组类);
+   玻璃 padding 0 两颗 44 满排 88×44。修饰三处几何:盒尺寸、__row gap 0
+   (标准 gap 16 撑不满盒)、item 圆改 44 盒内收 inset 4px(圆 36、玻璃环
+   4px=磨砂组默认档;item 默认 -4px 是 20 图标盒的外扩圆,方向相反)。 */
+.docs-top-bar__actions.liquid-glass-icon-button-group {
   width: 88px;
   height: 44px;
 }
 
-.docs-liquid-top-bar-actions__row {
-  display: flex;
-  align-items: center;
+.docs-top-bar__actions .liquid-glass-icon-button-group__row {
+  gap: 0;
 }
 
-.docs-liquid-top-bar-actions__row button {
-  display: inline-flex;
+.docs-top-bar__actions .liquid-glass-icon-button-group__item {
   align-items: center;
   justify-content: center;
   width: 44px;
@@ -117,9 +120,13 @@
   cursor: pointer;
 }
 
-.docs-liquid-top-bar-actions__row svg {
+.docs-top-bar__actions .liquid-glass-icon-button-group__item svg {
   width: 20px;
   height: 20px;
+}
+
+.docs-top-bar__actions .liquid-glass-icon-button-group__item::after {
+  inset: 4px;
 }
 
 .preview-stage .weimo-card {

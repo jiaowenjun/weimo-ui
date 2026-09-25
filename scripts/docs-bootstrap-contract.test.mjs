@@ -92,7 +92,8 @@ for (const snippet of [
   "import { LiquidGlassSurface } from '../components/liquid-glass'",
   "import { LiquidGlassTile } from './liquid-glass-tile'",
   '<LiquidGlassTile className="docs-liquid-top-bar">',
-  'docs-liquid-top-bar-actions__row',
+  'liquid-glass-icon-button-group docs-top-bar__actions',
+  'liquid-glass-icon-button-group__item',
   'docs-top-bar__title-sizer',
   'title="按 / 搜索"',
 ]) {
@@ -102,12 +103,12 @@ for (const snippet of [
   )
 }
 assert.equal(
-  (docsShellSource.match(/docs-liquid-top-bar-actions__row[\s\S]*?<\/span>/g) ?? []).length,
+  (docsShellSource.match(/docs-top-bar__actions[\s\S]*?<\/span>/g) ?? []).length,
   1,
   'DocsShell top bar must hold exactly one liquid glass actions pill.',
 )
 assert.ok(
-  (docsShellSource.match(/docs-liquid-top-bar-actions__row[\s\S]*?<\/span>/)?.[0].match(/<button\b/g) ?? []).length ===
+  (docsShellSource.match(/docs-top-bar__actions[\s\S]*?<\/span>/)?.[0].match(/<button\b/g) ?? []).length ===
     2,
   'DocsShell liquid glass actions pill must hold exactly the search and theme toggle buttons.',
 )

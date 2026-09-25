@@ -233,3 +233,10 @@ assert.ok(
     !appCss.includes('.liquid-glass-icon-button-group:not(:disabled):active::after'),
   'Liquid glass icon groups must not carry a group-wide pill wash: the frosted group container has no group-level hover feedback, per-icon discs replace it.',
 )
+assert.ok(
+  appCss.includes('.docs-top-bar__actions.liquid-glass-icon-button-group') &&
+    appCss.includes('.docs-top-bar__actions .liquid-glass-icon-button-group__item::after') &&
+    appCss.includes('.docs-top-bar__actions .liquid-glass-icon-button-group__item svg') &&
+    !appCss.includes('docs-liquid-top-bar-actions'),
+  'The docs top bar actions pill must reuse the standard liquid glass icon button group skeleton (sized modifier, real buttons carrying the item class for independent hover discs) instead of a bespoke actions stylesheet.',
+)

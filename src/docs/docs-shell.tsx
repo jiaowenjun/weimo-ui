@@ -228,11 +228,12 @@ export function DocsShell() {
   )
   const topBarRightSlot = (
     <LiquidGlassTile className="docs-liquid-top-bar">
-      <span className="docs-liquid-top-bar-actions">
+      <span className="liquid-glass-icon-button-group docs-top-bar__actions">
         <LiquidGlassSurface cornerRadius={999} padding="0px">
-          <span className="docs-liquid-top-bar-actions__row">
+          <span className="liquid-glass-icon-button-group__row">
             <button
               aria-label="搜索"
+              className="liquid-glass-icon-button-group__item"
               title="按 / 搜索"
               type="button"
               onClick={() => setSearchOpen(true)}
@@ -247,6 +248,7 @@ export function DocsShell() {
                     ? '切换到跟随系统主题'
                     : '切换到浅色主题'
               }
+              className="liquid-glass-icon-button-group__item"
               type="button"
               onClick={() => setTheme((current) => nextTheme(current))}
             >
