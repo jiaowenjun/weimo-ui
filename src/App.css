@@ -1121,6 +1121,49 @@
   }
 }
 
+/* hover 背景色罩对齐磨砂图标按钮:同值 color-mix(currentColor 12%,
+   transparent)(= frosted-surface 的 --glass-surface-hover-bg)、同款
+   opacity 180ms ease 过渡、hover 限定精确指针、:active 常亮、
+   reduced-motion 降级——后者三条与库辉光体系相互独立。
+   层序取舍:磨砂 ::after 垫内容之后(z-index:-1,图标不被染);液态玻璃
+   根恒带内联 transform 创建堆叠上下文,宿主伪元素插不进「玻璃材质之上、
+   图标之下」,垫到玻璃背后则会进入 warp 的 backdrop-filter 采样区、
+   opacity 过渡期(<1)还可能合成层化为 backdrop root 截断采样——故色罩
+   盖在最上,图标被同色 12% 轻微加浓为已知微小差异。色罩几何=宿主盒,
+   与玻璃满盒同尺寸,弹性平移期错位不足 0.5px 不可感知。 */
+.liquid-glass-icon-button::after,
+.liquid-glass-icon-button-group::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-round);
+  background-color: color-mix(in srgb, currentColor 12%, transparent);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    background-color 160ms ease,
+    opacity 180ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .liquid-glass-icon-button:not(:disabled):hover::after,
+  .liquid-glass-icon-button-group:not(:disabled):hover::after {
+    opacity: 1;
+  }
+}
+
+.liquid-glass-icon-button:not(:disabled):active::after,
+.liquid-glass-icon-button-group:not(:disabled):active::after {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .liquid-glass-icon-button::after,
+  .liquid-glass-icon-button-group::after {
+    transition-duration: 1ms;
+  }
+}
+
 /* 液态玻璃胶囊(胶囊页):与磨砂态胶囊同节奏的三档字号(胶囊 padding 6px 10px、
    行高 1),玻璃层绝对居中于定尺寸占位盒,文字色随画布 tone 自适应。 */
 .liquid-glass-chip-preview {

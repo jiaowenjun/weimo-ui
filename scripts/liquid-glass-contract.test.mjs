@@ -213,3 +213,10 @@ assert.ok(
     appCss.includes('var(--glass-surface-fg-on-dark)'),
   'Liquid glass demo text must adapt to the sampled background tone through the shared glass foreground tokens.',
 )
+assert.ok(
+  appCss.includes('color-mix(in srgb, currentColor 12%, transparent)') &&
+    appCss.includes('.liquid-glass-icon-button:not(:disabled):hover::after') &&
+    appCss.includes('.liquid-glass-icon-button:not(:disabled):active::after') &&
+    appCss.includes('@media (hover: hover) and (pointer: fine)'),
+  'Liquid glass buttons must mirror the frosted icon button hover color wash (same 12% currentColor value as frosted-surface-contract locks, hover gated to fine pointers, active pinned on).',
+)
