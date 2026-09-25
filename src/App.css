@@ -1027,6 +1027,8 @@
   background: none;
   color: inherit;
   cursor: pointer;
+  /* 按压缩放对齐磨砂图标按钮:transform 150ms ease 同款节奏。 */
+  transition: transform 150ms ease;
 }
 
 .liquid-glass-icon-button {
@@ -1083,6 +1085,24 @@
 .liquid-glass-icon-button-group:disabled {
   opacity: 0.5;
   cursor: default;
+}
+
+/* 按压缩放对齐磨砂图标按钮:scale(var(--press-scale)) 由宿主按钮承担,
+   整体缩放玻璃层与辉光/描边覆盖层。库在按压时给玻璃层及兄弟层内联写入
+   scale(0.96),方向相反且与宿主 1.05 叠加后近乎抵消,必须一并归一——
+   库层 transform 是内联 style,只能 !important 覆盖;归一仅发生在
+   :active 期间,非按压时的弹性平移/方向拉伸不受影响(按压时鼠标就在
+   玻璃上,被丢弃的弹性偏移不足 0.5px,不可感知)。 */
+.liquid-glass-icon-button:not(:disabled):active,
+.liquid-glass-icon-button-group:not(:disabled):active {
+  transform: scale(var(--press-scale));
+}
+
+.liquid-glass-icon-button:active > div,
+.liquid-glass-icon-button:active > span,
+.liquid-glass-icon-button-group:active > div,
+.liquid-glass-icon-button-group:active > span {
+  transform: translate(-50%, -50%) !important;
 }
 
 /* 液态玻璃胶囊(胶囊页):与磨砂态胶囊同节奏的三档字号(胶囊 padding 6px 10px、
