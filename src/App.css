@@ -1017,6 +1017,68 @@
   cursor: default;
 }
 
+/* 液态玻璃胶囊(胶囊页):与磨砂态胶囊同节奏的三档字号(胶囊 padding 6px 10px、
+   行高 1),玻璃层绝对居中于定尺寸占位盒,文字色随画布 tone 自适应。 */
+.liquid-glass-chip-preview {
+  display: grid;
+  min-width: 0;
+  place-items: center;
+  color: var(--glass-surface-fg-on-dark);
+}
+
+.liquid-glass-chip-preview[data-background-tone='light'] {
+  color: var(--glass-surface-fg-on-light);
+}
+
+.liquid-glass-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.liquid-glass-chip {
+  position: relative;
+}
+
+.liquid-glass-chip--sm {
+  width: 60px;
+  height: 25px;
+}
+
+.liquid-glass-chip--base {
+  width: 84px;
+  height: 28px;
+}
+
+.liquid-glass-chip--lg {
+  width: 88px;
+  height: 29px;
+}
+
+.liquid-glass-chip__label {
+  display: block;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.liquid-glass-chip__label--sm {
+  font-size: var(--font-size-sm);
+}
+
+.liquid-glass-chip__label--base {
+  font-size: var(--font-size-base);
+}
+
+.liquid-glass-chip__label--lg {
+  font-size: var(--font-size-lg);
+}
+
+.liquid-glass-chip-preview[data-background-tone='light'] .liquid-glass-chip__label {
+  text-shadow: none;
+}
+
 /* 画布与示例等高后,预览窗默认的 overflow: hidden 会把真实阴影整体裁掉
    (卡片 --shadow-card 0 2px 8px、浮层 --shadow-overlay 0 28px 80px);
    让阴影画进卡片 padding,浮层卡是页面最后一张卡,阴影透到页底空白处。

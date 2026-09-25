@@ -17,6 +17,7 @@ const componentSource = readProjectFile('src/components/liquid-glass.tsx')
 const definitionSource = readProjectFile('src/docs/component-definitions/surface.tsx')
 const tileSource = readProjectFile('src/docs/liquid-glass-tile.tsx')
 const buttonDefinitionSource = readProjectFile('src/docs/component-definitions/button.tsx')
+const capsuleDefinitionSource = readProjectFile('src/docs/component-definitions/capsule.tsx')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const appCss = readProjectFile('src/App.css')
 const frostedSurfaceSource = readProjectFile('src/components/frosted-surface.tsx')
@@ -100,6 +101,16 @@ for (const snippet of [
   assert.ok(
     buttonDefinitionSource.includes(snippet),
     `The button page liquid glass icon cards must include ${snippet}.`,
+  )
+}
+for (const snippet of [
+  'label="液态玻璃胶囊"',
+  '<LiquidGlassSurface cornerRadius={999} padding="6px 10px">',
+  '液态玻璃胶囊字号预览',
+]) {
+  assert.ok(
+    capsuleDefinitionSource.includes(snippet),
+    `The capsule page liquid glass chip card must include ${snippet}.`,
   )
 }
 assert.ok(

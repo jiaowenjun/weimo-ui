@@ -3,10 +3,12 @@ import { Hash, X } from 'lucide-react'
 
 import { Chip } from '../../components/chip'
 import { ChipButton } from '../../components/chip-button'
+import { LiquidGlassSurface } from '../../components/liquid-glass'
 import { ComponentPreviewCard } from '../../components/component-preview-card'
 import { GhostIconButton } from '../../components/ghost-icon-button'
 import type { ComponentDefinition } from '../component-docs'
 import { GlassPreviewCard } from '../glass-preview-card'
+import { LiquidGlassTile } from '../liquid-glass-tile'
 import { PreviewToggle, SurfaceBorderToggle } from '../preview-toggle'
 
 function ChipTextSizeDemo() {
@@ -36,6 +38,35 @@ function GlassChipDemo() {
         <Chip bordered={bordered} content="基础字号" textSize="base" variant="glass" />
         <Chip bordered={bordered} content="标题字号" textSize="lg" variant="glass" />
       </div>
+    </GlassPreviewCard>
+  )
+}
+
+// 液态玻璃胶囊:与磨砂态胶囊同节奏的三档字号(玻璃层绝对居中于定尺寸
+// 占位盒,文字色随画布 tone 自适应;液态自带渐变边缘,无边框开关)。
+// eslint-disable-next-line react-refresh/only-export-components
+function LiquidGlassChipDemo() {
+  return (
+    <GlassPreviewCard label="液态玻璃胶囊">
+      <LiquidGlassTile className="liquid-glass-chip-preview">
+        <div aria-label="液态玻璃胶囊字号预览" className="liquid-glass-chip-row">
+          <span className="liquid-glass-chip liquid-glass-chip--sm">
+            <LiquidGlassSurface cornerRadius={999} padding="6px 10px">
+              <span className="liquid-glass-chip__label liquid-glass-chip__label--sm">小字号</span>
+            </LiquidGlassSurface>
+          </span>
+          <span className="liquid-glass-chip liquid-glass-chip--base">
+            <LiquidGlassSurface cornerRadius={999} padding="6px 10px">
+              <span className="liquid-glass-chip__label liquid-glass-chip__label--base">基础字号</span>
+            </LiquidGlassSurface>
+          </span>
+          <span className="liquid-glass-chip liquid-glass-chip--lg">
+            <LiquidGlassSurface cornerRadius={999} padding="6px 10px">
+              <span className="liquid-glass-chip__label liquid-glass-chip__label--lg">标题字号</span>
+            </LiquidGlassSurface>
+          </span>
+        </div>
+      </LiquidGlassTile>
     </GlassPreviewCard>
   )
 }
@@ -171,6 +202,7 @@ function CapsuleDemo() {
     <>
       <ChipTextSizeDemo />
       <GlassChipDemo />
+      <LiquidGlassChipDemo />
       <PrefixChipDemo />
       <SuffixChipDemo />
       <ChipButtonDemo />
@@ -195,6 +227,7 @@ export const capsuleDefinition = {
     '前缀胶囊',
     '后缀胶囊',
     '胶囊按钮',
+    '液态玻璃胶囊',
   ],
   preview: () => <CapsuleDemo />,
 } satisfies ComponentDefinition
