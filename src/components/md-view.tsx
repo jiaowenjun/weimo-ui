@@ -1,4 +1,6 @@
 import {
+  Component,
+  createRef,
   forwardRef,
   lazy,
   Suspense,
@@ -6,7 +8,7 @@ import {
   useImperativeHandle,
   useRef,
 } from 'react'
-import type { CSSProperties } from 'react'
+import type { ComponentPropsWithoutRef, CSSProperties } from 'react'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import remarkParse from 'remark-parse'
@@ -26,6 +28,65 @@ const MdEditor = lazy(() =>
 
 export type MdViewMode = 'view' | 'edit'
 type MdViewStyle = CSSProperties & Record<'--md-view-editor-bottom-safe-area', string>
+
+type MdViewRootProps = ComponentPropsWithoutRef<'div'> & { mode: MdViewMode }
+
+class MdViewRoot extends Component<MdViewRootProps, Record<string, never>, boolean> {
+  private rootRef = createRef<HTMLDivElement>()
+  private previousMinHeight: string | null = null
+  private editorReady = false
+
+  getSnapshotBeforeUpdate(previousProps: MdViewRootProps) {
+    const root = this.rootRef.current
+
+    if (!root || previousProps.mode === this.props.mode) return false
+
+    // Hold height before either subtree is removed. Entry also needs protection
+    // across the lazy import and Tiptap initialization, not just this commit.
+    // A layout effect runs too late to protect this part of the commit.
+    this.previousMinHeight ??= root.style.minHeight
+    root.style.minHeight = window.getComputedStyle(root).height
+    return true
+  }
+
+  componentDidUpdate(
+    _previousProps: MdViewRootProps,
+    _previousState: Record<string, never>,
+    modeChanged: boolean,
+  ) {
+    if (!modeChanged) return
+    // Exits and already-preloaded entries must be unlocked before Card measures.
+    if (this.props.mode === 'view' || this.editorReady) this.releaseHeight()
+  }
+
+  setEditorReady(ready: boolean) {
+    this.editorReady = ready
+    if (!ready || this.previousMinHeight === null) return
+
+    // Wait for the whole initialization commit, including StrictMode's effect
+    // replay, before releasing. This still precedes the editor's focus frame.
+    queueMicrotask(() => {
+      if (this.props.mode === 'edit' && this.editorReady) this.releaseHeight()
+    })
+  }
+
+  private releaseHeight() {
+    const root = this.rootRef.current
+    const previousMinHeight = this.previousMinHeight
+    if (previousMinHeight === null || !root) return
+
+    // Flush the mounted content's layout while still protected: Safari can
+    // otherwise apply a pending scroll clamp from the empty intermediate layout.
+    root.getBoundingClientRect()
+    root.style.minHeight = previousMinHeight
+    this.previousMinHeight = null
+  }
+
+  render() {
+    const { mode, ...props } = this.props
+    return <div {...props} data-mode={mode} ref={this.rootRef} />
+  }
+}
 
 const mdViewMarkdownFormatter = unified()
   .use(remarkParse)
@@ -75,6 +136,7 @@ export const MdView = forwardRef<MdViewHandle, MdViewProps>(function MdView(
   },
   ref,
 ) {
+  const rootRef = useRef<MdViewRoot | null>(null)
   const editorRef = useRef<MdEditorHandle | null>(null)
   const renderRef = useRef<HTMLDivElement | null>(null)
   const previousModeRef = useRef<MdViewMode>(mode)
@@ -84,6 +146,11 @@ export const MdView = forwardRef<MdViewHandle, MdViewProps>(function MdView(
   const editorAutoFocusPosition = editorProps?.autoFocusPosition ?? 'end'
   const editorImageRenderer = editorProps?.renderImage ?? renderProps?.renderImage
   const editorImageSrcResolver = editorProps?.resolveImageSrc ?? renderProps?.resolveImageSrc
+
+  const handleEditorChange: NonNullable<MdEditorProps['onEditorChange']> = (editor) => {
+    rootRef.current?.setEditorReady(editor !== null)
+    editorProps?.onEditorChange?.(editor)
+  }
 
   useEffect(() => {
     const previousMode = previousModeRef.current
@@ -136,9 +203,10 @@ export const MdView = forwardRef<MdViewHandle, MdViewProps>(function MdView(
       : undefined
 
   return (
-    <div
+    <MdViewRoot
+      ref={rootRef}
+      mode={mode}
       className={cn('md-view', className)}
-      data-mode={mode}
       data-preloading-editor={preloadEditor && !showEditor ? 'true' : undefined}
       style={editorStyle}
     >
@@ -154,6 +222,7 @@ export const MdView = forwardRef<MdViewHandle, MdViewProps>(function MdView(
               value={value}
               onChange={onChange}
               {...editorProps}
+              onEditorChange={handleEditorChange}
               autoFocus={editorAutoFocus}
               autoFocusPosition={editorAutoFocusPosition}
               renderImage={editorImageRenderer}
@@ -165,7 +234,7 @@ export const MdView = forwardRef<MdViewHandle, MdViewProps>(function MdView(
       {showEditor ? null : (
         <MdRender ref={renderRef} content={value} {...renderProps} />
       )}
-    </div>
+    </MdViewRoot>
   )
 })
 

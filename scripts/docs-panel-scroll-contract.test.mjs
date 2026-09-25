@@ -35,9 +35,9 @@ const previewStageChildren = blockFor(css, '.preview-stage > *')
 const mdEditorDocsPreview = blockFor(css, '.md-editor-docs-preview')
 const mdEditorDocsCanvas = blockFor(
   css,
-  '.component-preview-card:has(.md-editor-docs-preview) .base-card__content',
+  '.component-preview-card:has(.md-editor-docs-preview, .md-view-docs-preview) .base-card__content',
 )
-const mdViewDocsViewport = blockFor(css, '.md-view-docs-preview__surface .md-editor__viewport')
+const mdViewDocsViewport = blockFor(css, '.md-view-docs-preview .md-editor__viewport')
 
 assert.ok(!css.includes('.component-frame'), 'overview gallery frame styles must be removed.')
 assert.ok(!css.includes('.component-grid'), 'overview gallery grid styles must be removed.')

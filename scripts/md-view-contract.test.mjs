@@ -34,10 +34,9 @@ const definitionsIndexSource = readProjectFile('src/docs/component-definitions/i
 const cssSource = readProjectFile('src/App.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 const registryJson = JSON.parse(readProjectFile('registry.json'))
-const previewFrameBlock = cssBlockFor(cssSource, '.md-view-docs-preview__frame')
 const previewEditorViewportBlock = cssBlockFor(
   cssSource,
-  '.md-view-docs-preview__surface .md-editor__viewport',
+  '.md-view-docs-preview .md-editor__viewport',
 )
 const mdViewEditorLayerBlock = cssBlockFor(
   mdViewCssSource,
@@ -371,14 +370,15 @@ for (const dependencyName of ['remark-parse', 'remark-stringify', 'unified']) {
 
 for (const selector of [
   '.md-view-docs-preview',
-  '.md-view-docs-preview__frame',
-  '.md-view-docs-preview__surface',
-  '.md-view-docs-preview__surface .md-editor__viewport',
+  '.md-view-docs-preview .md-editor__viewport',
 ]) {
   assert.ok(cssSource.includes(selector), `App.css must include ${selector}.`)
 }
 
 for (const selector of [
+  '.md-view-docs-preview__frame',
+  '.md-view-docs-preview__surface',
+  '.md-view-docs-preview__surface .md-editor__viewport',
   '.md-view-docs-preview__toolbar',
   '.md-view-docs-preview__measure',
   '.md-view-docs-preview__measure-label',
@@ -391,16 +391,6 @@ for (const selector of [
 }
 
 for (const [block, snippet, message] of [
-  [
-    previewFrameBlock,
-    'max-height:',
-    'MdView preview frame must let display and edit states grow to content height.',
-  ],
-  [
-    previewFrameBlock,
-    'overflow: auto;',
-    'MdView preview frame must not scroll inside its shared frame.',
-  ],
   [
     previewEditorViewportBlock,
     'min-height: min(220px',

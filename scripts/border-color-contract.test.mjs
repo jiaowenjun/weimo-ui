@@ -111,7 +111,6 @@ const markdownEditorTableWrapperBlock = blockFor(
   '.md-editor__content.weimo-markdown-content .tableWrapper',
 )
 const demoBlockPanelBlock = blockFor(appCss, '.demo-block__panel')
-const mdViewDocsPreviewFrameBlock = blockFor(appCss, '.md-view-docs-preview__frame')
 const tagTreePreviewPanelBlock = firstBlockFor(appCss, '.tag-tree-preview__panel')
 const tagBarPreviewPanelBlock = blockFor(appCss, '.tag-bar-preview__panel')
 const sampleBlock = blockFor(appCss, '.border-color-preview__sample')
@@ -374,7 +373,6 @@ assert.ok(
     cossButtonCss.includes('border-color: var(--color-border);') &&
     sidebarDrawerBlock.includes('border: 1px solid var(--color-border);') &&
     demoBlockPanelBlock.includes('border: 1px solid var(--color-border);') &&
-    mdViewDocsPreviewFrameBlock.includes('border: 1px solid var(--color-border);') &&
     tagTreePreviewPanelBlock.includes('border: 1px solid var(--color-border);') &&
     tagBarPreviewPanelBlock.includes('border: 1px solid var(--color-border);'),
   'Default BorderColor usage must cover surface/container outer borders and docs preview frames.',

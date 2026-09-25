@@ -76,17 +76,13 @@ function MdViewDemo() {
       label="Markdown 视图"
     >
       <div className="md-view-docs-preview">
-        <div className="md-view-docs-preview__frame">
-          <div className="md-view-docs-preview__surface">
-            <MdView
-              editorBottomSafeArea={100}
-              editorProps={{ placeholder: '写点什么...' }}
-              mode={mode}
-              onChange={setMarkdown}
-              value={markdown}
-            />
-          </div>
-        </div>
+        <MdView
+          editorBottomSafeArea={100}
+          editorProps={{ placeholder: '写点什么...' }}
+          mode={mode}
+          onChange={setMarkdown}
+          value={markdown}
+        />
       </div>
     </ComponentPreviewCard>
   )
