@@ -14,7 +14,7 @@ function readProjectFile(relativePath) {
 }
 
 const componentSource = readProjectFile('src/components/liquid-glass.tsx')
-const definitionSource = readProjectFile('src/docs/component-definitions/liquid-glass.tsx')
+const definitionSource = readProjectFile('src/docs/component-definitions/surface.tsx')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const appCss = readProjectFile('src/App.css')
 const glassSurfaceSource = readProjectFile('src/components/glass-surface.tsx')
@@ -71,29 +71,31 @@ assert.ok(
 )
 
 for (const snippet of [
-  "id: 'liquid-glass'",
   '<GlassPreviewCard',
   'label="液态玻璃材质"',
   '<LiquidGlassSurface',
   "from '../../components/liquid-glass'",
-  "import { useGlassSurfaceBackgroundToneRef } from '../../components/glass-surface'",
+  "import { GlassSurface, useGlassSurfaceBackgroundToneRef } from '../../components/glass-surface'",
   'data-background-tone={backgroundTone ?? undefined}',
 ]) {
   assert.ok(
     definitionSource.includes(snippet),
-    `liquid-glass docs definition must include ${snippet}.`,
+    `The Surface page liquid glass card must include ${snippet}.`,
   )
 }
 assert.ok(
-  !definitionSource.includes('<GlassSurface') &&
-    !definitionSource.includes('getGlassSurfaceClassName'),
-  'The liquid glass demo must borrow only the plain glass tone hook, never render the GlassSurface material itself.',
+  !existsSync(join(root, 'src/docs/component-definitions/liquid-glass.tsx')),
+  'The liquid glass docs page must be merged into the Surface page without a standalone definition file.',
 )
 assert.ok(
   !definitionSource.includes('overLight') &&
-    !definitionSource.includes('PreviewToggle') &&
     !definitionSource.includes('亮背景'),
-  'The liquid glass demo must keep only the default material state without the overLight toggle.',
+  'The liquid glass card must keep only the default material state without the overLight toggle.',
+)
+assert.ok(
+  !definitionSource.includes('液态胶囊') &&
+    !definitionSource.includes('--pill'),
+  'The liquid glass card must keep one tile mirroring the plain glass card, without the pill example.',
 )
 
 for (const snippet of [
@@ -137,8 +139,9 @@ assert.ok(
 
 assert.ok(
   appCss.includes('.liquid-glass-preview__tile {') &&
-    appCss.includes('.liquid-glass-preview__tile--pill {'),
-  'App.css must keep the liquid glass demo tile styles.',
+    !appCss.includes('.liquid-glass-preview__tile--pill') &&
+    !appCss.includes('.liquid-glass-preview__pill-label'),
+  'App.css must keep exactly one liquid glass demo tile style without the pill variant.',
 )
 assert.ok(
   appCss.includes(

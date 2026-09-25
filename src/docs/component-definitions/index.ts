@@ -4,7 +4,6 @@ import { textTokensDefinition } from './text-tokens'
 import { backgroundTokensDefinition } from './background-tokens'
 import { borderTokensDefinition } from './border-tokens'
 import { surfaceDefinition } from './surface'
-import { liquidGlassDefinition } from './liquid-glass'
 import { actionDialogDefinition } from './action-dialog'
 import { buttonDefinition } from './button'
 import { sliderDefinition } from './slider'
@@ -29,7 +28,6 @@ export const componentDefinitionsById = {
   'background-tokens': backgroundTokensDefinition,
   'border-tokens': borderTokensDefinition,
   surface: surfaceDefinition,
-  'liquid-glass': liquidGlassDefinition,
   'action-dialog': actionDialogDefinition,
   button: buttonDefinition,
   slider: sliderDefinition,

@@ -285,9 +285,9 @@ assertDecodablePngDataUrl(
   'ImageView detail preview sample image',
 )
 assert.ok(
-    componentDefinitionsSource.includes("import { GlassSurface } from '../../components/glass-surface'") &&
+    componentDefinitionsSource.includes("import { GlassSurface, useGlassSurfaceBackgroundToneRef } from '../../components/glass-surface'") &&
     componentDefinitionsSource.includes("id: 'surface'") &&
-    componentDefinitionsSource.includes('静态卡片、亮度自适应玻璃层与抬升浮层的材质总览') &&
+    componentDefinitionsSource.includes('静态卡片、亮度自适应磨砂玻璃层、液态玻璃与抬升浮层的材质总览') &&
     componentDefinitionsSource.includes("from '../glass-preview-card'") &&
     componentDefinitionsSource.includes('<GlassPreviewCard') &&
     !componentDefinitionsSource.includes('glass-surface-preview__scroll') &&

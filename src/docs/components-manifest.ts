@@ -165,7 +165,7 @@ export const componentManifest = [
     registryName: 'liquid-glass',
     packageExport: './components/liquid-glass',
     group: 'surface-material',
-    docs: true,
+    docs: false,
     registry: true,
   },
   {

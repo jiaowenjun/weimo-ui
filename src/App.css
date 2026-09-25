@@ -891,8 +891,8 @@
   line-height: 1.4;
 }
 
-/* 液态玻璃页:圆角块与全胶囊并列在条纹画布上,玻璃层绝对居中于定尺寸瓦片,
-   瓦片只负责占位。内容文字借玻璃材质的 tone 采样自适应(瓦片持有
+/* 液态玻璃卡(材质页):与磨砂材质卡同构的单一瓦片,玻璃层绝对居中于定尺寸瓦片,
+   瓦片只负责占位。内容文字借磨砂材质的 tone 采样自适应(瓦片持有
    data-background-tone):亮背景翻深字并去掉库默认的深色文字投影,
    暗背景维持白字+投影;两主题 token 同值,只随背景亮度翻转。 */
 .liquid-glass-preview {
@@ -900,7 +900,6 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 16px;
   min-width: 0;
 }
 
@@ -911,11 +910,6 @@
   height: 84px;
 }
 
-.liquid-glass-preview__tile--pill {
-  width: 168px;
-  height: 48px;
-}
-
 .liquid-glass-preview__content {
   display: grid;
   gap: 4px;
@@ -923,17 +917,12 @@
   text-align: center;
 }
 
-.liquid-glass-preview__title,
-.liquid-glass-preview__pill-label {
+.liquid-glass-preview__title {
   color: var(--glass-surface-fg-on-dark);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
   line-height: 1.2;
   transition: color 160ms ease;
-}
-
-.liquid-glass-preview__pill-label {
-  white-space: nowrap;
 }
 
 .liquid-glass-preview__meta {
@@ -945,8 +934,7 @@
 }
 
 /* 亮背景:深字覆盖继承自库内容层的深色 text-shadow,否则深字配深影发糊。 */
-.liquid-glass-preview__tile[data-background-tone='light'] .liquid-glass-preview__title,
-.liquid-glass-preview__tile[data-background-tone='light'] .liquid-glass-preview__pill-label {
+.liquid-glass-preview__tile[data-background-tone='light'] .liquid-glass-preview__title {
   color: var(--glass-surface-fg-on-light);
   text-shadow: none;
 }

@@ -335,15 +335,16 @@ assertOmits(
 
 for (const snippet of [
   "import { useState } from 'react'",
-  "import { GlassSurface } from '../../components/glass-surface'",
+  "import type { ReactNode } from 'react'",
+  "import { GlassSurface, useGlassSurfaceBackgroundToneRef } from '../../components/glass-surface'",
   "import { ComponentPreviewCard } from '../../components/component-preview-card'",
   "import { SurfaceBorderToggle } from '../preview-toggle'",
   "from '../glass-preview-card'",
   "id: 'surface'",
-  '静态卡片、亮度自适应玻璃层与抬升浮层的材质总览',
+  '静态卡片、亮度自适应磨砂玻璃层、液态玻璃与抬升浮层的材质总览',
   'function GlassSurfacePreview()',
   'const [bordered, setBordered] = useState(false)',
-  'label="玻璃材质"',
+  'label="磨砂材质"',
   '<SurfaceBorderToggle bordered={bordered} onBorderedChange={setBordered} />',
   '<GlassSurface bordered={bordered} className="glass-surface-preview__tile">',
   "'无边框',",
@@ -368,7 +369,7 @@ assertOmits(
 )
 
 // 滑块 + 主题归位 + 条纹背景的玻璃卡外壳抽到 GlassPreviewCard 共享组件
-// （Surface 页玻璃材质卡与按钮页玻璃图标按钮卡共用），契约锁共享组件源。
+// （Surface 页磨砂材质卡与按钮页玻璃图标按钮卡共用），契约锁共享组件源。
 const glassPreviewCardModuleSource = readProjectFile(
   'src/docs/glass-preview-card.tsx',
 )

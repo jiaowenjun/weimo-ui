@@ -134,6 +134,7 @@ assert.deepEqual(
     'border-radius',
     'glass-surface',
     'popup-surface',
+    'liquid-glass',
     'ghost-icon-button',
     'glass-icon-button',
     'glass-icon-button-group',
