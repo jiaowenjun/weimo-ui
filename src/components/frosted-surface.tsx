@@ -82,6 +82,8 @@ function useFrostedSurfaceBackgroundToneForElement<ElementType extends HTMLEleme
         ? new ownerWindow.MutationObserver(scheduleUpdate)
         : null
 
+    // 首次挂载在绘制前确定字色,后续定位/背景变化仍按帧合并采样。
+    updateBackgroundTone()
     scheduleUpdate()
     resizeObserver?.observe(element)
     resizeObserver?.observe(element.ownerDocument.documentElement)

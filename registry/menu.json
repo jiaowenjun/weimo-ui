@@ -3,7 +3,7 @@
   "name": "menu",
   "type": "registry:ui",
   "title": "Menu",
-  "description": "A Coss/Base UI action menu with Weimo frosted popup material and skyline-style scale animation.",
+  "description": "A Coss/Base UI action menu with liquid glass popup material and skyline-style scale animation.",
   "categories": [
     "action",
     "overlay"
@@ -11,6 +11,7 @@
   "dependencies": [
     "@base-ui/react",
     "class-variance-authority",
+    "liquid-glass-react",
     "lucide-react"
   ],
   "registryDependencies": [
@@ -26,7 +27,7 @@
     {
       "path": "src/components/menu/menu-variants.ts",
       "type": "registry:ui",
-      "target": "@ui/menu/menu-variants.ts"
+      "target": "@ui/menu-variants.ts"
     },
     {
       "path": "src/components/menu.css",
@@ -47,6 +48,11 @@
       "path": "src/components/frosted-surface.css",
       "type": "registry:ui",
       "target": "@ui/frosted-surface.css"
+    },
+    {
+      "path": "src/components/liquid-glass.tsx",
+      "type": "registry:ui",
+      "target": "@ui/liquid-glass.tsx"
     }
   ]
 }

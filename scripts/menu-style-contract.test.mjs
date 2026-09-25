@@ -27,6 +27,7 @@ function cssBlockFor(source, selector) {
 }
 
 const popupBlock = cssBlockFor(menuCss, '.weimo-menu__popup')
+const popupLayerBlock = cssBlockFor(menuCss, '.weimo-menu__popup > *')
 const positionerBlock = cssBlockFor(menuCss, '.weimo-menu__positioner')
 const rootTokenBlock = cssBlockFor(tokensCss, ':root')
 const darkTokenBlock = cssBlockFor(tokensCss, '.dark')
@@ -34,6 +35,11 @@ const transitionBlock = cssBlockFor(
   menuCss,
   '.weimo-menu__popup[data-starting-style],\n  .weimo-menu__popup[data-ending-style]',
 )
+const popupAnimationStyles = [
+  popupBlock,
+  transitionBlock,
+  cssBlockFor(menuCss, '.weimo-menu__popup[data-ending-style]'),
+].join('\n').replace(/\/\*[\s\S]*?\*\//gu, '')
 const menuPreviewBlock = cssBlockFor(appCss, '.menu-preview')
 const itemBlock = cssBlockFor(menuCss, '.weimo-menu__item')
 const menuPopupLightToneBlock = cssBlockFor(menuCss, '.weimo-menu__popup[data-background-tone="light"]')
@@ -48,23 +54,26 @@ const separatorBlock = cssBlockFor(menuCss, '.weimo-menu__separator')
 const frostedSurfaceBlock = cssBlockFor(frostedSurfaceCss, '.frosted-surface')
 
 assert.ok(
-  menuSource.includes("from './frosted-surface'") &&
-    menuSource.includes(
-      "getFrostedSurfaceClassName(\n            'weimo-menu__popup',\n            'frosted-surface--bordered',\n            className,\n          )",
-    ) &&
-    menuSource.includes('useFrostedSurfaceBackgroundToneRef<HTMLDivElement>(true)') &&
+  menuSource.includes("import { LiquidGlassSurface } from './liquid-glass'") &&
+    menuSource.includes('useFrostedSurfaceBackgroundToneRef<HTMLDivElement>(positioned)') &&
+    menuSource.includes('positioned={positionerProps.style?.opacity !== 0}') &&
     menuSource.includes('data-background-tone={backgroundTone ?? undefined}') &&
     menuSource.includes('ref={setElementRef}') &&
+    menuSource.includes('<LiquidGlassSurface') &&
+    menuSource.includes('className="weimo-menu__popup-glass"') &&
+    menuSource.includes("style={{ left: 'auto', position: 'relative', top: 'auto', width: '100%' }}") &&
+    !menuSource.includes('getFrostedSurfaceClassName') &&
+    !menuSource.includes('frosted-surface.css') &&
     !menuSource.includes('elevation') &&
     !frostedSurfaceModelSource.includes('FrostedSurfaceElevation') &&
     !frostedSurfaceModelSource.includes('getFrostedSurfaceAttributes'),
-  'Menu popup must compose and sample the shared FrostedSurface material with a callback ref that observes delayed Base UI popup mounts.',
+  'Menu popup must render the LiquidGlassSurface material in flow with a callback ref that observes delayed Base UI popup mounts.',
 )
 assert.ok(
   !popupBlock.includes('color: var(--color-text-primary);') &&
     !itemBlock.includes('color: var(--color-text-primary);') &&
     itemBlock.includes('color: inherit;'),
-  'Menu popup and regular items must inherit FrostedSurface foreground instead of overriding it with theme text tokens.',
+  'Menu popup and regular items must inherit the tone-adaptive liquid glass foreground instead of overriding it with theme text tokens.',
 )
 assert.ok(!frostedSurfaceBlock.includes('background: var(--glass-gradient);'), 'FrostedSurface must not use the Weimo glass gradient.')
 assert.ok(!frostedSurfaceBlock.includes('linear-gradient'), 'FrostedSurface must not use a gradient background.')
@@ -85,6 +94,27 @@ assert.ok(popupBlock.includes('transform-origin: var(--transform-origin, top rig
 assert.ok(popupBlock.includes('cubic-bezier(0.34, 1.56, 0.64, 1)'), 'Menu popup must use the skyline spring enter curve.')
 assert.ok(transitionBlock.includes('transform: scale(0.7);'), 'Menu popup must start and end from skyline scale(0.7).')
 assert.ok(menuCss.includes('cubic-bezier(0.4, 0, 1, 1)'), 'Menu popup must use the skyline exit curve.')
+assert.ok(
+  popupBlock.includes('will-change: transform;') &&
+    !/(?:^|\n)\s*(?:opacity\s*:|(?:transition|will-change)\s*:[^;]*\bopacity\b)/u.test(
+      popupAnimationStyles,
+    ),
+  'Menu material ancestors must keep opacity at 1 throughout enter/exit and must not pre-isolate backdrop sampling with will-change: opacity.',
+)
+assert.ok(
+  popupLayerBlock.includes('transform: none !important;') &&
+    popupLayerBlock.includes('mix-blend-mode: normal !important;'),
+  'Every liquid-glass sibling layer must override the library centering transform and blend mode so geometry and backdrop sampling stay aligned.',
+)
+assert.ok(
+  cssBlockFor(menuCss, '.weimo-menu__popup .liquid-glass .glass > div').includes('width: 100%;'),
+  'The liquid-glass content wrapper must fill the popup so menu highlights and submenu anchors span its inner width.',
+)
+assert.ok(
+  cssBlockFor(menuCss, '.weimo-menu__popup .liquid-glass .glass > div').includes('text-shadow: none !important;') &&
+    cssBlockFor(menuCss, '.weimo-menu__popup > .liquid-glass,\n  .weimo-menu__popup .liquid-glass .glass,\n  .weimo-menu__popup .liquid-glass .glass > div').includes('transition: none !important;'),
+  'Menu text must override the library shadow and inherited color transitions while leaving the popup scale animation intact.',
+)
 assert.ok(
   menuDefinitionSource.includes('const MENU_PREVIEW_ITEMS') &&
     menuDefinitionSource.includes('<ComponentPreviewCard label="操作菜单">') &&
@@ -117,9 +147,16 @@ assert.ok(
   popupBlock.includes(
     '--weimo-menu-item-hover-bg: color-mix(in srgb, var(--glass-surface-fg) 12%, transparent);',
   ) &&
+    popupBlock.includes('color: var(--glass-surface-fg);') &&
+    menuPopupLightToneBlock.includes('--glass-surface-fg: var(--glass-surface-fg-on-light);') &&
+    menuPopupDarkToneBlock.includes('--glass-surface-fg: var(--glass-surface-fg-on-dark);') &&
+    popupBlock.includes('display: grid;') &&
+    popupBlock.includes('.weimo-menu__popup > * {') === false &&
+    menuCss.includes('.weimo-menu__popup > * {\n    grid-area: 1 / 1;') &&
+    menuCss.includes('.weimo-menu__popup .liquid-glass .glass {\n    width: 100%;') &&
     itemHoverBlock.includes('background: var(--weimo-menu-item-hover-bg);') &&
     !itemHoverBlock.includes('background: var(--color-bg-hover);'),
-  'Menu item hover/focus must derive its background from the sampled FrostedSurface foreground instead of the global theme hover token.',
+  'Menu popup must grid-stack the liquid glass layers, derive foreground from the sampled tone, and derive hover from the currentColor mix.',
 )
 assert.ok(
   popupBlock.includes('--weimo-menu-separator-bg: var(--color-border-divider-menu);') &&
@@ -128,7 +165,7 @@ assert.ok(
     separatorBlock.includes('background: var(--weimo-menu-separator-bg);') &&
     !separatorBlock.includes('var(--glass-surface-border)') &&
     !separatorBlock.includes('var(--color-border-divider)'),
-  'Menu separator must use its own background-aware divider token family instead of FrostedSurface border or the global divider token.',
+  'Menu separator must use its own background-aware divider token family instead of glass borders or the global divider token.',
 )
 assert.ok(menuCss.includes('var(--color-text-danger)'), 'Menu destructive state must use the shared danger token.')
 assert.ok(tokensCss.includes('--color-text-danger: hsl(4 77% 40%);'), 'Light theme must define --color-text-danger.')
