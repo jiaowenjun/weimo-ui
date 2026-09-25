@@ -37,74 +37,38 @@
     --weimo-menu-item-hover-bg: color-mix(in srgb, var(--glass-surface-fg) 12%, transparent);
     --weimo-menu-separator-bg: var(--color-border-divider-menu);
 
-    display: grid;
     min-width: 180px;
     max-width: min(280px, calc(100vw - 24px));
+    padding: 4px 8px;
     border-radius: var(--radius);
     outline: none;
+    opacity: 1;
     transform: scale(1);
     transform-origin: var(--transform-origin, top right);
-    /* 祖先 opacity / will-change: opacity 会隔离后代玻璃的背景采样,只保留缩放。 */
-    transition: transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1);
-    will-change: transform;
-    /* 背景尚未采样时跟随主题,避免亮主题首帧出现白字。 */
-    color: var(--glass-surface-fg);
-  }
-
-  /* 玻璃与装饰兄弟层共享同一格。库会覆盖透传 style.transform,各层都要取消
-     内联的 -50% 居中平移;高光混合在 Chromium 中还会阻断同组玻璃的背景采样。 */
-  .weimo-menu__popup > * {
-    grid-area: 1 / 1;
-    transform: none !important;
-    mix-blend-mode: normal !important;
-  }
-
-  .weimo-menu__popup .liquid-glass .glass {
-    width: 100%;
-  }
-
-  /* 库的内容容器默认按文字收缩;菜单行须铺满面板,子菜单才能锚定到右边缘。 */
-  .weimo-menu__popup .liquid-glass .glass > div {
-    width: 100%;
-    min-width: 0;
-    text-shadow: none !important;
-  }
-
-  /* 库在两层祖先上内联 transition: all,会把继承的字色变化拖成渐变。
-     菜单动画统一交给 popup;文字与背景识别结果同步切换。 */
-  .weimo-menu__popup > .liquid-glass,
-  .weimo-menu__popup .liquid-glass .glass,
-  .weimo-menu__popup .liquid-glass .glass > div {
-    transition: none !important;
-  }
-
-  /* 入场动画期间库把 glassSize 测成 scale(0.7) 的值,高光/投影覆盖层会矮一截;
-     覆盖层是纯装饰,强制铺满弹层格(内联尺寸须 !important 压制)。 */
-  .weimo-menu__popup > span,
-  .weimo-menu__popup > div:not(.liquid-glass) {
-    width: 100% !important;
-    height: 100% !important;
+    transition:
+      opacity 200ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    will-change: opacity, transform;
   }
 
   .weimo-menu__popup[data-background-tone="light"] {
-    --glass-surface-fg: var(--glass-surface-fg-on-light);
-    color: var(--glass-surface-fg-on-light);
     --weimo-menu-separator-bg: var(--color-border-divider-menu-on-light);
   }
 
   .weimo-menu__popup[data-background-tone="dark"] {
-    --glass-surface-fg: var(--glass-surface-fg-on-dark);
-    color: var(--glass-surface-fg-on-dark);
     --weimo-menu-separator-bg: var(--color-border-divider-menu-on-dark);
   }
 
   .weimo-menu__popup[data-starting-style],
   .weimo-menu__popup[data-ending-style] {
+    opacity: 0;
     transform: scale(0.7);
   }
 
   .weimo-menu__popup[data-ending-style] {
-    transition: transform 130ms cubic-bezier(0.4, 0, 1, 1);
+    transition:
+      opacity 130ms cubic-bezier(0.4, 0, 1, 1),
+      transform 130ms cubic-bezier(0.4, 0, 1, 1);
   }
 
   .weimo-menu__group,

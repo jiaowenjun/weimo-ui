@@ -2,8 +2,10 @@ import { Menu as BaseMenu } from '@base-ui/react/menu'
 import { Check, ChevronRight, Circle, MoreHorizontal } from 'lucide-react'
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 
-import { useFrostedSurfaceBackgroundToneRef } from './frosted-surface'
-import { LiquidGlassSurface } from './liquid-glass'
+import {
+  getFrostedSurfaceClassName,
+  useFrostedSurfaceBackgroundToneRef,
+} from './frosted-surface'
 import { cn } from './lib/utils'
 import {
   menuItemVariants,
@@ -11,6 +13,7 @@ import {
   type MenuItemStyleProps,
 } from './menu/menu-variants'
 
+import './frosted-surface.css'
 import './menu.css'
 
 export type { MenuItemVariant } from './menu/menu-variants'
@@ -78,6 +81,9 @@ export function MenuPopup({
   sticky,
   ...props
 }: MenuPopupProps) {
+  const { backgroundTone, setElementRef } =
+    useFrostedSurfaceBackgroundToneRef<HTMLDivElement>(true)
+
   return (
     <BaseMenu.Portal {...portalProps}>
       <BaseMenu.Positioner
@@ -94,49 +100,20 @@ export function MenuPopup({
         side={side}
         sideOffset={sideOffset}
         sticky={sticky}
-        render={(positionerProps) => (
-          <div {...positionerProps}>
-            {/* Base UI 定位前会设 opacity: 0。此时还在原点,必须等最终坐标
-                提交后再采样;子组件的 layout effect 在首次可见绘制前更新字色。 */}
-            <MenuPopupSurface
-              className={className}
-              positioned={positionerProps.style?.opacity !== 0}
-              {...props}
-            />
-          </div>
-        )}
-      />
-    </BaseMenu.Portal>
-  )
-}
-
-function MenuPopupSurface({
-  className,
-  positioned,
-  ...props
-}: WithStringClassName<BaseMenu.Popup.Props> & { positioned: boolean }) {
-  const { backgroundTone, setElementRef } =
-    useFrostedSurfaceBackgroundToneRef<HTMLDivElement>(positioned)
-
-  return (
-    <BaseMenu.Popup
-      className={cn('weimo-menu__popup', className)}
-      data-background-tone={backgroundTone ?? undefined}
-      data-slot="menu-popup"
-      ref={setElementRef}
-      {...props}
-    >
-      {/* 玻璃进流撑尺寸,装饰兄弟层由 popup 的 grid 叠放。 */}
-      <LiquidGlassSurface
-        className="weimo-menu__popup-glass"
-        cornerRadius={16}
-        elasticity={0}
-        padding="4px 8px"
-        style={{ left: 'auto', position: 'relative', top: 'auto', width: '100%' }}
       >
-        {props.children}
-      </LiquidGlassSurface>
-    </BaseMenu.Popup>
+        <BaseMenu.Popup
+          className={getFrostedSurfaceClassName(
+            'weimo-menu__popup',
+            'frosted-surface--bordered',
+            className,
+          )}
+          data-background-tone={backgroundTone ?? undefined}
+          data-slot="menu-popup"
+          ref={setElementRef}
+          {...props}
+        />
+      </BaseMenu.Positioner>
+    </BaseMenu.Portal>
   )
 }
 
