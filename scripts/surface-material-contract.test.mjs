@@ -298,11 +298,11 @@ assert.ok(
     !popupSurfaceCss.includes('border-width: 0'),
   'PopupSurface must drop the border variant modifier while the base keeps the 1px transparent border geometry.',
 )
-// 暗主题以描边代阴影:阴影 token 在暗主题置 none,浮层轮廓取强调边框 token
-// (比卡片材质的默认边框亮一档,层级更高的浮层在深底上更可辨)。
+// 暗主题以描边代阴影:阴影 token 在暗主题置 none,浮层轮廓取分割线边框 token
+// (比卡片材质的默认边框亮一档,层级更高的浮层在深底上仍可辨)。
 assert.ok(
-  blockFor(popupSurfaceCss, '.dark .popup-surface').includes('border-color: var(--color-border-emphasis);'),
-  'Dark theme must stroke popup surfaces with the emphasis border token instead of the invisible shadow.',
+  blockFor(popupSurfaceCss, '.dark .popup-surface').includes('border-color: var(--color-border-divider);'),
+  'Dark theme must stroke popup surfaces with the divider border token instead of the invisible shadow.',
 )
 assert.ok(
   !popupSurfaceCss.includes('backdrop-filter') && !popupSurfaceBlock.includes('padding:'),

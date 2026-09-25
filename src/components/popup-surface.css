@@ -8,9 +8,10 @@
   }
 
   /* 浮层材质固定双态，不提供边框变体：亮主题抬升阴影分层（边框保持透明几何）；
-     暗主题阴影 token 置 none，以强调边框 token 描出浮层轮廓。 */
+     暗主题阴影 token 置 none，以分割线边框 token 描出浮层轮廓
+     （比卡片材质的默认边框亮一档，层级更高的浮层在深底上仍可辨）。 */
   .dark .popup-surface {
-    border-color: var(--color-border-emphasis);
+    border-color: var(--color-border-divider);
   }
 
   .popup-surface[data-level="tooltip"] {
