@@ -9,20 +9,12 @@ import { GlassPreviewCard } from '../glass-preview-card'
 import { SurfaceBorderToggle } from '../preview-toggle'
 
 function CardSurfacePreview() {
-  const [bordered, setBordered] = useState(false)
-
   return (
-    <ComponentPreviewCard
-      action={
-        <SurfaceBorderToggle bordered={bordered} onBorderedChange={setBordered} />
-      }
-      align="center"
-      label="卡片材质"
-    >
+    <ComponentPreviewCard align="center" label="卡片材质">
       <div aria-hidden="true" className="card-surface-preview">
-        <CardSurface bordered={bordered} className="card-surface-preview__tile">
+        <CardSurface className="card-surface-preview__tile">
           <span className="card-surface-preview__title">Card Surface</span>
-          <span className="card-surface-preview__meta">静态实体卡片材质</span>
+          <span className="card-surface-preview__meta">亮主题细微阴影，暗主题边框描边</span>
         </CardSurface>
       </div>
     </ComponentPreviewCard>
@@ -48,20 +40,12 @@ function GlassSurfacePreview() {
 }
 
 function PopupSurfacePreview() {
-  const [bordered, setBordered] = useState(false)
-
   return (
-    <ComponentPreviewCard
-      action={
-        <SurfaceBorderToggle bordered={bordered} onBorderedChange={setBordered} />
-      }
-      align="center"
-      label="浮层材质"
-    >
+    <ComponentPreviewCard align="center" label="浮层材质">
       <div className="popup-surface-preview">
-        <PopupSurface bordered={bordered} className="popup-surface-preview__tile">
+        <PopupSurface className="popup-surface-preview__tile">
           <span className="popup-surface-preview__title">Modal Surface</span>
-          <span className="popup-surface-preview__meta">抬升浮层主体材质</span>
+          <span className="popup-surface-preview__meta">亮主题抬升投影，暗主题边框描边</span>
         </PopupSurface>
       </div>
     </ComponentPreviewCard>

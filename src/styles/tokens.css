@@ -100,7 +100,7 @@
   --glass-surface-muted-fg-on-dark: hsl(0 0% 100% / 0.72);
 
   /* === 阴影 === */
-  --shadow-card: 0 1px 4px hsl(0 0% 0% / 0.035);
+  --shadow-card: 0 1px 2px hsl(0 0% 0% / 0.04), 0 2px 8px hsl(0 0% 0% / 0.06);
   --shadow-card-interactive: 0 6px 18px hsl(0 0% 0% / 0.06);
   --shadow-overlay: 0 28px 80px hsl(0 0% 0% / 0.22);
   --shadow-tooltip: 0 4px 12px hsl(0 0% 0% / 0.1), 0 12px 28px hsl(0 0% 0% / 0.12);
@@ -217,6 +217,8 @@
   --glass-surface-fg-on-dark: hsl(0 0% 100% / 0.9);
   --glass-surface-muted-fg-on-dark: hsl(0 0% 100% / 0.72);
   --shadow-card: none;
+  --shadow-overlay: none;
+  --shadow-tooltip: none;
 }
 
 @theme inline {

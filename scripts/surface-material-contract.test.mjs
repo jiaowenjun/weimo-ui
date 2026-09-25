@@ -102,17 +102,17 @@ for (const snippet of [
   "import { cn } from './lib/utils'",
   "import './card-surface.css'",
   'export type CardSurfaceProps',
-  'bordered?: boolean',
   'export function getCardSurfaceClassName(...className: ClassValue[])',
   "return cn('card-surface', className)",
-  'export function getCardSurfaceBorderClassName(bordered: boolean | undefined)',
-  'if (bordered === undefined) return undefined',
-  "return bordered ? 'card-surface--bordered' : 'card-surface--borderless'",
   'export function CardSurface',
-  'getCardSurfaceBorderClassName(bordered),',
 ]) {
   assert.ok(cardSurfaceSource.includes(snippet), `CardSurface source must include ${snippet}.`)
 }
+// 卡片材质固定双态,不提供边框变体:亮主题细微阴影无边框,暗主题边框无阴影。
+assert.ok(
+  !cardSurfaceSource.includes('bordered'),
+  'CardSurface must not expose a bordered variant; the material is fixed per theme.',
+)
 const cardSurfaceBlock = blockFor(cardSurfaceCss, '.card-surface')
 for (const snippet of [
   'box-sizing: border-box;',
@@ -129,22 +129,18 @@ assert.ok(
   'CardSurface must own material only, not layout padding or blur.',
 )
 assert.ok(
-  blockFor(cardSurfaceCss, '.card-surface--bordered').includes('border-color: var(--color-border);') &&
+  !cardSurfaceCss.includes('card-surface--bordered') &&
+    !cardSurfaceCss.includes('card-surface--borderless') &&
+    !cardSurfaceCss.includes('.card-surface .card-surface') &&
     !cardSurfaceCss.includes('border: none') &&
     !cardSurfaceCss.includes('border-width: 0'),
-  'CardSurface stroke must be opt-in via --bordered while the base keeps the 1px transparent border geometry.',
+  'CardSurface must drop every border variant modifier and the nested auto-stroke; only the theme-fixed stroke may color the border.',
 )
+// 暗主题以描边代阴影:深底上阴影不可见(--shadow-card 暗主题为 none),
+// 取默认边框 token 划出卡片轮廓;亮主题保持细微阴影分层、无边框。
 assert.ok(
-  blockFor(cardSurfaceCss, '.card-surface .card-surface').includes('border-color: var(--color-border);'),
-  'Nested card surfaces must auto-stroke with the default border token so users can tell nested card boundaries apart.',
-)
-// 显式无边框 opt-out 必须排在嵌套规则之后:同特异性靠源顺序取胜,
-// 否则 bordered={false} 在嵌套场景(如材质页开关演示)无法强制无边框。
-assert.ok(
-  blockFor(cardSurfaceCss, '.card-surface.card-surface--borderless').includes('border-color: transparent;') &&
-    cardSurfaceCss.indexOf('.card-surface .card-surface {') <
-      cardSurfaceCss.indexOf('.card-surface.card-surface--borderless {'),
-  'The explicit borderless opt-out must come after the nested auto-stroke rule so bordered={false} still wins when nested.',
+  blockFor(cardSurfaceCss, '.dark .card-surface').includes('border-color: var(--color-border);'),
+  'Dark theme must stroke card surfaces with the default border token instead of the invisible shadow.',
 )
 
 for (const snippet of [
@@ -153,16 +149,16 @@ for (const snippet of [
   "import { ComponentPreviewCard } from '../../components/component-preview-card'",
   "import { SurfaceBorderToggle } from '../preview-toggle'",
   "id: 'surface'",
-  '静态实体卡片材质',
+  '亮主题细微阴影，暗主题边框描边',
   'function CardSurfacePreview()',
   'label="卡片材质"',
   '<div aria-hidden="true" className="card-surface-preview">',
-  '<CardSurface bordered={bordered} className="card-surface-preview__tile">',
+  '<CardSurface className="card-surface-preview__tile">',
   '<GlassSurface bordered={bordered} className="glass-surface-preview__tile">',
   'function PopupSurfacePreview()',
   'label="浮层材质"',
-  '<PopupSurface bordered={bordered} className="popup-surface-preview__tile">',
-  '抬升浮层主体材质',
+  '<PopupSurface className="popup-surface-preview__tile">',
+  '亮主题抬升投影，暗主题边框描边',
   '<SurfaceBorderToggle bordered={bordered} onBorderedChange={setBordered} />',
   "frame: 'plain',",
 ]) {
@@ -217,9 +213,9 @@ assert.ok(
 )
 assert.ok(
   appCss.includes(
-    '.component-preview-card:has(.popup-surface-preview) .base-card__content {\n  overflow: visible;\n}',
+    '.component-preview-card:has(.card-surface-preview, .popup-surface-preview) .base-card__content {\n  overflow: visible;\n}',
   ),
-  'PopupSurface demo must opt out of the preview-window clip so the real --shadow-overlay renders into the card padding.',
+  'Card and popup surface demos must opt out of the preview-window clip so real shadows (--shadow-card / --shadow-overlay) render into the card padding.',
 )
 
 for (const snippet of [
@@ -268,16 +264,18 @@ for (const snippet of [
   "import './popup-surface.css'",
   "export type PopupSurfaceLevel = 'modal' | 'tooltip'",
   'export type PopupSurfaceProps',
-  'bordered?: boolean',
   'export function getPopupSurfaceClassName(',
   "return cn('popup-surface', className)",
   'export function PopupSurface',
-  'bordered = false',
-  "bordered ? 'popup-surface--bordered' : undefined",
   "data-level={level === 'modal' ? undefined : level}",
 ]) {
   assert.ok(popupSurfaceSource.includes(snippet), `PopupSurface source must include ${snippet}.`)
 }
+// 浮层材质固定双态,不提供边框变体:亮主题抬升阴影无边框,暗主题边框无阴影。
+assert.ok(
+  !popupSurfaceSource.includes('bordered'),
+  'PopupSurface must not expose a bordered variant; the material is fixed per theme.',
+)
 const popupSurfaceBlock = blockFor(popupSurfaceCss, '.popup-surface')
 for (const snippet of [
   'color: var(--color-text-primary);',
@@ -295,10 +293,16 @@ assert.ok(
   'PopupSurface tooltip level must use tooltip radius and shadow.',
 )
 assert.ok(
-  blockFor(popupSurfaceCss, '.popup-surface--bordered').includes('border-color: var(--color-border);') &&
+  !popupSurfaceCss.includes('popup-surface--bordered') &&
     !popupSurfaceCss.includes('border: none') &&
     !popupSurfaceCss.includes('border-width: 0'),
-  'PopupSurface stroke must be opt-in via --bordered while the base keeps the 1px transparent border geometry.',
+  'PopupSurface must drop the border variant modifier while the base keeps the 1px transparent border geometry.',
+)
+// 暗主题以描边代阴影:阴影 token 在暗主题置 none,浮层轮廓取强调边框 token
+// (比卡片材质的默认边框亮一档,层级更高的浮层在深底上更可辨)。
+assert.ok(
+  blockFor(popupSurfaceCss, '.dark .popup-surface').includes('border-color: var(--color-border-emphasis);'),
+  'Dark theme must stroke popup surfaces with the emphasis border token instead of the invisible shadow.',
 )
 assert.ok(
   !popupSurfaceCss.includes('backdrop-filter') && !popupSurfaceBlock.includes('padding:'),

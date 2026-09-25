@@ -990,9 +990,10 @@
   line-height: 1.4;
 }
 
-/* 画布与瓦片等高后,预览窗默认的 overflow: hidden 会把 --shadow-overlay(0 28px 80px)
-   整体裁掉;浮层卡是页面最后一张卡,真实阴影画进卡片 padding 并透到页底空白处。 */
-.component-preview-card:has(.popup-surface-preview) .base-card__content {
+/* 画布与瓦片等高后,预览窗默认的 overflow: hidden 会把真实阴影整体裁掉
+   (卡片 --shadow-card 0 2px 8px、浮层 --shadow-overlay 0 28px 80px);
+   让阴影画进卡片 padding,浮层卡是页面最后一张卡,阴影透到页底空白处。 */
+.component-preview-card:has(.card-surface-preview, .popup-surface-preview) .base-card__content {
   overflow: visible;
 }
 

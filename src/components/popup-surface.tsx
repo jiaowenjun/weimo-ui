@@ -8,7 +8,6 @@ import './popup-surface.css'
 export type PopupSurfaceLevel = 'modal' | 'tooltip'
 
 export type PopupSurfaceProps = ComponentPropsWithoutRef<'div'> & {
-  bordered?: boolean
   level?: PopupSurfaceLevel
 }
 
@@ -21,19 +20,15 @@ export function getPopupSurfaceClassName(
   return cn('popup-surface', className)
 }
 
+/* 浮层材质固定双态，不提供变体：亮主题抬升阴影无边框，暗主题边框无阴影。 */
 export function PopupSurface({
-  bordered = false,
   className,
   level = 'modal',
   ...props
 }: PopupSurfaceProps) {
   return (
     <div
-      className={getPopupSurfaceClassName(
-        level,
-        bordered ? 'popup-surface--bordered' : undefined,
-        className,
-      )}
+      className={getPopupSurfaceClassName(level, className)}
       data-level={level === 'modal' ? undefined : level}
       {...props}
     />

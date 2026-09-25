@@ -93,7 +93,7 @@ assert.ok(
     tooltipCss.includes("@import '../popup-surface.css';") &&
     popupSurfaceCss.includes('color: var(--color-text-primary);') &&
     popupSurfaceCss.includes('border: 1px solid transparent;') &&
-    popupSurfaceCss.includes('border-color: var(--color-border);') &&
+    popupSurfaceCss.includes('border-color: var(--color-border-emphasis);') &&
     popupSurfaceCss.includes('background: var(--color-bg-card);'),
   'coss tooltip CSS must define compact high-layer layout and delegate theme-aware material to PopupSurface.',
 )

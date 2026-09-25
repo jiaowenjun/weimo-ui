@@ -34,7 +34,7 @@ export const borderColorToneMap = {
     },
     className: 'border-color--default',
     description: '默认 surface 外框和控件边界，用于区分容器与页面背景。',
-    uiUsage: 'Card/Dialog/Tooltip/SideBar/docs preview surface、MdEditor、Coss button outline、Markdown pre/image border、GlassSurface border',
+    uiUsage: 'Card/SideBar/docs preview surface、MdEditor、Coss button outline、Markdown pre/image border、GlassSurface border',
     bijiUsage: 'Form controls、Auth shell、memo-list state、RefCard',
   },
   emphasis: {
@@ -46,7 +46,7 @@ export const borderColorToneMap = {
     },
     className: 'border-color--emphasis',
     description: '中性增强边界，用于 hover、focus-within 和被动可交互轮廓。',
-    uiUsage: 'neutral hover boundary、Coss Card hover/focus-within、Coss Button neutral hover、ImageUploader dashed base',
+    uiUsage: 'PopupSurface dark stroke、neutral hover boundary、Coss Button neutral hover、ImageUploader dashed base',
     bijiUsage: 'Form controls hover',
   },
   accent: {

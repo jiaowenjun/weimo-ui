@@ -8,21 +8,10 @@
     box-shadow: var(--shadow-card);
   }
 
-  /* 描边为 opt-in：基类默认透明（1px 几何保留，与有边框实例并排时内边距节奏一致），
-     下游材质调用者自动继承无边框默认。 */
-  .card-surface--bordered {
+  /* 卡片材质固定双态，不提供任何边框变体（嵌套也不例外）：
+     亮主题靠细微阴影分层（--shadow-card，边框保持透明几何）；
+     暗主题阴影不可见（--shadow-card 为 none），以默认边框 token 划出卡片轮廓。 */
+  .dark .card-surface {
     border-color: var(--color-border);
-  }
-
-  /* 嵌套卡片自动显示描边：内外卡片同底色同阴影，隔着内容容器时边界难辨，
-     内层卡片自动取默认边框 token 区分；与 --bordered 同色，深度不限。 */
-  .card-surface .card-surface {
-    border-color: var(--color-border);
-  }
-
-  /* 显式无边框 opt-out：须排在嵌套规则之后（同特异性靠源顺序取胜），
-     让 bordered={false} 在嵌套场景也能强制无边框。 */
-  .card-surface.card-surface--borderless {
-    border-color: transparent;
   }
 }

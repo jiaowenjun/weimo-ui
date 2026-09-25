@@ -5,34 +5,13 @@ import { cn } from './lib/utils'
 
 import './card-surface.css'
 
-export type CardSurfaceProps = ComponentPropsWithoutRef<'div'> & {
-  bordered?: boolean
-}
+export type CardSurfaceProps = ComponentPropsWithoutRef<'div'>
 
 export function getCardSurfaceClassName(...className: ClassValue[]) {
   return cn('card-surface', className)
 }
 
-/* bordered 三态：未指定时交给上下文（嵌套在 card-surface 内的卡片经
-   .card-surface .card-surface 自动描边），显式 true/false 强制有/无边框。 */
-export function getCardSurfaceBorderClassName(bordered: boolean | undefined) {
-  if (bordered === undefined) return undefined
-
-  return bordered ? 'card-surface--bordered' : 'card-surface--borderless'
-}
-
-export function CardSurface({
-  bordered,
-  className,
-  ...props
-}: CardSurfaceProps) {
-  return (
-    <div
-      className={getCardSurfaceClassName(
-        getCardSurfaceBorderClassName(bordered),
-        className,
-      )}
-      {...props}
-    />
-  )
+/* 卡片材质固定双态，不提供变体：亮主题细微阴影无边框，暗主题边框无阴影。 */
+export function CardSurface({ className, ...props }: CardSurfaceProps) {
+  return <div className={getCardSurfaceClassName(className)} {...props} />
 }

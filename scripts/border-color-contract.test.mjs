@@ -100,11 +100,6 @@ const standaloneRegistryItem = readJson('registry/border-color.json')
 const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const registryItem = rootRegistry.items.find((item) => item.name === 'border-color')
 const cossButtonFocusBlock = blockFor(cossButtonCss, '.coss-button:focus-visible')
-// 卡片材质默认无边框后，coss 卡 hover/focus-within 强调描边只落在 opt-in 边框实例上。
-const cossCardInteractiveBlock = blockFor(
-  cossCardCss,
-  '.coss-card--interactive.card-surface--bordered:hover,\n  .coss-card--interactive.card-surface--bordered:focus-within',
-)
 const cossTabsFocusBlock = blockFor(cossTabsCss, '.coss-tabs__tab:focus-visible')
 const markdownInlineCodeSurfaceBlock = blockFor(
   markdownContentCss,
@@ -329,13 +324,12 @@ assert.ok(
     borderColorSource.includes('Menu separator') &&
     borderColorSource.includes('Coss Card/Dialog/Command/Table divider') &&
     borderColorSource.includes('Markdown inline code/table outer/table cell/hr divider') &&
-    borderColorSource.includes('Card/Dialog/Tooltip/SideBar/docs preview surface'),
+    borderColorSource.includes('Card/SideBar/docs preview surface'),
   'BorderColor detail usage copy must include guide-line and divider examples.',
 )
 assert.ok(
   borderColorSource.includes('neutral hover boundary') &&
     borderColorSource.includes('primary action/selected/keyboard focus') &&
-    cossCardInteractiveBlock.includes('border-color: var(--color-border-emphasis);') &&
     cossButtonCss.includes('.coss-button:hover') &&
     cossButtonCss.includes('border-color: var(--color-border-emphasis);') &&
     cossButtonCss.includes('.coss-button--default:hover,\n  .coss-button--default[data-popup-open] {\n    border-color: var(--color-border-accent);') &&
@@ -374,7 +368,7 @@ assert.ok(
 )
 assert.ok(
     cardSurfaceCss.includes('border-color: var(--color-border);') &&
-    popupSurfaceCss.includes('border-color: var(--color-border);') &&
+    popupSurfaceCss.includes('border-color: var(--color-border-emphasis);') &&
     !glassSurfaceCss.includes('var(--color-border-divider)') &&
     !chipSurfaceCss.includes('var(--color-border-divider)') &&
     cossButtonCss.includes('border-color: var(--color-border);') &&
