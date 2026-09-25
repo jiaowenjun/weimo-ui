@@ -50,8 +50,69 @@
   display: inline-flex;
 }
 
+/* 站点顶栏:液态玻璃标题胶囊(隐藏 sizer 撑盒宽,玻璃绝对居中覆盖)
+   与搜索/主题液态按钮组;色随页面背景 tone 自适应(每槽一个 tone 容器)。 */
+.docs-liquid-top-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  color: var(--glass-surface-fg-on-dark);
+}
+
+.docs-liquid-top-bar[data-background-tone='light'] {
+  color: var(--glass-surface-fg-on-light);
+}
+
+.docs-liquid-top-bar[data-background-tone='light'] .liquid-glass-chip__label {
+  text-shadow: none;
+}
+
 .docs-top-bar__title {
+  position: relative;
+  display: inline-flex;
+  height: 29px;
+}
+
+.docs-top-bar__title .liquid-glass-chip__label {
   font-weight: 600;
+}
+
+.docs-top-bar__title-sizer {
+  visibility: hidden;
+  font-size: var(--font-size-lg);
+  line-height: 1;
+  padding: 6px 10px;
+  white-space: nowrap;
+}
+
+.docs-liquid-top-bar-actions {
+  position: relative;
+  width: 88px;
+  height: 44px;
+}
+
+.docs-liquid-top-bar-actions__row {
+  display: flex;
+  align-items: center;
+}
+
+.docs-liquid-top-bar-actions__row button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.docs-liquid-top-bar-actions__row svg {
+  width: 20px;
+  height: 20px;
 }
 
 .preview-stage .weimo-card {

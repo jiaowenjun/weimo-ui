@@ -23,13 +23,9 @@ import {
   CommandItem,
   CommandList,
 } from '../components/coss/command'
-import { Chip } from '../components/chip'
 import { TopBar } from '../components/top-bar'
+import { LiquidGlassSurface } from '../components/liquid-glass'
 import { FrostedIconButton } from '../components/frosted-icon-button'
-import {
-  FrostedIconButtonGroup,
-  FrostedIconGroupButton,
-} from '../components/frosted-icon-button-group'
 import { GhostIconButton } from '../components/ghost-icon-button'
 import { SideBar } from '../components/sidebar'
 import {
@@ -39,6 +35,7 @@ import {
 } from './component-docs'
 import { type DocsOutletContext } from './docs-outlet-context'
 import { componentHref, componentPath } from './routes'
+import { LiquidGlassTile } from './liquid-glass-tile'
 import { searchComponentDocs } from './search-component-docs'
 
 type Theme = 'light' | 'dark' | 'system'
@@ -199,48 +196,65 @@ export function DocsShell() {
     onComponentSelect: openComponent,
   })
 
+  // 站点顶栏同样走液态玻璃:标题胶囊/侧边栏钮/搜索与主题组;TopBar 本体是
+  // fixed 定位,tone 容器(LiquidGlassTile)按槽各挂一个避免包装层塌陷;
+  // 标题文字长度可变,用隐藏 sizer 同尺寸撑盒宽,玻璃绝对居中覆盖其上。
   const topBarLeftSlot = (
-    <>
-      <FrostedIconButton
-        className="docs-top-bar__sidebar-trigger"
+    <LiquidGlassTile className="docs-liquid-top-bar">
+      <button
         aria-label="打开侧边栏"
+        className="liquid-glass-icon-button docs-top-bar__sidebar-trigger"
+        type="button"
         onClick={() => setSidebarOpen(true)}
       >
-        <Menu />
-      </FrostedIconButton>
+        <LiquidGlassSurface cornerRadius={999} onClick={() => {}} padding="12px">
+          <Menu />
+        </LiquidGlassSurface>
+      </button>
       {selected ? (
-        <Chip
-          bordered={false}
-          className="docs-top-bar__title"
-          content={selected.name}
-          textSize="lg"
-          variant="glass"
-        />
+        <span className="docs-top-bar__title">
+          <LiquidGlassSurface cornerRadius={999} padding="6px 10px">
+            <span className="liquid-glass-chip__label liquid-glass-chip__label--lg">
+              {selected.name}
+            </span>
+          </LiquidGlassSurface>
+          <span aria-hidden="true" className="docs-top-bar__title-sizer">
+            {selected.name}
+          </span>
+        </span>
       ) : null}
-    </>
+    </LiquidGlassTile>
   )
   const topBarRightSlot = (
-    <FrostedIconButtonGroup aria-label="搜索与主题切换">
-      <FrostedIconGroupButton
-        aria-label="搜索"
-        onClick={() => setSearchOpen(true)}
-        title="按 / 搜索"
-      >
-        <Search />
-      </FrostedIconGroupButton>
-      <FrostedIconGroupButton
-        aria-label={
-          theme === 'light'
-            ? '切换到深色主题'
-            : theme === 'dark'
-              ? '切换到跟随系统主题'
-              : '切换到浅色主题'
-        }
-        onClick={() => setTheme((current) => nextTheme(current))}
-      >
-        {theme === 'system' ? <Monitor /> : theme === 'light' ? <Sun /> : <Moon />}
-      </FrostedIconGroupButton>
-    </FrostedIconButtonGroup>
+    <LiquidGlassTile className="docs-liquid-top-bar">
+      <span className="docs-liquid-top-bar-actions">
+        <LiquidGlassSurface cornerRadius={999} padding="0px">
+          <span className="docs-liquid-top-bar-actions__row">
+            <button
+              aria-label="搜索"
+              title="按 / 搜索"
+              type="button"
+              onClick={() => setSearchOpen(true)}
+            >
+              <Search />
+            </button>
+            <button
+              aria-label={
+                theme === 'light'
+                  ? '切换到深色主题'
+                  : theme === 'dark'
+                    ? '切换到跟随系统主题'
+                    : '切换到浅色主题'
+              }
+              type="button"
+              onClick={() => setTheme((current) => nextTheme(current))}
+            >
+              {theme === 'system' ? <Monitor /> : theme === 'light' ? <Sun /> : <Moon />}
+            </button>
+          </span>
+        </LiquidGlassSurface>
+      </span>
+    </LiquidGlassTile>
   )
   const closeSidebar = () => setSidebarOpen(false)
   const sidebarDrawerAction = (

@@ -86,20 +86,35 @@ for (const snippet of [
   )
 }
 
-// 顶部栏搜索与主题切换收进磨砂图标按钮组,与左侧独立的侧边栏触发按钮保持高度一致。
+// 顶部栏改走液态玻璃:标题胶囊/侧边栏钮/搜索与主题组都是 LiquidGlassSurface 层,
+// 搜索与主题两颗按钮收在同一枚玻璃胶囊里,色随页面背景 tone 自适应。
 for (const snippet of [
-  "import {\n  FrostedIconButtonGroup,\n  FrostedIconGroupButton,\n} from '../components/frosted-icon-button-group'",
-  '<FrostedIconButtonGroup aria-label="搜索与主题切换">',
+  "import { LiquidGlassSurface } from '../components/liquid-glass'",
+  "import { LiquidGlassTile } from './liquid-glass-tile'",
+  '<LiquidGlassTile className="docs-liquid-top-bar">',
+  'docs-liquid-top-bar-actions__row',
+  'docs-top-bar__title-sizer',
+  'title="按 / 搜索"',
 ]) {
   assert.ok(
     docsShellSource.includes(snippet),
-    `DocsShell top bar actions must include ${snippet}.`,
+    `DocsShell liquid glass top bar must include ${snippet}.`,
   )
 }
 assert.equal(
-  (docsShellSource.match(/<FrostedIconGroupButton\b/g) ?? []).length,
-  2,
-  'DocsShell top bar actions group must hold exactly the search and theme toggle buttons.',
+  (docsShellSource.match(/docs-liquid-top-bar-actions__row[\s\S]*?<\/span>/g) ?? []).length,
+  1,
+  'DocsShell top bar must hold exactly one liquid glass actions pill.',
+)
+assert.ok(
+  (docsShellSource.match(/docs-liquid-top-bar-actions__row[\s\S]*?<\/span>/)?.[0].match(/<button\b/g) ?? []).length ===
+    2,
+  'DocsShell liquid glass actions pill must hold exactly the search and theme toggle buttons.',
+)
+assert.ok(
+  !docsShellSource.includes('FrostedIconButtonGroup') &&
+    !docsShellSource.includes('<Chip\n'),
+  'DocsShell top bar must not fall back to frosted groups or glass Chips.',
 )
 
 assert.ok(

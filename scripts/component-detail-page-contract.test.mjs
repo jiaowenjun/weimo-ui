@@ -99,13 +99,13 @@ const packageJson = JSON.parse(readProjectFile('package.json'))
 
 assert.ok(
   docsShellSource.includes('className="docs-top-bar__title"') &&
-    docsShellSource.includes('content={selected.name}') &&
-    docsShellSource.includes('<Chip') &&
+    docsShellSource.includes('{selected.name}') &&
+    docsShellSource.includes('docs-top-bar__title-sizer') &&
     !detailPageSource.includes('<h1') &&
     !detailPageSource.includes('doc-page__header') &&
     !css.includes('.doc-page__title') &&
     css.includes('.docs-top-bar__title'),
-  'component titles must render in the TopBar instead of consuming detail-page content space.',
+  'component titles must render in the liquid glass TopBar capsule instead of consuming detail-page content space.',
 )
 
 assert.ok(
