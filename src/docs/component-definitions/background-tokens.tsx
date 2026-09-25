@@ -20,7 +20,6 @@ import {
 import { pressableToneMap, pressableTones } from '../../components/pressable'
 import { ComponentPreviewCard } from '../../components/component-preview-card'
 import { GlassPreviewCard } from '../glass-preview-card'
-import { glassBackgroundGrayMidpoint } from '../glass-preview'
 import type { ComponentDefinition } from '../component-docs'
 import { useIsDarkTheme } from '../token-preview-color'
 
@@ -94,7 +93,6 @@ function BgColorPreview() {
       </ComponentPreviewCard>
 
       <GlassPreviewCard
-        initialGray={glassBackgroundGrayMidpoint}
         items={bgBlurTones.map((tone) => ({
           token: getBgBlurBlurToken(tone),
           value: getBgBlurBlurValue(tone),

@@ -255,8 +255,6 @@ assert.ok(
     docsDefinitionSource.includes("frame: 'plain',") &&
     docsDefinitionSource.includes("import { ComponentPreviewCard } from '../../components/component-preview-card'") &&
     docsDefinitionSource.includes("import { GlassPreviewCard } from '../glass-preview-card'") &&
-    docsDefinitionSource.includes("import { glassBackgroundGrayMidpoint } from '../glass-preview'") &&
-    docsDefinitionSource.includes('initialGray={glassBackgroundGrayMidpoint}') &&
     docsDefinitionSource.includes('bgBlurTones.map') &&
     docsDefinitionSource.includes('bgBlurToneMap[tone]') &&
     docsDefinitionSource.includes('getBgBlurClassName(tone)') &&
