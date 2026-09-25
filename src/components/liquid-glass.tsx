@@ -1,7 +1,7 @@
 import { useEffect, useId } from 'react'
 import type { CSSProperties, ReactNode } from 'react'
 
-import LiquidGlass from 'liquid-glass-react'
+import LiquidGlass from './liquid-glass-react'
 
 import { cn } from './lib/utils'
 

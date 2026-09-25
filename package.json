@@ -120,7 +120,6 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "katex": "^0.16.47",
-    "liquid-glass-react": "^1.1.1",
     "lucide-react": "1.24.0",
     "react-markdown": "^10.1.0",
     "react-router": "7.18.1",

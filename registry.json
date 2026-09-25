@@ -586,9 +586,6 @@
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "type": "registry:ui",
-      "dependencies": [
-        "liquid-glass-react"
-      ],
       "name": "liquid-glass",
       "title": "Liquid Glass Surface",
       "description": "A liquid glass material surface with displacement-map refraction, edge aberration and elastic hover, adapted from liquid-glass-react.",
@@ -604,6 +601,26 @@
           "path": "src/components/liquid-glass.tsx",
           "type": "registry:ui",
           "target": "@ui/liquid-glass.tsx"
+        },
+        {
+          "path": "src/components/liquid-glass-react/index.tsx",
+          "type": "registry:ui",
+          "target": "@ui/liquid-glass-react/index.tsx"
+        },
+        {
+          "path": "src/components/liquid-glass-react/shader-utils.ts",
+          "type": "registry:ui",
+          "target": "@ui/liquid-glass-react/shader-utils.ts"
+        },
+        {
+          "path": "src/components/liquid-glass-react/utils.ts",
+          "type": "registry:ui",
+          "target": "@ui/liquid-glass-react/utils.ts"
+        },
+        {
+          "path": "src/components/liquid-glass-react/LICENSE",
+          "type": "registry:ui",
+          "target": "@ui/liquid-glass-react/LICENSE"
         }
       ]
     },

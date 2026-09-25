@@ -27,9 +27,17 @@ const registryItem = JSON.parse(readProjectFile('registry/liquid-glass.json'))
 const packageJson = JSON.parse(readProjectFile('package.json'))
 
 assert.ok(
-  componentSource.includes("import LiquidGlass from 'liquid-glass-react'"),
-  'liquid-glass.tsx must adapt the liquid-glass-react default export.',
+  componentSource.includes("import LiquidGlass from './liquid-glass-react'"),
+  'liquid-glass.tsx must adapt the vendored in-repo LiquidGlass default export.',
 )
+for (const vendoredFile of [
+  'src/components/liquid-glass-react/index.tsx',
+  'src/components/liquid-glass-react/shader-utils.ts',
+  'src/components/liquid-glass-react/utils.ts',
+  'src/components/liquid-glass-react/LICENSE',
+]) {
+  assert.ok(existsSync(join(root, vendoredFile)), `${vendoredFile} must exist: the glass engine is vendored in-repo.`)
+}
 assert.ok(
   componentSource.includes('export function LiquidGlassSurface'),
   'liquid-glass.tsx must export LiquidGlassSurface.',
@@ -164,10 +172,14 @@ for (const snippet of [
 }
 
 assert.equal(registryItem.type, 'registry:ui', 'liquid-glass must stay a registry:ui item.')
-assert.deepEqual(
-  registryItem.dependencies,
-  ['liquid-glass-react'],
-  'liquid-glass must install its liquid-glass-react runtime dependency.',
+assert.ok(
+  !registryItem.dependencies?.includes('liquid-glass-react'),
+  'liquid-glass must not declare the liquid-glass-react npm dependency: the engine is vendored in-repo.',
+)
+assert.ok(
+  registryItem.files.some((file) => file.path === 'src/components/liquid-glass-react/index.tsx') &&
+    registryItem.files.some((file) => file.path === 'src/components/liquid-glass-react/LICENSE'),
+  'liquid-glass must ship the vendored engine sources and its MIT LICENSE.',
 )
 assert.ok(
   registryItem.registryDependencies.includes('@weimo/style'),
@@ -183,8 +195,8 @@ assert.ok(
   'package.json must export ./components/liquid-glass.',
 )
 assert.ok(
-  packageJson.dependencies['liquid-glass-react'],
-  'package.json must declare liquid-glass-react as a runtime dependency.',
+  !packageJson.dependencies['liquid-glass-react'],
+  'package.json must not depend on the liquid-glass-react npm package: the engine is vendored in-repo.',
 )
 assert.ok(
   packageJson.scripts.test.includes('node scripts/liquid-glass-contract.test.mjs'),
