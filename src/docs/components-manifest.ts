@@ -159,6 +159,16 @@ export const componentManifest = [
     registry: true,
   },
   {
+    id: 'liquid-glass',
+    name: '液态玻璃',
+    exportName: 'LiquidGlassSurface',
+    registryName: 'liquid-glass',
+    packageExport: './components/liquid-glass',
+    group: 'surface-material',
+    docs: true,
+    registry: true,
+  },
+  {
     id: 'ghost-icon-button',
     name: 'GhostIconButton',
     registryName: 'ghost-icon-button',

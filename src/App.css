@@ -891,11 +891,76 @@
   line-height: 1.4;
 }
 
+/* 液态玻璃页:圆角块与全胶囊并列在条纹画布上,玻璃层绝对居中于定尺寸瓦片,
+   瓦片只负责占位。内容文字借玻璃材质的 tone 采样自适应(瓦片持有
+   data-background-tone):亮背景翻深字并去掉库默认的深色文字投影,
+   暗背景维持白字+投影;两主题 token 同值,只随背景亮度翻转。 */
+.liquid-glass-preview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.liquid-glass-preview__tile {
+  position: relative;
+  width: 260px;
+  max-width: 100%;
+  height: 84px;
+}
+
+.liquid-glass-preview__tile--pill {
+  width: 168px;
+  height: 48px;
+}
+
+.liquid-glass-preview__content {
+  display: grid;
+  gap: 4px;
+  justify-items: center;
+  text-align: center;
+}
+
+.liquid-glass-preview__title,
+.liquid-glass-preview__pill-label {
+  color: var(--glass-surface-fg-on-dark);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.2;
+  transition: color 160ms ease;
+}
+
+.liquid-glass-preview__pill-label {
+  white-space: nowrap;
+}
+
+.liquid-glass-preview__meta {
+  color: var(--glass-surface-muted-fg-on-dark);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  line-height: 1.4;
+  transition: color 160ms ease;
+}
+
+/* 亮背景:深字覆盖继承自库内容层的深色 text-shadow,否则深字配深影发糊。 */
+.liquid-glass-preview__tile[data-background-tone='light'] .liquid-glass-preview__title,
+.liquid-glass-preview__tile[data-background-tone='light'] .liquid-glass-preview__pill-label {
+  color: var(--glass-surface-fg-on-light);
+  text-shadow: none;
+}
+
+.liquid-glass-preview__tile[data-background-tone='light'] .liquid-glass-preview__meta {
+  color: var(--glass-surface-muted-fg-on-light);
+  text-shadow: none;
+}
+
 /* 画布与示例等高后,预览窗默认的 overflow: hidden 会把真实阴影整体裁掉
    (卡片 --shadow-card 0 2px 8px、浮层 --shadow-overlay 0 28px 80px);
    让阴影画进卡片 padding,浮层卡是页面最后一张卡,阴影透到页底空白处。
    底部操作栏画布同例:示例容器已换成 CardSurface,阴影同样要落进卡片 padding。 */
-.component-preview-card:has(.card-surface-preview, .popup-surface-preview, .internal-bottom-preview) .base-card__content {
+.component-preview-card:has(.card-surface-preview, .popup-surface-preview, .internal-bottom-preview, .liquid-glass-preview) .base-card__content {
   overflow: visible;
 }
 
