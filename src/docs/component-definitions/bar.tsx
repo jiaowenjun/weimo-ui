@@ -1,6 +1,7 @@
 import { Check, Plus, Search, X } from 'lucide-react'
 
 import { BottomBar } from '../../components/bottom-bar'
+import { CardSurface } from '../../components/card-surface'
 import { Chip } from '../../components/chip'
 import { ComponentPreviewCard } from '../../components/component-preview-card'
 import { FloatBar } from '../../components/float-bar'
@@ -16,7 +17,7 @@ function BottomBarDemo() {
   return (
     <ComponentPreviewCard label="底部操作栏">
       <div className="internal-bottom-preview" aria-label="BottomBar preview">
-        <div className="internal-bottom-preview__surface">
+        <CardSurface className="internal-bottom-preview__surface">
           <p>正文区域</p>
           <BottomBar
             aria-label="底部操作栏预览"
@@ -34,7 +35,7 @@ function BottomBarDemo() {
               </span>
             }
           />
-        </div>
+        </CardSurface>
       </div>
     </ComponentPreviewCard>
   )

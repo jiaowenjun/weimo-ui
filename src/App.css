@@ -425,6 +425,7 @@
   margin-inline: 24px;
 }
 
+/* 示例容器交给 CardSurface 卡片材质(亮主题细微阴影、暗主题描边),这里只保留几何布局 */
 .internal-bottom-preview__surface {
   position: relative;
   display: grid;
@@ -433,10 +434,6 @@
   align-items: start;
   padding: 20px;
   overflow: hidden;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background: var(--color-bg-card);
-  box-shadow: var(--shadow-card);
 }
 
 .internal-card-top-bar-preview__surface {
@@ -990,10 +987,11 @@
   line-height: 1.4;
 }
 
-/* 画布与瓦片等高后,预览窗默认的 overflow: hidden 会把真实阴影整体裁掉
+/* 画布与示例等高后,预览窗默认的 overflow: hidden 会把真实阴影整体裁掉
    (卡片 --shadow-card 0 2px 8px、浮层 --shadow-overlay 0 28px 80px);
-   让阴影画进卡片 padding,浮层卡是页面最后一张卡,阴影透到页底空白处。 */
-.component-preview-card:has(.card-surface-preview, .popup-surface-preview) .base-card__content {
+   让阴影画进卡片 padding,浮层卡是页面最后一张卡,阴影透到页底空白处。
+   底部操作栏画布同例:示例容器已换成 CardSurface,阴影同样要落进卡片 padding。 */
+.component-preview-card:has(.card-surface-preview, .popup-surface-preview, .internal-bottom-preview) .base-card__content {
   overflow: visible;
 }
 

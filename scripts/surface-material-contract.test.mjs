@@ -213,9 +213,9 @@ assert.ok(
 )
 assert.ok(
   appCss.includes(
-    '.component-preview-card:has(.card-surface-preview, .popup-surface-preview) .base-card__content {\n  overflow: visible;\n}',
+    '.component-preview-card:has(.card-surface-preview, .popup-surface-preview, .internal-bottom-preview) .base-card__content {\n  overflow: visible;\n}',
   ),
-  'Card and popup surface demos must opt out of the preview-window clip so real shadows (--shadow-card / --shadow-overlay) render into the card padding.',
+  'Card and popup surface demos (plus the bottom-bar canvas on CardSurface) must opt out of the preview-window clip so real shadows (--shadow-card / --shadow-overlay) render into the card padding.',
 )
 
 for (const snippet of [
