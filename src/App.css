@@ -1081,6 +1081,52 @@
   height: 16px;
 }
 
+/* 组内图标独立 hover 圆(对齐磨砂组的子按钮高亮圆):组维持单 button,
+   item 只是视觉/命中单元,点击仍整组一个 onClick。圆几何对齐磨砂组
+   「玻璃环+圆间距」节奏——默认档 inset 4px:圆 28、上下玻璃环 4px、
+   相邻圆间距 8px;sm 档 inset 2px 同为 4px 环/8px 圆距。
+   罩垫图标之下:isolation 把 z-index:-1 封在 item 内,不漏进玻璃
+   折射层的 backdrop 采样区,图标不被染色(优于单按钮罩的盖顶方案)。 */
+.liquid-glass-icon-button-group__item {
+  position: relative;
+  display: inline-flex;
+  isolation: isolate;
+}
+
+.liquid-glass-icon-button-group__item::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  z-index: -1;
+  border-radius: var(--radius-round);
+  background-color: color-mix(in srgb, currentColor 12%, transparent);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    background-color 160ms ease,
+    opacity 180ms ease;
+}
+
+.liquid-glass-icon-button-group--sm .liquid-glass-icon-button-group__item::after {
+  inset: -2px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .liquid-glass-icon-button-group:not(:disabled) .liquid-glass-icon-button-group__item:hover::after {
+    opacity: 1;
+  }
+}
+
+.liquid-glass-icon-button-group:not(:disabled) .liquid-glass-icon-button-group__item:active::after {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .liquid-glass-icon-button-group__item::after {
+    transition-duration: 1ms;
+  }
+}
+
 .liquid-glass-icon-button:disabled,
 .liquid-glass-icon-button-group:disabled {
   opacity: 0.5;
@@ -1121,18 +1167,18 @@
   }
 }
 
-/* hover 背景色罩对齐磨砂图标按钮:同值 color-mix(currentColor 12%,
-   transparent)(= frosted-surface 的 --glass-surface-hover-bg)、同款
+/* hover 背景色罩对齐磨砂图标按钮(单按钮档):同值 color-mix(currentColor
+   12%, transparent)(= frosted-surface 的 --glass-surface-hover-bg)、同款
    opacity 180ms ease 过渡、hover 限定精确指针、:active 常亮、
-   reduced-motion 降级——后者三条与库辉光体系相互独立。
+   reduced-motion 降级。组(单 button 多图标)不走满胶囊罩——磨砂组容器
+   本无组级 hover 反馈,组内独立高亮圆见下方 __item 规则。
    层序取舍:磨砂 ::after 垫内容之后(z-index:-1,图标不被染);液态玻璃
    根恒带内联 transform 创建堆叠上下文,宿主伪元素插不进「玻璃材质之上、
    图标之下」,垫到玻璃背后则会进入 warp 的 backdrop-filter 采样区、
    opacity 过渡期(<1)还可能合成层化为 backdrop root 截断采样——故色罩
    盖在最上,图标被同色 12% 轻微加浓为已知微小差异。色罩几何=宿主盒,
    与玻璃满盒同尺寸,弹性平移期错位不足 0.5px 不可感知。 */
-.liquid-glass-icon-button::after,
-.liquid-glass-icon-button-group::after {
+.liquid-glass-icon-button::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -1146,20 +1192,17 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .liquid-glass-icon-button:not(:disabled):hover::after,
-  .liquid-glass-icon-button-group:not(:disabled):hover::after {
+  .liquid-glass-icon-button:not(:disabled):hover::after {
     opacity: 1;
   }
 }
 
-.liquid-glass-icon-button:not(:disabled):active::after,
-.liquid-glass-icon-button-group:not(:disabled):active::after {
+.liquid-glass-icon-button:not(:disabled):active::after {
   opacity: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .liquid-glass-icon-button::after,
-  .liquid-glass-icon-button-group::after {
+  .liquid-glass-icon-button::after {
     transition-duration: 1ms;
   }
 }

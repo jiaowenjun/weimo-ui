@@ -75,8 +75,12 @@ function FloatBarDemo() {
               >
                 <LiquidGlassSurface cornerRadius={999} onClick={() => {}} padding="6px">
                   <span className="liquid-glass-icon-button-group__row">
-                    <Check />
-                    <X />
+                    <span className="liquid-glass-icon-button-group__item">
+                      <Check />
+                    </span>
+                    <span className="liquid-glass-icon-button-group__item">
+                      <X />
+                    </span>
                   </span>
                 </LiquidGlassSurface>
               </button>

@@ -220,3 +220,16 @@ assert.ok(
     appCss.includes('@media (hover: hover) and (pointer: fine)'),
   'Liquid glass buttons must mirror the frosted icon button hover color wash (same 12% currentColor value as frosted-surface-contract locks, hover gated to fine pointers, active pinned on).',
 )
+assert.ok(
+  appCss.includes('.liquid-glass-icon-button-group__item::after') &&
+    appCss.includes('__item:hover::after') &&
+    appCss.includes('__item:active::after') &&
+    appCss.includes('.liquid-glass-icon-button-group__item {'),
+  'Liquid glass icon groups must give each icon an independent hover disc (frosted-group-like inset circle, hover gated to fine pointers, active pinned on) inside the single-button shell.',
+)
+assert.ok(
+  !appCss.includes('.liquid-glass-icon-button-group::after') &&
+    !appCss.includes('.liquid-glass-icon-button-group:not(:disabled):hover::after') &&
+    !appCss.includes('.liquid-glass-icon-button-group:not(:disabled):active::after'),
+  'Liquid glass icon groups must not carry a group-wide pill wash: the frosted group container has no group-level hover feedback, per-icon discs replace it.',
+)

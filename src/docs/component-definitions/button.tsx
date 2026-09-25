@@ -237,8 +237,12 @@ function LiquidGlassIconButtonGroupPreviewGroup({ disabled }: { disabled: boolea
       >
         <LiquidGlassSurface cornerRadius={999} padding="8px">
           <span className="liquid-glass-icon-button-group__row">
-            <Share />
-            <Ellipsis />
+            <span className="liquid-glass-icon-button-group__item">
+              <Share />
+            </span>
+            <span className="liquid-glass-icon-button-group__item">
+              <Ellipsis />
+            </span>
           </span>
         </LiquidGlassSurface>
       </button>
@@ -250,8 +254,12 @@ function LiquidGlassIconButtonGroupPreviewGroup({ disabled }: { disabled: boolea
       >
         <LiquidGlassSurface cornerRadius={999} padding="6px">
           <span className="liquid-glass-icon-button-group__row">
-            <Share />
-            <Ellipsis />
+            <span className="liquid-glass-icon-button-group__item">
+              <Share />
+            </span>
+            <span className="liquid-glass-icon-button-group__item">
+              <Ellipsis />
+            </span>
           </span>
         </LiquidGlassSurface>
       </button>
