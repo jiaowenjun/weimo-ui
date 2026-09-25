@@ -1296,8 +1296,10 @@
 /* 画布与示例等高后,预览窗默认的 overflow: hidden 会把真实阴影整体裁掉
    (卡片 --shadow-card 0 2px 8px、浮层 --shadow-overlay 0 28px 80px);
    让阴影画进卡片 padding,浮层卡是页面最后一张卡,阴影透到页底空白处。
-   底部操作栏画布同例:示例容器已换成 CardSurface,阴影同样要落进卡片 padding。 */
-.component-preview-card:has(.card-surface-preview, .popup-surface-preview, .internal-bottom-preview, .liquid-glass-preview) .base-card__content {
+   底部操作栏画布同例:示例容器已换成 CardSurface,阴影同样要落进卡片 padding。
+   浮动/顶部工具栏画布同例:液态玻璃按钮的库投影 0 12px 40px 比画布
+   (80px 高)大得多,同样要落进卡片 padding。 */
+.component-preview-card:has(.card-surface-preview, .popup-surface-preview, .internal-bottom-preview, .liquid-glass-preview, .liquid-glass-toolbar-preview) .base-card__content {
   overflow: visible;
 }
 
