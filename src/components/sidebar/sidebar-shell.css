@@ -29,10 +29,10 @@
   padding-inline: var(--space-gutter);
 }
 
+/* 只负责占住侧边栏列宽,不裁切——普通面板经 card-surface 带真实阴影,须画出面板外 */
 .weimo-sidebar-shell__bleed {
   width: var(--size-sidebar-width);
   flex: none;
-  overflow: hidden;
 }
 
 .weimo-sidebar {
