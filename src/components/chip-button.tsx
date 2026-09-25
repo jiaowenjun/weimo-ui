@@ -9,11 +9,11 @@ import {
   getAnimatedInlineSizeStyle,
   useAnimatedInlineSize,
 } from './animated-inline-size-model'
-import { useGlassSurfaceBackgroundToneRef } from './glass-surface'
+import { useFrostedSurfaceBackgroundToneRef } from './frosted-surface'
 
 import './chip-surface.css'
 import './chip-button.css'
-import './glass-surface.css'
+import './frosted-surface.css'
 
 export type ChipButtonState = 'default' | 'glass'
 
@@ -35,7 +35,7 @@ export function ChipButton({
   const renderedPrefix = prefix.slice(0, 1)
   const isGlassState = state === 'glass'
   const { backgroundTone, setElementRef } =
-    useGlassSurfaceBackgroundToneRef<HTMLButtonElement>(isGlassState)
+    useFrostedSurfaceBackgroundToneRef<HTMLButtonElement>(isGlassState)
   const { measureRef, inlineSize } = useAnimatedInlineSize([
     renderedPrefix,
     children,
@@ -51,7 +51,7 @@ export function ChipButton({
   const button = (
     <button
       className={getChipSurfaceClassName(
-        isGlassState && 'glass-surface',
+        isGlassState && 'frosted-surface',
         'chip-button',
         'chip-button--button',
         className,

@@ -498,8 +498,8 @@
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "type": "registry:ui",
       "dependencies": [],
-      "name": "glass-surface",
-      "title": "Glass Surface Surface",
+      "name": "frosted-surface",
+      "title": "Frosted Surface",
       "description": "A glass material surface that samples nearby background styles and adapts foreground color.",
       "categories": [
         "layout",
@@ -511,19 +511,19 @@
       ],
       "files": [
         {
-          "path": "src/components/glass-surface.tsx",
+          "path": "src/components/frosted-surface.tsx",
           "type": "registry:ui",
-          "target": "@ui/glass-surface.tsx"
+          "target": "@ui/frosted-surface.tsx"
         },
         {
-          "path": "src/components/glass-surface-model.ts",
+          "path": "src/components/frosted-surface-model.ts",
           "type": "registry:ui",
-          "target": "@ui/glass-surface-model.ts"
+          "target": "@ui/frosted-surface-model.ts"
         },
         {
-          "path": "src/components/glass-surface.css",
+          "path": "src/components/frosted-surface.css",
           "type": "registry:ui",
-          "target": "@ui/glass-surface.css"
+          "target": "@ui/frosted-surface.css"
         }
       ]
     },
@@ -609,6 +609,109 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "frosted-icon-button",
+      "type": "registry:ui",
+      "title": "Glass Icon Button",
+      "description": "A circular glass icon button that samples the background and adapts foreground and hover feedback.",
+      "categories": [
+        "action"
+      ],
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/frosted-icon-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/frosted-icon-button.tsx"
+        },
+        {
+          "path": "src/components/icon-button-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/icon-button-model.ts"
+        },
+        {
+          "path": "src/components/icon-button.css",
+          "type": "registry:ui",
+          "target": "@ui/icon-button.css"
+        },
+        {
+          "path": "src/components/frosted-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/frosted-surface.tsx"
+        },
+        {
+          "path": "src/components/frosted-surface-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/frosted-surface-model.ts"
+        },
+        {
+          "path": "src/components/frosted-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/frosted-surface.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "frosted-icon-button-group",
+      "type": "registry:ui",
+      "title": "Glass Icon Button Group",
+      "description": "A round-pill glass surface hosting borderless icon buttons that inherit the glass hover overlay and press feedback.",
+      "categories": [
+        "action"
+      ],
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/frosted-icon-button-group.tsx",
+          "type": "registry:ui",
+          "target": "@ui/frosted-icon-button-group.tsx"
+        },
+        {
+          "path": "src/components/frosted-icon-button-group.css",
+          "type": "registry:ui",
+          "target": "@ui/frosted-icon-button-group.css"
+        },
+        {
+          "path": "src/components/icon-button-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/icon-button-model.ts"
+        },
+        {
+          "path": "src/components/icon-button.css",
+          "type": "registry:ui",
+          "target": "@ui/icon-button.css"
+        },
+        {
+          "path": "src/components/frosted-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/frosted-surface.tsx"
+        },
+        {
+          "path": "src/components/frosted-surface-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/frosted-surface-model.ts"
+        },
+        {
+          "path": "src/components/frosted-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/frosted-surface.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "ghost-icon-button",
       "type": "registry:ui",
       "title": "Ghost Icon Button",
@@ -638,109 +741,6 @@
           "path": "src/components/icon-button.css",
           "type": "registry:ui",
           "target": "@ui/icon-button.css"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "name": "glass-icon-button",
-      "type": "registry:ui",
-      "title": "Glass Icon Button",
-      "description": "A circular glass icon button that samples the background and adapts foreground and hover feedback.",
-      "categories": [
-        "action"
-      ],
-      "dependencies": [
-        "class-variance-authority"
-      ],
-      "registryDependencies": [
-        "@weimo/style",
-        "@weimo/utils"
-      ],
-      "files": [
-        {
-          "path": "src/components/glass-icon-button.tsx",
-          "type": "registry:ui",
-          "target": "@ui/glass-icon-button.tsx"
-        },
-        {
-          "path": "src/components/icon-button-model.ts",
-          "type": "registry:ui",
-          "target": "@ui/icon-button-model.ts"
-        },
-        {
-          "path": "src/components/icon-button.css",
-          "type": "registry:ui",
-          "target": "@ui/icon-button.css"
-        },
-        {
-          "path": "src/components/glass-surface.tsx",
-          "type": "registry:ui",
-          "target": "@ui/glass-surface.tsx"
-        },
-        {
-          "path": "src/components/glass-surface-model.ts",
-          "type": "registry:ui",
-          "target": "@ui/glass-surface-model.ts"
-        },
-        {
-          "path": "src/components/glass-surface.css",
-          "type": "registry:ui",
-          "target": "@ui/glass-surface.css"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "name": "glass-icon-button-group",
-      "type": "registry:ui",
-      "title": "Glass Icon Button Group",
-      "description": "A round-pill glass surface hosting borderless icon buttons that inherit the glass hover overlay and press feedback.",
-      "categories": [
-        "action"
-      ],
-      "dependencies": [
-        "class-variance-authority"
-      ],
-      "registryDependencies": [
-        "@weimo/style",
-        "@weimo/utils"
-      ],
-      "files": [
-        {
-          "path": "src/components/glass-icon-button-group.tsx",
-          "type": "registry:ui",
-          "target": "@ui/glass-icon-button-group.tsx"
-        },
-        {
-          "path": "src/components/glass-icon-button-group.css",
-          "type": "registry:ui",
-          "target": "@ui/glass-icon-button-group.css"
-        },
-        {
-          "path": "src/components/icon-button-model.ts",
-          "type": "registry:ui",
-          "target": "@ui/icon-button-model.ts"
-        },
-        {
-          "path": "src/components/icon-button.css",
-          "type": "registry:ui",
-          "target": "@ui/icon-button.css"
-        },
-        {
-          "path": "src/components/glass-surface.tsx",
-          "type": "registry:ui",
-          "target": "@ui/glass-surface.tsx"
-        },
-        {
-          "path": "src/components/glass-surface-model.ts",
-          "type": "registry:ui",
-          "target": "@ui/glass-surface-model.ts"
-        },
-        {
-          "path": "src/components/glass-surface.css",
-          "type": "registry:ui",
-          "target": "@ui/glass-surface.css"
         }
       ]
     },
@@ -809,7 +809,7 @@
         "@weimo/utils",
         "@weimo/float-bar",
         "@weimo/bottom-bar",
-        "@weimo/glass-icon-button"
+        "@weimo/frosted-icon-button"
       ],
       "files": [
         {
@@ -833,9 +833,9 @@
           "target": "@ui/coss/dialog.css"
         },
         {
-          "path": "src/components/glass-icon-button.tsx",
+          "path": "src/components/frosted-icon-button.tsx",
           "type": "registry:ui",
-          "target": "@ui/glass-icon-button.tsx"
+          "target": "@ui/frosted-icon-button.tsx"
         },
         {
           "path": "src/components/icon-button-model.ts",
@@ -848,19 +848,19 @@
           "target": "@ui/icon-button.css"
         },
         {
-          "path": "src/components/glass-surface.tsx",
+          "path": "src/components/frosted-surface.tsx",
           "type": "registry:ui",
-          "target": "@ui/glass-surface.tsx"
+          "target": "@ui/frosted-surface.tsx"
         },
         {
-          "path": "src/components/glass-surface-model.ts",
+          "path": "src/components/frosted-surface-model.ts",
           "type": "registry:ui",
-          "target": "@ui/glass-surface-model.ts"
+          "target": "@ui/frosted-surface-model.ts"
         },
         {
-          "path": "src/components/glass-surface.css",
+          "path": "src/components/frosted-surface.css",
           "type": "registry:ui",
-          "target": "@ui/glass-surface.css"
+          "target": "@ui/frosted-surface.css"
         },
         {
           "path": "src/components/popup-surface.tsx",
@@ -961,19 +961,19 @@
           "target": "@ui/menu.css"
         },
         {
-          "path": "src/components/glass-surface.tsx",
+          "path": "src/components/frosted-surface.tsx",
           "type": "registry:ui",
-          "target": "@ui/glass-surface.tsx"
+          "target": "@ui/frosted-surface.tsx"
         },
         {
-          "path": "src/components/glass-surface-model.ts",
+          "path": "src/components/frosted-surface-model.ts",
           "type": "registry:ui",
-          "target": "@ui/glass-surface-model.ts"
+          "target": "@ui/frosted-surface-model.ts"
         },
         {
-          "path": "src/components/glass-surface.css",
+          "path": "src/components/frosted-surface.css",
           "type": "registry:ui",
-          "target": "@ui/glass-surface.css"
+          "target": "@ui/frosted-surface.css"
         }
       ]
     },
@@ -1023,7 +1023,7 @@
         "@weimo/style",
         "@weimo/utils",
         "@weimo/bottom-bar",
-        "@weimo/glass-icon-button"
+        "@weimo/frosted-icon-button"
       ],
       "files": [
         {
@@ -1037,9 +1037,9 @@
           "target": "@ui/card-tool-bar.css"
         },
         {
-          "path": "src/components/glass-icon-button.tsx",
+          "path": "src/components/frosted-icon-button.tsx",
           "type": "registry:ui",
-          "target": "@ui/glass-icon-button.tsx"
+          "target": "@ui/frosted-icon-button.tsx"
         },
         {
           "path": "src/components/icon-button-model.ts",
@@ -1052,19 +1052,19 @@
           "target": "@ui/icon-button.css"
         },
         {
-          "path": "src/components/glass-surface.tsx",
+          "path": "src/components/frosted-surface.tsx",
           "type": "registry:ui",
-          "target": "@ui/glass-surface.tsx"
+          "target": "@ui/frosted-surface.tsx"
         },
         {
-          "path": "src/components/glass-surface-model.ts",
+          "path": "src/components/frosted-surface-model.ts",
           "type": "registry:ui",
-          "target": "@ui/glass-surface-model.ts"
+          "target": "@ui/frosted-surface-model.ts"
         },
         {
-          "path": "src/components/glass-surface.css",
+          "path": "src/components/frosted-surface.css",
           "type": "registry:ui",
-          "target": "@ui/glass-surface.css"
+          "target": "@ui/frosted-surface.css"
         }
       ]
     },
@@ -1185,19 +1185,19 @@
           "target": "@ui/sidebar/sidebar-shell.css"
         },
         {
-          "path": "src/components/glass-surface.tsx",
+          "path": "src/components/frosted-surface.tsx",
           "type": "registry:ui",
-          "target": "@ui/glass-surface.tsx"
+          "target": "@ui/frosted-surface.tsx"
         },
         {
-          "path": "src/components/glass-surface-model.ts",
+          "path": "src/components/frosted-surface-model.ts",
           "type": "registry:ui",
-          "target": "@ui/glass-surface-model.ts"
+          "target": "@ui/frosted-surface-model.ts"
         },
         {
-          "path": "src/components/glass-surface.css",
+          "path": "src/components/frosted-surface.css",
           "type": "registry:ui",
-          "target": "@ui/glass-surface.css"
+          "target": "@ui/frosted-surface.css"
         },
         {
           "path": "src/components/card-surface.tsx",
@@ -1268,19 +1268,19 @@
           "target": "@ui/animated-inline-size.css"
         },
         {
-          "path": "src/components/glass-surface.tsx",
+          "path": "src/components/frosted-surface.tsx",
           "type": "registry:ui",
-          "target": "@ui/glass-surface.tsx"
+          "target": "@ui/frosted-surface.tsx"
         },
         {
-          "path": "src/components/glass-surface-model.ts",
+          "path": "src/components/frosted-surface-model.ts",
           "type": "registry:ui",
-          "target": "@ui/glass-surface-model.ts"
+          "target": "@ui/frosted-surface-model.ts"
         },
         {
-          "path": "src/components/glass-surface.css",
+          "path": "src/components/frosted-surface.css",
           "type": "registry:ui",
-          "target": "@ui/glass-surface.css"
+          "target": "@ui/frosted-surface.css"
         }
       ]
     },
@@ -1354,19 +1354,19 @@
           "target": "@ui/coss/breadcrumb.css"
         },
         {
-          "path": "src/components/glass-surface.tsx",
+          "path": "src/components/frosted-surface.tsx",
           "type": "registry:ui",
-          "target": "@ui/glass-surface.tsx"
+          "target": "@ui/frosted-surface.tsx"
         },
         {
-          "path": "src/components/glass-surface-model.ts",
+          "path": "src/components/frosted-surface-model.ts",
           "type": "registry:ui",
-          "target": "@ui/glass-surface-model.ts"
+          "target": "@ui/frosted-surface-model.ts"
         },
         {
-          "path": "src/components/glass-surface.css",
+          "path": "src/components/frosted-surface.css",
           "type": "registry:ui",
-          "target": "@ui/glass-surface.css"
+          "target": "@ui/frosted-surface.css"
         }
       ]
     },
@@ -1387,7 +1387,7 @@
       "registryDependencies": [
         "@weimo/style",
         "@weimo/utils",
-        "@weimo/glass-icon-button"
+        "@weimo/frosted-icon-button"
       ],
       "files": [
         {
@@ -1481,24 +1481,24 @@
           "target": "@ui/coss/scroll-area.css"
         },
         {
-          "path": "src/components/glass-surface.tsx",
+          "path": "src/components/frosted-surface.tsx",
           "type": "registry:ui",
-          "target": "@ui/glass-surface.tsx"
+          "target": "@ui/frosted-surface.tsx"
         },
         {
-          "path": "src/components/glass-surface-model.ts",
+          "path": "src/components/frosted-surface-model.ts",
           "type": "registry:ui",
-          "target": "@ui/glass-surface-model.ts"
+          "target": "@ui/frosted-surface-model.ts"
         },
         {
-          "path": "src/components/glass-surface.css",
+          "path": "src/components/frosted-surface.css",
           "type": "registry:ui",
-          "target": "@ui/glass-surface.css"
+          "target": "@ui/frosted-surface.css"
         },
         {
-          "path": "src/components/glass-icon-button.tsx",
+          "path": "src/components/frosted-icon-button.tsx",
           "type": "registry:ui",
-          "target": "@ui/glass-icon-button.tsx"
+          "target": "@ui/frosted-icon-button.tsx"
         },
         {
           "path": "src/components/icon-button-model.ts",
@@ -1748,19 +1748,19 @@
           "target": "@ui/animated-inline-size.css"
         },
         {
-          "path": "src/components/glass-surface.tsx",
+          "path": "src/components/frosted-surface.tsx",
           "type": "registry:ui",
-          "target": "@ui/glass-surface.tsx"
+          "target": "@ui/frosted-surface.tsx"
         },
         {
-          "path": "src/components/glass-surface-model.ts",
+          "path": "src/components/frosted-surface-model.ts",
           "type": "registry:ui",
-          "target": "@ui/glass-surface-model.ts"
+          "target": "@ui/frosted-surface-model.ts"
         },
         {
-          "path": "src/components/glass-surface.css",
+          "path": "src/components/frosted-surface.css",
           "type": "registry:ui",
-          "target": "@ui/glass-surface.css"
+          "target": "@ui/frosted-surface.css"
         }
       ]
     },
@@ -1833,7 +1833,7 @@
         "@weimo/utils",
         "@weimo/action-dialog",
         "@weimo/menu",
-        "@weimo/glass-icon-button"
+        "@weimo/frosted-icon-button"
       ],
       "files": [
         {
@@ -2007,24 +2007,24 @@
           "target": "@ui/coss/tooltip.css"
         },
         {
-          "path": "src/components/glass-surface.tsx",
+          "path": "src/components/frosted-surface.tsx",
           "type": "registry:ui",
-          "target": "@ui/glass-surface.tsx"
+          "target": "@ui/frosted-surface.tsx"
         },
         {
-          "path": "src/components/glass-surface-model.ts",
+          "path": "src/components/frosted-surface-model.ts",
           "type": "registry:ui",
-          "target": "@ui/glass-surface-model.ts"
+          "target": "@ui/frosted-surface-model.ts"
         },
         {
-          "path": "src/components/glass-surface.css",
+          "path": "src/components/frosted-surface.css",
           "type": "registry:ui",
-          "target": "@ui/glass-surface.css"
+          "target": "@ui/frosted-surface.css"
         },
         {
-          "path": "src/components/glass-icon-button.tsx",
+          "path": "src/components/frosted-icon-button.tsx",
           "type": "registry:ui",
-          "target": "@ui/glass-icon-button.tsx"
+          "target": "@ui/frosted-icon-button.tsx"
         },
         {
           "path": "src/components/icon-button-model.ts",
@@ -2065,7 +2065,7 @@
         "@weimo/style",
         "@weimo/utils",
         "@weimo/action-dialog",
-        "@weimo/glass-icon-button"
+        "@weimo/frosted-icon-button"
       ],
       "files": [
         {
@@ -2089,9 +2089,9 @@
           "target": "@ui/coss/dialog.css"
         },
         {
-          "path": "src/components/glass-icon-button.tsx",
+          "path": "src/components/frosted-icon-button.tsx",
           "type": "registry:ui",
-          "target": "@ui/glass-icon-button.tsx"
+          "target": "@ui/frosted-icon-button.tsx"
         },
         {
           "path": "src/components/icon-button-model.ts",
@@ -2104,19 +2104,19 @@
           "target": "@ui/icon-button.css"
         },
         {
-          "path": "src/components/glass-surface.tsx",
+          "path": "src/components/frosted-surface.tsx",
           "type": "registry:ui",
-          "target": "@ui/glass-surface.tsx"
+          "target": "@ui/frosted-surface.tsx"
         },
         {
-          "path": "src/components/glass-surface-model.ts",
+          "path": "src/components/frosted-surface-model.ts",
           "type": "registry:ui",
-          "target": "@ui/glass-surface-model.ts"
+          "target": "@ui/frosted-surface-model.ts"
         },
         {
-          "path": "src/components/glass-surface.css",
+          "path": "src/components/frosted-surface.css",
           "type": "registry:ui",
-          "target": "@ui/glass-surface.css"
+          "target": "@ui/frosted-surface.css"
         },
         {
           "path": "src/components/popup-surface.tsx",
@@ -2784,24 +2784,24 @@
           "target": "@ui/lib/utils.ts"
         },
         {
-          "path": "src/components/glass-surface.tsx",
+          "path": "src/components/frosted-surface.tsx",
           "type": "registry:ui",
-          "target": "@ui/glass-surface.tsx"
+          "target": "@ui/frosted-surface.tsx"
         },
         {
-          "path": "src/components/glass-surface-model.ts",
+          "path": "src/components/frosted-surface-model.ts",
           "type": "registry:ui",
-          "target": "@ui/glass-surface-model.ts"
+          "target": "@ui/frosted-surface-model.ts"
         },
         {
-          "path": "src/components/glass-surface.css",
+          "path": "src/components/frosted-surface.css",
           "type": "registry:ui",
-          "target": "@ui/glass-surface.css"
+          "target": "@ui/frosted-surface.css"
         },
         {
-          "path": "src/components/glass-icon-button.tsx",
+          "path": "src/components/frosted-icon-button.tsx",
           "type": "registry:ui",
-          "target": "@ui/glass-icon-button.tsx"
+          "target": "@ui/frosted-icon-button.tsx"
         },
         {
           "path": "src/components/icon-button-model.ts",
@@ -2971,7 +2971,7 @@
         "@weimo/utils",
         "@weimo/card-composer",
         "@weimo/image-uploader",
-        "@weimo/glass-icon-button"
+        "@weimo/frosted-icon-button"
       ],
       "files": [
         {
@@ -3033,7 +3033,7 @@
         "@weimo/style",
         "@weimo/utils",
         "@weimo/action-dialog",
-        "@weimo/glass-icon-button",
+        "@weimo/frosted-icon-button",
         "@weimo/menu"
       ],
       "files": [

@@ -2,21 +2,21 @@ import type { ClassValue } from 'clsx'
 
 import { cn } from './lib/utils'
 
-export type GlassSurfaceBackgroundTone = 'light' | 'dark'
+export type FrostedSurfaceBackgroundTone = 'light' | 'dark'
 
-export type GlassSurfaceColor = {
+export type FrostedSurfaceColor = {
   red: number
   green: number
   blue: number
   alpha: number
 }
 
-type GlassSurfacePoint = {
+type FrostedSurfacePoint = {
   x: number
   y: number
 }
 
-type GlassSurfaceRenderedRect = Pick<
+type FrostedSurfaceRenderedRect = Pick<
   DOMRect,
   'bottom' | 'height' | 'left' | 'right' | 'top' | 'width'
 >
@@ -25,13 +25,13 @@ const BACKGROUND_LIGHTNESS_THRESHOLD = 0.5
 const MIN_VISIBLE_ALPHA = 0.05
 const MIN_VIDEO_READY_STATE = 2
 
-export function getGlassSurfaceClassName(...className: ClassValue[]) {
-  return cn('glass-surface', className)
+export function getFrostedSurfaceClassName(...className: ClassValue[]) {
+  return cn('frosted-surface', className)
 }
 
 export function resolveElementBackgroundTone(
   element: HTMLElement,
-): GlassSurfaceBackgroundTone | null {
+): FrostedSurfaceBackgroundTone | null {
   const ownerDocument = element.ownerDocument
   const ownerWindow = ownerDocument.defaultView
 
@@ -46,7 +46,7 @@ export function resolveElementBackgroundTone(
   }
 
   const samplePoints = getElementSamplePoints(rect)
-  const sampleColors: GlassSurfaceColor[] = []
+  const sampleColors: FrostedSurfaceColor[] = []
 
   for (const point of samplePoints) {
     const backgroundColor = findBackgroundColorBehindElement(element, point.x, point.y)
@@ -68,8 +68,8 @@ export function resolveElementBackgroundTone(
 }
 
 export function getReadableToneForColor(
-  color: GlassSurfaceColor,
-): GlassSurfaceBackgroundTone {
+  color: FrostedSurfaceColor,
+): FrostedSurfaceBackgroundTone {
   return relativeLuminanceForRgb(color) >= BACKGROUND_LIGHTNESS_THRESHOLD ? 'light' : 'dark'
 }
 
@@ -77,7 +77,7 @@ export function relativeLuminanceForRgb({
   red,
   green,
   blue,
-}: Pick<GlassSurfaceColor, 'red' | 'green' | 'blue'>) {
+}: Pick<FrostedSurfaceColor, 'red' | 'green' | 'blue'>) {
   const [linearRed, linearGreen, linearBlue] = [red, green, blue].map((channel) => {
     const normalized = clamp(channel, 0, 255) / 255
 
@@ -89,7 +89,7 @@ export function relativeLuminanceForRgb({
   return 0.2126 * linearRed + 0.7152 * linearGreen + 0.0722 * linearBlue
 }
 
-export function parseCssColor(color: string): GlassSurfaceColor | null {
+export function parseCssColor(color: string): FrostedSurfaceColor | null {
   const normalizedColor = color.trim().toLowerCase()
 
   if (!normalizedColor || normalizedColor === 'transparent') {
@@ -140,7 +140,7 @@ function findBackgroundColorBehindElement(
   element: HTMLElement,
   x: number,
   y: number,
-): GlassSurfaceColor | null {
+): FrostedSurfaceColor | null {
   const ownerWindow = element.ownerDocument.defaultView
 
   if (!ownerWindow) {
@@ -181,7 +181,7 @@ function findBackgroundColorBehindElement(
   return null
 }
 
-function findNearestPaintedBackground(element: Element): GlassSurfaceColor | null {
+function findNearestPaintedBackground(element: Element): FrostedSurfaceColor | null {
   const ownerWindow = element.ownerDocument.defaultView
   let current: Element | null = element
 
@@ -196,7 +196,7 @@ function findNearestPaintedBackground(element: Element): GlassSurfaceColor | nul
   return null
 }
 
-function findPaintedElementBackground(element: Element): GlassSurfaceColor | null {
+function findPaintedElementBackground(element: Element): FrostedSurfaceColor | null {
   const ownerWindow = element.ownerDocument.defaultView
 
   if (!ownerWindow) {
@@ -207,7 +207,7 @@ function findPaintedElementBackground(element: Element): GlassSurfaceColor | nul
   const colors = [
     ...extractCssColors(computedStyle.backgroundImage),
     parseCssColor(computedStyle.backgroundColor),
-  ].filter((color): color is GlassSurfaceColor => Boolean(color))
+  ].filter((color): color is FrostedSurfaceColor => Boolean(color))
   const visibleColors = colors.filter((color) => color.alpha > MIN_VISIBLE_ALPHA)
 
   if (visibleColors.length === 0) {
@@ -221,7 +221,7 @@ function sampleActualPixelColor(
   element: Element,
   x: number,
   y: number,
-): GlassSurfaceColor | null {
+): FrostedSurfaceColor | null {
   const ownerWindow = element.ownerDocument.defaultView
 
   if (!ownerWindow) {
@@ -256,7 +256,7 @@ function sampleImageElementPixel(
   image: HTMLImageElement,
   x: number,
   y: number,
-): GlassSurfaceColor | null {
+): FrostedSurfaceColor | null {
   if (!image.complete || image.naturalWidth <= 0 || image.naturalHeight <= 0) {
     return null
   }
@@ -280,7 +280,7 @@ function sampleCanvasElementPixel(
   canvas: HTMLCanvasElement,
   x: number,
   y: number,
-): GlassSurfaceColor | null {
+): FrostedSurfaceColor | null {
   if (canvas.width <= 0 || canvas.height <= 0) {
     return null
   }
@@ -304,7 +304,7 @@ function sampleVideoElementPixel(
   video: HTMLVideoElement,
   x: number,
   y: number,
-): GlassSurfaceColor | null {
+): FrostedSurfaceColor | null {
   if (
     video.readyState < MIN_VIDEO_READY_STATE ||
     video.videoWidth <= 0 ||
@@ -347,7 +347,7 @@ function mapClientPointToObjectPixel(
   clientY: number,
   intrinsicWidth: number,
   intrinsicHeight: number,
-): GlassSurfacePoint | null {
+): FrostedSurfacePoint | null {
   const renderedRect = getRenderedObjectRect(element, intrinsicWidth, intrinsicHeight)
 
   if (!renderedRect) {
@@ -369,7 +369,7 @@ function mapClientPointToElementPixel(
   clientY: number,
   sourceWidth: number,
   sourceHeight: number,
-): GlassSurfacePoint | null {
+): FrostedSurfacePoint | null {
   return mapClientPointToRenderedPixel(
     element.getBoundingClientRect(),
     clientX,
@@ -380,12 +380,12 @@ function mapClientPointToElementPixel(
 }
 
 function mapClientPointToRenderedPixel(
-  renderedRect: GlassSurfaceRenderedRect,
+  renderedRect: FrostedSurfaceRenderedRect,
   clientX: number,
   clientY: number,
   sourceWidth: number,
   sourceHeight: number,
-): GlassSurfacePoint | null {
+): FrostedSurfacePoint | null {
   if (
     renderedRect.width <= 0 ||
     renderedRect.height <= 0 ||
@@ -417,7 +417,7 @@ function getRenderedObjectRect(
   element: HTMLElement,
   intrinsicWidth: number,
   intrinsicHeight: number,
-): GlassSurfaceRenderedRect | null {
+): FrostedSurfaceRenderedRect | null {
   const rect = element.getBoundingClientRect()
 
   if (
@@ -499,9 +499,9 @@ function parseObjectPosition(position: string) {
 
 function drawImageSourcePixel(
   source: CanvasImageSource,
-  sourcePoint: GlassSurfacePoint,
+  sourcePoint: FrostedSurfacePoint,
   ownerDocument: Document,
-): GlassSurfaceColor | null {
+): FrostedSurfaceColor | null {
   const canvas = ownerDocument.createElement('canvas')
 
   canvas.width = 1
@@ -535,8 +535,8 @@ function drawImageSourcePixel(
 
 function readCanvasPixel(
   context: CanvasRenderingContext2D,
-  sourcePoint: GlassSurfacePoint,
-): GlassSurfaceColor | null {
+  sourcePoint: FrostedSurfacePoint,
+): FrostedSurfaceColor | null {
   try {
     return imageDataToColor(
       context.getImageData(Math.floor(sourcePoint.x), Math.floor(sourcePoint.y), 1, 1).data,
@@ -546,7 +546,7 @@ function readCanvasPixel(
   }
 }
 
-function imageDataToColor(data: Uint8ClampedArray): GlassSurfaceColor {
+function imageDataToColor(data: Uint8ClampedArray): FrostedSurfaceColor {
   return {
     red: data[0],
     green: data[1],
@@ -556,7 +556,7 @@ function imageDataToColor(data: Uint8ClampedArray): GlassSurfaceColor {
 }
 
 function extractCssColors(source: string) {
-  const colors: GlassSurfaceColor[] = []
+  const colors: FrostedSurfaceColor[] = []
   const colorMatches = source.match(/#[0-9a-f]{3,8}\b|rgba?\([^)]*\)/gi) ?? []
 
   for (const colorMatch of colorMatches) {
@@ -570,7 +570,7 @@ function extractCssColors(source: string) {
   return colors
 }
 
-function averageColors(colors: GlassSurfaceColor[]) {
+function averageColors(colors: FrostedSurfaceColor[]) {
   const totalAlpha = colors.reduce((sum, color) => sum + color.alpha, 0)
 
   if (totalAlpha <= 0) {
@@ -592,7 +592,7 @@ function averageColors(colors: GlassSurfaceColor[]) {
   )
 }
 
-function parseHexColor(color: string): GlassSurfaceColor | null {
+function parseHexColor(color: string): FrostedSurfaceColor | null {
   const match = color.match(/^#([0-9a-f]{3,8})$/i)
 
   if (!match) {

@@ -107,7 +107,7 @@ assert.ok(
   pressableSource.includes('TagPicker option') &&
     pressableSource.includes('TagTree row') &&
     !pressableSource.includes('Menu item') &&
-    !pressableSource.includes('GlassIconButton / GhostIconButton') &&
+    !pressableSource.includes('FrostedIconButton / GhostIconButton') &&
     pressableSource.includes('app-local controls 复用 --color-bg-hover 语义'),
   'Pressable usage notes must remain owned by the public tone map.',
 )

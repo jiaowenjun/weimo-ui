@@ -3,7 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 export const iconButtonVariants = cva('icon-button', {
   variants: {
     variant: {
-      glass: 'icon-button--glass',
+      glass: 'icon-button--frosted',
       ghost: 'icon-button--ghost',
     },
     size: {

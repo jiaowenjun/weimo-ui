@@ -9,7 +9,7 @@ import {
 } from '../coss/input-group'
 import { ScrollArea } from '../coss/scroll-area'
 import { ActionDialog } from '../action-dialog'
-import { GlassIconButton } from '../glass-icon-button'
+import { FrostedIconButton } from '../frosted-icon-button'
 import { cn } from '../lib/utils'
 import { useTagPicker } from './use-tag-picker'
 import type {
@@ -169,14 +169,14 @@ export function TagPicker({
               </InputGroupAddon>
             ) : null}
           </InputGroup>
-          <GlassIconButton
+          <FrostedIconButton
             aria-label="确认"
             className="tag-picker__confirm"
             disabled={state.confirmDisabled}
             onClick={() => applyDraft()}
           >
             <Check />
-          </GlassIconButton>
+          </FrostedIconButton>
         </div>
       }
     >

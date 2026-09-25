@@ -2,7 +2,7 @@ import './bg-blur.css'
 
 export const bgBlurToneMap = {
   glass: {
-    label: '玻璃材质',
+    label: '磨砂材质',
     backgroundToken: 'none',
     backgroundValue: {
       light: 'none',

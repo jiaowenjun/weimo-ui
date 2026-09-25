@@ -68,8 +68,8 @@
     backdrop-filter: blur(var(--glass-blur));
     -webkit-backdrop-filter: blur(var(--glass-blur));
 
-    /* 玻璃态 hover/active 走 glass-surface 的 12% currentColor 色调：元素自身的
-       backdrop-filter 材质不动，::after 空层淡入色调，与 GlassIconButton 同构 */
+    /* 玻璃态 hover/active 走 frosted-surface 的 12% currentColor 色调：元素自身的
+       backdrop-filter 材质不动，::after 空层淡入色调，与 FrostedIconButton 同构 */
     --chip-surface-hover-background: var(--glass-surface-hover-bg);
     --chip-surface-active-background: var(--glass-surface-hover-bg);
   }

@@ -25,11 +25,11 @@ import {
 } from '../components/coss/command'
 import { Chip } from '../components/chip'
 import { TopBar } from '../components/top-bar'
-import { GlassIconButton } from '../components/glass-icon-button'
+import { FrostedIconButton } from '../components/frosted-icon-button'
 import {
-  GlassIconButtonGroup,
-  GlassIconGroupButton,
-} from '../components/glass-icon-button-group'
+  FrostedIconButtonGroup,
+  FrostedIconGroupButton,
+} from '../components/frosted-icon-button-group'
 import { GhostIconButton } from '../components/ghost-icon-button'
 import { SideBar } from '../components/sidebar'
 import {
@@ -201,13 +201,13 @@ export function DocsShell() {
 
   const topBarLeftSlot = (
     <>
-      <GlassIconButton
+      <FrostedIconButton
         className="docs-top-bar__sidebar-trigger"
         aria-label="打开侧边栏"
         onClick={() => setSidebarOpen(true)}
       >
         <Menu />
-      </GlassIconButton>
+      </FrostedIconButton>
       {selected ? (
         <Chip
           bordered={false}
@@ -220,15 +220,15 @@ export function DocsShell() {
     </>
   )
   const topBarRightSlot = (
-    <GlassIconButtonGroup aria-label="搜索与主题切换">
-      <GlassIconGroupButton
+    <FrostedIconButtonGroup aria-label="搜索与主题切换">
+      <FrostedIconGroupButton
         aria-label="搜索"
         onClick={() => setSearchOpen(true)}
         title="按 / 搜索"
       >
         <Search />
-      </GlassIconGroupButton>
-      <GlassIconGroupButton
+      </FrostedIconGroupButton>
+      <FrostedIconGroupButton
         aria-label={
           theme === 'light'
             ? '切换到深色主题'
@@ -239,14 +239,14 @@ export function DocsShell() {
         onClick={() => setTheme((current) => nextTheme(current))}
       >
         {theme === 'system' ? <Monitor /> : theme === 'light' ? <Sun /> : <Moon />}
-      </GlassIconGroupButton>
-    </GlassIconButtonGroup>
+      </FrostedIconGroupButton>
+    </FrostedIconButtonGroup>
   )
   const closeSidebar = () => setSidebarOpen(false)
   const sidebarDrawerAction = (
-    <GlassIconButton aria-label="关闭侧边栏" onClick={closeSidebar}>
+    <FrostedIconButton aria-label="关闭侧边栏" onClick={closeSidebar}>
       <X />
-    </GlassIconButton>
+    </FrostedIconButton>
   )
 
   const outletContext: DocsOutletContext = {

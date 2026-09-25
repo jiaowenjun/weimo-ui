@@ -17,7 +17,7 @@ const componentSource = readProjectFile('src/components/liquid-glass.tsx')
 const definitionSource = readProjectFile('src/docs/component-definitions/surface.tsx')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const appCss = readProjectFile('src/App.css')
-const glassSurfaceSource = readProjectFile('src/components/glass-surface.tsx')
+const frostedSurfaceSource = readProjectFile('src/components/frosted-surface.tsx')
 const registryItem = JSON.parse(readProjectFile('registry/liquid-glass.json'))
 const packageJson = JSON.parse(readProjectFile('package.json'))
 
@@ -63,11 +63,11 @@ assert.ok(
 // 两种玻璃材质保持独立:液态玻璃不并入普通玻璃的实现,普通玻璃不依赖液态玻璃。
 assert.ok(
   !componentSource.includes('glass-surface'),
-  'LiquidGlassSurface must stay independent from the plain GlassSurface material.',
+  'LiquidGlassSurface must stay independent from the plain FrostedSurface material.',
 )
 assert.ok(
-  !glassSurfaceSource.includes('liquid'),
-  'The plain GlassSurface material must not depend on liquid glass.',
+  !frostedSurfaceSource.includes('liquid'),
+  'The plain FrostedSurface material must not depend on liquid glass.',
 )
 
 for (const snippet of [
@@ -75,7 +75,7 @@ for (const snippet of [
   'label="液态玻璃材质"',
   '<LiquidGlassSurface',
   "from '../../components/liquid-glass'",
-  "import { GlassSurface, useGlassSurfaceBackgroundToneRef } from '../../components/glass-surface'",
+  "import { FrostedSurface, useFrostedSurfaceBackgroundToneRef } from '../../components/frosted-surface'",
   'data-background-tone={backgroundTone ?? undefined}',
 ]) {
   assert.ok(
@@ -142,6 +142,14 @@ assert.ok(
     !appCss.includes('.liquid-glass-preview__tile--pill') &&
     !appCss.includes('.liquid-glass-preview__pill-label'),
   'App.css must keep exactly one liquid glass demo tile style without the pill variant.',
+)
+assert.ok(
+  appCss.includes(
+    '.liquid-glass-preview__tile {\n  position: relative;\n  width: 260px;\n  max-width: 100%;\n  height: 80px;\n}',
+  ) &&
+    appCss.includes('width: 220px;') &&
+    definitionSource.includes('padding="20px"'),
+  'The liquid glass tile must keep the same 260x80 visible footprint as the card/frosted/popup tiles.',
 )
 assert.ok(
   appCss.includes(

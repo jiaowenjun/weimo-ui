@@ -2,20 +2,20 @@ import { forwardRef, useCallback } from 'react'
 import type { ComponentPropsWithoutRef, Ref } from 'react'
 
 import {
-  getGlassSurfaceClassName,
-  useGlassSurfaceBackgroundToneRef,
-} from './glass-surface'
+  getFrostedSurfaceClassName,
+  useFrostedSurfaceBackgroundToneRef,
+} from './frosted-surface'
 import { getIconButtonClassName, type IconButtonSize } from './icon-button-model'
 
-import './glass-surface.css'
+import './frosted-surface.css'
 import './icon-button.css'
 
-export type GlassIconButtonProps = ComponentPropsWithoutRef<'button'> & {
+export type FrostedIconButtonProps = ComponentPropsWithoutRef<'button'> & {
   size?: IconButtonSize
   bordered?: boolean
 }
 
-export const GlassIconButton = forwardRef<HTMLButtonElement, GlassIconButtonProps>(function GlassIconButton(
+export const FrostedIconButton = forwardRef<HTMLButtonElement, FrostedIconButtonProps>(function FrostedIconButton(
   {
     bordered = false,
     className,
@@ -27,19 +27,19 @@ export const GlassIconButton = forwardRef<HTMLButtonElement, GlassIconButtonProp
 ) {
   const {
     backgroundTone,
-    setElementRef: setGlassSurfaceElementRef,
-  } = useGlassSurfaceBackgroundToneRef<HTMLButtonElement>(true)
+    setElementRef: setFrostedSurfaceElementRef,
+  } = useFrostedSurfaceBackgroundToneRef<HTMLButtonElement>(true)
   const setElementRef = useCallback((element: HTMLButtonElement | null) => {
-    setGlassSurfaceElementRef(element)
+    setFrostedSurfaceElementRef(element)
     assignButtonRef(ref, element)
-  }, [ref, setGlassSurfaceElementRef])
+  }, [ref, setFrostedSurfaceElementRef])
 
   return (
     <button
       {...props}
-      className={getGlassSurfaceClassName(
+      className={getFrostedSurfaceClassName(
         getIconButtonClassName('glass', size),
-        bordered ? 'glass-surface--bordered' : undefined,
+        bordered ? 'frosted-surface--bordered' : undefined,
         className,
       )}
       data-background-tone={backgroundTone ?? undefined}
@@ -49,7 +49,7 @@ export const GlassIconButton = forwardRef<HTMLButtonElement, GlassIconButtonProp
   )
 })
 
-GlassIconButton.displayName = 'GlassIconButton'
+FrostedIconButton.displayName = 'FrostedIconButton'
 
 function assignButtonRef(
   ref: Ref<HTMLButtonElement> | undefined,

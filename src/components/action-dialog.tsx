@@ -11,7 +11,7 @@ import {
   type DialogProps,
 } from './coss/dialog'
 import { FloatBar } from './float-bar'
-import { GlassIconButton } from './glass-icon-button'
+import { FrostedIconButton } from './frosted-icon-button'
 import { cn } from './lib/utils'
 
 import './action-dialog.css'
@@ -74,7 +74,7 @@ export function ActionDialog({
               {showCloseButton ? (
                 <DialogClose
                   aria-label={closeLabel}
-                  render={<GlassIconButton />}
+                  render={<FrostedIconButton />}
                   type="button"
                 >
                   <X />

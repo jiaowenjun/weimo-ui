@@ -2,35 +2,35 @@ import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
 import type { ComponentPropsWithoutRef, RefObject } from 'react'
 
 import {
-  getGlassSurfaceClassName,
+  getFrostedSurfaceClassName,
   resolveElementBackgroundTone,
-  type GlassSurfaceBackgroundTone,
-} from './glass-surface-model'
+  type FrostedSurfaceBackgroundTone,
+} from './frosted-surface-model'
 
-import './glass-surface.css'
+import './frosted-surface.css'
 
 const useIsomorphicLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect
-type GlassSurfaceScrollParent = HTMLElement | Window
+type FrostedSurfaceScrollParent = HTMLElement | Window
 
-export { getGlassSurfaceClassName }
+export { getFrostedSurfaceClassName }
 
-export type GlassSurfaceProps = ComponentPropsWithoutRef<'div'> & {
+export type FrostedSurfaceProps = ComponentPropsWithoutRef<'div'> & {
   bordered?: boolean
   observe?: boolean
 }
 
-export function useGlassSurfaceBackgroundTone<ElementType extends HTMLElement>(
+export function useFrostedSurfaceBackgroundTone<ElementType extends HTMLElement>(
   elementRef: RefObject<ElementType | null>,
   observe: boolean,
 ) {
-  return useGlassSurfaceBackgroundToneForElement(elementRef.current, observe)
+  return useFrostedSurfaceBackgroundToneForElement(elementRef.current, observe)
 }
 
-export function useGlassSurfaceBackgroundToneRef<ElementType extends HTMLElement>(
+export function useFrostedSurfaceBackgroundToneRef<ElementType extends HTMLElement>(
   observe: boolean,
 ) {
   const [element, setElement] = useState<ElementType | null>(null)
-  const backgroundTone = useGlassSurfaceBackgroundToneForElement(element, observe)
+  const backgroundTone = useFrostedSurfaceBackgroundToneForElement(element, observe)
   const setElementRef = useCallback((nextElement: ElementType | null) => {
     setElement((currentElement) => (
       currentElement === nextElement ? currentElement : nextElement
@@ -40,12 +40,12 @@ export function useGlassSurfaceBackgroundToneRef<ElementType extends HTMLElement
   return { backgroundTone, setElementRef }
 }
 
-function useGlassSurfaceBackgroundToneForElement<ElementType extends HTMLElement>(
+function useFrostedSurfaceBackgroundToneForElement<ElementType extends HTMLElement>(
   element: ElementType | null,
   observe: boolean,
 ) {
   const [backgroundTone, setBackgroundTone] =
-    useState<GlassSurfaceBackgroundTone | null>(null)
+    useState<FrostedSurfaceBackgroundTone | null>(null)
 
   useIsomorphicLayoutEffect(() => {
     const ownerWindow = element?.ownerDocument.defaultView
@@ -57,7 +57,7 @@ function useGlassSurfaceBackgroundToneForElement<ElementType extends HTMLElement
     }
 
     let animationFrame = 0
-    const scrollParents = getGlassSurfaceScrollParents(element)
+    const scrollParents = getFrostedSurfaceScrollParents(element)
     const scrollListenerOptions = { capture: true, passive: true } as const
 
     const updateBackgroundTone = () => {
@@ -113,19 +113,19 @@ function useGlassSurfaceBackgroundToneForElement<ElementType extends HTMLElement
   return backgroundTone
 }
 
-export function GlassSurface({
+export function FrostedSurface({
   bordered = false,
   className,
   observe = true,
   ...props
-}: GlassSurfaceProps) {
+}: FrostedSurfaceProps) {
   const { backgroundTone, setElementRef } =
-    useGlassSurfaceBackgroundToneRef<HTMLDivElement>(observe)
+    useFrostedSurfaceBackgroundToneRef<HTMLDivElement>(observe)
 
   return (
     <div
-      className={getGlassSurfaceClassName(
-        bordered ? 'glass-surface--bordered' : undefined,
+      className={getFrostedSurfaceClassName(
+        bordered ? 'frosted-surface--bordered' : undefined,
         className,
       )}
       data-background-tone={backgroundTone ?? undefined}
@@ -135,9 +135,9 @@ export function GlassSurface({
   )
 }
 
-function getGlassSurfaceScrollParents(element: HTMLElement) {
+function getFrostedSurfaceScrollParents(element: HTMLElement) {
   const ownerWindow = element.ownerDocument.defaultView
-  const scrollParents: GlassSurfaceScrollParent[] = ownerWindow ? [ownerWindow] : []
+  const scrollParents: FrostedSurfaceScrollParent[] = ownerWindow ? [ownerWindow] : []
   let current = element.parentElement
 
   while (current && ownerWindow) {

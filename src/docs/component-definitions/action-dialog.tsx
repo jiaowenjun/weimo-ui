@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { ActionDialog } from '../../components/action-dialog'
 import { ComponentPreviewCard } from '../../components/component-preview-card'
 import { DialogPanel } from '../../components/coss/dialog'
-import { GlassIconButton } from '../../components/glass-icon-button'
+import { FrostedIconButton } from '../../components/frosted-icon-button'
 import { TextButton } from '../../components/text-button'
 import type { ComponentDefinition } from '../component-docs'
 
@@ -19,9 +19,9 @@ function ActionDialogDemo({ defaultOpen = false }: { defaultOpen?: boolean }) {
         </TextButton>
         <ActionDialog
           bottomBarRightSlot={
-            <GlassIconButton aria-label="保存">
+            <FrostedIconButton aria-label="保存">
               <Check />
-            </GlassIconButton>
+            </FrostedIconButton>
           }
           onOpenChange={setOpen}
           open={open}

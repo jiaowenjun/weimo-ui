@@ -152,7 +152,7 @@ assert.ok(
 for (const snippet of [
   "import { TextButton } from '../../components/text-button'",
   "id: 'button'",
-  "summary: '文本按钮、幽灵/玻璃图标按钮、玻璃图标按钮组与模式按钮的按钮总览'",
+  "summary: '文本按钮、幽灵/磨砂图标按钮、磨砂图标按钮组与模式按钮的按钮总览'",
   'preview: () => <ButtonDemo />',
   '<TextButtonPreview />',
 ]) {
@@ -187,7 +187,7 @@ assert.ok(
 for (const removedFilePath of [
   'src/docs/component-definitions/text-button.tsx',
   'src/docs/component-definitions/ghost-icon-button.tsx',
-  'src/docs/component-definitions/glass-icon-button.tsx',
+  'src/docs/component-definitions/frosted-icon-button.tsx',
   'src/docs/component-definitions/mode-button.tsx',
 ]) {
   assert.ok(

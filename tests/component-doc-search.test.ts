@@ -12,7 +12,7 @@ describe('component docs search', () => {
     expect(resultIds('BgColor')).toContain('background-tokens')
     expect(resultIds('text-color')).toContain('text-tokens')
     expect(resultIds('CardSurface')).toContain('surface')
-    expect(resultIds('GlassSurface')).toContain('surface')
+    expect(resultIds('FrostedSurface')).toContain('surface')
     expect(resultIds('PopupSurface')).toContain('surface')
     expect(resultIds('Md')).toContain('md')
     expect(resultIds('Markdown')).toContain('md')

@@ -11,7 +11,7 @@ import {
   getAnimatedInlineSizeStyle,
   useAnimatedInlineSize,
 } from './animated-inline-size-model'
-import { useGlassSurfaceBackgroundToneRef } from './glass-surface'
+import { useFrostedSurfaceBackgroundToneRef } from './frosted-surface'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -21,7 +21,7 @@ import {
   BreadcrumbSeparator,
 } from './coss/breadcrumb'
 import './chip-surface.css'
-import './glass-surface.css'
+import './frosted-surface.css'
 import './tag-bread.css'
 
 type TagBreadCrumb = {
@@ -63,7 +63,7 @@ export function TagBread({
   const crumbs = buildTagBreadCrumbs(tag)
   const { measureRef, inlineSize } = useAnimatedInlineSize(tag)
   const { backgroundTone, setElementRef } =
-    useGlassSurfaceBackgroundToneRef<HTMLElement>(true)
+    useFrostedSurfaceBackgroundToneRef<HTMLElement>(true)
   const chipSurfaceAttributes = getChipSurfaceAttributes({ variant: 'glass', textSize: 'base' })
 
   function handleCrumbClick(event: MouseEvent<HTMLAnchorElement>, path: string) {
@@ -117,7 +117,7 @@ export function TagBread({
     <>
       <Breadcrumb
         {...props}
-        className={getChipSurfaceClassName('glass-surface', 'tag-bread', className)}
+        className={getChipSurfaceClassName('frosted-surface', 'tag-bread', className)}
         data-background-tone={backgroundTone ?? undefined}
         ref={setElementRef}
         style={getAnimatedInlineSizeStyle(style, inlineSize)}

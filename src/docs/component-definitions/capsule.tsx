@@ -29,9 +29,9 @@ function GlassChipDemo() {
       action={
         <SurfaceBorderToggle bordered={bordered} onBorderedChange={setBordered} />
       }
-      label="玻璃态胶囊"
+      label="磨砂态胶囊"
     >
-      <div className="icon-preview__row" aria-label="Chip 玻璃态字号预览">
+      <div className="icon-preview__row" aria-label="Chip 磨砂态字号预览">
         <Chip bordered={bordered} content="小字号" textSize="sm" variant="glass" />
         <Chip bordered={bordered} content="基础字号" textSize="base" variant="glass" />
         <Chip bordered={bordered} content="标题字号" textSize="lg" variant="glass" />
@@ -81,9 +81,9 @@ function SuffixChipDemo() {
 function ChipButtonDemo() {
   return (
     <ComponentPreviewCard align="center" label="胶囊按钮">
-      <div className="text-button-preview" aria-label="ChipButton 默认态与玻璃态预览">
+      <div className="text-button-preview" aria-label="ChipButton 默认态与磨砂态预览">
         <ChipButton state="default">默认态</ChipButton>
-        <ChipButton state="glass">玻璃态</ChipButton>
+        <ChipButton state="glass">磨砂态</ChipButton>
       </div>
     </ComponentPreviewCard>
   )
@@ -96,9 +96,9 @@ function StateToggleChipButtonDemo() {
     <ComponentPreviewCard
       action={
         <PreviewToggle
-          ariaLabel="切换玻璃态"
+          ariaLabel="切换磨砂态"
           checked={state === 'glass'}
-          label={state === 'glass' ? '玻璃态' : '默认态'}
+          label={state === 'glass' ? '磨砂态' : '默认态'}
           onCheckedChange={(checked) => setState(checked ? 'glass' : 'default')}
         />
       }

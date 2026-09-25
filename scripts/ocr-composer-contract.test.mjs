@@ -56,7 +56,7 @@ for (const snippet of [
   "import type { ComponentPropsWithoutRef, ReactNode } from 'react'",
   "import { CardTopBar } from './card-top-bar'",
   "import { ComposerShell } from './composer-shell'",
-  "import { GlassIconButton } from './glass-icon-button'",
+  "import { FrostedIconButton } from './frosted-icon-button'",
   "import { GhostIconButton } from './ghost-icon-button'",
   "import { ImageUploader, type ImageUploaderActionApi, type ImageUploaderProps } from './image-uploader'",
   "import { TagBar } from './tag-bar'",
@@ -95,7 +95,7 @@ for (const snippet of [
   'className="weimo-ocr-composer__actions"',
   'role="group"',
   'aria-label={resolvedLabels.imageToolbar}',
-  '<GlassIconButton',
+  '<FrostedIconButton',
   'aria-label={resolvedLabels.selectImage}',
   'disabled={!canUseActions || !imageActions}',
   'onClick={() => imageActions?.select()}',
@@ -140,7 +140,7 @@ for (const snippet of [
   "from './coss/toolbar'",
   "from './bottom-bar'",
   "from './card-tool-bar'",
-  "from './glass-surface-model'",
+  "from './frosted-surface-model'",
   '<Toolbar',
   '<ToolbarButton',
   '<BottomBar',
@@ -167,7 +167,7 @@ const actionSlotSource = source.slice(actionSlotStart, returnStart)
 
 assert.match(
   actionSlotSource,
-  /: \(\s*<>\s*<GlassIconButton[\s\S]*aria-label=\{resolvedLabels\.clearImage\}[\s\S]*<\/GlassIconButton>\s*<GlassIconButton[\s\S]*aria-label=\{resolvedLabels\.save\}[\s\S]*<Check aria-hidden="true" \/>[\s\S]*<\/GlassIconButton>\s*<\/>\s*\)\}/,
+  /: \(\s*<>\s*<FrostedIconButton[\s\S]*aria-label=\{resolvedLabels\.clearImage\}[\s\S]*<\/FrostedIconButton>\s*<FrostedIconButton[\s\S]*aria-label=\{resolvedLabels\.save\}[\s\S]*<Check aria-hidden="true" \/>[\s\S]*<\/FrostedIconButton>\s*<\/>\s*\)\}/,
   'OcrComposer check action must render only in the has-file branch.',
 )
 
@@ -253,7 +253,7 @@ assert.deepEqual(
     '@weimo/utils',
     '@weimo/card-composer',
     '@weimo/image-uploader',
-    '@weimo/glass-icon-button',
+    '@weimo/frosted-icon-button',
   ],
   'OcrComposer registry item must install composer shell, uploader, utils, and glass action controls.',
 )

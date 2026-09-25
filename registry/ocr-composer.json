@@ -16,7 +16,7 @@
     "@weimo/utils",
     "@weimo/card-composer",
     "@weimo/image-uploader",
-    "@weimo/glass-icon-button"
+    "@weimo/frosted-icon-button"
   ],
   "files": [
     {

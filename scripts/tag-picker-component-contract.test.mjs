@@ -197,7 +197,7 @@ assert.ok(
     actionDialogSource.includes("from './coss/dialog'") &&
     actionDialogSource.includes("import { BottomBar } from './bottom-bar'") &&
     actionDialogSource.includes("import { FloatBar } from './float-bar'") &&
-    actionDialogSource.includes("import { GlassIconButton } from './glass-icon-button'") &&
+    actionDialogSource.includes("import { FrostedIconButton } from './frosted-icon-button'") &&
     actionDialogSource.includes("import { cn } from './lib/utils'") &&
     actionDialogSource.includes("import './action-dialog.css'") &&
     actionDialogSource.includes('export type ActionDialogProps') &&
@@ -224,7 +224,7 @@ assert.ok(
     actionDialogSource.includes('{toolbarRightSlot}') &&
     actionDialogSource.includes('showCloseButton ?') &&
     actionDialogSource.includes('<DialogClose') &&
-    actionDialogSource.includes('render={<GlassIconButton />}') &&
+    actionDialogSource.includes('render={<FrostedIconButton />}') &&
     actionDialogSource.includes('type="button"') &&
     actionDialogSource.includes('{children}') &&
     actionDialogSource.includes('showBottomBar ?') &&
@@ -234,7 +234,7 @@ assert.ok(
     actionDialogSource.includes('leftSlot={bottomBarLeftSlot}') &&
     actionDialogSource.includes('rightSlot={bottomBarRightSlot}') &&
     actionDialogSource.indexOf('{children}') < actionDialogSource.indexOf('showBottomBar ?'),
-  'ActionDialog must compose coss Dialog, internal FloatBar title bar, right toolbar slot, optional internal BottomBar, visible DialogTitle, and GlassIconButton-backed DialogClose.',
+  'ActionDialog must compose coss Dialog, internal FloatBar title bar, right toolbar slot, optional internal BottomBar, visible DialogTitle, and FrostedIconButton-backed DialogClose.',
 )
 assert.ok(
   actionDialogCss.includes('.action-dialog') &&
@@ -292,7 +292,7 @@ assert.ok(
     !componentSource.includes('<BottomBar') &&
     !componentSource.includes("from '../float-bar'") &&
     componentSource.includes("from '../action-dialog'") &&
-    componentSource.includes("from '../glass-icon-button'") &&
+    componentSource.includes("from '../frosted-icon-button'") &&
     componentSource.includes('<ActionDialog') &&
     componentSource.includes('className="tag-picker"') &&
     componentSource.includes('closeLabel="关闭标签选择器"') &&
@@ -340,7 +340,7 @@ assert.ok(
   componentSource.includes('<Check') &&
   componentSource.includes('toolbarLabel="标签选择器工具栏"') &&
   componentSource.includes('<Search') &&
-    componentSource.includes('<GlassIconButton') &&
+    componentSource.includes('<FrostedIconButton') &&
   componentSource.includes('closeLabel="关闭标签选择器"') &&
   componentSource.includes('aria-label="确认"') &&
   componentSource.includes('aria-label={inputAriaLabel}') &&
@@ -359,14 +359,14 @@ assert.ok(
 assert.ok(
   componentSource.indexOf('</InputGroup>') <
   componentSource.indexOf('className="tag-picker__confirm"'),
-  'TagPicker confirm GlassIconButton must render outside the InputGroup as the right-side footer action.',
+  'TagPicker confirm FrostedIconButton must render outside the InputGroup as the right-side footer action.',
 )
 assert.ok(
   componentSource.includes('className="tag-picker__confirm"') &&
   !componentSource.includes('variant="ghost"') &&
   !componentSource.includes('variant={') &&
   !componentSource.includes('size="sm"'),
-  'TagPicker confirm control must use the default GlassIconButton size instead of custom/ghost button styling.',
+  'TagPicker confirm control must use the default FrostedIconButton size instead of custom/ghost button styling.',
 )
 assert.ok(
   componentSource.includes('onClick={() => onPress(option)}') &&

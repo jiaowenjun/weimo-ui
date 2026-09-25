@@ -81,7 +81,7 @@ const cossInputGroupCss = readProjectFile('src/components/coss/input-group.css')
 const cossTableCss = readProjectFile('src/components/coss/table.css')
 const cossTabsCss = readProjectFile('src/components/coss/tabs.css')
 const cossTooltipCss = readProjectFile('src/components/coss/tooltip.css')
-const glassSurfaceCss = readProjectFile('src/components/glass-surface.css')
+const frostedSurfaceCss = readProjectFile('src/components/frosted-surface.css')
 const mdEditorCss = readProjectFile('src/components/md-editor/md-editor.css')
 const markdownContentCss = readProjectFile('src/components/markdown-content.css')
 const menuCss = readProjectFile('src/components/menu.css')
@@ -369,7 +369,7 @@ assert.ok(
 assert.ok(
     cardSurfaceCss.includes('border-color: var(--color-border);') &&
     popupSurfaceCss.includes('border-color: var(--color-border-divider);') &&
-    !glassSurfaceCss.includes('var(--color-border-divider)') &&
+    !frostedSurfaceCss.includes('var(--color-border-divider)') &&
     !chipSurfaceCss.includes('var(--color-border-divider)') &&
     cossButtonCss.includes('border-color: var(--color-border);') &&
     sidebarDrawerBlock.includes('border: 1px solid var(--color-border);') &&
@@ -380,9 +380,9 @@ assert.ok(
   'Default BorderColor usage must cover surface/container outer borders and docs preview frames.',
 )
 assert.ok(
-  glassSurfaceCss.includes('border-color: var(--glass-surface-border);') &&
-    !glassSurfaceCss.includes('border: 1px solid var(--color-border);'),
-  'GlassSurface must use its background-aware border token (on the opt-in --bordered modifier) instead of the fixed default BorderColor token.',
+  frostedSurfaceCss.includes('border-color: var(--glass-surface-border);') &&
+    !frostedSurfaceCss.includes('border: 1px solid var(--color-border);'),
+  'FrostedSurface must use its background-aware border token (on the opt-in --bordered modifier) instead of the fixed default BorderColor token.',
 )
 
 assert.deepEqual(rootStyleItem, styleRegistry, 'Root registry style item must match registry/style.json.')

@@ -51,7 +51,7 @@ const registryItem = rootRegistry.items.find((item) => item.name === 'tag-bread'
 const smokeSource = readProjectFile('scripts/registry-smoke.test.mjs')
 
 const rootBlock = blockFor(surfaceCss, '.chip-surface')
-const glassSurfaceBlock = blockFor(surfaceCss, '.chip-surface[data-variant="glass"]')
+const frostedSurfaceBlock = blockFor(surfaceCss, '.chip-surface[data-variant="glass"]')
 const glassLayerBlock = blockFor(surfaceCss, '.chip-surface::after')
 const listBlock = blockFor(css, '.tag-bread .coss-breadcrumb__list')
 const itemBlock = blockFor(css, '.tag-bread .coss-breadcrumb__item')
@@ -139,9 +139,9 @@ for (const snippet of [
   'event.preventDefault()',
   'onSelect?.(path)',
   'const isPage = index === crumbs.length - 1',
-  "getChipSurfaceClassName('glass-surface', 'tag-bread', className)",
-  "useGlassSurfaceBackgroundToneRef<HTMLElement>(true)",
-  "import './glass-surface.css'",
+  "getChipSurfaceClassName('frosted-surface', 'tag-bread', className)",
+  "useFrostedSurfaceBackgroundToneRef<HTMLElement>(true)",
+  "import './frosted-surface.css'",
   "getChipSurfaceAttributes({ variant: 'glass', textSize: 'base' })",
   'useAnimatedInlineSize(tag)',
   '<AnimatedInlineSizeMeasure measureRef={measureRef}>',
@@ -198,16 +198,16 @@ assertIncludes(rootBlock, 'max-width: 100%;', 'TagBread root must fit narrow con
 assertIncludes(rootBlock, 'justify-content: flex-start;', 'TagBread must keep its prefix and breadcrumb trail left-aligned during width transitions.')
 assertIncludes(rootBlock, '--animated-inline-size-transition-duration: 180ms;', 'TagBread must inherit the shared 180ms width transition duration.')
 assertIncludes(rootBlock, 'inline-size var(--animated-inline-size-transition-duration) cubic-bezier(0.2, 0, 0, 1)', 'TagBread must animate measured breadcrumb-width changes through ChipSurface.')
-assertIncludes(glassSurfaceBlock, 'border-color: var(--glass-surface-border);', 'TagBread must use the standard glass surface border token.')
+assertIncludes(frostedSurfaceBlock, 'border-color: var(--glass-surface-border);', 'TagBread must use the standard glass surface border token.')
 assertIncludes(rootBlock, 'border-radius: var(--radius-round);', 'TagBread glass surface must be pill-shaped.')
 assert.ok(
   !glassLayerBlock.includes('background: var(--glass-gradient);') && !surfaceCss.includes('--glass-gradient'),
   'TagBread glass layer must not depend on a shared glass background gradient token.',
 )
-assertIncludes(glassSurfaceBlock, 'backdrop-filter: blur(var(--glass-blur));', 'TagBread must enable the glass blur.')
-assertIncludes(glassSurfaceBlock, '-webkit-backdrop-filter: blur(var(--glass-blur));', 'TagBread must support Safari glass blur.')
+assertIncludes(frostedSurfaceBlock, 'backdrop-filter: blur(var(--glass-blur));', 'TagBread must enable the glass blur.')
+assertIncludes(frostedSurfaceBlock, '-webkit-backdrop-filter: blur(var(--glass-blur));', 'TagBread must support Safari glass blur.')
 assert.ok(
-  !glassSurfaceBlock.includes('box-shadow') && !surfaceCss.includes('--glass-shadow'),
+  !frostedSurfaceBlock.includes('box-shadow') && !surfaceCss.includes('--glass-shadow'),
   'TagBread glass surface must not use glass shadow effects.',
 )
 assertIncludes(cossListBlock, 'color: var(--color-text-secondary);', 'coss Breadcrumb list must own TagBread text color even when the shared chip surface sets root color.')
@@ -363,9 +363,9 @@ assert.deepEqual(
     'src/components/animated-inline-size.css',
     'src/components/coss/breadcrumb.tsx',
     'src/components/coss/breadcrumb.css',
-    'src/components/glass-surface.tsx',
-    'src/components/glass-surface-model.ts',
-    'src/components/glass-surface.css',
+    'src/components/frosted-surface.tsx',
+    'src/components/frosted-surface-model.ts',
+    'src/components/frosted-surface.css',
   ],
   'TagBread registry item must ship the component, sidecar CSS, shared chip surface internals, and local coss Breadcrumb.',
 )

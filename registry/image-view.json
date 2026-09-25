@@ -14,7 +14,7 @@
     "@weimo/style",
     "@weimo/utils",
     "@weimo/action-dialog",
-    "@weimo/glass-icon-button",
+    "@weimo/frosted-icon-button",
     "@weimo/menu"
   ],
   "files": [

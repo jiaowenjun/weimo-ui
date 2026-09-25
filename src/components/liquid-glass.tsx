@@ -38,7 +38,7 @@ export type LiquidGlassSurfaceProps = {
 
 // Chromium 的 backdrop-filter 采样在「只有背景元素的内联样式变化」时会滞留:
 // 滑块改画布灰度时玻璃停留在旧快照,直到玻璃层自身发生一次样式提交才刷新。
-// 与 GlassSurface 的 MutationObserver 同思路——观察宿主样式变化,在玻璃外层
+// 与 FrostedSurface 的 MutationObserver 同思路——观察宿主样式变化,在玻璃外层
 // 写入一次视觉恒等的 translate 抖动强制重采样。
 // 只能观察「祖先链」的 class/style 属性,不能 subtree 全观察:抖动写在玻璃
 // 自身 subtree(对祖先观察不可见),否则自身/兄弟玻璃实例的写入会互相触发,

@@ -36,32 +36,32 @@ function cssBlockFor(source, selector) {
 
 const packageJson = readJson('package.json')
 const rootRegistry = readJson('registry.json')
-const groupRegistry = readJson('registry/glass-icon-button-group.json')
+const groupRegistry = readJson('registry/frosted-icon-button-group.json')
 const rootGroupItem = rootRegistry.items.find(
-  (item) => item.name === 'glass-icon-button-group',
+  (item) => item.name === 'frosted-icon-button-group',
 )
 const componentManifestSource = readProjectFile('src/docs/components-manifest.ts')
-const groupSource = readProjectFile('src/components/glass-icon-button-group.tsx')
-const glassIconButtonSource = readProjectFile('src/components/glass-icon-button.tsx')
-const groupCss = readProjectFile('src/components/glass-icon-button-group.css')
+const groupSource = readProjectFile('src/components/frosted-icon-button-group.tsx')
+const glassIconButtonSource = readProjectFile('src/components/frosted-icon-button.tsx')
+const groupCss = readProjectFile('src/components/frosted-icon-button-group.css')
 const iconButtonCss = readProjectFile('src/components/icon-button.css')
 const buttonDocsSource = readProjectFile('src/docs/component-definitions/button.tsx')
 
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/glass-icon-button-group-contract.test.mjs'),
-  'package.json test script must run glass-icon-button-group-contract.test.mjs.',
+  packageJson.scripts?.test?.includes('scripts/frosted-icon-button-group-contract.test.mjs'),
+  'package.json test script must run frosted-icon-button-group-contract.test.mjs.',
 )
 assert.equal(
-  packageJson.exports?.['./components/glass-icon-button-group'],
-  './src/components/glass-icon-button-group.tsx',
-  'GlassIconButtonGroup must have a public package export.',
+  packageJson.exports?.['./components/frosted-icon-button-group'],
+  './src/components/frosted-icon-button-group.tsx',
+  'FrostedIconButtonGroup must have a public package export.',
 )
 
 for (const snippet of [
-  "id: 'glass-icon-button-group'",
-  "name: 'GlassIconButtonGroup'",
-  "registryName: 'glass-icon-button-group'",
-  "packageExport: './components/glass-icon-button-group'",
+  "id: 'frosted-icon-button-group'",
+  "name: 'FrostedIconButtonGroup'",
+  "registryName: 'frosted-icon-button-group'",
+  "packageExport: './components/frosted-icon-button-group'",
   "group: 'controls-overlays'",
   'docs: false',
   'registry: true',
@@ -69,67 +69,67 @@ for (const snippet of [
   assertIncludes(
     componentManifestSource,
     snippet,
-    `GlassIconButtonGroup manifest entry must include ${snippet}.`,
+    `FrostedIconButtonGroup manifest entry must include ${snippet}.`,
   )
 }
 
-assert.ok(rootGroupItem, 'Root registry must include GlassIconButtonGroup.')
+assert.ok(rootGroupItem, 'Root registry must include FrostedIconButtonGroup.')
 assert.deepEqual(
   groupRegistry,
   rootGroupItem,
-  'registry/glass-icon-button-group.json must match registry.json payload.',
+  'registry/frosted-icon-button-group.json must match registry.json payload.',
 )
 assert.deepEqual(
   groupRegistry.registryDependencies,
   ['@weimo/style', '@weimo/utils'],
-  'GlassIconButtonGroup registry item must install shared style tokens and the cn utility.',
+  'FrostedIconButtonGroup registry item must install shared style tokens and the cn utility.',
 )
 assert.deepEqual(
   groupRegistry.files.map((file) => file.path),
   [
-    'src/components/glass-icon-button-group.tsx',
-    'src/components/glass-icon-button-group.css',
+    'src/components/frosted-icon-button-group.tsx',
+    'src/components/frosted-icon-button-group.css',
     'src/components/icon-button-model.ts',
     'src/components/icon-button.css',
-    'src/components/glass-surface.tsx',
-    'src/components/glass-surface-model.ts',
-    'src/components/glass-surface.css',
+    'src/components/frosted-surface.tsx',
+    'src/components/frosted-surface-model.ts',
+    'src/components/frosted-surface.css',
   ],
-  'GlassIconButtonGroup registry item must ship the group plus the icon-button and glass-surface primitives.',
+  'FrostedIconButtonGroup registry item must ship the group plus the icon-button and frosted-surface primitives.',
 )
 
 for (const snippet of [
-  "import {\n  getGlassSurfaceClassName,\n  useGlassSurfaceBackgroundToneRef,\n} from './glass-surface'",
+  "import {\n  getFrostedSurfaceClassName,\n  useFrostedSurfaceBackgroundToneRef,\n} from './frosted-surface'",
   "import { getIconButtonClassName, type IconButtonSize } from './icon-button-model'",
   "import { cn } from './lib/utils'",
-  "import './glass-icon-button-group.css'",
-  'export type GlassIconButtonGroupProps',
-  'export const GlassIconButtonGroup =',
+  "import './frosted-icon-button-group.css'",
+  'export type FrostedIconButtonGroupProps',
+  'export const FrostedIconButtonGroup =',
   'bordered?: boolean',
   'bordered = false',
   "role ?? 'group'",
-  `getGlassSurfaceClassName(\n        'glass-icon-button-group',\n        bordered ? 'glass-surface--bordered' : undefined,\n        className,\n      )`,
+  `getFrostedSurfaceClassName(\n        'frosted-icon-button-group',\n        bordered ? 'frosted-surface--bordered' : undefined,\n        className,\n      )`,
   'data-background-tone={backgroundTone ?? undefined}',
-  'export type GlassIconGroupButtonProps',
-  'export const GlassIconGroupButton =',
+  'export type FrostedIconGroupButtonProps',
+  'export const FrostedIconGroupButton =',
   "cn(getIconButtonClassName('glass', size), className)",
   'type = \'button\'',
 ]) {
   assertIncludes(
     groupSource,
     snippet,
-    `GlassIconButtonGroup source must include ${snippet}.`,
+    `FrostedIconButtonGroup source must include ${snippet}.`,
   )
 }
 
-// 组内按钮不叠第二层玻璃表面：组件不得再包 GlassIconButton/Glass-surface 按钮。
+// 组内按钮不叠第二层玻璃表面：组件不得再包 FrostedIconButton/Glass-surface 按钮。
 assertOmits(
   groupSource,
-  "from './glass-icon-button'",
-  'GlassIconButtonGroup must compose plain icon-button--glass buttons instead of nested full glass icon buttons.',
+  "from './frosted-icon-button'",
+  'FrostedIconButtonGroup must compose plain icon-button--frosted buttons instead of nested full glass icon buttons.',
 )
 
-const groupBlock = cssBlockFor(groupCss, '.glass-icon-button-group')
+const groupBlock = cssBlockFor(groupCss, '.frosted-icon-button-group')
 
 for (const snippet of [
   'display: inline-flex;',
@@ -140,20 +140,20 @@ for (const snippet of [
 ]) {
   assert.ok(
     groupBlock.includes(snippet),
-    `.glass-icon-button-group block must include ${snippet}`,
+    `.frosted-icon-button-group block must include ${snippet}`,
   )
 }
 
 // 组高度与同级单个图标按钮严格一致:按钮盒纵向外溢 1px 抵消上下玻璃描边占位,
 // 首尾按钮横向外溢 1px 让内收后的悬停圆与端帽半圆同心,中间按钮不重叠。
-const groupButtonBlock = cssBlockFor(groupCss, '.glass-icon-button-group > .icon-button')
+const groupButtonBlock = cssBlockFor(groupCss, '.frosted-icon-button-group > .icon-button')
 const groupFirstButtonBlock = cssBlockFor(
   groupCss,
-  '.glass-icon-button-group > .icon-button:first-child',
+  '.frosted-icon-button-group > .icon-button:first-child',
 )
 const groupLastButtonBlock = cssBlockFor(
   groupCss,
-  '.glass-icon-button-group > .icon-button:last-child',
+  '.frosted-icon-button-group > .icon-button:last-child',
 )
 
 assert.ok(
@@ -172,15 +172,15 @@ assert.ok(
 // 悬停蒙层内收分档:默认档 4px 等距环,sm/xs 维持 2px 紧凑环。
 const groupHoverBlock = cssBlockFor(
   groupCss,
-  '.glass-icon-button-group > .icon-button--glass::after',
+  '.frosted-icon-button-group > .icon-button--frosted::after',
 )
 const groupSmHoverBlock = cssBlockFor(
   groupCss,
-  '.glass-icon-button-group > .icon-button--sm.icon-button--glass::after',
+  '.frosted-icon-button-group > .icon-button--sm.icon-button--frosted::after',
 )
 const groupXsHoverBlock = cssBlockFor(
   groupCss,
-  '.glass-icon-button-group > .icon-button--xs.icon-button--glass::after',
+  '.frosted-icon-button-group > .icon-button--xs.icon-button--frosted::after',
 )
 
 assert.ok(
@@ -209,39 +209,39 @@ for (const omittedSnippet of [
   assertOmits(
     groupCss,
     omittedSnippet,
-    `GlassIconButtonGroup CSS must not redefine ${omittedSnippet}; it inherits glass-surface and icon-button--glass feedback.`,
+    `FrostedIconButtonGroup CSS must not redefine ${omittedSnippet}; it inherits frosted-surface and icon-button--frosted feedback.`,
   )
 }
 
 for (const snippet of [
-  '.glass-icon-button-group > .icon-button--glass:disabled {',
+  '.frosted-icon-button-group > .icon-button--frosted:disabled {',
   'color: var(--color-text-disabled);',
-  ".glass-icon-button-group[data-background-tone='light'] > .icon-button--glass:disabled {",
+  ".frosted-icon-button-group[data-background-tone='light'] > .icon-button--frosted:disabled {",
   'color: var(--color-text-disabled-on-light);',
-  ".glass-icon-button-group[data-background-tone='dark'] > .icon-button--glass:disabled {",
+  ".frosted-icon-button-group[data-background-tone='dark'] > .icon-button--frosted:disabled {",
   'color: var(--color-text-disabled-on-dark);',
 ]) {
   assertIncludes(
     groupCss,
     snippet,
-    `GlassIconButtonGroup CSS must include ${snippet}.`,
+    `FrostedIconButtonGroup CSS must include ${snippet}.`,
   )
 }
 
 // 组无 :disabled 伪类,经 :has 从子按钮推导:全部按钮禁用时组描边
-// 对齐玻璃图标按钮的禁用边框 token(icon-button--glass:disabled 同款三档);
-// .glass-surface--bordered 修饰类保证描边只出现在 opt-in 边框组上(默认无边框)。
+// 对齐磨砂图标按钮的禁用边框 token(icon-button--frosted:disabled 同款三档);
+// .frosted-surface--bordered 修饰类保证描边只出现在 opt-in 边框组上(默认无边框)。
 const groupDisabledBorderBlocks = [
   [
-    '.glass-icon-button-group.glass-surface--bordered:not(:has(> .icon-button--glass:not(:disabled)))',
+    '.frosted-icon-button-group.frosted-surface--bordered:not(:has(> .icon-button--frosted:not(:disabled)))',
     'border-color: var(--color-border-disabled);',
   ],
   [
-    ".glass-icon-button-group.glass-surface--bordered[data-background-tone='light']:not(:has(> .icon-button--glass:not(:disabled)))",
+    ".frosted-icon-button-group.frosted-surface--bordered[data-background-tone='light']:not(:has(> .icon-button--frosted:not(:disabled)))",
     'border-color: var(--color-border-disabled-on-light);',
   ],
   [
-    ".glass-icon-button-group.glass-surface--bordered[data-background-tone='dark']:not(:has(> .icon-button--glass:not(:disabled)))",
+    ".frosted-icon-button-group.frosted-surface--bordered[data-background-tone='dark']:not(:has(> .icon-button--frosted:not(:disabled)))",
     'border-color: var(--color-border-disabled-on-dark);',
   ],
 ]
@@ -249,59 +249,59 @@ const groupDisabledBorderBlocks = [
 for (const [selector, snippet] of groupDisabledBorderBlocks) {
   assert.ok(
     cssBlockFor(groupCss, selector).includes(snippet),
-    `GlassIconButtonGroup disabled border must mirror the glass icon button token: ${selector} must set ${snippet}`,
+    `FrostedIconButtonGroup disabled border must mirror the glass icon button token: ${selector} must set ${snippet}`,
   )
 }
 
-// 悬停反馈与玻璃图标按钮同源:组内按钮复用 icon-button--glass 的 ::after 蒙层,
+// 悬停反馈与磨砂图标按钮同源:组内按钮复用 icon-button--frosted 的 ::after 蒙层,
 // 蒙层色取组上继承的 --glass-surface-hover-bg(currentColor 12%),缺省才回落主题色。
 assertIncludes(
   iconButtonCss,
   'background-color: var(--glass-surface-hover-bg, var(--color-bg-hover));',
-  'icon-button--glass hover overlay must keep consuming the inherited glass-surface hover token.',
+  'icon-button--frosted hover overlay must keep consuming the inherited frosted-surface hover token.',
 )
 
-// 玻璃材质基类默认无边框:玻璃图标按钮的禁用描边必须落在 .glass-surface--bordered
+// 磨砂材质基类默认无边框:磨砂图标按钮的禁用描边必须落在 .frosted-surface--bordered
 // 修饰类上,无边框实例在任何状态都保持透明描边。
 for (const snippet of [
   'bordered?: boolean',
   'bordered = false',
-  "bordered ? 'glass-surface--bordered' : undefined",
+  "bordered ? 'frosted-surface--bordered' : undefined",
 ]) {
   assertIncludes(
     glassIconButtonSource,
     snippet,
-    `GlassIconButton must default to borderless and only stroke when bordered is set: ${snippet}.`,
+    `FrostedIconButton must default to borderless and only stroke when bordered is set: ${snippet}.`,
   )
 }
-const glassDisabledBlock = cssBlockFor(iconButtonCss, '.icon-button--glass:disabled')
+const glassDisabledBlock = cssBlockFor(iconButtonCss, '.icon-button--frosted:disabled')
 
 assert.ok(
   !glassDisabledBlock.includes('border-color'),
-  'The base .icon-button--glass:disabled block must not set border-color; borderless instances would lose the transparent stroke.',
+  'The base .icon-button--frosted:disabled block must not set border-color; borderless instances would lose the transparent stroke.',
 )
 assert.ok(
   cssBlockFor(
     iconButtonCss,
-    '.icon-button--glass.glass-surface--bordered:disabled',
+    '.icon-button--frosted.frosted-surface--bordered:disabled',
   ).includes('border-color: var(--icon-button-disabled-border);'),
-  'The glass icon button disabled stroke must only land on bordered instances via the .glass-surface--bordered modifier.',
+  'The glass icon button disabled stroke must only land on bordered instances via the .frosted-surface--bordered modifier.',
 )
 
 for (const snippet of [
-  "import {\n  GlassIconButtonGroup,\n  GlassIconGroupButton,\n} from '../../components/glass-icon-button-group'",
-  'function GlassIconButtonGroupPreviewGroup(',
-  'function GlassIconButtonGroupPreview()',
-  'label="玻璃图标按钮组"',
-  '<GlassIconButtonGroupPreview />',
-  '<GlassIconButtonGroupPreviewGroup disabled={disabled} />',
+  "import {\n  FrostedIconButtonGroup,\n  FrostedIconGroupButton,\n} from '../../components/frosted-icon-button-group'",
+  'function FrostedIconButtonGroupPreviewGroup(',
+  'function FrostedIconButtonGroupPreview()',
+  'label="磨砂图标按钮组"',
+  '<FrostedIconButtonGroupPreview />',
+  '<FrostedIconButtonGroupPreviewGroup disabled={disabled} />',
   'className="icon-preview__row"',
-  'aria-label="GlassIconButtonGroup 玻璃按钮组预览"',
-  '<GlassIconButtonGroup aria-label="玻璃图标按钮组">',
-  '<GlassIconButtonGroup aria-label="小号玻璃图标按钮组">',
-  '<GlassIconButtonGroup aria-label="带边框玻璃图标按钮组" bordered>',
-  "'玻璃图标按钮组',",
-  "'GlassIconButtonGroup',",
+  'aria-label="FrostedIconButtonGroup 磨砂按钮组预览"',
+  '<FrostedIconButtonGroup aria-label="磨砂图标按钮组">',
+  '<FrostedIconButtonGroup aria-label="小号磨砂图标按钮组">',
+  '<FrostedIconButtonGroup aria-label="带边框磨砂图标按钮组" bordered>',
+  "'磨砂图标按钮组',",
+  "'FrostedIconButtonGroup',",
 ]) {
   assertIncludes(
     buttonDocsSource,
@@ -311,12 +311,12 @@ for (const snippet of [
 }
 
 assert.equal(
-  (buttonDocsSource.match(/<GlassIconGroupButton\b[^>\n]*disabled=\{disabled\}/g) ?? []).length,
+  (buttonDocsSource.match(/<FrostedIconGroupButton\b[^>\n]*disabled=\{disabled\}/g) ?? []).length,
   6,
   'Button docs group preview must demo the borderless default group, the two-button sm group, and the bordered group, all wired to the disabled toggle.',
 )
 assert.equal(
-  (buttonDocsSource.match(/<GlassIconGroupButton\b[^>\n]*size="sm"/g) ?? []).length,
+  (buttonDocsSource.match(/<FrostedIconGroupButton\b[^>\n]*size="sm"/g) ?? []).length,
   2,
   'Button docs group preview must demo the small group via two sm icon buttons.',
 )

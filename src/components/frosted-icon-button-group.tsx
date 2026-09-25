@@ -2,20 +2,20 @@ import { forwardRef, useCallback } from 'react'
 import type { ComponentPropsWithoutRef, ReactNode, Ref } from 'react'
 
 import {
-  getGlassSurfaceClassName,
-  useGlassSurfaceBackgroundToneRef,
-} from './glass-surface'
+  getFrostedSurfaceClassName,
+  useFrostedSurfaceBackgroundToneRef,
+} from './frosted-surface'
 import { getIconButtonClassName, type IconButtonSize } from './icon-button-model'
 import { cn } from './lib/utils'
 
-import './glass-icon-button-group.css'
+import './frosted-icon-button-group.css'
 
-export type GlassIconButtonGroupProps = Omit<ComponentPropsWithoutRef<'div'>, 'children'> & {
+export type FrostedIconButtonGroupProps = Omit<ComponentPropsWithoutRef<'div'>, 'children'> & {
   children: ReactNode
   bordered?: boolean
 }
 
-export const GlassIconButtonGroup = forwardRef<HTMLDivElement, GlassIconButtonGroupProps>(function GlassIconButtonGroup(
+export const FrostedIconButtonGroup = forwardRef<HTMLDivElement, FrostedIconButtonGroupProps>(function FrostedIconButtonGroup(
   {
     bordered = false,
     children,
@@ -27,20 +27,20 @@ export const GlassIconButtonGroup = forwardRef<HTMLDivElement, GlassIconButtonGr
 ) {
   const {
     backgroundTone,
-    setElementRef: setGlassSurfaceElementRef,
-  } = useGlassSurfaceBackgroundToneRef<HTMLDivElement>(true)
+    setElementRef: setFrostedSurfaceElementRef,
+  } = useFrostedSurfaceBackgroundToneRef<HTMLDivElement>(true)
   const setElementRef = useCallback((element: HTMLDivElement | null) => {
-    setGlassSurfaceElementRef(element)
+    setFrostedSurfaceElementRef(element)
     assignGroupRef(ref, element)
-  }, [ref, setGlassSurfaceElementRef])
+  }, [ref, setFrostedSurfaceElementRef])
 
   return (
     <div
       {...props}
       role={role ?? 'group'}
-      className={getGlassSurfaceClassName(
-        'glass-icon-button-group',
-        bordered ? 'glass-surface--bordered' : undefined,
+      className={getFrostedSurfaceClassName(
+        'frosted-icon-button-group',
+        bordered ? 'frosted-surface--bordered' : undefined,
         className,
       )}
       data-background-tone={backgroundTone ?? undefined}
@@ -51,13 +51,13 @@ export const GlassIconButtonGroup = forwardRef<HTMLDivElement, GlassIconButtonGr
   )
 })
 
-GlassIconButtonGroup.displayName = 'GlassIconButtonGroup'
+FrostedIconButtonGroup.displayName = 'FrostedIconButtonGroup'
 
-export type GlassIconGroupButtonProps = ComponentPropsWithoutRef<'button'> & {
+export type FrostedIconGroupButtonProps = ComponentPropsWithoutRef<'button'> & {
   size?: IconButtonSize
 }
 
-export const GlassIconGroupButton = forwardRef<HTMLButtonElement, GlassIconGroupButtonProps>(function GlassIconGroupButton(
+export const FrostedIconGroupButton = forwardRef<HTMLButtonElement, FrostedIconGroupButtonProps>(function FrostedIconGroupButton(
   {
     className,
     size,
@@ -76,7 +76,7 @@ export const GlassIconGroupButton = forwardRef<HTMLButtonElement, GlassIconGroup
   )
 })
 
-GlassIconGroupButton.displayName = 'GlassIconGroupButton'
+FrostedIconGroupButton.displayName = 'FrostedIconGroupButton'
 
 function assignGroupRef(
   ref: Ref<HTMLDivElement> | undefined,

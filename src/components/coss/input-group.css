@@ -23,8 +23,8 @@
 
   /* 玻璃材质默认无边框：焦点强调描边仅在 opt-in 边框实例上叠加，
      无边框实例靠外圈 focus ring 反馈。 */
-  .coss-input-group.glass-surface--bordered:has(input:focus-visible),
-  .coss-input-group.glass-surface--bordered:has(textarea:focus-visible) {
+  .coss-input-group.frosted-surface--bordered:has(input:focus-visible),
+  .coss-input-group.frosted-surface--bordered:has(textarea:focus-visible) {
     border-color: var(--color-border-accent);
   }
 

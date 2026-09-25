@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Drawer } from '@base-ui/react/drawer'
 import { Menu, X } from 'lucide-react'
 
-import { GlassIconButton } from '../../components/glass-icon-button'
+import { FrostedIconButton } from '../../components/frosted-icon-button'
 
 export function SideBarDrawerPreview() {
   const [drawerOpen, setDrawerOpen] = useState(false)
@@ -11,12 +11,12 @@ export function SideBarDrawerPreview() {
   return (
     <>
       <div className="sidebar-preview__trigger">
-        <GlassIconButton
+        <FrostedIconButton
           aria-label="打开抽屉侧边栏"
           onClick={() => setDrawerOpen(true)}
         >
           <Menu />
-        </GlassIconButton>
+        </FrostedIconButton>
         <span className="sidebar-preview__trigger-label">抽屉侧边栏</span>
       </div>
       <Drawer.Root
@@ -38,12 +38,12 @@ export function SideBarDrawerPreview() {
                 data-sidebar-variant="drawer"
               >
                 <div className="weimo-sidebar__drawer-action">
-                  <GlassIconButton
+                  <FrostedIconButton
                     aria-label="关闭抽屉侧边栏示例"
                     onClick={closeDrawer}
                   >
                     <X />
-                  </GlassIconButton>
+                  </FrostedIconButton>
                 </div>
                 <strong className="sidebar-preview__drawer-title">
                   抽屉侧边栏

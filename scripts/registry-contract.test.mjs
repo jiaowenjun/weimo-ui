@@ -175,7 +175,7 @@ const promotedRegistryNames = [
   'bottom-bar',
   'card-top-bar',
   'ghost-icon-button',
-  'glass-icon-button',
+  'frosted-icon-button',
   'text-button',
   'mode-button',
   'card-tool-bar',
@@ -199,7 +199,7 @@ const promotedRegistryNames = [
   'border-color',
   'border-radius',
   'card-surface',
-  'glass-surface',
+  'frosted-surface',
   'popup-surface',
 ]
 
@@ -219,7 +219,7 @@ for (const filePath of [
 }
 assert.deepEqual(
   imageViewItem.registryDependencies,
-  ['@weimo/style', '@weimo/utils', '@weimo/action-dialog', '@weimo/glass-icon-button', '@weimo/menu'],
+  ['@weimo/style', '@weimo/utils', '@weimo/action-dialog', '@weimo/frosted-icon-button', '@weimo/menu'],
   'ImageView registry item must install detail dialog and display-mode menu internals.',
 )
 assert.deepEqual(
@@ -399,9 +399,9 @@ for (const filePath of [
   'src/components/chip-surface.tsx',
   'src/components/chip-surface-model.ts',
   'src/components/chip-surface.css',
-  'src/components/glass-surface.tsx',
-  'src/components/glass-surface-model.ts',
-  'src/components/glass-surface.css',
+  'src/components/frosted-surface.tsx',
+  'src/components/frosted-surface-model.ts',
+  'src/components/frosted-surface.css',
   'src/components/animated-inline-size.tsx',
   'src/components/animated-inline-size-model.ts',
   'src/components/animated-inline-size.css',
@@ -417,7 +417,7 @@ for (const filePath of [
   'src/components/float-bar.css',
   'src/components/bottom-bar.tsx',
   'src/components/bottom-bar.css',
-  'src/components/glass-icon-button.tsx',
+  'src/components/frosted-icon-button.tsx',
   'src/components/ghost-icon-button.tsx',
   'src/components/icon-button-model.ts',
   'src/components/icon-button.css',
@@ -504,9 +504,9 @@ for (const filePath of [
   'src/components/tag-picker/use-tag-picker.ts',
   'src/components/tag-picker/tag-picker-model.ts',
   'src/components/tag-picker/tag-picker.css',
-  'src/components/glass-surface.tsx',
-  'src/components/glass-surface-model.ts',
-  'src/components/glass-surface.css',
+  'src/components/frosted-surface.tsx',
+  'src/components/frosted-surface-model.ts',
+  'src/components/frosted-surface.css',
   'src/components/action-dialog.tsx',
   'src/components/action-dialog.css',
   'src/components/float-bar.tsx',

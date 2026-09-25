@@ -6,12 +6,12 @@ import { AlignCenter, Heading1, List, Quote, SquareSigma, Type } from 'lucide-re
 import { Button } from '../coss/button'
 import { Toolbar, ToolbarButton, ToolbarGroup } from '../coss/toolbar'
 import { Tooltip, TooltipPopup, TooltipProvider, TooltipTrigger } from '../coss/tooltip'
-import { getGlassSurfaceClassName } from '../glass-surface-model'
+import { getFrostedSurfaceClassName } from '../frosted-surface-model'
 import { WEIMO_CENTERED_QUOTE_MARKER } from '../markdown-centered-quote'
 import { formatEditorContent } from './md-editor-content-format'
 import { convertSelectionToInlineMath, resolveInlineMathSelection } from './md-editor-math-conversion'
 
-import '../glass-surface.css'
+import '../frosted-surface.css'
 
 type CenteredQuoteRange = {
   blockquoteFrom: number
@@ -307,7 +307,7 @@ export function MdEditorToolbar({
   return (
     <Toolbar
       aria-label="Markdown 格式工具栏"
-      className={getGlassSurfaceClassName('md-editor__toolbar')}
+      className={getFrostedSurfaceClassName('md-editor__toolbar')}
     >
       <TooltipProvider delay={180}>
         <ToolbarGroup className="md-editor__toolbar-group">

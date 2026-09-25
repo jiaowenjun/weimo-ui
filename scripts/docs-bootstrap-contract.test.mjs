@@ -86,10 +86,10 @@ for (const snippet of [
   )
 }
 
-// 顶部栏搜索与主题切换收进玻璃图标按钮组,与左侧独立的侧边栏触发按钮保持高度一致。
+// 顶部栏搜索与主题切换收进磨砂图标按钮组,与左侧独立的侧边栏触发按钮保持高度一致。
 for (const snippet of [
-  "import {\n  GlassIconButtonGroup,\n  GlassIconGroupButton,\n} from '../components/glass-icon-button-group'",
-  '<GlassIconButtonGroup aria-label="搜索与主题切换">',
+  "import {\n  FrostedIconButtonGroup,\n  FrostedIconGroupButton,\n} from '../components/frosted-icon-button-group'",
+  '<FrostedIconButtonGroup aria-label="搜索与主题切换">',
 ]) {
   assert.ok(
     docsShellSource.includes(snippet),
@@ -97,7 +97,7 @@ for (const snippet of [
   )
 }
 assert.equal(
-  (docsShellSource.match(/<GlassIconGroupButton\b/g) ?? []).length,
+  (docsShellSource.match(/<FrostedIconGroupButton\b/g) ?? []).length,
   2,
   'DocsShell top bar actions group must hold exactly the search and theme toggle buttons.',
 )
@@ -207,7 +207,7 @@ for (const snippet of [
   "id: 'tag-bread'",
   "id: 'stat'",
   "id: 'ghost-icon-button'",
-  "id: 'glass-icon-button'",
+  "id: 'frosted-icon-button'",
   "id: 'button'",
   "id: 'menu'",
   "id: 'surface'",
@@ -228,9 +228,9 @@ for (const snippet of [
   './components/bg-color',
   './components/border-color',
   './components/ghost-icon-button',
-  './components/glass-icon-button',
+  './components/frosted-icon-button',
   './components/menu',
-  './components/glass-surface',
+  './components/frosted-surface',
   './components/tag-tree',
   './components/card',
 ]) {
@@ -280,16 +280,16 @@ for (const snippet of [
   '<StatGroup items={sidebarStatsItems}',
   'sidebar-preview__panel weimo-sidebar weimo-sidebar--normal',
   'className="top-bar-preview"',
-  'function GlassIconButtonPreviewGroup({ disabled }: { disabled: boolean })',
-  '<GlassIconButton aria-label="菜单" disabled={disabled}>',
+  'function FrostedIconButtonPreviewGroup({ disabled }: { disabled: boolean })',
+  '<FrostedIconButton aria-label="菜单" disabled={disabled}>',
   'className="icon-button-preview"',
   '普通背景',
   'function GhostIconButtonPreviewGroup({ disabled }: { disabled: boolean })',
   '<GhostIconButton aria-label="菜单" disabled={disabled}>',
   '<GhostIconButton aria-label="极小号菜单" disabled={disabled} size="xs">',
-  '<GlassSurface bordered={bordered} className="glass-surface-preview__tile">',
+  '<FrostedSurface bordered={bordered} className="frosted-surface-preview__tile">',
   '<GlassPreviewCard',
-  'label="玻璃图标按钮"',
+  'label="磨砂图标按钮"',
 ]) {
   assert.ok(
     componentDefinitionsSource.includes(snippet),
@@ -438,7 +438,7 @@ for (const snippet of [
 for (const snippet of [
   "import { Drawer } from '@base-ui/react/drawer'",
   "import { Menu, X } from 'lucide-react'",
-  "import { GlassIconButton } from '../../components/glass-icon-button'",
+  "import { FrostedIconButton } from '../../components/frosted-icon-button'",
   "function SideBarDrawerPreview",
   "const [drawerOpen, setDrawerOpen] = useState(false)",
   'Drawer.Root',

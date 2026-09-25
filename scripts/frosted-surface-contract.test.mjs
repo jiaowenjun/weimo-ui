@@ -38,9 +38,9 @@ function cssBlockFor(source, selector) {
 
 const packageJson = readJson('package.json')
 const rootRegistry = readJson('registry.json')
-const glassSurfaceRegistry = readJson('registry/glass-surface.json')
-const rootGlassSurfaceItem = rootRegistry.items.find(
-  (item) => item.name === 'glass-surface',
+const frostedSurfaceRegistry = readJson('registry/frosted-surface.json')
+const rootFrostedSurfaceItem = rootRegistry.items.find(
+  (item) => item.name === 'frosted-surface',
 )
 const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const styleRegistry = readJson('registry/style.json')
@@ -48,21 +48,21 @@ const componentManifestSource = readProjectFile('src/docs/components-manifest.ts
 const componentDefinitionsIndexSource = readProjectFile(
   'src/docs/component-definitions/index.ts',
 )
-const glassSurfaceDefinitionSource = readProjectFile(
+const frostedSurfaceDefinitionSource = readProjectFile(
   'src/docs/component-definitions/surface.tsx',
 )
-const glassSurfaceSource = readProjectFile('src/components/glass-surface.tsx')
-const glassSurfaceModelSource = readProjectFile(
-  'src/components/glass-surface-model.ts',
+const frostedSurfaceSource = readProjectFile('src/components/frosted-surface.tsx')
+const frostedSurfaceModelSource = readProjectFile(
+  'src/components/frosted-surface-model.ts',
 )
-const glassSurfaceCss = readProjectFile('src/components/glass-surface.css')
+const frostedSurfaceCss = readProjectFile('src/components/frosted-surface.css')
 const sliderCss = readProjectFile('src/components/slider.css')
 const appCss = readProjectFile('src/App.css')
 const tokensCss = readProjectFile('src/styles/tokens.css')
-const glassSurfaceModelContractModule = await import(
+const frostedSurfaceModelContractModule = await import(
   `data:text/javascript;base64,${Buffer.from(
     ts.transpileModule(
-      glassSurfaceModelSource
+      frostedSurfaceModelSource
         .replace("import type { ClassValue } from 'clsx'\n\n", 'type ClassValue = unknown\n\n')
         .replace(
           "import { cn } from './lib/utils'\n\n",
@@ -200,9 +200,9 @@ function contractRect(left, top, width, height) {
   elementsAtPoint = [surface, image, page]
 
   assert.equal(
-    glassSurfaceModelContractModule.resolveElementBackgroundTone(surface),
+    frostedSurfaceModelContractModule.resolveElementBackgroundTone(surface),
     'dark',
-    'GlassSurface must prefer actual image pixels behind the surface over a painted parent background.',
+    'FrostedSurface must prefer actual image pixels behind the surface over a painted parent background.',
   )
 }
 
@@ -246,30 +246,30 @@ function contractRect(left, top, width, height) {
   elementsAtPoint = [surface, actionLayer, image, uploader]
 
   assert.equal(
-    glassSurfaceModelContractModule.resolveElementBackgroundTone(surface),
+    frostedSurfaceModelContractModule.resolveElementBackgroundTone(surface),
     'light',
-    'GlassSurface must keep searching for image pixels below transparent overlay layers before falling back to ancestor backgrounds.',
+    'FrostedSurface must keep searching for image pixels below transparent overlay layers before falling back to ancestor backgrounds.',
   )
 }
 
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/glass-surface-contract.test.mjs'),
-  'package.json test script must run glass-surface-contract.test.mjs.',
+  packageJson.scripts?.test?.includes('scripts/frosted-surface-contract.test.mjs'),
+  'package.json test script must run frosted-surface-contract.test.mjs.',
 )
 assert.equal(
-  packageJson.exports?.['./components/glass-surface'],
-  './src/components/glass-surface.tsx',
-  'GlassSurface must have a public package export.',
+  packageJson.exports?.['./components/frosted-surface'],
+  './src/components/frosted-surface.tsx',
+  'FrostedSurface must have a public package export.',
 )
 assert.ok(
   !Object.hasOwn(packageJson.exports ?? {}, './components/smart-glass-surface'),
-  'SmartGlassSurface package export must be removed after GlassSurface replaces it.',
+  'SmartGlassSurface package export must be removed after FrostedSurface replaces it.',
 )
 assert.ok(
   !packageJson.scripts?.test?.includes('scripts/smart-glass-surface-contract.test.mjs'),
   'package.json test script must not run the removed smart-glass-surface contract.',
 )
-assert.ok(rootGlassSurfaceItem, 'Root registry must include GlassSurface.')
+assert.ok(rootFrostedSurfaceItem, 'Root registry must include FrostedSurface.')
 assert.ok(
   !rootRegistry.items.some((item) => item.name === 'smart-glass-surface'),
   'Root registry must remove the standalone SmartGlassSurface item.',
@@ -288,16 +288,16 @@ for (const removedFilePath of [
   assert.ok(!existsSync(join(root, removedFilePath)), `${removedFilePath} must be removed.`)
 }
 assert.deepEqual(
-  glassSurfaceRegistry,
-  rootGlassSurfaceItem,
-  'registry/glass-surface.json must match registry.json payload.',
+  frostedSurfaceRegistry,
+  rootFrostedSurfaceItem,
+  'registry/frosted-surface.json must match registry.json payload.',
 )
 
 for (const snippet of [
-  "id: 'glass-surface'",
-  "name: 'GlassSurface'",
-  "registryName: 'glass-surface'",
-  "packageExport: './components/glass-surface'",
+  "id: 'frosted-surface'",
+  "name: 'FrostedSurface'",
+  "registryName: 'frosted-surface'",
+  "packageExport: './components/frosted-surface'",
   "group: 'surface-material'",
   'docs: false',
   'registry: true',
@@ -305,7 +305,7 @@ for (const snippet of [
   assertIncludes(
     componentManifestSource,
     snippet,
-    `GlassSurface manifest entry must include ${snippet}.`,
+    `FrostedSurface manifest entry must include ${snippet}.`,
   )
 }
 
@@ -316,7 +316,7 @@ for (const snippet of [
   assertIncludes(
     componentDefinitionsIndexSource,
     snippet,
-    `GlassSurface docs index must include ${snippet}.`,
+    `FrostedSurface docs index must include ${snippet}.`,
   )
 }
 
@@ -328,44 +328,44 @@ for (const removedFilePath of [
   assert.ok(!existsSync(join(root, removedFilePath)), `${removedFilePath} must be removed.`)
 }
 assertOmits(
-  glassSurfaceDefinitionSource,
+  frostedSurfaceDefinitionSource,
   'coss/slider',
-  'GlassSurface docs definition must use the self-built Slider instead of the removed coss Slider.',
+  'FrostedSurface docs definition must use the self-built Slider instead of the removed coss Slider.',
 )
 
 for (const snippet of [
   "import { useState } from 'react'",
   "import type { ReactNode } from 'react'",
-  "import { GlassSurface, useGlassSurfaceBackgroundToneRef } from '../../components/glass-surface'",
+  "import { FrostedSurface, useFrostedSurfaceBackgroundToneRef } from '../../components/frosted-surface'",
   "import { ComponentPreviewCard } from '../../components/component-preview-card'",
   "import { SurfaceBorderToggle } from '../preview-toggle'",
   "from '../glass-preview-card'",
   "id: 'surface'",
   '静态卡片、亮度自适应磨砂玻璃层、液态玻璃与抬升浮层的材质总览',
-  'function GlassSurfacePreview()',
+  'function FrostedSurfacePreview()',
   'const [bordered, setBordered] = useState(false)',
   'label="磨砂材质"',
   '<SurfaceBorderToggle bordered={bordered} onBorderedChange={setBordered} />',
-  '<GlassSurface bordered={bordered} className="glass-surface-preview__tile">',
+  '<FrostedSurface bordered={bordered} className="frosted-surface-preview__tile">',
   "'无边框',",
   "frame: 'plain',",
 ]) {
   assertIncludes(
-    glassSurfaceDefinitionSource,
+    frostedSurfaceDefinitionSource,
     snippet,
-    `GlassSurface docs definition must include ${snippet}.`,
+    `FrostedSurface docs definition must include ${snippet}.`,
   )
 }
 
 assertOmits(
-  glassSurfaceDefinitionSource,
+  frostedSurfaceDefinitionSource,
   'canvasClassName',
-  'GlassSurface demo canvas must inherit the GlassPreviewCard default canvas, not a fixed-height custom canvas class.',
+  'FrostedSurface demo canvas must inherit the GlassPreviewCard default canvas, not a fixed-height custom canvas class.',
 )
 assertOmits(
-  glassSurfaceDefinitionSource,
-  'glass-surface-preview__fixed',
-  'GlassSurface tile must sit directly in the striped canvas instead of the removed fixed overlay wrapper.',
+  frostedSurfaceDefinitionSource,
+  'frosted-surface-preview__fixed',
+  'FrostedSurface tile must sit directly in the striped canvas instead of the removed fixed overlay wrapper.',
 )
 
 // 滑块 + 主题归位 + 条纹背景的玻璃卡外壳抽到 GlassPreviewCard 共享组件
@@ -448,26 +448,26 @@ for (const snippet of [
   )
 }
 assert.ok(
-  !glassSurfaceDefinitionSource.includes('items=') &&
-    !glassSurfaceDefinitionSource.includes('surface-backdrop'),
-  'GlassSurface docs definition must keep the label title bar without token rows or preview backdrop.',
+  !frostedSurfaceDefinitionSource.includes('items=') &&
+    !frostedSurfaceDefinitionSource.includes('surface-backdrop'),
+  'FrostedSurface docs definition must keep the label title bar without token rows or preview backdrop.',
 )
 assert.ok(
-  !glassSurfaceDefinitionSource.includes('glassSurfacePreviewBackgroundBands') &&
-    !glassSurfaceDefinitionSource.includes('glass-surface-preview__scroll') &&
-    !glassSurfaceDefinitionSource.includes('glass-surface-preview__band'),
-  'GlassSurface demo background must stay the slider-driven stripe backdrop and must not resurrect the scrollable band scene.',
+  !frostedSurfaceDefinitionSource.includes('frostedSurfacePreviewBackgroundBands') &&
+    !frostedSurfaceDefinitionSource.includes('frosted-surface-preview__scroll') &&
+    !frostedSurfaceDefinitionSource.includes('frosted-surface-preview__band'),
+  'FrostedSurface demo background must stay the slider-driven stripe backdrop and must not resurrect the scrollable band scene.',
 )
 
 for (const snippet of [
   '.glass-preview-card__canvas {\n  display: grid;\n  min-height: 100%;\n  padding: 16px;\n  place-items: center;\n}',
   '.glass-preview-card__slider-row',
   'justify-content: center;',
-  '.glass-surface-preview__tile',
+  '.frosted-surface-preview__tile',
   'justify-items: center;',
   'text-align: center;',
 ]) {
-  assertIncludes(appCss, snippet, `GlassSurface preview CSS must include ${snippet}.`)
+  assertIncludes(appCss, snippet, `FrostedSurface preview CSS must include ${snippet}.`)
 }
 assert.ok(
   !appCss.includes('.glass-preview-card__slider-row {\n  display: flex;\n  justify-content: center;\n  min-height: 0;'),
@@ -476,18 +476,18 @@ assert.ok(
 
 assertOmits(
   appCss,
-  '.glass-surface-preview {',
-  'GlassSurface demo canvas block must stay deleted; the demo inherits the shared canvas rhythm.',
+  '.frosted-surface-preview {',
+  'FrostedSurface demo canvas block must stay deleted; the demo inherits the shared canvas rhythm.',
 )
 assertOmits(
   appCss,
   '\n  height: 180px;',
-  'GlassSurface demo canvas must be content-sized, not fixed at 180px.',
+  'FrostedSurface demo canvas must be content-sized, not fixed at 180px.',
 )
 assertOmits(
   appCss,
-  '.glass-surface-preview__fixed',
-  'GlassSurface fixed overlay wrapper CSS must stay deleted.',
+  '.frosted-surface-preview__fixed',
+  'FrostedSurface fixed overlay wrapper CSS must stay deleted.',
 )
 
 for (const snippet of [
@@ -509,61 +509,61 @@ for (const snippet of [
 }
 assertOmits(
   appCss,
-  '.glass-surface-preview__tile[data-background-tone',
-  'GlassSurface preview tile must not stack tone outlines on top of the 1px component border.',
+  '.frosted-surface-preview__tile[data-background-tone',
+  'FrostedSurface preview tile must not stack tone outlines on top of the 1px component border.',
 )
 assertOmits(
   appCss,
-  ".preview-stage[data-component-id='glass-surface']",
-  'GlassSurface preview renders inside ComponentPreviewCard and must not keep preview-stage special cases.',
+  ".preview-stage[data-component-id='frosted-surface']",
+  'FrostedSurface preview renders inside ComponentPreviewCard and must not keep preview-stage special cases.',
 )
 assertOmits(
   appCss,
-  '.glass-surface-preview__scroll',
-  'GlassSurface preview CSS must drop the removed scrollable gradient scene.',
+  '.frosted-surface-preview__scroll',
+  'FrostedSurface preview CSS must drop the removed scrollable gradient scene.',
 )
 assert.ok(
-  !glassSurfaceDefinitionSource.includes('glass-surface-preview__sticky'),
-  'GlassSurface preview must not keep the tile inside sticky scroll content.',
+  !frostedSurfaceDefinitionSource.includes('frosted-surface-preview__sticky'),
+  'FrostedSurface preview must not keep the tile inside sticky scroll content.',
 )
 
 for (const snippet of [
   "import type { ComponentPropsWithoutRef, RefObject } from 'react'",
   "import { useCallback, useEffect, useLayoutEffect, useState } from 'react'",
-  "from './glass-surface-model'",
-  "import './glass-surface.css'",
-  'export type GlassSurfaceProps',
-  'export function useGlassSurfaceBackgroundTone',
-  'export function useGlassSurfaceBackgroundToneRef',
-  'export function GlassSurface',
+  "from './frosted-surface-model'",
+  "import './frosted-surface.css'",
+  'export type FrostedSurfaceProps',
+  'export function useFrostedSurfaceBackgroundTone',
+  'export function useFrostedSurfaceBackgroundToneRef',
+  'export function FrostedSurface',
   'bordered?: boolean',
   'bordered = false',
   'observe = true',
   'const [element, setElement] = useState<ElementType | null>(null)',
   'const setElementRef = useCallback((nextElement: ElementType | null) => {',
-  'useGlassSurfaceBackgroundToneForElement(element, observe)',
+  'useFrostedSurfaceBackgroundToneForElement(element, observe)',
   'return { backgroundTone, setElementRef }',
-  'useGlassSurfaceBackgroundToneRef<HTMLDivElement>(observe)',
+  'useFrostedSurfaceBackgroundToneRef<HTMLDivElement>(observe)',
   'data-background-tone={backgroundTone ?? undefined}',
-  "bordered ? 'glass-surface--bordered' : undefined",
+  "bordered ? 'frosted-surface--bordered' : undefined",
   'ref={setElementRef}',
   'resolveElementBackgroundTone(element)',
-  'getGlassSurfaceScrollParents(element)',
+  'getFrostedSurfaceScrollParents(element)',
   'scrollParents.forEach((scrollParent) => {',
   'ResizeObserver',
   'MutationObserver',
 ]) {
   assertIncludes(
-    glassSurfaceSource,
+    frostedSurfaceSource,
     snippet,
-    `GlassSurface source must include ${snippet}.`,
+    `FrostedSurface source must include ${snippet}.`,
   )
 }
 assert.ok(
-  !glassSurfaceSource.includes('const element = elementRef.current') ||
-    glassSurfaceSource.indexOf('const element = elementRef.current') <
-      glassSurfaceSource.indexOf('useGlassSurfaceBackgroundToneForElement'),
-  'GlassSurface must move the observing effect behind an element-state hook so callback refs can resample after delayed mounts.',
+  !frostedSurfaceSource.includes('const element = elementRef.current') ||
+    frostedSurfaceSource.indexOf('const element = elementRef.current') <
+      frostedSurfaceSource.indexOf('useFrostedSurfaceBackgroundToneForElement'),
+  'FrostedSurface must move the observing effect behind an element-state hook so callback refs can resample after delayed mounts.',
 )
 for (const removedSnippet of [
   "import type { SmartGlassSurfaceProps } from './smart-glass-surface'",
@@ -571,18 +571,18 @@ for (const removedSnippet of [
   "import './smart-glass-surface.css'",
 ]) {
   assertOmits(
-    glassSurfaceSource,
+    frostedSurfaceSource,
     removedSnippet,
-    `GlassSurface source must not include removed ${removedSnippet}.`,
+    `FrostedSurface source must not include removed ${removedSnippet}.`,
   )
 }
 
 for (const snippet of [
   "import type { ClassValue } from 'clsx'",
   "import { cn } from './lib/utils'",
-  'export type GlassSurfaceBackgroundTone',
-  "export function getGlassSurfaceClassName(...className: ClassValue[])",
-  "return cn('glass-surface', className)",
+  'export type FrostedSurfaceBackgroundTone',
+  "export function getFrostedSurfaceClassName(...className: ClassValue[])",
+  "return cn('frosted-surface', className)",
   'export function resolveElementBackgroundTone',
   'export function getReadableToneForColor',
   'export function relativeLuminanceForRgb',
@@ -591,19 +591,19 @@ for (const snippet of [
   'backgroundImage',
 ]) {
   assertIncludes(
-    glassSurfaceModelSource,
+    frostedSurfaceModelSource,
     snippet,
-    `GlassSurface model source must include ${snippet}.`,
+    `FrostedSurface model source must include ${snippet}.`,
   )
 }
 assertOmits(
-  glassSurfaceModelSource,
+  frostedSurfaceModelSource,
   'smart-glass-surface-model',
-  'GlassSurface model must not import the removed SmartGlassSurface model.',
+  'FrostedSurface model must not import the removed SmartGlassSurface model.',
 )
 
 for (const snippet of [
-  '.glass-surface {',
+  '.frosted-surface {',
   '@property --glass-surface-fg-opacity',
   '--glass-surface-muted-color: var(--glass-surface-muted-fg);',
   '--glass-surface-hover-bg: color-mix(in srgb, currentColor 12%, transparent);',
@@ -612,35 +612,35 @@ for (const snippet of [
   '-webkit-backdrop-filter: blur(var(--glass-blur));',
   'color: var(--glass-surface-fg);',
   'transition: color 160ms ease, border-color 160ms ease;',
-  '.glass-surface--bordered {',
+  '.frosted-surface--bordered {',
   'border-color: var(--glass-surface-border);',
-  '.glass-surface[data-background-tone="light"]',
+  '.frosted-surface[data-background-tone="light"]',
   '--glass-surface-fg: var(--glass-surface-fg-on-light);',
   '--glass-surface-muted-color: var(--glass-surface-muted-fg-on-light);',
   '--glass-surface-border: var(--glass-surface-border-on-light);',
-  '.glass-surface[data-background-tone="dark"]',
+  '.frosted-surface[data-background-tone="dark"]',
   '--glass-surface-fg: var(--glass-surface-fg-on-dark);',
   '--glass-surface-muted-color: var(--glass-surface-muted-fg-on-dark);',
   '--glass-surface-border: var(--glass-surface-border-on-dark);',
 ]) {
-  assertIncludes(glassSurfaceCss, snippet, `GlassSurface CSS must include ${snippet}.`)
+  assertIncludes(frostedSurfaceCss, snippet, `FrostedSurface CSS must include ${snippet}.`)
 }
 assertOmits(
-  glassSurfaceCss,
+  frostedSurfaceCss,
   'border: 1px solid var(--color-border);',
-  'GlassSurface border must use its adaptive border token instead of the global theme border.',
+  'FrostedSurface border must use its adaptive border token instead of the global theme border.',
 )
 for (const removedBorderReset of ['border: none', 'border: 0', 'border-width: 0']) {
   assertOmits(
-    glassSurfaceCss,
+    frostedSurfaceCss,
     removedBorderReset,
-    `GlassSurface borderless variant must keep the 1px transparent border geometry instead of ${removedBorderReset}.`,
+    `FrostedSurface borderless variant must keep the 1px transparent border geometry instead of ${removedBorderReset}.`,
   )
 }
 assertOmits(
-  glassSurfaceCss,
+  frostedSurfaceCss,
   '--smart-glass-surface',
-  'GlassSurface CSS must not consume removed SmartGlassSurface CSS variables.',
+  'FrostedSurface CSS must not consume removed SmartGlassSurface CSS variables.',
 )
 
 for (const [tokenName, lightValue, darkValue] of [
@@ -705,13 +705,13 @@ for (const removedTokenName of ['smart-glass-surface-fg', 'smart-glass-surface-m
 }
 
 assert.deepEqual(
-  getRegistryFiles(rootGlassSurfaceItem),
+  getRegistryFiles(rootFrostedSurfaceItem),
   [
-    'src/components/glass-surface.tsx',
-    'src/components/glass-surface-model.ts',
-    'src/components/glass-surface.css',
+    'src/components/frosted-surface.tsx',
+    'src/components/frosted-surface-model.ts',
+    'src/components/frosted-surface.css',
   ],
-  'GlassSurface registry item must ship only its own files.',
+  'FrostedSurface registry item must ship only its own files.',
 )
 
 function getRegistryFiles(item) {

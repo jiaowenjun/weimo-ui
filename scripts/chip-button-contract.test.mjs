@@ -131,7 +131,7 @@ for (const snippet of [
   'const renderedPrefix = prefix.slice(0, 1)',
   'getChipSurfaceAttributes({ variant: state, interactive: true })',
   'data-state={state}',
-  "isGlassState && 'glass-surface',",
+  "isGlassState && 'frosted-surface',",
   'style={animateWidth ? getAnimatedInlineSizeStyle(style, inlineSize) : style}',
   'chip-surface__slot chip-button__prefix',
   'chip-surface__content chip-button__text',
@@ -253,7 +253,7 @@ assert.ok(
     docsSource.includes('ref={widthMeasureRef}') &&
     docsSource.includes('aria-label="ChipButton 宽度变化预览"') &&
     docsSource.includes("checked={state === 'glass'}") &&
-    docsSource.includes("label={state === 'glass' ? '玻璃态' : '默认态'}") &&
+    docsSource.includes("label={state === 'glass' ? '磨砂态' : '默认态'}") &&
     docsSource.includes("checked={widthMode === 'long'}") &&
     docsSource.includes("label={widthMode === 'long' ? '长标签' : '短标签'}"),
   'ChipButton docs definition must include an internal preview with state and width-change toggles.',
@@ -265,7 +265,7 @@ assert.ok(
 )
 assert.ok(
   docsSource.includes(
-    '<div className="text-button-preview" aria-label="ChipButton 默认态与玻璃态预览">',
+    '<div className="text-button-preview" aria-label="ChipButton 默认态与磨砂态预览">',
   ) && appCss.includes('.text-button-preview'),
   'Capsule chip-button demo card must lay out its buttons in the shared 12px-gap preview row.',
 )

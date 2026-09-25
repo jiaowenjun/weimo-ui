@@ -2,7 +2,7 @@ import { Menu, Search } from 'lucide-react'
 
 import { Chip } from '../../components/chip'
 import { ComponentPreviewCard } from '../../components/component-preview-card'
-import { GlassIconButton } from '../../components/glass-icon-button'
+import { FrostedIconButton } from '../../components/frosted-icon-button'
 import { TopBar } from '../../components/top-bar'
 import type { ComponentDefinition } from '../component-docs'
 import { GlassPreviewCard } from '../glass-preview-card'
@@ -42,17 +42,17 @@ function SideBarDemo() {
 
 function renderTopBarSidebarButton() {
   return (
-    <GlassIconButton aria-label="打开侧边栏">
+    <FrostedIconButton aria-label="打开侧边栏">
       <Menu />
-    </GlassIconButton>
+    </FrostedIconButton>
   )
 }
 
 function renderTopBarSearchButton() {
   return (
-    <GlassIconButton aria-label="搜索">
+    <FrostedIconButton aria-label="搜索">
       <Search />
-    </GlassIconButton>
+    </FrostedIconButton>
   )
 }
 

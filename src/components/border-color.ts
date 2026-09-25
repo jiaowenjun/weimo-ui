@@ -10,7 +10,7 @@ export const borderColorToneMap = {
     },
     className: 'border-color--disable',
     description: '禁用控件边界，用于保留轮廓但降低可操作暗示。',
-    uiUsage: 'GlassIconButton disabled outline、disabled control boundary',
+    uiUsage: 'FrostedIconButton disabled outline、disabled control boundary',
     bijiUsage: '继承 shared 禁用边框语义',
   },
   divider: {
@@ -34,7 +34,7 @@ export const borderColorToneMap = {
     },
     className: 'border-color--default',
     description: '默认 surface 外框和控件边界，用于区分容器与页面背景。',
-    uiUsage: 'Card/SideBar/docs preview surface、MdEditor、Coss button outline、Markdown pre/image border、GlassSurface border',
+    uiUsage: 'Card/SideBar/docs preview surface、MdEditor、Coss button outline、Markdown pre/image border、FrostedSurface border',
     bijiUsage: 'Form controls、Auth shell、memo-list state、RefCard',
   },
   emphasis: {

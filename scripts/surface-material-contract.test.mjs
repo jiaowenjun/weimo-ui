@@ -77,7 +77,7 @@ for (const snippet of [
   "registryName: 'card-surface'",
   "packageExport: './components/card-surface'",
   "group: 'surface-material'",
-  "id: 'glass-surface'",
+  "id: 'frosted-surface'",
   "id: 'popup-surface'",
   "registryName: 'popup-surface'",
   "packageExport: './components/popup-surface'",
@@ -85,7 +85,7 @@ for (const snippet of [
   assert.ok(manifestSource.includes(snippet), `components-manifest.ts must include ${snippet}.`)
 }
 assert.ok(
-  manifestSource.indexOf("id: 'glass-surface'") < manifestSource.indexOf("id: 'popup-surface'") &&
+  manifestSource.indexOf("id: 'frosted-surface'") < manifestSource.indexOf("id: 'popup-surface'") &&
     manifestSource.indexOf("id: 'popup-surface'") < manifestSource.indexOf("id: 'surface'"),
   'Surface / 材质 manifest entries must stay sorted by component name.',
 )
@@ -154,7 +154,7 @@ for (const snippet of [
   'label="卡片材质"',
   '<div aria-hidden="true" className="card-surface-preview">',
   '<CardSurface className="card-surface-preview__tile">',
-  '<GlassSurface bordered={bordered} className="glass-surface-preview__tile">',
+  '<FrostedSurface bordered={bordered} className="frosted-surface-preview__tile">',
   'function PopupSurfacePreview()',
   'label="浮层材质"',
   '<PopupSurface className="popup-surface-preview__tile">',
@@ -192,18 +192,18 @@ assert.ok(
     !appCss.includes('.popup-surface-preview__tile[data-level="tooltip"]'),
   'PopupSurface demo must render only the modal tile; the tooltip level stays a component feature, not a docs sample.',
 )
-const glassSurfaceTileOnlyBlock = blockFor(appCss, '.glass-surface-preview__tile')
+const frostedSurfaceTileOnlyBlock = blockFor(appCss, '.frosted-surface-preview__tile')
 assert.ok(
   appCss.includes(
-    '.card-surface-preview__tile,\n.glass-surface-preview__tile,\n.popup-surface-preview__tile {\n  display: grid;\n  gap: 6px;\n  width: 260px;\n  max-width: 100%;\n  padding: 18px;\n  justify-items: center;\n  text-align: center;\n}',
+    '.card-surface-preview__tile,\n.frosted-surface-preview__tile,\n.popup-surface-preview__tile {\n  display: grid;\n  gap: 6px;\n  width: 260px;\n  max-width: 100%;\n  padding: 18px;\n  justify-items: center;\n  text-align: center;\n}',
   ) &&
-    !glassSurfaceTileOnlyBlock.includes('min-height') &&
-    !glassSurfaceTileOnlyBlock.includes('align-content'),
+    !frostedSurfaceTileOnlyBlock.includes('min-height') &&
+    !frostedSurfaceTileOnlyBlock.includes('align-content'),
   'All three Surface demo tiles must share one size box: no glass-only min-height, identical padding and caption line heights.',
 )
 assert.ok(
   !appCss.includes('.card-surface-preview,\n.popup-surface-preview {') &&
-    !appCss.includes('.glass-surface-preview {') &&
+    !appCss.includes('.frosted-surface-preview {') &&
     !appCss.includes('\n  height: 180px;'),
   'Surface page demo canvases must drop the fixed 180px height and custom canvas padding, inheriting the ComponentPreviewCard default rhythm.',
 )

@@ -16,12 +16,12 @@ const dialogCss = readProjectFile('src/components/coss/dialog.css')
 const popupSurfaceCss = readProjectFile('src/components/popup-surface.css')
 const inputGroupSource = readProjectFile('src/components/coss/input-group.tsx')
 const inputGroupCss = readProjectFile('src/components/coss/input-group.css')
-const glassSurfaceCss = readProjectFile('src/components/glass-surface.css')
+const frostedSurfaceCss = readProjectFile('src/components/frosted-surface.css')
 const scrollAreaSource = readProjectFile('src/components/coss/scroll-area.tsx')
 const scrollAreaCss = readProjectFile('src/components/coss/scroll-area.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
-const glassSurfaceBlock =
-  glassSurfaceCss.match(/\.glass-surface\s*\{(?<block>[^}]*)\}/)?.groups?.block ?? ''
+const frostedSurfaceBlock =
+  frostedSurfaceCss.match(/\.frosted-surface\s*\{(?<block>[^}]*)\}/)?.groups?.block ?? ''
 
 assert.ok(
   dialogSource.includes("import { Dialog as BaseDialog } from '@base-ui/react/dialog'") &&
@@ -106,18 +106,18 @@ assert.ok(
   'coss input-group CSS must keep empty and filled groups the same height while padding input text away from the left border.',
 )
 assert.ok(
-  inputGroupSource.includes("getGlassSurfaceClassName('coss-input-group', className)") &&
-    !inputGroupSource.includes('getGlassSurfaceAttributes') &&
-    glassSurfaceBlock.includes('border: 1px solid transparent;') &&
-    glassSurfaceCss.includes('.glass-surface--bordered {') &&
-    glassSurfaceCss.includes('border-color: var(--glass-surface-border);') &&
-    !glassSurfaceBlock.includes('background: var(--glass-gradient);') &&
-    !glassSurfaceBlock.includes('linear-gradient') &&
-    !glassSurfaceCss.includes('box-shadow:') &&
-    !glassSurfaceCss.includes('--glass-shadow') &&
-    glassSurfaceBlock.includes('backdrop-filter: blur(var(--glass-blur));') &&
-    glassSurfaceBlock.includes('-webkit-backdrop-filter: blur(var(--glass-blur));'),
-  'coss input-group must compose the shared Weimo frosted GlassSurface material without a gradient background.',
+  inputGroupSource.includes("getFrostedSurfaceClassName('coss-input-group', className)") &&
+    !inputGroupSource.includes('getFrostedSurfaceAttributes') &&
+    frostedSurfaceBlock.includes('border: 1px solid transparent;') &&
+    frostedSurfaceCss.includes('.frosted-surface--bordered {') &&
+    frostedSurfaceCss.includes('border-color: var(--glass-surface-border);') &&
+    !frostedSurfaceBlock.includes('background: var(--glass-gradient);') &&
+    !frostedSurfaceBlock.includes('linear-gradient') &&
+    !frostedSurfaceCss.includes('box-shadow:') &&
+    !frostedSurfaceCss.includes('--glass-shadow') &&
+    frostedSurfaceBlock.includes('backdrop-filter: blur(var(--glass-blur));') &&
+    frostedSurfaceBlock.includes('-webkit-backdrop-filter: blur(var(--glass-blur));'),
+  'coss input-group must compose the shared Weimo frosted FrostedSurface material without a gradient background.',
 )
 
 assert.ok(

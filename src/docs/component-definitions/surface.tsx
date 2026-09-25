@@ -2,7 +2,7 @@ import { useState } from 'react'
 import type { ReactNode } from 'react'
 
 import { CardSurface } from '../../components/card-surface'
-import { GlassSurface, useGlassSurfaceBackgroundToneRef } from '../../components/glass-surface'
+import { FrostedSurface, useFrostedSurfaceBackgroundToneRef } from '../../components/frosted-surface'
 import { PopupSurface } from '../../components/popup-surface'
 import { LiquidGlassSurface } from '../../components/liquid-glass'
 import { ComponentPreviewCard } from '../../components/component-preview-card'
@@ -23,7 +23,7 @@ function CardSurfacePreview() {
   )
 }
 
-function GlassSurfacePreview() {
+function FrostedSurfacePreview() {
   const [bordered, setBordered] = useState(false)
 
   return (
@@ -33,10 +33,10 @@ function GlassSurfacePreview() {
       }
       label="磨砂材质"
     >
-      <GlassSurface bordered={bordered} className="glass-surface-preview__tile">
-        <span className="glass-surface-preview__title">Glass Surface</span>
-        <span className="glass-surface-preview__meta">前景色随背景亮度自适应明暗</span>
-      </GlassSurface>
+      <FrostedSurface bordered={bordered} className="frosted-surface-preview__tile">
+        <span className="frosted-surface-preview__title">Frosted Surface</span>
+        <span className="frosted-surface-preview__meta">前景色随背景亮度自适应明暗</span>
+      </FrostedSurface>
     </GlassPreviewCard>
   )
 }
@@ -53,7 +53,7 @@ function LiquidGlassTile({
   className?: string
 }) {
   const { backgroundTone, setElementRef } =
-    useGlassSurfaceBackgroundToneRef<HTMLDivElement>(true)
+    useFrostedSurfaceBackgroundToneRef<HTMLDivElement>(true)
 
   return (
     <div
@@ -72,7 +72,7 @@ function LiquidGlassPreview() {
     <GlassPreviewCard label="液态玻璃材质">
       <div className="liquid-glass-preview">
         <LiquidGlassTile className="liquid-glass-preview__tile">
-          <LiquidGlassSurface cornerRadius={16} padding="14px 20px">
+          <LiquidGlassSurface cornerRadius={16} padding="20px">
             <div className="liquid-glass-preview__content">
               <span className="liquid-glass-preview__title">Liquid Glass</span>
               <span className="liquid-glass-preview__meta">位移贴图折射背景、边缘色差与高光</span>
@@ -103,7 +103,7 @@ function SurfaceDemo() {
   return (
     <>
       <CardSurfacePreview />
-      <GlassSurfacePreview />
+      <FrostedSurfacePreview />
       <LiquidGlassPreview />
       <PopupSurfacePreview />
     </>
@@ -118,7 +118,7 @@ export const surfaceDefinition = {
   searchAliases: [
     'Surface',
     'CardSurface',
-    'GlassSurface',
+    'FrostedSurface',
     'PopupSurface',
     'LiquidGlass',
     'LiquidGlassSurface',

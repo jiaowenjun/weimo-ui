@@ -1,4 +1,4 @@
-import { GlassIconButton } from '../src/components/glass-icon-button'
+import { FrostedIconButton } from '../src/components/frosted-icon-button'
 import { GhostIconButton } from '../src/components/ghost-icon-button'
 import { TextButton, type TextButtonProps } from '../src/components/text-button'
 import type { SideBarShellProps } from '../src/components/sidebar'
@@ -16,11 +16,11 @@ import {
 } from '../src/components/pressable'
 
 const textButtonProps: TextButtonProps = { disabled: false, type: 'button' }
-const glassIconButton = <GlassIconButton aria-label="Glass action" />
+const glassIconButton = <FrostedIconButton aria-label="Glass action" />
 const ghostIconButton = <GhostIconButton aria-label="Ghost action" />
 const textButton = <TextButton {...textButtonProps}>Text action</TextButton>
-// @ts-expect-error GlassIconButton does not expose the removed variant prop.
-const glassIconButtonRejectsVariant = <GlassIconButton aria-label="Glass" variant="glass" />
+// @ts-expect-error FrostedIconButton does not expose the removed variant prop.
+const glassIconButtonRejectsVariant = <FrostedIconButton aria-label="Glass" variant="glass" />
 // @ts-expect-error GhostIconButton does not expose the removed variant prop.
 const ghostIconButtonRejectsVariant = <GhostIconButton aria-label="Ghost" variant="ghost" />
 // @ts-expect-error TextButton stays a native button surface without variants.

@@ -9,11 +9,11 @@ import {
   getAnimatedInlineSizeStyle,
   useAnimatedInlineSize,
 } from './animated-inline-size-model'
-import { useGlassSurfaceBackgroundToneRef } from './glass-surface'
+import { useFrostedSurfaceBackgroundToneRef } from './frosted-surface'
 
 import './chip-surface.css'
 import './chip.css'
-import './glass-surface.css'
+import './frosted-surface.css'
 
 export type ChipVariant = 'default' | 'glass'
 export type ChipTextSize = 'sm' | 'base' | 'lg'
@@ -50,7 +50,7 @@ export function Chip({
 
   const isGlassVariant = variant === 'glass'
   const { backgroundTone, setElementRef } =
-    useGlassSurfaceBackgroundToneRef<HTMLSpanElement>(isGlassVariant)
+    useFrostedSurfaceBackgroundToneRef<HTMLSpanElement>(isGlassVariant)
   const { measureRef, inlineSize } = useAnimatedInlineSize([
     prefix,
     content,
@@ -64,7 +64,7 @@ export function Chip({
     <>
       <span
         className={getChipSurfaceClassName(
-          isGlassVariant && 'glass-surface',
+          isGlassVariant && 'frosted-surface',
           'chip',
           className,
         )}
@@ -91,7 +91,7 @@ export function Chip({
       <AnimatedInlineSizeMeasure measureRef={measureRef}>
         <span
           className={getChipSurfaceClassName(
-            isGlassVariant && 'glass-surface',
+            isGlassVariant && 'frosted-surface',
             'chip',
             className,
           )}

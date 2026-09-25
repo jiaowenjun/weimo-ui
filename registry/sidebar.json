@@ -31,19 +31,19 @@
       "target": "@ui/sidebar/sidebar-shell.css"
     },
     {
-      "path": "src/components/glass-surface.tsx",
+      "path": "src/components/frosted-surface.tsx",
       "type": "registry:ui",
-      "target": "@ui/glass-surface.tsx"
+      "target": "@ui/frosted-surface.tsx"
     },
     {
-      "path": "src/components/glass-surface-model.ts",
+      "path": "src/components/frosted-surface-model.ts",
       "type": "registry:ui",
-      "target": "@ui/glass-surface-model.ts"
+      "target": "@ui/frosted-surface-model.ts"
     },
     {
-      "path": "src/components/glass-surface.css",
+      "path": "src/components/frosted-surface.css",
       "type": "registry:ui",
-      "target": "@ui/glass-surface.css"
+      "target": "@ui/frosted-surface.css"
     },
     {
       "path": "src/components/card-surface.tsx",

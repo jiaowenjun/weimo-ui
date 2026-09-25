@@ -144,7 +144,7 @@ for (const snippet of [
   "buttonProps={{ size: 'sm' }}",
   '编辑',
   "id: 'button'",
-  "summary: '文本按钮、幽灵/玻璃图标按钮、玻璃图标按钮组与模式按钮的按钮总览'",
+  "summary: '文本按钮、幽灵/磨砂图标按钮、磨砂图标按钮组与模式按钮的按钮总览'",
   'preview: () => <ButtonDemo />',
   '<ModeButtonDemo />',
 ]) {

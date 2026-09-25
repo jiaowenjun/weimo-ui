@@ -53,7 +53,7 @@ for (const snippet of [
   "import { forwardRef, type ComponentPropsWithoutRef, type ReactNode } from 'react'",
   "import { Check } from 'lucide-react'",
   "import { BottomBar } from './bottom-bar'",
-  "import { GlassIconButton } from './glass-icon-button'",
+  "import { FrostedIconButton } from './frosted-icon-button'",
   "import { cn } from './lib/utils'",
   "import './card-tool-bar.css'",
   'export type CardToolBarProps',

@@ -179,7 +179,7 @@ import { ImageUploader } from "@/components/ui/image-uploader"
 import { OcrComposer } from "@/components/ui/ocr-composer"
 import { OcrCard } from "@/components/ui/ocr-card"
 import { TopBar } from "@/components/ui/top-bar"
-import { GlassIconButton } from "@/components/ui/glass-icon-button"
+import { FrostedIconButton } from "@/components/ui/frosted-icon-button"
 import { GhostIconButton } from "@/components/ui/ghost-icon-button"
 import { TextButton } from "@/components/ui/text-button"
 	import {
@@ -206,7 +206,7 @@ import { StatGroup } from "@/components/ui/stat-group"
 import { TagPicker, type TagPickerApplyPayload } from "@/components/ui/tag-picker"
 import { TagBread } from "@/components/ui/tag-bread"
 import { ImageView, ImageViewDisplayModeMenu, type ImageViewDisplayMode } from "@/components/ui/image-view"
-import { GlassSurface } from "@/components/ui/glass-surface"
+import { FrostedSurface } from "@/components/ui/frosted-surface"
 import { FloatBar } from "@/components/ui/float-bar"
 import { BottomBar } from "@/components/ui/bottom-bar"
 import { CardTopBar } from "@/components/ui/card-top-bar"
@@ -321,7 +321,7 @@ export function RegistryConsumerContract() {
         open
         src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 240'%3E%3Crect width='320' height='240' fill='%23f8fafc'/%3E%3Ctext x='32' y='96' font-size='28'%3EDetail View%3C/text%3E%3C/svg%3E"
       />
-      <GlassSurface>Glass surface</GlassSurface>
+      <FrostedSurface>Glass surface</FrostedSurface>
       <FloatBar leftSlot={<span>Left</span>} centerSlot={<span>Center</span>} rightSlot={<span>Right</span>} />
       <BottomBar leftSlot={<span>Draft</span>} rightSlot={<button type="button">Save</button>} />
       <CardTopBar mode="display" createdAtText="今天 14:06" onAction={() => {}} />
@@ -343,9 +343,9 @@ export function RegistryConsumerContract() {
       <MdEditor value={"## Editor"} onChange={() => {}} />
       <MdView mode="view" value={"## View"} />
       <MathEditor dialog={mathDialog} onOpenChange={() => {}} onSave={() => {}} />
-      <GlassIconButton aria-label="Open">
+      <FrostedIconButton aria-label="Open">
         <PanelLeft />
-      </GlassIconButton>
+      </FrostedIconButton>
       <StatGroup
         items={[
           { key: "notes", value: "128", label: "笔记" },
@@ -433,14 +433,14 @@ export function RegistryConsumerContract() {
       <TopBar
         className="topbar-extra"
         leftSlot={
-          <GlassIconButton aria-label="Open navigation">
+          <FrostedIconButton aria-label="Open navigation">
             <PanelLeft />
-          </GlassIconButton>
+          </FrostedIconButton>
         }
         rightSlot={
-          <GlassIconButton aria-label="Search">
+          <FrostedIconButton aria-label="Search">
             <PanelLeft />
-          </GlassIconButton>
+          </FrostedIconButton>
         }
       />
       <SideBar open={false} onClose={() => {}} className="sidebar-extra">
@@ -567,7 +567,7 @@ try {
   await runShadcnAdd(consumerDir, '@weimo/image-uploader')
   await runShadcnAdd(consumerDir, '@weimo/ocr-composer')
   await runShadcnAdd(consumerDir, '@weimo/ocr-card')
-  await runShadcnAdd(consumerDir, '@weimo/glass-icon-button')
+  await runShadcnAdd(consumerDir, '@weimo/frosted-icon-button')
   await runShadcnAdd(consumerDir, '@weimo/ghost-icon-button')
   await runShadcnAdd(consumerDir, '@weimo/text-button')
   await runShadcnAdd(consumerDir, '@weimo/tag-picker')
@@ -589,7 +589,7 @@ try {
   await runShadcnAdd(consumerDir, '@weimo/tag-tree')
   for (const item of [
     '@weimo/image-view',
-    '@weimo/glass-surface',
+    '@weimo/frosted-surface',
     '@weimo/float-bar',
     '@weimo/bottom-bar',
     '@weimo/card-top-bar',
@@ -637,7 +637,7 @@ try {
     'md-render.json',
     'chip-button.json',
     'md-editor.json',
-    'glass-surface.json',
+    'frosted-surface.json',
     'float-bar.json',
     'bottom-bar.json',
     'card-top-bar.json',
@@ -714,8 +714,8 @@ try {
     'Smoke test must install the explicitly requested ComponentPreviewCard item through the local @weimo registry.',
   )
   assert.ok(
-    hits.includes('glass-icon-button.json') && hits.includes('ghost-icon-button.json'),
-    'Smoke test must install the explicitly requested GlassIconButton and GhostIconButton items through the local @weimo registry.',
+    hits.includes('frosted-icon-button.json') && hits.includes('ghost-icon-button.json'),
+    'Smoke test must install the explicitly requested FrostedIconButton and GhostIconButton items through the local @weimo registry.',
   )
   assert.ok(
     hits.includes('menu.json'),
@@ -772,10 +772,10 @@ try {
     'shadcn add must write internal ChipSurface files used by Card TagBar and TagBread.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/glass-surface.tsx')) &&
-      existsSync(join(consumerDir, 'src/components/ui/glass-surface-model.ts')) &&
-      existsSync(join(consumerDir, 'src/components/ui/glass-surface.css')),
-    'shadcn add must write GlassSurface files from the configured custom registry.',
+    existsSync(join(consumerDir, 'src/components/ui/frosted-surface.tsx')) &&
+      existsSync(join(consumerDir, 'src/components/ui/frosted-surface-model.ts')) &&
+      existsSync(join(consumerDir, 'src/components/ui/frosted-surface.css')),
+    'shadcn add must write FrostedSurface files from the configured custom registry.',
   )
   assert.ok(
     !existsSync(join(consumerDir, 'src/components/ui/smart-glass-surface.tsx')) &&
@@ -987,14 +987,14 @@ try {
     'shadcn add must write Heatmap sidecar CSS from the configured custom registry.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/glass-icon-button.tsx')) &&
+    existsSync(join(consumerDir, 'src/components/ui/frosted-icon-button.tsx')) &&
       existsSync(join(consumerDir, 'src/components/ui/ghost-icon-button.tsx')) &&
       existsSync(join(consumerDir, 'src/components/ui/icon-button-model.ts')),
-    'shadcn add must write explicitly requested GlassIconButton and GhostIconButton files from the configured custom registry.',
+    'shadcn add must write explicitly requested FrostedIconButton and GhostIconButton files from the configured custom registry.',
   )
   assert.ok(
     existsSync(join(consumerDir, 'src/components/ui/icon-button.css')),
-    'shadcn add must write shared icon button CSS because installed components use GlassIconButton and GhostIconButton.',
+    'shadcn add must write shared icon button CSS because installed components use FrostedIconButton and GhostIconButton.',
   )
   assert.ok(
     existsSync(join(consumerDir, 'src/components/ui/text-button.tsx')) &&
@@ -1259,7 +1259,7 @@ try {
   assert.ok(
     cardToolBarSource.includes('export const CardToolBar = forwardRef<HTMLDivElement, CardToolBarProps>(function CardToolBar') &&
       cardToolBarSource.includes("from './bottom-bar'") &&
-      cardToolBarSource.includes("from './glass-icon-button'") &&
+      cardToolBarSource.includes("from './frosted-icon-button'") &&
       cardToolBarSource.includes("import { Check } from 'lucide-react'") &&
       cardToolBarSource.includes('toolbarSlot?: ReactNode') &&
       cardToolBarSource.includes('saveDisabled?: boolean') &&
@@ -1458,19 +1458,19 @@ try {
     tagPickerSource.includes("from '../coss/input-group'") &&
     !tagPickerSource.includes("from '../bottom-bar'") &&
     tagPickerSource.includes("from '../action-dialog'") &&
-    tagPickerSource.includes("from '../glass-icon-button'") &&
+    tagPickerSource.includes("from '../frosted-icon-button'") &&
     tagPickerSource.includes('<ActionDialog') &&
     tagPickerSource.includes('bottomBarLabel="标签选择器输入栏"') &&
     tagPickerSource.includes('bottomBarClassName="tag-picker__bottom-float-bar"') &&
     tagPickerSource.includes('bottomBarLeftSlot={') &&
     inputGroupSource.includes("data-slot=\"input-group\""),
-    'Installed TagPicker must use ActionDialog bottomBarLeftSlot with shipped InputGroup and GlassIconButton dependencies.',
+    'Installed TagPicker must use ActionDialog bottomBarLeftSlot with shipped InputGroup and FrostedIconButton dependencies.',
   )
   assert.ok(
     actionDialogSource.includes("import { BottomBar } from './bottom-bar'") &&
     actionDialogSource.includes("import { FloatBar } from './float-bar'") &&
     actionDialogSource.includes("from './coss/dialog'") &&
-    actionDialogSource.includes("from './glass-icon-button'") &&
+    actionDialogSource.includes("from './frosted-icon-button'") &&
     actionDialogSource.includes('bottomBarLeftSlot?: ReactNode') &&
     actionDialogSource.includes('bottomBarRightSlot?: ReactNode') &&
     actionDialogSource.includes('showCloseButton?: boolean') &&
@@ -1482,7 +1482,7 @@ try {
     actionDialogSource.includes('<BottomBar') &&
     actionDialogSource.includes('leftSlot={bottomBarLeftSlot}') &&
     actionDialogSource.includes('rightSlot={bottomBarRightSlot}'),
-    'Installed ActionDialog must compose installed internal BottomBar, FloatBar, coss Dialog, GlassIconButton, and right toolbar slot files.',
+    'Installed ActionDialog must compose installed internal BottomBar, FloatBar, coss Dialog, FrostedIconButton, and right toolbar slot files.',
   )
   assert.ok(
     bottomBarSource.includes("import { FloatBar } from './float-bar'") &&

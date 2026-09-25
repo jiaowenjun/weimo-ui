@@ -285,19 +285,19 @@ assertDecodablePngDataUrl(
   'ImageView detail preview sample image',
 )
 assert.ok(
-    componentDefinitionsSource.includes("import { GlassSurface, useGlassSurfaceBackgroundToneRef } from '../../components/glass-surface'") &&
+    componentDefinitionsSource.includes("import { FrostedSurface, useFrostedSurfaceBackgroundToneRef } from '../../components/frosted-surface'") &&
     componentDefinitionsSource.includes("id: 'surface'") &&
     componentDefinitionsSource.includes('静态卡片、亮度自适应磨砂玻璃层、液态玻璃与抬升浮层的材质总览') &&
     componentDefinitionsSource.includes("from '../glass-preview-card'") &&
     componentDefinitionsSource.includes('<GlassPreviewCard') &&
-    !componentDefinitionsSource.includes('glass-surface-preview__scroll') &&
-    !componentDefinitionsSource.includes('glass-surface-preview__fixed') &&
-    componentDefinitionsSource.includes('<GlassSurface bordered={bordered} className="glass-surface-preview__tile">') &&
-    !componentDefinitionsSource.includes('glass-surface-preview__sticky'),
-  'GlassSurface detail page must render a slider-driven dark-to-light adaptive material preview via the shared GlassPreviewCard.',
+    !componentDefinitionsSource.includes('frosted-surface-preview__scroll') &&
+    !componentDefinitionsSource.includes('frosted-surface-preview__fixed') &&
+    componentDefinitionsSource.includes('<FrostedSurface bordered={bordered} className="frosted-surface-preview__tile">') &&
+    !componentDefinitionsSource.includes('frosted-surface-preview__sticky'),
+  'FrostedSurface detail page must render a slider-driven dark-to-light adaptive material preview via the shared GlassPreviewCard.',
 )
 assert.ok(
-    buttonDefinitionSource.includes("import { GlassIconButton } from '../../components/glass-icon-button'") &&
+    buttonDefinitionSource.includes("import { FrostedIconButton } from '../../components/frosted-icon-button'") &&
     buttonDefinitionSource.includes("import { PreviewToggle } from '../preview-toggle'") &&
     buttonDefinitionSource.includes("import { useState } from 'react'") &&
     buttonDefinitionSource.includes("import { TextButton } from '../../components/text-button'") &&
@@ -305,7 +305,7 @@ assert.ok(
     !buttonDefinitionSource.includes('glassIconButtonPreviewScenes') &&
     buttonDefinitionSource.includes("from '../glass-preview-card'") &&
     buttonDefinitionSource.includes('<GlassPreviewCard') &&
-    buttonDefinitionSource.includes('label="玻璃图标按钮"') &&
+    buttonDefinitionSource.includes('label="磨砂图标按钮"') &&
     buttonDefinitionSource.includes('className="icon-button-preview"') &&
     !buttonDefinitionSource.includes('icon-preview__scene--light-gradient') &&
     !buttonDefinitionSource.includes('icon-preview__scene--dark-solid') &&
@@ -313,7 +313,7 @@ assert.ok(
     !buttonDefinitionSource.includes('title:') &&
     !buttonDefinitionSource.includes('icon-preview__scene-title') &&
     !buttonDefinitionSource.includes('scene.title') &&
-    buttonDefinitionSource.includes('function GlassIconButtonPreview()') &&
+    buttonDefinitionSource.includes('function FrostedIconButtonPreview()') &&
     buttonDefinitionSource.includes('const [disabled, setDisabled] = useState(false)') &&
     buttonDefinitionSource.includes('setDisabled(!checked)') &&
     buttonDefinitionSource.includes('checked={!disabled}') &&
@@ -324,11 +324,11 @@ assert.ok(
     !buttonDefinitionSource.includes("from '../../components/coss/button'") &&
     !buttonDefinitionSource.includes("variant=\"outline\"") &&
     !buttonDefinitionSource.includes('className={`icon-preview__scene icon-preview__scene--${scene.id}`}') &&
-    (buttonDefinitionSource.match(/<GlassIconButton\b[^>\n]*disabled=\{disabled\}/g) ?? []).length === 4 &&
-    buttonDefinitionSource.includes('<GlassIconButton aria-label="带边框菜单" bordered disabled={disabled}>') &&
+    (buttonDefinitionSource.match(/<FrostedIconButton\b[^>\n]*disabled=\{disabled\}/g) ?? []).length === 4 &&
+    buttonDefinitionSource.includes('<FrostedIconButton aria-label="带边框菜单" bordered disabled={disabled}>') &&
     !buttonDefinitionSource.includes('状态切换菜单') &&
     buttonDefinitionSource.includes('preview: () => <ButtonDemo />') &&
-    buttonDefinitionSource.includes('<GlassIconButtonPreview />') &&
+    buttonDefinitionSource.includes('<FrostedIconButtonPreview />') &&
     !componentDefinitionsSource.includes("from '../../components/icon-button'") &&
     !componentDefinitionsSource.includes("id: 'icon-button'") &&
     !componentDefinitionsSource.includes('<IconButton'),

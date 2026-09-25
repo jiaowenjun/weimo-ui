@@ -4,7 +4,7 @@ import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 
 import { CardTopBar } from './card-top-bar'
 import { ComposerShell } from './composer-shell'
-import { GlassIconButton } from './glass-icon-button'
+import { FrostedIconButton } from './frosted-icon-button'
 import { GhostIconButton } from './ghost-icon-button'
 import { ImageUploader, type ImageUploaderActionApi, type ImageUploaderProps } from './image-uploader'
 import { TagBar } from './tag-bar'
@@ -163,41 +163,41 @@ export function OcrComposer({
     >
       {!hasFile ? (
         <>
-          <GlassIconButton
+          <FrostedIconButton
             aria-label={resolvedLabels.selectImage}
             disabled={!canUseActions || !imageActions}
             onClick={() => imageActions?.select()}
             onMouseDown={(event) => event.preventDefault()}
           >
             <FileImage aria-hidden="true" />
-          </GlassIconButton>
-          <GlassIconButton
+          </FrostedIconButton>
+          <FrostedIconButton
             aria-label={resolvedLabels.pasteImage}
             disabled={!canUseActions || !imageActions?.canPasteClipboardImage}
             onClick={() => imageActions?.paste()}
             onMouseDown={(event) => event.preventDefault()}
           >
             <Clipboard aria-hidden="true" />
-          </GlassIconButton>
+          </FrostedIconButton>
         </>
       ) : (
         <>
-          <GlassIconButton
+          <FrostedIconButton
             aria-label={resolvedLabels.clearImage}
             disabled={!canUseActions || !imageActions}
             onClick={() => imageActions?.close()}
             onMouseDown={(event) => event.preventDefault()}
           >
             <X aria-hidden="true" />
-          </GlassIconButton>
-          <GlassIconButton
+          </FrostedIconButton>
+          <FrostedIconButton
             aria-label={resolvedLabels.save}
             disabled={!canUseActions}
             onClick={handleSave}
             onMouseDown={(event) => event.preventDefault()}
           >
             <Check aria-hidden="true" />
-          </GlassIconButton>
+          </FrostedIconButton>
         </>
       )}
     </div>

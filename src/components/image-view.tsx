@@ -10,7 +10,7 @@ import type {
 } from 'react'
 
 import { ActionDialog } from './action-dialog'
-import { GlassIconButton } from './glass-icon-button'
+import { FrostedIconButton } from './frosted-icon-button'
 import { cn } from './lib/utils'
 import { ActionMenu, type ActionMenuItem } from './menu'
 
@@ -131,13 +131,13 @@ export function ImageViewDisplayModeMenu({
       }}
       triggerProps={{
         render: (
-          <GlassIconButton
+          <FrostedIconButton
             aria-label="切换图片展示模式"
             className="image-view__mode-trigger"
             type="button"
           >
             {getImageViewDisplayModeIcon(displayMode)}
-          </GlassIconButton>
+          </FrostedIconButton>
         ),
       }}
     />

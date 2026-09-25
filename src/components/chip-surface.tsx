@@ -5,10 +5,10 @@ import {
   getChipSurfaceClassName,
   type ChipSurfaceOptions,
 } from './chip-surface-model'
-import { useGlassSurfaceBackgroundToneRef } from './glass-surface'
+import { useFrostedSurfaceBackgroundToneRef } from './frosted-surface'
 
 import './chip-surface.css'
-import './glass-surface.css'
+import './frosted-surface.css'
 
 export type {
   ChipSurfaceOptions,
@@ -29,11 +29,11 @@ export function ChipSurface({
 }: ChipSurfaceProps) {
   const isGlassVariant = variant === 'glass'
   const { backgroundTone, setElementRef } =
-    useGlassSurfaceBackgroundToneRef<HTMLSpanElement>(isGlassVariant)
+    useFrostedSurfaceBackgroundToneRef<HTMLSpanElement>(isGlassVariant)
 
   return (
     <span
-      className={getChipSurfaceClassName(isGlassVariant && 'glass-surface', className)}
+      className={getChipSurfaceClassName(isGlassVariant && 'frosted-surface', className)}
       data-background-tone={
         isGlassVariant ? backgroundTone ?? undefined : undefined
       }

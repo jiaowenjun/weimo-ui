@@ -105,9 +105,9 @@ for (const snippet of [
   'bordered = true',
   "variant = 'default'",
   "textSize = 'sm'",
-  "import { useGlassSurfaceBackgroundToneRef } from './glass-surface'",
-  "import './glass-surface.css'",
-  "isGlassVariant && 'glass-surface',",
+  "import { useFrostedSurfaceBackgroundToneRef } from './frosted-surface'",
+  "import './frosted-surface.css'",
+  "isGlassVariant && 'frosted-surface',",
   'isGlassVariant ? backgroundTone ?? undefined : undefined',
   "getChipSurfaceClassName(",
   'getChipSurfaceAttributes({ bordered, variant, textSize })',
@@ -211,7 +211,7 @@ assert.ok(
     docsSource.includes('label="胶囊字号"') &&
     docsSource.includes('function GlassChipDemo') &&
     docsSource.includes('<GlassChipDemo />') &&
-    docsSource.includes('label="玻璃态胶囊"') &&
+    docsSource.includes('label="磨砂态胶囊"') &&
     docsSource.includes('<GlassPreviewCard') &&
     docsSource.includes('<SurfaceBorderToggle bordered={bordered} onBorderedChange={setBordered} />') &&
     docsSource.includes('bordered={bordered}') &&

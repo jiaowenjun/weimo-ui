@@ -194,7 +194,7 @@ describe('shared CSS interfaces', () => {
 
     expect(
       cssDeclaration(
-        cssRuleWithDeclaration(root, '.icon-button--glass::after', 'pointer-events'),
+        cssRuleWithDeclaration(root, '.icon-button--frosted::after', 'pointer-events'),
         'pointer-events',
       ),
     ).toBe('none')

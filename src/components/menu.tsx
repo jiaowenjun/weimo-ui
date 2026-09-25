@@ -3,9 +3,9 @@ import { Check, ChevronRight, Circle, MoreHorizontal } from 'lucide-react'
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 
 import {
-  getGlassSurfaceClassName,
-  useGlassSurfaceBackgroundToneRef,
-} from './glass-surface'
+  getFrostedSurfaceClassName,
+  useFrostedSurfaceBackgroundToneRef,
+} from './frosted-surface'
 import { cn } from './lib/utils'
 import {
   menuItemVariants,
@@ -13,7 +13,7 @@ import {
   type MenuItemStyleProps,
 } from './menu/menu-variants'
 
-import './glass-surface.css'
+import './frosted-surface.css'
 import './menu.css'
 
 export type { MenuItemVariant } from './menu/menu-variants'
@@ -82,7 +82,7 @@ export function MenuPopup({
   ...props
 }: MenuPopupProps) {
   const { backgroundTone, setElementRef } =
-    useGlassSurfaceBackgroundToneRef<HTMLDivElement>(true)
+    useFrostedSurfaceBackgroundToneRef<HTMLDivElement>(true)
 
   return (
     <BaseMenu.Portal {...portalProps}>
@@ -102,9 +102,9 @@ export function MenuPopup({
         sticky={sticky}
       >
         <BaseMenu.Popup
-          className={getGlassSurfaceClassName(
+          className={getFrostedSurfaceClassName(
             'weimo-menu__popup',
-            'glass-surface--bordered',
+            'frosted-surface--bordered',
             className,
           )}
           data-background-tone={backgroundTone ?? undefined}

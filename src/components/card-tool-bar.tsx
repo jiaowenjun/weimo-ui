@@ -2,7 +2,7 @@ import { forwardRef, type ComponentPropsWithoutRef, type ReactNode } from 'react
 import { Check } from 'lucide-react'
 
 import { BottomBar } from './bottom-bar'
-import { GlassIconButton } from './glass-icon-button'
+import { FrostedIconButton } from './frosted-icon-button'
 import { cn } from './lib/utils'
 
 import './card-tool-bar.css'
@@ -35,14 +35,14 @@ export const CardToolBar = forwardRef<HTMLDivElement, CardToolBarProps>(function
       leftSlot={toolbarSlot}
       rightSlot={
         <div className="weimo-card-tool-bar__actions">
-          <GlassIconButton
+          <FrostedIconButton
             aria-label={saveLabel}
             disabled={disabled || saveDisabled}
             onClick={onSave}
             onMouseDown={(event) => event.preventDefault()}
           >
             <Check />
-          </GlassIconButton>
+          </FrostedIconButton>
         </div>
       }
     />

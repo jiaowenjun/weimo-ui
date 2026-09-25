@@ -17,7 +17,7 @@
     "@weimo/utils",
     "@weimo/float-bar",
     "@weimo/bottom-bar",
-    "@weimo/glass-icon-button"
+    "@weimo/frosted-icon-button"
   ],
   "files": [
     {
@@ -41,9 +41,9 @@
       "target": "@ui/coss/dialog.css"
     },
     {
-      "path": "src/components/glass-icon-button.tsx",
+      "path": "src/components/frosted-icon-button.tsx",
       "type": "registry:ui",
-      "target": "@ui/glass-icon-button.tsx"
+      "target": "@ui/frosted-icon-button.tsx"
     },
     {
       "path": "src/components/icon-button-model.ts",
@@ -56,19 +56,19 @@
       "target": "@ui/icon-button.css"
     },
     {
-      "path": "src/components/glass-surface.tsx",
+      "path": "src/components/frosted-surface.tsx",
       "type": "registry:ui",
-      "target": "@ui/glass-surface.tsx"
+      "target": "@ui/frosted-surface.tsx"
     },
     {
-      "path": "src/components/glass-surface-model.ts",
+      "path": "src/components/frosted-surface-model.ts",
       "type": "registry:ui",
-      "target": "@ui/glass-surface-model.ts"
+      "target": "@ui/frosted-surface-model.ts"
     },
     {
-      "path": "src/components/glass-surface.css",
+      "path": "src/components/frosted-surface.css",
       "type": "registry:ui",
-      "target": "@ui/glass-surface.css"
+      "target": "@ui/frosted-surface.css"
     },
     {
       "path": "src/components/popup-surface.tsx",

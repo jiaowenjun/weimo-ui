@@ -128,7 +128,7 @@ for (const snippet of [
   'ReactNode,',
   'Ref,',
   "import { ActionDialog } from './action-dialog'",
-  "import { GlassIconButton } from './glass-icon-button'",
+  "import { FrostedIconButton } from './frosted-icon-button'",
   "import { cn } from './lib/utils'",
   "import { ActionMenu, type ActionMenuItem } from './menu'",
   "import './image-view.css'",
@@ -156,7 +156,7 @@ for (const snippet of [
   '<ActionMenu',
   'ariaLabel="切换图片展示模式"',
   'items={IMAGE_VIEW_DISPLAY_MODE_ITEMS}',
-  '<GlassIconButton',
+  '<FrostedIconButton',
   'className="image-view__mode-trigger"',
   'export function ImageView',
   'const [detailDisplayMode, setDetailDisplayMode] = useState<ImageViewDisplayMode>(DEFAULT_IMAGE_VIEW_DISPLAY_MODE)',
@@ -289,7 +289,7 @@ assert.deepEqual(
 )
 assert.deepEqual(
   registryItem.registryDependencies,
-  ['@weimo/style', '@weimo/utils', '@weimo/action-dialog', '@weimo/glass-icon-button', '@weimo/menu'],
+  ['@weimo/style', '@weimo/utils', '@weimo/action-dialog', '@weimo/frosted-icon-button', '@weimo/menu'],
   'ImageView registry item must install style, utils, ActionDialog, glass button, and menu.',
 )
 for (const filePath of [

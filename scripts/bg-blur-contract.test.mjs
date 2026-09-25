@@ -30,7 +30,7 @@ function blockFor(source, selector) {
 const expectedTones = [
   {
     tone: 'glass',
-    label: '玻璃材质',
+    label: '磨砂材质',
     backgroundToken: 'none',
     blurToken: '--glass-blur',
     blurValue: '14px',
@@ -59,7 +59,7 @@ const docsDefinitionSource = readProjectFile('src/docs/component-definitions/bac
 const appCss = readProjectFile('src/App.css')
 const tokenPreviewCardCss = readProjectFile('src/components/component-preview-card.css')
 const tokensCss = readProjectFile('src/styles/tokens.css')
-const glassSurfaceCss = readProjectFile('src/components/glass-surface.css')
+const frostedSurfaceCss = readProjectFile('src/components/frosted-surface.css')
 const chipSurfaceCss = readProjectFile('src/components/chip-surface.css')
 const commandCss = readProjectFile('src/components/coss/command.css')
 const dialogCss = readProjectFile('src/components/coss/dialog.css')
@@ -208,9 +208,9 @@ assert.ok(
   'ChipSurface glass must keep the shared blur while removing the shared glass background gradient token.',
 )
 assert.ok(
-  blockFor(glassSurfaceCss, '.glass-surface').includes('backdrop-filter: blur(var(--glass-blur));') &&
-    !blockFor(glassSurfaceCss, '.glass-surface').includes('background: var(--glass-gradient);'),
-  'GlassSurface currently owns only the shared glass blur.',
+  blockFor(frostedSurfaceCss, '.frosted-surface').includes('backdrop-filter: blur(var(--glass-blur));') &&
+    !blockFor(frostedSurfaceCss, '.frosted-surface').includes('background: var(--glass-gradient);'),
+  'FrostedSurface currently owns only the shared glass blur.',
 )
 
 for (const [source, selector] of [

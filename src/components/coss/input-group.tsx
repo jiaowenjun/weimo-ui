@@ -1,9 +1,9 @@
 import type { ComponentPropsWithoutRef, MouseEvent } from 'react'
 
-import { getGlassSurfaceClassName } from '../glass-surface-model'
+import { getFrostedSurfaceClassName } from '../frosted-surface-model'
 import { cn } from '../lib/utils'
 
-import '../glass-surface.css'
+import '../frosted-surface.css'
 import './input-group.css'
 
 export type InputGroupAddonAlign =
@@ -17,7 +17,7 @@ export type InputGroupProps = ComponentPropsWithoutRef<'div'>
 export function InputGroup({ className, ...props }: InputGroupProps) {
   return (
     <div
-      className={getGlassSurfaceClassName('coss-input-group', className)}
+      className={getFrostedSurfaceClassName('coss-input-group', className)}
       data-slot="input-group"
       role="group"
       {...props}

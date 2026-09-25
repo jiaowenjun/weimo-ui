@@ -219,9 +219,9 @@ for (const [source, label] of [
 }
 
 assert.ok(
-  chipSource.includes("import { useGlassSurfaceBackgroundToneRef } from './glass-surface'") &&
-    chipSource.includes("import './glass-surface.css'") &&
-    chipSource.includes("isGlassVariant && 'glass-surface',") &&
+  chipSource.includes("import { useFrostedSurfaceBackgroundToneRef } from './frosted-surface'") &&
+    chipSource.includes("import './frosted-surface.css'") &&
+    chipSource.includes("isGlassVariant && 'frosted-surface',") &&
     chipSource.includes('getChipSurfaceAttributes({ bordered, variant, textSize })') &&
     chipSource.includes('useAnimatedInlineSize') &&
     chipSource.includes('<AnimatedInlineSizeMeasure measureRef={measureRef}>') &&
@@ -231,9 +231,9 @@ assert.ok(
   'Chip must use shared surface classes and animated inline-size while preserving its slot API.',
 )
 assert.ok(
-  chipButtonSource.includes("isGlassState && 'glass-surface',") &&
-    chipButtonSource.includes("import { useGlassSurfaceBackgroundToneRef } from './glass-surface'") &&
-    chipButtonSource.includes("import './glass-surface.css'") &&
+  chipButtonSource.includes("isGlassState && 'frosted-surface',") &&
+    chipButtonSource.includes("import { useFrostedSurfaceBackgroundToneRef } from './frosted-surface'") &&
+    chipButtonSource.includes("import './frosted-surface.css'") &&
     chipButtonSource.includes("getChipSurfaceAttributes({ variant: state, interactive: true })") &&
     chipButtonSource.includes('animateWidth = false') &&
     chipButtonSource.includes('style={animateWidth ? getAnimatedInlineSizeStyle(style, inlineSize) : style}') &&
@@ -251,9 +251,9 @@ assert.ok(
   'ChipButton hover and active behavior must come from interactive ChipSurface, not duplicated CSS.',
 )
 assert.ok(
-  tagBreadSource.includes("getChipSurfaceClassName('glass-surface', 'tag-bread', className)") &&
-    tagBreadSource.includes("useGlassSurfaceBackgroundToneRef<HTMLElement>(true)") &&
-    tagBreadSource.includes("import './glass-surface.css'") &&
+  tagBreadSource.includes("getChipSurfaceClassName('frosted-surface', 'tag-bread', className)") &&
+    tagBreadSource.includes("useFrostedSurfaceBackgroundToneRef<HTMLElement>(true)") &&
+    tagBreadSource.includes("import './frosted-surface.css'") &&
     tagBreadSource.includes("getChipSurfaceAttributes({ variant: 'glass', textSize: 'base' })") &&
     tagBreadSource.includes('useAnimatedInlineSize(tag)') &&
     tagBreadSource.includes('<AnimatedInlineSizeMeasure measureRef={measureRef}>') &&

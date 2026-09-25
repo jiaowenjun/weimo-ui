@@ -8,9 +8,9 @@ const menuDefinitionSource = readFileSync(
   'utf8',
 )
 const appCss = readFileSync(new URL('../src/App.css', import.meta.url), 'utf8')
-const glassSurfaceCss = readFileSync(new URL('../src/components/glass-surface.css', import.meta.url), 'utf8')
-const glassSurfaceModelSource = readFileSync(
-  new URL('../src/components/glass-surface-model.ts', import.meta.url),
+const frostedSurfaceCss = readFileSync(new URL('../src/components/frosted-surface.css', import.meta.url), 'utf8')
+const frostedSurfaceModelSource = readFileSync(
+  new URL('../src/components/frosted-surface-model.ts', import.meta.url),
   'utf8',
 )
 const tokensCss = readFileSync(new URL('../src/styles/tokens.css', import.meta.url), 'utf8')
@@ -45,42 +45,42 @@ const itemHoverBlock = cssBlockFor(
 const itemIconBlock = cssBlockFor(menuCss, '.weimo-menu__item > svg,\n  .weimo-menu__item-content > svg')
 const insetItemBlock = cssBlockFor(menuCss, '.weimo-menu__item--inset')
 const separatorBlock = cssBlockFor(menuCss, '.weimo-menu__separator')
-const glassSurfaceBlock = cssBlockFor(glassSurfaceCss, '.glass-surface')
+const frostedSurfaceBlock = cssBlockFor(frostedSurfaceCss, '.frosted-surface')
 
 assert.ok(
-  menuSource.includes("from './glass-surface'") &&
+  menuSource.includes("from './frosted-surface'") &&
     menuSource.includes(
-      "getGlassSurfaceClassName(\n            'weimo-menu__popup',\n            'glass-surface--bordered',\n            className,\n          )",
+      "getFrostedSurfaceClassName(\n            'weimo-menu__popup',\n            'frosted-surface--bordered',\n            className,\n          )",
     ) &&
-    menuSource.includes('useGlassSurfaceBackgroundToneRef<HTMLDivElement>(true)') &&
+    menuSource.includes('useFrostedSurfaceBackgroundToneRef<HTMLDivElement>(true)') &&
     menuSource.includes('data-background-tone={backgroundTone ?? undefined}') &&
     menuSource.includes('ref={setElementRef}') &&
     !menuSource.includes('elevation') &&
-    !glassSurfaceModelSource.includes('GlassSurfaceElevation') &&
-    !glassSurfaceModelSource.includes('getGlassSurfaceAttributes'),
-  'Menu popup must compose and sample the shared GlassSurface material with a callback ref that observes delayed Base UI popup mounts.',
+    !frostedSurfaceModelSource.includes('FrostedSurfaceElevation') &&
+    !frostedSurfaceModelSource.includes('getFrostedSurfaceAttributes'),
+  'Menu popup must compose and sample the shared FrostedSurface material with a callback ref that observes delayed Base UI popup mounts.',
 )
 assert.ok(
   !popupBlock.includes('color: var(--color-text-primary);') &&
     !itemBlock.includes('color: var(--color-text-primary);') &&
     itemBlock.includes('color: inherit;'),
-  'Menu popup and regular items must inherit GlassSurface foreground instead of overriding it with theme text tokens.',
+  'Menu popup and regular items must inherit FrostedSurface foreground instead of overriding it with theme text tokens.',
 )
-assert.ok(!glassSurfaceBlock.includes('background: var(--glass-gradient);'), 'GlassSurface must not use the Weimo glass gradient.')
-assert.ok(!glassSurfaceBlock.includes('linear-gradient'), 'GlassSurface must not use a gradient background.')
+assert.ok(!frostedSurfaceBlock.includes('background: var(--glass-gradient);'), 'FrostedSurface must not use the Weimo glass gradient.')
+assert.ok(!frostedSurfaceBlock.includes('linear-gradient'), 'FrostedSurface must not use a gradient background.')
 assert.ok(
-  glassSurfaceBlock.includes('border: 1px solid transparent;') &&
-    glassSurfaceCss.includes('.glass-surface--bordered {') &&
-    glassSurfaceCss.includes('border-color: var(--glass-surface-border);'),
-  'GlassSurface must keep its stroke opt-in on the --bordered modifier using the background-aware border token.',
+  frostedSurfaceBlock.includes('border: 1px solid transparent;') &&
+    frostedSurfaceCss.includes('.frosted-surface--bordered {') &&
+    frostedSurfaceCss.includes('border-color: var(--glass-surface-border);'),
+  'FrostedSurface must keep its stroke opt-in on the --bordered modifier using the background-aware border token.',
 )
-assert.ok(!glassSurfaceCss.includes('box-shadow:'), 'GlassSurface must not use inner or outer shadow effects.')
-assert.ok(!glassSurfaceCss.includes('--glass-shadow'), 'GlassSurface must not depend on glass shadow tokens.')
+assert.ok(!frostedSurfaceCss.includes('box-shadow:'), 'FrostedSurface must not use inner or outer shadow effects.')
+assert.ok(!frostedSurfaceCss.includes('--glass-shadow'), 'FrostedSurface must not depend on glass shadow tokens.')
 assert.ok(menuSource.includes('className="weimo-menu__positioner"'), 'Menu positioner must expose a stable class for layer styling.')
 assert.ok(menuSource.includes('data-slot="menu-positioner"'), 'Menu positioner must expose a stable data-slot for diagnostics.')
 assert.ok(positionerBlock.includes('z-index: 90;'), 'Menu positioner must render above dialogs, fixed sidebars, and drawers.')
-assert.ok(glassSurfaceBlock.includes('backdrop-filter: blur(var(--glass-blur));'), 'GlassSurface must use backdrop blur.')
-assert.ok(glassSurfaceBlock.includes('-webkit-backdrop-filter: blur(var(--glass-blur));'), 'GlassSurface must include the WebKit backdrop filter.')
+assert.ok(frostedSurfaceBlock.includes('backdrop-filter: blur(var(--glass-blur));'), 'FrostedSurface must use backdrop blur.')
+assert.ok(frostedSurfaceBlock.includes('-webkit-backdrop-filter: blur(var(--glass-blur));'), 'FrostedSurface must include the WebKit backdrop filter.')
 assert.ok(popupBlock.includes('transform-origin: var(--transform-origin, top right);'), 'Menu popup must use Base UI transform origin with a skyline fallback.')
 assert.ok(popupBlock.includes('cubic-bezier(0.34, 1.56, 0.64, 1)'), 'Menu popup must use the skyline spring enter curve.')
 assert.ok(transitionBlock.includes('transform: scale(0.7);'), 'Menu popup must start and end from skyline scale(0.7).')
@@ -119,7 +119,7 @@ assert.ok(
   ) &&
     itemHoverBlock.includes('background: var(--weimo-menu-item-hover-bg);') &&
     !itemHoverBlock.includes('background: var(--color-bg-hover);'),
-  'Menu item hover/focus must derive its background from the sampled GlassSurface foreground instead of the global theme hover token.',
+  'Menu item hover/focus must derive its background from the sampled FrostedSurface foreground instead of the global theme hover token.',
 )
 assert.ok(
   popupBlock.includes('--weimo-menu-separator-bg: var(--color-border-divider-menu);') &&
@@ -128,7 +128,7 @@ assert.ok(
     separatorBlock.includes('background: var(--weimo-menu-separator-bg);') &&
     !separatorBlock.includes('var(--glass-surface-border)') &&
     !separatorBlock.includes('var(--color-border-divider)'),
-  'Menu separator must use its own background-aware divider token family instead of GlassSurface border or the global divider token.',
+  'Menu separator must use its own background-aware divider token family instead of FrostedSurface border or the global divider token.',
 )
 assert.ok(menuCss.includes('var(--color-text-danger)'), 'Menu destructive state must use the shared danger token.')
 assert.ok(tokensCss.includes('--color-text-danger: hsl(4 77% 40%);'), 'Light theme must define --color-text-danger.')

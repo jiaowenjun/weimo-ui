@@ -3,7 +3,7 @@ import { Check } from 'lucide-react'
 
 import { DialogPanel } from '../coss/dialog'
 import { ActionDialog } from '../action-dialog'
-import { GlassIconButton } from '../glass-icon-button'
+import { FrostedIconButton } from '../frosted-icon-button'
 
 export type MathEditorValue = {
   kind: 'inline' | 'block'
@@ -55,14 +55,14 @@ export function MathEditor({
       bottomBarClassName="md-editor__math-dialog-float-bar"
       bottomBarRightSlot={
         <div className="md-editor__math-dialog-action-row">
-          <GlassIconButton
+          <FrostedIconButton
             aria-label="保存"
             disabled={draft.trim().length === 0}
             form={formId}
             type="submit"
           >
             <Check />
-          </GlassIconButton>
+          </FrostedIconButton>
         </div>
       }
       closeLabel="关闭公式编辑"

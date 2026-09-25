@@ -8,10 +8,10 @@ import {
 import { Drawer } from '@base-ui/react/drawer'
 
 import { getCardSurfaceClassName } from '../card-surface'
-import { getGlassSurfaceClassName } from '../glass-surface-model'
+import { getFrostedSurfaceClassName } from '../frosted-surface-model'
 import { cn } from '../lib/utils'
 
-import '../glass-surface.css'
+import '../frosted-surface.css'
 import './sidebar-shell.css'
 
 type SideBarPanelPropsBase = Omit<
@@ -145,7 +145,7 @@ function SideBarDrawer({
                 <div className="weimo-sidebar__drawer-action">
                   <button
                     aria-label={closeButtonLabel}
-                    className={getGlassSurfaceClassName('weimo-sidebar__close-button')}
+                    className={getFrostedSurfaceClassName('weimo-sidebar__close-button')}
                     onClick={onClose}
                     type="button"
                   >

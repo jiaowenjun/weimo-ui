@@ -5,11 +5,11 @@ import { CardSurface } from '../../components/card-surface'
 import { Chip } from '../../components/chip'
 import { ComponentPreviewCard } from '../../components/component-preview-card'
 import { FloatBar } from '../../components/float-bar'
-import { GlassIconButton } from '../../components/glass-icon-button'
+import { FrostedIconButton } from '../../components/frosted-icon-button'
 import {
-  GlassIconButtonGroup,
-  GlassIconGroupButton,
-} from '../../components/glass-icon-button-group'
+  FrostedIconButtonGroup,
+  FrostedIconGroupButton,
+} from '../../components/frosted-icon-button-group'
 import type { ComponentDefinition } from '../component-docs'
 import { GlassPreviewCard } from '../glass-preview-card'
 
@@ -26,12 +26,12 @@ function BottomBarDemo() {
             }
             rightSlot={
               <span className="internal-preview__actions">
-                <GlassIconButton aria-label="新增" size="sm">
+                <FrostedIconButton aria-label="新增" size="sm">
                   <Plus />
-                </GlassIconButton>
-                <GlassIconButton aria-label="保存" size="sm">
+                </FrostedIconButton>
+                <FrostedIconButton aria-label="保存" size="sm">
                   <Check />
-                </GlassIconButton>
+                </FrostedIconButton>
               </span>
             }
           />
@@ -52,17 +52,17 @@ function FloatBarDemo() {
         }
         rightSlot={
           <span className="internal-preview__actions">
-            <GlassIconButton aria-label="搜索" size="sm">
+            <FrostedIconButton aria-label="搜索" size="sm">
               <Search />
-            </GlassIconButton>
-            <GlassIconButtonGroup aria-label="确认与关闭">
-              <GlassIconGroupButton aria-label="确认" size="sm">
+            </FrostedIconButton>
+            <FrostedIconButtonGroup aria-label="确认与关闭">
+              <FrostedIconGroupButton aria-label="确认" size="sm">
                 <Check />
-              </GlassIconGroupButton>
-              <GlassIconGroupButton aria-label="关闭" size="sm">
+              </FrostedIconGroupButton>
+              <FrostedIconGroupButton aria-label="关闭" size="sm">
                 <X />
-              </GlassIconGroupButton>
-            </GlassIconButtonGroup>
+              </FrostedIconGroupButton>
+            </FrostedIconButtonGroup>
           </span>
         }
       />

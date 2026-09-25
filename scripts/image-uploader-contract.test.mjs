@@ -199,8 +199,8 @@ assert.ok(
 
 assert.ok(
   !source.includes("from 'lucide-react'") &&
-    !source.includes("from './glass-icon-button'") &&
-    !source.includes('<GlassIconButton') &&
+    !source.includes("from './frosted-icon-button'") &&
+    !source.includes('<FrostedIconButton') &&
     !source.includes('uploadAction') &&
     !source.includes('ImageUploaderUploadAction') &&
     !source.includes('DEFAULT_IMAGE_UPLOADER_CLEAR_LABEL') &&
@@ -385,7 +385,7 @@ for (const filePath of [
 for (const snippet of [
   "import { Check, Clipboard, FileImage, X } from 'lucide-react'",
   "import { useState } from 'react'",
-  "import { GlassIconButton } from '../../components/glass-icon-button'",
+  "import { FrostedIconButton } from '../../components/frosted-icon-button'",
   "import { ImageUploader, type ImageUploaderActionApi } from '../../components/image-uploader'",
   "id: 'image'",
   'function ImageUploaderPreview()',

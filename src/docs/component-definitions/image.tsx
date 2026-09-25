@@ -3,7 +3,7 @@ import { Check, Clipboard, FileImage, X } from 'lucide-react'
 
 import { CanvasTransparency } from '../../components/canvas-transparency'
 import { ComponentPreviewCard } from '../../components/component-preview-card'
-import { GlassIconButton } from '../../components/glass-icon-button'
+import { FrostedIconButton } from '../../components/frosted-icon-button'
 import { ImageUploader, type ImageUploaderActionApi } from '../../components/image-uploader'
 import { ImageView, ImageViewDisplayModeMenu, type ImageViewDisplayMode } from '../../components/image-view'
 import type { ComponentDefinition } from '../component-docs'
@@ -69,35 +69,35 @@ function ImageUploaderPreview() {
         <span className="image-uploader-docs-preview__actions">
           {!actions?.hasFile ? (
             <>
-              <GlassIconButton
+              <FrostedIconButton
                 aria-label="选择文件"
                 onClick={() => actions?.select()}
               >
                 <FileImage aria-hidden="true" />
-              </GlassIconButton>
-              <GlassIconButton
+              </FrostedIconButton>
+              <FrostedIconButton
                 aria-label="粘贴图片"
                 disabled={!actions?.canPasteClipboardImage}
                 onClick={() => actions?.paste()}
               >
                 <Clipboard aria-hidden="true" />
-              </GlassIconButton>
+              </FrostedIconButton>
             </>
           ) : (
             <>
-              <GlassIconButton
+              <FrostedIconButton
                 aria-label="清除图片"
                 onClick={() => actions?.close()}
               >
                 <X aria-hidden="true" />
-              </GlassIconButton>
-              <GlassIconButton
+              </FrostedIconButton>
+              <FrostedIconButton
                 aria-label="确认图片"
                 disabled={!actions?.canCheck}
                 onClick={() => actions?.check()}
               >
                 <Check aria-hidden="true" />
-              </GlassIconButton>
+              </FrostedIconButton>
             </>
           )}
         </span>

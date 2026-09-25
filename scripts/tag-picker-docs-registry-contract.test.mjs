@@ -91,7 +91,7 @@ assert.deepEqual(registryItem.categories, ['input', 'overlay'])
 assert.deepEqual(registryItem.dependencies, ['@base-ui/react', 'lucide-react'])
 assert.deepEqual(
   registryItem.registryDependencies,
-  ['@weimo/style', '@weimo/utils', '@weimo/glass-icon-button'],
+  ['@weimo/style', '@weimo/utils', '@weimo/frosted-icon-button'],
 )
 for (const filePath of [
   'src/components/tag-picker.tsx',
