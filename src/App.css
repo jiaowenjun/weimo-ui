@@ -1105,6 +1105,22 @@
   transform: translate(-50%, -50%) !important;
 }
 
+/* 触屏保护对齐磨砂图标按钮:磨砂的 hover 反馈包在 (hover: hover) and
+   (pointer: fine) 内,触屏不会粘滞;液态的 hover 辉光由库 React state
+   驱动,触屏点按合成的 mouseenter 会点亮辉光且 mouseleave 迟迟不发,
+   辉光粘滞,只能在 CSS 侧压制。辉光层没有类名、opacity 全由内联 state
+   写入,它们是玻璃层(.liquid-glass)之后的兄弟 div,故对玻璃根取后续
+   兄弟选择器;媒体查询取磨砂条件的德摩根反面(hover:none 或
+   pointer:coarse)以传统语法表达,opacity 以 !important 压过内联。
+   按压辉光随之一并关闭——触屏按压反馈由宿主 :active 缩放承担,与磨砂
+   触屏行为一致;弹性跟随是位移维度、无残留态,不受影响。 */
+@media (hover: none), (pointer: coarse) {
+  .liquid-glass-icon-button > .liquid-glass ~ div,
+  .liquid-glass-icon-button-group > .liquid-glass ~ div {
+    opacity: 0 !important;
+  }
+}
+
 /* 液态玻璃胶囊(胶囊页):与磨砂态胶囊同节奏的三档字号(胶囊 padding 6px 10px、
    行高 1),玻璃层绝对居中于定尺寸占位盒,文字色随画布 tone 自适应。 */
 .liquid-glass-chip-preview {
