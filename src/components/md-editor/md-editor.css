@@ -4,6 +4,9 @@
   .md-editor {
     position: relative;
     display: flex;
+    /* container-type:inline-size 会把内在宽度归零,flex 行容器里 flex-basis:auto 随之塌缩成 0 宽;
+       显式 width 让编辑器在任何宿主布局下都占满主轴 */
+    width: 100%;
     min-width: 0;
     flex-direction: column;
     container-name: weimo-markdown-content;

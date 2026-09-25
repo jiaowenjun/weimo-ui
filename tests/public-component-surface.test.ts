@@ -181,6 +181,12 @@ describe('shared CSS interfaces', () => {
     expect(cssDeclaration(editorViewport, 'overflow-y')).toBe('auto')
     expect(cssDeclaration(editorViewport, 'overscroll-behavior')).toBe('contain')
     expect(cssDeclaration(editorViewport, 'padding-block-end')).toBe('14px')
+
+    // container-type:inline-size 会把 .md-editor 的内在宽度归零;没有显式 width 时,
+    // MdView 编辑层(display:flex)里 flex-basis:auto 塌缩成 0 宽,正文逐字符竖排撑爆画布。
+    const editorRoot = cssRule(editor, '.md-editor')
+    expect(cssDeclaration(editorRoot, 'width')).toBe('100%')
+    expect(cssDeclaration(editorRoot, 'container-type')).toBe('inline-size')
   })
 
   it('keeps icon-button interactions on variant-owned visual layers', () => {
