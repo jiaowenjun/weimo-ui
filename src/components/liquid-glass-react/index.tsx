@@ -1,8 +1,15 @@
 // Vendored from rdev/liquid-glass-react v1.1.1 (MIT, see ./LICENSE) so the
 // project owns the glass implementation and carries no external npm dep.
-// Only deviation from upstream: React namespace types (FC etc.) are
-// imported explicitly because upstream ships esbuild-transpiled output and
-// never type-checks; see ./LICENSE for the original copyright notice.
+// Deviations from upstream (kept minimal, behavior-preserving for this repo):
+// 1. React namespace types (React.FC etc.) are imported explicitly — upstream
+//    ships esbuild-transpiled output and never type-checks.
+// 2. The content wrapper's white-text Tailwind utility class is removed —
+//    vendored source under src/ feeds Tailwind's scanner (even words in
+//    comments count as candidates), and the generated rule would set color on
+//    the wrapper itself, severing the host's inherited tone-adaptive
+//    foreground. Upstream relies on the class never being generated from
+//    node_modules. Do not reintroduce that class name in any form here.
+// See ./LICENSE for the original copyright notice.
 import { forwardRef, useCallback, useEffect, useId, useRef, useState } from "react"
 import type { CSSProperties, FC, PropsWithChildren, ReactNode, RefObject } from "react"
 import { ShaderDisplacementGenerator, fragmentShaders } from "./shader-utils"
@@ -233,8 +240,12 @@ const GlassContainer = forwardRef<
           />
 
           {/* user content stays sharp */}
+          {/* The upstream white-text utility class is removed here (see the
+              vendoring note at the top of this file): it would set color on
+              this wrapper itself and sever the inherited tone-adaptive
+              foreground from the host. */}
           <div
-            className="transition-all duration-150 ease-in-out text-white"
+            className="transition-all duration-150 ease-in-out"
             style={{
               position: "relative",
               zIndex: 1,

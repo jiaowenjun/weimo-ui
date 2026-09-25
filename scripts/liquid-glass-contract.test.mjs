@@ -198,6 +198,14 @@ assert.ok(
   !packageJson.dependencies['liquid-glass-react'],
   'package.json must not depend on the liquid-glass-react npm package: the engine is vendored in-repo.',
 )
+// The forbidden class name is assembled at runtime: this file is itself a
+// Tailwind source-scanning candidate, and a literal utility string here
+// would regenerate the very rule this assertion bans.
+const forbiddenUtilityClass = ['text', 'white'].join('-')
+assert.ok(
+  !readProjectFile('src/components/liquid-glass-react/index.tsx').includes(forbiddenUtilityClass),
+  `The vendored engine must not carry the upstream ${forbiddenUtilityClass} class: vendored source under src/ feeds Tailwind's scanner, and the generated rule would set color on the content wrapper, severing the inherited tone-adaptive foreground.`,
+)
 assert.ok(
   packageJson.scripts.test.includes('node scripts/liquid-glass-contract.test.mjs'),
   'The package test must run the liquid-glass contract.',
