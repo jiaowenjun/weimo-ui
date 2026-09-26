@@ -102,6 +102,11 @@ assert.ok(
 for (const snippet of [
   "import { useEffect, useLayoutEffect, useRef, useState } from 'react'",
   "import type { ComponentPropsWithoutRef } from 'react'",
+  "import { Hash, Plus } from 'lucide-react'",
+  "const TAG_CHIP_PLUS_PREFIX = <Plus aria-hidden=\"true\" />",
+  "const TAG_CHIP_HASH_PREFIX = <Hash aria-hidden=\"true\" />",
+  "const emptyChipPrefix = editable ? '+' : '#'",
+  "const emptyChipPrefixIcon = emptyChipPrefix === '+' ? TAG_CHIP_PLUS_PREFIX : TAG_CHIP_HASH_PREFIX",
   "import { FloatBar } from './float-bar'",
   "import { ChipButton } from './chip-button'",
   'TagPicker,',
@@ -172,7 +177,7 @@ for (const snippet of [
   'visibleTags.map((tag, index) =>',
   '<ChipButton',
   'key={isEmpty ? \'empty\' : `${tag}-${index}`}',
-  'prefix={editable && isEmpty ? \'+\' : \'#\'}',
+  'prefix={editable && isEmpty ? TAG_CHIP_PLUS_PREFIX : TAG_CHIP_HASH_PREFIX}',
   "state={editable ? 'glass' : 'default'}",
   'disabled={editable && !canEdit}',
   'onClick={getChipClickHandler(tag)}',
@@ -182,7 +187,7 @@ for (const snippet of [
   'onAnimationEnd={handleAddChipAnimationEnd}',
   'aria-label={`新增${addLabel}`}',
   'onClick={openInsert}',
-  'prefix="+"',
+  'prefix={TAG_CHIP_PLUS_PREFIX}',
   'state="glass"',
   '<TagPicker',
   'initialDraft={activeTag}',
@@ -337,7 +342,7 @@ assert.ok(
     visibleTagsMapSource.includes('<span') &&
     visibleTagsMapSource.includes("className={isEmpty ? 'tag-bar__morph-slot' : undefined}") &&
     visibleTagsMapSource.includes('style={isEmpty ? emptyChipWidthStyle : undefined}') &&
-    visibleTagsMapSource.includes("prefix={editable && isEmpty ? '+' : '#'}") &&
+    visibleTagsMapSource.includes("prefix={editable && isEmpty ? TAG_CHIP_PLUS_PREFIX : TAG_CHIP_HASH_PREFIX}") &&
     visibleTagsMapSource.includes("state={editable ? 'glass' : 'default'}") &&
     visibleTagsMapSource.includes('onClick={getChipClickHandler(tag)}') &&
     visibleTagsMapSource.includes('disabled={editable && !canEdit}'),

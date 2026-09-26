@@ -24,3 +24,14 @@ button.chip-button {
   color: var(--color-primary);
   line-height: 1;
 }
+
+/* 前后缀图标位置:图标圆框距胶囊左/右边框 6px,图标与文字的 gap 收紧到
+   1px——三档字号统一,两侧对称;padding 仅在带对应插槽时收窄,无前后缀
+   胶囊保持共享 10px 内边距。 */
+button.chip-button[data-has-prefix] {
+  padding-left: 6px;
+}
+
+button.chip-button[data-has-suffix] {
+  padding-right: 6px;
+}

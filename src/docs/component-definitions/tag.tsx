@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { CalendarDays, Folder, Hash } from 'lucide-react'
+import { CalendarDays, Folder, Hash, Plus } from 'lucide-react'
 
 import { ChipButton } from '../../components/chip-button'
 import { ComponentPreviewCard } from '../../components/component-preview-card'
@@ -216,7 +216,7 @@ function TagPickerDemo({
                   {tag}
                 </ChipButton>
               ) : (
-                <ChipButton key={`new-${index}`} onClick={() => openTagPicker(index)} prefix="+">
+                <ChipButton key={`new-${index}`} onClick={() => openTagPicker(index)} prefix={<Plus aria-hidden="true" />}>
                   标签
                 </ChipButton>
               )

@@ -14,9 +14,9 @@ function ChipTextSizeDemo() {
   return (
     <ComponentPreviewCard align="center" label="胶囊字号">
       <div className="text-button-preview" aria-label="ChipButton 字号预览">
-        <ChipButton prefix="" textSize="sm">小字号</ChipButton>
-        <ChipButton prefix="" textSize="base">基础字号</ChipButton>
-        <ChipButton prefix="" textSize="lg">标题字号</ChipButton>
+        <ChipButton prefix={null} textSize="sm">小字号</ChipButton>
+        <ChipButton prefix={null} textSize="base">基础字号</ChipButton>
+        <ChipButton prefix={null} textSize="lg">标题字号</ChipButton>
       </div>
     </ComponentPreviewCard>
   )
@@ -26,9 +26,9 @@ function GlassChipDemo() {
   return (
     <GlassPreviewCard label="磨砂态胶囊">
       <div className="icon-preview__row" aria-label="ChipButton 磨砂态字号预览">
-        <ChipButton prefix="" state="glass" textSize="sm">小字号</ChipButton>
-        <ChipButton prefix="" state="glass" textSize="base">基础字号</ChipButton>
-        <ChipButton prefix="" state="glass" textSize="lg">标题字号</ChipButton>
+        <ChipButton prefix={null} state="glass" textSize="sm">小字号</ChipButton>
+        <ChipButton prefix={null} state="glass" textSize="base">基础字号</ChipButton>
+        <ChipButton prefix={null} state="glass" textSize="lg">标题字号</ChipButton>
       </div>
     </GlassPreviewCard>
   )
@@ -96,7 +96,7 @@ function SuffixChipDemo() {
     <ComponentPreviewCard align="center" label="后缀胶囊">
       <div className="text-button-preview" aria-label="ChipButton 后缀预览">
         <ChipButton
-          prefix=""
+          prefix={null}
           suffix={
             <GhostIconButton aria-label="移除标签" size="xs">
               <X aria-hidden="true" />
@@ -106,7 +106,7 @@ function SuffixChipDemo() {
           可关闭标签
         </ChipButton>
         <ChipButton
-          prefix=""
+          prefix={null}
           state="glass"
           suffix={
             <GhostIconButton aria-label="移除标签" size="xs">
@@ -138,7 +138,7 @@ function StateToggleChipButtonDemo() {
       label="状态切换胶囊"
     >
       <div aria-label="ChipButton 状态预览">
-        <ChipButton prefix={<Hash aria-hidden="true" />} state={state}>写作/日记</ChipButton>
+        <ChipButton state={state}>写作/日记</ChipButton>
       </div>
     </ComponentPreviewCard>
   )
@@ -184,11 +184,11 @@ function WidthToggleChipButtonDemo() {
           className="chip-button-preview__width-slot"
           style={widthPreviewStyle}
         >
-          <ChipButton prefix={<Hash aria-hidden="true" />} state="default">{widthPreviewLabel}</ChipButton>
+          <ChipButton state="default">{widthPreviewLabel}</ChipButton>
         </span>
         <span className="chip-button-preview__width-measure" aria-hidden="true">
           <span ref={widthMeasureRef}>
-            <ChipButton prefix={<Hash aria-hidden="true" />} state="default">{widthPreviewLabel}</ChipButton>
+            <ChipButton state="default">{widthPreviewLabel}</ChipButton>
           </span>
         </span>
       </div>

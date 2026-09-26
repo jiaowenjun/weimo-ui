@@ -74,6 +74,8 @@ const activeLayerBlock = cssBlockFor(
 const slotBlock = cssBlockFor(surfaceCss, '.chip-surface__slot')
 const contentBlock = cssBlockFor(surfaceCss, '.chip-surface__content')
 const chipButtonBlock = standaloneCssBlockFor(css, 'button.chip-button')
+const chipButtonPrefixPaddingBlock = standaloneCssBlockFor(css, 'button.chip-button[data-has-prefix]')
+const chipButtonSuffixPaddingBlock = standaloneCssBlockFor(css, 'button.chip-button[data-has-suffix]')
 const textBlock = standaloneCssBlockFor(css, '.chip-button__text')
 const reducedMotionBlock = cssBlockFor(
   surfaceCss,
@@ -113,7 +115,8 @@ assert.ok(
 )
 
 for (const snippet of [
-  "import type { ButtonHTMLAttributes, ReactNode } from 'react'",
+  "import type { ButtonHTMLAttributes, ReactElement, ReactNode } from 'react'",
+  "import { Hash } from 'lucide-react'",
   "from './animated-inline-size'",
   "from './animated-inline-size-model'",
   "from './chip-surface-model'",
@@ -123,13 +126,13 @@ for (const snippet of [
   'export type ChipButtonProps',
   "Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'prefix'>",
   'animateWidth?: boolean',
-  'prefix?: ReactNode',
+  'prefix?: ReactElement | null',
   'state?: ChipButtonState',
-  'suffix?: ReactNode',
+  'suffix?: ReactElement | null',
   'textSize?: ChipSurfaceTextSize',
   'export function ChipButton',
   'animateWidth = false',
-  "prefix = '#'",
+  'prefix = <Hash aria-hidden="true" />',
   "state = 'default'",
   "textSize = 'sm'",
   'function isEmptyChipButtonSlot',
@@ -137,6 +140,8 @@ for (const snippet of [
   '{isEmptyChipButtonSlot(suffix) ? null : (',
   'getChipSurfaceAttributes({ variant: state, interactive: true, textSize })',
   'data-state={state}',
+  "data-has-prefix={isEmptyChipButtonSlot(prefix) ? undefined : 'true'}",
+  "data-has-suffix={isEmptyChipButtonSlot(suffix) ? undefined : 'true'}",
   "isGlassState && 'frosted-surface',",
   '? { ...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle }',
   'chip-surface__slot chip-button__prefix',
@@ -194,7 +199,9 @@ for (const [block, snippet, message] of [
   [slotBlock, 'align-items: center;', 'ChipButton prefix content must be vertically centered within the slot.'],
   [slotBlock, 'justify-content: center;', 'ChipButton prefix content must stay centered horizontally within the slot.'],
   [contentBlock, 'z-index: 1;', 'ChipButton content must stay above visual layers.'],
-  [chipButtonBlock, 'gap: 1px;', 'ChipButton must tighten its own prefix/text gap without changing shared ChipSurface spacing.'],
+  [chipButtonBlock, 'gap: 1px;', 'ChipButton must keep the tight uniform 1px inner gap between the prefix icon and text across text sizes.'],
+  [chipButtonPrefixPaddingBlock, 'padding-left: 6px;', 'ChipButton with a prefix must sit the icon 6px from the left border across text sizes.'],
+  [chipButtonSuffixPaddingBlock, 'padding-right: 6px;', 'ChipButton with a suffix must sit the icon 6px from the right border across text sizes.'],
   [textBlock, 'overflow: hidden;', 'ChipButton text must hide overflowing content.'],
   [textBlock, 'text-overflow: clip;', 'ChipButton text overflow must be clipped without an ellipsis.'],
   [textBlock, 'white-space: nowrap;', 'ChipButton text must stay on one line when clipped.'],
@@ -254,15 +261,15 @@ assert.ok(
     docsSource.includes('function ChipTextSizeDemo') &&
     docsSource.includes('<ChipTextSizeDemo />') &&
     docsSource.includes('label="胶囊字号"') &&
-    docsSource.includes('<ChipButton prefix="" textSize="sm">') &&
-    docsSource.includes('<ChipButton prefix="" textSize="base">') &&
-    docsSource.includes('<ChipButton prefix="" textSize="lg">') &&
+    docsSource.includes('<ChipButton prefix={null} textSize="sm">') &&
+    docsSource.includes('<ChipButton prefix={null} textSize="base">') &&
+    docsSource.includes('<ChipButton prefix={null} textSize="lg">') &&
     docsSource.includes('function GlassChipDemo') &&
     docsSource.includes('<GlassChipDemo />') &&
     docsSource.includes('label="磨砂态胶囊"') &&
-    docsSource.includes('<ChipButton prefix="" state="glass" textSize="sm">') &&
-    docsSource.includes('<ChipButton prefix="" state="glass" textSize="base">') &&
-    docsSource.includes('<ChipButton prefix="" state="glass" textSize="lg">') &&
+    docsSource.includes('<ChipButton prefix={null} state="glass" textSize="sm">') &&
+    docsSource.includes('<ChipButton prefix={null} state="glass" textSize="base">') &&
+    docsSource.includes('<ChipButton prefix={null} state="glass" textSize="lg">') &&
     docsSource.includes('function LiquidGlassChipDemo') &&
     docsSource.includes('<LiquidGlassChipDemo />') &&
     docsSource.includes('function PrefixChipDemo') &&
@@ -291,8 +298,8 @@ assert.ok(
     docsSource.includes('widthMeasureRef.current') &&
     docsSource.includes('getBoundingClientRect().width') &&
     docsSource.includes('setWidthPreviewSize((currentSize) =>') &&
-    docsSource.includes('<ChipButton prefix={<Hash aria-hidden="true" />} state={state}>') &&
-    docsSource.includes('<ChipButton prefix={<Hash aria-hidden="true" />} state="default">') &&
+    docsSource.includes('<ChipButton state={state}>') &&
+    docsSource.includes('<ChipButton state="default">') &&
     docsSource.includes('className="chip-button-preview__width-example"') &&
     docsSource.includes('className="chip-button-preview__width-slot"') &&
     docsSource.includes('style={widthPreviewStyle}') &&

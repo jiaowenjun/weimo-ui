@@ -58,7 +58,7 @@ for (const snippet of [
   'const [tagSlots, setTagSlots]',
   'const [activeSlotIndex, setActiveSlotIndex]',
   'function openTagPicker',
-  'prefix="+"',
+  'prefix={<Plus aria-hidden="true" />}',
   '标签',
   'nextSlots.push(\'\')',
   "const tagOptions = [",

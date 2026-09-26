@@ -267,7 +267,7 @@ assert.ok(
 
 assert.ok(
     docsDefinition.includes("import { TagBread } from '../../components/tag-bread'") &&
-    docsDefinition.includes("import { CalendarDays, Folder, Hash } from 'lucide-react'") &&
+    docsDefinition.includes("import { CalendarDays, Folder, Hash, Plus } from 'lucide-react'") &&
     docsDefinition.includes("from '../../components/chip-surface-model'") &&
     docsDefinition.includes('const tagBreadDocsSurfaceAttributes = getChipSurfaceAttributes({') &&
     docsDefinition.includes("variant: 'glass'") &&

@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import type { ComponentPropsWithoutRef } from 'react'
+import { Hash, Plus } from 'lucide-react'
 
 import { FloatBar } from './float-bar'
 import { cn } from './lib/utils'
@@ -11,6 +12,11 @@ import {
 } from './tag-picker'
 
 import './tag-bar.css'
+
+// 胶囊前后缀只接受图标:模块级常量保引用稳定,兼作测量 effect 与布局签名的
+// 依赖时不会每渲染变一次。
+const TAG_CHIP_PLUS_PREFIX = <Plus aria-hidden="true" />
+const TAG_CHIP_HASH_PREFIX = <Hash aria-hidden="true" />
 
 export type TagBarProps = Omit<
   ComponentPropsWithoutRef<'div'>,
@@ -61,6 +67,7 @@ export function TagBar({
   const showAddChip = !isEmpty && (editable || renderAddChip)
   const emptyChipLabel = editable ? addLabel : emptyLabel
   const emptyChipPrefix = editable ? '+' : '#'
+  const emptyChipPrefixIcon = emptyChipPrefix === '+' ? TAG_CHIP_PLUS_PREFIX : TAG_CHIP_HASH_PREFIX
   const emptyChipWidthStyle = emptyChipSize === null
     ? undefined
     : { inlineSize: `${emptyChipSize}px` }
@@ -243,7 +250,7 @@ export function TagBar({
                       : !isEmpty && !isTagClickEnabled(tag)
                   }
                   onClick={getChipClickHandler(tag)}
-                  prefix={editable && isEmpty ? '+' : '#'}
+                  prefix={editable && isEmpty ? TAG_CHIP_PLUS_PREFIX : TAG_CHIP_HASH_PREFIX}
                   state={editable ? 'glass' : 'default'}
                 >
                   {tag}
@@ -255,7 +262,7 @@ export function TagBar({
                 <span ref={emptyChipMeasureRef}>
                   <ChipButton
                     disabled={editable && !canEdit}
-                    prefix={emptyChipPrefix}
+                    prefix={emptyChipPrefixIcon}
                     state={editable ? 'glass' : 'default'}
                   >
                     {emptyChipLabel}
@@ -271,7 +278,7 @@ export function TagBar({
                 disabled={!canEdit}
                 onAnimationEnd={handleAddChipAnimationEnd}
                 onClick={openInsert}
-                prefix="+"
+                prefix={TAG_CHIP_PLUS_PREFIX}
                 state="glass"
               >
                 {addLabel}

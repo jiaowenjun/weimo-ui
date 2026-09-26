@@ -259,7 +259,7 @@ for (const snippet of [
 for (const snippet of [
   "import { useState } from 'react'",
   'type TagTreeNode',
-  "import { CalendarDays, Folder, Hash } from 'lucide-react'",
+  "import { CalendarDays, Folder, Hash, Plus } from 'lucide-react'",
   'icon: <Folder aria-hidden="true" />',
   'defaultIcon={<Hash aria-hidden="true" />}',
   'TagTreeVariant',
@@ -292,7 +292,7 @@ for (const snippet of [
   'labels={{ placeholder: ',
   'function openTagPicker',
   'const [activeSlotIndex, setActiveSlotIndex]',
-  'prefix="+"',
+  'prefix={<Plus aria-hidden="true" />}',
   '<StatGroup items={sidebarStatsItems}',
   'sidebar-preview__panel weimo-sidebar weimo-sidebar--normal',
   'className="top-bar-preview"',
