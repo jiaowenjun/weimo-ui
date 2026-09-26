@@ -64,7 +64,7 @@ for (const snippet of [
 assert.ok(
   manifestSource.includes("group: 'token-style'") &&
     manifestSource.includes("exportName: 'Md'"),
-  'the manifest must keep token grouping while separating the Md display and export names.',
+  'the manifest must keep token grouping for the style tokens while separating the Md display and export names.',
 )
 
 assert.ok(

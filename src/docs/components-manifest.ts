@@ -50,16 +50,6 @@ export type ComponentManifestItem = PublicComponentManifestItem
 
 export const componentManifest = [
   {
-    id: 'md',
-    name: 'Markdown渲染',
-    exportName: 'Md',
-    registryName: 'md',
-    packageExport: './components/md',
-    group: 'token-style',
-    docs: true,
-    registry: true,
-  },
-  {
     id: 'text-color',
     name: '字色',
     registryName: 'text-color',
@@ -235,6 +225,16 @@ export const componentManifest = [
     registry: true,
   },
   {
+    id: 'capsule',
+    name: '胶囊',
+    exportName: 'Chip',
+    registryName: 'chip',
+    packageExport: './components/chip',
+    group: 'controls-overlays',
+    docs: true,
+    registry: true,
+  },
+  {
     id: 'menu',
     name: '菜单',
     exportName: 'Menu',
@@ -356,16 +356,6 @@ export const componentManifest = [
     registry: true,
   },
   {
-    id: 'capsule',
-    name: '胶囊',
-    exportName: 'Chip',
-    registryName: 'chip',
-    packageExport: './components/chip',
-    group: 'tags-navigation',
-    docs: true,
-    registry: true,
-  },
-  {
     id: 'card-composer',
     name: 'CardComposer',
     registryName: 'card-composer',
@@ -380,6 +370,16 @@ export const componentManifest = [
     exportName: 'MdEditor',
     registryName: 'md-editor',
     packageExport: './components/md-editor',
+    group: 'content-markdown',
+    docs: true,
+    registry: true,
+  },
+  {
+    id: 'md',
+    name: 'Markdown样式',
+    exportName: 'Md',
+    registryName: 'md',
+    packageExport: './components/md',
     group: 'content-markdown',
     docs: true,
     registry: true,

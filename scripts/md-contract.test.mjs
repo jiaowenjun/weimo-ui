@@ -234,11 +234,11 @@ for (const [token, value] of markdownStaticTokens) {
 
 assert.ok(
   manifestSource.includes("id: 'md'") &&
-    manifestSource.includes("name: 'Markdown渲染'") &&
+    manifestSource.includes("name: 'Markdown样式'") &&
     manifestSource.includes("registryName: 'md'") &&
     manifestSource.includes("packageExport: './components/md'") &&
-    manifestSource.includes("group: 'token-style'"),
-  'Md must be listed as a Token / 样式 detail page in the component manifest.',
+    manifestSource.includes("group: 'content-markdown'"),
+  'Md must be listed as a 内容 / Markdown detail page in the component manifest.',
 )
 
 assert.ok(
