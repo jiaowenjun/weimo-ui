@@ -729,9 +729,10 @@
   display: block;
   flex: 1 1 0;
   min-width: 0;
-  /* 480×240 封顶(2:1),宽画布上示例不再无限长高,余量居中 */
+  /* 480 宽封顶,宽画布上示例不再无限拉宽,余量居中 */
   max-width: 480px;
-  aspect-ratio: 2 / 1;
+  /* 高度与材质页磨砂材质瓦片(260×80)对齐,画布随共享 16px 内边距同节奏 */
+  height: 80px;
   border-radius: var(--radius-sm);
   /* 边框勾勒示例边界,便于观察模糊范围 */
   border: 1px solid var(--color-border);
