@@ -10,69 +10,33 @@ import { GlassPreviewCard } from '../glass-preview-card'
 import { LiquidGlassTile } from '../liquid-glass-tile'
 import { PreviewToggle } from '../preview-toggle'
 
-function ChipTextSizeDemo() {
-  return (
-    <ComponentPreviewCard align="center" label="胶囊字号">
-      <div className="text-button-preview" aria-label="ChipButton 字号预览">
-        <ChipButton prefix={null} textSize="sm">小字号</ChipButton>
-        <ChipButton prefix={null} textSize="base">基础字号</ChipButton>
-        <ChipButton prefix={null} textSize="lg">标题字号</ChipButton>
-      </div>
-    </ComponentPreviewCard>
-  )
-}
-
-function GlassChipDemo() {
-  return (
-    <GlassPreviewCard label="磨砂态胶囊">
-      <div className="icon-preview__row" aria-label="ChipButton 磨砂态字号预览">
-        <ChipButton prefix={null} state="glass" textSize="sm">小字号</ChipButton>
-        <ChipButton prefix={null} state="glass" textSize="base">基础字号</ChipButton>
-        <ChipButton prefix={null} state="glass" textSize="lg">标题字号</ChipButton>
-      </div>
-    </GlassPreviewCard>
-  )
-}
-
 // noop 点击透传给玻璃层以启用库的悬停辉光与按压缩放反馈(同液态玻璃图标按钮)。
 function noopLiquidGlassChipClick() {}
 
-// 液态玻璃胶囊:整体按钮形态,参考液态玻璃图标按钮组的「整体按钮、内部
-// 独立小部件」结构——胶囊盒本身是原生 button,玻璃层与三档字号标签是按钮
-// 内部的小部件;与磨砂态胶囊同节奏(玻璃层绝对居中于定尺寸按钮盒,文字色
-// 随画布 tone 自适应;液态自带渐变边缘,无边框开关)。
+// 胶囊材质:普通(ChipButton 默认态)、磨砂(ChipButton 磨砂态)、液态玻璃
+// (原生 button 包 LiquidGlassSurface,参考液态玻璃图标按钮组的「整体按钮、
+// 内部独立小部件」结构)三例并列于灰度画布,拖动滑块可对比三种材质随背景
+// 的表现。液态玻璃例文字长于 --sm 固定占位盒,用站点顶栏同款隐藏 sizer 撑
+// 盒宽,玻璃层绝对居中覆盖其上,文字色随画布 tone 自适应。
 // eslint-disable-next-line react-refresh/only-export-components
-function LiquidGlassChipDemo() {
+function CapsuleMaterialDemo() {
   return (
-    <GlassPreviewCard label="液态玻璃胶囊">
+    <GlassPreviewCard label="胶囊材质">
       <LiquidGlassTile className="liquid-glass-chip-preview">
-        <div aria-label="液态玻璃胶囊字号预览" className="liquid-glass-chip-row">
-          <button className="liquid-glass-chip liquid-glass-chip--sm" type="button">
+        <div aria-label="胶囊材质预览" className="capsule-material-row">
+          <ChipButton prefix={null} state="default">普通胶囊</ChipButton>
+          <ChipButton prefix={null} state="glass">磨砂胶囊</ChipButton>
+          <button className="liquid-glass-chip" type="button">
             <LiquidGlassSurface
               cornerRadius={999}
               onClick={noopLiquidGlassChipClick}
               padding="6px 10px"
             >
-              <span className="liquid-glass-chip__label liquid-glass-chip__label--sm">小字号</span>
+              <span className="liquid-glass-chip__label liquid-glass-chip__label--sm">液态玻璃胶囊</span>
             </LiquidGlassSurface>
-          </button>
-          <button className="liquid-glass-chip liquid-glass-chip--base" type="button">
-            <LiquidGlassSurface
-              cornerRadius={999}
-              onClick={noopLiquidGlassChipClick}
-              padding="6px 10px"
-            >
-              <span className="liquid-glass-chip__label liquid-glass-chip__label--base">基础字号</span>
-            </LiquidGlassSurface>
-          </button>
-          <button className="liquid-glass-chip liquid-glass-chip--lg" type="button">
-            <LiquidGlassSurface
-              cornerRadius={999}
-              onClick={noopLiquidGlassChipClick}
-              padding="6px 10px"
-            >
-              <span className="liquid-glass-chip__label liquid-glass-chip__label--lg">标题字号</span>
-            </LiquidGlassSurface>
+            <span aria-hidden="true" className="capsule-material-row__liquid-sizer">
+              液态玻璃胶囊
+            </span>
           </button>
         </div>
       </LiquidGlassTile>
@@ -82,7 +46,7 @@ function LiquidGlassChipDemo() {
 
 function PrefixChipDemo() {
   return (
-    <ComponentPreviewCard align="center" label="前缀胶囊">
+    <ComponentPreviewCard align="center" label="胶囊前缀">
       <div className="text-button-preview" aria-label="ChipButton 前缀预览">
         <ChipButton prefix={<Hash aria-hidden="true" />}>写作/日记</ChipButton>
         <ChipButton prefix={<Plus aria-hidden="true" />} state="glass">新增标签</ChipButton>
@@ -93,7 +57,7 @@ function PrefixChipDemo() {
 
 function SuffixChipDemo() {
   return (
-    <ComponentPreviewCard align="center" label="后缀胶囊">
+    <ComponentPreviewCard align="center" label="胶囊后缀">
       <div className="text-button-preview" aria-label="ChipButton 后缀预览">
         <ChipButton
           prefix={null}
@@ -135,7 +99,7 @@ function StateToggleChipButtonDemo() {
         />
       }
       align="center"
-      label="状态切换胶囊"
+      label="胶囊状态切换"
     >
       <div aria-label="ChipButton 状态预览">
         <ChipButton state={state}>写作/日记</ChipButton>
@@ -174,7 +138,7 @@ function WidthToggleChipButtonDemo() {
         />
       }
       align="center"
-      label="长度切换胶囊"
+      label="胶囊长度切换"
     >
       <div
         className="chip-button-preview__width-example"
@@ -201,9 +165,7 @@ function WidthToggleChipButtonDemo() {
 function CapsuleDemo() {
   return (
     <>
-      <ChipTextSizeDemo />
-      <GlassChipDemo />
-      <LiquidGlassChipDemo />
+      <CapsuleMaterialDemo />
       <PrefixChipDemo />
       <SuffixChipDemo />
       <StateToggleChipButtonDemo />
@@ -222,11 +184,12 @@ export const capsuleDefinition = {
     'ChipButton',
     '标签胶囊',
     '状态标签胶囊',
-    '状态切换胶囊',
-    '长度切换胶囊',
-    '前缀胶囊',
-    '后缀胶囊',
+    '胶囊状态切换',
+    '胶囊长度切换',
+    '胶囊前缀',
+    '胶囊后缀',
     '液态玻璃胶囊',
+    '胶囊材质',
   ],
   preview: () => <CapsuleDemo />,
 } satisfies ComponentDefinition

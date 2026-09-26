@@ -120,7 +120,6 @@ for (const snippet of [
   "from './animated-inline-size'",
   "from './animated-inline-size-model'",
   "from './chip-surface-model'",
-  'type ChipSurfaceTextSize,',
   "import './chip-button.css'",
   "export type ChipButtonState = 'default' | 'glass'",
   'export type ChipButtonProps',
@@ -129,16 +128,14 @@ for (const snippet of [
   'prefix?: ReactElement | null',
   'state?: ChipButtonState',
   'suffix?: ReactElement | null',
-  'textSize?: ChipSurfaceTextSize',
   'export function ChipButton',
   'animateWidth = false',
   'prefix = <Hash aria-hidden="true" />',
   "state = 'default'",
-  "textSize = 'sm'",
   'function isEmptyChipButtonSlot',
   '{isEmptyChipButtonSlot(prefix) ? null : (',
   '{isEmptyChipButtonSlot(suffix) ? null : (',
-  'getChipSurfaceAttributes({ variant: state, interactive: true, textSize })',
+  "getChipSurfaceAttributes({ variant: state, interactive: true, textSize: 'sm' })",
   'data-state={state}',
   "data-has-prefix={isEmptyChipButtonSlot(prefix) ? undefined : 'true'}",
   "data-has-suffix={isEmptyChipButtonSlot(suffix) ? undefined : 'true'}",
@@ -151,6 +148,12 @@ for (const snippet of [
 ]) {
   assertIncludes(source, snippet, `ChipButton source must include ${snippet}.`)
 }
+assert.ok(
+  !source.includes('textSize?:') &&
+    !source.includes("textSize = 'sm'") &&
+    !source.includes('ChipSurfaceTextSize'),
+  'ChipButton must support the single small text size only; the textSize prop stays removed.',
+)
 assertIncludes(
   css,
   '.chip-button__suffix',
@@ -189,6 +192,7 @@ for (const [block, snippet, message] of [
   [glassLayerBlock, 'background-color var(--chip-surface-state-transition-duration) ease', 'ChipButton glass layer hover tint must fade like icon buttons.'],
   [glassBaseBlock, 'border-color: var(--glass-surface-border);', 'ChipButton glass state must transition to the standard glass surface border.'],
   [glassBaseBlock, 'backdrop-filter: blur(var(--glass-blur));', 'ChipButton glass state must use shared glass blur.'],
+  [glassBaseBlock, 'color: var(--glass-surface-fg);', 'ChipButton glass state text color must follow the tone-adaptive fg token so it flips with the sampled background.'],
   [defaultStateBeforeBlock, 'opacity: 1;', 'ChipButton default state must show default layer.'],
   [defaultStateAfterBlock, 'opacity: 0;', 'ChipButton default state must hide glass layer.'],
   [glassStateBeforeBlock, 'opacity: 0;', 'ChipButton glass state must hide default layer.'],
@@ -227,6 +231,10 @@ assert.ok(
   'ChipButton wrapper CSS must not depend directly on a shared glass background gradient token.',
 )
 assert.ok(
+  !chipButtonBlock.includes('color:'),
+  'The unlayered button.chip-button block must stay geometry-only: an unlayered color would unconditionally beat the layered glass variant tone-adaptive color and pin frosted chip text.',
+)
+assert.ok(
   !baseBlock.includes('box-shadow') &&
     !glassBaseBlock.includes('box-shadow') &&
     !css.includes('--glass-shadow'),
@@ -258,33 +266,24 @@ assert.ok(
     docsSource.includes("import { GlassPreviewCard } from '../glass-preview-card'") &&
     docsSource.includes("import { PreviewToggle } from '../preview-toggle'") &&
     docsSource.includes("id: 'capsule'") &&
-    docsSource.includes('function ChipTextSizeDemo') &&
-    docsSource.includes('<ChipTextSizeDemo />') &&
-    docsSource.includes('label="胶囊字号"') &&
-    docsSource.includes('<ChipButton prefix={null} textSize="sm">') &&
-    docsSource.includes('<ChipButton prefix={null} textSize="base">') &&
-    docsSource.includes('<ChipButton prefix={null} textSize="lg">') &&
-    docsSource.includes('function GlassChipDemo') &&
-    docsSource.includes('<GlassChipDemo />') &&
-    docsSource.includes('label="磨砂态胶囊"') &&
-    docsSource.includes('<ChipButton prefix={null} state="glass" textSize="sm">') &&
-    docsSource.includes('<ChipButton prefix={null} state="glass" textSize="base">') &&
-    docsSource.includes('<ChipButton prefix={null} state="glass" textSize="lg">') &&
-    docsSource.includes('function LiquidGlassChipDemo') &&
-    docsSource.includes('<LiquidGlassChipDemo />') &&
+    docsSource.includes('function CapsuleMaterialDemo') &&
+    docsSource.includes('<CapsuleMaterialDemo />') &&
+    docsSource.includes('label="胶囊材质"') &&
+    docsSource.includes('<ChipButton prefix={null} state="default">普通胶囊</ChipButton>') &&
+    docsSource.includes('<ChipButton prefix={null} state="glass">磨砂胶囊</ChipButton>') &&
     docsSource.includes('function PrefixChipDemo') &&
     docsSource.includes('<PrefixChipDemo />') &&
-    docsSource.includes('label="前缀胶囊"') &&
+    docsSource.includes('label="胶囊前缀"') &&
     docsSource.includes('prefix={<Hash aria-hidden="true" />}') &&
     docsSource.includes('prefix={<Plus aria-hidden="true" />}') &&
     docsSource.includes('function SuffixChipDemo') &&
     docsSource.includes('<SuffixChipDemo />') &&
-    docsSource.includes('label="后缀胶囊"') &&
+    docsSource.includes('label="胶囊后缀"') &&
     docsSource.includes("import { GhostIconButton } from '../../components/ghost-icon-button'") &&
     docsSource.includes('suffix={') &&
     docsSource.includes('<GhostIconButton aria-label="移除标签" size="xs">') &&
     docsSource.includes('<X aria-hidden="true" />'),
-  'Capsule docs cards must show button-form capsules only: text sizes, glass sizes, prefix, and suffix demos all render ChipButton.',
+  'Capsule docs cards must show button-form capsules only: prefix and suffix demos render ChipButton beside the capsule material card.',
 )
 assert.ok(
   docsSource.includes("const [state, setState] = useState<'default' | 'glass'>('default')") &&
@@ -318,16 +317,15 @@ assert.ok(
   'ChipButton docs text toggles must not use coss Button.',
 )
 assert.ok(
-  [
-    'ChipButton 字号预览',
-    'ChipButton 前缀预览',
-    'ChipButton 后缀预览',
-  ].every((demoLabel) =>
+  ['ChipButton 前缀预览', 'ChipButton 后缀预览'].every((demoLabel) =>
     docsSource.includes(`<div className="text-button-preview" aria-label="${demoLabel}">`),
   ) &&
     appCss.includes('.text-button-preview') &&
-    !docsSource.includes('label="胶囊按钮"'),
-  'Capsule chip-button demo cards must lay out their buttons in the shared preview row; the redundant state-pair chip-button card must stay removed.',
+    !docsSource.includes('label="胶囊按钮"') &&
+    !docsSource.includes('textSize=') &&
+    !docsSource.includes('label="胶囊字号"') &&
+    !docsSource.includes('label="磨砂态胶囊"'),
+  'Capsule chip-button demo cards must lay out their buttons in the shared preview row; the redundant state-pair and text-size cards must stay removed.',
 )
 assert.ok(
   definitionsIndexSource.includes("import { capsuleDefinition } from './capsule'") &&

@@ -1390,7 +1390,7 @@ try {
       chipButtonSource.includes("from './chip-surface-model'") &&
       chipButtonSource.includes("from './animated-inline-size'") &&
       chipButtonSource.includes("from './animated-inline-size-model'") &&
-      chipButtonSource.includes('getChipSurfaceAttributes({ variant: state, interactive: true, textSize })') &&
+	      chipButtonSource.includes("getChipSurfaceAttributes({ variant: state, interactive: true, textSize: 'sm' })") &&
       chipSurfaceSource.includes('export function ChipSurface') &&
       chipSurfaceModelSource.includes('export function getChipSurfaceClassName') &&
       animatedInlineSizeSource.includes('export function AnimatedInlineSizeMeasure') &&

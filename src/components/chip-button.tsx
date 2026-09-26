@@ -5,7 +5,6 @@ import { AnimatedInlineSizeMeasure } from './animated-inline-size'
 import {
   getChipSurfaceAttributes,
   getChipSurfaceClassName,
-  type ChipSurfaceTextSize,
 } from './chip-surface-model'
 import {
   getAnimatedInlineSizeStyle,
@@ -24,7 +23,6 @@ export type ChipButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'pre
   prefix?: ReactElement | null
   state?: ChipButtonState
   suffix?: ReactElement | null
-  textSize?: ChipSurfaceTextSize
 }
 
 function isEmptyChipButtonSlot(slot: ReactNode) {
@@ -39,7 +37,6 @@ export function ChipButton({
   state = 'default',
   style,
   suffix,
-  textSize = 'sm',
   ...props
 }: ChipButtonProps) {
   const isGlassState = state === 'glass'
@@ -50,9 +47,9 @@ export function ChipButton({
     children,
     state,
     suffix,
-    textSize,
   ])
-  const chipSurfaceAttributes = getChipSurfaceAttributes({ variant: state, interactive: true, textSize })
+  // 胶囊只保留小字号一档(sm):基础/标题字号变体已随 textSize prop 一并移除。
+  const chipSurfaceAttributes = getChipSurfaceAttributes({ variant: state, interactive: true, textSize: 'sm' })
   // prefix/suffix 是整体按钮内部的独立小部件,只接受图标元素(Hash 图标、可
   // 关闭胶囊的 X 幽灵图标按钮等),不支持普通字符——类型层已排除 string;
   // 默认前缀为 Hash 图标(对齐 TagBread),null 隐藏插槽,gap 不由空插槽垫宽;

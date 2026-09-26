@@ -109,6 +109,34 @@ function useFrostedSurfaceBackgroundToneForElement<ElementType extends HTMLEleme
         ? new ownerWindow.MutationObserver(scheduleUpdate)
         : null
 
+    // Chromium 的 backdrop-filter 快照在「只有背景元素的内联样式变化」时会滞留:
+    // 灰度滑块只改画布 style 时,磨砂材质停在旧模糊底色,直到材质自身发生一次
+    // 样式提交(如按压反馈)才刷新。与 LiquidGlassSurface 的抖动同思路——观察
+    // 祖先链 class/style,在元素自身交替写入视觉恒等的 translate 强制重采样。
+    // 只能观察祖先链、写入只能在自身:上面的采样观察器挂在 documentElement
+    // subtree 上,抖动若由它触发会对自身写入形成 rAF 乒乓循环。
+    const backdropObserver =
+      'MutationObserver' in ownerWindow
+        ? new ownerWindow.MutationObserver(() => {
+            const nudged = element.dataset.frostedBackdropNudge === '1'
+            element.dataset.frostedBackdropNudge = nudged ? '0' : '1'
+            element.style.translate = nudged ? '' : '0 0.001px'
+          })
+        : null
+
+    if (backdropObserver) {
+      for (
+        let ancestor = element.parentElement;
+        ancestor;
+        ancestor = ancestor.parentElement
+      ) {
+        backdropObserver.observe(ancestor, {
+          attributeFilter: ['class', 'style'],
+          attributes: true,
+        })
+      }
+    }
+
     // 首次挂载在绘制前确定字色,后续定位/背景变化仍按帧合并采样。
     updateBackgroundTone()
     scheduleUpdate()
@@ -132,6 +160,7 @@ function useFrostedSurfaceBackgroundToneForElement<ElementType extends HTMLEleme
 
       resizeObserver?.disconnect()
       mutationObserver?.disconnect()
+      backdropObserver?.disconnect()
       ownerWindow.removeEventListener('resize', scheduleUpdate)
       scrollParents.forEach((scrollParent) => {
         scrollParent.removeEventListener('scroll', scheduleUpdate, scrollListenerOptions)

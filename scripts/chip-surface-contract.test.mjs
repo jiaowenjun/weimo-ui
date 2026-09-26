@@ -234,7 +234,7 @@ assert.ok(
   chipButtonSource.includes("isGlassState && 'frosted-surface',") &&
     chipButtonSource.includes("import { useFrostedSurfaceBackgroundToneRef } from './frosted-surface'") &&
     chipButtonSource.includes("import './frosted-surface.css'") &&
-    chipButtonSource.includes("getChipSurfaceAttributes({ variant: state, interactive: true, textSize })") &&
+    chipButtonSource.includes("getChipSurfaceAttributes({ variant: state, interactive: true, textSize: 'sm' })") &&
     chipButtonSource.includes('animateWidth = false') &&
     chipButtonSource.includes('? { ...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle }') &&
     chipButtonSource.includes(': { ...style, ...backgroundStyle }') &&

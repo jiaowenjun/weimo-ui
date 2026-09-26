@@ -587,6 +587,21 @@ assert.ok(
       frostedSurfaceSource.indexOf('useFrostedSurfaceBackgroundToneForElement'),
   'FrostedSurface must move the observing effect behind an element-state hook so callback refs can resample after delayed mounts.',
 )
+// Chromium backdrop-filter 快照滞留的自愈抖动:祖先链内联样式变化(灰度滑块)时
+// 材质停在旧模糊底色,须在自身写入一次视觉恒等的 translate 强制重采样。
+// 只能观察祖先链:抖动写入与 documentElement subtree 采样观察器互相可见会
+// 形成 rAF 乒乓循环,故对 backdropObserver 的 observe 显式禁 subtree。
+assert.ok(
+  frostedSurfaceSource.includes('const backdropObserver =') &&
+    frostedSurfaceSource.includes("element.dataset.frostedBackdropNudge === '1'") &&
+    frostedSurfaceSource.includes("element.style.translate = nudged ? '' : '0 0.001px'") &&
+    frostedSurfaceSource.includes('backdropObserver.observe(ancestor, {'),
+  'Frosted surfaces must nudge their own translate on ancestor style mutations so Chromium backdrop-filter snapshots track slider-driven inline background changes.',
+)
+assert.ok(
+  !/backdropObserver\.observe\([^)]*subtree/.test(frostedSurfaceSource),
+  'The backdrop nudge observer must watch the ancestor chain only; subtree observation would ping-pong with its own writes.',
+)
 for (const removedSnippet of [
   "import type { SmartGlassSurfaceProps } from './smart-glass-surface'",
   "from './smart-glass-surface'",

@@ -114,17 +114,19 @@ for (const snippet of [
   )
 }
 for (const snippet of [
-  'label="液态玻璃胶囊"',
-  '<button className="liquid-glass-chip liquid-glass-chip--sm" type="button">',
+  'label="胶囊材质"',
+  '<button className="liquid-glass-chip" type="button">',
   '<LiquidGlassSurface',
   'cornerRadius={999}',
   'onClick={noopLiquidGlassChipClick}',
   'padding="6px 10px"',
-  '液态玻璃胶囊字号预览',
+  '液态玻璃胶囊',
+  '胶囊材质预览',
+  'capsule-material-row__liquid-sizer',
 ]) {
   assert.ok(
     capsuleDefinitionSource.includes(snippet),
-    `The capsule page liquid glass chip card must include ${snippet}.`,
+    `The capsule page material card must include ${snippet}.`,
   )
 }
 const liquidGlassChipButtonBlock =

@@ -1215,8 +1215,9 @@
   }
 }
 
-/* 液态玻璃胶囊(胶囊页):与磨砂态胶囊同节奏的三档字号(胶囊 padding 6px 10px、
-   行高 1),玻璃层绝对居中于定尺寸占位盒,文字色随画布 tone 自适应。 */
+/* 胶囊材质卡(胶囊页):普通/磨砂/液态玻璃三例并列于灰度画布;液态玻璃例
+   文字长于定尺寸占位盒,改用隐藏 sizer 撑盒宽(站点顶栏标题同款),玻璃层
+   绝对居中覆盖其上,文字色随画布 tone 自适应。 */
 .liquid-glass-chip-preview {
   display: grid;
   min-width: 0;
@@ -1228,12 +1229,27 @@
   color: var(--glass-surface-fg-on-light);
 }
 
-.liquid-glass-chip-row {
+.capsule-material-row {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 16px;
+}
+
+/* 液态玻璃胶囊在材质卡内按内容定宽:sizer 撑盒,玻璃层绝对居中覆盖;
+   两例 ChipButton 自带尺寸不参与此机制。 */
+.capsule-material-row .liquid-glass-chip {
+  display: inline-flex;
+  align-items: center;
+}
+
+.capsule-material-row__liquid-sizer {
+  visibility: hidden;
+  font-size: var(--font-size-sm);
+  line-height: 1;
+  padding: 6px 10px;
+  white-space: nowrap;
 }
 
 .liquid-glass-chip {
@@ -1257,11 +1273,6 @@ button.liquid-glass-chip {
   height: 25px;
 }
 
-.liquid-glass-chip--base {
-  width: 84px;
-  height: 28px;
-}
-
 .liquid-glass-chip--lg {
   width: 88px;
   height: 29px;
@@ -1275,10 +1286,6 @@ button.liquid-glass-chip {
 
 .liquid-glass-chip__label--sm {
   font-size: var(--font-size-sm);
-}
-
-.liquid-glass-chip__label--base {
-  font-size: var(--font-size-base);
 }
 
 .liquid-glass-chip__label--lg {
