@@ -31,18 +31,18 @@ const BACKGROUND_LIGHTNESS_THRESHOLD = 0.5
 const MIN_VISIBLE_ALPHA = 0.05
 const MIN_VIDEO_READY_STATE = 2
 
-// 边框亮度插值锚点(零饱和度灰的 lightness):暗端取 --color-border 暗主题值(20%),
-// 亮端取 --color-border 亮主题值(90%),过渡极值取 --color-text-primary 两主题值
-// (暗 98%/亮 9%)。与 BACKGROUND_LIGHTNESS_THRESHOLD 同为采样行为的内聚常量:
-// 不 import token 镜像以保持 registry 自包含,token 改值时需同步锚点。
-const BORDER_ANCHOR_ON_DARK_LIGHTNESS = 20
-const BORDER_ANCHOR_ON_LIGHT_LIGHTNESS = 90
-const BORDER_FOREGROUND_DARK_LIGHTNESS = 98
-const BORDER_FOREGROUND_LIGHT_LIGHTNESS = 9
+// 边框亮度插值锚点(零饱和度灰的 lightness,演示页调参定值,不对应单一 token):
+// 暗段 0~50% 从 20% 递增至 98%,亮段 50%~100% 从 35% 递增至 90%。50% 恰是
+// tone 翻转点,边框与前景色同处 98→35 跳变,由组件的 border-color 过渡柔化。
+// 与 BACKGROUND_LIGHTNESS_THRESHOLD 同为采样行为的内聚常量,不 import token
+// 镜像以保持 registry 自包含。
+const BORDER_DARK_SEGMENT_START_LIGHTNESS = 20
+const BORDER_DARK_SEGMENT_END_LIGHTNESS = 98
+const BORDER_LIGHT_SEGMENT_START_LIGHTNESS = 35
+const BORDER_LIGHT_SEGMENT_END_LIGHTNESS = 90
 
-// 边框亮度随感知亮度两段平滑递增(0~50%: 20%→98%;50%~100%: 9%→90%),端点固定
-// 与站点主题无关;50% 恰是 tone 翻转点,边框与前景色同处 98→9 跳变,由组件的
-// border-color 过渡柔化。锚点全为纯灰,lightness 域插值与颜色插值等价。
+// 边框亮度随感知亮度两段平滑递增(暗段 20%→98%,亮段 35%→90%),端点固定与
+// 站点主题无关;锚点全为纯灰,lightness 域插值与颜色插值等价。
 export function interpolateFrostedBorderColor(luminance: number | null) {
   if (luminance == null) {
     return null
@@ -51,10 +51,10 @@ export function interpolateFrostedBorderColor(luminance: number | null) {
   const progress = Math.min(Math.max(luminance, 0), 1)
   const [fromLightness, toLightness, phase] =
     progress < 0.5
-      ? [BORDER_ANCHOR_ON_DARK_LIGHTNESS, BORDER_FOREGROUND_DARK_LIGHTNESS, progress / 0.5]
+      ? [BORDER_DARK_SEGMENT_START_LIGHTNESS, BORDER_DARK_SEGMENT_END_LIGHTNESS, progress / 0.5]
       : [
-          BORDER_FOREGROUND_LIGHT_LIGHTNESS,
-          BORDER_ANCHOR_ON_LIGHT_LIGHTNESS,
+          BORDER_LIGHT_SEGMENT_START_LIGHTNESS,
+          BORDER_LIGHT_SEGMENT_END_LIGHTNESS,
           (progress - 0.5) / 0.5,
         ]
   const lightness = fromLightness + (toLightness - fromLightness) * phase
