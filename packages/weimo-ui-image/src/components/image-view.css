@@ -1,0 +1,104 @@
+@layer components {
+  .image-view {
+    --image-view-object-fit: contain;
+
+    position: relative;
+    display: grid;
+    box-sizing: border-box;
+    min-width: 0;
+    aspect-ratio: var(--image-view-aspect-ratio, auto);
+    place-items: center;
+    overflow: hidden;
+    margin: 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: color-mix(in srgb, var(--color-bg-raised) 70%, transparent);
+  }
+
+  .image-view[data-object-fit="cover"] {
+    --image-view-object-fit: cover;
+  }
+
+  .image-view[data-display-mode] {
+    display: block;
+    min-height: 0;
+    aspect-ratio: auto;
+    padding: 12px;
+    overflow: auto;
+    cursor: grab;
+    touch-action: none;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .image-view[data-display-mode][data-dragging="true"] {
+    cursor: grabbing;
+    user-select: none;
+  }
+
+  .image-view__mode-trigger svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .image-view__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: var(--image-view-object-fit);
+  }
+
+  .image-view[data-display-mode] .image-view__image {
+    width: auto;
+    height: auto;
+    max-width: none;
+    max-height: none;
+    margin-inline: auto;
+    object-fit: initial;
+    user-select: none;
+  }
+
+  .image-view[data-display-mode="fit-width"] .image-view__image {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+  }
+
+  .image-view[data-display-mode="fit-height"] {
+    height: min(78vh, 760px);
+  }
+
+  .image-view[data-display-mode="fit-height"] .image-view__image {
+    width: auto;
+    height: 100%;
+    max-height: 100%;
+  }
+
+  .image-view__detail-dialog {
+    width: min(96vw, 1120px);
+  }
+
+  .image-view__detail-title {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .image-view__detail {
+    width: 100%;
+  }
+
+  .image-view__placeholder {
+    max-width: 18rem;
+    padding: 16px;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.45;
+    text-align: center;
+  }
+}

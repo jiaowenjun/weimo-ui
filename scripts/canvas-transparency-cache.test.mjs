@@ -34,7 +34,7 @@ function resultFor(label) {
   }
 }
 
-const cacheSource = readProjectFile('src/components/canvas-transparency-cache.ts')
+const cacheSource = readProjectFile('packages/weimo-ui-image/src/components/canvas-transparency-cache.ts')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 
 assert.ok(

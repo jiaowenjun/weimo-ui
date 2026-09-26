@@ -209,8 +209,8 @@ for (const name of promotedRegistryNames) {
 }
 assert.ok(topBarItem, 'Root registry must include the @weimo/top-bar item.')
 for (const filePath of [
-  'src/components/image-view.tsx',
-  'src/components/image-view.css',
+  'packages/weimo-ui-image/src/components/image-view.tsx',
+  'packages/weimo-ui-image/src/components/image-view.css',
 ]) {
   assert.ok(
     imageViewItem.files.some((file) => file.path === filePath),
@@ -451,9 +451,9 @@ assert.ok(
   'Card registry item must install @base-ui/react for MdEditor, TagPicker, and ActionDialog internals.',
 )
 for (const filePath of [
-  'src/components/canvas-transparency.tsx',
-  'src/components/canvas-transparency-cache.ts',
-  'src/components/canvas-transparency-model.ts',
+  'packages/weimo-ui-image/src/components/canvas-transparency.tsx',
+  'packages/weimo-ui-image/src/components/canvas-transparency-cache.ts',
+  'packages/weimo-ui-image/src/components/canvas-transparency-model.ts',
 ]) {
   assert.ok(
     canvasTransparencyItem.files.some((file) => file.path === filePath),
@@ -470,8 +470,8 @@ assert.deepEqual(
   'CanvasTransparency registry item must install only the shared style item.',
 )
 for (const filePath of [
-  'src/components/image-uploader.tsx',
-  'src/components/image-uploader.css',
+  'packages/weimo-ui-image/src/components/image-uploader.tsx',
+  'packages/weimo-ui-image/src/components/image-uploader.css',
 ]) {
   assert.ok(
     imageUploaderItem.files.some((file) => file.path === filePath),

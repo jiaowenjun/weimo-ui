@@ -49,6 +49,7 @@ const coreGroups = new Set([
   'layout-bars',
 ])
 const additionalCoreComponents = new Set(['base-card', 'component-preview-card'])
+const imageComponents = new Set(['canvas-transparency', 'image-uploader', 'image'])
 
 describe('public component catalog', () => {
   it('keeps component groups ordered and each group alphabetized', () => {
@@ -75,6 +76,7 @@ describe('public component catalog', () => {
   it('maps every manifest entry to one package export and exported source module', () => {
     const packageJson = readProjectJson<PackageJson>('package.json')
     const corePackageJson = readProjectJson<PackageJson>('packages/weimo-ui-core/package.json')
+    const imagePackageJson = readProjectJson<PackageJson>('packages/weimo-ui-image/package.json')
     const markdownPackageJson = readProjectJson<PackageJson>('packages/weimo-ui-markdown/package.json')
     const statsPackageJson = readProjectJson<PackageJson>('packages/weimo-ui-stats/package.json')
     const ids = new Set<string>()
@@ -90,22 +92,27 @@ describe('public component catalog', () => {
       registryNames.add(item.registryName)
 
       const isCoreComponent = coreGroups.has(item.group) || additionalCoreComponents.has(item.id)
+      const isImageComponent = imageComponents.has(item.id)
       const isMarkdownComponent = item.group === 'markdown'
       const isStatsComponent = item.group === 'data-visualization'
       const ownerPackageJson = isCoreComponent
         ? corePackageJson
-        : isMarkdownComponent
-          ? markdownPackageJson
-          : isStatsComponent
-            ? statsPackageJson
-            : packageJson
+        : isImageComponent
+          ? imagePackageJson
+          : isMarkdownComponent
+            ? markdownPackageJson
+            : isStatsComponent
+              ? statsPackageJson
+              : packageJson
       const packageRoot = isCoreComponent
         ? 'packages/weimo-ui-core/'
-        : isMarkdownComponent
-          ? 'packages/weimo-ui-markdown/'
-          : isStatsComponent
-            ? 'packages/weimo-ui-stats/'
-            : ''
+        : isImageComponent
+          ? 'packages/weimo-ui-image/'
+          : isMarkdownComponent
+            ? 'packages/weimo-ui-markdown/'
+            : isStatsComponent
+              ? 'packages/weimo-ui-stats/'
+              : ''
       const sourcePath = ownerPackageJson.exports[item.packageExport]
       const projectSourcePath = `${packageRoot}${sourcePath.replace(/^\.\//u, '')}`
       expect(sourcePath, `${item.id} package export`).toBeTypeOf('string')

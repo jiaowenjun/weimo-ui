@@ -19,12 +19,12 @@
   ],
   "files": [
     {
-      "path": "src/components/image-view.tsx",
+      "path": "packages/weimo-ui-image/src/components/image-view.tsx",
       "type": "registry:ui",
       "target": "@ui/image-view.tsx"
     },
     {
-      "path": "src/components/image-view.css",
+      "path": "packages/weimo-ui-image/src/components/image-view.css",
       "type": "registry:ui",
       "target": "@ui/image-view.css"
     }

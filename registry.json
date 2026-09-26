@@ -2881,17 +2881,17 @@
       ],
       "files": [
         {
-          "path": "src/components/canvas-transparency.tsx",
+          "path": "packages/weimo-ui-image/src/components/canvas-transparency.tsx",
           "type": "registry:ui",
           "target": "@ui/canvas-transparency.tsx"
         },
         {
-          "path": "src/components/canvas-transparency-cache.ts",
+          "path": "packages/weimo-ui-image/src/components/canvas-transparency-cache.ts",
           "type": "registry:ui",
           "target": "@ui/canvas-transparency-cache.ts"
         },
         {
-          "path": "src/components/canvas-transparency-model.ts",
+          "path": "packages/weimo-ui-image/src/components/canvas-transparency-model.ts",
           "type": "registry:ui",
           "target": "@ui/canvas-transparency-model.ts"
         }
@@ -2913,12 +2913,12 @@
       ],
       "files": [
         {
-          "path": "src/components/image-uploader.tsx",
+          "path": "packages/weimo-ui-image/src/components/image-uploader.tsx",
           "type": "registry:ui",
           "target": "@ui/image-uploader.tsx"
         },
         {
-          "path": "src/components/image-uploader.css",
+          "path": "packages/weimo-ui-image/src/components/image-uploader.css",
           "type": "registry:ui",
           "target": "@ui/image-uploader.css"
         }
@@ -3042,12 +3042,12 @@
       ],
       "files": [
         {
-          "path": "src/components/image-view.tsx",
+          "path": "packages/weimo-ui-image/src/components/image-view.tsx",
           "type": "registry:ui",
           "target": "@ui/image-view.tsx"
         },
         {
-          "path": "src/components/image-view.css",
+          "path": "packages/weimo-ui-image/src/components/image-view.css",
           "type": "registry:ui",
           "target": "@ui/image-view.css"
         }

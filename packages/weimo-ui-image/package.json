@@ -1,0 +1,39 @@
+{
+  "name": "weimo-ui-image",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "exports": {
+    ".": "./src/index.ts",
+    "./components/canvas-transparency": "./src/components/canvas-transparency.tsx",
+    "./components/canvas-transparency-cache": "./src/components/canvas-transparency-cache.ts",
+    "./components/image-uploader": "./src/components/image-uploader.tsx",
+    "./components/image-view": "./src/components/image-view.tsx",
+    "./styles/image-uploader.css": "./src/components/image-uploader.css",
+    "./styles/image-view.css": "./src/components/image-view.css"
+  },
+  "scripts": {
+    "test:typecheck": "tsc -p tsconfig.json --noEmit --pretty false"
+  },
+  "dependencies": {
+    "lucide-react": "1.24.0",
+    "weimo-ui-core": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "typescript": "~6.0.3"
+  }
+}

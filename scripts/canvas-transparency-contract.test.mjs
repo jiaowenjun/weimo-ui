@@ -17,9 +17,9 @@ function readJson(relativePath) {
   return JSON.parse(readProjectFile(relativePath))
 }
 
-const source = readProjectFile('src/components/canvas-transparency.tsx')
-const cacheSource = readProjectFile('src/components/canvas-transparency-cache.ts')
-const modelSource = readProjectFile('src/components/canvas-transparency-model.ts')
+const source = readProjectFile('packages/weimo-ui-image/src/components/canvas-transparency.tsx')
+const cacheSource = readProjectFile('packages/weimo-ui-image/src/components/canvas-transparency-cache.ts')
+const modelSource = readProjectFile('packages/weimo-ui-image/src/components/canvas-transparency-model.ts')
 const docsDefinition = readProjectFile(
   'src/docs/component-definitions/image.tsx',
 )
@@ -211,9 +211,9 @@ assert.deepEqual(
 assert.deepEqual(
   registryItem.files.map((file) => file.path),
   [
-    'src/components/canvas-transparency.tsx',
-    'src/components/canvas-transparency-cache.ts',
-    'src/components/canvas-transparency-model.ts',
+    'packages/weimo-ui-image/src/components/canvas-transparency.tsx',
+    'packages/weimo-ui-image/src/components/canvas-transparency-cache.ts',
+    'packages/weimo-ui-image/src/components/canvas-transparency-model.ts',
   ],
   'CanvasTransparency registry item must ship the component, result cache, and processing model.',
 )
@@ -223,7 +223,7 @@ const {
   makeCanvasBackgroundTransparent,
   makeCanvasDarkForeground,
   resolveCanvasTransparencyAlpha,
-} = await import('../src/components/canvas-transparency-model.ts')
+} = await import('../packages/weimo-ui-image/src/components/canvas-transparency-model.ts')
 
 assert.equal(
   resolveCanvasTransparencyAlpha([255, 255, 255], [255, 255, 255], 16, 32),

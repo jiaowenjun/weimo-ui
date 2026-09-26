@@ -30,8 +30,8 @@ function assertIncludes(source, snippet, message) {
   assert.ok(source.includes(snippet), message)
 }
 
-const source = readProjectFile('src/components/image-uploader.tsx')
-const css = readProjectFile('src/components/image-uploader.css')
+const source = readProjectFile('packages/weimo-ui-image/src/components/image-uploader.tsx')
+const css = readProjectFile('packages/weimo-ui-image/src/components/image-uploader.css')
 const packageJson = readJson('package.json')
 const manifest = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndex = readProjectFile('src/docs/component-definitions/index.ts')
@@ -81,7 +81,7 @@ for (const snippet of [
   "import type { ChangeEvent, DragEvent, KeyboardEvent, MouseEvent } from 'react'",
   "import type { ComponentPropsWithoutRef } from 'react'",
   "import { ImageView } from './image-view'",
-  "import { cn } from './lib/utils'",
+  "import { cn } from 'weimo-ui-core/components/lib/utils'",
   "import './image-uploader.css'",
   "type ImageUploaderSelectionSource = 'picker' | 'clipboard' | 'drop'",
   'export type ImageUploaderActionApi = {',
@@ -360,8 +360,8 @@ assert.ok(
   'ImageUploader registry item must let ImageView own its package dependencies.',
 )
 for (const filePath of [
-  'src/components/image-uploader.tsx',
-  'src/components/image-uploader.css',
+  'packages/weimo-ui-image/src/components/image-uploader.tsx',
+  'packages/weimo-ui-image/src/components/image-uploader.css',
 ]) {
   assert.ok(
     registryItem.files.some((file) => file.path === filePath),
@@ -373,8 +373,8 @@ for (const filePath of [
   'src/components/image-detail.css',
   'src/components/image-detail-view.tsx',
   'src/components/image-detail-view.css',
-  'src/components/image-view.tsx',
-  'src/components/image-view.css',
+  'packages/weimo-ui-image/src/components/image-view.tsx',
+  'packages/weimo-ui-image/src/components/image-view.css',
 ]) {
   assert.ok(
     !registryItem.files.some((file) => file.path === filePath),
@@ -386,7 +386,7 @@ for (const snippet of [
   "import { Check, Clipboard, FileImage, X } from 'lucide-react'",
   "import { useState } from 'react'",
   "import { FrostedIconButton } from '../../components/frosted-icon-button'",
-  "import { ImageUploader, type ImageUploaderActionApi } from '../../components/image-uploader'",
+  "import { ImageUploader, type ImageUploaderActionApi } from '../../../packages/weimo-ui-image/src/components/image-uploader'",
   "id: 'image'",
   'function ImageUploaderPreview()',
   'const [file, setFile] = useState<File | null>(null)',

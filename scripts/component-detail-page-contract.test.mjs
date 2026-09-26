@@ -254,7 +254,7 @@ for (const selector of [
 }
 
 assert.ok(
-  imageViewDefinitionSource.includes("import { ImageView, ImageViewDisplayModeMenu, type ImageViewDisplayMode } from '../../components/image-view'") &&
+  imageViewDefinitionSource.includes("import { ImageView, ImageViewDisplayModeMenu, type ImageViewDisplayMode } from '../../../packages/weimo-ui-image/src/components/image-view'") &&
     imageViewDefinitionSource.includes("id: 'image'") &&
     imageViewDefinitionSource.includes("const sampleImage = 'data:image/png;base64,") &&
     imageViewDefinitionSource.includes('src={sampleImage}') &&

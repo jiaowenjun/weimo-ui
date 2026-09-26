@@ -42,8 +42,8 @@ const packageJson = readJson('package.json')
 const manifest = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndex = readProjectFile('src/docs/component-definitions/index.ts')
 const docsDefinition = readProjectFile('src/docs/component-definitions/image.tsx')
-const imageViewSource = readProjectFile('src/components/image-view.tsx')
-const imageViewCss = readProjectFile('src/components/image-view.css')
+const imageViewSource = readProjectFile('packages/weimo-ui-image/src/components/image-view.tsx')
+const imageViewCss = readProjectFile('packages/weimo-ui-image/src/components/image-view.css')
 const ocrDetailSource = readProjectFile('src/components/ocr-detail.tsx')
 const ocrDetailCss = readProjectFile('src/components/ocr-detail.css')
 const rootRegistry = readJson('registry.json')
@@ -127,10 +127,10 @@ for (const snippet of [
   'PointerEvent as ReactPointerEvent,',
   'ReactNode,',
   'Ref,',
-  "import { ActionDialog } from './action-dialog'",
-  "import { FrostedIconButton } from './frosted-icon-button'",
-  "import { cn } from './lib/utils'",
-  "import { ActionMenu, type ActionMenuItem } from './menu'",
+  "import { ActionDialog } from 'weimo-ui-core/components/action-dialog'",
+  "import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'",
+  "import { cn } from 'weimo-ui-core/components/lib/utils'",
+  "import { ActionMenu, type ActionMenuItem } from 'weimo-ui-core/components/menu'",
   "import './image-view.css'",
   "export type ImageViewDisplayMode = 'actual-size' | 'fit-width' | 'fit-height'",
   "export type ImageViewProps = Omit<ComponentPropsWithoutRef<'figure'>, 'children'> & {",
@@ -293,8 +293,8 @@ assert.deepEqual(
   'ImageView registry item must install style, utils, ActionDialog, glass button, and menu.',
 )
 for (const filePath of [
-  'src/components/image-view.tsx',
-  'src/components/image-view.css',
+  'packages/weimo-ui-image/src/components/image-view.tsx',
+  'packages/weimo-ui-image/src/components/image-view.css',
 ]) {
   assert.ok(
     registryItem.files.some((file) => file.path === filePath),
@@ -320,7 +320,7 @@ assert.ok(
 
 for (const snippet of [
   "import { useState } from 'react'",
-  "import { ImageView, ImageViewDisplayModeMenu, type ImageViewDisplayMode } from '../../components/image-view'",
+  "import { ImageView, ImageViewDisplayModeMenu, type ImageViewDisplayMode } from '../../../packages/weimo-ui-image/src/components/image-view'",
   "id: 'image'",
   "const [displayMode, setDisplayMode] = useState<ImageViewDisplayMode>('fit-width')",
   '<ImageViewDisplayModeMenu',
