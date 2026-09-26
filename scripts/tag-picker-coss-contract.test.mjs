@@ -14,11 +14,11 @@ function readProjectFile(relativePath) {
 const dialogSource = readProjectFile('packages/weimo-ui-core/src/components/coss/dialog.tsx')
 const dialogCss = readProjectFile('packages/weimo-ui-core/src/components/coss/dialog.css')
 const popupSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/popup-surface.css')
-const inputGroupSource = readProjectFile('src/components/coss/input-group.tsx')
-const inputGroupCss = readProjectFile('src/components/coss/input-group.css')
+const inputGroupSource = readProjectFile('packages/weimo-ui-tagtree/src/components/coss/input-group.tsx')
+const inputGroupCss = readProjectFile('packages/weimo-ui-tagtree/src/components/coss/input-group.css')
 const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.css')
-const scrollAreaSource = readProjectFile('src/components/coss/scroll-area.tsx')
-const scrollAreaCss = readProjectFile('src/components/coss/scroll-area.css')
+const scrollAreaSource = readProjectFile('packages/weimo-ui-tagtree/src/components/coss/scroll-area.tsx')
+const scrollAreaCss = readProjectFile('packages/weimo-ui-tagtree/src/components/coss/scroll-area.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 const frostedSurfaceBlock =
   frostedSurfaceCss.match(/\.frosted-surface\s*\{(?<block>[^}]*)\}/)?.groups?.block ?? ''

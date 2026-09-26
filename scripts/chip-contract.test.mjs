@@ -40,7 +40,7 @@ const docsSource = readProjectFile('src/docs/component-definitions/capsule.tsx')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const appCss = readProjectFile('src/App.css')
-const previewCardCss = readProjectFile('src/components/component-preview-card.css')
+const previewCardCss = readProjectFile('packages/weimo-ui-core/src/components/component-preview-card.css')
 
 const baseBlock = cssBlockFor(surfaceCss, '.capsule-frame')
 const defaultLayerBlock = cssBlockFor(surfaceCss, '.capsule-frame::before')

@@ -1,7 +1,1 @@
-export {
-  TagTree,
-  type TagTreeMenuAction,
-  type TagTreeNode,
-  type TagTreeProps,
-  type TagTreeVariant,
-} from './tag-tree/index'
+export * from '../../packages/weimo-ui-tagtree/src/components/tag-tree.tsx'

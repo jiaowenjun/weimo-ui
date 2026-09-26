@@ -30,8 +30,8 @@ const detailPageSource = readProjectFile('src/docs/pages/component-detail-page.t
 const docsShellSource = readProjectFile('src/docs/docs-shell.tsx')
 const searchSource = readProjectFile('src/docs/search-component-docs.ts')
 const colorSource = readProjectFile('src/docs/token-preview-color.ts')
-const cardSource = readProjectFile('src/components/component-preview-card.tsx')
-const cardCss = readProjectFile('src/components/component-preview-card.css')
+const cardSource = readProjectFile('packages/weimo-ui-core/src/components/component-preview-card.tsx')
+const cardCss = readProjectFile('packages/weimo-ui-core/src/components/component-preview-card.css')
 const cardRegistry = JSON.parse(readProjectFile('registry/component-preview-card.json'))
 const previewCardDefinitionSource = readProjectFile(
   'src/docs/component-definitions/component-preview-card.tsx',

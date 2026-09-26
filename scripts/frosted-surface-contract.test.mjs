@@ -581,9 +581,9 @@ for (const snippet of [
 // (如磨砂图标按钮禁用描边)优先级更高不受影响。
 for (const [sourcePath, sourceLabel, extraSnippets] of [
   ['packages/weimo-ui-core/src/components/chip.tsx', 'Chip', ['...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle']],
-  ['src/components/chip-button.tsx', 'ChipButton', ['...style, ...backgroundStyle']],
+  ['packages/weimo-ui-tagtree/src/components/chip-button.tsx', 'ChipButton', ['...style, ...backgroundStyle']],
   ['packages/weimo-ui-core/src/components/menu.tsx', 'MenuPopup', ['style={{ ...style, ...backgroundStyle }}']],
-  ['src/components/tag-bread.tsx', 'TagBread', ['...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle']],
+  ['packages/weimo-ui-tagtree/src/components/tag-bread.tsx', 'TagBread', ['...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle']],
   ['packages/weimo-ui-core/src/components/frosted-icon-button.tsx', 'FrostedIconButton', ['style={{ ...style, ...backgroundStyle }}']],
   ['packages/weimo-ui-core/src/components/frosted-icon-button-group.tsx', 'FrostedIconButtonGroup', ['style={{ ...style, ...backgroundStyle }}']],
 ]) {

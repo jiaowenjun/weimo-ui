@@ -17,12 +17,12 @@
   ],
   "files": [
     {
-      "path": "src/components/chip-button.tsx",
+      "path": "packages/weimo-ui-tagtree/src/components/chip-button.tsx",
       "type": "registry:ui",
       "target": "@ui/chip-button.tsx"
     },
     {
-      "path": "src/components/chip-button.css",
+      "path": "packages/weimo-ui-tagtree/src/components/chip-button.css",
       "type": "registry:ui",
       "target": "@ui/chip-button.css"
     },

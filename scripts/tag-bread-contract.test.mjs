@@ -34,18 +34,18 @@ function countOccurrences(source, snippet) {
   return source.split(snippet).length - 1
 }
 
-const source = readProjectFile('src/components/tag-bread.tsx')
-const css = readProjectFile('src/components/tag-bread.css')
+const source = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bread.tsx')
+const css = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bread.css')
 const surfaceCss = readProjectFile('packages/weimo-ui-core/src/components/capsule-frame.css')
 const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.css')
-const appCss = readProjectFile('src/App.css')
+const pageCss = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.css')
 const indexCss = readProjectFile('src/index.css')
-const cossBreadcrumbSource = readProjectFile('src/components/coss/breadcrumb.tsx')
-const cossBreadcrumbCss = readProjectFile('src/components/coss/breadcrumb.css')
+const cossBreadcrumbSource = readProjectFile('packages/weimo-ui-tagtree/src/components/coss/breadcrumb.tsx')
+const cossBreadcrumbCss = readProjectFile('packages/weimo-ui-tagtree/src/components/coss/breadcrumb.css')
 const packageJson = readJson('package.json')
 const manifest = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndex = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinition = readProjectFile('src/docs/component-definitions/tag.tsx')
+const docsDefinition = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx')
 const rootRegistry = readJson('registry.json')
 const standaloneRegistry = readJson('registry/tag-bread.json')
 const registryItem = rootRegistry.items.find((item) => item.name === 'tag-bread')
@@ -72,8 +72,8 @@ const cossSeparatorBlock = blockFor(
   '.coss-breadcrumb__separator,\n  .coss-breadcrumb__ellipsis',
 )
 const docsPreviewEllipsisBlock = blockFor(
-  appCss,
-  '.tag-bread-docs-preview__ellipsis',
+  pageCss,
+  '.tag-page__bread-preview',
 )
 
 assert.ok(
@@ -110,10 +110,10 @@ for (const snippet of [
   'BreadcrumbPage,',
   'BreadcrumbSeparator,',
   "from './coss/breadcrumb'",
-  "from './animated-inline-size'",
-  "from './animated-inline-size-model'",
-  "from './capsule-frame'",
-  "import './capsule-frame.css'",
+  "from 'weimo-ui-core/components/animated-inline-size'",
+  "from 'weimo-ui-core/components/animated-inline-size-model'",
+  "from 'weimo-ui-core/components/capsule-frame'",
+  "import 'weimo-ui-core/styles/capsule-frame.css'",
   "import './tag-bread.css'",
   'type TagBreadCrumb = {',
   'label: string',
@@ -144,7 +144,7 @@ for (const snippet of [
   'const frostedSurfaceClassName = getFrostedSurfaceClassName(',
   "'frosted-surface--bordered'",
   "useFrostedSurfaceBackgroundToneRef<HTMLElement>(true)",
-  "import './frosted-surface.css'",
+  "import 'weimo-ui-core/styles/frosted-surface.css'",
   'const capsuleFrameAttributes = getCapsuleFrameAttributes({',
   "material: 'frosted'",
   'useAnimatedInlineSize(tag)',
@@ -177,7 +177,7 @@ for (const snippet of [
   "import type { ComponentProps, ReactElement } from 'react'",
   "import { mergeProps } from '@base-ui/react/merge-props'",
   "import { useRender } from '@base-ui/react/use-render'",
-  "import { cn } from '../lib/utils'",
+  "import { cn } from 'weimo-ui-core/components/lib/utils'",
   "import './breadcrumb.css'",
   'export function Breadcrumb',
   'aria-label="breadcrumb"',
@@ -270,16 +270,15 @@ assert.ok(
 )
 
 assert.ok(
-    docsDefinition.includes("import { TagBread } from '../../components/tag-bread'") &&
+    docsDefinition.includes("import { TagBread } from './components/tag-bread'") &&
     docsDefinition.includes("import { CalendarDays, Folder, Hash, Plus } from 'lucide-react'") &&
-    docsDefinition.includes("from '../../components/capsule-frame'") &&
-    docsDefinition.includes("from '../../components/frosted-surface-model'") &&
-    docsDefinition.includes('const tagBreadDocsSurfaceAttributes = getCapsuleFrameAttributes({') &&
+    docsDefinition.includes("from 'weimo-ui-core/components/capsule-frame'") &&
+    docsDefinition.includes("from 'weimo-ui-core/components/frosted-surface-model'") &&
+    docsDefinition.includes('const surfaceAttributes = getCapsuleFrameAttributes({') &&
     docsDefinition.includes("material: 'frosted'") &&
     docsDefinition.includes("textSize: 'base'") &&
     docsDefinition.includes('className={getCapsuleFrameClassName(') &&
-    docsDefinition.includes("'tag-bread-docs-preview__ellipsis'") &&
-    docsDefinition.includes("import { GhostIconButton } from '../../components/ghost-icon-button'") &&
+    docsDefinition.includes("import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'") &&
     !docsDefinition.includes("import { Button } from '../../components/coss/button'") &&
     docsDefinition.includes("import {") &&
     docsDefinition.includes("BreadcrumbEllipsis,") &&
@@ -287,60 +286,57 @@ assert.ok(
     docsDefinition.includes("BreadcrumbLink,") &&
     docsDefinition.includes("BreadcrumbList,") &&
     docsDefinition.includes("BreadcrumbPage,") &&
-    docsDefinition.includes("BreadcrumbSeparator,") &&
-    docsDefinition.includes("} from '../../components/coss/breadcrumb'") &&
+    docsDefinition.includes('BreadcrumbSeparator') &&
+    docsDefinition.includes("} from './components/coss/breadcrumb'") &&
     docsDefinition.includes('Menu,') &&
     docsDefinition.includes('MenuItem,') &&
     docsDefinition.includes('MenuPopup,') &&
-    docsDefinition.includes('MenuTrigger,') &&
-    docsDefinition.includes("} from '../../components/menu'") &&
+    docsDefinition.includes('MenuTrigger') &&
+    docsDefinition.includes("} from 'weimo-ui-core/components/menu'") &&
     !docsDefinition.includes('TagBreadItem') &&
-    docsDefinition.includes("id: 'tag'") &&
-    docsDefinition.includes('summary:') &&
     docsDefinition.includes('function TagBreadDemo') &&
-    docsDefinition.includes('className="tag-bread-docs-preview"') &&
+    docsDefinition.includes('className="tag-page__bread-preview"') &&
     docsDefinition.includes('tag="文学/古代/诗词"') &&
     docsDefinition.includes('onSelect={() => {}}') &&
     docsDefinition.includes('<Breadcrumb') &&
-    docsDefinition.includes('aria-label="coss 省略面包屑示例"') &&
-    docsDefinition.includes('{...tagBreadDocsSurfaceAttributes}') &&
+    docsDefinition.includes('aria-label="省略面包屑示例"') &&
+    docsDefinition.includes('{...surfaceAttributes}') &&
     docsDefinition.includes('<span className="tag-bread__prefix">') &&
     docsDefinition.includes('<Hash aria-hidden="true" />') &&
     docsDefinition.includes('<BreadcrumbItem className="tag-bread__item">') &&
-    docsDefinition.includes('<BreadcrumbLink className="tag-bread__link" href="/">') &&
+    docsDefinition.includes('<BreadcrumbLink href="/">') &&
     docsDefinition.includes('<Menu>') &&
     docsDefinition.includes('<MenuTrigger') &&
     docsDefinition.includes('render={') &&
     docsDefinition.includes('<GhostIconButton') &&
     docsDefinition.includes('aria-label="展开省略的面包屑层级"') &&
-    docsDefinition.includes('className="tag-bread-docs-preview__ellipsis-trigger"') &&
     docsDefinition.includes('size="sm"') &&
     !docsDefinition.includes('variant="ghost"') &&
     docsDefinition.includes('<BreadcrumbEllipsis />') &&
     docsDefinition.includes('<MenuPopup align="start">') &&
     docsDefinition.includes('<MenuItem render={<a href="/docs" />}>Docs</MenuItem>') &&
     docsDefinition.includes('<MenuItem render={<a href="/particles" />}>Particles</MenuItem>') &&
-    docsDefinition.includes('<BreadcrumbLink className="tag-bread__link" href="/docs/components">') &&
-    docsDefinition.includes('<BreadcrumbPage className="tag-bread__page">Breadcrumb</BreadcrumbPage>') &&
+    docsDefinition.includes('<BreadcrumbLink href="/docs/components">') &&
+    docsDefinition.includes('<BreadcrumbPage>Breadcrumb</BreadcrumbPage>') &&
     !docsDefinition.includes("href: '#writing'"),
   'TagBread docs definition must preview the tag-string API and the coss ellipsis breadcrumb example.',
 )
 
 assert.equal(
-  countOccurrences(docsDefinition, '<BreadcrumbSeparator className="tag-bread__separator">'),
+  countOccurrences(docsDefinition, '<BreadcrumbSeparator>/</BreadcrumbSeparator>'),
   3,
   'TagBread docs ellipsis preview must render every separator as the shared slash separator.',
 )
 assert.ok(
-  docsPreviewEllipsisBlock.includes('max-width: 100%;'),
+  docsPreviewEllipsisBlock.includes('min-width: 0;'),
   'TagBread docs ellipsis preview root must stay constrained inside the preview panel.',
 )
 assert.ok(
-  !appCss.includes('.tag-bread-docs-preview__ellipsis .coss-breadcrumb__list') &&
-    !appCss.includes('.tag-bread-docs-preview__ellipsis .coss-breadcrumb__item') &&
-    !appCss.includes('.tag-bread-docs-preview__ellipsis .coss-breadcrumb__link') &&
-    !appCss.includes('.tag-bread-docs-preview__ellipsis .coss-breadcrumb__page') &&
-    !appCss.includes('.tag-bread-docs-preview__ellipsis .coss-breadcrumb__separator svg'),
+  !pageCss.includes('.tag-page__bread-preview .coss-breadcrumb__list') &&
+    !pageCss.includes('.tag-page__bread-preview .coss-breadcrumb__item') &&
+    !pageCss.includes('.tag-page__bread-preview .coss-breadcrumb__link') &&
+    !pageCss.includes('.tag-page__bread-preview .coss-breadcrumb__page') &&
+    !pageCss.includes('.tag-page__bread-preview .coss-breadcrumb__separator svg'),
   'TagBread docs ellipsis preview must reuse TagBread glass and separator styles instead of overriding coss Breadcrumb locally.',
 )
 
@@ -358,15 +354,15 @@ assert.deepEqual(registryItem.registryDependencies, ['@weimo/style', '@weimo/uti
 assert.deepEqual(
   registryItem.files.map((file) => file.path),
   [
-    'src/components/tag-bread.tsx',
-    'src/components/tag-bread.css',
+    'packages/weimo-ui-tagtree/src/components/tag-bread.tsx',
+    'packages/weimo-ui-tagtree/src/components/tag-bread.css',
     'packages/weimo-ui-core/src/components/capsule-frame.ts',
     'packages/weimo-ui-core/src/components/capsule-frame.css',
     'packages/weimo-ui-core/src/components/animated-inline-size.tsx',
     'packages/weimo-ui-core/src/components/animated-inline-size-model.ts',
     'packages/weimo-ui-core/src/components/animated-inline-size.css',
-    'src/components/coss/breadcrumb.tsx',
-    'src/components/coss/breadcrumb.css',
+    'packages/weimo-ui-tagtree/src/components/coss/breadcrumb.tsx',
+    'packages/weimo-ui-tagtree/src/components/coss/breadcrumb.css',
     'packages/weimo-ui-core/src/components/frosted-surface.tsx',
     'packages/weimo-ui-core/src/components/frosted-surface-model.ts',
     'packages/weimo-ui-core/src/components/frosted-surface.css',

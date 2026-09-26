@@ -18,10 +18,14 @@ const detailSource = readProjectFile('src/docs/pages/component-detail-page.tsx')
 const actionDialogDefinitionSource = readProjectFile('src/docs/component-definitions/action-dialog.tsx')
 const cardTopBarDefinitionSource = readProjectFile('src/docs/component-definitions/tagged-card.tsx')
 const mathDialogDefinitionSource = readProjectFile('src/docs/component-definitions/markdown.tsx')
-const tagTreeRowDefinitionSource = readProjectFile('src/docs/component-definitions/tag.tsx')
+const tagTreeRowDefinitionSource = [
+  readProjectFile('src/docs/component-definitions/tag.tsx'),
+  readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx'),
+].join('\n')
 const barDefinitionSource = readProjectFile('src/docs/component-definitions/bar.tsx')
 const pageLayoutDefinitionSource = readProjectFile('src/docs/component-definitions/page-layout.tsx')
 const css = readProjectFile('src/App.css')
+const tagPageCss = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 
 function cssBlockFor(source, selector) {
@@ -113,13 +117,15 @@ for (const selector of [
 }
 
 assert.ok(
-  tagTreeRowDefinitionSource.includes('className="internal-tag-tree-row-preview tag-tree"') &&
-    tagTreeRowDefinitionSource.includes('<ComponentPreviewCard align="center" label="标签树行">'),
+  tagTreeRowDefinitionSource.includes('function TagTreeRowDemo') &&
+    tagTreeRowDefinitionSource.includes('<PreviewCard label="标签树行">') &&
+    tagTreeRowDefinitionSource.includes('className="tag-page__tree-panel"'),
   'TagTreeRow docs preview must render centered on the shared align=center canvas inside the tag-tree styling scope.',
 )
 
 assert.ok(
-  css.includes('justify-items: stretch;'),
+  tagPageCss.includes('width: min(100%, 380px);') &&
+    tagPageCss.includes('margin: 0 auto;'),
   'TagTreeRow docs preview must stretch each row across the preview panel.',
 )
 

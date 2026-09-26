@@ -1,0 +1,107 @@
+@layer components {
+  .coss-scroll-area {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .coss-scroll-area__viewport {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    outline: none;
+  }
+
+  .coss-scroll-area__content {
+    min-width: fit-content;
+  }
+
+  .coss-scroll-area[data-clamp-min-width] .coss-scroll-area__content {
+    min-width: 0;
+  }
+
+  .coss-scroll-area[data-fill] .coss-scroll-area__content {
+    min-height: 100%;
+  }
+
+  .coss-scroll-area[data-scrollbar-gutter] .coss-scroll-area__viewport {
+    scrollbar-gutter: stable both-edges;
+  }
+
+  .coss-scroll-area[data-scroll-fade]::before,
+  .coss-scroll-area[data-scroll-fade]::after {
+    position: absolute;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    height: 20px;
+    content: "";
+    pointer-events: none;
+  }
+
+  .coss-scroll-area[data-scroll-fade]::before {
+    top: 0;
+    background: linear-gradient(
+      to bottom,
+      var(--color-bg-card),
+      transparent
+    );
+  }
+
+  .coss-scroll-area[data-scroll-fade]::after {
+    bottom: 0;
+    background: linear-gradient(to top, var(--color-bg-card), transparent);
+  }
+
+  .coss-scroll-area__scrollbar {
+    display: flex;
+    touch-action: none;
+    user-select: none;
+    margin: 4px;
+    opacity: 0;
+    background: transparent;
+    transition-duration: 150ms;
+    transition-property: opacity;
+    transition-timing-function: ease;
+    transition-delay: 300ms;
+  }
+
+  .coss-scroll-area__scrollbar[data-orientation="vertical"] {
+    width: 6px;
+  }
+
+  .coss-scroll-area__scrollbar[data-orientation="horizontal"] {
+    height: 6px;
+    flex-direction: column;
+  }
+
+  .coss-scroll-area__scrollbar[data-hovering],
+  .coss-scroll-area__scrollbar[data-scrolling] {
+    opacity: 1;
+    transition-duration: 100ms;
+    transition-delay: 0ms;
+  }
+
+  .coss-scroll-area__thumb {
+    position: relative;
+    flex: 1;
+    border-radius: var(--radius-round);
+    background: color-mix(in srgb, var(--color-text-placeholder) 46%, transparent);
+  }
+
+  .coss-scroll-area__thumb::before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    min-width: 24px;
+    height: 100%;
+    min-height: 24px;
+    content: "";
+    transform: translate(-50%, -50%);
+  }
+
+  .coss-scroll-area__corner {
+    background: transparent;
+  }
+}

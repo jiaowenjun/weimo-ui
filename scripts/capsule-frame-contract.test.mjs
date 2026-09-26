@@ -35,8 +35,8 @@ const rootRegistry = readJson('registry.json')
 const modelSource = readProjectFile('packages/weimo-ui-core/src/components/capsule-frame.ts')
 const css = readProjectFile('packages/weimo-ui-core/src/components/capsule-frame.css')
 const chipSource = readProjectFile('packages/weimo-ui-core/src/components/chip.tsx')
-const chipButtonSource = readProjectFile('src/components/chip-button.tsx')
-const tagBreadSource = readProjectFile('src/components/tag-bread.tsx')
+const chipButtonSource = readProjectFile('packages/weimo-ui-tagtree/src/components/chip-button.tsx')
+const tagBreadSource = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bread.tsx')
 
 const frameBlock = blockFor(css, '.capsule-frame')
 const beforeBlock = blockFor(css, '.capsule-frame::before')
@@ -156,8 +156,10 @@ for (const [source, label] of [
   [tagBreadSource, 'TagBread'],
 ]) {
   assert.ok(
-    source.includes("from './capsule-frame'") &&
-      source.includes("import './capsule-frame.css'") &&
+    (source.includes("from './capsule-frame'") ||
+      source.includes("from 'weimo-ui-core/components/capsule-frame'")) &&
+      (source.includes("import './capsule-frame.css'") ||
+        source.includes("import 'weimo-ui-core/styles/capsule-frame.css'")) &&
       source.includes('getCapsuleFrameClassName(') &&
       source.includes('getCapsuleFrameAttributes({'),
     `${label} must compose the shared CapsuleFrame internals.`,

@@ -1,4 +1,1 @@
-export {
-  TagTreeRow,
-  type TagTreeRowProps,
-} from './tag-tree/tag-tree-row'
+export * from '../../packages/weimo-ui-tagtree/src/components/tag-tree-row.tsx'

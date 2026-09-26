@@ -34,7 +34,7 @@ const rawColorPattern = /#[\da-f]{3,8}\b|rgba?\([^)]*\)|hsla?\([^)]*\)/gi
 const allowlistedTokenFiles = new Set(['packages/weimo-ui-core/src/styles/tokens.css'])
 const allowlistedComponentColors = new Map([
   [
-    'src/components/component-preview-card.css',
+    'packages/weimo-ui-core/src/components/component-preview-card.css',
     new Set([
       'hsl(18.1 71.9% 46.1% / 0.72)',
       'hsl(222.2 47.4% 11.2% / 0.72)',

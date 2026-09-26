@@ -48,6 +48,7 @@ const coreGroups = new Set([
   'controls-overlays',
   'layout-bars',
 ])
+const additionalCoreComponents = new Set(['base-card', 'component-preview-card'])
 
 describe('public component catalog', () => {
   it('keeps component groups ordered and each group alphabetized', () => {
@@ -86,10 +87,11 @@ describe('public component catalog', () => {
       packageExports.add(item.packageExport)
       registryNames.add(item.registryName)
 
-      const sourcePath = coreGroups.has(item.group)
+      const isCoreComponent = coreGroups.has(item.group) || additionalCoreComponents.has(item.id)
+      const sourcePath = isCoreComponent
         ? corePackageJson.exports[item.packageExport]
         : packageJson.exports[item.packageExport]
-      const projectSourcePath = coreGroups.has(item.group)
+      const projectSourcePath = isCoreComponent
         ? `packages/weimo-ui-core/${sourcePath.replace(/^\.\//u, '')}`
         : sourcePath.replace(/^\.\//u, '')
       expect(sourcePath, `${item.id} package export`).toBeTypeOf('string')

@@ -1,0 +1,53 @@
+{
+  "name": "weimo-ui-tagtree",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "exports": {
+    ".": "./src/index.ts",
+    "./page": "./src/tag-page.tsx",
+    "./components/chip-button": "./src/components/chip-button.tsx",
+    "./components/tag-bar": "./src/components/tag-bar.tsx",
+    "./components/tag-bread": "./src/components/tag-bread.tsx",
+    "./components/tag-picker": "./src/components/tag-picker.tsx",
+    "./components/tag-picker-model": "./src/components/tag-picker/tag-picker-model.ts",
+    "./components/tag-tree": "./src/components/tag-tree.tsx",
+    "./components/tag-tree-model": "./src/components/tag-tree/tag-tree-model.ts",
+    "./components/tag-tree-row": "./src/components/tag-tree-row.tsx",
+    "./components/coss/breadcrumb": "./src/components/coss/breadcrumb.tsx",
+    "./components/coss/input-group": "./src/components/coss/input-group.tsx",
+    "./components/coss/scroll-area": "./src/components/coss/scroll-area.tsx",
+    "./styles/page.css": "./src/tag-page.css"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -p tsconfig.json --noEmit --pretty false && vite build",
+    "test:typecheck": "tsc -p tsconfig.json --noEmit --pretty false"
+  },
+  "dependencies": {
+    "@base-ui/react": "1.5.0",
+    "lucide-react": "1.24.0",
+    "weimo-ui-core": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@vitejs/plugin-react": "^6.1.1",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "~6.0.3",
+    "vite": "^8.3.0"
+  }
+}

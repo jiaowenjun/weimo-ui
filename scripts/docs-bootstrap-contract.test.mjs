@@ -36,7 +36,10 @@ const sidebarPreviewSource = readProjectFile(
 )
 const componentDefinitionSources = {
   'tagged-card': readProjectFile('src/docs/component-definitions/tagged-card.tsx'),
-  tag: readProjectFile('src/docs/component-definitions/tag.tsx'),
+  tag: [
+    readProjectFile('src/docs/component-definitions/tag.tsx'),
+    readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx'),
+  ].join('\n'),
   stat: readProjectFile('src/docs/component-definitions/stat.tsx'),
   'background-tokens': readProjectFile('src/docs/component-definitions/background-tokens.tsx'),
   'border-tokens': readProjectFile('src/docs/component-definitions/border-tokens.tsx'),
@@ -277,8 +280,8 @@ for (const snippet of [
   'function TagBreadDemo',
   '<TagBread tag="文学/古代/诗词"',
   'className={getCapsuleFrameClassName(',
-  "'tag-bread-docs-preview__ellipsis'",
-  '{...tagBreadDocsSurfaceAttributes}',
+  "'tag-bread'",
+  '{...surfaceAttributes}',
   '<span className="tag-bread__prefix">',
   '<Hash aria-hidden="true" />',
   '<MenuTrigger',
@@ -286,8 +289,8 @@ for (const snippet of [
   '<BreadcrumbEllipsis />',
   '<MenuPopup align="start">',
   '<MenuItem render={<a href="/docs" />}>Docs</MenuItem>',
-  '<BreadcrumbSeparator className="tag-bread__separator">',
-  '<BreadcrumbPage className="tag-bread__page">Breadcrumb</BreadcrumbPage>',
+  '<BreadcrumbSeparator>/</BreadcrumbSeparator>',
+  '<BreadcrumbPage>Breadcrumb</BreadcrumbPage>',
   'CardDemo',
   'labels={{ placeholder: ',
   'function openTagPicker',
@@ -376,15 +379,13 @@ for (const snippet of [
   'const tagTreeDemoNodes',
   'function TagTreeDemo',
   "from '../../components/top-bar'",
-  "from '../../components/tag-tree'",
-  "from '../../components/chip-button'",
+  "from './components/tag-tree'",
+  "from './components/chip-button'",
   "from '../../components/menu'",
   '<TagTreeDemo />',
-  'onMenuAction={variant === "default" ? () => {} : undefined}',
-  "selectedTag: initialSelectedTag = 'writing/daily'",
-  'const [selectedTag, setSelectedTag] = useState(initialSelectedTag)',
-  "defaultExpandedTags = ['writing', 'research']",
-  'defaultExpandedTags={defaultExpandedTags}',
+  "onMenuAction={variant === 'default' ? () => {} : undefined}",
+  "const [selectedTag, setSelectedTag] = useState('writing/daily')",
+  "defaultExpandedTags={['writing', 'research']}",
   "variant: 'destructive'",
   '<ActionMenu',
   "type: 'checkbox'",
@@ -404,7 +405,7 @@ for (const snippet of [
 
 assert.ok(
   !componentDefinitionSources.tag.includes("from '../../components/coss/button'") &&
-  componentDefinitionSources.tag.includes("from '../../components/chip-button'") &&
+  componentDefinitionSources.tag.includes("from './components/chip-button'") &&
   !componentDefinitionSources.tag.includes('tag-picker-preview__trigger') &&
   !componentDefinitionSources.tag.includes('<Button') &&
   !componentDefinitionSources.tag.includes('选择标签'),

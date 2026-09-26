@@ -19,32 +19,32 @@
   ],
   "files": [
     {
-      "path": "src/components/tag-tree-row.tsx",
+      "path": "packages/weimo-ui-tagtree/src/components/tag-tree-row.tsx",
       "type": "registry:ui",
       "target": "@ui/tag-tree-row.tsx"
     },
     {
-      "path": "src/components/tag-tree/tag-tree-row.tsx",
+      "path": "packages/weimo-ui-tagtree/src/components/tag-tree/tag-tree-row.tsx",
       "type": "registry:ui",
       "target": "@ui/tag-tree/tag-tree-row.tsx"
     },
     {
-      "path": "src/components/tag-tree/tag-tree-model.ts",
+      "path": "packages/weimo-ui-tagtree/src/components/tag-tree/tag-tree-model.ts",
       "type": "registry:ui",
       "target": "@ui/tag-tree/tag-tree-model.ts"
     },
     {
-      "path": "src/components/tag-tree/tag-tree.tsx",
+      "path": "packages/weimo-ui-tagtree/src/components/tag-tree/tag-tree.tsx",
       "type": "registry:ui",
       "target": "@ui/tag-tree/tag-tree.tsx"
     },
     {
-      "path": "src/components/tag-tree/use-tag-tree.ts",
+      "path": "packages/weimo-ui-tagtree/src/components/tag-tree/use-tag-tree.ts",
       "type": "registry:ui",
       "target": "@ui/tag-tree/use-tag-tree.ts"
     },
     {
-      "path": "src/components/tag-tree/tag-tree.css",
+      "path": "packages/weimo-ui-tagtree/src/components/tag-tree/tag-tree.css",
       "type": "registry:ui",
       "target": "@ui/tag-tree/tag-tree.css"
     },

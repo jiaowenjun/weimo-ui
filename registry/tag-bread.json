@@ -18,12 +18,12 @@
   ],
   "files": [
     {
-      "path": "src/components/tag-bread.tsx",
+      "path": "packages/weimo-ui-tagtree/src/components/tag-bread.tsx",
       "type": "registry:ui",
       "target": "@ui/tag-bread.tsx"
     },
     {
-      "path": "src/components/tag-bread.css",
+      "path": "packages/weimo-ui-tagtree/src/components/tag-bread.css",
       "type": "registry:ui",
       "target": "@ui/tag-bread.css"
     },
@@ -53,12 +53,12 @@
       "target": "@ui/animated-inline-size.css"
     },
     {
-      "path": "src/components/coss/breadcrumb.tsx",
+      "path": "packages/weimo-ui-tagtree/src/components/coss/breadcrumb.tsx",
       "type": "registry:ui",
       "target": "@ui/coss/breadcrumb.tsx"
     },
     {
-      "path": "src/components/coss/breadcrumb.css",
+      "path": "packages/weimo-ui-tagtree/src/components/coss/breadcrumb.css",
       "type": "registry:ui",
       "target": "@ui/coss/breadcrumb.css"
     },

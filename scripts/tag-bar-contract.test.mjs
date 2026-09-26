@@ -34,9 +34,9 @@ function assertNotIncludes(source, snippet, message) {
   assert.ok(!source.includes(snippet), message)
 }
 
-const componentSource = readProjectFile('src/components/tag-bar.tsx')
-const cssSource = readProjectFile('src/components/tag-bar.css')
-const docsSource = readProjectFile('src/docs/component-definitions/tag.tsx')
+const componentSource = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bar.tsx')
+const cssSource = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bar.css')
+const docsSource = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const appCssSource = readProjectFile('src/App.css')
@@ -107,13 +107,13 @@ for (const snippet of [
   "const TAG_CHIP_HASH_PREFIX = <Hash aria-hidden=\"true\" />",
   "const emptyChipPrefix = editable ? '+' : '#'",
   "const emptyChipPrefixIcon = emptyChipPrefix === '+' ? TAG_CHIP_PLUS_PREFIX : TAG_CHIP_HASH_PREFIX",
-  "import { FloatBar } from './float-bar'",
+  "import { FloatBar } from 'weimo-ui-core/components/float-bar'",
   "import { ChipButton } from './chip-button'",
   'TagPicker,',
   'type TagPickerApplyPayload,',
   'type TagPickerMode,',
   "from './tag-picker'",
-  "import { cn } from './lib/utils'",
+  "import { cn } from 'weimo-ui-core/components/lib/utils'",
   "import './tag-bar.css'",
   'export type TagBarProps',
   'Omit<',
@@ -434,16 +434,11 @@ assert.ok(
 
 assert.ok(
   docsSource.includes("import { useState } from 'react'") &&
-    docsSource.includes("import { TagBar } from '../../components/tag-bar'") &&
-    docsSource.includes("import { TextButton } from '../../components/text-button'") &&
-    docsSource.includes("id: 'tag'") &&
-    docsSource.includes('preview: () => <TagDemo />') &&
+    docsSource.includes("import { TagBar } from './components/tag-bar'") &&
+    docsSource.includes("import { TextButton } from 'weimo-ui-core/components/text-button'") &&
+    docsSource.includes('function TagBarDemo') &&
+    docsSource.includes('<PreviewCard label="标签栏">') &&
     docsSource.includes('<TagBarDemo />') &&
-    docsSource.includes('summary:') &&
-    docsSource.includes('status:') &&
-    docsSource.includes('preview:') &&
-    !docsSource.includes('code:') &&
-    !docsSource.includes('variantPreviews:') &&
     docsSource.includes('const [editable, setEditable] = useState(false)') &&
     docsSource.includes("const [tags, setTags] = useState(['写作/日记', '研究/论文'])") &&
     docsSource.includes('<TagBar') &&

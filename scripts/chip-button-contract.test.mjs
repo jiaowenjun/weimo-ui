@@ -44,8 +44,8 @@ function assertIncludes(source, snippet, message) {
 
 const packageJson = readJson('package.json')
 const rootRegistry = readJson('registry.json')
-const source = readProjectFile('src/components/chip-button.tsx')
-const css = readProjectFile('src/components/chip-button.css')
+const source = readProjectFile('packages/weimo-ui-tagtree/src/components/chip-button.tsx')
+const css = readProjectFile('packages/weimo-ui-tagtree/src/components/chip-button.css')
 const surfaceCss = readProjectFile('packages/weimo-ui-core/src/components/capsule-frame.css')
 const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
@@ -122,9 +122,9 @@ assert.ok(
 for (const snippet of [
   "import type { ButtonHTMLAttributes, ReactElement, ReactNode } from 'react'",
   "import { Hash } from 'lucide-react'",
-  "from './animated-inline-size'",
-  "from './animated-inline-size-model'",
-  "from './capsule-frame'",
+  "from 'weimo-ui-core/components/animated-inline-size'",
+  "from 'weimo-ui-core/components/animated-inline-size-model'",
+  "from 'weimo-ui-core/components/capsule-frame'",
   "import './chip-button.css'",
   "export type ChipButtonState = 'default' | 'glass'",
   'export type ChipButtonProps',

@@ -34,7 +34,7 @@ const {
   resolveTagLabel,
   stageTagTreeRows,
   toggleExpandedTag,
-} = await loadTsModule('src/components/tag-tree/tag-tree-model.ts')
+} = await loadTsModule('packages/weimo-ui-tagtree/src/components/tag-tree/tag-tree-model.ts')
 
 const nodes = [
   {

@@ -1,12 +1,13 @@
 # weimo-ui-core
 
-`weimo-ui-core` 是 Weimo UI workspace 中的基础 React 源码包，承载 Token / 样式、Surface / 材质、控件 / 弹层和布局 / 栏位四组组件。
+`weimo-ui-core` 是 Weimo UI workspace 中的基础 React 源码包，承载 Token / 样式、Surface / 材质、控件 / 弹层、布局 / 栏位，以及基础卡片和预览卡片壳层。
 
 组件按子路径导入：
 
 ```tsx
 import { FrostedSurface } from 'weimo-ui-core/components/frosted-surface'
 import { TextButton } from 'weimo-ui-core/components/text-button'
+import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 ```
 
 全局 token 需在应用入口导入一次：

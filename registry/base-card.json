@@ -17,12 +17,12 @@
   ],
   "files": [
     {
-      "path": "src/components/base-card.tsx",
+      "path": "packages/weimo-ui-core/src/components/base-card.tsx",
       "type": "registry:ui",
       "target": "@ui/base-card.tsx"
     },
     {
-      "path": "src/components/base-card.css",
+      "path": "packages/weimo-ui-core/src/components/base-card.css",
       "type": "registry:ui",
       "target": "@ui/base-card.css"
     },

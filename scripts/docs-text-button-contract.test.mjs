@@ -17,7 +17,8 @@ function assertTextButtonDocsControl(relativePath, labels) {
   const source = readProjectFile(relativePath)
 
   assert.ok(
-    source.includes("import { TextButton } from '../../components/text-button'"),
+    (source.includes("import { TextButton } from '../../components/text-button'") ||
+      source.includes("import { TextButton } from 'weimo-ui-core/components/text-button'")),
     `${relativePath} must import TextButton for docs text controls.`,
   )
   assert.ok(
@@ -36,7 +37,7 @@ for (const [relativePath, labels] of [
   ['src/docs/component-definitions/action-dialog.tsx', ['打开内部对话框']],
   ['src/docs/component-definitions/markdown.tsx', ['打开公式对话框']],
   ['src/docs/component-definitions/button.tsx', ['文本按钮']],
-  ['src/docs/component-definitions/tag.tsx', ['切换到编辑态', '切换到展示态']],
+  ['packages/weimo-ui-tagtree/src/tag-page.tsx', ['切换到编辑态', '切换到展示态']],
 ]) {
   assertTextButtonDocsControl(relativePath, labels)
 }

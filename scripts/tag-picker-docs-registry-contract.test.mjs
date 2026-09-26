@@ -14,6 +14,7 @@ function readProjectFile(relativePath) {
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const definitionSource = readProjectFile('src/docs/component-definitions/tag.tsx')
+const pageSource = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx')
 const registryItem = JSON.parse(readProjectFile('registry/tag-picker.json'))
 const rootRegistry = JSON.parse(readProjectFile('registry.json'))
 const rootItem = rootRegistry.items.find((item) => item.name === 'tag-picker')
@@ -67,15 +68,15 @@ for (const snippet of [
   'TagPickerDemo',
 ]) {
   assert.ok(
-    definitionSource.includes(snippet),
+    pageSource.includes(snippet),
     `TagPicker docs definition must include ${snippet}.`,
   )
 }
 assert.ok(
-  !definitionSource.includes("from '../../components/coss/button'") &&
-  !definitionSource.includes('tag-picker-preview__trigger') &&
-  !definitionSource.includes('<Button') &&
-  !definitionSource.includes('选择标签'),
+  !pageSource.includes("from '../../components/coss/button'") &&
+  !pageSource.includes('tag-picker-preview__trigger') &&
+  !pageSource.includes('<Button') &&
+  !pageSource.includes('选择标签'),
   'TagPicker docs preview must use only tag chips as triggers, without the old select-tag button.',
 )
 
@@ -94,12 +95,12 @@ assert.deepEqual(
   ['@weimo/style', '@weimo/utils', '@weimo/frosted-icon-button'],
 )
 for (const filePath of [
-  'src/components/tag-picker.tsx',
-  'src/components/tag-picker/index.tsx',
-  'src/components/tag-picker/tag-picker.tsx',
-  'src/components/tag-picker/use-tag-picker.ts',
-  'src/components/tag-picker/tag-picker-model.ts',
-  'src/components/tag-picker/tag-picker.css',
+  'packages/weimo-ui-tagtree/src/components/tag-picker.tsx',
+  'packages/weimo-ui-tagtree/src/components/tag-picker/index.tsx',
+  'packages/weimo-ui-tagtree/src/components/tag-picker/tag-picker.tsx',
+  'packages/weimo-ui-tagtree/src/components/tag-picker/use-tag-picker.ts',
+  'packages/weimo-ui-tagtree/src/components/tag-picker/tag-picker-model.ts',
+  'packages/weimo-ui-tagtree/src/components/tag-picker/tag-picker.css',
   'packages/weimo-ui-core/src/components/action-dialog.tsx',
   'packages/weimo-ui-core/src/components/action-dialog.css',
   'packages/weimo-ui-core/src/components/float-bar.tsx',
@@ -108,10 +109,10 @@ for (const filePath of [
   'packages/weimo-ui-core/src/components/bottom-bar.css',
   'packages/weimo-ui-core/src/components/coss/dialog.tsx',
   'packages/weimo-ui-core/src/components/coss/dialog.css',
-  'src/components/coss/input-group.tsx',
-  'src/components/coss/input-group.css',
-  'src/components/coss/scroll-area.tsx',
-  'src/components/coss/scroll-area.css',
+  'packages/weimo-ui-tagtree/src/components/coss/input-group.tsx',
+  'packages/weimo-ui-tagtree/src/components/coss/input-group.css',
+  'packages/weimo-ui-tagtree/src/components/coss/scroll-area.tsx',
+  'packages/weimo-ui-tagtree/src/components/coss/scroll-area.css',
 ]) {
   assert.ok(
     registryItem.files.some((file) => file.path === filePath),

@@ -136,14 +136,41 @@ function hasExportModifier(node: ts.Node) {
     ts.getModifiers(node)?.some((modifier) => modifier.kind === ts.SyntaxKind.ExportKeyword)
 }
 
-export function exportedNames(relativePath: string) {
+function resolveExportModule(relativePath: string, moduleSpecifier: string) {
+  const absolutePath = path.resolve(path.dirname(projectPath(relativePath)), moduleSpecifier)
+  const candidates = [
+    absolutePath,
+    `${absolutePath}.ts`,
+    `${absolutePath}.tsx`,
+    `${absolutePath}.js`,
+    path.join(absolutePath, 'index.ts'),
+    path.join(absolutePath, 'index.tsx'),
+    path.join(absolutePath, 'index.js'),
+  ]
+  const resolvedPath = candidates.find((candidate) => existsSync(candidate)) ?? absolutePath
+  return path.relative(projectRoot, resolvedPath)
+}
+
+function collectExportedNames(relativePath: string, visited: Set<string>) {
+  if (visited.has(relativePath)) return new Set<string>()
+  visited.add(relativePath)
+
   const sourceFile = parseProjectTypeScript(relativePath)
   const names = new Set<string>()
 
   for (const statement of sourceFile.statements) {
     if (ts.isExportDeclaration(statement)) {
+      const moduleSpecifier = statement.moduleSpecifier && ts.isStringLiteral(statement.moduleSpecifier)
+        ? statement.moduleSpecifier.text
+        : undefined
+      const moduleNames = moduleSpecifier
+        ? collectExportedNames(resolveExportModule(relativePath, moduleSpecifier), visited)
+        : new Set<string>()
+
       if (statement.exportClause && ts.isNamedExports(statement.exportClause)) {
         for (const element of statement.exportClause.elements) names.add(element.name.text)
+      } else {
+        for (const name of moduleNames) names.add(name)
       }
       continue
     }
@@ -167,4 +194,8 @@ export function exportedNames(relativePath: string) {
   }
 
   return names
+}
+
+export function exportedNames(relativePath: string) {
+  return collectExportedNames(relativePath, new Set<string>())
 }

@@ -12,6 +12,7 @@ const coreGroups = new Set([
   'controls-overlays',
   'layout-bars',
 ])
+const additionalCoreComponents = new Set(['base-card', 'component-preview-card'])
 
 function readProjectFile(relativePath) {
   const absolutePath = join(root, relativePath)
@@ -39,13 +40,15 @@ const { componentManifest } = await loadTsModule('src/docs/components-manifest.t
 const rootPackage = JSON.parse(readProjectFile('package.json'))
 const corePackage = JSON.parse(readProjectFile('packages/weimo-ui-core/package.json'))
 const workspace = readProjectFile('pnpm-workspace.yaml')
-const coreItems = componentManifest.filter((item) => coreGroups.has(item.group))
+const coreItems = componentManifest.filter((item) =>
+  coreGroups.has(item.group) || additionalCoreComponents.has(item.id),
+)
 
 assert.equal(corePackage.name, 'weimo-ui-core')
 assert.ok(!rootPackage.dependencies?.['weimo-ui-core'])
 assert.ok(rootPackage.files.includes('packages/weimo-ui-core/src'))
 assert.match(workspace, /packages:\s*\n\s+- 'packages\/\*'/u)
-assert.equal(coreItems.length, 27, 'The four core groups must contain 27 public components.')
+assert.equal(coreItems.length, 29, 'The four core groups plus card shells must contain 29 public components.')
 
 for (const item of coreItems) {
   const coreTarget = corePackage.exports?.[item.packageExport]
@@ -67,7 +70,9 @@ for (const item of coreItems) {
   )
 }
 
-for (const item of componentManifest.filter((item) => !coreGroups.has(item.group))) {
+for (const item of componentManifest.filter((item) =>
+  !coreGroups.has(item.group) && !additionalCoreComponents.has(item.id),
+)) {
   assert.ok(
     !corePackage.exports?.[item.packageExport],
     `${item.packageExport} belongs to ${item.group}, not weimo-ui-core.`,

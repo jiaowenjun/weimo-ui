@@ -9,7 +9,7 @@ function read(relativePath) {
   return readFileSync(join(root, relativePath), 'utf8')
 }
 
-const tagBar = read('src/components/tag-bar.tsx')
+const tagBar = read('packages/weimo-ui-tagtree/src/components/tag-bar.tsx')
 const card = read('src/components/card.tsx')
 const cardResolvers = read('src/components/card-resolvers.tsx')
 const ocrCard = read('src/components/ocr-card.tsx')

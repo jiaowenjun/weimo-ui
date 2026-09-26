@@ -30,12 +30,12 @@ function blockForPattern(source, selectorPattern, label) {
   return match[1]
 }
 
-const css = readProjectFile('src/components/tag-tree/tag-tree.css')
+const css = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-tree/tag-tree.css')
 const source = [
-  'src/components/tag-tree/tag-tree-model.ts',
-  'src/components/tag-tree/use-tag-tree.ts',
-  'src/components/tag-tree/tag-tree-row.tsx',
-  'src/components/tag-tree/tag-tree.tsx',
+  'packages/weimo-ui-tagtree/src/components/tag-tree/tag-tree-model.ts',
+  'packages/weimo-ui-tagtree/src/components/tag-tree/use-tag-tree.ts',
+  'packages/weimo-ui-tagtree/src/components/tag-tree/tag-tree-row.tsx',
+  'packages/weimo-ui-tagtree/src/components/tag-tree/tag-tree.tsx',
 ]
   .map(readProjectFile)
   .join('\n')

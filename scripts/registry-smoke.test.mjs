@@ -153,6 +153,8 @@ function writeConsumerProject(consumerDir, registryUrl) {
           baseUrl: '.',
           paths: {
             '@/*': ['./src/*'],
+            'weimo-ui-core/components/*': ['./src/components/ui/*'],
+            'weimo-ui-core/styles/*': ['./src/components/ui/*'],
           },
         },
         include: ['src'],
@@ -1382,9 +1384,12 @@ try {
 	      tagBarSource.includes('const nextOffset = readRootParentOffset(root, parent)') &&
 	      tagBarSource.includes('}, [rootPositionLayoutSignature])') &&
 	      chipButtonSource.includes('export function ChipButton') &&
-	      chipButtonSource.includes("from './capsule-frame'") &&
-      chipButtonSource.includes("from './animated-inline-size'") &&
-      chipButtonSource.includes("from './animated-inline-size-model'") &&
+	      chipButtonSource.includes("from 'weimo-ui-core/components/capsule-frame'") &&
+      chipButtonSource.includes("from 'weimo-ui-core/components/animated-inline-size'") &&
+      chipButtonSource.includes("from 'weimo-ui-core/components/animated-inline-size-model'") &&
+	      chipButtonSource.includes("from 'weimo-ui-core/components/frosted-surface'") &&
+	      chipButtonSource.includes("import 'weimo-ui-core/styles/capsule-frame.css'") &&
+	      chipButtonSource.includes("import 'weimo-ui-core/styles/frosted-surface.css'") &&
 	      chipButtonSource.includes("material: isFrostedState ? 'frosted' : 'solid'") &&
       capsuleFrameSource.includes('export function getCapsuleFrameClassName') &&
       animatedInlineSizeSource.includes('export function AnimatedInlineSizeMeasure') &&
@@ -1438,7 +1443,7 @@ try {
     tagTreeSource,
     sidebarShellSource,
   ]) {
-    assert.match(source, /from ['"](?:\.\/|\.\.\/)lib\/utils['"]/)
+    assert.match(source, /from ['"](?:(?:\.\/|\.\.\/)lib\/utils|weimo-ui-core\/components\/lib\/utils)['"]/)
     assert.doesNotMatch(source, /from ['"]@\/lib\/utils['"]/)
   }
   assert.doesNotMatch(consumerCss, /--radius-card:/)
@@ -1451,8 +1456,10 @@ try {
   assert.ok(
     tagPickerSource.includes("from '../coss/input-group'") &&
     !tagPickerSource.includes("from '../bottom-bar'") &&
-    tagPickerSource.includes("from '../action-dialog'") &&
-    tagPickerSource.includes("from '../frosted-icon-button'") &&
+    (tagPickerSource.includes("from '../action-dialog'") ||
+      tagPickerSource.includes("from 'weimo-ui-core/components/action-dialog'")) &&
+    (tagPickerSource.includes("from '../frosted-icon-button'") ||
+      tagPickerSource.includes("from 'weimo-ui-core/components/frosted-icon-button'")) &&
     tagPickerSource.includes('<ActionDialog') &&
     tagPickerSource.includes('bottomBarLabel="标签选择器输入栏"') &&
     tagPickerSource.includes('bottomBarClassName="tag-picker__bottom-float-bar"') &&
