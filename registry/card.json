@@ -43,17 +43,17 @@
   ],
   "files": [
     {
-      "path": "src/components/card.tsx",
+      "path": "packages/weimo-ui-card/src/components/card.tsx",
       "type": "registry:ui",
       "target": "@ui/card.tsx"
     },
     {
-      "path": "src/components/card-edit-state-machine.ts",
+      "path": "packages/weimo-ui-card/src/components/card-edit-state-machine.ts",
       "type": "registry:ui",
       "target": "@ui/card-edit-state-machine.ts"
     },
     {
-      "path": "src/components/use-card-edit-transition.ts",
+      "path": "packages/weimo-ui-card/src/components/use-card-edit-transition.ts",
       "type": "registry:ui",
       "target": "@ui/use-card-edit-transition.ts"
     },
@@ -63,12 +63,12 @@
       "target": "@ui/md-editor/md-editor-content-format.ts"
     },
     {
-      "path": "src/components/card-save-shortcut.ts",
+      "path": "packages/weimo-ui-card/src/components/card-save-shortcut.ts",
       "type": "registry:ui",
       "target": "@ui/card-save-shortcut.ts"
     },
     {
-      "path": "src/components/card-resolvers.tsx",
+      "path": "packages/weimo-ui-card/src/components/card-resolvers.tsx",
       "type": "registry:ui",
       "target": "@ui/card-resolvers.tsx"
     },
@@ -78,27 +78,27 @@
       "target": "@ui/deferred-md-editor-toolbar.tsx"
     },
     {
-      "path": "src/components/use-card-draft.ts",
+      "path": "packages/weimo-ui-card/src/components/use-card-draft.ts",
       "type": "registry:ui",
       "target": "@ui/use-card-draft.ts"
     },
     {
-      "path": "src/components/card-layout-measurement.ts",
+      "path": "packages/weimo-ui-card/src/components/card-layout-measurement.ts",
       "type": "registry:ui",
       "target": "@ui/card-layout-measurement.ts"
     },
     {
-      "path": "src/components/use-height-transition.ts",
+      "path": "packages/weimo-ui-card/src/components/use-height-transition.ts",
       "type": "registry:ui",
       "target": "@ui/use-height-transition.ts"
     },
     {
-      "path": "src/components/card-editable.css",
+      "path": "packages/weimo-ui-card/src/components/card-editable.css",
       "type": "registry:ui",
       "target": "@ui/card-editable.css"
     },
     {
-      "path": "src/components/card.css",
+      "path": "packages/weimo-ui-card/src/components/card.css",
       "type": "registry:ui",
       "target": "@ui/card.css"
     },

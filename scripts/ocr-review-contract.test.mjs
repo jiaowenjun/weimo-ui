@@ -20,7 +20,7 @@ function assertNotExists(relativePath, message) {
 const packageJson = readJson('package.json')
 const manifest = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndex = readProjectFile('src/docs/component-definitions/index.ts')
-const ocrDetailSource = readProjectFile('src/components/ocr-detail.tsx')
+const ocrDetailSource = readProjectFile('packages/weimo-ui-card/src/components/ocr-detail.tsx')
 const ocrDetailContract = readProjectFile('scripts/ocr-detail-contract.test.mjs')
 const registryContract = readProjectFile('scripts/registry-contract.test.mjs')
 const registrySmoke = readProjectFile('scripts/registry-smoke.test.mjs')

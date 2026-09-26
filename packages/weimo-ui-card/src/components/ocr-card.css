@@ -1,0 +1,11 @@
+@layer components {
+  .weimo-ocr-card__header-actions {
+    align-items: center;
+    display: flex;
+    gap: var(--space-tag-gap);
+  }
+
+  .weimo-ocr-card__image.image-view {
+    width: 100%;
+  }
+}

@@ -1,10 +1,10 @@
 import { useState } from 'react'
 
 import { ComponentPreviewCard } from '../../components/component-preview-card'
-import { OcrCard } from '../../components/ocr-card'
-import { OcrComposer } from '../../components/ocr-composer'
-import type { OcrComposerDraft } from '../../components/ocr-composer'
-import { OcrDetail } from '../../components/ocr-detail'
+import { OcrCard } from '../../../packages/weimo-ui-card/src/components/ocr-card'
+import { OcrComposer } from '../../../packages/weimo-ui-card/src/components/ocr-composer'
+import type { OcrComposerDraft } from '../../../packages/weimo-ui-card/src/components/ocr-composer'
+import { OcrDetail } from '../../../packages/weimo-ui-card/src/components/ocr-detail'
 import { TextButton } from '../../components/text-button'
 import type { ComponentDefinition } from '../component-docs'
 

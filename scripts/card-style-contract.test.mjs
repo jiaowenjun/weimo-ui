@@ -40,11 +40,11 @@ function assertIncludes(block, snippet, message) {
   assert.ok(block.includes(snippet), message)
 }
 
-const cardCss = readProjectFile('src/components/card.css')
+const cardCss = readProjectFile('packages/weimo-ui-card/src/components/card.css')
 const cardTopBarCss = readProjectFile('packages/weimo-ui-core/src/components/card-top-bar.css')
 const markdownContentCss = readProjectFile('packages/weimo-ui-markdown/src/components/markdown-content.css')
-const CardSource = readProjectFile('src/components/card.tsx')
-const CardResolversSource = readProjectFile('src/components/card-resolvers.tsx')
+const CardSource = readProjectFile('packages/weimo-ui-card/src/components/card.tsx')
+const CardResolversSource = readProjectFile('packages/weimo-ui-card/src/components/card-resolvers.tsx')
 const cardPropsSource = CardSource.slice(
   CardSource.indexOf('export type CardProps'),
   CardSource.indexOf('function shouldIgnoreCardBodyDoubleClick'),
@@ -314,7 +314,7 @@ assert.ok(
   'CardTopBar CSS must use a selector that beats the IconButton base color.',
 )
 assert.ok(
-  CardSource.includes("import { CardTopBar } from './card-top-bar'") &&
+  CardSource.includes("import { CardTopBar } from 'weimo-ui-core/components/card-top-bar'") &&
     CardSource.includes("} from './card-resolvers'") &&
     CardSource.includes('<CardTopBar') &&
     CardSource.includes('<CardTopBar {...topBarProps} />') &&
@@ -347,7 +347,7 @@ assert.ok(
 )
 assert.ok(CardItem, 'registry.json must include the @weimo/card item.')
 assert.ok(
-  CardItem.files.some((file) => file.path === 'src/components/card-resolvers.tsx'),
+  CardItem.files.some((file) => file.path === 'packages/weimo-ui-card/src/components/card-resolvers.tsx'),
   'Card registry item must ship private Card resolver helpers.',
 )
 assert.ok(
@@ -418,7 +418,7 @@ assert.ok(
   'MdRender must keep image placeholders by default while allowing caller-approved image rendering.',
 )
 assert.ok(
-  cardCss.startsWith('@import "./markdown-content.css";'),
+  cardCss.startsWith('@import "weimo-ui-markdown/styles/markdown-content.css";'),
   'Card CSS must import the shared Markdown prose stylesheet before component styles.',
 )
 assert.ok(
@@ -700,7 +700,7 @@ assert.ok(
   'Shared markdown docs preview sample must remain with Card docs.',
 )
 assert.deepEqual(
-  CardItem.files.some((file) => file.path === 'src/components/card.css'),
+  CardItem.files.some((file) => file.path === 'packages/weimo-ui-card/src/components/card.css'),
   true,
   'Card registry item must keep shipping shared card shell CSS.',
 )

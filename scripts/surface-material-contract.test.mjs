@@ -43,8 +43,8 @@ const surfaceDefinitionSource = readProjectFile('src/docs/component-definitions/
 const popupSurfaceSource = readProjectFile('packages/weimo-ui-core/src/components/popup-surface.tsx')
 const popupSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/popup-surface.css')
 
-const cardResolverSource = readProjectFile('src/components/card-resolvers.tsx')
-const sharedCardCss = readProjectFile('src/components/card.css')
+const cardResolverSource = readProjectFile('packages/weimo-ui-card/src/components/card-resolvers.tsx')
+const sharedCardCss = readProjectFile('packages/weimo-ui-card/src/components/card.css')
 const cossCardSource = readProjectFile('src/components/coss/card.tsx')
 const cossCardCss = readProjectFile('src/components/coss/card.css')
 const sidebarSource = readProjectFile('packages/weimo-ui-core/src/components/sidebar/sidebar-shell.tsx')
@@ -218,7 +218,7 @@ assert.ok(
 )
 
 for (const snippet of [
-  "from './card-surface'",
+  "from 'weimo-ui-core/components/card-surface'",
   "className: getCardSurfaceClassName('weimo-card weimo-card-editable', className)",
 ]) {
   assert.ok(cardResolverSource.includes(snippet), `Card resolver must include ${snippet}.`)

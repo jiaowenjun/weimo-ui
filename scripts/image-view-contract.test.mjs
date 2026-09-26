@@ -44,8 +44,8 @@ const definitionsIndex = readProjectFile('src/docs/component-definitions/index.t
 const docsDefinition = readProjectFile('src/docs/component-definitions/image.tsx')
 const imageViewSource = readProjectFile('packages/weimo-ui-image/src/components/image-view.tsx')
 const imageViewCss = readProjectFile('packages/weimo-ui-image/src/components/image-view.css')
-const ocrDetailSource = readProjectFile('src/components/ocr-detail.tsx')
-const ocrDetailCss = readProjectFile('src/components/ocr-detail.css')
+const ocrDetailSource = readProjectFile('packages/weimo-ui-card/src/components/ocr-detail.tsx')
+const ocrDetailCss = readProjectFile('packages/weimo-ui-card/src/components/ocr-detail.css')
 const rootRegistry = readJson('registry.json')
 const standaloneRegistry = readJson('registry/image-view.json')
 const registryItem = rootRegistry.items.find((item) => item.name === 'image-view')
@@ -256,7 +256,7 @@ for (const selector of [
 }
 
 assert.ok(
-  ocrDetailSource.includes("import { ImageView, ImageViewDisplayModeMenu, type ImageViewDisplayMode } from './image-view'") &&
+  ocrDetailSource.includes("import { ImageView, ImageViewDisplayModeMenu, type ImageViewDisplayMode } from 'weimo-ui-image/components/image-view'") &&
     ocrDetailSource.includes('<ImageViewDisplayModeMenu') &&
     ocrDetailSource.includes("const [imageDisplayMode, setImageDisplayMode] = useState<ImageViewDisplayMode>('fit-width')") &&
     ocrDetailSource.includes('<ImageView') &&

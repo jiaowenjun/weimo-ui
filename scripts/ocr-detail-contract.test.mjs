@@ -44,8 +44,8 @@ const packageJson = readJson('package.json')
 const manifest = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndex = readProjectFile('src/docs/component-definitions/index.ts')
 const docsDefinition = readProjectFile('src/docs/component-definitions/ocr.tsx')
-const ocrDetailSource = readProjectFile('src/components/ocr-detail.tsx')
-const ocrDetailCss = readProjectFile('src/components/ocr-detail.css')
+const ocrDetailSource = readProjectFile('packages/weimo-ui-card/src/components/ocr-detail.tsx')
+const ocrDetailCss = readProjectFile('packages/weimo-ui-card/src/components/ocr-detail.css')
 const rootRegistry = readJson('registry.json')
 const standaloneRegistry = readJson('registry/ocr-detail.json')
 const registryItem = rootRegistry.items.find((item) => item.name === 'ocr-detail')
@@ -78,10 +78,10 @@ assert.ok(
 
 for (const snippet of [
   "import { useEffect, useState } from 'react'",
-  "import { ActionDialog, type ActionDialogProps } from './action-dialog'",
+  "import { ActionDialog, type ActionDialogProps } from 'weimo-ui-core/components/action-dialog'",
   "import { Card, type CardDraft, type CardProps } from './card'",
-  "import { ImageView, ImageViewDisplayModeMenu, type ImageViewDisplayMode } from './image-view'",
-  "import { cn } from './lib/utils'",
+  "import { ImageView, ImageViewDisplayModeMenu, type ImageViewDisplayMode } from 'weimo-ui-image/components/image-view'",
+  "import { cn } from 'weimo-ui-core/components/lib/utils'",
   "import './ocr-detail.css'",
   'export type OcrDetailDraft = {',
   'title: string',
@@ -272,8 +272,8 @@ assert.ok(
   'OcrDetail registry item must let ActionDialog, Card, and ImageView own their package dependencies.',
 )
 for (const filePath of [
-  'src/components/ocr-detail.tsx',
-  'src/components/ocr-detail.css',
+  'packages/weimo-ui-card/src/components/ocr-detail.tsx',
+  'packages/weimo-ui-card/src/components/ocr-detail.css',
 ]) {
   assert.ok(
     registryItem.files.some((file) => file.path === filePath),
@@ -293,7 +293,7 @@ for (const filePath of [
 }
 
 for (const snippet of [
-  "import { OcrDetail } from '../../components/ocr-detail'",
+  "import { OcrDetail } from '../../../packages/weimo-ui-card/src/components/ocr-detail'",
   "id: 'ocr'",
   '<OcrDetail',
   'imageSrc={sampleOcrImage}',

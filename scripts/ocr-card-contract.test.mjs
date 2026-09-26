@@ -25,8 +25,8 @@ const packageJson = readJson('package.json')
 const manifest = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndex = readProjectFile('src/docs/component-definitions/index.ts')
 const docsDefinition = readProjectFile('src/docs/component-definitions/ocr.tsx')
-const source = readProjectFile('src/components/ocr-card.tsx')
-const css = readProjectFile('src/components/ocr-card.css')
+const source = readProjectFile('packages/weimo-ui-card/src/components/ocr-card.tsx')
+const css = readProjectFile('packages/weimo-ui-card/src/components/ocr-card.css')
 const appCss = readProjectFile('src/App.css')
 const rootRegistry = readJson('registry.json')
 const standaloneRegistry = readJson('registry/ocr-card.json')
@@ -64,10 +64,10 @@ for (const snippet of [
   "import { useEffect, useState } from 'react'",
   "import type { ComponentPropsWithoutRef, ReactNode } from 'react'",
   "import { Card, type CardDraft, type CardEditorOptions, type CardInitialMode, type CardLabels } from './card'",
-  "import { ImageView, type ImageViewProps } from './image-view'",
-  "import { cn } from './lib/utils'",
-  "import type { MdRenderImageRenderer, MdRenderImageSrcResolver } from './md-render'",
-  "import type { ActionMenuItem } from './menu'",
+  "import { ImageView, type ImageViewProps } from 'weimo-ui-image/components/image-view'",
+  "import { cn } from 'weimo-ui-core/components/lib/utils'",
+  "import type { MdRenderImageRenderer, MdRenderImageSrcResolver } from 'weimo-ui-markdown/components/md-render'",
+  "import type { ActionMenuItem } from 'weimo-ui-core/components/menu'",
   "import { OcrDetail, type OcrDetailDraft } from './ocr-detail'",
   "import './ocr-card.css'",
   'export type OcrCardNote = {',
@@ -270,7 +270,7 @@ assert.ok(
 )
 
 for (const snippet of [
-  "import { OcrCard } from '../../components/ocr-card'",
+  "import { OcrCard } from '../../../packages/weimo-ui-card/src/components/ocr-card'",
   "id: 'ocr'",
   "status: 'Ready'",
   'const sampleOcrMarkdown =',
@@ -319,8 +319,8 @@ assert.deepEqual(
   'OcrCard registry item must install lucide-react for its header icons.',
 )
 for (const filePath of [
-  'src/components/ocr-card.tsx',
-  'src/components/ocr-card.css',
+  'packages/weimo-ui-card/src/components/ocr-card.tsx',
+  'packages/weimo-ui-card/src/components/ocr-card.css',
 ]) {
   assert.ok(
     registryItem.files.some((file) => file.path === filePath),

@@ -24,8 +24,8 @@ function cssBlockFor(source, selector) {
 
 const componentSource = readProjectFile('packages/weimo-ui-core/src/components/card-top-bar.tsx')
 const componentCss = readProjectFile('packages/weimo-ui-core/src/components/card-top-bar.css')
-const CardSource = readProjectFile('src/components/card.tsx')
-const CardResolversSource = readProjectFile('src/components/card-resolvers.tsx')
+const CardSource = readProjectFile('packages/weimo-ui-card/src/components/card.tsx')
+const CardResolversSource = readProjectFile('packages/weimo-ui-card/src/components/card-resolvers.tsx')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 const rootRegistry = JSON.parse(readProjectFile('registry.json'))
 const registryFiles = new Set(
@@ -159,14 +159,14 @@ assert.ok(
   'Removed EditableCard source and CSS files must not exist.',
 )
 assert.ok(
-  existsSync(join(root, 'src/components/card.tsx')) &&
-    existsSync(join(root, 'src/components/card-resolvers.tsx')) &&
-    CardSource.includes("import { CardTopBar } from './card-top-bar'") &&
+    existsSync(join(root, 'packages/weimo-ui-card/src/components/card.tsx')) &&
+    existsSync(join(root, 'packages/weimo-ui-card/src/components/card-resolvers.tsx')) &&
+    CardSource.includes("import { CardTopBar } from 'weimo-ui-core/components/card-top-bar'") &&
     CardSource.includes('resolveCardTopBarProps,') &&
     CardSource.includes("} from './card-resolvers'") &&
     CardSource.includes('const topBarProps = resolveCardTopBarProps(') &&
     CardSource.includes('<CardTopBar {...topBarProps} />') &&
-    CardResolversSource.includes("import type { CardTopBarProps } from './card-top-bar'") &&
+    CardResolversSource.includes("import type { CardTopBarProps } from 'weimo-ui-core/components/card-top-bar'") &&
     CardResolversSource.includes('export function resolveCardTopBarProps(') &&
     CardResolversSource.includes('): CardTopBarProps') &&
     CardResolversSource.includes("mode: 'display'") &&

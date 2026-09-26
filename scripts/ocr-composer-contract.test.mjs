@@ -31,8 +31,8 @@ function cssBlockFor(source, selector) {
 }
 
 const packageJson = readJson('package.json')
-const source = readProjectFile('src/components/ocr-composer.tsx')
-const css = readProjectFile('src/components/ocr-composer.css')
+const source = readProjectFile('packages/weimo-ui-card/src/components/ocr-composer.tsx')
+const css = readProjectFile('packages/weimo-ui-card/src/components/ocr-composer.css')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const definitionSource = readProjectFile('src/docs/component-definitions/ocr.tsx')
@@ -54,14 +54,14 @@ for (const snippet of [
   "import { Check, Clipboard, FileImage, X } from 'lucide-react'",
   "import { useCallback, useEffect, useState } from 'react'",
   "import type { ComponentPropsWithoutRef, ReactNode } from 'react'",
-  "import { CardTopBar } from './card-top-bar'",
+  "import { CardTopBar } from 'weimo-ui-core/components/card-top-bar'",
   "import { ComposerShell } from './composer-shell'",
-  "import { FrostedIconButton } from './frosted-icon-button'",
-  "import { GhostIconButton } from './ghost-icon-button'",
-  "import { ImageUploader, type ImageUploaderActionApi, type ImageUploaderProps } from './image-uploader'",
-  "import { TagBar } from './tag-bar'",
-  "import { getCardSurfaceClassName } from './card-surface'",
-  "import { cn } from './lib/utils'",
+  "import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'",
+  "import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'",
+  "import { ImageUploader, type ImageUploaderActionApi, type ImageUploaderProps } from 'weimo-ui-image/components/image-uploader'",
+  "import { TagBar } from 'weimo-ui-tagtree/components/tag-bar'",
+  "import { getCardSurfaceClassName } from 'weimo-ui-core/components/card-surface'",
+  "import { cn } from 'weimo-ui-core/components/lib/utils'",
   "import './ocr-composer.css'",
   'export type OcrComposerDraft = {',
   'file: File',
@@ -232,8 +232,8 @@ assert.ok(
 )
 
 for (const snippet of [
-  "import { OcrComposer } from '../../components/ocr-composer'",
-  "import type { OcrComposerDraft } from '../../components/ocr-composer'",
+  "import { OcrComposer } from '../../../packages/weimo-ui-card/src/components/ocr-composer'",
+  "import type { OcrComposerDraft } from '../../../packages/weimo-ui-card/src/components/ocr-composer'",
   "id: 'ocr'",
   '<OcrComposerDemo />',
 ]) {
@@ -265,8 +265,8 @@ assert.deepEqual(
 assert.deepEqual(
   registryFilePaths(rootRegistryItem),
   new Set([
-    'src/components/ocr-composer.tsx',
-    'src/components/ocr-composer.css',
+    'packages/weimo-ui-card/src/components/ocr-composer.tsx',
+    'packages/weimo-ui-card/src/components/ocr-composer.css',
   ]),
   'OcrComposer registry item must ship only its component and styles.',
 )

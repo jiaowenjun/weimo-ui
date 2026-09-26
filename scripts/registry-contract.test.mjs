@@ -244,8 +244,8 @@ assert.deepEqual(
   'OcrCard registry item must install lucide-react for its header icons.',
 )
 for (const filePath of [
-  'src/components/ocr-card.tsx',
-  'src/components/ocr-card.css',
+  'packages/weimo-ui-card/src/components/ocr-card.tsx',
+  'packages/weimo-ui-card/src/components/ocr-card.css',
 ]) {
   assert.ok(
     ocrCardItem.files.some((file) => file.path === filePath),
@@ -258,9 +258,9 @@ assert.deepEqual(
   'Card registry item must keep only shared style and utils registry dependencies.',
 )
 for (const filePath of [
-  'src/components/card-composer.tsx',
-  'src/components/composer-shell.tsx',
-  'src/components/card-composer.css',
+  'packages/weimo-ui-card/src/components/card-composer.tsx',
+  'packages/weimo-ui-card/src/components/composer-shell.tsx',
+  'packages/weimo-ui-card/src/components/card-composer.css',
 ]) {
   assert.ok(
     cardComposerItem.files.some((file) => file.path === filePath),
@@ -363,11 +363,11 @@ for (const filePath of [
   )
 }
 for (const filePath of [
-  'src/components/card.tsx',
-  'src/components/card-resolvers.tsx',
+  'packages/weimo-ui-card/src/components/card.tsx',
+  'packages/weimo-ui-card/src/components/card-resolvers.tsx',
   'packages/weimo-ui-markdown/src/components/deferred-md-editor-toolbar.tsx',
-  'src/components/card-editable.css',
-  'src/components/card.css',
+  'packages/weimo-ui-card/src/components/card-editable.css',
+  'packages/weimo-ui-card/src/components/card.css',
   'packages/weimo-ui-core/src/components/card-top-bar.tsx',
   'packages/weimo-ui-core/src/components/card-top-bar.css',
   'packages/weimo-ui-core/src/components/mode-button.tsx',

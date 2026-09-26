@@ -14,9 +14,9 @@ function readProjectFile(relativePath) {
 }
 
 const packageJson = JSON.parse(readProjectFile('package.json'))
-const source = readProjectFile('src/components/card-composer.tsx')
-const composerShellSource = readProjectFile('src/components/composer-shell.tsx')
-const cssSource = readProjectFile('src/components/card-composer.css')
+const source = readProjectFile('packages/weimo-ui-card/src/components/card-composer.tsx')
+const composerShellSource = readProjectFile('packages/weimo-ui-card/src/components/composer-shell.tsx')
+const cssSource = readProjectFile('packages/weimo-ui-card/src/components/card-composer.css')
 const appCss = readProjectFile('src/App.css')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
@@ -40,7 +40,7 @@ for (const snippet of [
   "import type { ReactNode } from 'react'",
   "import { Card, type CardProps } from './card'",
   "import { ComposerShell } from './composer-shell'",
-  "import { GhostIconButton } from './ghost-icon-button'",
+  "import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'",
   'export type CardComposerRenderCard = (props: CardProps) => ReactNode',
   'export type CardComposerProps = CardProps & {',
   'clientId: string',
@@ -182,8 +182,8 @@ assert.ok(
 )
 
 for (const snippet of [
-  "import { CardComposer } from '../../components/card-composer'",
-  "import type { CardDraft, CardProps } from '../../components/card'",
+  "import { CardComposer } from '../../../packages/weimo-ui-card/src/components/card-composer'",
+  "import type { CardDraft, CardProps } from '../../../packages/weimo-ui-card/src/components/card'",
   'className="card-composer-docs-preview"',
   "id: 'tagged-card'",
   '<CardComposerDemo />',
@@ -213,9 +213,9 @@ assert.ok(
 )
 assert.ok(
   registryItem.includes('"name": "card-composer"') &&
-    registryItem.includes('"src/components/card-composer.tsx"') &&
-    registryItem.includes('"src/components/composer-shell.tsx"') &&
-    registryItem.includes('"src/components/card-composer.css"') &&
+    registryItem.includes('"packages/weimo-ui-card/src/components/card-composer.tsx"') &&
+    registryItem.includes('"packages/weimo-ui-card/src/components/composer-shell.tsx"') &&
+    registryItem.includes('"packages/weimo-ui-card/src/components/card-composer.css"') &&
     registryItem.includes('"@weimo/card"') &&
     registryItem.includes('"@weimo/ghost-icon-button"'),
   'CardComposer registry item must ship the composer shell and depend on Card plus the cancel button.',

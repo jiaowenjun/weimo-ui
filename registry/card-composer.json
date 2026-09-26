@@ -18,17 +18,17 @@
   ],
   "files": [
     {
-      "path": "src/components/card-composer.tsx",
+      "path": "packages/weimo-ui-card/src/components/card-composer.tsx",
       "type": "registry:ui",
       "target": "@ui/card-composer.tsx"
     },
     {
-      "path": "src/components/composer-shell.tsx",
+      "path": "packages/weimo-ui-card/src/components/composer-shell.tsx",
       "type": "registry:ui",
       "target": "@ui/composer-shell.tsx"
     },
     {
-      "path": "src/components/card-composer.css",
+      "path": "packages/weimo-ui-card/src/components/card-composer.css",
       "type": "registry:ui",
       "target": "@ui/card-composer.css"
     }

@@ -18,12 +18,12 @@
   ],
   "files": [
     {
-      "path": "src/components/ocr-detail.tsx",
+      "path": "packages/weimo-ui-card/src/components/ocr-detail.tsx",
       "type": "registry:ui",
       "target": "@ui/ocr-detail.tsx"
     },
     {
-      "path": "src/components/ocr-detail.css",
+      "path": "packages/weimo-ui-card/src/components/ocr-detail.css",
       "type": "registry:ui",
       "target": "@ui/ocr-detail.css"
     }

@@ -41,7 +41,13 @@ pnpm install
 
 `packages/weimo-ui-tagtree` 是标签树 workspace 包，负责标签树页面和标签导航组件；它唯一的 workspace 内部依赖同样是 `weimo-ui-core`。
 
-主包的同名入口以源码级 re-export 转发到对应子项目，并在 Git 安装包中携带子项目源码；卡片、媒体与数据可视化组件继续留在主项目，并按需单向依赖 core 或 Markdown。
+`packages/weimo-ui-image` 是图片 workspace 包，负责图片预览、上传和透明度处理；它唯一的 workspace 内部依赖是 `weimo-ui-core`。
+
+`packages/weimo-ui-stats` 是统计与可视化 workspace 包，负责 Heatmap 和 StatGroup；它唯一的 workspace 内部依赖是 `weimo-ui-core`。
+
+`packages/weimo-ui-card` 是卡片与 OCR workspace 包，负责带标签卡片、卡片 composer、OCR 卡片、OCR composer 和 OCR 详情；它复用 `weimo-ui-core`，并依赖 Markdown、标签树和图片子项目。
+
+主包的同名入口以源码级 re-export 转发到对应子项目，并在 Git 安装包中携带子项目源码。
 
 ## 职责定位
 

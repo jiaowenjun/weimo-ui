@@ -1,0 +1,47 @@
+{
+  "name": "weimo-ui-card",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "exports": {
+    ".": "./src/index.ts",
+    "./components/card": "./src/components/card.tsx",
+    "./components/card-composer": "./src/components/card-composer.tsx",
+    "./components/ocr-card": "./src/components/ocr-card.tsx",
+    "./components/ocr-composer": "./src/components/ocr-composer.tsx",
+    "./components/ocr-detail": "./src/components/ocr-detail.tsx",
+    "./styles/card.css": "./src/components/card.css",
+    "./styles/card-composer.css": "./src/components/card-composer.css",
+    "./styles/ocr-card.css": "./src/components/ocr-card.css",
+    "./styles/ocr-composer.css": "./src/components/ocr-composer.css",
+    "./styles/ocr-detail.css": "./src/components/ocr-detail.css"
+  },
+  "scripts": {
+    "test:typecheck": "tsc -p tsconfig.json --noEmit --pretty false"
+  },
+  "dependencies": {
+    "@tiptap/core": "3.27.0",
+    "lucide-react": "1.24.0",
+    "weimo-ui-core": "workspace:*",
+    "weimo-ui-image": "workspace:*",
+    "weimo-ui-markdown": "workspace:*",
+    "weimo-ui-tagtree": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "typescript": "~6.0.3"
+  }
+}

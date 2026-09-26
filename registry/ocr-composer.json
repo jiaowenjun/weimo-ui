@@ -20,12 +20,12 @@
   ],
   "files": [
     {
-      "path": "src/components/ocr-composer.tsx",
+      "path": "packages/weimo-ui-card/src/components/ocr-composer.tsx",
       "type": "registry:ui",
       "target": "@ui/ocr-composer.tsx"
     },
     {
-      "path": "src/components/ocr-composer.css",
+      "path": "packages/weimo-ui-card/src/components/ocr-composer.css",
       "type": "registry:ui",
       "target": "@ui/ocr-composer.css"
     }

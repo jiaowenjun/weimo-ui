@@ -10,9 +10,9 @@ function read(relativePath) {
 }
 
 const tagBar = read('packages/weimo-ui-tagtree/src/components/tag-bar.tsx')
-const card = read('src/components/card.tsx')
-const cardResolvers = read('src/components/card-resolvers.tsx')
-const ocrCard = read('src/components/ocr-card.tsx')
+const card = read('packages/weimo-ui-card/src/components/card.tsx')
+const cardResolvers = read('packages/weimo-ui-card/src/components/card-resolvers.tsx')
+const ocrCard = read('packages/weimo-ui-card/src/components/ocr-card.tsx')
 const packageJson = JSON.parse(read('package.json'))
 
 assert.ok(

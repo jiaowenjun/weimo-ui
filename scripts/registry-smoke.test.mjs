@@ -155,6 +155,14 @@ function writeConsumerProject(consumerDir, registryUrl) {
             '@/*': ['./src/*'],
             'weimo-ui-core/components/*': ['./src/components/ui/*'],
             'weimo-ui-core/styles/*': ['./src/components/ui/*'],
+            'weimo-ui-card/components/*': ['./src/components/ui/*'],
+            'weimo-ui-card/styles/*': ['./src/components/ui/*'],
+            'weimo-ui-image/components/*': ['./src/components/ui/*'],
+            'weimo-ui-image/styles/*': ['./src/components/ui/*'],
+            'weimo-ui-markdown/components/*': ['./src/components/ui/*'],
+            'weimo-ui-markdown/styles/*': ['./src/components/ui/*'],
+            'weimo-ui-tagtree/components/*': ['./src/components/ui/*'],
+            'weimo-ui-tagtree/styles/*': ['./src/components/ui/*'],
           },
         },
         include: ['src'],
@@ -1273,10 +1281,10 @@ try {
   )
   assert.ok(
     cardRuntimeSource.includes('export function Card') &&
-      cardRuntimeSource.includes("from './card-top-bar'") &&
-      cardRuntimeSource.includes("from './card-tool-bar'") &&
-      cardRuntimeSource.includes("from './md-view'") &&
-      cardRuntimeSource.includes("from './tag-bar'") &&
+      cardRuntimeSource.includes("from 'weimo-ui-core/components/card-top-bar'") &&
+      cardRuntimeSource.includes("from 'weimo-ui-core/components/card-tool-bar'") &&
+      cardRuntimeSource.includes("from 'weimo-ui-markdown/components/md-view'") &&
+      cardRuntimeSource.includes("from 'weimo-ui-tagtree/components/tag-bar'") &&
       cardRuntimeSource.includes("from './card-layout-measurement'") &&
       cardRuntimeSource.includes("from './card-resolvers'") &&
       cardRuntimeSource.includes("from './use-card-draft'") &&
@@ -1516,7 +1524,7 @@ try {
     'Installed MdEditor math dialog must use ActionDialog bottomBarRightSlot while preserving submit behavior.',
   )
   assert.ok(
-    cardCssSource.includes('@import "./markdown-content.css";'),
+    cardCssSource.includes('@import "weimo-ui-markdown/styles/markdown-content.css";'),
     'Installed Card CSS must import shared Markdown content CSS.',
   )
   assert.ok(

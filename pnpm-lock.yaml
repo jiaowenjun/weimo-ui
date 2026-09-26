@@ -367,6 +367,43 @@ importers:
         specifier: ^4.1.11
         version: 4.1.11(@types/node@25.9.8)(jsdom@29.1.1)(vite@8.3.0(@types/node@25.9.8)(jiti@2.7.0))
 
+  packages/weimo-ui-card:
+    dependencies:
+      '@tiptap/core':
+        specifier: 3.27.0
+        version: 3.27.0(@tiptap/pm@3.27.0)
+      lucide-react:
+        specifier: 1.24.0
+        version: 1.24.0(react@19.2.7)
+      react:
+        specifier: ^19.0.0
+        version: 19.2.7
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.2.7(react@19.2.7)
+      weimo-ui-core:
+        specifier: workspace:*
+        version: link:../weimo-ui-core
+      weimo-ui-image:
+        specifier: workspace:*
+        version: link:../weimo-ui-image
+      weimo-ui-markdown:
+        specifier: workspace:*
+        version: link:../weimo-ui-markdown
+      weimo-ui-tagtree:
+        specifier: workspace:*
+        version: link:../weimo-ui-tagtree
+    devDependencies:
+      '@types/react':
+        specifier: ^19.3.0
+        version: 19.3.0
+      '@types/react-dom':
+        specifier: ^19.3.0
+        version: 19.3.0(@types/react@19.3.0)
+      typescript:
+        specifier: ~6.0.3
+        version: 6.0.3
+
   packages/weimo-ui-core:
     dependencies:
       '@base-ui/react':

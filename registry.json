@@ -1757,17 +1757,17 @@
       ],
       "files": [
         {
-          "path": "src/components/card-composer.tsx",
+          "path": "packages/weimo-ui-card/src/components/card-composer.tsx",
           "type": "registry:ui",
           "target": "@ui/card-composer.tsx"
         },
         {
-          "path": "src/components/composer-shell.tsx",
+          "path": "packages/weimo-ui-card/src/components/composer-shell.tsx",
           "type": "registry:ui",
           "target": "@ui/composer-shell.tsx"
         },
         {
-          "path": "src/components/card-composer.css",
+          "path": "packages/weimo-ui-card/src/components/card-composer.css",
           "type": "registry:ui",
           "target": "@ui/card-composer.css"
         }
@@ -1878,17 +1878,17 @@
       ],
       "files": [
         {
-          "path": "src/components/card.tsx",
+          "path": "packages/weimo-ui-card/src/components/card.tsx",
           "type": "registry:ui",
           "target": "@ui/card.tsx"
         },
         {
-          "path": "src/components/card-edit-state-machine.ts",
+          "path": "packages/weimo-ui-card/src/components/card-edit-state-machine.ts",
           "type": "registry:ui",
           "target": "@ui/card-edit-state-machine.ts"
         },
         {
-          "path": "src/components/use-card-edit-transition.ts",
+          "path": "packages/weimo-ui-card/src/components/use-card-edit-transition.ts",
           "type": "registry:ui",
           "target": "@ui/use-card-edit-transition.ts"
         },
@@ -1898,12 +1898,12 @@
           "target": "@ui/md-editor/md-editor-content-format.ts"
         },
         {
-          "path": "src/components/card-save-shortcut.ts",
+          "path": "packages/weimo-ui-card/src/components/card-save-shortcut.ts",
           "type": "registry:ui",
           "target": "@ui/card-save-shortcut.ts"
         },
         {
-          "path": "src/components/card-resolvers.tsx",
+          "path": "packages/weimo-ui-card/src/components/card-resolvers.tsx",
           "type": "registry:ui",
           "target": "@ui/card-resolvers.tsx"
         },
@@ -1913,27 +1913,27 @@
           "target": "@ui/deferred-md-editor-toolbar.tsx"
         },
         {
-          "path": "src/components/use-card-draft.ts",
+          "path": "packages/weimo-ui-card/src/components/use-card-draft.ts",
           "type": "registry:ui",
           "target": "@ui/use-card-draft.ts"
         },
         {
-          "path": "src/components/card-layout-measurement.ts",
+          "path": "packages/weimo-ui-card/src/components/card-layout-measurement.ts",
           "type": "registry:ui",
           "target": "@ui/card-layout-measurement.ts"
         },
         {
-          "path": "src/components/use-height-transition.ts",
+          "path": "packages/weimo-ui-card/src/components/use-height-transition.ts",
           "type": "registry:ui",
           "target": "@ui/use-height-transition.ts"
         },
         {
-          "path": "src/components/card-editable.css",
+          "path": "packages/weimo-ui-card/src/components/card-editable.css",
           "type": "registry:ui",
           "target": "@ui/card-editable.css"
         },
         {
-          "path": "src/components/card.css",
+          "path": "packages/weimo-ui-card/src/components/card.css",
           "type": "registry:ui",
           "target": "@ui/card.css"
         },
@@ -2946,12 +2946,12 @@
       ],
       "files": [
         {
-          "path": "src/components/ocr-card.tsx",
+          "path": "packages/weimo-ui-card/src/components/ocr-card.tsx",
           "type": "registry:ui",
           "target": "@ui/ocr-card.tsx"
         },
         {
-          "path": "src/components/ocr-card.css",
+          "path": "packages/weimo-ui-card/src/components/ocr-card.css",
           "type": "registry:ui",
           "target": "@ui/ocr-card.css"
         }
@@ -2979,12 +2979,12 @@
       ],
       "files": [
         {
-          "path": "src/components/ocr-composer.tsx",
+          "path": "packages/weimo-ui-card/src/components/ocr-composer.tsx",
           "type": "registry:ui",
           "target": "@ui/ocr-composer.tsx"
         },
         {
-          "path": "src/components/ocr-composer.css",
+          "path": "packages/weimo-ui-card/src/components/ocr-composer.css",
           "type": "registry:ui",
           "target": "@ui/ocr-composer.css"
         }
@@ -3010,12 +3010,12 @@
       ],
       "files": [
         {
-          "path": "src/components/ocr-detail.tsx",
+          "path": "packages/weimo-ui-card/src/components/ocr-detail.tsx",
           "type": "registry:ui",
           "target": "@ui/ocr-detail.tsx"
         },
         {
-          "path": "src/components/ocr-detail.css",
+          "path": "packages/weimo-ui-card/src/components/ocr-detail.css",
           "type": "registry:ui",
           "target": "@ui/ocr-detail.css"
         }
