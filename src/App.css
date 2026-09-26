@@ -1239,6 +1239,18 @@
   position: relative;
 }
 
+/* 液态玻璃胶囊转整体按钮(参考液态玻璃图标按钮):按钮盒只做点击区,
+   玻璃层与文字标签是按钮内部的小部件;选择器限定 button,bar/page-layout
+   等处的 span 标题胶囊不受影响。字体与颜色继承走 index.css 的全局 button 重置。 */
+button.liquid-glass-chip {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  /* 按压缩放对齐液态玻璃图标按钮:transform 150ms ease 同款节奏。 */
+  transition: transform 150ms ease;
+}
+
 .liquid-glass-chip--sm {
   width: 60px;
   height: 25px;

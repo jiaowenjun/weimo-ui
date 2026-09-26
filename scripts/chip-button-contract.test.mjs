@@ -113,32 +113,44 @@ assert.ok(
 )
 
 for (const snippet of [
-  "import type { ButtonHTMLAttributes } from 'react'",
+  "import type { ButtonHTMLAttributes, ReactNode } from 'react'",
   "from './animated-inline-size'",
   "from './animated-inline-size-model'",
   "from './chip-surface-model'",
+  'type ChipSurfaceTextSize,',
   "import './chip-button.css'",
   "export type ChipButtonState = 'default' | 'glass'",
   'export type ChipButtonProps',
   "Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'prefix'>",
   'animateWidth?: boolean',
-  'prefix?: string',
+  'prefix?: ReactNode',
   'state?: ChipButtonState',
+  'suffix?: ReactNode',
+  'textSize?: ChipSurfaceTextSize',
   'export function ChipButton',
   'animateWidth = false',
   "prefix = '#'",
   "state = 'default'",
-  'const renderedPrefix = prefix.slice(0, 1)',
-  'getChipSurfaceAttributes({ variant: state, interactive: true })',
+  "textSize = 'sm'",
+  'function isEmptyChipButtonSlot',
+  '{isEmptyChipButtonSlot(prefix) ? null : (',
+  '{isEmptyChipButtonSlot(suffix) ? null : (',
+  'getChipSurfaceAttributes({ variant: state, interactive: true, textSize })',
   'data-state={state}',
   "isGlassState && 'frosted-surface',",
   '? { ...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle }',
   'chip-surface__slot chip-button__prefix',
   'chip-surface__content chip-button__text',
+  'chip-surface__slot chip-button__suffix',
   'type="button"',
 ]) {
   assertIncludes(source, snippet, `ChipButton source must include ${snippet}.`)
 }
+assertIncludes(
+  css,
+  '.chip-button__suffix',
+  'ChipButton suffix widget slot must reuse the shared chip-surface slot layout beside the prefix slot.',
+)
 
 for (const [block, snippet, message] of [
   [baseBlock, 'display: inline-flex;', 'ChipButton must match ChipButton inline-flex layout.'],
@@ -229,10 +241,38 @@ assert.ok(
 
 assert.ok(
   docsSource.includes("import { useLayoutEffect, useRef, useState } from 'react'") &&
+    docsSource.includes("import { Hash, Plus, X } from 'lucide-react'") &&
     docsSource.includes("import { ChipButton } from '../../components/chip-button'") &&
+    docsSource.includes("import { GlassPreviewCard } from '../glass-preview-card'") &&
     docsSource.includes("import { PreviewToggle } from '../preview-toggle'") &&
     docsSource.includes("id: 'capsule'") &&
-    docsSource.includes("const [state, setState] = useState<'default' | 'glass'>('default')") &&
+    docsSource.includes('function ChipTextSizeDemo') &&
+    docsSource.includes('<ChipTextSizeDemo />') &&
+    docsSource.includes('label="胶囊字号"') &&
+    docsSource.includes('<ChipButton prefix="" textSize="sm">') &&
+    docsSource.includes('<ChipButton prefix="" textSize="base">') &&
+    docsSource.includes('<ChipButton prefix="" textSize="lg">') &&
+    docsSource.includes('function GlassChipDemo') &&
+    docsSource.includes('<GlassChipDemo />') &&
+    docsSource.includes('label="磨砂态胶囊"') &&
+    docsSource.includes('<ChipButton prefix="" state="glass" textSize="sm">') &&
+    docsSource.includes('<ChipButton prefix="" state="glass" textSize="base">') &&
+    docsSource.includes('<ChipButton prefix="" state="glass" textSize="lg">') &&
+    docsSource.includes('function LiquidGlassChipDemo') &&
+    docsSource.includes('<LiquidGlassChipDemo />') &&
+    docsSource.includes('function PrefixChipDemo') &&
+    docsSource.includes('<PrefixChipDemo />') &&
+    docsSource.includes('label="前缀胶囊"') &&
+    docsSource.includes('prefix={<Hash aria-hidden="true" />}') &&
+    docsSource.includes('prefix={<Plus aria-hidden="true" />}') &&
+    docsSource.includes('function SuffixChipDemo') &&
+    docsSource.includes('<SuffixChipDemo />') &&
+    docsSource.includes('label="后缀胶囊"') &&
+    docsSource.includes('<ChipButton prefix="" suffix={<X aria-hidden="true" />}>'),
+  'Capsule docs cards must show button-form capsules only: text sizes, glass sizes, prefix, and suffix demos all render ChipButton.',
+)
+assert.ok(
+  docsSource.includes("const [state, setState] = useState<'default' | 'glass'>('default')") &&
     docsSource.includes("const [widthMode, setWidthMode] = useState<'short' | 'long'>('short')") &&
     docsSource.includes('const widthMeasureRef = useRef<HTMLSpanElement | null>(null)') &&
     docsSource.includes('const [widthPreviewSize, setWidthPreviewSize] = useState<number | null>(null)') &&
@@ -243,9 +283,8 @@ assert.ok(
     docsSource.includes('widthMeasureRef.current') &&
     docsSource.includes('getBoundingClientRect().width') &&
     docsSource.includes('setWidthPreviewSize((currentSize) =>') &&
-    docsSource.includes('<ChipButton state={state}>') &&
-    docsSource.includes('<ChipButton state="default">') &&
-    docsSource.includes('<ChipButton state="glass">') &&
+    docsSource.includes('<ChipButton prefix={<Hash aria-hidden="true" />} state={state}>') &&
+    docsSource.includes('<ChipButton prefix={<Hash aria-hidden="true" />} state="default">') &&
     docsSource.includes('className="chip-button-preview__width-example"') &&
     docsSource.includes('className="chip-button-preview__width-slot"') &&
     docsSource.includes('style={widthPreviewStyle}') &&
@@ -264,10 +303,16 @@ assert.ok(
   'ChipButton docs text toggles must not use coss Button.',
 )
 assert.ok(
-  docsSource.includes(
-    '<div className="text-button-preview" aria-label="ChipButton 默认态与磨砂态预览">',
-  ) && appCss.includes('.text-button-preview'),
-  'Capsule chip-button demo card must lay out its buttons in the shared 12px-gap preview row.',
+  [
+    'ChipButton 字号预览',
+    'ChipButton 前缀预览',
+    'ChipButton 后缀预览',
+  ].every((demoLabel) =>
+    docsSource.includes(`<div className="text-button-preview" aria-label="${demoLabel}">`),
+  ) &&
+    appCss.includes('.text-button-preview') &&
+    !docsSource.includes('label="胶囊按钮"'),
+  'Capsule chip-button demo cards must lay out their buttons in the shared preview row; the redundant state-pair chip-button card must stay removed.',
 )
 assert.ok(
   definitionsIndexSource.includes("import { capsuleDefinition } from './capsule'") &&

@@ -1,11 +1,9 @@
 import { useLayoutEffect, useRef, useState } from 'react'
-import { Hash, X } from 'lucide-react'
+import { Hash, Plus, X } from 'lucide-react'
 
-import { Chip } from '../../components/chip'
 import { ChipButton } from '../../components/chip-button'
 import { LiquidGlassSurface } from '../../components/liquid-glass'
 import { ComponentPreviewCard } from '../../components/component-preview-card'
-import { GhostIconButton } from '../../components/ghost-icon-button'
 import type { ComponentDefinition } from '../component-docs'
 import { GlassPreviewCard } from '../glass-preview-card'
 import { LiquidGlassTile } from '../liquid-glass-tile'
@@ -14,10 +12,10 @@ import { PreviewToggle } from '../preview-toggle'
 function ChipTextSizeDemo() {
   return (
     <ComponentPreviewCard align="center" label="胶囊字号">
-      <div className="text-button-preview" aria-label="Chip 字号预览">
-        <Chip content="小字号" textSize="sm" />
-        <Chip content="基础字号" textSize="base" />
-        <Chip content="标题字号" textSize="lg" />
+      <div className="text-button-preview" aria-label="ChipButton 字号预览">
+        <ChipButton prefix="" textSize="sm">小字号</ChipButton>
+        <ChipButton prefix="" textSize="base">基础字号</ChipButton>
+        <ChipButton prefix="" textSize="lg">标题字号</ChipButton>
       </div>
     </ComponentPreviewCard>
   )
@@ -26,38 +24,55 @@ function ChipTextSizeDemo() {
 function GlassChipDemo() {
   return (
     <GlassPreviewCard label="磨砂态胶囊">
-      <div className="icon-preview__row" aria-label="Chip 磨砂态字号预览">
-        <Chip content="小字号" textSize="sm" variant="glass" />
-        <Chip content="基础字号" textSize="base" variant="glass" />
-        <Chip content="标题字号" textSize="lg" variant="glass" />
+      <div className="icon-preview__row" aria-label="ChipButton 磨砂态字号预览">
+        <ChipButton prefix="" state="glass" textSize="sm">小字号</ChipButton>
+        <ChipButton prefix="" state="glass" textSize="base">基础字号</ChipButton>
+        <ChipButton prefix="" state="glass" textSize="lg">标题字号</ChipButton>
       </div>
     </GlassPreviewCard>
   )
 }
 
-// 液态玻璃胶囊:与磨砂态胶囊同节奏的三档字号(玻璃层绝对居中于定尺寸
-// 占位盒,文字色随画布 tone 自适应;液态自带渐变边缘,无边框开关)。
+// noop 点击透传给玻璃层以启用库的悬停辉光与按压缩放反馈(同液态玻璃图标按钮)。
+function noopLiquidGlassChipClick() {}
+
+// 液态玻璃胶囊:整体按钮形态,参考液态玻璃图标按钮组的「整体按钮、内部
+// 独立小部件」结构——胶囊盒本身是原生 button,玻璃层与三档字号标签是按钮
+// 内部的小部件;与磨砂态胶囊同节奏(玻璃层绝对居中于定尺寸按钮盒,文字色
+// 随画布 tone 自适应;液态自带渐变边缘,无边框开关)。
 // eslint-disable-next-line react-refresh/only-export-components
 function LiquidGlassChipDemo() {
   return (
     <GlassPreviewCard label="液态玻璃胶囊">
       <LiquidGlassTile className="liquid-glass-chip-preview">
         <div aria-label="液态玻璃胶囊字号预览" className="liquid-glass-chip-row">
-          <span className="liquid-glass-chip liquid-glass-chip--sm">
-            <LiquidGlassSurface cornerRadius={999} padding="6px 10px">
+          <button className="liquid-glass-chip liquid-glass-chip--sm" type="button">
+            <LiquidGlassSurface
+              cornerRadius={999}
+              onClick={noopLiquidGlassChipClick}
+              padding="6px 10px"
+            >
               <span className="liquid-glass-chip__label liquid-glass-chip__label--sm">小字号</span>
             </LiquidGlassSurface>
-          </span>
-          <span className="liquid-glass-chip liquid-glass-chip--base">
-            <LiquidGlassSurface cornerRadius={999} padding="6px 10px">
+          </button>
+          <button className="liquid-glass-chip liquid-glass-chip--base" type="button">
+            <LiquidGlassSurface
+              cornerRadius={999}
+              onClick={noopLiquidGlassChipClick}
+              padding="6px 10px"
+            >
               <span className="liquid-glass-chip__label liquid-glass-chip__label--base">基础字号</span>
             </LiquidGlassSurface>
-          </span>
-          <span className="liquid-glass-chip liquid-glass-chip--lg">
-            <LiquidGlassSurface cornerRadius={999} padding="6px 10px">
+          </button>
+          <button className="liquid-glass-chip liquid-glass-chip--lg" type="button">
+            <LiquidGlassSurface
+              cornerRadius={999}
+              onClick={noopLiquidGlassChipClick}
+              padding="6px 10px"
+            >
               <span className="liquid-glass-chip__label liquid-glass-chip__label--lg">标题字号</span>
             </LiquidGlassSurface>
-          </span>
+          </button>
         </div>
       </LiquidGlassTile>
     </GlassPreviewCard>
@@ -67,9 +82,9 @@ function LiquidGlassChipDemo() {
 function PrefixChipDemo() {
   return (
     <ComponentPreviewCard align="center" label="前缀胶囊">
-      <div className="text-button-preview" aria-label="Chip 前缀预览">
-        <Chip content="写作/日记" prefix={<Hash aria-hidden="true" />} variant="default" />
-        <Chip content="写作/日记" prefix={<Hash aria-hidden="true" />} variant="glass" />
+      <div className="text-button-preview" aria-label="ChipButton 前缀预览">
+        <ChipButton prefix={<Hash aria-hidden="true" />}>写作/日记</ChipButton>
+        <ChipButton prefix={<Plus aria-hidden="true" />} state="glass">新增标签</ChipButton>
       </div>
     </ComponentPreviewCard>
   )
@@ -78,36 +93,9 @@ function PrefixChipDemo() {
 function SuffixChipDemo() {
   return (
     <ComponentPreviewCard align="center" label="后缀胶囊">
-      <div className="text-button-preview" aria-label="Chip 后缀预览">
-        <Chip
-          content="可关闭标签"
-          suffix={
-            <GhostIconButton aria-label="移除标签" size="xs">
-              <X aria-hidden="true" />
-            </GhostIconButton>
-          }
-          variant="default"
-        />
-        <Chip
-          content="可关闭标签"
-          suffix={
-            <GhostIconButton aria-label="移除标签" size="xs">
-              <X aria-hidden="true" />
-            </GhostIconButton>
-          }
-          variant="glass"
-        />
-      </div>
-    </ComponentPreviewCard>
-  )
-}
-
-function ChipButtonDemo() {
-  return (
-    <ComponentPreviewCard align="center" label="胶囊按钮">
-      <div className="text-button-preview" aria-label="ChipButton 默认态与磨砂态预览">
-        <ChipButton state="default">默认态</ChipButton>
-        <ChipButton state="glass">磨砂态</ChipButton>
+      <div className="text-button-preview" aria-label="ChipButton 后缀预览">
+        <ChipButton prefix="" suffix={<X aria-hidden="true" />}>可关闭标签</ChipButton>
+        <ChipButton prefix="" state="glass" suffix={<X aria-hidden="true" />}>可关闭标签</ChipButton>
       </div>
     </ComponentPreviewCard>
   )
@@ -130,7 +118,7 @@ function StateToggleChipButtonDemo() {
       label="状态切换胶囊"
     >
       <div aria-label="ChipButton 状态预览">
-        <ChipButton state={state}>写作/日记</ChipButton>
+        <ChipButton prefix={<Hash aria-hidden="true" />} state={state}>写作/日记</ChipButton>
       </div>
     </ComponentPreviewCard>
   )
@@ -176,11 +164,11 @@ function WidthToggleChipButtonDemo() {
           className="chip-button-preview__width-slot"
           style={widthPreviewStyle}
         >
-          <ChipButton state="default">{widthPreviewLabel}</ChipButton>
+          <ChipButton prefix={<Hash aria-hidden="true" />} state="default">{widthPreviewLabel}</ChipButton>
         </span>
         <span className="chip-button-preview__width-measure" aria-hidden="true">
           <span ref={widthMeasureRef}>
-            <ChipButton state="default">{widthPreviewLabel}</ChipButton>
+            <ChipButton prefix={<Hash aria-hidden="true" />} state="default">{widthPreviewLabel}</ChipButton>
           </span>
         </span>
       </div>
@@ -198,7 +186,6 @@ function CapsuleDemo() {
       <LiquidGlassChipDemo />
       <PrefixChipDemo />
       <SuffixChipDemo />
-      <ChipButtonDemo />
       <StateToggleChipButtonDemo />
       <WidthToggleChipButtonDemo />
     </>
@@ -219,7 +206,6 @@ export const capsuleDefinition = {
     '长度切换胶囊',
     '前缀胶囊',
     '后缀胶囊',
-    '胶囊按钮',
     '液态玻璃胶囊',
   ],
   preview: () => <CapsuleDemo />,

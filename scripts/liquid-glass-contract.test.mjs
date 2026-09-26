@@ -115,7 +115,11 @@ for (const snippet of [
 }
 for (const snippet of [
   'label="液态玻璃胶囊"',
-  '<LiquidGlassSurface cornerRadius={999} padding="6px 10px">',
+  '<button className="liquid-glass-chip liquid-glass-chip--sm" type="button">',
+  '<LiquidGlassSurface',
+  'cornerRadius={999}',
+  'onClick={noopLiquidGlassChipClick}',
+  'padding="6px 10px"',
   '液态玻璃胶囊字号预览',
 ]) {
   assert.ok(
@@ -123,6 +127,13 @@ for (const snippet of [
     `The capsule page liquid glass chip card must include ${snippet}.`,
   )
 }
+const liquidGlassChipButtonBlock =
+  appCss.match(/button\.liquid-glass-chip\s*\{([^}]*)\}/)?.[1] ?? ''
+assert.ok(
+  liquidGlassChipButtonBlock.includes('border: none;') &&
+    liquidGlassChipButtonBlock.includes('cursor: pointer;'),
+  'The capsule page liquid glass chips must be whole buttons: button.liquid-glass-chip resets the button chrome while span title capsules keep the plain .liquid-glass-chip base.',
+)
 for (const snippet of [
   'label="浮动工具栏"',
   '<LiquidGlassTile className="liquid-glass-toolbar-preview">',

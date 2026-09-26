@@ -200,38 +200,12 @@ assert.ok(
 )
 
 assert.ok(
-  docsSource.includes("import { Hash, X } from 'lucide-react'") &&
-    docsSource.includes("import { Chip } from '../../components/chip'") &&
-    docsSource.includes("import { GlassPreviewCard } from '../glass-preview-card'") &&
-    docsSource.includes("import { PreviewToggle } from '../preview-toggle'") &&
-    docsSource.includes("id: 'capsule'") &&
+  docsSource.includes("id: 'capsule'") &&
     docsSource.includes('preview: () => <CapsuleDemo />') &&
-    docsSource.includes('function ChipTextSizeDemo') &&
-    docsSource.includes('<ChipTextSizeDemo />') &&
-    docsSource.includes('label="胶囊字号"') &&
-    docsSource.includes('function GlassChipDemo') &&
-    docsSource.includes('<GlassChipDemo />') &&
-    docsSource.includes('label="磨砂态胶囊"') &&
-    docsSource.includes('<GlassPreviewCard') &&
-    docsSource.includes('function PrefixChipDemo') &&
-    docsSource.includes('<PrefixChipDemo />') &&
-    docsSource.includes('label="前缀胶囊"') &&
-    docsSource.includes('function SuffixChipDemo') &&
-    docsSource.includes('<SuffixChipDemo />') &&
-    docsSource.includes('label="后缀胶囊"') &&
-    docsSource.includes('align="center"') &&
-    docsSource.includes('content="写作/日记"') &&
-    docsSource.includes('variant="default"') &&
-    docsSource.includes('variant="glass"') &&
-    docsSource.includes('textSize="sm"') &&
-    docsSource.includes('textSize="base"') &&
-    docsSource.includes('textSize="lg"') &&
-    docsSource.includes('prefix={<Hash aria-hidden="true" />}') &&
-    docsSource.includes("import { GhostIconButton } from '../../components/ghost-icon-button'") &&
-    docsSource.includes('suffix={') &&
-    docsSource.includes('<GhostIconButton aria-label="移除标签" size="xs">') &&
-    docsSource.includes('<X aria-hidden="true" />'),
-  'Capsule docs definition must show text-size, glass, prefix, and suffix chip examples in split cards.',
+    !docsSource.includes("import { Chip } from '../../components/chip'") &&
+    !docsSource.includes('<Chip ') &&
+    !docsSource.includes('<Chip\n'),
+  'Capsule docs must demo button-form capsules only; plain text Chip examples must stay removed from the page.',
 )
 assert.ok(
   !docsSource.includes('className="internal-chip-preview"') &&
@@ -240,17 +214,9 @@ assert.ok(
     !/\.internal-chip-preview\s*\{/.test(appCss),
   'Chip docs cards must not revive the removed internal-chip-preview wrapper chrome.',
 )
-const chipPreviewRowBlock = cssBlockFor(appCss, '.text-button-preview')
-assert.ok(
-  ['Chip 字号预览', 'Chip 前缀预览', 'Chip 后缀预览'].every((demoLabel) =>
-    docsSource.includes(`<div className="text-button-preview" aria-label="${demoLabel}">`),
-  ) &&
-    chipPreviewRowBlock.includes('gap: 12px;'),
-  'Capsule chip demo cards must lay out their chips in a shared 12px-gap preview row like the glass capsule card.',
-)
 assert.ok(
   !appCss.includes('.internal-chip-preview__action'),
-  'Chip suffix demo action must come from the shared GhostIconButton xs size instead of custom preview CSS.',
+  'Chip docs must not revive custom suffix-action preview CSS.',
 )
 assert.ok(
   definitionsIndexSource.includes("import { capsuleDefinition } from './capsule'") &&
