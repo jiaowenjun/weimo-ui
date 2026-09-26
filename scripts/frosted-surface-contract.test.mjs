@@ -334,18 +334,15 @@ assertOmits(
 )
 
 for (const snippet of [
-  "import { useState } from 'react'",
   "import { FrostedSurface } from '../../components/frosted-surface'",
   "import { ComponentPreviewCard } from '../../components/component-preview-card'",
-  "import { SurfaceBorderToggle } from '../preview-toggle'",
   "from '../glass-preview-card'",
   "id: 'surface'",
   '静态卡片、亮度自适应磨砂玻璃层、液态玻璃与抬升浮层的材质总览',
   'function FrostedSurfacePreview()',
-  'const [bordered, setBordered] = useState(true)',
   'label="磨砂材质"',
-  '<SurfaceBorderToggle bordered={bordered} onBorderedChange={setBordered} />',
-  '<FrostedSurface bordered={bordered} className="frosted-surface-preview__tile">',
+  
+  '<FrostedSurface bordered className="frosted-surface-preview__tile">',
   "'无边框',",
   "frame: 'plain',",
 ]) {
@@ -539,7 +536,7 @@ for (const snippet of [
   'export function useFrostedSurfaceBackgroundToneRef',
   'export function FrostedSurface',
   'bordered?: boolean',
-  'bordered = false',
+  'bordered = true',
   'observe = true',
   'const [element, setElement] = useState<ElementType | null>(null)',
   'const setElementRef = useCallback((nextElement: ElementType | null) => {',

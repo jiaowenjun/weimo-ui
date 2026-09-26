@@ -292,7 +292,7 @@ assert.ok(
     componentDefinitionsSource.includes('<GlassPreviewCard') &&
     !componentDefinitionsSource.includes('frosted-surface-preview__scroll') &&
     !componentDefinitionsSource.includes('frosted-surface-preview__fixed') &&
-    componentDefinitionsSource.includes('<FrostedSurface bordered={bordered} className="frosted-surface-preview__tile">') &&
+    componentDefinitionsSource.includes('<FrostedSurface bordered className="frosted-surface-preview__tile">') &&
     !componentDefinitionsSource.includes('frosted-surface-preview__sticky'),
   'FrostedSurface detail page must render a slider-driven dark-to-light adaptive material preview via the shared GlassPreviewCard.',
 )
@@ -324,8 +324,7 @@ assert.ok(
     !buttonDefinitionSource.includes("from '../../components/coss/button'") &&
     !buttonDefinitionSource.includes("variant=\"outline\"") &&
     !buttonDefinitionSource.includes('className={`icon-preview__scene icon-preview__scene--${scene.id}`}') &&
-    (buttonDefinitionSource.match(/<FrostedIconButton\b[^>\n]*disabled=\{disabled\}/g) ?? []).length === 4 &&
-    buttonDefinitionSource.includes('<FrostedIconButton aria-label="带边框菜单" bordered disabled={disabled}>') &&
+    (buttonDefinitionSource.match(/<FrostedIconButton\b[^>\n]*disabled=\{disabled\}/g) ?? []).length === 2 &&
     !buttonDefinitionSource.includes('状态切换菜单') &&
     buttonDefinitionSource.includes('preview: () => <ButtonDemo />') &&
     buttonDefinitionSource.includes('<FrostedIconButtonPreview />') &&

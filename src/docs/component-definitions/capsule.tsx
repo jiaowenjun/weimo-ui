@@ -9,7 +9,7 @@ import { GhostIconButton } from '../../components/ghost-icon-button'
 import type { ComponentDefinition } from '../component-docs'
 import { GlassPreviewCard } from '../glass-preview-card'
 import { LiquidGlassTile } from '../liquid-glass-tile'
-import { PreviewToggle, SurfaceBorderToggle } from '../preview-toggle'
+import { PreviewToggle } from '../preview-toggle'
 
 function ChipTextSizeDemo() {
   return (
@@ -24,19 +24,12 @@ function ChipTextSizeDemo() {
 }
 
 function GlassChipDemo() {
-  const [bordered, setBordered] = useState(true)
-
   return (
-    <GlassPreviewCard
-      action={
-        <SurfaceBorderToggle bordered={bordered} onBorderedChange={setBordered} />
-      }
-      label="磨砂态胶囊"
-    >
+    <GlassPreviewCard label="磨砂态胶囊">
       <div className="icon-preview__row" aria-label="Chip 磨砂态字号预览">
-        <Chip bordered={bordered} content="小字号" textSize="sm" variant="glass" />
-        <Chip bordered={bordered} content="基础字号" textSize="base" variant="glass" />
-        <Chip bordered={bordered} content="标题字号" textSize="lg" variant="glass" />
+        <Chip content="小字号" textSize="sm" variant="glass" />
+        <Chip content="基础字号" textSize="base" variant="glass" />
+        <Chip content="标题字号" textSize="lg" variant="glass" />
       </div>
     </GlassPreviewCard>
   )

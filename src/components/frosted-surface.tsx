@@ -143,7 +143,7 @@ function useFrostedSurfaceBackgroundToneForElement<ElementType extends HTMLEleme
 }
 
 export function FrostedSurface({
-  bordered = false,
+  bordered = true,
   className,
   observe = true,
   style,

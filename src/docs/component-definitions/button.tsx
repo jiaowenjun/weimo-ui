@@ -92,12 +92,6 @@ function FrostedIconButtonPreviewGroup({ disabled }: { disabled: boolean }) {
       <FrostedIconButton aria-label="小号菜单" disabled={disabled} size="sm">
         <Menu />
       </FrostedIconButton>
-      <FrostedIconButton aria-label="带边框菜单" bordered disabled={disabled}>
-        <Menu />
-      </FrostedIconButton>
-      <FrostedIconButton aria-label="小号带边框菜单" bordered disabled={disabled} size="sm">
-        <Menu />
-      </FrostedIconButton>
     </div>
   )
 }
@@ -138,14 +132,6 @@ function FrostedIconButtonGroupPreviewGroup({ disabled }: { disabled: boolean })
           <Share />
         </FrostedIconGroupButton>
         <FrostedIconGroupButton aria-label="小号更多" disabled={disabled} size="sm">
-          <Ellipsis />
-        </FrostedIconGroupButton>
-      </FrostedIconButtonGroup>
-      <FrostedIconButtonGroup aria-label="带边框磨砂图标按钮组" bordered>
-        <FrostedIconGroupButton aria-label="带边框分享" disabled={disabled}>
-          <Share />
-        </FrostedIconGroupButton>
-        <FrostedIconGroupButton aria-label="带边框更多" disabled={disabled}>
           <Ellipsis />
         </FrostedIconGroupButton>
       </FrostedIconButtonGroup>

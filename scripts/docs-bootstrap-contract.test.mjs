@@ -303,7 +303,7 @@ for (const snippet of [
   'function GhostIconButtonPreviewGroup({ disabled }: { disabled: boolean })',
   '<GhostIconButton aria-label="菜单" disabled={disabled}>',
   '<GhostIconButton aria-label="极小号菜单" disabled={disabled} size="xs">',
-  '<FrostedSurface bordered={bordered} className="frosted-surface-preview__tile">',
+  '<FrostedSurface bordered className="frosted-surface-preview__tile">',
   '<GlassPreviewCard',
   'label="磨砂图标按钮"',
 ]) {

@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import { CardSurface } from '../../components/card-surface'
 import { FrostedSurface } from '../../components/frosted-surface'
 import { PopupSurface } from '../../components/popup-surface'
@@ -8,7 +6,6 @@ import { ComponentPreviewCard } from '../../components/component-preview-card'
 import type { ComponentDefinition } from '../component-docs'
 import { GlassPreviewCard } from '../glass-preview-card'
 import { LiquidGlassTile } from '../liquid-glass-tile'
-import { SurfaceBorderToggle } from '../preview-toggle'
 
 function CardSurfacePreview() {
   return (
@@ -24,16 +21,9 @@ function CardSurfacePreview() {
 }
 
 function FrostedSurfacePreview() {
-  const [bordered, setBordered] = useState(true)
-
   return (
-    <GlassPreviewCard
-      action={
-        <SurfaceBorderToggle bordered={bordered} onBorderedChange={setBordered} />
-      }
-      label="磨砂材质"
-    >
-      <FrostedSurface bordered={bordered} className="frosted-surface-preview__tile">
+    <GlassPreviewCard label="磨砂材质">
+      <FrostedSurface bordered className="frosted-surface-preview__tile">
         <span className="frosted-surface-preview__title">Frosted Surface</span>
         <span className="frosted-surface-preview__meta">前景色随背景亮度自适应明暗</span>
       </FrostedSurface>

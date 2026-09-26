@@ -203,7 +203,7 @@ assert.ok(
   docsSource.includes("import { Hash, X } from 'lucide-react'") &&
     docsSource.includes("import { Chip } from '../../components/chip'") &&
     docsSource.includes("import { GlassPreviewCard } from '../glass-preview-card'") &&
-    docsSource.includes("import { PreviewToggle, SurfaceBorderToggle } from '../preview-toggle'") &&
+    docsSource.includes("import { PreviewToggle } from '../preview-toggle'") &&
     docsSource.includes("id: 'capsule'") &&
     docsSource.includes('preview: () => <CapsuleDemo />') &&
     docsSource.includes('function ChipTextSizeDemo') &&
@@ -213,8 +213,6 @@ assert.ok(
     docsSource.includes('<GlassChipDemo />') &&
     docsSource.includes('label="磨砂态胶囊"') &&
     docsSource.includes('<GlassPreviewCard') &&
-    docsSource.includes('<SurfaceBorderToggle bordered={bordered} onBorderedChange={setBordered} />') &&
-    docsSource.includes('bordered={bordered}') &&
     docsSource.includes('function PrefixChipDemo') &&
     docsSource.includes('<PrefixChipDemo />') &&
     docsSource.includes('label="前缀胶囊"') &&

@@ -230,7 +230,7 @@ assert.ok(
 assert.ok(
   docsSource.includes("import { useLayoutEffect, useRef, useState } from 'react'") &&
     docsSource.includes("import { ChipButton } from '../../components/chip-button'") &&
-    docsSource.includes("import { PreviewToggle, SurfaceBorderToggle } from '../preview-toggle'") &&
+    docsSource.includes("import { PreviewToggle } from '../preview-toggle'") &&
     docsSource.includes("id: 'capsule'") &&
     docsSource.includes("const [state, setState] = useState<'default' | 'glass'>('default')") &&
     docsSource.includes("const [widthMode, setWidthMode] = useState<'short' | 'long'>('short')") &&

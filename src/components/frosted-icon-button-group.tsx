@@ -17,7 +17,7 @@ export type FrostedIconButtonGroupProps = Omit<ComponentPropsWithoutRef<'div'>, 
 
 export const FrostedIconButtonGroup = forwardRef<HTMLDivElement, FrostedIconButtonGroupProps>(function FrostedIconButtonGroup(
   {
-    bordered = false,
+    bordered = true,
     children,
     className,
     role,

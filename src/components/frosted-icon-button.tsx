@@ -17,7 +17,7 @@ export type FrostedIconButtonProps = ComponentPropsWithoutRef<'button'> & {
 
 export const FrostedIconButton = forwardRef<HTMLButtonElement, FrostedIconButtonProps>(function FrostedIconButton(
   {
-    bordered = false,
+    bordered = true,
     className,
     size,
     style,

@@ -147,19 +147,18 @@ for (const snippet of [
   "import { CardSurface } from '../../components/card-surface'",
   "import { PopupSurface } from '../../components/popup-surface'",
   "import { ComponentPreviewCard } from '../../components/component-preview-card'",
-  "import { SurfaceBorderToggle } from '../preview-toggle'",
   "id: 'surface'",
   '亮主题细微阴影，暗主题边框描边',
   'function CardSurfacePreview()',
   'label="卡片材质"',
   '<div aria-hidden="true" className="card-surface-preview">',
   '<CardSurface className="card-surface-preview__tile">',
-  '<FrostedSurface bordered={bordered} className="frosted-surface-preview__tile">',
+  '<FrostedSurface bordered className="frosted-surface-preview__tile">',
   'function PopupSurfacePreview()',
   'label="浮层材质"',
   '<PopupSurface className="popup-surface-preview__tile">',
   '亮主题抬升投影，暗主题边框描边',
-  '<SurfaceBorderToggle bordered={bordered} onBorderedChange={setBordered} />',
+  
   "frame: 'plain',",
 ]) {
   assert.ok(surfaceDefinitionSource.includes(snippet), `Surface docs definition must include ${snippet}.`)

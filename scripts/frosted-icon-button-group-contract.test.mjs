@@ -106,7 +106,7 @@ for (const snippet of [
   'export type FrostedIconButtonGroupProps',
   'export const FrostedIconButtonGroup =',
   'bordered?: boolean',
-  'bordered = false',
+  'bordered = true',
   "role ?? 'group'",
   `getFrostedSurfaceClassName(\n        'frosted-icon-button-group',\n        bordered ? 'frosted-surface--bordered' : undefined,\n        className,\n      )`,
   'data-background-tone={backgroundTone ?? undefined}',
@@ -265,13 +265,13 @@ assertIncludes(
 // 修饰类上,无边框实例在任何状态都保持透明描边。
 for (const snippet of [
   'bordered?: boolean',
-  'bordered = false',
+  'bordered = true',
   "bordered ? 'frosted-surface--bordered' : undefined",
 ]) {
   assertIncludes(
     glassIconButtonSource,
     snippet,
-    `FrostedIconButton must default to borderless and only stroke when bordered is set: ${snippet}.`,
+    `FrostedIconButton must stroke by default and only go borderless when the caller opts out: ${snippet}.`,
   )
 }
 const glassDisabledBlock = cssBlockFor(iconButtonCss, '.icon-button--frosted:disabled')
@@ -299,7 +299,6 @@ for (const snippet of [
   'aria-label="FrostedIconButtonGroup 磨砂按钮组预览"',
   '<FrostedIconButtonGroup aria-label="磨砂图标按钮组">',
   '<FrostedIconButtonGroup aria-label="小号磨砂图标按钮组">',
-  '<FrostedIconButtonGroup aria-label="带边框磨砂图标按钮组" bordered>',
   "'磨砂图标按钮组',",
   "'FrostedIconButtonGroup',",
 ]) {
@@ -312,8 +311,8 @@ for (const snippet of [
 
 assert.equal(
   (buttonDocsSource.match(/<FrostedIconGroupButton\b[^>\n]*disabled=\{disabled\}/g) ?? []).length,
-  6,
-  'Button docs group preview must demo the borderless default group, the two-button sm group, and the bordered group, all wired to the disabled toggle.',
+  4,
+  'Button docs group preview must demo the default group and the two-button sm group, all wired to the disabled toggle.',
 )
 assert.equal(
   (buttonDocsSource.match(/<FrostedIconGroupButton\b[^>\n]*size="sm"/g) ?? []).length,
