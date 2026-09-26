@@ -163,7 +163,7 @@ function collectExportedNames(relativePath: string, visited: Set<string>) {
       const moduleSpecifier = statement.moduleSpecifier && ts.isStringLiteral(statement.moduleSpecifier)
         ? statement.moduleSpecifier.text
         : undefined
-      const moduleNames = moduleSpecifier
+      const moduleNames = moduleSpecifier?.startsWith('.')
         ? collectExportedNames(resolveExportModule(relativePath, moduleSpecifier), visited)
         : new Set<string>()
 

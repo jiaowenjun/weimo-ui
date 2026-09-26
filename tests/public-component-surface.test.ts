@@ -76,6 +76,7 @@ describe('public component catalog', () => {
     const packageJson = readProjectJson<PackageJson>('package.json')
     const corePackageJson = readProjectJson<PackageJson>('packages/weimo-ui-core/package.json')
     const markdownPackageJson = readProjectJson<PackageJson>('packages/weimo-ui-markdown/package.json')
+    const statsPackageJson = readProjectJson<PackageJson>('packages/weimo-ui-stats/package.json')
     const ids = new Set<string>()
     const packageExports = new Set<string>()
     const registryNames = new Set<string>()
@@ -90,16 +91,21 @@ describe('public component catalog', () => {
 
       const isCoreComponent = coreGroups.has(item.group) || additionalCoreComponents.has(item.id)
       const isMarkdownComponent = item.group === 'markdown'
+      const isStatsComponent = item.group === 'data-visualization'
       const ownerPackageJson = isCoreComponent
         ? corePackageJson
         : isMarkdownComponent
           ? markdownPackageJson
-          : packageJson
+          : isStatsComponent
+            ? statsPackageJson
+            : packageJson
       const packageRoot = isCoreComponent
         ? 'packages/weimo-ui-core/'
         : isMarkdownComponent
           ? 'packages/weimo-ui-markdown/'
-          : ''
+          : isStatsComponent
+            ? 'packages/weimo-ui-stats/'
+            : ''
       const sourcePath = ownerPackageJson.exports[item.packageExport]
       const projectSourcePath = `${packageRoot}${sourcePath.replace(/^\.\//u, '')}`
       expect(sourcePath, `${item.id} package export`).toBeTypeOf('string')

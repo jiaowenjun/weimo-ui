@@ -26,8 +26,8 @@ function assertIncludes(block, snippet, message) {
   assert.ok(block.includes(snippet), message)
 }
 
-const source = readProjectFile('src/components/stat-group.tsx')
-const css = readProjectFile('src/components/stat-group.css')
+const source = readProjectFile('packages/weimo-ui-stats/src/components/stat-group.tsx')
+const css = readProjectFile('packages/weimo-ui-stats/src/components/stat-group.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 const manifest = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndex = readProjectFile('src/docs/component-definitions/index.ts')
@@ -46,7 +46,7 @@ assert.ok(
   'StatGroup must use plain div props plus ReactNode metric fields.',
 )
 assert.ok(
-  source.includes("import { cn } from './lib/utils'") &&
+  source.includes("import { cn } from 'weimo-ui-core/components/lib/utils'") &&
     source.includes("import './stat-group.css'") &&
     !source.includes("from './stat-block'") &&
     !source.includes('StatBlock') &&
@@ -140,7 +140,7 @@ assert.ok(
   'Stat docs definition must be wired into component-definitions/index.ts.',
 )
 assert.ok(
-  docsDefinition.includes("import { StatGroup } from '../../components/stat-group'") &&
+  docsDefinition.includes("import { StatGroup } from '../../../packages/weimo-ui-stats/src/components/stat-group'") &&
     docsDefinition.includes("id: 'stat'") &&
     docsDefinition.includes('const wordMetric = formatWordCountMetric(12345)') &&
     docsDefinition.includes('items={sidebarStatsItems}') &&
@@ -160,7 +160,7 @@ assert.deepEqual(
 )
 assert.deepEqual(
   registryItem.files.map((file) => file.path),
-  ['src/components/stat-group.tsx', 'src/components/stat-group.css'],
+  ['packages/weimo-ui-stats/src/components/stat-group.tsx', 'packages/weimo-ui-stats/src/components/stat-group.css'],
   'StatGroup registry item must ship the component and sidecar CSS.',
 )
 assert.deepEqual(

@@ -34,7 +34,7 @@ const {
   buildHeatmapMonthLabels,
   formatHeatmapDateKey,
   getHeatmapLevel,
-} = await loadTsModule('src/components/heatmap/heatmap-model.ts')
+} = await loadTsModule('packages/weimo-ui-stats/src/components/heatmap/heatmap-model.ts')
 
 const today = '2026-06-18'
 const dailyCounts = [

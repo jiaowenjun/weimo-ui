@@ -4,7 +4,10 @@ import { join, relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
-const componentsRoot = join(root, 'src/components')
+const componentsRoots = [
+  join(root, 'src/components'),
+  join(root, 'packages/weimo-ui-stats/src/components'),
+]
 
 function collectCssFiles(directory) {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
@@ -54,7 +57,7 @@ assert.ok(
   'Shared typography tokens must not keep the removed --font-size-2xl token.',
 )
 
-const cssFiles = collectCssFiles(componentsRoot)
+const cssFiles = componentsRoots.flatMap(collectCssFiles)
 const disallowedDeclarations = []
 
 assert.ok(cssFiles.length > 0, 'Component typography contract must inspect component CSS files.')

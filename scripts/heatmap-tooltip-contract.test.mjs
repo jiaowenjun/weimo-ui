@@ -48,10 +48,10 @@ async function loadTooltipFormatter() {
 }
 
 const componentSource = readProjectFile(
-  'src/components/heatmap/heatmap.tsx',
+  'packages/weimo-ui-stats/src/components/heatmap/heatmap.tsx',
 )
 const componentCss = readProjectFile(
-  'src/components/heatmap/heatmap.css',
+  'packages/weimo-ui-stats/src/components/heatmap/heatmap.css',
 )
 const heatColorLevelsSource = readProjectFile(
   'packages/weimo-ui-core/src/components/heatmap/heat-color.tsx',
@@ -114,7 +114,7 @@ assert.ok(
 )
 
 assert.ok(
-  componentSource.includes("from '../coss/tooltip'") &&
+  componentSource.includes("from 'weimo-ui-core/components/coss/tooltip'") &&
     componentSource.includes('<TooltipProvider') &&
     componentSource.includes('<Tooltip') &&
     componentSource.includes('TooltipTrigger') &&
@@ -164,7 +164,7 @@ assert.ok(
   'Heatmap registry item must ship the coss tooltip primitive files.',
 )
 assert.ok(
-  registryItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/components/heatmap/heat-color.tsx'),
+    registryItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/components/heatmap/heat-color.tsx'),
   'Heatmap registry item must ship the public HeatColor implementation.',
 )
 assert.ok(

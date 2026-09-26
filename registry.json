@@ -348,7 +348,7 @@
           "target": "@ui/heatmap/heat-color.tsx"
         },
         {
-          "path": "src/components/heatmap/heatmap-model.ts",
+          "path": "packages/weimo-ui-stats/src/components/heatmap/heatmap-model.ts",
           "type": "registry:ui",
           "target": "@ui/heatmap/heatmap-model.ts"
         },
@@ -3072,17 +3072,17 @@
       ],
       "files": [
         {
-          "path": "src/components/heatmap.tsx",
+          "path": "packages/weimo-ui-stats/src/components/heatmap.tsx",
           "type": "registry:ui",
           "target": "@ui/heatmap.tsx"
         },
         {
-          "path": "src/components/heatmap/index.tsx",
+          "path": "packages/weimo-ui-stats/src/components/heatmap/index.tsx",
           "type": "registry:ui",
           "target": "@ui/heatmap/index.tsx"
         },
         {
-          "path": "src/components/heatmap/heatmap.tsx",
+          "path": "packages/weimo-ui-stats/src/components/heatmap/heatmap.tsx",
           "type": "registry:ui",
           "target": "@ui/heatmap/heatmap.tsx"
         },
@@ -3092,7 +3092,7 @@
           "target": "@ui/heatmap/heat-color.tsx"
         },
         {
-          "path": "src/components/heatmap/heatmap-model.ts",
+          "path": "packages/weimo-ui-stats/src/components/heatmap/heatmap-model.ts",
           "type": "registry:ui",
           "target": "@ui/heatmap/heatmap-model.ts"
         },
@@ -3102,7 +3102,7 @@
           "target": "@ui/heat-color.css"
         },
         {
-          "path": "src/components/heatmap/heatmap.css",
+          "path": "packages/weimo-ui-stats/src/components/heatmap/heatmap.css",
           "type": "registry:ui",
           "target": "@ui/heatmap/heatmap.css"
         },
@@ -3143,12 +3143,12 @@
       ],
       "files": [
         {
-          "path": "src/components/stat-group.tsx",
+          "path": "packages/weimo-ui-stats/src/components/stat-group.tsx",
           "type": "registry:ui",
           "target": "@ui/stat-group.tsx"
         },
         {
-          "path": "src/components/stat-group.css",
+          "path": "packages/weimo-ui-stats/src/components/stat-group.css",
           "type": "registry:ui",
           "target": "@ui/stat-group.css"
         }

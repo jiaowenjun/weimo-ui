@@ -1,1 +1,1 @@
-export * from '../../../packages/weimo-ui-core/src/components/heatmap/heat-color.tsx'
+export * from '../../../packages/weimo-ui-stats/src/components/heatmap/heat-color.tsx'

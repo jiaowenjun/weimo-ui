@@ -4,7 +4,10 @@ import { join, relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
-const componentsRoot = join(root, 'src/components')
+const componentsRoots = [
+  join(root, 'src/components'),
+  join(root, 'packages/weimo-ui-stats/src/components'),
+]
 
 function collectCssFiles(directory) {
   const entries = readdirSync(directory, { withFileTypes: true })
@@ -39,7 +42,7 @@ assert.ok(tokensCss.includes('--radius-xs: 4px;'), 'Shared tokens must define --
 assert.equal(styleItem.cssVars.light['radius-xs'], '4px', 'Registry style must export --radius-xs.')
 assert.deepEqual(rootStyleItem, styleItem, 'Root registry style item must match registry/style.json.')
 
-const cssFiles = collectCssFiles(componentsRoot)
+const cssFiles = componentsRoots.flatMap(collectCssFiles)
 
 assert.ok(cssFiles.length > 0, 'Component CSS files must exist.')
 
@@ -80,6 +83,6 @@ assert.deepEqual(
 )
 
 assert.ok(
-  readProjectFile('src/components/heatmap/heatmap.css').includes('--heatmap-cell-radius: var(--radius-xs);'),
+  readProjectFile('packages/weimo-ui-stats/src/components/heatmap/heatmap.css').includes('--heatmap-cell-radius: var(--radius-xs);'),
   'Heatmap cell radius must bridge through the shared xs radius token.',
 )

@@ -38,8 +38,8 @@ const packageJson = readJson('package.json')
 const heatColorEntrySource = readProjectFile('packages/weimo-ui-core/src/components/heat-color.tsx')
 const heatColorSource = readProjectFile('packages/weimo-ui-core/src/components/heatmap/heat-color.tsx')
 const heatColorCss = readProjectFile('packages/weimo-ui-core/src/components/heat-color.css')
-const heatmapCss = readProjectFile('src/components/heatmap/heatmap.css')
-const heatmapSource = readProjectFile('src/components/heatmap/heatmap.tsx')
+const heatmapCss = readProjectFile('packages/weimo-ui-stats/src/components/heatmap/heatmap.css')
+const heatmapSource = readProjectFile('packages/weimo-ui-stats/src/components/heatmap/heatmap.tsx')
 const backgroundTokensDocsDefinitionSource = readProjectFile('src/docs/component-definitions/background-tokens.tsx')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
@@ -148,7 +148,7 @@ assert.ok(
   'HeatColor swatches must consume the shared level utility helper.',
 )
 assert.ok(
-  heatmapSource.includes("import { getHeatColorClassName } from './heat-color'") &&
+  heatmapSource.includes("import { getHeatColorClassName } from 'weimo-ui-core/components/heat-color'") &&
     heatmapSource.includes('getHeatColorClassName(cell.level)'),
   'Heatmap cells must consume the shared HeatColor utility helper.',
 )
@@ -215,7 +215,7 @@ assert.deepEqual(
   [
     'packages/weimo-ui-core/src/components/heat-color.tsx',
     'packages/weimo-ui-core/src/components/heatmap/heat-color.tsx',
-    'src/components/heatmap/heatmap-model.ts',
+    'packages/weimo-ui-stats/src/components/heatmap/heatmap-model.ts',
     'packages/weimo-ui-core/src/components/heat-color.css',
   ],
   'HeatColor registry item must ship the entry, implementation, model type, and utility stylesheet.',

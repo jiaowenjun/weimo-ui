@@ -13,12 +13,12 @@
   ],
   "files": [
     {
-      "path": "src/components/stat-group.tsx",
+      "path": "packages/weimo-ui-stats/src/components/stat-group.tsx",
       "type": "registry:ui",
       "target": "@ui/stat-group.tsx"
     },
     {
-      "path": "src/components/stat-group.css",
+      "path": "packages/weimo-ui-stats/src/components/stat-group.css",
       "type": "registry:ui",
       "target": "@ui/stat-group.css"
     }

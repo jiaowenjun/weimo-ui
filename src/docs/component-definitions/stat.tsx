@@ -5,8 +5,8 @@ import {
   Heatmap,
   formatHeatmapDateKey,
   type HeatmapDailyCount,
-} from '../../components/heatmap'
-import { StatGroup } from '../../components/stat-group'
+} from '../../../packages/weimo-ui-stats/src/components/heatmap'
+import { StatGroup } from '../../../packages/weimo-ui-stats/src/components/stat-group'
 import type { ComponentDefinition } from '../component-docs'
 
 function dateOffset(days: number) {

@@ -4,7 +4,10 @@ import { join, relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
-const componentsRoot = join(root, 'src/components')
+const componentsRoots = [
+  join(root, 'src/components'),
+  join(root, 'packages/weimo-ui-stats/src/components'),
+]
 
 function readProjectFile(relativePath) {
   return readFileSync(join(root, relativePath), 'utf8')
@@ -43,7 +46,7 @@ const allowlistedComponentColors = new Map([
     ]),
   ],
 ])
-const cssFiles = listCssFiles(componentsRoot)
+const cssFiles = componentsRoots.flatMap(listCssFiles)
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const rootRegistry = readJson('registry.json')
 const styleRegistry = readJson('registry/style.json')

@@ -23,7 +23,7 @@
       "target": "@ui/heatmap/heat-color.tsx"
     },
     {
-      "path": "src/components/heatmap/heatmap-model.ts",
+      "path": "packages/weimo-ui-stats/src/components/heatmap/heatmap-model.ts",
       "type": "registry:ui",
       "target": "@ui/heatmap/heatmap-model.ts"
     },
