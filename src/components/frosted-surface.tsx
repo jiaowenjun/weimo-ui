@@ -3,8 +3,8 @@ import type { ComponentPropsWithoutRef, RefObject } from 'react'
 
 import {
   getFrostedSurfaceClassName,
-  resolveElementBackgroundTone,
-  type FrostedSurfaceBackgroundTone,
+  resolveElementBackgroundSample,
+  type FrostedSurfaceBackgroundSample,
 } from './frosted-surface-model'
 
 import './frosted-surface.css'
@@ -23,35 +23,46 @@ export function useFrostedSurfaceBackgroundTone<ElementType extends HTMLElement>
   elementRef: RefObject<ElementType | null>,
   observe: boolean,
 ) {
-  return useFrostedSurfaceBackgroundToneForElement(elementRef.current, observe)
+  const backgroundSample = useFrostedSurfaceBackgroundToneForElement(
+    elementRef.current,
+    observe,
+  )
+
+  return backgroundSample?.tone ?? null
 }
 
+// 返回完整采样:backgroundTone 驱动 data-background-tone,backgroundLuminance 供
+// 演示页直接展示材质感知到的背景相对亮度(两者来自同一次采样,不会相互漂移)。
 export function useFrostedSurfaceBackgroundToneRef<ElementType extends HTMLElement>(
   observe: boolean,
 ) {
   const [element, setElement] = useState<ElementType | null>(null)
-  const backgroundTone = useFrostedSurfaceBackgroundToneForElement(element, observe)
+  const backgroundSample = useFrostedSurfaceBackgroundToneForElement(element, observe)
   const setElementRef = useCallback((nextElement: ElementType | null) => {
     setElement((currentElement) => (
       currentElement === nextElement ? currentElement : nextElement
     ))
   }, [])
 
-  return { backgroundTone, setElementRef }
+  return {
+    backgroundLuminance: backgroundSample?.luminance ?? null,
+    backgroundTone: backgroundSample?.tone ?? null,
+    setElementRef,
+  }
 }
 
 function useFrostedSurfaceBackgroundToneForElement<ElementType extends HTMLElement>(
   element: ElementType | null,
   observe: boolean,
 ) {
-  const [backgroundTone, setBackgroundTone] =
-    useState<FrostedSurfaceBackgroundTone | null>(null)
+  const [backgroundSample, setBackgroundSample] =
+    useState<FrostedSurfaceBackgroundSample | null>(null)
 
   useIsomorphicLayoutEffect(() => {
     const ownerWindow = element?.ownerDocument.defaultView
 
     if (!element || !ownerWindow || !observe) {
-      setBackgroundTone(null)
+      setBackgroundSample(null)
 
       return undefined
     }
@@ -62,9 +73,14 @@ function useFrostedSurfaceBackgroundToneForElement<ElementType extends HTMLEleme
 
     const updateBackgroundTone = () => {
       animationFrame = 0
-      const nextTone = resolveElementBackgroundTone(element)
+      const nextSample = resolveElementBackgroundSample(element)
 
-      setBackgroundTone((currentTone) => (currentTone === nextTone ? currentTone : nextTone))
+      setBackgroundSample((currentSample) => (
+        currentSample?.tone === nextSample?.tone &&
+        currentSample?.luminance === nextSample?.luminance
+          ? currentSample
+          : nextSample
+      ))
     }
 
     const scheduleUpdate = () => {
@@ -112,7 +128,7 @@ function useFrostedSurfaceBackgroundToneForElement<ElementType extends HTMLEleme
     }
   }, [element, observe])
 
-  return backgroundTone
+  return backgroundSample
 }
 
 export function FrostedSurface({

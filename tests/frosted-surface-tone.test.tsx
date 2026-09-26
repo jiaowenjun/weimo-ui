@@ -2,11 +2,11 @@ import { act, cleanup, render, screen } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { useFrostedSurfaceBackgroundToneRef } from '../src/components/frosted-surface'
-import { resolveElementBackgroundTone } from '../src/components/frosted-surface-model'
+import { resolveElementBackgroundSample } from '../src/components/frosted-surface-model'
 
 vi.mock('../src/components/frosted-surface-model', async (importOriginal) => ({
   ...await importOriginal<typeof import('../src/components/frosted-surface-model')>(),
-  resolveElementBackgroundTone: vi.fn(),
+  resolveElementBackgroundSample: vi.fn(),
 }))
 
 function ToneProbe({ mounted = true, positioned = true }) {
@@ -30,7 +30,10 @@ function flushFrame() {
 beforeEach(() => {
   frames.clear()
   frameId = 0
-  vi.mocked(resolveElementBackgroundTone).mockReset().mockReturnValue('light')
+  vi.mocked(resolveElementBackgroundSample).mockReset().mockReturnValue({
+    luminance: 0.9,
+    tone: 'light',
+  })
   vi.spyOn(window, 'requestAnimationFrame').mockImplementation((callback) => {
     frames.set(++frameId, callback)
     return frameId
@@ -48,7 +51,7 @@ afterEach(() => {
 describe('surface background tone timing', () => {
   it('samples a delayed popup mount before any animation frame runs', () => {
     const { rerender } = render(<ToneProbe mounted={false} />)
-    expect(resolveElementBackgroundTone).not.toHaveBeenCalled()
+    expect(resolveElementBackgroundSample).not.toHaveBeenCalled()
 
     rerender(<ToneProbe />)
 
@@ -58,7 +61,7 @@ describe('surface background tone timing', () => {
 
   it('waits for positioning and resamples before paint when observation starts', () => {
     const { rerender } = render(<ToneProbe positioned={false} />)
-    expect(resolveElementBackgroundTone).not.toHaveBeenCalled()
+    expect(resolveElementBackgroundSample).not.toHaveBeenCalled()
     expect(screen.getByTestId('surface')).not.toHaveAttribute('data-background-tone')
 
     rerender(<ToneProbe positioned />)
@@ -66,7 +69,10 @@ describe('surface background tone timing', () => {
     expect(screen.getByTestId('surface')).toHaveAttribute('data-background-tone', 'light')
 
     rerender(<ToneProbe positioned={false} />)
-    vi.mocked(resolveElementBackgroundTone).mockReturnValue('dark')
+    vi.mocked(resolveElementBackgroundSample).mockReturnValue({
+      luminance: 0.1,
+      tone: 'dark',
+    })
     rerender(<ToneProbe positioned />)
 
     expect(screen.getByTestId('surface')).toHaveAttribute('data-background-tone', 'dark')
@@ -75,7 +81,10 @@ describe('surface background tone timing', () => {
   it('still coalesces later background updates and cancels pending work on unmount', () => {
     const { unmount } = render(<ToneProbe />)
     flushFrame()
-    vi.mocked(resolveElementBackgroundTone).mockReturnValue('dark')
+    vi.mocked(resolveElementBackgroundSample).mockReturnValue({
+      luminance: 0.1,
+      tone: 'dark',
+    })
 
     act(() => {
       window.dispatchEvent(new Event('resize'))

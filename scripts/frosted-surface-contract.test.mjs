@@ -295,11 +295,12 @@ assert.deepEqual(
 
 for (const snippet of [
   "id: 'frosted-surface'",
-  "name: 'FrostedSurface'",
+  "name: '磨砂材质'",
+  "exportName: 'FrostedSurface'",
   "registryName: 'frosted-surface'",
   "packageExport: './components/frosted-surface'",
   "group: 'surface-material'",
-  'docs: false',
+  'docs: true',
   'registry: true',
 ]) {
   assertIncludes(
@@ -367,6 +368,68 @@ assertOmits(
   'FrostedSurface tile must sit directly in the striped canvas instead of the removed fixed overlay wrapper.',
 )
 
+// 磨砂材质演示页(独立 docs 页):只展示有边框变体,探针包住瓦片交给采样 hook,
+// 标题栏实时显示材质感知到的背景相对亮度——读数与组件 tone 来自同一采样管线。
+const frostedSurfaceDocsPageSource = readProjectFile(
+  'src/docs/component-definitions/frosted-surface.tsx',
+)
+
+for (const snippet of [
+  "import {\n  FrostedSurface,\n  useFrostedSurfaceBackgroundToneRef,\n} from '../../components/frosted-surface'",
+  "import { borderColorToneMap } from '../../components/border-color'",
+  "import { textColorToneMap } from '../../components/text-color'",
+  "import { parseColorLightness } from '../token-preview-color'",
+  "from '../glass-preview-card'",
+  "id: 'frosted-surface'",
+  'useFrostedSurfaceBackgroundToneRef<HTMLDivElement>(true)',
+  'backgroundLuminance, backgroundTone, setElementRef',
+  'textColorToneMap.primary.value[backgroundTone]',
+  'textColorToneMap.secondary.value[backgroundTone]',
+  'const [sliderGray, setSliderGray] = useState<number | null>(null)',
+  'onGrayChange={setSliderGray}',
+  'function interpolateBorderColor(luminance: number | null)',
+  'borderColorToneMap.default.value.dark',
+  'borderColorToneMap.default.value.light',
+  'textColorToneMap.primary.value.dark',
+  'textColorToneMap.primary.value.light',
+  'progress < 0.5',
+  '[borderOnDarkLightness, darkForegroundLightness, progress / 0.5]',
+  '[lightForegroundLightness, borderOnLightLightness, (progress - 0.5) / 0.5]',
+  '`hsl(0 0% ${lightness.toFixed(1)}%)`',
+  '<GlassPreviewCard',
+  'label="磨砂材质"',
+  'className="frosted-surface-docs__reading"',
+  'className="frosted-surface-docs__swatch"',
+  '滑块',
+  '边框',
+  '感知亮度',
+  '(backgroundLuminance * 100).toFixed(1)',
+  'className="frosted-surface-docs__probe"',
+  'borderColor: borderColor ?? undefined',
+  'color: foregroundColor ?? undefined',
+  'style={secondaryColor ? { color: secondaryColor } : undefined}',
+  "<FrostedSurface\n          bordered\n          className=\"frosted-surface-preview__tile\"",
+]) {
+  assertIncludes(
+    frostedSurfaceDocsPageSource,
+    snippet,
+    `FrostedSurface docs page must include ${snippet}.`,
+  )
+}
+assertOmits(
+  frostedSurfaceDocsPageSource,
+  'SurfaceBorderToggle',
+  'FrostedSurface docs page must show the bordered variant only; the border toggle stays on the material overview page.',
+)
+
+// 本页瓦片文字随感知 tone 取标准文字 token 的对应主题值,经 inline style 注入
+// ( textColorToneMap 镜像链是值来源);不落 CSS 覆盖,避免裸值镜像或跨主题取值。
+assertOmits(
+  appCss,
+  '.frosted-surface-docs__probe .frosted-surface {',
+  'FrostedSurface docs page text color must come from the inline tone-mapped token value, not a CSS override.',
+)
+
 // 滑块 + 主题归位 + 条纹背景的玻璃卡外壳抽到 GlassPreviewCard 共享组件
 // （Surface 页磨砂材质卡与按钮页玻璃图标按钮卡共用），契约锁共享组件源。
 const glassPreviewCardModuleSource = readProjectFile(
@@ -379,6 +442,8 @@ for (const snippet of [
   "from './glass-preview'",
   "from '../components/slider'",
   'initialGray ??',
+  'onGrayChange?: (gray: number) => void',
+  'onGrayChange?.(glassBackgroundGray)',
   'window.matchMedia(\'(prefers-color-scheme: dark)\').matches',
   '? glassBackgroundGrayDark\n      : glassBackgroundGrayLight',
   'const syncThemeEndpoint = () => {',
@@ -421,7 +486,7 @@ for (const snippet of [
   'function getGlassPreviewBackground(',
   'const colorfulness = progress <= 0 || progress >= 1 ? 0 : Math.sin(Math.PI * progress)',
   'const boundedGray =',
-  'colorfulness === 0 ? gray : Math.min(Math.max(gray + spread * colorfulness, 3), 97)',
+  'colorfulness === 0 ? gray : Math.min(Math.max(gray + spread * colorfulness, 3), 100)',
   'return `rgb(${red}, ${green}, ${blue}) ${index * glassStripeWidth}px ${(index + 1) * glassStripeWidth}px`',
   'backgroundImage: `repeating-linear-gradient(90deg, ${stripes.join(\', \')})`',
   'backgroundPositionX: `${-progress * glassStripePeriod}px`',
@@ -542,12 +607,13 @@ for (const snippet of [
   'const [element, setElement] = useState<ElementType | null>(null)',
   'const setElementRef = useCallback((nextElement: ElementType | null) => {',
   'useFrostedSurfaceBackgroundToneForElement(element, observe)',
-  'return { backgroundTone, setElementRef }',
+  'backgroundLuminance: backgroundSample?.luminance ?? null',
+  'backgroundTone: backgroundSample?.tone ?? null',
   'useFrostedSurfaceBackgroundToneRef<HTMLDivElement>(observe)',
   'data-background-tone={backgroundTone ?? undefined}',
   "bordered ? 'frosted-surface--bordered' : undefined",
   'ref={setElementRef}',
-  'resolveElementBackgroundTone(element)',
+  'resolveElementBackgroundSample(element)',
   'getFrostedSurfaceScrollParents(element)',
   'scrollParents.forEach((scrollParent) => {',
   'ResizeObserver',
@@ -581,9 +647,12 @@ for (const snippet of [
   "import type { ClassValue } from 'clsx'",
   "import { cn } from './lib/utils'",
   'export type FrostedSurfaceBackgroundTone',
+  'export type FrostedSurfaceBackgroundSample',
   "export function getFrostedSurfaceClassName(...className: ClassValue[])",
   "return cn('frosted-surface', className)",
+  'export function resolveElementBackgroundSample',
   'export function resolveElementBackgroundTone',
+  'return resolveElementBackgroundSample(element)?.tone ?? null',
   'export function getReadableToneForColor',
   'export function relativeLuminanceForRgb',
   'export function parseCssColor',

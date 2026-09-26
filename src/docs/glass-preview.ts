@@ -56,9 +56,11 @@ export function getGlassPreviewBackground(gray: number): CSSProperties {
   // 端点显式归零，避免 sin(π) 的浮点残差把纯色端点挤进防洗白 clamp 区间。
   const colorfulness = progress <= 0 || progress >= 1 ? 0 : Math.sin(Math.PI * progress)
   const stripes = glassGradientStops.map(({ hue, saturation, spread }, index) => {
-    // clamp 只约束彩色区间的 stop，端点灰度（12/100）原样保留。
+    // clamp 上限取亮端点(100)而非 97:97 会把 97~100 区间的五条 stop 全部削平,
+    // 「平均亮度等于滑块灰度」的不变量失效,且残留饱和度随 sin 包络未归零反向
+    // 扰动 RGB 均值,造成滑块 98→99 时感知亮度不增反降;下限 3 防暗端死黑。
     const boundedGray =
-      colorfulness === 0 ? gray : Math.min(Math.max(gray + spread * colorfulness, 3), 97)
+      colorfulness === 0 ? gray : Math.min(Math.max(gray + spread * colorfulness, 3), 100)
     const [red, green, blue] = glassHslToRgb(
       hue,
       saturation * colorfulness,

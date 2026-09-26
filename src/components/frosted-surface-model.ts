@@ -4,6 +4,12 @@ import { cn } from './lib/utils'
 
 export type FrostedSurfaceBackgroundTone = 'light' | 'dark'
 
+// 采样管线的一次完整输出:相对亮度(WCAG relative luminance, 0~1)与由它判定的 tone。
+export type FrostedSurfaceBackgroundSample = {
+  luminance: number
+  tone: FrostedSurfaceBackgroundTone
+}
+
 export type FrostedSurfaceColor = {
   red: number
   green: number
@@ -29,9 +35,9 @@ export function getFrostedSurfaceClassName(...className: ClassValue[]) {
   return cn('frosted-surface', className)
 }
 
-export function resolveElementBackgroundTone(
+export function resolveElementBackgroundSample(
   element: HTMLElement,
-): FrostedSurfaceBackgroundTone | null {
+): FrostedSurfaceBackgroundSample | null {
   const ownerDocument = element.ownerDocument
   const ownerWindow = ownerDocument.defaultView
 
@@ -60,11 +66,20 @@ export function resolveElementBackgroundTone(
     return null
   }
 
-  const averageLuminance =
+  const luminance =
     sampleColors.reduce((sum, color) => sum + relativeLuminanceForRgb(color), 0) /
     sampleColors.length
 
-  return averageLuminance >= BACKGROUND_LIGHTNESS_THRESHOLD ? 'light' : 'dark'
+  return {
+    luminance,
+    tone: luminance >= BACKGROUND_LIGHTNESS_THRESHOLD ? 'light' : 'dark',
+  }
+}
+
+export function resolveElementBackgroundTone(
+  element: HTMLElement,
+): FrostedSurfaceBackgroundTone | null {
+  return resolveElementBackgroundSample(element)?.tone ?? null
 }
 
 export function getReadableToneForColor(

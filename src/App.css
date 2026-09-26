@@ -952,6 +952,40 @@
   line-height: 1.4;
 }
 
+/* 磨砂材质页:探针元素包住瓦片,把瓦片区域交给背景采样 hook。探针自身必须保持
+   完全透明无背景——采样会沿 elementsFromPoint 栈找第一个有可见背景的祖先,
+   画布条纹正是要读的那一层。瓦片文字色不走这里的 CSS 覆盖,由演示页按感知
+   tone 以 inline style 注入标准文字 token 的对应主题值(textColorToneMap)。 */
+.frosted-surface-docs__probe {
+  display: grid;
+}
+
+/* 标题栏右侧的实时读数:等宽字体稳定数字宽度,滑块拖动时数字不跳动;
+   单行横排(标题栏高度锁定 sm×1.2,不允许竖排撑高)。 */
+.frosted-surface-docs__reading {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+/* 色值小样:亮 tone 的边框色 hsl(0 0% 80%) 与卡片底近同色、暗 tone 的前景色
+   近纯黑,靠 1px 描边划出轮廓。 */
+.frosted-surface-docs__swatch {
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xs);
+}
+
+.frosted-surface-docs__reading-separator {
+  color: var(--color-text-placeholder);
+}
+
 /* 液态玻璃卡(材质页):与磨砂材质卡同构的单一瓦片,玻璃层绝对居中于定尺寸瓦片,
    瓦片只负责占位。内容文字借磨砂材质的 tone 采样自适应(瓦片持有
    data-background-tone):亮背景翻深字并去掉库默认的深色文字投影,

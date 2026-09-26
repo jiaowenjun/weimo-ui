@@ -78,6 +78,8 @@ for (const snippet of [
   "packageExport: './components/card-surface'",
   "group: 'surface-material'",
   "id: 'frosted-surface'",
+  "name: '磨砂材质'",
+  "exportName: 'FrostedSurface'",
   "id: 'popup-surface'",
   "registryName: 'popup-surface'",
   "packageExport: './components/popup-surface'",
@@ -85,9 +87,10 @@ for (const snippet of [
   assert.ok(manifestSource.includes(snippet), `components-manifest.ts must include ${snippet}.`)
 }
 assert.ok(
-  manifestSource.indexOf("id: 'frosted-surface'") < manifestSource.indexOf("id: 'popup-surface'") &&
-    manifestSource.indexOf("id: 'popup-surface'") < manifestSource.indexOf("id: 'surface'"),
-  'Surface / 材质 manifest entries must stay sorted by component name.',
+  manifestSource.indexOf("id: 'popup-surface'") < manifestSource.indexOf("id: 'surface'") &&
+    manifestSource.indexOf("id: 'surface'") < manifestSource.indexOf("id: 'liquid-glass'") &&
+    manifestSource.indexOf("id: 'liquid-glass'") < manifestSource.indexOf("id: 'frosted-surface'"),
+  'Surface / 材质 manifest entries must stay sorted by component name (磨砂材质 docs page sorts last).',
 )
 
 for (const snippet of [

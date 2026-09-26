@@ -3,6 +3,7 @@ import { textTokensDefinition } from './text-tokens'
 import { backgroundTokensDefinition } from './background-tokens'
 import { borderTokensDefinition } from './border-tokens'
 import { surfaceDefinition } from './surface'
+import { frostedSurfaceDefinition } from './frosted-surface'
 import { actionDialogDefinition } from './action-dialog'
 import { buttonDefinition } from './button'
 import { sliderDefinition } from './slider'
@@ -27,6 +28,7 @@ export const componentDefinitionsById = {
   'background-tokens': backgroundTokensDefinition,
   'border-tokens': borderTokensDefinition,
   surface: surfaceDefinition,
+  'frosted-surface': frostedSurfaceDefinition,
   'action-dialog': actionDialogDefinition,
   button: buttonDefinition,
   slider: sliderDefinition,

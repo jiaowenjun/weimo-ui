@@ -14,6 +14,7 @@ import {
 // action 渲染在标题栏右侧（如按钮页的启用 Switch）；
 // token/value/items 透传给 token 行（不传则无行，与 ComponentPreviewCard 语义一致）。
 // initialGray 指定刷新与主题切换后的固定起始灰度（如轨道中点）；不传则跟随主题端点。
+// onGrayChange 在灰度变化（含挂载初值与主题切换归位）时回传当前滑块值。
 export function GlassPreviewCard({
   action,
   children,
@@ -21,6 +22,7 @@ export function GlassPreviewCard({
   initialGray,
   items,
   label,
+  onGrayChange,
   token,
   value,
 }: {
@@ -30,6 +32,7 @@ export function GlassPreviewCard({
   initialGray?: number
   items?: readonly ComponentPreviewCardItem[]
   label: ReactNode
+  onGrayChange?: (gray: number) => void
   token?: string
   value?: ReactNode
 }) {
@@ -64,6 +67,12 @@ export function GlassPreviewCard({
 
     return () => themeObserver.disconnect()
   }, [initialGray])
+
+  // 灰度回传:拖动、挂载初值与主题切换归位都经此通知调用方(如磨砂材质页的
+  // 滑块位置读数);值未变化时重复通知由调用方的相同值 setState 归并为 no-op。
+  useEffect(() => {
+    onGrayChange?.(glassBackgroundGray)
+  }, [glassBackgroundGray, onGrayChange])
 
   return (
     <ComponentPreviewCard

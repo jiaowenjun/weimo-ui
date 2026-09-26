@@ -133,7 +133,6 @@ assert.deepEqual(
     'heat-color',
     'bg-blur',
     'border-radius',
-    'frosted-surface',
     'popup-surface',
     'liquid-glass',
     'frosted-icon-button',
