@@ -1,9 +1,10 @@
 import { useState } from 'react'
+import { RotateCcw } from 'lucide-react'
 
 import { ComponentPreviewCard } from '../../components/component-preview-card'
+import { GhostIconButton } from '../../components/ghost-icon-button'
 import { Slider } from '../../components/slider'
 import type { ComponentDefinition } from '../component-docs'
-import { PreviewToggle } from '../preview-toggle'
 
 const SLIDER_INITIAL_VALUE = 50
 
@@ -11,17 +12,17 @@ const SLIDER_INITIAL_VALUE = 50
 // eslint-disable-next-line react-refresh/only-export-components
 function SliderDemo() {
   const [value, setValue] = useState(SLIDER_INITIAL_VALUE)
-  const [reset, setReset] = useState(false)
 
   return (
     <ComponentPreviewCard
       action={
-        <PreviewToggle
-          ariaLabel="滑块复位"
-          checked={reset}
-          label={reset ? '已复位' : '自定义'}
-          onCheckedChange={setReset}
-        />
+        <GhostIconButton
+          aria-label="复位滑块"
+          onClick={() => setValue(SLIDER_INITIAL_VALUE)}
+          size="sm"
+        >
+          <RotateCcw aria-hidden="true" />
+        </GhostIconButton>
       }
       label="滑块"
     >
@@ -30,14 +31,11 @@ function SliderDemo() {
           ariaLabel="数值"
           max={100}
           min={0}
-          onValueChange={(next) => {
-            setReset(false)
-            setValue(next)
-          }}
-          value={reset ? SLIDER_INITIAL_VALUE : value}
+          onValueChange={setValue}
+          value={value}
         />
         <span aria-hidden="true" className="slider-preview__value">
-          {reset ? SLIDER_INITIAL_VALUE : value}
+          {value}
         </span>
       </div>
     </ComponentPreviewCard>
