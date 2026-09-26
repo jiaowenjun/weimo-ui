@@ -151,6 +151,11 @@ assertIncludes(
   '.chip-button__suffix',
   'ChipButton suffix widget slot must reuse the shared chip-surface slot layout beside the prefix slot.',
 )
+assertIncludes(
+  css,
+  '--icon-button-ghost-hover-bg: var(--color-bg-nested-hover)',
+  'A ghost icon button nested in the ChipButton suffix must hover with the nested-level token so it reads distinct from the capsule hover.',
+)
 
 for (const [block, snippet, message] of [
   [baseBlock, 'display: inline-flex;', 'ChipButton must match ChipButton inline-flex layout.'],
@@ -268,7 +273,10 @@ assert.ok(
     docsSource.includes('function SuffixChipDemo') &&
     docsSource.includes('<SuffixChipDemo />') &&
     docsSource.includes('label="后缀胶囊"') &&
-    docsSource.includes('<ChipButton prefix="" suffix={<X aria-hidden="true" />}>'),
+    docsSource.includes("import { GhostIconButton } from '../../components/ghost-icon-button'") &&
+    docsSource.includes('suffix={') &&
+    docsSource.includes('<GhostIconButton aria-label="移除标签" size="xs">') &&
+    docsSource.includes('<X aria-hidden="true" />'),
   'Capsule docs cards must show button-form capsules only: text sizes, glass sizes, prefix, and suffix demos all render ChipButton.',
 )
 assert.ok(

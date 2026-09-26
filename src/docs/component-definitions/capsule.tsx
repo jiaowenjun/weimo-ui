@@ -4,6 +4,7 @@ import { Hash, Plus, X } from 'lucide-react'
 import { ChipButton } from '../../components/chip-button'
 import { LiquidGlassSurface } from '../../components/liquid-glass'
 import { ComponentPreviewCard } from '../../components/component-preview-card'
+import { GhostIconButton } from '../../components/ghost-icon-button'
 import type { ComponentDefinition } from '../component-docs'
 import { GlassPreviewCard } from '../glass-preview-card'
 import { LiquidGlassTile } from '../liquid-glass-tile'
@@ -94,8 +95,27 @@ function SuffixChipDemo() {
   return (
     <ComponentPreviewCard align="center" label="后缀胶囊">
       <div className="text-button-preview" aria-label="ChipButton 后缀预览">
-        <ChipButton prefix="" suffix={<X aria-hidden="true" />}>可关闭标签</ChipButton>
-        <ChipButton prefix="" state="glass" suffix={<X aria-hidden="true" />}>可关闭标签</ChipButton>
+        <ChipButton
+          prefix=""
+          suffix={
+            <GhostIconButton aria-label="移除标签" size="xs">
+              <X aria-hidden="true" />
+            </GhostIconButton>
+          }
+        >
+          可关闭标签
+        </ChipButton>
+        <ChipButton
+          prefix=""
+          state="glass"
+          suffix={
+            <GhostIconButton aria-label="移除标签" size="xs">
+              <X aria-hidden="true" />
+            </GhostIconButton>
+          }
+        >
+          可关闭标签
+        </ChipButton>
       </div>
     </ComponentPreviewCard>
   )

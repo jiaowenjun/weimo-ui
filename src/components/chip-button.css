@@ -11,6 +11,12 @@
     text-overflow: clip;
     white-space: nowrap;
   }
+
+  /* 后缀小部件为幽灵图标按钮等嵌套交互时,hover/active 色改走嵌套层级
+     token,与胶囊按钮自身的 bg-hover 反馈区分。 */
+  .chip-button__suffix .icon-button {
+    --icon-button-ghost-hover-bg: var(--color-bg-nested-hover);
+  }
 }
 
 button.chip-button {

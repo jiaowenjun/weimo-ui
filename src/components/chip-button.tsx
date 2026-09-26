@@ -52,9 +52,10 @@ export function ChipButton({
     textSize,
   ])
   const chipSurfaceAttributes = getChipSurfaceAttributes({ variant: state, interactive: true, textSize })
-  // prefix/suffix 是整体按钮内部的独立小部件(字符或图标,如 Hash 图标、可关闭
-  // 胶囊的 X 图标),纯视觉不承接交互——button 内不能嵌套交互元素,点击统一由
-  // 胶囊按钮自身承接;空前缀隐藏插槽,gap 不由空插槽垫宽。
+  // prefix/suffix 是整体按钮内部的独立小部件(字符、图标或幽灵图标按钮,如
+  // Hash 图标、可关闭胶囊的 X 幽灵图标按钮);嵌套图标按钮的 hover/active 色由
+  // chip-button.css 以 nested-hover token 与胶囊自身反馈区分,点击会冒泡至胶囊
+  // 按钮统一承接;空前缀隐藏插槽,gap 不由空插槽垫宽。
   const buttonContent = (
     <>
       {isEmptyChipButtonSlot(prefix) ? null : (
