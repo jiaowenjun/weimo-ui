@@ -50,7 +50,8 @@ describe('public component catalog', () => {
       'controls-overlays',
       'layout-bars',
       'tags-navigation',
-      'content-markdown',
+      'card',
+      'markdown',
       'media-ocr',
       'data-visualization',
     ])

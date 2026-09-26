@@ -463,7 +463,7 @@ assert.ok(
 )
 assert.ok(
   manifestSource.includes("id: 'tag'") &&
-    manifestSource.includes("name: '标签'") &&
+    manifestSource.includes("name: '标签树'") &&
     manifestSource.includes("exportName: 'TagBar'") &&
     manifestSource.includes("registryName: 'tag-bar'") &&
     manifestSource.includes("packageExport: './components/tag-bar'") &&

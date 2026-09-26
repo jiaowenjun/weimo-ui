@@ -225,9 +225,9 @@ assert.ok(
     manifestSource.includes("registryName: 'component-preview-card'") &&
     manifestSource.includes("packageExport: './components/component-preview-card'") &&
     manifestSource.includes(
-      "packageExport: './components/component-preview-card',\n    group: 'content-markdown',\n    docs: true,",
+      "packageExport: './components/component-preview-card',\n    group: 'card',\n    docs: true,",
     ),
-  'ComponentPreviewCard must be listed in the 内容 / Markdown catalog as the preview card docs page.',
+  'ComponentPreviewCard must be listed in the 卡片 catalog as the preview card docs page.',
 )
 assert.ok(
   existsSync(join(root, 'src/docs/component-definitions/component-preview-card.tsx')) &&
@@ -236,7 +236,7 @@ assert.ok(
     previewCardDefinitionSource.includes('<GlassPreviewCard') &&
     previewCardDefinitionSource.includes("frame: 'plain',") &&
     !existsSync(join(root, 'src/docs/component-definitions/component-preview-card-demo.tsx')),
-  'the preview card docs page must live in 内容 / Markdown and show both ComponentPreviewCard and the shared GlassPreviewCard.',
+  'the preview card docs page must live in 卡片 and show both ComponentPreviewCard and the shared GlassPreviewCard.',
 )
 assert.equal(cardRegistry.name, 'component-preview-card')
 assert.equal(cardRegistry.type, 'registry:ui')

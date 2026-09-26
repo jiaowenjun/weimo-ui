@@ -237,8 +237,8 @@ assert.ok(
     manifestSource.includes("name: 'Markdown样式'") &&
     manifestSource.includes("registryName: 'md'") &&
     manifestSource.includes("packageExport: './components/md'") &&
-    manifestSource.includes("group: 'content-markdown'"),
-  'Md must be listed as a 内容 / Markdown detail page in the component manifest.',
+    manifestSource.includes("group: 'markdown'"),
+  'Md must be listed as a Markdown detail page in the component manifest.',
 )
 
 assert.ok(

@@ -168,7 +168,7 @@ for (const snippet of [
   "name: 'CardComposer'",
   "registryName: 'card-composer'",
   "packageExport: './components/card-composer'",
-  "group: 'content-markdown'",
+  "group: 'card'",
   'docs: false',
 ]) {
   assert.ok(manifestSource.includes(snippet), `CardComposer manifest must include: ${snippet}`)
