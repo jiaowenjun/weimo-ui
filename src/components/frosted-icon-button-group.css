@@ -13,6 +13,11 @@
      按钮自身无边框无底色，外溢落在描边上不可见。 */
   .frosted-icon-button-group > .icon-button {
     margin-block: -1px;
+    transition:
+      transform 150ms ease,
+      background-color 180ms ease,
+      color var(--frosted-surface-tone-transition-duration, 160ms) ease,
+      border-color 180ms ease;
   }
 
   .frosted-icon-button-group > .icon-button:first-child {
@@ -68,5 +73,11 @@
 
   .frosted-icon-button-group.frosted-surface--bordered[data-background-tone='dark']:not(:has(> .icon-button--frosted:not(:disabled))) {
     border-color: var(--color-border-disabled-on-dark);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .frosted-icon-button-group > .icon-button {
+      transition-duration: 1ms;
+    }
   }
 }

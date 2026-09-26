@@ -16,6 +16,15 @@
       border-color 180ms ease;
   }
 
+  /* FrostedSurface and IconButton share one element. This compound rule owns
+     the complete list so CSS import order cannot drop press feedback. */
+  .icon-button.frosted-surface {
+    transition:
+      transform 150ms ease,
+      color var(--frosted-surface-tone-transition-duration, 160ms) ease,
+      border-color var(--frosted-surface-tone-transition-duration, 160ms) ease;
+  }
+
   /* === Sizes === */
   .icon-button--md {
     width: var(--size-topbar-button);
@@ -147,6 +156,7 @@
 
   @media (prefers-reduced-motion: reduce) {
     .icon-button,
+    .icon-button.frosted-surface,
     .icon-button--frosted::after {
       transition-duration: 1ms;
     }

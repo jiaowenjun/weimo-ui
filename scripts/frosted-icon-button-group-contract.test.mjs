@@ -147,6 +147,7 @@ for (const snippet of [
 // 组高度与同级单个图标按钮严格一致:按钮盒纵向外溢 1px 抵消上下玻璃描边占位,
 // 首尾按钮横向外溢 1px 让内收后的悬停圆与端帽半圆同心,中间按钮不重叠。
 const groupButtonBlock = cssBlockFor(groupCss, '.frosted-icon-button-group > .icon-button')
+const frostedIconButtonBlock = cssBlockFor(iconButtonCss, '.icon-button.frosted-surface')
 const groupFirstButtonBlock = cssBlockFor(
   groupCss,
   '.frosted-icon-button-group > .icon-button:first-child',
@@ -159,6 +160,26 @@ const groupLastButtonBlock = cssBlockFor(
 assert.ok(
   groupButtonBlock.includes('margin-block: -1px;'),
   'Grouped icon buttons must cancel the 1px glass border height so the pill matches a standalone button.',
+)
+for (const snippet of [
+  'transform 150ms ease',
+  'color var(--frosted-surface-tone-transition-duration, 160ms) ease',
+]) {
+  assert.ok(
+    groupButtonBlock.includes(snippet),
+    `Grouped icon buttons must preserve press motion and the shared tone timing: ${snippet}.`,
+  )
+  assert.ok(
+    frostedIconButtonBlock.includes(snippet),
+    `Standalone frosted icon buttons must compose transitions independent of CSS order: ${snippet}.`,
+  )
+}
+assert.ok(
+  groupCss.includes('@media (prefers-reduced-motion: reduce)') &&
+    groupCss.includes('transition-duration: 1ms;') &&
+    iconButtonCss.includes('.icon-button.frosted-surface,') &&
+    iconButtonCss.includes('transition-duration: 1ms;'),
+  'Standalone and grouped frosted icon buttons must preserve reduced-motion overrides at compound-selector specificity.',
 )
 assert.ok(
   groupFirstButtonBlock.includes('margin-inline-start: -1px;'),

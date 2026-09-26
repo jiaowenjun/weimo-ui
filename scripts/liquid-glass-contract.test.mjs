@@ -14,6 +14,8 @@ function readProjectFile(relativePath) {
 }
 
 const componentSource = readProjectFile('src/components/liquid-glass.tsx')
+const componentCss = readProjectFile('src/components/liquid-glass.css')
+const engineSource = readProjectFile('src/components/liquid-glass-react/index.tsx')
 const definitionSource = readProjectFile('src/docs/component-definitions/surface.tsx')
 const tileSource = readProjectFile('src/docs/liquid-glass-tile.tsx')
 const buttonDefinitionSource = readProjectFile('src/docs/component-definitions/button.tsx')
@@ -29,6 +31,10 @@ const packageJson = JSON.parse(readProjectFile('package.json'))
 assert.ok(
   componentSource.includes("import LiquidGlass from './liquid-glass-react'"),
   'liquid-glass.tsx must adapt the vendored in-repo LiquidGlass default export.',
+)
+assert.ok(
+  componentSource.includes("import './liquid-glass.css'"),
+  'LiquidGlassSurface must import its semantic layer transitions.',
 )
 for (const vendoredFile of [
   'src/components/liquid-glass-react/index.tsx',
@@ -202,6 +208,10 @@ assert.ok(
   registryItem.files.some((file) => file.path === 'src/components/liquid-glass.tsx'),
   'liquid-glass must ship the LiquidGlassSurface source.',
 )
+assert.ok(
+  registryItem.files.some((file) => file.path === 'src/components/liquid-glass.css'),
+  'liquid-glass must ship its semantic transition CSS.',
+)
 
 assert.ok(
   packageJson.exports['./components/liquid-glass'],
@@ -216,8 +226,50 @@ assert.ok(
 // would regenerate the very rule this assertion bans.
 const forbiddenUtilityClass = ['text', 'white'].join('-')
 assert.ok(
-  !readProjectFile('src/components/liquid-glass-react/index.tsx').includes(forbiddenUtilityClass),
+  !engineSource.includes(forbiddenUtilityClass),
   `The vendored engine must not carry the upstream ${forbiddenUtilityClass} class: vendored source under src/ feeds Tailwind's scanner, and the generated rule would set color on the content wrapper, severing the inherited tone-adaptive foreground.`,
+)
+for (const forbiddenTransition of [
+  'transition-all',
+  'duration-150',
+  'transition: "all',
+  'transition: baseStyle.transition',
+]) {
+  assert.ok(
+    !engineSource.includes(forbiddenTransition),
+    `Liquid glass engine must not use broad or inherited transition plumbing: ${forbiddenTransition}.`,
+  )
+}
+for (const layerClass of [
+  'liquid-glass__glass',
+  'liquid-glass__content',
+  'liquid-glass__over-light',
+  'liquid-glass__border',
+  'liquid-glass__highlight',
+]) {
+  assert.ok(
+    engineSource.includes(layerClass) && componentCss.includes(`.${layerClass}`),
+    `Liquid glass ${layerClass} must have a stable class and component-owned transition CSS.`,
+  )
+}
+for (const transition of [
+  'transform var(--liquid-glass-motion-transition-duration, 200ms) ease-out',
+  'box-shadow var(--liquid-glass-motion-transition-duration, 200ms) ease-in-out',
+  'color var(--liquid-glass-tone-transition-duration, 160ms) ease',
+  'text-shadow var(--liquid-glass-tone-transition-duration, 160ms) ease',
+  'opacity var(--liquid-glass-motion-transition-duration, 200ms) ease-out',
+]) {
+  assert.ok(componentCss.includes(transition), `Liquid glass CSS must include ${transition}.`)
+}
+assert.ok(
+  componentCss.includes('@media (prefers-reduced-motion: reduce)') &&
+    componentCss.includes('transition-duration: 1ms;'),
+  'Liquid glass semantic layers must respect reduced motion.',
+)
+assert.ok(
+  !appCss.includes('.docs-top-bar__title > :not(.docs-top-bar__title-sizer)') &&
+    !appCss.includes('transition-property: transform, opacity, box-shadow !important;'),
+  'The docs top bar must not need a transition-all size override after the engine declares exact properties.',
 )
 assert.ok(
   packageJson.scripts.test.includes('node scripts/liquid-glass-contract.test.mjs'),
@@ -245,6 +297,14 @@ assert.ok(
     appCss.includes('var(--glass-surface-fg-on-light)') &&
     appCss.includes('var(--glass-surface-fg-on-dark)'),
   'Liquid glass demo text must adapt to the sampled background tone through the shared glass foreground tokens.',
+)
+assert.ok(
+  appCss.includes('text-shadow 160ms ease;') &&
+    appCss.includes('.liquid-glass-chip__label {') &&
+    appCss.includes('color 160ms ease,') &&
+    appCss.includes('button.liquid-glass-chip,') &&
+    appCss.includes('transition-duration: 1ms;'),
+  'Liquid glass previews and labels must transition tone and text shadow together and respect reduced motion.',
 )
 assert.ok(
   appCss.includes('color-mix(in srgb, currentColor 12%, transparent)') &&

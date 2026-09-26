@@ -74,11 +74,6 @@
   height: 29px;
 }
 
-/* 重测时立即同步尺寸,避免库的 transition: all 从默认 270×69 过渡。 */
-.docs-top-bar__title > :not(.docs-top-bar__title-sizer) {
-  transition-property: transform, opacity, box-shadow !important;
-}
-
 .docs-top-bar__title .liquid-glass-chip__label,
 .docs-top-bar__title-sizer {
   font-family: system-ui;
@@ -951,6 +946,7 @@
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
   line-height: 1.4;
+  transition: color 160ms ease;
 }
 
 /* 液态玻璃卡(材质页):与磨砂材质卡同构的单一瓦片,玻璃层绝对居中于定尺寸瓦片,
@@ -988,7 +984,9 @@
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
   line-height: 1.2;
-  transition: color 160ms ease;
+  transition:
+    color 160ms ease,
+    text-shadow 160ms ease;
 }
 
 .liquid-glass-preview__meta {
@@ -996,7 +994,9 @@
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
   line-height: 1.4;
-  transition: color 160ms ease;
+  transition:
+    color 160ms ease,
+    text-shadow 160ms ease;
 }
 
 /* 亮背景:深字覆盖继承自库内容层的深色 text-shadow,否则深字配深影发糊。 */
@@ -1008,6 +1008,14 @@
 .liquid-glass-preview__tile[data-background-tone='light'] .liquid-glass-preview__meta {
   color: var(--glass-surface-muted-fg-on-light);
   text-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frosted-surface-preview__meta,
+  .liquid-glass-preview__title,
+  .liquid-glass-preview__meta {
+    transition-duration: 1ms;
+  }
 }
 
 /* 液态玻璃图标按钮/按钮组(按钮页):玻璃层绝对居中于定尺寸按钮盒,
@@ -1130,6 +1138,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .liquid-glass-icon-button,
+  .liquid-glass-icon-button-group,
   .liquid-glass-icon-button-group__item::after {
     transition-duration: 1ms;
   }
@@ -1282,6 +1292,9 @@ button.liquid-glass-chip {
   display: block;
   white-space: nowrap;
   line-height: 1;
+  transition:
+    color 160ms ease,
+    text-shadow 160ms ease;
 }
 
 .liquid-glass-chip__label--sm {
@@ -1311,6 +1324,13 @@ button.liquid-glass-chip {
 
 .liquid-glass-toolbar-preview[data-background-tone='light'] .liquid-glass-chip__label {
   text-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button.liquid-glass-chip,
+  .liquid-glass-chip__label {
+    transition-duration: 1ms;
+  }
 }
 
 /* 画布与示例等高后,预览窗默认的 overflow: hidden 会把真实阴影整体裁掉

@@ -1,0 +1,37 @@
+@layer components {
+  .liquid-glass {
+    transition: transform var(--liquid-glass-motion-transition-duration, 200ms) ease-out;
+  }
+
+  .liquid-glass__glass {
+    transition: box-shadow var(--liquid-glass-motion-transition-duration, 200ms) ease-in-out;
+  }
+
+  .liquid-glass__content {
+    transition:
+      color var(--liquid-glass-tone-transition-duration, 160ms) ease,
+      text-shadow var(--liquid-glass-tone-transition-duration, 160ms) ease;
+  }
+
+  .liquid-glass__over-light,
+  .liquid-glass__highlight {
+    transition:
+      transform var(--liquid-glass-motion-transition-duration, 200ms) ease-out,
+      opacity var(--liquid-glass-motion-transition-duration, 200ms) ease-out;
+  }
+
+  .liquid-glass__border {
+    transition: transform var(--liquid-glass-motion-transition-duration, 200ms) ease-out;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .liquid-glass,
+    .liquid-glass__glass,
+    .liquid-glass__content,
+    .liquid-glass__over-light,
+    .liquid-glass__highlight,
+    .liquid-glass__border {
+      transition-duration: 1ms;
+    }
+  }
+}

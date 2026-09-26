@@ -465,6 +465,8 @@ for (const snippet of [
   '.frosted-surface-preview__tile',
   'justify-items: center;',
   'text-align: center;',
+  '.frosted-surface-preview__meta',
+  'transition: color 160ms ease;',
 ]) {
   assertIncludes(appCss, snippet, `FrostedSurface preview CSS must include ${snippet}.`)
 }
@@ -652,13 +654,15 @@ assertOmits(
 for (const snippet of [
   '.frosted-surface {',
   '@property --glass-surface-fg-opacity',
+  '--frosted-surface-tone-transition-duration: 160ms;',
   '--glass-surface-muted-color: var(--glass-surface-muted-fg);',
   '--glass-surface-hover-bg: color-mix(in srgb, currentColor 12%, transparent);',
   'border: 1px solid transparent;',
   'backdrop-filter: blur(var(--glass-blur));',
   '-webkit-backdrop-filter: blur(var(--glass-blur));',
   'color: var(--glass-surface-fg);',
-  'transition: color 160ms ease, border-color 160ms ease;',
+  'color var(--frosted-surface-tone-transition-duration) ease,',
+  'border-color var(--frosted-surface-tone-transition-duration) ease;',
   '.frosted-surface--bordered {',
   'border-color: var(--glass-surface-border);',
   '.frosted-surface[data-background-tone="light"]',
@@ -669,6 +673,8 @@ for (const snippet of [
   '--glass-surface-fg: var(--glass-surface-fg-on-dark);',
   '--glass-surface-muted-color: var(--glass-surface-muted-fg-on-dark);',
   '--glass-surface-border: var(--glass-surface-border-on-dark);',
+  '@media (prefers-reduced-motion: reduce)',
+  'transition-duration: 1ms;',
 ]) {
   assertIncludes(frostedSurfaceCss, snippet, `FrostedSurface CSS must include ${snippet}.`)
 }

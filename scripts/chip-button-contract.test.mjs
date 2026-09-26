@@ -80,6 +80,7 @@ const textBlock = standaloneCssBlockFor(css, '.chip-button__text')
 const reducedMotionBlock = cssBlockFor(
   surfaceCss,
   `.chip-surface,
+    .chip-surface.frosted-surface,
     .chip-surface::before,
     .chip-surface::after`,
 )

@@ -50,6 +50,7 @@ const surfaceBlock = blockFor(surfaceCss, '.chip-surface')
 const surfaceBeforeBlock = blockFor(surfaceCss, '.chip-surface::before')
 const surfaceAfterBlock = blockFor(surfaceCss, '.chip-surface::after')
 const surfaceGlassBlock = blockFor(surfaceCss, '.chip-surface[data-variant="glass"]')
+const composedGlassBlock = blockFor(surfaceCss, '.chip-surface.frosted-surface')
 const surfaceBorderlessBlock = blockFor(surfaceCss, '.chip-surface[data-bordered="false"]')
 const surfaceInteractiveBlock = blockFor(surfaceCss, '.chip-surface[data-interactive="true"]')
 const surfaceHoverBlock = blockFor(
@@ -166,6 +167,10 @@ for (const [block, snippet, message] of [
   [surfaceGlassBlock, 'color: var(--glass-surface-fg);', 'ChipSurface glass variant must use the standard glass surface adaptive foreground.'],
   [surfaceGlassBlock, 'border-color: var(--glass-surface-border);', 'ChipSurface glass variant must use the standard glass surface border token.'],
   [surfaceGlassBlock, 'backdrop-filter: blur(var(--glass-blur));', 'ChipSurface glass variant must use the shared blur.'],
+  [composedGlassBlock, 'inline-size var(--animated-inline-size-transition-duration) cubic-bezier(0.2, 0, 0, 1)', 'Composed glass ChipSurface must preserve width motion independent of CSS order.'],
+  [composedGlassBlock, 'transform 150ms ease', 'Composed glass ChipSurface must preserve press feedback independent of CSS order.'],
+  [composedGlassBlock, 'color var(--frosted-surface-tone-transition-duration, 160ms) ease', 'Composed glass ChipSurface must use the shared tone timing.'],
+  [composedGlassBlock, 'border-color var(--frosted-surface-tone-transition-duration, 160ms) ease', 'Composed glass ChipSurface border must follow the shared tone timing.'],
   [surfaceBorderlessBlock, 'border-color: transparent;', 'ChipSurface borderless mode must hide the variant border without changing capsule metrics.'],
   [surfaceInteractiveBlock, 'cursor: pointer;', 'Only interactive ChipSurface callers must get pointer cursor.'],
   [surfaceInteractiveBlock, 'appearance: none;', 'Only interactive ChipSurface callers must reset native appearance.'],
@@ -184,6 +189,11 @@ for (const [block, snippet, message] of [
 ]) {
   assertIncludes(block, snippet, message)
 }
+assert.ok(
+  surfaceCss.includes('.chip-surface.frosted-surface,') &&
+    surfaceCss.includes('transition-duration: 1ms;'),
+  'Composed glass ChipSurface must keep reduced-motion specificity independent of CSS order.',
+)
 assert.ok(
   !surfaceAfterBlock.includes('background: var(--glass-gradient);') && !surfaceCss.includes('--glass-gradient'),
   'ChipSurface glass layer must not depend on a shared glass background gradient token.',

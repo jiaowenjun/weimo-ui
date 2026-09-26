@@ -5,6 +5,8 @@ import LiquidGlass from './liquid-glass-react'
 
 import { cn } from './lib/utils'
 
+import './liquid-glass.css'
+
 // LiquidGlass 渲染玻璃层与多层高光/投影覆盖层等一组兄弟节点,自身不占布局;
 // 这里统一按库的预期用法以「绝对定位 + 外层容器中点」摆放,调用方只需提供
 // 一个 position: relative 的定尺寸容器,各层就会对齐容器中心叠放。

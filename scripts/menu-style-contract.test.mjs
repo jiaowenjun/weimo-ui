@@ -27,6 +27,11 @@ function cssBlockFor(source, selector) {
 }
 
 const popupBlock = cssBlockFor(menuCss, '.weimo-menu__popup')
+const composedPopupBlock = cssBlockFor(menuCss, '.weimo-menu__popup.frosted-surface')
+const composedPopupExitBlock = cssBlockFor(
+  menuCss,
+  '.weimo-menu__popup.frosted-surface[data-ending-style]',
+)
 const positionerBlock = cssBlockFor(menuCss, '.weimo-menu__positioner')
 const rootTokenBlock = cssBlockFor(tokensCss, ':root')
 const darkTokenBlock = cssBlockFor(tokensCss, '.dark')
@@ -83,6 +88,18 @@ assert.ok(frostedSurfaceBlock.includes('backdrop-filter: blur(var(--glass-blur))
 assert.ok(frostedSurfaceBlock.includes('-webkit-backdrop-filter: blur(var(--glass-blur));'), 'FrostedSurface must include the WebKit backdrop filter.')
 assert.ok(popupBlock.includes('transform-origin: var(--transform-origin, top right);'), 'Menu popup must use Base UI transform origin with a skyline fallback.')
 assert.ok(popupBlock.includes('cubic-bezier(0.34, 1.56, 0.64, 1)'), 'Menu popup must use the skyline spring enter curve.')
+for (const block of [composedPopupBlock, composedPopupExitBlock]) {
+  assert.ok(
+    block.includes('color var(--frosted-surface-tone-transition-duration, 160ms) ease') &&
+      block.includes('border-color var(--frosted-surface-tone-transition-duration, 160ms) ease'),
+    'Menu popup must preserve FrostedSurface tone transitions alongside enter/exit motion independent of CSS order.',
+  )
+}
+assert.ok(
+  menuCss.includes('@media (prefers-reduced-motion: reduce)') &&
+    menuCss.includes('transition-duration: 1ms;'),
+  'Menu popup tone and enter/exit transitions must respect reduced motion.',
+)
 assert.ok(transitionBlock.includes('transform: scale(0.7);'), 'Menu popup must start and end from skyline scale(0.7).')
 assert.ok(menuCss.includes('cubic-bezier(0.4, 0, 1, 1)'), 'Menu popup must use the skyline exit curve.')
 assert.ok(

@@ -6,6 +6,7 @@
 
 @layer components {
   .frosted-surface {
+    --frosted-surface-tone-transition-duration: 160ms;
     --glass-surface-muted-color: var(--glass-surface-muted-fg);
     --glass-surface-hover-bg: color-mix(in srgb, currentColor 12%, transparent);
 
@@ -13,7 +14,9 @@
     border: 1px solid transparent;
     backdrop-filter: blur(var(--glass-blur));
     -webkit-backdrop-filter: blur(var(--glass-blur));
-    transition: color 160ms ease, border-color 160ms ease;
+    transition:
+      color var(--frosted-surface-tone-transition-duration) ease,
+      border-color var(--frosted-surface-tone-transition-duration) ease;
   }
 
   /* 描边为 opt-in：基类默认透明（1px 几何保留，与有边框实例并排时内边距节奏一致，
@@ -32,5 +35,11 @@
     --glass-surface-fg: var(--glass-surface-fg-on-dark);
     --glass-surface-muted-color: var(--glass-surface-muted-fg-on-dark);
     --glass-surface-border: var(--glass-surface-border-on-dark);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .frosted-surface {
+      transition-duration: 1ms;
+    }
   }
 }

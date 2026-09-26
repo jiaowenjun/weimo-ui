@@ -57,6 +57,7 @@ const contentBlock = cssBlockFor(surfaceCss, '.chip-surface__content')
 const reducedMotionBlock = cssBlockFor(
   surfaceCss,
   `.chip-surface,
+    .chip-surface.frosted-surface,
     .chip-surface::before,
     .chip-surface::after`,
 )

@@ -74,6 +74,16 @@
     --chip-surface-active-background: var(--glass-surface-hover-bg);
   }
 
+  /* The glass variant composes FrostedSurface on this same element. Keep the
+     full list here so neither material CSS file can erase width/press motion. */
+  .chip-surface.frosted-surface {
+    transition:
+      inline-size var(--animated-inline-size-transition-duration) cubic-bezier(0.2, 0, 0, 1),
+      border-color var(--frosted-surface-tone-transition-duration, 160ms) ease,
+      transform 150ms ease,
+      color var(--frosted-surface-tone-transition-duration, 160ms) ease;
+  }
+
   .chip-surface[data-variant="glass"]::before {
     opacity: 0;
   }
@@ -147,6 +157,7 @@
 
   @media (prefers-reduced-motion: reduce) {
     .chip-surface,
+    .chip-surface.frosted-surface,
     .chip-surface::before,
     .chip-surface::after {
       transition-duration: 1ms;
