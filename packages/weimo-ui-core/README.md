@@ -1,6 +1,6 @@
 # weimo-ui-core
 
-`weimo-ui-core` 是 Weimo UI workspace 中的基础 React 源码包，承载 Token / 样式、Surface / 材质、控件 / 弹层、布局 / 栏位，以及基础卡片和预览卡片壳层。
+`weimo-ui-core` 是 Weimo UI workspace 中的基础 React 源码包，承载通用 Token / 样式、Surface / 材质、控件 / 弹层、布局 / 栏位，以及基础卡片和预览卡片壳层。Markdown 专用 token 与组件位于 `weimo-ui-markdown`。
 
 组件按子路径导入：
 

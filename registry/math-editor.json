@@ -19,12 +19,12 @@
   ],
   "files": [
     {
-      "path": "src/components/math-editor.tsx",
+      "path": "packages/weimo-ui-markdown/src/components/math-editor.tsx",
       "type": "registry:ui",
       "target": "@ui/math-editor.tsx"
     },
     {
-      "path": "src/components/md-editor/math-editor.tsx",
+      "path": "packages/weimo-ui-markdown/src/components/md-editor/math-editor.tsx",
       "type": "registry:ui",
       "target": "@ui/md-editor/math-editor.tsx"
     },

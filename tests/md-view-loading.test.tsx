@@ -3,7 +3,7 @@ import { act, render, waitFor } from '@testing-library/react'
 import { StrictMode } from 'react'
 import { afterEach, expect, it, vi } from 'vitest'
 
-import { MdView, type MdViewMode } from '../src/components/md-view'
+import { MdView, type MdViewMode } from '../packages/weimo-ui-markdown/src/components/md-view'
 
 const moduleGate = vi.hoisted(() => {
   let resolve!: () => void
@@ -11,7 +11,7 @@ const moduleGate = vi.hoisted(() => {
   return { ready, resolve }
 })
 
-vi.mock('../src/components/md-editor', async (importOriginal) => {
+vi.mock('../packages/weimo-ui-markdown/src/components/md-editor', async (importOriginal) => {
   await moduleGate.ready
   return importOriginal()
 })

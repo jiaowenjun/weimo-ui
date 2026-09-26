@@ -37,16 +37,16 @@ function cssBlocksFor(source, selector) {
   return matches.map((match) => match.groups?.block ?? '').join('\n')
 }
 
-const componentSource = readProjectFile('src/components/md.tsx')
-const mdRenderSource = readProjectFile('src/components/md-render.tsx')
-const optionGridSource = readProjectFile('src/components/markdown-option-grid.ts')
-const markdownSanitizeSource = readProjectFile('src/components/markdown-sanitize.ts')
-const parenthesizedListSource = readProjectFile('src/components/markdown-parenthesized-list.ts')
+const componentSource = readProjectFile('packages/weimo-ui-markdown/src/components/md.tsx')
+const mdRenderSource = readProjectFile('packages/weimo-ui-markdown/src/components/md-render.tsx')
+const optionGridSource = readProjectFile('packages/weimo-ui-markdown/src/components/markdown-option-grid.ts')
+const markdownSanitizeSource = readProjectFile('packages/weimo-ui-markdown/src/components/markdown-sanitize.ts')
+const parenthesizedListSource = readProjectFile('packages/weimo-ui-markdown/src/components/markdown-parenthesized-list.ts')
 const markdownImageRendererSource = readProjectFile(
-  'src/components/markdown-image-renderer.ts',
+  'packages/weimo-ui-markdown/src/components/markdown-image-renderer.ts',
 )
-const markdownImageSizeSource = readProjectFile('src/components/markdown-image-size.ts')
-const markdownContentCss = readProjectFile('src/components/markdown-content.css')
+const markdownImageSizeSource = readProjectFile('packages/weimo-ui-markdown/src/components/markdown-image-size.ts')
+const markdownContentCss = readProjectFile('packages/weimo-ui-markdown/src/components/markdown-content.css')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionSource = readProjectFile('src/docs/component-definitions/md.tsx')
 const mdRenderDefinitionSource = readProjectFile(
@@ -54,8 +54,9 @@ const mdRenderDefinitionSource = readProjectFile(
 )
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const appCss = readProjectFile('src/App.css')
-const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
+const tokensCss = readProjectFile('packages/weimo-ui-markdown/src/styles/tokens.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
+const markdownPackageJson = JSON.parse(readProjectFile('packages/weimo-ui-markdown/package.json'))
 const rootRegistry = JSON.parse(readProjectFile('registry.json'))
 const standaloneRegistry = JSON.parse(readProjectFile('registry/md.json'))
 const styleRegistry = JSON.parse(readProjectFile('registry/style.json'))
@@ -164,8 +165,9 @@ const legacyMarkdownTokenNames = [
 ]
 
 assert.ok(
-  packageJson.exports?.['./components/md'] === './src/components/md.tsx',
-  'package.json must expose ./components/md.',
+  packageJson.exports?.['./components/md'] === './src/components/md.tsx' &&
+    markdownPackageJson.exports?.['./components/md'] === './src/components/md.tsx',
+  'Root and weimo-ui-markdown packages must expose ./components/md.',
 )
 
 assert.deepEqual(
@@ -213,7 +215,7 @@ for (const [token, lightValue, darkValue] of markdownColorTokens) {
   assert.ok(
     tokensRootBlock.includes(`${token}: ${lightValue};`) &&
       tokensDarkBlock.includes(`${token}: ${darkValue};`),
-    `packages/weimo-ui-core/src/styles/tokens.css must define concrete light and dark values for ${token}.`,
+    `packages/weimo-ui-markdown/src/styles/tokens.css must define concrete light and dark values for ${token}.`,
   )
   assert.equal(styleRegistry.cssVars.light[key], lightValue, `registry/style.json must export the light ${token}.`)
   assert.equal(styleRegistry.cssVars.dark[key], darkValue, `registry/style.json must export the dark ${token}.`)
@@ -226,7 +228,7 @@ for (const [token, value] of markdownStaticTokens) {
 
   assert.ok(
     tokensRootBlock.includes(`${token}: ${value};`) && !value.includes('var('),
-    `packages/weimo-ui-core/src/styles/tokens.css must define a concrete value for ${token}.`,
+    `packages/weimo-ui-markdown/src/styles/tokens.css must define a concrete value for ${token}.`,
   )
   assert.equal(styleRegistry.cssVars.light[key], value, `registry/style.json must export ${token}.`)
   assert.equal(rootStyleItem?.cssVars.light[key], value, `registry.json must export ${token}.`)
@@ -715,7 +717,7 @@ const mdRenderTestContext = {
         jsxs: () => null,
       }
     }
-    if (specifier === './lib/utils') {
+    if (specifier === './lib/utils' || specifier === 'weimo-ui-core/components/lib/utils') {
       return { cn: (...values) => values.filter(Boolean).join(' ') }
     }
     if (specifier === './markdown-centered-quote') {
@@ -1325,6 +1327,6 @@ assert.deepEqual(
 )
 assert.deepEqual(
   rootRegistryItem.files.map((file) => file.path),
-  ['src/components/md.tsx', 'src/components/md.css'],
+  ['packages/weimo-ui-markdown/src/components/md.tsx', 'packages/weimo-ui-markdown/src/components/md.css'],
   'Md registry item must ship only the wrapper source and its style entry.',
 )

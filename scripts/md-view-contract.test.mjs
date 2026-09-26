@@ -26,13 +26,14 @@ function cssBlockFor(source, selector) {
   return match.groups.block
 }
 
-const componentSource = readProjectFile('src/components/md-view.tsx')
-const mdViewCssSource = readProjectFile('src/components/md-view.css')
+const componentSource = readProjectFile('packages/weimo-ui-markdown/src/components/md-view.tsx')
+const mdViewCssSource = readProjectFile('packages/weimo-ui-markdown/src/components/md-view.css')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionSource = readProjectFile('src/docs/component-definitions/markdown.tsx')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const cssSource = readProjectFile('src/App.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
+const markdownPackageJson = JSON.parse(readProjectFile('packages/weimo-ui-markdown/package.json'))
 const registryJson = JSON.parse(readProjectFile('registry.json'))
 const previewEditorViewportBlock = cssBlockFor(
   cssSource,
@@ -430,8 +431,9 @@ assert.ok(
   'package.json test script must run md-view-contract.test.mjs.',
 )
 assert.ok(
-  packageJson.exports?.['./components/md-view'] === './src/components/md-view.tsx',
-  'package.json must expose ./components/md-view.',
+  packageJson.exports?.['./components/md-view'] === './src/components/md-view.tsx' &&
+    markdownPackageJson.exports?.['./components/md-view'] === './src/components/md-view.tsx',
+  'Root and weimo-ui-markdown packages must expose ./components/md-view.',
 )
 assert.ok(
   registryJson.items.some((item) => item.name === 'md-view'),

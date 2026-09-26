@@ -35,172 +35,172 @@
   ],
   "files": [
     {
-      "path": "src/components/md-editor.tsx",
+      "path": "packages/weimo-ui-markdown/src/components/md-editor.tsx",
       "type": "registry:ui",
       "target": "@ui/md-editor.tsx"
     },
     {
-      "path": "src/components/md-editor/index.tsx",
+      "path": "packages/weimo-ui-markdown/src/components/md-editor/index.tsx",
       "type": "registry:ui",
       "target": "@ui/md-editor/index.tsx"
     },
     {
-      "path": "src/components/md-editor/md-editor-types.ts",
+      "path": "packages/weimo-ui-markdown/src/components/md-editor/md-editor-types.ts",
       "type": "registry:ui",
       "target": "@ui/md-editor/md-editor-types.ts"
     },
     {
-      "path": "src/components/md-editor/md-editor.tsx",
+      "path": "packages/weimo-ui-markdown/src/components/md-editor/md-editor.tsx",
       "type": "registry:ui",
       "target": "@ui/md-editor/md-editor.tsx"
     },
     {
-      "path": "src/components/md-editor/md-editor-content-format.ts",
+      "path": "packages/weimo-ui-markdown/src/components/md-editor/md-editor-content-format.ts",
       "type": "registry:ui",
       "target": "@ui/md-editor/md-editor-content-format.ts"
     },
     {
-      "path": "src/components/md-editor/md-editor-toolbar.tsx",
+      "path": "packages/weimo-ui-markdown/src/components/md-editor/md-editor-toolbar.tsx",
       "type": "registry:ui",
       "target": "@ui/md-editor/md-editor-toolbar.tsx"
     },
     {
-      "path": "src/components/md-editor/use-md-editor.ts",
+      "path": "packages/weimo-ui-markdown/src/components/md-editor/use-md-editor.ts",
       "type": "registry:ui",
       "target": "@ui/md-editor/use-md-editor.ts"
     },
     {
-      "path": "src/components/md-editor/md-editor-extensions.ts",
+      "path": "packages/weimo-ui-markdown/src/components/md-editor/md-editor-extensions.ts",
       "type": "registry:ui",
       "target": "@ui/md-editor/md-editor-extensions.ts"
     },
     {
-      "path": "src/components/md-editor/md-editor-option-grid.ts",
+      "path": "packages/weimo-ui-markdown/src/components/md-editor/md-editor-option-grid.ts",
       "type": "registry:ui",
       "target": "@ui/md-editor/md-editor-option-grid.ts"
     },
     {
-      "path": "src/components/md-editor/md-editor-list-image-layout.ts",
+      "path": "packages/weimo-ui-markdown/src/components/md-editor/md-editor-list-image-layout.ts",
       "type": "registry:ui",
       "target": "@ui/md-editor/md-editor-list-image-layout.ts"
     },
     {
-      "path": "src/components/md-editor/md-editor-table.ts",
+      "path": "packages/weimo-ui-markdown/src/components/md-editor/md-editor-table.ts",
       "type": "registry:ui",
       "target": "@ui/md-editor/md-editor-table.ts"
     },
     {
-      "path": "src/components/md-editor/md-editor-ordered-list.ts",
+      "path": "packages/weimo-ui-markdown/src/components/md-editor/md-editor-ordered-list.ts",
       "type": "registry:ui",
       "target": "@ui/md-editor/md-editor-ordered-list.ts"
     },
     {
-      "path": "src/components/md-editor/md-editor-block-math.ts",
+      "path": "packages/weimo-ui-markdown/src/components/md-editor/md-editor-block-math.ts",
       "type": "registry:ui",
       "target": "@ui/md-editor/md-editor-block-math.ts"
     },
     {
-      "path": "src/components/md-editor/md-editor-inline-math.ts",
+      "path": "packages/weimo-ui-markdown/src/components/md-editor/md-editor-inline-math.ts",
       "type": "registry:ui",
       "target": "@ui/md-editor/md-editor-inline-math.ts"
     },
     {
-      "path": "src/components/md-editor/md-editor-math-view.tsx",
+      "path": "packages/weimo-ui-markdown/src/components/md-editor/md-editor-math-view.tsx",
       "type": "registry:ui",
       "target": "@ui/md-editor/md-editor-math-view.tsx"
     },
     {
-      "path": "src/components/md-editor/md-editor-math-conversion.ts",
+      "path": "packages/weimo-ui-markdown/src/components/md-editor/md-editor-math-conversion.ts",
       "type": "registry:ui",
       "target": "@ui/md-editor/md-editor-math-conversion.ts"
     },
     {
-      "path": "src/components/md-editor/md-editor-centered-quote.ts",
+      "path": "packages/weimo-ui-markdown/src/components/md-editor/md-editor-centered-quote.ts",
       "type": "registry:ui",
       "target": "@ui/md-editor/md-editor-centered-quote.ts"
     },
     {
-      "path": "src/components/md-editor/md-editor-image.ts",
+      "path": "packages/weimo-ui-markdown/src/components/md-editor/md-editor-image.ts",
       "type": "registry:ui",
       "target": "@ui/md-editor/md-editor-image.ts"
     },
     {
-      "path": "src/components/md-editor/md-editor-image-view.tsx",
+      "path": "packages/weimo-ui-markdown/src/components/md-editor/md-editor-image-view.tsx",
       "type": "registry:ui",
       "target": "@ui/md-editor/md-editor-image-view.tsx"
     },
     {
-      "path": "src/components/md-editor/md-editor-markdown.ts",
+      "path": "packages/weimo-ui-markdown/src/components/md-editor/md-editor-markdown.ts",
       "type": "registry:ui",
       "target": "@ui/md-editor/md-editor-markdown.ts"
     },
     {
-      "path": "src/components/md-editor/md-editor-save-keymap.ts",
+      "path": "packages/weimo-ui-markdown/src/components/md-editor/md-editor-save-keymap.ts",
       "type": "registry:ui",
       "target": "@ui/md-editor/md-editor-save-keymap.ts"
     },
     {
-      "path": "src/components/md-editor/math-editor.tsx",
+      "path": "packages/weimo-ui-markdown/src/components/md-editor/math-editor.tsx",
       "type": "registry:ui",
       "target": "@ui/md-editor/math-editor.tsx"
     },
     {
-      "path": "src/components/md-editor/md-editor.css",
+      "path": "packages/weimo-ui-markdown/src/components/md-editor/md-editor.css",
       "type": "registry:ui",
       "target": "@ui/md-editor/md-editor.css"
     },
     {
-      "path": "src/components/markdown-centered-quote.ts",
+      "path": "packages/weimo-ui-markdown/src/components/markdown-centered-quote.ts",
       "type": "registry:ui",
       "target": "@ui/markdown-centered-quote.ts"
     },
     {
-      "path": "src/components/markdown-image-size.ts",
+      "path": "packages/weimo-ui-markdown/src/components/markdown-image-size.ts",
       "type": "registry:ui",
       "target": "@ui/markdown-image-size.ts"
     },
     {
-      "path": "src/components/markdown-image-renderer.ts",
+      "path": "packages/weimo-ui-markdown/src/components/markdown-image-renderer.ts",
       "type": "registry:ui",
       "target": "@ui/markdown-image-renderer.ts"
     },
     {
-      "path": "src/components/markdown-parenthesized-list.ts",
+      "path": "packages/weimo-ui-markdown/src/components/markdown-parenthesized-list.ts",
       "type": "registry:ui",
       "target": "@ui/markdown-parenthesized-list.ts"
     },
     {
-      "path": "src/components/markdown-option-grid.ts",
+      "path": "packages/weimo-ui-markdown/src/components/markdown-option-grid.ts",
       "type": "registry:ui",
       "target": "@ui/markdown-option-grid.ts"
     },
     {
-      "path": "src/components/markdown-content.css",
+      "path": "packages/weimo-ui-markdown/src/components/markdown-content.css",
       "type": "registry:ui",
       "target": "@ui/markdown-content.css"
     },
     {
-      "path": "src/components/coss/button.tsx",
+      "path": "packages/weimo-ui-core/src/components/coss/button.tsx",
       "type": "registry:ui",
       "target": "@ui/coss/button.tsx"
     },
     {
-      "path": "src/components/coss/button.css",
+      "path": "packages/weimo-ui-core/src/components/coss/button.css",
       "type": "registry:ui",
       "target": "@ui/coss/button.css"
     },
     {
-      "path": "src/components/coss/toolbar.tsx",
+      "path": "packages/weimo-ui-core/src/components/coss/toolbar.tsx",
       "type": "registry:ui",
       "target": "@ui/coss/toolbar.tsx"
     },
     {
-      "path": "src/components/coss/tooltip.tsx",
+      "path": "packages/weimo-ui-core/src/components/coss/tooltip.tsx",
       "type": "registry:ui",
       "target": "@ui/coss/tooltip.tsx"
     },
     {
-      "path": "src/components/coss/tooltip.css",
+      "path": "packages/weimo-ui-core/src/components/coss/tooltip.css",
       "type": "registry:ui",
       "target": "@ui/coss/tooltip.css"
     },

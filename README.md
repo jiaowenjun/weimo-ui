@@ -37,7 +37,11 @@ pnpm install
 - 控件 / 弹层
 - 布局 / 栏位
 
-主包的同名入口以源码级 re-export 转发到 core，并在 Git 安装包中携带 core 源码；卡片、标签、Markdown、媒体与数据可视化组件继续留在主项目，并单向依赖 core。
+`packages/weimo-ui-markdown` 是 Markdown workspace 包，负责 Markdown 分组中的 token、渲染、编辑、数学公式和视图组件；它唯一的 workspace 内部依赖是 `weimo-ui-core`。
+
+`packages/weimo-ui-tagtree` 是标签树 workspace 包，负责标签树页面和标签导航组件；它唯一的 workspace 内部依赖同样是 `weimo-ui-core`。
+
+主包的同名入口以源码级 re-export 转发到对应子项目，并在 Git 安装包中携带子项目源码；卡片、媒体与数据可视化组件继续留在主项目，并按需单向依赖 core 或 Markdown。
 
 ## 职责定位
 

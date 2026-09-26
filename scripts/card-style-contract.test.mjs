@@ -42,19 +42,20 @@ function assertIncludes(block, snippet, message) {
 
 const cardCss = readProjectFile('src/components/card.css')
 const cardTopBarCss = readProjectFile('packages/weimo-ui-core/src/components/card-top-bar.css')
-const markdownContentCss = readProjectFile('src/components/markdown-content.css')
+const markdownContentCss = readProjectFile('packages/weimo-ui-markdown/src/components/markdown-content.css')
 const CardSource = readProjectFile('src/components/card.tsx')
 const CardResolversSource = readProjectFile('src/components/card-resolvers.tsx')
 const cardPropsSource = CardSource.slice(
   CardSource.indexOf('export type CardProps'),
   CardSource.indexOf('function shouldIgnoreCardBodyDoubleClick'),
 )
-const mdRenderSource = readProjectFile('src/components/md-render.tsx')
+const mdRenderSource = readProjectFile('packages/weimo-ui-markdown/src/components/md-render.tsx')
 const markdownSanitizeSource = readProjectFile(
-  'src/components/markdown-sanitize.ts',
+  'packages/weimo-ui-markdown/src/components/markdown-sanitize.ts',
 )
 const indexCss = readProjectFile('src/index.css')
 const sharedTokenCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
+const markdownTokenCss = readProjectFile('packages/weimo-ui-markdown/src/styles/tokens.css')
 const docsMarkdownSampleSource = readProjectFile('src/docs/component-definitions/markdown-sample.ts')
 const registry = JSON.parse(readProjectFile('registry.json'))
 const styleRegistry = JSON.parse(readProjectFile('registry/style.json'))
@@ -556,12 +557,12 @@ assertIncludes(
   'Markdown unordered lists must show standard bullet markers.',
 )
 assertIncludes(
-  sharedTokenCss,
+  markdownTokenCss,
   '--md-list-indent: 1.35em;',
   'Shared style tokens must define the standard Markdown list padding.',
 )
 assertIncludes(
-  sharedTokenCss,
+  markdownTokenCss,
   '--md-list-wide-marker-indent: 2em;',
   'Shared style tokens must define the wide-marker ordered-list padding.',
 )
@@ -712,7 +713,7 @@ for (const snippet of [
 
 assert.ok(
   indexCss.includes('@import "./styles/tokens.css";'),
-  'src/index.css must consume shared tokens through packages/weimo-ui-core/src/styles/tokens.css.',
+  'src/index.css must consume shared tokens through the root token entry.',
 )
 assert.equal(
   packageJson.exports?.['./styles/tokens.css'],

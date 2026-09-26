@@ -52,12 +52,12 @@
       "target": "@ui/heatmap/heatmap.css"
     },
     {
-      "path": "src/components/coss/tooltip.tsx",
+      "path": "packages/weimo-ui-core/src/components/coss/tooltip.tsx",
       "type": "registry:ui",
       "target": "@ui/coss/tooltip.tsx"
     },
     {
-      "path": "src/components/coss/tooltip.css",
+      "path": "packages/weimo-ui-core/src/components/coss/tooltip.css",
       "type": "registry:ui",
       "target": "@ui/coss/tooltip.css"
     },

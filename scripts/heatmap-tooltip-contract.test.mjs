@@ -56,8 +56,8 @@ const componentCss = readProjectFile(
 const heatColorLevelsSource = readProjectFile(
   'packages/weimo-ui-core/src/components/heatmap/heat-color.tsx',
 )
-const tooltipSource = readProjectFile('src/components/coss/tooltip.tsx')
-const tooltipCss = readProjectFile('src/components/coss/tooltip.css')
+const tooltipSource = readProjectFile('packages/weimo-ui-core/src/components/coss/tooltip.tsx')
+const tooltipCss = readProjectFile('packages/weimo-ui-core/src/components/coss/tooltip.css')
 const popupSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/popup-surface.css')
 const registryItem = JSON.parse(readProjectFile('registry/heatmap.json'))
 const packageJson = JSON.parse(readProjectFile('package.json'))
@@ -159,8 +159,8 @@ assert.deepEqual(
   'Heatmap registry item must keep only existing shared registry dependencies because tooltip files ship with the item.',
 )
 assert.ok(
-  registryItem.files.some((file) => file.path === 'src/components/coss/tooltip.tsx') &&
-    registryItem.files.some((file) => file.path === 'src/components/coss/tooltip.css'),
+  registryItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/components/coss/tooltip.tsx') &&
+    registryItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/components/coss/tooltip.css'),
   'Heatmap registry item must ship the coss tooltip primitive files.',
 )
 assert.ok(

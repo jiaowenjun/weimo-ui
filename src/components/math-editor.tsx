@@ -1,5 +1,1 @@
-export {
-  MathEditor,
-  type MathEditorProps,
-  type MathEditorValue,
-} from './md-editor/math-editor'
+export * from '../../packages/weimo-ui-markdown/src/components/math-editor.tsx'

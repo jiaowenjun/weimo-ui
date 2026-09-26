@@ -5,8 +5,8 @@ function readProjectFile(relativePath) {
   return readFileSync(new URL(`../${relativePath}`, import.meta.url), 'utf8')
 }
 
-const editorTypesSource = readProjectFile('src/components/md-editor/md-editor-types.ts')
-const editorSource = readProjectFile('src/components/md-editor/md-editor.tsx')
+const editorTypesSource = readProjectFile('packages/weimo-ui-markdown/src/components/md-editor/md-editor-types.ts')
+const editorSource = readProjectFile('packages/weimo-ui-markdown/src/components/md-editor/md-editor.tsx')
 const cardSource = readProjectFile('src/components/card.tsx')
 const cardEditTransitionSource = readProjectFile(
   'src/components/use-card-edit-transition.ts',

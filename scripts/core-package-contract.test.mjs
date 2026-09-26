@@ -81,11 +81,25 @@ for (const item of componentManifest.filter((item) =>
 
 assert.equal(
   readProjectFile('src/styles/tokens.css'),
-  '@import "../../packages/weimo-ui-core/src/styles/tokens.css";\n',
+  '@import "../../packages/weimo-ui-markdown/src/styles/tokens.css";\n',
 )
 assert.equal(
   corePackage.exports?.['./styles/tokens.css'],
   './src/styles/tokens.css',
 )
+assert.ok(
+  !readProjectFile('packages/weimo-ui-core/src/styles/tokens.css').includes('--md-'),
+  'weimo-ui-core tokens must not define Markdown-only tokens.',
+)
+for (const [exportName, target] of [
+  ['./components/coss/button', './src/components/coss/button.tsx'],
+  ['./components/coss/toolbar', './src/components/coss/toolbar.tsx'],
+  ['./components/coss/tooltip', './src/components/coss/tooltip.tsx'],
+  ['./styles/button.css', './src/components/coss/button.css'],
+  ['./styles/tooltip.css', './src/components/coss/tooltip.css'],
+]) {
+  assert.equal(corePackage.exports?.[exportName], target, `${exportName} must resolve to ${target}.`)
+  assert.ok(existsSync(join(root, 'packages/weimo-ui-core', target.slice(2))), `${target} must exist.`)
+}
 
 console.log('weimo-ui-core package contract tests passed.')

@@ -1,0 +1,68 @@
+{
+  "name": "weimo-ui-markdown",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "exports": {
+    ".": "./src/index.ts",
+    "./components/md": "./src/components/md.tsx",
+    "./components/md-editor": "./src/components/md-editor.tsx",
+    "./components/md-render": "./src/components/md-render.tsx",
+    "./components/md-view": "./src/components/md-view.tsx",
+    "./components/math-editor": "./src/components/math-editor.tsx",
+    "./styles/tokens.css": "./src/styles/tokens.css",
+    "./styles/markdown-content.css": "./src/components/markdown-content.css",
+    "./styles/md.css": "./src/components/md.css",
+    "./styles/md-view.css": "./src/components/md-view.css",
+    "./styles/md-editor.css": "./src/components/md-editor/md-editor.css"
+  },
+  "scripts": {
+    "test:typecheck": "tsc -p tsconfig.json --noEmit --pretty false"
+  },
+  "dependencies": {
+    "@tiptap/core": "3.27.0",
+    "@tiptap/extension-list": "3.27.0",
+    "@tiptap/extension-mathematics": "3.27.0",
+    "@tiptap/extension-placeholder": "3.27.0",
+    "@tiptap/extension-table": "3.27.0",
+    "@tiptap/extension-table-cell": "3.27.0",
+    "@tiptap/extension-table-header": "3.27.0",
+    "@tiptap/extension-table-row": "3.27.0",
+    "@tiptap/extension-task-item": "3.27.0",
+    "@tiptap/extension-task-list": "3.27.0",
+    "@tiptap/markdown": "3.27.0",
+    "@tiptap/pm": "3.27.0",
+    "@tiptap/react": "3.27.0",
+    "@tiptap/starter-kit": "3.27.0",
+    "katex": "^0.16.47",
+    "lucide-react": "1.24.0",
+    "react-markdown": "^10.1.0",
+    "rehype-katex": "^7.0.1",
+    "rehype-raw": "^7.0.0",
+    "rehype-sanitize": "^6.0.0",
+    "remark-breaks": "^4.0.0",
+    "remark-gfm": "^4.0.1",
+    "remark-math": "^6.0.0",
+    "remark-parse": "^11.0.0",
+    "remark-stringify": "^11.0.0",
+    "unified": "^11.0.5",
+    "weimo-ui-core": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "typescript": "~6.0.3"
+  }
+}

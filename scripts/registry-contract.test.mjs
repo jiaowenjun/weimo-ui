@@ -278,7 +278,7 @@ for (const [item, itemName] of [
   [CardItem, 'Card'],
 ]) {
   assert.ok(
-    item.files.some((file) => file.path === 'src/components/markdown-content.css'),
+    item.files.some((file) => file.path === 'packages/weimo-ui-markdown/src/components/markdown-content.css'),
     `${itemName} registry item must ship shared Markdown content CSS.`,
   )
 }
@@ -288,17 +288,17 @@ for (const [item, itemName] of [
   [mdEditorItem, 'MdEditor'],
 ]) {
   assert.ok(
-    item.files.some((file) => file.path === 'src/components/markdown-image-size.ts'),
+    item.files.some((file) => file.path === 'packages/weimo-ui-markdown/src/components/markdown-image-size.ts'),
     `${itemName} registry item must ship the shared Markdown intrinsic image sizing helper.`,
   )
 }
 const mdRenderCarrierItems = items.filter((item) =>
-  item.files?.some((file) => file.path === 'src/components/md-render.tsx'),
+  item.files?.some((file) => file.path === 'packages/weimo-ui-markdown/src/components/md-render.tsx'),
 )
 
 for (const item of mdRenderCarrierItems) {
   assert.ok(
-    item.files.some((file) => file.path === 'src/components/markdown-image-renderer.ts'),
+    item.files.some((file) => file.path === 'packages/weimo-ui-markdown/src/components/markdown-image-renderer.ts'),
     `${item.name} registry item must ship the shared Markdown image renderer contract.`,
   )
   assert.ok(
@@ -307,34 +307,34 @@ for (const item of mdRenderCarrierItems) {
     `${item.name} registry item must install raw HTML parsing and sanitizing for MdRender.`,
   )
   assert.ok(
-    item.files.some((file) => file.path === 'src/components/markdown-parenthesized-list.ts'),
+    item.files.some((file) => file.path === 'packages/weimo-ui-markdown/src/components/markdown-parenthesized-list.ts'),
     `${item.name} registry item must ship the parenthesized list grammar used by MdRender.`,
   )
   assert.ok(
-    item.files.some((file) => file.path === 'src/components/markdown-sanitize.ts'),
+    item.files.some((file) => file.path === 'packages/weimo-ui-markdown/src/components/markdown-sanitize.ts'),
     `${item.name} registry item must ship the sanitizer schema used by MdRender.`,
   )
   assert.ok(
-    item.files.some((file) => file.path === 'src/components/markdown-option-grid.ts'),
+    item.files.some((file) => file.path === 'packages/weimo-ui-markdown/src/components/markdown-option-grid.ts'),
     `${item.name} registry item must ship the shared option-grid measurement.`,
   )
 }
 
 const mdEditorCarrierItems = items.filter((item) =>
-  item.files?.some((file) => file.path === 'src/components/md-editor/md-editor-extensions.ts'),
+  item.files?.some((file) => file.path === 'packages/weimo-ui-markdown/src/components/md-editor/md-editor-extensions.ts'),
 )
 
 for (const item of mdEditorCarrierItems) {
   for (const filePath of [
-    'src/components/markdown-image-renderer.ts',
-    'src/components/markdown-parenthesized-list.ts',
-    'src/components/md-editor/md-editor-content-format.ts',
-    'src/components/md-editor/md-editor-table.ts',
-    'src/components/md-editor/md-editor-ordered-list.ts',
-    'src/components/md-editor/md-editor-option-grid.ts',
-    'src/components/md-editor/md-editor-list-image-layout.ts',
-    'src/components/md-editor/md-editor-image-view.tsx',
-    'src/components/markdown-option-grid.ts',
+    'packages/weimo-ui-markdown/src/components/markdown-image-renderer.ts',
+    'packages/weimo-ui-markdown/src/components/markdown-parenthesized-list.ts',
+    'packages/weimo-ui-markdown/src/components/md-editor/md-editor-content-format.ts',
+    'packages/weimo-ui-markdown/src/components/md-editor/md-editor-table.ts',
+    'packages/weimo-ui-markdown/src/components/md-editor/md-editor-ordered-list.ts',
+    'packages/weimo-ui-markdown/src/components/md-editor/md-editor-option-grid.ts',
+    'packages/weimo-ui-markdown/src/components/md-editor/md-editor-list-image-layout.ts',
+    'packages/weimo-ui-markdown/src/components/md-editor/md-editor-image-view.tsx',
+    'packages/weimo-ui-markdown/src/components/markdown-option-grid.ts',
   ]) {
     assert.ok(
       item.files.some((file) => file.path === filePath),
@@ -365,7 +365,7 @@ for (const filePath of [
 for (const filePath of [
   'src/components/card.tsx',
   'src/components/card-resolvers.tsx',
-  'src/components/deferred-md-editor-toolbar.tsx',
+  'packages/weimo-ui-markdown/src/components/deferred-md-editor-toolbar.tsx',
   'src/components/card-editable.css',
   'src/components/card.css',
   'packages/weimo-ui-core/src/components/card-top-bar.tsx',
@@ -374,24 +374,24 @@ for (const filePath of [
   'packages/weimo-ui-core/src/components/mode-button.css',
   'packages/weimo-ui-core/src/components/card-tool-bar.tsx',
   'packages/weimo-ui-core/src/components/card-tool-bar.css',
-  'src/components/md-view.tsx',
-  'src/components/md-render.tsx',
-  'src/components/markdown-content.css',
-  'src/components/markdown-centered-quote.ts',
-  'src/components/markdown-image-size.ts',
-  'src/components/md-editor.tsx',
-  'src/components/md-editor/index.tsx',
-  'src/components/md-editor/md-editor-types.ts',
-  'src/components/md-editor/md-editor.tsx',
-  'src/components/md-editor/md-editor-toolbar.tsx',
-  'src/components/md-editor/use-md-editor.ts',
-  'src/components/md-editor/md-editor-extensions.ts',
-  'src/components/md-editor/md-editor-centered-quote.ts',
-  'src/components/md-editor/md-editor-image.ts',
-  'src/components/md-editor/md-editor-markdown.ts',
-  'src/components/md-editor/md-editor-save-keymap.ts',
-  'src/components/md-editor/math-editor.tsx',
-  'src/components/md-editor/md-editor.css',
+  'packages/weimo-ui-markdown/src/components/md-view.tsx',
+  'packages/weimo-ui-markdown/src/components/md-render.tsx',
+  'packages/weimo-ui-markdown/src/components/markdown-content.css',
+  'packages/weimo-ui-markdown/src/components/markdown-centered-quote.ts',
+  'packages/weimo-ui-markdown/src/components/markdown-image-size.ts',
+  'packages/weimo-ui-markdown/src/components/md-editor.tsx',
+  'packages/weimo-ui-markdown/src/components/md-editor/index.tsx',
+  'packages/weimo-ui-markdown/src/components/md-editor/md-editor-types.ts',
+  'packages/weimo-ui-markdown/src/components/md-editor/md-editor.tsx',
+  'packages/weimo-ui-markdown/src/components/md-editor/md-editor-toolbar.tsx',
+  'packages/weimo-ui-markdown/src/components/md-editor/use-md-editor.ts',
+  'packages/weimo-ui-markdown/src/components/md-editor/md-editor-extensions.ts',
+  'packages/weimo-ui-markdown/src/components/md-editor/md-editor-centered-quote.ts',
+  'packages/weimo-ui-markdown/src/components/md-editor/md-editor-image.ts',
+  'packages/weimo-ui-markdown/src/components/md-editor/md-editor-markdown.ts',
+  'packages/weimo-ui-markdown/src/components/md-editor/md-editor-save-keymap.ts',
+  'packages/weimo-ui-markdown/src/components/md-editor/math-editor.tsx',
+  'packages/weimo-ui-markdown/src/components/md-editor/md-editor.css',
   'packages/weimo-ui-tagtree/src/components/tag-bar.tsx',
   'packages/weimo-ui-tagtree/src/components/tag-bar.css',
   'packages/weimo-ui-tagtree/src/components/chip-button.tsx',
@@ -425,17 +425,17 @@ for (const filePath of [
   'packages/weimo-ui-core/src/components/menu/menu-variants.ts',
   'packages/weimo-ui-core/src/components/coss/dialog.tsx',
   'packages/weimo-ui-core/src/components/coss/dialog.css',
-  'src/components/coss/button.tsx',
-  'src/components/coss/button.css',
+  'packages/weimo-ui-core/src/components/coss/button.tsx',
+  'packages/weimo-ui-core/src/components/coss/button.css',
   'packages/weimo-ui-tagtree/src/components/coss/input-group.tsx',
   'packages/weimo-ui-tagtree/src/components/coss/input-group.css',
   'packages/weimo-ui-tagtree/src/components/coss/scroll-area.tsx',
   'packages/weimo-ui-tagtree/src/components/coss/scroll-area.css',
   'src/components/coss/tabs.tsx',
   'src/components/coss/tabs.css',
-  'src/components/coss/toolbar.tsx',
-  'src/components/coss/tooltip.tsx',
-  'src/components/coss/tooltip.css',
+  'packages/weimo-ui-core/src/components/coss/toolbar.tsx',
+  'packages/weimo-ui-core/src/components/coss/tooltip.tsx',
+  'packages/weimo-ui-core/src/components/coss/tooltip.css',
 ]) {
   assert.ok(
     CardItem.files.some((file) => file.path === filePath),

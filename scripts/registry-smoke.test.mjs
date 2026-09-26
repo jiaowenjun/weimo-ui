@@ -1504,7 +1504,8 @@ try {
     'Installed MdEditor must use Tiptap React and the public forwarded ref API without main-surface BottomBar controls.',
   )
   assert.ok(
-    mathEditorSource.includes("from '../action-dialog'") &&
+    (mathEditorSource.includes("from '../action-dialog'") ||
+      mathEditorSource.includes("from 'weimo-ui-core/components/action-dialog'")) &&
       !mathEditorSource.includes("from '../bottom-bar'") &&
       mathEditorSource.includes('bottomBarLabel="公式编辑操作栏"') &&
       mathEditorSource.includes('bottomBarClassName="md-editor__math-dialog-float-bar"') &&

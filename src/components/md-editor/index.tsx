@@ -1,6 +1,1 @@
-export { MdEditor } from './md-editor'
-export type {
-  MdEditorFormatContentOptions,
-  MdEditorHandle,
-  MdEditorProps,
-} from './md-editor-types'
+export * from '../../../packages/weimo-ui-markdown/src/components/md-editor/index.tsx'

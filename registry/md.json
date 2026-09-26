@@ -23,12 +23,12 @@
   ],
   "files": [
     {
-      "path": "src/components/md.tsx",
+      "path": "packages/weimo-ui-markdown/src/components/md.tsx",
       "type": "registry:ui",
       "target": "@ui/md.tsx"
     },
     {
-      "path": "src/components/md.css",
+      "path": "packages/weimo-ui-markdown/src/components/md.css",
       "type": "registry:ui",
       "target": "@ui/md.css"
     }

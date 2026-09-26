@@ -53,8 +53,8 @@ const dialogSource = readProjectFile('packages/weimo-ui-core/src/components/coss
 const dialogCss = readProjectFile('packages/weimo-ui-core/src/components/coss/dialog.css')
 const commandSource = readProjectFile('src/components/coss/command.tsx')
 const commandCss = readProjectFile('src/components/coss/command.css')
-const tooltipSource = readProjectFile('src/components/coss/tooltip.tsx')
-const tooltipCss = readProjectFile('src/components/coss/tooltip.css')
+const tooltipSource = readProjectFile('packages/weimo-ui-core/src/components/coss/tooltip.tsx')
+const tooltipCss = readProjectFile('packages/weimo-ui-core/src/components/coss/tooltip.css')
 
 assert.equal(
   packageJson.exports['./components/card-surface'],

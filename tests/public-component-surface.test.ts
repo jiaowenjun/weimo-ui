@@ -75,6 +75,7 @@ describe('public component catalog', () => {
   it('maps every manifest entry to one package export and exported source module', () => {
     const packageJson = readProjectJson<PackageJson>('package.json')
     const corePackageJson = readProjectJson<PackageJson>('packages/weimo-ui-core/package.json')
+    const markdownPackageJson = readProjectJson<PackageJson>('packages/weimo-ui-markdown/package.json')
     const ids = new Set<string>()
     const packageExports = new Set<string>()
     const registryNames = new Set<string>()
@@ -88,12 +89,19 @@ describe('public component catalog', () => {
       registryNames.add(item.registryName)
 
       const isCoreComponent = coreGroups.has(item.group) || additionalCoreComponents.has(item.id)
-      const sourcePath = isCoreComponent
-        ? corePackageJson.exports[item.packageExport]
-        : packageJson.exports[item.packageExport]
-      const projectSourcePath = isCoreComponent
-        ? `packages/weimo-ui-core/${sourcePath.replace(/^\.\//u, '')}`
-        : sourcePath.replace(/^\.\//u, '')
+      const isMarkdownComponent = item.group === 'markdown'
+      const ownerPackageJson = isCoreComponent
+        ? corePackageJson
+        : isMarkdownComponent
+          ? markdownPackageJson
+          : packageJson
+      const packageRoot = isCoreComponent
+        ? 'packages/weimo-ui-core/'
+        : isMarkdownComponent
+          ? 'packages/weimo-ui-markdown/'
+          : ''
+      const sourcePath = ownerPackageJson.exports[item.packageExport]
+      const projectSourcePath = `${packageRoot}${sourcePath.replace(/^\.\//u, '')}`
       expect(sourcePath, `${item.id} package export`).toBeTypeOf('string')
       expect(projectFileExists(projectSourcePath)).toBe(true)
 
@@ -175,7 +183,7 @@ describe('shared CSS interfaces', () => {
 
   it('keeps Card edit layout and MdEditor scrolling owned by explicit state selectors', () => {
     const card = parseProjectCss('src/components/card-editable.css')
-    const editor = parseProjectCss('src/components/md-editor/md-editor.css')
+    const editor = parseProjectCss('packages/weimo-ui-markdown/src/components/md-editor/md-editor.css')
 
     expect(
       cssDeclaration(
