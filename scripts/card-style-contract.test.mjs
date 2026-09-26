@@ -53,10 +53,10 @@ const mdRenderSource = readProjectFile('packages/weimo-ui-markdown/src/component
 const markdownSanitizeSource = readProjectFile(
   'packages/weimo-ui-markdown/src/components/markdown-sanitize.ts',
 )
-const indexCss = readProjectFile('src/index.css')
+const indexCss = readProjectFile('packages/weimo-ui-site/src/index.css')
 const sharedTokenCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const markdownTokenCss = readProjectFile('packages/weimo-ui-markdown/src/styles/tokens.css')
-const docsMarkdownSampleSource = readProjectFile('src/docs/component-definitions/markdown-sample.ts')
+const docsMarkdownSampleSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/markdown-sample.ts')
 const registry = JSON.parse(readProjectFile('registry.json'))
 const styleRegistry = JSON.parse(readProjectFile('registry/style.json'))
 const packageJson = JSON.parse(readProjectFile('package.json'))
@@ -696,7 +696,7 @@ assert.ok(
 )
 assert.ok(
   docsMarkdownSampleSource.includes('export const mdRenderSample') &&
-    existsSync(join(root, 'src/docs/component-definitions/tagged-card.tsx')),
+    existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/tagged-card.tsx')),
   'Shared markdown docs preview sample must remain with Card docs.',
 )
 assert.deepEqual(
@@ -712,8 +712,8 @@ for (const snippet of [
 }
 
 assert.ok(
-  indexCss.includes('@import "./styles/tokens.css";'),
-  'src/index.css must consume shared tokens through the root token entry.',
+  indexCss.includes('@import "weimo-ui-markdown/styles/tokens.css";'),
+  'packages/weimo-ui-site/src/index.css must consume shared tokens through the Markdown token entry.',
 )
 assert.equal(
   packageJson.exports?.['./styles/tokens.css'],

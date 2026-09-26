@@ -33,9 +33,9 @@ function assertIncludes(source, snippet, message) {
 const source = readProjectFile('packages/weimo-ui-image/src/components/image-uploader.tsx')
 const css = readProjectFile('packages/weimo-ui-image/src/components/image-uploader.css')
 const packageJson = readJson('package.json')
-const manifest = readProjectFile('src/docs/components-manifest.ts')
-const definitionsIndex = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinition = readProjectFile('src/docs/component-definitions/image.tsx')
+const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const docsDefinition = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/image.tsx')
 const rootRegistry = readJson('registry.json')
 const standaloneRegistry = readJson('registry/image-uploader.json')
 const registryItem = rootRegistry.items.find((item) => item.name === 'image-uploader')
@@ -385,8 +385,8 @@ for (const filePath of [
 for (const snippet of [
   "import { Check, Clipboard, FileImage, X } from 'lucide-react'",
   "import { useState } from 'react'",
-  "import { FrostedIconButton } from '../../components/frosted-icon-button'",
-  "import { ImageUploader, type ImageUploaderActionApi } from '../../../packages/weimo-ui-image/src/components/image-uploader'",
+  "import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'",
+  "import { ImageUploader, type ImageUploaderActionApi } from 'weimo-ui-image/components/image-uploader'",
   "id: 'image'",
   'function ImageUploaderPreview()',
   'const [file, setFile] = useState<File | null>(null)',

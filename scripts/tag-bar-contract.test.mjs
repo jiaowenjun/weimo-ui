@@ -37,9 +37,9 @@ function assertNotIncludes(source, snippet, message) {
 const componentSource = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bar.tsx')
 const cssSource = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bar.css')
 const docsSource = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx')
-const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const manifestSource = readProjectFile('src/docs/components-manifest.ts')
-const appCssSource = readProjectFile('src/App.css')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const appCssSource = readProjectFile('packages/weimo-ui-site/src/App.css')
 const packageJson = readJson('package.json')
 const rootRegistry = readJson('registry.json')
 
@@ -451,7 +451,7 @@ assert.ok(
   'Tag docs definition must provide a local state TagBar preview with a mode toggle.',
 )
 assert.ok(
-  !docsSource.includes("import { Button } from '../../components/coss/button'") &&
+  !docsSource.includes("import { Button } from 'weimo-ui-core/components/coss/button'") &&
     !/<Button\b/.test(docsSource),
   'TagBar docs mode toggle must not use coss Button.',
 )

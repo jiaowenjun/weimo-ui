@@ -22,12 +22,12 @@ function assertIncludes(source, snippet, message) {
 }
 
 const packageJson = readJson('package.json')
-const manifest = readProjectFile('src/docs/components-manifest.ts')
-const definitionsIndex = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinition = readProjectFile('src/docs/component-definitions/ocr.tsx')
+const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const docsDefinition = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/ocr.tsx')
 const source = readProjectFile('packages/weimo-ui-card/src/components/ocr-card.tsx')
 const css = readProjectFile('packages/weimo-ui-card/src/components/ocr-card.css')
-const appCss = readProjectFile('src/App.css')
+const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const rootRegistry = readJson('registry.json')
 const standaloneRegistry = readJson('registry/ocr-card.json')
 const registryItem = rootRegistry.items.find((item) => item.name === 'ocr-card')
@@ -270,7 +270,7 @@ assert.ok(
 )
 
 for (const snippet of [
-  "import { OcrCard } from '../../../packages/weimo-ui-card/src/components/ocr-card'",
+  "import { OcrCard } from 'weimo-ui-card/components/ocr-card'",
   "id: 'ocr'",
   "status: 'Ready'",
   'const sampleOcrMarkdown =',

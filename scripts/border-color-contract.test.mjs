@@ -74,8 +74,8 @@ const popupSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/p
 const breadcrumbCss = readProjectFile('packages/weimo-ui-tagtree/src/components/coss/breadcrumb.css')
 const capsuleFrameCss = readProjectFile('packages/weimo-ui-core/src/components/capsule-frame.css')
 const cossButtonCss = readProjectFile('packages/weimo-ui-core/src/components/coss/button.css')
-const cossCardCss = readProjectFile('src/components/coss/card.css')
-const cossCommandCss = readProjectFile('src/components/coss/command.css')
+const cossCardCss = readProjectFile('packages/weimo-ui-site/src/components/coss/card.css')
+const cossCommandCss = readProjectFile('packages/weimo-ui-site/src/components/coss/command.css')
 const cossDialogCss = readProjectFile('packages/weimo-ui-core/src/components/coss/dialog.css')
 const cossInputGroupCss = readProjectFile('packages/weimo-ui-tagtree/src/components/coss/input-group.css')
 const cossTableCss = readProjectFile('src/components/coss/table.css')
@@ -89,10 +89,10 @@ const sidebarShellCss = readProjectFile('packages/weimo-ui-core/src/components/s
 // 普通侧边栏经由 card-surface 继承无边框默认；抽屉变体不挂材质类，描边自持。
 const sidebarDrawerBlock = blockFor(sidebarShellCss, '.weimo-sidebar--drawer')
 const tagTreeCss = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-tree/tag-tree.css')
-const manifestSource = readProjectFile('src/docs/components-manifest.ts')
-const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinitionSource = readProjectFile('src/docs/component-definitions/border-tokens.tsx')
-const appCss = readProjectFile('src/App.css')
+const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/border-tokens.tsx')
+const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const rootRegistry = readJson('registry.json')
 const styleRegistry = readJson('registry/style.json')
@@ -400,8 +400,8 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'border-tokens'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { ComponentPreviewCard } from '../../components/component-preview-card'") &&
-    docsDefinitionSource.includes("from '../../components/border-radius'") &&
+    docsDefinitionSource.includes("import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'") &&
+    docsDefinitionSource.includes("from 'weimo-ui-core/components/border-radius'") &&
     !docsDefinitionSource.includes('component-preview-card-demo__category') &&
     docsDefinitionSource.includes('borderRadiusScales.map') &&
     docsDefinitionSource.includes('const borderColorToneOrder = [') &&

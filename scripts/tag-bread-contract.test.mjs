@@ -39,12 +39,12 @@ const css = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bread.
 const surfaceCss = readProjectFile('packages/weimo-ui-core/src/components/capsule-frame.css')
 const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.css')
 const pageCss = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.css')
-const indexCss = readProjectFile('src/index.css')
+const indexCss = readProjectFile('packages/weimo-ui-site/src/index.css')
 const cossBreadcrumbSource = readProjectFile('packages/weimo-ui-tagtree/src/components/coss/breadcrumb.tsx')
 const cossBreadcrumbCss = readProjectFile('packages/weimo-ui-tagtree/src/components/coss/breadcrumb.css')
 const packageJson = readJson('package.json')
-const manifest = readProjectFile('src/docs/components-manifest.ts')
-const definitionsIndex = readProjectFile('src/docs/component-definitions/index.ts')
+const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
 const docsDefinition = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx')
 const rootRegistry = readJson('registry.json')
 const standaloneRegistry = readJson('registry/tag-bread.json')
@@ -279,7 +279,7 @@ assert.ok(
     docsDefinition.includes("textSize: 'base'") &&
     docsDefinition.includes('className={getCapsuleFrameClassName(') &&
     docsDefinition.includes("import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'") &&
-    !docsDefinition.includes("import { Button } from '../../components/coss/button'") &&
+    !docsDefinition.includes("import { Button } from 'weimo-ui-core/components/coss/button'") &&
     docsDefinition.includes("import {") &&
     docsDefinition.includes("BreadcrumbEllipsis,") &&
     docsDefinition.includes("BreadcrumbItem,") &&

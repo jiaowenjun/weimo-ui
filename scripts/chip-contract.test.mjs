@@ -36,10 +36,10 @@ const source = readProjectFile('packages/weimo-ui-core/src/components/chip.tsx')
 const css = readProjectFile('packages/weimo-ui-core/src/components/chip.css')
 const surfaceCss = readProjectFile('packages/weimo-ui-core/src/components/capsule-frame.css')
 const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.css')
-const docsSource = readProjectFile('src/docs/component-definitions/capsule.tsx')
-const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const manifestSource = readProjectFile('src/docs/components-manifest.ts')
-const appCss = readProjectFile('src/App.css')
+const docsSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/capsule.tsx')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const previewCardCss = readProjectFile('packages/weimo-ui-core/src/components/component-preview-card.css')
 
 const baseBlock = cssBlockFor(surfaceCss, '.capsule-frame')
@@ -210,7 +210,7 @@ assert.ok(
 assert.ok(
   docsSource.includes("id: 'capsule'") &&
     docsSource.includes('preview: () => <CapsuleDemo />') &&
-    !docsSource.includes("import { Chip } from '../../components/chip'") &&
+    !docsSource.includes("import { Chip } from 'weimo-ui-core/components/chip'") &&
     !docsSource.includes('<Chip ') &&
     !docsSource.includes('<Chip\n'),
   'Capsule docs must demo button-form capsules only; plain text Chip examples must stay removed from the page.',
@@ -244,8 +244,8 @@ assert.ok(
   'Component manifest must list Chip as a public registry component through the merged Capsule page.',
 )
 for (const removedFilePath of [
-  'src/docs/component-definitions/chip.tsx',
-  'src/docs/component-definitions/chip-button.tsx',
+  'packages/weimo-ui-site/src/docs/component-definitions/chip.tsx',
+  'packages/weimo-ui-site/src/docs/component-definitions/chip-button.tsx',
 ]) {
   assert.ok(
     !existsSync(join(root, removedFilePath)),

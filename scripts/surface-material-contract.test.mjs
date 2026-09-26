@@ -33,26 +33,26 @@ function registryFiles(item) {
 const packageJson = readJson('package.json')
 const rootRegistry = readJson('registry.json')
 const rootItemsByName = new Map(rootRegistry.items.map((item) => [item.name, item]))
-const manifestSource = readProjectFile('src/docs/components-manifest.ts')
-const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const appCss = readProjectFile('src/App.css')
+const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 
 const cardSurfaceSource = readProjectFile('packages/weimo-ui-core/src/components/card-surface.tsx')
 const cardSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/card-surface.css')
-const surfaceDefinitionSource = readProjectFile('src/docs/component-definitions/surface.tsx')
+const surfaceDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/surface.tsx')
 const popupSurfaceSource = readProjectFile('packages/weimo-ui-core/src/components/popup-surface.tsx')
 const popupSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/popup-surface.css')
 
 const cardResolverSource = readProjectFile('packages/weimo-ui-card/src/components/card-resolvers.tsx')
 const sharedCardCss = readProjectFile('packages/weimo-ui-card/src/components/card.css')
-const cossCardSource = readProjectFile('src/components/coss/card.tsx')
-const cossCardCss = readProjectFile('src/components/coss/card.css')
+const cossCardSource = readProjectFile('packages/weimo-ui-site/src/components/coss/card.tsx')
+const cossCardCss = readProjectFile('packages/weimo-ui-site/src/components/coss/card.css')
 const sidebarSource = readProjectFile('packages/weimo-ui-core/src/components/sidebar/sidebar-shell.tsx')
 const sidebarCss = readProjectFile('packages/weimo-ui-core/src/components/sidebar/sidebar-shell.css')
 const dialogSource = readProjectFile('packages/weimo-ui-core/src/components/coss/dialog.tsx')
 const dialogCss = readProjectFile('packages/weimo-ui-core/src/components/coss/dialog.css')
-const commandSource = readProjectFile('src/components/coss/command.tsx')
-const commandCss = readProjectFile('src/components/coss/command.css')
+const commandSource = readProjectFile('packages/weimo-ui-site/src/components/coss/command.tsx')
+const commandCss = readProjectFile('packages/weimo-ui-site/src/components/coss/command.css')
 const tooltipSource = readProjectFile('packages/weimo-ui-core/src/components/coss/tooltip.tsx')
 const tooltipCss = readProjectFile('packages/weimo-ui-core/src/components/coss/tooltip.css')
 
@@ -144,9 +144,9 @@ assert.ok(
 )
 
 for (const snippet of [
-  "import { CardSurface } from '../../components/card-surface'",
-  "import { PopupSurface } from '../../components/popup-surface'",
-  "import { ComponentPreviewCard } from '../../components/component-preview-card'",
+  "import { CardSurface } from 'weimo-ui-core/components/card-surface'",
+  "import { PopupSurface } from 'weimo-ui-core/components/popup-surface'",
+  "import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'",
   "id: 'surface'",
   '亮主题细微阴影，暗主题边框描边',
   'function CardSurfacePreview()',
@@ -166,7 +166,7 @@ for (const snippet of [
 
 // 标题栏开关（可见状态标签 + Switch）抽到 docs 共享组件：材质页三张卡的边框开关
 // 与按钮页启用/模式开关共用，契约锁共享文件。
-const previewToggleSource = readProjectFile('src/docs/preview-toggle.tsx')
+const previewToggleSource = readProjectFile('packages/weimo-ui-site/src/docs/preview-toggle.tsx')
 
 for (const snippet of [
   "import { Switch } from '../components/coss/switch'",
@@ -230,7 +230,7 @@ assert.ok(
 )
 
 for (const snippet of [
-  "from '../card-surface'",
+  "from 'weimo-ui-core/components/card-surface'",
   "getCardSurfaceClassName(cardVariants({ variant }), className)",
   "getCardSurfaceClassName('coss-card-frame', className)",
 ]) {
@@ -242,7 +242,7 @@ assert.ok(
   'coss Card CSS must delegate static card material to CardSurface.',
 )
 assert.ok(
-  cossCardCss.includes("import '../card-surface.css';"),
+  cossCardCss.includes("import 'weimo-ui-core/styles/card-surface.css';"),
   'coss Card CSS must import CardSurface material CSS for registry-installed consumers.',
 )
 
@@ -313,7 +313,7 @@ assert.ok(
   'coss Dialog popup must compose PopupSurface.',
 )
 assert.ok(
-  commandSource.includes("from '../popup-surface'") &&
+  commandSource.includes("from 'weimo-ui-core/components/popup-surface'") &&
     commandSource.includes("getPopupSurfaceClassName('modal', 'coss-command__popup', className)"),
   'coss Command popup must compose PopupSurface.',
 )
@@ -322,10 +322,10 @@ assert.ok(
     tooltipSource.includes("getPopupSurfaceClassName('tooltip', 'coss-tooltip__popup', className)"),
   'coss Tooltip popup must compose PopupSurface.',
 )
-for (const [source, selector, name] of [
-  [dialogCss, '.coss-dialog__popup', 'Dialog'],
-  [commandCss, '.coss-command__popup', 'Command'],
-  [tooltipCss, '.coss-tooltip__popup', 'Tooltip'],
+for (const [source, selector, name, materialImport] of [
+  [dialogCss, '.coss-dialog__popup', 'Dialog', "import '../popup-surface.css';"],
+  [commandCss, '.coss-command__popup', 'Command', "import 'weimo-ui-core/styles/popup-surface.css';"],
+  [tooltipCss, '.coss-tooltip__popup', 'Tooltip', "import '../popup-surface.css';"],
 ]) {
   const block = blockFor(source, selector)
   assert.ok(
@@ -335,7 +335,7 @@ for (const [source, selector, name] of [
     `${name} popup CSS must delegate raised material to PopupSurface.`,
   )
   assert.ok(
-    source.includes("import '../popup-surface.css';"),
+    source.includes(materialImport),
     `${name} CSS must import PopupSurface CSS for registry-installed consumers.`,
   )
 }

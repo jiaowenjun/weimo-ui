@@ -18,8 +18,8 @@ function assertNotExists(relativePath, message) {
 }
 
 const packageJson = readJson('package.json')
-const manifest = readProjectFile('src/docs/components-manifest.ts')
-const definitionsIndex = readProjectFile('src/docs/component-definitions/index.ts')
+const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
 const ocrDetailSource = readProjectFile('packages/weimo-ui-card/src/components/ocr-detail.tsx')
 const ocrDetailContract = readProjectFile('scripts/ocr-detail-contract.test.mjs')
 const registryContract = readProjectFile('scripts/registry-contract.test.mjs')
@@ -60,7 +60,7 @@ assert.ok(
 assertNotExists('src/components/ocr-review.tsx', 'Removed OcrReview source must not exist.')
 assertNotExists('src/components/ocr-review.css', 'Removed OcrReview CSS must not exist.')
 assertNotExists(
-  'src/docs/component-definitions/ocr-review.tsx',
+  'packages/weimo-ui-site/src/docs/component-definitions/ocr-review.tsx',
   'Removed OcrReview docs definition must not exist.',
 )
 

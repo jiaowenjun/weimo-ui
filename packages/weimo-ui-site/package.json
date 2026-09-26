@@ -1,0 +1,48 @@
+{
+  "name": "weimo-ui-site",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "files": [
+    "src",
+    "public",
+    "index.html",
+    "vite.config.ts",
+    "tsconfig.json",
+    "README.md"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -p tsconfig.json --noEmit --pretty false && vite build",
+    "preview": "vite preview",
+    "test:typecheck": "tsc -p tsconfig.json --noEmit --pretty false"
+  },
+  "dependencies": {
+    "@base-ui/react": "1.5.0",
+    "class-variance-authority": "^0.7.1",
+    "lucide-react": "1.24.0",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "react-router": "7.18.1",
+    "weimo-ui-card": "workspace:*",
+    "weimo-ui-core": "workspace:*",
+    "weimo-ui-image": "workspace:*",
+    "weimo-ui-markdown": "workspace:*",
+    "weimo-ui-stats": "workspace:*",
+    "weimo-ui-tagtree": "workspace:*"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.7",
+    "@rolldown/plugin-babel": "^0.2.4",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^25.9.8",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "babel-plugin-react-compiler": "^1.0.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "~6.0.3",
+    "vite": "^8.3.0"
+  }
+}

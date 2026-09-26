@@ -49,10 +49,10 @@ const css = readProjectFile('packages/weimo-ui-tagtree/src/components/chip-butto
 const surfaceCss = readProjectFile('packages/weimo-ui-core/src/components/capsule-frame.css')
 const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
-const docsSource = readProjectFile('src/docs/component-definitions/capsule.tsx')
-const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const manifestSource = readProjectFile('src/docs/components-manifest.ts')
-const appCss = readProjectFile('src/App.css')
+const docsSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/capsule.tsx')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 
 const baseBlock = cssBlockFor(surfaceCss, '.capsule-frame')
 const defaultLayerBlock = cssBlockFor(surfaceCss, '.capsule-frame::before')
@@ -270,7 +270,7 @@ assert.ok(
 assert.ok(
   docsSource.includes("import { useLayoutEffect, useRef, useState } from 'react'") &&
     docsSource.includes("import { Hash, Plus, X } from 'lucide-react'") &&
-    docsSource.includes("import { ChipButton } from '../../components/chip-button'") &&
+    docsSource.includes("import { ChipButton } from 'weimo-ui-tagtree/components/chip-button'") &&
     docsSource.includes("import { GlassPreviewCard } from '../glass-preview-card'") &&
     docsSource.includes("import { PreviewToggle } from '../preview-toggle'") &&
     docsSource.includes("id: 'capsule'") &&
@@ -287,7 +287,7 @@ assert.ok(
     docsSource.includes('function SuffixChipDemo') &&
     docsSource.includes('<SuffixChipDemo />') &&
     docsSource.includes('label="胶囊后缀"') &&
-    docsSource.includes("import { GhostIconButton } from '../../components/ghost-icon-button'") &&
+    docsSource.includes("import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'") &&
     docsSource.includes('suffix={') &&
     docsSource.includes('<GhostIconButton aria-label="移除标签" size="xs">') &&
     docsSource.includes('<X aria-hidden="true" />'),
@@ -320,7 +320,7 @@ assert.ok(
   'ChipButton docs definition must include an internal preview with state and width-change toggles.',
 )
 assert.ok(
-  !docsSource.includes("import { Button } from '../../components/coss/button'") &&
+  !docsSource.includes("import { Button } from 'weimo-ui-core/components/coss/button'") &&
     !/<Button\b/.test(docsSource),
   'ChipButton docs text toggles must not use coss Button.',
 )

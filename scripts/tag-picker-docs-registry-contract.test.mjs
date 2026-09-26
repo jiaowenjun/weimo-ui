@@ -11,9 +11,9 @@ function readProjectFile(relativePath) {
   return readFileSync(absolutePath, 'utf8')
 }
 
-const manifestSource = readProjectFile('src/docs/components-manifest.ts')
-const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const definitionSource = readProjectFile('src/docs/component-definitions/tag.tsx')
+const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/tag.tsx')
 const pageSource = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx')
 const registryItem = JSON.parse(readProjectFile('registry/tag-picker.json'))
 const rootRegistry = JSON.parse(readProjectFile('registry.json'))
@@ -73,7 +73,7 @@ for (const snippet of [
   )
 }
 assert.ok(
-  !pageSource.includes("from '../../components/coss/button'") &&
+  !pageSource.includes("from 'weimo-ui-core/components/coss/button'") &&
   !pageSource.includes('tag-picker-preview__trigger') &&
   !pageSource.includes('<Button') &&
   !pageSource.includes('选择标签'),

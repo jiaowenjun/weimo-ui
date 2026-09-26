@@ -37,11 +37,11 @@ function assertNotIncludes(source, snippet, message) {
 const componentSource = readProjectFile('packages/weimo-ui-core/src/components/card-tool-bar.tsx')
 const componentCss = readProjectFile('packages/weimo-ui-core/src/components/card-tool-bar.css')
 const docsDefinitionSource = readProjectFile(
-  'src/docs/component-definitions/tagged-card.tsx',
+  'packages/weimo-ui-site/src/docs/component-definitions/tagged-card.tsx',
 )
-const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const manifestSource = readProjectFile('src/docs/components-manifest.ts')
-const appCss = readProjectFile('src/App.css')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const packageJson = readJson('package.json')
 const rootRegistry = readJson('registry.json')
 const registryItemsByName = new Map(rootRegistry.items.map((item) => [item.name, item]))
@@ -125,10 +125,10 @@ assertNotIncludes(
 for (const snippet of [
   "import { useState } from 'react'",
   "import { Heading1, List, Quote } from 'lucide-react'",
-  "import { CardToolBar } from '../../components/card-tool-bar'",
-  "import { Button } from '../../components/coss/button'",
-  "import { Toolbar, ToolbarButton, ToolbarGroup } from '../../components/coss/toolbar'",
-  "import { TextButton } from '../../components/text-button'",
+  "import { CardToolBar } from 'weimo-ui-core/components/card-tool-bar'",
+  "import { Button } from 'weimo-ui-core/components/coss/button'",
+  "import { Toolbar, ToolbarButton, ToolbarGroup } from 'weimo-ui-core/components/coss/toolbar'",
+  "import { TextButton } from 'weimo-ui-core/components/text-button'",
   "id: 'tagged-card'",
   "const [saveDisabled, setSaveDisabled] = useState(false)",
   '<CardToolBar',

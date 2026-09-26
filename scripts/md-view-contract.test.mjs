@@ -28,10 +28,10 @@ function cssBlockFor(source, selector) {
 
 const componentSource = readProjectFile('packages/weimo-ui-markdown/src/components/md-view.tsx')
 const mdViewCssSource = readProjectFile('packages/weimo-ui-markdown/src/components/md-view.css')
-const manifestSource = readProjectFile('src/docs/components-manifest.ts')
-const definitionSource = readProjectFile('src/docs/component-definitions/markdown.tsx')
-const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const cssSource = readProjectFile('src/App.css')
+const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/markdown.tsx')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const cssSource = readProjectFile('packages/weimo-ui-site/src/App.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 const markdownPackageJson = JSON.parse(readProjectFile('packages/weimo-ui-markdown/package.json'))
 const registryJson = JSON.parse(readProjectFile('registry.json'))
@@ -319,8 +319,8 @@ assert.ok(
 
 for (const snippet of [
   "import { useState } from 'react'",
-  "import { MdView, type MdViewMode } from '../../components/md-view'",
-  "import { TextButton } from '../../components/text-button'",
+  "import { MdView, type MdViewMode } from 'weimo-ui-markdown/components/md-view'",
+  "import { TextButton } from 'weimo-ui-core/components/text-button'",
   "import { PreviewToggle } from '../preview-toggle'",
   "import { mdRenderSample } from './markdown-sample'",
   "const [mode, setMode] = useState<MdViewMode>('view')",
@@ -357,7 +357,7 @@ assert.ok(
   'MdView docs preview must show only the editor/view surface without measurement or raw-source panels.',
 )
 assert.ok(
-  !definitionSource.includes("import { Button } from '../../components/coss/button'") &&
+  !definitionSource.includes("import { Button } from 'weimo-ui-core/components/coss/button'") &&
     !/<Button\b/.test(definitionSource),
   'MdView docs mode toggle must not use coss Button.',
 )

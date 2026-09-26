@@ -44,12 +44,12 @@ const rootFrostedSurfaceItem = rootRegistry.items.find(
 )
 const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const styleRegistry = readJson('registry/style.json')
-const componentManifestSource = readProjectFile('src/docs/components-manifest.ts')
+const componentManifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const componentDefinitionsIndexSource = readProjectFile(
-  'src/docs/component-definitions/index.ts',
+  'packages/weimo-ui-site/src/docs/component-definitions/index.ts',
 )
 const frostedSurfaceDefinitionSource = readProjectFile(
-  'src/docs/component-definitions/surface.tsx',
+  'packages/weimo-ui-site/src/docs/component-definitions/surface.tsx',
 )
 const frostedSurfaceSource = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.tsx')
 const frostedSurfaceModelSource = readProjectFile(
@@ -57,7 +57,7 @@ const frostedSurfaceModelSource = readProjectFile(
 )
 const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.css')
 const sliderCss = readProjectFile('packages/weimo-ui-core/src/components/slider.css')
-const appCss = readProjectFile('src/App.css')
+const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const frostedSurfaceModelContractModule = await import(
   `data:text/javascript;base64,${Buffer.from(
@@ -293,7 +293,7 @@ for (const removedFilePath of [
   'src/components/smart-glass-surface.tsx',
   'src/components/smart-glass-surface-model.ts',
   'src/components/smart-glass-surface.css',
-  'src/docs/component-definitions/smart-glass-surface.tsx',
+  'packages/weimo-ui-site/src/docs/component-definitions/smart-glass-surface.tsx',
   'scripts/smart-glass-surface-contract.test.mjs',
 ]) {
   assert.ok(!existsSync(join(root, removedFilePath)), `${removedFilePath} must be removed.`)
@@ -334,7 +334,7 @@ for (const snippet of [
 for (const removedFilePath of [
   'src/components/coss/slider.tsx',
   'src/components/coss/slider.css',
-  'src/docs/gray-slider.tsx',
+  'packages/weimo-ui-site/src/docs/gray-slider.tsx',
 ]) {
   assert.ok(!existsSync(join(root, removedFilePath)), `${removedFilePath} must be removed.`)
 }
@@ -345,8 +345,8 @@ assertOmits(
 )
 
 for (const snippet of [
-  "import { FrostedSurface } from '../../components/frosted-surface'",
-  "import { ComponentPreviewCard } from '../../components/component-preview-card'",
+  "import { FrostedSurface } from 'weimo-ui-core/components/frosted-surface'",
+  "import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'",
   "from '../glass-preview-card'",
   "id: 'surface'",
   '静态卡片、亮度自适应磨砂玻璃层、液态玻璃与抬升浮层的材质总览',
@@ -378,14 +378,14 @@ assertOmits(
 // 滑块 + 主题归位 + 条纹背景的玻璃卡外壳抽到 GlassPreviewCard 共享组件
 // （Surface 页磨砂材质卡与按钮页玻璃图标按钮卡共用），契约锁共享组件源。
 const glassPreviewCardModuleSource = readProjectFile(
-  'src/docs/glass-preview-card.tsx',
+  'packages/weimo-ui-site/src/docs/glass-preview-card.tsx',
 )
 
 for (const snippet of [
   'function GlassPreviewCard(',
-  "from '../components/component-preview-card'",
+  "from 'weimo-ui-core/components/component-preview-card'",
   "from './glass-preview'",
-  "from '../components/slider'",
+  "from 'weimo-ui-core/components/slider'",
   'initialGray ??',
   'onGrayChange?: (gray: number) => void',
   'onGrayChange?.(glassBackgroundGray)',
@@ -417,10 +417,10 @@ assert.ok(
 )
 
 // 条纹背景机制与自研滑块抽到 docs 共享模块（Surface 页与按钮页玻璃卡共用），契约随之锁共享文件。
-const glassPreviewModuleSource = readProjectFile('src/docs/glass-preview.ts')
+const glassPreviewModuleSource = readProjectFile('packages/weimo-ui-site/src/docs/glass-preview.ts')
 
 for (const snippet of [
-  "from '../components/bg-color'",
+  "from 'weimo-ui-core/components/bg-color'",
   'parseColorLightness(bgColorToneMap.card.value.dark)?.lightness ?? 12',
   'parseColorLightness(bgColorToneMap.card.value.light)?.lightness ?? 100',
   'export const glassBackgroundGrayMidpoint = (glassBackgroundGrayDark + glassBackgroundGrayLight) / 2',

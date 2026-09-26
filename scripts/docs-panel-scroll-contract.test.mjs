@@ -26,7 +26,7 @@ function assertDeclaration(block, declaration, message) {
   assert.ok(block.includes(declaration), message)
 }
 
-const css = readProjectFile('src/App.css')
+const css = readProjectFile('packages/weimo-ui-site/src/App.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 
 const demoPanel = blockFor(css, '.demo-block__panel')

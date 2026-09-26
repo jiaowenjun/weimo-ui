@@ -7,7 +7,7 @@ import { createServer } from 'vite'
 const root = fileURLToPath(new URL('..', import.meta.url))
 const server = await createServer({
   appType: 'custom',
-  configFile: fileURLToPath(new URL('../vite.config.ts', import.meta.url)),
+  configFile: fileURLToPath(new URL('../packages/weimo-ui-site/vite.config.ts', import.meta.url)),
   logLevel: 'error',
   root,
   server: { middlewareMode: true },

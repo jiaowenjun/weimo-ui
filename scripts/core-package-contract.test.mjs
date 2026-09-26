@@ -36,7 +36,7 @@ async function loadTsModule(relativePath) {
   return import(`data:text/javascript;charset=utf-8,${encodeURIComponent(transpiled)}`)
 }
 
-const { componentManifest } = await loadTsModule('src/docs/components-manifest.ts')
+const { componentManifest } = await loadTsModule('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const rootPackage = JSON.parse(readProjectFile('package.json'))
 const corePackage = JSON.parse(readProjectFile('packages/weimo-ui-core/package.json'))
 const workspace = readProjectFile('pnpm-workspace.yaml')

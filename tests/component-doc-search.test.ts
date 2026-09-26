@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
-import { componentDocs } from '../src/docs/component-docs'
-import { searchComponentDocs } from '../src/docs/search-component-docs'
+import { componentDocs } from '../packages/weimo-ui-site/src/docs/component-docs'
+import { searchComponentDocs } from '../packages/weimo-ui-site/src/docs/search-component-docs'
 
 function resultIds(query: string) {
   return searchComponentDocs(componentDocs, query).map((doc) => doc.id)

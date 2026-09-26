@@ -186,10 +186,10 @@ assert.ok(
   'Card must let CardTopBar own the display mode action control.',
 )
 
-const docsDefinitionSource = readProjectFile('src/docs/component-definitions/tagged-card.tsx')
-const componentDefinitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const manifestSource = readProjectFile('src/docs/components-manifest.ts')
-const appCss = readProjectFile('src/App.css')
+const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/tagged-card.tsx')
+const componentDefinitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 
 for (const snippet of [
   "id: 'card-top-bar'",
@@ -222,8 +222,8 @@ assert.ok(
 
 for (const snippet of [
   "import { useState } from 'react'",
-  "import { CardTopBar } from '../../components/card-top-bar'",
-  "import { TextButton } from '../../components/text-button'",
+  "import { CardTopBar } from 'weimo-ui-core/components/card-top-bar'",
+  "import { TextButton } from 'weimo-ui-core/components/text-button'",
   "id: 'tagged-card'",
   "summary: '笔记卡片、新建草稿壳层、卡片工具栏与卡片顶部栏总览'",
   "useState<'display' | 'edit'>('display')",
@@ -242,8 +242,8 @@ for (const snippet of [
 }
 for (const snippet of [
   "import { Ellipsis, X } from 'lucide-react'",
-  "import { IconButton } from '../../components/icon-button'",
-  "import { ActionMenu } from '../../components/menu'",
+  "import { IconButton } from 'weimo-ui-core/components/icon-button'",
+  "import { ActionMenu } from 'weimo-ui-core/components/menu'",
   'const [menuOpen, setMenuOpen] = useState(false)',
   'const actionSlot = (',
   'actionSlot={actionSlot}',

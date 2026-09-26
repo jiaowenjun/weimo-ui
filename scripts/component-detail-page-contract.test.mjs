@@ -72,28 +72,28 @@ function assertDecodablePngDataUrl(dataUrl, message) {
   assert.ok(inflateSync(Buffer.concat(idatChunks)).length > 0, `${message} PNG image data must inflate.`)
 }
 
-const detailPageSource = readProjectFile('src/docs/pages/component-detail-page.tsx')
-const docsShellSource = readProjectFile('src/docs/docs-shell.tsx')
-const componentDocsSource = readProjectFile('src/docs/component-docs.tsx')
-const mdRenderDefinitionSource = readProjectFile('src/docs/component-definitions/markdown.tsx')
-const imageViewDefinitionSource = readProjectFile('src/docs/component-definitions/image.tsx')
-const buttonDefinitionSource = readProjectFile('src/docs/component-definitions/button.tsx')
-const borderTokensDefinitionSource = readProjectFile('src/docs/component-definitions/border-tokens.tsx')
-const componentDefinitionsSource = readProjectFile('src/docs/component-definitions/tagged-card.tsx') +
+const detailPageSource = readProjectFile('packages/weimo-ui-site/src/docs/pages/component-detail-page.tsx')
+const docsShellSource = readProjectFile('packages/weimo-ui-site/src/docs/docs-shell.tsx')
+const componentDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/component-docs.tsx')
+const mdRenderDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/markdown.tsx')
+const imageViewDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/image.tsx')
+const buttonDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/button.tsx')
+const borderTokensDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/border-tokens.tsx')
+const componentDefinitionsSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/tagged-card.tsx') +
   mdRenderDefinitionSource +
   imageViewDefinitionSource +
-  readProjectFile('src/docs/component-definitions/surface.tsx') +
-  readProjectFile('src/docs/component-definitions/tag.tsx') +
-  readProjectFile('src/docs/component-definitions/stat.tsx') +
+  readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/surface.tsx') +
+  readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/tag.tsx') +
+  readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/stat.tsx') +
   buttonDefinitionSource +
   borderTokensDefinitionSource +
-  readProjectFile('src/docs/component-definitions/menu.tsx') +
-  readProjectFile('src/docs/component-definitions/bar.tsx') +
-  readProjectFile('src/docs/component-definitions/page-layout.tsx') +
-  readProjectFile('src/docs/component-definitions/action-dialog.tsx') +
-  readProjectFile('src/docs/component-definitions/capsule.tsx') +
+  readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/menu.tsx') +
+  readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/bar.tsx') +
+  readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/page-layout.tsx') +
+  readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/action-dialog.tsx') +
+  readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/capsule.tsx') +
   mdRenderDefinitionSource
-const css = readProjectFile('src/App.css')
+const css = readProjectFile('packages/weimo-ui-site/src/App.css')
 const iconPreviewRowBlock = blockFor(css, '.icon-preview__row')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 
@@ -109,23 +109,23 @@ assert.ok(
 )
 
 assert.ok(
-  !existsSync(join(root, 'src/docs/component-definitions/editable-card.tsx')),
+  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/editable-card.tsx')),
   'Removed EditableCard detail docs definition must not exist.',
 )
 assert.ok(
-  existsSync(join(root, 'src/docs/component-definitions/tagged-card.tsx')),
+  existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/tagged-card.tsx')),
   'Merged tagged-card detail docs definition must exist.',
 )
 assert.ok(
-  !existsSync(join(root, 'src/docs/component-definitions/tag-edit-bar.tsx')),
+  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/tag-edit-bar.tsx')),
   'Removed TagEditBar detail docs definition must not exist.',
 )
 assert.ok(
-  existsSync(join(root, 'src/docs/component-definitions/capsule.tsx')),
+  existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/capsule.tsx')),
   'Merged Capsule detail docs definition must exist.',
 )
 assert.ok(
-  existsSync(join(root, 'src/docs/component-definitions/surface.tsx')),
+  existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/surface.tsx')),
   'Surface detail docs definition must exist.',
 )
 
@@ -157,7 +157,7 @@ for (const snippet of [
   'API 参考',
   'api-heading',
   'selected.props',
-  "from '../../components/coss/tabs'",
+  "from 'weimo-ui-core/components/coss/tabs'",
   '<TabsTab value="code">',
   '<TabsTab value="preview">',
   'selected.code',
@@ -229,7 +229,7 @@ assert.ok(
 )
 
 assert.ok(
-  mdRenderDefinitionSource.includes("import { MdRender } from '../../components/md-render'") &&
+  mdRenderDefinitionSource.includes("import { MdRender } from 'weimo-ui-markdown/components/md-render'") &&
     mdRenderDefinitionSource.includes("id: 'markdown'") &&
     mdRenderDefinitionSource.includes('function MdRenderPreview()') &&
     mdRenderDefinitionSource.includes('<MdRenderPreview />') &&
@@ -254,7 +254,7 @@ for (const selector of [
 }
 
 assert.ok(
-  imageViewDefinitionSource.includes("import { ImageView, ImageViewDisplayModeMenu, type ImageViewDisplayMode } from '../../../packages/weimo-ui-image/src/components/image-view'") &&
+  imageViewDefinitionSource.includes("import { ImageView, ImageViewDisplayModeMenu, type ImageViewDisplayMode } from 'weimo-ui-image/components/image-view'") &&
     imageViewDefinitionSource.includes("id: 'image'") &&
     imageViewDefinitionSource.includes("const sampleImage = 'data:image/png;base64,") &&
     imageViewDefinitionSource.includes('src={sampleImage}') &&
@@ -285,7 +285,7 @@ assertDecodablePngDataUrl(
   'ImageView detail preview sample image',
 )
 assert.ok(
-    componentDefinitionsSource.includes("import { FrostedSurface } from '../../components/frosted-surface'") &&
+    componentDefinitionsSource.includes("import { FrostedSurface } from 'weimo-ui-core/components/frosted-surface'") &&
     componentDefinitionsSource.includes("id: 'surface'") &&
     componentDefinitionsSource.includes('静态卡片、亮度自适应磨砂玻璃层、液态玻璃与抬升浮层的材质总览') &&
     componentDefinitionsSource.includes("from '../glass-preview-card'") &&
@@ -297,10 +297,10 @@ assert.ok(
   'FrostedSurface detail page must render a slider-driven dark-to-light adaptive material preview via the shared GlassPreviewCard.',
 )
 assert.ok(
-    buttonDefinitionSource.includes("import { FrostedIconButton } from '../../components/frosted-icon-button'") &&
+    buttonDefinitionSource.includes("import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'") &&
     buttonDefinitionSource.includes("import { PreviewToggle } from '../preview-toggle'") &&
     buttonDefinitionSource.includes("import { useState } from 'react'") &&
-    buttonDefinitionSource.includes("import { TextButton } from '../../components/text-button'") &&
+    buttonDefinitionSource.includes("import { TextButton } from 'weimo-ui-core/components/text-button'") &&
     buttonDefinitionSource.includes("id: 'button'") &&
     !buttonDefinitionSource.includes('glassIconButtonPreviewScenes') &&
     buttonDefinitionSource.includes("from '../glass-preview-card'") &&
@@ -321,14 +321,14 @@ assert.ok(
     !buttonDefinitionSource.includes('icon-preview-shell') &&
     !buttonDefinitionSource.includes('icon-preview__controls') &&
     buttonDefinitionSource.includes('<TextButton') &&
-    !buttonDefinitionSource.includes("from '../../components/coss/button'") &&
+    !buttonDefinitionSource.includes("from 'weimo-ui-core/components/coss/button'") &&
     !buttonDefinitionSource.includes("variant=\"outline\"") &&
     !buttonDefinitionSource.includes('className={`icon-preview__scene icon-preview__scene--${scene.id}`}') &&
     (buttonDefinitionSource.match(/<FrostedIconButton\b[^>\n]*disabled=\{disabled\}/g) ?? []).length === 2 &&
     !buttonDefinitionSource.includes('状态切换菜单') &&
     buttonDefinitionSource.includes('preview: () => <ButtonDemo />') &&
     buttonDefinitionSource.includes('<FrostedIconButtonPreview />') &&
-    !componentDefinitionsSource.includes("from '../../components/icon-button'") &&
+    !componentDefinitionsSource.includes("from 'weimo-ui-core/components/icon-button'") &&
     !componentDefinitionsSource.includes("id: 'icon-button'") &&
     !componentDefinitionsSource.includes('<IconButton'),
   'Button page glass icon card must reuse the shared GlassPreviewCard (slider + striped glass background) from the Surface glass card.',
@@ -343,9 +343,9 @@ assert.ok(
   'BorderColor detail page must keep background-aware token variants searchable without rendering redundant prose.',
 )
 assert.ok(
-    buttonDefinitionSource.includes("import { GhostIconButton } from '../../components/ghost-icon-button'") &&
+    buttonDefinitionSource.includes("import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'") &&
     buttonDefinitionSource.includes("import { useState } from 'react'") &&
-    buttonDefinitionSource.includes("import { TextButton } from '../../components/text-button'") &&
+    buttonDefinitionSource.includes("import { TextButton } from 'weimo-ui-core/components/text-button'") &&
     buttonDefinitionSource.includes('function GhostIconButtonPreview()') &&
     buttonDefinitionSource.includes('const [disabled, setDisabled] = useState(false)') &&
     buttonDefinitionSource.includes('setDisabled(!checked)') &&
@@ -354,7 +354,7 @@ assert.ok(
     !buttonDefinitionSource.includes('icon-preview-shell') &&
     !buttonDefinitionSource.includes('icon-preview__controls') &&
     buttonDefinitionSource.includes('<TextButton') &&
-    !buttonDefinitionSource.includes("from '../../components/coss/button'") &&
+    !buttonDefinitionSource.includes("from 'weimo-ui-core/components/coss/button'") &&
     !buttonDefinitionSource.includes("variant=\"outline\"") &&
     buttonDefinitionSource.includes('className="icon-button-preview"') &&
     buttonDefinitionSource.includes('普通背景') &&

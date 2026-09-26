@@ -13,18 +13,18 @@ function readProjectFile(relativePath) {
   return readFileSync(absolutePath, 'utf8')
 }
 
-const shellSource = readProjectFile('src/docs/docs-shell.tsx')
-const detailSource = readProjectFile('src/docs/pages/component-detail-page.tsx')
-const actionDialogDefinitionSource = readProjectFile('src/docs/component-definitions/action-dialog.tsx')
-const cardTopBarDefinitionSource = readProjectFile('src/docs/component-definitions/tagged-card.tsx')
-const mathDialogDefinitionSource = readProjectFile('src/docs/component-definitions/markdown.tsx')
+const shellSource = readProjectFile('packages/weimo-ui-site/src/docs/docs-shell.tsx')
+const detailSource = readProjectFile('packages/weimo-ui-site/src/docs/pages/component-detail-page.tsx')
+const actionDialogDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/action-dialog.tsx')
+const cardTopBarDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/tagged-card.tsx')
+const mathDialogDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/markdown.tsx')
 const tagTreeRowDefinitionSource = [
-  readProjectFile('src/docs/component-definitions/tag.tsx'),
+  readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/tag.tsx'),
   readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx'),
 ].join('\n')
-const barDefinitionSource = readProjectFile('src/docs/component-definitions/bar.tsx')
-const pageLayoutDefinitionSource = readProjectFile('src/docs/component-definitions/page-layout.tsx')
-const css = readProjectFile('src/App.css')
+const barDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/bar.tsx')
+const pageLayoutDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/page-layout.tsx')
+const css = readProjectFile('packages/weimo-ui-site/src/App.css')
 const tagPageCss = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 
@@ -100,7 +100,7 @@ assert.ok(
 )
 
 assert.ok(
-  !existsSync(join(root, 'src/docs/pages/component-gallery-page.tsx')),
+  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/pages/component-gallery-page.tsx')),
   'ComponentGalleryPage must be removed with the overview page.',
 )
 
@@ -153,8 +153,8 @@ assert.ok(
     cardTopBarDefinitionSource.includes('切换到展示态') &&
     cardTopBarDefinitionSource.includes('<CardTopBar') &&
     !cardTopBarDefinitionSource.includes("import { Ellipsis, X } from 'lucide-react'") &&
-    !cardTopBarDefinitionSource.includes("import { IconButton } from '../../components/icon-button'") &&
-    !cardTopBarDefinitionSource.includes("import { ActionMenu } from '../../components/menu'") &&
+    !cardTopBarDefinitionSource.includes("import { IconButton } from 'weimo-ui-core/components/icon-button'") &&
+    !cardTopBarDefinitionSource.includes("import { ActionMenu } from 'weimo-ui-core/components/menu'") &&
     !cardTopBarDefinitionSource.includes('const actionSlot = ('),
   'CardTopBar docs preview must use CardTopBar default ModeButton actions plus the external toggle.',
 )

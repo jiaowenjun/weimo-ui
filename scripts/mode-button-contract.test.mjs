@@ -25,13 +25,13 @@ function cssBlockFor(source, selector) {
 const componentSource = readProjectFile('packages/weimo-ui-core/src/components/mode-button.tsx')
 const componentCss = readProjectFile('packages/weimo-ui-core/src/components/mode-button.css')
 const docsDefinitionSource = readProjectFile(
-  'src/docs/component-definitions/button.tsx',
+  'packages/weimo-ui-site/src/docs/component-definitions/button.tsx',
 )
 const componentDefinitionsIndexSource = readProjectFile(
-  'src/docs/component-definitions/index.ts',
+  'packages/weimo-ui-site/src/docs/component-definitions/index.ts',
 )
-const manifestSource = readProjectFile('src/docs/components-manifest.ts')
-const appCss = readProjectFile('src/App.css')
+const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 
 const ghostIconButtonRenderCount = [...componentSource.matchAll(/<GhostIconButton\b/g)].length
@@ -130,10 +130,10 @@ assert.ok(
 
 for (const snippet of [
   "import { useState } from 'react'",
-  "import { TextButton } from '../../components/text-button'",
+  "import { TextButton } from 'weimo-ui-core/components/text-button'",
   'ModeButton,',
   'type ModeButtonMode,',
-  "} from '../../components/mode-button'",
+  "} from 'weimo-ui-core/components/mode-button'",
   "useState<ModeButtonMode>('display')",
   'function toggleMode(checked: boolean)',
   '<ModeButton',
@@ -151,7 +151,7 @@ for (const snippet of [
   assert.ok(docsDefinitionSource.includes(snippet), `docs definition must include ${snippet}.`)
 }
 assert.ok(
-  !docsDefinitionSource.includes("import { Button } from '../../components/coss/button'") &&
+  !docsDefinitionSource.includes("import { Button } from 'weimo-ui-core/components/coss/button'") &&
     !/<Button\b/.test(docsDefinitionSource),
   'ModeButton docs text toggle must not use coss Button.',
 )

@@ -21,10 +21,10 @@ const source = readProjectFile('packages/weimo-ui-image/src/components/canvas-tr
 const cacheSource = readProjectFile('packages/weimo-ui-image/src/components/canvas-transparency-cache.ts')
 const modelSource = readProjectFile('packages/weimo-ui-image/src/components/canvas-transparency-model.ts')
 const docsDefinition = readProjectFile(
-  'src/docs/component-definitions/image.tsx',
+  'packages/weimo-ui-site/src/docs/component-definitions/image.tsx',
 )
-const definitionsIndex = readProjectFile('src/docs/component-definitions/index.ts')
-const manifest = readProjectFile('src/docs/components-manifest.ts')
+const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const packageJson = readJson('package.json')
 const rootRegistry = readJson('registry.json')
 const standaloneRegistry = readJson('registry/canvas-transparency.json')

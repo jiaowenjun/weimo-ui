@@ -33,9 +33,9 @@ function cssBlockFor(source, selector) {
 const packageJson = readJson('package.json')
 const source = readProjectFile('packages/weimo-ui-card/src/components/ocr-composer.tsx')
 const css = readProjectFile('packages/weimo-ui-card/src/components/ocr-composer.css')
-const manifestSource = readProjectFile('src/docs/components-manifest.ts')
-const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const definitionSource = readProjectFile('src/docs/component-definitions/ocr.tsx')
+const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/ocr.tsx')
 const registry = readJson('registry.json')
 const standaloneRegistryItem = readJson('registry/ocr-composer.json')
 const rootRegistryItem = registry.items.find((item) => item.name === 'ocr-composer')
@@ -232,8 +232,8 @@ assert.ok(
 )
 
 for (const snippet of [
-  "import { OcrComposer } from '../../../packages/weimo-ui-card/src/components/ocr-composer'",
-  "import type { OcrComposerDraft } from '../../../packages/weimo-ui-card/src/components/ocr-composer'",
+  "import { OcrComposer } from 'weimo-ui-card/components/ocr-composer'",
+  "import type { OcrComposerDraft } from 'weimo-ui-card/components/ocr-composer'",
   "id: 'ocr'",
   '<OcrComposerDemo />',
 ]) {

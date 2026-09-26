@@ -110,15 +110,15 @@ function tokenValuesForSource(source, token) {
 const packageJson = readJson('package.json')
 const bgColorSource = readProjectFile('packages/weimo-ui-core/src/components/bg-color.ts')
 const bgColorCss = readProjectFile('packages/weimo-ui-core/src/components/bg-color.css')
-const manifestSource = readProjectFile('src/docs/components-manifest.ts')
-const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinitionSource = readProjectFile('src/docs/component-definitions/background-tokens.tsx')
-const textDocsSource = readProjectFile('src/docs/component-definitions/text-tokens.tsx')
-const appCss = readProjectFile('src/App.css')
+const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/background-tokens.tsx')
+const textDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/text-tokens.tsx')
+const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const tokenPreviewCardCss = readProjectFile('packages/weimo-ui-core/src/components/component-preview-card.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const dialogCss = readProjectFile('packages/weimo-ui-core/src/components/coss/dialog.css')
-const commandCss = readProjectFile('src/components/coss/command.css')
+const commandCss = readProjectFile('packages/weimo-ui-site/src/components/coss/command.css')
 const sidebarShellCss = readProjectFile('packages/weimo-ui-core/src/components/sidebar/sidebar-shell.css')
 const rootRegistry = readJson('registry.json')
 const styleRegistry = readJson('registry/style.json')
@@ -368,9 +368,9 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'background-tokens'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { ComponentPreviewCard } from '../../components/component-preview-card'") &&
-    docsDefinitionSource.includes("import { pressableToneMap, pressableTones } from '../../components/pressable'") &&
-    docsDefinitionSource.includes("from '../../components/bg-blur'") &&
+    docsDefinitionSource.includes("import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'") &&
+    docsDefinitionSource.includes("import { pressableToneMap, pressableTones } from 'weimo-ui-core/components/pressable'") &&
+    docsDefinitionSource.includes("from 'weimo-ui-core/components/bg-blur'") &&
     docsDefinitionSource.includes('bgColorSwatchTones') &&
     docsDefinitionSource.includes('swatchTones.map') &&
     docsDefinitionSource.includes('useIsDarkTheme()') &&
@@ -463,7 +463,7 @@ const selectionSampleBlock = blockFor(appCss, '.bg-color-preview__selection-samp
 const selectionHighlightBlock = blockFor(appCss, '.bg-color-preview__selection-highlight')
 const selectionPseudoBlock = blockFor(appCss, '.bg-color-preview__selection-sample ::selection')
 assert.ok(
-  textDocsSource.includes("from '../../components/bg-color'") &&
+  textDocsSource.includes("from 'weimo-ui-core/components/bg-color'") &&
     textDocsSource.includes('bgColorToneMap.selection') &&
     textDocsSource.includes('bg-color-preview__selection-sample') &&
     textDocsSource.includes('bg-color-preview__selection-copy') &&

@@ -29,9 +29,9 @@ function assertIncludes(block, snippet, message) {
 const source = readProjectFile('packages/weimo-ui-stats/src/components/stat-group.tsx')
 const css = readProjectFile('packages/weimo-ui-stats/src/components/stat-group.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
-const manifest = readProjectFile('src/docs/components-manifest.ts')
-const definitionsIndex = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinition = readProjectFile('src/docs/component-definitions/stat.tsx')
+const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const docsDefinition = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/stat.tsx')
 const rootRegistry = JSON.parse(readProjectFile('registry.json'))
 const standaloneRegistry = JSON.parse(readProjectFile('registry/stat-group.json'))
 const registryItem = rootRegistry.items.find((item) => item.name === 'stat-group')
@@ -140,7 +140,7 @@ assert.ok(
   'Stat docs definition must be wired into component-definitions/index.ts.',
 )
 assert.ok(
-  docsDefinition.includes("import { StatGroup } from '../../../packages/weimo-ui-stats/src/components/stat-group'") &&
+  docsDefinition.includes("import { StatGroup } from 'weimo-ui-stats/components/stat-group'") &&
     docsDefinition.includes("id: 'stat'") &&
     docsDefinition.includes('const wordMetric = formatWordCountMetric(12345)') &&
     docsDefinition.includes('items={sidebarStatsItems}') &&

@@ -41,12 +41,12 @@ const expectedScales = [
 const packageJson = readJson('package.json')
 const fontSizeSource = readProjectFile('packages/weimo-ui-core/src/components/font-size.ts')
 const fontSizeCss = readProjectFile('packages/weimo-ui-core/src/components/font-size.css')
-const cossCardCss = readProjectFile('src/components/coss/card.css')
+const cossCardCss = readProjectFile('packages/weimo-ui-site/src/components/coss/card.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
-const manifestSource = readProjectFile('src/docs/components-manifest.ts')
-const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinitionSource = readProjectFile('src/docs/component-definitions/text-tokens.tsx')
-const appCss = readProjectFile('src/App.css')
+const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/text-tokens.tsx')
+const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const rootRegistry = readJson('registry.json')
 const styleRegistry = readJson('registry/style.json')
 const standaloneRegistryItem = readJson('registry/font-size.json')
@@ -159,8 +159,8 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'text-tokens'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { ComponentPreviewCard } from '../../components/component-preview-card'") &&
-    docsDefinitionSource.includes("from '../../components/text-color'") &&
+    docsDefinitionSource.includes("import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'") &&
+    docsDefinitionSource.includes("from 'weimo-ui-core/components/text-color'") &&
     !docsDefinitionSource.includes('component-preview-card-demo__category') &&
     docsDefinitionSource.includes('fontFamilyTokens.map') &&
     docsDefinitionSource.includes("'--font-sans'") &&
@@ -193,7 +193,7 @@ assert.ok(
 )
 
 assert.ok(
-  docsDefinitionSource.includes("from '../../components/bg-color'") &&
+  docsDefinitionSource.includes("from 'weimo-ui-core/components/bg-color'") &&
     docsDefinitionSource.includes('bgColorToneMap.selection') &&
     docsDefinitionSource.includes("token={getBgColorToken('selection')}") &&
     docsDefinitionSource.includes('label={bgColorToneMap.selection.label}') &&

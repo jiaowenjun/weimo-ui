@@ -17,12 +17,11 @@ function assertTextButtonDocsControl(relativePath, labels) {
   const source = readProjectFile(relativePath)
 
   assert.ok(
-    (source.includes("import { TextButton } from '../../components/text-button'") ||
-      source.includes("import { TextButton } from 'weimo-ui-core/components/text-button'")),
+    source.includes("import { TextButton } from 'weimo-ui-core/components/text-button'"),
     `${relativePath} must import TextButton for docs text controls.`,
   )
   assert.ok(
-    !source.includes("import { Button } from '../../components/coss/button'"),
+    !source.includes("import { Button } from 'weimo-ui-core/components/coss/button'"),
     `${relativePath} must not import coss Button for docs text controls.`,
   )
   assert.ok(/<TextButton\b/.test(source), `${relativePath} must render TextButton.`)
@@ -34,22 +33,22 @@ function assertTextButtonDocsControl(relativePath, labels) {
 }
 
 for (const [relativePath, labels] of [
-  ['src/docs/component-definitions/action-dialog.tsx', ['打开内部对话框']],
-  ['src/docs/component-definitions/markdown.tsx', ['打开公式对话框']],
-  ['src/docs/component-definitions/button.tsx', ['文本按钮']],
+  ['packages/weimo-ui-site/src/docs/component-definitions/action-dialog.tsx', ['打开内部对话框']],
+  ['packages/weimo-ui-site/src/docs/component-definitions/markdown.tsx', ['打开公式对话框']],
+  ['packages/weimo-ui-site/src/docs/component-definitions/button.tsx', ['文本按钮']],
   ['packages/weimo-ui-tagtree/src/tag-page.tsx', ['切换到编辑态', '切换到展示态']],
 ]) {
   assertTextButtonDocsControl(relativePath, labels)
 }
 
-const cardToolBarSource = readProjectFile('src/docs/component-definitions/tagged-card.tsx')
+const cardToolBarSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/tagged-card.tsx')
 
 assert.ok(
-  cardToolBarSource.includes("import { TextButton } from '../../components/text-button'"),
+  cardToolBarSource.includes("import { TextButton } from 'weimo-ui-core/components/text-button'"),
   'CardToolBar docs must import TextButton for the save-disabled text toggle.',
 )
 assert.ok(
-  cardToolBarSource.includes("import { Button } from '../../components/coss/button'"),
+  cardToolBarSource.includes("import { Button } from 'weimo-ui-core/components/coss/button'"),
   'CardToolBar docs may keep coss Button for icon toolbar render slots.',
 )
 assert.ok(

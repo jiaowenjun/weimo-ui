@@ -39,9 +39,9 @@ function assertNotExists(relativePath, message) {
 }
 
 const packageJson = readJson('package.json')
-const manifest = readProjectFile('src/docs/components-manifest.ts')
-const definitionsIndex = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinition = readProjectFile('src/docs/component-definitions/image.tsx')
+const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const docsDefinition = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/image.tsx')
 const imageViewSource = readProjectFile('packages/weimo-ui-image/src/components/image-view.tsx')
 const imageViewCss = readProjectFile('packages/weimo-ui-image/src/components/image-view.css')
 const ocrDetailSource = readProjectFile('packages/weimo-ui-card/src/components/ocr-detail.tsx')
@@ -77,8 +77,8 @@ for (const relativePath of [
   'src/components/image-detail.css',
   'src/components/image-detail-view.tsx',
   'src/components/image-detail-view.css',
-  'src/docs/component-definitions/image-detail.tsx',
-  'src/docs/component-definitions/image-detail-view.tsx',
+  'packages/weimo-ui-site/src/docs/component-definitions/image-detail.tsx',
+  'packages/weimo-ui-site/src/docs/component-definitions/image-detail-view.tsx',
   'registry/image-detail.json',
   'registry/image-detail-view.json',
 ]) {
@@ -320,7 +320,7 @@ assert.ok(
 
 for (const snippet of [
   "import { useState } from 'react'",
-  "import { ImageView, ImageViewDisplayModeMenu, type ImageViewDisplayMode } from '../../../packages/weimo-ui-image/src/components/image-view'",
+  "import { ImageView, ImageViewDisplayModeMenu, type ImageViewDisplayMode } from 'weimo-ui-image/components/image-view'",
   "id: 'image'",
   "const [displayMode, setDisplayMode] = useState<ImageViewDisplayMode>('fit-width')",
   '<ImageViewDisplayModeMenu',

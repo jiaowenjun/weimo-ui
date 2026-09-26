@@ -38,9 +38,9 @@ execFileSync(process.execPath, ['scripts/sync-component-catalog.mjs', '--check']
 })
 
 const { componentGroups, componentManifest } = await loadTsModule(
-  'src/docs/components-manifest.ts',
+  'packages/weimo-ui-site/src/docs/components-manifest.ts',
 )
-const componentDocsSource = readProjectFile('src/docs/component-docs.tsx')
+const componentDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/component-docs.tsx')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 
 assert.ok(Array.isArray(componentManifest), 'componentManifest must export an array.')
@@ -83,7 +83,7 @@ for (const groupId of expectedGroupIds) {
 }
 
 for (const item of componentManifest) {
-  const definitionPath = `src/docs/component-definitions/${item.id}.tsx`
+  const definitionPath = `packages/weimo-ui-site/src/docs/component-definitions/${item.id}.tsx`
 
   assert.ok(!componentIds.has(item.id), `${item.id} must be unique.`)
   assert.ok(!packageExports.has(item.packageExport), `${item.packageExport} must be unique.`)

@@ -35,10 +35,10 @@ const rootRegistry = readJson('registry.json')
 const standaloneRegistryItem = readJson('registry/text-button.json')
 const source = readProjectFile('packages/weimo-ui-core/src/components/text-button.tsx')
 const css = readProjectFile('packages/weimo-ui-core/src/components/text-button.css')
-const docsSource = readProjectFile('src/docs/component-definitions/button.tsx')
-const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const manifestSource = readProjectFile('src/docs/components-manifest.ts')
-const appCss = readProjectFile('src/App.css')
+const docsSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/button.tsx')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const registryItem = rootRegistry.items.find((item) => item.name === 'text-button')
 
 const baseBlock = cssBlockFor(css, '.text-button')
@@ -150,7 +150,7 @@ assert.ok(
 )
 
 for (const snippet of [
-  "import { TextButton } from '../../components/text-button'",
+  "import { TextButton } from 'weimo-ui-core/components/text-button'",
   "id: 'button'",
   "summary: '文本按钮、幽灵/磨砂图标按钮、磨砂图标按钮组与模式按钮的按钮总览'",
   'preview: () => <ButtonDemo />',
@@ -185,10 +185,10 @@ assert.ok(
   'TextButton manifest entry must be merged into the Button page instead of staying standalone.',
 )
 for (const removedFilePath of [
-  'src/docs/component-definitions/text-button.tsx',
-  'src/docs/component-definitions/ghost-icon-button.tsx',
-  'src/docs/component-definitions/frosted-icon-button.tsx',
-  'src/docs/component-definitions/mode-button.tsx',
+  'packages/weimo-ui-site/src/docs/component-definitions/text-button.tsx',
+  'packages/weimo-ui-site/src/docs/component-definitions/ghost-icon-button.tsx',
+  'packages/weimo-ui-site/src/docs/component-definitions/frosted-icon-button.tsx',
+  'packages/weimo-ui-site/src/docs/component-definitions/mode-button.tsx',
 ]) {
   assert.ok(
     !existsSync(join(root, removedFilePath)),
@@ -196,9 +196,9 @@ for (const removedFilePath of [
   )
 }
 assert.ok(
-  docsSource.includes("import { TextButton } from '../../components/text-button'") &&
+  docsSource.includes("import { TextButton } from 'weimo-ui-core/components/text-button'") &&
     docsSource.includes('<TextButton') &&
-    !docsSource.includes("from '../../components/coss/button'") &&
+    !docsSource.includes("from 'weimo-ui-core/components/coss/button'") &&
     !docsSource.includes('variant="outline"'),
   'Button page disabled toggles must use the shared TextButton instead of a local coss Button.',
 )

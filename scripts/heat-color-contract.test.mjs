@@ -40,10 +40,10 @@ const heatColorSource = readProjectFile('packages/weimo-ui-core/src/components/h
 const heatColorCss = readProjectFile('packages/weimo-ui-core/src/components/heat-color.css')
 const heatmapCss = readProjectFile('packages/weimo-ui-stats/src/components/heatmap/heatmap.css')
 const heatmapSource = readProjectFile('packages/weimo-ui-stats/src/components/heatmap/heatmap.tsx')
-const backgroundTokensDocsDefinitionSource = readProjectFile('src/docs/component-definitions/background-tokens.tsx')
-const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const manifestSource = readProjectFile('src/docs/components-manifest.ts')
-const appCss = readProjectFile('src/App.css')
+const backgroundTokensDocsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/background-tokens.tsx')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const rootRegistry = readJson('registry.json')
 const styleRegistry = readJson('registry/style.json')
@@ -163,15 +163,15 @@ assert.ok(
 )
 
 assert.ok(
-  !existsSync(join(root, 'src/docs/component-definitions/heat-color.tsx')) &&
+  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/heat-color.tsx')) &&
     !definitionsIndexSource.includes("from './heat-color'") &&
     !definitionsIndexSource.includes('heatColorDefinition') &&
     /id: 'heat-color',[\s\S]*?docs: false,/.test(manifestSource),
   'HeatColor must remain public without exposing a separate detail page.',
 )
 assert.ok(
-  backgroundTokensDocsDefinitionSource.includes("from '../../components/heat-color'") &&
-    backgroundTokensDocsDefinitionSource.includes("from '../../components/component-preview-card'") &&
+  backgroundTokensDocsDefinitionSource.includes("from 'weimo-ui-core/components/heat-color'") &&
+    backgroundTokensDocsDefinitionSource.includes("from 'weimo-ui-core/components/component-preview-card'") &&
     backgroundTokensDocsDefinitionSource.includes('heatColorLevels.map') &&
     backgroundTokensDocsDefinitionSource.includes('heatColorMap[level]') &&
     backgroundTokensDocsDefinitionSource.includes('getHeatColorClassName(level)') &&

@@ -16,14 +16,14 @@ function readProjectFile(relativePath) {
 const componentSource = readProjectFile('packages/weimo-ui-core/src/components/liquid-glass.tsx')
 const componentCss = readProjectFile('packages/weimo-ui-core/src/components/liquid-glass.css')
 const engineSource = readProjectFile('packages/weimo-ui-core/src/components/liquid-glass-react/index.tsx')
-const definitionSource = readProjectFile('src/docs/component-definitions/surface.tsx')
-const tileSource = readProjectFile('src/docs/liquid-glass-tile.tsx')
-const buttonDefinitionSource = readProjectFile('src/docs/component-definitions/button.tsx')
-const capsuleDefinitionSource = readProjectFile('src/docs/component-definitions/capsule.tsx')
-const barDefinitionSource = readProjectFile('src/docs/component-definitions/bar.tsx')
-const pageLayoutDefinitionSource = readProjectFile('src/docs/component-definitions/page-layout.tsx')
-const manifestSource = readProjectFile('src/docs/components-manifest.ts')
-const appCss = readProjectFile('src/App.css')
+const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/surface.tsx')
+const tileSource = readProjectFile('packages/weimo-ui-site/src/docs/liquid-glass-tile.tsx')
+const buttonDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/button.tsx')
+const capsuleDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/capsule.tsx')
+const barDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/bar.tsx')
+const pageLayoutDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/page-layout.tsx')
+const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const frostedSurfaceSource = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.tsx')
 const registryItem = JSON.parse(readProjectFile('registry/liquid-glass.json'))
 const packageJson = JSON.parse(readProjectFile('package.json'))
@@ -94,7 +94,7 @@ for (const snippet of [
   '<GlassPreviewCard',
   'label="液态玻璃材质"',
   '<LiquidGlassSurface',
-  "from '../../components/liquid-glass'",
+  "from 'weimo-ui-core/components/liquid-glass'",
   "import { LiquidGlassTile } from '../liquid-glass-tile'",
 ]) {
   assert.ok(
@@ -103,7 +103,7 @@ for (const snippet of [
   )
 }
 for (const snippet of [
-  "import { useFrostedSurfaceBackgroundToneRef } from '../components/frosted-surface'",
+  "import { useFrostedSurfaceBackgroundToneRef } from 'weimo-ui-core/components/frosted-surface'",
   'data-background-tone={backgroundTone ?? undefined}',
 ]) {
   assert.ok(tileSource.includes(snippet), `liquid-glass-tile.tsx must include ${snippet}.`)
@@ -165,7 +165,7 @@ for (const snippet of [
   )
 }
 assert.ok(
-  !existsSync(join(root, 'src/docs/component-definitions/liquid-glass.tsx')),
+  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/liquid-glass.tsx')),
   'The liquid glass docs page must be merged into the Surface page without a standalone definition file.',
 )
 assert.ok(

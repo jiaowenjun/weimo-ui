@@ -38,10 +38,10 @@ const expectedScaleOrder = expectedScales.map(([scale]) => scale)
 const packageJson = readJson('package.json')
 const borderRadiusSource = readProjectFile('packages/weimo-ui-core/src/components/border-radius.ts')
 const menuCss = readProjectFile('packages/weimo-ui-core/src/components/menu.css')
-const manifestSource = readProjectFile('src/docs/components-manifest.ts')
-const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinitionSource = readProjectFile('src/docs/component-definitions/border-tokens.tsx')
-const appCss = readProjectFile('src/App.css')
+const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/border-tokens.tsx')
+const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const rootRegistry = readJson('registry.json')
 const styleRegistry = readJson('registry/style.json')
@@ -149,13 +149,13 @@ assert.ok(
 assert.ok(
   !definitionsIndexSource.includes("from './border-radius'") &&
     !definitionsIndexSource.includes('borderRadiusDefinition') &&
-    !existsSync(join(root, 'src/docs/component-definitions/border-radius.tsx')),
+    !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/border-radius.tsx')),
   'component definitions index must not expose a separate BorderRadius detail page.',
 )
 assert.ok(
   docsDefinitionSource.includes("id: 'border-tokens'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { ComponentPreviewCard } from '../../components/component-preview-card'") &&
+    docsDefinitionSource.includes("import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'") &&
     docsDefinitionSource.includes('borderRadiusScales.map') &&
     docsDefinitionSource.includes('borderRadiusScaleMap[scale]') &&
     docsDefinitionSource.includes('getBorderRadiusToken(scale)') &&
@@ -219,6 +219,6 @@ assert.deepEqual(
 )
 
 assert.ok(
-  !appCss.includes('border-radius: 1rem;') && !readProjectFile('src/index.css').includes('border-radius: 5px;'),
+  !appCss.includes('border-radius: 1rem;') && !readProjectFile('packages/weimo-ui-site/src/index.css').includes('border-radius: 5px;'),
   'weimo-ui runtime CSS must not keep hard-coded radius values that match shared radius tokens.',
 )

@@ -28,11 +28,11 @@ const expectedTones = [
 ]
 
 const packageJson = readJson('package.json')
-const manifestSource = readProjectFile('src/docs/components-manifest.ts')
-const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
+const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
 const pressableSource = readProjectFile('packages/weimo-ui-core/src/components/pressable.ts')
-const backgroundTokensDocsDefinitionSource = readProjectFile('src/docs/component-definitions/background-tokens.tsx')
-const appCss = readProjectFile('src/App.css')
+const backgroundTokensDocsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/background-tokens.tsx')
+const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const registrySmokeSource = readProjectFile('scripts/registry-smoke.test.mjs')
 const rootRegistry = readJson('registry.json')
 const standaloneRegistry = readJson('registry/pressable.json')
@@ -92,9 +92,9 @@ assert.ok(
 )
 
 assert.ok(
-  !existsSync(join(root, 'src/docs/component-definitions/pressable.tsx')) &&
-    !existsSync(join(root, 'src/docs/component-definitions/pressable-demo.tsx')) &&
-    backgroundTokensDocsDefinitionSource.includes("import { pressableToneMap, pressableTones } from '../../components/pressable'") &&
+  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/pressable.tsx')) &&
+    !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/pressable-demo.tsx')) &&
+    backgroundTokensDocsDefinitionSource.includes("import { pressableToneMap, pressableTones } from 'weimo-ui-core/components/pressable'") &&
     !backgroundTokensDocsDefinitionSource.includes('pressableFeedback') &&
     !backgroundTokensDocsDefinitionSource.includes('pressable-preview__sample') &&
     !backgroundTokensDocsDefinitionSource.includes('悬停 / 按压查看反馈色') &&

@@ -53,14 +53,14 @@ const expectedTones = [
 const packageJson = readJson('package.json')
 const bgBlurSource = readProjectFile('packages/weimo-ui-core/src/components/bg-blur.ts')
 const bgBlurCss = readProjectFile('packages/weimo-ui-core/src/components/bg-blur.css')
-const manifestSource = readProjectFile('src/docs/components-manifest.ts')
-const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinitionSource = readProjectFile('src/docs/component-definitions/background-tokens.tsx')
-const appCss = readProjectFile('src/App.css')
+const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/background-tokens.tsx')
+const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const tokenPreviewCardCss = readProjectFile('packages/weimo-ui-core/src/components/component-preview-card.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.css')
-const commandCss = readProjectFile('src/components/coss/command.css')
+const commandCss = readProjectFile('packages/weimo-ui-site/src/components/coss/command.css')
 const dialogCss = readProjectFile('packages/weimo-ui-core/src/components/coss/dialog.css')
 const sidebarShellCss = readProjectFile('packages/weimo-ui-core/src/components/sidebar/sidebar-shell.css')
 const rootRegistry = readJson('registry.json')
@@ -236,7 +236,7 @@ assert.ok(
 assert.ok(
   !definitionsIndexSource.includes("from './bg-blur'") &&
     !definitionsIndexSource.includes('bgBlurDefinition') &&
-    !existsSync(join(root, 'src/docs/component-definitions/bg-blur.tsx')) &&
+    !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/bg-blur.tsx')) &&
     !definitionsIndexSource.includes("from './blur'") &&
     !definitionsIndexSource.includes("'blur':"),
   'component definitions index must remove the merged BgBlur detail page and old Blur alias.',
@@ -244,7 +244,7 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'background-tokens'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { ComponentPreviewCard } from '../../components/component-preview-card'") &&
+    docsDefinitionSource.includes("import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'") &&
     docsDefinitionSource.includes("import { GlassPreviewCard } from '../glass-preview-card'") &&
     docsDefinitionSource.includes("import { glassBackgroundGrayMidpoint } from '../glass-preview'") &&
     docsDefinitionSource.includes('initialGray={glassBackgroundGrayMidpoint}') &&

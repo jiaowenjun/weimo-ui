@@ -1,6 +1,6 @@
 # Weimo UI
 
-`weimo-ui` 是独立 Git 仓库，也是面向 Weimo 产品的 React 组件库与文档站。
+`weimo-ui` 是独立 Git 仓库，提供面向 Weimo 产品的 React 组件库与文档站。
 
 站点参考 `https://coss.com/ui` 搭建，提供精简文档壳、命令式搜索、明暗主题切换、组件预览、安装片段和参数表。初始组件来自 `examples/demo/src/components`。
 
@@ -47,6 +47,8 @@ pnpm install
 
 `packages/weimo-ui-card` 是卡片与 OCR workspace 包，负责带标签卡片、卡片 composer、OCR 卡片、OCR composer 和 OCR 详情；它复用 `weimo-ui-core`，并依赖 Markdown、标签树和图片子项目。
 
+`packages/weimo-ui-site` 是文档站 workspace 包，负责站点入口、路由、组件目录、组件预览和站点专用 UI；它通过 workspace 依赖消费各组件子项目，不再属于根组件包的源码入口。
+
 主包的同名入口以源码级 re-export 转发到对应子项目，并在 Git 安装包中携带子项目源码。
 
 ## 职责定位
@@ -71,14 +73,14 @@ Token / 样式 分组下的组件详情页只用于展示底层 token 值。
 
 ## 脚本
 
-`src/docs/components-manifest.ts` 是公共组件目录。新增或调整公共组件时，编辑 manifest、详情页 definition、package export 和对应的独立 `registry/*.json`，然后生成并检查派生产物：
+`packages/weimo-ui-site/src/docs/components-manifest.ts` 是公共组件目录。新增或调整公共组件时，编辑 manifest、详情页 definition、package export 和对应的独立 `registry/*.json`，然后生成并检查派生产物：
 
 ```bash
 pnpm catalog:sync
 pnpm catalog:check
 ```
 
-`src/docs/component-definitions/index.ts` 与根 `registry.json` 是生成文件，不直接编辑。
+`packages/weimo-ui-site/src/docs/component-definitions/index.ts` 与根 `registry.json` 是生成文件，不直接编辑。
 
 ```bash
 pnpm dev
@@ -87,10 +89,10 @@ pnpm lint
 pnpm preview
 ```
 
-Vite 的 base 路径为 `/weimo-ui/`，本地开发访问 `http://localhost:5176/weimo-ui/`。
+站点包的 Vite base 路径为 `/weimo-ui/`，本地开发访问 `http://localhost:5176/weimo-ui/`。
 
 ## 部署
 
 推送到 `main` 后，GitHub Actions 自动构建并发布到 GitHub Pages：`https://jiaowenjun.github.io/weimo-ui/`（workflow 见 `.github/workflows/deploy-pages.yml`）。
 
-构建产物为纯静态 SPA。GitHub Pages 没有 SPA fallback，workflow 在构建后把 `index.html` 复制为 `404.html`，配合应用内 `path="*"` 兜底路由，使 `/components/:id` 等深链接可直接访问。
+构建产物为纯静态 SPA，位于 `packages/weimo-ui-site/dist`。GitHub Pages 没有 SPA fallback，workflow 在构建后把 `index.html` 复制为 `404.html`，配合应用内 `path="*"` 兜底路由，使 `/components/:id` 等深链接可直接访问。

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { componentGroups, componentManifest } from '../src/docs/components-manifest'
+import { componentGroups, componentManifest } from '../packages/weimo-ui-site/src/docs/components-manifest'
 import {
   cssDeclaration,
   cssRule,

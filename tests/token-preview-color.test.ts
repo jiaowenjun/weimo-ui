@@ -7,7 +7,7 @@ import {
   effectiveColorLightness,
   parseColorLightness,
   sortByThemeLightness,
-} from '../src/docs/token-preview-color'
+} from '../packages/weimo-ui-site/src/docs/token-preview-color'
 
 describe('token preview color ordering', () => {
   it('parses the CSS color formats used by token maps', () => {

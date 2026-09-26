@@ -54,10 +54,10 @@ const packageJson = JSON.parse(readProjectFile('package.json'))
 const textColorSource = readProjectFile('packages/weimo-ui-core/src/components/text-color.ts')
 const textColorCss = readProjectFile('packages/weimo-ui-core/src/components/text-color.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
-const manifestSource = readProjectFile('src/docs/components-manifest.ts')
-const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinitionSource = readProjectFile('src/docs/component-definitions/text-tokens.tsx')
-const appCss = readProjectFile('src/App.css')
+const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/text-tokens.tsx')
+const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const rootRegistry = readJson('registry.json')
 const styleRegistry = readJson('registry/style.json')
 const standaloneRegistryItem = readJson('registry/text-color.json')
@@ -233,13 +233,13 @@ assert.ok(
 assert.ok(
   !definitionsIndexSource.includes("from './text-color'") &&
     !definitionsIndexSource.includes('textColorDefinition') &&
-    !existsSync(join(root, 'src/docs/component-definitions/text-color.tsx')),
+    !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/text-color.tsx')),
   'component definitions index must not expose a separate TextColor detail page.',
 )
 assert.ok(
   docsDefinitionSource.includes("id: 'text-tokens'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { ComponentPreviewCard } from '../../components/component-preview-card'") &&
+    docsDefinitionSource.includes("import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'") &&
     docsDefinitionSource.includes('const previewTextColorTones = textColorTones.filter((tone) => tone !== \'inherit\')') &&
     docsDefinitionSource.includes('textColorToneMap[tone]') &&
     docsDefinitionSource.includes('function FontPreview()') &&

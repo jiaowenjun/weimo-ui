@@ -40,12 +40,12 @@ const groupRegistry = readJson('registry/frosted-icon-button-group.json')
 const rootGroupItem = rootRegistry.items.find(
   (item) => item.name === 'frosted-icon-button-group',
 )
-const componentManifestSource = readProjectFile('src/docs/components-manifest.ts')
+const componentManifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const groupSource = readProjectFile('packages/weimo-ui-core/src/components/frosted-icon-button-group.tsx')
 const glassIconButtonSource = readProjectFile('packages/weimo-ui-core/src/components/frosted-icon-button.tsx')
 const groupCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-icon-button-group.css')
 const iconButtonCss = readProjectFile('packages/weimo-ui-core/src/components/icon-button.css')
-const buttonDocsSource = readProjectFile('src/docs/component-definitions/button.tsx')
+const buttonDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/button.tsx')
 
 assert.ok(
   packageJson.scripts?.test?.includes('scripts/frosted-icon-button-group-contract.test.mjs'),
@@ -310,7 +310,7 @@ assert.ok(
 )
 
 for (const snippet of [
-  "import {\n  FrostedIconButtonGroup,\n  FrostedIconGroupButton,\n} from '../../components/frosted-icon-button-group'",
+  "import {\n  FrostedIconButtonGroup,\n  FrostedIconGroupButton,\n} from 'weimo-ui-core/components/frosted-icon-button-group'",
   'function FrostedIconButtonGroupPreviewGroup(',
   'function FrostedIconButtonGroupPreview()',
   'label="磨砂图标按钮组"',

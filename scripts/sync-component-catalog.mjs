@@ -27,7 +27,7 @@ function readProjectJson(relativePath) {
 }
 
 async function loadComponentManifest() {
-  const relativePath = 'src/docs/components-manifest.ts'
+  const relativePath = 'packages/weimo-ui-site/src/docs/components-manifest.ts'
   const source = readProjectFile(relativePath)
   const transpiled = ts.transpileModule(source, {
     compilerOptions: {
@@ -47,7 +47,7 @@ function propertyKey(id) {
 }
 
 function definitionExportFor(id) {
-  const relativePath = `src/docs/component-definitions/${id}.tsx`
+  const relativePath = `packages/weimo-ui-site/src/docs/component-definitions/${id}.tsx`
   const source = readProjectFile(relativePath)
   const exports = [...source.matchAll(/^export const ([A-Za-z_$][A-Za-z0-9_$]*Definition)\s*=/gmu)]
 
@@ -60,12 +60,12 @@ function definitionExportFor(id) {
 
 function validateDefinitionFiles(componentManifest) {
   const componentIds = new Set(componentManifest.map((item) => item.id))
-  const definitionFiles = readdirSync(join(root, 'src/docs/component-definitions'))
+  const definitionFiles = readdirSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions'))
     .filter((file) => file.endsWith('.tsx'))
     .sort()
 
   for (const file of definitionFiles) {
-    const source = readProjectFile(`src/docs/component-definitions/${file}`)
+    const source = readProjectFile(`packages/weimo-ui-site/src/docs/component-definitions/${file}`)
     const exportsDefinition =
       /^export const [A-Za-z_$][A-Za-z0-9_$]*Definition\s*=/mu.test(source)
 
@@ -212,7 +212,7 @@ async function generatedArtifacts() {
 
   return new Map([
     [
-      'src/docs/component-definitions/index.ts',
+      'packages/weimo-ui-site/src/docs/component-definitions/index.ts',
       renderDefinitionsIndex(componentManifest),
     ],
     ['registry.json', renderRootRegistry(registryConfig, registryItems)],

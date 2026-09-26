@@ -22,44 +22,44 @@ function blockFor(source, selector) {
   return match[1]
 }
 
-const appSource = readProjectFile('src/App.tsx')
-const appCss = readProjectFile('src/App.css')
-const docsShellSource = readProjectFile('src/docs/docs-shell.tsx')
-const routesSource = readProjectFile('src/docs/routes.ts')
-const componentDocsSource = readProjectFile('src/docs/component-docs.tsx')
-const componentManifestSource = readProjectFile('src/docs/components-manifest.ts')
+const appSource = readProjectFile('packages/weimo-ui-site/src/App.tsx')
+const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
+const docsShellSource = readProjectFile('packages/weimo-ui-site/src/docs/docs-shell.tsx')
+const routesSource = readProjectFile('packages/weimo-ui-site/src/docs/routes.ts')
+const componentDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/component-docs.tsx')
+const componentManifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const componentDefinitionsIndexSource = readProjectFile(
-  'src/docs/component-definitions/index.ts',
+  'packages/weimo-ui-site/src/docs/component-definitions/index.ts',
 )
 const sidebarPreviewSource = readProjectFile(
-  'src/docs/component-definitions/sidebar-preview.tsx',
+  'packages/weimo-ui-site/src/docs/component-definitions/sidebar-preview.tsx',
 )
 const componentDefinitionSources = {
-  'tagged-card': readProjectFile('src/docs/component-definitions/tagged-card.tsx'),
+  'tagged-card': readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/tagged-card.tsx'),
   tag: [
-    readProjectFile('src/docs/component-definitions/tag.tsx'),
+    readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/tag.tsx'),
     readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx'),
   ].join('\n'),
-  stat: readProjectFile('src/docs/component-definitions/stat.tsx'),
-  'background-tokens': readProjectFile('src/docs/component-definitions/background-tokens.tsx'),
-  'border-tokens': readProjectFile('src/docs/component-definitions/border-tokens.tsx'),
-  button: readProjectFile('src/docs/component-definitions/button.tsx'),
-  menu: readProjectFile('src/docs/component-definitions/menu.tsx'),
-  surface: readProjectFile('src/docs/component-definitions/surface.tsx'),
+  stat: readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/stat.tsx'),
+  'background-tokens': readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/background-tokens.tsx'),
+  'border-tokens': readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/border-tokens.tsx'),
+  button: readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/button.tsx'),
+  menu: readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/menu.tsx'),
+  surface: readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/surface.tsx'),
   markdown: [
-    readProjectFile('src/docs/component-definitions/markdown.tsx'),
-    readProjectFile('src/docs/component-definitions/md-editor-demos.tsx'),
+    readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/markdown.tsx'),
+    readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/md-editor-demos.tsx'),
   ].join('\n'),
-  bar: readProjectFile('src/docs/component-definitions/bar.tsx'),
-  'page-layout': readProjectFile('src/docs/component-definitions/page-layout.tsx'),
-  capsule: readProjectFile('src/docs/component-definitions/capsule.tsx'),
+  bar: readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/bar.tsx'),
+  'page-layout': readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/page-layout.tsx'),
+  capsule: readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/capsule.tsx'),
 }
 const componentDefinitionsSource = [
   ...Object.values(componentDefinitionSources),
   sidebarPreviewSource,
 ].join('\n')
-const docsOutletContextSource = readProjectFile('src/docs/docs-outlet-context.ts')
-const detailPageSource = readProjectFile('src/docs/pages/component-detail-page.tsx')
+const docsOutletContextSource = readProjectFile('packages/weimo-ui-site/src/docs/docs-outlet-context.ts')
+const detailPageSource = readProjectFile('packages/weimo-ui-site/src/docs/pages/component-detail-page.tsx')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 const heatmapPreviewBlock = blockFor(appCss, '.heatmap-preview')
 const iconPreviewRowBlock = blockFor(appCss, '.icon-preview__row')
@@ -92,7 +92,7 @@ for (const snippet of [
 // 顶部栏改走液态玻璃:标题胶囊/侧边栏钮/搜索与主题组都是 LiquidGlassSurface 层,
 // 搜索与主题两颗按钮收在同一枚玻璃胶囊里,色随页面背景 tone 自适应。
 for (const snippet of [
-  "import { LiquidGlassSurface } from '../components/liquid-glass'",
+  "import { LiquidGlassSurface } from 'weimo-ui-core/components/liquid-glass'",
   "import { LiquidGlassTile } from './liquid-glass-tile'",
   '<LiquidGlassTile className="docs-liquid-top-bar">',
   'liquid-glass-icon-button-group docs-top-bar__actions',
@@ -133,16 +133,16 @@ for (const snippet of [
   'export function componentHref',
   "'/components/'",
 ]) {
-  assert.ok(routesSource.includes(snippet), `src/docs/routes.ts must include ${snippet}.`)
+  assert.ok(routesSource.includes(snippet), `packages/weimo-ui-site/src/docs/routes.ts must include ${snippet}.`)
 }
 
 assert.ok(
   !routesSource.includes('/docs/components/'),
-  'src/docs/routes.ts must not define the old /docs/components/ route.',
+  'packages/weimo-ui-site/src/docs/routes.ts must not define the old /docs/components/ route.',
 )
 assert.ok(
   !routesSource.includes('homePath') && !routesSource.includes('appHref'),
-  'src/docs/routes.ts must remove the overview/home route helpers.',
+  'packages/weimo-ui-site/src/docs/routes.ts must remove the overview/home route helpers.',
 )
 
 for (const snippet of [
@@ -197,7 +197,7 @@ for (const snippet of [
 ]) {
   assert.ok(
     componentDocsSource.includes(snippet),
-    `src/docs/component-docs.tsx must include ${snippet}.`,
+    `packages/weimo-ui-site/src/docs/component-docs.tsx must include ${snippet}.`,
   )
 }
 
@@ -356,14 +356,14 @@ assert.ok(
 )
 
 assert.ok(
-  !existsSync(join(root, 'src/docs/component-definitions/bg-blur.tsx')) &&
+  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/bg-blur.tsx')) &&
     componentDefinitionSources['background-tokens'].includes('bgBlurTones.map') &&
     componentDefinitionSources['background-tokens'].includes('label="背景模糊度"'),
   'BgBlur docs must be merged into the Background detail page.',
 )
 
 assert.ok(
-  !existsSync(join(root, 'src/docs/component-definitions/heat-color.tsx')) &&
+  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/heat-color.tsx')) &&
     componentDefinitionSources['background-tokens'].includes('heatColorLevels.map') &&
     componentDefinitionSources['background-tokens'].includes('<ComponentPreviewCard') &&
     componentDefinitionSources['background-tokens'].includes('label="热力图"'),
@@ -378,10 +378,10 @@ for (const snippet of [
   'renderMenuDemo',
   'const tagTreeDemoNodes',
   'function TagTreeDemo',
-  "from '../../components/top-bar'",
+  "from 'weimo-ui-core/components/top-bar'",
   "from './components/tag-tree'",
   "from './components/chip-button'",
-  "from '../../components/menu'",
+  "from 'weimo-ui-core/components/menu'",
   '<TagTreeDemo />',
   "onMenuAction={variant === 'default' ? () => {} : undefined}",
   "const [selectedTag, setSelectedTag] = useState('writing/daily')",
@@ -404,7 +404,7 @@ for (const snippet of [
 }
 
 assert.ok(
-  !componentDefinitionSources.tag.includes("from '../../components/coss/button'") &&
+  !componentDefinitionSources.tag.includes("from 'weimo-ui-core/components/coss/button'") &&
   componentDefinitionSources.tag.includes("from './components/chip-button'") &&
   !componentDefinitionSources.tag.includes('tag-picker-preview__trigger') &&
   !componentDefinitionSources.tag.includes('<Button') &&
@@ -455,7 +455,7 @@ for (const snippet of [
 for (const snippet of [
   "import { Drawer } from '@base-ui/react/drawer'",
   "import { Menu, X } from 'lucide-react'",
-  "import { FrostedIconButton } from '../../components/frosted-icon-button'",
+  "import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'",
   "function SideBarDrawerPreview",
   "const [drawerOpen, setDrawerOpen] = useState(false)",
   'Drawer.Root',
@@ -481,8 +481,8 @@ assert.ok(
 )
 
 assert.ok(
-  !componentDefinitionSources.menu.includes("from '../../components/card'") &&
-  !componentDefinitionSources.menu.includes("from '../../components/chip-button'") &&
+  !componentDefinitionSources.menu.includes("from 'weimo-ui-core/components/card'") &&
+  !componentDefinitionSources.menu.includes("from 'weimo-ui-tagtree/components/chip-button'") &&
   !componentDefinitionSources.menu.includes('<WeimoCard') &&
   !componentDefinitionSources.menu.includes('<CardHeader') &&
   !componentDefinitionSources.menu.includes('<CardContent') &&
@@ -499,7 +499,7 @@ assert.ok(
   'Menu preview must lead with the high-level ActionMenu API and GhostIconButton trigger.',
 )
 assert.ok(
-  !componentDefinitionSources.menu.includes("from '../../components/coss/button'") &&
+  !componentDefinitionSources.menu.includes("from 'weimo-ui-core/components/coss/button'") &&
   !componentDefinitionSources.menu.includes('CossButton') &&
   !componentDefinitionSources.menu.includes("name: 'Selection Items'") &&
   !componentDefinitionSources.menu.includes('checkbox and radio rows') &&
@@ -516,8 +516,8 @@ assert.ok(
 assert.ok(
   !componentDocsSource.includes('const componentCode = {') &&
   !componentDocsSource.includes("from 'lucide-react'") &&
-  !componentDocsSource.includes("from '../components/card'") &&
-  !componentDocsSource.includes("from '../components/menu'"),
+  !componentDocsSource.includes("from 'weimo-ui-core/components/card'") &&
+  !componentDocsSource.includes("from 'weimo-ui-core/components/menu'"),
   'component-docs.tsx must not own example strings or preview component imports.',
 )
 assert.ok(
@@ -560,8 +560,8 @@ assert.ok(
   !componentDocsSource.includes('galleryPreview') &&
     !componentDefinitionsSource.includes('galleryPreview') &&
     !packageJson.scripts?.test?.includes('gallery-preview-contract.test.mjs') &&
-    !existsSync(join(root, 'src/docs/pages/component-gallery-page.tsx')) &&
-    !existsSync(join(root, 'src/docs/component-definitions/gallery-preview-sample.ts')) &&
+    !existsSync(join(root, 'packages/weimo-ui-site/src/docs/pages/component-gallery-page.tsx')) &&
+    !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/gallery-preview-sample.ts')) &&
     !existsSync(join(root, 'scripts/gallery-preview-contract.test.mjs')),
   'overview-only gallery preview code and tests must be removed.',
 )
@@ -578,7 +578,7 @@ for (const snippet of [
   "id: 'tag-edit-bar'",
   "packageExport: './components/tag-edit-bar',",
   "from './tag-edit-bar'",
-  "from '../../components/tag-edit-bar'",
+  "from 'weimo-ui-core/components/tag-edit-bar'",
   '<TagEditBar',
   'TagEditBarDemo',
   "id: 'editable-card'",
@@ -601,11 +601,11 @@ for (const snippet of [
 }
 
 assert.ok(
-  existsSync(join(root, 'src/docs/component-definitions/tagged-card.tsx')),
+  existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/tagged-card.tsx')),
   'Merged tagged-card docs definition must exist.',
 )
 assert.ok(
-  existsSync(join(root, 'src/docs/component-definitions/capsule.tsx')),
+  existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/capsule.tsx')),
   'Merged Capsule docs definition must exist.',
 )
 

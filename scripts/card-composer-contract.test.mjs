@@ -17,10 +17,10 @@ const packageJson = JSON.parse(readProjectFile('package.json'))
 const source = readProjectFile('packages/weimo-ui-card/src/components/card-composer.tsx')
 const composerShellSource = readProjectFile('packages/weimo-ui-card/src/components/composer-shell.tsx')
 const cssSource = readProjectFile('packages/weimo-ui-card/src/components/card-composer.css')
-const appCss = readProjectFile('src/App.css')
-const manifestSource = readProjectFile('src/docs/components-manifest.ts')
-const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const definitionSource = readProjectFile('src/docs/component-definitions/tagged-card.tsx')
+const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
+const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/tagged-card.tsx')
 const registry = JSON.parse(readProjectFile('registry.json'))
 const registryItem = readProjectFile('registry/card-composer.json')
 
@@ -182,8 +182,8 @@ assert.ok(
 )
 
 for (const snippet of [
-  "import { CardComposer } from '../../../packages/weimo-ui-card/src/components/card-composer'",
-  "import type { CardDraft, CardProps } from '../../../packages/weimo-ui-card/src/components/card'",
+  "import { CardComposer } from 'weimo-ui-card/components/card-composer'",
+  "import type { CardDraft, CardProps } from 'weimo-ui-card/components/card'",
   'className="card-composer-docs-preview"',
   "id: 'tagged-card'",
   '<CardComposerDemo />',

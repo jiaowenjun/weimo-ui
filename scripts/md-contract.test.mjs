@@ -47,13 +47,13 @@ const markdownImageRendererSource = readProjectFile(
 )
 const markdownImageSizeSource = readProjectFile('packages/weimo-ui-markdown/src/components/markdown-image-size.ts')
 const markdownContentCss = readProjectFile('packages/weimo-ui-markdown/src/components/markdown-content.css')
-const manifestSource = readProjectFile('src/docs/components-manifest.ts')
-const definitionSource = readProjectFile('src/docs/component-definitions/md.tsx')
+const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/md.tsx')
 const mdRenderDefinitionSource = readProjectFile(
-  'src/docs/component-definitions/markdown.tsx',
+  'packages/weimo-ui-site/src/docs/component-definitions/markdown.tsx',
 )
-const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const appCss = readProjectFile('src/App.css')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const tokensCss = readProjectFile('packages/weimo-ui-markdown/src/styles/tokens.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 const markdownPackageJson = JSON.parse(readProjectFile('packages/weimo-ui-markdown/package.json'))
@@ -250,9 +250,9 @@ assert.ok(
 )
 
 for (const snippet of [
-  "import { Md } from '../../components/md'",
+  "import { Md } from 'weimo-ui-markdown/components/md'",
   "import { CardPanel } from '../../components/coss/card'",
-  "import { ComponentPreviewCard } from '../../components/component-preview-card'",
+  "import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'",
   "import { mdRenderSample } from './markdown-sample'",
   "id: 'md'",
   "frame: 'plain',",

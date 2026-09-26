@@ -41,9 +41,9 @@ function sourceBetween(source, startSnippet, endSnippet) {
 }
 
 const packageJson = readJson('package.json')
-const manifest = readProjectFile('src/docs/components-manifest.ts')
-const definitionsIndex = readProjectFile('src/docs/component-definitions/index.ts')
-const docsDefinition = readProjectFile('src/docs/component-definitions/ocr.tsx')
+const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
+const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const docsDefinition = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/ocr.tsx')
 const ocrDetailSource = readProjectFile('packages/weimo-ui-card/src/components/ocr-detail.tsx')
 const ocrDetailCss = readProjectFile('packages/weimo-ui-card/src/components/ocr-detail.css')
 const rootRegistry = readJson('registry.json')
@@ -293,7 +293,7 @@ for (const filePath of [
 }
 
 for (const snippet of [
-  "import { OcrDetail } from '../../../packages/weimo-ui-card/src/components/ocr-detail'",
+  "import { OcrDetail } from 'weimo-ui-card/components/ocr-detail'",
   "id: 'ocr'",
   '<OcrDetail',
   'imageSrc={sampleOcrImage}',
