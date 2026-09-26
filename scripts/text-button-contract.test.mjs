@@ -33,8 +33,8 @@ function assertIncludes(source, snippet, message) {
 const packageJson = readJson('package.json')
 const rootRegistry = readJson('registry.json')
 const standaloneRegistryItem = readJson('registry/text-button.json')
-const source = readProjectFile('src/components/text-button.tsx')
-const css = readProjectFile('src/components/text-button.css')
+const source = readProjectFile('packages/weimo-ui-core/src/components/text-button.tsx')
+const css = readProjectFile('packages/weimo-ui-core/src/components/text-button.css')
 const docsSource = readProjectFile('src/docs/component-definitions/button.tsx')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
@@ -77,7 +77,7 @@ assert.deepEqual(
 )
 assert.deepEqual(
   registryItem?.files.map((file) => file.path),
-  ['src/components/text-button.tsx', 'src/components/text-button.css'],
+  ['packages/weimo-ui-core/src/components/text-button.tsx', 'packages/weimo-ui-core/src/components/text-button.css'],
   'TextButton registry item must ship source and CSS while depending on @weimo/utils for cn().',
 )
 

@@ -1063,7 +1063,7 @@ try {
   assert.ok(
     !topBarRegistryFiles.some(
       (file) =>
-        file.path === 'src/components/float-bar.css' ||
+        file.path === 'packages/weimo-ui-core/src/components/float-bar.css' ||
         file.target === '@ui/float-bar.css',
     ),
     'The TopBar registry payload must not ship unused internal FloatBar CSS.',

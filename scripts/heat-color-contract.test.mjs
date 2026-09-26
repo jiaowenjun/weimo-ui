@@ -35,16 +35,16 @@ const expectedLevels = [
 ]
 
 const packageJson = readJson('package.json')
-const heatColorEntrySource = readProjectFile('src/components/heat-color.tsx')
-const heatColorSource = readProjectFile('src/components/heatmap/heat-color.tsx')
-const heatColorCss = readProjectFile('src/components/heat-color.css')
+const heatColorEntrySource = readProjectFile('packages/weimo-ui-core/src/components/heat-color.tsx')
+const heatColorSource = readProjectFile('packages/weimo-ui-core/src/components/heatmap/heat-color.tsx')
+const heatColorCss = readProjectFile('packages/weimo-ui-core/src/components/heat-color.css')
 const heatmapCss = readProjectFile('src/components/heatmap/heatmap.css')
 const heatmapSource = readProjectFile('src/components/heatmap/heatmap.tsx')
 const backgroundTokensDocsDefinitionSource = readProjectFile('src/docs/component-definitions/background-tokens.tsx')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const appCss = readProjectFile('src/App.css')
-const tokensCss = readProjectFile('src/styles/tokens.css')
+const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const rootRegistry = readJson('registry.json')
 const styleRegistry = readJson('registry/style.json')
 const standaloneRegistryItem = readJson('registry/heat-color.json')
@@ -213,15 +213,15 @@ assert.deepEqual(
 assert.deepEqual(
   standaloneRegistryItem.files.map((file) => file.path),
   [
-    'src/components/heat-color.tsx',
-    'src/components/heatmap/heat-color.tsx',
+    'packages/weimo-ui-core/src/components/heat-color.tsx',
+    'packages/weimo-ui-core/src/components/heatmap/heat-color.tsx',
     'src/components/heatmap/heatmap-model.ts',
-    'src/components/heat-color.css',
+    'packages/weimo-ui-core/src/components/heat-color.css',
   ],
   'HeatColor registry item must ship the entry, implementation, model type, and utility stylesheet.',
 )
 assert.ok(
-  heatmapRegistryItem.files.some((file) => file.path === 'src/components/heat-color.css') &&
-    rootHeatmapItem.files.some((file) => file.path === 'src/components/heat-color.css'),
+  heatmapRegistryItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/components/heat-color.css') &&
+    rootHeatmapItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/components/heat-color.css'),
   'Heatmap registry items must ship the shared HeatColor utility stylesheet.',
 )

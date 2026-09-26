@@ -13,7 +13,7 @@
   ],
   "files": [
     {
-      "path": "src/components/border-radius.ts",
+      "path": "packages/weimo-ui-core/src/components/border-radius.ts",
       "type": "registry:ui",
       "target": "@ui/border-radius.ts"
     }

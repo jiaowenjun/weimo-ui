@@ -67,25 +67,25 @@ const excludedTokens = [
 ]
 
 const packageJson = readJson('package.json')
-const borderColorSource = readProjectFile('src/components/border-color.ts')
-const borderColorCss = readProjectFile('src/components/border-color.css')
-const cardSurfaceCss = readProjectFile('src/components/card-surface.css')
-const popupSurfaceCss = readProjectFile('src/components/popup-surface.css')
+const borderColorSource = readProjectFile('packages/weimo-ui-core/src/components/border-color.ts')
+const borderColorCss = readProjectFile('packages/weimo-ui-core/src/components/border-color.css')
+const cardSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/card-surface.css')
+const popupSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/popup-surface.css')
 const breadcrumbCss = readProjectFile('src/components/coss/breadcrumb.css')
-const capsuleFrameCss = readProjectFile('src/components/capsule-frame.css')
+const capsuleFrameCss = readProjectFile('packages/weimo-ui-core/src/components/capsule-frame.css')
 const cossButtonCss = readProjectFile('src/components/coss/button.css')
 const cossCardCss = readProjectFile('src/components/coss/card.css')
 const cossCommandCss = readProjectFile('src/components/coss/command.css')
-const cossDialogCss = readProjectFile('src/components/coss/dialog.css')
+const cossDialogCss = readProjectFile('packages/weimo-ui-core/src/components/coss/dialog.css')
 const cossInputGroupCss = readProjectFile('src/components/coss/input-group.css')
 const cossTableCss = readProjectFile('src/components/coss/table.css')
 const cossTabsCss = readProjectFile('src/components/coss/tabs.css')
 const cossTooltipCss = readProjectFile('src/components/coss/tooltip.css')
-const frostedSurfaceCss = readProjectFile('src/components/frosted-surface.css')
+const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.css')
 const mdEditorCss = readProjectFile('src/components/md-editor/md-editor.css')
 const markdownContentCss = readProjectFile('src/components/markdown-content.css')
-const menuCss = readProjectFile('src/components/menu.css')
-const sidebarShellCss = readProjectFile('src/components/sidebar/sidebar-shell.css')
+const menuCss = readProjectFile('packages/weimo-ui-core/src/components/menu.css')
+const sidebarShellCss = readProjectFile('packages/weimo-ui-core/src/components/sidebar/sidebar-shell.css')
 // 普通侧边栏经由 card-surface 继承无边框默认；抽屉变体不挂材质类，描边自持。
 const sidebarDrawerBlock = blockFor(sidebarShellCss, '.weimo-sidebar--drawer')
 const tagTreeCss = readProjectFile('src/components/tag-tree/tag-tree.css')
@@ -93,7 +93,7 @@ const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const docsDefinitionSource = readProjectFile('src/docs/component-definitions/border-tokens.tsx')
 const appCss = readProjectFile('src/App.css')
-const tokensCss = readProjectFile('src/styles/tokens.css')
+const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const rootRegistry = readJson('registry.json')
 const styleRegistry = readJson('registry/style.json')
 const standaloneRegistryItem = readJson('registry/border-color.json')
@@ -474,8 +474,8 @@ assert.deepEqual(
 assert.deepEqual(
   registryItem.files.map((file) => file.path),
   [
-    'src/components/border-color.ts',
-    'src/components/border-color.css',
+    'packages/weimo-ui-core/src/components/border-color.ts',
+    'packages/weimo-ui-core/src/components/border-color.css',
   ],
   'border-color registry item must ship the tone map and utility stylesheet.',
 )

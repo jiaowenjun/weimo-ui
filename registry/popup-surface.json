@@ -15,12 +15,12 @@
   ],
   "files": [
     {
-      "path": "src/components/popup-surface.tsx",
+      "path": "packages/weimo-ui-core/src/components/popup-surface.tsx",
       "type": "registry:ui",
       "target": "@ui/popup-surface.tsx"
     },
     {
-      "path": "src/components/popup-surface.css",
+      "path": "packages/weimo-ui-core/src/components/popup-surface.css",
       "type": "registry:ui",
       "target": "@ui/popup-surface.css"
     }

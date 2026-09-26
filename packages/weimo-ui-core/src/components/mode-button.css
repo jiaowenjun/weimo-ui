@@ -1,0 +1,37 @@
+.mode-button__icon-stack {
+  display: grid;
+  width: 1em;
+  height: 1em;
+  place-items: center;
+}
+
+.mode-button__icon-layer {
+  display: grid;
+  grid-area: 1 / 1;
+  place-items: center;
+  opacity: 0;
+  transform: scale(0.86) rotate(-18deg);
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.mode-button__icon-layer--edit {
+  transform: scale(0.86) rotate(18deg);
+}
+
+.mode-button__icon-layer[data-active="true"] {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.mode-button__icon-layer svg {
+  width: 1em;
+  height: 1em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mode-button__icon-layer {
+    transition-duration: 1ms;
+  }
+}

@@ -30,7 +30,7 @@ const expectedTones = [
 const packageJson = readJson('package.json')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
-const pressableSource = readProjectFile('src/components/pressable.ts')
+const pressableSource = readProjectFile('packages/weimo-ui-core/src/components/pressable.ts')
 const backgroundTokensDocsDefinitionSource = readProjectFile('src/docs/component-definitions/background-tokens.tsx')
 const appCss = readProjectFile('src/App.css')
 const registrySmokeSource = readProjectFile('scripts/registry-smoke.test.mjs')
@@ -193,7 +193,7 @@ assert.deepEqual(
 )
 assert.deepEqual(
   rootPressableItem.files.map((file) => [file.path, file.target]),
-  [['src/components/pressable.ts', '@ui/pressable.ts']],
+  [['packages/weimo-ui-core/src/components/pressable.ts', '@ui/pressable.ts']],
   'Pressable registry item must ship only the focused public tone map.',
 )
 

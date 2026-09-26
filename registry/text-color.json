@@ -13,12 +13,12 @@
   ],
   "files": [
     {
-      "path": "src/components/text-color.ts",
+      "path": "packages/weimo-ui-core/src/components/text-color.ts",
       "type": "registry:ui",
       "target": "@ui/text-color.ts"
     },
     {
-      "path": "src/components/text-color.css",
+      "path": "packages/weimo-ui-core/src/components/text-color.css",
       "type": "registry:ui",
       "target": "@ui/text-color.css"
     }

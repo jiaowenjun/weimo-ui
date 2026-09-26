@@ -13,12 +13,12 @@
   ],
   "files": [
     {
-      "path": "src/components/heat-color.tsx",
+      "path": "packages/weimo-ui-core/src/components/heat-color.tsx",
       "type": "registry:ui",
       "target": "@ui/heat-color.tsx"
     },
     {
-      "path": "src/components/heatmap/heat-color.tsx",
+      "path": "packages/weimo-ui-core/src/components/heatmap/heat-color.tsx",
       "type": "registry:ui",
       "target": "@ui/heatmap/heat-color.tsx"
     },
@@ -28,7 +28,7 @@
       "target": "@ui/heatmap/heatmap-model.ts"
     },
     {
-      "path": "src/components/heat-color.css",
+      "path": "packages/weimo-ui-core/src/components/heat-color.css",
       "type": "registry:ui",
       "target": "@ui/heat-color.css"
     }

@@ -13,12 +13,12 @@
   ],
   "files": [
     {
-      "path": "src/components/border-color.ts",
+      "path": "packages/weimo-ui-core/src/components/border-color.ts",
       "type": "registry:ui",
       "target": "@ui/border-color.ts"
     },
     {
-      "path": "src/components/border-color.css",
+      "path": "packages/weimo-ui-core/src/components/border-color.css",
       "type": "registry:ui",
       "target": "@ui/border-color.css"
     }

@@ -36,13 +36,13 @@ const expectedScales = [
 const expectedScaleOrder = expectedScales.map(([scale]) => scale)
 
 const packageJson = readJson('package.json')
-const borderRadiusSource = readProjectFile('src/components/border-radius.ts')
-const menuCss = readProjectFile('src/components/menu.css')
+const borderRadiusSource = readProjectFile('packages/weimo-ui-core/src/components/border-radius.ts')
+const menuCss = readProjectFile('packages/weimo-ui-core/src/components/menu.css')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const docsDefinitionSource = readProjectFile('src/docs/component-definitions/border-tokens.tsx')
 const appCss = readProjectFile('src/App.css')
-const tokensCss = readProjectFile('src/styles/tokens.css')
+const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const rootRegistry = readJson('registry.json')
 const styleRegistry = readJson('registry/style.json')
 const standaloneRegistryItem = readJson('registry/border-radius.json')
@@ -214,7 +214,7 @@ assert.deepEqual(
 )
 assert.deepEqual(
   registryItem.files.map((file) => file.path),
-  ['src/components/border-radius.ts'],
+  ['packages/weimo-ui-core/src/components/border-radius.ts'],
   'border-radius registry item must ship the scale map.',
 )
 

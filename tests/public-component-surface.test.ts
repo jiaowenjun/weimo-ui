@@ -42,6 +42,13 @@ const conceptualTokenModules = new Set([
   'text-tokens',
 ])
 
+const coreGroups = new Set([
+  'token-style',
+  'surface-material',
+  'controls-overlays',
+  'layout-bars',
+])
+
 describe('public component catalog', () => {
   it('keeps component groups ordered and each group alphabetized', () => {
     expect(componentGroups.map((group) => group.id)).toEqual([
@@ -66,6 +73,7 @@ describe('public component catalog', () => {
 
   it('maps every manifest entry to one package export and exported source module', () => {
     const packageJson = readProjectJson<PackageJson>('package.json')
+    const corePackageJson = readProjectJson<PackageJson>('packages/weimo-ui-core/package.json')
     const ids = new Set<string>()
     const packageExports = new Set<string>()
     const registryNames = new Set<string>()
@@ -78,11 +86,16 @@ describe('public component catalog', () => {
       packageExports.add(item.packageExport)
       registryNames.add(item.registryName)
 
-      const sourcePath = packageJson.exports[item.packageExport]
+      const sourcePath = coreGroups.has(item.group)
+        ? corePackageJson.exports[item.packageExport]
+        : packageJson.exports[item.packageExport]
+      const projectSourcePath = coreGroups.has(item.group)
+        ? `packages/weimo-ui-core/${sourcePath.replace(/^\.\//u, '')}`
+        : sourcePath.replace(/^\.\//u, '')
       expect(sourcePath, `${item.id} package export`).toBeTypeOf('string')
-      expect(projectFileExists(sourcePath.replace(/^\.\//u, ''))).toBe(true)
+      expect(projectFileExists(projectSourcePath)).toBe(true)
 
-      const names = exportedNames(sourcePath.replace(/^\.\//u, ''))
+      const names = exportedNames(projectSourcePath)
       expect(names.size, `${item.id} source exports`).toBeGreaterThan(0)
       if (!conceptualTokenModules.has(item.id)) {
         const exportName = ('exportName' in item ? item.exportName : undefined) ?? item.name
@@ -115,6 +128,7 @@ describe('public component catalog', () => {
 describe('package exports', () => {
   it('keeps every export target installable and exposes the dialog used by Weimo', () => {
     const packageJson = readProjectJson<PackageJson>('package.json')
+    const corePackageJson = readProjectJson<PackageJson>('packages/weimo-ui-core/package.json')
 
     for (const [packageExport, sourcePath] of Object.entries(packageJson.exports)) {
       expect(
@@ -125,13 +139,14 @@ describe('package exports', () => {
 
     const dialogSource = packageJson.exports['./components/coss/dialog']
     expect(dialogSource).toBe('./src/components/coss/dialog.tsx')
-    expect(exportedNames(dialogSource.replace(/^\.\//u, '')).has('DialogPanel')).toBe(true)
+    const coreDialogSource = corePackageJson.exports['./components/coss/dialog']
+    expect(exportedNames(`packages/weimo-ui-core/${coreDialogSource.replace(/^\.\//u, '')}`).has('DialogPanel')).toBe(true)
   })
 })
 
 describe('shared CSS interfaces', () => {
   it('keeps transparent TopBar shell regions click-through', () => {
-    const root = parseProjectCss('src/components/top-bar.css')
+    const root = parseProjectCss('packages/weimo-ui-core/src/components/top-bar.css')
 
     expect(
       cssDeclaration(cssRuleWithDeclaration(root, '.top-bar', 'pointer-events'), 'pointer-events'),
@@ -191,7 +206,7 @@ describe('shared CSS interfaces', () => {
   })
 
   it('keeps icon-button interactions on variant-owned visual layers', () => {
-    const root = parseProjectCss('src/components/icon-button.css')
+    const root = parseProjectCss('packages/weimo-ui-core/src/components/icon-button.css')
 
     expect(
       cssDeclaration(

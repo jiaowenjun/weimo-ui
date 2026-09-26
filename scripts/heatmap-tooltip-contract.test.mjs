@@ -54,11 +54,11 @@ const componentCss = readProjectFile(
   'src/components/heatmap/heatmap.css',
 )
 const heatColorLevelsSource = readProjectFile(
-  'src/components/heatmap/heat-color.tsx',
+  'packages/weimo-ui-core/src/components/heatmap/heat-color.tsx',
 )
 const tooltipSource = readProjectFile('src/components/coss/tooltip.tsx')
 const tooltipCss = readProjectFile('src/components/coss/tooltip.css')
-const popupSurfaceCss = readProjectFile('src/components/popup-surface.css')
+const popupSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/popup-surface.css')
 const registryItem = JSON.parse(readProjectFile('registry/heatmap.json'))
 const packageJson = JSON.parse(readProjectFile('package.json'))
 
@@ -164,7 +164,7 @@ assert.ok(
   'Heatmap registry item must ship the coss tooltip primitive files.',
 )
 assert.ok(
-  registryItem.files.some((file) => file.path === 'src/components/heatmap/heat-color.tsx'),
+  registryItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/components/heatmap/heat-color.tsx'),
   'Heatmap registry item must ship the public HeatColor implementation.',
 )
 assert.ok(

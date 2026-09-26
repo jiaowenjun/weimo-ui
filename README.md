@@ -28,6 +28,17 @@ pnpm install
 
 分发形态为源码导出：`exports` 直接指向 `src` 下的 `.ts/.tsx/.css`，要求消费方使用支持 TypeScript、TSX 和 CSS 的打包器。`react` 与 `react-dom` 声明为 peer dependencies，其余运行时依赖为普通 dependencies。`private: true` 仅禁止误发到 npm，不影响通过 Git commit 安装。
 
+## 子项目
+
+`packages/weimo-ui-core` 是基础 UI workspace 包，负责以下文档分组：
+
+- Token / 样式
+- Surface / 材质
+- 控件 / 弹层
+- 布局 / 栏位
+
+主包的同名入口以源码级 re-export 转发到 core，并在 Git 安装包中携带 core 源码；卡片、标签、Markdown、媒体与数据可视化组件继续留在主项目，并单向依赖 core。
+
 ## 职责定位
 
 `weimo-ui` 不是用于复刻 `coss ui`、`shadcn/ui`、`base ui` 等组件库中已经存在的通用组件。

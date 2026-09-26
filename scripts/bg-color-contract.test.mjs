@@ -108,18 +108,18 @@ function tokenValuesForSource(source, token) {
 }
 
 const packageJson = readJson('package.json')
-const bgColorSource = readProjectFile('src/components/bg-color.ts')
-const bgColorCss = readProjectFile('src/components/bg-color.css')
+const bgColorSource = readProjectFile('packages/weimo-ui-core/src/components/bg-color.ts')
+const bgColorCss = readProjectFile('packages/weimo-ui-core/src/components/bg-color.css')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const docsDefinitionSource = readProjectFile('src/docs/component-definitions/background-tokens.tsx')
 const textDocsSource = readProjectFile('src/docs/component-definitions/text-tokens.tsx')
 const appCss = readProjectFile('src/App.css')
 const tokenPreviewCardCss = readProjectFile('src/components/component-preview-card.css')
-const tokensCss = readProjectFile('src/styles/tokens.css')
-const dialogCss = readProjectFile('src/components/coss/dialog.css')
+const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
+const dialogCss = readProjectFile('packages/weimo-ui-core/src/components/coss/dialog.css')
 const commandCss = readProjectFile('src/components/coss/command.css')
-const sidebarShellCss = readProjectFile('src/components/sidebar/sidebar-shell.css')
+const sidebarShellCss = readProjectFile('packages/weimo-ui-core/src/components/sidebar/sidebar-shell.css')
 const rootRegistry = readJson('registry.json')
 const styleRegistry = readJson('registry/style.json')
 const standaloneRegistryItem = readJson('registry/bg-color.json')
@@ -193,7 +193,7 @@ for (const [tone, token, className, lightValue, darkValue] of expectedTones) {
 }
 
 for (const [sourceName, source] of [
-  ['src/styles/tokens.css', tokensCss],
+  ['packages/weimo-ui-core/src/styles/tokens.css', tokensCss],
   ['registry/style.json', JSON.stringify(styleRegistry)],
   ['registry.json', JSON.stringify(rootStyleItem)],
 ]) {
@@ -520,8 +520,8 @@ assert.deepEqual(
 assert.deepEqual(
   registryItem.files.map((file) => file.path),
   [
-    'src/components/bg-color.ts',
-    'src/components/bg-color.css',
+    'packages/weimo-ui-core/src/components/bg-color.ts',
+    'packages/weimo-ui-core/src/components/bg-color.css',
   ],
   'bg-color registry item must ship the tone map and utility stylesheet.',
 )

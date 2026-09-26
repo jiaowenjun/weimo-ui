@@ -30,7 +30,7 @@ function readProjectFile(relativePath) {
   return readFileSync(join(root, relativePath), 'utf8')
 }
 
-const tokensCss = readProjectFile('src/styles/tokens.css')
+const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const styleItem = JSON.parse(readProjectFile('registry/style.json'))
 const registry = JSON.parse(readProjectFile('registry.json'))
 const rootStyleItem = registry.items.find((item) => item.name === 'style')

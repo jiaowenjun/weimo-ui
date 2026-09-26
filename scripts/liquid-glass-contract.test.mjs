@@ -13,9 +13,9 @@ function readProjectFile(relativePath) {
   return readFileSync(absolutePath, 'utf8')
 }
 
-const componentSource = readProjectFile('src/components/liquid-glass.tsx')
-const componentCss = readProjectFile('src/components/liquid-glass.css')
-const engineSource = readProjectFile('src/components/liquid-glass-react/index.tsx')
+const componentSource = readProjectFile('packages/weimo-ui-core/src/components/liquid-glass.tsx')
+const componentCss = readProjectFile('packages/weimo-ui-core/src/components/liquid-glass.css')
+const engineSource = readProjectFile('packages/weimo-ui-core/src/components/liquid-glass-react/index.tsx')
 const definitionSource = readProjectFile('src/docs/component-definitions/surface.tsx')
 const tileSource = readProjectFile('src/docs/liquid-glass-tile.tsx')
 const buttonDefinitionSource = readProjectFile('src/docs/component-definitions/button.tsx')
@@ -24,7 +24,7 @@ const barDefinitionSource = readProjectFile('src/docs/component-definitions/bar.
 const pageLayoutDefinitionSource = readProjectFile('src/docs/component-definitions/page-layout.tsx')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const appCss = readProjectFile('src/App.css')
-const frostedSurfaceSource = readProjectFile('src/components/frosted-surface.tsx')
+const frostedSurfaceSource = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.tsx')
 const registryItem = JSON.parse(readProjectFile('registry/liquid-glass.json'))
 const packageJson = JSON.parse(readProjectFile('package.json'))
 
@@ -37,10 +37,10 @@ assert.ok(
   'LiquidGlassSurface must import its semantic layer transitions.',
 )
 for (const vendoredFile of [
-  'src/components/liquid-glass-react/index.tsx',
-  'src/components/liquid-glass-react/shader-utils.ts',
-  'src/components/liquid-glass-react/utils.ts',
-  'src/components/liquid-glass-react/LICENSE',
+  'packages/weimo-ui-core/src/components/liquid-glass-react/index.tsx',
+  'packages/weimo-ui-core/src/components/liquid-glass-react/shader-utils.ts',
+  'packages/weimo-ui-core/src/components/liquid-glass-react/utils.ts',
+  'packages/weimo-ui-core/src/components/liquid-glass-react/LICENSE',
 ]) {
   assert.ok(existsSync(join(root, vendoredFile)), `${vendoredFile} must exist: the glass engine is vendored in-repo.`)
 }
@@ -196,8 +196,8 @@ assert.ok(
   'liquid-glass must not declare the liquid-glass-react npm dependency: the engine is vendored in-repo.',
 )
 assert.ok(
-  registryItem.files.some((file) => file.path === 'src/components/liquid-glass-react/index.tsx') &&
-    registryItem.files.some((file) => file.path === 'src/components/liquid-glass-react/LICENSE'),
+  registryItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/components/liquid-glass-react/index.tsx') &&
+    registryItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/components/liquid-glass-react/LICENSE'),
   'liquid-glass must ship the vendored engine sources and its MIT LICENSE.',
 )
 assert.ok(
@@ -205,11 +205,11 @@ assert.ok(
   'liquid-glass must install the shared style tokens.',
 )
 assert.ok(
-  registryItem.files.some((file) => file.path === 'src/components/liquid-glass.tsx'),
+  registryItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/components/liquid-glass.tsx'),
   'liquid-glass must ship the LiquidGlassSurface source.',
 )
 assert.ok(
-  registryItem.files.some((file) => file.path === 'src/components/liquid-glass.css'),
+  registryItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/components/liquid-glass.css'),
   'liquid-glass must ship its semantic transition CSS.',
 )
 

@@ -22,8 +22,8 @@ function cssBlockFor(source, selector) {
   return match[1]
 }
 
-const componentSource = readProjectFile('src/components/card-top-bar.tsx')
-const componentCss = readProjectFile('src/components/card-top-bar.css')
+const componentSource = readProjectFile('packages/weimo-ui-core/src/components/card-top-bar.tsx')
+const componentCss = readProjectFile('packages/weimo-ui-core/src/components/card-top-bar.css')
 const CardSource = readProjectFile('src/components/card.tsx')
 const CardResolversSource = readProjectFile('src/components/card-resolvers.tsx')
 const packageJson = JSON.parse(readProjectFile('package.json'))
@@ -313,10 +313,10 @@ assert.ok(
 )
 assert.ok(CardItem, 'Card registry item must exist.')
 for (const filePath of [
-  'src/components/card-top-bar.tsx',
-  'src/components/card-top-bar.css',
-  'src/components/mode-button.tsx',
-  'src/components/mode-button.css',
+  'packages/weimo-ui-core/src/components/card-top-bar.tsx',
+  'packages/weimo-ui-core/src/components/card-top-bar.css',
+  'packages/weimo-ui-core/src/components/mode-button.tsx',
+  'packages/weimo-ui-core/src/components/mode-button.css',
 ]) {
   assert.ok(
     CardItem.files.some((file) => file.path === filePath),

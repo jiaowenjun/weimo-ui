@@ -11,12 +11,12 @@ function readProjectFile(relativePath) {
   return readFileSync(absolutePath, 'utf8')
 }
 
-const dialogSource = readProjectFile('src/components/coss/dialog.tsx')
-const dialogCss = readProjectFile('src/components/coss/dialog.css')
-const popupSurfaceCss = readProjectFile('src/components/popup-surface.css')
+const dialogSource = readProjectFile('packages/weimo-ui-core/src/components/coss/dialog.tsx')
+const dialogCss = readProjectFile('packages/weimo-ui-core/src/components/coss/dialog.css')
+const popupSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/popup-surface.css')
 const inputGroupSource = readProjectFile('src/components/coss/input-group.tsx')
 const inputGroupCss = readProjectFile('src/components/coss/input-group.css')
-const frostedSurfaceCss = readProjectFile('src/components/frosted-surface.css')
+const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.css')
 const scrollAreaSource = readProjectFile('src/components/coss/scroll-area.tsx')
 const scrollAreaCss = readProjectFile('src/components/coss/scroll-area.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))

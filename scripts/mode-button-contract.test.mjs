@@ -22,8 +22,8 @@ function cssBlockFor(source, selector) {
   return match[1]
 }
 
-const componentSource = readProjectFile('src/components/mode-button.tsx')
-const componentCss = readProjectFile('src/components/mode-button.css')
+const componentSource = readProjectFile('packages/weimo-ui-core/src/components/mode-button.tsx')
+const componentCss = readProjectFile('packages/weimo-ui-core/src/components/mode-button.css')
 const docsDefinitionSource = readProjectFile(
   'src/docs/component-definitions/button.tsx',
 )

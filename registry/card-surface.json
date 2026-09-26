@@ -15,12 +15,12 @@
   ],
   "files": [
     {
-      "path": "src/components/card-surface.tsx",
+      "path": "packages/weimo-ui-core/src/components/card-surface.tsx",
       "type": "registry:ui",
       "target": "@ui/card-surface.tsx"
     },
     {
-      "path": "src/components/card-surface.css",
+      "path": "packages/weimo-ui-core/src/components/card-surface.css",
       "type": "registry:ui",
       "target": "@ui/card-surface.css"
     }

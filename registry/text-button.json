@@ -13,12 +13,12 @@
   ],
   "files": [
     {
-      "path": "src/components/text-button.tsx",
+      "path": "packages/weimo-ui-core/src/components/text-button.tsx",
       "type": "registry:ui",
       "target": "@ui/text-button.tsx"
     },
     {
-      "path": "src/components/text-button.css",
+      "path": "packages/weimo-ui-core/src/components/text-button.css",
       "type": "registry:ui",
       "target": "@ui/text-button.css"
     }

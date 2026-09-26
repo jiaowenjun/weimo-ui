@@ -51,9 +51,9 @@ const removedTones = [
 ]
 
 const packageJson = JSON.parse(readProjectFile('package.json'))
-const textColorSource = readProjectFile('src/components/text-color.ts')
-const textColorCss = readProjectFile('src/components/text-color.css')
-const tokensCss = readProjectFile('src/styles/tokens.css')
+const textColorSource = readProjectFile('packages/weimo-ui-core/src/components/text-color.ts')
+const textColorCss = readProjectFile('packages/weimo-ui-core/src/components/text-color.css')
+const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const docsDefinitionSource = readProjectFile('src/docs/component-definitions/text-tokens.tsx')
@@ -298,8 +298,8 @@ assert.deepEqual(
 assert.deepEqual(
   registryItem.files.map((file) => file.path),
   [
-    'src/components/text-color.ts',
-    'src/components/text-color.css',
+    'packages/weimo-ui-core/src/components/text-color.ts',
+    'packages/weimo-ui-core/src/components/text-color.css',
   ],
   'text-color registry item must ship the tone map and utility stylesheet.',
 )

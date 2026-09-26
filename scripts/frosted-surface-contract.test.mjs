@@ -51,14 +51,14 @@ const componentDefinitionsIndexSource = readProjectFile(
 const frostedSurfaceDefinitionSource = readProjectFile(
   'src/docs/component-definitions/surface.tsx',
 )
-const frostedSurfaceSource = readProjectFile('src/components/frosted-surface.tsx')
+const frostedSurfaceSource = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.tsx')
 const frostedSurfaceModelSource = readProjectFile(
-  'src/components/frosted-surface-model.ts',
+  'packages/weimo-ui-core/src/components/frosted-surface-model.ts',
 )
-const frostedSurfaceCss = readProjectFile('src/components/frosted-surface.css')
-const sliderCss = readProjectFile('src/components/slider.css')
+const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.css')
+const sliderCss = readProjectFile('packages/weimo-ui-core/src/components/slider.css')
 const appCss = readProjectFile('src/App.css')
-const tokensCss = readProjectFile('src/styles/tokens.css')
+const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const frostedSurfaceModelContractModule = await import(
   `data:text/javascript;base64,${Buffer.from(
     ts.transpileModule(
@@ -443,7 +443,7 @@ for (const snippet of [
   )
 }
 
-const sliderModuleSource = readProjectFile('src/components/slider.tsx')
+const sliderModuleSource = readProjectFile('packages/weimo-ui-core/src/components/slider.tsx')
 
 for (const snippet of [
   'function Slider(',
@@ -580,12 +580,12 @@ for (const snippet of [
 // 统一经 backgroundStyle 以 inline 变量下发,直接声明 border-color 的规则
 // (如磨砂图标按钮禁用描边)优先级更高不受影响。
 for (const [sourcePath, sourceLabel, extraSnippets] of [
-  ['src/components/chip.tsx', 'Chip', ['...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle']],
+  ['packages/weimo-ui-core/src/components/chip.tsx', 'Chip', ['...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle']],
   ['src/components/chip-button.tsx', 'ChipButton', ['...style, ...backgroundStyle']],
-  ['src/components/menu.tsx', 'MenuPopup', ['style={{ ...style, ...backgroundStyle }}']],
+  ['packages/weimo-ui-core/src/components/menu.tsx', 'MenuPopup', ['style={{ ...style, ...backgroundStyle }}']],
   ['src/components/tag-bread.tsx', 'TagBread', ['...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle']],
-  ['src/components/frosted-icon-button.tsx', 'FrostedIconButton', ['style={{ ...style, ...backgroundStyle }}']],
-  ['src/components/frosted-icon-button-group.tsx', 'FrostedIconButtonGroup', ['style={{ ...style, ...backgroundStyle }}']],
+  ['packages/weimo-ui-core/src/components/frosted-icon-button.tsx', 'FrostedIconButton', ['style={{ ...style, ...backgroundStyle }}']],
+  ['packages/weimo-ui-core/src/components/frosted-icon-button-group.tsx', 'FrostedIconButtonGroup', ['style={{ ...style, ...backgroundStyle }}']],
 ]) {
   const source = readProjectFile(sourcePath)
 
@@ -770,9 +770,9 @@ for (const removedTokenName of ['smart-glass-surface-fg', 'smart-glass-surface-m
 assert.deepEqual(
   getRegistryFiles(rootFrostedSurfaceItem),
   [
-    'src/components/frosted-surface.tsx',
-    'src/components/frosted-surface-model.ts',
-    'src/components/frosted-surface.css',
+    'packages/weimo-ui-core/src/components/frosted-surface.tsx',
+    'packages/weimo-ui-core/src/components/frosted-surface-model.ts',
+    'packages/weimo-ui-core/src/components/frosted-surface.css',
   ],
   'FrostedSurface registry item must ship only its own files.',
 )

@@ -19,42 +19,42 @@
   ],
   "files": [
     {
-      "path": "src/components/card-tool-bar.tsx",
+      "path": "packages/weimo-ui-core/src/components/card-tool-bar.tsx",
       "type": "registry:ui",
       "target": "@ui/card-tool-bar.tsx"
     },
     {
-      "path": "src/components/card-tool-bar.css",
+      "path": "packages/weimo-ui-core/src/components/card-tool-bar.css",
       "type": "registry:ui",
       "target": "@ui/card-tool-bar.css"
     },
     {
-      "path": "src/components/frosted-icon-button.tsx",
+      "path": "packages/weimo-ui-core/src/components/frosted-icon-button.tsx",
       "type": "registry:ui",
       "target": "@ui/frosted-icon-button.tsx"
     },
     {
-      "path": "src/components/icon-button-model.ts",
+      "path": "packages/weimo-ui-core/src/components/icon-button-model.ts",
       "type": "registry:ui",
       "target": "@ui/icon-button-model.ts"
     },
     {
-      "path": "src/components/icon-button.css",
+      "path": "packages/weimo-ui-core/src/components/icon-button.css",
       "type": "registry:ui",
       "target": "@ui/icon-button.css"
     },
     {
-      "path": "src/components/frosted-surface.tsx",
+      "path": "packages/weimo-ui-core/src/components/frosted-surface.tsx",
       "type": "registry:ui",
       "target": "@ui/frosted-surface.tsx"
     },
     {
-      "path": "src/components/frosted-surface-model.ts",
+      "path": "packages/weimo-ui-core/src/components/frosted-surface-model.ts",
       "type": "registry:ui",
       "target": "@ui/frosted-surface-model.ts"
     },
     {
-      "path": "src/components/frosted-surface.css",
+      "path": "packages/weimo-ui-core/src/components/frosted-surface.css",
       "type": "registry:ui",
       "target": "@ui/frosted-surface.css"
     }

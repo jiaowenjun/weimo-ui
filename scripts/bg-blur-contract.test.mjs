@@ -51,18 +51,18 @@ const expectedTones = [
 ]
 
 const packageJson = readJson('package.json')
-const bgBlurSource = readProjectFile('src/components/bg-blur.ts')
-const bgBlurCss = readProjectFile('src/components/bg-blur.css')
+const bgBlurSource = readProjectFile('packages/weimo-ui-core/src/components/bg-blur.ts')
+const bgBlurCss = readProjectFile('packages/weimo-ui-core/src/components/bg-blur.css')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const docsDefinitionSource = readProjectFile('src/docs/component-definitions/background-tokens.tsx')
 const appCss = readProjectFile('src/App.css')
 const tokenPreviewCardCss = readProjectFile('src/components/component-preview-card.css')
-const tokensCss = readProjectFile('src/styles/tokens.css')
-const frostedSurfaceCss = readProjectFile('src/components/frosted-surface.css')
+const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
+const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.css')
 const commandCss = readProjectFile('src/components/coss/command.css')
-const dialogCss = readProjectFile('src/components/coss/dialog.css')
-const sidebarShellCss = readProjectFile('src/components/sidebar/sidebar-shell.css')
+const dialogCss = readProjectFile('packages/weimo-ui-core/src/components/coss/dialog.css')
+const sidebarShellCss = readProjectFile('packages/weimo-ui-core/src/components/sidebar/sidebar-shell.css')
 const rootRegistry = readJson('registry.json')
 const styleRegistry = readJson('registry/style.json')
 const standaloneRegistryItem = readJson('registry/bg-blur.json')
@@ -331,7 +331,7 @@ assert.deepEqual(
 )
 assert.deepEqual(
   registryItem.files.map((file) => file.path),
-  ['src/components/bg-blur.ts', 'src/components/bg-blur.css'],
+  ['packages/weimo-ui-core/src/components/bg-blur.ts', 'packages/weimo-ui-core/src/components/bg-blur.css'],
   'bg-blur registry item must ship the tone map and utility stylesheet.',
 )
 assert.ok(

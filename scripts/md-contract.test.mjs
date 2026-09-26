@@ -54,7 +54,7 @@ const mdRenderDefinitionSource = readProjectFile(
 )
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const appCss = readProjectFile('src/App.css')
-const tokensCss = readProjectFile('src/styles/tokens.css')
+const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 const rootRegistry = JSON.parse(readProjectFile('registry.json'))
 const standaloneRegistry = JSON.parse(readProjectFile('registry/md.json'))
@@ -213,7 +213,7 @@ for (const [token, lightValue, darkValue] of markdownColorTokens) {
   assert.ok(
     tokensRootBlock.includes(`${token}: ${lightValue};`) &&
       tokensDarkBlock.includes(`${token}: ${darkValue};`),
-    `src/styles/tokens.css must define concrete light and dark values for ${token}.`,
+    `packages/weimo-ui-core/src/styles/tokens.css must define concrete light and dark values for ${token}.`,
   )
   assert.equal(styleRegistry.cssVars.light[key], lightValue, `registry/style.json must export the light ${token}.`)
   assert.equal(styleRegistry.cssVars.dark[key], darkValue, `registry/style.json must export the dark ${token}.`)
@@ -226,7 +226,7 @@ for (const [token, value] of markdownStaticTokens) {
 
   assert.ok(
     tokensRootBlock.includes(`${token}: ${value};`) && !value.includes('var('),
-    `src/styles/tokens.css must define a concrete value for ${token}.`,
+    `packages/weimo-ui-core/src/styles/tokens.css must define a concrete value for ${token}.`,
   )
   assert.equal(styleRegistry.cssVars.light[key], value, `registry/style.json must export ${token}.`)
   assert.equal(rootStyleItem?.cssVars.light[key], value, `registry.json must export ${token}.`)

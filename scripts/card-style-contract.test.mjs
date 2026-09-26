@@ -41,7 +41,7 @@ function assertIncludes(block, snippet, message) {
 }
 
 const cardCss = readProjectFile('src/components/card.css')
-const cardTopBarCss = readProjectFile('src/components/card-top-bar.css')
+const cardTopBarCss = readProjectFile('packages/weimo-ui-core/src/components/card-top-bar.css')
 const markdownContentCss = readProjectFile('src/components/markdown-content.css')
 const CardSource = readProjectFile('src/components/card.tsx')
 const CardResolversSource = readProjectFile('src/components/card-resolvers.tsx')
@@ -54,7 +54,7 @@ const markdownSanitizeSource = readProjectFile(
   'src/components/markdown-sanitize.ts',
 )
 const indexCss = readProjectFile('src/index.css')
-const sharedTokenCss = readProjectFile('src/styles/tokens.css')
+const sharedTokenCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const docsMarkdownSampleSource = readProjectFile('src/docs/component-definitions/markdown-sample.ts')
 const registry = JSON.parse(readProjectFile('registry.json'))
 const styleRegistry = JSON.parse(readProjectFile('registry/style.json'))
@@ -707,12 +707,12 @@ for (const snippet of [
   '--color-text-placeholder: hsl(0 0% 74%);',
   '--color-text-placeholder: hsl(0 0% 35%);',
 ]) {
-  assert.ok(sharedTokenCss.includes(snippet), `src/styles/tokens.css must include ${snippet}`)
+  assert.ok(sharedTokenCss.includes(snippet), `packages/weimo-ui-core/src/styles/tokens.css must include ${snippet}`)
 }
 
 assert.ok(
   indexCss.includes('@import "./styles/tokens.css";'),
-  'src/index.css must consume shared tokens through src/styles/tokens.css.',
+  'src/index.css must consume shared tokens through packages/weimo-ui-core/src/styles/tokens.css.',
 )
 assert.equal(
   packageJson.exports?.['./styles/tokens.css'],

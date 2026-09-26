@@ -39,10 +39,10 @@ const expectedScales = [
 ]
 
 const packageJson = readJson('package.json')
-const fontSizeSource = readProjectFile('src/components/font-size.ts')
-const fontSizeCss = readProjectFile('src/components/font-size.css')
+const fontSizeSource = readProjectFile('packages/weimo-ui-core/src/components/font-size.ts')
+const fontSizeCss = readProjectFile('packages/weimo-ui-core/src/components/font-size.css')
 const cossCardCss = readProjectFile('src/components/coss/card.css')
-const tokensCss = readProjectFile('src/styles/tokens.css')
+const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const docsDefinitionSource = readProjectFile('src/docs/component-definitions/text-tokens.tsx')
@@ -247,8 +247,8 @@ assert.deepEqual(
 assert.deepEqual(
   registryItem.files.map((file) => file.path),
   [
-    'src/components/font-size.ts',
-    'src/components/font-size.css',
+    'packages/weimo-ui-core/src/components/font-size.ts',
+    'packages/weimo-ui-core/src/components/font-size.css',
   ],
   'font-size registry item must ship the scale map and utility stylesheet.',
 )

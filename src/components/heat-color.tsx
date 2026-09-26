@@ -1,12 +1,1 @@
-export {
-  HeatColor,
-  heatColorMap,
-  heatColorLevels,
-  getHeatColorClassName,
-  getHeatColorToken,
-  type HeatColorLevel,
-  type HeatColorProps,
-} from './heatmap/heat-color'
-export {
-  type HeatmapLevel,
-} from './heatmap/heatmap-model'
+export * from '../../packages/weimo-ui-core/src/components/heat-color.tsx'

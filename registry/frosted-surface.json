@@ -15,17 +15,17 @@
   ],
   "files": [
     {
-      "path": "src/components/frosted-surface.tsx",
+      "path": "packages/weimo-ui-core/src/components/frosted-surface.tsx",
       "type": "registry:ui",
       "target": "@ui/frosted-surface.tsx"
     },
     {
-      "path": "src/components/frosted-surface-model.ts",
+      "path": "packages/weimo-ui-core/src/components/frosted-surface-model.ts",
       "type": "registry:ui",
       "target": "@ui/frosted-surface-model.ts"
     },
     {
-      "path": "src/components/frosted-surface.css",
+      "path": "packages/weimo-ui-core/src/components/frosted-surface.css",
       "type": "registry:ui",
       "target": "@ui/frosted-surface.css"
     }

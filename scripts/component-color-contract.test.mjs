@@ -31,7 +31,7 @@ function listCssFiles(directory) {
 }
 
 const rawColorPattern = /#[\da-f]{3,8}\b|rgba?\([^)]*\)|hsla?\([^)]*\)/gi
-const allowlistedTokenFiles = new Set(['src/styles/tokens.css'])
+const allowlistedTokenFiles = new Set(['packages/weimo-ui-core/src/styles/tokens.css'])
 const allowlistedComponentColors = new Map([
   [
     'src/components/component-preview-card.css',
@@ -44,17 +44,17 @@ const allowlistedComponentColors = new Map([
   ],
 ])
 const cssFiles = listCssFiles(componentsRoot)
-const tokensCss = readProjectFile('src/styles/tokens.css')
+const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const rootRegistry = readJson('registry.json')
 const styleRegistry = readJson('registry/style.json')
 const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const hslOnlyTokenSources = [
-  'src/styles/tokens.css',
-  'src/components/bg-blur.ts',
-  'src/components/bg-color.ts',
-  'src/components/border-color.ts',
-  'src/components/heatmap/heat-color.tsx',
-  'src/components/text-color.ts',
+  'packages/weimo-ui-core/src/styles/tokens.css',
+  'packages/weimo-ui-core/src/components/bg-blur.ts',
+  'packages/weimo-ui-core/src/components/bg-color.ts',
+  'packages/weimo-ui-core/src/components/border-color.ts',
+  'packages/weimo-ui-core/src/components/heatmap/heat-color.tsx',
+  'packages/weimo-ui-core/src/components/text-color.ts',
   'registry/style.json',
 ]
 const nonHslColorPattern = /#[\da-f]{3,8}\b|rgba?\(/i

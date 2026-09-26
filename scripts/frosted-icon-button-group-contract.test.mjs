@@ -41,10 +41,10 @@ const rootGroupItem = rootRegistry.items.find(
   (item) => item.name === 'frosted-icon-button-group',
 )
 const componentManifestSource = readProjectFile('src/docs/components-manifest.ts')
-const groupSource = readProjectFile('src/components/frosted-icon-button-group.tsx')
-const glassIconButtonSource = readProjectFile('src/components/frosted-icon-button.tsx')
-const groupCss = readProjectFile('src/components/frosted-icon-button-group.css')
-const iconButtonCss = readProjectFile('src/components/icon-button.css')
+const groupSource = readProjectFile('packages/weimo-ui-core/src/components/frosted-icon-button-group.tsx')
+const glassIconButtonSource = readProjectFile('packages/weimo-ui-core/src/components/frosted-icon-button.tsx')
+const groupCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-icon-button-group.css')
+const iconButtonCss = readProjectFile('packages/weimo-ui-core/src/components/icon-button.css')
 const buttonDocsSource = readProjectFile('src/docs/component-definitions/button.tsx')
 
 assert.ok(
@@ -87,13 +87,13 @@ assert.deepEqual(
 assert.deepEqual(
   groupRegistry.files.map((file) => file.path),
   [
-    'src/components/frosted-icon-button-group.tsx',
-    'src/components/frosted-icon-button-group.css',
-    'src/components/icon-button-model.ts',
-    'src/components/icon-button.css',
-    'src/components/frosted-surface.tsx',
-    'src/components/frosted-surface-model.ts',
-    'src/components/frosted-surface.css',
+    'packages/weimo-ui-core/src/components/frosted-icon-button-group.tsx',
+    'packages/weimo-ui-core/src/components/frosted-icon-button-group.css',
+    'packages/weimo-ui-core/src/components/icon-button-model.ts',
+    'packages/weimo-ui-core/src/components/icon-button.css',
+    'packages/weimo-ui-core/src/components/frosted-surface.tsx',
+    'packages/weimo-ui-core/src/components/frosted-surface-model.ts',
+    'packages/weimo-ui-core/src/components/frosted-surface.css',
   ],
   'FrostedIconButtonGroup registry item must ship the group plus the icon-button and frosted-surface primitives.',
 )

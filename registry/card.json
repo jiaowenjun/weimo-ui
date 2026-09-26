@@ -103,32 +103,32 @@
       "target": "@ui/card.css"
     },
     {
-      "path": "src/components/card-top-bar.tsx",
+      "path": "packages/weimo-ui-core/src/components/card-top-bar.tsx",
       "type": "registry:ui",
       "target": "@ui/card-top-bar.tsx"
     },
     {
-      "path": "src/components/card-top-bar.css",
+      "path": "packages/weimo-ui-core/src/components/card-top-bar.css",
       "type": "registry:ui",
       "target": "@ui/card-top-bar.css"
     },
     {
-      "path": "src/components/mode-button.tsx",
+      "path": "packages/weimo-ui-core/src/components/mode-button.tsx",
       "type": "registry:ui",
       "target": "@ui/mode-button.tsx"
     },
     {
-      "path": "src/components/mode-button.css",
+      "path": "packages/weimo-ui-core/src/components/mode-button.css",
       "type": "registry:ui",
       "target": "@ui/mode-button.css"
     },
     {
-      "path": "src/components/card-tool-bar.tsx",
+      "path": "packages/weimo-ui-core/src/components/card-tool-bar.tsx",
       "type": "registry:ui",
       "target": "@ui/card-tool-bar.tsx"
     },
     {
-      "path": "src/components/card-tool-bar.css",
+      "path": "packages/weimo-ui-core/src/components/card-tool-bar.css",
       "type": "registry:ui",
       "target": "@ui/card-tool-bar.css"
     },
@@ -308,27 +308,27 @@
       "target": "@ui/chip-button.css"
     },
     {
-      "path": "src/components/capsule-frame.ts",
+      "path": "packages/weimo-ui-core/src/components/capsule-frame.ts",
       "type": "registry:ui",
       "target": "@ui/capsule-frame.ts"
     },
     {
-      "path": "src/components/capsule-frame.css",
+      "path": "packages/weimo-ui-core/src/components/capsule-frame.css",
       "type": "registry:ui",
       "target": "@ui/capsule-frame.css"
     },
     {
-      "path": "src/components/animated-inline-size.tsx",
+      "path": "packages/weimo-ui-core/src/components/animated-inline-size.tsx",
       "type": "registry:ui",
       "target": "@ui/animated-inline-size.tsx"
     },
     {
-      "path": "src/components/animated-inline-size-model.ts",
+      "path": "packages/weimo-ui-core/src/components/animated-inline-size-model.ts",
       "type": "registry:ui",
       "target": "@ui/animated-inline-size-model.ts"
     },
     {
-      "path": "src/components/animated-inline-size.css",
+      "path": "packages/weimo-ui-core/src/components/animated-inline-size.css",
       "type": "registry:ui",
       "target": "@ui/animated-inline-size.css"
     },
@@ -363,62 +363,62 @@
       "target": "@ui/tag-picker/tag-picker.css"
     },
     {
-      "path": "src/components/action-dialog.tsx",
+      "path": "packages/weimo-ui-core/src/components/action-dialog.tsx",
       "type": "registry:ui",
       "target": "@ui/action-dialog.tsx"
     },
     {
-      "path": "src/components/action-dialog.css",
+      "path": "packages/weimo-ui-core/src/components/action-dialog.css",
       "type": "registry:ui",
       "target": "@ui/action-dialog.css"
     },
     {
-      "path": "src/components/float-bar.tsx",
+      "path": "packages/weimo-ui-core/src/components/float-bar.tsx",
       "type": "registry:ui",
       "target": "@ui/float-bar.tsx"
     },
     {
-      "path": "src/components/float-bar.css",
+      "path": "packages/weimo-ui-core/src/components/float-bar.css",
       "type": "registry:ui",
       "target": "@ui/float-bar.css"
     },
     {
-      "path": "src/components/bottom-bar.tsx",
+      "path": "packages/weimo-ui-core/src/components/bottom-bar.tsx",
       "type": "registry:ui",
       "target": "@ui/bottom-bar.tsx"
     },
     {
-      "path": "src/components/bottom-bar.css",
+      "path": "packages/weimo-ui-core/src/components/bottom-bar.css",
       "type": "registry:ui",
       "target": "@ui/bottom-bar.css"
     },
     {
-      "path": "src/components/icon-button.css",
+      "path": "packages/weimo-ui-core/src/components/icon-button.css",
       "type": "registry:ui",
       "target": "@ui/icon-button.css"
     },
     {
-      "path": "src/components/menu.tsx",
+      "path": "packages/weimo-ui-core/src/components/menu.tsx",
       "type": "registry:ui",
       "target": "@ui/menu.tsx"
     },
     {
-      "path": "src/components/menu.css",
+      "path": "packages/weimo-ui-core/src/components/menu.css",
       "type": "registry:ui",
       "target": "@ui/menu.css"
     },
     {
-      "path": "src/components/menu/menu-variants.ts",
+      "path": "packages/weimo-ui-core/src/components/menu/menu-variants.ts",
       "type": "registry:ui",
       "target": "@ui/menu/menu-variants.ts"
     },
     {
-      "path": "src/components/coss/dialog.tsx",
+      "path": "packages/weimo-ui-core/src/components/coss/dialog.tsx",
       "type": "registry:ui",
       "target": "@ui/coss/dialog.tsx"
     },
     {
-      "path": "src/components/coss/dialog.css",
+      "path": "packages/weimo-ui-core/src/components/coss/dialog.css",
       "type": "registry:ui",
       "target": "@ui/coss/dialog.css"
     },
@@ -483,52 +483,52 @@
       "target": "@ui/lib/utils.ts"
     },
     {
-      "path": "src/components/frosted-surface.tsx",
+      "path": "packages/weimo-ui-core/src/components/frosted-surface.tsx",
       "type": "registry:ui",
       "target": "@ui/frosted-surface.tsx"
     },
     {
-      "path": "src/components/frosted-surface-model.ts",
+      "path": "packages/weimo-ui-core/src/components/frosted-surface-model.ts",
       "type": "registry:ui",
       "target": "@ui/frosted-surface-model.ts"
     },
     {
-      "path": "src/components/frosted-surface.css",
+      "path": "packages/weimo-ui-core/src/components/frosted-surface.css",
       "type": "registry:ui",
       "target": "@ui/frosted-surface.css"
     },
     {
-      "path": "src/components/frosted-icon-button.tsx",
+      "path": "packages/weimo-ui-core/src/components/frosted-icon-button.tsx",
       "type": "registry:ui",
       "target": "@ui/frosted-icon-button.tsx"
     },
     {
-      "path": "src/components/icon-button-model.ts",
+      "path": "packages/weimo-ui-core/src/components/icon-button-model.ts",
       "type": "registry:ui",
       "target": "@ui/icon-button-model.ts"
     },
     {
-      "path": "src/components/ghost-icon-button.tsx",
+      "path": "packages/weimo-ui-core/src/components/ghost-icon-button.tsx",
       "type": "registry:ui",
       "target": "@ui/ghost-icon-button.tsx"
     },
     {
-      "path": "src/components/card-surface.tsx",
+      "path": "packages/weimo-ui-core/src/components/card-surface.tsx",
       "type": "registry:ui",
       "target": "@ui/card-surface.tsx"
     },
     {
-      "path": "src/components/card-surface.css",
+      "path": "packages/weimo-ui-core/src/components/card-surface.css",
       "type": "registry:ui",
       "target": "@ui/card-surface.css"
     },
     {
-      "path": "src/components/popup-surface.tsx",
+      "path": "packages/weimo-ui-core/src/components/popup-surface.tsx",
       "type": "registry:ui",
       "target": "@ui/popup-surface.tsx"
     },
     {
-      "path": "src/components/popup-surface.css",
+      "path": "packages/weimo-ui-core/src/components/popup-surface.css",
       "type": "registry:ui",
       "target": "@ui/popup-surface.css"
     }

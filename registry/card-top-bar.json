@@ -17,12 +17,12 @@
   ],
   "files": [
     {
-      "path": "src/components/card-top-bar.tsx",
+      "path": "packages/weimo-ui-core/src/components/card-top-bar.tsx",
       "type": "registry:ui",
       "target": "@ui/card-top-bar.tsx"
     },
     {
-      "path": "src/components/card-top-bar.css",
+      "path": "packages/weimo-ui-core/src/components/card-top-bar.css",
       "type": "registry:ui",
       "target": "@ui/card-top-bar.css"
     }

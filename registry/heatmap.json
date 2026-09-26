@@ -32,7 +32,7 @@
       "target": "@ui/heatmap/heatmap.tsx"
     },
     {
-      "path": "src/components/heatmap/heat-color.tsx",
+      "path": "packages/weimo-ui-core/src/components/heatmap/heat-color.tsx",
       "type": "registry:ui",
       "target": "@ui/heatmap/heat-color.tsx"
     },
@@ -42,7 +42,7 @@
       "target": "@ui/heatmap/heatmap-model.ts"
     },
     {
-      "path": "src/components/heat-color.css",
+      "path": "packages/weimo-ui-core/src/components/heat-color.css",
       "type": "registry:ui",
       "target": "@ui/heat-color.css"
     },
@@ -62,12 +62,12 @@
       "target": "@ui/coss/tooltip.css"
     },
     {
-      "path": "src/components/popup-surface.tsx",
+      "path": "packages/weimo-ui-core/src/components/popup-surface.tsx",
       "type": "registry:ui",
       "target": "@ui/popup-surface.tsx"
     },
     {
-      "path": "src/components/popup-surface.css",
+      "path": "packages/weimo-ui-core/src/components/popup-surface.css",
       "type": "registry:ui",
       "target": "@ui/popup-surface.css"
     }

@@ -36,8 +36,8 @@ function countOccurrences(source, snippet) {
 
 const source = readProjectFile('src/components/tag-bread.tsx')
 const css = readProjectFile('src/components/tag-bread.css')
-const surfaceCss = readProjectFile('src/components/capsule-frame.css')
-const frostedSurfaceCss = readProjectFile('src/components/frosted-surface.css')
+const surfaceCss = readProjectFile('packages/weimo-ui-core/src/components/capsule-frame.css')
+const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.css')
 const appCss = readProjectFile('src/App.css')
 const indexCss = readProjectFile('src/index.css')
 const cossBreadcrumbSource = readProjectFile('src/components/coss/breadcrumb.tsx')
@@ -360,16 +360,16 @@ assert.deepEqual(
   [
     'src/components/tag-bread.tsx',
     'src/components/tag-bread.css',
-    'src/components/capsule-frame.ts',
-    'src/components/capsule-frame.css',
-    'src/components/animated-inline-size.tsx',
-    'src/components/animated-inline-size-model.ts',
-    'src/components/animated-inline-size.css',
+    'packages/weimo-ui-core/src/components/capsule-frame.ts',
+    'packages/weimo-ui-core/src/components/capsule-frame.css',
+    'packages/weimo-ui-core/src/components/animated-inline-size.tsx',
+    'packages/weimo-ui-core/src/components/animated-inline-size-model.ts',
+    'packages/weimo-ui-core/src/components/animated-inline-size.css',
     'src/components/coss/breadcrumb.tsx',
     'src/components/coss/breadcrumb.css',
-    'src/components/frosted-surface.tsx',
-    'src/components/frosted-surface-model.ts',
-    'src/components/frosted-surface.css',
+    'packages/weimo-ui-core/src/components/frosted-surface.tsx',
+    'packages/weimo-ui-core/src/components/frosted-surface-model.ts',
+    'packages/weimo-ui-core/src/components/frosted-surface.css',
   ],
   'TagBread registry item must ship the component, sidecar CSS, shared chip surface internals, and local coss Breadcrumb.',
 )

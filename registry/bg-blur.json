@@ -13,12 +13,12 @@
   ],
   "files": [
     {
-      "path": "src/components/bg-blur.ts",
+      "path": "packages/weimo-ui-core/src/components/bg-blur.ts",
       "type": "registry:ui",
       "target": "@ui/bg-blur.ts"
     },
     {
-      "path": "src/components/bg-blur.css",
+      "path": "packages/weimo-ui-core/src/components/bg-blur.css",
       "type": "registry:ui",
       "target": "@ui/bg-blur.css"
     }

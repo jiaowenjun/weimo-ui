@@ -1,19 +1,31 @@
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 
-const menuCss = readFileSync(new URL('../src/components/menu.css', import.meta.url), 'utf8')
-const menuSource = readFileSync(new URL('../src/components/menu.tsx', import.meta.url), 'utf8')
+const menuCss = readFileSync(
+  new URL('../packages/weimo-ui-core/src/components/menu.css', import.meta.url),
+  'utf8',
+)
+const menuSource = readFileSync(
+  new URL('../packages/weimo-ui-core/src/components/menu.tsx', import.meta.url),
+  'utf8',
+)
 const menuDefinitionSource = readFileSync(
   new URL('../src/docs/component-definitions/menu.tsx', import.meta.url),
   'utf8',
 )
 const appCss = readFileSync(new URL('../src/App.css', import.meta.url), 'utf8')
-const frostedSurfaceCss = readFileSync(new URL('../src/components/frosted-surface.css', import.meta.url), 'utf8')
-const frostedSurfaceModelSource = readFileSync(
-  new URL('../src/components/frosted-surface-model.ts', import.meta.url),
+const frostedSurfaceCss = readFileSync(
+  new URL('../packages/weimo-ui-core/src/components/frosted-surface.css', import.meta.url),
   'utf8',
 )
-const tokensCss = readFileSync(new URL('../src/styles/tokens.css', import.meta.url), 'utf8')
+const frostedSurfaceModelSource = readFileSync(
+  new URL('../packages/weimo-ui-core/src/components/frosted-surface-model.ts', import.meta.url),
+  'utf8',
+)
+const tokensCss = readFileSync(
+  new URL('../packages/weimo-ui-core/src/styles/tokens.css', import.meta.url),
+  'utf8',
+)
 const registry = JSON.parse(readFileSync(new URL('../registry.json', import.meta.url), 'utf8'))
 const styleItem = registry.items.find((item) => item.name === 'style')
 

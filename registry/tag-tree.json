@@ -53,17 +53,17 @@
       "target": "@ui/tag-tree/tag-tree.css"
     },
     {
-      "path": "src/components/ghost-icon-button.tsx",
+      "path": "packages/weimo-ui-core/src/components/ghost-icon-button.tsx",
       "type": "registry:ui",
       "target": "@ui/ghost-icon-button.tsx"
     },
     {
-      "path": "src/components/icon-button-model.ts",
+      "path": "packages/weimo-ui-core/src/components/icon-button-model.ts",
       "type": "registry:ui",
       "target": "@ui/icon-button-model.ts"
     },
     {
-      "path": "src/components/icon-button.css",
+      "path": "packages/weimo-ui-core/src/components/icon-button.css",
       "type": "registry:ui",
       "target": "@ui/icon-button.css"
     }

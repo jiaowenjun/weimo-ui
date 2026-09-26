@@ -12,12 +12,12 @@
   ],
   "files": [
     {
-      "path": "src/components/slider.tsx",
+      "path": "packages/weimo-ui-core/src/components/slider.tsx",
       "type": "registry:ui",
       "target": "@ui/slider.tsx"
     },
     {
-      "path": "src/components/slider.css",
+      "path": "packages/weimo-ui-core/src/components/slider.css",
       "type": "registry:ui",
       "target": "@ui/slider.css"
     }

@@ -5,15 +5,15 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { createServer } from 'vite'
 
 const sidebarSource = readFileSync(
-  new URL('../src/components/sidebar/sidebar-shell.tsx', import.meta.url),
+  new URL('../packages/weimo-ui-core/src/components/sidebar/sidebar-shell.tsx', import.meta.url),
   'utf8',
 )
 const sidebarIndexSource = readFileSync(
-  new URL('../src/components/sidebar/index.tsx', import.meta.url),
+  new URL('../packages/weimo-ui-core/src/components/sidebar/index.tsx', import.meta.url),
   'utf8',
 )
 const sidebarCss = readFileSync(
-  new URL('../src/components/sidebar/sidebar-shell.css', import.meta.url),
+  new URL('../packages/weimo-ui-core/src/components/sidebar/sidebar-shell.css', import.meta.url),
   'utf8',
 )
 const sidebarRegistry = readFileSync(
@@ -274,7 +274,7 @@ const viteServer = await createServer({
 
 try {
   const { SideBarShell } = await viteServer.ssrLoadModule(
-    '/src/components/sidebar/sidebar-shell.tsx',
+    '/packages/weimo-ui-core/src/components/sidebar/sidebar-shell.tsx',
   )
   const html = renderToStaticMarkup(
     React.createElement(
