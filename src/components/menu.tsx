@@ -79,9 +79,10 @@ export function MenuPopup({
   side,
   sideOffset = 6,
   sticky,
+  style,
   ...props
 }: MenuPopupProps) {
-  const { backgroundTone, setElementRef } =
+  const { backgroundStyle, backgroundTone, setElementRef } =
     useFrostedSurfaceBackgroundToneRef<HTMLDivElement>(true)
 
   return (
@@ -110,6 +111,7 @@ export function MenuPopup({
           data-background-tone={backgroundTone ?? undefined}
           data-slot="menu-popup"
           ref={setElementRef}
+          style={{ ...style, ...backgroundStyle }}
           {...props}
         />
       </BaseMenu.Positioner>

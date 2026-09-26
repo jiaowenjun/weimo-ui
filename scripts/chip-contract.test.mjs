@@ -112,7 +112,7 @@ for (const snippet of [
   "getChipSurfaceClassName(",
   'getChipSurfaceAttributes({ bordered, variant, textSize })',
   'useAnimatedInlineSize([',
-  'style={getAnimatedInlineSizeStyle(style, inlineSize)}',
+  '...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle',
   '<AnimatedInlineSizeMeasure measureRef={measureRef}>',
   'chip-surface__slot chip__slot chip__slot--prefix',
   'chip-surface__content chip__content',

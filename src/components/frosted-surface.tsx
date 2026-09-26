@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useLayoutEffect, useState } from 'react'
-import type { ComponentPropsWithoutRef, RefObject } from 'react'
+import type { ComponentPropsWithoutRef, CSSProperties, RefObject } from 'react'
 
 import {
   getFrostedSurfaceClassName,
+  interpolateFrostedBorderColor,
   resolveElementBackgroundSample,
   type FrostedSurfaceBackgroundSample,
 } from './frosted-surface-model'
@@ -33,6 +34,9 @@ export function useFrostedSurfaceBackgroundTone<ElementType extends HTMLElement>
 
 // 返回完整采样:backgroundTone 驱动 data-background-tone,backgroundLuminance 供
 // 演示页直接展示材质感知到的背景相对亮度(两者来自同一次采样,不会相互漂移)。
+// backgroundStyle 以 inline 自定义属性下发插值边框色——所有磨砂材质的边框
+// 亮度随感知亮度两段递增,直接声明 border-color 的规则(如禁用描边)优先级更高
+// 不受影响;采样前为 undefined,CSS 的 tone 二值声明作为回退。
 export function useFrostedSurfaceBackgroundToneRef<ElementType extends HTMLElement>(
   observe: boolean,
 ) {
@@ -44,8 +48,15 @@ export function useFrostedSurfaceBackgroundToneRef<ElementType extends HTMLEleme
     ))
   }, [])
 
+  const interpolatedBorderColor = interpolateFrostedBorderColor(
+    backgroundSample?.luminance ?? null,
+  )
+
   return {
     backgroundLuminance: backgroundSample?.luminance ?? null,
+    backgroundStyle: interpolatedBorderColor
+      ? ({ '--glass-surface-border': interpolatedBorderColor }) as CSSProperties
+      : undefined,
     backgroundTone: backgroundSample?.tone ?? null,
     setElementRef,
   }
@@ -135,9 +146,10 @@ export function FrostedSurface({
   bordered = false,
   className,
   observe = true,
+  style,
   ...props
 }: FrostedSurfaceProps) {
-  const { backgroundTone, setElementRef } =
+  const { backgroundStyle, backgroundTone, setElementRef } =
     useFrostedSurfaceBackgroundToneRef<HTMLDivElement>(observe)
 
   return (
@@ -148,6 +160,7 @@ export function FrostedSurface({
       )}
       data-background-tone={backgroundTone ?? undefined}
       ref={setElementRef}
+      style={{ ...style, ...backgroundStyle }}
       {...props}
     />
   )

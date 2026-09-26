@@ -132,7 +132,7 @@ for (const snippet of [
   'getChipSurfaceAttributes({ variant: state, interactive: true })',
   'data-state={state}',
   "isGlassState && 'frosted-surface',",
-  'style={animateWidth ? getAnimatedInlineSizeStyle(style, inlineSize) : style}',
+  '? { ...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle }',
   'chip-surface__slot chip-button__prefix',
   'chip-surface__content chip-button__text',
   'type="button"',

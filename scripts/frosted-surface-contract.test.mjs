@@ -376,9 +376,8 @@ const frostedSurfaceDocsPageSource = readProjectFile(
 
 for (const snippet of [
   "import {\n  FrostedSurface,\n  useFrostedSurfaceBackgroundToneRef,\n} from '../../components/frosted-surface'",
-  "import { borderColorToneMap } from '../../components/border-color'",
+  "import { interpolateFrostedBorderColor } from '../../components/frosted-surface-model'",
   "import { textColorToneMap } from '../../components/text-color'",
-  "import { parseColorLightness } from '../token-preview-color'",
   "from '../glass-preview-card'",
   "id: 'frosted-surface'",
   'useFrostedSurfaceBackgroundToneRef<HTMLDivElement>(true)',
@@ -387,15 +386,7 @@ for (const snippet of [
   'textColorToneMap.secondary.value[backgroundTone]',
   'const [sliderGray, setSliderGray] = useState<number | null>(null)',
   'onGrayChange={setSliderGray}',
-  'function interpolateBorderColor(luminance: number | null)',
-  'borderColorToneMap.default.value.dark',
-  'borderColorToneMap.default.value.light',
-  'textColorToneMap.primary.value.dark',
-  'textColorToneMap.primary.value.light',
-  'progress < 0.5',
-  '[borderOnDarkLightness, darkForegroundLightness, progress / 0.5]',
-  '[lightForegroundLightness, borderOnLightLightness, (progress - 0.5) / 0.5]',
-  '`hsl(0 0% ${lightness.toFixed(1)}%)`',
+  'const borderColor = interpolateFrostedBorderColor(backgroundLuminance)',
   '<GlassPreviewCard',
   'label="磨砂材质"',
   'className="frosted-surface-docs__reading"',
@@ -404,6 +395,10 @@ for (const snippet of [
   '边框',
   '感知亮度',
   '(backgroundLuminance * 100).toFixed(1)',
+  'function luminanceToSrgbGrayChannel(luminance: number)',
+  '1.055 * luminance ** (1 / 2.4) - 0.055',
+  'Math.round(luminanceToSrgbGrayChannel(backgroundLuminance) * 255)',
+  'RGB ${perceivedRgbGray}',
   'className="frosted-surface-docs__probe"',
   'borderColor: borderColor ?? undefined',
   'color: foregroundColor ?? undefined',
@@ -593,7 +588,7 @@ assert.ok(
 )
 
 for (const snippet of [
-  "import type { ComponentPropsWithoutRef, RefObject } from 'react'",
+  "import type { ComponentPropsWithoutRef, CSSProperties, RefObject } from 'react'",
   "import { useCallback, useEffect, useLayoutEffect, useState } from 'react'",
   "from './frosted-surface-model'",
   "import './frosted-surface.css'",
@@ -608,11 +603,14 @@ for (const snippet of [
   'const setElementRef = useCallback((nextElement: ElementType | null) => {',
   'useFrostedSurfaceBackgroundToneForElement(element, observe)',
   'backgroundLuminance: backgroundSample?.luminance ?? null',
+  'backgroundStyle: interpolatedBorderColor',
+  "'--glass-surface-border': interpolatedBorderColor",
   'backgroundTone: backgroundSample?.tone ?? null',
   'useFrostedSurfaceBackgroundToneRef<HTMLDivElement>(observe)',
   'data-background-tone={backgroundTone ?? undefined}',
   "bordered ? 'frosted-surface--bordered' : undefined",
   'ref={setElementRef}',
+  "style={{ ...style, ...backgroundStyle }}",
   'resolveElementBackgroundSample(element)',
   'getFrostedSurfaceScrollParents(element)',
   'scrollParents.forEach((scrollParent) => {',
@@ -624,6 +622,25 @@ for (const snippet of [
     snippet,
     `FrostedSurface source must include ${snippet}.`,
   )
+}
+
+// 边框亮度插值下沉到 model,是所有磨砂材质的共享行为:持有采样 hook 的组件
+// 统一经 backgroundStyle 以 inline 变量下发,直接声明 border-color 的规则
+// (如磨砂图标按钮禁用描边)优先级更高不受影响。
+for (const [sourcePath, sourceLabel, extraSnippets] of [
+  ['src/components/chip-surface.tsx', 'ChipSurface', ['style={{ ...style, ...backgroundStyle }}']],
+  ['src/components/chip.tsx', 'Chip', ['...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle']],
+  ['src/components/chip-button.tsx', 'ChipButton', ['...style, ...backgroundStyle']],
+  ['src/components/menu.tsx', 'MenuPopup', ['style={{ ...style, ...backgroundStyle }}']],
+  ['src/components/tag-bread.tsx', 'TagBread', ['...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle']],
+  ['src/components/frosted-icon-button.tsx', 'FrostedIconButton', ['style={{ ...style, ...backgroundStyle }}']],
+  ['src/components/frosted-icon-button-group.tsx', 'FrostedIconButtonGroup', ['style={{ ...style, ...backgroundStyle }}']],
+]) {
+  const source = readProjectFile(sourcePath)
+
+  for (const snippet of ['backgroundStyle', ...extraSnippets]) {
+    assertIncludes(source, snippet, `${sourceLabel} must include ${snippet}.`)
+  }
 }
 assert.ok(
   !frostedSurfaceSource.includes('const element = elementRef.current') ||
@@ -653,6 +670,13 @@ for (const snippet of [
   'export function resolveElementBackgroundSample',
   'export function resolveElementBackgroundTone',
   'return resolveElementBackgroundSample(element)?.tone ?? null',
+  'export function interpolateFrostedBorderColor',
+  'const BORDER_ANCHOR_ON_DARK_LIGHTNESS = 20',
+  'const BORDER_ANCHOR_ON_LIGHT_LIGHTNESS = 90',
+  'const BORDER_FOREGROUND_DARK_LIGHTNESS = 98',
+  'const BORDER_FOREGROUND_LIGHT_LIGHTNESS = 9',
+  '[BORDER_ANCHOR_ON_DARK_LIGHTNESS, BORDER_FOREGROUND_DARK_LIGHTNESS, progress / 0.5]',
+  '[\n          BORDER_FOREGROUND_LIGHT_LIGHTNESS,\n          BORDER_ANCHOR_ON_LIGHT_LIGHTNESS,\n          (progress - 0.5) / 0.5,\n        ]',
   'export function getReadableToneForColor',
   'export function relativeLuminanceForRgb',
   'export function parseCssColor',

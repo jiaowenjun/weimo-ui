@@ -62,7 +62,7 @@ export function TagBread({
 }: TagBreadProps) {
   const crumbs = buildTagBreadCrumbs(tag)
   const { measureRef, inlineSize } = useAnimatedInlineSize(tag)
-  const { backgroundTone, setElementRef } =
+  const { backgroundStyle, backgroundTone, setElementRef } =
     useFrostedSurfaceBackgroundToneRef<HTMLElement>(true)
   const chipSurfaceAttributes = getChipSurfaceAttributes({ variant: 'glass', textSize: 'base' })
 
@@ -120,7 +120,7 @@ export function TagBread({
         className={getChipSurfaceClassName('frosted-surface', 'tag-bread', className)}
         data-background-tone={backgroundTone ?? undefined}
         ref={setElementRef}
-        style={getAnimatedInlineSizeStyle(style, inlineSize)}
+        style={{ ...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle }}
         {...chipSurfaceAttributes}
       >
         {renderCrumbs()}

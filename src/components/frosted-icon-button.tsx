@@ -20,12 +20,14 @@ export const FrostedIconButton = forwardRef<HTMLButtonElement, FrostedIconButton
     bordered = false,
     className,
     size,
+    style,
     type = 'button',
     ...props
   },
   ref,
 ) {
   const {
+    backgroundStyle,
     backgroundTone,
     setElementRef: setFrostedSurfaceElementRef,
   } = useFrostedSurfaceBackgroundToneRef<HTMLButtonElement>(true)
@@ -44,6 +46,7 @@ export const FrostedIconButton = forwardRef<HTMLButtonElement, FrostedIconButton
       )}
       data-background-tone={backgroundTone ?? undefined}
       ref={setElementRef}
+      style={{ ...style, ...backgroundStyle }}
       type={type}
     />
   )

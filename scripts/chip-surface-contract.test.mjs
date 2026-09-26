@@ -236,7 +236,8 @@ assert.ok(
     chipButtonSource.includes("import './frosted-surface.css'") &&
     chipButtonSource.includes("getChipSurfaceAttributes({ variant: state, interactive: true })") &&
     chipButtonSource.includes('animateWidth = false') &&
-    chipButtonSource.includes('style={animateWidth ? getAnimatedInlineSizeStyle(style, inlineSize) : style}') &&
+    chipButtonSource.includes('? { ...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle }') &&
+    chipButtonSource.includes(': { ...style, ...backgroundStyle }') &&
     chipButtonSource.includes('data-state={state}') &&
     chipButtonSource.includes('type="button"') &&
     chipButtonSource.includes('chip-surface__slot chip-button__prefix') &&

@@ -34,7 +34,7 @@ export function ChipButton({
 }: ChipButtonProps) {
   const renderedPrefix = prefix.slice(0, 1)
   const isGlassState = state === 'glass'
-  const { backgroundTone, setElementRef } =
+  const { backgroundStyle, backgroundTone, setElementRef } =
     useFrostedSurfaceBackgroundToneRef<HTMLButtonElement>(isGlassState)
   const { measureRef, inlineSize } = useAnimatedInlineSize([
     renderedPrefix,
@@ -61,7 +61,11 @@ export function ChipButton({
       }
       data-state={state}
       ref={isGlassState ? setElementRef : undefined}
-      style={animateWidth ? getAnimatedInlineSizeStyle(style, inlineSize) : style}
+      style={
+        animateWidth
+          ? { ...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle }
+          : { ...style, ...backgroundStyle }
+      }
       type="button"
       {...chipSurfaceAttributes}
       {...props}

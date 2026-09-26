@@ -49,7 +49,7 @@ export function Chip({
   }
 
   const isGlassVariant = variant === 'glass'
-  const { backgroundTone, setElementRef } =
+  const { backgroundStyle, backgroundTone, setElementRef } =
     useFrostedSurfaceBackgroundToneRef<HTMLSpanElement>(isGlassVariant)
   const { measureRef, inlineSize } = useAnimatedInlineSize([
     prefix,
@@ -68,7 +68,7 @@ export function Chip({
           'chip',
           className,
         )}
-        style={getAnimatedInlineSizeStyle(style, inlineSize)}
+        style={{ ...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle }}
         data-background-tone={
           isGlassVariant ? backgroundTone ?? undefined : undefined
         }

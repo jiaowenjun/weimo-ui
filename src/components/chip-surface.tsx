@@ -22,13 +22,14 @@ export type ChipSurfaceProps = Omit<ComponentPropsWithoutRef<'span'>, 'prefix'> 
 export function ChipSurface({
   bordered = true,
   className,
+  style,
   variant = 'default',
   textSize = 'sm',
   interactive = false,
   ...props
 }: ChipSurfaceProps) {
   const isGlassVariant = variant === 'glass'
-  const { backgroundTone, setElementRef } =
+  const { backgroundStyle, backgroundTone, setElementRef } =
     useFrostedSurfaceBackgroundToneRef<HTMLSpanElement>(isGlassVariant)
 
   return (
@@ -38,6 +39,7 @@ export function ChipSurface({
         isGlassVariant ? backgroundTone ?? undefined : undefined
       }
       ref={isGlassVariant ? setElementRef : undefined}
+      style={{ ...style, ...backgroundStyle }}
       {...getChipSurfaceAttributes({ bordered, variant, textSize, interactive })}
       {...props}
     />
