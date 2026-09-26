@@ -18,7 +18,7 @@ export const pressableToneMap = {
     value: bgColorToneMap['hover'].value,
     className: getBgColorClassName('hover'),
     description: 'Ghost 图标按钮、列表项和轻量 app 控件共用的 hover/active 反馈背景。',
-    uiUsage: 'GhostIconButton、TagPicker option、TagTree row、ChipSurface',
+    uiUsage: 'GhostIconButton、TagPicker option、TagTree row、ChipButton',
     bijiUsage: '继承 shared TagPicker、TagTree、GhostIconButton；app-local controls 复用 --color-bg-hover 语义，具体值可由 app 覆盖',
   },
 } satisfies Record<string, {

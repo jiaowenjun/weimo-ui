@@ -938,19 +938,14 @@
           "target": "@ui/chip.css"
         },
         {
-          "path": "src/components/chip-surface.tsx",
+          "path": "src/components/capsule-frame.ts",
           "type": "registry:ui",
-          "target": "@ui/chip-surface.tsx"
+          "target": "@ui/capsule-frame.ts"
         },
         {
-          "path": "src/components/chip-surface-model.ts",
+          "path": "src/components/capsule-frame.css",
           "type": "registry:ui",
-          "target": "@ui/chip-surface-model.ts"
-        },
-        {
-          "path": "src/components/chip-surface.css",
-          "type": "registry:ui",
-          "target": "@ui/chip-surface.css"
+          "target": "@ui/capsule-frame.css"
         },
         {
           "path": "src/components/animated-inline-size.tsx",
@@ -1299,19 +1294,14 @@
           "target": "@ui/chip-button.css"
         },
         {
-          "path": "src/components/chip-surface.tsx",
+          "path": "src/components/capsule-frame.ts",
           "type": "registry:ui",
-          "target": "@ui/chip-surface.tsx"
+          "target": "@ui/capsule-frame.ts"
         },
         {
-          "path": "src/components/chip-surface-model.ts",
+          "path": "src/components/capsule-frame.css",
           "type": "registry:ui",
-          "target": "@ui/chip-surface-model.ts"
-        },
-        {
-          "path": "src/components/chip-surface.css",
-          "type": "registry:ui",
-          "target": "@ui/chip-surface.css"
+          "target": "@ui/capsule-frame.css"
         },
         {
           "path": "src/components/animated-inline-size.tsx",
@@ -1375,19 +1365,14 @@
           "target": "@ui/tag-bread.css"
         },
         {
-          "path": "src/components/chip-surface.tsx",
+          "path": "src/components/capsule-frame.ts",
           "type": "registry:ui",
-          "target": "@ui/chip-surface.tsx"
+          "target": "@ui/capsule-frame.ts"
         },
         {
-          "path": "src/components/chip-surface-model.ts",
+          "path": "src/components/capsule-frame.css",
           "type": "registry:ui",
-          "target": "@ui/chip-surface-model.ts"
-        },
-        {
-          "path": "src/components/chip-surface.css",
-          "type": "registry:ui",
-          "target": "@ui/chip-surface.css"
+          "target": "@ui/capsule-frame.css"
         },
         {
           "path": "src/components/animated-inline-size.tsx",
@@ -2158,19 +2143,14 @@
           "target": "@ui/chip-button.css"
         },
         {
-          "path": "src/components/chip-surface.tsx",
+          "path": "src/components/capsule-frame.ts",
           "type": "registry:ui",
-          "target": "@ui/chip-surface.tsx"
+          "target": "@ui/capsule-frame.ts"
         },
         {
-          "path": "src/components/chip-surface-model.ts",
+          "path": "src/components/capsule-frame.css",
           "type": "registry:ui",
-          "target": "@ui/chip-surface-model.ts"
-        },
-        {
-          "path": "src/components/chip-surface.css",
-          "type": "registry:ui",
-          "target": "@ui/chip-surface.css"
+          "target": "@ui/capsule-frame.css"
         },
         {
           "path": "src/components/animated-inline-size.tsx",

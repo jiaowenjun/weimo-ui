@@ -78,6 +78,17 @@ const frostedSurfaceModelContractModule = await import(
   ).toString('base64')}`
 )
 
+assert.equal(
+  frostedSurfaceModelContractModule.interpolateFrostedBorderColor(0),
+  'hsl(0 0% 38.0%)',
+  'FrostedSurface borders must remain visible on a fully black background.',
+)
+assert.equal(
+  frostedSurfaceModelContractModule.interpolateFrostedBorderColor(0.0125),
+  'hsl(0 0% 39.5%)',
+  'FrostedSurface borders must remain visible near the default 12% dark preview background.',
+)
+
 class ContractElement {
   parentElement = null
 
@@ -569,7 +580,6 @@ for (const snippet of [
 // 统一经 backgroundStyle 以 inline 变量下发,直接声明 border-color 的规则
 // (如磨砂图标按钮禁用描边)优先级更高不受影响。
 for (const [sourcePath, sourceLabel, extraSnippets] of [
-  ['src/components/chip-surface.tsx', 'ChipSurface', ['style={{ ...style, ...backgroundStyle }}']],
   ['src/components/chip.tsx', 'Chip', ['...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle']],
   ['src/components/chip-button.tsx', 'ChipButton', ['...style, ...backgroundStyle']],
   ['src/components/menu.tsx', 'MenuPopup', ['style={{ ...style, ...backgroundStyle }}']],
@@ -627,7 +637,7 @@ for (const snippet of [
   'export function resolveElementBackgroundTone',
   'return resolveElementBackgroundSample(element)?.tone ?? null',
   'export function interpolateFrostedBorderColor',
-  'const BORDER_DARK_SEGMENT_START_LIGHTNESS = 20',
+  'const BORDER_DARK_SEGMENT_START_LIGHTNESS = 38',
   'const BORDER_DARK_SEGMENT_END_LIGHTNESS = 98',
   'const BORDER_LIGHT_SEGMENT_START_LIGHTNESS = 35',
   'const BORDER_LIGHT_SEGMENT_END_LIGHTNESS = 90',

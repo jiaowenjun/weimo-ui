@@ -10,8 +10,8 @@
 
 ## 2. 材质规则
 
-- 材质由 Surface 层统一实现：组件通过组合 Surface 获得背景、边框、圆角和阴影，不在组件 CSS 里重复定义材质。
-- 玻璃材质用于贴附在页面内容上的轻浮元素，透出底下的内容；由 `GlassSurface` 提供运行时背景亮度自适应。
+- 材质绘制由 Surface 层统一实现；宿主组件保留自身几何、布局与交互反馈，不在组件 CSS 里重复定义 blur、材质边框或材质前景色。
+- 磨砂材质用于贴附在页面内容上的轻浮元素，透出底下的内容；由 `FrostedSurface` 提供运行时背景亮度自适应。
 - 抬升浮层（对话框、命令面板、Tooltip）使用不透明材质，靠阴影表达层级，不依赖底下的内容。
 - 常驻、嵌入式、占位式组件一律使用不透明背景，不使用 `backdrop-filter`。
 - 面板材质与 backdrop 模糊是两件事：抽屉面板本体是不透明材质，模糊只发生在 backdrop 上。
@@ -22,15 +22,16 @@
 |---|---|---|
 | `opaque.card` | `CardSurface` | `Card`、coss `Card` / `CardFrame`、`SideBarShell` 常驻态 |
 | `opaque.popup` | `PopupSurface`（`level: modal \| tooltip` 细分圆角与阴影） | Dialog、Command、Tooltip 弹层 |
-| `glass.adaptive` | `GlassSurface`（运行时背景亮度采样切换前景/边框 token，Web 实现细节） | `Menu` 弹层、`GlassIconButton`、`MdEditorToolbar`、coss `InputGroup` |
-| `chip.glass` | `ChipSurface` 的组件局部状态 | `Chip` 的 glass 变体 |
+| `solid.chip` | `CapsuleFrame` 使用 `--color-bg-chip` 绘制普通胶囊底色 | `Chip`、`ChipButton` 默认态 |
+| `frosted.adaptive` | `FrostedSurface`（运行时背景亮度采样切换前景/边框 token） | `Menu` 弹层、磨砂图标按钮、`MdEditorToolbar`、coss `InputGroup`、胶囊磨砂态、`TagBread` |
+| `liquid.glass` | `LiquidGlassSurface` | 明确选择液态折射效果的浮动控件 |
 
-- `Chip` 的 glass 态不组合 `GlassSurface`：玻璃效果实现于 `::before` / `::after` 伪元素与 inline-flex 布局，组合需要引入 Surface 的运行时观察器，成本大于收益。
+- `CapsuleFrame` 只拥有胶囊几何、内容插槽、宽度/按压动画和普通态填充；磨砂态组合 `FrostedSurface`，由后者拥有前景色、描边和 backdrop blur。
 - 依赖方向锁定为：组件 → Surface → token，由 `surface-material-contract` 契约测试强制。
 
 ### 当前对应关系
 
-- `Menu` 弹层、`GlassIconButton`、`MdEditorToolbar`、coss `InputGroup`：浮动元素，使用玻璃材质。
+- `Menu` 弹层、磨砂图标按钮、`MdEditorToolbar`、coss `InputGroup`：浮动元素，使用磨砂材质。
 - Dialog、Command、Tooltip 弹层：抬升浮层，使用不透明材质（`PopupSurface`）。
 - `Card`：非浮动组件，使用纯色卡片背景。
 - `SideBarShell` 常驻态：非浮动组件，组合 `CardSurface`。
@@ -41,7 +42,7 @@
 
 - 静态内容面板使用 `--color-bg-card` 与 `--shadow-card`（`CardSurface`）。
 - 抬升浮层使用 `--color-bg-card` 与 `--shadow-overlay` / `--shadow-tooltip`（`PopupSurface`）。
-- 玻璃材质使用 `--glass-blur` 与 `--glass-surface-*` token（`GlassSurface`）。
+- 磨砂材质使用 `--glass-blur` 与 `--glass-surface-*` token（`FrostedSurface`）。
 - 抽屉 backdrop 模糊使用 `--backdrop-blur`。
 - 视觉效果服务于层级，不服务于装饰。
 
@@ -49,7 +50,7 @@
 
 - `Card` 负责内容承载，不接管业务拼装。
 - `Chip` 负责标签式小动作或标记。
-- `IconButton` 负责图标按钮；`GlassIconButton` 负责玻璃底图标按钮。
+- `IconButton` 负责图标按钮；`FrostedIconButton` 负责磨砂底图标按钮。
 - `SideBarShell` 负责桌面常驻面板和移动端抽屉壳层，但不负责导航内容本身。
 - `FloatBar` 负责浮动条布局壳，不负责材质，也不负责具体业务按钮语义。
 

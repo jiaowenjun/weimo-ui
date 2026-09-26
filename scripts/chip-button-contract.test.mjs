@@ -46,43 +46,47 @@ const packageJson = readJson('package.json')
 const rootRegistry = readJson('registry.json')
 const source = readProjectFile('src/components/chip-button.tsx')
 const css = readProjectFile('src/components/chip-button.css')
-const surfaceCss = readProjectFile('src/components/chip-surface.css')
+const surfaceCss = readProjectFile('src/components/capsule-frame.css')
+const frostedSurfaceCss = readProjectFile('src/components/frosted-surface.css')
 const tokensCss = readProjectFile('src/styles/tokens.css')
 const docsSource = readProjectFile('src/docs/component-definitions/capsule.tsx')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const appCss = readProjectFile('src/App.css')
 
-const baseBlock = cssBlockFor(surfaceCss, '.chip-surface')
-const defaultLayerBlock = cssBlockFor(surfaceCss, '.chip-surface::before')
-const glassLayerBlock = cssBlockFor(surfaceCss, '.chip-surface::after')
-const glassBaseBlock = cssBlockFor(surfaceCss, '.chip-surface[data-variant="glass"]')
-const defaultStateBeforeBlock = cssBlockFor(surfaceCss, '.chip-surface[data-variant="default"]::before')
-const defaultStateAfterBlock = cssBlockFor(surfaceCss, '.chip-surface[data-variant="default"]::after')
-const glassStateBeforeBlock = cssBlockFor(surfaceCss, '.chip-surface[data-variant="glass"]::before')
-const glassStateAfterBlock = cssBlockFor(surfaceCss, '.chip-surface[data-variant="glass"]::after')
+const baseBlock = cssBlockFor(surfaceCss, '.capsule-frame')
+const defaultLayerBlock = cssBlockFor(surfaceCss, '.capsule-frame::before')
+const glassLayerBlock = cssBlockFor(surfaceCss, '.capsule-frame::after')
+const solidFrameBlock = cssBlockFor(surfaceCss, '.capsule-frame[data-material="solid"]')
+const glassBaseBlock = cssBlockFor(surfaceCss, '.capsule-frame.frosted-surface')
+const frostedSurfaceBlock = cssBlockFor(frostedSurfaceCss, '.frosted-surface')
+const frostedBorderBlock = cssBlockFor(frostedSurfaceCss, '.frosted-surface--bordered')
+const defaultStateBeforeBlock = cssBlockFor(surfaceCss, '.capsule-frame[data-material="solid"]::before')
+const defaultStateAfterBlock = cssBlockFor(surfaceCss, '.capsule-frame[data-material="solid"]::after')
+const glassStateBeforeBlock = cssBlockFor(surfaceCss, '.capsule-frame[data-material="frosted"]::before')
+const glassStateAfterBlock = cssBlockFor(surfaceCss, '.capsule-frame[data-material="frosted"]::after')
 const hoverLayerBlock = cssBlockFor(
   surfaceCss,
-  `.chip-surface[data-interactive="true"]:hover::before,
-    .chip-surface[data-interactive="true"]:hover::after`,
+  `.capsule-frame[data-interactive="true"]:hover::before,
+    .capsule-frame[data-interactive="true"]:hover::after`,
 )
 const activeLayerBlock = cssBlockFor(
   surfaceCss,
-  `.chip-surface[data-interactive="true"]:active::before,
-  .chip-surface[data-interactive="true"]:active::after`,
+  `.capsule-frame[data-interactive="true"]:active::before,
+  .capsule-frame[data-interactive="true"]:active::after`,
 )
-const slotBlock = cssBlockFor(surfaceCss, '.chip-surface__slot')
-const contentBlock = cssBlockFor(surfaceCss, '.chip-surface__content')
+const slotBlock = cssBlockFor(surfaceCss, '.capsule-frame__slot')
+const contentBlock = cssBlockFor(surfaceCss, '.capsule-frame__content')
 const chipButtonBlock = standaloneCssBlockFor(css, 'button.chip-button')
 const chipButtonPrefixPaddingBlock = standaloneCssBlockFor(css, 'button.chip-button[data-has-prefix]')
 const chipButtonSuffixPaddingBlock = standaloneCssBlockFor(css, 'button.chip-button[data-has-suffix]')
 const textBlock = standaloneCssBlockFor(css, '.chip-button__text')
 const reducedMotionBlock = cssBlockFor(
   surfaceCss,
-  `.chip-surface,
-    .chip-surface.frosted-surface,
-    .chip-surface::before,
-    .chip-surface::after`,
+  `.capsule-frame,
+    .capsule-frame.frosted-surface,
+    .capsule-frame::before,
+    .capsule-frame::after`,
 )
 const previewWidthExampleBlock = cssBlockFor(appCss, '.chip-button-preview__width-example')
 const previewWidthSlotBlock = cssBlockFor(appCss, '.chip-button-preview__width-slot')
@@ -120,7 +124,7 @@ for (const snippet of [
   "import { Hash } from 'lucide-react'",
   "from './animated-inline-size'",
   "from './animated-inline-size-model'",
-  "from './chip-surface-model'",
+  "from './capsule-frame'",
   "import './chip-button.css'",
   "export type ChipButtonState = 'default' | 'glass'",
   'export type ChipButtonProps',
@@ -136,15 +140,17 @@ for (const snippet of [
   'function isEmptyChipButtonSlot',
   '{isEmptyChipButtonSlot(prefix) ? null : (',
   '{isEmptyChipButtonSlot(suffix) ? null : (',
-  "getChipSurfaceAttributes({ variant: state, interactive: true, textSize: 'sm' })",
+  'const capsuleFrameAttributes = getCapsuleFrameAttributes({',
+  "material: isFrostedState ? 'frosted' : 'solid'",
+  "getFrostedSurfaceClassName('frosted-surface--bordered')",
   'data-state={state}',
   "data-has-prefix={isEmptyChipButtonSlot(prefix) ? undefined : 'true'}",
   "data-has-suffix={isEmptyChipButtonSlot(suffix) ? undefined : 'true'}",
-  "isGlassState && 'frosted-surface',",
+  "const isFrostedState = state === 'glass'",
   '? { ...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle }',
-  'chip-surface__slot chip-button__prefix',
-  'chip-surface__content chip-button__text',
-  'chip-surface__slot chip-button__suffix',
+  'capsule-frame__slot chip-button__prefix',
+  'capsule-frame__content chip-button__text',
+  'capsule-frame__slot chip-button__suffix',
   'type="button"',
 ]) {
   assertIncludes(source, snippet, `ChipButton source must include ${snippet}.`)
@@ -152,13 +158,13 @@ for (const snippet of [
 assert.ok(
   !source.includes('textSize?:') &&
     !source.includes("textSize = 'sm'") &&
-    !source.includes('ChipSurfaceTextSize'),
+    !source.includes('CapsuleFrameTextSize'),
   'ChipButton must support the single small text size only; the textSize prop stays removed.',
 )
 assertIncludes(
   css,
   '.chip-button__suffix',
-  'ChipButton suffix widget slot must reuse the shared chip-surface slot layout beside the prefix slot.',
+  'ChipButton suffix widget slot must reuse the shared capsule-frame slot layout beside the prefix slot.',
 )
 assertIncludes(
   css,
@@ -169,37 +175,38 @@ assertIncludes(
 for (const [block, snippet, message] of [
   [baseBlock, 'display: inline-flex;', 'ChipButton must match ChipButton inline-flex layout.'],
   [baseBlock, 'justify-content: flex-start;', 'ChipButton must keep prefix and text left-aligned during width transitions.'],
-  [baseBlock, 'gap: 4px;', 'Shared ChipSurface gap must stay 4px so Chip and TagBread spacing do not change.'],
+  [baseBlock, 'gap: 4px;', 'Shared CapsuleFrame gap must stay 4px so Chip and TagBread spacing do not change.'],
   [baseBlock, 'padding: 6px 10px;', 'ChipButton must match ChipButton padding.'],
-  [baseBlock, 'border: 1px solid transparent;', 'ChipButton must start with a transparent border.'],
+  [solidFrameBlock, 'border: 1px solid transparent;', 'Solid ChipButton must keep transparent border geometry without overriding its frosted border.'],
+  [solidFrameBlock, 'color: var(--color-primary);', 'Solid ChipButton must keep its primary foreground without overriding its frosted foreground.'],
   [baseBlock, 'border-radius: var(--radius-round);', 'ChipButton must match ChipButton radius.'],
   [baseBlock, 'background: transparent;', 'ChipButton base must leave background to layers and hover.'],
   [baseBlock, 'isolation: isolate;', 'ChipButton must isolate visual layers.'],
   [baseBlock, 'overflow: hidden;', 'ChipButton must clip visual layers to capsule radius.'],
   [baseBlock, '--animated-inline-size-transition-duration: 180ms;', 'ChipButton width transitions must use the shared 180ms duration when enabled.'],
-  [baseBlock, '--chip-surface-state-transition-duration: 180ms;', 'ChipButton hover and state transitions must stay independent from width transitions.'],
-  [baseBlock, '--chip-surface-hover-background: var(--color-bg-hover);', 'ChipButton must keep a stable shared hover background token for visual layers.'],
-  [baseBlock, '--chip-surface-active-background: var(--color-bg-hover);', 'ChipButton must keep a stable shared active background token for visual layers.'],
+  [baseBlock, '--capsule-frame-state-transition-duration: 180ms;', 'ChipButton hover and state transitions must stay independent from width transitions.'],
+  [baseBlock, '--capsule-frame-hover-background: var(--color-bg-hover);', 'ChipButton must keep a stable shared hover background token for visual layers.'],
+  [baseBlock, '--capsule-frame-active-background: var(--color-bg-hover);', 'ChipButton must keep a stable shared active background token for visual layers.'],
   [baseBlock, 'transition:', 'ChipButton must transition state changes.'],
   [baseBlock, 'inline-size var(--animated-inline-size-transition-duration) cubic-bezier(0.2, 0, 0, 1)', 'ChipButton must be able to animate measured content-width changes without custom CSS.'],
-  [baseBlock, 'border-color var(--chip-surface-state-transition-duration) ease', 'ChipButton border transition must use the shared state duration variable.'],
-  [baseBlock, 'color var(--chip-surface-state-transition-duration) ease', 'ChipButton color transition must use the shared state duration variable.'],
+  [baseBlock, 'border-color var(--capsule-frame-state-transition-duration) ease', 'ChipButton border transition must use the shared state duration variable.'],
+  [baseBlock, 'color var(--capsule-frame-state-transition-duration) ease', 'ChipButton color transition must use the shared state duration variable.'],
   [defaultLayerBlock, 'background: var(--color-bg-chip);', 'ChipButton default layer must use the shared brand chip surface.'],
-  [defaultLayerBlock, 'opacity var(--chip-surface-state-transition-duration) ease', 'ChipButton default layer opacity transition must use the shared state duration variable.'],
-  [defaultLayerBlock, 'transform var(--chip-surface-state-transition-duration) ease', 'ChipButton default layer transform transition must use the shared state duration variable.'],
-  [defaultLayerBlock, 'background-color var(--chip-surface-state-transition-duration) ease', 'ChipButton default layer hover repaint must fade like icon buttons.'],
-  [glassLayerBlock, 'opacity var(--chip-surface-state-transition-duration) ease', 'ChipButton glass layer opacity transition must use the shared state duration variable.'],
-  [glassLayerBlock, 'transform var(--chip-surface-state-transition-duration) ease', 'ChipButton glass layer transform transition must use the shared state duration variable.'],
-  [glassLayerBlock, 'background-color var(--chip-surface-state-transition-duration) ease', 'ChipButton glass layer hover tint must fade like icon buttons.'],
-  [glassBaseBlock, 'border-color: var(--glass-surface-border);', 'ChipButton glass state must transition to the standard glass surface border.'],
-  [glassBaseBlock, 'backdrop-filter: blur(var(--glass-blur));', 'ChipButton glass state must use shared glass blur.'],
-  [glassBaseBlock, 'color: var(--glass-surface-fg);', 'ChipButton glass state text color must follow the tone-adaptive fg token so it flips with the sampled background.'],
+  [defaultLayerBlock, 'opacity var(--capsule-frame-state-transition-duration) ease', 'ChipButton default layer opacity transition must use the shared state duration variable.'],
+  [defaultLayerBlock, 'transform var(--capsule-frame-state-transition-duration) ease', 'ChipButton default layer transform transition must use the shared state duration variable.'],
+  [defaultLayerBlock, 'background-color var(--capsule-frame-state-transition-duration) ease', 'ChipButton default layer hover repaint must fade like icon buttons.'],
+  [glassLayerBlock, 'opacity var(--capsule-frame-state-transition-duration) ease', 'ChipButton glass layer opacity transition must use the shared state duration variable.'],
+  [glassLayerBlock, 'transform var(--capsule-frame-state-transition-duration) ease', 'ChipButton glass layer transform transition must use the shared state duration variable.'],
+  [glassLayerBlock, 'background-color var(--capsule-frame-state-transition-duration) ease', 'ChipButton glass layer hover tint must fade like icon buttons.'],
+  [frostedBorderBlock, 'border-color: var(--glass-surface-border);', 'ChipButton glass state must transition to the standard frosted surface border.'],
+  [frostedSurfaceBlock, 'backdrop-filter: blur(var(--glass-blur));', 'ChipButton glass state must use shared frosted blur.'],
+  [frostedSurfaceBlock, 'color: var(--glass-surface-fg);', 'ChipButton glass state text color must follow the tone-adaptive fg token so it flips with the sampled background.'],
   [defaultStateBeforeBlock, 'opacity: 1;', 'ChipButton default state must show default layer.'],
   [defaultStateAfterBlock, 'opacity: 0;', 'ChipButton default state must hide glass layer.'],
   [glassStateBeforeBlock, 'opacity: 0;', 'ChipButton glass state must hide default layer.'],
   [glassStateAfterBlock, 'opacity: 1;', 'ChipButton glass state must show glass layer.'],
-  [hoverLayerBlock, 'background: var(--chip-surface-hover-background);', 'ChipButton hover must retint the visible layer through ChipSurface instead of fading it out.'],
-  [activeLayerBlock, 'background: var(--chip-surface-active-background);', 'ChipButton active must retint the visible layer through ChipSurface instead of fading it out.'],
+  [hoverLayerBlock, 'background: var(--capsule-frame-hover-background);', 'ChipButton hover must retint the visible layer through CapsuleFrame instead of fading it out.'],
+  [activeLayerBlock, 'background: var(--capsule-frame-active-background);', 'ChipButton active must retint the visible layer through CapsuleFrame instead of fading it out.'],
   [slotBlock, 'align-self: center;', 'ChipButton prefix slot must be vertically centered instead of baseline-aligned.'],
   [slotBlock, 'align-items: center;', 'ChipButton prefix content must be vertically centered within the slot.'],
   [slotBlock, 'justify-content: center;', 'ChipButton prefix content must stay centered horizontally within the slot.'],
@@ -252,7 +259,7 @@ assert.ok(
   'ChipButton brand chip surface token must derive from the local neutral brand theme by default.',
 )
 assert.ok(
-  !/\.chip-surface\[data-interactive="true"\]:(?:hover|active)::(?:before|after)[^{]*\{[^}]*opacity:\s*0;/.test(surfaceCss),
+  !/\.capsule-frame\[data-interactive="true"\]:(?:hover|active)::(?:before|after)[^{]*\{[^}]*opacity:\s*0;/.test(surfaceCss),
   'ChipButton CSS must not contain hover or active pseudo-layer opacity fades.',
 )
 assert.ok(

@@ -13,7 +13,7 @@ export const bgBlurToneMap = {
     filter: 'blur(var(--glass-blur))',
     className: 'bg-blur--glass',
     description: '玻璃 chip 和同类浮动材质使用的半透明背景与柔和背景模糊组合。',
-    uiUsage: 'ChipSurface glass',
+    uiUsage: 'FrostedSurface、Chip / ChipButton 磨砂态、TagBread',
     bijiUsage: '继承 shared 玻璃 chip/control，暂无本地背景 blur 覆盖',
   },
   backdrop: {

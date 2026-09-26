@@ -72,7 +72,7 @@ const borderColorCss = readProjectFile('src/components/border-color.css')
 const cardSurfaceCss = readProjectFile('src/components/card-surface.css')
 const popupSurfaceCss = readProjectFile('src/components/popup-surface.css')
 const breadcrumbCss = readProjectFile('src/components/coss/breadcrumb.css')
-const chipSurfaceCss = readProjectFile('src/components/chip-surface.css')
+const capsuleFrameCss = readProjectFile('src/components/capsule-frame.css')
 const cossButtonCss = readProjectFile('src/components/coss/button.css')
 const cossCardCss = readProjectFile('src/components/coss/card.css')
 const cossCommandCss = readProjectFile('src/components/coss/command.css')
@@ -369,7 +369,7 @@ assert.ok(
     cardSurfaceCss.includes('border-color: var(--color-border);') &&
     popupSurfaceCss.includes('border-color: var(--color-border-divider);') &&
     !frostedSurfaceCss.includes('var(--color-border-divider)') &&
-    !chipSurfaceCss.includes('var(--color-border-divider)') &&
+    !capsuleFrameCss.includes('var(--color-border-divider)') &&
     cossButtonCss.includes('border-color: var(--color-border);') &&
     sidebarDrawerBlock.includes('border: 1px solid var(--color-border);') &&
     demoBlockPanelBlock.includes('border: 1px solid var(--color-border);') &&

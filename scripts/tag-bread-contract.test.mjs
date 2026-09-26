@@ -36,7 +36,8 @@ function countOccurrences(source, snippet) {
 
 const source = readProjectFile('src/components/tag-bread.tsx')
 const css = readProjectFile('src/components/tag-bread.css')
-const surfaceCss = readProjectFile('src/components/chip-surface.css')
+const surfaceCss = readProjectFile('src/components/capsule-frame.css')
+const frostedSurfaceCss = readProjectFile('src/components/frosted-surface.css')
 const appCss = readProjectFile('src/App.css')
 const indexCss = readProjectFile('src/index.css')
 const cossBreadcrumbSource = readProjectFile('src/components/coss/breadcrumb.tsx')
@@ -50,9 +51,10 @@ const standaloneRegistry = readJson('registry/tag-bread.json')
 const registryItem = rootRegistry.items.find((item) => item.name === 'tag-bread')
 const smokeSource = readProjectFile('scripts/registry-smoke.test.mjs')
 
-const rootBlock = blockFor(surfaceCss, '.chip-surface')
-const frostedSurfaceBlock = blockFor(surfaceCss, '.chip-surface[data-variant="glass"]')
-const glassLayerBlock = blockFor(surfaceCss, '.chip-surface::after')
+const rootBlock = blockFor(surfaceCss, '.capsule-frame')
+const frostedSurfaceBlock = blockFor(frostedSurfaceCss, '.frosted-surface')
+const frostedBorderBlock = blockFor(frostedSurfaceCss, '.frosted-surface--bordered')
+const glassLayerBlock = blockFor(surfaceCss, '.capsule-frame::after')
 const listBlock = blockFor(css, '.tag-bread .coss-breadcrumb__list')
 const itemBlock = blockFor(css, '.tag-bread .coss-breadcrumb__item')
 const lastItemBlock = blockFor(css, '.tag-bread .coss-breadcrumb__item:last-of-type')
@@ -110,8 +112,8 @@ for (const snippet of [
   "from './coss/breadcrumb'",
   "from './animated-inline-size'",
   "from './animated-inline-size-model'",
-  "from './chip-surface-model'",
-  "import './chip-surface.css'",
+  "from './capsule-frame'",
+  "import './capsule-frame.css'",
   "import './tag-bread.css'",
   'type TagBreadCrumb = {',
   'label: string',
@@ -139,10 +141,12 @@ for (const snippet of [
   'event.preventDefault()',
   'onSelect?.(path)',
   'const isPage = index === crumbs.length - 1',
-  "getChipSurfaceClassName('frosted-surface', 'tag-bread', className)",
+  'const frostedSurfaceClassName = getFrostedSurfaceClassName(',
+  "'frosted-surface--bordered'",
   "useFrostedSurfaceBackgroundToneRef<HTMLElement>(true)",
   "import './frosted-surface.css'",
-  "getChipSurfaceAttributes({ variant: 'glass', textSize: 'base' })",
+  'const capsuleFrameAttributes = getCapsuleFrameAttributes({',
+  "material: 'frosted'",
   'useAnimatedInlineSize(tag)',
   '<AnimatedInlineSizeMeasure measureRef={measureRef}>',
   '<Breadcrumb',
@@ -197,8 +201,8 @@ assertIncludes(rootBlock, 'display: inline-flex;', 'TagBread root must be an inl
 assertIncludes(rootBlock, 'max-width: 100%;', 'TagBread root must fit narrow containers.')
 assertIncludes(rootBlock, 'justify-content: flex-start;', 'TagBread must keep its prefix and breadcrumb trail left-aligned during width transitions.')
 assertIncludes(rootBlock, '--animated-inline-size-transition-duration: 180ms;', 'TagBread must inherit the shared 180ms width transition duration.')
-assertIncludes(rootBlock, 'inline-size var(--animated-inline-size-transition-duration) cubic-bezier(0.2, 0, 0, 1)', 'TagBread must animate measured breadcrumb-width changes through ChipSurface.')
-assertIncludes(frostedSurfaceBlock, 'border-color: var(--glass-surface-border);', 'TagBread must use the standard glass surface border token.')
+assertIncludes(rootBlock, 'inline-size var(--animated-inline-size-transition-duration) cubic-bezier(0.2, 0, 0, 1)', 'TagBread must animate measured breadcrumb-width changes through CapsuleFrame.')
+assertIncludes(frostedBorderBlock, 'border-color: var(--glass-surface-border);', 'TagBread must use the standard frosted surface border token.')
 assertIncludes(rootBlock, 'border-radius: var(--radius-round);', 'TagBread glass surface must be pill-shaped.')
 assert.ok(
   !glassLayerBlock.includes('background: var(--glass-gradient);') && !surfaceCss.includes('--glass-gradient'),
@@ -268,11 +272,12 @@ assert.ok(
 assert.ok(
     docsDefinition.includes("import { TagBread } from '../../components/tag-bread'") &&
     docsDefinition.includes("import { CalendarDays, Folder, Hash, Plus } from 'lucide-react'") &&
-    docsDefinition.includes("from '../../components/chip-surface-model'") &&
-    docsDefinition.includes('const tagBreadDocsSurfaceAttributes = getChipSurfaceAttributes({') &&
-    docsDefinition.includes("variant: 'glass'") &&
+    docsDefinition.includes("from '../../components/capsule-frame'") &&
+    docsDefinition.includes("from '../../components/frosted-surface-model'") &&
+    docsDefinition.includes('const tagBreadDocsSurfaceAttributes = getCapsuleFrameAttributes({') &&
+    docsDefinition.includes("material: 'frosted'") &&
     docsDefinition.includes("textSize: 'base'") &&
-    docsDefinition.includes('className={getChipSurfaceClassName(') &&
+    docsDefinition.includes('className={getCapsuleFrameClassName(') &&
     docsDefinition.includes("'tag-bread-docs-preview__ellipsis'") &&
     docsDefinition.includes("import { GhostIconButton } from '../../components/ghost-icon-button'") &&
     !docsDefinition.includes("import { Button } from '../../components/coss/button'") &&
@@ -355,9 +360,8 @@ assert.deepEqual(
   [
     'src/components/tag-bread.tsx',
     'src/components/tag-bread.css',
-    'src/components/chip-surface.tsx',
-    'src/components/chip-surface-model.ts',
-    'src/components/chip-surface.css',
+    'src/components/capsule-frame.ts',
+    'src/components/capsule-frame.css',
     'src/components/animated-inline-size.tsx',
     'src/components/animated-inline-size-model.ts',
     'src/components/animated-inline-size.css',

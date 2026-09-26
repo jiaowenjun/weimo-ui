@@ -47,7 +47,7 @@
   }
 
   /* xs 陪 chip 插槽等紧凑场景：16px 命中区 + 12px 图标。复合选择器抬高一级
-     特异性，压过 .chip-surface__slot svg 的 1em，尺寸不随打包顺序漂移 */
+     特异性，压过 .capsule-frame__slot svg 的 1em，尺寸不随打包顺序漂移 */
   .icon-button--xs {
     width: 16px;
     height: 16px;

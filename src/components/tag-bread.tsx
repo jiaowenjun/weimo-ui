@@ -4,14 +4,17 @@ import { Hash } from 'lucide-react'
 
 import { AnimatedInlineSizeMeasure } from './animated-inline-size'
 import {
-  getChipSurfaceAttributes,
-  getChipSurfaceClassName,
-} from './chip-surface-model'
+  getCapsuleFrameAttributes,
+  getCapsuleFrameClassName,
+} from './capsule-frame'
 import {
   getAnimatedInlineSizeStyle,
   useAnimatedInlineSize,
 } from './animated-inline-size-model'
-import { useFrostedSurfaceBackgroundToneRef } from './frosted-surface'
+import {
+  getFrostedSurfaceClassName,
+  useFrostedSurfaceBackgroundToneRef,
+} from './frosted-surface'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -20,7 +23,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from './coss/breadcrumb'
-import './chip-surface.css'
+import './capsule-frame.css'
 import './frosted-surface.css'
 import './tag-bread.css'
 
@@ -64,7 +67,13 @@ export function TagBread({
   const { measureRef, inlineSize } = useAnimatedInlineSize(tag)
   const { backgroundStyle, backgroundTone, setElementRef } =
     useFrostedSurfaceBackgroundToneRef<HTMLElement>(true)
-  const chipSurfaceAttributes = getChipSurfaceAttributes({ variant: 'glass', textSize: 'base' })
+  const capsuleFrameAttributes = getCapsuleFrameAttributes({
+    material: 'frosted',
+    textSize: 'base',
+  })
+  const frostedSurfaceClassName = getFrostedSurfaceClassName(
+    'frosted-surface--bordered',
+  )
 
   function handleCrumbClick(event: MouseEvent<HTMLAnchorElement>, path: string) {
     event.preventDefault()
@@ -117,18 +126,22 @@ export function TagBread({
     <>
       <Breadcrumb
         {...props}
-        className={getChipSurfaceClassName('frosted-surface', 'tag-bread', className)}
+        className={getCapsuleFrameClassName(
+          frostedSurfaceClassName,
+          'tag-bread',
+          className,
+        )}
         data-background-tone={backgroundTone ?? undefined}
         ref={setElementRef}
         style={{ ...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle }}
-        {...chipSurfaceAttributes}
+        {...capsuleFrameAttributes}
       >
         {renderCrumbs()}
       </Breadcrumb>
       <AnimatedInlineSizeMeasure measureRef={measureRef}>
         <Breadcrumb
-          className={getChipSurfaceClassName('tag-bread')}
-          {...chipSurfaceAttributes}
+          className={getCapsuleFrameClassName(frostedSurfaceClassName, 'tag-bread')}
+          {...capsuleFrameAttributes}
         >
           {renderCrumbs(false)}
         </Breadcrumb>

@@ -6,9 +6,10 @@ import { ComponentPreviewCard } from '../../components/component-preview-card'
 import { TagBar } from '../../components/tag-bar'
 import { TagBread } from '../../components/tag-bread'
 import {
-  getChipSurfaceAttributes,
-  getChipSurfaceClassName,
-} from '../../components/chip-surface-model'
+  getCapsuleFrameAttributes,
+  getCapsuleFrameClassName,
+} from '../../components/capsule-frame'
+import { getFrostedSurfaceClassName } from '../../components/frosted-surface-model'
 import {
   TagPicker,
   type TagPickerApplyPayload,
@@ -93,8 +94,8 @@ function TagBarDemo() {
 }
 
 function TagBreadDemo() {
-  const tagBreadDocsSurfaceAttributes = getChipSurfaceAttributes({
-    variant: 'glass',
+  const tagBreadDocsSurfaceAttributes = getCapsuleFrameAttributes({
+    material: 'frosted',
     textSize: 'base',
   })
 
@@ -104,7 +105,8 @@ function TagBreadDemo() {
         <TagBread tag="文学/古代/诗词" onSelect={() => {}} />
         <Breadcrumb
           aria-label="coss 省略面包屑示例"
-          className={getChipSurfaceClassName(
+          className={getCapsuleFrameClassName(
+            getFrostedSurfaceClassName('frosted-surface--bordered'),
             'tag-bread',
             'tag-bread-docs-preview__ellipsis',
           )}

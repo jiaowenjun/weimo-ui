@@ -2,16 +2,19 @@ import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 
 import { AnimatedInlineSizeMeasure } from './animated-inline-size'
 import {
-  getChipSurfaceAttributes,
-  getChipSurfaceClassName,
-} from './chip-surface-model'
+  getCapsuleFrameAttributes,
+  getCapsuleFrameClassName,
+} from './capsule-frame'
 import {
   getAnimatedInlineSizeStyle,
   useAnimatedInlineSize,
 } from './animated-inline-size-model'
-import { useFrostedSurfaceBackgroundToneRef } from './frosted-surface'
+import {
+  getFrostedSurfaceClassName,
+  useFrostedSurfaceBackgroundToneRef,
+} from './frosted-surface'
 
-import './chip-surface.css'
+import './capsule-frame.css'
 import './chip.css'
 import './frosted-surface.css'
 
@@ -48,9 +51,9 @@ export function Chip({
     throw new Error('Chip content cannot be empty.')
   }
 
-  const isGlassVariant = variant === 'glass'
+  const isFrostedVariant = variant === 'glass'
   const { backgroundStyle, backgroundTone, setElementRef } =
-    useFrostedSurfaceBackgroundToneRef<HTMLSpanElement>(isGlassVariant)
+    useFrostedSurfaceBackgroundToneRef<HTMLSpanElement>(isFrostedVariant)
   const { measureRef, inlineSize } = useAnimatedInlineSize([
     prefix,
     content,
@@ -58,53 +61,59 @@ export function Chip({
     variant,
     textSize,
   ])
-  const chipSurfaceAttributes = getChipSurfaceAttributes({ bordered, variant, textSize })
+  const capsuleFrameAttributes = getCapsuleFrameAttributes({
+    material: isFrostedVariant ? 'frosted' : 'solid',
+    textSize,
+  })
+  const frostedSurfaceClassName = isFrostedVariant
+    ? getFrostedSurfaceClassName(bordered ? 'frosted-surface--bordered' : undefined)
+    : undefined
 
   return (
     <>
       <span
-        className={getChipSurfaceClassName(
-          isGlassVariant && 'frosted-surface',
+        className={getCapsuleFrameClassName(
+          frostedSurfaceClassName,
           'chip',
           className,
         )}
         style={{ ...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle }}
         data-background-tone={
-          isGlassVariant ? backgroundTone ?? undefined : undefined
+          isFrostedVariant ? backgroundTone ?? undefined : undefined
         }
-        ref={isGlassVariant ? setElementRef : undefined}
-        {...chipSurfaceAttributes}
+        ref={isFrostedVariant ? setElementRef : undefined}
+        {...capsuleFrameAttributes}
         {...props}
       >
         {isEmptyChipSlot(prefix) ? null : (
-          <span className="chip-surface__slot chip__slot chip__slot--prefix">
+          <span className="capsule-frame__slot chip__slot chip__slot--prefix">
             {prefix}
           </span>
         )}
-        <span className="chip-surface__content chip__content">{content}</span>
+        <span className="capsule-frame__content chip__content">{content}</span>
         {isEmptyChipSlot(suffix) ? null : (
-          <span className="chip-surface__slot chip__slot chip__slot--suffix">
+          <span className="capsule-frame__slot chip__slot chip__slot--suffix">
             {suffix}
           </span>
         )}
       </span>
       <AnimatedInlineSizeMeasure measureRef={measureRef}>
         <span
-          className={getChipSurfaceClassName(
-            isGlassVariant && 'frosted-surface',
+          className={getCapsuleFrameClassName(
+            frostedSurfaceClassName,
             'chip',
             className,
           )}
-          {...chipSurfaceAttributes}
+          {...capsuleFrameAttributes}
         >
           {isEmptyChipSlot(prefix) ? null : (
-            <span className="chip-surface__slot chip__slot chip__slot--prefix">
+            <span className="capsule-frame__slot chip__slot chip__slot--prefix">
               {prefix}
             </span>
           )}
-          <span className="chip-surface__content chip__content">{content}</span>
+          <span className="capsule-frame__content chip__content">{content}</span>
           {isEmptyChipSlot(suffix) ? null : (
-            <span className="chip-surface__slot chip__slot chip__slot--suffix">
+            <span className="capsule-frame__slot chip__slot chip__slot--suffix">
               {suffix}
             </span>
           )}

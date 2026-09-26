@@ -32,16 +32,17 @@ const MIN_VISIBLE_ALPHA = 0.05
 const MIN_VIDEO_READY_STATE = 2
 
 // 边框亮度插值锚点(零饱和度灰的 lightness,演示页调参定值,不对应单一 token):
-// 暗段 0~50% 从 20% 递增至 98%,亮段 50%~100% 从 35% 递增至 90%。50% 恰是
+// 暗段 0~50% 从 38% 递增至 98%,亮段 50%~100% 从 35% 递增至 90%。暗段
+// 起点与暗背景描边 token 对齐,避免小尺寸圆形/胶囊描边在近黑背景上不可辨。50% 恰是
 // tone 翻转点,边框与前景色同处 98→35 跳变,由组件的 border-color 过渡柔化。
 // 与 BACKGROUND_LIGHTNESS_THRESHOLD 同为采样行为的内聚常量,不 import token
 // 镜像以保持 registry 自包含。
-const BORDER_DARK_SEGMENT_START_LIGHTNESS = 20
+const BORDER_DARK_SEGMENT_START_LIGHTNESS = 38
 const BORDER_DARK_SEGMENT_END_LIGHTNESS = 98
 const BORDER_LIGHT_SEGMENT_START_LIGHTNESS = 35
 const BORDER_LIGHT_SEGMENT_END_LIGHTNESS = 90
 
-// 边框亮度随感知亮度两段平滑递增(暗段 20%→98%,亮段 35%→90%),端点固定与
+// 边框亮度随感知亮度两段平滑递增(暗段 38%→98%,亮段 35%→90%),端点固定与
 // 站点主题无关;锚点全为纯灰,lightness 域插值与颜色插值等价。
 export function interpolateFrostedBorderColor(luminance: number | null) {
   if (luminance == null) {

@@ -36,7 +36,7 @@ const expectedTones = [
     blurValue: '14px',
     filter: 'blur(var(--glass-blur))',
     className: 'bg-blur--glass',
-    usage: 'ChipSurface glass',
+    usage: 'FrostedSurface、Chip / ChipButton 磨砂态、TagBread',
   },
   {
     tone: 'backdrop',
@@ -60,7 +60,6 @@ const appCss = readProjectFile('src/App.css')
 const tokenPreviewCardCss = readProjectFile('src/components/component-preview-card.css')
 const tokensCss = readProjectFile('src/styles/tokens.css')
 const frostedSurfaceCss = readProjectFile('src/components/frosted-surface.css')
-const chipSurfaceCss = readProjectFile('src/components/chip-surface.css')
 const commandCss = readProjectFile('src/components/coss/command.css')
 const dialogCss = readProjectFile('src/components/coss/dialog.css')
 const sidebarShellCss = readProjectFile('src/components/sidebar/sidebar-shell.css')
@@ -198,19 +197,11 @@ assert.equal(
   'registry/style.json must export --backdrop-blur as 4px.',
 )
 
-const chipGlassBlock = blockFor(chipSurfaceCss, '.chip-surface[data-variant="glass"]')
-
 assert.ok(
-  chipSurfaceCss.includes('.chip-surface::after') &&
-    !chipSurfaceCss.includes('--glass-gradient') &&
-    chipGlassBlock.includes('backdrop-filter: blur(var(--glass-blur));') &&
-    chipGlassBlock.includes('-webkit-backdrop-filter: blur(var(--glass-blur));'),
-  'ChipSurface glass must keep the shared blur while removing the shared glass background gradient token.',
-)
-assert.ok(
-  blockFor(frostedSurfaceCss, '.frosted-surface').includes('backdrop-filter: blur(var(--glass-blur));') &&
-    !blockFor(frostedSurfaceCss, '.frosted-surface').includes('background: var(--glass-gradient);'),
-  'FrostedSurface currently owns only the shared glass blur.',
+  frostedSurfaceCss.includes('backdrop-filter: blur(var(--glass-blur));') &&
+    frostedSurfaceCss.includes('-webkit-backdrop-filter: blur(var(--glass-blur));') &&
+    !frostedSurfaceCss.includes('background: var(--glass-gradient);'),
+  'FrostedSurface must own the shared frosted blur without a background gradient.',
 )
 
 for (const [source, selector] of [

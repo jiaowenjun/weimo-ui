@@ -58,7 +58,7 @@ export const bgColorToneMap = {
     },
     className: 'bg-color--hover',
     description: '普通列表项、chip、菜单项、数学节点和轻量按钮的 hover 底色。',
-    uiUsage: 'ChipSurface、TagPicker option、Command item、Markdown math',
+    uiUsage: 'ChipButton、TagPicker option、Command item、Markdown math',
     bijiUsage: 'WorkspaceFilterBar close、Form controls hover',
   },
   'hover-on-hover': {
@@ -94,7 +94,7 @@ export const bgColorToneMap = {
     },
     className: 'bg-color--chip',
     description: '标签、筛选 chip 和轻量标记的柔和填充色。',
-    uiUsage: 'ChipSurface、ImageUploader selected file',
+    uiUsage: 'Chip、ChipButton、ImageUploader selected file',
     bijiUsage: 'WorkspaceFilterBar chip、TagBar',
   },
   selection: {

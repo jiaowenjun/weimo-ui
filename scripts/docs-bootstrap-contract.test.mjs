@@ -276,7 +276,7 @@ for (const snippet of [
   'TagPickerDemo',
   'function TagBreadDemo',
   '<TagBread tag="文学/古代/诗词"',
-  'className={getChipSurfaceClassName(',
+  'className={getCapsuleFrameClassName(',
   "'tag-bread-docs-preview__ellipsis'",
   '{...tagBreadDocsSurfaceAttributes}',
   '<span className="tag-bread__prefix">',

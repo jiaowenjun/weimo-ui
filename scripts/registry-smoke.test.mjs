@@ -766,10 +766,9 @@ try {
     'shadcn add must write internal ChipButton CSS used by Card TagBar.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/chip-surface.tsx')) &&
-      existsSync(join(consumerDir, 'src/components/ui/chip-surface-model.ts')) &&
-      existsSync(join(consumerDir, 'src/components/ui/chip-surface.css')),
-    'shadcn add must write internal ChipSurface files used by Card TagBar and TagBread.',
+    existsSync(join(consumerDir, 'src/components/ui/capsule-frame.ts')) &&
+      existsSync(join(consumerDir, 'src/components/ui/capsule-frame.css')),
+    'shadcn add must write internal CapsuleFrame files used by Card TagBar and TagBread.',
   )
   assert.ok(
     existsSync(join(consumerDir, 'src/components/ui/frosted-surface.tsx')) &&
@@ -1130,16 +1129,12 @@ try {
     join(consumerDir, 'src/components/ui/chip-button.css'),
     'utf8',
   )
-  const chipSurfaceSource = readFileSync(
-    join(consumerDir, 'src/components/ui/chip-surface.tsx'),
+  const capsuleFrameSource = readFileSync(
+    join(consumerDir, 'src/components/ui/capsule-frame.ts'),
     'utf8',
   )
-  const chipSurfaceModelSource = readFileSync(
-    join(consumerDir, 'src/components/ui/chip-surface-model.ts'),
-    'utf8',
-  )
-  const chipSurfaceCssSource = readFileSync(
-    join(consumerDir, 'src/components/ui/chip-surface.css'),
+  const capsuleFrameCssSource = readFileSync(
+    join(consumerDir, 'src/components/ui/capsule-frame.css'),
     'utf8',
   )
   const animatedInlineSizeSource = readFileSync(
@@ -1387,22 +1382,21 @@ try {
 	      tagBarSource.includes('const nextOffset = readRootParentOffset(root, parent)') &&
 	      tagBarSource.includes('}, [rootPositionLayoutSignature])') &&
 	      chipButtonSource.includes('export function ChipButton') &&
-      chipButtonSource.includes("from './chip-surface-model'") &&
+	      chipButtonSource.includes("from './capsule-frame'") &&
       chipButtonSource.includes("from './animated-inline-size'") &&
       chipButtonSource.includes("from './animated-inline-size-model'") &&
-	      chipButtonSource.includes("getChipSurfaceAttributes({ variant: state, interactive: true, textSize: 'sm' })") &&
-      chipSurfaceSource.includes('export function ChipSurface') &&
-      chipSurfaceModelSource.includes('export function getChipSurfaceClassName') &&
+	      chipButtonSource.includes("material: isFrostedState ? 'frosted' : 'solid'") &&
+      capsuleFrameSource.includes('export function getCapsuleFrameClassName') &&
       animatedInlineSizeSource.includes('export function AnimatedInlineSizeMeasure') &&
       animatedInlineSizeModelSource.includes('export function useAnimatedInlineSize') &&
-      chipSurfaceCssSource.includes('.chip-surface[data-variant="glass"]') &&
-      !chipSurfaceCssSource.includes('background: var(--glass-gradient);') &&
-      !chipSurfaceCssSource.includes('--glass-gradient') &&
-      chipSurfaceCssSource.includes('--animated-inline-size-transition-duration: 180ms;') &&
-      chipSurfaceCssSource.includes('inline-size var(--animated-inline-size-transition-duration)') &&
-      chipSurfaceCssSource.includes('justify-content: flex-start;') &&
-      chipSurfaceCssSource.includes('--chip-surface-state-transition-duration: 180ms;') &&
-      chipSurfaceCssSource.includes('opacity var(--chip-surface-state-transition-duration)') &&
+      capsuleFrameCssSource.includes('.capsule-frame[data-material="frosted"]') &&
+      !capsuleFrameCssSource.includes('background: var(--glass-gradient);') &&
+      !capsuleFrameCssSource.includes('--glass-gradient') &&
+      capsuleFrameCssSource.includes('--animated-inline-size-transition-duration: 180ms;') &&
+      capsuleFrameCssSource.includes('inline-size var(--animated-inline-size-transition-duration)') &&
+      capsuleFrameCssSource.includes('justify-content: flex-start;') &&
+      capsuleFrameCssSource.includes('--capsule-frame-state-transition-duration: 180ms;') &&
+      capsuleFrameCssSource.includes('opacity var(--capsule-frame-state-transition-duration)') &&
 	      !chipButtonCssSource.includes(':hover::before') &&
 	      tagBarCssSource.includes('.tag-bar[data-position-animating="true"]') &&
 	      tagBarCssSource.includes('tag-bar-add-chip-in var(--weimo-card-transition-duration, 180ms)') &&

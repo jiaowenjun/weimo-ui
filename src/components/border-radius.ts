@@ -28,7 +28,7 @@ export const borderRadiusScaleMap = {
     token: '--radius-round',
     value: '999px',
     description: 'Chip、圆形图标按钮、头像按钮和骨架条使用的完全圆角。',
-    uiUsage: 'ChipSurface、FrostedIconButton / GhostIconButton、TagPicker check、ScrollArea thumb',
+    uiUsage: 'Chip / ChipButton / TagBread、FrostedIconButton / GhostIconButton、TagPicker check、ScrollArea thumb',
     bijiUsage: 'Toolbar icon button、memo-list skeleton',
   },
 } as const

@@ -3,16 +3,19 @@ import { Hash } from 'lucide-react'
 
 import { AnimatedInlineSizeMeasure } from './animated-inline-size'
 import {
-  getChipSurfaceAttributes,
-  getChipSurfaceClassName,
-} from './chip-surface-model'
+  getCapsuleFrameAttributes,
+  getCapsuleFrameClassName,
+} from './capsule-frame'
 import {
   getAnimatedInlineSizeStyle,
   useAnimatedInlineSize,
 } from './animated-inline-size-model'
-import { useFrostedSurfaceBackgroundToneRef } from './frosted-surface'
+import {
+  getFrostedSurfaceClassName,
+  useFrostedSurfaceBackgroundToneRef,
+} from './frosted-surface'
 
-import './chip-surface.css'
+import './capsule-frame.css'
 import './chip-button.css'
 import './frosted-surface.css'
 
@@ -39,9 +42,9 @@ export function ChipButton({
   suffix,
   ...props
 }: ChipButtonProps) {
-  const isGlassState = state === 'glass'
+  const isFrostedState = state === 'glass'
   const { backgroundStyle, backgroundTone, setElementRef } =
-    useFrostedSurfaceBackgroundToneRef<HTMLButtonElement>(isGlassState)
+    useFrostedSurfaceBackgroundToneRef<HTMLButtonElement>(isFrostedState)
   const { measureRef, inlineSize } = useAnimatedInlineSize([
     prefix,
     children,
@@ -49,7 +52,14 @@ export function ChipButton({
     suffix,
   ])
   // 胶囊只保留小字号一档(sm):基础/标题字号变体已随 textSize prop 一并移除。
-  const chipSurfaceAttributes = getChipSurfaceAttributes({ variant: state, interactive: true, textSize: 'sm' })
+  const capsuleFrameAttributes = getCapsuleFrameAttributes({
+    interactive: true,
+    material: isFrostedState ? 'frosted' : 'solid',
+    textSize: 'sm',
+  })
+  const frostedSurfaceClassName = isFrostedState
+    ? getFrostedSurfaceClassName('frosted-surface--bordered')
+    : undefined
   // prefix/suffix 是整体按钮内部的独立小部件,只接受图标元素(Hash 图标、可
   // 关闭胶囊的 X 幽灵图标按钮等),不支持普通字符——类型层已排除 string;
   // 默认前缀为 Hash 图标(对齐 TagBread),null 隐藏插槽,gap 不由空插槽垫宽;
@@ -58,36 +68,36 @@ export function ChipButton({
   const buttonContent = (
     <>
       {isEmptyChipButtonSlot(prefix) ? null : (
-        <span className="chip-surface__slot chip-button__prefix">{prefix}</span>
+        <span className="capsule-frame__slot chip-button__prefix">{prefix}</span>
       )}
-      <span className="chip-surface__content chip-button__text">{children}</span>
+      <span className="capsule-frame__content chip-button__text">{children}</span>
       {isEmptyChipButtonSlot(suffix) ? null : (
-        <span className="chip-surface__slot chip-button__suffix">{suffix}</span>
+        <span className="capsule-frame__slot chip-button__suffix">{suffix}</span>
       )}
     </>
   )
   const button = (
     <button
-      className={getChipSurfaceClassName(
-        isGlassState && 'frosted-surface',
+      className={getCapsuleFrameClassName(
+        frostedSurfaceClassName,
         'chip-button',
         'chip-button--button',
         className,
       )}
       data-background-tone={
-        isGlassState ? backgroundTone ?? undefined : undefined
+        isFrostedState ? backgroundTone ?? undefined : undefined
       }
       data-has-prefix={isEmptyChipButtonSlot(prefix) ? undefined : 'true'}
       data-has-suffix={isEmptyChipButtonSlot(suffix) ? undefined : 'true'}
       data-state={state}
-      ref={isGlassState ? setElementRef : undefined}
+      ref={isFrostedState ? setElementRef : undefined}
       style={
         animateWidth
           ? { ...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle }
           : { ...style, ...backgroundStyle }
       }
       type="button"
-      {...chipSurfaceAttributes}
+      {...capsuleFrameAttributes}
       {...props}
     >
       {buttonContent}
@@ -103,12 +113,16 @@ export function ChipButton({
       {button}
       <AnimatedInlineSizeMeasure measureRef={measureRef}>
         <button
-          className={getChipSurfaceClassName('chip-button', 'chip-button--button')}
+          className={getCapsuleFrameClassName(
+            frostedSurfaceClassName,
+            'chip-button',
+            'chip-button--button',
+          )}
           data-has-prefix={isEmptyChipButtonSlot(prefix) ? undefined : 'true'}
           data-has-suffix={isEmptyChipButtonSlot(suffix) ? undefined : 'true'}
           data-state={state}
           type="button"
-          {...chipSurfaceAttributes}
+          {...capsuleFrameAttributes}
         >
           {buttonContent}
         </button>

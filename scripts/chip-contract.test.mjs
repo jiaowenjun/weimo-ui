@@ -34,32 +34,36 @@ const packageJson = readJson('package.json')
 const rootRegistry = readJson('registry.json')
 const source = readProjectFile('src/components/chip.tsx')
 const css = readProjectFile('src/components/chip.css')
-const surfaceCss = readProjectFile('src/components/chip-surface.css')
+const surfaceCss = readProjectFile('src/components/capsule-frame.css')
+const frostedSurfaceCss = readProjectFile('src/components/frosted-surface.css')
 const docsSource = readProjectFile('src/docs/component-definitions/capsule.tsx')
 const definitionsIndexSource = readProjectFile('src/docs/component-definitions/index.ts')
 const manifestSource = readProjectFile('src/docs/components-manifest.ts')
 const appCss = readProjectFile('src/App.css')
 const previewCardCss = readProjectFile('src/components/component-preview-card.css')
 
-const baseBlock = cssBlockFor(surfaceCss, '.chip-surface')
-const defaultLayerBlock = cssBlockFor(surfaceCss, '.chip-surface::before')
-const glassLayerBlock = cssBlockFor(surfaceCss, '.chip-surface::after')
-const defaultVariantBeforeBlock = cssBlockFor(surfaceCss, '.chip-surface[data-variant="default"]::before')
-const defaultVariantAfterBlock = cssBlockFor(surfaceCss, '.chip-surface[data-variant="default"]::after')
-const glassVariantBlock = cssBlockFor(surfaceCss, '.chip-surface[data-variant="glass"]')
-const glassVariantBeforeBlock = cssBlockFor(surfaceCss, '.chip-surface[data-variant="glass"]::before')
-const glassVariantAfterBlock = cssBlockFor(surfaceCss, '.chip-surface[data-variant="glass"]::after')
-const smallTextBlock = cssBlockFor(surfaceCss, '.chip-surface[data-text-size="sm"]')
-const baseTextBlock = cssBlockFor(surfaceCss, '.chip-surface[data-text-size="base"]')
-const lgTextBlock = cssBlockFor(surfaceCss, '.chip-surface[data-text-size="lg"]')
-const slotBlock = cssBlockFor(surfaceCss, '.chip-surface__slot')
-const contentBlock = cssBlockFor(surfaceCss, '.chip-surface__content')
+const baseBlock = cssBlockFor(surfaceCss, '.capsule-frame')
+const defaultLayerBlock = cssBlockFor(surfaceCss, '.capsule-frame::before')
+const glassLayerBlock = cssBlockFor(surfaceCss, '.capsule-frame::after')
+const solidFrameBlock = cssBlockFor(surfaceCss, '.capsule-frame[data-material="solid"]')
+const defaultVariantBeforeBlock = cssBlockFor(surfaceCss, '.capsule-frame[data-material="solid"]::before')
+const defaultVariantAfterBlock = cssBlockFor(surfaceCss, '.capsule-frame[data-material="solid"]::after')
+const glassVariantBlock = cssBlockFor(surfaceCss, '.capsule-frame.frosted-surface')
+const glassVariantBeforeBlock = cssBlockFor(surfaceCss, '.capsule-frame[data-material="frosted"]::before')
+const glassVariantAfterBlock = cssBlockFor(surfaceCss, '.capsule-frame[data-material="frosted"]::after')
+const frostedSurfaceBlock = cssBlockFor(frostedSurfaceCss, '.frosted-surface')
+const frostedBorderBlock = cssBlockFor(frostedSurfaceCss, '.frosted-surface--bordered')
+const smallTextBlock = cssBlockFor(surfaceCss, '.capsule-frame[data-text-size="sm"]')
+const baseTextBlock = cssBlockFor(surfaceCss, '.capsule-frame[data-text-size="base"]')
+const lgTextBlock = cssBlockFor(surfaceCss, '.capsule-frame[data-text-size="lg"]')
+const slotBlock = cssBlockFor(surfaceCss, '.capsule-frame__slot')
+const contentBlock = cssBlockFor(surfaceCss, '.capsule-frame__content')
 const reducedMotionBlock = cssBlockFor(
   surfaceCss,
-  `.chip-surface,
-    .chip-surface.frosted-surface,
-    .chip-surface::before,
-    .chip-surface::after`,
+  `.capsule-frame,
+    .capsule-frame.frosted-surface,
+    .capsule-frame::before,
+    .capsule-frame::after`,
 )
 const previewAlignBlock = cssBlockFor(
   previewCardCss,
@@ -88,7 +92,7 @@ for (const snippet of [
   "import type { ComponentPropsWithoutRef, ReactNode } from 'react'",
   "from './animated-inline-size'",
   "from './animated-inline-size-model'",
-  "from './chip-surface-model'",
+  "from './capsule-frame'",
   "import './chip.css'",
   "export type ChipVariant = 'default' | 'glass'",
   "export type ChipTextSize = 'sm' | 'base' | 'lg'",
@@ -106,18 +110,21 @@ for (const snippet of [
   'bordered = true',
   "variant = 'default'",
   "textSize = 'sm'",
-  "import { useFrostedSurfaceBackgroundToneRef } from './frosted-surface'",
+  'getFrostedSurfaceClassName,',
+  'useFrostedSurfaceBackgroundToneRef,',
   "import './frosted-surface.css'",
-  "isGlassVariant && 'frosted-surface',",
-  'isGlassVariant ? backgroundTone ?? undefined : undefined',
-  "getChipSurfaceClassName(",
-  'getChipSurfaceAttributes({ bordered, variant, textSize })',
+  "const isFrostedVariant = variant === 'glass'",
+  'isFrostedVariant ? backgroundTone ?? undefined : undefined',
+  "getCapsuleFrameClassName(",
+  'const capsuleFrameAttributes = getCapsuleFrameAttributes({',
+  "material: isFrostedVariant ? 'frosted' : 'solid'",
+  "getFrostedSurfaceClassName(bordered ? 'frosted-surface--bordered' : undefined)",
   'useAnimatedInlineSize([',
   '...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle',
   '<AnimatedInlineSizeMeasure measureRef={measureRef}>',
-  'chip-surface__slot chip__slot chip__slot--prefix',
-  'chip-surface__content chip__content',
-  'chip-surface__slot chip__slot chip__slot--suffix',
+  'capsule-frame__slot chip__slot chip__slot--prefix',
+  'capsule-frame__content chip__content',
+  'capsule-frame__slot chip__slot chip__slot--suffix',
 ]) {
   assertIncludes(source, snippet, `Chip source must include ${snippet}.`)
 }
@@ -136,29 +143,29 @@ for (const [block, snippet, message] of [
   [baseBlock, 'justify-content: flex-start;', 'Chip must keep prefix and content left-aligned during width transitions.'],
   [baseBlock, 'gap: 4px;', 'Chip slots must have a compact gap for icons and actions.'],
   [baseBlock, 'padding: 6px 10px;', 'Chip must match ChipButton padding.'],
-  [baseBlock, 'border: 1px solid transparent;', 'Chip must start with a transparent border.'],
+  [solidFrameBlock, 'border: 1px solid transparent;', 'Solid Chip must keep transparent border geometry without overriding its frosted border.'],
   [baseBlock, 'border-radius: var(--radius-round);', 'Chip must match ChipButton radius.'],
   [baseBlock, 'background: transparent;', 'Chip base must leave background to visual layers.'],
-  [baseBlock, 'color: var(--color-primary);', 'Chip must match ChipButton primary text color.'],
+  [solidFrameBlock, 'color: var(--color-primary);', 'Solid Chip must match ChipButton primary text color without overriding its frosted foreground.'],
   [baseBlock, 'line-height: 1;', 'Chip must match ChipButton compact line height.'],
   [baseBlock, 'isolation: isolate;', 'Chip must isolate visual layers.'],
   [baseBlock, 'overflow: hidden;', 'Chip must clip visual layers to capsule radius.'],
   [baseBlock, '--animated-inline-size-transition-duration: 180ms;', 'Chip width transitions must use the shared 180ms duration.'],
-  [baseBlock, '--chip-surface-state-transition-duration: 180ms;', 'Chip state transitions must stay independent from width transitions.'],
+  [baseBlock, '--capsule-frame-state-transition-duration: 180ms;', 'Chip state transitions must stay independent from width transitions.'],
   [baseBlock, 'inline-size var(--animated-inline-size-transition-duration) cubic-bezier(0.2, 0, 0, 1)', 'Chip must animate measured content-width changes.'],
-  [baseBlock, 'border-color var(--chip-surface-state-transition-duration) ease', 'Chip border transition must use the shared state duration variable.'],
-  [baseBlock, 'color var(--chip-surface-state-transition-duration) ease', 'Chip color transition must use the shared state duration variable.'],
+  [baseBlock, 'border-color var(--capsule-frame-state-transition-duration) ease', 'Chip border transition must use the shared state duration variable.'],
+  [baseBlock, 'color var(--capsule-frame-state-transition-duration) ease', 'Chip color transition must use the shared state duration variable.'],
   [defaultLayerBlock, 'background: var(--color-bg-chip);', 'Chip default layer must use the shared brand chip surface.'],
-  [defaultLayerBlock, 'opacity var(--chip-surface-state-transition-duration) ease', 'Chip default layer opacity transition must use the shared state duration variable.'],
-  [defaultLayerBlock, 'background-color var(--chip-surface-state-transition-duration) ease', 'Chip default layer hover repaint must fade like icon buttons.'],
-  [glassLayerBlock, 'opacity var(--chip-surface-state-transition-duration) ease', 'Chip glass layer opacity transition must use the shared state duration variable.'],
-  [glassLayerBlock, 'background-color var(--chip-surface-state-transition-duration) ease', 'Chip glass layer hover tint must fade like icon buttons.'],
+  [defaultLayerBlock, 'opacity var(--capsule-frame-state-transition-duration) ease', 'Chip default layer opacity transition must use the shared state duration variable.'],
+  [defaultLayerBlock, 'background-color var(--capsule-frame-state-transition-duration) ease', 'Chip default layer hover repaint must fade like icon buttons.'],
+  [glassLayerBlock, 'opacity var(--capsule-frame-state-transition-duration) ease', 'Chip glass layer opacity transition must use the shared state duration variable.'],
+  [glassLayerBlock, 'background-color var(--capsule-frame-state-transition-duration) ease', 'Chip glass layer hover tint must fade like icon buttons.'],
   [defaultVariantBeforeBlock, 'opacity: 1;', 'Chip default variant must show default layer.'],
   [defaultVariantAfterBlock, 'opacity: 0;', 'Chip default variant must hide glass layer.'],
-  [glassVariantBlock, 'color: var(--glass-surface-fg);', 'Chip glass variant must use the standard glass surface adaptive foreground.'],
-  [glassVariantBlock, 'border-color: var(--glass-surface-border);', 'Chip glass variant must use the standard glass surface border token.'],
-  [glassVariantBlock, 'backdrop-filter: blur(var(--glass-blur));', 'Chip glass variant must use shared glass blur.'],
-  [glassVariantBlock, '--chip-surface-hover-background: var(--glass-surface-hover-bg);', 'Chip glass variant hover tint must use the glass surface currentColor mix instead of the fixed bg-hover token.'],
+  [frostedSurfaceBlock, 'color: var(--glass-surface-fg);', 'Chip glass variant must use the standard frosted surface adaptive foreground.'],
+  [frostedBorderBlock, 'border-color: var(--glass-surface-border);', 'Chip glass variant must use the standard frosted surface border token.'],
+  [frostedSurfaceBlock, 'backdrop-filter: blur(var(--glass-blur));', 'Chip glass variant must use shared frosted blur.'],
+  [glassVariantBlock, '--capsule-frame-hover-background: var(--glass-surface-hover-bg);', 'Chip glass variant hover tint must use the glass surface currentColor mix instead of the fixed bg-hover token.'],
   [glassVariantBeforeBlock, 'opacity: 0;', 'Chip glass variant must hide default layer.'],
   [glassVariantAfterBlock, 'opacity: 1;', 'Chip glass variant must show glass layer.'],
   [smallTextBlock, 'font-size: var(--font-size-sm);', 'Chip small text size must use the shared small token.'],
@@ -187,7 +194,7 @@ assert.ok(
 )
 assert.ok(
   !baseBlock.includes('box-shadow') &&
-    !glassVariantBlock.includes('box-shadow') &&
+    !frostedSurfaceBlock.includes('box-shadow') &&
     !css.includes('--glass-shadow'),
   'Chip glass variant must not use glass shadow effects.',
 )

@@ -25,7 +25,7 @@ export const fontSizeScaleMap = {
     value: '13px',
     className: 'font-size--sm',
     description: '小型控件、标签、列表元信息和菜单项的紧凑阅读字号。',
-    uiUsage: 'CardTopBar、ChipSurface、TagPicker、Table、Markdown meta',
+    uiUsage: 'CardTopBar、Chip、ChipButton、TagPicker、Table、Markdown meta',
     bijiUsage: 'side bar label、RefCard、form label、auth secondary text',
   },
   md: {

@@ -21,7 +21,7 @@
 
 /* 只放几何。color/line-height 不能落在无层区:无层声明无条件压过
    @layer components 里 glass 变体的 tone 自适应 color(--glass-surface-fg),
-   基类在 .chip-surface(同层同值)已有声明,这里再写会把磨砂态文字钉死。 */
+   基类在 .capsule-frame(同层同值)已有声明,这里再写会把磨砂态文字钉死。 */
 button.chip-button {
   gap: 1px;
 }
