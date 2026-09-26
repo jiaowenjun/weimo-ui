@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { componentGroups, componentManifest } from '../packages/weimo-ui-site/src/docs/components-manifest'
+import { componentManifest, componentPackages } from '../packages/weimo-ui-site/src/docs/components-manifest'
 import {
   cssDeclaration,
   cssRule,
@@ -42,35 +42,51 @@ const conceptualTokenModules = new Set([
   'text-tokens',
 ])
 
-const coreGroups = new Set([
-  'token-style',
-  'surface-material',
-  'controls-overlays',
-  'layout-bars',
-])
-const additionalCoreComponents = new Set(['base-card', 'component-preview-card'])
-const cardComponents = new Set(['tagged-card', 'card-composer', 'ocr', 'ocr-composer', 'ocr-detail'])
-const imageComponents = new Set(['canvas-transparency', 'image-uploader', 'image'])
-
 describe('public component catalog', () => {
-  it('keeps component groups ordered and each group alphabetized', () => {
-    expect(componentGroups.map((group) => group.id)).toEqual([
-      'token-style',
-      'surface-material',
-      'controls-overlays',
-      'layout-bars',
-      'tags-navigation',
-      'card',
-      'markdown',
-      'media-ocr',
-      'data-visualization',
+  it('keeps packages and their functional pages in product order', () => {
+    expect(componentPackages.map((packageItem) => packageItem.id)).toEqual([
+      'weimo-ui-core',
+      'weimo-ui-tagtree',
+      'weimo-ui-markdown',
+      'weimo-ui-image',
+      'weimo-ui-stats',
+      'weimo-ui-card',
     ])
 
-    for (const group of componentGroups) {
-      const names = componentManifest
-        .filter((item) => item.group === group.id)
-        .map((item) => item.name)
-      expect(names).toEqual([...names].sort((left, right) => left.localeCompare(right, 'en')))
+    expect(componentManifest.filter((item) => item.docs).map((item) => item.id)).toEqual([
+      'text-tokens',
+      'background-tokens',
+      'border-tokens',
+      'surface',
+      'button',
+      'capsule',
+      'slider',
+      'menu',
+      'action-dialog',
+      'bar',
+      'page-layout',
+      'card-tool-bar',
+      'base-card',
+      'component-preview-card',
+      'tag',
+      'chip-button',
+      'markdown',
+      'md',
+      'image',
+      'stat',
+      'tagged-card',
+      'ocr',
+    ])
+
+    const pages = new Map(
+      componentManifest.filter((item) => item.docs).map((item) => [item.id, item]),
+    )
+
+    for (const item of componentManifest) {
+      const page = pages.get(item.page)
+
+      expect(page, `${item.id} docs page`).toBeDefined()
+      expect(page?.packageName).toBe(item.packageName)
     }
   })
 
@@ -81,6 +97,7 @@ describe('public component catalog', () => {
     const imagePackageJson = readProjectJson<PackageJson>('packages/weimo-ui-image/package.json')
     const markdownPackageJson = readProjectJson<PackageJson>('packages/weimo-ui-markdown/package.json')
     const statsPackageJson = readProjectJson<PackageJson>('packages/weimo-ui-stats/package.json')
+    const tagtreePackageJson = readProjectJson<PackageJson>('packages/weimo-ui-tagtree/package.json')
     const ids = new Set<string>()
     const packageExports = new Set<string>()
     const registryNames = new Set<string>()
@@ -93,37 +110,20 @@ describe('public component catalog', () => {
       packageExports.add(item.packageExport)
       registryNames.add(item.registryName)
 
-      const isCoreComponent = coreGroups.has(item.group) || additionalCoreComponents.has(item.id)
-      const isCardComponent = cardComponents.has(item.id)
-      const isImageComponent = imageComponents.has(item.id)
-      const isMarkdownComponent = item.group === 'markdown'
-      const isStatsComponent = item.group === 'data-visualization'
-      const ownerPackageJson = isCoreComponent
-        ? corePackageJson
-        : isCardComponent
-          ? cardPackageJson
-          : isImageComponent
-            ? imagePackageJson
-            : isMarkdownComponent
-              ? markdownPackageJson
-              : isStatsComponent
-                ? statsPackageJson
-                : packageJson
-      const packageRoot = isCoreComponent
-        ? 'packages/weimo-ui-core/'
-        : isCardComponent
-          ? 'packages/weimo-ui-card/'
-          : isImageComponent
-            ? 'packages/weimo-ui-image/'
-            : isMarkdownComponent
-              ? 'packages/weimo-ui-markdown/'
-              : isStatsComponent
-                ? 'packages/weimo-ui-stats/'
-                : ''
+      const packagesByName = {
+        'weimo-ui-card': [cardPackageJson, 'packages/weimo-ui-card/'],
+        'weimo-ui-core': [corePackageJson, 'packages/weimo-ui-core/'],
+        'weimo-ui-image': [imagePackageJson, 'packages/weimo-ui-image/'],
+        'weimo-ui-markdown': [markdownPackageJson, 'packages/weimo-ui-markdown/'],
+        'weimo-ui-stats': [statsPackageJson, 'packages/weimo-ui-stats/'],
+        'weimo-ui-tagtree': [tagtreePackageJson, 'packages/weimo-ui-tagtree/'],
+      } as const
+      const [ownerPackageJson, packageRoot] = packagesByName[item.packageName]
       const sourcePath = ownerPackageJson.exports[item.packageExport]
       const projectSourcePath = `${packageRoot}${sourcePath.replace(/^\.\//u, '')}`
       expect(sourcePath, `${item.id} package export`).toBeTypeOf('string')
       expect(projectFileExists(projectSourcePath)).toBe(true)
+      expect(packageJson.exports[item.packageExport]).toBeTypeOf('string')
 
       const names = exportedNames(projectSourcePath)
       expect(names.size, `${item.id} source exports`).toBeGreaterThan(0)

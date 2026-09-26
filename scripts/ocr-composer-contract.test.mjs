@@ -218,7 +218,7 @@ for (const snippet of [
   "name: 'OcrComposer'",
   "registryName: 'ocr-composer'",
   "packageExport: './components/ocr-composer'",
-  "group: 'media-ocr'",
+  "packageName: 'weimo-ui-card'",
   'docs: false',
 ]) {
   assert.ok(manifestSource.includes(snippet), `OcrComposer manifest must include: ${snippet}`)

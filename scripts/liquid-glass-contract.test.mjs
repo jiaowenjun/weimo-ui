@@ -19,7 +19,7 @@ const engineSource = readProjectFile('packages/weimo-ui-core/src/components/liqu
 const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/surface.tsx')
 const tileSource = readProjectFile('packages/weimo-ui-site/src/docs/liquid-glass-tile.tsx')
 const buttonDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/button.tsx')
-const capsuleDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/capsule.tsx')
+const chipButtonDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/chip-button.tsx')
 const barDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/bar.tsx')
 const pageLayoutDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/page-layout.tsx')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
@@ -131,8 +131,8 @@ for (const snippet of [
   'capsule-material-row__liquid-sizer',
 ]) {
   assert.ok(
-    capsuleDefinitionSource.includes(snippet),
-    `The capsule page material card must include ${snippet}.`,
+    chipButtonDefinitionSource.includes(snippet),
+    `The tagtree ChipButton page material card must include ${snippet}.`,
   )
 }
 const liquidGlassChipButtonBlock =
@@ -185,7 +185,7 @@ for (const snippet of [
   "exportName: 'LiquidGlassSurface'",
   "registryName: 'liquid-glass'",
   "packageExport: './components/liquid-glass'",
-  "group: 'surface-material'",
+  "packageName: 'weimo-ui-core'",
 ]) {
   assert.ok(manifestSource.includes(snippet), `components-manifest.ts must include ${snippet}.`)
 }

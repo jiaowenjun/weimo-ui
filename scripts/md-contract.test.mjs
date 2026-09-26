@@ -236,10 +236,10 @@ for (const [token, value] of markdownStaticTokens) {
 
 assert.ok(
   manifestSource.includes("id: 'md'") &&
-    manifestSource.includes("name: 'Markdown样式'") &&
+    manifestSource.includes("name: 'Markdown 样式'") &&
     manifestSource.includes("registryName: 'md'") &&
     manifestSource.includes("packageExport: './components/md'") &&
-    manifestSource.includes("group: 'markdown'"),
+    manifestSource.includes("packageName: 'weimo-ui-markdown'"),
   'Md must be listed as a Markdown detail page in the component manifest.',
 )
 

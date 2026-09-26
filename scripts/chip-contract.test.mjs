@@ -210,10 +210,11 @@ assert.ok(
 assert.ok(
   docsSource.includes("id: 'capsule'") &&
     docsSource.includes('preview: () => <CapsuleDemo />') &&
-    !docsSource.includes("import { Chip } from 'weimo-ui-core/components/chip'") &&
-    !docsSource.includes('<Chip ') &&
-    !docsSource.includes('<Chip\n'),
-  'Capsule docs must demo button-form capsules only; plain text Chip examples must stay removed from the page.',
+    docsSource.includes("import { Chip } from 'weimo-ui-core/components/chip'") &&
+    docsSource.includes('<Chip content="普通胶囊"') &&
+    docsSource.includes('textSize="lg"') &&
+    !docsSource.includes('ChipButton'),
+  'The core Capsule page must demo non-interactive Chip variants without importing tagtree controls.',
 )
 assert.ok(
   !docsSource.includes('className="internal-chip-preview"') &&
@@ -228,9 +229,8 @@ assert.ok(
 )
 assert.ok(
   definitionsIndexSource.includes("import { capsuleDefinition } from './capsule'") &&
-    definitionsIndexSource.includes('capsule: capsuleDefinition') &&
-    !definitionsIndexSource.includes("from './chip'"),
-  'Component definitions index must register the merged Capsule page.',
+    definitionsIndexSource.includes('capsule: capsuleDefinition'),
+  'Component definitions index must register the core Capsule page.',
 )
 assert.ok(
   manifestSource.includes("id: 'capsule'") &&
@@ -238,17 +238,16 @@ assert.ok(
     manifestSource.includes("exportName: 'Chip'") &&
     manifestSource.includes("registryName: 'chip'") &&
     manifestSource.includes("packageExport: './components/chip'") &&
+    manifestSource.includes("packageName: 'weimo-ui-core'") &&
+    manifestSource.includes("page: 'capsule'") &&
+    manifestSource.includes('docs: true') &&
     manifestSource.includes('registry: true') &&
     !manifestSource.includes("id: 'chip',") &&
     !manifestSource.includes("internalGroup: 'tag-tree'"),
   'Component manifest must list Chip as a public registry component through the merged Capsule page.',
 )
-for (const removedFilePath of [
-  'packages/weimo-ui-site/src/docs/component-definitions/chip.tsx',
-  'packages/weimo-ui-site/src/docs/component-definitions/chip-button.tsx',
-]) {
-  assert.ok(
-    !existsSync(join(root, removedFilePath)),
-    `${removedFilePath} must be merged into capsule.tsx.`,
-  )
-}
+assert.ok(
+  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/chip.tsx')) &&
+    existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/chip-button.tsx')),
+  'Chip stays on the core Capsule page while ChipButton owns a separate tagtree page.',
+)

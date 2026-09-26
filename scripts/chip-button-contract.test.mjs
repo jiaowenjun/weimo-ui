@@ -49,7 +49,7 @@ const css = readProjectFile('packages/weimo-ui-tagtree/src/components/chip-butto
 const surfaceCss = readProjectFile('packages/weimo-ui-core/src/components/capsule-frame.css')
 const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
-const docsSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/capsule.tsx')
+const docsSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/chip-button.tsx')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
@@ -273,7 +273,7 @@ assert.ok(
     docsSource.includes("import { ChipButton } from 'weimo-ui-tagtree/components/chip-button'") &&
     docsSource.includes("import { GlassPreviewCard } from '../glass-preview-card'") &&
     docsSource.includes("import { PreviewToggle } from '../preview-toggle'") &&
-    docsSource.includes("id: 'capsule'") &&
+    docsSource.includes("id: 'chip-button'") &&
     docsSource.includes('function CapsuleMaterialDemo') &&
     docsSource.includes('<CapsuleMaterialDemo />') &&
     docsSource.includes('label="胶囊材质"') &&
@@ -336,18 +336,20 @@ assert.ok(
   'Capsule chip-button demo cards must lay out their buttons in the shared preview row; the redundant state-pair and text-size cards must stay removed.',
 )
 assert.ok(
-  definitionsIndexSource.includes("import { capsuleDefinition } from './capsule'") &&
-    definitionsIndexSource.includes('capsule: capsuleDefinition') &&
-    !definitionsIndexSource.includes('chip-button'),
-  'Component definitions index must register ChipButton through the merged Capsule page.',
+  definitionsIndexSource.includes("import { chipButtonDefinition } from './chip-button'") &&
+    definitionsIndexSource.includes("'chip-button': chipButtonDefinition"),
+  'Component definitions index must register the standalone tagtree ChipButton page.',
 )
 assert.ok(
   manifestSource.includes("id: 'chip-button'") &&
-    manifestSource.includes("name: 'ChipButton'") &&
+    manifestSource.includes("name: '标签胶囊'") &&
+    manifestSource.includes("exportName: 'ChipButton'") &&
     manifestSource.includes("registryName: 'chip-button'") &&
     manifestSource.includes("packageExport: './components/chip-button'") &&
-    manifestSource.includes('docs: false') &&
+    manifestSource.includes("packageName: 'weimo-ui-tagtree'") &&
+    manifestSource.includes("page: 'chip-button'") &&
+    manifestSource.includes('docs: true') &&
     manifestSource.includes('registry: true') &&
     !manifestSource.includes("internalGroup: 'tag-tree'"),
-  'Component manifest must keep ChipButton registry-only after the Capsule page merge.',
+  'Component manifest must expose ChipButton through its tagtree functional page.',
 )

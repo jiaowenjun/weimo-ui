@@ -16,7 +16,7 @@ function readProjectFile(relativePath) {
 const shellSource = readProjectFile('packages/weimo-ui-site/src/docs/docs-shell.tsx')
 const detailSource = readProjectFile('packages/weimo-ui-site/src/docs/pages/component-detail-page.tsx')
 const actionDialogDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/action-dialog.tsx')
-const cardTopBarDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/tagged-card.tsx')
+const cardTopBarDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/card-tool-bar.tsx')
 const mathDialogDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/markdown.tsx')
 const tagTreeRowDefinitionSource = [
   readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/tag.tsx'),
@@ -89,9 +89,9 @@ for (const selector of [
 }
 
 assert.ok(
-  shellSource.includes('componentDocGroups') &&
-    shellSource.includes('docGroup.title') &&
-    shellSource.includes('group.items.map') &&
+  shellSource.includes('componentDocPackages') &&
+    shellSource.includes('docPackage.title') &&
+    shellSource.includes('docPackage.items.map') &&
     !shellSource.includes("'概览'") &&
     !shellSource.includes("'全部组件'") &&
     !shellSource.includes("'组件'") &&

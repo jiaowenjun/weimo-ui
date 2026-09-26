@@ -1,16 +1,9 @@
 import { useState } from 'react'
-import type { ReactNode } from 'react'
-import { Heading1, List, Quote } from 'lucide-react'
 
 import { Card } from 'weimo-ui-card/components/card'
 import type { CardDraft, CardProps } from 'weimo-ui-card/components/card'
 import { CardComposer } from 'weimo-ui-card/components/card-composer'
-import { CardTopBar } from 'weimo-ui-core/components/card-top-bar'
-import { CardToolBar } from 'weimo-ui-core/components/card-tool-bar'
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
-import { Button } from 'weimo-ui-core/components/coss/button'
-import { Toolbar, ToolbarButton, ToolbarGroup } from 'weimo-ui-core/components/coss/toolbar'
-import { TextButton } from 'weimo-ui-core/components/text-button'
 import type { ComponentDefinition } from '../component-docs'
 
 import { mdRenderSample } from './markdown-sample'
@@ -78,106 +71,6 @@ function CardComposerDemo() {
   )
 }
 
-function CardToolBarDemo() {
-  const [saveDisabled, setSaveDisabled] = useState(false)
-
-  return (
-    <ComponentPreviewCard label="卡片工具栏">
-      <div
-        className="internal-card-tool-bar-preview"
-        aria-label="CardToolBar preview"
-      >
-        <div className="internal-card-tool-bar-preview__surface">
-          <TextButton
-            className="internal-card-tool-bar-preview__toggle"
-            onClick={() => setSaveDisabled((current) => !current)}
-          >
-            {saveDisabled ? '启用保存' : '禁用保存'}
-          </TextButton>
-          <CardToolBar
-            aria-label="卡片底部操作栏预览"
-            saveDisabled={saveDisabled}
-            saveLabel="保存"
-            toolbarSlot={
-              <Toolbar aria-label="Markdown 格式工具栏" className="md-editor__toolbar">
-                <ToolbarGroup className="md-editor__toolbar-group">
-                  <ToolbarButton
-                    aria-label="标题"
-                    className="md-editor__toolbar-button"
-                    disabled
-                    render={<Button variant="ghost" />}
-                  >
-                    <Heading1 />
-                  </ToolbarButton>
-                  <ToolbarButton
-                    aria-label="列表"
-                    className="md-editor__toolbar-button"
-                    disabled
-                    render={<Button variant="ghost" />}
-                  >
-                    <List />
-                  </ToolbarButton>
-                  <ToolbarButton
-                    aria-label="引用"
-                    className="md-editor__toolbar-button"
-                    disabled
-                    render={<Button variant="ghost" />}
-                  >
-                    <Quote />
-                  </ToolbarButton>
-                </ToolbarGroup>
-              </Toolbar>
-            }
-          />
-        </div>
-      </div>
-    </ComponentPreviewCard>
-  )
-}
-
-function CardTopBarDemo() {
-  const [mode, setMode] = useState<'display' | 'edit'>('display')
-  const editing = mode === 'edit'
-
-  function enterEdit() {
-    setMode('edit')
-  }
-
-  function exitEdit() {
-    setMode('display')
-  }
-
-  return (
-    <ComponentPreviewCard label="卡片顶部栏">
-      <div className="internal-card-top-bar-preview" aria-label="CardTopBar preview">
-        <div className="internal-card-top-bar-preview__surface">
-          {editing ? (
-            <CardTopBar
-              mode="edit"
-              editTitle="编辑笔记"
-              onCancel={exitEdit}
-            />
-          ) : (
-            <CardTopBar
-              mode="display"
-              createdAtText="今天 14:06"
-              onAction={enterEdit}
-            />
-          )}
-          <TextButton
-            className="internal-card-top-bar-preview__toggle"
-            onClick={() => {
-              setMode((current) => (current === 'display' ? 'edit' : 'display'))
-            }}
-          >
-            {editing ? '切换到展示态' : '切换到编辑态'}
-          </TextButton>
-        </div>
-      </div>
-    </ComponentPreviewCard>
-  )
-}
-
 // Docs definitions intentionally colocate preview components with exported page metadata.
 // eslint-disable-next-line react-refresh/only-export-components
 function TaggedCardDemo() {
@@ -185,29 +78,22 @@ function TaggedCardDemo() {
     <>
       <CardDemo />
       <CardComposerDemo />
-      <CardToolBarDemo />
-      <CardTopBarDemo />
     </>
   )
 }
 
 export const taggedCardDefinition = {
   id: 'tagged-card',
-  summary: '笔记卡片、新建草稿壳层、卡片工具栏与卡片顶部栏总览',
+  summary: '带标签笔记卡片与新建草稿壳层',
   status: 'Preview',
   frame: 'plain',
   searchAliases: [
     'Card',
     'CardComposer',
-    'CardToolBar',
-    'CardTopBar',
     '笔记卡片',
     '新建草稿壳层',
-    '卡片工具栏',
-    '卡片顶部栏',
   ],
   preview: () => <TaggedCardDemo />,
 } satisfies ComponentDefinition
 
-void (null as unknown as ReactNode)
 void (null as unknown as CardProps)

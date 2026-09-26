@@ -53,7 +53,7 @@ assert.ok(
     manifest.includes("name: 'CanvasTransparency'") &&
     manifest.includes("registryName: 'canvas-transparency'") &&
     manifest.includes("packageExport: './components/canvas-transparency'") &&
-    manifest.includes("group: 'media-ocr'") &&
+    manifest.includes("packageName: 'weimo-ui-image'") &&
     manifest.includes('docs: false'),
   'Component manifest must keep CanvasTransparency registry-only in the media-ocr group after the Image page merge.',
 )

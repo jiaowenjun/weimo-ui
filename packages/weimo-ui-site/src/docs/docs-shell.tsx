@@ -29,9 +29,9 @@ import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'
 import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'
 import { SideBar } from 'weimo-ui-core/components/sidebar'
 import {
-  componentDocGroups,
+  componentDocPackages,
   componentDocs,
-  type ComponentDocGroup,
+  type ComponentDocPackage,
 } from './component-docs'
 import { type DocsOutletContext } from './docs-outlet-context'
 import { componentHref, componentPath } from './routes'
@@ -54,12 +54,12 @@ type DocsSidebarGroup = {
 
 function buildSidebarGroups(options: {
   activeComponentId?: string
-  docGroups: ComponentDocGroup[]
+  docPackages: ComponentDocPackage[]
   onComponentSelect: (id: string) => void
 }): DocsSidebarGroup[] {
-  return options.docGroups.map((docGroup) => ({
-    title: docGroup.title,
-    items: docGroup.items.map((doc) => ({
+  return options.docPackages.map((docPackage) => ({
+    title: docPackage.title,
+    items: docPackage.items.map((doc) => ({
       active: options.activeComponentId === doc.id,
       href: componentHref(doc.id),
       label: doc.name,
@@ -119,7 +119,9 @@ export function DocsShell() {
   const selected = activeComponentId
     ? componentDocs.find((doc) => doc.id === activeComponentId)
     : undefined
-  const tokenPreview = selected?.group === 'token-style'
+  const tokenPreview = selected
+    ? ['text-tokens', 'background-tokens', 'border-tokens'].includes(selected.id)
+    : false
 
   useEffect(() => {
     if (theme !== 'system') {
@@ -192,7 +194,7 @@ export function DocsShell() {
 
   const sidebarGroups = buildSidebarGroups({
     activeComponentId,
-    docGroups: componentDocGroups,
+    docPackages: componentDocPackages,
     onComponentSelect: openComponent,
   })
 
@@ -324,7 +326,10 @@ export function DocsShell() {
               <CommandItem key={doc.id} onClick={() => openComponent(doc.id)}>
                 <span>
                   <strong>{doc.name}</strong>
-                  {doc.summary ? <small>{doc.summary}</small> : null}
+                  <small>
+                    {doc.packageName}
+                    {doc.summary ? ` · ${doc.summary}` : ''}
+                  </small>
                 </span>
                 <ArrowRight />
               </CommandItem>

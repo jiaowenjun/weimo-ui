@@ -91,7 +91,7 @@ assert.ok(
     manifest.includes("exportName: 'ImageView'") &&
     manifest.includes("registryName: 'image-view'") &&
     manifest.includes("packageExport: './components/image-view'") &&
-    manifest.includes("group: 'media-ocr'"),
+    manifest.includes("packageName: 'weimo-ui-image'"),
   'Component manifest must list ImageView through the merged Image page as the only public image-detail viewing component.',
 )
 for (const snippet of [

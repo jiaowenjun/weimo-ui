@@ -186,7 +186,7 @@ assert.ok(
   'Card must let CardTopBar own the display mode action control.',
 )
 
-const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/tagged-card.tsx')
+const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/card-tool-bar.tsx')
 const componentDefinitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
@@ -215,17 +215,17 @@ assert.ok(
 
 assert.ok(
   componentDefinitionsIndexSource.includes(
-    "import { taggedCardDefinition } from './tagged-card'",
-  ) && componentDefinitionsIndexSource.includes("'tagged-card': taggedCardDefinition"),
-  'CardTopBar preview must be registered through the merged tagged-card definition in component-definitions/index.ts.',
+    "import { cardToolBarDefinition } from './card-tool-bar'",
+  ) && componentDefinitionsIndexSource.includes("'card-tool-bar': cardToolBarDefinition"),
+  'CardTopBar preview must be registered through the core card-tool-bar page.',
 )
 
 for (const snippet of [
   "import { useState } from 'react'",
   "import { CardTopBar } from 'weimo-ui-core/components/card-top-bar'",
   "import { TextButton } from 'weimo-ui-core/components/text-button'",
-  "id: 'tagged-card'",
-  "summary: '笔记卡片、新建草稿壳层、卡片工具栏与卡片顶部栏总览'",
+  "id: 'card-tool-bar'",
+  "summary: '卡片编辑流程的底部工具栏与展示/编辑顶部栏'",
   "useState<'display' | 'edit'>('display')",
   'setMode((current) => (current ===',
   '<TextButton',

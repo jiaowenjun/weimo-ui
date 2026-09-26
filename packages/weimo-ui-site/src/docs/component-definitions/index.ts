@@ -3,22 +3,24 @@ import { textTokensDefinition } from './text-tokens'
 import { backgroundTokensDefinition } from './background-tokens'
 import { borderTokensDefinition } from './border-tokens'
 import { surfaceDefinition } from './surface'
-import { actionDialogDefinition } from './action-dialog'
 import { buttonDefinition } from './button'
-import { sliderDefinition } from './slider'
 import { capsuleDefinition } from './capsule'
+import { sliderDefinition } from './slider'
 import { menuDefinition } from './menu'
+import { actionDialogDefinition } from './action-dialog'
 import { barDefinition } from './bar'
 import { pageLayoutDefinition } from './page-layout'
-import { tagDefinition } from './tag'
+import { cardToolBarDefinition } from './card-tool-bar'
 import { baseCardDefinition } from './base-card'
-import { taggedCardDefinition } from './tagged-card'
 import { componentPreviewCardDefinition } from './component-preview-card'
+import { tagDefinition } from './tag'
+import { chipButtonDefinition } from './chip-button'
 import { markdownDefinition } from './markdown'
 import { mdDefinition } from './md'
-import { ocrDefinition } from './ocr'
 import { imageDefinition } from './image'
 import { statDefinition } from './stat'
+import { taggedCardDefinition } from './tagged-card'
+import { ocrDefinition } from './ocr'
 import type { ComponentId } from '../components-manifest'
 import type { ComponentDefinition } from '../component-docs'
 
@@ -27,20 +29,22 @@ export const componentDefinitionsById = {
   'background-tokens': backgroundTokensDefinition,
   'border-tokens': borderTokensDefinition,
   surface: surfaceDefinition,
-  'action-dialog': actionDialogDefinition,
   button: buttonDefinition,
-  slider: sliderDefinition,
   capsule: capsuleDefinition,
+  slider: sliderDefinition,
   menu: menuDefinition,
+  'action-dialog': actionDialogDefinition,
   bar: barDefinition,
   'page-layout': pageLayoutDefinition,
-  tag: tagDefinition,
+  'card-tool-bar': cardToolBarDefinition,
   'base-card': baseCardDefinition,
-  'tagged-card': taggedCardDefinition,
   'component-preview-card': componentPreviewCardDefinition,
+  tag: tagDefinition,
+  'chip-button': chipButtonDefinition,
   markdown: markdownDefinition,
   md: mdDefinition,
-  ocr: ocrDefinition,
   image: imageDefinition,
   stat: statDefinition,
+  'tagged-card': taggedCardDefinition,
+  ocr: ocrDefinition,
 } satisfies Record<ComponentId, ComponentDefinition>

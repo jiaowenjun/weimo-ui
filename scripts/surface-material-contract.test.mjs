@@ -76,7 +76,7 @@ for (const snippet of [
   "name: '材质'",
   "registryName: 'card-surface'",
   "packageExport: './components/card-surface'",
-  "group: 'surface-material'",
+  "packageName: 'weimo-ui-core'",
   "id: 'frosted-surface'",
   "id: 'popup-surface'",
   "registryName: 'popup-surface'",
@@ -85,9 +85,10 @@ for (const snippet of [
   assert.ok(manifestSource.includes(snippet), `components-manifest.ts must include ${snippet}.`)
 }
 assert.ok(
-  manifestSource.indexOf("id: 'frosted-surface'") < manifestSource.indexOf("id: 'popup-surface'") &&
-    manifestSource.indexOf("id: 'popup-surface'") < manifestSource.indexOf("id: 'surface'"),
-  'Surface / 材质 manifest entries must stay sorted by component name.',
+  manifestSource.indexOf("id: 'surface'") < manifestSource.indexOf("id: 'frosted-surface'") &&
+    manifestSource.indexOf("id: 'frosted-surface'") < manifestSource.indexOf("id: 'liquid-glass'") &&
+    manifestSource.indexOf("id: 'liquid-glass'") < manifestSource.indexOf("id: 'popup-surface'"),
+  'The core material page must lead its related surface components in functional order.',
 )
 
 for (const snippet of [

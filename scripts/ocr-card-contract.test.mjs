@@ -48,7 +48,7 @@ assert.ok(
     manifest.includes("exportName: 'OcrCard'") &&
     manifest.includes("registryName: 'ocr-card'") &&
     manifest.includes("packageExport: './components/ocr-card'") &&
-    manifest.includes("group: 'media-ocr'") &&
+    manifest.includes("packageName: 'weimo-ui-card'") &&
     manifest.includes('registry: true'),
   'Component manifest must list OcrCard through the merged OCR page.',
 )

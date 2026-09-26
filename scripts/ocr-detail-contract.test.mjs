@@ -65,7 +65,7 @@ assert.ok(
     manifest.includes("name: 'OcrDetail'") &&
     manifest.includes("registryName: 'ocr-detail'") &&
     manifest.includes("packageExport: './components/ocr-detail'") &&
-    manifest.includes("group: 'media-ocr'") &&
+    manifest.includes("packageName: 'weimo-ui-card'") &&
     manifest.includes('docs: false'),
   'Component manifest must list OcrDetail as a public registry-backed media/OCR component.',
 )

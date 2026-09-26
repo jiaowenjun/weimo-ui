@@ -145,10 +145,10 @@ assert.deepEqual(rootStyleItem, styleRegistry, 'registry.json style item must ma
 
 assert.ok(
   manifestSource.includes("id: 'text-tokens'") &&
-    manifestSource.includes("name: '文字'") &&
+    manifestSource.includes("name: '文字样式'") &&
     manifestSource.includes("registryName: 'font-size'") &&
     manifestSource.includes("packageExport: './components/font-size'") &&
-    manifestSource.includes("group: 'token-style'"),
+    manifestSource.includes("packageName: 'weimo-ui-core'"),
   'component manifest must list the 文字 page as a public registry-backed token utility.',
 )
 assert.ok(

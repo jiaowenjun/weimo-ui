@@ -86,7 +86,7 @@ assert.ok(
     manifestSource.includes("name: '按压反馈色'") &&
     manifestSource.includes("registryName: 'pressable'") &&
     manifestSource.includes("packageExport: './components/pressable'") &&
-    manifestSource.includes("group: 'token-style'") &&
+    manifestSource.includes("packageName: 'weimo-ui-core'") &&
     /id: 'pressable',[\s\S]*?docs: false,/.test(manifestSource),
   'component manifest must keep Pressable public while hiding its merged docs page.',
 )

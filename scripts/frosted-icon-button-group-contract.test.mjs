@@ -62,7 +62,7 @@ for (const snippet of [
   "name: 'FrostedIconButtonGroup'",
   "registryName: 'frosted-icon-button-group'",
   "packageExport: './components/frosted-icon-button-group'",
-  "group: 'controls-overlays'",
+  "packageName: 'weimo-ui-core'",
   'docs: false',
   'registry: true',
 ]) {

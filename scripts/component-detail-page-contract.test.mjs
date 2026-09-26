@@ -80,6 +80,7 @@ const imageViewDefinitionSource = readProjectFile('packages/weimo-ui-site/src/do
 const buttonDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/button.tsx')
 const borderTokensDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/border-tokens.tsx')
 const componentDefinitionsSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/tagged-card.tsx') +
+  readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/card-tool-bar.tsx') +
   mdRenderDefinitionSource +
   imageViewDefinitionSource +
   readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/surface.tsx') +
@@ -92,6 +93,7 @@ const componentDefinitionsSource = readProjectFile('packages/weimo-ui-site/src/d
   readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/page-layout.tsx') +
   readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/action-dialog.tsx') +
   readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/capsule.tsx') +
+  readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/chip-button.tsx') +
   mdRenderDefinitionSource
 const css = readProjectFile('packages/weimo-ui-site/src/App.css')
 const iconPreviewRowBlock = blockFor(css, '.icon-preview__row')
@@ -200,6 +202,8 @@ for (const snippet of [
   "id: 'action-dialog'",
   "id: 'tag'",
   "id: 'capsule'",
+  "id: 'chip-button'",
+  "id: 'card-tool-bar'",
   "id: 'image'",
   "id: 'markdown'",
   "id: 'button'",

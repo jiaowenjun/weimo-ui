@@ -387,7 +387,7 @@ assert.deepEqual(rootStyleItem, styleRegistry, 'Root registry style item must ma
 
 assert.ok(
   manifestSource.includes("id: 'border-tokens'") &&
-    manifestSource.includes("name: '边框'") &&
+    manifestSource.includes("name: '边框样式'") &&
     manifestSource.includes("registryName: 'border-color'") &&
     manifestSource.includes("packageExport: './components/border-color'"),
   'component manifest must list BorderColor as a public registry-backed utility.',

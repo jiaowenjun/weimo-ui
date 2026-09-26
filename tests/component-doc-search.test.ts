@@ -8,6 +8,12 @@ function resultIds(query: string) {
 }
 
 describe('component docs search', () => {
+  it('finds functional pages by workspace package', () => {
+    expect(resultIds('weimo-ui-tagtree')).toEqual(['tag', 'chip-button'])
+    expect(resultIds('weimo-ui-image')).toEqual(['image'])
+    expect(resultIds('weimo-ui-card')).toEqual(['tagged-card', 'ocr'])
+  })
+
   it('finds localized token pages by stable English identifiers', () => {
     expect(resultIds('BgColor')).toContain('background-tokens')
     expect(resultIds('text-color')).toContain('text-tokens')

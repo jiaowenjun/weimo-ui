@@ -177,7 +177,7 @@ assert.ok(
     manifestSource.includes("name: '按钮'") &&
     manifestSource.includes("registryName: 'text-button'") &&
     manifestSource.includes("packageExport: './components/text-button'") &&
-    manifestSource.includes("group: 'controls-overlays'"),
+    manifestSource.includes("packageName: 'weimo-ui-core'"),
   'TextButton must stay listed as a public controls component through the merged Button page.',
 )
 assert.ok(

@@ -41,7 +41,7 @@ for (const [relativePath, labels] of [
   assertTextButtonDocsControl(relativePath, labels)
 }
 
-const cardToolBarSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/tagged-card.tsx')
+const cardToolBarSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/card-tool-bar.tsx')
 
 assert.ok(
   cardToolBarSource.includes("import { TextButton } from 'weimo-ui-core/components/text-button'"),

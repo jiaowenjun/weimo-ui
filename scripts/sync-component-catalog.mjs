@@ -102,12 +102,17 @@ function renderDefinitionsIndex(componentManifest) {
   ].join('\n')
 }
 
-function validateManifest(componentGroups, componentManifest, packageJson) {
-  if (!Array.isArray(componentGroups) || !Array.isArray(componentManifest)) {
-    throw new Error('components-manifest.ts must export componentGroups and componentManifest arrays.')
+function validateManifest(componentPackages, componentManifest, packageJson) {
+  if (!Array.isArray(componentPackages) || !Array.isArray(componentManifest)) {
+    throw new Error('components-manifest.ts must export componentPackages and componentManifest arrays.')
   }
 
-  const groupIds = new Set(componentGroups.map((group) => group.id))
+  const packageNames = new Set(componentPackages.map((packageItem) => packageItem.id))
+  const pagesById = new Map(
+    componentManifest
+      .filter((item) => item.docs)
+      .map((item) => [item.id, item]),
+  )
   const componentIds = new Set()
   const registryNames = new Set()
 
@@ -118,14 +123,27 @@ function validateManifest(componentGroups, componentManifest, packageJson) {
     if (registryNames.has(item.registryName)) {
       throw new Error(`Duplicate component registry name: ${item.registryName}`)
     }
-    if (!groupIds.has(item.group)) {
-      throw new Error(`${item.id} uses unknown component group ${item.group}.`)
+    if (!packageNames.has(item.packageName)) {
+      throw new Error(`${item.id} uses unknown component package ${item.packageName}.`)
     }
     if (typeof item.docs !== 'boolean' || item.registry !== true) {
       throw new Error(`${item.id} must declare docs visibility and remain registry-backed.`)
     }
     if (!packageJson.exports?.[item.packageExport]) {
       throw new Error(`${item.id} package export ${item.packageExport} must exist.`)
+    }
+    const page = pagesById.get(item.page)
+
+    if (!page) {
+      throw new Error(`${item.id} uses unknown docs page ${item.page}.`)
+    }
+    if (page.packageName !== item.packageName) {
+      throw new Error(
+        `${item.id} cannot use ${page.packageName} page ${item.page} from ${item.packageName}.`,
+      )
+    }
+    if (item.docs && item.page !== item.id) {
+      throw new Error(`${item.id} docs page must reference itself.`)
     }
 
     componentIds.add(item.id)
@@ -199,10 +217,10 @@ function renderRootRegistry(registryConfig, registryItems) {
 }
 
 async function generatedArtifacts() {
-  const { componentGroups, componentManifest } = await loadComponentManifest()
+  const { componentPackages, componentManifest } = await loadComponentManifest()
   const packageJson = readProjectJson('package.json')
   const publicRegistryNames = validateManifest(
-    componentGroups,
+    componentPackages,
     componentManifest,
     packageJson,
   )

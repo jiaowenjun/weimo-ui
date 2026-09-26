@@ -309,7 +309,7 @@ for (const snippet of [
   "name: 'FrostedSurface'",
   "registryName: 'frosted-surface'",
   "packageExport: './components/frosted-surface'",
-  "group: 'surface-material'",
+  "packageName: 'weimo-ui-core'",
   'docs: false',
   'registry: true',
 ]) {

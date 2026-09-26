@@ -2,10 +2,10 @@ import type { ReactNode } from 'react'
 
 import { componentDefinitionsById } from './component-definitions'
 import {
-  componentGroups,
+  componentPackages,
   componentManifest,
-  type ComponentGroupId,
   type ComponentId,
+  type ComponentPackageName,
 } from './components-manifest'
 
 export type ComponentPreviewContext = {
@@ -16,7 +16,7 @@ export type ComponentDoc = {
   id: ComponentId
   name: string
   exportName: string
-  group: ComponentGroupId
+  packageName: ComponentPackageName
   registryName: string
   packageExport: string
   searchAliases: readonly string[]
@@ -37,8 +37,8 @@ export type ComponentDefinition = Pick<
   searchAliases?: readonly string[]
 }
 
-export type ComponentDocGroup = {
-  id: ComponentGroupId
+export type ComponentDocPackage = {
+  id: ComponentPackageName
   title: string
   items: ComponentDoc[]
 }
@@ -52,14 +52,28 @@ export const componentDocs: ComponentDoc[] = componentManifest
       throw new Error(`Missing component definition for ${item.id}`)
     }
 
+    const pageComponents = componentManifest.filter(
+      (component) => component.page === item.id,
+    )
+
     return {
       id: item.id,
       name: item.name,
       exportName: ('exportName' in item ? item.exportName : undefined) ?? item.name,
-      group: item.group,
+      packageName: item.packageName,
       registryName: item.registryName,
       packageExport: item.packageExport,
-      searchAliases: definition.searchAliases ?? [],
+      searchAliases: [
+        item.packageName,
+        ...(definition.searchAliases ?? []),
+        ...pageComponents.flatMap((component) => [
+          component.id,
+          component.name,
+          component.registryName,
+          component.packageExport,
+          ...('exportName' in component ? [component.exportName] : []),
+        ]),
+      ],
       summary: definition.summary,
       status: definition.status,
       frame: definition.frame,
@@ -67,10 +81,10 @@ export const componentDocs: ComponentDoc[] = componentManifest
     }
   })
 
-export const componentDocGroups: ComponentDocGroup[] = componentGroups
-  .map((group) => ({
-    id: group.id,
-    title: group.title,
-    items: componentDocs.filter((doc) => doc.group === group.id),
+export const componentDocPackages: ComponentDocPackage[] = componentPackages
+  .map((packageItem) => ({
+    id: packageItem.id,
+    title: packageItem.title,
+    items: componentDocs.filter((doc) => doc.packageName === packageItem.id),
   }))
-  .filter((group) => group.items.length > 0)
+  .filter((packageItem) => packageItem.items.length > 0)

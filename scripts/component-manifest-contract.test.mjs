@@ -37,7 +37,7 @@ execFileSync(process.execPath, ['scripts/sync-component-catalog.mjs', '--check']
   stdio: 'pipe',
 })
 
-const { componentGroups, componentManifest } = await loadTsModule(
+const { componentManifest, componentPackages } = await loadTsModule(
   'packages/weimo-ui-site/src/docs/components-manifest.ts',
 )
 const componentDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/component-docs.tsx')
@@ -45,42 +45,56 @@ const packageJson = JSON.parse(readProjectFile('package.json'))
 
 assert.ok(Array.isArray(componentManifest), 'componentManifest must export an array.')
 assert.ok(componentManifest.length > 0, 'componentManifest must not be empty.')
-assert.ok(Array.isArray(componentGroups), 'componentGroups must export an array.')
+assert.ok(Array.isArray(componentPackages), 'componentPackages must export an array.')
 assert.deepEqual(
-  componentGroups.map((group) => [group.id, group.title]),
+  componentPackages.map((packageItem) => [packageItem.id, packageItem.title]),
   [
-    ['token-style', 'Token / 样式'],
-    ['surface-material', 'Surface / 材质'],
-    ['controls-overlays', '控件 / 弹层'],
-    ['layout-bars', '布局 / 栏位'],
-    ['tags-navigation', '标签 / 导航'],
-    ['card', '卡片'],
-    ['markdown', 'Markdown'],
-    ['media-ocr', '媒体 / OCR'],
-    ['data-visualization', '数据 / 可视化'],
+    ['weimo-ui-core', 'weimo-ui-core'],
+    ['weimo-ui-tagtree', 'weimo-ui-tagtree'],
+    ['weimo-ui-markdown', 'weimo-ui-markdown'],
+    ['weimo-ui-image', 'weimo-ui-image'],
+    ['weimo-ui-stats', 'weimo-ui-stats'],
+    ['weimo-ui-card', 'weimo-ui-card'],
   ],
-  'componentGroups must define the docs grouping order.',
+  'componentPackages must define the docs package order.',
 )
 
-const expectedGroupIds = new Set(componentGroups.map((group) => group.id))
+const expectedPackageNames = new Set(componentPackages.map((packageItem) => packageItem.id))
 const componentIds = new Set()
 const packageExports = new Set()
 const registryNames = new Set()
+const pagesById = new Map(
+  componentManifest.filter((item) => item.docs).map((item) => [item.id, item]),
+)
 
-for (const groupId of expectedGroupIds) {
-  const groupNames = componentManifest
-    .filter((item) => item.group === groupId && item.docs)
-    .map((item) => item.name)
-  const sortedGroupNames = [...groupNames].sort((left, right) =>
-    left.localeCompare(right, 'en'),
-  )
-
-  assert.deepEqual(
-    groupNames,
-    sortedGroupNames,
-    `${groupId} docs components must be sorted by component name.`,
-  )
-}
+assert.deepEqual(
+  [...pagesById.keys()],
+  [
+    'text-tokens',
+    'background-tokens',
+    'border-tokens',
+    'surface',
+    'button',
+    'capsule',
+    'slider',
+    'menu',
+    'action-dialog',
+    'bar',
+    'page-layout',
+    'card-tool-bar',
+    'base-card',
+    'component-preview-card',
+    'tag',
+    'chip-button',
+    'markdown',
+    'md',
+    'image',
+    'stat',
+    'tagged-card',
+    'ocr',
+  ],
+  'docs pages must follow package and functional order.',
+)
 
 for (const item of componentManifest) {
   const definitionPath = `packages/weimo-ui-site/src/docs/component-definitions/${item.id}.tsx`
@@ -112,7 +126,20 @@ for (const item of componentManifest) {
   assert.equal(typeof item.name, 'string', `${item.id} must have a display name.`)
   assert.equal(typeof item.registryName, 'string', `${item.id} must have a registry name.`)
   assert.equal(typeof item.packageExport, 'string', `${item.id} must have a package export key.`)
-  assert.ok(expectedGroupIds.has(item.group), `${item.id} must use a known docs group.`)
+  assert.ok(
+    expectedPackageNames.has(item.packageName),
+    `${item.id} must use a known component package.`,
+  )
+  const page = pagesById.get(item.page)
+  assert.ok(page, `${item.id} must use a known docs page.`)
+  assert.equal(
+    page.packageName,
+    item.packageName,
+    `${item.id} and its page must belong to the same component package.`,
+  )
+  if (item.docs) {
+    assert.equal(item.page, item.id, `${item.id} docs page must reference itself.`)
+  }
   assert.equal(typeof item.docs, 'boolean', `${item.id} must declare docs visibility.`)
   assert.equal(item.registry, true, `${item.id} must remain available in the registry.`)
   assert.ok(
@@ -129,35 +156,33 @@ assert.deepEqual(
   componentManifest.filter((item) => !item.docs).map((item) => item.id),
   [
     'text-color',
-    'pressable',
-    'heat-color',
     'bg-blur',
+    'heat-color',
+    'pressable',
     'border-radius',
     'frosted-surface',
-    'popup-surface',
     'liquid-glass',
+    'popup-surface',
     'frosted-icon-button',
     'frosted-icon-button-group',
     'ghost-icon-button',
     'mode-button',
     'bottom-bar',
-    'card-tool-bar',
-    'card-top-bar',
     'top-bar',
-    'chip-button',
+    'card-top-bar',
     'tag-bread',
     'tag-picker',
     'tag-tree',
     'tag-tree-row',
-    'card-composer',
     'math-editor',
     'md-render',
     'md-view',
-    'canvas-transparency',
     'image-uploader',
+    'canvas-transparency',
+    'heatmap',
+    'card-composer',
     'ocr-composer',
     'ocr-detail',
-    'heatmap',
   ],
   'Merged token utilities, surface materials, and bar/button/chip/tag/card/image/OCR/stat variants must remain public without separate docs pages.',
 )
@@ -190,8 +215,8 @@ assert.ok(
 )
 assert.ok(
   componentDocsSource.includes('componentManifest') &&
-    componentDocsSource.includes('componentGroups') &&
-    componentDocsSource.includes('componentDocGroups') &&
+    componentDocsSource.includes('componentPackages') &&
+    componentDocsSource.includes('componentDocPackages') &&
     componentDocsSource.includes('componentDefinitionsById') &&
     !componentDocsSource.includes('buildInstallGuide'),
   'component-docs.tsx must assemble docs from the component catalog.',

@@ -6,14 +6,6 @@ import { fileURLToPath } from 'node:url'
 import ts from 'typescript'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
-const coreGroups = new Set([
-  'token-style',
-  'surface-material',
-  'controls-overlays',
-  'layout-bars',
-])
-const additionalCoreComponents = new Set(['base-card', 'component-preview-card'])
-
 function readProjectFile(relativePath) {
   const absolutePath = join(root, relativePath)
 
@@ -40,8 +32,8 @@ const { componentManifest } = await loadTsModule('packages/weimo-ui-site/src/doc
 const rootPackage = JSON.parse(readProjectFile('package.json'))
 const corePackage = JSON.parse(readProjectFile('packages/weimo-ui-core/package.json'))
 const workspace = readProjectFile('pnpm-workspace.yaml')
-const coreItems = componentManifest.filter((item) =>
-  coreGroups.has(item.group) || additionalCoreComponents.has(item.id),
+const coreItems = componentManifest.filter(
+  (item) => item.packageName === 'weimo-ui-core',
 )
 
 assert.equal(corePackage.name, 'weimo-ui-core')
@@ -70,12 +62,12 @@ for (const item of coreItems) {
   )
 }
 
-for (const item of componentManifest.filter((item) =>
-  !coreGroups.has(item.group) && !additionalCoreComponents.has(item.id),
+for (const item of componentManifest.filter(
+  (item) => item.packageName !== 'weimo-ui-core',
 )) {
   assert.ok(
     !corePackage.exports?.[item.packageExport],
-    `${item.packageExport} belongs to ${item.group}, not weimo-ui-core.`,
+    `${item.packageExport} belongs to ${item.packageName}, not weimo-ui-core.`,
   )
 }
 

@@ -355,7 +355,7 @@ assert.deepEqual(rootStyleItem, styleRegistry, 'Root registry style item must ma
 
 assert.ok(
   manifestSource.includes("id: 'background-tokens'") &&
-    manifestSource.includes("name: '背景'") &&
+    manifestSource.includes("name: '背景样式'") &&
     manifestSource.includes("registryName: 'bg-color'") &&
     manifestSource.includes("packageExport: './components/bg-color'"),
   'component manifest must list BgColor as a public registry-backed utility.',

@@ -36,6 +36,7 @@ const sidebarPreviewSource = readProjectFile(
 )
 const componentDefinitionSources = {
   'tagged-card': readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/tagged-card.tsx'),
+  'card-tool-bar': readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/card-tool-bar.tsx'),
   tag: [
     readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/tag.tsx'),
     readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx'),
@@ -53,6 +54,7 @@ const componentDefinitionSources = {
   bar: readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/bar.tsx'),
   'page-layout': readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/page-layout.tsx'),
   capsule: readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/capsule.tsx'),
+  'chip-button': readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/chip-button.tsx'),
 }
 const componentDefinitionsSource = [
   ...Object.values(componentDefinitionSources),
@@ -212,6 +214,8 @@ for (const componentId of [
   'surface',
   'bar',
   'page-layout',
+  'card-tool-bar',
+  'chip-button',
 ]) {
   assert.ok(
     componentDefinitionsIndexSource.includes(`from './${componentId}'`),
@@ -607,6 +611,11 @@ assert.ok(
 assert.ok(
   existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/capsule.tsx')),
   'Merged Capsule docs definition must exist.',
+)
+assert.ok(
+  existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/chip-button.tsx')) &&
+    existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/card-tool-bar.tsx')),
+  'Package-specific ChipButton and card bar docs definitions must exist.',
 )
 
 for (const [source, label] of [

@@ -37,7 +37,7 @@ function assertNotIncludes(source, snippet, message) {
 const componentSource = readProjectFile('packages/weimo-ui-core/src/components/card-tool-bar.tsx')
 const componentCss = readProjectFile('packages/weimo-ui-core/src/components/card-tool-bar.css')
 const docsDefinitionSource = readProjectFile(
-  'packages/weimo-ui-site/src/docs/component-definitions/tagged-card.tsx',
+  'packages/weimo-ui-site/src/docs/component-definitions/card-tool-bar.tsx',
 )
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
@@ -129,7 +129,7 @@ for (const snippet of [
   "import { Button } from 'weimo-ui-core/components/coss/button'",
   "import { Toolbar, ToolbarButton, ToolbarGroup } from 'weimo-ui-core/components/coss/toolbar'",
   "import { TextButton } from 'weimo-ui-core/components/text-button'",
-  "id: 'tagged-card'",
+  "id: 'card-tool-bar'",
   "const [saveDisabled, setSaveDisabled] = useState(false)",
   '<CardToolBar',
   'toolbarSlot={',
@@ -143,7 +143,7 @@ for (const snippet of [
   '<TextButton',
   '禁用保存',
   '启用保存',
-  'preview: () => <TaggedCardDemo />',
+  'preview: () => <CardBarDemo />',
   '<CardToolBarDemo />',
 ]) {
   assertIncludes(docsDefinitionSource, snippet, `CardToolBar docs must include ${snippet}.`)
@@ -151,21 +151,24 @@ for (const snippet of [
 
 assertIncludes(
   definitionsIndexSource,
-  "import { barDefinition } from './bar'",
-  'Bar definition must be imported by component-definitions/index.ts.',
+  "import { cardToolBarDefinition } from './card-tool-bar'",
+  'CardToolBar definition must be imported by component-definitions/index.ts.',
 )
 assertIncludes(
   definitionsIndexSource,
-  'bar: barDefinition',
-  'Bar definition must be registered by component-definitions/index.ts.',
+  "'card-tool-bar': cardToolBarDefinition",
+  'CardToolBar definition must be registered by component-definitions/index.ts.',
 )
 
 for (const snippet of [
   "id: 'card-tool-bar'",
-  "name: 'CardToolBar'",
+  "name: '卡片栏位'",
+  "exportName: 'CardToolBar'",
   "registryName: 'card-tool-bar'",
   "packageExport: './components/card-tool-bar'",
-  'docs: false',
+  "packageName: 'weimo-ui-core'",
+  "page: 'card-tool-bar'",
+  'docs: true',
   'registry: true',
 ]) {
   assertIncludes(manifestSource, snippet, `components manifest must include ${snippet}.`)

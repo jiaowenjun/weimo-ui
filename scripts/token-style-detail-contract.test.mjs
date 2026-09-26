@@ -62,13 +62,15 @@ for (const snippet of [
 }
 
 assert.ok(
-  manifestSource.includes("group: 'token-style'") &&
+  manifestSource.includes("packageName: 'weimo-ui-core'") &&
     manifestSource.includes("exportName: 'Md'"),
   'the manifest must keep token grouping for the style tokens while separating the Md display and export names.',
 )
 
 assert.ok(
-  componentDocsSource.includes('searchAliases: definition.searchAliases ?? []') &&
+  componentDocsSource.includes('const pageComponents = componentManifest.filter') &&
+    componentDocsSource.includes('item.packageName') &&
+    componentDocsSource.includes('...pageComponents.flatMap') &&
     searchSource.includes('doc.exportName') &&
     searchSource.includes('doc.registryName') &&
     searchSource.includes('doc.packageExport') &&
@@ -225,7 +227,7 @@ assert.ok(
     manifestSource.includes("registryName: 'component-preview-card'") &&
     manifestSource.includes("packageExport: './components/component-preview-card'") &&
     manifestSource.includes(
-      "packageExport: './components/component-preview-card',\n    group: 'card',\n    docs: true,",
+      "packageExport: './components/component-preview-card',\n    packageName: 'weimo-ui-core',\n    page: 'component-preview-card',\n    docs: true,",
     ),
   'ComponentPreviewCard must be listed in the 卡片 catalog as the preview card docs page.',
 )
@@ -286,7 +288,7 @@ for (const componentId of semanticTokenDefinitions) {
 }
 
 assert.ok(
-  docsShellSource.includes("const tokenPreview = selected?.group === 'token-style'") &&
+  docsShellSource.includes("['text-tokens', 'background-tokens', 'border-tokens'].includes(selected.id)") &&
     docsShellSource.includes("'app-shell__content app-shell__content--token-grid'") &&
     docsShellSource.includes('data-component-id={selected?.id}') &&
     detailPageSource.includes("if (selected.frame === 'plain')") &&
