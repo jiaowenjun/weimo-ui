@@ -462,6 +462,39 @@
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "type": "registry:ui",
       "dependencies": [],
+      "name": "frosted-surface",
+      "title": "Frosted Surface",
+      "description": "A glass material surface that samples nearby background styles and adapts foreground color.",
+      "categories": [
+        "layout",
+        "surface"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/frosted-surface.tsx",
+          "type": "registry:ui",
+          "target": "@ui/frosted-surface.tsx"
+        },
+        {
+          "path": "src/components/frosted-surface-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/frosted-surface-model.ts"
+        },
+        {
+          "path": "src/components/frosted-surface.css",
+          "type": "registry:ui",
+          "target": "@ui/frosted-surface.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [],
       "name": "popup-surface",
       "title": "Popup Surface",
       "description": "A raised popup material surface for modal and tooltip overlay bodies.",
@@ -552,39 +585,6 @@
           "path": "src/components/liquid-glass-react/LICENSE",
           "type": "registry:ui",
           "target": "@ui/liquid-glass-react/LICENSE"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "type": "registry:ui",
-      "dependencies": [],
-      "name": "frosted-surface",
-      "title": "Frosted Surface",
-      "description": "A glass material surface that samples nearby background styles and adapts foreground color.",
-      "categories": [
-        "layout",
-        "surface"
-      ],
-      "registryDependencies": [
-        "@weimo/style",
-        "@weimo/utils"
-      ],
-      "files": [
-        {
-          "path": "src/components/frosted-surface.tsx",
-          "type": "registry:ui",
-          "target": "@ui/frosted-surface.tsx"
-        },
-        {
-          "path": "src/components/frosted-surface-model.ts",
-          "type": "registry:ui",
-          "target": "@ui/frosted-surface-model.ts"
-        },
-        {
-          "path": "src/components/frosted-surface.css",
-          "type": "registry:ui",
-          "target": "@ui/frosted-surface.css"
         }
       ]
     },

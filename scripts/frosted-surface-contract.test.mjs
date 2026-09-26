@@ -295,12 +295,11 @@ assert.deepEqual(
 
 for (const snippet of [
   "id: 'frosted-surface'",
-  "name: '磨砂材质'",
-  "exportName: 'FrostedSurface'",
+  "name: 'FrostedSurface'",
   "registryName: 'frosted-surface'",
   "packageExport: './components/frosted-surface'",
   "group: 'surface-material'",
-  'docs: true',
+  'docs: false',
   'registry: true',
 ]) {
   assertIncludes(
@@ -343,7 +342,7 @@ for (const snippet of [
   "id: 'surface'",
   '静态卡片、亮度自适应磨砂玻璃层、液态玻璃与抬升浮层的材质总览',
   'function FrostedSurfacePreview()',
-  'const [bordered, setBordered] = useState(false)',
+  'const [bordered, setBordered] = useState(true)',
   'label="磨砂材质"',
   '<SurfaceBorderToggle bordered={bordered} onBorderedChange={setBordered} />',
   '<FrostedSurface bordered={bordered} className="frosted-surface-preview__tile">',
@@ -366,63 +365,6 @@ assertOmits(
   frostedSurfaceDefinitionSource,
   'frosted-surface-preview__fixed',
   'FrostedSurface tile must sit directly in the striped canvas instead of the removed fixed overlay wrapper.',
-)
-
-// 磨砂材质演示页(独立 docs 页):只展示有边框变体,探针包住瓦片交给采样 hook,
-// 标题栏实时显示材质感知到的背景相对亮度——读数与组件 tone 来自同一采样管线。
-const frostedSurfaceDocsPageSource = readProjectFile(
-  'src/docs/component-definitions/frosted-surface.tsx',
-)
-
-for (const snippet of [
-  "import {\n  FrostedSurface,\n  useFrostedSurfaceBackgroundToneRef,\n} from '../../components/frosted-surface'",
-  "import { interpolateFrostedBorderColor } from '../../components/frosted-surface-model'",
-  "import { textColorToneMap } from '../../components/text-color'",
-  "from '../glass-preview-card'",
-  "id: 'frosted-surface'",
-  'useFrostedSurfaceBackgroundToneRef<HTMLDivElement>(true)',
-  'backgroundLuminance, backgroundTone, setElementRef',
-  'textColorToneMap.primary.value[backgroundTone]',
-  'textColorToneMap.secondary.value[backgroundTone]',
-  'const [sliderGray, setSliderGray] = useState<number | null>(null)',
-  'onGrayChange={setSliderGray}',
-  'const borderColor = interpolateFrostedBorderColor(backgroundLuminance)',
-  '<GlassPreviewCard',
-  'label="磨砂材质"',
-  'className="frosted-surface-docs__reading"',
-  'className="frosted-surface-docs__swatch"',
-  '滑块',
-  '边框',
-  '感知亮度',
-  '(backgroundLuminance * 100).toFixed(1)',
-  'function luminanceToSrgbGrayChannel(luminance: number)',
-  '1.055 * luminance ** (1 / 2.4) - 0.055',
-  'Math.round(luminanceToSrgbGrayChannel(backgroundLuminance) * 255)',
-  'RGB ${perceivedRgbGray}',
-  'className="frosted-surface-docs__probe"',
-  'borderColor: borderColor ?? undefined',
-  'color: foregroundColor ?? undefined',
-  'style={secondaryColor ? { color: secondaryColor } : undefined}',
-  "<FrostedSurface\n          bordered\n          className=\"frosted-surface-preview__tile\"",
-]) {
-  assertIncludes(
-    frostedSurfaceDocsPageSource,
-    snippet,
-    `FrostedSurface docs page must include ${snippet}.`,
-  )
-}
-assertOmits(
-  frostedSurfaceDocsPageSource,
-  'SurfaceBorderToggle',
-  'FrostedSurface docs page must show the bordered variant only; the border toggle stays on the material overview page.',
-)
-
-// 本页瓦片文字随感知 tone 取标准文字 token 的对应主题值,经 inline style 注入
-// ( textColorToneMap 镜像链是值来源);不落 CSS 覆盖,避免裸值镜像或跨主题取值。
-assertOmits(
-  appCss,
-  '.frosted-surface-docs__probe .frosted-surface {',
-  'FrostedSurface docs page text color must come from the inline tone-mapped token value, not a CSS override.',
 )
 
 // 滑块 + 主题归位 + 条纹背景的玻璃卡外壳抽到 GlassPreviewCard 共享组件

@@ -126,6 +126,15 @@ export const componentManifest = [
     registry: true,
   },
   {
+    id: 'frosted-surface',
+    name: 'FrostedSurface',
+    registryName: 'frosted-surface',
+    packageExport: './components/frosted-surface',
+    group: 'surface-material',
+    docs: false,
+    registry: true,
+  },
+  {
     id: 'popup-surface',
     name: 'PopupSurface',
     registryName: 'popup-surface',
@@ -151,16 +160,6 @@ export const componentManifest = [
     packageExport: './components/liquid-glass',
     group: 'surface-material',
     docs: false,
-    registry: true,
-  },
-  {
-    id: 'frosted-surface',
-    name: '磨砂材质',
-    exportName: 'FrostedSurface',
-    registryName: 'frosted-surface',
-    packageExport: './components/frosted-surface',
-    group: 'surface-material',
-    docs: true,
     registry: true,
   },
   {

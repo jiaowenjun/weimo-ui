@@ -24,7 +24,7 @@ function CardSurfacePreview() {
 }
 
 function FrostedSurfacePreview() {
-  const [bordered, setBordered] = useState(false)
+  const [bordered, setBordered] = useState(true)
 
   return (
     <GlassPreviewCard
