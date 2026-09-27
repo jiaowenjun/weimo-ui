@@ -58,9 +58,6 @@ function TagPickerDemo() {
               <CapsuleButton key={`new-${index}`} onClick={() => openTagPicker(index)} prefix={<Plus aria-hidden="true" />} state="frosted">标签</CapsuleButton>
             ))}
           </div>
-          <p className="tag-picker-preview__result">
-            {selectedTags.length > 0 ? `已选：${selectedTags.join('、')}` : '尚未选择标签'}
-          </p>
         </div>
         <TagPicker
           initialDraft={activeTag}
