@@ -34,19 +34,19 @@ const packageJson = readJson('package.json')
 const source = readProjectFile('packages/weimo-ui-card/src/components/ocr-composer.tsx')
 const css = readProjectFile('packages/weimo-ui-card/src/components/ocr-composer.css')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
-const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/ocr.tsx')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
+const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/ocr.tsx')
 const registry = readJson('registry.json')
 const standaloneRegistryItem = readJson('registry/ocr-composer.json')
 const rootRegistryItem = registry.items.find((item) => item.name === 'ocr-composer')
 
 assert.ok(
-  packageJson.scripts?.test?.includes('node scripts/ocr-composer-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package test script must run the OcrComposer contract.',
 )
 assert.equal(
   packageJson.exports?.['./components/ocr-composer'],
-  './src/components/ocr-composer.tsx',
+  './packages/weimo-ui-card/src/components/ocr-composer.tsx',
   'package.json must expose ./components/ocr-composer.',
 )
 
@@ -61,7 +61,7 @@ for (const snippet of [
   "import { ImageUploader, type ImageUploaderActionApi, type ImageUploaderProps } from 'weimo-ui-image/components/image-uploader'",
   "import { TagBar } from 'weimo-ui-tagtree/components/tag-bar'",
   "import { getCardSurfaceClassName } from 'weimo-ui-core/components/card-surface'",
-  "import { cn } from 'weimo-ui-core/components/lib/utils'",
+  "import { cn } from 'weimo-ui-core/lib/utils'",
   "import './ocr-composer.css'",
   'export type OcrComposerDraft = {',
   'file: File',
@@ -225,7 +225,7 @@ for (const snippet of [
 }
 
 assert.ok(
-  definitionsIndexSource.includes("import { ocrDefinition } from './ocr'") &&
+  definitionsIndexSource.includes("import { ocrDefinition } from './packages/weimo-ui-card/ocr'") &&
     definitionsIndexSource.includes('ocr: ocrDefinition') &&
     !definitionsIndexSource.includes('ocr-composer'),
   'OcrComposer preview must be wired through the merged OCR definition.',

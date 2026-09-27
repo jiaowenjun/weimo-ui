@@ -3,7 +3,7 @@ import type { ChangeEvent, DragEvent, KeyboardEvent, MouseEvent } from 'react'
 import type { ComponentPropsWithoutRef } from 'react'
 
 import { ImageView } from './image-view'
-import { cn } from 'weimo-ui-core/components/lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 
 import './image-uploader.css'
 

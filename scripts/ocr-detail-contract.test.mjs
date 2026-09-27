@@ -42,8 +42,8 @@ function sourceBetween(source, startSnippet, endSnippet) {
 
 const packageJson = readJson('package.json')
 const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
-const docsDefinition = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/ocr.tsx')
+const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
+const docsDefinition = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/ocr.tsx')
 const ocrDetailSource = readProjectFile('packages/weimo-ui-card/src/components/ocr-detail.tsx')
 const ocrDetailCss = readProjectFile('packages/weimo-ui-card/src/components/ocr-detail.css')
 const rootRegistry = readJson('registry.json')
@@ -52,11 +52,11 @@ const registryItem = rootRegistry.items.find((item) => item.name === 'ocr-detail
 
 assert.equal(
   packageJson.exports?.['./components/ocr-detail'],
-  './src/components/ocr-detail.tsx',
+  './packages/weimo-ui-card/src/components/ocr-detail.tsx',
   'package.json must export OcrDetail.',
 )
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/ocr-detail-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run ocr-detail-contract.test.mjs.',
 )
 
@@ -70,7 +70,7 @@ assert.ok(
   'Component manifest must list OcrDetail as a public registry-backed media/OCR component.',
 )
 assert.ok(
-  definitionsIndex.includes("import { ocrDefinition } from './ocr'") &&
+  definitionsIndex.includes("import { ocrDefinition } from './packages/weimo-ui-card/ocr'") &&
     definitionsIndex.includes('ocr: ocrDefinition') &&
     !definitionsIndex.includes('ocr-detail'),
   'OcrDetail docs definition must be wired into component-definitions/index.ts.',
@@ -81,7 +81,7 @@ for (const snippet of [
   "import { ActionDialog, type ActionDialogProps } from 'weimo-ui-core/components/action-dialog'",
   "import { Card, type CardDraft, type CardProps } from './card'",
   "import { ImageView, ImageViewDisplayModeMenu, type ImageViewDisplayMode } from 'weimo-ui-image/components/image-view'",
-  "import { cn } from 'weimo-ui-core/components/lib/utils'",
+  "import { cn } from 'weimo-ui-core/lib/utils'",
   "import './ocr-detail.css'",
   'export type OcrDetailDraft = {',
   'title: string',

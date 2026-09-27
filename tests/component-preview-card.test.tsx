@@ -1,7 +1,7 @@
 import { render, screen, within } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 
-import { ComponentPreviewCard } from '../src/components/component-preview-card'
+import { ComponentPreviewCard } from '../packages/weimo-ui-core/src/components/component-preview-card'
 
 describe('ComponentPreviewCard', () => {
   it('renders token identity and preview content on the BaseCard shell', () => {

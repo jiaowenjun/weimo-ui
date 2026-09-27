@@ -1,7 +1,7 @@
 import type { ComponentPropsWithoutRef, MouseEvent } from 'react'
 
 import { getFrostedSurfaceClassName } from 'weimo-ui-core/components/frosted-surface-model'
-import { cn } from 'weimo-ui-core/components/lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 
 import 'weimo-ui-core/styles/frosted-surface.css'
 import './input-group.css'

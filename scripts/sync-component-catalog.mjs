@@ -1,5 +1,5 @@
 import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
-import { join, relative } from 'node:path'
+import { dirname, join, relative } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import ts from 'typescript'
@@ -26,10 +26,15 @@ function readProjectJson(relativePath) {
   return JSON.parse(readProjectFile(relativePath))
 }
 
-async function loadComponentManifest() {
-  const relativePath = 'packages/weimo-ui-site/src/docs/components-manifest.ts'
+const moduleUrlCache = new Map()
+
+async function buildTypeScriptModuleUrl(relativePath) {
+  const cached = moduleUrlCache.get(relativePath)
+
+  if (cached) return cached
+
   const source = readProjectFile(relativePath)
-  const transpiled = ts.transpileModule(source, {
+  let transpiled = ts.transpileModule(source, {
     compilerOptions: {
       module: ts.ModuleKind.ES2022,
       target: ts.ScriptTarget.ES2022,
@@ -37,7 +42,49 @@ async function loadComponentManifest() {
     },
     fileName: relativePath,
   }).outputText
+  const relativeImports = [
+    ...transpiled.matchAll(/from\s+(['"])(\.\.?\/[^'"]+)\1/gmu),
+  ]
+
+  for (const [, quote, specifier] of relativeImports) {
+    const dependencyPath = resolveTypeScriptDependency(relativePath, specifier)
+    const dependencyUrl = await buildTypeScriptModuleUrl(dependencyPath)
+
+    transpiled = transpiled.replaceAll(
+      `from ${quote}${specifier}${quote}`,
+      `from ${JSON.stringify(dependencyUrl)}`,
+    )
+  }
+
   const url = `data:text/javascript;charset=utf-8,${encodeURIComponent(transpiled)}`
+
+  moduleUrlCache.set(relativePath, url)
+
+  return url
+}
+
+function resolveTypeScriptDependency(relativePath, specifier) {
+  const basePath = join(dirname(relativePath), specifier)
+  const candidates = [
+    basePath,
+    `${basePath}.ts`,
+    `${basePath}.tsx`,
+    `${basePath}.js`,
+    join(basePath, 'index.ts'),
+    join(basePath, 'index.tsx'),
+  ]
+  const resolved = candidates.find((candidate) => existsSync(join(root, candidate)))
+
+  if (!resolved) {
+    throw new Error(`Cannot resolve ${specifier} imported by ${relativePath}.`)
+  }
+
+  return resolved
+}
+
+async function loadComponentManifest() {
+  const relativePath = 'packages/weimo-ui-site/src/docs/catalog/manifest.ts'
+  const url = await buildTypeScriptModuleUrl(relativePath)
 
   return import(url)
 }
@@ -46,8 +93,12 @@ function propertyKey(id) {
   return /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(id) ? id : `'${id}'`
 }
 
-function definitionExportFor(id) {
-  const relativePath = `packages/weimo-ui-site/src/docs/component-definitions/${id}.tsx`
+function definitionPathFor(item) {
+  return `packages/weimo-ui-site/src/docs/catalog/packages/${item.packageName}/${item.id}.tsx`
+}
+
+function definitionExportFor(item) {
+  const relativePath = definitionPathFor(item)
   const source = readProjectFile(relativePath)
   const exports = [...source.matchAll(/^export const ([A-Za-z_$][A-Za-z0-9_$]*Definition)\s*=/gmu)]
 
@@ -58,19 +109,24 @@ function definitionExportFor(id) {
   return exports[0][1]
 }
 
-function validateDefinitionFiles(componentManifest) {
+function validateDefinitionFiles(componentPackages, componentManifest) {
   const componentIds = new Set(componentManifest.map((item) => item.id))
-  const definitionFiles = readdirSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions'))
-    .filter((file) => file.endsWith('.tsx'))
-    .sort()
 
-  for (const file of definitionFiles) {
-    const source = readProjectFile(`packages/weimo-ui-site/src/docs/component-definitions/${file}`)
-    const exportsDefinition =
-      /^export const [A-Za-z_$][A-Za-z0-9_$]*Definition\s*=/mu.test(source)
+  for (const packageItem of componentPackages) {
+    const definitionsDirectory =
+      `packages/weimo-ui-site/src/docs/catalog/packages/${packageItem.id}`
+    const definitionFiles = readdirSync(join(root, definitionsDirectory))
+      .filter((file) => file.endsWith('.tsx'))
+      .sort()
 
-    if (exportsDefinition && !componentIds.has(file.slice(0, -'.tsx'.length))) {
-      throw new Error(`${file} exports a component definition but is missing from componentManifest.`)
+    for (const file of definitionFiles) {
+      const source = readProjectFile(`${definitionsDirectory}/${file}`)
+      const exportsDefinition =
+        /^export const [A-Za-z_$][A-Za-z0-9_$]*Definition\s*=/mu.test(source)
+
+      if (exportsDefinition && !componentIds.has(file.slice(0, -'.tsx'.length))) {
+        throw new Error(`${definitionsDirectory}/${file} is missing from the component catalog.`)
+      }
     }
   }
 }
@@ -79,11 +135,14 @@ function renderDefinitionsIndex(componentManifest) {
   const definitions = componentManifest
     .filter((item) => item.docs)
     .map((item) => ({
-      exportName: definitionExportFor(item.id),
+      exportName: definitionExportFor(item),
       id: item.id,
+      packageName: item.packageName,
     }))
   const imports = definitions
-    .map(({ exportName, id }) => `import { ${exportName} } from './${id}'`)
+    .map(({ exportName, id, packageName }) =>
+      `import { ${exportName} } from './packages/${packageName}/${id}'`,
+    )
     .join('\n')
   const entries = definitions
     .map(({ exportName, id }) => `  ${propertyKey(id)}: ${exportName},`)
@@ -92,8 +151,8 @@ function renderDefinitionsIndex(componentManifest) {
   return [
     '// Generated by scripts/sync-component-catalog.mjs. Do not edit directly.',
     imports,
-    "import type { ComponentId } from '../components-manifest'",
-    "import type { ComponentDefinition } from '../component-docs'",
+    "import type { ComponentId } from './manifest'",
+    "import type { ComponentDefinition } from './types'",
     '',
     'export const componentDefinitionsById = {',
     entries,
@@ -102,7 +161,62 @@ function renderDefinitionsIndex(componentManifest) {
   ].join('\n')
 }
 
-function validateManifest(componentPackages, componentManifest, packageJson) {
+function renderLegacyManifest(componentPackages, componentManifest) {
+  const packageLines = componentPackages
+    .map(({ id, title }) => `  { id: '${id}', title: '${title}' },`)
+    .join('\n')
+  const itemLines = componentManifest
+    .map((item) => {
+      const exportName = item.exportName ? `\n    exportName: '${item.exportName}',` : ''
+
+      return [
+        '  {',
+        `    id: '${item.id}',`,
+        `    name: '${item.name}',${exportName}`,
+        `    registryName: '${item.registryName}',`,
+        `    packageExport: '${item.packageExport}',`,
+        `    packageName: '${item.packageName}',`,
+        `    page: '${item.page}',`,
+        `    docs: ${item.docs},`,
+        '    registry: true,',
+        '  },',
+      ].join('\n')
+    })
+    .join('\n')
+
+  return [
+    '// Generated compatibility catalog. Edit catalog/packages instead.',
+    'export const componentPackages = [',
+    packageLines,
+    '] as const',
+    '',
+    "export type ComponentPackageName = (typeof componentPackages)[number]['id']",
+    '',
+    'export type ComponentManifestItem = {',
+    '  id: string',
+    '  name: string',
+    '  exportName?: string',
+    '  registryName: string',
+    '  packageExport: string',
+    '  packageName: ComponentPackageName',
+    '  page: string',
+    '  docs: boolean',
+    '  registry: true',
+    '}',
+    '',
+    'export const componentManifest = [',
+    itemLines,
+    '] as const satisfies ComponentManifestItem[]',
+    '',
+    'export type ComponentId = Extract<',
+    '  (typeof componentManifest)[number],',
+    '  { readonly docs: true }',
+    ">['id']",
+    '',
+  ].join('\n')
+}
+
+function validateManifest(componentPackages, componentManifest, packageJsonByName) {
   if (!Array.isArray(componentPackages) || !Array.isArray(componentManifest)) {
     throw new Error('components-manifest.ts must export componentPackages and componentManifest arrays.')
   }
@@ -129,7 +243,9 @@ function validateManifest(componentPackages, componentManifest, packageJson) {
     if (typeof item.docs !== 'boolean' || item.registry !== true) {
       throw new Error(`${item.id} must declare docs visibility and remain registry-backed.`)
     }
-    if (!packageJson.exports?.[item.packageExport]) {
+    const packageJson = packageJsonByName.get(item.packageName)
+
+    if (!packageJson?.exports?.[item.packageExport]) {
       throw new Error(`${item.id} package export ${item.packageExport} must exist.`)
     }
     const page = pagesById.get(item.page)
@@ -218,19 +334,26 @@ function renderRootRegistry(registryConfig, registryItems) {
 
 async function generatedArtifacts() {
   const { componentPackages, componentManifest } = await loadComponentManifest()
-  const packageJson = readProjectJson('package.json')
+  const packageJsonByName = new Map(componentPackages.map((packageItem) => [
+    packageItem.id,
+    readProjectJson(`packages/${packageItem.id}/package.json`),
+  ]))
   const publicRegistryNames = validateManifest(
     componentPackages,
     componentManifest,
-    packageJson,
+    packageJsonByName,
   )
-  validateDefinitionFiles(componentManifest)
+  validateDefinitionFiles(componentPackages, componentManifest)
   const registryItems = loadRegistryItems(componentManifest, publicRegistryNames)
   const registryConfig = readProjectJson('registry.config.json')
 
   return new Map([
     [
-      'packages/weimo-ui-site/src/docs/component-definitions/index.ts',
+      'packages/weimo-ui-site/src/docs/components-manifest.ts',
+      renderLegacyManifest(componentPackages, componentManifest),
+    ],
+    [
+      'packages/weimo-ui-site/src/docs/catalog/definitions.ts',
       renderDefinitionsIndex(componentManifest),
     ],
     ['registry.json', renderRootRegistry(registryConfig, registryItems)],

@@ -3,7 +3,7 @@ import { Check } from 'lucide-react'
 
 import { BottomBar } from './bottom-bar'
 import { FrostedIconButton } from './frosted-icon-button'
-import { cn } from './lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 
 import './card-tool-bar.css'
 

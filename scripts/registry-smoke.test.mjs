@@ -154,6 +154,7 @@ function writeConsumerProject(consumerDir, registryUrl) {
           paths: {
             '@/*': ['./src/*'],
             'weimo-ui-core/components/*': ['./src/components/ui/*'],
+            'weimo-ui-core/lib/*': ['./src/components/ui/lib/*'],
             'weimo-ui-core/styles/*': ['./src/components/ui/*'],
             'weimo-ui-card/components/*': ['./src/components/ui/*'],
             'weimo-ui-card/styles/*': ['./src/components/ui/*'],
@@ -1451,7 +1452,7 @@ try {
     tagTreeSource,
     sidebarShellSource,
   ]) {
-    assert.match(source, /from ['"](?:(?:\.\/|\.\.\/)lib\/utils|weimo-ui-core\/components\/lib\/utils)['"]/)
+    assert.match(source, /from ['"](?:(?:\.\/|\.\.\/)lib\/utils|weimo-ui-core\/(?:components\/)?lib\/utils)['"]/)
     assert.doesNotMatch(source, /from ['"]@\/lib\/utils['"]/)
   }
   assert.doesNotMatch(consumerCss, /--radius-card:/)

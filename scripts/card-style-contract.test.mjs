@@ -56,7 +56,7 @@ const markdownSanitizeSource = readProjectFile(
 const indexCss = readProjectFile('packages/weimo-ui-site/src/index.css')
 const sharedTokenCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const markdownTokenCss = readProjectFile('packages/weimo-ui-markdown/src/styles/tokens.css')
-const docsMarkdownSampleSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/markdown-sample.ts')
+const docsMarkdownSampleSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/fixtures/markdown-sample.ts')
 const registry = JSON.parse(readProjectFile('registry.json'))
 const styleRegistry = JSON.parse(readProjectFile('registry/style.json'))
 const packageJson = JSON.parse(readProjectFile('package.json'))
@@ -696,7 +696,7 @@ assert.ok(
 )
 assert.ok(
   docsMarkdownSampleSource.includes('export const mdRenderSample') &&
-    existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/tagged-card.tsx')),
+    existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/tagged-card.tsx')),
   'Shared markdown docs preview sample must remain with Card docs.',
 )
 assert.deepEqual(
@@ -717,7 +717,7 @@ assert.ok(
 )
 assert.equal(
   packageJson.exports?.['./styles/tokens.css'],
-  './src/styles/tokens.css',
+  './packages/weimo-ui-markdown/src/styles/tokens.css',
   'package.json must export shared tokens for workspace consumers.',
 )
 
@@ -746,6 +746,6 @@ assert.equal(
   'Standalone style registry dark theme must export color-text-placeholder.',
 )
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/card-style-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run card-style-contract.test.mjs.',
 )

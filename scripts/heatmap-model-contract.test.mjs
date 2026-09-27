@@ -147,6 +147,6 @@ assert.deepEqual(
 const packageJson = JSON.parse(readProjectFile('package.json'))
 
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/heatmap-model-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run heatmap-model-contract.test.mjs.',
 )

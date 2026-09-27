@@ -25,16 +25,16 @@ function blockFor(source, selector) {
 const packageJson = JSON.parse(readProjectFile('package.json'))
 const readmeSource = readProjectFile('README.md')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const componentDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/component-docs.tsx')
+const componentDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/component-docs.tsx')
 const detailPageSource = readProjectFile('packages/weimo-ui-site/src/docs/pages/component-detail-page.tsx')
 const docsShellSource = readProjectFile('packages/weimo-ui-site/src/docs/docs-shell.tsx')
-const searchSource = readProjectFile('packages/weimo-ui-site/src/docs/search-component-docs.ts')
-const colorSource = readProjectFile('packages/weimo-ui-site/src/docs/token-preview-color.ts')
+const searchSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/search-component-docs.ts')
+const colorSource = readProjectFile('packages/weimo-ui-site/src/docs/components/token-preview-color.ts')
 const cardSource = readProjectFile('packages/weimo-ui-core/src/components/component-preview-card.tsx')
 const cardCss = readProjectFile('packages/weimo-ui-core/src/components/component-preview-card.css')
 const cardRegistry = JSON.parse(readProjectFile('registry/component-preview-card.json'))
 const previewCardDefinitionSource = readProjectFile(
-  'packages/weimo-ui-site/src/docs/component-definitions/component-preview-card.tsx',
+  'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/component-preview-card.tsx',
 )
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const previewBlock = blockFor(
@@ -48,7 +48,7 @@ const transparentSurfaceBlock = blockFor(
 const borderSampleBlock = blockFor(appCss, '.border-color-preview__sample')
 
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/token-style-detail-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run the Token / style detail-page contract.',
 )
 
@@ -217,7 +217,7 @@ for (const selector of ['.bg-color-preview__selection-sample']) {
 
 assert.equal(
   packageJson.exports?.['./components/component-preview-card'],
-  './src/components/component-preview-card.tsx',
+  './packages/weimo-ui-core/src/components/component-preview-card.tsx',
   'ComponentPreviewCard must have a public package export.',
 )
 assert.ok(
@@ -232,9 +232,9 @@ assert.ok(
   'ComponentPreviewCard must be listed in the 卡片 catalog as the preview card docs page.',
 )
 assert.ok(
-  existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/component-preview-card.tsx')) &&
+  existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/component-preview-card.tsx')) &&
     previewCardDefinitionSource.includes("import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'") &&
-    previewCardDefinitionSource.includes("from '../glass-preview-card'") &&
+    previewCardDefinitionSource.includes("from '../../../components/glass-preview-card'") &&
     previewCardDefinitionSource.includes('<GlassPreviewCard') &&
     previewCardDefinitionSource.includes("frame: 'plain',") &&
     !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/component-preview-card-demo.tsx')),
@@ -271,7 +271,7 @@ const tokenPreviewWrappers = {
 }
 
 for (const componentId of semanticTokenDefinitions) {
-  const definitionSource = readProjectFile(`packages/weimo-ui-site/src/docs/component-definitions/${componentId}.tsx`)
+  const definitionSource = readProjectFile(`packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/${componentId}.tsx`)
 
   assert.ok(
       definitionSource.includes("frame: 'plain',") &&
@@ -297,9 +297,9 @@ assert.ok(
   'token cards must be direct app-shell__content children and use the content-level grid.',
 )
 
-const backgroundTokensDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/background-tokens.tsx')
-const borderTokensDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/border-tokens.tsx')
-const textTokensDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/text-tokens.tsx')
+const backgroundTokensDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/background-tokens.tsx')
+const borderTokensDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/border-tokens.tsx')
+const textTokensDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/text-tokens.tsx')
 
 assert.ok(
   !borderTokensDefinitionSource.includes('<TokenPreviewDetails') &&
@@ -307,7 +307,7 @@ assert.ok(
   'BorderColor must hide related-token prose while keeping those tokens searchable.',
 )
 
-const mdDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/md.tsx')
+const mdDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/md.tsx')
 
 assert.ok(
   mdDefinitionSource.includes("frame: 'plain',") &&
@@ -321,7 +321,7 @@ assert.ok(
 )
 
 assert.ok(
-  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/bg-blur.tsx')) &&
+  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/bg-blur.tsx')) &&
     backgroundTokensDefinitionSource.includes('label="背景模糊度"') &&
     backgroundTokensDefinitionSource.includes('bgBlurTones.map') &&
     backgroundTokensDefinitionSource.includes('item.backgroundToken'),
@@ -329,7 +329,7 @@ assert.ok(
 )
 
 assert.ok(
-  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/pressable.tsx')) &&
+  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/pressable.tsx')) &&
     !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/pressable-demo.tsx')) &&
     backgroundTokensDefinitionSource.includes('pressableToneMap') &&
     !backgroundTokensDefinitionSource.includes('pressable-preview__sample'),
@@ -337,7 +337,7 @@ assert.ok(
 )
 
 assert.ok(
-  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/heat-color.tsx')) &&
+  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/heat-color.tsx')) &&
     backgroundTokensDefinitionSource.includes('heatColorLevels.map') &&
     backgroundTokensDefinitionSource.includes('<ComponentPreviewCard') &&
     backgroundTokensDefinitionSource.includes('heat-color-preview__swatch') &&
@@ -346,7 +346,7 @@ assert.ok(
 )
 
 assert.ok(
-  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/text-color.tsx')) &&
+  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/text-color.tsx')) &&
     textTokensDefinitionSource.includes('label="字色"') &&
     textTokensDefinitionSource.includes('label="字号"') &&
     textTokensDefinitionSource.includes('textColorToneMap') &&
@@ -355,7 +355,7 @@ assert.ok(
 )
 
 assert.ok(
-  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/border-radius.tsx')) &&
+  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/border-radius.tsx')) &&
     !borderTokensDefinitionSource.includes('component-preview-card-demo__category') &&
     borderTokensDefinitionSource.includes('label="圆角"') &&
     borderTokensDefinitionSource.includes('label="边框色"') &&

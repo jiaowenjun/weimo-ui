@@ -1,6 +1,6 @@
 import type { ComponentPropsWithoutRef, MutableRefObject, ReactNode } from 'react'
 
-import { cn } from './lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 
 import './animated-inline-size.css'
 

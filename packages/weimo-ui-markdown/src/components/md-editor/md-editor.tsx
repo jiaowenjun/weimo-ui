@@ -1,7 +1,7 @@
 import { forwardRef, useImperativeHandle, useLayoutEffect, useRef } from 'react'
 import { EditorContent } from '@tiptap/react'
 
-import { cn } from 'weimo-ui-core/components/lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 import { formatEditorContent } from './md-editor-content-format'
 import { convertSelectionToInlineMath } from './md-editor-math-conversion'
 import { useMdEditor } from './use-md-editor'

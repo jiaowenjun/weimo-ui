@@ -1,3 +1,4 @@
+// Generated compatibility catalog. Edit catalog/packages instead.
 export const componentPackages = [
   { id: 'weimo-ui-core', title: 'weimo-ui-core' },
   { id: 'weimo-ui-tagtree', title: 'weimo-ui-tagtree' },
@@ -9,7 +10,7 @@ export const componentPackages = [
 
 export type ComponentPackageName = (typeof componentPackages)[number]['id']
 
-export type PublicComponentManifestItem = {
+export type ComponentManifestItem = {
   id: string
   name: string
   exportName?: string
@@ -21,10 +22,7 @@ export type PublicComponentManifestItem = {
   registry: true
 }
 
-export type ComponentManifestItem = PublicComponentManifestItem
-
 export const componentManifest = [
-  // weimo-ui-core: Token / 样式
   {
     id: 'text-tokens',
     name: '文字样式',
@@ -105,8 +103,6 @@ export const componentManifest = [
     docs: false,
     registry: true,
   },
-
-  // weimo-ui-core: Surface / 材质
   {
     id: 'surface',
     name: '材质',
@@ -148,8 +144,6 @@ export const componentManifest = [
     docs: false,
     registry: true,
   },
-
-  // weimo-ui-core: 控件 / 弹层
   {
     id: 'button',
     name: '按钮',
@@ -245,8 +239,6 @@ export const componentManifest = [
     docs: true,
     registry: true,
   },
-
-  // weimo-ui-core: 布局 / 栏位
   {
     id: 'bar',
     name: '浮动栏',
@@ -310,8 +302,6 @@ export const componentManifest = [
     docs: false,
     registry: true,
   },
-
-  // weimo-ui-core: 卡片壳层
   {
     id: 'base-card',
     name: '基础卡片',
@@ -334,8 +324,6 @@ export const componentManifest = [
     docs: true,
     registry: true,
   },
-
-  // weimo-ui-tagtree
   {
     id: 'tag',
     name: '标签树',
@@ -398,8 +386,6 @@ export const componentManifest = [
     docs: true,
     registry: true,
   },
-
-  // weimo-ui-markdown
   {
     id: 'markdown',
     name: 'Markdown 编辑与预览',
@@ -452,8 +438,6 @@ export const componentManifest = [
     docs: true,
     registry: true,
   },
-
-  // weimo-ui-image
   {
     id: 'image',
     name: '图片',
@@ -485,8 +469,6 @@ export const componentManifest = [
     docs: false,
     registry: true,
   },
-
-  // weimo-ui-stats
   {
     id: 'stat',
     name: '统计',
@@ -508,8 +490,6 @@ export const componentManifest = [
     docs: false,
     registry: true,
   },
-
-  // weimo-ui-card: 复合卡片工作流最后展示
   {
     id: 'tagged-card',
     name: '带标签卡片',

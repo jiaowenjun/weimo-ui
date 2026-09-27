@@ -89,7 +89,7 @@ assert.match(viteConfig, /port: 5176/u)
 assert.match(deployWorkflow, /packages\/weimo-ui-site\/dist/u)
 
 assert.doesNotMatch(siteSource, /from\s+['"]weimo-ui(?:\/|['"])/u)
-assert.doesNotMatch(siteSource, /from\s+['"][^'"]*packages\/weimo-ui-/u)
+assert.doesNotMatch(siteSource, /from\s+['"](?:\.\.\/)+[^'"]*packages\/weimo-ui-/u)
 assert.doesNotMatch(siteSource, /from\s+['"][^'"]*\/src\//u)
 
 for (const dependency of internalDependencies) {

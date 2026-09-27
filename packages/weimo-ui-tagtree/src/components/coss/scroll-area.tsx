@@ -1,7 +1,7 @@
 import { ScrollArea as BaseScrollArea } from '@base-ui/react/scroll-area'
 import type { ReactNode } from 'react'
 
-import { cn } from 'weimo-ui-core/components/lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 
 import './scroll-area.css'
 

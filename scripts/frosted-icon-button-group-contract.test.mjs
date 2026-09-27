@@ -45,15 +45,15 @@ const groupSource = readProjectFile('packages/weimo-ui-core/src/components/frost
 const glassIconButtonSource = readProjectFile('packages/weimo-ui-core/src/components/frosted-icon-button.tsx')
 const groupCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-icon-button-group.css')
 const iconButtonCss = readProjectFile('packages/weimo-ui-core/src/components/icon-button.css')
-const buttonDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/button.tsx')
+const buttonDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/button.tsx')
 
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/frosted-icon-button-group-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run frosted-icon-button-group-contract.test.mjs.',
 )
 assert.equal(
   packageJson.exports?.['./components/frosted-icon-button-group'],
-  './src/components/frosted-icon-button-group.tsx',
+  './packages/weimo-ui-core/src/components/frosted-icon-button-group.tsx',
   'FrostedIconButtonGroup must have a public package export.',
 )
 
@@ -101,7 +101,7 @@ assert.deepEqual(
 for (const snippet of [
   "import {\n  getFrostedSurfaceClassName,\n  useFrostedSurfaceBackgroundToneRef,\n} from './frosted-surface'",
   "import { getIconButtonClassName, type IconButtonSize } from './icon-button-model'",
-  "import { cn } from './lib/utils'",
+  "import { cn } from 'weimo-ui-core/lib/utils'",
   "import './frosted-icon-button-group.css'",
   'export type FrostedIconButtonGroupProps',
   'export const FrostedIconButtonGroup =',

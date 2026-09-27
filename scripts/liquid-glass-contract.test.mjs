@@ -16,12 +16,12 @@ function readProjectFile(relativePath) {
 const componentSource = readProjectFile('packages/weimo-ui-core/src/components/liquid-glass.tsx')
 const componentCss = readProjectFile('packages/weimo-ui-core/src/components/liquid-glass.css')
 const engineSource = readProjectFile('packages/weimo-ui-core/src/components/liquid-glass-react/index.tsx')
-const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/surface.tsx')
-const tileSource = readProjectFile('packages/weimo-ui-site/src/docs/liquid-glass-tile.tsx')
-const buttonDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/button.tsx')
-const chipButtonDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/chip-button.tsx')
-const barDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/bar.tsx')
-const pageLayoutDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/page-layout.tsx')
+const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/surface.tsx')
+const tileSource = readProjectFile('packages/weimo-ui-site/src/docs/components/liquid-glass-tile.tsx')
+const buttonDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/button.tsx')
+const chipButtonDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/chip-button.tsx')
+const barDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/bar.tsx')
+const pageLayoutDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/page-layout.tsx')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const frostedSurfaceSource = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.tsx')
@@ -95,7 +95,7 @@ for (const snippet of [
   'label="液态玻璃材质"',
   '<LiquidGlassSurface',
   "from 'weimo-ui-core/components/liquid-glass'",
-  "import { LiquidGlassTile } from '../liquid-glass-tile'",
+  "import { LiquidGlassTile } from '../../../components/liquid-glass-tile'",
 ]) {
   assert.ok(
     definitionSource.includes(snippet),
@@ -112,7 +112,7 @@ for (const snippet of [
   'label="液态玻璃图标按钮"',
   'label="液态玻璃图标按钮组"',
   '<LiquidGlassSurface cornerRadius={999}',
-  "import { LiquidGlassTile } from '../liquid-glass-tile'",
+  "import { LiquidGlassTile } from '../../../components/liquid-glass-tile'",
 ]) {
   assert.ok(
     buttonDefinitionSource.includes(snippet),
@@ -272,7 +272,7 @@ assert.ok(
   'The docs top bar must not need a transition-all size override after the engine declares exact properties.',
 )
 assert.ok(
-  packageJson.scripts.test.includes('node scripts/liquid-glass-contract.test.mjs'),
+  packageJson.scripts['test:contracts'].includes('run-contract-tests.mjs'),
   'The package test must run the liquid-glass contract.',
 )
 

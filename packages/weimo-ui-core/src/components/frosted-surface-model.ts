@@ -1,6 +1,6 @@
 import type { ClassValue } from 'clsx'
 
-import { cn } from './lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 
 export type FrostedSurfaceBackgroundTone = 'light' | 'dark'
 

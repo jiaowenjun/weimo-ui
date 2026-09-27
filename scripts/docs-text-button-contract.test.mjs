@@ -33,15 +33,15 @@ function assertTextButtonDocsControl(relativePath, labels) {
 }
 
 for (const [relativePath, labels] of [
-  ['packages/weimo-ui-site/src/docs/component-definitions/action-dialog.tsx', ['打开内部对话框']],
-  ['packages/weimo-ui-site/src/docs/component-definitions/markdown.tsx', ['打开公式对话框']],
-  ['packages/weimo-ui-site/src/docs/component-definitions/button.tsx', ['文本按钮']],
+  ['packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/action-dialog.tsx', ['打开内部对话框']],
+  ['packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown.tsx', ['打开公式对话框']],
+  ['packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/button.tsx', ['文本按钮']],
   ['packages/weimo-ui-tagtree/src/tag-page.tsx', ['切换到编辑态', '切换到展示态']],
 ]) {
   assertTextButtonDocsControl(relativePath, labels)
 }
 
-const cardToolBarSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/card-tool-bar.tsx')
+const cardToolBarSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/card-tool-bar.tsx')
 
 assert.ok(
   cardToolBarSource.includes("import { TextButton } from 'weimo-ui-core/components/text-button'"),
@@ -65,6 +65,6 @@ assert.ok(
 const packageJson = JSON.parse(readProjectFile('package.json'))
 
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/docs-text-button-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run docs-text-button-contract.test.mjs.',
 )

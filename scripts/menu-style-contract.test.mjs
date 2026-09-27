@@ -10,7 +10,7 @@ const menuSource = readFileSync(
   'utf8',
 )
 const menuDefinitionSource = readFileSync(
-  new URL('../packages/weimo-ui-site/src/docs/component-definitions/menu.tsx', import.meta.url),
+  new URL('../packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/menu.tsx', import.meta.url),
   'utf8',
 )
 const appCss = readFileSync(new URL('../packages/weimo-ui-site/src/App.css', import.meta.url), 'utf8')

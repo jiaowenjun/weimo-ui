@@ -34,12 +34,12 @@ const packageJson = readJson('package.json')
 const rootRegistry = readJson('registry.json')
 const rootItemsByName = new Map(rootRegistry.items.map((item) => [item.name, item]))
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 
 const cardSurfaceSource = readProjectFile('packages/weimo-ui-core/src/components/card-surface.tsx')
 const cardSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/card-surface.css')
-const surfaceDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/surface.tsx')
+const surfaceDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/surface.tsx')
 const popupSurfaceSource = readProjectFile('packages/weimo-ui-core/src/components/popup-surface.tsx')
 const popupSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/popup-surface.css')
 
@@ -58,16 +58,16 @@ const tooltipCss = readProjectFile('packages/weimo-ui-core/src/components/coss/t
 
 assert.equal(
   packageJson.exports['./components/card-surface'],
-  './src/components/card-surface.tsx',
+  './packages/weimo-ui-core/src/components/card-surface.tsx',
   'package.json must expose CardSurface.',
 )
 assert.equal(
   packageJson.exports['./components/popup-surface'],
-  './src/components/popup-surface.tsx',
+  './packages/weimo-ui-core/src/components/popup-surface.tsx',
   'package.json must expose PopupSurface.',
 )
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/surface-material-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run surface-material-contract.test.mjs.',
 )
 
@@ -92,7 +92,7 @@ assert.ok(
 )
 
 for (const snippet of [
-  "import { surfaceDefinition } from './surface'",
+  "import { surfaceDefinition } from './packages/weimo-ui-core/surface'",
   'surface: surfaceDefinition',
 ]) {
   assert.ok(definitionsIndexSource.includes(snippet), `component definitions index must include ${snippet}.`)
@@ -100,7 +100,7 @@ for (const snippet of [
 
 for (const snippet of [
   "import type { ClassValue } from 'clsx'",
-  "import { cn } from './lib/utils'",
+  "import { cn } from 'weimo-ui-core/lib/utils'",
   "import './card-surface.css'",
   'export type CardSurfaceProps',
   'export function getCardSurfaceClassName(...className: ClassValue[])',
@@ -167,10 +167,10 @@ for (const snippet of [
 
 // 标题栏开关（可见状态标签 + Switch）抽到 docs 共享组件：材质页三张卡的边框开关
 // 与按钮页启用/模式开关共用，契约锁共享文件。
-const previewToggleSource = readProjectFile('packages/weimo-ui-site/src/docs/preview-toggle.tsx')
+const previewToggleSource = readProjectFile('packages/weimo-ui-site/src/docs/components/preview-toggle.tsx')
 
 for (const snippet of [
-  "import { Switch } from '../components/coss/switch'",
+  "import { Switch } from '../../components/coss/switch'",
   'export function PreviewToggle(',
   'ariaLabel: string',
   'label: ReactNode',
@@ -260,7 +260,7 @@ assert.ok(
 
 for (const snippet of [
   "import type { ClassValue } from 'clsx'",
-  "import { cn } from './lib/utils'",
+  "import { cn } from 'weimo-ui-core/lib/utils'",
   "import './popup-surface.css'",
   "export type PopupSurfaceLevel = 'modal' | 'tooltip'",
   'export type PopupSurfaceProps',

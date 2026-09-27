@@ -4,7 +4,7 @@ import { ChevronRight } from 'lucide-react'
 
 import { getCardSurfaceClassName } from './card-surface'
 import { GhostIconButton } from './ghost-icon-button'
-import { cn } from './lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 
 import './base-card.css'
 

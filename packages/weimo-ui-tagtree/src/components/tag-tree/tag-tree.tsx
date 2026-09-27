@@ -1,6 +1,6 @@
 import type { HTMLAttributes, ReactNode } from 'react'
 
-import { cn } from 'weimo-ui-core/components/lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 import type { ActionMenuItem } from 'weimo-ui-core/components/menu'
 import { TagTreeRow } from './tag-tree-row'
 import { useTagTree } from './use-tag-tree'

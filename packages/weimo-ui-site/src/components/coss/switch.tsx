@@ -1,6 +1,6 @@
 import { Switch as BaseSwitch } from '@base-ui/react/switch'
 
-import { cn } from 'weimo-ui-core/components/lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 
 import './switch.css'
 

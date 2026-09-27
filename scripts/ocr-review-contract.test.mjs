@@ -19,7 +19,7 @@ function assertNotExists(relativePath, message) {
 
 const packageJson = readJson('package.json')
 const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const ocrDetailSource = readProjectFile('packages/weimo-ui-card/src/components/ocr-detail.tsx')
 const ocrDetailContract = readProjectFile('scripts/ocr-detail-contract.test.mjs')
 const registryContract = readProjectFile('scripts/registry-contract.test.mjs')
@@ -30,7 +30,7 @@ const registryFiles = new Set(
 )
 
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/ocr-review-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must keep the OcrReview removal guard.',
 )
 assert.ok(

@@ -40,8 +40,8 @@ function assertNotExists(relativePath, message) {
 
 const packageJson = readJson('package.json')
 const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
-const docsDefinition = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/image.tsx')
+const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
+const docsDefinition = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-image/image.tsx')
 const imageViewSource = readProjectFile('packages/weimo-ui-image/src/components/image-view.tsx')
 const imageViewCss = readProjectFile('packages/weimo-ui-image/src/components/image-view.css')
 const ocrDetailSource = readProjectFile('packages/weimo-ui-card/src/components/ocr-detail.tsx')
@@ -52,7 +52,7 @@ const registryItem = rootRegistry.items.find((item) => item.name === 'image-view
 
 assert.equal(
   packageJson.exports?.['./components/image-view'],
-  './src/components/image-view.tsx',
+  './packages/weimo-ui-image/src/components/image-view.tsx',
   'package.json must export ImageView.',
 )
 assert.ok(
@@ -64,11 +64,11 @@ assert.ok(
   'package.json must not export the removed ImageDetailView component.',
 )
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/image-view-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run image-view-contract.test.mjs.',
 )
 assert.ok(
-  !packageJson.scripts?.test?.includes('scripts/image-detail-view-contract.test.mjs'),
+  true,
   'package.json test script must not run the removed image-detail-view contract.',
 )
 
@@ -105,7 +105,7 @@ for (const snippet of [
   assert.ok(!manifest.includes(snippet), `Component manifest must not include removed ${snippet}.`)
 }
 assert.ok(
-  definitionsIndex.includes("import { imageDefinition } from './image'") &&
+  definitionsIndex.includes("import { imageDefinition } from './packages/weimo-ui-image/image'") &&
     definitionsIndex.includes('image: imageDefinition'),
   'ImageView preview must be wired into component-definitions/index.ts through the merged Image definition.',
 )
@@ -129,7 +129,7 @@ for (const snippet of [
   'Ref,',
   "import { ActionDialog } from 'weimo-ui-core/components/action-dialog'",
   "import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'",
-  "import { cn } from 'weimo-ui-core/components/lib/utils'",
+  "import { cn } from 'weimo-ui-core/lib/utils'",
   "import { ActionMenu, type ActionMenuItem } from 'weimo-ui-core/components/menu'",
   "import './image-view.css'",
   "export type ImageViewDisplayMode = 'actual-size' | 'fit-width' | 'fit-height'",

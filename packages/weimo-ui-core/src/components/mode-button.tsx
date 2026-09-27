@@ -3,7 +3,7 @@ import { Ellipsis, Pencil, X } from 'lucide-react'
 
 import { GhostIconButton, type GhostIconButtonProps } from './ghost-icon-button'
 import { ActionMenu, type ActionMenuItem } from './menu'
-import { cn } from './lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 
 import './mode-button.css'
 

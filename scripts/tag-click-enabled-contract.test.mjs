@@ -16,7 +16,7 @@ const ocrCard = read('packages/weimo-ui-card/src/components/ocr-card.tsx')
 const packageJson = JSON.parse(read('package.json'))
 
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/tag-click-enabled-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'UI test script must run the tag-click-enabled contract.',
 )
 assert.ok(tagBar.includes('isTagClickEnabled?: (tag: string) => boolean'))

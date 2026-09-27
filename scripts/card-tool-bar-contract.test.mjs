@@ -37,9 +37,9 @@ function assertNotIncludes(source, snippet, message) {
 const componentSource = readProjectFile('packages/weimo-ui-core/src/components/card-tool-bar.tsx')
 const componentCss = readProjectFile('packages/weimo-ui-core/src/components/card-tool-bar.css')
 const docsDefinitionSource = readProjectFile(
-  'packages/weimo-ui-site/src/docs/component-definitions/card-tool-bar.tsx',
+  'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/card-tool-bar.tsx',
 )
-const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const packageJson = readJson('package.json')
@@ -54,7 +54,7 @@ for (const snippet of [
   "import { Check } from 'lucide-react'",
   "import { BottomBar } from './bottom-bar'",
   "import { FrostedIconButton } from './frosted-icon-button'",
-  "import { cn } from './lib/utils'",
+  "import { cn } from 'weimo-ui-core/lib/utils'",
   "import './card-tool-bar.css'",
   'export type CardToolBarProps',
   "Omit<ComponentPropsWithoutRef<'div'>,",
@@ -151,7 +151,7 @@ for (const snippet of [
 
 assertIncludes(
   definitionsIndexSource,
-  "import { cardToolBarDefinition } from './card-tool-bar'",
+  "import { cardToolBarDefinition } from './packages/weimo-ui-core/card-tool-bar'",
   'CardToolBar definition must be imported by component-definitions/index.ts.',
 )
 assertIncludes(
@@ -199,7 +199,7 @@ assertIncludes(
 )
 
 assert.ok(
-  packageJson.exports?.['./components/card-tool-bar'] === './src/components/card-tool-bar.tsx',
+  packageJson.exports?.['./components/card-tool-bar'] === './packages/weimo-ui-core/src/components/card-tool-bar.tsx',
   'CardToolBar must have a public package export.',
 )
 assert.ok(

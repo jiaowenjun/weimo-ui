@@ -34,8 +34,8 @@ const source = readProjectFile('packages/weimo-ui-image/src/components/image-upl
 const css = readProjectFile('packages/weimo-ui-image/src/components/image-uploader.css')
 const packageJson = readJson('package.json')
 const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
-const docsDefinition = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/image.tsx')
+const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
+const docsDefinition = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-image/image.tsx')
 const rootRegistry = readJson('registry.json')
 const standaloneRegistry = readJson('registry/image-uploader.json')
 const registryItem = rootRegistry.items.find((item) => item.name === 'image-uploader')
@@ -54,11 +54,11 @@ const readyPanelBlock = blockFor(css, '.image-uploader[data-state="ready"] .imag
 
 assert.equal(
   packageJson.exports?.['./components/image-uploader'],
-  './src/components/image-uploader.tsx',
+  './packages/weimo-ui-image/src/components/image-uploader.tsx',
   'package.json must export ImageUploader.',
 )
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/image-uploader-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run image-uploader-contract.test.mjs.',
 )
 assert.ok(
@@ -70,7 +70,7 @@ assert.ok(
   'Component manifest must keep ImageUploader registry-only after the Image page merge.',
 )
 assert.ok(
-  definitionsIndex.includes("import { imageDefinition } from './image'") &&
+  definitionsIndex.includes("import { imageDefinition } from './packages/weimo-ui-image/image'") &&
     definitionsIndex.includes('image: imageDefinition') &&
     !definitionsIndex.includes('image-uploader'),
   'ImageUploader preview must be wired into component-definitions/index.ts through the merged Image definition.',
@@ -81,7 +81,7 @@ for (const snippet of [
   "import type { ChangeEvent, DragEvent, KeyboardEvent, MouseEvent } from 'react'",
   "import type { ComponentPropsWithoutRef } from 'react'",
   "import { ImageView } from './image-view'",
-  "import { cn } from 'weimo-ui-core/components/lib/utils'",
+  "import { cn } from 'weimo-ui-core/lib/utils'",
   "import './image-uploader.css'",
   "type ImageUploaderSelectionSource = 'picker' | 'clipboard' | 'drop'",
   'export type ImageUploaderActionApi = {',

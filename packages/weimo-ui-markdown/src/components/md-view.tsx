@@ -18,7 +18,7 @@ import { unified } from 'unified'
 import type { MdEditorHandle, MdEditorProps } from './md-editor'
 import { MdRender, type MdRenderProps } from './md-render'
 import { normalizeCenteredQuoteSyntax, restoreCenteredQuoteSyntax } from './markdown-centered-quote'
-import { cn } from 'weimo-ui-core/components/lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 
 import './md-view.css'
 

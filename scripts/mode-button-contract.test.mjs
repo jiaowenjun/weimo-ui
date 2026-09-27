@@ -25,10 +25,10 @@ function cssBlockFor(source, selector) {
 const componentSource = readProjectFile('packages/weimo-ui-core/src/components/mode-button.tsx')
 const componentCss = readProjectFile('packages/weimo-ui-core/src/components/mode-button.css')
 const docsDefinitionSource = readProjectFile(
-  'packages/weimo-ui-site/src/docs/component-definitions/button.tsx',
+  'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/button.tsx',
 )
 const componentDefinitionsIndexSource = readProjectFile(
-  'packages/weimo-ui-site/src/docs/component-definitions/index.ts',
+  'packages/weimo-ui-site/src/docs/catalog/definitions.ts',
 )
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
@@ -47,7 +47,7 @@ for (const snippet of [
   "import { Ellipsis, Pencil, X } from 'lucide-react'",
   "import { GhostIconButton, type GhostIconButtonProps } from './ghost-icon-button'",
   "import { ActionMenu, type ActionMenuItem } from './menu'",
-  "import { cn } from './lib/utils'",
+  "import { cn } from 'weimo-ui-core/lib/utils'",
   "import './mode-button.css'",
   "export type ModeButtonMode = 'display' | 'edit'",
   "export type ModeButtonMenuCloseTiming = 'before-mode-change' | 'after-mode-change'",
@@ -167,13 +167,13 @@ for (const snippet of [
   assert.ok(manifestSource.includes(snippet), `components manifest must include ${snippet}.`)
 }
 assert.ok(
-  packageJson.exports?.['./components/mode-button'] === './src/components/mode-button.tsx',
+  packageJson.exports?.['./components/mode-button'] === './packages/weimo-ui-core/src/components/mode-button.tsx',
   'ModeButton must have a public package export.',
 )
 
 assert.ok(
   componentDefinitionsIndexSource.includes(
-    "import { buttonDefinition } from './button'",
+    "import { buttonDefinition } from './packages/weimo-ui-core/button'",
   ) &&
     componentDefinitionsIndexSource.includes('button: buttonDefinition') &&
     !componentDefinitionsIndexSource.includes('mode-button'),
@@ -198,6 +198,6 @@ assert.ok(
 )
 
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/mode-button-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run mode-button-contract.test.mjs.',
 )

@@ -15,15 +15,15 @@ function readProjectFile(relativePath) {
 
 const shellSource = readProjectFile('packages/weimo-ui-site/src/docs/docs-shell.tsx')
 const detailSource = readProjectFile('packages/weimo-ui-site/src/docs/pages/component-detail-page.tsx')
-const actionDialogDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/action-dialog.tsx')
-const cardTopBarDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/card-tool-bar.tsx')
-const mathDialogDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/markdown.tsx')
+const actionDialogDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/action-dialog.tsx')
+const cardTopBarDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/card-tool-bar.tsx')
+const mathDialogDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown.tsx')
 const tagTreeRowDefinitionSource = [
-  readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/tag.tsx'),
+  readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/tag.tsx'),
   readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx'),
 ].join('\n')
-const barDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/bar.tsx')
-const pageLayoutDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/page-layout.tsx')
+const barDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/bar.tsx')
+const pageLayoutDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/page-layout.tsx')
 const css = readProjectFile('packages/weimo-ui-site/src/App.css')
 const tagPageCss = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
@@ -265,6 +265,6 @@ assertLiquidGlassToolbarDemo(floatBarDemoSource, 'FloatBar')
 assertLiquidGlassToolbarDemo(topBarDemoSource, 'TopBar')
 
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/internal-docs-ui-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run internal-docs-ui-contract.test.mjs.',
 )

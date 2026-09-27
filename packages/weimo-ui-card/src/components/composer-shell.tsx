@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useRef } from 'react'
 import type { ComponentPropsWithoutRef, ReactNode, TransitionEvent } from 'react'
 
-import { cn } from 'weimo-ui-core/components/lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 
 import './card-composer.css'
 

@@ -26,7 +26,7 @@ pnpm install
 
 更新依赖时先在本仓库完成测试并 push commit，再更新 Weimo 的 package manifests 与 lockfile，并验证所有真实消费者。导入符保持为 `weimo-ui/...`。
 
-分发形态为源码导出：`exports` 直接指向 `src` 下的 `.ts/.tsx/.css`，要求消费方使用支持 TypeScript、TSX 和 CSS 的打包器。`react` 与 `react-dom` 声明为 peer dependencies，其余运行时依赖为普通 dependencies。`private: true` 仅禁止误发到 npm，不影响通过 Git commit 安装。
+分发形态为源码导出：根包兼容入口直接指向 `packages/*/src` 下的 `.ts/.tsx/.css`，要求消费方使用支持 TypeScript、TSX 和 CSS 的打包器。`react` 与 `react-dom` 声明为 peer dependencies，其余运行时依赖为普通 dependencies。`private: true` 仅禁止误发到 npm，不影响通过 Git commit 安装。
 
 ## 子项目
 
@@ -49,7 +49,9 @@ pnpm install
 
 `packages/weimo-ui-site` 是文档站 workspace 包，负责站点入口、路由、组件目录、组件预览和站点专用 UI；它通过 workspace 依赖消费各组件子项目，不再属于根组件包的源码入口。
 
-主包的同名入口以源码级 re-export 转发到对应子项目，并在 Git 安装包中携带子项目源码。
+根包只保留兼容导出，不再维护一份重复的 `src` 源码树；每个入口直接指向对应子项目，并在 Git 安装包中携带子项目源码。
+
+站点组件目录按子项目组织在 `packages/weimo-ui-site/src/docs/catalog/packages/<package>`：每个子项目目录包含自身的 `manifest.ts` 和页面定义，`catalog/manifest.ts` 负责聚合。站点共享预览组件集中在 `src/docs/components`，页面和通用类型分别集中在 `src/docs/pages` 与 `src/docs/catalog/types.ts`。
 
 ## 职责定位
 
@@ -59,7 +61,7 @@ pnpm install
 
 后续向 `weimo-ui` 添加组件时，应优先确认是否已有合适的通用组件库替代；只有确实没有合适替代、并且该组件服务于 `examples/demo` 或 `weimo-biji/frontend/web` 的特殊场景时，才应纳入本组件库。
 
-`src/lib` 可以承载被多个当前应用消费、且不读取产品 store、query 或业务实体的 headless 交互 hook。此类模块通过 package export 和行为测试发布，不属于视觉组件目录，也不进入详情页、manifest 或 registry。
+`packages/weimo-ui-core/src/lib` 可以承载被多个当前应用消费、且不读取产品 store、query 或业务实体的 headless 交互 hook。此类模块通过 package export 和行为测试发布，不属于视觉组件目录，也不进入详情页、manifest 或 registry。
 
 ## Token / 样式 详情页规范
 
@@ -73,14 +75,14 @@ Token / 样式 分组下的组件详情页只用于展示底层 token 值。
 
 ## 脚本
 
-`packages/weimo-ui-site/src/docs/components-manifest.ts` 是公共组件目录。新增或调整公共组件时，编辑 manifest、详情页 definition、package export 和对应的独立 `registry/*.json`，然后生成并检查派生产物：
+`packages/weimo-ui-site/src/docs/catalog/packages/*/manifest.ts` 是按子项目拆分的公共组件目录。新增或调整公共组件时，编辑所属子项目的 manifest、同目录详情页 definition、package export 和对应的独立 `registry/*.json`，然后生成并检查派生产物：
 
 ```bash
 pnpm catalog:sync
 pnpm catalog:check
 ```
 
-`packages/weimo-ui-site/src/docs/component-definitions/index.ts` 与根 `registry.json` 是生成文件，不直接编辑。
+`packages/weimo-ui-site/src/docs/catalog/definitions.ts`、兼容清单 `packages/weimo-ui-site/src/docs/components-manifest.ts` 与根 `registry.json` 是生成文件，不直接编辑。契约测试由 `scripts/run-contract-tests.mjs` 自动发现 `scripts/*.test.mjs`。
 
 ```bash
 pnpm dev

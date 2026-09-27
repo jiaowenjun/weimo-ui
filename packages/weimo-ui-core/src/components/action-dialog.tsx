@@ -12,7 +12,7 @@ import {
 } from './coss/dialog'
 import { FloatBar } from './float-bar'
 import { FrostedIconButton } from './frosted-icon-button'
-import { cn } from './lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 
 import './action-dialog.css'
 

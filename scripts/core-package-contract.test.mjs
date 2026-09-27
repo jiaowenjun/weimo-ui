@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { existsSync, readFileSync } from 'node:fs'
-import { dirname, join, relative } from 'node:path'
+import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import ts from 'typescript'
@@ -52,13 +52,10 @@ for (const item of coreItems) {
     coreTarget.startsWith('./src/components/'),
     `${item.packageExport} must resolve to core source.`,
   )
-  const rootEntry = rootTarget.slice(2)
-  const coreEntry = join('packages/weimo-ui-core', coreTarget.slice(2))
-  const coreImport = relative(dirname(rootEntry), coreEntry)
   assert.equal(
-    readProjectFile(rootTarget.slice(2)),
-    `export * from '${coreImport}'\n`,
-    `${item.packageExport} compatibility entry must only re-export weimo-ui-core.`,
+    rootTarget,
+    `./packages/weimo-ui-core/${coreTarget.slice(2)}`,
+    `${item.packageExport} root export must point directly at weimo-ui-core.`,
   )
 }
 
@@ -72,8 +69,8 @@ for (const item of componentManifest.filter(
 }
 
 assert.equal(
-  readProjectFile('src/styles/tokens.css'),
-  '@import "../../packages/weimo-ui-markdown/src/styles/tokens.css";\n',
+  rootPackage.exports?.['./styles/tokens.css'],
+  './packages/weimo-ui-markdown/src/styles/tokens.css',
 )
 assert.equal(
   corePackage.exports?.['./styles/tokens.css'],

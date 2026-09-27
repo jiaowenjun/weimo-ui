@@ -6,20 +6,20 @@ import {
   reduceCardMode,
   resolveCardModeState,
   resolveInitialCardMode,
-} from '../src/components/card-edit-state-machine'
+} from '../packages/weimo-ui-card/src/components/card-edit-state-machine'
 import {
   resolveCardArticleProps,
   resolveCardContentState,
   resolveCardDisplayMenuItems,
   resolveCardLabels,
   resolveCardToolBarState,
-} from '../src/components/card-resolvers'
+} from '../packages/weimo-ui-card/src/components/card-resolvers'
 import {
   isCardInlineMathShortcut,
   isCardSaveShortcut,
   type CardSaveShortcutEvent,
-} from '../src/components/card-save-shortcut'
-import { Card, type CardNote } from '../src/components/card'
+} from '../packages/weimo-ui-card/src/components/card-save-shortcut'
+import { Card, type CardNote } from '../packages/weimo-ui-card/src/components/card'
 
 const note: CardNote = {
   content: 'Original content',

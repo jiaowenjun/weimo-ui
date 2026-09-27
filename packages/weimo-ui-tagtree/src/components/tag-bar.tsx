@@ -3,7 +3,7 @@ import type { ComponentPropsWithoutRef } from 'react'
 import { Hash, Plus } from 'lucide-react'
 
 import { FloatBar } from 'weimo-ui-core/components/float-bar'
-import { cn } from 'weimo-ui-core/components/lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 import { ChipButton } from './chip-button'
 import {
   TagPicker,

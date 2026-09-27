@@ -1,7 +1,7 @@
 import { forwardRef, type ComponentPropsWithoutRef } from 'react'
 
 import { getIconButtonClassName, type IconButtonSize } from './icon-button-model'
-import { cn } from './lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 
 import './icon-button.css'
 

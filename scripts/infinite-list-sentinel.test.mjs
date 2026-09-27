@@ -7,11 +7,11 @@ import ts from 'typescript'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const observerSource = readFileSync(
-  join(root, 'src/lib/infinite-list-sentinel.ts'),
+  join(root, 'packages/weimo-ui-core/src/lib/infinite-list-sentinel.ts'),
   'utf8',
 )
 const hookSource = readFileSync(
-  join(root, 'src/lib/use-infinite-list-sentinel.ts'),
+  join(root, 'packages/weimo-ui-core/src/lib/use-infinite-list-sentinel.ts'),
   'utf8',
 )
 const packageJson = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'))
@@ -103,5 +103,5 @@ for (const snippet of [
 
 assert.equal(
   packageJson.exports?.['./lib/use-infinite-list-sentinel'],
-  './src/lib/use-infinite-list-sentinel.ts',
+  './packages/weimo-ui-core/src/lib/use-infinite-list-sentinel.ts',
 )

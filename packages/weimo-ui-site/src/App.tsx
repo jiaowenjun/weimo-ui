@@ -1,7 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router'
 
 import './App.css'
-import { componentDocs } from './docs/component-docs'
+import { componentDocs } from './docs/catalog/component-docs'
 import { DocsShell } from './docs/docs-shell'
 import { ComponentDetailPage } from './docs/pages/component-detail-page'
 import { componentPath, routerBasename } from './docs/routes'

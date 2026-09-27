@@ -6,7 +6,7 @@ import {
   getFrostedSurfaceClassName,
   useFrostedSurfaceBackgroundToneRef,
 } from './frosted-surface'
-import { cn } from './lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 import {
   menuItemVariants,
   type MenuItemVariant,

@@ -18,7 +18,7 @@
       ],
       "files": [
         {
-          "path": "src/lib/utils.ts",
+          "path": "packages/weimo-ui-core/src/lib/utils.ts",
           "type": "registry:lib",
           "target": "@ui/lib/utils.ts"
         }
@@ -1319,7 +1319,7 @@
           "target": "@ui/icon-button.css"
         },
         {
-          "path": "src/lib/utils.ts",
+          "path": "packages/weimo-ui-core/src/lib/utils.ts",
           "type": "registry:lib",
           "target": "@ui/lib/utils.ts"
         }
@@ -2940,12 +2940,12 @@
           "target": "@ui/coss/scroll-area.css"
         },
         {
-          "path": "src/components/coss/tabs.tsx",
+          "path": "packages/weimo-ui-core/src/components/coss/tabs.tsx",
           "type": "registry:ui",
           "target": "@ui/coss/tabs.tsx"
         },
         {
-          "path": "src/components/coss/tabs.css",
+          "path": "packages/weimo-ui-core/src/components/coss/tabs.css",
           "type": "registry:ui",
           "target": "@ui/coss/tabs.css"
         },
@@ -2965,7 +2965,7 @@
           "target": "@ui/coss/tooltip.css"
         },
         {
-          "path": "src/lib/utils.ts",
+          "path": "packages/weimo-ui-core/src/lib/utils.ts",
           "type": "registry:lib",
           "target": "@ui/lib/utils.ts"
         },

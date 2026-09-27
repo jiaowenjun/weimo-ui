@@ -88,7 +88,7 @@ assert.ok(
 )
 assert.ok(
   readProjectFile('packages/weimo-ui-stats/src/components/stat-group.tsx').includes(
-    "from 'weimo-ui-core/components/lib/utils'",
+    "from 'weimo-ui-core/lib/utils'",
   ),
   'StatGroup must consume cn from weimo-ui-core.',
 )

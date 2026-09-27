@@ -74,26 +74,26 @@ function assertDecodablePngDataUrl(dataUrl, message) {
 
 const detailPageSource = readProjectFile('packages/weimo-ui-site/src/docs/pages/component-detail-page.tsx')
 const docsShellSource = readProjectFile('packages/weimo-ui-site/src/docs/docs-shell.tsx')
-const componentDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/component-docs.tsx')
-const mdRenderDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/markdown.tsx')
-const imageViewDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/image.tsx')
-const buttonDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/button.tsx')
-const borderTokensDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/border-tokens.tsx')
-const componentDefinitionsSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/tagged-card.tsx') +
-  readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/card-tool-bar.tsx') +
+const componentDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/component-docs.tsx')
+const mdRenderDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown.tsx')
+const imageViewDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-image/image.tsx')
+const buttonDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/button.tsx')
+const borderTokensDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/border-tokens.tsx')
+const componentDefinitionsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/tagged-card.tsx') +
+  readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/card-tool-bar.tsx') +
   mdRenderDefinitionSource +
   imageViewDefinitionSource +
-  readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/surface.tsx') +
-  readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/tag.tsx') +
-  readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/stat.tsx') +
+  readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/surface.tsx') +
+  readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/tag.tsx') +
+  readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-stats/stat.tsx') +
   buttonDefinitionSource +
   borderTokensDefinitionSource +
-  readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/menu.tsx') +
-  readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/bar.tsx') +
-  readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/page-layout.tsx') +
-  readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/action-dialog.tsx') +
-  readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/capsule.tsx') +
-  readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/chip-button.tsx') +
+  readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/menu.tsx') +
+  readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/bar.tsx') +
+  readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/page-layout.tsx') +
+  readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/action-dialog.tsx') +
+  readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule.tsx') +
+  readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/chip-button.tsx') +
   mdRenderDefinitionSource
 const css = readProjectFile('packages/weimo-ui-site/src/App.css')
 const iconPreviewRowBlock = blockFor(css, '.icon-preview__row')
@@ -111,23 +111,23 @@ assert.ok(
 )
 
 assert.ok(
-  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/editable-card.tsx')),
+  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/editable-card.tsx')),
   'Removed EditableCard detail docs definition must not exist.',
 )
 assert.ok(
-  existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/tagged-card.tsx')),
+  existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/tagged-card.tsx')),
   'Merged tagged-card detail docs definition must exist.',
 )
 assert.ok(
-  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/tag-edit-bar.tsx')),
+  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/tag-edit-bar.tsx')),
   'Removed TagEditBar detail docs definition must not exist.',
 )
 assert.ok(
-  existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/capsule.tsx')),
+  existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule.tsx')),
   'Merged Capsule detail docs definition must exist.',
 )
 assert.ok(
-  existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/surface.tsx')),
+  existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/surface.tsx')),
   'Surface detail docs definition must exist.',
 )
 
@@ -228,7 +228,7 @@ for (const selector of [
 }
 
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/component-detail-page-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run component-detail-page-contract.test.mjs.',
 )
 
@@ -292,7 +292,7 @@ assert.ok(
     componentDefinitionsSource.includes("import { FrostedSurface } from 'weimo-ui-core/components/frosted-surface'") &&
     componentDefinitionsSource.includes("id: 'surface'") &&
     componentDefinitionsSource.includes('静态卡片、亮度自适应磨砂玻璃层、液态玻璃与抬升浮层的材质总览') &&
-    componentDefinitionsSource.includes("from '../glass-preview-card'") &&
+    componentDefinitionsSource.includes("from '../../../components/glass-preview-card'") &&
     componentDefinitionsSource.includes('<GlassPreviewCard') &&
     !componentDefinitionsSource.includes('frosted-surface-preview__scroll') &&
     !componentDefinitionsSource.includes('frosted-surface-preview__fixed') &&
@@ -302,12 +302,12 @@ assert.ok(
 )
 assert.ok(
     buttonDefinitionSource.includes("import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'") &&
-    buttonDefinitionSource.includes("import { PreviewToggle } from '../preview-toggle'") &&
+    buttonDefinitionSource.includes("import { PreviewToggle } from '../../../components/preview-toggle'") &&
     buttonDefinitionSource.includes("import { useState } from 'react'") &&
     buttonDefinitionSource.includes("import { TextButton } from 'weimo-ui-core/components/text-button'") &&
     buttonDefinitionSource.includes("id: 'button'") &&
     !buttonDefinitionSource.includes('glassIconButtonPreviewScenes') &&
-    buttonDefinitionSource.includes("from '../glass-preview-card'") &&
+    buttonDefinitionSource.includes("from '../../../components/glass-preview-card'") &&
     buttonDefinitionSource.includes('<GlassPreviewCard') &&
     buttonDefinitionSource.includes('label="磨砂图标按钮"') &&
     buttonDefinitionSource.includes('className="icon-button-preview"') &&

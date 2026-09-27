@@ -186,8 +186,8 @@ assert.ok(
   'Card must let CardTopBar own the display mode action control.',
 )
 
-const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/card-tool-bar.tsx')
-const componentDefinitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/card-tool-bar.tsx')
+const componentDefinitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 
@@ -215,7 +215,7 @@ assert.ok(
 
 assert.ok(
   componentDefinitionsIndexSource.includes(
-    "import { cardToolBarDefinition } from './card-tool-bar'",
+    "import { cardToolBarDefinition } from './packages/weimo-ui-core/card-tool-bar'",
   ) && componentDefinitionsIndexSource.includes("'card-tool-bar': cardToolBarDefinition"),
   'CardTopBar preview must be registered through the core card-tool-bar page.',
 )
@@ -288,7 +288,7 @@ assert.ok(
 )
 
 assert.ok(
-  packageJson.exports?.['./components/card-top-bar'] === './src/components/card-top-bar.tsx',
+  packageJson.exports?.['./components/card-top-bar'] === './packages/weimo-ui-core/src/components/card-top-bar.tsx',
   'CardTopBar must have a public package export.',
 )
 assert.ok(
@@ -306,7 +306,7 @@ assert.ok(
   'Removed EditableCard must not keep package or registry entries.',
 )
 assert.ok(
-  packageJson.exports?.['./components/card'] === './src/components/card.tsx' &&
+  packageJson.exports?.['./components/card'] === './packages/weimo-ui-card/src/components/card.tsx' &&
     registryItemsByName.has('card') &&
     registryFiles.has('card.json'),
   'Card must keep package and registry entries.',

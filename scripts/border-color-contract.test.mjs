@@ -78,8 +78,8 @@ const cossCardCss = readProjectFile('packages/weimo-ui-site/src/components/coss/
 const cossCommandCss = readProjectFile('packages/weimo-ui-site/src/components/coss/command.css')
 const cossDialogCss = readProjectFile('packages/weimo-ui-core/src/components/coss/dialog.css')
 const cossInputGroupCss = readProjectFile('packages/weimo-ui-tagtree/src/components/coss/input-group.css')
-const cossTableCss = readProjectFile('src/components/coss/table.css')
-const cossTabsCss = readProjectFile('src/components/coss/tabs.css')
+const cossTableCss = readProjectFile('packages/weimo-ui-core/src/components/coss/table.css')
+const cossTabsCss = readProjectFile('packages/weimo-ui-core/src/components/coss/tabs.css')
 const cossTooltipCss = readProjectFile('packages/weimo-ui-core/src/components/coss/tooltip.css')
 const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.css')
 const mdEditorCss = readProjectFile('packages/weimo-ui-markdown/src/components/md-editor/md-editor.css')
@@ -90,8 +90,8 @@ const sidebarShellCss = readProjectFile('packages/weimo-ui-core/src/components/s
 const sidebarDrawerBlock = blockFor(sidebarShellCss, '.weimo-sidebar--drawer')
 const tagTreeCss = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-tree/tag-tree.css')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
-const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/border-tokens.tsx')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
+const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/border-tokens.tsx')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const rootRegistry = readJson('registry.json')
@@ -118,16 +118,16 @@ const samplesBlock = blockFor(appCss, '.border-color-preview__samples')
 
 assert.equal(
   packageJson.exports?.['./components/border-color'],
-  './src/components/border-color.ts',
+  './packages/weimo-ui-core/src/components/border-color.ts',
   'package.json must expose the public border-color tone map.',
 )
 assert.equal(
   packageJson.exports?.['./styles/border-color.css'],
-  './src/components/border-color.css',
+  './packages/weimo-ui-core/src/components/border-color.css',
   'package.json must expose the standalone border-color utility stylesheet.',
 )
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/border-color-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run border-color-contract.test.mjs.',
 )
 
@@ -393,7 +393,7 @@ assert.ok(
   'component manifest must list BorderColor as a public registry-backed utility.',
 )
 assert.ok(
-  definitionsIndexSource.includes("import { borderTokensDefinition } from './border-tokens'") &&
+  definitionsIndexSource.includes("import { borderTokensDefinition } from './packages/weimo-ui-core/border-tokens'") &&
     definitionsIndexSource.includes("'border-tokens': borderTokensDefinition"),
   'component definitions index must wire the 边框 (border-tokens) detail definition.',
 )

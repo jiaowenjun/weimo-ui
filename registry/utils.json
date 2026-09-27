@@ -13,7 +13,7 @@
   ],
   "files": [
     {
-      "path": "src/lib/utils.ts",
+      "path": "packages/weimo-ui-core/src/lib/utils.ts",
       "type": "registry:lib",
       "target": "@ui/lib/utils.ts"
     }

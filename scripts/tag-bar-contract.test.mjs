@@ -37,7 +37,7 @@ function assertNotIncludes(source, snippet, message) {
 const componentSource = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bar.tsx')
 const cssSource = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bar.css')
 const docsSource = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx')
-const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const appCssSource = readProjectFile('packages/weimo-ui-site/src/App.css')
 const packageJson = readJson('package.json')
@@ -82,12 +82,12 @@ const rootPositionAnimationSource = componentSource.slice(
 )
 
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/tag-bar-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run tag-bar-contract.test.mjs.',
 )
 assert.equal(
   packageJson.exports?.['./components/tag-bar'],
-  './src/components/tag-bar.tsx',
+  './packages/weimo-ui-tagtree/src/components/tag-bar.tsx',
   'TagBar must have a public package export.',
 )
 assert.ok(
@@ -113,7 +113,7 @@ for (const snippet of [
   'type TagPickerApplyPayload,',
   'type TagPickerMode,',
   "from './tag-picker'",
-  "import { cn } from 'weimo-ui-core/components/lib/utils'",
+  "import { cn } from 'weimo-ui-core/lib/utils'",
   "import './tag-bar.css'",
   'export type TagBarProps',
   'Omit<',
@@ -456,7 +456,7 @@ assert.ok(
   'TagBar docs mode toggle must not use coss Button.',
 )
 assert.ok(
-  definitionsIndexSource.includes("import { tagDefinition } from './tag'") &&
+  definitionsIndexSource.includes("import { tagDefinition } from './packages/weimo-ui-tagtree/tag'") &&
     definitionsIndexSource.includes('tag: tagDefinition') &&
     !definitionsIndexSource.includes('tag-bar'),
   'Component definitions index must export the merged Tag docs definition.',

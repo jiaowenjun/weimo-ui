@@ -12,8 +12,8 @@ function readProjectFile(relativePath) {
 }
 
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
-const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/tag.tsx')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
+const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/tag.tsx')
 const pageSource = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx')
 const registryItem = JSON.parse(readProjectFile('registry/tag-picker.json'))
 const rootRegistry = JSON.parse(readProjectFile('registry.json'))
@@ -32,7 +32,7 @@ assert.ok(
   'components-manifest.ts must keep TagPicker registry-only after the Tag page merge.',
 )
 assert.ok(
-  definitionsIndexSource.includes("import { tagDefinition } from './tag'") &&
+  definitionsIndexSource.includes("import { tagDefinition } from './packages/weimo-ui-tagtree/tag'") &&
   definitionsIndexSource.includes('tag: tagDefinition') &&
   !definitionsIndexSource.includes('tag-picker'),
   'component-definitions index must export the merged Tag definition for TagPicker.',
@@ -136,6 +136,6 @@ assert.ok(
   'registry smoke test must install and typecheck TagPicker from the custom registry.',
 )
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/tag-picker-docs-registry-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run tag-picker-docs-registry-contract.test.mjs.',
 )

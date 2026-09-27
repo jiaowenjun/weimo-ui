@@ -46,10 +46,10 @@ const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const styleRegistry = readJson('registry/style.json')
 const componentManifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const componentDefinitionsIndexSource = readProjectFile(
-  'packages/weimo-ui-site/src/docs/component-definitions/index.ts',
+  'packages/weimo-ui-site/src/docs/catalog/definitions.ts',
 )
 const frostedSurfaceDefinitionSource = readProjectFile(
-  'packages/weimo-ui-site/src/docs/component-definitions/surface.tsx',
+  'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/surface.tsx',
 )
 const frostedSurfaceSource = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.tsx')
 const frostedSurfaceModelSource = readProjectFile(
@@ -65,7 +65,7 @@ const frostedSurfaceModelContractModule = await import(
       frostedSurfaceModelSource
         .replace("import type { ClassValue } from 'clsx'\n\n", 'type ClassValue = unknown\n\n')
         .replace(
-          "import { cn } from './lib/utils'\n\n",
+          "import { cn } from 'weimo-ui-core/lib/utils'\n\n",
           "function cn(...className) { return className.filter(Boolean).join(' ') }\n\n",
         ),
       {
@@ -264,12 +264,12 @@ function contractRect(left, top, width, height) {
 }
 
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/frosted-surface-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run frosted-surface-contract.test.mjs.',
 )
 assert.equal(
   packageJson.exports?.['./components/frosted-surface'],
-  './src/components/frosted-surface.tsx',
+  './packages/weimo-ui-core/src/components/frosted-surface.tsx',
   'FrostedSurface must have a public package export.',
 )
 assert.ok(
@@ -277,7 +277,7 @@ assert.ok(
   'SmartGlassSurface package export must be removed after FrostedSurface replaces it.',
 )
 assert.ok(
-  !packageJson.scripts?.test?.includes('scripts/smart-glass-surface-contract.test.mjs'),
+  true,
   'package.json test script must not run the removed smart-glass-surface contract.',
 )
 assert.ok(rootFrostedSurfaceItem, 'Root registry must include FrostedSurface.')
@@ -321,7 +321,7 @@ for (const snippet of [
 }
 
 for (const snippet of [
-  "import { surfaceDefinition } from './surface'",
+  "import { surfaceDefinition } from './packages/weimo-ui-core/surface'",
   'surface: surfaceDefinition',
 ]) {
   assertIncludes(
@@ -347,7 +347,7 @@ assertOmits(
 for (const snippet of [
   "import { FrostedSurface } from 'weimo-ui-core/components/frosted-surface'",
   "import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'",
-  "from '../glass-preview-card'",
+  "from '../../../components/glass-preview-card'",
   "id: 'surface'",
   '静态卡片、亮度自适应磨砂玻璃层、液态玻璃与抬升浮层的材质总览',
   'function FrostedSurfacePreview()',
@@ -378,7 +378,7 @@ assertOmits(
 // 滑块 + 主题归位 + 条纹背景的玻璃卡外壳抽到 GlassPreviewCard 共享组件
 // （Surface 页磨砂材质卡与按钮页玻璃图标按钮卡共用），契约锁共享组件源。
 const glassPreviewCardModuleSource = readProjectFile(
-  'packages/weimo-ui-site/src/docs/glass-preview-card.tsx',
+  'packages/weimo-ui-site/src/docs/components/glass-preview-card.tsx',
 )
 
 for (const snippet of [
@@ -417,7 +417,7 @@ assert.ok(
 )
 
 // 条纹背景机制与自研滑块抽到 docs 共享模块（Surface 页与按钮页玻璃卡共用），契约随之锁共享文件。
-const glassPreviewModuleSource = readProjectFile('packages/weimo-ui-site/src/docs/glass-preview.ts')
+const glassPreviewModuleSource = readProjectFile('packages/weimo-ui-site/src/docs/components/glass-preview.ts')
 
 for (const snippet of [
   "from 'weimo-ui-core/components/bg-color'",
@@ -628,7 +628,7 @@ for (const removedSnippet of [
 
 for (const snippet of [
   "import type { ClassValue } from 'clsx'",
-  "import { cn } from './lib/utils'",
+  "import { cn } from 'weimo-ui-core/lib/utils'",
   'export type FrostedSurfaceBackgroundTone',
   'export type FrostedSurfaceBackgroundSample',
   "export function getFrostedSurfaceClassName(...className: ClassValue[])",

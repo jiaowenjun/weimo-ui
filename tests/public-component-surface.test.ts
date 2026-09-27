@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { componentManifest, componentPackages } from '../packages/weimo-ui-site/src/docs/components-manifest'
+import { componentManifest, componentPackages } from '../packages/weimo-ui-site/src/docs/catalog/manifest'
 import {
   cssDeclaration,
   cssRule,
@@ -168,7 +168,7 @@ describe('package exports', () => {
     }
 
     const dialogSource = packageJson.exports['./components/coss/dialog']
-    expect(dialogSource).toBe('./src/components/coss/dialog.tsx')
+    expect(dialogSource).toBe('./packages/weimo-ui-core/src/components/coss/dialog.tsx')
     const coreDialogSource = corePackageJson.exports['./components/coss/dialog']
     expect(exportedNames(`packages/weimo-ui-core/${coreDialogSource.replace(/^\.\//u, '')}`).has('DialogPanel')).toBe(true)
   })

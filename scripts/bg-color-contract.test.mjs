@@ -111,9 +111,9 @@ const packageJson = readJson('package.json')
 const bgColorSource = readProjectFile('packages/weimo-ui-core/src/components/bg-color.ts')
 const bgColorCss = readProjectFile('packages/weimo-ui-core/src/components/bg-color.css')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
-const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/background-tokens.tsx')
-const textDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/text-tokens.tsx')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
+const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/background-tokens.tsx')
+const textDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/text-tokens.tsx')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const tokenPreviewCardCss = readProjectFile('packages/weimo-ui-core/src/components/component-preview-card.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
@@ -136,16 +136,16 @@ const surfaceBlock = firstBlockFor(
 
 assert.equal(
   packageJson.exports?.['./components/bg-color'],
-  './src/components/bg-color.ts',
+  './packages/weimo-ui-core/src/components/bg-color.ts',
   'package.json must expose the public bg-color tone map.',
 )
 assert.equal(
   packageJson.exports?.['./styles/bg-color.css'],
-  './src/components/bg-color.css',
+  './packages/weimo-ui-core/src/components/bg-color.css',
   'package.json must expose the standalone bg-color utility stylesheet.',
 )
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/bg-color-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run bg-color-contract.test.mjs.',
 )
 
@@ -361,7 +361,7 @@ assert.ok(
   'component manifest must list BgColor as a public registry-backed utility.',
 )
 assert.ok(
-  definitionsIndexSource.includes("import { backgroundTokensDefinition } from './background-tokens'") &&
+  definitionsIndexSource.includes("import { backgroundTokensDefinition } from './packages/weimo-ui-core/background-tokens'") &&
     definitionsIndexSource.includes("'background-tokens': backgroundTokensDefinition"),
   'component definitions index must wire the 背景 (background-tokens) detail definition.',
 )

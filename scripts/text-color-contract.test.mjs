@@ -55,8 +55,8 @@ const textColorSource = readProjectFile('packages/weimo-ui-core/src/components/t
 const textColorCss = readProjectFile('packages/weimo-ui-core/src/components/text-color.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
-const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/text-tokens.tsx')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
+const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/text-tokens.tsx')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const rootRegistry = readJson('registry.json')
 const styleRegistry = readJson('registry/style.json')
@@ -68,16 +68,16 @@ const samplesBlock = blockFor(appCss, '.text-color-preview__samples')
 
 assert.equal(
   packageJson.exports?.['./components/text-color'],
-  './src/components/text-color.ts',
+  './packages/weimo-ui-core/src/components/text-color.ts',
   'package.json must expose the public text-color tone map.',
 )
 assert.equal(
   packageJson.exports?.['./styles/text-color.css'],
-  './src/components/text-color.css',
+  './packages/weimo-ui-core/src/components/text-color.css',
   'package.json must expose the standalone text-color utility stylesheet.',
 )
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/text-color-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run text-color-contract.test.mjs.',
 )
 
@@ -233,7 +233,7 @@ assert.ok(
 assert.ok(
   !definitionsIndexSource.includes("from './text-color'") &&
     !definitionsIndexSource.includes('textColorDefinition') &&
-    !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/text-color.tsx')),
+    !existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/text-color.tsx')),
   'component definitions index must not expose a separate TextColor detail page.',
 )
 assert.ok(

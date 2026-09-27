@@ -26,35 +26,35 @@ const appSource = readProjectFile('packages/weimo-ui-site/src/App.tsx')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const docsShellSource = readProjectFile('packages/weimo-ui-site/src/docs/docs-shell.tsx')
 const routesSource = readProjectFile('packages/weimo-ui-site/src/docs/routes.ts')
-const componentDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/component-docs.tsx')
+const componentDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/component-docs.tsx')
 const componentManifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const componentDefinitionsIndexSource = readProjectFile(
-  'packages/weimo-ui-site/src/docs/component-definitions/index.ts',
+  'packages/weimo-ui-site/src/docs/catalog/definitions.ts',
 )
 const sidebarPreviewSource = readProjectFile(
-  'packages/weimo-ui-site/src/docs/component-definitions/sidebar-preview.tsx',
+  'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/sidebar-preview.tsx',
 )
 const componentDefinitionSources = {
-  'tagged-card': readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/tagged-card.tsx'),
-  'card-tool-bar': readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/card-tool-bar.tsx'),
+  'tagged-card': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/tagged-card.tsx'),
+  'card-tool-bar': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/card-tool-bar.tsx'),
   tag: [
-    readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/tag.tsx'),
+    readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/tag.tsx'),
     readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx'),
   ].join('\n'),
-  stat: readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/stat.tsx'),
-  'background-tokens': readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/background-tokens.tsx'),
-  'border-tokens': readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/border-tokens.tsx'),
-  button: readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/button.tsx'),
-  menu: readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/menu.tsx'),
-  surface: readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/surface.tsx'),
+  stat: readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-stats/stat.tsx'),
+  'background-tokens': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/background-tokens.tsx'),
+  'border-tokens': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/border-tokens.tsx'),
+  button: readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/button.tsx'),
+  menu: readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/menu.tsx'),
+  surface: readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/surface.tsx'),
   markdown: [
-    readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/markdown.tsx'),
-    readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/md-editor-demos.tsx'),
+    readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown.tsx'),
+    readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/md-editor-demos.tsx'),
   ].join('\n'),
-  bar: readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/bar.tsx'),
-  'page-layout': readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/page-layout.tsx'),
-  capsule: readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/capsule.tsx'),
-  'chip-button': readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/chip-button.tsx'),
+  bar: readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/bar.tsx'),
+  'page-layout': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/page-layout.tsx'),
+  capsule: readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule.tsx'),
+  'chip-button': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/chip-button.tsx'),
 }
 const componentDefinitionsSource = [
   ...Object.values(componentDefinitionSources),
@@ -95,7 +95,7 @@ for (const snippet of [
 // 搜索与主题两颗按钮收在同一枚玻璃胶囊里,色随页面背景 tone 自适应。
 for (const snippet of [
   "import { LiquidGlassSurface } from 'weimo-ui-core/components/liquid-glass'",
-  "import { LiquidGlassTile } from './liquid-glass-tile'",
+  "import { LiquidGlassTile } from './components/liquid-glass-tile'",
   '<LiquidGlassTile className="docs-liquid-top-bar">',
   'liquid-glass-icon-button-group docs-top-bar__actions',
   'liquid-glass-icon-button-group__item',
@@ -199,7 +199,7 @@ for (const snippet of [
 ]) {
   assert.ok(
     componentDocsSource.includes(snippet),
-    `packages/weimo-ui-site/src/docs/component-docs.tsx must include ${snippet}.`,
+    `packages/weimo-ui-site/src/docs/catalog/component-docs.tsx must include ${snippet}.`,
   )
 }
 
@@ -218,7 +218,7 @@ for (const componentId of [
   'chip-button',
 ]) {
   assert.ok(
-    componentDefinitionsIndexSource.includes(`from './${componentId}'`),
+    componentDefinitionsIndexSource.includes(`/${componentId}'`),
     `component-definitions/index.ts must export ${componentId}.`,
   )
 }
@@ -360,14 +360,14 @@ assert.ok(
 )
 
 assert.ok(
-  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/bg-blur.tsx')) &&
+  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/bg-blur.tsx')) &&
     componentDefinitionSources['background-tokens'].includes('bgBlurTones.map') &&
     componentDefinitionSources['background-tokens'].includes('label="背景模糊度"'),
   'BgBlur docs must be merged into the Background detail page.',
 )
 
 assert.ok(
-  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/heat-color.tsx')) &&
+  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/heat-color.tsx')) &&
     componentDefinitionSources['background-tokens'].includes('heatColorLevels.map') &&
     componentDefinitionSources['background-tokens'].includes('<ComponentPreviewCard') &&
     componentDefinitionSources['background-tokens'].includes('label="热力图"'),
@@ -563,7 +563,7 @@ assert.ok(
 assert.ok(
   !componentDocsSource.includes('galleryPreview') &&
     !componentDefinitionsSource.includes('galleryPreview') &&
-    !packageJson.scripts?.test?.includes('gallery-preview-contract.test.mjs') &&
+    !packageJson.scripts?.['test:contracts']?.includes('gallery-preview-contract.test.mjs') &&
     !existsSync(join(root, 'packages/weimo-ui-site/src/docs/pages/component-gallery-page.tsx')) &&
     !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/gallery-preview-sample.ts')) &&
     !existsSync(join(root, 'scripts/gallery-preview-contract.test.mjs')),
@@ -605,16 +605,16 @@ for (const snippet of [
 }
 
 assert.ok(
-  existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/tagged-card.tsx')),
+  existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/tagged-card.tsx')),
   'Merged tagged-card docs definition must exist.',
 )
 assert.ok(
-  existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/capsule.tsx')),
+  existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule.tsx')),
   'Merged Capsule docs definition must exist.',
 )
 assert.ok(
-  existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/chip-button.tsx')) &&
-    existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/card-tool-bar.tsx')),
+  existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/chip-button.tsx')) &&
+    existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/card-tool-bar.tsx')),
   'Package-specific ChipButton and card bar docs definitions must exist.',
 )
 

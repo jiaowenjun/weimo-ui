@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 
-import { cn } from 'weimo-ui-core/components/lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 import { MdRender, type MdRenderProps } from './md-render'
 import './md.css'
 

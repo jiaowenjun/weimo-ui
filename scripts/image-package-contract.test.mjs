@@ -91,7 +91,7 @@ assert.ok(
 )
 assert.ok(
   readProjectFile('packages/weimo-ui-image/src/components/image-uploader.tsx').includes(
-    "from 'weimo-ui-core/components/lib/utils'",
+    "from 'weimo-ui-core/lib/utils'",
   ),
   'ImageUploader must consume cn from weimo-ui-core.',
 )

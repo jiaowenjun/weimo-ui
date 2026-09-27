@@ -3,7 +3,7 @@ import { Search } from 'lucide-react'
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 
 import { getPopupSurfaceClassName } from 'weimo-ui-core/components/popup-surface'
-import { cn } from 'weimo-ui-core/components/lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 
 import './command.css'
 

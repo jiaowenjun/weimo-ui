@@ -16,7 +16,7 @@ import remarkBreaks from 'remark-breaks'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 
-import { cn } from 'weimo-ui-core/components/lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 import {
   normalizeCenteredQuoteSyntax,
   WEIMO_CENTERED_QUOTE_MARKER,

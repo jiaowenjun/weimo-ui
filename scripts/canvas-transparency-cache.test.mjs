@@ -38,9 +38,7 @@ const cacheSource = readProjectFile('packages/weimo-ui-image/src/components/canv
 const packageJson = JSON.parse(readProjectFile('package.json'))
 
 assert.ok(
-  packageJson.scripts?.test?.includes(
-    'node scripts/canvas-transparency-cache.test.mjs',
-  ),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package test script must run the Canvas transparency cache contract.',
 )
 assert.ok(

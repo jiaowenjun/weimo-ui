@@ -60,11 +60,12 @@ export function ChipButton({
   const frostedSurfaceClassName = isFrostedState
     ? getFrostedSurfaceClassName('frosted-surface--bordered')
     : undefined
-  // prefix/suffix 是整体按钮内部的独立小部件,只接受图标元素(Hash 图标、可
-  // 关闭胶囊的 X 幽灵图标按钮等),不支持普通字符——类型层已排除 string;
+  // prefix/suffix 是整体按钮内部的独立图标插槽,只接受图标元素,不支持普通
+  // 字符——类型层已排除 string;交互由外层胶囊按钮统一承接,避免在 button
+  // 内嵌套另一个 button 造成无效 HTML;
   // 默认前缀为 Hash 图标(对齐 TagBread),null 隐藏插槽,gap 不由空插槽垫宽;
-  // 嵌套图标按钮的 hover/active 色由 chip-button.css 以 nested-hover token 与
-  // 胶囊自身反馈区分,点击会冒泡至胶囊按钮统一承接。
+  // 图标插槽的 hover/active 色由 chip-button.css 以 nested-hover token 与
+  // 胶囊自身反馈区分。
   const buttonContent = (
     <>
       {isEmptyChipButtonSlot(prefix) ? null : (

@@ -23,8 +23,8 @@ function assertIncludes(source, snippet, message) {
 
 const packageJson = readJson('package.json')
 const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
-const docsDefinition = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/ocr.tsx')
+const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
+const docsDefinition = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/ocr.tsx')
 const source = readProjectFile('packages/weimo-ui-card/src/components/ocr-card.tsx')
 const css = readProjectFile('packages/weimo-ui-card/src/components/ocr-card.css')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
@@ -34,11 +34,11 @@ const registryItem = rootRegistry.items.find((item) => item.name === 'ocr-card')
 
 assert.equal(
   packageJson.exports?.['./components/ocr-card'],
-  './src/components/ocr-card.tsx',
+  './packages/weimo-ui-card/src/components/ocr-card.tsx',
   'package.json must export OcrCard.',
 )
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/ocr-card-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run ocr-card-contract.test.mjs.',
 )
 
@@ -53,7 +53,7 @@ assert.ok(
   'Component manifest must list OcrCard through the merged OCR page.',
 )
 assert.ok(
-  definitionsIndex.includes("import { ocrDefinition } from './ocr'") &&
+  definitionsIndex.includes("import { ocrDefinition } from './packages/weimo-ui-card/ocr'") &&
     definitionsIndex.includes('ocr: ocrDefinition') &&
     !definitionsIndex.includes('ocr-card'),
   'OcrCard preview must be wired into component-definitions/index.ts through the merged OCR definition.',
@@ -65,7 +65,7 @@ for (const snippet of [
   "import type { ComponentPropsWithoutRef, ReactNode } from 'react'",
   "import { Card, type CardDraft, type CardEditorOptions, type CardInitialMode, type CardLabels } from './card'",
   "import { ImageView, type ImageViewProps } from 'weimo-ui-image/components/image-view'",
-  "import { cn } from 'weimo-ui-core/components/lib/utils'",
+  "import { cn } from 'weimo-ui-core/lib/utils'",
   "import type { MdRenderImageRenderer, MdRenderImageSrcResolver } from 'weimo-ui-markdown/components/md-render'",
   "import type { ActionMenuItem } from 'weimo-ui-core/components/menu'",
   "import { OcrDetail, type OcrDetailDraft } from './ocr-detail'",

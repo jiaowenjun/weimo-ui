@@ -19,18 +19,18 @@ const composerShellSource = readProjectFile('packages/weimo-ui-card/src/componen
 const cssSource = readProjectFile('packages/weimo-ui-card/src/components/card-composer.css')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
-const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/tagged-card.tsx')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
+const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/tagged-card.tsx')
 const registry = JSON.parse(readProjectFile('registry.json'))
 const registryItem = readProjectFile('registry/card-composer.json')
 
 assert.ok(
-  packageJson.scripts?.test?.includes('node scripts/card-composer-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package test script must run the CardComposer contract.',
 )
 assert.equal(
   packageJson.exports?.['./components/card-composer'],
-  './src/components/card-composer.tsx',
+  './packages/weimo-ui-card/src/components/card-composer.tsx',
   'package.json must expose ./components/card-composer.',
 )
 
@@ -175,7 +175,7 @@ for (const snippet of [
 }
 
 assert.ok(
-  definitionsIndexSource.includes("import { taggedCardDefinition } from './tagged-card'") &&
+  definitionsIndexSource.includes("import { taggedCardDefinition } from './packages/weimo-ui-card/tagged-card'") &&
     definitionsIndexSource.includes("'tagged-card': taggedCardDefinition") &&
     !definitionsIndexSource.includes('card-composer'),
   'CardComposer preview must be wired through the merged tagged-card definition.',

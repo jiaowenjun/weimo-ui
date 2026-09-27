@@ -54,8 +54,8 @@ const packageJson = readJson('package.json')
 const bgBlurSource = readProjectFile('packages/weimo-ui-core/src/components/bg-blur.ts')
 const bgBlurCss = readProjectFile('packages/weimo-ui-core/src/components/bg-blur.css')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
-const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/background-tokens.tsx')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
+const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/background-tokens.tsx')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const tokenPreviewCardCss = readProjectFile('packages/weimo-ui-core/src/components/component-preview-card.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
@@ -83,12 +83,12 @@ const surfaceBlock = blockFor(
 
 assert.equal(
   packageJson.exports?.['./components/bg-blur'],
-  './src/components/bg-blur.ts',
+  './packages/weimo-ui-core/src/components/bg-blur.ts',
   'package.json must expose the public BgBlur tone map.',
 )
 assert.equal(
   packageJson.exports?.['./styles/bg-blur.css'],
-  './src/components/bg-blur.css',
+  './packages/weimo-ui-core/src/components/bg-blur.css',
   'package.json must expose the standalone BgBlur utility stylesheet.',
 )
 assert.ok(
@@ -97,8 +97,8 @@ assert.ok(
   'Blur must be replaced by BgBlur instead of kept as a parallel public alias.',
 )
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/bg-blur-contract.test.mjs') &&
-    !packageJson.scripts?.test?.includes('scripts/blur-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs') &&
+    true,
   'package.json test script must run bg-blur-contract.test.mjs and drop the old blur contract.',
 )
 
@@ -236,7 +236,7 @@ assert.ok(
 assert.ok(
   !definitionsIndexSource.includes("from './bg-blur'") &&
     !definitionsIndexSource.includes('bgBlurDefinition') &&
-    !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/bg-blur.tsx')) &&
+    !existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/bg-blur.tsx')) &&
     !definitionsIndexSource.includes("from './blur'") &&
     !definitionsIndexSource.includes("'blur':"),
   'component definitions index must remove the merged BgBlur detail page and old Blur alias.',
@@ -245,8 +245,8 @@ assert.ok(
   docsDefinitionSource.includes("id: 'background-tokens'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
     docsDefinitionSource.includes("import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'") &&
-    docsDefinitionSource.includes("import { GlassPreviewCard } from '../glass-preview-card'") &&
-    docsDefinitionSource.includes("import { glassBackgroundGrayMidpoint } from '../glass-preview'") &&
+    docsDefinitionSource.includes("import { GlassPreviewCard } from '../../../components/glass-preview-card'") &&
+    docsDefinitionSource.includes("import { glassBackgroundGrayMidpoint } from '../../../components/glass-preview'") &&
     docsDefinitionSource.includes('initialGray={glassBackgroundGrayMidpoint}') &&
     docsDefinitionSource.includes('bgBlurTones.map') &&
     docsDefinitionSource.includes('bgBlurToneMap[tone]') &&

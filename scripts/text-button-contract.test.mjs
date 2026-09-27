@@ -35,8 +35,8 @@ const rootRegistry = readJson('registry.json')
 const standaloneRegistryItem = readJson('registry/text-button.json')
 const source = readProjectFile('packages/weimo-ui-core/src/components/text-button.tsx')
 const css = readProjectFile('packages/weimo-ui-core/src/components/text-button.css')
-const docsSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/button.tsx')
-const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const docsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/button.tsx')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const registryItem = rootRegistry.items.find((item) => item.name === 'text-button')
@@ -51,17 +51,17 @@ const unlayeredDisabledBlock = cssBlockFor(css, 'button.text-button:disabled')
 const previewBlock = cssBlockFor(appCss, '.text-button-preview')
 
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/text-button-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run text-button-contract.test.mjs.',
 )
 assert.equal(
   packageJson.exports?.['./components/text-button'],
-  './src/components/text-button.tsx',
+  './packages/weimo-ui-core/src/components/text-button.tsx',
   'TextButton must have a public package export.',
 )
 assert.equal(
   packageJson.exports?.['./styles/text-button.css'],
-  './src/components/text-button.css',
+  './packages/weimo-ui-core/src/components/text-button.css',
   'TextButton must expose its standalone stylesheet.',
 )
 assert.ok(registryItem, 'TextButton must be listed in registry.json.')
@@ -83,7 +83,7 @@ assert.deepEqual(
 
 for (const snippet of [
   "import { forwardRef, type ComponentPropsWithoutRef } from 'react'",
-  "import { cn } from './lib/utils'",
+  "import { cn } from 'weimo-ui-core/lib/utils'",
   "import './text-button.css'",
   'export type TextButtonProps = ComponentPropsWithoutRef<\'button\'>',
   'forwardRef<HTMLButtonElement, TextButtonProps>(function TextButton',
@@ -164,7 +164,7 @@ assert.ok(
 )
 assertIncludes(
   definitionsIndexSource,
-  "import { buttonDefinition } from './button'",
+  "import { buttonDefinition } from './packages/weimo-ui-core/button'",
   'Button definition must be imported from component-definitions/index.ts.',
 )
 assertIncludes(

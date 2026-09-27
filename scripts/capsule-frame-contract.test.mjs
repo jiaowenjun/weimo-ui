@@ -60,7 +60,7 @@ const reducedMotionBlock = blockFor(
 )
 
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/capsule-frame-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run capsule-frame-contract.test.mjs.',
 )
 assert.ok(

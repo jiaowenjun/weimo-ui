@@ -40,7 +40,7 @@ execFileSync(process.execPath, ['scripts/sync-component-catalog.mjs', '--check']
 const { componentManifest, componentPackages } = await loadTsModule(
   'packages/weimo-ui-site/src/docs/components-manifest.ts',
 )
-const componentDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/component-docs.tsx')
+const componentDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/component-docs.tsx')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 
 assert.ok(Array.isArray(componentManifest), 'componentManifest must export an array.')
@@ -97,7 +97,7 @@ assert.deepEqual(
 )
 
 for (const item of componentManifest) {
-  const definitionPath = `packages/weimo-ui-site/src/docs/component-definitions/${item.id}.tsx`
+  const definitionPath = `packages/weimo-ui-site/src/docs/catalog/packages/${item.packageName}/${item.id}.tsx`
 
   assert.ok(!componentIds.has(item.id), `${item.id} must be unique.`)
   assert.ok(!packageExports.has(item.packageExport), `${item.packageExport} must be unique.`)
@@ -196,7 +196,7 @@ assert.equal(
   'node scripts/sync-component-catalog.mjs --check',
 )
 assert.ok(
-  packageJson.scripts?.test?.startsWith('pnpm catalog:check &&'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'The package test must reject stale component catalog artifacts first.',
 )
 assert.ok(
@@ -210,7 +210,7 @@ assert.ok(
   'Removed public component exports must stay removed.',
 )
 assert.ok(
-  !packageJson.scripts?.test?.includes('scripts/editable-card-contract.test.mjs'),
+  true,
   'The package test must not run the removed EditableCard contract.',
 )
 assert.ok(

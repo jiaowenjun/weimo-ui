@@ -44,8 +44,8 @@ const fontSizeCss = readProjectFile('packages/weimo-ui-core/src/components/font-
 const cossCardCss = readProjectFile('packages/weimo-ui-site/src/components/coss/card.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
-const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/text-tokens.tsx')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
+const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/text-tokens.tsx')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const rootRegistry = readJson('registry.json')
 const styleRegistry = readJson('registry/style.json')
@@ -57,16 +57,16 @@ const samplesBlock = blockFor(appCss, '.font-size-preview__samples')
 
 assert.equal(
   packageJson.exports?.['./components/font-size'],
-  './src/components/font-size.ts',
+  './packages/weimo-ui-core/src/components/font-size.ts',
   'package.json must expose the public font-size scale map.',
 )
 assert.equal(
   packageJson.exports?.['./styles/font-size.css'],
-  './src/components/font-size.css',
+  './packages/weimo-ui-core/src/components/font-size.css',
   'package.json must expose the standalone font-size utility stylesheet.',
 )
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/font-size-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run font-size-contract.test.mjs.',
 )
 
@@ -152,7 +152,7 @@ assert.ok(
   'component manifest must list the 文字 page as a public registry-backed token utility.',
 )
 assert.ok(
-  definitionsIndexSource.includes("import { textTokensDefinition } from './text-tokens'") &&
+  definitionsIndexSource.includes("import { textTokensDefinition } from './packages/weimo-ui-core/text-tokens'") &&
     definitionsIndexSource.includes("'text-tokens': textTokensDefinition"),
   'component definitions index must wire the 文字 (text) detail definition.',
 )

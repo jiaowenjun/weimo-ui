@@ -29,8 +29,8 @@ function cssBlockFor(source, selector) {
 const componentSource = readProjectFile('packages/weimo-ui-markdown/src/components/md-view.tsx')
 const mdViewCssSource = readProjectFile('packages/weimo-ui-markdown/src/components/md-view.css')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/markdown.tsx')
-const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown.tsx')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const cssSource = readProjectFile('packages/weimo-ui-site/src/App.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 const markdownPackageJson = JSON.parse(readProjectFile('packages/weimo-ui-markdown/package.json'))
@@ -311,7 +311,7 @@ assert.ok(
 )
 
 assert.ok(
-  definitionsIndexSource.includes("import { markdownDefinition } from './markdown'") &&
+  definitionsIndexSource.includes("import { markdownDefinition } from './packages/weimo-ui-markdown/markdown'") &&
     definitionsIndexSource.includes('markdown: markdownDefinition') &&
     !definitionsIndexSource.includes('md-view'),
   'component-definitions/index.ts must register the merged Markdown definition for MdView.',
@@ -321,8 +321,8 @@ for (const snippet of [
   "import { useState } from 'react'",
   "import { MdView, type MdViewMode } from 'weimo-ui-markdown/components/md-view'",
   "import { TextButton } from 'weimo-ui-core/components/text-button'",
-  "import { PreviewToggle } from '../preview-toggle'",
-  "import { mdRenderSample } from './markdown-sample'",
+  "import { PreviewToggle } from '../../../components/preview-toggle'",
+  "import { mdRenderSample } from '../../fixtures/markdown-sample'",
   "const [mode, setMode] = useState<MdViewMode>('view')",
   'const [markdown, setMarkdown] = useState(mdRenderSample)',
   '<PreviewToggle',
@@ -427,11 +427,11 @@ for (const [block, snippet, message] of [
 }
 
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/md-view-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run md-view-contract.test.mjs.',
 )
 assert.ok(
-  packageJson.exports?.['./components/md-view'] === './src/components/md-view.tsx' &&
+  packageJson.exports?.['./components/md-view'] === './packages/weimo-ui-markdown/src/components/md-view.tsx' &&
     markdownPackageJson.exports?.['./components/md-view'] === './src/components/md-view.tsx',
   'Root and weimo-ui-markdown packages must expose ./components/md-view.',
 )

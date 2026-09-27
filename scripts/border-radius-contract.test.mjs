@@ -39,8 +39,8 @@ const packageJson = readJson('package.json')
 const borderRadiusSource = readProjectFile('packages/weimo-ui-core/src/components/border-radius.ts')
 const menuCss = readProjectFile('packages/weimo-ui-core/src/components/menu.css')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
-const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/border-tokens.tsx')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
+const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/border-tokens.tsx')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const rootRegistry = readJson('registry.json')
@@ -51,11 +51,11 @@ const registryItem = rootRegistry.items.find((item) => item.name === 'border-rad
 
 assert.equal(
   packageJson.exports?.['./components/border-radius'],
-  './src/components/border-radius.ts',
+  './packages/weimo-ui-core/src/components/border-radius.ts',
   'package.json must expose the public border-radius scale map.',
 )
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/border-radius-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run border-radius-contract.test.mjs.',
 )
 
@@ -149,7 +149,7 @@ assert.ok(
 assert.ok(
   !definitionsIndexSource.includes("from './border-radius'") &&
     !definitionsIndexSource.includes('borderRadiusDefinition') &&
-    !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/border-radius.tsx')),
+    !existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/border-radius.tsx')),
   'component definitions index must not expose a separate BorderRadius detail page.',
 )
 assert.ok(

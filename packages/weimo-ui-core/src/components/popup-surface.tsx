@@ -1,7 +1,7 @@
 import type { ComponentPropsWithoutRef } from 'react'
 import type { ClassValue } from 'clsx'
 
-import { cn } from './lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 
 import './popup-surface.css'
 

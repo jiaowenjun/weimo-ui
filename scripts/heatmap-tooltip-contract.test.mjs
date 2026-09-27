@@ -168,6 +168,6 @@ assert.ok(
   'Heatmap registry item must ship the public HeatColor implementation.',
 )
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/heatmap-tooltip-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run heatmap-tooltip-contract.test.mjs.',
 )

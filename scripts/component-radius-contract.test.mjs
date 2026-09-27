@@ -5,10 +5,12 @@ import { fileURLToPath } from 'node:url'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const componentsRoots = [
-  join(root, 'src/components'),
+  join(root, 'packages/weimo-ui-core/src/components'),
   join(root, 'packages/weimo-ui-card/src/components'),
   join(root, 'packages/weimo-ui-image/src/components'),
   join(root, 'packages/weimo-ui-stats/src/components'),
+  join(root, 'packages/weimo-ui-markdown/src/components'),
+  join(root, 'packages/weimo-ui-tagtree/src/components'),
 ]
 
 function collectCssFiles(directory) {

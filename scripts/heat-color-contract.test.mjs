@@ -40,8 +40,8 @@ const heatColorSource = readProjectFile('packages/weimo-ui-core/src/components/h
 const heatColorCss = readProjectFile('packages/weimo-ui-core/src/components/heat-color.css')
 const heatmapCss = readProjectFile('packages/weimo-ui-stats/src/components/heatmap/heatmap.css')
 const heatmapSource = readProjectFile('packages/weimo-ui-stats/src/components/heatmap/heatmap.tsx')
-const backgroundTokensDocsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/background-tokens.tsx')
-const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const backgroundTokensDocsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/background-tokens.tsx')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
@@ -58,16 +58,16 @@ const heatColorSwatchBlock = cssBlockFor(appCss, '.heat-color-preview__swatch')
 
 assert.equal(
   packageJson.exports?.['./components/heat-color'],
-  './src/components/heat-color.tsx',
+  './packages/weimo-ui-core/src/components/heat-color.tsx',
   'package.json must expose the public HeatColor entrypoint.',
 )
 assert.equal(
   packageJson.exports?.['./styles/heat-color.css'],
-  './src/components/heat-color.css',
+  './packages/weimo-ui-core/src/components/heat-color.css',
   'package.json must expose the standalone HeatColor utility stylesheet.',
 )
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/heat-color-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run heat-color-contract.test.mjs.',
 )
 
@@ -163,7 +163,7 @@ assert.ok(
 )
 
 assert.ok(
-  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/heat-color.tsx')) &&
+  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/heat-color.tsx')) &&
     !definitionsIndexSource.includes("from './heat-color'") &&
     !definitionsIndexSource.includes('heatColorDefinition') &&
     /id: 'heat-color',[\s\S]*?docs: false,/.test(manifestSource),

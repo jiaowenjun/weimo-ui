@@ -262,6 +262,6 @@ assert.ok(
   'TagTree must coordinate enter and removal timing in React.',
 )
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/tag-tree-style-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run tag-tree-style-contract.test.mjs.',
 )

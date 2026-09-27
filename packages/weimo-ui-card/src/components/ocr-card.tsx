@@ -4,7 +4,7 @@ import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 
 import { Card, type CardDraft, type CardEditorOptions, type CardInitialMode, type CardLabels } from './card'
 import { ImageView, type ImageViewProps } from 'weimo-ui-image/components/image-view'
-import { cn } from 'weimo-ui-core/components/lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 import type { MdRenderImageRenderer, MdRenderImageSrcResolver } from 'weimo-ui-markdown/components/md-render'
 import type { ActionMenuItem } from 'weimo-ui-core/components/menu'
 import { OcrDetail, type OcrDetailDraft } from './ocr-detail'

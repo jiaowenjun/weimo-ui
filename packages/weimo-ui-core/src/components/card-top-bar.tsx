@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 
-import { cn } from './lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 import { ModeButton, type ModeButtonMode } from './mode-button'
 import type { ActionMenuItem } from './menu'
 

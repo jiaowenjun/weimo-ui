@@ -134,6 +134,6 @@ assert.ok(
 )
 
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/docs-panel-scroll-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run docs-panel-scroll-contract.test.mjs.',
 )

@@ -6,7 +6,7 @@ import {
   useFrostedSurfaceBackgroundToneRef,
 } from './frosted-surface'
 import { getIconButtonClassName, type IconButtonSize } from './icon-button-model'
-import { cn } from './lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 
 import './frosted-icon-button-group.css'
 

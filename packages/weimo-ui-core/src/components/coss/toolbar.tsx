@@ -1,7 +1,7 @@
 import { Toolbar as ToolbarPrimitive } from '@base-ui/react/toolbar'
 import type { ReactElement } from 'react'
 
-import { cn } from '../lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 
 export function Toolbar({
   className,

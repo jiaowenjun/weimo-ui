@@ -9,7 +9,7 @@ import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'
 import { ImageUploader, type ImageUploaderActionApi, type ImageUploaderProps } from 'weimo-ui-image/components/image-uploader'
 import { TagBar } from 'weimo-ui-tagtree/components/tag-bar'
 import { getCardSurfaceClassName } from 'weimo-ui-core/components/card-surface'
-import { cn } from 'weimo-ui-core/components/lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 
 import './card.css'
 import './card-editable.css'

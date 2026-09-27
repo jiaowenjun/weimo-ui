@@ -44,7 +44,7 @@ const cossBreadcrumbSource = readProjectFile('packages/weimo-ui-tagtree/src/comp
 const cossBreadcrumbCss = readProjectFile('packages/weimo-ui-tagtree/src/components/coss/breadcrumb.css')
 const packageJson = readJson('package.json')
 const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const docsDefinition = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx')
 const rootRegistry = readJson('registry.json')
 const standaloneRegistry = readJson('registry/tag-bread.json')
@@ -77,12 +77,12 @@ const docsPreviewEllipsisBlock = blockFor(
 )
 
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/tag-bread-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run tag-bread-contract.test.mjs.',
 )
 assert.equal(
   packageJson.exports?.['./components/tag-bread'],
-  './src/components/tag-bread.tsx',
+  './packages/weimo-ui-tagtree/src/components/tag-bread.tsx',
   'package.json must export TagBread.',
 )
 assert.ok(
@@ -94,7 +94,7 @@ assert.ok(
   'Component manifest must keep TagBread registry-only after the Tag page merge.',
 )
 assert.ok(
-  definitionsIndex.includes("import { tagDefinition } from './tag'") &&
+  definitionsIndex.includes("import { tagDefinition } from './packages/weimo-ui-tagtree/tag'") &&
     definitionsIndex.includes('tag: tagDefinition') &&
     !definitionsIndex.includes('tag-bread'),
   'TagBread preview must be wired into component-definitions/index.ts through the merged Tag definition.',
@@ -177,7 +177,7 @@ for (const snippet of [
   "import type { ComponentProps, ReactElement } from 'react'",
   "import { mergeProps } from '@base-ui/react/merge-props'",
   "import { useRender } from '@base-ui/react/use-render'",
-  "import { cn } from 'weimo-ui-core/components/lib/utils'",
+  "import { cn } from 'weimo-ui-core/lib/utils'",
   "import './breadcrumb.css'",
   'export function Breadcrumb',
   'aria-label="breadcrumb"',

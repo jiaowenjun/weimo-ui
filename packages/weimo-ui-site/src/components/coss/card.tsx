@@ -2,7 +2,7 @@ import type { ComponentPropsWithoutRef } from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 
 import { getCardSurfaceClassName } from 'weimo-ui-core/components/card-surface'
-import { cn } from 'weimo-ui-core/components/lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 
 import './card.css'
 

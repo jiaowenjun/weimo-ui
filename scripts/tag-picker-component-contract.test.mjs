@@ -59,26 +59,26 @@ assert.ok(
 )
 assert.equal(
   packageJson.exports?.['./components/tag-picker'],
-  './src/components/tag-picker.tsx',
+  './packages/weimo-ui-tagtree/src/components/tag-picker.tsx',
   'package.json must expose ./components/tag-picker.',
 )
 assert.equal(
   packageJson.exports?.['./components/float-bar'],
-  './src/components/float-bar.tsx',
+  './packages/weimo-ui-core/src/components/float-bar.tsx',
   'FloatBar must have a public package export.',
 )
 assert.equal(
   packageJson.exports?.['./components/action-dialog'],
-  './src/components/action-dialog.tsx',
+  './packages/weimo-ui-core/src/components/action-dialog.tsx',
   'ActionDialog must have a public package export.',
 )
 assert.equal(
   packageJson.exports?.['./components/bottom-bar'],
-  './src/components/bottom-bar.tsx',
+  './packages/weimo-ui-core/src/components/bottom-bar.tsx',
   'BottomBar must have a public package export.',
 )
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/tag-picker-component-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run tag-picker-component-contract.test.mjs.',
 )
 
@@ -125,7 +125,7 @@ assert.equal(
 
 assert.ok(
   floatBarSource.includes("import { forwardRef, type ComponentPropsWithoutRef, type ReactNode } from 'react'") &&
-  floatBarSource.includes("import { cn } from './lib/utils'") &&
+  floatBarSource.includes("import { cn } from 'weimo-ui-core/lib/utils'") &&
   floatBarSource.includes("import './float-bar.css'") &&
   floatBarSource.includes('export type FloatBarProps') &&
   floatBarSource.includes('leftSlot?: ReactNode') &&
@@ -159,7 +159,7 @@ assert.ok(
 assert.ok(
   bottomBarSource.includes("import { forwardRef, type ComponentPropsWithoutRef, type ReactNode } from 'react'") &&
   bottomBarSource.includes("import { FloatBar } from './float-bar'") &&
-  bottomBarSource.includes("import { cn } from './lib/utils'") &&
+  bottomBarSource.includes("import { cn } from 'weimo-ui-core/lib/utils'") &&
   bottomBarSource.includes("import './bottom-bar.css'") &&
   bottomBarSource.includes('export type BottomBarProps') &&
   bottomBarSource.includes('leftSlot?: ReactNode') &&
@@ -198,7 +198,7 @@ assert.ok(
     actionDialogSource.includes("import { BottomBar } from './bottom-bar'") &&
     actionDialogSource.includes("import { FloatBar } from './float-bar'") &&
     actionDialogSource.includes("import { FrostedIconButton } from './frosted-icon-button'") &&
-    actionDialogSource.includes("import { cn } from './lib/utils'") &&
+    actionDialogSource.includes("import { cn } from 'weimo-ui-core/lib/utils'") &&
     actionDialogSource.includes("import './action-dialog.css'") &&
     actionDialogSource.includes('export type ActionDialogProps') &&
     actionDialogSource.includes('bottomBarLabel?: string') &&

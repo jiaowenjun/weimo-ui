@@ -48,11 +48,11 @@ const markdownImageRendererSource = readProjectFile(
 const markdownImageSizeSource = readProjectFile('packages/weimo-ui-markdown/src/components/markdown-image-size.ts')
 const markdownContentCss = readProjectFile('packages/weimo-ui-markdown/src/components/markdown-content.css')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/md.tsx')
+const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/md.tsx')
 const mdRenderDefinitionSource = readProjectFile(
-  'packages/weimo-ui-site/src/docs/component-definitions/markdown.tsx',
+  'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown.tsx',
 )
-const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const tokensCss = readProjectFile('packages/weimo-ui-markdown/src/styles/tokens.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
@@ -165,7 +165,7 @@ const legacyMarkdownTokenNames = [
 ]
 
 assert.ok(
-  packageJson.exports?.['./components/md'] === './src/components/md.tsx' &&
+  packageJson.exports?.['./components/md'] === './packages/weimo-ui-markdown/src/components/md.tsx' &&
     markdownPackageJson.exports?.['./components/md'] === './src/components/md.tsx',
   'Root and weimo-ui-markdown packages must expose ./components/md.',
 )
@@ -244,16 +244,16 @@ assert.ok(
 )
 
 assert.ok(
-  definitionsIndexSource.includes("import { mdDefinition } from './md'") &&
+  definitionsIndexSource.includes("import { mdDefinition } from './packages/weimo-ui-markdown/md'") &&
     definitionsIndexSource.includes('md: mdDefinition'),
   'component-definitions/index.ts must export mdDefinition.',
 )
 
 for (const snippet of [
   "import { Md } from 'weimo-ui-markdown/components/md'",
-  "import { CardPanel } from '../../components/coss/card'",
+  "import { CardPanel } from '../../../../components/coss/card'",
   "import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'",
-  "import { mdRenderSample } from './markdown-sample'",
+  "import { mdRenderSample } from '../../fixtures/markdown-sample'",
   "id: 'md'",
   "frame: 'plain',",
   'markdownStyleTokens',
@@ -717,7 +717,10 @@ const mdRenderTestContext = {
         jsxs: () => null,
       }
     }
-    if (specifier === './lib/utils' || specifier === 'weimo-ui-core/components/lib/utils') {
+    if (
+      specifier === 'weimo-ui-core/lib/utils' ||
+      specifier === 'weimo-ui-core/components/lib/utils'
+    ) {
       return { cn: (...values) => values.filter(Boolean).join(' ') }
     }
     if (specifier === './markdown-centered-quote') {

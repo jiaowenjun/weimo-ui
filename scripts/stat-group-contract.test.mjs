@@ -30,8 +30,8 @@ const source = readProjectFile('packages/weimo-ui-stats/src/components/stat-grou
 const css = readProjectFile('packages/weimo-ui-stats/src/components/stat-group.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
-const docsDefinition = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/stat.tsx')
+const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
+const docsDefinition = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-stats/stat.tsx')
 const rootRegistry = JSON.parse(readProjectFile('registry.json'))
 const standaloneRegistry = JSON.parse(readProjectFile('registry/stat-group.json'))
 const registryItem = rootRegistry.items.find((item) => item.name === 'stat-group')
@@ -46,7 +46,7 @@ assert.ok(
   'StatGroup must use plain div props plus ReactNode metric fields.',
 )
 assert.ok(
-  source.includes("import { cn } from 'weimo-ui-core/components/lib/utils'") &&
+  source.includes("import { cn } from 'weimo-ui-core/lib/utils'") &&
     source.includes("import './stat-group.css'") &&
     !source.includes("from './stat-block'") &&
     !source.includes('StatBlock') &&
@@ -121,7 +121,7 @@ assertIncludes(
 
 assert.equal(
   packageJson.exports?.['./components/stat-group'],
-  './src/components/stat-group.tsx',
+  './packages/weimo-ui-stats/src/components/stat-group.tsx',
   'package.json must export StatGroup.',
 )
 assert.ok(
@@ -134,7 +134,7 @@ assert.ok(
   'Component manifest must list StatGroup through the merged Stat page.',
 )
 assert.ok(
-  definitionsIndex.includes("import { statDefinition } from './stat'") &&
+  definitionsIndex.includes("import { statDefinition } from './packages/weimo-ui-stats/stat'") &&
     definitionsIndex.includes('stat: statDefinition') &&
     !definitionsIndex.includes('stat-group'),
   'Stat docs definition must be wired into component-definitions/index.ts.',

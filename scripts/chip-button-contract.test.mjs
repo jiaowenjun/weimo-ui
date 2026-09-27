@@ -49,8 +49,8 @@ const css = readProjectFile('packages/weimo-ui-tagtree/src/components/chip-butto
 const surfaceCss = readProjectFile('packages/weimo-ui-core/src/components/capsule-frame.css')
 const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
-const docsSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/chip-button.tsx')
-const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const docsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/chip-button.tsx')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 
@@ -102,12 +102,12 @@ assert.ok(
 )
 
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/chip-button-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run chip-button-contract.test.mjs.',
 )
 assert.equal(
   packageJson.exports?.['./components/chip-button'],
-  './src/components/chip-button.tsx',
+  './packages/weimo-ui-tagtree/src/components/chip-button.tsx',
   'ChipButton must have a public package export.',
 )
 assert.ok(
@@ -271,8 +271,8 @@ assert.ok(
   docsSource.includes("import { useLayoutEffect, useRef, useState } from 'react'") &&
     docsSource.includes("import { Hash, Plus, X } from 'lucide-react'") &&
     docsSource.includes("import { ChipButton } from 'weimo-ui-tagtree/components/chip-button'") &&
-    docsSource.includes("import { GlassPreviewCard } from '../glass-preview-card'") &&
-    docsSource.includes("import { PreviewToggle } from '../preview-toggle'") &&
+    docsSource.includes("import { GlassPreviewCard } from '../../../components/glass-preview-card'") &&
+    docsSource.includes("import { PreviewToggle } from '../../../components/preview-toggle'") &&
     docsSource.includes("id: 'chip-button'") &&
     docsSource.includes('function CapsuleMaterialDemo') &&
     docsSource.includes('<CapsuleMaterialDemo />') &&
@@ -287,11 +287,10 @@ assert.ok(
     docsSource.includes('function SuffixChipDemo') &&
     docsSource.includes('<SuffixChipDemo />') &&
     docsSource.includes('label="胶囊后缀"') &&
-    docsSource.includes("import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'") &&
     docsSource.includes('suffix={') &&
-    docsSource.includes('<GhostIconButton aria-label="移除标签" size="xs">') &&
+    docsSource.includes('<span aria-hidden="true" className="icon-button icon-button--ghost icon-button--xs">') &&
     docsSource.includes('<X aria-hidden="true" />'),
-  'Capsule docs cards must show button-form capsules only: prefix and suffix demos render ChipButton beside the capsule material card.',
+  'Capsule docs cards must show valid button-form capsules: suffix icons stay non-interactive inside the outer ChipButton.',
 )
 assert.ok(
   docsSource.includes("const [state, setState] = useState<'default' | 'glass'>('default')") &&
@@ -336,7 +335,7 @@ assert.ok(
   'Capsule chip-button demo cards must lay out their buttons in the shared preview row; the redundant state-pair and text-size cards must stay removed.',
 )
 assert.ok(
-  definitionsIndexSource.includes("import { chipButtonDefinition } from './chip-button'") &&
+  definitionsIndexSource.includes("import { chipButtonDefinition } from './packages/weimo-ui-tagtree/chip-button'") &&
     definitionsIndexSource.includes("'chip-button': chipButtonDefinition"),
   'Component definitions index must register the standalone tagtree ChipButton page.',
 )

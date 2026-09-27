@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest'
 
-import { bgColorToneMap, type BgColorTone } from '../src/components/bg-color'
-import { borderColorToneMap, borderColorTones } from '../src/components/border-color'
-import { textColorToneMap, type TextColorTone } from '../src/components/text-color'
+import { bgColorToneMap, type BgColorTone } from '../packages/weimo-ui-core/src/components/bg-color'
+import { borderColorToneMap, borderColorTones } from '../packages/weimo-ui-core/src/components/border-color'
+import { textColorToneMap, type TextColorTone } from '../packages/weimo-ui-core/src/components/text-color'
 import {
   effectiveColorLightness,
   parseColorLightness,
   sortByThemeLightness,
-} from '../packages/weimo-ui-site/src/docs/token-preview-color'
+} from '../packages/weimo-ui-site/src/docs/components/token-preview-color'
 
 describe('token preview color ordering', () => {
   it('parses the CSS color formats used by token maps', () => {

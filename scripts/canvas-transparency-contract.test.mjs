@@ -21,9 +21,9 @@ const source = readProjectFile('packages/weimo-ui-image/src/components/canvas-tr
 const cacheSource = readProjectFile('packages/weimo-ui-image/src/components/canvas-transparency-cache.ts')
 const modelSource = readProjectFile('packages/weimo-ui-image/src/components/canvas-transparency-model.ts')
 const docsDefinition = readProjectFile(
-  'packages/weimo-ui-site/src/docs/component-definitions/image.tsx',
+  'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-image/image.tsx',
 )
-const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const packageJson = readJson('package.json')
 const rootRegistry = readJson('registry.json')
@@ -34,18 +34,16 @@ const registryItem = rootRegistry.items.find(
 
 assert.equal(
   packageJson.exports?.['./components/canvas-transparency'],
-  './src/components/canvas-transparency.tsx',
+  './packages/weimo-ui-image/src/components/canvas-transparency.tsx',
   'package.json must export CanvasTransparency.',
 )
 assert.equal(
   packageJson.exports?.['./components/canvas-transparency-cache'],
-  './src/components/canvas-transparency-cache.ts',
+  './packages/weimo-ui-image/src/components/canvas-transparency-cache.ts',
   'package.json must expose CanvasTransparency cache controls separately from the React component.',
 )
 assert.ok(
-  packageJson.scripts?.test?.includes(
-    'scripts/canvas-transparency-contract.test.mjs',
-  ),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run canvas-transparency-contract.test.mjs.',
 )
 assert.ok(
@@ -58,7 +56,7 @@ assert.ok(
   'Component manifest must keep CanvasTransparency registry-only in the media-ocr group after the Image page merge.',
 )
 assert.ok(
-  definitionsIndex.includes("import { imageDefinition } from './image'") &&
+  definitionsIndex.includes("import { imageDefinition } from './packages/weimo-ui-image/image'") &&
     definitionsIndex.includes('image: imageDefinition') &&
     !definitionsIndex.includes('canvas-transparency'),
   'CanvasTransparency preview must be wired into the definitions index through the merged Image definition.',

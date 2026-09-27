@@ -29,9 +29,9 @@ const expectedTones = [
 
 const packageJson = readJson('package.json')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const pressableSource = readProjectFile('packages/weimo-ui-core/src/components/pressable.ts')
-const backgroundTokensDocsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/background-tokens.tsx')
+const backgroundTokensDocsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/background-tokens.tsx')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const registrySmokeSource = readProjectFile('scripts/registry-smoke.test.mjs')
 const rootRegistry = readJson('registry.json')
@@ -40,12 +40,12 @@ const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const rootPressableItem = rootRegistry.items.find((item) => item.name === 'pressable')
 
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/pressable-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run the Pressable focused contract.',
 )
 assert.equal(
   packageJson.exports?.['./components/pressable'],
-  './src/components/pressable.ts',
+  './packages/weimo-ui-core/src/components/pressable.ts',
   'package.json must expose the public Pressable tone map.',
 )
 
@@ -92,7 +92,7 @@ assert.ok(
 )
 
 assert.ok(
-  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/pressable.tsx')) &&
+  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/pressable.tsx')) &&
     !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/pressable-demo.tsx')) &&
     backgroundTokensDocsDefinitionSource.includes("import { pressableToneMap, pressableTones } from 'weimo-ui-core/components/pressable'") &&
     !backgroundTokensDocsDefinitionSource.includes('pressableFeedback') &&

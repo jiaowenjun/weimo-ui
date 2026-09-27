@@ -36,8 +36,8 @@ const source = readProjectFile('packages/weimo-ui-core/src/components/chip.tsx')
 const css = readProjectFile('packages/weimo-ui-core/src/components/chip.css')
 const surfaceCss = readProjectFile('packages/weimo-ui-core/src/components/capsule-frame.css')
 const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.css')
-const docsSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/capsule.tsx')
-const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/component-definitions/index.ts')
+const docsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule.tsx')
+const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const previewCardCss = readProjectFile('packages/weimo-ui-core/src/components/component-preview-card.css')
@@ -71,12 +71,12 @@ const previewAlignBlock = cssBlockFor(
 )
 
 assert.ok(
-  packageJson.scripts?.test?.includes('scripts/chip-contract.test.mjs'),
+  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run chip-contract.test.mjs.',
 )
 assert.equal(
   packageJson.exports?.['./components/chip'],
-  './src/components/chip.tsx',
+  './packages/weimo-ui-core/src/components/chip.tsx',
   'Chip must have a public package export.',
 )
 assert.ok(
@@ -228,7 +228,7 @@ assert.ok(
   'Chip docs must not revive custom suffix-action preview CSS.',
 )
 assert.ok(
-  definitionsIndexSource.includes("import { capsuleDefinition } from './capsule'") &&
+  definitionsIndexSource.includes("import { capsuleDefinition } from './packages/weimo-ui-core/capsule'") &&
     definitionsIndexSource.includes('capsule: capsuleDefinition'),
   'Component definitions index must register the core Capsule page.',
 )
@@ -247,7 +247,7 @@ assert.ok(
   'Component manifest must list Chip as a public registry component through the merged Capsule page.',
 )
 assert.ok(
-  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/chip.tsx')) &&
-    existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/chip-button.tsx')),
+  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/chip.tsx')) &&
+    existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/chip-button.tsx')),
   'Chip stays on the core Capsule page while ChipButton owns a separate tagtree page.',
 )

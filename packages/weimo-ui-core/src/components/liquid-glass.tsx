@@ -3,7 +3,7 @@ import type { CSSProperties, ReactNode } from 'react'
 
 import LiquidGlass from './liquid-glass-react'
 
-import { cn } from './lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 
 import './liquid-glass.css'
 

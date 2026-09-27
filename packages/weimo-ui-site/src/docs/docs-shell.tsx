@@ -32,11 +32,11 @@ import {
   componentDocPackages,
   componentDocs,
   type ComponentDocPackage,
-} from './component-docs'
+} from './catalog/component-docs'
 import { type DocsOutletContext } from './docs-outlet-context'
 import { componentHref, componentPath } from './routes'
-import { LiquidGlassTile } from './liquid-glass-tile'
-import { searchComponentDocs } from './search-component-docs'
+import { LiquidGlassTile } from './components/liquid-glass-tile'
+import { searchComponentDocs } from './catalog/search-component-docs'
 
 type Theme = 'light' | 'dark' | 'system'
 

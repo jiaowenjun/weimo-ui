@@ -9,7 +9,7 @@ import { Drawer } from '@base-ui/react/drawer'
 
 import { getCardSurfaceClassName } from '../card-surface'
 import { getFrostedSurfaceClassName } from '../frosted-surface-model'
-import { cn } from '../lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 
 import '../frosted-surface.css'
 import './sidebar-shell.css'

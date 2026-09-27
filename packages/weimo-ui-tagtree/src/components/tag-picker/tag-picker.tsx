@@ -10,7 +10,7 @@ import {
 import { ScrollArea } from '../coss/scroll-area'
 import { ActionDialog } from 'weimo-ui-core/components/action-dialog'
 import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'
-import { cn } from 'weimo-ui-core/components/lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 import { useTagPicker } from './use-tag-picker'
 import type {
   TagPickerApplyPayload,

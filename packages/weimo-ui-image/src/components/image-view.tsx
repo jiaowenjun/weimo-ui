@@ -11,7 +11,7 @@ import type {
 
 import { ActionDialog } from 'weimo-ui-core/components/action-dialog'
 import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'
-import { cn } from 'weimo-ui-core/components/lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 import { ActionMenu, type ActionMenuItem } from 'weimo-ui-core/components/menu'
 
 import './image-view.css'

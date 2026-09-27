@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef } from 'react'
 import type { ComponentPropsWithoutRef, ComponentRef, ReactNode, RefObject } from 'react'
 
 import { BaseCard } from './base-card'
-import { cn } from './lib/utils'
+import { cn } from 'weimo-ui-core/lib/utils'
 
 import './component-preview-card.css'
 
