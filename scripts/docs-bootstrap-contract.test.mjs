@@ -386,7 +386,7 @@ for (const snippet of [
   "from 'weimo-ui-core/components/menu'",
   '<TagTreeDemo />',
   "onMenuAction={variant === 'default' ? () => {} : undefined}",
-  "const [selectedTag, setSelectedTag] = useState('writing/daily')",
+  'const [selectedTag, setSelectedTag] = useState<string | undefined>(undefined)',
   "defaultExpandedTags={['writing', 'research']}",
   "variant: 'destructive'",
   '<ActionMenu',

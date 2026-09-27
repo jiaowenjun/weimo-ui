@@ -182,7 +182,7 @@ function TagPickerDemo({ mode = 'insert', initialDraft = '', targetTag = '' }: {
 }
 
 function TagTreeDemo({ variant = 'default' }: { variant?: TagTreeVariant }) {
-  const [selectedTag, setSelectedTag] = useState('writing/daily')
+  const [selectedTag, setSelectedTag] = useState<string | undefined>(undefined)
   return (
     <ComponentPreviewCard
       className="tag-page__card"
