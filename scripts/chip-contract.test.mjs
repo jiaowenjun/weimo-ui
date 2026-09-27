@@ -43,6 +43,9 @@ const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const previewCardCss = readProjectFile('packages/weimo-ui-core/src/components/component-preview-card.css')
 
 const baseBlock = cssBlockFor(surfaceCss, '.capsule-frame')
+const chipGapBlock = cssBlockFor(css, '.chip')
+const chipPrefixPaddingBlock = cssBlockFor(css, '.chip[data-has-prefix]')
+const chipSuffixPaddingBlock = cssBlockFor(css, '.chip[data-has-suffix]')
 const defaultLayerBlock = cssBlockFor(surfaceCss, '.capsule-frame::before')
 const glassLayerBlock = cssBlockFor(surfaceCss, '.capsule-frame::after')
 const solidFrameBlock = cssBlockFor(surfaceCss, '.capsule-frame[data-material="solid"]')
@@ -119,6 +122,8 @@ for (const snippet of [
   'capsule-frame__slot chip__slot chip__slot--prefix',
   'capsule-frame__content chip__content',
   'capsule-frame__slot chip__slot chip__slot--suffix',
+  "data-has-prefix={isEmptyChipSlot(prefix) ? undefined : 'true'}",
+  "data-has-suffix={isEmptyChipSlot(suffix) ? undefined : 'true'}",
 ]) {
   assertIncludes(source, snippet, `Chip source must include ${snippet}.`)
 }
@@ -141,8 +146,11 @@ for (const [block, snippet, message] of [
   [baseBlock, 'min-width: 0;', 'Chip must allow clipped content inside narrow containers.'],
   [baseBlock, 'align-items: center;', 'Chip must vertically align arbitrary slot content.'],
   [baseBlock, 'justify-content: flex-start;', 'Chip must keep prefix and content left-aligned during width transitions.'],
-  [baseBlock, 'gap: 4px;', 'Chip slots must have a compact gap for icons and actions.'],
+  [baseBlock, 'gap: 4px;', 'The shared CapsuleFrame base gap stays 4px; Chip tightens its own gap to 1px.'],
+  [chipGapBlock, 'gap: 1px;', 'Chip must keep the tight uniform 1px inner gap between icons and text like CapsuleButton.'],
   [baseBlock, 'padding: 6px 10px;', 'Chip must match CapsuleButton padding.'],
+  [chipPrefixPaddingBlock, 'padding-left: 6px;', 'Chip with a prefix must sit the icon 6px from the left border like CapsuleButton.'],
+  [chipSuffixPaddingBlock, 'padding-right: 6px;', 'Chip with a suffix must sit the icon 6px from the right border like CapsuleButton.'],
   [solidFrameBlock, 'border: 1px solid transparent;', 'Solid Chip must keep transparent border geometry without overriding its frosted border.'],
   [baseBlock, 'border-radius: var(--radius-round);', 'Chip must match CapsuleButton radius.'],
   [baseBlock, 'background: transparent;', 'Chip base must leave background to visual layers.'],

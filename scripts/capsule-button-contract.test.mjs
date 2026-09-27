@@ -175,7 +175,7 @@ assertIncludes(
 for (const [block, snippet, message] of [
   [baseBlock, 'display: inline-flex;', 'CapsuleButton must match CapsuleButton inline-flex layout.'],
   [baseBlock, 'justify-content: flex-start;', 'CapsuleButton must keep prefix and text left-aligned during width transitions.'],
-  [baseBlock, 'gap: 4px;', 'Shared CapsuleFrame gap must stay 4px so Chip and TagBread spacing do not change.'],
+  [baseBlock, 'gap: 4px;', 'Shared CapsuleFrame gap must stay 4px so TagBread spacing does not change; Chip and CapsuleButton tighten their own gap to 1px.'],
   [baseBlock, 'padding: 6px 10px;', 'CapsuleButton must match CapsuleButton padding.'],
   [solidFrameBlock, 'border: 1px solid transparent;', 'Solid CapsuleButton must keep transparent border geometry without overriding its frosted border.'],
   [solidFrameBlock, 'color: var(--color-primary);', 'Solid CapsuleButton must keep its primary foreground without overriding its frosted foreground.'],

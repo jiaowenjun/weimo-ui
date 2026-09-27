@@ -2,6 +2,7 @@ import { Hash, X } from 'lucide-react'
 
 import { Chip } from 'weimo-ui-core/components/chip'
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
+import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'
 import type { ComponentDefinition } from '../../component-docs'
 import { GlassPreviewCard } from '../../../components/glass-preview-card'
 
@@ -21,7 +22,15 @@ function ChipSlotDemo() {
     <ComponentPreviewCard align="center" label="胶囊插槽">
       <div aria-label="Chip 前后缀预览" className="text-button-preview">
         <Chip content="写作/日记" prefix={<Hash aria-hidden="true" />} />
-        <Chip content="可关闭标签" suffix={<X aria-hidden="true" />} variant="glass" />
+        <Chip
+          content="可关闭标签"
+          suffix={
+            <GhostIconButton aria-label="移除标签" size="xs">
+              <X aria-hidden="true" />
+            </GhostIconButton>
+          }
+          variant="glass"
+        />
       </div>
     </ComponentPreviewCard>
   )

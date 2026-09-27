@@ -76,6 +76,8 @@ export function Chip({
         data-background-tone={
           isFrostedVariant ? backgroundTone ?? undefined : undefined
         }
+        data-has-prefix={isEmptyChipSlot(prefix) ? undefined : 'true'}
+        data-has-suffix={isEmptyChipSlot(suffix) ? undefined : 'true'}
         ref={isFrostedVariant ? setElementRef : undefined}
         {...capsuleFrameAttributes}
         {...props}
@@ -99,6 +101,8 @@ export function Chip({
             'chip',
             className,
           )}
+          data-has-prefix={isEmptyChipSlot(prefix) ? undefined : 'true'}
+          data-has-suffix={isEmptyChipSlot(suffix) ? undefined : 'true'}
           {...capsuleFrameAttributes}
         >
           {isEmptyChipSlot(prefix) ? null : (
