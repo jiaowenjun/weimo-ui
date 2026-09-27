@@ -184,10 +184,10 @@ for (const [snippet, message] of [
   assert.ok(internalFloatPreviewBlock.includes(snippet), message)
 }
 
-// 底部操作栏与顶部工具栏演示的材质规则：按钮一律磨砂图标按钮，文字一律磨砂态胶囊。
+// 底部操作栏与顶部工具栏演示的材质规则：按钮一律磨砂图标按钮，文字一律磨砂态 CapsuleButton。
 // 相邻动作可收进 FrostedIconButtonGroup（组内为 FrostedIconGroupButton，反馈同源）。
 // 磨砂图标按钮与磨砂态胶囊的边框展示不做限制（有边框、无边框都支持），
-// 因此这里只锁组件种类与 variant，不断言 bordered 的有无或取值。
+// 因此这里只锁组件种类与 state，不断言边框的有无或取值。
 // 浮动工具栏与顶部工具栏改走液态玻璃：按钮与胶囊文字一律 LiquidGlassSurface 层（assertLiquidGlassToolbarDemo）。
 function sliceDemoSource(source, startMarker, endMarker, label) {
   const start = source.indexOf(startMarker)
@@ -202,15 +202,15 @@ function sliceDemoSource(source, startMarker, endMarker, label) {
 }
 
 function assertGlassToolbarDemo(demoSource, label) {
-  const chipCount = (demoSource.match(/<Chip\b/g) ?? []).length
-  const glassVariantCount = (demoSource.match(/variant="frosted"/g) ?? []).length
+  const capsuleButtonCount = (demoSource.match(/<CapsuleButton\b/g) ?? []).length
+  const frostedStateCount = (demoSource.match(/state="frosted"/g) ?? []).length
 
   assert.ok(
-    chipCount > 0 &&
-      glassVariantCount >= chipCount &&
+    capsuleButtonCount > 0 &&
+      frostedStateCount >= capsuleButtonCount &&
       !demoSource.includes('internal-preview__text') &&
       !demoSource.includes('internal-preview__title'),
-    `${label} docs demo must render every text label as a glass-variant Chip instead of raw preview text spans.`,
+    `${label} docs demo must render every text label as a frosted-state CapsuleButton instead of raw preview text spans.`,
   )
 
   assert.ok(
@@ -219,9 +219,8 @@ function assertGlassToolbarDemo(demoSource, label) {
       !demoSource.includes('GhostIconButton') &&
       !demoSource.includes('<IconButton') &&
       !demoSource.includes('<TextButton') &&
-      !demoSource.includes('<CapsuleButton') &&
       !demoSource.includes('<button'),
-    `${label} docs demo must use FrostedIconButton (standalone or grouped) for every toolbar button.`,
+    `${label} docs demo must use FrostedIconButton (standalone or grouped) for every toolbar icon button.`,
   )
 }
 
@@ -255,7 +254,6 @@ function assertLiquidGlassToolbarDemo(demoSource, label) {
   assert.ok(
     liquidLayerCount >= 3 &&
       demoSource.includes('<LiquidGlassTile') &&
-      !demoSource.includes('<Chip') &&
       !demoSource.includes('FrostedIconButton'),
     `${label} docs demo must render every button and text capsule as LiquidGlassSurface layers.`,
   )

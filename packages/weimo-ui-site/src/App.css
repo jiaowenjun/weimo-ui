@@ -57,11 +57,11 @@
   align-items: center;
   gap: 8px;
   min-width: 0;
-  color: var(--glass-surface-fg-on-dark);
+  color: var(--liquid-glass-fg-on-dark);
 }
 
 .docs-liquid-top-bar[data-background-tone='light'] {
-  color: var(--glass-surface-fg-on-light);
+  color: var(--liquid-glass-fg-on-light);
 }
 
 .docs-liquid-top-bar[data-background-tone='light'] .liquid-glass-chip__label {
@@ -988,7 +988,7 @@
 }
 
 .frosted-surface-preview__meta {
-  color: var(--glass-surface-muted-color);
+  color: var(--frosted-surface-muted-color);
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
   line-height: 1.4;
@@ -1026,7 +1026,7 @@
 }
 
 .liquid-glass-preview__title {
-  color: var(--glass-surface-fg-on-dark);
+  color: var(--liquid-glass-fg-on-dark);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
   line-height: 1.2;
@@ -1036,7 +1036,7 @@
 }
 
 .liquid-glass-preview__meta {
-  color: var(--glass-surface-muted-fg-on-dark);
+  color: var(--frosted-surface-muted-fg-on-dark);
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
   line-height: 1.4;
@@ -1047,12 +1047,12 @@
 
 /* 亮背景:深字覆盖继承自库内容层的深色 text-shadow,否则深字配深影发糊。 */
 .liquid-glass-preview__tile[data-background-tone='light'] .liquid-glass-preview__title {
-  color: var(--glass-surface-fg-on-light);
+  color: var(--liquid-glass-fg-on-light);
   text-shadow: none;
 }
 
 .liquid-glass-preview__tile[data-background-tone='light'] .liquid-glass-preview__meta {
-  color: var(--glass-surface-muted-fg-on-light);
+  color: var(--frosted-surface-muted-fg-on-light);
   text-shadow: none;
 }
 
@@ -1074,11 +1074,11 @@
   justify-content: center;
   gap: 20px;
   min-width: 0;
-  color: var(--glass-surface-fg-on-dark);
+  color: var(--liquid-glass-fg-on-dark);
 }
 
 .liquid-glass-icon-preview[data-background-tone='light'] {
-  color: var(--glass-surface-fg-on-light);
+  color: var(--liquid-glass-fg-on-light);
 }
 
 .liquid-glass-icon-button,
@@ -1232,7 +1232,7 @@
 }
 
 /* hover 背景色罩对齐磨砂图标按钮(单按钮档):同值 color-mix(currentColor
-   12%, transparent)(= frosted-surface 的 --glass-surface-hover-bg)、同款
+   12%, transparent)(= frosted-surface 的 --frosted-surface-hover-bg)、同款
    opacity 180ms ease 过渡、hover 限定精确指针、:active 常亮、
    reduced-motion 降级。组(单 button 多图标)不走满胶囊罩——磨砂组容器
    本无组级 hover 反馈,组内独立高亮圆见下方 __item 规则。
@@ -1277,11 +1277,11 @@
   display: grid;
   min-width: 0;
   place-items: center;
-  color: var(--glass-surface-fg-on-dark);
+  color: var(--liquid-glass-fg-on-dark);
 }
 
 .liquid-glass-chip-preview[data-background-tone='light'] {
-  color: var(--glass-surface-fg-on-light);
+  color: var(--liquid-glass-fg-on-light);
 }
 
 .capsule-material-row {
@@ -1345,11 +1345,11 @@ button.liquid-glass-chip {
   display: grid;
   width: 100%;
   min-width: 0;
-  color: var(--glass-surface-fg-on-dark);
+  color: var(--liquid-glass-fg-on-dark);
 }
 
 .liquid-glass-toolbar-preview[data-background-tone='light'] {
-  color: var(--glass-surface-fg-on-light);
+  color: var(--liquid-glass-fg-on-light);
 }
 
 .liquid-glass-toolbar-preview[data-background-tone='light'] .liquid-glass-chip__label {

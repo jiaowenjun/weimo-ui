@@ -58,7 +58,9 @@
      transparent shorthand cannot win by stylesheet import order. */
   .capsule-frame[data-material="solid"] {
     border: 1px solid transparent;
-    color: var(--color-primary);
+    /* --color-primary 只在 @theme inline 里定义,Tailwind 按需发射、组件 CSS
+       引用会解析失效回退继承;前景须直接引用底层通道 --primary。 */
+    color: hsl(var(--primary));
   }
 
   .capsule-frame[data-material="solid"]::before {
@@ -80,8 +82,8 @@
   /* CapsuleFrame owns width and press motion while FrostedSurface owns the
      material's foreground, border, and backdrop blur on the same element. */
   .capsule-frame.frosted-surface {
-    --capsule-frame-hover-background: var(--glass-surface-hover-bg);
-    --capsule-frame-active-background: var(--glass-surface-hover-bg);
+    --capsule-frame-hover-background: var(--frosted-surface-hover-bg);
+    --capsule-frame-active-background: var(--frosted-surface-hover-bg);
 
     transition:
       inline-size var(--animated-inline-size-transition-duration) cubic-bezier(0.2, 0, 0, 1),

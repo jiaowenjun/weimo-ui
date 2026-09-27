@@ -196,17 +196,6 @@ export const componentManifest = [
     registry: true,
   },
   {
-    id: 'chip',
-    name: '胶囊',
-    exportName: 'Chip',
-    registryName: 'chip',
-    packageExport: './components/chip',
-    packageName: 'weimo-ui-core',
-    page: 'chip',
-    docs: true,
-    registry: true,
-  },
-  {
     id: 'capsule-button',
     name: '按钮胶囊',
     exportName: 'CapsuleButton',

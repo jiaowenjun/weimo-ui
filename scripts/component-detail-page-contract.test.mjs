@@ -92,7 +92,6 @@ const componentDefinitionsSource = readProjectFile('packages/weimo-ui-site/src/d
   readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/bar.tsx') +
   readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/page-layout.tsx') +
   readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/action-dialog.tsx') +
-  readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/chip.tsx') +
   readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule-button.tsx') +
   mdRenderDefinitionSource
 const css = readProjectFile('packages/weimo-ui-site/src/App.css')
@@ -121,10 +120,6 @@ assert.ok(
 assert.ok(
   !existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/tag-edit-bar.tsx')),
   'Removed TagEditBar detail docs definition must not exist.',
-)
-assert.ok(
-  existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/chip.tsx')),
-  'Merged Capsule detail docs definition must exist.',
 )
 assert.ok(
   existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/surface.tsx')),
@@ -201,7 +196,6 @@ for (const snippet of [
   "id: 'bar'",
   "id: 'action-dialog'",
   "id: 'tag'",
-  "id: 'chip'",
   "id: 'capsule-button'",
   "id: 'card-tool-bar'",
   "id: 'image'",
@@ -342,7 +336,7 @@ assert.ok(
     borderTokensDefinitionSource.includes('<ComponentPreviewCard') &&
     !borderTokensDefinitionSource.includes('<TokenPreviewDetails') &&
     borderTokensDefinitionSource.includes('...contexts.flatMap') &&
-    borderTokensDefinitionSource.includes('--glass-surface-border') &&
+    borderTokensDefinitionSource.includes('--frosted-surface-border') &&
     borderTokensDefinitionSource.includes('--color-border-divider-menu-on-light'),
   'BorderColor detail page must keep background-aware token variants searchable without rendering redundant prose.',
 )

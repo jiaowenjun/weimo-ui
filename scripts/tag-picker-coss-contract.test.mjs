@@ -110,13 +110,13 @@ assert.ok(
     !inputGroupSource.includes('getFrostedSurfaceAttributes') &&
     frostedSurfaceBlock.includes('border: 1px solid transparent;') &&
     frostedSurfaceCss.includes('.frosted-surface--bordered {') &&
-    frostedSurfaceCss.includes('border-color: var(--glass-surface-border);') &&
+    frostedSurfaceCss.includes('border-color: var(--frosted-surface-border);') &&
     !frostedSurfaceBlock.includes('background: var(--glass-gradient);') &&
     !frostedSurfaceBlock.includes('linear-gradient') &&
     !frostedSurfaceCss.includes('box-shadow:') &&
     !frostedSurfaceCss.includes('--glass-shadow') &&
-    frostedSurfaceBlock.includes('backdrop-filter: blur(var(--glass-blur));') &&
-    frostedSurfaceBlock.includes('-webkit-backdrop-filter: blur(var(--glass-blur));'),
+    frostedSurfaceBlock.includes('backdrop-filter: blur(var(--frosted-blur));') &&
+    frostedSurfaceBlock.includes('-webkit-backdrop-filter: blur(var(--frosted-blur));'),
   'coss input-group must compose the shared Weimo frosted FrostedSurface material without a gradient background.',
 )
 

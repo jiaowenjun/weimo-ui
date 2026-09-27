@@ -75,7 +75,6 @@ assert.deepEqual(
     'border-tokens',
     'surface',
     'button',
-    'chip',
     'capsule-button',
     'slider',
     'menu',
@@ -184,7 +183,7 @@ assert.deepEqual(
     'ocr-composer',
     'ocr-detail',
   ],
-  'Merged token utilities, surface materials, and bar/button/chip/tag/card/image/OCR/stat variants must remain public without separate docs pages.',
+  'Merged token utilities, surface materials, and bar/button/tag/card/image/OCR/stat variants must remain public without separate docs pages.',
 )
 
 assert.equal(

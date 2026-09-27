@@ -55,7 +55,7 @@ export function useFrostedSurfaceBackgroundToneRef<ElementType extends HTMLEleme
   return {
     backgroundLuminance: backgroundSample?.luminance ?? null,
     backgroundStyle: interpolatedBorderColor
-      ? ({ '--glass-surface-border': interpolatedBorderColor }) as CSSProperties
+      ? ({ '--frosted-surface-border': interpolatedBorderColor }) as CSSProperties
       : undefined,
     backgroundTone: backgroundSample?.tone ?? null,
     setElementRef,

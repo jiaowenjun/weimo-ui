@@ -57,7 +57,6 @@ export const coreCatalog = {
         { id: 'mode-button', name: 'ModeButton', registryName: 'mode-button', packageExport: './components/mode-button' },
       ],
     },
-    { id: 'chip', name: '胶囊', exportName: 'Chip', registryName: 'chip', packageExport: './components/chip' },
     { id: 'capsule-button', name: '按钮胶囊', exportName: 'CapsuleButton', registryName: 'capsule-button', packageExport: './components/capsule-button' },
     { id: 'slider', name: '滑块', exportName: 'Slider', registryName: 'slider', packageExport: './components/slider' },
     { id: 'menu', name: '菜单', exportName: 'Menu', registryName: 'menu', packageExport: './components/menu' },

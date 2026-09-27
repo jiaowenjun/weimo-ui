@@ -88,7 +88,7 @@ assert.ok(!frostedSurfaceBlock.includes('linear-gradient'), 'FrostedSurface must
 assert.ok(
   frostedSurfaceBlock.includes('border: 1px solid transparent;') &&
     frostedSurfaceCss.includes('.frosted-surface--bordered {') &&
-    frostedSurfaceCss.includes('border-color: var(--glass-surface-border);'),
+    frostedSurfaceCss.includes('border-color: var(--frosted-surface-border);'),
   'FrostedSurface must keep its stroke opt-in on the --bordered modifier using the background-aware border token.',
 )
 assert.ok(!frostedSurfaceCss.includes('box-shadow:'), 'FrostedSurface must not use inner or outer shadow effects.')
@@ -96,8 +96,8 @@ assert.ok(!frostedSurfaceCss.includes('--glass-shadow'), 'FrostedSurface must no
 assert.ok(menuSource.includes('className="weimo-menu__positioner"'), 'Menu positioner must expose a stable class for layer styling.')
 assert.ok(menuSource.includes('data-slot="menu-positioner"'), 'Menu positioner must expose a stable data-slot for diagnostics.')
 assert.ok(positionerBlock.includes('z-index: 90;'), 'Menu positioner must render above dialogs, fixed sidebars, and drawers.')
-assert.ok(frostedSurfaceBlock.includes('backdrop-filter: blur(var(--glass-blur));'), 'FrostedSurface must use backdrop blur.')
-assert.ok(frostedSurfaceBlock.includes('-webkit-backdrop-filter: blur(var(--glass-blur));'), 'FrostedSurface must include the WebKit backdrop filter.')
+assert.ok(frostedSurfaceBlock.includes('backdrop-filter: blur(var(--frosted-blur));'), 'FrostedSurface must use backdrop blur.')
+assert.ok(frostedSurfaceBlock.includes('-webkit-backdrop-filter: blur(var(--frosted-blur));'), 'FrostedSurface must include the WebKit backdrop filter.')
 assert.ok(popupBlock.includes('transform-origin: var(--transform-origin, top right);'), 'Menu popup must use Base UI transform origin with a skyline fallback.')
 assert.ok(popupBlock.includes('cubic-bezier(0.34, 1.56, 0.64, 1)'), 'Menu popup must use the skyline spring enter curve.')
 for (const block of [composedPopupBlock, composedPopupExitBlock]) {
@@ -144,7 +144,7 @@ assert.ok(
 )
 assert.ok(
   popupBlock.includes(
-    '--weimo-menu-item-hover-bg: color-mix(in srgb, var(--glass-surface-fg) 12%, transparent);',
+    '--weimo-menu-item-hover-bg: color-mix(in srgb, var(--frosted-surface-fg) 12%, transparent);',
   ) &&
     itemHoverBlock.includes('background: var(--weimo-menu-item-hover-bg);') &&
     !itemHoverBlock.includes('background: var(--color-bg-hover);'),
@@ -155,7 +155,7 @@ assert.ok(
     menuPopupLightToneBlock.includes('--weimo-menu-separator-bg: var(--color-border-divider-menu-on-light);') &&
     menuPopupDarkToneBlock.includes('--weimo-menu-separator-bg: var(--color-border-divider-menu-on-dark);') &&
     separatorBlock.includes('background: var(--weimo-menu-separator-bg);') &&
-    !separatorBlock.includes('var(--glass-surface-border)') &&
+    !separatorBlock.includes('var(--frosted-surface-border)') &&
     !separatorBlock.includes('var(--color-border-divider)'),
   'Menu separator must use its own background-aware divider token family instead of FrostedSurface border or the global divider token.',
 )

@@ -290,8 +290,8 @@ assert.ok(
   appCss.includes(
     ".liquid-glass-preview__tile[data-background-tone='light'] .liquid-glass-preview__title",
   ) &&
-    appCss.includes('var(--glass-surface-fg-on-light)') &&
-    appCss.includes('var(--glass-surface-fg-on-dark)'),
+    appCss.includes('var(--liquid-glass-fg-on-light)') &&
+    appCss.includes('var(--liquid-glass-fg-on-dark)'),
   'Liquid glass demo text must adapt to the sampled background tone through the shared glass foreground tokens.',
 )
 assert.ok(

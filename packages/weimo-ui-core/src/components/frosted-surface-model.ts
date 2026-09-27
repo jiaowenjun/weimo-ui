@@ -31,25 +31,25 @@ const BACKGROUND_LIGHTNESS_THRESHOLD = 0.5
 const MIN_VISIBLE_ALPHA = 0.05
 const MIN_VIDEO_READY_STATE = 2
 
-// 磨砂边框插值锚点 token 镜像(--glass-surface-border-{dark,light}-{start,end}):
+// 磨砂边框插值锚点 token 镜像(--frosted-surface-border-{dark,light}-{start,end}):
 // 暗段=背景感知亮度 0~50%(start→end 递增),亮段=50%~100%,端点固定跨主题同值。
 // 值镜像 tokens.css 并由契约双向锁定;模型保持零相对 import 以维持 registry 自包含,
 // 插值亮度从镜像色值推导,避免同一端点在文件内出现数字/色值双重表示。
 export const frostedSurfaceBorderAnchorMap = {
   darkStart: {
-    token: '--glass-surface-border-dark-start',
+    token: '--frosted-surface-border-dark-start',
     value: 'hsl(0 0% 38%)',
   },
   darkEnd: {
-    token: '--glass-surface-border-dark-end',
+    token: '--frosted-surface-border-dark-end',
     value: 'hsl(0 0% 98%)',
   },
   lightStart: {
-    token: '--glass-surface-border-light-start',
+    token: '--frosted-surface-border-light-start',
     value: 'hsl(0 0% 35%)',
   },
   lightEnd: {
-    token: '--glass-surface-border-light-end',
+    token: '--frosted-surface-border-light-end',
     value: 'hsl(0 0% 90%)',
   },
 } as const
@@ -66,7 +66,7 @@ function resolveGrayHslLightness(color: string) {
   return Number.parseFloat(lightness)
 }
 
-// 边框亮度插值锚点(零饱和度灰的 lightness):暗段起点与 --glass-surface-border 的
+// 边框亮度插值锚点(零饱和度灰的 lightness):暗段起点与 --frosted-surface-border 的
 // 暗主题回退值同值,避免小尺寸圆形/胶囊描边在近黑背景上不可辨。50% 恰是 tone 翻转点,
 // 边框与前景色同处 darkEnd→lightStart 跳变,由组件的 border-color 过渡柔化。
 const BORDER_DARK_SEGMENT_START_LIGHTNESS = resolveGrayHslLightness(

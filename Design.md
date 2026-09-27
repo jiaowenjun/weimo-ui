@@ -22,7 +22,7 @@
 |---|---|---|
 | `opaque.card` | `CardSurface` | `Card`、coss `Card` / `CardFrame`、`SideBarShell` 常驻态 |
 | `opaque.popup` | `PopupSurface`（`level: modal \| tooltip` 细分圆角与阴影） | Dialog、Command、Tooltip 弹层 |
-| `solid.chip` | `CapsuleFrame` 使用 `--color-bg-chip` 绘制普通胶囊底色 | `Chip`、`CapsuleButton` 默认态 |
+| `solid.chip` | `CapsuleFrame` 使用 `--color-bg-chip` 绘制普通胶囊底色 | `CapsuleButton` 默认态 |
 | `frosted.adaptive` | `FrostedSurface`（运行时背景亮度采样切换前景/边框 token） | `Menu` 弹层、磨砂图标按钮、`MdEditorToolbar`、coss `InputGroup`、胶囊磨砂态、`TagBread` |
 | `liquid.glass` | `LiquidGlassSurface` | 明确选择液态折射效果的浮动控件 |
 
@@ -49,7 +49,7 @@
 ## 4. 组件边界
 
 - `Card` 负责内容承载，不接管业务拼装。
-- `Chip` 负责标签式小动作或标记。
+- `CapsuleButton` 负责胶囊形态的标签动作与标记。
 - `IconButton` 负责图标按钮；`FrostedIconButton` 负责磨砂底图标按钮。
 - `SideBarShell` 负责桌面常驻面板和移动端抽屉壳层，但不负责导航内容本身。
 - `FloatBar` 负责浮动条布局壳，不负责材质，也不负责具体业务按钮语义。

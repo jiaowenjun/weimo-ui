@@ -32,11 +32,11 @@ const expectedTones = [
     tone: 'glass',
     label: '磨砂材质',
     backgroundToken: 'none',
-    blurToken: '--glass-blur',
+    blurToken: '--frosted-blur',
     blurValue: '14px',
-    filter: 'blur(var(--glass-blur))',
+    filter: 'blur(var(--frosted-blur))',
     className: 'bg-blur--glass',
-    usage: 'FrostedSurface、Chip / CapsuleButton 磨砂态、TagBread',
+    usage: 'FrostedSurface、CapsuleButton 磨砂态、TagBread',
   },
   {
     tone: 'backdrop',
@@ -166,15 +166,15 @@ assert.ok(
   'shared UI tokens and registry style payloads must remove the glass background gradient token.',
 )
 assert.equal(
-  styleRegistry.cssVars?.light?.['glass-blur'],
+  styleRegistry.cssVars?.light?.['frosted-blur'],
   '14px',
-  'registry/style.json must export --glass-blur as 14px.',
+  'registry/style.json must export --frosted-blur as 14px.',
 )
-assert.ok(tokensCss.includes('--glass-blur: 14px;'), 'shared UI tokens must define --glass-blur as 14px.')
+assert.ok(tokensCss.includes('--frosted-blur: 14px;'), 'shared UI tokens must define --frosted-blur as 14px.')
 assert.equal(
-  rootStyleItem?.cssVars?.light?.['glass-blur'],
+  rootStyleItem?.cssVars?.light?.['frosted-blur'],
   '14px',
-  'registry.json style item must export --glass-blur as 14px.',
+  'registry.json style item must export --frosted-blur as 14px.',
 )
 assert.ok(
   tokensCss.includes('--color-bg-backdrop: hsl(214.3 33.3% 4.1% / 0.32);') &&
@@ -198,8 +198,8 @@ assert.equal(
 )
 
 assert.ok(
-  frostedSurfaceCss.includes('backdrop-filter: blur(var(--glass-blur));') &&
-    frostedSurfaceCss.includes('-webkit-backdrop-filter: blur(var(--glass-blur));') &&
+  frostedSurfaceCss.includes('backdrop-filter: blur(var(--frosted-blur));') &&
+    frostedSurfaceCss.includes('-webkit-backdrop-filter: blur(var(--frosted-blur));') &&
     !frostedSurfaceCss.includes('background: var(--glass-gradient);'),
   'FrostedSurface must own the shared frosted blur without a background gradient.',
 )

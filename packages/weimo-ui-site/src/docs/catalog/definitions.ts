@@ -4,7 +4,6 @@ import { backgroundTokensDefinition } from './packages/weimo-ui-core/background-
 import { borderTokensDefinition } from './packages/weimo-ui-core/border-tokens'
 import { surfaceDefinition } from './packages/weimo-ui-core/surface'
 import { buttonDefinition } from './packages/weimo-ui-core/button'
-import { chipDefinition } from './packages/weimo-ui-core/chip'
 import { capsuleButtonDefinition } from './packages/weimo-ui-core/capsule-button'
 import { sliderDefinition } from './packages/weimo-ui-core/slider'
 import { menuDefinition } from './packages/weimo-ui-core/menu'
@@ -30,7 +29,6 @@ export const componentDefinitionsById = {
   'border-tokens': borderTokensDefinition,
   surface: surfaceDefinition,
   button: buttonDefinition,
-  chip: chipDefinition,
   'capsule-button': capsuleButtonDefinition,
   slider: sliderDefinition,
   menu: menuDefinition,

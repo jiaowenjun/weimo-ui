@@ -223,7 +223,7 @@ for (const omittedSnippet of [
   ':hover',
   ':active',
   'transform: scale',
-  '--glass-surface-hover-bg:',
+  '--frosted-surface-hover-bg:',
   'border:',
   'backdrop-filter',
 ]) {
@@ -275,10 +275,10 @@ for (const [selector, snippet] of groupDisabledBorderBlocks) {
 }
 
 // 悬停反馈与磨砂图标按钮同源:组内按钮复用 icon-button--frosted 的 ::after 蒙层,
-// 蒙层色取组上继承的 --glass-surface-hover-bg(currentColor 12%),缺省才回落主题色。
+// 蒙层色取组上继承的 --frosted-surface-hover-bg(currentColor 12%),缺省才回落主题色。
 assertIncludes(
   iconButtonCss,
-  'background-color: var(--glass-surface-hover-bg, var(--color-bg-hover));',
+  'background-color: var(--frosted-surface-hover-bg, var(--color-bg-hover));',
   'icon-button--frosted hover overlay must keep consuming the inherited frosted-surface hover token.',
 )
 

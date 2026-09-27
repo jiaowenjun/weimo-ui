@@ -354,7 +354,7 @@ assert.ok(
     menuCss.includes('--weimo-menu-separator-bg: var(--color-border-divider-menu-on-light);') &&
     menuCss.includes('--weimo-menu-separator-bg: var(--color-border-divider-menu-on-dark);') &&
     menuCss.includes('background: var(--weimo-menu-separator-bg);') &&
-    !menuCss.includes('background: var(--glass-surface-border);') &&
+    !menuCss.includes('background: var(--frosted-surface-border);') &&
     !menuCss.includes('background: var(--color-border-divider);') &&
     cossCardCss.includes('border-bottom: 1px solid var(--color-border-divider, var(--color-border));') &&
     cossCommandCss.includes('border-bottom: 1px solid var(--color-border-divider, var(--color-border));') &&
@@ -386,13 +386,13 @@ assert.ok(
   'Default BorderColor usage must cover surface/container outer borders and docs preview frames.',
 )
 assert.ok(
-  frostedSurfaceCss.includes('border-color: var(--glass-surface-border);') &&
+  frostedSurfaceCss.includes('border-color: var(--frosted-surface-border);') &&
     !frostedSurfaceCss.includes('border: 1px solid var(--color-border);'),
   'FrostedSurface must use its background-aware border token (on the opt-in --bordered modifier) instead of the fixed default BorderColor token.',
 )
 
 for (const [token, lightThemeValue, darkThemeValue] of [
-  ['--glass-surface-border', 'hsl(0 0% 80%)', 'hsl(0 0% 38%)'],
+  ['--frosted-surface-border', 'hsl(0 0% 80%)', 'hsl(0 0% 38%)'],
 ]) {
   assert.ok(
     borderColorSource.includes(`token: '${token}'`),
@@ -478,8 +478,8 @@ assert.ok(
     !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     docsDefinitionSource.includes('--color-border-disabled-on-light') &&
     docsDefinitionSource.includes('--color-border-divider-menu-on-dark') &&
-    docsDefinitionSource.includes("token: '--glass-surface-border'") &&
-    !docsDefinitionSource.includes('glass-surface-border-on-') &&
+    docsDefinitionSource.includes("token: '--frosted-surface-border'") &&
+    !docsDefinitionSource.includes('frosted-surface-border-on-') &&
     !docsDefinitionSource.includes('description={item.description}') &&
     !docsDefinitionSource.includes('uiUsage={item.uiUsage}') &&
     !docsDefinitionSource.includes('bijiUsage={item.bijiUsage}') &&

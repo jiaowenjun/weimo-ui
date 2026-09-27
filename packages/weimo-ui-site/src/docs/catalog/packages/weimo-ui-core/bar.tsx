@@ -2,7 +2,7 @@ import { Check, Plus, Search, X } from 'lucide-react'
 
 import { BottomBar } from 'weimo-ui-core/components/bottom-bar'
 import { CardSurface } from 'weimo-ui-core/components/card-surface'
-import { Chip } from 'weimo-ui-core/components/chip'
+import { CapsuleButton } from 'weimo-ui-core/components/capsule-button'
 import { LiquidGlassSurface } from 'weimo-ui-core/components/liquid-glass'
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import { FloatBar } from 'weimo-ui-core/components/float-bar'
@@ -20,7 +20,14 @@ function BottomBarDemo() {
           <BottomBar
             aria-label="底部操作栏预览"
             leftSlot={
-              <Chip bordered={false} content="2 个标签待保存" variant="frosted" />
+              <CapsuleButton
+                aria-label="保存 2 个标签"
+                onClick={() => {}}
+                prefix={null}
+                state="frosted"
+              >
+                2 个标签待保存
+              </CapsuleButton>
             }
             rightSlot={
               <span className="internal-preview__actions">

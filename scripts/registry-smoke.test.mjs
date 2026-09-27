@@ -225,7 +225,6 @@ import { ModeButton, type ModeButtonMode } from "@/components/ui/mode-button"
 import { CardToolBar } from "@/components/ui/card-tool-bar"
 import { ActionDialog } from "@/components/ui/action-dialog"
 import { TagTreeRow, type TagTreeRowProps } from "@/components/ui/tag-tree-row"
-import { Chip } from "@/components/ui/chip"
 import { CapsuleButton, type CapsuleButtonState } from "@/components/ui/capsule-button"
 import { TagBar } from "@/components/ui/tag-bar"
 import { MdEditor } from "@/components/ui/md-editor"
@@ -347,7 +346,6 @@ export function RegistryConsumerContract() {
         onSelect={() => {}}
         onToggle={() => {}}
       />
-      <Chip content="Chip" prefix="#" />
       <CapsuleButton state={chipState}>Chip button</CapsuleButton>
       <TagBar tags={["Tag"]} />
       <MdRender content={"## Render\\n\\ncontent"} />
@@ -608,7 +606,6 @@ try {
     '@weimo/card-tool-bar',
     '@weimo/action-dialog',
     '@weimo/tag-tree-row',
-    '@weimo/chip',
     '@weimo/capsule-button',
     '@weimo/tag-bar',
     '@weimo/md-editor',
@@ -656,7 +653,6 @@ try {
     'card-tool-bar.json',
     'action-dialog.json',
     'tag-tree-row.json',
-    'chip.json',
     'tag-bar.json',
     'ocr-detail.json',
     'md-view.json',
@@ -797,7 +793,7 @@ try {
     existsSync(join(consumerDir, 'src/components/ui/animated-inline-size.tsx')) &&
       existsSync(join(consumerDir, 'src/components/ui/animated-inline-size-model.ts')) &&
       existsSync(join(consumerDir, 'src/components/ui/animated-inline-size.css')),
-    'shadcn add must write internal AnimatedInlineSize files used by chip surfaces.',
+    'shadcn add must write internal AnimatedInlineSize files used by capsule surfaces.',
   )
   assert.ok(
     existsSync(join(consumerDir, 'src/components/ui/canvas-transparency.tsx')) &&

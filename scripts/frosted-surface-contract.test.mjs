@@ -556,7 +556,7 @@ for (const snippet of [
   'useFrostedSurfaceBackgroundToneForElement(element, observe)',
   'backgroundLuminance: backgroundSample?.luminance ?? null',
   'backgroundStyle: interpolatedBorderColor',
-  "'--glass-surface-border': interpolatedBorderColor",
+  "'--frosted-surface-border': interpolatedBorderColor",
   'backgroundTone: backgroundSample?.tone ?? null',
   'useFrostedSurfaceBackgroundToneRef<HTMLDivElement>(observe)',
   'data-background-tone={backgroundTone ?? undefined}',
@@ -580,7 +580,6 @@ for (const snippet of [
 // 统一经 backgroundStyle 以 inline 变量下发,直接声明 border-color 的规则
 // (如磨砂图标按钮禁用描边)优先级更高不受影响。
 for (const [sourcePath, sourceLabel, extraSnippets] of [
-  ['packages/weimo-ui-core/src/components/chip.tsx', 'Chip', ['...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle']],
   ['packages/weimo-ui-core/src/components/capsule-button.tsx', 'CapsuleButton', ['...style, ...backgroundStyle']],
   ['packages/weimo-ui-core/src/components/menu.tsx', 'MenuPopup', ['style={{ ...style, ...backgroundStyle }}']],
   ['packages/weimo-ui-tagtree/src/components/tag-bread.tsx', 'TagBread', ['...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle']],
@@ -638,10 +637,10 @@ for (const snippet of [
   'return resolveElementBackgroundSample(element)?.tone ?? null',
   'export function interpolateFrostedBorderColor',
   'export const frostedSurfaceBorderAnchorMap',
-  "token: '--glass-surface-border-dark-start'",
-  "token: '--glass-surface-border-dark-end'",
-  "token: '--glass-surface-border-light-start'",
-  "token: '--glass-surface-border-light-end'",
+  "token: '--frosted-surface-border-dark-start'",
+  "token: '--frosted-surface-border-dark-end'",
+  "token: '--frosted-surface-border-light-start'",
+  "token: '--frosted-surface-border-light-end'",
   "value: 'hsl(0 0% 38%)'",
   "value: 'hsl(0 0% 98%)'",
   "value: 'hsl(0 0% 35%)'",
@@ -673,24 +672,24 @@ assertOmits(
 
 for (const snippet of [
   '.frosted-surface {',
-  '@property --glass-surface-fg-opacity',
+  '@property --frosted-surface-fg-opacity',
   '--frosted-surface-tone-transition-duration: 160ms;',
-  '--glass-surface-muted-color: var(--glass-surface-muted-fg);',
-  '--glass-surface-hover-bg: color-mix(in srgb, currentColor 12%, transparent);',
+  '--frosted-surface-muted-color: var(--frosted-surface-muted-fg);',
+  '--frosted-surface-hover-bg: color-mix(in srgb, currentColor 12%, transparent);',
   'border: 1px solid transparent;',
-  'backdrop-filter: blur(var(--glass-blur));',
-  '-webkit-backdrop-filter: blur(var(--glass-blur));',
-  'color: var(--glass-surface-fg);',
+  'backdrop-filter: blur(var(--frosted-blur));',
+  '-webkit-backdrop-filter: blur(var(--frosted-blur));',
+  'color: var(--frosted-surface-fg);',
   'color var(--frosted-surface-tone-transition-duration) ease,',
   'border-color var(--frosted-surface-tone-transition-duration) ease;',
   '.frosted-surface--bordered {',
-  'border-color: var(--glass-surface-border);',
+  'border-color: var(--frosted-surface-border);',
   '.frosted-surface[data-background-tone="light"]',
-  '--glass-surface-fg: var(--glass-surface-fg-on-light);',
-  '--glass-surface-muted-color: var(--glass-surface-muted-fg-on-light);',
+  '--frosted-surface-fg: var(--frosted-surface-fg-on-light);',
+  '--frosted-surface-muted-color: var(--frosted-surface-muted-fg-on-light);',
   '.frosted-surface[data-background-tone="dark"]',
-  '--glass-surface-fg: var(--glass-surface-fg-on-dark);',
-  '--glass-surface-muted-color: var(--glass-surface-muted-fg-on-dark);',
+  '--frosted-surface-fg: var(--frosted-surface-fg-on-dark);',
+  '--frosted-surface-muted-color: var(--frosted-surface-muted-fg-on-dark);',
   '@media (prefers-reduced-motion: reduce)',
   'transition-duration: 1ms;',
 ]) {
@@ -715,17 +714,17 @@ assertOmits(
 )
 
 for (const [tokenName, lightValue, darkValue] of [
-  ['glass-surface-border', 'hsl(0 0% 80%)', 'hsl(0 0% 38%)'],
-  ['glass-surface-border-dark-start', 'hsl(0 0% 38%)'],
-  ['glass-surface-border-dark-end', 'hsl(0 0% 98%)'],
-  ['glass-surface-border-light-start', 'hsl(0 0% 35%)'],
-  ['glass-surface-border-light-end', 'hsl(0 0% 90%)'],
-  ['glass-surface-fg', 'hsl(222.2 47.4% 11.2% / 0.9)', 'hsl(0 0% 79.2%)'],
-  ['glass-surface-muted-fg', 'hsl(215.3 25% 26.7% / 0.68)', 'hsl(0 0% 100% / 0.68)'],
-  ['glass-surface-fg-on-light', 'hsl(222.2 47.4% 11.2% / 0.9)'],
-  ['glass-surface-muted-fg-on-light', 'hsl(215.3 25% 26.7% / 0.68)'],
-  ['glass-surface-fg-on-dark', 'hsl(0 0% 100% / 0.9)'],
-  ['glass-surface-muted-fg-on-dark', 'hsl(0 0% 100% / 0.72)'],
+  ['frosted-surface-border', 'hsl(0 0% 80%)', 'hsl(0 0% 38%)'],
+  ['frosted-surface-border-dark-start', 'hsl(0 0% 38%)'],
+  ['frosted-surface-border-dark-end', 'hsl(0 0% 98%)'],
+  ['frosted-surface-border-light-start', 'hsl(0 0% 35%)'],
+  ['frosted-surface-border-light-end', 'hsl(0 0% 90%)'],
+  ['frosted-surface-fg', 'hsl(222.2 47.4% 11.2% / 0.9)', 'hsl(0 0% 79.2%)'],
+  ['frosted-surface-muted-fg', 'hsl(215.3 25% 26.7% / 0.68)', 'hsl(0 0% 100% / 0.68)'],
+  ['frosted-surface-fg-on-light', 'hsl(222.2 47.4% 11.2% / 0.9)'],
+  ['frosted-surface-muted-fg-on-light', 'hsl(215.3 25% 26.7% / 0.68)'],
+  ['frosted-surface-fg-on-dark', 'hsl(0 0% 100% / 0.9)'],
+  ['frosted-surface-muted-fg-on-dark', 'hsl(0 0% 100% / 0.72)'],
 ].map(([tokenName, lightValue, darkValue = lightValue]) => [tokenName, lightValue, darkValue])) {
   assertIncludes(
     tokensCss,
@@ -754,12 +753,12 @@ for (const [tokenName, lightValue, darkValue] of [
   )
 }
 // glass-surface-border-on-light/on-dark 已删:tone 属性与插值边框同帧提交,tone 块的
-// border 赋值永远被 inline 插值遮蔽,且值与各主题 --glass-surface-border root 默认全同。
+// border 赋值永远被 inline 插值遮蔽,且值与各主题 --frosted-surface-border root 默认全同。
 for (const removedTokenName of [
   'smart-glass-surface-fg',
   'smart-glass-surface-muted-fg',
-  'glass-surface-border-on-light',
-  'glass-surface-border-on-dark',
+  'frosted-surface-border-on-light',
+  'frosted-surface-border-on-dark',
 ]) {
   assertOmits(tokensCss, `--${removedTokenName}:`, `tokens.css must remove --${removedTokenName}.`)
   assertOmits(

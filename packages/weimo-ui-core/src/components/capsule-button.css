@@ -20,7 +20,7 @@
 }
 
 /* 只放几何。color/line-height 不能落在无层区:无层声明无条件压过
-   @layer components 里 glass 变体的 tone 自适应 color(--glass-surface-fg),
+   @layer components 里 glass 变体的 tone 自适应 color(--frosted-surface-fg),
    基类在 .capsule-frame(同层同值)已有声明,这里再写会把磨砂态文字钉死。 */
 button.capsule-button {
   gap: 1px;
@@ -51,12 +51,12 @@ button.capsule-button[data-has-suffix] {
   font-family: inherit;
   font-size: var(--font-size-sm);
   line-height: 1;
-  color: var(--glass-surface-fg-on-dark);
+  color: var(--liquid-glass-fg-on-dark);
   transition: transform 150ms ease;
 }
 
 .capsule-button--liquid-glass[data-background-tone='light'] {
-  color: var(--glass-surface-fg-on-light);
+  color: var(--liquid-glass-fg-on-light);
 }
 
 /* 库内容层 .liquid-glass__content 带内联 font:500 20px,样式表无法覆写:

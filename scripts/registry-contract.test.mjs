@@ -181,7 +181,6 @@ const promotedRegistryNames = [
   'card-tool-bar',
   'action-dialog',
   'tag-tree-row',
-  'chip',
   'capsule-button',
   'tag-bar',
   'md',

@@ -49,6 +49,13 @@ const allowlistedComponentColors = new Map([
       'hsl(0 0% 100% / 0.16)',
     ]),
   ],
+  [
+    'packages/weimo-ui-core/src/components/capsule-frame.css',
+    // hsl(var(--primary)) 是 token 组合而非裸色值:--color-primary 仅存在于
+    // @theme inline(按需发射,组件 var() 引用解析失效),solid 前景必须直连
+    // 底层通道 --primary。
+    new Set(['hsl(var(--primary)']),
+  ],
 ])
 const cssFiles = componentsRoots.flatMap(listCssFiles)
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')

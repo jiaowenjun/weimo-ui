@@ -202,14 +202,14 @@ assertIncludes(rootBlock, 'max-width: 100%;', 'TagBread root must fit narrow con
 assertIncludes(rootBlock, 'justify-content: flex-start;', 'TagBread must keep its prefix and breadcrumb trail left-aligned during width transitions.')
 assertIncludes(rootBlock, '--animated-inline-size-transition-duration: 180ms;', 'TagBread must inherit the shared 180ms width transition duration.')
 assertIncludes(rootBlock, 'inline-size var(--animated-inline-size-transition-duration) cubic-bezier(0.2, 0, 0, 1)', 'TagBread must animate measured breadcrumb-width changes through CapsuleFrame.')
-assertIncludes(frostedBorderBlock, 'border-color: var(--glass-surface-border);', 'TagBread must use the standard frosted surface border token.')
+assertIncludes(frostedBorderBlock, 'border-color: var(--frosted-surface-border);', 'TagBread must use the standard frosted surface border token.')
 assertIncludes(rootBlock, 'border-radius: var(--radius-round);', 'TagBread glass surface must be pill-shaped.')
 assert.ok(
   !glassLayerBlock.includes('background: var(--glass-gradient);') && !surfaceCss.includes('--glass-gradient'),
   'TagBread glass layer must not depend on a shared glass background gradient token.',
 )
-assertIncludes(frostedSurfaceBlock, 'backdrop-filter: blur(var(--glass-blur));', 'TagBread must enable the glass blur.')
-assertIncludes(frostedSurfaceBlock, '-webkit-backdrop-filter: blur(var(--glass-blur));', 'TagBread must support Safari glass blur.')
+assertIncludes(frostedSurfaceBlock, 'backdrop-filter: blur(var(--frosted-blur));', 'TagBread must enable the glass blur.')
+assertIncludes(frostedSurfaceBlock, '-webkit-backdrop-filter: blur(var(--frosted-blur));', 'TagBread must support Safari glass blur.')
 assert.ok(
   !frostedSurfaceBlock.includes('box-shadow') && !surfaceCss.includes('--glass-shadow'),
   'TagBread glass surface must not use glass shadow effects.',

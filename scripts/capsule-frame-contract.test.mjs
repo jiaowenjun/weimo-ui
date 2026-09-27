@@ -34,7 +34,6 @@ const packageJson = readJson('package.json')
 const rootRegistry = readJson('registry.json')
 const modelSource = readProjectFile('packages/weimo-ui-core/src/components/capsule-frame.ts')
 const css = readProjectFile('packages/weimo-ui-core/src/components/capsule-frame.css')
-const chipSource = readProjectFile('packages/weimo-ui-core/src/components/chip.tsx')
 const capsuleButtonSource = readProjectFile('packages/weimo-ui-core/src/components/capsule-button.tsx')
 const tagBreadSource = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bread.tsx')
 
@@ -113,12 +112,12 @@ for (const [block, snippet, message] of [
   [frameBlock, '--capsule-frame-state-transition-duration: 180ms;', 'CapsuleFrame must expose state timing.'],
   [beforeBlock, 'background: var(--color-bg-chip);', 'The solid capsule layer must retain the chip fill token.'],
   [solidFrameBlock, 'border: 1px solid transparent;', 'Solid capsules must preserve the shared 1px border geometry.'],
-  [solidFrameBlock, 'color: var(--color-primary);', 'Solid capsules must retain the primary foreground token.'],
+  [solidFrameBlock, 'color: hsl(var(--primary));', 'Solid capsules must retain the primary foreground token.'],
   [solidBeforeBlock, 'opacity: 1;', 'Solid capsules must show the chip fill layer.'],
   [solidAfterBlock, 'opacity: 0;', 'Solid capsules must hide the feedback-only frosted layer.'],
   [frostedBeforeBlock, 'opacity: 0;', 'Frosted capsules must hide the solid fill.'],
   [frostedAfterBlock, 'opacity: 1;', 'Frosted capsules must expose the feedback layer.'],
-  [composedFrostedBlock, '--capsule-frame-hover-background: var(--glass-surface-hover-bg);', 'Frosted capsules must reuse the FrostedSurface hover tint.'],
+  [composedFrostedBlock, '--capsule-frame-hover-background: var(--frosted-surface-hover-bg);', 'Frosted capsules must reuse the FrostedSurface hover tint.'],
   [composedFrostedBlock, 'color var(--frosted-surface-tone-transition-duration, 160ms) ease', 'Frame motion must compose with FrostedSurface tone motion.'],
   [interactiveBlock, 'cursor: pointer;', 'Interactive frames must expose pointer affordance.'],
   [interactiveBlock, 'appearance: none;', 'Interactive frames must reset native appearance.'],
@@ -138,9 +137,9 @@ assert.ok(
 )
 assert.ok(
   !css.includes('backdrop-filter:') &&
-    !css.includes('color: var(--glass-surface-fg)') &&
-    !css.includes('border-color: var(--glass-surface-border)') &&
-    !css.includes('--glass-blur') &&
+    !css.includes('color: var(--frosted-surface-fg)') &&
+    !css.includes('border-color: var(--frosted-surface-border)') &&
+    !css.includes('--frosted-blur') &&
     !css.includes('data-text-size'),
   'CapsuleFrame must leave frosted foreground, border, and blur ownership to FrostedSurface and stay on the single small text size.',
 )
@@ -152,7 +151,6 @@ assert.ok(
 )
 
 for (const [source, label] of [
-  [chipSource, 'Chip'],
   [capsuleButtonSource, 'CapsuleButton'],
   [tagBreadSource, 'TagBread'],
 ]) {
@@ -172,7 +170,7 @@ for (const [source, label] of [
   )
 }
 
-for (const registryName of ['card', 'chip', 'capsule-button', 'tag-bread']) {
+for (const registryName of ['card', 'capsule-button', 'tag-bread']) {
   const registryItem = readJson(`registry/${registryName}.json`)
   const filePaths = registryItem.files.map((file) => file.path)
 

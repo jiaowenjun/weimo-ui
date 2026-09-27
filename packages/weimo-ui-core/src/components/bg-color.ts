@@ -94,7 +94,7 @@ export const bgColorToneMap = {
     },
     className: 'bg-color--chip',
     description: '标签、筛选 chip 和轻量标记的柔和填充色。',
-    uiUsage: 'Chip、CapsuleButton、ImageUploader selected file',
+    uiUsage: 'CapsuleButton、ImageUploader selected file',
     bijiUsage: 'WorkspaceFilterBar chip、TagBar',
   },
   selection: {

@@ -29,11 +29,11 @@ describe('component docs search', () => {
 
   it('finds token pages by CSS token and usage language', () => {
     expect(resultIds('--color-bg-card')).toContain('background-tokens')
-    expect(resultIds('--glass-blur')).toContain('background-tokens')
+    expect(resultIds('--frosted-blur')).toContain('background-tokens')
     expect(resultIds('TagPicker option')).toContain('background-tokens')
     expect(resultIds('--color-heat-4')).toContain('background-tokens')
-    expect(resultIds('--glass-surface-border')).toContain('border-tokens')
-    expect(resultIds('--glass-surface-border-dark-end')).toContain('border-tokens')
+    expect(resultIds('-frosted-surface-border')).toContain('border-tokens')
+    expect(resultIds('-frosted-surface-border-dark-end')).toContain('border-tokens')
   })
 
   it('keeps localized display-name search working', () => {

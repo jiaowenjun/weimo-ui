@@ -40,7 +40,6 @@
     "./components/card-surface": "./packages/weimo-ui-core/src/components/card-surface.tsx",
     "./components/card-tool-bar": "./packages/weimo-ui-core/src/components/card-tool-bar.tsx",
     "./components/card-top-bar": "./packages/weimo-ui-core/src/components/card-top-bar.tsx",
-    "./components/chip": "./packages/weimo-ui-core/src/components/chip.tsx",
     "./components/component-preview-card": "./packages/weimo-ui-core/src/components/component-preview-card.tsx",
     "./components/coss/button": "./packages/weimo-ui-core/src/components/coss/button.tsx",
     "./components/coss/dialog": "./packages/weimo-ui-core/src/components/coss/dialog.tsx",

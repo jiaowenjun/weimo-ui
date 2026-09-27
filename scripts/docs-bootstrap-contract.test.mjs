@@ -53,7 +53,6 @@ const componentDefinitionSources = {
   ].join('\n'),
   bar: readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/bar.tsx'),
   'page-layout': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/page-layout.tsx'),
-  chip: readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/chip.tsx'),
   'capsule-button': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule-button.tsx'),
 }
 const componentDefinitionsSource = [
@@ -118,9 +117,8 @@ assert.ok(
   'DocsShell liquid glass actions pill must hold exactly the search and theme toggle buttons.',
 )
 assert.ok(
-  !docsShellSource.includes('FrostedIconButtonGroup') &&
-    !docsShellSource.includes('<Chip\n'),
-  'DocsShell top bar must not fall back to frosted groups or glass Chips.',
+  !docsShellSource.includes('FrostedIconButtonGroup'),
+  'DocsShell top bar must not fall back to frosted groups.',
 )
 
 assert.ok(
@@ -609,10 +607,6 @@ assert.ok(
   'Merged tagged-card docs definition must exist.',
 )
 assert.ok(
-  existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/chip.tsx')),
-  'Merged Capsule docs definition must exist.',
-)
-assert.ok(
   existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule-button.tsx')) &&
     existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/card-tool-bar.tsx')),
   'Package-specific CapsuleButton and card bar docs definitions must exist.',
@@ -632,10 +626,6 @@ assert.match(
   appCss,
   /\.menu-preview\s*\{[\s\S]*?justify-content:\s*center;/,
   'Menu docs must include centered preview styling.',
-)
-assert.ok(
-  !appCss.includes('.chip-preview'),
-  'App.css must not keep legacy chip preview styles.',
 )
 assert.match(
   appCss,

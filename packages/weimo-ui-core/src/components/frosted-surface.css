@@ -1,4 +1,4 @@
-@property --glass-surface-fg-opacity {
+@property --frosted-surface-fg-opacity {
   syntax: '<number>';
   inherits: false;
   initial-value: 1;
@@ -7,13 +7,13 @@
 @layer components {
   .frosted-surface {
     --frosted-surface-tone-transition-duration: 160ms;
-    --glass-surface-muted-color: var(--glass-surface-muted-fg);
-    --glass-surface-hover-bg: color-mix(in srgb, currentColor 12%, transparent);
+    --frosted-surface-muted-color: var(--frosted-surface-muted-fg);
+    --frosted-surface-hover-bg: color-mix(in srgb, currentColor 12%, transparent);
 
-    color: var(--glass-surface-fg);
+    color: var(--frosted-surface-fg);
     border: 1px solid transparent;
-    backdrop-filter: blur(var(--glass-blur));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
+    backdrop-filter: blur(var(--frosted-blur));
+    -webkit-backdrop-filter: blur(var(--frosted-blur));
     transition:
       color var(--frosted-surface-tone-transition-duration) ease,
       border-color var(--frosted-surface-tone-transition-duration) ease;
@@ -22,17 +22,17 @@
   /* 描边为 opt-in：基类默认透明（1px 几何保留，与有边框实例并排时内边距节奏一致，
      边框开关切换可走 border-color 过渡），下游材质调用者自动继承无边框默认。 */
   .frosted-surface--bordered {
-    border-color: var(--glass-surface-border);
+    border-color: var(--frosted-surface-border);
   }
 
   .frosted-surface[data-background-tone="light"] {
-    --glass-surface-fg: var(--glass-surface-fg-on-light);
-    --glass-surface-muted-color: var(--glass-surface-muted-fg-on-light);
+    --frosted-surface-fg: var(--frosted-surface-fg-on-light);
+    --frosted-surface-muted-color: var(--frosted-surface-muted-fg-on-light);
   }
 
   .frosted-surface[data-background-tone="dark"] {
-    --glass-surface-fg: var(--glass-surface-fg-on-dark);
-    --glass-surface-muted-color: var(--glass-surface-muted-fg-on-dark);
+    --frosted-surface-fg: var(--frosted-surface-fg-on-dark);
+    --frosted-surface-muted-color: var(--frosted-surface-muted-fg-on-dark);
   }
 
   @media (prefers-reduced-motion: reduce) {
