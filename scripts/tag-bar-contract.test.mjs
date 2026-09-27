@@ -481,7 +481,6 @@ assert.ok(
 )
 
 for (const [block, snippet, message] of [
-  [previewBlock, 'min-height: 180px;', 'TagBar preview canvas must reserve a stable component preview area.'],
   [previewBlock, 'padding: 16px;', 'TagBar preview canvas must provide component breathing room.'],
   [previewPanelBlock, 'display: grid;', 'TagBar preview panel must host the tag row on a grid.'],
   [previewPanelBlock, 'width: 100%;', 'TagBar preview panel must fill the component preview canvas.'],
@@ -501,6 +500,7 @@ assert.ok(
 )
 
 for (const [block, snippet, message] of [
+  [previewBlock, 'min-height:', 'TagBar preview canvas must be content-sized, letting the example open the canvas height.'],
   [previewPanelBlock, 'justify-items:', 'TagBar preview panel must left-align the tag row like the picker panel.'],
   [previewPanelBlock, 'box-shadow:', 'TagBar preview panel must match CardTopBar by omitting an outer shadow.'],
   [previewPanelBlock, 'display: flex;', 'TagBar preview panel must not use side-by-side flex layout.'],

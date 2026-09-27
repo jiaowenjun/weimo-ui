@@ -32,7 +32,7 @@
   .tag-page__header p:last-child { margin: 14px 0 0; color: var(--color-text-secondary); }
   .tag-page__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
   .tag-page__card { min-width: 0; }
-  .tag-page__canvas { width: 100%; min-width: 0; min-height: 180px; padding: 16px; }
+  .tag-page__canvas { width: 100%; min-width: 0; padding: 16px; }
   .tag-page__panel { display: grid; width: 100%; min-width: 0; gap: 14px; padding: 16px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: var(--color-bg-card); }
   .tag-page__toggle { display: inline-flex; align-items: center; gap: 6px; }
   .tag-page__toggle-label { color: var(--color-text-secondary); font-size: var(--font-size-xs); line-height: 1.2; }

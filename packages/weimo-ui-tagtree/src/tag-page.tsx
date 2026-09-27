@@ -241,12 +241,12 @@ export type TagTreePageProps = {
 export function TagTreePage({ embedded = false }: TagTreePageProps = {}) {
   const demos = (
     <>
+      <TagPickerDemo />
       <TagBarDemo />
       <TagBreadDemo />
-      <TagPickerDemo />
+      <TagTreeRowDemo />
       <TagTreeDemo />
       <TagTreeDemo variant="no-action" />
-      <TagTreeRowDemo />
     </>
   )
 
