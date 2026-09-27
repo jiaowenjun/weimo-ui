@@ -36,7 +36,7 @@ const source = readProjectFile('packages/weimo-ui-core/src/components/chip.tsx')
 const css = readProjectFile('packages/weimo-ui-core/src/components/chip.css')
 const surfaceCss = readProjectFile('packages/weimo-ui-core/src/components/capsule-frame.css')
 const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.css')
-const docsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule.tsx')
+const docsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/chip.tsx')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
@@ -221,7 +221,7 @@ assert.ok(
 )
 
 assert.ok(
-  docsSource.includes("id: 'capsule'") &&
+  docsSource.includes("id: 'chip'") &&
     docsSource.includes('preview: () => <CapsuleDemo />') &&
     docsSource.includes("import { Chip } from 'weimo-ui-core/components/chip'") &&
     docsSource.includes('<Chip content="普通胶囊"') &&
@@ -242,26 +242,25 @@ assert.ok(
   'Chip docs must not revive custom suffix-action preview CSS.',
 )
 assert.ok(
-  definitionsIndexSource.includes("import { capsuleDefinition } from './packages/weimo-ui-core/capsule'") &&
-    definitionsIndexSource.includes('capsule: capsuleDefinition'),
+  definitionsIndexSource.includes("import { chipDefinition } from './packages/weimo-ui-core/chip'") &&
+    definitionsIndexSource.includes('chip: chipDefinition'),
   'Component definitions index must register the core Capsule page.',
 )
 assert.ok(
-  manifestSource.includes("id: 'capsule'") &&
+  manifestSource.includes("id: 'chip'") &&
     manifestSource.includes("name: '胶囊'") &&
     manifestSource.includes("exportName: 'Chip'") &&
     manifestSource.includes("registryName: 'chip'") &&
     manifestSource.includes("packageExport: './components/chip'") &&
     manifestSource.includes("packageName: 'weimo-ui-core'") &&
-    manifestSource.includes("page: 'capsule'") &&
+    manifestSource.includes("page: 'chip'") &&
     manifestSource.includes('docs: true') &&
     manifestSource.includes('registry: true') &&
-    !manifestSource.includes("id: 'chip',") &&
     !manifestSource.includes("internalGroup: 'tag-tree'"),
   'Component manifest must list Chip as a public registry component through the merged Capsule page.',
 )
 assert.ok(
-  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/chip.tsx')) &&
+  existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/chip.tsx')) &&
     existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/capsule-button.tsx')),
-  'Chip stays on the core Capsule page while CapsuleButton owns a separate tagtree page.',
+  'Chip and CapsuleButton keep their own core docs pages named after their components.',
 )

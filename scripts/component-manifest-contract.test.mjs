@@ -75,7 +75,7 @@ assert.deepEqual(
     'border-tokens',
     'surface',
     'button',
-    'capsule',
+    'chip',
     'slider',
     'menu',
     'action-dialog',

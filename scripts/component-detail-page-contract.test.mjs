@@ -92,7 +92,7 @@ const componentDefinitionsSource = readProjectFile('packages/weimo-ui-site/src/d
   readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/bar.tsx') +
   readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/page-layout.tsx') +
   readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/action-dialog.tsx') +
-  readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule.tsx') +
+  readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/chip.tsx') +
   readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/capsule-button.tsx') +
   mdRenderDefinitionSource
 const css = readProjectFile('packages/weimo-ui-site/src/App.css')
@@ -123,7 +123,7 @@ assert.ok(
   'Removed TagEditBar detail docs definition must not exist.',
 )
 assert.ok(
-  existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule.tsx')),
+  existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/chip.tsx')),
   'Merged Capsule detail docs definition must exist.',
 )
 assert.ok(
@@ -201,7 +201,7 @@ for (const snippet of [
   "id: 'bar'",
   "id: 'action-dialog'",
   "id: 'tag'",
-  "id: 'capsule'",
+  "id: 'chip'",
   "id: 'capsule-button'",
   "id: 'card-tool-bar'",
   "id: 'image'",

@@ -46,8 +46,8 @@ function CapsuleDemo() {
   )
 }
 
-export const capsuleDefinition = {
-  id: 'capsule',
+export const chipDefinition = {
+  id: 'chip',
   summary: '非交互胶囊的材质与前后缀插槽',
   status: 'Ready',
   frame: 'plain',
@@ -59,6 +59,7 @@ export const capsuleDefinition = {
     '胶囊前缀',
     '胶囊后缀',
     '液态玻璃胶囊',
+    'capsule',
   ],
   preview: () => <CapsuleDemo />,
 } satisfies ComponentDefinition

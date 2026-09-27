@@ -53,7 +53,7 @@ const componentDefinitionSources = {
   ].join('\n'),
   bar: readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/bar.tsx'),
   'page-layout': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/page-layout.tsx'),
-  capsule: readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule.tsx'),
+  chip: readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/chip.tsx'),
   'capsule-button': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/capsule-button.tsx'),
 }
 const componentDefinitionsSource = [
@@ -609,7 +609,7 @@ assert.ok(
   'Merged tagged-card docs definition must exist.',
 )
 assert.ok(
-  existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule.tsx')),
+  existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/chip.tsx')),
   'Merged Capsule docs definition must exist.',
 )
 assert.ok(

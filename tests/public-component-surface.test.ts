@@ -59,7 +59,7 @@ describe('public component catalog', () => {
       'border-tokens',
       'surface',
       'button',
-      'capsule',
+      'chip',
       'slider',
       'menu',
       'action-dialog',
