@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Plus } from 'lucide-react'
+import { Plus, X } from 'lucide-react'
 
 import { TagBar } from 'weimo-ui-card/components/tag-bar'
 import { TagPicker, type TagPickerApplyPayload, type TagPickerMode } from 'weimo-ui-card/components/tag-picker'
@@ -102,12 +102,49 @@ function TagBarDemo() {
   )
 }
 
+function EditableCapsuleDemo() {
+  const [state, setState] = useState<'default' | 'frosted'>('default')
+  const editing = state === 'frosted'
+
+  return (
+    <ComponentPreviewCard
+      action={
+        <PreviewToggle
+          ariaLabel="切换编辑态"
+          checked={editing}
+          label={editing ? '编辑态' : '默认态'}
+          onCheckedChange={(checked) => setState(checked ? 'frosted' : 'default')}
+        />
+      }
+      align="center"
+      label="可编辑胶囊"
+    >
+      <div aria-label="CapsuleButton 状态预览">
+        <CapsuleButton
+          animateWidth
+          state={state}
+          suffix={
+            editing ? (
+              <span aria-hidden="true" className="icon-button icon-button--ghost icon-button--xs">
+                <X aria-hidden="true" />
+              </span>
+            ) : null
+          }
+        >
+          写作/日记
+        </CapsuleButton>
+      </div>
+    </ComponentPreviewCard>
+  )
+}
+
 // Docs definitions intentionally colocate preview components with exported page metadata.
 function TagBarPageDemo() {
   return (
     <>
       <TagPickerDemo />
       <TagBarDemo />
+      <EditableCapsuleDemo />
     </>
   )
 }
