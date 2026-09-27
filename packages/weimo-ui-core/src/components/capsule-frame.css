@@ -92,6 +92,10 @@
       color var(--frosted-surface-tone-transition-duration, 160ms) ease;
   }
 
+  /* 插槽行盒统一锁 1em:更高的前后缀部件(icon-button 圆框 xs16/sm24 等)在
+     居中插槽内垂直溢出而非撑高胶囊,溢出落进 6px padding 区保持可见;
+     capsule-frame 全部派生组件(CapsuleButton/EditableCapsule/TagBar 芯片
+     等)自动继承。参照 tag-bread 的 :has 同款方案。 */
   .capsule-frame__slot {
     position: relative;
     z-index: 1;
@@ -101,11 +105,18 @@
     align-items: center;
     justify-content: center;
     min-width: 0;
+    height: 1em;
   }
 
   .capsule-frame__slot svg {
     width: 1em;
     height: 1em;
+  }
+
+  /* 插槽内嵌 icon-button 时放开胶囊裁切:超出 padding 区的更大圆框(md 28px
+     等)保持完整命中区可见;材质层 inset:0 自带圆角,不依赖此处裁切。 */
+  .capsule-frame:has(.capsule-frame__slot .icon-button) {
+    overflow: visible;
   }
 
   .capsule-frame__content {

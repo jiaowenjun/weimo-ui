@@ -49,6 +49,7 @@ const composedFrostedBlock = blockFor(css, '.capsule-frame.frosted-surface')
 const interactiveBlock = blockFor(css, '.capsule-frame[data-interactive="true"]')
 const activeTransformBlock = blockFor(css, '.capsule-frame[data-interactive="true"]:active')
 const slotBlock = blockFor(css, '.capsule-frame__slot')
+const slotIconButtonOverflowBlock = blockFor(css, '.capsule-frame:has(.capsule-frame__slot .icon-button)')
 const contentBlock = blockFor(css, '.capsule-frame__content')
 const reducedMotionBlock = blockFor(
   css,
@@ -120,6 +121,8 @@ for (const [block, snippet, message] of [
   [activeTransformBlock, 'transform: scale(var(--press-scale));', 'Interactive frames must use the shared press scale.'],
   [slotBlock, 'display: inline-flex;', 'CapsuleFrame must own reusable slot layout.'],
   [slotBlock, 'flex: none;', 'Capsule slots must not shrink.'],
+  [slotBlock, 'height: 1em;', 'Capsule slots must lock the line box to 1em so prefix and suffix widgets overflow vertically instead of stretching the capsule height.'],
+  [slotIconButtonOverflowBlock, 'overflow: visible;', 'Capsules holding an icon-button in a slot must keep the overflowing widget fully visible.'],
   [contentBlock, 'min-width: 0;', 'Capsule content must be shrinkable.'],
   [contentBlock, 'white-space: nowrap;', 'Capsule content must stay on one line.'],
   [reducedMotionBlock, 'transition-duration: 1ms;', 'CapsuleFrame must respect reduced motion.'],
