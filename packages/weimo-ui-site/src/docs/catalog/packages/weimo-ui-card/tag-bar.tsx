@@ -152,8 +152,8 @@ function TagBarPageDemo() {
   return (
     <>
       <TagPickerDemo />
-      <TagBarDemo />
       <EditableCapsuleDemo />
+      <TagBarDemo />
     </>
   )
 }
