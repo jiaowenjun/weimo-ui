@@ -51,11 +51,10 @@ export function ChipButton({
     state,
     suffix,
   ])
-  // 胶囊只保留小字号一档(sm):基础/标题字号变体已随 textSize prop 一并移除。
+  // 胶囊只保留小字号一档(sm):字号由 capsule-frame 基底统一指定,尺寸参数已删除。
   const capsuleFrameAttributes = getCapsuleFrameAttributes({
     interactive: true,
     material: isFrostedState ? 'frosted' : 'solid',
-    textSize: 'sm',
   })
   const frostedSurfaceClassName = isFrostedState
     ? getFrostedSurfaceClassName('frosted-surface--bordered')

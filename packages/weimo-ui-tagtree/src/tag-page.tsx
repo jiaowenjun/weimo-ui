@@ -79,7 +79,7 @@ function TagBarDemo() {
 }
 
 function TagBreadDemo() {
-  const surfaceAttributes = getCapsuleFrameAttributes({ material: 'frosted', textSize: 'base' })
+  const surfaceAttributes = getCapsuleFrameAttributes({ material: 'frosted' })
 
   return (
     <ComponentPreviewCard className="tag-page__card" label="标签面包屑">

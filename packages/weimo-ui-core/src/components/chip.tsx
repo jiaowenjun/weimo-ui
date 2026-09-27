@@ -19,7 +19,6 @@ import './chip.css'
 import './frosted-surface.css'
 
 export type ChipVariant = 'default' | 'glass'
-export type ChipTextSize = 'sm' | 'base' | 'lg'
 
 type ChipContent = Exclude<ReactNode, boolean | null | undefined>
 
@@ -29,7 +28,6 @@ export type ChipProps = Omit<ComponentPropsWithoutRef<'span'>, 'children' | 'con
   content: ChipContent
   suffix?: ReactNode
   variant?: ChipVariant
-  textSize?: ChipTextSize
 }
 
 function isEmptyChipSlot(slot: ReactNode) {
@@ -44,7 +42,6 @@ export function Chip({
   suffix,
   style,
   variant = 'default',
-  textSize = 'sm',
   ...props
 }: ChipProps) {
   if (isEmptyChipSlot(content)) {
@@ -59,11 +56,9 @@ export function Chip({
     content,
     suffix,
     variant,
-    textSize,
   ])
   const capsuleFrameAttributes = getCapsuleFrameAttributes({
     material: isFrostedVariant ? 'frosted' : 'solid',
-    textSize,
   })
   const frostedSurfaceClassName = isFrostedVariant
     ? getFrostedSurfaceClassName(bordered ? 'frosted-surface--bordered' : undefined)

@@ -79,17 +79,14 @@ assert.ok(
 
 for (const snippet of [
   "export type CapsuleFrameMaterial = 'solid' | 'frosted'",
-  "export type CapsuleFrameTextSize = 'sm' | 'base' | 'lg'",
   'export type CapsuleFrameOptions = {',
   'material?: CapsuleFrameMaterial',
-  'textSize?: CapsuleFrameTextSize',
   'interactive?: boolean',
   'export function getCapsuleFrameClassName',
   "return cn('capsule-frame', className)",
   'export function getCapsuleFrameAttributes',
   "material = 'solid'",
   "'data-material': material",
-  "'data-text-size': textSize",
   "'data-interactive': interactive ? 'true' : undefined",
 ]) {
   assertIncludes(modelSource, snippet, `CapsuleFrame model must include ${snippet}.`)
@@ -97,8 +94,10 @@ for (const snippet of [
 assert.ok(
   !modelSource.includes('bordered') &&
     !modelSource.includes('variant') &&
-    !modelSource.includes('ChipSurface'),
-  'CapsuleFrame attributes must describe frame state, not own material borders or the removed surface API.',
+    !modelSource.includes('ChipSurface') &&
+    !modelSource.includes('textSize') &&
+    !modelSource.includes('data-text-size'),
+  'CapsuleFrame attributes must describe frame state, not own material borders, text sizes, or the removed surface API.',
 )
 
 for (const [block, snippet, message] of [
@@ -108,6 +107,7 @@ for (const [block, snippet, message] of [
   [frameBlock, 'gap: 4px;', 'CapsuleFrame must keep shared slot spacing.'],
   [frameBlock, 'padding: 6px 10px;', 'CapsuleFrame must own shared padding.'],
   [frameBlock, 'border-radius: var(--radius-round);', 'CapsuleFrame must own capsule geometry.'],
+  [frameBlock, 'font-size: var(--font-size-sm);', 'CapsuleFrame must render the single small text size; the size parameter stays removed.'],
   [frameBlock, 'overflow: hidden;', 'CapsuleFrame must clip material layers.'],
   [frameBlock, '--animated-inline-size-transition-duration: 180ms;', 'CapsuleFrame must expose width motion timing.'],
   [frameBlock, '--capsule-frame-state-transition-duration: 180ms;', 'CapsuleFrame must expose state timing.'],
@@ -140,8 +140,9 @@ assert.ok(
   !css.includes('backdrop-filter:') &&
     !css.includes('color: var(--glass-surface-fg)') &&
     !css.includes('border-color: var(--glass-surface-border)') &&
-    !css.includes('--glass-blur'),
-  'CapsuleFrame must leave frosted foreground, border, and blur ownership to FrostedSurface.',
+    !css.includes('--glass-blur') &&
+    !css.includes('data-text-size'),
+  'CapsuleFrame must leave frosted foreground, border, and blur ownership to FrostedSurface and stay on the single small text size.',
 )
 assert.ok(
   !afterBlock.includes('background: var(--glass-gradient);') &&

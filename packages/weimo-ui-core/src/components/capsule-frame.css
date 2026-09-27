@@ -19,6 +19,7 @@
     overflow: hidden;
     border-radius: var(--radius-round);
     background: transparent;
+    font-size: var(--font-size-sm);
     line-height: 1;
     transition:
       inline-size var(--animated-inline-size-transition-duration) cubic-bezier(0.2, 0, 0, 1),
@@ -87,18 +88,6 @@
       border-color var(--frosted-surface-tone-transition-duration, 160ms) ease,
       transform 150ms ease,
       color var(--frosted-surface-tone-transition-duration, 160ms) ease;
-  }
-
-  .capsule-frame[data-text-size="sm"] {
-    font-size: var(--font-size-sm);
-  }
-
-  .capsule-frame[data-text-size="base"] {
-    font-size: var(--font-size-base);
-  }
-
-  .capsule-frame[data-text-size="lg"] {
-    font-size: var(--font-size-lg);
   }
 
   .capsule-frame__slot {

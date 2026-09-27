@@ -69,7 +69,6 @@ export function TagBread({
     useFrostedSurfaceBackgroundToneRef<HTMLElement>(true)
   const capsuleFrameAttributes = getCapsuleFrameAttributes({
     material: 'frosted',
-    textSize: 'base',
   })
   const frostedSurfaceClassName = getFrostedSurfaceClassName(
     'frosted-surface--bordered',

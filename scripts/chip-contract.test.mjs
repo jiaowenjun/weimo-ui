@@ -53,9 +53,6 @@ const glassVariantBeforeBlock = cssBlockFor(surfaceCss, '.capsule-frame[data-mat
 const glassVariantAfterBlock = cssBlockFor(surfaceCss, '.capsule-frame[data-material="frosted"]::after')
 const frostedSurfaceBlock = cssBlockFor(frostedSurfaceCss, '.frosted-surface')
 const frostedBorderBlock = cssBlockFor(frostedSurfaceCss, '.frosted-surface--bordered')
-const smallTextBlock = cssBlockFor(surfaceCss, '.capsule-frame[data-text-size="sm"]')
-const baseTextBlock = cssBlockFor(surfaceCss, '.capsule-frame[data-text-size="base"]')
-const lgTextBlock = cssBlockFor(surfaceCss, '.capsule-frame[data-text-size="lg"]')
 const slotBlock = cssBlockFor(surfaceCss, '.capsule-frame__slot')
 const contentBlock = cssBlockFor(surfaceCss, '.capsule-frame__content')
 const reducedMotionBlock = cssBlockFor(
@@ -95,7 +92,6 @@ for (const snippet of [
   "from './capsule-frame'",
   "import './chip.css'",
   "export type ChipVariant = 'default' | 'glass'",
-  "export type ChipTextSize = 'sm' | 'base' | 'lg'",
   'type ChipContent = Exclude<ReactNode, boolean | null | undefined>',
   "export type ChipProps = Omit<ComponentPropsWithoutRef<'span'>, 'children' | 'content' | 'prefix'> & {",
   'bordered?: boolean',
@@ -103,13 +99,11 @@ for (const snippet of [
   'content: ChipContent',
   'suffix?: ReactNode',
   'variant?: ChipVariant',
-  'textSize?: ChipTextSize',
   'function isEmptyChipSlot(slot: ReactNode)',
   "throw new Error('Chip content cannot be empty.')",
   'export function Chip',
   'bordered = true',
   "variant = 'default'",
-  "textSize = 'sm'",
   'getFrostedSurfaceClassName,',
   'useFrostedSurfaceBackgroundToneRef,',
   "import './frosted-surface.css'",
@@ -133,6 +127,12 @@ assert.ok(
     !source.includes('type="button"') &&
     !source.includes("'chip-button'"),
   'Chip must be a neutral internal slot surface rather than another button wrapper.',
+)
+assert.ok(
+  !source.includes('textSize') &&
+    !source.includes('ChipTextSize') &&
+    !surfaceCss.includes('data-text-size'),
+  'Chip must support the single small text size only; the size parameter stays removed from the capsule frame.',
 )
 
 for (const [block, snippet, message] of [
@@ -168,9 +168,7 @@ for (const [block, snippet, message] of [
   [glassVariantBlock, '--capsule-frame-hover-background: var(--glass-surface-hover-bg);', 'Chip glass variant hover tint must use the glass surface currentColor mix instead of the fixed bg-hover token.'],
   [glassVariantBeforeBlock, 'opacity: 0;', 'Chip glass variant must hide default layer.'],
   [glassVariantAfterBlock, 'opacity: 1;', 'Chip glass variant must show glass layer.'],
-  [smallTextBlock, 'font-size: var(--font-size-sm);', 'Chip small text size must use the shared small token.'],
-  [baseTextBlock, 'font-size: var(--font-size-base);', 'Chip base text size must use the shared base token.'],
-  [lgTextBlock, 'font-size: var(--font-size-lg);', 'Chip lg text size must use the shared title token.'],
+  [baseBlock, 'font-size: var(--font-size-sm);', 'Chip must render the single small text size from the shared capsule frame.'],
   [slotBlock, 'display: inline-flex;', 'Chip slots must support icons, strings, and nested controls.'],
   [slotBlock, 'flex: none;', 'Chip optional slots must not shrink the required content.'],
   [slotBlock, 'align-self: center;', 'Chip prefix and suffix slots must be vertically centered instead of baseline-aligned.'],
@@ -212,7 +210,8 @@ assert.ok(
     docsSource.includes('preview: () => <CapsuleDemo />') &&
     docsSource.includes("import { Chip } from 'weimo-ui-core/components/chip'") &&
     docsSource.includes('<Chip content="普通胶囊"') &&
-    docsSource.includes('textSize="lg"') &&
+    !docsSource.includes('textSize=') &&
+    !docsSource.includes('胶囊尺寸') &&
     !docsSource.includes('ChipButton'),
   'The core Capsule page must demo non-interactive Chip variants without importing tagtree controls.',
 )

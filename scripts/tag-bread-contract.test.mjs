@@ -276,7 +276,7 @@ assert.ok(
     docsDefinition.includes("from 'weimo-ui-core/components/frosted-surface-model'") &&
     docsDefinition.includes('const surfaceAttributes = getCapsuleFrameAttributes({') &&
     docsDefinition.includes("material: 'frosted'") &&
-    docsDefinition.includes("textSize: 'base'") &&
+    !docsDefinition.includes('textSize') &&
     docsDefinition.includes('className={getCapsuleFrameClassName(') &&
     docsDefinition.includes("import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'") &&
     !docsDefinition.includes("import { Button } from 'weimo-ui-core/components/coss/button'") &&

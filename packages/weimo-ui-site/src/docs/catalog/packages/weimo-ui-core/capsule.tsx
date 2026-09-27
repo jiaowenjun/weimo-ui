@@ -16,18 +16,6 @@ function ChipMaterialDemo() {
   )
 }
 
-function ChipSizeDemo() {
-  return (
-    <ComponentPreviewCard align="center" label="胶囊尺寸">
-      <div aria-label="Chip 尺寸预览" className="text-button-preview">
-        <Chip content="小号" textSize="sm" />
-        <Chip content="基础" textSize="base" />
-        <Chip content="大号" textSize="lg" />
-      </div>
-    </ComponentPreviewCard>
-  )
-}
-
 function ChipSlotDemo() {
   return (
     <ComponentPreviewCard align="center" label="胶囊插槽">
@@ -43,7 +31,6 @@ function CapsuleDemo() {
   return (
     <>
       <ChipMaterialDemo />
-      <ChipSizeDemo />
       <ChipSlotDemo />
     </>
   )
@@ -51,7 +38,7 @@ function CapsuleDemo() {
 
 export const capsuleDefinition = {
   id: 'capsule',
-  summary: '非交互胶囊的材质、字号与前后缀插槽',
+  summary: '非交互胶囊的材质与前后缀插槽',
   status: 'Ready',
   frame: 'plain',
   searchAliases: [
@@ -59,7 +46,6 @@ export const capsuleDefinition = {
     '胶囊',
     '标签胶囊',
     '胶囊材质',
-    '胶囊尺寸',
     '胶囊前缀',
     '胶囊后缀',
   ],
