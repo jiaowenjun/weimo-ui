@@ -1,100 +1,241 @@
 # Weimo UI
 
-`weimo-ui` 是独立 Git 仓库，提供面向 Weimo 产品的 React 组件库与文档站。
+面向 Weimo 风格产品的 React UI 组件库。它提供可以直接组合到应用中的材质、Markdown、卡片、标签、图片和数据可视化组件，帮助你更快搭建一致、可交互的界面。
 
-站点参考 `https://coss.com/ui` 搭建，提供精简文档壳、命令式搜索、明暗主题切换、组件预览、安装片段和参数表。初始组件来自 `examples/demo/src/components`。
+- [在线文档与组件预览](https://jiaowenjun.github.io/weimo-ui/)
+- [GitHub 仓库](https://github.com/jiaowenjun/weimo-ui)
 
-## 安装与消费
+## 适合什么场景
 
-`weimo-ui` 不依赖 Weimo 应用仓库：源码零跨仓库导入，依赖全部来自 npm，并拥有自己的 pnpm workspace 和 lockfile。
+Weimo UI 适合需要以下界面的 React 应用：
+
+- 笔记、知识库和内容管理：Markdown 展示、编辑和阅读/编辑切换
+- 标签导航：可展开、可选中、支持操作菜单的标签树
+- 图片工作流：图片上传、拖放、粘贴、预览和原图查看
+- 内容卡片：带标题、正文、标签和编辑流程的卡片，以及 OCR 卡片
+- 活动与统计：日期热力图和统计指标组
+- 轻量的页面壳层：磨砂材质、卡片材质、弹层、按钮和布局栏位
+
+它更适合产品型界面和 Weimo 风格的专用交互，而不是用来替代已经成熟的通用组件库。
+
+## 安装
+
+当前通过 Git commit 安装，建议锁定具体 commit，避免依赖随分支变化：
+
+下面示例中的 `COMMIT_SHA` 替换为你要使用的完整 commit SHA。
+
+```bash
+pnpm add github:jiaowenjun/weimo-ui#COMMIT_SHA
+```
+
+也可以写入 `package.json`：
+
+```json
+{
+  "dependencies": {
+    "weimo-ui": "github:jiaowenjun/weimo-ui#COMMIT_SHA"
+  }
+}
+```
+
+组件以 TypeScript/TSX/CSS 源码提供。你的构建工具需要能够处理这些格式；应用需要使用 React 19，并安装 `react` 与 `react-dom`。
+
+## 第一个组件
+
+在应用入口加载一次全局 token，然后从 `weimo-ui/...` 导入需要的组件：
+
+```tsx
+// main.tsx
+import 'weimo-ui/styles/tokens.css'
+```
+
+```tsx
+import { useState } from 'react'
+import { FrostedSurface } from 'weimo-ui/components/frosted-surface'
+import { TextButton } from 'weimo-ui/components/text-button'
+
+export function WelcomePanel() {
+  const [message, setMessage] = useState('准备开始')
+
+  return (
+    <FrostedSurface className="welcome-panel">
+      <p>{message}</p>
+      <TextButton onClick={() => setMessage('已完成')}>确认</TextButton>
+    </FrostedSurface>
+  )
+}
+```
+
+支持原生属性透传的组件可以直接接收 `className`、`style`、ARIA 属性和事件处理器；每个组件的完整参数与交互预览见[在线文档](https://jiaowenjun.github.io/weimo-ui/)。
+
+## 常用调用示例
+
+### Markdown 展示与编辑
+
+`MdRender` 适合只读内容；需要在同一位置切换查看和编辑时使用 `MdView`。
+
+```tsx
+import { useState } from 'react'
+import { MdView, type MdViewMode } from 'weimo-ui/components/md-view'
+
+export function MarkdownExample() {
+  const [mode, setMode] = useState<MdViewMode>('view')
+  const [content, setContent] = useState('## 今日\n\n- 完成首页')
+
+  return (
+    <>
+      <button type="button" onClick={() => setMode(mode === 'view' ? 'edit' : 'view')}>
+        {mode === 'view' ? '编辑' : '完成'}
+      </button>
+      <MdView mode={mode} value={content} onChange={setContent} />
+    </>
+  )
+}
+```
+
+### 图片上传与预览
+
+`ImageUploader` 负责选择、拖放和粘贴图片；上传到服务端后，可以把返回的 URL 交给 `ImageView` 展示。
+
+```tsx
+import { useEffect, useState } from 'react'
+import { ImageUploader } from 'weimo-ui/components/image-uploader'
+import { ImageView } from 'weimo-ui/components/image-view'
+
+export function ImageExample() {
+  const [file, setFile] = useState<File | null>(null)
+  const [previewUrl, setPreviewUrl] = useState<string>()
+
+  useEffect(() => {
+    if (!file) {
+      setPreviewUrl(undefined)
+      return
+    }
+
+    const url = URL.createObjectURL(file)
+    setPreviewUrl(url)
+
+    return () => URL.revokeObjectURL(url)
+  }, [file])
+
+  return (
+    <>
+      <ImageUploader file={file} onFileChange={setFile} />
+      <ImageView
+        alt="图片预览"
+        displayMode="fit-width"
+        src={previewUrl}
+        style={{ maxWidth: 480 }}
+      />
+    </>
+  )
+}
+```
+
+在实际应用中，建议在文件变化时上传并回收预览 URL；如果只需要展示已有地址，可以直接使用 `ImageView`。
+
+### 标签树
+
+标签节点使用递归数据结构；通过 `selectedTag` 和回调接入应用自己的路由或筛选状态。
+
+```tsx
+import { useState } from 'react'
+import { TagTree, type TagTreeNode } from 'weimo-ui/components/tag-tree'
+
+const nodes: TagTreeNode[] = [
+  {
+    tag: 'project',
+    label: '项目',
+    children: [
+      { tag: 'project/design', label: '设计', itemCount: 12 },
+      { tag: 'project/research', label: '调研', itemCount: 4 },
+    ],
+  },
+]
+
+export function TagTreeExample() {
+  const [selectedTag, setSelectedTag] = useState('project/design')
+
+  return (
+    <TagTree
+      nodes={nodes}
+      selectedTag={selectedTag}
+      onSelect={(tag) => setSelectedTag(tag)}
+    />
+  )
+}
+```
+
+### 热力图与统计指标
+
+```tsx
+import { Heatmap } from 'weimo-ui/components/heatmap'
+import { StatGroup } from 'weimo-ui/components/stat-group'
+
+export function ActivityExample() {
+  return (
+    <>
+      <StatGroup
+        items={[
+          { label: '连续记录', value: '12 天' },
+          { label: '本月记录', value: 38 },
+        ]}
+      />
+      <Heatmap
+        dailyCounts={[
+          { date: '2026-09-25', count: 3 },
+          { date: '2026-09-26', count: 7 },
+        ]}
+        onDateSelect={(date) => console.log('选择日期', date)}
+      />
+    </>
+  )
+}
+```
+
+## 组件怎么选
+
+| 需求 | 组件 |
+| --- | --- |
+| 只读 Markdown | `MdRender` 或 `Md` |
+| Markdown 查看/编辑切换 | `MdView` |
+| 独立 Markdown 编辑器 | `MdEditor` |
+| 磨砂背景容器 | `FrostedSurface` |
+| 卡片背景容器 | `CardSurface` |
+| 带编辑流程的内容卡片 | `Card` |
+| 上传、拖放或粘贴图片 | `ImageUploader` |
+| 图片展示和原图预览 | `ImageView` |
+| 可展开标签导航 | `TagTree` |
+| 日期活动可视化 | `Heatmap` |
+| 一组关键指标 | `StatGroup` |
+
+更多按钮、弹层、菜单、布局栏位和 token 组件，可以在[组件目录](https://jiaowenjun.github.io/weimo-ui/)中按场景查看预览与参数。
+
+## 导入规则
+
+优先使用根包的公开子路径：
+
+```tsx
+import { Card } from 'weimo-ui/components/card'
+import { Heatmap } from 'weimo-ui/components/heatmap'
+import { TagTree } from 'weimo-ui/components/tag-tree'
+```
+
+不需要复制组件源码，也不需要依赖仓库内部的目录结构。组件的样式会随组件加载；全局 token 只需在应用入口导入一次。
+
+## 本地开发
+
+如果需要查看组件目录或参与贡献：
 
 ```bash
 git clone https://github.com/jiaowenjun/weimo-ui.git
 cd weimo-ui
 pnpm install
-```
-
-即可独立安装、测试和构建。Weimo 应用通过锁定的 Git commit 消费本包，避免跟随 `main` 漂移：
-
-```json
-{
-  "dependencies": {
-    "weimo-ui": "github:jiaowenjun/weimo-ui#<full-commit-sha>"
-  }
-}
-```
-
-更新依赖时先在本仓库完成测试并 push commit，再更新 Weimo 的 package manifests 与 lockfile，并验证所有真实消费者。导入符保持为 `weimo-ui/...`。
-
-分发形态为源码导出：根包兼容入口直接指向 `packages/*/src` 下的 `.ts/.tsx/.css`，要求消费方使用支持 TypeScript、TSX 和 CSS 的打包器。`react` 与 `react-dom` 声明为 peer dependencies，其余运行时依赖为普通 dependencies。`private: true` 仅禁止误发到 npm，不影响通过 Git commit 安装。
-
-## 子项目
-
-`packages/weimo-ui-core` 是基础 UI workspace 包，负责以下文档分组：
-
-- Token / 样式
-- Surface / 材质
-- 控件 / 弹层
-- 布局 / 栏位
-
-`packages/weimo-ui-markdown` 是 Markdown workspace 包，负责 Markdown 分组中的 token、渲染、编辑、数学公式和视图组件；它唯一的 workspace 内部依赖是 `weimo-ui-core`。
-
-`packages/weimo-ui-tagtree` 是标签树 workspace 包，负责标签树页面和标签导航组件；它唯一的 workspace 内部依赖同样是 `weimo-ui-core`。
-
-`packages/weimo-ui-image` 是图片 workspace 包，负责图片预览、上传和透明度处理；它唯一的 workspace 内部依赖是 `weimo-ui-core`。
-
-`packages/weimo-ui-stats` 是统计与可视化 workspace 包，负责 Heatmap 和 StatGroup；它唯一的 workspace 内部依赖是 `weimo-ui-core`。
-
-`packages/weimo-ui-card` 是卡片与 OCR workspace 包，负责带标签卡片、卡片 composer、OCR 卡片、OCR composer 和 OCR 详情；它复用 `weimo-ui-core`，并依赖 Markdown、标签树和图片子项目。
-
-`packages/weimo-ui-site` 是文档站 workspace 包，负责站点入口、路由、组件目录、组件预览和站点专用 UI；它通过 workspace 依赖消费各组件子项目，不再属于根组件包的源码入口。
-
-根包只保留兼容导出，不再维护一份重复的 `src` 源码树；每个入口直接指向对应子项目，并在 Git 安装包中携带子项目源码。
-
-站点组件目录按子项目组织在 `packages/weimo-ui-site/src/docs/catalog/packages/<package>`：每个子项目目录包含自身的 `manifest.ts` 和页面定义，`catalog/manifest.ts` 负责聚合。站点共享预览组件集中在 `src/docs/components`，页面和通用类型分别集中在 `src/docs/pages` 与 `src/docs/catalog/types.ts`。
-
-## 职责定位
-
-`weimo-ui` 不是用于复刻 `coss ui`、`shadcn/ui`、`base ui` 等组件库中已经存在的通用组件。
-
-它专门用于沉淀在 `examples/demo` 和 `weimo-biji/frontend/web` 中使用的特殊组件：这些组件应当是在 `coss ui`、`shadcn/ui`、`base ui` 等现有组件库里没有合适替代方案的 Weimo 专属组件。
-
-后续向 `weimo-ui` 添加组件时，应优先确认是否已有合适的通用组件库替代；只有确实没有合适替代、并且该组件服务于 `examples/demo` 或 `weimo-biji/frontend/web` 的特殊场景时，才应纳入本组件库。
-
-`packages/weimo-ui-core/src/lib` 可以承载被多个当前应用消费、且不读取产品 store、query 或业务实体的 headless 交互 hook。此类模块通过 package export 和行为测试发布，不属于视觉组件目录，也不进入详情页、manifest 或 registry。
-
-## Token / 样式 详情页规范
-
-Token / 样式 分组下的组件详情页只用于展示底层 token 值。
-
-真实使用场景可以出现在预览区，包括可交互的真实使用场景，但只能作为 token 值的可视化载体。页面主轴必须是 token 名称、亮/暗值、utility/helper 映射和最小必要说明。
-
-可交互场景必须明确绑定正在展示的 token，并且只展示真实 CSS 中存在的 hover、active、highlighted 等状态。
-
-不要把 Token / 样式 详情页写成组件 API、业务用法或 selector 行为文档。若需要讲解真实组件交互或业务用法，应放到对应组件详情页或其他非 Token / 样式 分组。
-
-## 脚本
-
-`packages/weimo-ui-site/src/docs/catalog/packages/*/manifest.ts` 是按子项目拆分的公共组件目录。新增或调整公共组件时，编辑所属子项目的 manifest、同目录详情页 definition、package export 和对应的独立 `registry/*.json`，然后生成并检查派生产物：
-
-```bash
-pnpm catalog:sync
-pnpm catalog:check
-```
-
-`packages/weimo-ui-site/src/docs/catalog/definitions.ts`、兼容清单 `packages/weimo-ui-site/src/docs/components-manifest.ts` 与根 `registry.json` 是生成文件，不直接编辑。契约测试由 `scripts/run-contract-tests.mjs` 自动发现 `scripts/*.test.mjs`。
-
-```bash
 pnpm dev
-pnpm build
-pnpm lint
-pnpm preview
 ```
 
-站点包的 Vite base 路径为 `/weimo-ui/`，本地开发访问 `http://localhost:5176/weimo-ui/`。
+然后打开 `http://localhost:5176/weimo-ui/`。组件目录会展示每个组件的预览、参数和可复制的导入方式。
 
-## 部署
+## 许可
 
-推送到 `main` 后，GitHub Actions 自动构建并发布到 GitHub Pages：`https://jiaowenjun.github.io/weimo-ui/`（workflow 见 `.github/workflows/deploy-pages.yml`）。
-
-构建产物为纯静态 SPA，位于 `packages/weimo-ui-site/dist`。GitHub Pages 没有 SPA fallback，workflow 在构建后把 `index.html` 复制为 `404.html`，配合应用内 `path="*"` 兜底路由，使 `/components/:id` 等深链接可直接访问。
+[MIT](LICENSE)
