@@ -1368,7 +1368,7 @@
         "@weimo/style",
         "@weimo/utils",
         "@weimo/float-bar",
-        "@weimo/chip-button",
+        "@weimo/capsule-button",
         "@weimo/tag-picker"
       ],
       "files": [
@@ -1761,9 +1761,9 @@
       "dependencies": [
         "lucide-react"
       ],
-      "name": "chip-button",
-      "title": "Chip Button",
-      "description": "A button-shaped chip surface with default and glass states.",
+      "name": "capsule-button",
+      "title": "Capsule Button",
+      "description": "A button-shaped capsule with default and glass states.",
       "categories": [
         "action",
         "tag"
@@ -1774,14 +1774,14 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-tagtree/src/components/chip-button.tsx",
+          "path": "packages/weimo-ui-tagtree/src/components/capsule-button.tsx",
           "type": "registry:ui",
-          "target": "@ui/chip-button.tsx"
+          "target": "@ui/capsule-button.tsx"
         },
         {
-          "path": "packages/weimo-ui-tagtree/src/components/chip-button.css",
+          "path": "packages/weimo-ui-tagtree/src/components/capsule-button.css",
           "type": "registry:ui",
-          "target": "@ui/chip-button.css"
+          "target": "@ui/capsule-button.css"
         },
         {
           "path": "packages/weimo-ui-core/src/components/capsule-frame.ts",
@@ -2785,14 +2785,14 @@
           "target": "@ui/tag-bar.css"
         },
         {
-          "path": "packages/weimo-ui-tagtree/src/components/chip-button.tsx",
+          "path": "packages/weimo-ui-tagtree/src/components/capsule-button.tsx",
           "type": "registry:ui",
-          "target": "@ui/chip-button.tsx"
+          "target": "@ui/capsule-button.tsx"
         },
         {
-          "path": "packages/weimo-ui-tagtree/src/components/chip-button.css",
+          "path": "packages/weimo-ui-tagtree/src/components/capsule-button.css",
           "type": "registry:ui",
-          "target": "@ui/chip-button.css"
+          "target": "@ui/capsule-button.css"
         },
         {
           "path": "packages/weimo-ui-core/src/components/capsule-frame.ts",

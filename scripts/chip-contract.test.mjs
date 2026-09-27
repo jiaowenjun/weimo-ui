@@ -125,7 +125,7 @@ for (const snippet of [
 assert.ok(
   !source.includes('ButtonHTMLAttributes') &&
     !source.includes('type="button"') &&
-    !source.includes("'chip-button'"),
+    !source.includes("'capsule-button'"),
   'Chip must be a neutral internal slot surface rather than another button wrapper.',
 )
 assert.ok(
@@ -136,18 +136,18 @@ assert.ok(
 )
 
 for (const [block, snippet, message] of [
-  [baseBlock, 'display: inline-flex;', 'Chip must match ChipButton inline-flex layout.'],
+  [baseBlock, 'display: inline-flex;', 'Chip must match CapsuleButton inline-flex layout.'],
   [baseBlock, 'max-width: 100%;', 'Chip must fit narrow containers.'],
   [baseBlock, 'min-width: 0;', 'Chip must allow clipped content inside narrow containers.'],
   [baseBlock, 'align-items: center;', 'Chip must vertically align arbitrary slot content.'],
   [baseBlock, 'justify-content: flex-start;', 'Chip must keep prefix and content left-aligned during width transitions.'],
   [baseBlock, 'gap: 4px;', 'Chip slots must have a compact gap for icons and actions.'],
-  [baseBlock, 'padding: 6px 10px;', 'Chip must match ChipButton padding.'],
+  [baseBlock, 'padding: 6px 10px;', 'Chip must match CapsuleButton padding.'],
   [solidFrameBlock, 'border: 1px solid transparent;', 'Solid Chip must keep transparent border geometry without overriding its frosted border.'],
-  [baseBlock, 'border-radius: var(--radius-round);', 'Chip must match ChipButton radius.'],
+  [baseBlock, 'border-radius: var(--radius-round);', 'Chip must match CapsuleButton radius.'],
   [baseBlock, 'background: transparent;', 'Chip base must leave background to visual layers.'],
-  [solidFrameBlock, 'color: var(--color-primary);', 'Solid Chip must match ChipButton primary text color without overriding its frosted foreground.'],
-  [baseBlock, 'line-height: 1;', 'Chip must match ChipButton compact line height.'],
+  [solidFrameBlock, 'color: var(--color-primary);', 'Solid Chip must match CapsuleButton primary text color without overriding its frosted foreground.'],
+  [baseBlock, 'line-height: 1;', 'Chip must match CapsuleButton compact line height.'],
   [baseBlock, 'isolation: isolate;', 'Chip must isolate visual layers.'],
   [baseBlock, 'overflow: hidden;', 'Chip must clip visual layers to capsule radius.'],
   [baseBlock, '--animated-inline-size-transition-duration: 180ms;', 'Chip width transitions must use the shared 180ms duration.'],
@@ -202,7 +202,7 @@ assert.ok(
     !css.includes('appearance: none') &&
     !css.includes('transform: scale(0.97)') &&
     !css.includes('.chip:hover'),
-  'Chip must not inherit ChipButton-only interactive button affordances.',
+  'Chip must not inherit CapsuleButton-only interactive button affordances.',
 )
 
 assert.ok(
@@ -212,7 +212,7 @@ assert.ok(
     docsSource.includes('<Chip content="普通胶囊"') &&
     !docsSource.includes('textSize=') &&
     !docsSource.includes('胶囊尺寸') &&
-    !docsSource.includes('ChipButton'),
+    !docsSource.includes('CapsuleButton'),
   'The core Capsule page must demo non-interactive Chip variants without importing tagtree controls.',
 )
 assert.ok(
@@ -247,6 +247,6 @@ assert.ok(
 )
 assert.ok(
   !existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/chip.tsx')) &&
-    existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/chip-button.tsx')),
-  'Chip stays on the core Capsule page while ChipButton owns a separate tagtree page.',
+    existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/capsule-button.tsx')),
+  'Chip stays on the core Capsule page while CapsuleButton owns a separate tagtree page.',
 )

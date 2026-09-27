@@ -9,7 +9,7 @@ function resultIds(query: string) {
 
 describe('component docs search', () => {
   it('finds functional pages by workspace package', () => {
-    expect(resultIds('weimo-ui-tagtree')).toEqual(['tag', 'chip-button'])
+    expect(resultIds('weimo-ui-tagtree')).toEqual(['tag', 'capsule-button'])
     expect(resultIds('weimo-ui-image')).toEqual(['image'])
     expect(resultIds('weimo-ui-card')).toEqual(['tagged-card', 'ocr'])
   })

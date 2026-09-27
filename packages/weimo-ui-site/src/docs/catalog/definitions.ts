@@ -14,7 +14,7 @@ import { cardToolBarDefinition } from './packages/weimo-ui-core/card-tool-bar'
 import { baseCardDefinition } from './packages/weimo-ui-core/base-card'
 import { componentPreviewCardDefinition } from './packages/weimo-ui-core/component-preview-card'
 import { tagDefinition } from './packages/weimo-ui-tagtree/tag'
-import { chipButtonDefinition } from './packages/weimo-ui-tagtree/chip-button'
+import { capsuleButtonDefinition } from './packages/weimo-ui-tagtree/capsule-button'
 import { markdownDefinition } from './packages/weimo-ui-markdown/markdown'
 import { mdDefinition } from './packages/weimo-ui-markdown/md'
 import { imageDefinition } from './packages/weimo-ui-image/image'
@@ -40,7 +40,7 @@ export const componentDefinitionsById = {
   'base-card': baseCardDefinition,
   'component-preview-card': componentPreviewCardDefinition,
   tag: tagDefinition,
-  'chip-button': chipButtonDefinition,
+  'capsule-button': capsuleButtonDefinition,
   markdown: markdownDefinition,
   md: mdDefinition,
   image: imageDefinition,

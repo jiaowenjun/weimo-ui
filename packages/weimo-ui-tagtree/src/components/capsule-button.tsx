@@ -15,24 +15,24 @@ import {
   useFrostedSurfaceBackgroundToneRef,
 } from 'weimo-ui-core/components/frosted-surface'
 
-import './chip-button.css'
+import './capsule-button.css'
 import 'weimo-ui-core/styles/capsule-frame.css'
 import 'weimo-ui-core/styles/frosted-surface.css'
 
-export type ChipButtonState = 'default' | 'glass'
+export type CapsuleButtonState = 'default' | 'glass'
 
-export type ChipButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'prefix'> & {
+export type CapsuleButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'prefix'> & {
   animateWidth?: boolean
   prefix?: ReactElement | null
-  state?: ChipButtonState
+  state?: CapsuleButtonState
   suffix?: ReactElement | null
 }
 
-function isEmptyChipButtonSlot(slot: ReactNode) {
+function isEmptyCapsuleButtonSlot(slot: ReactNode) {
   return slot === null || slot === undefined || typeof slot === 'boolean' || slot === ''
 }
 
-export function ChipButton({
+export function CapsuleButton({
   animateWidth = false,
   children,
   className,
@@ -41,7 +41,7 @@ export function ChipButton({
   style,
   suffix,
   ...props
-}: ChipButtonProps) {
+}: CapsuleButtonProps) {
   const isFrostedState = state === 'glass'
   const { backgroundStyle, backgroundTone, setElementRef } =
     useFrostedSurfaceBackgroundToneRef<HTMLButtonElement>(isFrostedState)
@@ -63,16 +63,16 @@ export function ChipButton({
   // 字符——类型层已排除 string;交互由外层胶囊按钮统一承接,避免在 button
   // 内嵌套另一个 button 造成无效 HTML;
   // 默认前缀为 Hash 图标(对齐 TagBread),null 隐藏插槽,gap 不由空插槽垫宽;
-  // 图标插槽的 hover/active 色由 chip-button.css 以 nested-hover token 与
+  // 图标插槽的 hover/active 色由 capsule-button.css 以 nested-hover token 与
   // 胶囊自身反馈区分。
   const buttonContent = (
     <>
-      {isEmptyChipButtonSlot(prefix) ? null : (
-        <span className="capsule-frame__slot chip-button__prefix">{prefix}</span>
+      {isEmptyCapsuleButtonSlot(prefix) ? null : (
+        <span className="capsule-frame__slot capsule-button__prefix">{prefix}</span>
       )}
-      <span className="capsule-frame__content chip-button__text">{children}</span>
-      {isEmptyChipButtonSlot(suffix) ? null : (
-        <span className="capsule-frame__slot chip-button__suffix">{suffix}</span>
+      <span className="capsule-frame__content capsule-button__text">{children}</span>
+      {isEmptyCapsuleButtonSlot(suffix) ? null : (
+        <span className="capsule-frame__slot capsule-button__suffix">{suffix}</span>
       )}
     </>
   )
@@ -80,15 +80,15 @@ export function ChipButton({
     <button
       className={getCapsuleFrameClassName(
         frostedSurfaceClassName,
-        'chip-button',
-        'chip-button--button',
+        'capsule-button',
+        'capsule-button--button',
         className,
       )}
       data-background-tone={
         isFrostedState ? backgroundTone ?? undefined : undefined
       }
-      data-has-prefix={isEmptyChipButtonSlot(prefix) ? undefined : 'true'}
-      data-has-suffix={isEmptyChipButtonSlot(suffix) ? undefined : 'true'}
+      data-has-prefix={isEmptyCapsuleButtonSlot(prefix) ? undefined : 'true'}
+      data-has-suffix={isEmptyCapsuleButtonSlot(suffix) ? undefined : 'true'}
       data-state={state}
       ref={isFrostedState ? setElementRef : undefined}
       style={
@@ -115,11 +115,11 @@ export function ChipButton({
         <button
           className={getCapsuleFrameClassName(
             frostedSurfaceClassName,
-            'chip-button',
-            'chip-button--button',
+            'capsule-button',
+            'capsule-button--button',
           )}
-          data-has-prefix={isEmptyChipButtonSlot(prefix) ? undefined : 'true'}
-          data-has-suffix={isEmptyChipButtonSlot(suffix) ? undefined : 'true'}
+          data-has-prefix={isEmptyCapsuleButtonSlot(prefix) ? undefined : 'true'}
+          data-has-suffix={isEmptyCapsuleButtonSlot(suffix) ? undefined : 'true'}
           data-state={state}
           type="button"
           {...capsuleFrameAttributes}

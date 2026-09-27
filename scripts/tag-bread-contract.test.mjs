@@ -162,14 +162,14 @@ for (const snippet of [
   assertIncludes(source, snippet, `TagBread source must include ${snippet}.`)
 }
 assert.ok(
-  !source.includes("from './chip-button'") &&
-    !source.includes('ChipButton') &&
+  !source.includes("from './capsule-button'") &&
+    !source.includes('CapsuleButton') &&
     !source.includes('<nav') &&
     !source.includes('export type TagBreadItem') &&
     !source.includes('items: TagBreadItem[]') &&
     !source.includes('item.href') &&
     !source.includes('current?: boolean'),
-  'TagBread must compose coss Breadcrumb rather than ChipButton or handwritten nav markup.',
+  'TagBread must compose coss Breadcrumb rather than CapsuleButton or handwritten nav markup.',
 )
 
 for (const snippet of [
@@ -217,7 +217,7 @@ assert.ok(
 assertIncludes(cossListBlock, 'color: var(--color-text-secondary);', 'coss Breadcrumb list must own TagBread text color even when the shared chip surface sets root color.')
 assertIncludes(listBlock, 'min-width: 0;', 'TagBread list must shrink inside constrained callers.')
 assertIncludes(listBlock, 'flex-wrap: nowrap;', 'TagBread list must keep the trail on one line.')
-assertIncludes(listBlock, 'gap: 6px;', 'TagBread breadcrumb list gap must not change when ChipButton gap changes.')
+assertIncludes(listBlock, 'gap: 6px;', 'TagBread breadcrumb list gap must not change when CapsuleButton gap changes.')
 assertIncludes(listBlock, 'font-size: var(--font-size-base);', 'TagBread text must use the base font size token.')
 assert.ok(!listBlock.includes('font-size: var(--font-size-sm);'), 'TagBread text must not use the small font size token.')
 assertIncludes(itemBlock, 'flex: none;', 'TagBread items must not shrink until Chinese text wraps.')
@@ -238,7 +238,7 @@ assert.ok(
   'TagBread current page overflow must not render an ellipsis.',
 )
 assertIncludes(prefixBlock, 'display: inline-flex;', 'TagBread prefix must align the default hash icon.')
-assertIncludes(tagBreadItemBlock, 'gap: 2px;', 'TagBread item prefix gap must not change when ChipButton gap changes.')
+assertIncludes(tagBreadItemBlock, 'gap: 2px;', 'TagBread item prefix gap must not change when CapsuleButton gap changes.')
 assertIncludes(prefixBlock, 'align-self: center;', 'TagBread prefix must stay vertically centered if breadcrumb item alignment changes.')
 assertIncludes(prefixBlock, 'align-items: center;', 'TagBread prefix icon must be vertically centered inside the prefix slot.')
 assertIncludes(prefixBlock, 'justify-content: center;', 'TagBread prefix icon must be horizontally centered inside the prefix slot.')

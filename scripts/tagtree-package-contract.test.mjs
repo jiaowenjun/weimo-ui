@@ -51,7 +51,7 @@ for (const [exportName, target] of [
   ['./components/tag-picker', './src/components/tag-picker.tsx'],
   ['./components/tag-tree', './src/components/tag-tree.tsx'],
   ['./components/tag-tree-row', './src/components/tag-tree-row.tsx'],
-  ['./components/chip-button', './src/components/chip-button.tsx'],
+  ['./components/capsule-button', './src/components/capsule-button.tsx'],
   ['./components/coss/breadcrumb', './src/components/coss/breadcrumb.tsx'],
   ['./components/coss/input-group', './src/components/coss/input-group.tsx'],
   ['./components/coss/scroll-area', './src/components/coss/scroll-area.tsx'],

@@ -55,9 +55,9 @@ const hiddenSlotBlock = cssBlockFor(
 )
 const chipsBlock = cssBlockFor(cssSource, '.tag-bar__chips')
 const morphSlotBlock = cssBlockFor(cssSource, '.tag-bar__morph-slot')
-const morphSlotChipBlock = cssBlockFor(cssSource, '.tag-bar__morph-slot .chip-button')
+const morphSlotChipBlock = cssBlockFor(cssSource, '.tag-bar__morph-slot .capsule-button')
 const morphMeasureBlock = cssBlockFor(cssSource, '.tag-bar__morph-measure')
-const morphMeasureChipBlock = cssBlockFor(cssSource, '.tag-bar__morph-measure .chip-button')
+const morphMeasureChipBlock = cssBlockFor(cssSource, '.tag-bar__morph-measure .capsule-button')
 const addChipBlock = cssBlockFor(cssSource, '.tag-bar__add-chip')
 const exitingAddChipBlock = cssBlockFor(cssSource, '.tag-bar__add-chip[data-exiting="true"]')
 const previewBlock = cssBlockFor(tagPageCssSource, '.tag-page__canvas')
@@ -109,7 +109,7 @@ for (const snippet of [
   "const emptyChipPrefix = editable ? '+' : '#'",
   "const emptyChipPrefixIcon = emptyChipPrefix === '+' ? TAG_CHIP_PLUS_PREFIX : TAG_CHIP_HASH_PREFIX",
   "import { FloatBar } from 'weimo-ui-core/components/float-bar'",
-  "import { ChipButton } from './chip-button'",
+  "import { CapsuleButton } from './capsule-button'",
   'TagPicker,',
   'type TagPickerApplyPayload,',
   'type TagPickerMode,',
@@ -176,7 +176,7 @@ for (const snippet of [
   'className="tag-bar__morph-measure"',
   'ref={emptyChipMeasureRef}',
   'visibleTags.map((tag, index) =>',
-  '<ChipButton',
+  '<CapsuleButton',
   'key={isEmpty ? \'empty\' : `${tag}-${index}`}',
   'prefix={editable && isEmpty ? TAG_CHIP_PLUS_PREFIX : TAG_CHIP_HASH_PREFIX}',
   "state={editable ? 'glass' : 'default'}",
@@ -267,9 +267,9 @@ assert.ok(
   'TagBar must not import, render, or reuse TagEditBar.',
 )
 assert.ok(
-  !componentSource.includes("from './chip-button" + "-v2'") &&
-    !componentSource.includes('<ChipButton' + 'v2'),
-  'TagBar must consume renamed ChipButton instead of the old v2 tag chip.',
+  !componentSource.includes("from './capsule-button" + "-v2'") &&
+    !componentSource.includes('<CapsuleButton' + 'v2'),
+  'TagBar must consume renamed CapsuleButton instead of the old v2 tag chip.',
 )
 assert.ok(
   componentSource.includes('function openInsert()') &&
@@ -361,15 +361,15 @@ assert.ok(
 )
 assert.ok(
   addChipSource.includes('showAddChip ? (') &&
-    addChipSource.includes('<ChipButton') &&
+    addChipSource.includes('<CapsuleButton') &&
     !addChipSource.includes('isEmpty'),
   'TagBar add chip branch must only serve non-empty tag rows; empty rows morph the placeholder chip in place.',
 )
 assert.ok(
-  !cssSource.includes('.tag-bar .chip-button') &&
-    !cssSource.includes(':where(.tag-bar) .chip-button') &&
-    !cssSource.includes('.tag-bar[data-editable="true"] .chip-button'),
-  'TagBar CSS must not duplicate ChipButton morph, hover, glass, or content-layer styles.',
+  !cssSource.includes('.tag-bar .capsule-button') &&
+    !cssSource.includes(':where(.tag-bar) .capsule-button') &&
+    !cssSource.includes('.tag-bar[data-editable="true"] .capsule-button'),
+  'TagBar CSS must not duplicate CapsuleButton morph, hover, glass, or content-layer styles.',
 )
 
 for (const [block, snippet, message] of [

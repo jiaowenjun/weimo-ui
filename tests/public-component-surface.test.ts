@@ -69,7 +69,7 @@ describe('public component catalog', () => {
       'base-card',
       'component-preview-card',
       'tag',
-      'chip-button',
+      'capsule-button',
       'markdown',
       'md',
       'image',

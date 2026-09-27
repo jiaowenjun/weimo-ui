@@ -22,7 +22,7 @@
 |---|---|---|
 | `opaque.card` | `CardSurface` | `Card`、coss `Card` / `CardFrame`、`SideBarShell` 常驻态 |
 | `opaque.popup` | `PopupSurface`（`level: modal \| tooltip` 细分圆角与阴影） | Dialog、Command、Tooltip 弹层 |
-| `solid.chip` | `CapsuleFrame` 使用 `--color-bg-chip` 绘制普通胶囊底色 | `Chip`、`ChipButton` 默认态 |
+| `solid.chip` | `CapsuleFrame` 使用 `--color-bg-chip` 绘制普通胶囊底色 | `Chip`、`CapsuleButton` 默认态 |
 | `frosted.adaptive` | `FrostedSurface`（运行时背景亮度采样切换前景/边框 token） | `Menu` 弹层、磨砂图标按钮、`MdEditorToolbar`、coss `InputGroup`、胶囊磨砂态、`TagBread` |
 | `liquid.glass` | `LiquidGlassSurface` | 明确选择液态折射效果的浮动控件 |
 

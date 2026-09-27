@@ -19,7 +19,7 @@ const engineSource = readProjectFile('packages/weimo-ui-core/src/components/liqu
 const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/surface.tsx')
 const tileSource = readProjectFile('packages/weimo-ui-site/src/docs/components/liquid-glass-tile.tsx')
 const buttonDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/button.tsx')
-const chipButtonDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/chip-button.tsx')
+const capsuleButtonDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/capsule-button.tsx')
 const barDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/bar.tsx')
 const pageLayoutDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/page-layout.tsx')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
@@ -131,15 +131,15 @@ for (const snippet of [
   'capsule-material-row__liquid-sizer',
 ]) {
   assert.ok(
-    chipButtonDefinitionSource.includes(snippet),
-    `The tagtree ChipButton page material card must include ${snippet}.`,
+    capsuleButtonDefinitionSource.includes(snippet),
+    `The tagtree CapsuleButton page material card must include ${snippet}.`,
   )
 }
-const liquidGlassChipButtonBlock =
+const liquidGlassCapsuleButtonBlock =
   appCss.match(/button\.liquid-glass-chip\s*\{([^}]*)\}/)?.[1] ?? ''
 assert.ok(
-  liquidGlassChipButtonBlock.includes('border: none;') &&
-    liquidGlassChipButtonBlock.includes('cursor: pointer;'),
+  liquidGlassCapsuleButtonBlock.includes('border: none;') &&
+    liquidGlassCapsuleButtonBlock.includes('cursor: pointer;'),
   'The capsule page liquid glass chips must be whole buttons: button.liquid-glass-chip resets the button chrome while span title capsules keep the plain .liquid-glass-chip base.',
 )
 for (const snippet of [

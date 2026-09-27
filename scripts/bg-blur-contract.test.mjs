@@ -36,7 +36,7 @@ const expectedTones = [
     blurValue: '14px',
     filter: 'blur(var(--glass-blur))',
     className: 'bg-blur--glass',
-    usage: 'FrostedSurface、Chip / ChipButton 磨砂态、TagBread',
+    usage: 'FrostedSurface、Chip / CapsuleButton 磨砂态、TagBread',
   },
   {
     tone: 'backdrop',

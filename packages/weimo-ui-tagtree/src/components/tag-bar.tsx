@@ -4,7 +4,7 @@ import { Hash, Plus } from 'lucide-react'
 
 import { FloatBar } from 'weimo-ui-core/components/float-bar'
 import { cn } from 'weimo-ui-core/lib/utils'
-import { ChipButton } from './chip-button'
+import { CapsuleButton } from './capsule-button'
 import {
   TagPicker,
   type TagPickerApplyPayload,
@@ -243,7 +243,7 @@ export function TagBar({
                 key={isEmpty ? 'empty' : `${tag}-${index}`}
                 style={isEmpty ? emptyChipWidthStyle : undefined}
               >
-                <ChipButton
+                <CapsuleButton
                   disabled={
                     editable
                       ? !canEdit
@@ -254,24 +254,24 @@ export function TagBar({
                   state={editable ? 'glass' : 'default'}
                 >
                   {tag}
-                </ChipButton>
+                </CapsuleButton>
               </span>
             ))}
             {isEmpty ? (
               <span className="tag-bar__morph-measure" aria-hidden="true">
                 <span ref={emptyChipMeasureRef}>
-                  <ChipButton
+                  <CapsuleButton
                     disabled={editable && !canEdit}
                     prefix={emptyChipPrefixIcon}
                     state={editable ? 'glass' : 'default'}
                   >
                     {emptyChipLabel}
-                  </ChipButton>
+                  </CapsuleButton>
                 </span>
               </span>
             ) : null}
             {showAddChip ? (
-              <ChipButton
+              <CapsuleButton
                 aria-label={`新增${addLabel}`}
                 className="tag-bar__add-chip"
                 data-exiting={!editable && addChipExiting ? 'true' : undefined}
@@ -282,7 +282,7 @@ export function TagBar({
                 state="glass"
               >
                 {addLabel}
-              </ChipButton>
+              </CapsuleButton>
             ) : null}
           </div>
         }

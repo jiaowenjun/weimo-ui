@@ -35,7 +35,7 @@ const rootRegistry = readJson('registry.json')
 const modelSource = readProjectFile('packages/weimo-ui-core/src/components/capsule-frame.ts')
 const css = readProjectFile('packages/weimo-ui-core/src/components/capsule-frame.css')
 const chipSource = readProjectFile('packages/weimo-ui-core/src/components/chip.tsx')
-const chipButtonSource = readProjectFile('packages/weimo-ui-tagtree/src/components/chip-button.tsx')
+const capsuleButtonSource = readProjectFile('packages/weimo-ui-tagtree/src/components/capsule-button.tsx')
 const tagBreadSource = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bread.tsx')
 
 const frameBlock = blockFor(css, '.capsule-frame')
@@ -153,7 +153,7 @@ assert.ok(
 
 for (const [source, label] of [
   [chipSource, 'Chip'],
-  [chipButtonSource, 'ChipButton'],
+  [capsuleButtonSource, 'CapsuleButton'],
   [tagBreadSource, 'TagBread'],
 ]) {
   assert.ok(
@@ -172,7 +172,7 @@ for (const [source, label] of [
   )
 }
 
-for (const registryName of ['card', 'chip', 'chip-button', 'tag-bread']) {
+for (const registryName of ['card', 'chip', 'capsule-button', 'tag-bread']) {
   const registryItem = readJson(`registry/${registryName}.json`)
   const filePaths = registryItem.files.map((file) => file.path)
 

@@ -788,6 +788,35 @@
   border-radius: var(--radius-sm);
 }
 
+.frosted-border-preview__samples {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  row-gap: 12px;
+  column-gap: clamp(12px, 4%, 24px);
+  padding: 24px 16px;
+}
+
+.frosted-border-preview__sample {
+  /* 两块方片均分扣掉 1 个 gap 后的剩余宽度；方片自带亮/暗底制造 token 的设计语境（演示级定值，非 token） */
+  width: clamp(48px, calc((100% - 1 * clamp(12px, 4%, 24px)) / 2), 96px);
+  aspect-ratio: 1;
+  border: 1px solid;
+  border-radius: var(--radius-sm);
+}
+
+.frosted-border-preview__sample--on-light {
+  background: hsl(0 0% 96%);
+  border-color: var(--glass-surface-border-on-light);
+}
+
+.frosted-border-preview__sample--on-dark {
+  background: hsl(0 0% 10%);
+  border-color: var(--glass-surface-border-on-dark);
+}
+
 .text-color-preview__samples {
   display: flex;
   align-items: baseline;
@@ -1248,7 +1277,7 @@
 }
 
 /* 液态玻璃胶囊在材质卡内按内容定宽:sizer 撑盒,玻璃层绝对居中覆盖;
-   两例 ChipButton 自带尺寸不参与此机制。 */
+   两例 CapsuleButton 自带尺寸不参与此机制。 */
 .capsule-material-row .liquid-glass-chip {
   display: inline-flex;
   align-items: center;
@@ -1363,26 +1392,26 @@ button.liquid-glass-chip {
   line-height: 1.4;
 }
 
-.chip-button-preview__width-example {
+.capsule-button-preview__width-example {
   position: relative;
   display: inline-grid;
   min-width: 0;
 }
 
-.chip-button-preview__width-slot {
-  --chip-button-preview-width-transition-duration: 180ms;
+.capsule-button-preview__width-slot {
+  --capsule-button-preview-width-transition-duration: 180ms;
 
   display: inline-block;
   max-width: 100%;
   overflow: visible;
-  transition: inline-size var(--chip-button-preview-width-transition-duration) cubic-bezier(0.2, 0, 0, 1);
+  transition: inline-size var(--capsule-button-preview-width-transition-duration) cubic-bezier(0.2, 0, 0, 1);
 }
 
-.chip-button-preview__width-slot .chip-button {
+.capsule-button-preview__width-slot .capsule-button {
   width: 100%;
 }
 
-.chip-button-preview__width-measure {
+.capsule-button-preview__width-measure {
   position: absolute;
   inset-block-start: 0;
   inset-inline-start: 0;
@@ -1391,7 +1420,7 @@ button.liquid-glass-chip {
   pointer-events: none;
 }
 
-.chip-button-preview__width-measure .chip-button {
+.capsule-button-preview__width-measure .capsule-button {
   width: max-content;
   max-width: none;
 }

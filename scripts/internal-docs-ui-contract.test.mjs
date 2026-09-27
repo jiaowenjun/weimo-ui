@@ -219,7 +219,7 @@ function assertGlassToolbarDemo(demoSource, label) {
       !demoSource.includes('GhostIconButton') &&
       !demoSource.includes('<IconButton') &&
       !demoSource.includes('<TextButton') &&
-      !demoSource.includes('<ChipButton') &&
+      !demoSource.includes('<CapsuleButton') &&
       !demoSource.includes('<button'),
     `${label} docs demo must use FrostedIconButton (standalone or grouped) for every toolbar button.`,
   )

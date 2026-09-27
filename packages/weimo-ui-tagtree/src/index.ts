@@ -1,5 +1,5 @@
 export { TagTreePage, type TagTreePageProps } from './tag-page'
-export { ChipButton, type ChipButtonProps, type ChipButtonState } from './components/chip-button'
+export { CapsuleButton, type CapsuleButtonProps, type CapsuleButtonState } from './components/capsule-button'
 export { TagBar, type TagBarProps } from './components/tag-bar'
 export { TagBread, type TagBreadProps } from './components/tag-bread'
 export {

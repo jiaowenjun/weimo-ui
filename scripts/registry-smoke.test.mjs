@@ -226,7 +226,7 @@ import { CardToolBar } from "@/components/ui/card-tool-bar"
 import { ActionDialog } from "@/components/ui/action-dialog"
 import { TagTreeRow, type TagTreeRowProps } from "@/components/ui/tag-tree-row"
 import { Chip } from "@/components/ui/chip"
-import { ChipButton, type ChipButtonState } from "@/components/ui/chip-button"
+import { CapsuleButton, type CapsuleButtonState } from "@/components/ui/capsule-button"
 import { TagBar } from "@/components/ui/tag-bar"
 import { MdEditor } from "@/components/ui/md-editor"
 import { MdRender } from "@/components/ui/md-render"
@@ -259,7 +259,7 @@ export function RegistryConsumerContract() {
   })
   const wordMetric = formatWordCountMetric(12345)
   const mode: ModeButtonMode = "display"
-  const chipState: ChipButtonState = "glass"
+  const chipState: CapsuleButtonState = "glass"
   const bgBlurClassName = getBgBlurClassName(bgBlurTones[0])
   const bgColorClassName = getBgColorClassName(bgColorTones[0])
   const pressableClassName = getPressableClassName(pressableTones[0])
@@ -348,7 +348,7 @@ export function RegistryConsumerContract() {
         onToggle={() => {}}
       />
       <Chip content="Chip" prefix="#" />
-      <ChipButton state={chipState}>Chip button</ChipButton>
+      <CapsuleButton state={chipState}>Chip button</CapsuleButton>
       <TagBar tags={["Tag"]} />
       <MdRender content={"## Render\\n\\ncontent"} />
       <MdEditor value={"## Editor"} onChange={() => {}} />
@@ -609,7 +609,7 @@ try {
     '@weimo/action-dialog',
     '@weimo/tag-tree-row',
     '@weimo/chip',
-    '@weimo/chip-button',
+    '@weimo/capsule-button',
     '@weimo/tag-bar',
     '@weimo/md-editor',
     '@weimo/md-render',
@@ -646,7 +646,7 @@ try {
   for (const file of [
     'image-view.json',
     'md-render.json',
-    'chip-button.json',
+    'capsule-button.json',
     'md-editor.json',
     'frosted-surface.json',
     'float-bar.json',
@@ -769,12 +769,12 @@ try {
     'shadcn add must write Card editable CSS file.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/chip-button.tsx')),
-    'shadcn add must write internal ChipButton source used by Card TagBar.',
+    existsSync(join(consumerDir, 'src/components/ui/capsule-button.tsx')),
+    'shadcn add must write internal CapsuleButton source used by Card TagBar.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/chip-button.css')),
-    'shadcn add must write internal ChipButton CSS used by Card TagBar.',
+    existsSync(join(consumerDir, 'src/components/ui/capsule-button.css')),
+    'shadcn add must write internal CapsuleButton CSS used by Card TagBar.',
   )
   assert.ok(
     existsSync(join(consumerDir, 'src/components/ui/capsule-frame.ts')) &&
@@ -1132,12 +1132,12 @@ try {
     join(consumerDir, 'src/components/ui/tag-bar.css'),
     'utf8',
   )
-  const chipButtonSource = readFileSync(
-    join(consumerDir, 'src/components/ui/chip-button.tsx'),
+  const capsuleButtonSource = readFileSync(
+    join(consumerDir, 'src/components/ui/capsule-button.tsx'),
     'utf8',
   )
-  const chipButtonCssSource = readFileSync(
-    join(consumerDir, 'src/components/ui/chip-button.css'),
+  const capsuleButtonCssSource = readFileSync(
+    join(consumerDir, 'src/components/ui/capsule-button.css'),
     'utf8',
   )
   const capsuleFrameSource = readFileSync(
@@ -1382,8 +1382,8 @@ try {
     'Installed Card must include its internal height transition hook.',
   )
   assert.ok(
-	      tagBarSource.includes("from './chip-button'") &&
-	      tagBarSource.includes('<ChipButton') &&
+	      tagBarSource.includes("from './capsule-button'") &&
+	      tagBarSource.includes('<CapsuleButton') &&
 	      tagBarSource.includes("state={editable ? 'glass' : 'default'}") &&
 	      tagBarSource.includes('state="glass"') &&
 	      tagBarSource.includes('const rootPositionLayoutSignature = [') &&
@@ -1392,14 +1392,14 @@ try {
 	      tagBarSource.includes('cancelRootPositionAnimation()') &&
 	      tagBarSource.includes('const nextOffset = readRootParentOffset(root, parent)') &&
 	      tagBarSource.includes('}, [rootPositionLayoutSignature])') &&
-	      chipButtonSource.includes('export function ChipButton') &&
-	      chipButtonSource.includes("from 'weimo-ui-core/components/capsule-frame'") &&
-      chipButtonSource.includes("from 'weimo-ui-core/components/animated-inline-size'") &&
-      chipButtonSource.includes("from 'weimo-ui-core/components/animated-inline-size-model'") &&
-	      chipButtonSource.includes("from 'weimo-ui-core/components/frosted-surface'") &&
-	      chipButtonSource.includes("import 'weimo-ui-core/styles/capsule-frame.css'") &&
-	      chipButtonSource.includes("import 'weimo-ui-core/styles/frosted-surface.css'") &&
-	      chipButtonSource.includes("material: isFrostedState ? 'frosted' : 'solid'") &&
+	      capsuleButtonSource.includes('export function CapsuleButton') &&
+	      capsuleButtonSource.includes("from 'weimo-ui-core/components/capsule-frame'") &&
+      capsuleButtonSource.includes("from 'weimo-ui-core/components/animated-inline-size'") &&
+      capsuleButtonSource.includes("from 'weimo-ui-core/components/animated-inline-size-model'") &&
+	      capsuleButtonSource.includes("from 'weimo-ui-core/components/frosted-surface'") &&
+	      capsuleButtonSource.includes("import 'weimo-ui-core/styles/capsule-frame.css'") &&
+	      capsuleButtonSource.includes("import 'weimo-ui-core/styles/frosted-surface.css'") &&
+	      capsuleButtonSource.includes("material: isFrostedState ? 'frosted' : 'solid'") &&
       capsuleFrameSource.includes('export function getCapsuleFrameClassName') &&
       animatedInlineSizeSource.includes('export function AnimatedInlineSizeMeasure') &&
       animatedInlineSizeModelSource.includes('export function useAnimatedInlineSize') &&
@@ -1411,11 +1411,11 @@ try {
       capsuleFrameCssSource.includes('justify-content: flex-start;') &&
       capsuleFrameCssSource.includes('--capsule-frame-state-transition-duration: 180ms;') &&
       capsuleFrameCssSource.includes('opacity var(--capsule-frame-state-transition-duration)') &&
-	      !chipButtonCssSource.includes(':hover::before') &&
+	      !capsuleButtonCssSource.includes(':hover::before') &&
 	      tagBarCssSource.includes('.tag-bar[data-position-animating="true"]') &&
 	      tagBarCssSource.includes('tag-bar-add-chip-in var(--weimo-card-transition-duration, 180ms)') &&
       tagBarCssSource.includes('tag-bar-add-chip-out var(--weimo-card-transition-duration, 160ms)'),
-    'Installed TagBar must consume the internal ChipButton files shipped with Card.',
+    'Installed TagBar must consume the internal CapsuleButton files shipped with Card.',
   )
   assert.ok(
     cardEditableCssSource.includes('.weimo-card-editable') &&

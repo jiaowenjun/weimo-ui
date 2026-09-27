@@ -13,7 +13,7 @@
     "@weimo/style",
     "@weimo/utils",
     "@weimo/float-bar",
-    "@weimo/chip-button",
+    "@weimo/capsule-button",
     "@weimo/tag-picker"
   ],
   "files": [

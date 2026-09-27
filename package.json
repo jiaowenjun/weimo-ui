@@ -71,7 +71,7 @@
     "./styles/heat-color.css": "./packages/weimo-ui-core/src/components/heat-color.css",
     "./styles/text-button.css": "./packages/weimo-ui-core/src/components/text-button.css",
     "./styles/text-color.css": "./packages/weimo-ui-core/src/components/text-color.css",
-    "./components/chip-button": "./packages/weimo-ui-tagtree/src/components/chip-button.tsx",
+    "./components/capsule-button": "./packages/weimo-ui-tagtree/src/components/capsule-button.tsx",
     "./components/coss/input-group": "./packages/weimo-ui-tagtree/src/components/coss/input-group.tsx",
     "./components/coss/scroll-area": "./packages/weimo-ui-tagtree/src/components/coss/scroll-area.tsx",
     "./components/tag-bar": "./packages/weimo-ui-tagtree/src/components/tag-bar.tsx",

@@ -54,7 +54,7 @@ const componentDefinitionSources = {
   bar: readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/bar.tsx'),
   'page-layout': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/page-layout.tsx'),
   capsule: readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule.tsx'),
-  'chip-button': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/chip-button.tsx'),
+  'capsule-button': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/capsule-button.tsx'),
 }
 const componentDefinitionsSource = [
   ...Object.values(componentDefinitionSources),
@@ -215,7 +215,7 @@ for (const componentId of [
   'bar',
   'page-layout',
   'card-tool-bar',
-  'chip-button',
+  'capsule-button',
 ]) {
   assert.ok(
     componentDefinitionsIndexSource.includes(`/${componentId}'`),
@@ -276,7 +276,7 @@ for (const snippet of [
   '<Heatmap',
   'setActiveDate(date)',
   'onSelect={setSelectedTag}',
-  '<ChipButton key={`${tag}-${index}`} onClick={() => openTagPicker(index)} state="glass">',
+  '<CapsuleButton key={`${tag}-${index}`} onClick={() => openTagPicker(index)} state="glass">',
   '<TagPicker',
   '<Card',
   'note={note}',
@@ -384,7 +384,7 @@ for (const snippet of [
   'function TagTreeDemo',
   "from 'weimo-ui-core/components/top-bar'",
   "from './components/tag-tree'",
-  "from './components/chip-button'",
+  "from './components/capsule-button'",
   "from 'weimo-ui-core/components/menu'",
   '<TagTreeDemo />',
   "onMenuAction={variant === 'default' ? () => {} : undefined}",
@@ -409,11 +409,11 @@ for (const snippet of [
 
 assert.ok(
   !componentDefinitionSources.tag.includes("from 'weimo-ui-core/components/coss/button'") &&
-  componentDefinitionSources.tag.includes("from './components/chip-button'") &&
+  componentDefinitionSources.tag.includes("from './components/capsule-button'") &&
   !componentDefinitionSources.tag.includes('tag-picker-preview__trigger') &&
   !componentDefinitionSources.tag.includes('<Button') &&
   !componentDefinitionSources.tag.includes('选择标签'),
-  'TagPicker docs preview must remove the standalone select-tag button and use internal ChipButton chips.',
+  'TagPicker docs preview must remove the standalone select-tag button and use internal CapsuleButton chips.',
 )
 assert.ok(
   !appCss.includes('.icon-preview__scene--light-solid') &&
@@ -486,12 +486,12 @@ assert.ok(
 
 assert.ok(
   !componentDefinitionSources.menu.includes("from 'weimo-ui-core/components/card'") &&
-  !componentDefinitionSources.menu.includes("from 'weimo-ui-tagtree/components/chip-button'") &&
+  !componentDefinitionSources.menu.includes("from 'weimo-ui-tagtree/components/capsule-button'") &&
   !componentDefinitionSources.menu.includes('<WeimoCard') &&
   !componentDefinitionSources.menu.includes('<CardHeader') &&
   !componentDefinitionSources.menu.includes('<CardContent') &&
   !componentDefinitionSources.menu.includes('<CardFooter') &&
-  !componentDefinitionSources.menu.includes('<ChipButton'),
+  !componentDefinitionSources.menu.includes('<CapsuleButton'),
   'Menu preview must render only its trigger button and menu content, not a memo card shell.',
 )
 assert.ok(
@@ -546,8 +546,8 @@ assert.ok(
 )
 assert.ok(
   !componentDefinitionsSource.includes('variant="button"') &&
-    !componentDefinitionsSource.includes('<ChipButton label='),
-  'ChipButton example code must match the single button chip API.',
+    !componentDefinitionsSource.includes('<CapsuleButton label='),
+  'CapsuleButton example code must match the single button chip API.',
 )
 assert.ok(
   !componentDefinitionsSource.includes('variant="bordered"') &&
@@ -613,9 +613,9 @@ assert.ok(
   'Merged Capsule docs definition must exist.',
 )
 assert.ok(
-  existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/chip-button.tsx')) &&
+  existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/capsule-button.tsx')) &&
     existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/card-tool-bar.tsx')),
-  'Package-specific ChipButton and card bar docs definitions must exist.',
+  'Package-specific CapsuleButton and card bar docs definitions must exist.',
 )
 
 for (const [source, label] of [

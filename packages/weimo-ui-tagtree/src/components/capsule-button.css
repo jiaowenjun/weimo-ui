@@ -1,10 +1,10 @@
 @layer components {
-  .chip-button__prefix,
-  .chip-button__suffix {
+  .capsule-button__prefix,
+  .capsule-button__suffix {
     flex: none;
   }
 
-  .chip-button__text {
+  .capsule-button__text {
     min-width: 0;
     max-width: 100%;
     overflow: hidden;
@@ -14,7 +14,7 @@
 
   /* 后缀小部件为幽灵图标按钮等嵌套交互时,hover/active 色改走嵌套层级
      token,与胶囊按钮自身的 bg-hover 反馈区分。 */
-  .chip-button__suffix .icon-button {
+  .capsule-button__suffix .icon-button {
     --icon-button-ghost-hover-bg: var(--color-bg-nested-hover);
   }
 }
@@ -22,17 +22,17 @@
 /* 只放几何。color/line-height 不能落在无层区:无层声明无条件压过
    @layer components 里 glass 变体的 tone 自适应 color(--glass-surface-fg),
    基类在 .capsule-frame(同层同值)已有声明,这里再写会把磨砂态文字钉死。 */
-button.chip-button {
+button.capsule-button {
   gap: 1px;
 }
 
 /* 前后缀图标位置:图标圆框距胶囊左/右边框 6px,图标与文字的 gap 收紧到
    1px——三档字号统一,两侧对称;padding 仅在带对应插槽时收窄,无前后缀
    胶囊保持共享 10px 内边距。 */
-button.chip-button[data-has-prefix] {
+button.capsule-button[data-has-prefix] {
   padding-left: 6px;
 }
 
-button.chip-button[data-has-suffix] {
+button.capsule-button[data-has-suffix] {
   padding-right: 6px;
 }
