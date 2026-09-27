@@ -790,18 +790,26 @@
 
 .frosted-border-preview__samples {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 12px;
+  padding: 24px 16px;
+}
+
+.frosted-border-preview__row {
+  display: flex;
+  width: 100%;
   flex-wrap: wrap;
   align-items: center;
   align-content: center;
   justify-content: center;
   row-gap: 12px;
   column-gap: clamp(12px, 4%, 24px);
-  padding: 24px 16px;
 }
 
 .frosted-border-preview__sample {
-  /* 五个方片均分扣掉 4 个 gap 后的剩余宽度，与 column-gap 共用同一 clamp；一 token 一方片，边框色来自行 token，规格与边框色示例对齐 */
-  width: clamp(24px, calc((100% - 4 * clamp(12px, 4%, 24px)) / 5), 48px);
+  /* 四锚点方片一行均分扣掉 3 个 gap 后的剩余宽度，与 column-gap 共用同一 clamp；主题默认方片独行居中、同规格 */
+  width: clamp(24px, calc((100% - 3 * clamp(12px, 4%, 24px)) / 4), 48px);
   aspect-ratio: 1;
   border: 1px solid;
   border-radius: var(--radius-sm);

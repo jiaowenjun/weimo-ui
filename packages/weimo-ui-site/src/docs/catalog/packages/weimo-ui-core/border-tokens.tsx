@@ -68,11 +68,11 @@ const frostedBorderAnchorOrder = [
   'lightEnd',
 ] as const satisfies readonly (keyof typeof frostedSurfaceBorderAnchorMap)[]
 
-// 卡片行序：主题回退在前，插值四锚点殿后；示例方片与 token 行一一对应。
-const frostedBorderTokens = [
-  frostedSurfaceBorderColorMap.default.token,
-  ...frostedBorderAnchorOrder.map((anchor) => frostedSurfaceBorderAnchorMap[anchor].token),
-]
+// 卡片行序：插值四锚点沿感知亮度轴在前，主题回退殿后；示例方片与 token 行一一对应，
+// 主题默认方片独行居中。
+const frostedBorderAnchorTokens = frostedBorderAnchorOrder.map(
+  (anchor) => frostedSurfaceBorderAnchorMap[anchor].token,
+)
 
 const borderColorSearchAliases = borderColorTones.flatMap((tone) => {
   const item = borderColorToneMap[tone]
@@ -133,26 +133,32 @@ function BorderColorPreview() {
 
       <ComponentPreviewCard
         items={[
+          ...frostedBorderAnchorOrder.map((anchor) => ({
+            token: frostedSurfaceBorderAnchorMap[anchor].token,
+            value: frostedSurfaceBorderAnchorMap[anchor].value,
+          })),
           {
             darkValue: frostedSurfaceBorderColorMap.default.value.dark,
             token: frostedSurfaceBorderColorMap.default.token,
             value: frostedSurfaceBorderColorMap.default.value.light,
           },
-          ...frostedBorderAnchorOrder.map((anchor) => ({
-            token: frostedSurfaceBorderAnchorMap[anchor].token,
-            value: frostedSurfaceBorderAnchorMap[anchor].value,
-          })),
         ]}
         label="磨砂材质边框色"
       >
         <div aria-hidden="true" className="frosted-border-preview__samples">
-          {frostedBorderTokens.map((token) => (
-            <div
-              className="frosted-border-preview__sample"
-              key={token}
-              style={{ borderColor: `var(${token})` }}
-            />
-          ))}
+          <div className="frosted-border-preview__row">
+            {frostedBorderAnchorTokens.map((token) => (
+              <div
+                className="frosted-border-preview__sample"
+                key={token}
+                style={{ borderColor: `var(${token})` }}
+              />
+            ))}
+          </div>
+          <div
+            className="frosted-border-preview__sample"
+            style={{ borderColor: `var(${frostedSurfaceBorderColorMap.default.token})` }}
+          />
         </div>
       </ComponentPreviewCard>
     </>

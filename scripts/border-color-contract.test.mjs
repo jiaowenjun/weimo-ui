@@ -116,6 +116,8 @@ const tagBarPreviewPanelBlock = blockFor(appCss, '.tag-bar-preview__panel')
 const sampleBlock = blockFor(appCss, '.border-color-preview__sample')
 const samplesBlock = blockFor(appCss, '.border-color-preview__samples')
 const frostedSampleBlock = blockFor(appCss, '.frosted-border-preview__sample')
+const frostedSamplesLayoutBlock = blockFor(appCss, '.frosted-border-preview__samples')
+const frostedRowBlock = blockFor(appCss, '.frosted-border-preview__row')
 
 assert.equal(
   packageJson.exports?.['./components/border-color'],
@@ -449,8 +451,12 @@ assert.ok(
     docsDefinitionSource.includes('...frostedBorderAnchorOrder.map((anchor) => ({') &&
     docsDefinitionSource.includes('label="磨砂材质边框色"') &&
     docsDefinitionSource.includes('className="frosted-border-preview__samples"') &&
-    docsDefinitionSource.includes('frostedBorderTokens.map((token) => (') &&
+    docsDefinitionSource.includes('frostedBorderAnchorTokens.map((token) => (') &&
+    docsDefinitionSource.includes('className="frosted-border-preview__row"') &&
     docsDefinitionSource.includes('style={{ borderColor: `var(${token})` }}') &&
+    docsDefinitionSource.includes(
+      'style={{ borderColor: `var(${frostedSurfaceBorderColorMap.default.token})` }}',
+    ) &&
     !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     docsDefinitionSource.includes('--color-border-disabled-on-light') &&
     docsDefinitionSource.includes('--color-border-divider-menu-on-dark') &&
@@ -492,9 +498,16 @@ assert.ok(
 )
 
 assert.ok(
-  appCss.includes('.frosted-border-preview__samples') &&
+  frostedSamplesLayoutBlock.includes('display: flex;') &&
+    frostedSamplesLayoutBlock.includes('flex-direction: column;') &&
+    frostedSamplesLayoutBlock.includes('align-items: center;') &&
+    frostedSamplesLayoutBlock.includes('row-gap: 12px;') &&
+    frostedRowBlock.includes('width: 100%;') &&
+    frostedRowBlock.includes('flex-wrap: wrap;') &&
+    frostedRowBlock.includes('justify-content: center;') &&
+    frostedRowBlock.includes('column-gap: clamp(12px, 4%, 24px);') &&
     frostedSampleBlock.includes(
-      'width: clamp(24px, calc((100% - 4 * clamp(12px, 4%, 24px)) / 5), 48px);',
+      'width: clamp(24px, calc((100% - 3 * clamp(12px, 4%, 24px)) / 4), 48px);',
     ) &&
     frostedSampleBlock.includes('aspect-ratio: 1;') &&
     frostedSampleBlock.includes('border: 1px solid;') &&
@@ -503,7 +516,7 @@ assert.ok(
     !frostedSampleBlock.includes('background:') &&
     !frostedSampleBlock.includes('box-shadow:') &&
     !appCss.includes('frosted-border-preview__sample--'),
-  'Frosted border preview must render one stroke-only square per frosted border token, sharing the BorderColor sample layout.',
+  'Frosted border preview must render four anchor squares in one row with the theme-default square centered on its own row.',
 )
 
 assert.ok(registryItem, 'registry.json must include the border-color registry item.')
