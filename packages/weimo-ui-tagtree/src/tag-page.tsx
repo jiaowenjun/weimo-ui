@@ -208,10 +208,16 @@ function TagTreeRowDemo() {
   return (
     <ComponentPreviewCard align="center" className="tag-page__card" label="标签树行">
       <div className="tag-page__canvas">
-        <div className="tag-page__tree-panel" role="tree" aria-label="TagTreeRow preview">
-          <TagTreeRow onMenuAction={() => {}} onSelect={() => {}} onToggle={() => {}} row={rootRow} rowMenuEnabled variant="default" />
-          <TagTreeRow onMenuAction={() => {}} onSelect={() => {}} onToggle={() => {}} row={childRow} rowMenuEnabled variant="default" />
-          <TagTreeRow onSelect={() => {}} onToggle={() => {}} row={{ ...childRow, tag: 'writing/ideas', label: '灵感', selected: false }} rowMenuEnabled={false} variant="no-action" />
+        <div className="tag-page__tree-panel">
+          {/* 行组件的布局变量(--tag-tree-*)定义在 .tag-tree 上,演示须复用
+              TagTree 的真实结构,脱离该作用域行内网格会整体失效。 */}
+          <div aria-label="TagTreeRow preview" className="tag-tree" role="tree">
+            <div className="tag-tree__list">
+              <TagTreeRow onMenuAction={() => {}} onSelect={() => {}} onToggle={() => {}} row={rootRow} rowMenuEnabled variant="default" />
+              <TagTreeRow onMenuAction={() => {}} onSelect={() => {}} onToggle={() => {}} row={childRow} rowMenuEnabled variant="default" />
+              <TagTreeRow onSelect={() => {}} onToggle={() => {}} row={{ ...childRow, tag: 'writing/ideas', label: '灵感', selected: false }} rowMenuEnabled={false} variant="no-action" />
+            </div>
+          </div>
         </div>
       </div>
     </ComponentPreviewCard>
@@ -223,23 +229,31 @@ export type TagTreePageProps = {
 }
 
 export function TagTreePage({ embedded = false }: TagTreePageProps = {}) {
+  const demos = (
+    <>
+      <TagBarDemo />
+      <TagBreadDemo />
+      <TagPickerDemo />
+      <TagTreeDemo />
+      <TagTreeDemo variant="no-action" />
+      <TagTreeRowDemo />
+    </>
+  )
+
+  // 站点内嵌时不带独立页外壳:卡片作为兄弟节点直接进 app-shell__content
+  // 纵列,与其他组件页的单列满宽布局对齐。
+  if (embedded) {
+    return demos
+  }
+
   return (
     <main className="tag-page">
-      {!embedded ? (
-        <header className="tag-page__header">
-          <p className="tag-page__eyebrow">Weimo UI / 标签树</p>
-          <h1>标签树</h1>
-          <p>标签栏、面包屑、选择器与树形导航组件。</p>
-        </header>
-      ) : null}
-      <div className="tag-page__grid">
-        <TagBarDemo />
-        <TagBreadDemo />
-        <TagPickerDemo />
-        <TagTreeDemo />
-        <TagTreeDemo variant="no-action" />
-        <TagTreeRowDemo />
-      </div>
+      <header className="tag-page__header">
+        <p className="tag-page__eyebrow">Weimo UI / 标签树</p>
+        <h1>标签树</h1>
+        <p>标签栏、面包屑、选择器与树形导航组件。</p>
+      </header>
+      <div className="tag-page__grid">{demos}</div>
     </main>
   )
 }
