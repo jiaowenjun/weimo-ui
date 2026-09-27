@@ -44,6 +44,8 @@ const previewCardCss = readProjectFile('packages/weimo-ui-core/src/components/co
 
 const baseBlock = cssBlockFor(surfaceCss, '.capsule-frame')
 const chipGapBlock = cssBlockFor(css, '.chip')
+const chipLiquidBlock = cssBlockFor(css, '.chip--liquid-glass')
+const chipLiquidToneBlock = cssBlockFor(css, `.chip--liquid-glass[data-background-tone='light']`)
 const chipPrefixPaddingBlock = cssBlockFor(css, '.chip[data-has-prefix]')
 const chipSuffixPaddingBlock = cssBlockFor(css, '.chip[data-has-suffix]')
 const defaultLayerBlock = cssBlockFor(surfaceCss, '.capsule-frame::before')
@@ -94,7 +96,7 @@ for (const snippet of [
   "from './animated-inline-size-model'",
   "from './capsule-frame'",
   "import './chip.css'",
-  "export type ChipVariant = 'default' | 'glass'",
+  "export type ChipVariant = 'default' | 'frosted' | 'liquid-glass'",
   'type ChipContent = Exclude<ReactNode, boolean | null | undefined>',
   "export type ChipProps = Omit<ComponentPropsWithoutRef<'span'>, 'children' | 'content' | 'prefix'> & {",
   'bordered?: boolean',
@@ -110,7 +112,7 @@ for (const snippet of [
   'getFrostedSurfaceClassName,',
   'useFrostedSurfaceBackgroundToneRef,',
   "import './frosted-surface.css'",
-  "const isFrostedVariant = variant === 'glass'",
+  "const isFrostedVariant = variant === 'frosted'",
   'isFrostedVariant ? backgroundTone ?? undefined : undefined',
   "getCapsuleFrameClassName(",
   'const capsuleFrameAttributes = getCapsuleFrameAttributes({',
@@ -124,6 +126,9 @@ for (const snippet of [
   'capsule-frame__slot chip__slot chip__slot--suffix',
   "data-has-prefix={isEmptyChipSlot(prefix) ? undefined : 'true'}",
   "data-has-suffix={isEmptyChipSlot(suffix) ? undefined : 'true'}",
+  "import { LiquidGlassSurface } from './liquid-glass'",
+  "const isLiquidGlassVariant = variant === 'liquid-glass'",
+  "'chip--liquid-glass'",
 ]) {
   assertIncludes(source, snippet, `Chip source must include ${snippet}.`)
 }
@@ -151,6 +156,8 @@ for (const [block, snippet, message] of [
   [baseBlock, 'padding: 6px 10px;', 'Chip must match CapsuleButton padding.'],
   [chipPrefixPaddingBlock, 'padding-left: 6px;', 'Chip with a prefix must sit the icon 6px from the left border like CapsuleButton.'],
   [chipSuffixPaddingBlock, 'padding-right: 6px;', 'Chip with a suffix must sit the icon 6px from the right border like CapsuleButton.'],
+  [chipLiquidBlock, 'color: var(--glass-surface-fg-on-dark);', 'Chip liquid glass variant must default its label color to the on-dark glass token.'],
+  [chipLiquidToneBlock, 'color: var(--glass-surface-fg-on-light);', 'Chip liquid glass variant must flip its label color on light backgrounds via its own tone sampling.'],
   [solidFrameBlock, 'border: 1px solid transparent;', 'Solid Chip must keep transparent border geometry without overriding its frosted border.'],
   [baseBlock, 'border-radius: var(--radius-round);', 'Chip must match CapsuleButton radius.'],
   [baseBlock, 'background: transparent;', 'Chip base must leave background to visual layers.'],

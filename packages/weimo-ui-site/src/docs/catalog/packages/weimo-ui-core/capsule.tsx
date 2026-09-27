@@ -11,7 +11,8 @@ function ChipMaterialDemo() {
     <GlassPreviewCard label="胶囊材质">
       <div aria-label="Chip 材质预览" className="capsule-material-row">
         <Chip content="普通胶囊" prefix={<Hash aria-hidden="true" />} variant="default" />
-        <Chip content="磨砂胶囊" prefix={<Hash aria-hidden="true" />} variant="glass" />
+        <Chip content="磨砂胶囊" prefix={<Hash aria-hidden="true" />} variant="frosted" />
+        <Chip content="液态玻璃胶囊" prefix={<Hash aria-hidden="true" />} variant="liquid-glass" />
       </div>
     </GlassPreviewCard>
   )
@@ -29,7 +30,7 @@ function ChipSlotDemo() {
               <X aria-hidden="true" />
             </GhostIconButton>
           }
-          variant="glass"
+          variant="frosted"
         />
       </div>
     </ComponentPreviewCard>
@@ -57,6 +58,7 @@ export const capsuleDefinition = {
     '胶囊材质',
     '胶囊前缀',
     '胶囊后缀',
+    '液态玻璃胶囊',
   ],
   preview: () => <CapsuleDemo />,
 } satisfies ComponentDefinition

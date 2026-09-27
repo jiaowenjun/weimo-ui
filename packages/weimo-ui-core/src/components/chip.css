@@ -24,3 +24,48 @@
 .chip[data-has-suffix] {
   padding-right: 6px;
 }
+
+/* 液态玻璃态:壳只做几何容器,玻璃层(LiquidGlassSurface)绝对居中覆盖,
+   隐藏 sizer 复刻槽位内容撑盒宽,不走 capsule-frame 的材质层与裁切;
+   文字色随自身 tone 采样自适应(与磨砂态共用采样 hook)。 */
+.chip--liquid-glass {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--font-size-sm);
+  line-height: 1;
+  color: var(--glass-surface-fg-on-dark);
+}
+
+.chip--liquid-glass[data-background-tone='light'] {
+  color: var(--glass-surface-fg-on-light);
+}
+
+/* 库内容层 .liquid-glass__content 带内联 font:500 20px,样式表无法覆写:
+   排版(flex/gap)在此层重建,sm 字号下沉到槽位与文字自身声明,玻璃层才会
+   与 sizer 同宽;字重保留库的 500(现网液态胶囊既有观感)。 */
+.chip__liquid-glass-layer .liquid-glass__content,
+.chip__liquid-sizer {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.chip__liquid-glass-layer .capsule-frame__slot,
+.chip__liquid-glass-layer .capsule-frame__content,
+.chip__liquid-sizer {
+  font-size: var(--font-size-sm);
+  line-height: 1;
+  font-family: var(--font-sans);
+  font-weight: 400;
+}
+
+/* 库在内容层内联了暗底文字投影,亮背景下会发虚,随 tone 关闭。 */
+.chip--liquid-glass[data-background-tone='light'] .capsule-frame__content {
+  text-shadow: none;
+}
+
+.chip__liquid-sizer {
+  visibility: hidden;
+  white-space: nowrap;
+}

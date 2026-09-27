@@ -203,7 +203,7 @@ function sliceDemoSource(source, startMarker, endMarker, label) {
 
 function assertGlassToolbarDemo(demoSource, label) {
   const chipCount = (demoSource.match(/<Chip\b/g) ?? []).length
-  const glassVariantCount = (demoSource.match(/variant="glass"/g) ?? []).length
+  const glassVariantCount = (demoSource.match(/variant="frosted"/g) ?? []).length
 
   assert.ok(
     chipCount > 0 &&

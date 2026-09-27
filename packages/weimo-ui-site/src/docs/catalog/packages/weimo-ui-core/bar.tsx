@@ -20,7 +20,7 @@ function BottomBarDemo() {
           <BottomBar
             aria-label="底部操作栏预览"
             leftSlot={
-              <Chip bordered={false} content="2 个标签待保存" variant="glass" />
+              <Chip bordered={false} content="2 个标签待保存" variant="frosted" />
             }
             rightSlot={
               <span className="internal-preview__actions">
