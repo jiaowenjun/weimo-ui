@@ -31,16 +31,56 @@ const BACKGROUND_LIGHTNESS_THRESHOLD = 0.5
 const MIN_VISIBLE_ALPHA = 0.05
 const MIN_VIDEO_READY_STATE = 2
 
-// 边框亮度插值锚点(零饱和度灰的 lightness,演示页调参定值,不对应单一 token):
-// 暗段 0~50% 从 38% 递增至 98%,亮段 50%~100% 从 35% 递增至 90%。暗段
-// 起点与暗背景描边 token 对齐,避免小尺寸圆形/胶囊描边在近黑背景上不可辨。50% 恰是
-// tone 翻转点,边框与前景色同处 98→35 跳变,由组件的 border-color 过渡柔化。
-// 与 BACKGROUND_LIGHTNESS_THRESHOLD 同为采样行为的内聚常量,不 import token
-// 镜像以保持 registry 自包含。
-const BORDER_DARK_SEGMENT_START_LIGHTNESS = 38
-const BORDER_DARK_SEGMENT_END_LIGHTNESS = 98
-const BORDER_LIGHT_SEGMENT_START_LIGHTNESS = 35
-const BORDER_LIGHT_SEGMENT_END_LIGHTNESS = 90
+// 磨砂边框插值锚点 token 镜像(--glass-surface-border-{dark,light}-{start,end}):
+// 暗段=背景感知亮度 0~50%(start→end 递增),亮段=50%~100%,端点固定跨主题同值。
+// 值镜像 tokens.css 并由契约双向锁定;模型保持零相对 import 以维持 registry 自包含,
+// 插值亮度从镜像色值推导,避免同一端点在文件内出现数字/色值双重表示。
+export const frostedSurfaceBorderAnchorMap = {
+  darkStart: {
+    token: '--glass-surface-border-dark-start',
+    value: 'hsl(0 0% 38%)',
+  },
+  darkEnd: {
+    token: '--glass-surface-border-dark-end',
+    value: 'hsl(0 0% 98%)',
+  },
+  lightStart: {
+    token: '--glass-surface-border-light-start',
+    value: 'hsl(0 0% 35%)',
+  },
+  lightEnd: {
+    token: '--glass-surface-border-light-end',
+    value: 'hsl(0 0% 90%)',
+  },
+} as const
+
+// 锚点必须全为零饱和度纯灰——lightness 域插值与颜色插值等价成立的前提;
+// 非纯灰端点在模块加载期立即暴露。
+function resolveGrayHslLightness(color: string) {
+  const lightness = /^hsl\(0 0% (.+)%\)$/.exec(color)?.[1]
+
+  if (lightness === undefined) {
+    throw new Error(`Frosted surface border anchor must be a pure gray hsl color: ${color}`)
+  }
+
+  return Number.parseFloat(lightness)
+}
+
+// 边框亮度插值锚点(零饱和度灰的 lightness):暗段起点与 --glass-surface-border 的
+// 暗主题回退值同值,避免小尺寸圆形/胶囊描边在近黑背景上不可辨。50% 恰是 tone 翻转点,
+// 边框与前景色同处 darkEnd→lightStart 跳变,由组件的 border-color 过渡柔化。
+const BORDER_DARK_SEGMENT_START_LIGHTNESS = resolveGrayHslLightness(
+  frostedSurfaceBorderAnchorMap.darkStart.value,
+)
+const BORDER_DARK_SEGMENT_END_LIGHTNESS = resolveGrayHslLightness(
+  frostedSurfaceBorderAnchorMap.darkEnd.value,
+)
+const BORDER_LIGHT_SEGMENT_START_LIGHTNESS = resolveGrayHslLightness(
+  frostedSurfaceBorderAnchorMap.lightStart.value,
+)
+const BORDER_LIGHT_SEGMENT_END_LIGHTNESS = resolveGrayHslLightness(
+  frostedSurfaceBorderAnchorMap.lightEnd.value,
+)
 
 // 边框亮度随感知亮度两段平滑递增(暗段 38%→98%,亮段 35%→90%),端点固定与
 // 站点主题无关;锚点全为纯灰,lightness 域插值与颜色插值等价。

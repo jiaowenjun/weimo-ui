@@ -60,8 +60,12 @@
   --glass-blur: 14px;
   --backdrop-blur: 4px;
   --glass-surface-border: hsl(0 0% 80%);
-  --glass-surface-border-on-light: hsl(0 0% 80%);
-  --glass-surface-border-on-dark: hsl(0 0% 38%);
+  /* 磨砂边框随背景感知亮度插值的四锚点：暗段=暗背景侧 0~50%（start→end 递增），
+     亮段=亮背景侧 50%~100%（start→end 递增）；端点固定，跨主题同值。 */
+  --glass-surface-border-dark-start: hsl(0 0% 38%);
+  --glass-surface-border-dark-end: hsl(0 0% 98%);
+  --glass-surface-border-light-start: hsl(0 0% 35%);
+  --glass-surface-border-light-end: hsl(0 0% 90%);
   --glass-surface-fg: hsl(222.2 47.4% 11.2% / 0.9);
   --glass-surface-muted-fg: hsl(215.3 25% 26.7% / 0.68);
   --glass-surface-fg-on-light: hsl(222.2 47.4% 11.2% / 0.9);
@@ -165,8 +169,10 @@
 
   /* === 玻璃效果暗色 === */
   --glass-surface-border: hsl(0 0% 38%);
-  --glass-surface-border-on-light: hsl(0 0% 80%);
-  --glass-surface-border-on-dark: hsl(0 0% 38%);
+  --glass-surface-border-dark-start: hsl(0 0% 38%);
+  --glass-surface-border-dark-end: hsl(0 0% 98%);
+  --glass-surface-border-light-start: hsl(0 0% 35%);
+  --glass-surface-border-light-end: hsl(0 0% 90%);
   --glass-surface-fg: hsl(0 0% 79.2%);
   --glass-surface-muted-fg: hsl(0 0% 100% / 0.68);
   --glass-surface-fg-on-light: hsl(222.2 47.4% 11.2% / 0.9);

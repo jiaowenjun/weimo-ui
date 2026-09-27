@@ -75,6 +75,19 @@ export const borderColorToneMap = {
   },
 } as const
 
+// 磨砂材质（FrostedSurface 家族）的描边 token 镜像。token 名沿袭 --glass-surface-*
+// 前缀（玻璃材质时代命名），现仅磨砂材质消费；--glass-surface-border 随主题翻转，
+// 是采样插值接管前的回退描边色。值镜像 tokens.css，改动须两处同步。
+export const frostedSurfaceBorderColorMap = {
+  default: {
+    token: '--glass-surface-border',
+    value: {
+      light: 'hsl(0 0% 80%)',
+      dark: 'hsl(0 0% 38%)',
+    },
+  },
+} as const
+
 export type BorderColorTone = keyof typeof borderColorToneMap
 
 export const borderColorTones = Object.keys(borderColorToneMap) as BorderColorTone[]

@@ -800,21 +800,11 @@
 }
 
 .frosted-border-preview__sample {
-  /* 两块方片均分扣掉 1 个 gap 后的剩余宽度；方片自带亮/暗底制造 token 的设计语境（演示级定值，非 token） */
-  width: clamp(48px, calc((100% - 1 * clamp(12px, 4%, 24px)) / 2), 96px);
+  /* 五个方片均分扣掉 4 个 gap 后的剩余宽度，与 column-gap 共用同一 clamp；一 token 一方片，边框色来自行 token，规格与边框色示例对齐 */
+  width: clamp(24px, calc((100% - 4 * clamp(12px, 4%, 24px)) / 5), 48px);
   aspect-ratio: 1;
   border: 1px solid;
   border-radius: var(--radius-sm);
-}
-
-.frosted-border-preview__sample--on-light {
-  background: hsl(0 0% 96%);
-  border-color: var(--glass-surface-border-on-light);
-}
-
-.frosted-border-preview__sample--on-dark {
-  background: hsl(0 0% 10%);
-  border-color: var(--glass-surface-border-on-dark);
 }
 
 .text-color-preview__samples {

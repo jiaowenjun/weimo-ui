@@ -1,6 +1,7 @@
 import {
   borderColorToneMap,
   borderColorTones,
+  frostedSurfaceBorderColorMap,
   getBorderColorClassName,
   getBorderColorToken,
   type BorderColorTone,
@@ -12,6 +13,7 @@ import {
   getBorderRadiusValue,
 } from 'weimo-ui-core/components/border-radius'
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
+import { frostedSurfaceBorderAnchorMap } from 'weimo-ui-core/components/frosted-surface-model'
 import type { ComponentDefinition } from '../../component-docs'
 
 type BorderContextToken = {
@@ -46,8 +48,6 @@ const borderContextTokens: Partial<Record<BorderColorTone, readonly BorderContex
   ],
   default: [
     { label: '主题默认', token: '--glass-surface-border' },
-    { label: '亮背景', token: '--glass-surface-border-on-light' },
-    { label: '暗背景', token: '--glass-surface-border-on-dark' },
   ],
 }
 
@@ -59,6 +59,20 @@ const borderColorToneOrder = [
   'accent',
   'danger',
 ] as const
+
+// 磨砂边框插值锚点展示顺序：沿感知亮度轴从纯黑背景到纯白背景（暗段→亮段）。
+const frostedBorderAnchorOrder = [
+  'darkStart',
+  'darkEnd',
+  'lightStart',
+  'lightEnd',
+] as const satisfies readonly (keyof typeof frostedSurfaceBorderAnchorMap)[]
+
+// 卡片行序：主题回退在前，插值四锚点殿后；示例方片与 token 行一一对应。
+const frostedBorderTokens = [
+  frostedSurfaceBorderColorMap.default.token,
+  ...frostedBorderAnchorOrder.map((anchor) => frostedSurfaceBorderAnchorMap[anchor].token),
+]
 
 const borderColorSearchAliases = borderColorTones.flatMap((tone) => {
   const item = borderColorToneMap[tone]
@@ -116,6 +130,31 @@ function BorderColorPreview() {
           ))}
         </div>
       </ComponentPreviewCard>
+
+      <ComponentPreviewCard
+        items={[
+          {
+            darkValue: frostedSurfaceBorderColorMap.default.value.dark,
+            token: frostedSurfaceBorderColorMap.default.token,
+            value: frostedSurfaceBorderColorMap.default.value.light,
+          },
+          ...frostedBorderAnchorOrder.map((anchor) => ({
+            token: frostedSurfaceBorderAnchorMap[anchor].token,
+            value: frostedSurfaceBorderAnchorMap[anchor].value,
+          })),
+        ]}
+        label="磨砂材质边框色"
+      >
+        <div aria-hidden="true" className="frosted-border-preview__samples">
+          {frostedBorderTokens.map((token) => (
+            <div
+              className="frosted-border-preview__sample"
+              key={token}
+              style={{ borderColor: `var(${token})` }}
+            />
+          ))}
+        </div>
+      </ComponentPreviewCard>
     </>
   )
 }
@@ -125,6 +164,9 @@ export const borderTokensDefinition = {
   status: 'Ready',
   frame: 'plain',
   searchAliases: borderColorSearchAliases.concat(
+    ['磨砂材质边框色', '磨砂边框', ...frostedBorderAnchorOrder.map(
+      (anchor) => frostedSurfaceBorderAnchorMap[anchor].token,
+    )],
     borderRadiusScales.flatMap((scale) => {
       const item = borderRadiusScaleMap[scale]
 

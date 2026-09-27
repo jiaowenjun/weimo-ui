@@ -637,10 +637,20 @@ for (const snippet of [
   'export function resolveElementBackgroundTone',
   'return resolveElementBackgroundSample(element)?.tone ?? null',
   'export function interpolateFrostedBorderColor',
-  'const BORDER_DARK_SEGMENT_START_LIGHTNESS = 38',
-  'const BORDER_DARK_SEGMENT_END_LIGHTNESS = 98',
-  'const BORDER_LIGHT_SEGMENT_START_LIGHTNESS = 35',
-  'const BORDER_LIGHT_SEGMENT_END_LIGHTNESS = 90',
+  'export const frostedSurfaceBorderAnchorMap',
+  "token: '--glass-surface-border-dark-start'",
+  "token: '--glass-surface-border-dark-end'",
+  "token: '--glass-surface-border-light-start'",
+  "token: '--glass-surface-border-light-end'",
+  "value: 'hsl(0 0% 38%)'",
+  "value: 'hsl(0 0% 98%)'",
+  "value: 'hsl(0 0% 35%)'",
+  "value: 'hsl(0 0% 90%)'",
+  'function resolveGrayHslLightness(color: string)',
+  'resolveGrayHslLightness(\n  frostedSurfaceBorderAnchorMap.darkStart.value,\n)',
+  'resolveGrayHslLightness(\n  frostedSurfaceBorderAnchorMap.darkEnd.value,\n)',
+  'resolveGrayHslLightness(\n  frostedSurfaceBorderAnchorMap.lightStart.value,\n)',
+  'resolveGrayHslLightness(\n  frostedSurfaceBorderAnchorMap.lightEnd.value,\n)',
   '[BORDER_DARK_SEGMENT_START_LIGHTNESS, BORDER_DARK_SEGMENT_END_LIGHTNESS, progress / 0.5]',
   '[\n          BORDER_LIGHT_SEGMENT_START_LIGHTNESS,\n          BORDER_LIGHT_SEGMENT_END_LIGHTNESS,\n          (progress - 0.5) / 0.5,\n        ]',
   'export function getReadableToneForColor',
@@ -678,11 +688,9 @@ for (const snippet of [
   '.frosted-surface[data-background-tone="light"]',
   '--glass-surface-fg: var(--glass-surface-fg-on-light);',
   '--glass-surface-muted-color: var(--glass-surface-muted-fg-on-light);',
-  '--glass-surface-border: var(--glass-surface-border-on-light);',
   '.frosted-surface[data-background-tone="dark"]',
   '--glass-surface-fg: var(--glass-surface-fg-on-dark);',
   '--glass-surface-muted-color: var(--glass-surface-muted-fg-on-dark);',
-  '--glass-surface-border: var(--glass-surface-border-on-dark);',
   '@media (prefers-reduced-motion: reduce)',
   'transition-duration: 1ms;',
 ]) {
@@ -708,8 +716,10 @@ assertOmits(
 
 for (const [tokenName, lightValue, darkValue] of [
   ['glass-surface-border', 'hsl(0 0% 80%)', 'hsl(0 0% 38%)'],
-  ['glass-surface-border-on-light', 'hsl(0 0% 80%)'],
-  ['glass-surface-border-on-dark', 'hsl(0 0% 38%)'],
+  ['glass-surface-border-dark-start', 'hsl(0 0% 38%)'],
+  ['glass-surface-border-dark-end', 'hsl(0 0% 98%)'],
+  ['glass-surface-border-light-start', 'hsl(0 0% 35%)'],
+  ['glass-surface-border-light-end', 'hsl(0 0% 90%)'],
   ['glass-surface-fg', 'hsl(222.2 47.4% 11.2% / 0.9)', 'hsl(0 0% 79.2%)'],
   ['glass-surface-muted-fg', 'hsl(215.3 25% 26.7% / 0.68)', 'hsl(0 0% 100% / 0.68)'],
   ['glass-surface-fg-on-light', 'hsl(222.2 47.4% 11.2% / 0.9)'],
@@ -743,8 +753,20 @@ for (const [tokenName, lightValue, darkValue] of [
     `registry.json style item must mirror dark ${tokenName}.`,
   )
 }
-for (const removedTokenName of ['smart-glass-surface-fg', 'smart-glass-surface-muted-fg']) {
+// glass-surface-border-on-light/on-dark 已删:tone 属性与插值边框同帧提交,tone 块的
+// border 赋值永远被 inline 插值遮蔽,且值与各主题 --glass-surface-border root 默认全同。
+for (const removedTokenName of [
+  'smart-glass-surface-fg',
+  'smart-glass-surface-muted-fg',
+  'glass-surface-border-on-light',
+  'glass-surface-border-on-dark',
+]) {
   assertOmits(tokensCss, `--${removedTokenName}:`, `tokens.css must remove --${removedTokenName}.`)
+  assertOmits(
+    frostedSurfaceCss,
+    removedTokenName,
+    `FrostedSurface CSS must not consume removed token ${removedTokenName}.`,
+  )
   assert.equal(
     styleRegistry.cssVars.light[removedTokenName],
     undefined,

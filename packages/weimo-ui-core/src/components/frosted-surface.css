@@ -28,13 +28,11 @@
   .frosted-surface[data-background-tone="light"] {
     --glass-surface-fg: var(--glass-surface-fg-on-light);
     --glass-surface-muted-color: var(--glass-surface-muted-fg-on-light);
-    --glass-surface-border: var(--glass-surface-border-on-light);
   }
 
   .frosted-surface[data-background-tone="dark"] {
     --glass-surface-fg: var(--glass-surface-fg-on-dark);
     --glass-surface-muted-color: var(--glass-surface-muted-fg-on-dark);
-    --glass-surface-border: var(--glass-surface-border-on-dark);
   }
 
   @media (prefers-reduced-motion: reduce) {

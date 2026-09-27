@@ -115,6 +115,7 @@ const tagTreePreviewPanelBlock = firstBlockFor(appCss, '.tag-tree-preview__panel
 const tagBarPreviewPanelBlock = blockFor(appCss, '.tag-bar-preview__panel')
 const sampleBlock = blockFor(appCss, '.border-color-preview__sample')
 const samplesBlock = blockFor(appCss, '.border-color-preview__samples')
+const frostedSampleBlock = blockFor(appCss, '.frosted-border-preview__sample')
 
 assert.equal(
   packageJson.exports?.['./components/border-color'],
@@ -383,6 +384,20 @@ assert.ok(
   'FrostedSurface must use its background-aware border token (on the opt-in --bordered modifier) instead of the fixed default BorderColor token.',
 )
 
+for (const [token, lightThemeValue, darkThemeValue] of [
+  ['--glass-surface-border', 'hsl(0 0% 80%)', 'hsl(0 0% 38%)'],
+]) {
+  assert.ok(
+    borderColorSource.includes(`token: '${token}'`),
+    `frostedSurfaceBorderColorMap must mirror the frosted material border token ${token}.`,
+  )
+  assert.ok(
+    tokensCss.includes(`${token}: ${lightThemeValue};`) &&
+      tokensCss.includes(`${token}: ${darkThemeValue};`),
+    `tokens.css must keep ${token} aligned with the frostedSurfaceBorderColorMap mirror.`,
+  )
+}
+
 assert.deepEqual(rootStyleItem, styleRegistry, 'Root registry style item must match registry/style.json.')
 
 assert.ok(
@@ -426,10 +441,21 @@ assert.ok(
     docsDefinitionSource.includes(
       'className={`border-color-preview__sample ${getBorderColorClassName(tone)}`}',
     ) &&
+    docsDefinitionSource.includes('frostedSurfaceBorderColorMap') &&
+    docsDefinitionSource.includes('darkValue: frostedSurfaceBorderColorMap.default.value.dark,') &&
+    docsDefinitionSource.includes(
+      "import { frostedSurfaceBorderAnchorMap } from 'weimo-ui-core/components/frosted-surface-model'",
+    ) &&
+    docsDefinitionSource.includes('...frostedBorderAnchorOrder.map((anchor) => ({') &&
+    docsDefinitionSource.includes('label="磨砂材质边框色"') &&
+    docsDefinitionSource.includes('className="frosted-border-preview__samples"') &&
+    docsDefinitionSource.includes('frostedBorderTokens.map((token) => (') &&
+    docsDefinitionSource.includes('style={{ borderColor: `var(${token})` }}') &&
     !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     docsDefinitionSource.includes('--color-border-disabled-on-light') &&
     docsDefinitionSource.includes('--color-border-divider-menu-on-dark') &&
-    docsDefinitionSource.includes('--glass-surface-border-on-dark') &&
+    docsDefinitionSource.includes("token: '--glass-surface-border'") &&
+    !docsDefinitionSource.includes('glass-surface-border-on-') &&
     !docsDefinitionSource.includes('description={item.description}') &&
     !docsDefinitionSource.includes('uiUsage={item.uiUsage}') &&
     !docsDefinitionSource.includes('bijiUsage={item.bijiUsage}') &&
@@ -463,6 +489,21 @@ assert.ok(
     !sampleBlock.includes('background:') &&
     !sampleBlock.includes('box-shadow:'),
   'BorderColor preview samples must stay square via aspect-ratio 1 with a 24-48px fluid size and 12-24px gaps, one centered row while six squares fit.',
+)
+
+assert.ok(
+  appCss.includes('.frosted-border-preview__samples') &&
+    frostedSampleBlock.includes(
+      'width: clamp(24px, calc((100% - 4 * clamp(12px, 4%, 24px)) / 5), 48px);',
+    ) &&
+    frostedSampleBlock.includes('aspect-ratio: 1;') &&
+    frostedSampleBlock.includes('border: 1px solid;') &&
+    frostedSampleBlock.includes('border-radius: var(--radius-sm);') &&
+    !frostedSampleBlock.includes('height:') &&
+    !frostedSampleBlock.includes('background:') &&
+    !frostedSampleBlock.includes('box-shadow:') &&
+    !appCss.includes('frosted-border-preview__sample--'),
+  'Frosted border preview must render one stroke-only square per frosted border token, sharing the BorderColor sample layout.',
 )
 
 assert.ok(registryItem, 'registry.json must include the border-color registry item.')

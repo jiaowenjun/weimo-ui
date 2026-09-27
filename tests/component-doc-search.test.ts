@@ -31,7 +31,8 @@ describe('component docs search', () => {
     expect(resultIds('--glass-blur')).toContain('background-tokens')
     expect(resultIds('TagPicker option')).toContain('background-tokens')
     expect(resultIds('--color-heat-4')).toContain('background-tokens')
-    expect(resultIds('--glass-surface-border-on-dark')).toContain('border-tokens')
+    expect(resultIds('--glass-surface-border')).toContain('border-tokens')
+    expect(resultIds('--glass-surface-border-dark-end')).toContain('border-tokens')
   })
 
   it('keeps localized display-name search working', () => {
