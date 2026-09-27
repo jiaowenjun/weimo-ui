@@ -17,8 +17,8 @@ import { TagBar } from './components/tag-bar'
 import { TagBread } from './components/tag-bread'
 import { TagPicker, type TagPickerApplyPayload, type TagPickerMode } from './components/tag-picker'
 import { TagTree, type TagTreeNode, type TagTreeVariant } from './components/tag-tree'
-import type { AnimatedTagTreeRow } from './components/tag-tree/tag-tree-model'
 import { TagTreeRow } from './components/tag-tree/tag-tree-row'
+import { useTagTree } from './components/tag-tree/use-tag-tree'
 
 import './tag-page.css'
 
@@ -29,16 +29,18 @@ const tagOptions = [
   '育儿/家庭', '人际/社交', '情绪/反思', '目标/计划', '杂项/待整理',
 ]
 
+const writingTreeNode: TagTreeNode = {
+  tag: 'writing',
+  label: '写作',
+  icon: <Folder aria-hidden="true" />,
+  children: [
+    { tag: 'writing/daily', label: '日记', icon: <CalendarDays aria-hidden="true" /> },
+    { tag: 'writing/ideas', label: '灵感' },
+  ],
+}
+
 const tagTreeDemoNodes: TagTreeNode[] = [
-  {
-    tag: 'writing',
-    label: '写作',
-    icon: <Folder aria-hidden="true" />,
-    children: [
-      { tag: 'writing/daily', label: '日记', icon: <CalendarDays aria-hidden="true" /> },
-      { tag: 'writing/ideas', label: '灵感' },
-    ],
-  },
+  writingTreeNode,
   {
     tag: 'research',
     label: '研究',
@@ -205,17 +207,13 @@ function TagTreeDemo({ variant = 'default' }: { variant?: TagTreeVariant }) {
   )
 }
 
-const rootRow: AnimatedTagTreeRow = {
-  node: { tag: 'writing', label: '写作', icon: <Folder aria-hidden="true" /> },
-  tag: 'writing', label: '写作', depth: 0, hasChildren: true, expanded: true, selected: false,
-}
-const childRow: AnimatedTagTreeRow = {
-  node: { tag: 'writing/daily', label: '日记', icon: <CalendarDays aria-hidden="true" /> },
-  tag: 'writing/daily', label: '日记', depth: 1, hasChildren: false, expanded: false, selected: false,
-}
+const tagTreeRowDemoNodes: TagTreeNode[] = [writingTreeNode]
 
 function TagTreeRowDemo() {
-  const [expanded, setExpanded] = useState(true)
+  const { renderedRows, handleSelect, handleToggle } = useTagTree({
+    defaultExpandedTags: ['writing'],
+    nodes: tagTreeRowDemoNodes,
+  })
 
   return (
     <ComponentPreviewCard align="center" className="tag-page__card" label="标签树行">
@@ -225,13 +223,17 @@ function TagTreeRowDemo() {
               TagTree 的真实结构,脱离该作用域行内网格会整体失效。 */}
           <div aria-label="TagTreeRow preview" className="tag-tree" role="tree">
             <div className="tag-tree__list">
-              <TagTreeRow onMenuAction={() => {}} onSelect={() => {}} onToggle={() => setExpanded((value) => !value)} row={{ ...rootRow, expanded }} rowMenuEnabled variant="default" />
-              {expanded ? (
-                <>
-                  <TagTreeRow onMenuAction={() => {}} onSelect={() => {}} onToggle={() => {}} row={childRow} rowMenuEnabled variant="default" />
-                  <TagTreeRow onSelect={() => {}} onToggle={() => {}} row={{ ...childRow, tag: 'writing/ideas', label: '灵感' }} rowMenuEnabled={false} variant="no-action" />
-                </>
-              ) : null}
+              {renderedRows.map((row) => (
+                <TagTreeRow
+                  key={row.tag}
+                  onMenuAction={() => {}}
+                  onSelect={handleSelect}
+                  onToggle={handleToggle}
+                  row={row}
+                  rowMenuEnabled={row.tag !== 'writing/ideas'}
+                  variant={row.tag === 'writing/ideas' ? 'no-action' : 'default'}
+                />
+              ))}
             </div>
           </div>
         </div>
