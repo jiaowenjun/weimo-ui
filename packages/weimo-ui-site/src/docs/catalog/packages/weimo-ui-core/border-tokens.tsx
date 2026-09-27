@@ -13,7 +13,9 @@ import {
   getBorderRadiusValue,
 } from 'weimo-ui-core/components/border-radius'
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
+import { FrostedSurface } from 'weimo-ui-core/components/frosted-surface'
 import { frostedSurfaceBorderAnchorMap } from 'weimo-ui-core/components/frosted-surface-model'
+import { GlassPreviewCard } from '../../../components/glass-preview-card'
 import type { ComponentDefinition } from '../../component-docs'
 
 type BorderContextToken = {
@@ -68,8 +70,8 @@ const frostedBorderAnchorOrder = [
   'lightEnd',
 ] as const satisfies readonly (keyof typeof frostedSurfaceBorderAnchorMap)[]
 
-// 卡片行序：插值四锚点沿感知亮度轴在前，主题回退殿后；示例方片与 token 行一一对应，
-// 主题默认方片独行居中。
+// 卡片行序：插值四锚点沿感知亮度轴在前，主题回退殿后；四锚点方片为画布上方静态示例，
+// 主题回退的活体示例=画布内方形磨砂材质（边框色随灰度采样插值动态变化）。
 const frostedBorderAnchorTokens = frostedBorderAnchorOrder.map(
   (anchor) => frostedSurfaceBorderAnchorMap[anchor].token,
 )
@@ -131,7 +133,19 @@ function BorderColorPreview() {
         </div>
       </ComponentPreviewCard>
 
-      <ComponentPreviewCard
+      <GlassPreviewCard
+        aboveCanvas={
+          <div aria-hidden="true" className="frosted-border-preview__row">
+            {frostedBorderAnchorTokens.map((token) => (
+              <div
+                className="frosted-border-preview__sample"
+                key={token}
+                style={{ borderColor: `var(${token})` }}
+              />
+            ))}
+          </div>
+        }
+        className="frosted-border-preview"
         items={[
           ...frostedBorderAnchorOrder.map((anchor) => ({
             token: frostedSurfaceBorderAnchorMap[anchor].token,
@@ -145,22 +159,8 @@ function BorderColorPreview() {
         ]}
         label="磨砂材质边框色"
       >
-        <div aria-hidden="true" className="frosted-border-preview__samples">
-          <div className="frosted-border-preview__row">
-            {frostedBorderAnchorTokens.map((token) => (
-              <div
-                className="frosted-border-preview__sample"
-                key={token}
-                style={{ borderColor: `var(${token})` }}
-              />
-            ))}
-          </div>
-          <div
-            className="frosted-border-preview__sample"
-            style={{ borderColor: `var(${frostedSurfaceBorderColorMap.default.token})` }}
-          />
-        </div>
-      </ComponentPreviewCard>
+        <FrostedSurface aria-hidden="true" bordered className="frosted-border-preview__tile" />
+      </GlassPreviewCard>
     </>
   )
 }

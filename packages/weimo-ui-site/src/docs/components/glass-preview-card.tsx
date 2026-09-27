@@ -12,10 +12,12 @@ import {
 // Surface 页「磨砂材质」卡、按钮页「磨砂图标按钮」卡与背景页「背景模糊度」卡的公共外壳：
 // ComponentPreviewCard + 可滑动竖条纹玻璃背景 + 画布下方居中的灰度滑块。
 // action 渲染在标题栏右侧（如按钮页的启用 Switch）；
+// aboveCanvas 渲染在条纹画布上方、卡底之上（如边框页的静态锚点方片行）；
 // token/value/items 透传给 token 行（不传则无行，与 ComponentPreviewCard 语义一致）。
 // initialGray 指定刷新与主题切换后的固定起始灰度（如轨道中点）；不传则跟随主题端点。
 // onGrayChange 在灰度变化（含挂载初值与主题切换归位）时回传当前滑块值。
 export function GlassPreviewCard({
+  aboveCanvas,
   action,
   children,
   className,
@@ -26,6 +28,7 @@ export function GlassPreviewCard({
   token,
   value,
 }: {
+  aboveCanvas?: ReactNode
   action?: ReactNode
   children: ReactNode
   className?: string
@@ -94,6 +97,7 @@ export function GlassPreviewCard({
       token={token}
       value={value}
     >
+      {aboveCanvas}
       <div
         className="glass-preview-card__canvas"
         style={getGlassPreviewBackground(glassBackgroundGray)}

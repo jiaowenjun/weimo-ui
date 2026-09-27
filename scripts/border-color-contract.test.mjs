@@ -116,8 +116,12 @@ const tagBarPreviewPanelBlock = blockFor(appCss, '.tag-bar-preview__panel')
 const sampleBlock = blockFor(appCss, '.border-color-preview__sample')
 const samplesBlock = blockFor(appCss, '.border-color-preview__samples')
 const frostedSampleBlock = blockFor(appCss, '.frosted-border-preview__sample')
-const frostedSamplesLayoutBlock = blockFor(appCss, '.frosted-border-preview__samples')
 const frostedRowBlock = blockFor(appCss, '.frosted-border-preview__row')
+const frostedTileBlock = blockFor(appCss, '.frosted-border-preview__tile')
+const frostedCanvasOverrideBlock = blockFor(
+  appCss,
+  '.frosted-border-preview .glass-preview-card__canvas',
+)
 
 assert.equal(
   packageJson.exports?.['./components/border-color'],
@@ -450,13 +454,19 @@ assert.ok(
     ) &&
     docsDefinitionSource.includes('...frostedBorderAnchorOrder.map((anchor) => ({') &&
     docsDefinitionSource.includes('label="磨砂材质边框色"') &&
-    docsDefinitionSource.includes('className="frosted-border-preview__samples"') &&
+    docsDefinitionSource.includes(
+      "import { GlassPreviewCard } from '../../../components/glass-preview-card'",
+    ) &&
+    docsDefinitionSource.includes(
+      "import { FrostedSurface } from 'weimo-ui-core/components/frosted-surface'",
+    ) &&
+    docsDefinitionSource.includes('aboveCanvas={') &&
+    docsDefinitionSource.includes('className="frosted-border-preview"') &&
     docsDefinitionSource.includes('frostedBorderAnchorTokens.map((token) => (') &&
     docsDefinitionSource.includes('className="frosted-border-preview__row"') &&
     docsDefinitionSource.includes('style={{ borderColor: `var(${token})` }}') &&
-    docsDefinitionSource.includes(
-      'style={{ borderColor: `var(${frostedSurfaceBorderColorMap.default.token})` }}',
-    ) &&
+    docsDefinitionSource.includes('className="frosted-border-preview__tile"') &&
+    !docsDefinitionSource.includes('frosted-border-preview__samples') &&
     !docsDefinitionSource.includes('<TokenPreviewDetails') &&
     docsDefinitionSource.includes('--color-border-disabled-on-light') &&
     docsDefinitionSource.includes('--color-border-divider-menu-on-dark') &&
@@ -498,14 +508,19 @@ assert.ok(
 )
 
 assert.ok(
-  frostedSamplesLayoutBlock.includes('display: flex;') &&
-    frostedSamplesLayoutBlock.includes('flex-direction: column;') &&
-    frostedSamplesLayoutBlock.includes('align-items: center;') &&
-    frostedSamplesLayoutBlock.includes('row-gap: 12px;') &&
+  frostedCanvasOverrideBlock.includes('flex: 1 1 auto;') &&
+    frostedCanvasOverrideBlock.includes('min-height: 0;') &&
+    frostedCanvasOverrideBlock.includes('border-radius: var(--radius-sm);'),
+  'The frosted border card must override the shared striped canvas to fill the remaining content height (above the static row) with rounded corners.',
+)
+
+assert.ok(
+  !appCss.includes('.frosted-border-preview__samples') &&
     frostedRowBlock.includes('width: 100%;') &&
     frostedRowBlock.includes('flex-wrap: wrap;') &&
     frostedRowBlock.includes('justify-content: center;') &&
     frostedRowBlock.includes('column-gap: clamp(12px, 4%, 24px);') &&
+    frostedRowBlock.includes('padding: 24px 16px 12px;') &&
     frostedSampleBlock.includes(
       'width: clamp(24px, calc((100% - 3 * clamp(12px, 4%, 24px)) / 4), 48px);',
     ) &&
@@ -515,8 +530,14 @@ assert.ok(
     !frostedSampleBlock.includes('height:') &&
     !frostedSampleBlock.includes('background:') &&
     !frostedSampleBlock.includes('box-shadow:') &&
-    !appCss.includes('frosted-border-preview__sample--'),
-  'Frosted border preview must render four anchor squares in one row with the theme-default square centered on its own row.',
+    !appCss.includes('frosted-border-preview__sample--') &&
+    frostedTileBlock.includes(
+      'width: clamp(24px, calc((100% - 3 * clamp(12px, 4%, 24px)) / 4), 48px);',
+    ) &&
+    frostedTileBlock.includes('aspect-ratio: 1;') &&
+    frostedTileBlock.includes('border-radius: var(--radius-sm);') &&
+    !frostedTileBlock.includes('height:'),
+  'Frosted border preview must keep four static anchor squares above the striped canvas and one live square FrostedSurface tile inside it.',
 )
 
 assert.ok(registryItem, 'registry.json must include the border-color registry item.')
