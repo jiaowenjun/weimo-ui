@@ -25,6 +25,16 @@ export const cardCatalog = {
       ],
     },
     {
+      id: 'tag-bar',
+      name: '标签栏',
+      exportName: 'TagBar',
+      registryName: 'tag-bar',
+      packageExport: './components/tag-bar',
+      components: [
+        { id: 'tag-picker', name: 'TagPicker', registryName: 'tag-picker', packageExport: './components/tag-picker' },
+      ],
+    },
+    {
       id: 'ocr',
       name: 'OCR',
       exportName: 'OcrCard',

@@ -37,6 +37,7 @@ const sidebarPreviewSource = readProjectFile(
 const componentDefinitionSources = {
   'tagged-card': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/tagged-card.tsx'),
   'card-tool-bar': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/card-tool-bar.tsx'),
+  'tag-bar': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/tag-bar.tsx'),
   tag: [
     readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/tag.tsx'),
     readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx'),
@@ -232,7 +233,8 @@ for (const snippet of [
   "id: 'button'",
   "id: 'menu'",
   "id: 'surface'",
-  "id: 'tag-tree'",
+  "id: 'tag-bar'",
+  "registryName: 'tag-tree'",
   "id: 'top-bar'",
   "id: 'page-layout'",
   './components/stat-group',
@@ -264,7 +266,7 @@ for (const snippet of [
 for (const snippet of [
   "import { useState } from 'react'",
   'type TagTreeNode',
-  "import { CalendarDays, Folder, Hash, Plus } from 'lucide-react'",
+  "import { CalendarDays, Folder, Hash } from 'lucide-react'",
   'icon: <Folder aria-hidden="true" />',
   'defaultIcon={<Hash aria-hidden="true" />}',
   'TagTreeVariant',
@@ -406,11 +408,17 @@ for (const snippet of [
 }
 
 assert.ok(
-  !componentDefinitionSources.tag.includes("from 'weimo-ui-core/components/coss/button'") &&
-  componentDefinitionSources.tag.includes("from 'weimo-ui-core/components/capsule-button'") &&
-  !componentDefinitionSources.tag.includes('tag-picker-preview__trigger') &&
-  !componentDefinitionSources.tag.includes('<Button') &&
-  !componentDefinitionSources.tag.includes('选择标签'),
+  !componentDefinitionSources.tag.includes("from 'weimo-ui-core/components/capsule-button'") &&
+    !componentDefinitionSources.tag.includes('选择标签') &&
+    !componentDefinitionSources.tag.includes('TagPicker') &&
+    !componentDefinitionSources.tag.includes('TagBar'),
+  'Tag docs page must not keep moved TagPicker/TagBar demos after the card package migration.',
+)
+assert.ok(
+  !componentDefinitionSources['tag-bar'].includes("from 'weimo-ui-core/components/coss/button'") &&
+  componentDefinitionSources['tag-bar'].includes("from 'weimo-ui-core/components/capsule-button'") &&
+  !componentDefinitionSources['tag-bar'].includes('tag-picker-preview__trigger') &&
+  !componentDefinitionSources['tag-bar'].includes('<Button'),
   'TagPicker docs preview must remove the standalone select-tag button and use internal CapsuleButton chips.',
 )
 assert.ok(

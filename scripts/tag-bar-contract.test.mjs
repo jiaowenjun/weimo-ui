@@ -34,10 +34,11 @@ function assertNotIncludes(source, snippet, message) {
   assert.ok(!source.includes(snippet), message)
 }
 
-const componentSource = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bar.tsx')
-const cssSource = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bar.css')
-const docsSource = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx')
-const tagPageCssSource = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.css')
+const componentSource = readProjectFile('packages/weimo-ui-card/src/components/tag-bar.tsx')
+const cssSource = readProjectFile('packages/weimo-ui-card/src/components/tag-bar.css')
+const docsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/tag-bar.tsx')
+const tagtreePageSource = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx')
+const appCssSource = readProjectFile('packages/weimo-ui-site/src/App.css')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const packageJson = readJson('package.json')
@@ -60,10 +61,9 @@ const morphMeasureBlock = cssBlockFor(cssSource, '.tag-bar__morph-measure')
 const morphMeasureChipBlock = cssBlockFor(cssSource, '.tag-bar__morph-measure .capsule-button')
 const addChipBlock = cssBlockFor(cssSource, '.tag-bar__add-chip')
 const exitingAddChipBlock = cssBlockFor(cssSource, '.tag-bar__add-chip[data-exiting="true"]')
-const previewBlock = cssBlockFor(tagPageCssSource, '.tag-page__canvas')
-const previewPanelBlock = cssBlockFor(tagPageCssSource, '.tag-page__panel')
-const previewToggleBlock = cssBlockFor(tagPageCssSource, '.tag-page__toggle')
-const previewToggleLabelBlock = cssBlockFor(tagPageCssSource, '.tag-page__toggle-label')
+const previewPanelBlock = cssBlockFor(appCssSource, '.tag-bar-preview__panel')
+const previewToggleBlock = cssBlockFor(appCssSource, '.preview-toggle')
+const previewToggleLabelBlock = cssBlockFor(appCssSource, '.preview-toggle__label')
 const visibleTagsMapStart = componentSource.indexOf('visibleTags.map((tag, index) =>')
 const addChipStart = componentSource.indexOf('showAddChip ? (', visibleTagsMapStart)
 const visibleTagsMapSource = componentSource.slice(visibleTagsMapStart, addChipStart)
@@ -84,7 +84,7 @@ const rootPositionAnimationSource = componentSource.slice(
 
 assert.equal(
   packageJson.exports?.['./components/tag-bar'],
-  './packages/weimo-ui-tagtree/src/components/tag-bar.tsx',
+  './packages/weimo-ui-card/src/components/tag-bar.tsx',
   'TagBar must have a public package export.',
 )
 assert.ok(
@@ -431,8 +431,8 @@ assert.ok(
 
 assert.ok(
   docsSource.includes("import { useState } from 'react'") &&
-    docsSource.includes("import { TagBar } from './components/tag-bar'") &&
-    docsSource.includes("import { Switch } from 'weimo-ui-core/components/coss/switch'") &&
+    docsSource.includes("import { TagBar } from 'weimo-ui-card/components/tag-bar'") &&
+    docsSource.includes("import { PreviewToggle } from '../../../components/preview-toggle'") &&
     docsSource.includes('function TagBarDemo') &&
     docsSource.includes('label="标签栏"') &&
     docsSource.includes('<TagBarDemo />') &&
@@ -443,10 +443,11 @@ assert.ok(
     docsSource.includes('onTagsChange={setTags}') &&
     docsSource.includes('tagOptions={tagOptions}') &&
     docsSource.includes('tags={tags}') &&
-    docsSource.includes('<Switch') &&
+    docsSource.includes('<PreviewToggle') &&
+    docsSource.includes('ariaLabel="切换编辑态"') &&
     docsSource.includes('checked={editable}') &&
-    docsSource.includes("editable ? '编辑态' : '展示态'"),
-  'Tag docs definition must provide a local state TagBar preview with a title-bar edit switch.',
+    docsSource.includes("label={editable ? '编辑态' : '展示态'}"),
+  'TagBar docs definition must provide a local state TagBar preview with a title-bar edit switch.',
 )
 assert.ok(
   !docsSource.includes("import { TextButton } from 'weimo-ui-core/components/text-button'") &&
@@ -459,31 +460,34 @@ assert.ok(
   'TagBar docs mode toggle must not use coss Button.',
 )
 assert.ok(
-  definitionsIndexSource.includes("import { tagDefinition } from './packages/weimo-ui-tagtree/tag'") &&
-    definitionsIndexSource.includes('tag: tagDefinition') &&
-    !definitionsIndexSource.includes('tag-bar'),
-  'Component definitions index must export the merged Tag docs definition.',
+  definitionsIndexSource.includes("import { tagBarDefinition } from './packages/weimo-ui-card/tag-bar'") &&
+    definitionsIndexSource.includes("'tag-bar': tagBarDefinition") &&
+    definitionsIndexSource.includes("import { tagDefinition } from './packages/weimo-ui-tagtree/tag'") &&
+    definitionsIndexSource.includes('tag: tagDefinition'),
+  'Component definitions index must export the card-group TagBar docs definition and the TagTree tag page.',
 )
 assert.ok(
-  manifestSource.includes("id: 'tag'") &&
-    manifestSource.includes("name: '标签树'") &&
+  !tagtreePageSource.includes('TagBar') && !tagtreePageSource.includes('TagPicker'),
+  'Tagtree tag page must not keep moved TagBar/TagPicker demos after the card package migration.',
+)
+assert.ok(
+  manifestSource.includes("id: 'tag-bar'") &&
+    manifestSource.includes("name: '标签栏'") &&
     manifestSource.includes("exportName: 'TagBar'") &&
     manifestSource.includes("registryName: 'tag-bar'") &&
     manifestSource.includes("packageExport: './components/tag-bar'") &&
+    manifestSource.includes("packageName: 'weimo-ui-card'") &&
     manifestSource.includes('registry: true') &&
-    !manifestSource.includes("id: 'tag-bar',") &&
     !manifestSource.includes("internalGroup: 'tag-tree'"),
-  'Component manifest must list TagBar as a public registry component through the merged Tag page.',
+  'Component manifest must list TagBar as a public registry component through the card-group tag-bar page.',
 )
 
 for (const [block, snippet, message] of [
-  [previewBlock, 'padding: 16px;', 'TagBar preview canvas must provide component breathing room.'],
   [previewPanelBlock, 'display: grid;', 'TagBar preview panel must host the tag row on a grid.'],
-  [previewPanelBlock, 'width: 100%;', 'TagBar preview panel must fill the component preview canvas.'],
   [previewPanelBlock, 'padding: 16px;', 'TagBar preview panel must use CardTopBar preview padding.'],
   [previewPanelBlock, 'border: 1px solid var(--color-border);', 'TagBar preview panel must match the picker panel with an outer border.'],
-  [previewPanelBlock, 'border-radius: var(--radius-sm);', 'TagBar preview panel must use the standard preview radius.'],
   [previewPanelBlock, 'background: var(--color-bg-card);', 'TagBar preview panel must use the standard preview surface.'],
+  [previewPanelBlock, 'justify-items: start;', 'TagBar preview panel must left-align the tag row like the picker panel.'],
   [previewToggleBlock, 'gap: 6px;', 'TagBar title-bar toggle must pair the state label and Switch compactly.'],
   [previewToggleLabelBlock, 'font-size: var(--font-size-xs);', 'TagBar title-bar toggle label must use the secondary caption size.'],
 ]) {
@@ -491,13 +495,11 @@ for (const [block, snippet, message] of [
 }
 
 assert.ok(
-  !tagPageCssSource.includes('tag-page__bar-panel') && !docsSource.includes('tag-page__bar-panel'),
+  !appCssSource.includes('tag-page__bar-panel') && !docsSource.includes('tag-page__bar-panel'),
   'TagBar preview must reuse the shared bordered panel instead of a dedicated borderless variant.',
 )
 
 for (const [block, snippet, message] of [
-  [previewBlock, 'min-height:', 'TagBar preview canvas must be content-sized, letting the example open the canvas height.'],
-  [previewPanelBlock, 'justify-items:', 'TagBar preview panel must left-align the tag row like the picker panel.'],
   [previewPanelBlock, 'box-shadow:', 'TagBar preview panel must match CardTopBar by omitting an outer shadow.'],
   [previewPanelBlock, 'display: flex;', 'TagBar preview panel must not use side-by-side flex layout.'],
 ]) {

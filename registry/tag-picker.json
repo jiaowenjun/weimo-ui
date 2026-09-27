@@ -19,32 +19,32 @@
   ],
   "files": [
     {
-      "path": "packages/weimo-ui-tagtree/src/components/tag-picker.tsx",
+      "path": "packages/weimo-ui-card/src/components/tag-picker.tsx",
       "type": "registry:ui",
       "target": "@ui/tag-picker.tsx"
     },
     {
-      "path": "packages/weimo-ui-tagtree/src/components/tag-picker/index.tsx",
+      "path": "packages/weimo-ui-card/src/components/tag-picker/index.tsx",
       "type": "registry:ui",
       "target": "@ui/tag-picker/index.tsx"
     },
     {
-      "path": "packages/weimo-ui-tagtree/src/components/tag-picker/tag-picker.tsx",
+      "path": "packages/weimo-ui-card/src/components/tag-picker/tag-picker.tsx",
       "type": "registry:ui",
       "target": "@ui/tag-picker/tag-picker.tsx"
     },
     {
-      "path": "packages/weimo-ui-tagtree/src/components/tag-picker/use-tag-picker.ts",
+      "path": "packages/weimo-ui-card/src/components/tag-picker/use-tag-picker.ts",
       "type": "registry:ui",
       "target": "@ui/tag-picker/use-tag-picker.ts"
     },
     {
-      "path": "packages/weimo-ui-tagtree/src/components/tag-picker/tag-picker-model.ts",
+      "path": "packages/weimo-ui-card/src/components/tag-picker/tag-picker-model.ts",
       "type": "registry:ui",
       "target": "@ui/tag-picker/tag-picker-model.ts"
     },
     {
-      "path": "packages/weimo-ui-tagtree/src/components/tag-picker/tag-picker.css",
+      "path": "packages/weimo-ui-card/src/components/tag-picker/tag-picker.css",
       "type": "registry:ui",
       "target": "@ui/tag-picker/tag-picker.css"
     },

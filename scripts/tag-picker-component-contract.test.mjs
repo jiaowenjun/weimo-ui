@@ -19,12 +19,12 @@ function cssBlockFor(source, selector) {
   return source.slice(start, end + 1)
 }
 
-const entrySource = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-picker.tsx')
-const indexSource = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-picker/index.tsx')
-const componentSource = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-picker/tag-picker.tsx')
-const hookSource = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-picker/use-tag-picker.ts')
-const modelSource = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-picker/tag-picker-model.ts')
-const cssSource = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-picker/tag-picker.css')
+const entrySource = readProjectFile('packages/weimo-ui-card/src/components/tag-picker.tsx')
+const indexSource = readProjectFile('packages/weimo-ui-card/src/components/tag-picker/index.tsx')
+const componentSource = readProjectFile('packages/weimo-ui-card/src/components/tag-picker/tag-picker.tsx')
+const hookSource = readProjectFile('packages/weimo-ui-card/src/components/tag-picker/use-tag-picker.ts')
+const modelSource = readProjectFile('packages/weimo-ui-card/src/components/tag-picker/tag-picker-model.ts')
+const cssSource = readProjectFile('packages/weimo-ui-card/src/components/tag-picker/tag-picker.css')
 const bottomBarSource = readProjectFile('packages/weimo-ui-core/src/components/bottom-bar.tsx')
 const bottomBarCss = readProjectFile('packages/weimo-ui-core/src/components/bottom-bar.css')
 const floatBarSource = readProjectFile('packages/weimo-ui-core/src/components/float-bar.tsx')
@@ -59,7 +59,7 @@ assert.ok(
 )
 assert.equal(
   packageJson.exports?.['./components/tag-picker'],
-  './packages/weimo-ui-tagtree/src/components/tag-picker.tsx',
+  './packages/weimo-ui-card/src/components/tag-picker.tsx',
   'package.json must expose ./components/tag-picker.',
 )
 assert.equal(
@@ -282,8 +282,8 @@ assert.ok(
 
 assert.ok(
   componentSource.includes("from 'weimo-ui-core/components/coss/dialog'") &&
-    componentSource.includes("from '../coss/input-group'") &&
-    componentSource.includes("from '../coss/scroll-area'") &&
+    componentSource.includes("from 'weimo-ui-tagtree/components/coss/input-group'") &&
+    componentSource.includes("from 'weimo-ui-tagtree/components/coss/scroll-area'") &&
     !componentSource.includes("from '../bottom-bar'") &&
     !componentSource.includes('<BottomBar') &&
     !componentSource.includes("from '../float-bar'") &&

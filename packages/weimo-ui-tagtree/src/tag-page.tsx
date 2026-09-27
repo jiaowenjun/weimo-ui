@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { CalendarDays, Folder, Hash, Plus } from 'lucide-react'
+import { CalendarDays, Folder, Hash } from 'lucide-react'
 
 import {
   getCapsuleFrameAttributes,
@@ -8,26 +8,15 @@ import {
 import { getFrostedSurfaceClassName } from 'weimo-ui-core/components/frosted-surface-model'
 import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'
 import { Menu, MenuItem, MenuPopup, MenuTrigger } from 'weimo-ui-core/components/menu'
-import { Switch } from 'weimo-ui-core/components/coss/switch'
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 
-import { CapsuleButton } from 'weimo-ui-core/components/capsule-button'
 import { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from './components/coss/breadcrumb'
-import { TagBar } from './components/tag-bar'
 import { TagBread } from './components/tag-bread'
-import { TagPicker, type TagPickerApplyPayload, type TagPickerMode } from './components/tag-picker'
 import { TagTree, type TagTreeNode, type TagTreeVariant } from './components/tag-tree'
 import { TagTreeRow } from './components/tag-tree/tag-tree-row'
 import { useTagTree } from './components/tag-tree/use-tag-tree'
 
 import './tag-page.css'
-
-const tagOptions = [
-  '工作/项目', '写作/日记', '研究/论文', '生活/灵感', '阅读/摘录',
-  '学习/笔记', '旅行/见闻', '健康/运动', '美食/烹饪', '音乐/收藏',
-  '电影/影评', '摄影/作品', '设计/草图', '编程/开发', '投资/理财',
-  '育儿/家庭', '人际/社交', '情绪/反思', '目标/计划', '杂项/待整理',
-]
 
 const writingTreeNode: TagTreeNode = {
   tag: 'writing',
@@ -51,34 +40,6 @@ const tagTreeDemoNodes: TagTreeNode[] = [
   },
   { tag: 'archive', label: '归档' },
 ]
-
-function TagBarDemo() {
-  const [editable, setEditable] = useState(false)
-  const [tags, setTags] = useState(['写作/日记', '研究/论文'])
-
-  return (
-    <ComponentPreviewCard
-      action={
-        <span className="tag-page__toggle">
-          <span className="tag-page__toggle-label">{editable ? '编辑态' : '展示态'}</span>
-          <Switch
-            aria-label="切换编辑态"
-            checked={editable}
-            onCheckedChange={setEditable}
-          />
-        </span>
-      }
-      className="tag-page__card"
-      label="标签栏"
-    >
-      <div className="tag-page__canvas">
-        <div className="tag-page__panel">
-          <TagBar editable={editable} onTagsChange={setTags} tagOptions={tagOptions} tags={tags} />
-        </div>
-      </div>
-    </ComponentPreviewCard>
-  )
-}
 
 function TagBreadDemo() {
   const surfaceAttributes = getCapsuleFrameAttributes({ material: 'frosted' })
@@ -120,64 +81,6 @@ function TagBreadDemo() {
             </BreadcrumbList>
           </Breadcrumb>
         </div>
-      </div>
-    </ComponentPreviewCard>
-  )
-}
-
-function TagPickerDemo({ mode = 'insert', initialDraft = '', targetTag = '' }: { mode?: TagPickerMode; initialDraft?: string; targetTag?: string }) {
-  const [open, setOpen] = useState(false)
-  const [tagSlots, setTagSlots] = useState(['写作/日记', ''])
-  const [activeSlotIndex, setActiveSlotIndex] = useState(0)
-  const [pickerMode, setPickerMode] = useState<TagPickerMode>(mode)
-  const selectedTags = tagSlots.filter(Boolean)
-  const activeTag = tagSlots[activeSlotIndex] ?? ''
-
-  function openTagPicker(index: number) {
-    const tag = tagSlots[index] ?? ''
-    setActiveSlotIndex(index)
-    setPickerMode(mode === 'pick' ? 'pick' : tag ? 'update' : 'insert')
-    setOpen(true)
-  }
-
-  function handleApply(payload: TagPickerApplyPayload) {
-    setTagSlots((slots) => {
-      const nextSlots = [...slots]
-      if (payload.mode === 'insert') {
-        nextSlots[activeSlotIndex] = payload.draft
-        nextSlots.push('')
-        return nextSlots
-      }
-      const nextTag = payload.selectedTags[activeSlotIndex] ?? ''
-      if (nextTag) nextSlots[activeSlotIndex] = nextTag
-      else nextSlots.splice(activeSlotIndex, 1)
-      if (nextSlots.length === 0 || nextSlots[nextSlots.length - 1]) nextSlots.push('')
-      return nextSlots
-    })
-  }
-
-  return (
-    <ComponentPreviewCard className="tag-page__card" label="标签选择器">
-      <div className="tag-page__canvas">
-        <div className="tag-page__panel">
-          <div className="tag-page__tags" aria-label="笔记标签">
-            {tagSlots.map((tag, index) => tag ? (
-              <CapsuleButton key={`${tag}-${index}`} onClick={() => openTagPicker(index)} state="frosted">{tag}</CapsuleButton>
-            ) : (
-              <CapsuleButton key={`new-${index}`} onClick={() => openTagPicker(index)} prefix={<Plus aria-hidden="true" />} state="frosted">标签</CapsuleButton>
-            ))}
-          </div>
-        </div>
-        <TagPicker
-          initialDraft={activeTag || initialDraft}
-          mode={pickerMode}
-          onApply={handleApply}
-          onOpenChange={setOpen}
-          open={open}
-          selectedTags={selectedTags}
-          tagOptions={tagOptions}
-          targetTag={activeTag || targetTag}
-        />
       </div>
     </ComponentPreviewCard>
   )
@@ -249,8 +152,6 @@ export type TagTreePageProps = {
 export function TagTreePage({ embedded = false }: TagTreePageProps = {}) {
   const demos = (
     <>
-      <TagPickerDemo />
-      <TagBarDemo />
       <TagBreadDemo />
       <TagTreeRowDemo />
       <TagTreeDemo />
@@ -269,7 +170,7 @@ export function TagTreePage({ embedded = false }: TagTreePageProps = {}) {
       <header className="tag-page__header">
         <p className="tag-page__eyebrow">Weimo UI / 标签树</p>
         <h1>标签树</h1>
-        <p>标签栏、面包屑、选择器与树形导航组件。</p>
+        <p>标签面包屑与树形导航组件。</p>
       </header>
       <div className="tag-page__grid">{demos}</div>
     </main>

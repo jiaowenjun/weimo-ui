@@ -267,7 +267,7 @@ assert.ok(
 
 assert.ok(
     docsDefinition.includes("import { TagBread } from './components/tag-bread'") &&
-    docsDefinition.includes("import { CalendarDays, Folder, Hash, Plus } from 'lucide-react'") &&
+    docsDefinition.includes("import { CalendarDays, Folder, Hash } from 'lucide-react'") &&
     docsDefinition.includes("from 'weimo-ui-core/components/capsule-frame'") &&
     docsDefinition.includes("from 'weimo-ui-core/components/frosted-surface-model'") &&
     docsDefinition.includes('const surfaceAttributes = getCapsuleFrameAttributes({') &&

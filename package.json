@@ -71,9 +71,7 @@
     "./styles/text-color.css": "./packages/weimo-ui-core/src/components/text-color.css",
     "./components/coss/input-group": "./packages/weimo-ui-tagtree/src/components/coss/input-group.tsx",
     "./components/coss/scroll-area": "./packages/weimo-ui-tagtree/src/components/coss/scroll-area.tsx",
-    "./components/tag-bar": "./packages/weimo-ui-tagtree/src/components/tag-bar.tsx",
     "./components/tag-bread": "./packages/weimo-ui-tagtree/src/components/tag-bread.tsx",
-    "./components/tag-picker": "./packages/weimo-ui-tagtree/src/components/tag-picker.tsx",
     "./components/tag-tree": "./packages/weimo-ui-tagtree/src/components/tag-tree.tsx",
     "./components/tag-tree-row": "./packages/weimo-ui-tagtree/src/components/tag-tree-row.tsx",
     "./components/math-editor": "./packages/weimo-ui-markdown/src/components/math-editor.tsx",
@@ -94,7 +92,9 @@
     "./components/card-top-bar": "./packages/weimo-ui-card/src/components/card-top-bar.tsx",
     "./components/ocr-card": "./packages/weimo-ui-card/src/components/ocr-card.tsx",
     "./components/ocr-composer": "./packages/weimo-ui-card/src/components/ocr-composer.tsx",
-    "./components/ocr-detail": "./packages/weimo-ui-card/src/components/ocr-detail.tsx"
+    "./components/ocr-detail": "./packages/weimo-ui-card/src/components/ocr-detail.tsx",
+    "./components/tag-bar": "./packages/weimo-ui-card/src/components/tag-bar.tsx",
+    "./components/tag-picker": "./packages/weimo-ui-card/src/components/tag-picker.tsx"
   },
   "scripts": {
     "catalog:sync": "node scripts/sync-component-catalog.mjs",

@@ -141,11 +141,13 @@ const packageRules = [
       "from './image-uploader'",
       "from './md-view'",
       "from './md-render'",
-      "from './tag-bar'",
       "from './menu'",
     ],
     requiredExports: {
       '.': './src/index.ts',
+      './components/tag-bar': './src/components/tag-bar.tsx',
+      './components/tag-picker': './src/components/tag-picker.tsx',
+      './components/tag-picker-model': './src/components/tag-picker/tag-picker-model.ts',
       './styles/card.css': './src/components/card.css',
       './styles/card-composer.css': './src/components/card-composer.css',
       './styles/card-tool-bar.css': './src/components/card-tool-bar.css',
@@ -153,6 +155,8 @@ const packageRules = [
       './styles/ocr-card.css': './src/components/ocr-card.css',
       './styles/ocr-composer.css': './src/components/ocr-composer.css',
       './styles/ocr-detail.css': './src/components/ocr-detail.css',
+      './styles/tag-bar.css': './src/components/tag-bar.css',
+      './styles/tag-picker.css': './src/components/tag-picker/tag-picker.css',
     },
   },
 ]
@@ -277,10 +281,11 @@ assert.doesNotMatch(coreTokens, /--md-/u)
 
 for (const [relativePath, dependencyPath] of [
   ['packages/weimo-ui-card/src/components/card.tsx', 'weimo-ui-markdown/components/md-view'],
-  ['packages/weimo-ui-card/src/components/card.tsx', 'weimo-ui-tagtree/components/tag-bar'],
   ['packages/weimo-ui-card/src/components/ocr-card.tsx', 'weimo-ui-image/components/image-view'],
   ['packages/weimo-ui-card/src/components/ocr-composer.tsx', 'weimo-ui-image/components/image-uploader'],
   ['packages/weimo-ui-card/src/components/ocr-detail.tsx', 'weimo-ui-core/components/action-dialog'],
+  ['packages/weimo-ui-card/src/components/tag-picker/tag-picker.tsx', 'weimo-ui-tagtree/components/coss/input-group'],
+  ['packages/weimo-ui-card/src/components/tag-picker/tag-picker.tsx', 'weimo-ui-tagtree/components/coss/scroll-area'],
   ['packages/weimo-ui-image/src/components/image-view.tsx', 'weimo-ui-core/components/action-dialog'],
   ['packages/weimo-ui-image/src/components/image-uploader.tsx', 'weimo-ui-core/lib/utils'],
   ['packages/weimo-ui-stats/src/components/heatmap/heatmap.tsx', 'weimo-ui-core/components/heat-color'],
@@ -298,7 +303,7 @@ const tagtreePage = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx'
 assert.match(tagtreeIndex, /TagTreePage/u)
 assert.match(tagtreePage, /export function TagTreePage/u)
 assert.match(tagtreePage, /from ['"]weimo-ui-core\/components\/component-preview-card['"]/u)
-assert.equal(tagtreePage.match(/<ComponentPreviewCard\b/gu)?.length, 5)
+assert.equal(tagtreePage.match(/<ComponentPreviewCard\b/gu)?.length, 3)
 
 const sitePackageJson = readProjectJson('packages/weimo-ui-site/package.json')
 const siteSourceFiles = collectSourceFiles(join(root, 'packages/weimo-ui-site/src'))

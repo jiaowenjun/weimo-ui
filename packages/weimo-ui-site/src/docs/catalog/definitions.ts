@@ -19,6 +19,7 @@ import { imageDefinition } from './packages/weimo-ui-image/image'
 import { statDefinition } from './packages/weimo-ui-stats/stat'
 import { cardToolBarDefinition } from './packages/weimo-ui-card/card-tool-bar'
 import { taggedCardDefinition } from './packages/weimo-ui-card/tagged-card'
+import { tagBarDefinition } from './packages/weimo-ui-card/tag-bar'
 import { ocrDefinition } from './packages/weimo-ui-card/ocr'
 import type { ComponentId } from './manifest'
 import type { ComponentDefinition } from './types'
@@ -44,5 +45,6 @@ export const componentDefinitionsById = {
   stat: statDefinition,
   'card-tool-bar': cardToolBarDefinition,
   'tagged-card': taggedCardDefinition,
+  'tag-bar': tagBarDefinition,
   ocr: ocrDefinition,
 } satisfies Record<ComponentId, ComponentDefinition>

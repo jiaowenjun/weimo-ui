@@ -6,8 +6,8 @@ import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
-} from '../coss/input-group'
-import { ScrollArea } from '../coss/scroll-area'
+} from 'weimo-ui-tagtree/components/coss/input-group'
+import { ScrollArea } from 'weimo-ui-tagtree/components/coss/scroll-area'
 import { ActionDialog } from 'weimo-ui-core/components/action-dialog'
 import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'
 import { cn } from 'weimo-ui-core/lib/utils'

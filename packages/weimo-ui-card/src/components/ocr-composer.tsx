@@ -7,7 +7,7 @@ import { ComposerShell } from './composer-shell'
 import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'
 import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'
 import { ImageUploader, type ImageUploaderActionApi, type ImageUploaderProps } from 'weimo-ui-image/components/image-uploader'
-import { TagBar } from 'weimo-ui-tagtree/components/tag-bar'
+import { TagBar } from './tag-bar'
 import { getCardSurfaceClassName } from 'weimo-ui-core/components/card-surface'
 import { cn } from 'weimo-ui-core/lib/utils'
 

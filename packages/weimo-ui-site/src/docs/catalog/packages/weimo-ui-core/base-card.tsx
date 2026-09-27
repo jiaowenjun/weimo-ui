@@ -7,7 +7,7 @@ import {
   ActionMenu,
   type ActionMenuItem,
 } from 'weimo-ui-core/components/menu'
-import { TagBar } from 'weimo-ui-tagtree/components/tag-bar'
+import { TagBar } from 'weimo-ui-card/components/tag-bar'
 import type { ComponentDefinition } from '../../component-docs'
 import { PreviewToggle } from '../../../components/preview-toggle'
 

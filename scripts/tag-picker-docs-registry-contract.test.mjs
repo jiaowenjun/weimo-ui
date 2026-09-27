@@ -13,7 +13,7 @@ function readProjectFile(relativePath) {
 
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
-const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/tag.tsx')
+const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/tag-bar.tsx')
 const pageSource = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx')
 const registryItem = JSON.parse(readProjectFile('registry/tag-picker.json'))
 const rootRegistry = JSON.parse(readProjectFile('registry.json'))
@@ -25,19 +25,21 @@ assert.ok(
   manifestSource.includes("name: 'TagPicker'") &&
   manifestSource.includes("registryName: 'tag-picker'") &&
   manifestSource.includes("packageExport: './components/tag-picker'") &&
+  manifestSource.includes("packageName: 'weimo-ui-card'") &&
+  manifestSource.includes("page: 'tag-bar'") &&
   manifestSource.includes('docs: false') &&
   !manifestSource.includes("@/components/ui/tag-picker") &&
   !manifestSource.includes("ui/components/tag-picker"),
-  'components-manifest.ts must keep TagPicker registry-only after the Tag page merge.',
+  'components-manifest.ts must keep TagPicker registry-only under the card-group tag-bar page.',
 )
 assert.ok(
-  definitionsIndexSource.includes("import { tagDefinition } from './packages/weimo-ui-tagtree/tag'") &&
-  definitionsIndexSource.includes('tag: tagDefinition') &&
+  definitionsIndexSource.includes("import { tagBarDefinition } from './packages/weimo-ui-card/tag-bar'") &&
+  definitionsIndexSource.includes("'tag-bar': tagBarDefinition") &&
   !definitionsIndexSource.includes('tag-picker'),
-  'component-definitions index must export the merged Tag definition for TagPicker.',
+  'component-definitions index must export the merged card-group TagBar definition for TagPicker.',
 )
 assert.ok(
-  definitionSource.includes("id: 'tag'") &&
+  definitionSource.includes("id: 'tag-bar'") &&
   definitionSource.includes('summary:') &&
   definitionSource.includes('status:') &&
   definitionSource.includes('preview:') &&
@@ -48,10 +50,10 @@ assert.ok(
 )
 for (const snippet of [
   "import { useState } from 'react'",
-  'TagPicker,',
-  'type TagPickerApplyPayload',
-  "mode = 'insert'",
-  "setPickerMode(mode === 'pick' ? 'pick' : tag ? 'update' : 'insert')",
+  "import { TagPicker, type TagPickerApplyPayload, type TagPickerMode } from 'weimo-ui-card/components/tag-picker'",
+  "import { TagBar } from 'weimo-ui-card/components/tag-bar'",
+  "const [pickerMode, setPickerMode] = useState<TagPickerMode>('insert')",
+  "setPickerMode(tag ? 'update' : 'insert')",
   'tagOptions={tagOptions}',
   'selectedTags={selectedTags}',
   'onApply={handleApply}',
@@ -67,16 +69,19 @@ for (const snippet of [
   'TagPickerDemo',
 ]) {
   assert.ok(
-    pageSource.includes(snippet),
+    definitionSource.includes(snippet),
     `TagPicker docs definition must include ${snippet}.`,
   )
 }
 assert.ok(
-  !pageSource.includes("from 'weimo-ui-core/components/coss/button'") &&
-  !pageSource.includes('tag-picker-preview__trigger') &&
-  !pageSource.includes('<Button') &&
-  !pageSource.includes('选择标签'),
+  !definitionSource.includes("from 'weimo-ui-core/components/coss/button'") &&
+  !definitionSource.includes('tag-picker-preview__trigger') &&
+  !definitionSource.includes('<Button'),
   'TagPicker docs preview must use only tag chips as triggers, without the old select-tag button.',
+)
+assert.ok(
+  !pageSource.includes('TagPicker') && !pageSource.includes('TagBar'),
+  'Tagtree tag page must not keep the moved TagPicker/TagBar demos.',
 )
 
 assert.ok(rootItem, 'Root registry must include tag-picker item.')
@@ -94,12 +99,12 @@ assert.deepEqual(
   ['@weimo/style', '@weimo/utils', '@weimo/frosted-icon-button'],
 )
 for (const filePath of [
-  'packages/weimo-ui-tagtree/src/components/tag-picker.tsx',
-  'packages/weimo-ui-tagtree/src/components/tag-picker/index.tsx',
-  'packages/weimo-ui-tagtree/src/components/tag-picker/tag-picker.tsx',
-  'packages/weimo-ui-tagtree/src/components/tag-picker/use-tag-picker.ts',
-  'packages/weimo-ui-tagtree/src/components/tag-picker/tag-picker-model.ts',
-  'packages/weimo-ui-tagtree/src/components/tag-picker/tag-picker.css',
+  'packages/weimo-ui-card/src/components/tag-picker.tsx',
+  'packages/weimo-ui-card/src/components/tag-picker/index.tsx',
+  'packages/weimo-ui-card/src/components/tag-picker/tag-picker.tsx',
+  'packages/weimo-ui-card/src/components/tag-picker/use-tag-picker.ts',
+  'packages/weimo-ui-card/src/components/tag-picker/tag-picker-model.ts',
+  'packages/weimo-ui-card/src/components/tag-picker/tag-picker.css',
   'packages/weimo-ui-core/src/components/action-dialog.tsx',
   'packages/weimo-ui-core/src/components/action-dialog.css',
   'packages/weimo-ui-core/src/components/float-bar.tsx',

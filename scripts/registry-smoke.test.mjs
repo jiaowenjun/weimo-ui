@@ -1281,7 +1281,7 @@ try {
       cardRuntimeSource.includes("from './card-top-bar'") &&
       cardRuntimeSource.includes("from './card-tool-bar'") &&
       cardRuntimeSource.includes("from 'weimo-ui-markdown/components/md-view'") &&
-      cardRuntimeSource.includes("from 'weimo-ui-tagtree/components/tag-bar'") &&
+      cardRuntimeSource.includes("from './tag-bar'") &&
       cardRuntimeSource.includes("from './card-layout-measurement'") &&
       cardRuntimeSource.includes("from './card-resolvers'") &&
       cardRuntimeSource.includes("from './use-card-draft'") &&
@@ -1459,7 +1459,8 @@ try {
   assert.match(consumerCss, /--color-heat-1:\s*hsl\(18 62% 89%\);/)
   assert.match(consumerCss, /--color-heatmap-today-ring:\s*hsl\(18\.1 71\.9% 46\.1% \/ 0\.55\);/)
   assert.ok(
-    tagPickerSource.includes("from '../coss/input-group'") &&
+    (tagPickerSource.includes("from 'weimo-ui-tagtree/components/coss/input-group'") ||
+      tagPickerSource.includes("from '../coss/input-group'")) &&
     !tagPickerSource.includes("from '../bottom-bar'") &&
     (tagPickerSource.includes("from '../action-dialog'") ||
       tagPickerSource.includes("from 'weimo-ui-core/components/action-dialog'")) &&
