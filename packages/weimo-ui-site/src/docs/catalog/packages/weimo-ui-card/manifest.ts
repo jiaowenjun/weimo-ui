@@ -32,6 +32,7 @@ export const cardCatalog = {
       packageExport: './components/tag-bar',
       components: [
         { id: 'tag-picker', name: 'TagPicker', registryName: 'tag-picker', packageExport: './components/tag-picker' },
+        { id: 'editable-capsule', name: 'EditableCapsule', registryName: 'editable-capsule', packageExport: './components/editable-capsule' },
       ],
     },
     {

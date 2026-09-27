@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "type": "registry:ui",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "name": "editable-capsule",
+  "title": "Editable Capsule",
+  "description": "A tag capsule switching between display and editable states with a remove suffix.",
+  "categories": [
+    "tag"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/utils",
+    "@weimo/capsule-button",
+    "@weimo/ghost-icon-button"
+  ],
+  "files": [
+    {
+      "path": "packages/weimo-ui-card/src/components/editable-capsule.tsx",
+      "type": "registry:ui",
+      "target": "@ui/editable-capsule.tsx"
+    }
+  ]
+}

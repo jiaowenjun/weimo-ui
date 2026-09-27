@@ -183,6 +183,7 @@ const promotedRegistryNames = [
   'tag-tree-row',
   'capsule-button',
   'tag-bar',
+  'editable-capsule',
   'md',
   'md-editor',
   'md-render',

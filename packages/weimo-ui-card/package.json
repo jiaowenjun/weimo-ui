@@ -17,6 +17,7 @@
     "./components/card-composer": "./src/components/card-composer.tsx",
     "./components/card-tool-bar": "./src/components/card-tool-bar.tsx",
     "./components/card-top-bar": "./src/components/card-top-bar.tsx",
+    "./components/editable-capsule": "./src/components/editable-capsule.tsx",
     "./components/ocr-card": "./src/components/ocr-card.tsx",
     "./components/ocr-composer": "./src/components/ocr-composer.tsx",
     "./components/ocr-detail": "./src/components/ocr-detail.tsx",

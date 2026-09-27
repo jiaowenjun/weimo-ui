@@ -90,6 +90,7 @@
     "./components/card-composer": "./packages/weimo-ui-card/src/components/card-composer.tsx",
     "./components/card-tool-bar": "./packages/weimo-ui-card/src/components/card-tool-bar.tsx",
     "./components/card-top-bar": "./packages/weimo-ui-card/src/components/card-top-bar.tsx",
+    "./components/editable-capsule": "./packages/weimo-ui-card/src/components/editable-capsule.tsx",
     "./components/ocr-card": "./packages/weimo-ui-card/src/components/ocr-card.tsx",
     "./components/ocr-composer": "./packages/weimo-ui-card/src/components/ocr-composer.tsx",
     "./components/ocr-detail": "./packages/weimo-ui-card/src/components/ocr-detail.tsx",

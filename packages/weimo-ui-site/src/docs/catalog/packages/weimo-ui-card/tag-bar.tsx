@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { Plus, X } from 'lucide-react'
+import { Plus } from 'lucide-react'
 
 import { TagBar } from 'weimo-ui-card/components/tag-bar'
 import { TagPicker, type TagPickerApplyPayload, type TagPickerMode } from 'weimo-ui-card/components/tag-picker'
+import { EditableCapsule } from 'weimo-ui-card/components/editable-capsule'
 import { CapsuleButton } from 'weimo-ui-core/components/capsule-button'
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import type { ComponentDefinition } from '../../component-docs'
@@ -103,36 +104,23 @@ function TagBarDemo() {
 }
 
 function EditableCapsuleDemo() {
-  const [state, setState] = useState<'default' | 'frosted'>('default')
-  const editing = state === 'frosted'
+  const [editable, setEditable] = useState(false)
 
   return (
     <ComponentPreviewCard
       action={
         <PreviewToggle
           ariaLabel="切换编辑态"
-          checked={editing}
-          label={editing ? '编辑态' : '默认态'}
-          onCheckedChange={(checked) => setState(checked ? 'frosted' : 'default')}
+          checked={editable}
+          label={editable ? '编辑态' : '展示态'}
+          onCheckedChange={setEditable}
         />
       }
       align="center"
       label="可编辑胶囊"
     >
-      <div aria-label="CapsuleButton 状态预览">
-        <CapsuleButton
-          animateWidth
-          state={state}
-          suffix={
-            editing ? (
-              <span aria-hidden="true" className="icon-button icon-button--ghost icon-button--xs">
-                <X aria-hidden="true" />
-              </span>
-            ) : null
-          }
-        >
-          写作/日记
-        </CapsuleButton>
+      <div aria-label="EditableCapsule preview">
+        <EditableCapsule editable={editable}>写作/日记</EditableCapsule>
       </div>
     </ComponentPreviewCard>
   )
@@ -157,8 +145,10 @@ export const tagBarDefinition = {
   searchAliases: [
     'TagBar',
     'TagPicker',
+    'EditableCapsule',
     '标签栏',
     '标签选择器',
+    '可编辑胶囊',
   ],
   preview: () => <TagBarPageDemo />,
 } satisfies ComponentDefinition

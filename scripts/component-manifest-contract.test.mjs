@@ -180,6 +180,7 @@ assert.deepEqual(
     'card-top-bar',
     'card-composer',
     'tag-picker',
+    'editable-capsule',
     'ocr-composer',
     'ocr-detail',
   ],

@@ -145,6 +145,7 @@ const packageRules = [
     ],
     requiredExports: {
       '.': './src/index.ts',
+      './components/editable-capsule': './src/components/editable-capsule.tsx',
       './components/tag-bar': './src/components/tag-bar.tsx',
       './components/tag-picker': './src/components/tag-picker.tsx',
       './components/tag-picker-model': './src/components/tag-picker/tag-picker-model.ts',

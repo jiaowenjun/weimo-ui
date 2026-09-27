@@ -10,6 +10,7 @@ import {
   type TagPickerApplyPayload,
   type TagPickerMode,
 } from './tag-picker'
+import { EditableCapsule } from './editable-capsule'
 
 import './tag-bar.css'
 
@@ -243,18 +244,27 @@ export function TagBar({
                 key={isEmpty ? 'empty' : `${tag}-${index}`}
                 style={isEmpty ? emptyChipWidthStyle : undefined}
               >
-                <CapsuleButton
-                  disabled={
-                    editable
-                      ? !canEdit
-                      : !isEmpty && !isTagClickEnabled(tag)
-                  }
-                  onClick={getChipClickHandler(tag)}
-                  prefix={editable && isEmpty ? TAG_CHIP_PLUS_PREFIX : TAG_CHIP_HASH_PREFIX}
-                  state={editable ? 'frosted' : 'default'}
-                >
-                  {tag}
-                </CapsuleButton>
+                {/* 空态芯片承担「+标签」新增语义,保持 CapsuleButton 原样;
+                    非空标签芯片用 EditableCapsule,编辑态挂 X 移除后缀。 */}
+                {isEmpty ? (
+                  <CapsuleButton
+                    disabled={editable && !canEdit}
+                    onClick={getChipClickHandler(tag)}
+                    prefix={editable ? TAG_CHIP_PLUS_PREFIX : TAG_CHIP_HASH_PREFIX}
+                    state={editable ? 'frosted' : 'default'}
+                  >
+                    {tag}
+                  </CapsuleButton>
+                ) : (
+                  <EditableCapsule
+                    disabled={editable ? !canEdit : !isTagClickEnabled(tag)}
+                    editable={editable}
+                    onClick={getChipClickHandler(tag)}
+                    prefix={TAG_CHIP_HASH_PREFIX}
+                  >
+                    {tag}
+                  </EditableCapsule>
+                )}
               </span>
             ))}
             {isEmpty ? (

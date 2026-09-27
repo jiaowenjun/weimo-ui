@@ -14,7 +14,8 @@
     "@weimo/utils",
     "@weimo/float-bar",
     "@weimo/capsule-button",
-    "@weimo/tag-picker"
+    "@weimo/tag-picker",
+    "@weimo/editable-capsule"
   ],
   "files": [
     {

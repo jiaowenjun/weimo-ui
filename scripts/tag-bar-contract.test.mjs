@@ -173,8 +173,12 @@ for (const snippet of [
   'ref={emptyChipMeasureRef}',
   'visibleTags.map((tag, index) =>',
   '<CapsuleButton',
-  'key={isEmpty ? \'empty\' : `${tag}-${index}`}',
-  'prefix={editable && isEmpty ? TAG_CHIP_PLUS_PREFIX : TAG_CHIP_HASH_PREFIX}',
+  "key={isEmpty ? 'empty' : `${tag}-${index}`}",
+  "import { EditableCapsule } from './editable-capsule'",
+  '<EditableCapsule',
+  'editable={editable}',
+  'prefix={editable ? TAG_CHIP_PLUS_PREFIX : TAG_CHIP_HASH_PREFIX}',
+  'prefix={TAG_CHIP_HASH_PREFIX}',
   "state={editable ? 'frosted' : 'default'}",
   'disabled={editable && !canEdit}',
   'onClick={getChipClickHandler(tag)}',
@@ -339,7 +343,9 @@ assert.ok(
     visibleTagsMapSource.includes('<span') &&
     visibleTagsMapSource.includes("className={isEmpty ? 'tag-bar__morph-slot' : undefined}") &&
     visibleTagsMapSource.includes('style={isEmpty ? emptyChipWidthStyle : undefined}') &&
-    visibleTagsMapSource.includes("prefix={editable && isEmpty ? TAG_CHIP_PLUS_PREFIX : TAG_CHIP_HASH_PREFIX}") &&
+    visibleTagsMapSource.includes("prefix={editable ? TAG_CHIP_PLUS_PREFIX : TAG_CHIP_HASH_PREFIX}") &&
+    visibleTagsMapSource.includes('<EditableCapsule') &&
+    visibleTagsMapSource.includes('editable={editable}') &&
     visibleTagsMapSource.includes("state={editable ? 'frosted' : 'default'}") &&
     visibleTagsMapSource.includes('onClick={getChipClickHandler(tag)}') &&
     visibleTagsMapSource.includes('disabled={editable && !canEdit}'),

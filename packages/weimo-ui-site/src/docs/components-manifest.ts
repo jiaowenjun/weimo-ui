@@ -502,6 +502,16 @@ export const componentManifest = [
     registry: true,
   },
   {
+    id: 'editable-capsule',
+    name: 'EditableCapsule',
+    registryName: 'editable-capsule',
+    packageExport: './components/editable-capsule',
+    packageName: 'weimo-ui-card',
+    page: 'tag-bar',
+    docs: false,
+    registry: true,
+  },
+  {
     id: 'ocr',
     name: 'OCR',
     exportName: 'OcrCard',
