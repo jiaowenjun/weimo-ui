@@ -105,6 +105,17 @@ function TagBarDemo() {
 
 function EditableCapsuleDemo() {
   const [editable, setEditable] = useState(false)
+  const [tag, setTag] = useState('写作/日记')
+  const [open, setOpen] = useState(false)
+
+  function openTagPicker() {
+    if (!editable) return
+    setOpen(true)
+  }
+
+  function handleApply(payload: TagPickerApplyPayload) {
+    setTag(payload.selectedTags[0] ?? tag)
+  }
 
   return (
     <ComponentPreviewCard
@@ -120,7 +131,17 @@ function EditableCapsuleDemo() {
       label="可编辑胶囊"
     >
       <div aria-label="EditableCapsule preview">
-        <EditableCapsule editable={editable}>写作/日记</EditableCapsule>
+        <EditableCapsule editable={editable} onClick={openTagPicker}>{tag}</EditableCapsule>
+        <TagPicker
+          initialDraft={tag}
+          mode="update"
+          onApply={handleApply}
+          onOpenChange={setOpen}
+          open={open}
+          selectedTags={[tag]}
+          tagOptions={tagOptions}
+          targetTag={tag}
+        />
       </div>
     </ComponentPreviewCard>
   )
