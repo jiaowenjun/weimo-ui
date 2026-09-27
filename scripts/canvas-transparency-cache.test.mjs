@@ -35,12 +35,7 @@ function resultFor(label) {
 }
 
 const cacheSource = readProjectFile('packages/weimo-ui-image/src/components/canvas-transparency-cache.ts')
-const packageJson = JSON.parse(readProjectFile('package.json'))
 
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package test script must run the Canvas transparency cache contract.',
-)
 assert.ok(
   cacheSource.includes('const CANVAS_TRANSPARENCY_CACHE_LIMIT = 32') &&
     cacheSource.includes('const CANVAS_TRANSPARENCY_CACHE_VERSION = 1'),

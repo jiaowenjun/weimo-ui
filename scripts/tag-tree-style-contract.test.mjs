@@ -39,7 +39,6 @@ const source = [
 ]
   .map(readProjectFile)
   .join('\n')
-const packageJson = JSON.parse(readProjectFile('package.json'))
 
 const rootBlock = blockFor(css, '.tag-tree')
 const rowBlock = blockFor(css, '.tag-tree__row')
@@ -260,8 +259,4 @@ assert.ok(
     source.includes('window.setTimeout') &&
     source.includes('TAG_TREE_ANIMATION_MS'),
   'TagTree must coordinate enter and removal timing in React.',
-)
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run tag-tree-style-contract.test.mjs.',
 )

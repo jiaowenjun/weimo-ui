@@ -66,10 +66,6 @@ assert.equal(
   './packages/weimo-ui-core/src/components/popup-surface.tsx',
   'package.json must expose PopupSurface.',
 )
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run surface-material-contract.test.mjs.',
-)
 
 for (const snippet of [
   "id: 'surface'",

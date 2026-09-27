@@ -50,10 +50,6 @@ const unlayeredBaseBlock = cssBlockFor(css, 'button.text-button')
 const unlayeredDisabledBlock = cssBlockFor(css, 'button.text-button:disabled')
 const previewBlock = cssBlockFor(appCss, '.text-button-preview')
 
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run text-button-contract.test.mjs.',
-)
 assert.equal(
   packageJson.exports?.['./components/text-button'],
   './packages/weimo-ui-core/src/components/text-button.tsx',

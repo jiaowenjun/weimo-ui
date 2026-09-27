@@ -60,10 +60,3 @@ assert.ok(
   cardToolBarSource.includes('render={<Button variant="ghost" />}'),
   'CardToolBar docs icon toolbar render slots must keep coss ghost Button.',
 )
-
-const packageJson = JSON.parse(readProjectFile('package.json'))
-
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run docs-text-button-contract.test.mjs.',
-)

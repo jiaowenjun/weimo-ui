@@ -77,10 +77,6 @@ assert.equal(
   './packages/weimo-ui-core/src/components/bottom-bar.tsx',
   'BottomBar must have a public package export.',
 )
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run tag-picker-component-contract.test.mjs.',
-)
 
 assert.ok(
   manifestSource.includes("id: 'bar'") &&

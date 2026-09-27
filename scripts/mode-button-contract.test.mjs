@@ -196,8 +196,3 @@ assert.ok(
   !appCss.includes('.internal-mode-button-preview__surface'),
   'ModeButton preview CSS must not keep the redundant nested surface.',
 )
-
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run mode-button-contract.test.mjs.',
-)

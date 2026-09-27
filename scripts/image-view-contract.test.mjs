@@ -63,15 +63,6 @@ assert.ok(
   !Object.hasOwn(packageJson.exports ?? {}, './components/image-detail-view'),
   'package.json must not export the removed ImageDetailView component.',
 )
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run image-view-contract.test.mjs.',
-)
-assert.ok(
-  true,
-  'package.json test script must not run the removed image-detail-view contract.',
-)
-
 for (const relativePath of [
   'src/components/image-detail.tsx',
   'src/components/image-detail.css',

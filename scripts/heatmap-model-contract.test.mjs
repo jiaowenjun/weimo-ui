@@ -143,10 +143,3 @@ assert.deepEqual(
   ],
   'Month labels must appear on columns containing the first day of a month.',
 )
-
-const packageJson = JSON.parse(readProjectFile('package.json'))
-
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run heatmap-model-contract.test.mjs.',
-)

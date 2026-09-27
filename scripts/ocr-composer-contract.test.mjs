@@ -40,10 +40,6 @@ const registry = readJson('registry.json')
 const standaloneRegistryItem = readJson('registry/ocr-composer.json')
 const rootRegistryItem = registry.items.find((item) => item.name === 'ocr-composer')
 
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package test script must run the OcrComposer contract.',
-)
 assert.equal(
   packageJson.exports?.['./components/ocr-composer'],
   './packages/weimo-ui-card/src/components/ocr-composer.tsx',

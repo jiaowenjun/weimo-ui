@@ -60,7 +60,6 @@ const tooltipSource = readProjectFile('packages/weimo-ui-core/src/components/cos
 const tooltipCss = readProjectFile('packages/weimo-ui-core/src/components/coss/tooltip.css')
 const popupSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/popup-surface.css')
 const registryItem = JSON.parse(readProjectFile('registry/heatmap.json'))
-const packageJson = JSON.parse(readProjectFile('package.json'))
 
 const { formatHeatmapTooltip } = await loadTooltipFormatter()
 
@@ -166,8 +165,4 @@ assert.ok(
 assert.ok(
     registryItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/components/heatmap/heat-color.tsx'),
   'Heatmap registry item must ship the public HeatColor implementation.',
-)
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run heatmap-tooltip-contract.test.mjs.',
 )

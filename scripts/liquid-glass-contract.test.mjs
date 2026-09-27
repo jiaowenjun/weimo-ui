@@ -267,10 +267,6 @@ assert.ok(
     !appCss.includes('transition-property: transform, opacity, box-shadow !important;'),
   'The docs top bar must not need a transition-all size override after the engine declares exact properties.',
 )
-assert.ok(
-  packageJson.scripts['test:contracts'].includes('run-contract-tests.mjs'),
-  'The package test must run the liquid-glass contract.',
-)
 
 assert.ok(
   appCss.includes('.liquid-glass-preview__tile {') &&

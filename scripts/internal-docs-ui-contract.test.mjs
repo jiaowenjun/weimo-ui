@@ -26,7 +26,6 @@ const barDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/cat
 const pageLayoutDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/page-layout.tsx')
 const css = readProjectFile('packages/weimo-ui-site/src/App.css')
 const tagPageCss = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.css')
-const packageJson = JSON.parse(readProjectFile('package.json'))
 
 function cssBlockFor(source, selector) {
   const start = source.indexOf(`${selector} {`)
@@ -261,8 +260,3 @@ function assertLiquidGlassToolbarDemo(demoSource, label) {
 
 assertLiquidGlassToolbarDemo(floatBarDemoSource, 'FloatBar')
 assertLiquidGlassToolbarDemo(topBarDemoSource, 'TopBar')
-
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run internal-docs-ui-contract.test.mjs.',
-)

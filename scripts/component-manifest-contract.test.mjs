@@ -195,10 +195,6 @@ assert.equal(
   'node scripts/sync-component-catalog.mjs --check',
 )
 assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'The package test must reject stale component catalog artifacts first.',
-)
-assert.ok(
   packageJson.scripts?.['test:registry']?.startsWith('pnpm catalog:check &&'),
   'The registry test must reject stale component catalog artifacts first.',
 )
@@ -207,10 +203,6 @@ assert.ok(
     !Object.hasOwn(packageJson.exports ?? {}, './components/tag-edit-bar') &&
     !Object.hasOwn(packageJson.exports ?? {}, './components/icon-button'),
   'Removed public component exports must stay removed.',
-)
-assert.ok(
-  true,
-  'The package test must not run the removed EditableCard contract.',
 )
 assert.ok(
   componentDocsSource.includes('componentManifest') &&

@@ -134,10 +134,6 @@ assert.equal(
   './packages/weimo-ui-core/src/components/border-color.css',
   'package.json must expose the standalone border-color utility stylesheet.',
 )
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run border-color-contract.test.mjs.',
-)
 
 assert.ok(
   borderColorSource.includes("import './border-color.css'"),

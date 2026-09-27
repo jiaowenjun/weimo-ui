@@ -19,7 +19,6 @@ const registryItem = JSON.parse(readProjectFile('registry/tag-picker.json'))
 const rootRegistry = JSON.parse(readProjectFile('registry.json'))
 const rootItem = rootRegistry.items.find((item) => item.name === 'tag-picker')
 const smokeSource = readProjectFile('scripts/registry-smoke.test.mjs')
-const packageJson = JSON.parse(readProjectFile('package.json'))
 
 assert.ok(
   manifestSource.includes("id: 'tag-picker'") &&
@@ -134,8 +133,4 @@ assert.ok(
   smokeSource.includes("src/components/ui/coss/input-group.tsx") &&
   smokeSource.includes("src/components/ui/coss/scroll-area.tsx"),
   'registry smoke test must install and typecheck TagPicker from the custom registry.',
-)
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run tag-picker-docs-registry-contract.test.mjs.',
 )

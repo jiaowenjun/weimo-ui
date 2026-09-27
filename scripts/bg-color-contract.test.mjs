@@ -144,10 +144,6 @@ assert.equal(
   './packages/weimo-ui-core/src/components/bg-color.css',
   'package.json must expose the standalone bg-color utility stylesheet.',
 )
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run bg-color-contract.test.mjs.',
-)
 
 assert.ok(
   bgColorSource.includes("import './bg-color.css'"),

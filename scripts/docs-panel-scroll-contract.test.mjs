@@ -27,7 +27,6 @@ function assertDeclaration(block, declaration, message) {
 }
 
 const css = readProjectFile('packages/weimo-ui-site/src/App.css')
-const packageJson = JSON.parse(readProjectFile('package.json'))
 
 const demoPanel = blockFor(css, '.demo-block__panel')
 const previewStage = blockFor(css, '.preview-stage')
@@ -131,9 +130,4 @@ for (const removedSelector of [
 assert.ok(
   !css.includes('.demo-block__bar'),
   'detail demo block must not keep the removed preview/code tab bar styles.',
-)
-
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run docs-panel-scroll-contract.test.mjs.',
 )

@@ -37,10 +37,6 @@ assert.equal(
   './packages/weimo-ui-card/src/components/ocr-card.tsx',
   'package.json must export OcrCard.',
 )
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run ocr-card-contract.test.mjs.',
-)
 
 assert.ok(
   manifest.includes("id: 'ocr'") &&

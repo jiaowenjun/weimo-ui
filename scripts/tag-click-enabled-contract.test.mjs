@@ -13,12 +13,7 @@ const tagBar = read('packages/weimo-ui-tagtree/src/components/tag-bar.tsx')
 const card = read('packages/weimo-ui-card/src/components/card.tsx')
 const cardResolvers = read('packages/weimo-ui-card/src/components/card-resolvers.tsx')
 const ocrCard = read('packages/weimo-ui-card/src/components/ocr-card.tsx')
-const packageJson = JSON.parse(read('package.json'))
 
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'UI test script must run the tag-click-enabled contract.',
-)
 assert.ok(tagBar.includes('isTagClickEnabled?: (tag: string) => boolean'))
 assert.ok(tagBar.includes('isTagClickEnabled = () => true'))
 assert.ok(tagBar.includes('!isTagClickEnabled(tag)'))

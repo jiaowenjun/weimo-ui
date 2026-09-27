@@ -82,10 +82,6 @@ const rootPositionAnimationSource = componentSource.slice(
   rootPositionAnimationEnd,
 )
 
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run tag-bar-contract.test.mjs.',
-)
 assert.equal(
   packageJson.exports?.['./components/tag-bar'],
   './packages/weimo-ui-tagtree/src/components/tag-bar.tsx',

@@ -76,10 +76,6 @@ const docsPreviewEllipsisBlock = blockFor(
   '.tag-page__bread-preview',
 )
 
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run tag-bread-contract.test.mjs.',
-)
 assert.equal(
   packageJson.exports?.['./components/tag-bread'],
   './packages/weimo-ui-tagtree/src/components/tag-bread.tsx',

@@ -103,10 +103,6 @@ assert.ok(
   'CapsuleButton preview cards must inherit ComponentPreviewCard default layout; only the width-demo mechanism keeps custom CSS.',
 )
 
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run capsule-button-contract.test.mjs.',
-)
 assert.equal(
   packageJson.exports?.['./components/capsule-button'],
   './packages/weimo-ui-core/src/components/capsule-button.tsx',

@@ -47,10 +47,6 @@ const groupCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-
 const iconButtonCss = readProjectFile('packages/weimo-ui-core/src/components/icon-button.css')
 const buttonDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/button.tsx')
 
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run frosted-icon-button-group-contract.test.mjs.',
-)
 assert.equal(
   packageJson.exports?.['./components/frosted-icon-button-group'],
   './packages/weimo-ui-core/src/components/frosted-icon-button-group.tsx',

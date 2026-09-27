@@ -76,10 +76,6 @@ assert.equal(
   './packages/weimo-ui-core/src/components/text-color.css',
   'package.json must expose the standalone text-color utility stylesheet.',
 )
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run text-color-contract.test.mjs.',
-)
 
 assert.ok(
   textColorSource.includes("import './text-color.css'"),

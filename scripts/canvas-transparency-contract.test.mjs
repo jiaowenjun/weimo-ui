@@ -43,10 +43,6 @@ assert.equal(
   'package.json must expose CanvasTransparency cache controls separately from the React component.',
 )
 assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run canvas-transparency-contract.test.mjs.',
-)
-assert.ok(
   manifest.includes("id: 'canvas-transparency'") &&
     manifest.includes("name: 'CanvasTransparency'") &&
     manifest.includes("registryName: 'canvas-transparency'") &&

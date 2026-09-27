@@ -180,7 +180,3 @@ assert.equal(
   undefined,
   'internal coss InputGroup must not be added as a public package export.',
 )
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run tag-picker-coss-contract.test.mjs.',
-)

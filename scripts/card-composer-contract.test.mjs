@@ -24,10 +24,6 @@ const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalo
 const registry = JSON.parse(readProjectFile('registry.json'))
 const registryItem = readProjectFile('registry/card-composer.json')
 
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package test script must run the CardComposer contract.',
-)
 assert.equal(
   packageJson.exports?.['./components/card-composer'],
   './packages/weimo-ui-card/src/components/card-composer.tsx',

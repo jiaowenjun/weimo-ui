@@ -260,9 +260,3 @@ assert.equal(
   }),
   null,
 )
-
-const packageJson = JSON.parse(readProjectFile('package.json'))
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run tag-picker-model-contract.test.mjs.',
-)

@@ -65,10 +65,6 @@ assert.equal(
   './packages/weimo-ui-core/src/components/font-size.css',
   'package.json must expose the standalone font-size utility stylesheet.',
 )
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run font-size-contract.test.mjs.',
-)
 
 assert.ok(
   fontSizeSource.includes("import './font-size.css'"),

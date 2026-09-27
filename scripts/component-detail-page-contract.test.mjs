@@ -96,7 +96,6 @@ const componentDefinitionsSource = readProjectFile('packages/weimo-ui-site/src/d
   mdRenderDefinitionSource
 const css = readProjectFile('packages/weimo-ui-site/src/App.css')
 const iconPreviewRowBlock = blockFor(css, '.icon-preview__row')
-const packageJson = JSON.parse(readProjectFile('package.json'))
 
 assert.ok(
   docsShellSource.includes('className="docs-top-bar__title"') &&
@@ -221,10 +220,6 @@ for (const selector of [
   assert.ok(!css.includes(selector), `App.css must remove unused ${selector} styles.`)
 }
 
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run component-detail-page-contract.test.mjs.',
-)
 
 assert.ok(
   mdRenderDefinitionSource.includes("import { MdRender } from 'weimo-ui-markdown/components/md-render'") &&

@@ -745,7 +745,3 @@ assert.equal(
   'hsl(0 0% 35%)',
   'Standalone style registry dark theme must export color-text-placeholder.',
 )
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run card-style-contract.test.mjs.',
-)

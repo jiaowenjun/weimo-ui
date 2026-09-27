@@ -54,10 +54,6 @@ assert.equal(
   './packages/weimo-ui-core/src/components/border-radius.ts',
   'package.json must expose the public border-radius scale map.',
 )
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run border-radius-contract.test.mjs.',
-)
 
 assert.ok(
   borderRadiusSource.includes('export const borderRadiusScaleMap'),

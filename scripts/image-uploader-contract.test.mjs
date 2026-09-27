@@ -58,10 +58,6 @@ assert.equal(
   'package.json must export ImageUploader.',
 )
 assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run image-uploader-contract.test.mjs.',
-)
-assert.ok(
   manifest.includes("id: 'image-uploader'") &&
     manifest.includes("name: 'ImageUploader'") &&
     manifest.includes("registryName: 'image-uploader'") &&

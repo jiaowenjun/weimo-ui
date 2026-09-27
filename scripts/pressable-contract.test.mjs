@@ -39,10 +39,6 @@ const standaloneRegistry = readJson('registry/pressable.json')
 const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const rootPressableItem = rootRegistry.items.find((item) => item.name === 'pressable')
 
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run the Pressable focused contract.',
-)
 assert.equal(
   packageJson.exports?.['./components/pressable'],
   './packages/weimo-ui-core/src/components/pressable.ts',

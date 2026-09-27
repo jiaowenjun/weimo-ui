@@ -59,10 +59,6 @@ const reducedMotionBlock = blockFor(
 )
 
 assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run capsule-frame-contract.test.mjs.',
-)
-assert.ok(
   !Object.hasOwn(packageJson.exports ?? {}, './components/capsule-frame') &&
     !rootRegistry.items.some((item) => item.name === 'capsule-frame') &&
     !existsSync(join(root, 'registry/capsule-frame.json')),

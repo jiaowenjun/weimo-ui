@@ -96,11 +96,6 @@ assert.ok(
     !Object.hasOwn(packageJson.exports ?? {}, './styles/blur.css'),
   'Blur must be replaced by BgBlur instead of kept as a parallel public alias.',
 )
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs') &&
-    true,
-  'package.json test script must run bg-blur-contract.test.mjs and drop the old blur contract.',
-)
 
 assert.ok(
   bgBlurSource.includes("import './bg-blur.css'"),

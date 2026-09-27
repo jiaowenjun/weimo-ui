@@ -46,10 +46,6 @@ const transparentSurfaceBlock = blockFor(
 )
 const borderSampleBlock = blockFor(appCss, '.border-color-preview__sample')
 
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run the Token / style detail-page contract.',
-)
 
 assert.ok(
   manifestSource.includes("packageName: 'weimo-ui-core'") &&

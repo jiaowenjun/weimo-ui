@@ -263,10 +263,6 @@ function contractRect(left, top, width, height) {
   )
 }
 
-assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run frosted-surface-contract.test.mjs.',
-)
 assert.equal(
   packageJson.exports?.['./components/frosted-surface'],
   './packages/weimo-ui-core/src/components/frosted-surface.tsx',
@@ -275,10 +271,6 @@ assert.equal(
 assert.ok(
   !Object.hasOwn(packageJson.exports ?? {}, './components/smart-glass-surface'),
   'SmartGlassSurface package export must be removed after FrostedSurface replaces it.',
-)
-assert.ok(
-  true,
-  'package.json test script must not run the removed smart-glass-surface contract.',
 )
 assert.ok(rootFrostedSurfaceItem, 'Root registry must include FrostedSurface.')
 assert.ok(

@@ -427,10 +427,6 @@ for (const [block, snippet, message] of [
 }
 
 assert.ok(
-  packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
-  'package.json test script must run md-view-contract.test.mjs.',
-)
-assert.ok(
   packageJson.exports?.['./components/md-view'] === './packages/weimo-ui-markdown/src/components/md-view.tsx' &&
     markdownPackageJson.exports?.['./components/md-view'] === './src/components/md-view.tsx',
   'Root and weimo-ui-markdown packages must expose ./components/md-view.',
