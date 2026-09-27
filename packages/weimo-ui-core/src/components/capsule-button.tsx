@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, ReactElement, ReactNode } from 'react'
+import type { ButtonHTMLAttributes, MouseEvent, ReactElement, ReactNode } from 'react'
 import { Hash } from 'lucide-react'
 
 import { AnimatedInlineSizeMeasure } from './animated-inline-size'
@@ -34,6 +34,13 @@ function isEmptyCapsuleButtonSlot(slot: ReactNode) {
   return slot === null || slot === undefined || typeof slot === 'boolean' || slot === ''
 }
 
+// 后缀部件点击就地拦截、不透传到胶囊本体:装饰性后缀(X 移除示能等)不应
+// 触发胶囊 onClick;后缀元素自带的 onClick 先于本拦截执行,保留扩展位。
+// 所有派生组件(EditableCapsule/TagBar 芯片等)经共享插槽自动继承。
+function stopSuffixClickPropagation(event: MouseEvent<HTMLSpanElement>) {
+  event.stopPropagation()
+}
+
 export function CapsuleButton({
   animateWidth = false,
   children,
@@ -65,11 +72,11 @@ export function CapsuleButton({
     ? getFrostedSurfaceClassName('frosted-surface--bordered')
     : undefined
   // prefix/suffix 是整体按钮内部的独立图标插槽,只接受图标元素,不支持普通
-  // 字符——类型层已排除 string;交互由外层胶囊按钮统一承接,避免在 button
-  // 内嵌套另一个 button 造成无效 HTML;
-  // 默认前缀为 Hash 图标(对齐 TagBread),null 隐藏插槽,gap 不由空插槽垫宽;
-  // 图标插槽的 hover/active 色由 capsule-button.css 以 nested-hover token 与
-  // 胶囊自身反馈区分。
+  // 字符——类型层已排除 string;插槽不嵌套 button 保持合法 HTML;后缀点击
+  // 由 stopSuffixClickPropagation 就地拦截不透传,前缀与键盘激活仍由胶囊
+  // 统一承接;默认前缀为 Hash 图标(对齐 TagBread),null 隐藏插槽,gap 不由
+  // 空插槽垫宽;图标插槽的 hover/active 色由 capsule-button.css 以
+  // nested-hover token 与胶囊自身反馈区分。
   const buttonContent = (
     <>
       {isEmptyCapsuleButtonSlot(prefix) ? null : (
@@ -77,7 +84,12 @@ export function CapsuleButton({
       )}
       <span className="capsule-frame__content capsule-button__text">{children}</span>
       {isEmptyCapsuleButtonSlot(suffix) ? null : (
-        <span className="capsule-frame__slot capsule-button__suffix">{suffix}</span>
+        <span
+          className="capsule-frame__slot capsule-button__suffix"
+          onClick={stopSuffixClickPropagation}
+        >
+          {suffix}
+        </span>
       )}
     </>
   )

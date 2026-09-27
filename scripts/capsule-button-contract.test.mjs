@@ -118,7 +118,7 @@ assert.ok(
 )
 
 for (const snippet of [
-  "import type { ButtonHTMLAttributes, ReactElement, ReactNode } from 'react'",
+  "import type { ButtonHTMLAttributes, MouseEvent, ReactElement, ReactNode } from 'react'",
   "import { Hash } from 'lucide-react'",
   "from './animated-inline-size'",
   "from './animated-inline-size-model'",
@@ -152,6 +152,9 @@ for (const snippet of [
   'capsule-frame__slot capsule-button__prefix',
   'capsule-frame__content capsule-button__text',
   'capsule-frame__slot capsule-button__suffix',
+  'function stopSuffixClickPropagation',
+  'event.stopPropagation()',
+  'onClick={stopSuffixClickPropagation}',
   'type="button"',
 ]) {
   assertIncludes(source, snippet, `CapsuleButton source must include ${snippet}.`)
