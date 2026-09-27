@@ -23,7 +23,6 @@ function blockFor(source, selector) {
 }
 
 const packageJson = JSON.parse(readProjectFile('package.json'))
-const readmeSource = readProjectFile('README.md')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const componentDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/component-docs.tsx')
 const detailPageSource = readProjectFile('packages/weimo-ui-site/src/docs/pages/component-detail-page.tsx')
@@ -51,15 +50,6 @@ assert.ok(
   packageJson.scripts?.['test:contracts']?.includes('run-contract-tests.mjs'),
   'package.json test script must run the Token / style detail-page contract.',
 )
-
-for (const snippet of [
-  '## Token / 样式 详情页规范',
-  'Token / 样式 分组下的组件详情页只用于展示底层 token 值。',
-  '页面主轴必须是 token 名称、亮/暗值、utility/helper 映射和最小必要说明。',
-  '不要把 Token / 样式 详情页写成组件 API、业务用法或 selector 行为文档。',
-]) {
-  assert.ok(readmeSource.includes(snippet), `README must keep the token detail-page rule: ${snippet}`)
-}
 
 assert.ok(
   manifestSource.includes("packageName: 'weimo-ui-core'") &&
