@@ -56,4 +56,19 @@
     width: 100%;
     height: 100%;
   }
+
+  /* 省略号等 28px icon-button 触发器不得撑高文字行:行盒锁定 1em,按钮靠
+     溢出而非缩放保住完整命中区;列表与胶囊随之放开 overflow,截断职责仍由
+     __page 自有 overflow 承担。 */
+  .tag-bread .coss-breadcrumb__item:has(.icon-button) {
+    height: 1em;
+  }
+
+  .tag-bread .coss-breadcrumb__list:has(.icon-button) {
+    overflow: visible;
+  }
+
+  .tag-bread.capsule-frame:has(.icon-button) {
+    overflow: visible;
+  }
 }
