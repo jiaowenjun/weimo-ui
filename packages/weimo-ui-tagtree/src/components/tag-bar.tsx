@@ -4,7 +4,7 @@ import { Hash, Plus } from 'lucide-react'
 
 import { FloatBar } from 'weimo-ui-core/components/float-bar'
 import { cn } from 'weimo-ui-core/lib/utils'
-import { CapsuleButton } from './capsule-button'
+import { CapsuleButton } from 'weimo-ui-core/components/capsule-button'
 import {
   TagPicker,
   type TagPickerApplyPayload,
@@ -251,7 +251,7 @@ export function TagBar({
                   }
                   onClick={getChipClickHandler(tag)}
                   prefix={editable && isEmpty ? TAG_CHIP_PLUS_PREFIX : TAG_CHIP_HASH_PREFIX}
-                  state={editable ? 'glass' : 'default'}
+                  state={editable ? 'frosted' : 'default'}
                 >
                   {tag}
                 </CapsuleButton>
@@ -263,7 +263,7 @@ export function TagBar({
                   <CapsuleButton
                     disabled={editable && !canEdit}
                     prefix={emptyChipPrefixIcon}
-                    state={editable ? 'glass' : 'default'}
+                    state={editable ? 'frosted' : 'default'}
                   >
                     {emptyChipLabel}
                   </CapsuleButton>
@@ -279,7 +279,7 @@ export function TagBar({
                 onAnimationEnd={handleAddChipAnimationEnd}
                 onClick={openInsert}
                 prefix={TAG_CHIP_PLUS_PREFIX}
-                state="glass"
+                state="frosted"
               >
                 {addLabel}
               </CapsuleButton>

@@ -14,7 +14,6 @@
   "exports": {
     ".": "./src/index.ts",
     "./page": "./src/tag-page.tsx",
-    "./components/capsule-button": "./src/components/capsule-button.tsx",
     "./components/tag-bar": "./src/components/tag-bar.tsx",
     "./components/tag-bread": "./src/components/tag-bread.tsx",
     "./components/tag-picker": "./src/components/tag-picker.tsx",

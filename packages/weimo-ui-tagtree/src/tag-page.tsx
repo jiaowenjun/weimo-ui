@@ -11,7 +11,7 @@ import { Menu, MenuItem, MenuPopup, MenuTrigger } from 'weimo-ui-core/components
 import { Switch } from 'weimo-ui-core/components/coss/switch'
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 
-import { CapsuleButton } from './components/capsule-button'
+import { CapsuleButton } from 'weimo-ui-core/components/capsule-button'
 import { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from './components/coss/breadcrumb'
 import { TagBar } from './components/tag-bar'
 import { TagBread } from './components/tag-bread'
@@ -160,9 +160,9 @@ function TagPickerDemo({ mode = 'insert', initialDraft = '', targetTag = '' }: {
         <div className="tag-page__panel">
           <div className="tag-page__tags" aria-label="笔记标签">
             {tagSlots.map((tag, index) => tag ? (
-              <CapsuleButton key={`${tag}-${index}`} onClick={() => openTagPicker(index)} state="glass">{tag}</CapsuleButton>
+              <CapsuleButton key={`${tag}-${index}`} onClick={() => openTagPicker(index)} state="frosted">{tag}</CapsuleButton>
             ) : (
-              <CapsuleButton key={`new-${index}`} onClick={() => openTagPicker(index)} prefix={<Plus aria-hidden="true" />} state="glass">标签</CapsuleButton>
+              <CapsuleButton key={`new-${index}`} onClick={() => openTagPicker(index)} prefix={<Plus aria-hidden="true" />} state="frosted">标签</CapsuleButton>
             ))}
           </div>
         </div>

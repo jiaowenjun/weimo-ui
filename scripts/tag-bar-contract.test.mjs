@@ -109,7 +109,7 @@ for (const snippet of [
   "const emptyChipPrefix = editable ? '+' : '#'",
   "const emptyChipPrefixIcon = emptyChipPrefix === '+' ? TAG_CHIP_PLUS_PREFIX : TAG_CHIP_HASH_PREFIX",
   "import { FloatBar } from 'weimo-ui-core/components/float-bar'",
-  "import { CapsuleButton } from './capsule-button'",
+  "import { CapsuleButton } from 'weimo-ui-core/components/capsule-button'",
   'TagPicker,',
   'type TagPickerApplyPayload,',
   'type TagPickerMode,',
@@ -179,7 +179,7 @@ for (const snippet of [
   '<CapsuleButton',
   'key={isEmpty ? \'empty\' : `${tag}-${index}`}',
   'prefix={editable && isEmpty ? TAG_CHIP_PLUS_PREFIX : TAG_CHIP_HASH_PREFIX}',
-  "state={editable ? 'glass' : 'default'}",
+  "state={editable ? 'frosted' : 'default'}",
   'disabled={editable && !canEdit}',
   'onClick={getChipClickHandler(tag)}',
   'showAddChip ? (',
@@ -189,7 +189,7 @@ for (const snippet of [
   'aria-label={`新增${addLabel}`}',
   'onClick={openInsert}',
   'prefix={TAG_CHIP_PLUS_PREFIX}',
-  'state="glass"',
+  'state="frosted"',
   '<TagPicker',
   'initialDraft={activeTag}',
   'mode={pickerMode}',
@@ -344,7 +344,7 @@ assert.ok(
     visibleTagsMapSource.includes("className={isEmpty ? 'tag-bar__morph-slot' : undefined}") &&
     visibleTagsMapSource.includes('style={isEmpty ? emptyChipWidthStyle : undefined}') &&
     visibleTagsMapSource.includes("prefix={editable && isEmpty ? TAG_CHIP_PLUS_PREFIX : TAG_CHIP_HASH_PREFIX}") &&
-    visibleTagsMapSource.includes("state={editable ? 'glass' : 'default'}") &&
+    visibleTagsMapSource.includes("state={editable ? 'frosted' : 'default'}") &&
     visibleTagsMapSource.includes('onClick={getChipClickHandler(tag)}') &&
     visibleTagsMapSource.includes('disabled={editable && !canEdit}'),
   'TagBar display and edit modes must share the same mapped tag chips so each chip can morph in place.',

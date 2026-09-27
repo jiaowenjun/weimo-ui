@@ -44,12 +44,12 @@ function assertIncludes(source, snippet, message) {
 
 const packageJson = readJson('package.json')
 const rootRegistry = readJson('registry.json')
-const source = readProjectFile('packages/weimo-ui-tagtree/src/components/capsule-button.tsx')
-const css = readProjectFile('packages/weimo-ui-tagtree/src/components/capsule-button.css')
+const source = readProjectFile('packages/weimo-ui-core/src/components/capsule-button.tsx')
+const css = readProjectFile('packages/weimo-ui-core/src/components/capsule-button.css')
 const surfaceCss = readProjectFile('packages/weimo-ui-core/src/components/capsule-frame.css')
 const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
-const docsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/capsule-button.tsx')
+const docsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule-button.tsx')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
@@ -81,6 +81,8 @@ const capsuleButtonBlock = standaloneCssBlockFor(css, 'button.capsule-button')
 const capsuleButtonPrefixPaddingBlock = standaloneCssBlockFor(css, 'button.capsule-button[data-has-prefix]')
 const capsuleButtonSuffixPaddingBlock = standaloneCssBlockFor(css, 'button.capsule-button[data-has-suffix]')
 const textBlock = standaloneCssBlockFor(css, '.capsule-button__text')
+const capsuleButtonLiquidBlock = cssBlockFor(css, '.capsule-button--liquid-glass')
+const capsuleButtonLiquidToneBlock = cssBlockFor(css, `.capsule-button--liquid-glass[data-background-tone='light']`)
 const reducedMotionBlock = cssBlockFor(
   surfaceCss,
   `.capsule-frame,
@@ -107,7 +109,7 @@ assert.ok(
 )
 assert.equal(
   packageJson.exports?.['./components/capsule-button'],
-  './packages/weimo-ui-tagtree/src/components/capsule-button.tsx',
+  './packages/weimo-ui-core/src/components/capsule-button.tsx',
   'CapsuleButton must have a public package export.',
 )
 assert.ok(
@@ -122,11 +124,11 @@ assert.ok(
 for (const snippet of [
   "import type { ButtonHTMLAttributes, ReactElement, ReactNode } from 'react'",
   "import { Hash } from 'lucide-react'",
-  "from 'weimo-ui-core/components/animated-inline-size'",
-  "from 'weimo-ui-core/components/animated-inline-size-model'",
-  "from 'weimo-ui-core/components/capsule-frame'",
+  "from './animated-inline-size'",
+  "from './animated-inline-size-model'",
+  "from './capsule-frame'",
   "import './capsule-button.css'",
-  "export type CapsuleButtonState = 'default' | 'glass'",
+  "export type CapsuleButtonState = 'default' | 'frosted' | 'liquid-glass'",
   'export type CapsuleButtonProps',
   "Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'prefix'>",
   'animateWidth?: boolean',
@@ -146,7 +148,10 @@ for (const snippet of [
   'data-state={state}',
   "data-has-prefix={isEmptyCapsuleButtonSlot(prefix) ? undefined : 'true'}",
   "data-has-suffix={isEmptyCapsuleButtonSlot(suffix) ? undefined : 'true'}",
-  "const isFrostedState = state === 'glass'",
+  "const isFrostedState = state === 'frosted'",
+  "import { LiquidGlassSurface } from './liquid-glass'",
+  "const isLiquidGlassState = state === 'liquid-glass'",
+  'capsule-button--liquid-glass',
   '? { ...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle }',
   'capsule-frame__slot capsule-button__prefix',
   'capsule-frame__content capsule-button__text',
@@ -214,6 +219,8 @@ for (const [block, snippet, message] of [
   [capsuleButtonBlock, 'gap: 1px;', 'CapsuleButton must keep the tight uniform 1px inner gap between the prefix icon and text across text sizes.'],
   [capsuleButtonPrefixPaddingBlock, 'padding-left: 6px;', 'CapsuleButton with a prefix must sit the icon 6px from the left border across text sizes.'],
   [capsuleButtonSuffixPaddingBlock, 'padding-right: 6px;', 'CapsuleButton with a suffix must sit the icon 6px from the right border across text sizes.'],
+  [capsuleButtonLiquidBlock, 'color: var(--glass-surface-fg-on-dark);', 'CapsuleButton liquid glass state must default its label color to the on-dark glass token.'],
+  [capsuleButtonLiquidToneBlock, 'color: var(--glass-surface-fg-on-light);', 'CapsuleButton liquid glass state must flip its label color on light backgrounds via its own tone sampling.'],
   [textBlock, 'overflow: hidden;', 'CapsuleButton text must hide overflowing content.'],
   [textBlock, 'text-overflow: clip;', 'CapsuleButton text overflow must be clipped without an ellipsis.'],
   [textBlock, 'white-space: nowrap;', 'CapsuleButton text must stay on one line when clipped.'],
@@ -269,8 +276,8 @@ assert.ok(
 
 assert.ok(
   docsSource.includes("import { useLayoutEffect, useRef, useState } from 'react'") &&
-    docsSource.includes("import { Hash, Plus, X } from 'lucide-react'") &&
-    docsSource.includes("import { CapsuleButton } from 'weimo-ui-tagtree/components/capsule-button'") &&
+    docsSource.includes("import { Hash, X } from 'lucide-react'") &&
+    docsSource.includes("import { CapsuleButton } from 'weimo-ui-core/components/capsule-button'") &&
     docsSource.includes("import { GlassPreviewCard } from '../../../components/glass-preview-card'") &&
     docsSource.includes("import { PreviewToggle } from '../../../components/preview-toggle'") &&
     docsSource.includes("id: 'capsule-button'") &&
@@ -278,22 +285,18 @@ assert.ok(
     docsSource.includes('<CapsuleMaterialDemo />') &&
     docsSource.includes('label="胶囊材质"') &&
     docsSource.includes('<CapsuleButton prefix={null} state="default">普通胶囊</CapsuleButton>') &&
-    docsSource.includes('<CapsuleButton prefix={null} state="glass">磨砂胶囊</CapsuleButton>') &&
-    docsSource.includes('function PrefixChipDemo') &&
-    docsSource.includes('<PrefixChipDemo />') &&
-    docsSource.includes('label="胶囊前缀"') &&
+    docsSource.includes('<CapsuleButton prefix={null} state="frosted">磨砂胶囊</CapsuleButton>') &&
+    docsSource.includes('function CapsuleSlotDemo') &&
+    docsSource.includes('<CapsuleSlotDemo />') &&
+    docsSource.includes('label="胶囊插槽"') &&
     docsSource.includes('prefix={<Hash aria-hidden="true" />}') &&
-    docsSource.includes('prefix={<Plus aria-hidden="true" />}') &&
-    docsSource.includes('function SuffixChipDemo') &&
-    docsSource.includes('<SuffixChipDemo />') &&
-    docsSource.includes('label="胶囊后缀"') &&
     docsSource.includes('suffix={') &&
     docsSource.includes('<span aria-hidden="true" className="icon-button icon-button--ghost icon-button--xs">') &&
     docsSource.includes('<X aria-hidden="true" />'),
   'Capsule docs cards must show valid button-form capsules: suffix icons stay non-interactive inside the outer CapsuleButton.',
 )
 assert.ok(
-  docsSource.includes("const [state, setState] = useState<'default' | 'glass'>('default')") &&
+  docsSource.includes("const [state, setState] = useState<'default' | 'frosted'>('default')") &&
     docsSource.includes("const [widthMode, setWidthMode] = useState<'short' | 'long'>('short')") &&
     docsSource.includes('const widthMeasureRef = useRef<HTMLSpanElement | null>(null)') &&
     docsSource.includes('const [widthPreviewSize, setWidthPreviewSize] = useState<number | null>(null)') &&
@@ -312,8 +315,8 @@ assert.ok(
     docsSource.includes('className="capsule-button-preview__width-measure"') &&
     docsSource.includes('ref={widthMeasureRef}') &&
     docsSource.includes('aria-label="CapsuleButton 宽度变化预览"') &&
-    docsSource.includes("checked={state === 'glass'}") &&
-    docsSource.includes("label={state === 'glass' ? '磨砂态' : '默认态'}") &&
+    docsSource.includes("checked={state === 'frosted'}") &&
+    docsSource.includes("label={state === 'frosted' ? '磨砂态' : '默认态'}") &&
     docsSource.includes("checked={widthMode === 'long'}") &&
     docsSource.includes("label={widthMode === 'long' ? '长标签' : '短标签'}"),
   'CapsuleButton docs definition must include an internal preview with state and width-change toggles.',
@@ -324,7 +327,7 @@ assert.ok(
   'CapsuleButton docs text toggles must not use coss Button.',
 )
 assert.ok(
-  ['CapsuleButton 前缀预览', 'CapsuleButton 后缀预览'].every((demoLabel) =>
+  ['CapsuleButton 前后缀预览'].every((demoLabel) =>
     docsSource.includes(`<div className="text-button-preview" aria-label="${demoLabel}">`),
   ) &&
     appCss.includes('.text-button-preview') &&
@@ -335,9 +338,9 @@ assert.ok(
   'Capsule button demo cards must lay out their buttons in the shared preview row; the redundant state-pair and text-size cards must stay removed.',
 )
 assert.ok(
-  definitionsIndexSource.includes("import { capsuleButtonDefinition } from './packages/weimo-ui-tagtree/capsule-button'") &&
+  definitionsIndexSource.includes("import { capsuleButtonDefinition } from './packages/weimo-ui-core/capsule-button'") &&
     definitionsIndexSource.includes("'capsule-button': capsuleButtonDefinition"),
-  'Component definitions index must register the standalone tagtree CapsuleButton page.',
+  'Component definitions index must register the standalone core CapsuleButton page.',
 )
 assert.ok(
   manifestSource.includes("id: 'capsule-button'") &&
@@ -345,10 +348,10 @@ assert.ok(
     manifestSource.includes("exportName: 'CapsuleButton'") &&
     manifestSource.includes("registryName: 'capsule-button'") &&
     manifestSource.includes("packageExport: './components/capsule-button'") &&
-    manifestSource.includes("packageName: 'weimo-ui-tagtree'") &&
+    manifestSource.includes("packageName: 'weimo-ui-core'") &&
     manifestSource.includes("page: 'capsule-button'") &&
     manifestSource.includes('docs: true') &&
     manifestSource.includes('registry: true') &&
     !manifestSource.includes("internalGroup: 'tag-tree'"),
-  'Component manifest must expose CapsuleButton through its tagtree functional page.',
+  'Component manifest must expose CapsuleButton through its core functional page.',
 )

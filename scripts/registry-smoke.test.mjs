@@ -259,7 +259,7 @@ export function RegistryConsumerContract() {
   })
   const wordMetric = formatWordCountMetric(12345)
   const mode: ModeButtonMode = "display"
-  const chipState: CapsuleButtonState = "glass"
+  const chipState: CapsuleButtonState = "frosted"
   const bgBlurClassName = getBgBlurClassName(bgBlurTones[0])
   const bgColorClassName = getBgColorClassName(bgColorTones[0])
   const pressableClassName = getPressableClassName(pressableTones[0])
@@ -1382,10 +1382,10 @@ try {
     'Installed Card must include its internal height transition hook.',
   )
   assert.ok(
-	      tagBarSource.includes("from './capsule-button'") &&
+	      tagBarSource.includes("from 'weimo-ui-core/components/capsule-button'") &&
 	      tagBarSource.includes('<CapsuleButton') &&
-	      tagBarSource.includes("state={editable ? 'glass' : 'default'}") &&
-	      tagBarSource.includes('state="glass"') &&
+	      tagBarSource.includes("state={editable ? 'frosted' : 'default'}") &&
+	      tagBarSource.includes('state="frosted"') &&
 	      tagBarSource.includes('const rootPositionLayoutSignature = [') &&
 	      tagBarSource.includes('function resolveRootPositionAnimationStartOffset(') &&
 	      tagBarSource.includes('const previousOffset = resolveRootPositionAnimationStartOffset(root, parent)') &&
@@ -1393,12 +1393,12 @@ try {
 	      tagBarSource.includes('const nextOffset = readRootParentOffset(root, parent)') &&
 	      tagBarSource.includes('}, [rootPositionLayoutSignature])') &&
 	      capsuleButtonSource.includes('export function CapsuleButton') &&
-	      capsuleButtonSource.includes("from 'weimo-ui-core/components/capsule-frame'") &&
-      capsuleButtonSource.includes("from 'weimo-ui-core/components/animated-inline-size'") &&
-      capsuleButtonSource.includes("from 'weimo-ui-core/components/animated-inline-size-model'") &&
-	      capsuleButtonSource.includes("from 'weimo-ui-core/components/frosted-surface'") &&
-	      capsuleButtonSource.includes("import 'weimo-ui-core/styles/capsule-frame.css'") &&
-	      capsuleButtonSource.includes("import 'weimo-ui-core/styles/frosted-surface.css'") &&
+	      capsuleButtonSource.includes("from './capsule-frame'") &&
+      capsuleButtonSource.includes("from './animated-inline-size'") &&
+      capsuleButtonSource.includes("from './animated-inline-size-model'") &&
+	      capsuleButtonSource.includes("from './frosted-surface'") &&
+	      capsuleButtonSource.includes("import './capsule-frame.css'") &&
+	      capsuleButtonSource.includes("import './frosted-surface.css'") &&
 	      capsuleButtonSource.includes("material: isFrostedState ? 'frosted' : 'solid'") &&
       capsuleFrameSource.includes('export function getCapsuleFrameClassName') &&
       animatedInlineSizeSource.includes('export function AnimatedInlineSizeMeasure') &&

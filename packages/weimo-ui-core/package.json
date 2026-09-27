@@ -21,6 +21,7 @@
     "./components/border-radius": "./src/components/border-radius.ts",
     "./components/base-card": "./src/components/base-card.tsx",
     "./components/bottom-bar": "./src/components/bottom-bar.tsx",
+    "./components/capsule-button": "./src/components/capsule-button.tsx",
     "./components/capsule-frame": "./src/components/capsule-frame.ts",
     "./components/card-surface": "./src/components/card-surface.tsx",
     "./components/card-tool-bar": "./src/components/card-tool-bar.tsx",

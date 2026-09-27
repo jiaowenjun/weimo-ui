@@ -93,7 +93,7 @@ const componentDefinitionsSource = readProjectFile('packages/weimo-ui-site/src/d
   readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/page-layout.tsx') +
   readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/action-dialog.tsx') +
   readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/chip.tsx') +
-  readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/capsule-button.tsx') +
+  readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule-button.tsx') +
   mdRenderDefinitionSource
 const css = readProjectFile('packages/weimo-ui-site/src/App.css')
 const iconPreviewRowBlock = blockFor(css, '.icon-preview__row')

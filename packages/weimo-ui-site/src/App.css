@@ -1271,9 +1271,8 @@
   }
 }
 
-/* 胶囊材质卡(胶囊页):普通/磨砂/液态玻璃三例并列于灰度画布;液态玻璃例
-   文字长于定尺寸占位盒,改用隐藏 sizer 撑盒宽(站点顶栏标题同款),玻璃层
-   绝对居中覆盖其上,文字色随画布 tone 自适应。 */
+/* 胶囊材质卡(按钮胶囊页):普通/磨砂/液态玻璃三例并列于灰度画布;磨砂与
+   液态玻璃文字色由组件自身 tone 采样自适应,画布仅提供灰度背景。 */
 .liquid-glass-chip-preview {
   display: grid;
   min-width: 0;
@@ -1291,21 +1290,6 @@
   align-items: center;
   justify-content: center;
   gap: 16px;
-}
-
-/* 液态玻璃胶囊在材质卡内按内容定宽:sizer 撑盒,玻璃层绝对居中覆盖;
-   两例 CapsuleButton 自带尺寸不参与此机制。 */
-.capsule-material-row .liquid-glass-chip {
-  display: inline-flex;
-  align-items: center;
-}
-
-.capsule-material-row__liquid-sizer {
-  visibility: hidden;
-  font-size: var(--font-size-sm);
-  line-height: 1;
-  padding: 6px 10px;
-  white-space: nowrap;
 }
 
 .liquid-glass-chip {

@@ -5,6 +5,7 @@ import { borderTokensDefinition } from './packages/weimo-ui-core/border-tokens'
 import { surfaceDefinition } from './packages/weimo-ui-core/surface'
 import { buttonDefinition } from './packages/weimo-ui-core/button'
 import { chipDefinition } from './packages/weimo-ui-core/chip'
+import { capsuleButtonDefinition } from './packages/weimo-ui-core/capsule-button'
 import { sliderDefinition } from './packages/weimo-ui-core/slider'
 import { menuDefinition } from './packages/weimo-ui-core/menu'
 import { actionDialogDefinition } from './packages/weimo-ui-core/action-dialog'
@@ -14,7 +15,6 @@ import { cardToolBarDefinition } from './packages/weimo-ui-core/card-tool-bar'
 import { baseCardDefinition } from './packages/weimo-ui-core/base-card'
 import { componentPreviewCardDefinition } from './packages/weimo-ui-core/component-preview-card'
 import { tagDefinition } from './packages/weimo-ui-tagtree/tag'
-import { capsuleButtonDefinition } from './packages/weimo-ui-tagtree/capsule-button'
 import { markdownDefinition } from './packages/weimo-ui-markdown/markdown'
 import { mdDefinition } from './packages/weimo-ui-markdown/md'
 import { imageDefinition } from './packages/weimo-ui-image/image'
@@ -31,6 +31,7 @@ export const componentDefinitionsById = {
   surface: surfaceDefinition,
   button: buttonDefinition,
   chip: chipDefinition,
+  'capsule-button': capsuleButtonDefinition,
   slider: sliderDefinition,
   menu: menuDefinition,
   'action-dialog': actionDialogDefinition,
@@ -40,7 +41,6 @@ export const componentDefinitionsById = {
   'base-card': baseCardDefinition,
   'component-preview-card': componentPreviewCardDefinition,
   tag: tagDefinition,
-  'capsule-button': capsuleButtonDefinition,
   markdown: markdownDefinition,
   md: mdDefinition,
   image: imageDefinition,

@@ -17,6 +17,5 @@ export const tagtreeCatalog = {
         { id: 'tag-tree-row', name: 'TagTreeRow', registryName: 'tag-tree-row', packageExport: './components/tag-tree-row' },
       ],
     },
-    { id: 'capsule-button', name: '按钮胶囊', exportName: 'CapsuleButton', registryName: 'capsule-button', packageExport: './components/capsule-button' },
   ],
 } as const satisfies PackageCatalog

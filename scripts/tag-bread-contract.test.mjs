@@ -162,7 +162,7 @@ for (const snippet of [
   assertIncludes(source, snippet, `TagBread source must include ${snippet}.`)
 }
 assert.ok(
-  !source.includes("from './capsule-button'") &&
+  !source.includes("from 'weimo-ui-core/components/capsule-button'") &&
     !source.includes('CapsuleButton') &&
     !source.includes('<nav') &&
     !source.includes('export type TagBreadItem') &&

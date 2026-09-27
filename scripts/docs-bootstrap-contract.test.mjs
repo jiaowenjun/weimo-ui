@@ -54,7 +54,7 @@ const componentDefinitionSources = {
   bar: readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/bar.tsx'),
   'page-layout': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/page-layout.tsx'),
   chip: readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/chip.tsx'),
-  'capsule-button': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/capsule-button.tsx'),
+  'capsule-button': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule-button.tsx'),
 }
 const componentDefinitionsSource = [
   ...Object.values(componentDefinitionSources),
@@ -276,7 +276,7 @@ for (const snippet of [
   '<Heatmap',
   'setActiveDate(date)',
   'onSelect={setSelectedTag}',
-  '<CapsuleButton key={`${tag}-${index}`} onClick={() => openTagPicker(index)} state="glass">',
+  '<CapsuleButton key={`${tag}-${index}`} onClick={() => openTagPicker(index)} state="frosted">',
   '<TagPicker',
   '<Card',
   'note={note}',
@@ -384,7 +384,7 @@ for (const snippet of [
   'function TagTreeDemo',
   "from 'weimo-ui-core/components/top-bar'",
   "from './components/tag-tree'",
-  "from './components/capsule-button'",
+  "from 'weimo-ui-core/components/capsule-button'",
   "from 'weimo-ui-core/components/menu'",
   '<TagTreeDemo />',
   "onMenuAction={variant === 'default' ? () => {} : undefined}",
@@ -409,7 +409,7 @@ for (const snippet of [
 
 assert.ok(
   !componentDefinitionSources.tag.includes("from 'weimo-ui-core/components/coss/button'") &&
-  componentDefinitionSources.tag.includes("from './components/capsule-button'") &&
+  componentDefinitionSources.tag.includes("from 'weimo-ui-core/components/capsule-button'") &&
   !componentDefinitionSources.tag.includes('tag-picker-preview__trigger') &&
   !componentDefinitionSources.tag.includes('<Button') &&
   !componentDefinitionSources.tag.includes('选择标签'),
@@ -486,7 +486,7 @@ assert.ok(
 
 assert.ok(
   !componentDefinitionSources.menu.includes("from 'weimo-ui-core/components/card'") &&
-  !componentDefinitionSources.menu.includes("from 'weimo-ui-tagtree/components/capsule-button'") &&
+  !componentDefinitionSources.menu.includes("from 'weimo-ui-core/components/capsule-button'") &&
   !componentDefinitionSources.menu.includes('<WeimoCard') &&
   !componentDefinitionSources.menu.includes('<CardHeader') &&
   !componentDefinitionSources.menu.includes('<CardContent') &&
@@ -613,7 +613,7 @@ assert.ok(
   'Merged Capsule docs definition must exist.',
 )
 assert.ok(
-  existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/capsule-button.tsx')) &&
+  existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule-button.tsx')) &&
     existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/card-tool-bar.tsx')),
   'Package-specific CapsuleButton and card bar docs definitions must exist.',
 )

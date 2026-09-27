@@ -40,7 +40,7 @@ assert.equal(corePackage.name, 'weimo-ui-core')
 assert.ok(!rootPackage.dependencies?.['weimo-ui-core'])
 assert.ok(rootPackage.files.includes('packages/weimo-ui-core/src'))
 assert.match(workspace, /packages:\s*\n\s+- 'packages\/\*'/u)
-assert.equal(coreItems.length, 29, 'The four core groups plus card shells must contain 29 public components.')
+assert.equal(coreItems.length, 30, 'The four core groups plus card shells must contain 30 public components.')
 
 for (const item of coreItems) {
   const coreTarget = corePackage.exports?.[item.packageExport]

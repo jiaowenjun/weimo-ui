@@ -19,7 +19,7 @@ const engineSource = readProjectFile('packages/weimo-ui-core/src/components/liqu
 const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/surface.tsx')
 const tileSource = readProjectFile('packages/weimo-ui-site/src/docs/components/liquid-glass-tile.tsx')
 const buttonDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/button.tsx')
-const capsuleButtonDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/capsule-button.tsx')
+const capsuleButtonDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule-button.tsx')
 const barDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/bar.tsx')
 const pageLayoutDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/page-layout.tsx')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
@@ -121,18 +121,14 @@ for (const snippet of [
 }
 for (const snippet of [
   'label="胶囊材质"',
-  '<button className="liquid-glass-chip" type="button">',
-  '<LiquidGlassSurface',
-  'cornerRadius={999}',
-  'onClick={noopLiquidGlassChipClick}',
-  'padding="6px 10px"',
-  '液态玻璃胶囊',
+  '<LiquidGlassTile className="liquid-glass-chip-preview">',
+  '<CapsuleButton prefix={null} state="frosted">磨砂胶囊</CapsuleButton>',
+  '<CapsuleButton prefix={null} state="liquid-glass">液态玻璃胶囊</CapsuleButton>',
   '胶囊材质预览',
-  'capsule-material-row__liquid-sizer',
 ]) {
   assert.ok(
     capsuleButtonDefinitionSource.includes(snippet),
-    `The tagtree CapsuleButton page material card must include ${snippet}.`,
+    `The core CapsuleButton page material card must include ${snippet}.`,
   )
 }
 const liquidGlassCapsuleButtonBlock =

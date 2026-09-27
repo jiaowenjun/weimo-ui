@@ -257,10 +257,10 @@ assert.ok(
     manifestSource.includes('docs: true') &&
     manifestSource.includes('registry: true') &&
     !manifestSource.includes("internalGroup: 'tag-tree'"),
-  'Component manifest must list Chip as a public registry component through the merged Capsule page.',
+  'Component manifest must list Chip as a public registry component on the chip page.',
 )
 assert.ok(
   existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/chip.tsx')) &&
-    existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/capsule-button.tsx')),
+    existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule-button.tsx')),
   'Chip and CapsuleButton keep their own core docs pages named after their components.',
 )

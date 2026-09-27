@@ -1,0 +1,95 @@
+@layer components {
+  .capsule-button__prefix,
+  .capsule-button__suffix {
+    flex: none;
+  }
+
+  .capsule-button__text {
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: clip;
+    white-space: nowrap;
+  }
+
+  /* 后缀小部件为幽灵图标按钮等嵌套交互时,hover/active 色改走嵌套层级
+     token,与胶囊按钮自身的 bg-hover 反馈区分。 */
+  .capsule-button__suffix .icon-button {
+    --icon-button-ghost-hover-bg: var(--color-bg-nested-hover);
+  }
+}
+
+/* 只放几何。color/line-height 不能落在无层区:无层声明无条件压过
+   @layer components 里 glass 变体的 tone 自适应 color(--glass-surface-fg),
+   基类在 .capsule-frame(同层同值)已有声明,这里再写会把磨砂态文字钉死。 */
+button.capsule-button {
+  gap: 1px;
+}
+
+/* 前后缀图标位置:图标圆框距胶囊左/右边框 6px,图标与文字的 gap 收紧到
+   1px——三档字号统一,两侧对称;padding 仅在带对应插槽时收窄,无前后缀
+   胶囊保持共享 10px 内边距。 */
+button.capsule-button[data-has-prefix] {
+  padding-left: 6px;
+}
+
+button.capsule-button[data-has-suffix] {
+  padding-right: 6px;
+}
+
+/* 液态玻璃态:按钮盒只做点击区,玻璃层(LiquidGlassSurface)绝对居中覆盖,
+   隐藏 sizer 复刻 buttonContent 撑盒宽,不走 capsule-frame 的材质层与裁切;
+   文字色随自身 tone 采样自适应(与磨砂态共用采样 hook)。 */
+.capsule-button--liquid-glass {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  line-height: 1;
+  color: var(--glass-surface-fg-on-dark);
+  transition: transform 150ms ease;
+}
+
+.capsule-button--liquid-glass[data-background-tone='light'] {
+  color: var(--glass-surface-fg-on-light);
+}
+
+/* 库内容层 .liquid-glass__content 带内联 font:500 20px,样式表无法覆写:
+   排版(flex/gap)在此层重建,sm 字号下沉到槽位与文字自身声明,玻璃层才会
+   与 sizer 同宽;字重保留库的 500(现网液态胶囊既有观感)。 */
+.capsule-button__liquid-glass-layer .liquid-glass__content,
+.capsule-button__liquid-sizer {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.capsule-button__liquid-glass-layer .capsule-frame__slot,
+.capsule-button__liquid-glass-layer .capsule-frame__content,
+.capsule-button__liquid-sizer {
+  font-size: var(--font-size-sm);
+  line-height: 1;
+  font-family: var(--font-sans);
+  font-weight: 400;
+}
+
+/* 库在内容层内联了暗底文字投影,亮背景下会发虚,随 tone 关闭。 */
+.capsule-button--liquid-glass[data-background-tone='light'] .capsule-frame__content {
+  text-shadow: none;
+}
+
+.capsule-button__liquid-sizer {
+  visibility: hidden;
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .capsule-button--liquid-glass {
+    transition-duration: 1ms;
+  }
+}
