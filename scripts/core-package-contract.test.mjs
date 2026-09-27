@@ -82,9 +82,11 @@ assert.ok(
 )
 for (const [exportName, target] of [
   ['./components/coss/button', './src/components/coss/button.tsx'],
+  ['./components/coss/switch', './src/components/coss/switch.tsx'],
   ['./components/coss/toolbar', './src/components/coss/toolbar.tsx'],
   ['./components/coss/tooltip', './src/components/coss/tooltip.tsx'],
   ['./styles/button.css', './src/components/coss/button.css'],
+  ['./styles/switch.css', './src/components/coss/switch.css'],
   ['./styles/tooltip.css', './src/components/coss/tooltip.css'],
 ]) {
   assert.equal(corePackage.exports?.[exportName], target, `${exportName} must resolve to ${target}.`)

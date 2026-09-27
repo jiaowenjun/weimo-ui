@@ -62,7 +62,8 @@ const addChipBlock = cssBlockFor(cssSource, '.tag-bar__add-chip')
 const exitingAddChipBlock = cssBlockFor(cssSource, '.tag-bar__add-chip[data-exiting="true"]')
 const previewBlock = cssBlockFor(tagPageCssSource, '.tag-page__canvas')
 const previewPanelBlock = cssBlockFor(tagPageCssSource, '.tag-page__panel')
-const previewControlsBlock = cssBlockFor(tagPageCssSource, '.tag-page__panel > .text-button')
+const previewToggleBlock = cssBlockFor(tagPageCssSource, '.tag-page__toggle')
+const previewToggleLabelBlock = cssBlockFor(tagPageCssSource, '.tag-page__toggle-label')
 const visibleTagsMapStart = componentSource.indexOf('visibleTags.map((tag, index) =>')
 const addChipStart = componentSource.indexOf('showAddChip ? (', visibleTagsMapStart)
 const visibleTagsMapSource = componentSource.slice(visibleTagsMapStart, addChipStart)
@@ -435,9 +436,9 @@ assert.ok(
 assert.ok(
   docsSource.includes("import { useState } from 'react'") &&
     docsSource.includes("import { TagBar } from './components/tag-bar'") &&
-    docsSource.includes("import { TextButton } from 'weimo-ui-core/components/text-button'") &&
+    docsSource.includes("import { Switch } from 'weimo-ui-core/components/coss/switch'") &&
     docsSource.includes('function TagBarDemo') &&
-    docsSource.includes('<ComponentPreviewCard className="tag-page__card" label="标签栏">') &&
+    docsSource.includes('label="标签栏"') &&
     docsSource.includes('<TagBarDemo />') &&
     docsSource.includes('const [editable, setEditable] = useState(false)') &&
     docsSource.includes("const [tags, setTags] = useState(['写作/日记', '研究/论文'])") &&
@@ -446,9 +447,15 @@ assert.ok(
     docsSource.includes('onTagsChange={setTags}') &&
     docsSource.includes('tagOptions={tagOptions}') &&
     docsSource.includes('tags={tags}') &&
-    docsSource.includes('<TextButton') &&
-    docsSource.includes("editable ? '切换到展示态' : '切换到编辑态'"),
-  'Tag docs definition must provide a local state TagBar preview with a mode toggle.',
+    docsSource.includes('<Switch') &&
+    docsSource.includes('checked={editable}') &&
+    docsSource.includes("editable ? '编辑态' : '展示态'"),
+  'Tag docs definition must provide a local state TagBar preview with a title-bar edit switch.',
+)
+assert.ok(
+  !docsSource.includes("import { TextButton } from 'weimo-ui-core/components/text-button'") &&
+    !docsSource.includes('<TextButton'),
+  'TagBar docs edit toggle must live in the title bar Switch, not an in-canvas TextButton.',
 )
 assert.ok(
   !docsSource.includes("import { Button } from 'weimo-ui-core/components/coss/button'") &&
@@ -476,19 +483,25 @@ assert.ok(
 for (const [block, snippet, message] of [
   [previewBlock, 'min-height: 180px;', 'TagBar preview canvas must reserve a stable component preview area.'],
   [previewBlock, 'padding: 16px;', 'TagBar preview canvas must provide component breathing room.'],
-  [previewPanelBlock, 'display: grid;', 'TagBar preview panel must stack the tag row and toggle.'],
+  [previewPanelBlock, 'display: grid;', 'TagBar preview panel must host the tag row on a grid.'],
   [previewPanelBlock, 'width: 100%;', 'TagBar preview panel must fill the component preview canvas.'],
-  [previewPanelBlock, 'gap: 14px;', 'TagBar preview panel must keep the toggle below the tag row with compact spacing.'],
   [previewPanelBlock, 'padding: 16px;', 'TagBar preview panel must use CardTopBar preview padding.'],
-  [previewPanelBlock, 'border: 1px solid var(--color-border);', 'TagBar preview panel must draw an outer border.'],
+  [previewPanelBlock, 'border: 1px solid var(--color-border);', 'TagBar preview panel must match the picker panel with an outer border.'],
   [previewPanelBlock, 'border-radius: var(--radius-sm);', 'TagBar preview panel must use the standard preview radius.'],
   [previewPanelBlock, 'background: var(--color-bg-card);', 'TagBar preview panel must use the standard preview surface.'],
-  [previewControlsBlock, 'justify-self: center;', 'TagBar preview controls must be centered below the tag row.'],
+  [previewToggleBlock, 'gap: 6px;', 'TagBar title-bar toggle must pair the state label and Switch compactly.'],
+  [previewToggleLabelBlock, 'font-size: var(--font-size-xs);', 'TagBar title-bar toggle label must use the secondary caption size.'],
 ]) {
   assertIncludes(block, snippet, message)
 }
 
+assert.ok(
+  !tagPageCssSource.includes('tag-page__bar-panel') && !docsSource.includes('tag-page__bar-panel'),
+  'TagBar preview must reuse the shared bordered panel instead of a dedicated borderless variant.',
+)
+
 for (const [block, snippet, message] of [
+  [previewPanelBlock, 'justify-items:', 'TagBar preview panel must left-align the tag row like the picker panel.'],
   [previewPanelBlock, 'box-shadow:', 'TagBar preview panel must match CardTopBar by omitting an outer shadow.'],
   [previewPanelBlock, 'display: flex;', 'TagBar preview panel must not use side-by-side flex layout.'],
 ]) {

@@ -36,7 +36,6 @@ for (const [relativePath, labels] of [
   ['packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/action-dialog.tsx', ['打开内部对话框']],
   ['packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown.tsx', ['打开公式对话框']],
   ['packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/button.tsx', ['文本按钮']],
-  ['packages/weimo-ui-tagtree/src/tag-page.tsx', ['切换到编辑态', '切换到展示态']],
 ]) {
   assertTextButtonDocsControl(relativePath, labels)
 }

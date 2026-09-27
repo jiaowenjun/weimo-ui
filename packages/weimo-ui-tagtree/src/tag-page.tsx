@@ -8,7 +8,7 @@ import {
 import { getFrostedSurfaceClassName } from 'weimo-ui-core/components/frosted-surface-model'
 import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'
 import { Menu, MenuItem, MenuPopup, MenuTrigger } from 'weimo-ui-core/components/menu'
-import { TextButton } from 'weimo-ui-core/components/text-button'
+import { Switch } from 'weimo-ui-core/components/coss/switch'
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 
 import { ChipButton } from './components/chip-button'
@@ -55,13 +55,23 @@ function TagBarDemo() {
   const [tags, setTags] = useState(['写作/日记', '研究/论文'])
 
   return (
-    <ComponentPreviewCard className="tag-page__card" label="标签栏">
+    <ComponentPreviewCard
+      action={
+        <span className="tag-page__toggle">
+          <span className="tag-page__toggle-label">{editable ? '编辑态' : '展示态'}</span>
+          <Switch
+            aria-label="切换编辑态"
+            checked={editable}
+            onCheckedChange={setEditable}
+          />
+        </span>
+      }
+      className="tag-page__card"
+      label="标签栏"
+    >
       <div className="tag-page__canvas">
         <div className="tag-page__panel">
           <TagBar editable={editable} onTagsChange={setTags} tagOptions={tagOptions} tags={tags} />
-          <TextButton onClick={() => setEditable((current) => !current)}>
-            {editable ? '切换到展示态' : '切换到编辑态'}
-          </TextButton>
         </div>
       </div>
     </ComponentPreviewCard>
@@ -150,9 +160,9 @@ function TagPickerDemo({ mode = 'insert', initialDraft = '', targetTag = '' }: {
         <div className="tag-page__panel">
           <div className="tag-page__tags" aria-label="笔记标签">
             {tagSlots.map((tag, index) => tag ? (
-              <ChipButton key={`${tag}-${index}`} onClick={() => openTagPicker(index)}>{tag}</ChipButton>
+              <ChipButton key={`${tag}-${index}`} onClick={() => openTagPicker(index)} state="glass">{tag}</ChipButton>
             ) : (
-              <ChipButton key={`new-${index}`} onClick={() => openTagPicker(index)} prefix={<Plus aria-hidden="true" />}>标签</ChipButton>
+              <ChipButton key={`new-${index}`} onClick={() => openTagPicker(index)} prefix={<Plus aria-hidden="true" />} state="glass">标签</ChipButton>
             ))}
           </div>
         </div>

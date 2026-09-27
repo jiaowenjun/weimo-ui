@@ -276,7 +276,7 @@ for (const snippet of [
   '<Heatmap',
   'setActiveDate(date)',
   'onSelect={setSelectedTag}',
-  '<ChipButton key={`${tag}-${index}`} onClick={() => openTagPicker(index)}>',
+  '<ChipButton key={`${tag}-${index}`} onClick={() => openTagPicker(index)} state="glass">',
   '<TagPicker',
   '<Card',
   'note={note}',

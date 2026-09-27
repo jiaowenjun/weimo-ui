@@ -34,10 +34,11 @@
   .tag-page__card { min-width: 0; }
   .tag-page__canvas { width: 100%; min-width: 0; min-height: 180px; padding: 16px; }
   .tag-page__panel { display: grid; width: 100%; min-width: 0; gap: 14px; padding: 16px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: var(--color-bg-card); }
-  .tag-page__panel > .text-button { justify-self: center; }
+  .tag-page__toggle { display: inline-flex; align-items: center; gap: 6px; }
+  .tag-page__toggle-label { color: var(--color-text-secondary); font-size: var(--font-size-xs); line-height: 1.2; }
   .tag-page__tags { display: flex; min-width: 0; flex-wrap: wrap; gap: var(--space-tag-gap); }
   .tag-page__bread-preview { display: grid; min-width: 0; gap: 20px; justify-items: center; }
-  .tag-page__tree-panel { width: min(100%, 380px); min-height: 220px; margin: 0 auto; padding: 12px 0; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: var(--color-bg-card); }
+  .tag-page__tree-panel { width: min(100%, 380px); margin: 0 auto; padding: 12px 0; border: 1px solid var(--color-border); border-radius: var(--radius-sm); background: var(--color-bg-card); }
 }
 
 @media (max-width: 720px) {

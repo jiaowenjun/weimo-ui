@@ -1,20 +1,2 @@
-import { Switch as BaseSwitch } from '@base-ui/react/switch'
-
-import { cn } from 'weimo-ui-core/lib/utils'
-
-import './switch.css'
-
-export function Switch({ className, ...props }: BaseSwitch.Root.Props) {
-  return (
-    <BaseSwitch.Root
-      className={cn('coss-switch', className)}
-      data-slot="switch"
-      {...props}
-    >
-      <BaseSwitch.Thumb
-        className="coss-switch__thumb"
-        data-slot="switch-thumb"
-      />
-    </BaseSwitch.Root>
-  )
-}
+// Switch 实体已下沉 core(coss/switch),此处保留重导出以维持站点内既有 import 路径。
+export { Switch } from 'weimo-ui-core/components/coss/switch'
