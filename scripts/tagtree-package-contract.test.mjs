@@ -70,6 +70,15 @@ assert.ok(
     pageSource.includes('<ComponentPreviewCard'),
   'tagtree page previews must use ComponentPreviewCard from weimo-ui-core.',
 )
+assert.equal(
+  pageSource.match(/<ComponentPreviewCard\b/gu)?.length,
+  5,
+  'tagtree page must render each component-example block in a ComponentPreviewCard.',
+)
+assert.ok(
+  !pageSource.includes('function PreviewCard'),
+  'tagtree page examples must use ComponentPreviewCard directly instead of a local preview-card wrapper.',
+)
 
 function collectSourceFiles(directory) {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {

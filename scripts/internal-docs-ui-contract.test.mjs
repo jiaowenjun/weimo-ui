@@ -118,7 +118,7 @@ for (const selector of [
 
 assert.ok(
   tagTreeRowDefinitionSource.includes('function TagTreeRowDemo') &&
-    tagTreeRowDefinitionSource.includes('<PreviewCard label="标签树行">') &&
+    tagTreeRowDefinitionSource.includes('<ComponentPreviewCard align="center" className="tag-page__card" label="标签树行">') &&
     tagTreeRowDefinitionSource.includes('className="tag-page__tree-panel"'),
   'TagTreeRow docs preview must render centered on the shared align=center canvas inside the tag-tree styling scope.',
 )

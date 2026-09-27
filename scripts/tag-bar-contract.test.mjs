@@ -37,9 +37,9 @@ function assertNotIncludes(source, snippet, message) {
 const componentSource = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bar.tsx')
 const cssSource = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bar.css')
 const docsSource = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx')
+const tagPageCssSource = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.css')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const appCssSource = readProjectFile('packages/weimo-ui-site/src/App.css')
 const packageJson = readJson('package.json')
 const rootRegistry = readJson('registry.json')
 
@@ -60,9 +60,9 @@ const morphMeasureBlock = cssBlockFor(cssSource, '.tag-bar__morph-measure')
 const morphMeasureChipBlock = cssBlockFor(cssSource, '.tag-bar__morph-measure .chip-button')
 const addChipBlock = cssBlockFor(cssSource, '.tag-bar__add-chip')
 const exitingAddChipBlock = cssBlockFor(cssSource, '.tag-bar__add-chip[data-exiting="true"]')
-const previewBlock = cssBlockFor(appCssSource, '.tag-bar-preview')
-const previewPanelBlock = cssBlockFor(appCssSource, '.tag-bar-preview__panel')
-const previewControlsBlock = cssBlockFor(appCssSource, '.tag-bar-preview__controls')
+const previewBlock = cssBlockFor(tagPageCssSource, '.tag-page__canvas')
+const previewPanelBlock = cssBlockFor(tagPageCssSource, '.tag-page__panel')
+const previewControlsBlock = cssBlockFor(tagPageCssSource, '.tag-page__panel > .text-button')
 const visibleTagsMapStart = componentSource.indexOf('visibleTags.map((tag, index) =>')
 const addChipStart = componentSource.indexOf('showAddChip ? (', visibleTagsMapStart)
 const visibleTagsMapSource = componentSource.slice(visibleTagsMapStart, addChipStart)
@@ -437,7 +437,7 @@ assert.ok(
     docsSource.includes("import { TagBar } from './components/tag-bar'") &&
     docsSource.includes("import { TextButton } from 'weimo-ui-core/components/text-button'") &&
     docsSource.includes('function TagBarDemo') &&
-    docsSource.includes('<PreviewCard label="标签栏">') &&
+    docsSource.includes('<ComponentPreviewCard className="tag-page__card" label="标签栏">') &&
     docsSource.includes('<TagBarDemo />') &&
     docsSource.includes('const [editable, setEditable] = useState(false)') &&
     docsSource.includes("const [tags, setTags] = useState(['写作/日记', '研究/论文'])") &&
@@ -474,15 +474,14 @@ assert.ok(
 )
 
 for (const [block, snippet, message] of [
-  [previewBlock, 'display: grid;', 'TagBar preview root must center the preview panel.'],
-  [previewBlock, 'place-items: center;', 'TagBar preview root must center contents.'],
+  [previewBlock, 'min-height: 180px;', 'TagBar preview canvas must reserve a stable component preview area.'],
+  [previewBlock, 'padding: 16px;', 'TagBar preview canvas must provide component breathing room.'],
   [previewPanelBlock, 'display: grid;', 'TagBar preview panel must stack the tag row and toggle.'],
-  [previewPanelBlock, 'grid-template-columns: minmax(0, 1fr);', 'TagBar preview panel must stack content like CardTopBar.'],
-  [previewPanelBlock, 'justify-items: start;', 'TagBar preview panel must align stacked content to the left.'],
-  [previewPanelBlock, 'gap: 12px;', 'TagBar preview panel must keep the toggle below the tag row with compact spacing.'],
+  [previewPanelBlock, 'width: 100%;', 'TagBar preview panel must fill the component preview canvas.'],
+  [previewPanelBlock, 'gap: 14px;', 'TagBar preview panel must keep the toggle below the tag row with compact spacing.'],
   [previewPanelBlock, 'padding: 16px;', 'TagBar preview panel must use CardTopBar preview padding.'],
   [previewPanelBlock, 'border: 1px solid var(--color-border);', 'TagBar preview panel must draw an outer border.'],
-  [previewPanelBlock, 'border-radius: var(--radius);', 'TagBar preview panel must use the standard preview radius.'],
+  [previewPanelBlock, 'border-radius: var(--radius-sm);', 'TagBar preview panel must use the standard preview radius.'],
   [previewPanelBlock, 'background: var(--color-bg-card);', 'TagBar preview panel must use the standard preview surface.'],
   [previewControlsBlock, 'justify-self: center;', 'TagBar preview controls must be centered below the tag row.'],
 ]) {

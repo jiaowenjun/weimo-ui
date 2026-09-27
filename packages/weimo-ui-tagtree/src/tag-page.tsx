@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import type { ReactNode } from 'react'
 import { CalendarDays, Folder, Hash, Plus } from 'lucide-react'
 
 import {
@@ -51,27 +50,21 @@ const tagTreeDemoNodes: TagTreeNode[] = [
   { tag: 'archive', label: '归档' },
 ]
 
-function PreviewCard({ children, label }: { children: ReactNode; label: string }) {
-  return (
-    <ComponentPreviewCard className="tag-page__card" label={label}>
-      <div className="tag-page__canvas">{children}</div>
-    </ComponentPreviewCard>
-  )
-}
-
 function TagBarDemo() {
   const [editable, setEditable] = useState(false)
   const [tags, setTags] = useState(['写作/日记', '研究/论文'])
 
   return (
-    <PreviewCard label="标签栏">
-      <div className="tag-page__panel">
-        <TagBar editable={editable} onTagsChange={setTags} tagOptions={tagOptions} tags={tags} />
-        <TextButton onClick={() => setEditable((current) => !current)}>
-          {editable ? '切换到展示态' : '切换到编辑态'}
-        </TextButton>
+    <ComponentPreviewCard className="tag-page__card" label="标签栏">
+      <div className="tag-page__canvas">
+        <div className="tag-page__panel">
+          <TagBar editable={editable} onTagsChange={setTags} tagOptions={tagOptions} tags={tags} />
+          <TextButton onClick={() => setEditable((current) => !current)}>
+            {editable ? '切换到展示态' : '切换到编辑态'}
+          </TextButton>
+        </div>
       </div>
-    </PreviewCard>
+    </ComponentPreviewCard>
   )
 }
 
@@ -79,42 +72,44 @@ function TagBreadDemo() {
   const surfaceAttributes = getCapsuleFrameAttributes({ material: 'frosted', textSize: 'base' })
 
   return (
-    <PreviewCard label="标签面包屑">
-      <div className="tag-page__bread-preview">
-        <TagBread tag="文学/古代/诗词" onSelect={() => {}} />
-        <Breadcrumb
-          aria-label="省略面包屑示例"
-          className={getCapsuleFrameClassName(
-            getFrostedSurfaceClassName('frosted-surface--bordered'),
-            'tag-bread',
-          )}
-          {...surfaceAttributes}
-        >
-          <BreadcrumbList>
-            <BreadcrumbItem className="tag-bread__item">
-              <span className="tag-bread__prefix"><Hash aria-hidden="true" /></span>
-              <BreadcrumbLink href="/">Home</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator>/</BreadcrumbSeparator>
-            <BreadcrumbItem className="tag-bread__item">
-              <Menu>
-                <MenuTrigger render={<GhostIconButton aria-label="展开省略的面包屑层级" size="sm" />}>
-                  <BreadcrumbEllipsis />
-                </MenuTrigger>
-                <MenuPopup align="start">
-                  <MenuItem render={<a href="/docs" />}>Docs</MenuItem>
-                  <MenuItem render={<a href="/particles" />}>Particles</MenuItem>
-                </MenuPopup>
-              </Menu>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator>/</BreadcrumbSeparator>
-            <BreadcrumbItem className="tag-bread__item"><BreadcrumbLink href="/docs/components">Components</BreadcrumbLink></BreadcrumbItem>
-            <BreadcrumbSeparator>/</BreadcrumbSeparator>
-            <BreadcrumbItem className="tag-bread__item"><BreadcrumbPage>Breadcrumb</BreadcrumbPage></BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+    <ComponentPreviewCard className="tag-page__card" label="标签面包屑">
+      <div className="tag-page__canvas">
+        <div className="tag-page__bread-preview">
+          <TagBread tag="文学/古代/诗词" onSelect={() => {}} />
+          <Breadcrumb
+            aria-label="省略面包屑示例"
+            className={getCapsuleFrameClassName(
+              getFrostedSurfaceClassName('frosted-surface--bordered'),
+              'tag-bread',
+            )}
+            {...surfaceAttributes}
+          >
+            <BreadcrumbList>
+              <BreadcrumbItem className="tag-bread__item">
+                <span className="tag-bread__prefix"><Hash aria-hidden="true" /></span>
+                <BreadcrumbLink href="/">Home</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator>/</BreadcrumbSeparator>
+              <BreadcrumbItem className="tag-bread__item">
+                <Menu>
+                  <MenuTrigger render={<GhostIconButton aria-label="展开省略的面包屑层级" size="sm" />}>
+                    <BreadcrumbEllipsis />
+                  </MenuTrigger>
+                  <MenuPopup align="start">
+                    <MenuItem render={<a href="/docs" />}>Docs</MenuItem>
+                    <MenuItem render={<a href="/particles" />}>Particles</MenuItem>
+                  </MenuPopup>
+                </Menu>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator>/</BreadcrumbSeparator>
+              <BreadcrumbItem className="tag-bread__item"><BreadcrumbLink href="/docs/components">Components</BreadcrumbLink></BreadcrumbItem>
+              <BreadcrumbSeparator>/</BreadcrumbSeparator>
+              <BreadcrumbItem className="tag-bread__item"><BreadcrumbPage>Breadcrumb</BreadcrumbPage></BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
       </div>
-    </PreviewCard>
+    </ComponentPreviewCard>
   )
 }
 
@@ -150,46 +145,53 @@ function TagPickerDemo({ mode = 'insert', initialDraft = '', targetTag = '' }: {
   }
 
   return (
-    <PreviewCard label="标签选择器">
-      <div className="tag-page__panel">
-        <div className="tag-page__tags" aria-label="笔记标签">
-          {tagSlots.map((tag, index) => tag ? (
-            <ChipButton key={`${tag}-${index}`} onClick={() => openTagPicker(index)}>{tag}</ChipButton>
-          ) : (
-            <ChipButton key={`new-${index}`} onClick={() => openTagPicker(index)} prefix={<Plus aria-hidden="true" />}>标签</ChipButton>
-          ))}
+    <ComponentPreviewCard className="tag-page__card" label="标签选择器">
+      <div className="tag-page__canvas">
+        <div className="tag-page__panel">
+          <div className="tag-page__tags" aria-label="笔记标签">
+            {tagSlots.map((tag, index) => tag ? (
+              <ChipButton key={`${tag}-${index}`} onClick={() => openTagPicker(index)}>{tag}</ChipButton>
+            ) : (
+              <ChipButton key={`new-${index}`} onClick={() => openTagPicker(index)} prefix={<Plus aria-hidden="true" />}>标签</ChipButton>
+            ))}
+          </div>
         </div>
+        <TagPicker
+          initialDraft={activeTag || initialDraft}
+          mode={pickerMode}
+          onApply={handleApply}
+          onOpenChange={setOpen}
+          open={open}
+          selectedTags={selectedTags}
+          tagOptions={tagOptions}
+          targetTag={activeTag || targetTag}
+        />
       </div>
-      <TagPicker
-        initialDraft={activeTag || initialDraft}
-        mode={pickerMode}
-        onApply={handleApply}
-        onOpenChange={setOpen}
-        open={open}
-        selectedTags={selectedTags}
-        tagOptions={tagOptions}
-        targetTag={activeTag || targetTag}
-      />
-    </PreviewCard>
+    </ComponentPreviewCard>
   )
 }
 
 function TagTreeDemo({ variant = 'default' }: { variant?: TagTreeVariant }) {
   const [selectedTag, setSelectedTag] = useState('writing/daily')
   return (
-    <PreviewCard label={variant === 'default' ? '标签树' : '无操作标签树'}>
-      <div className="tag-page__tree-panel">
-        <TagTree
-          defaultExpandedTags={['writing', 'research']}
-          defaultIcon={<Hash aria-hidden="true" />}
-          nodes={tagTreeDemoNodes}
-          onMenuAction={variant === 'default' ? () => {} : undefined}
-          onSelect={setSelectedTag}
-          selectedTag={selectedTag}
-          variant={variant}
-        />
+    <ComponentPreviewCard
+      className="tag-page__card"
+      label={variant === 'default' ? '标签树' : '无操作标签树'}
+    >
+      <div className="tag-page__canvas">
+        <div className="tag-page__tree-panel">
+          <TagTree
+            defaultExpandedTags={['writing', 'research']}
+            defaultIcon={<Hash aria-hidden="true" />}
+            nodes={tagTreeDemoNodes}
+            onMenuAction={variant === 'default' ? () => {} : undefined}
+            onSelect={setSelectedTag}
+            selectedTag={selectedTag}
+            variant={variant}
+          />
+        </div>
       </div>
-    </PreviewCard>
+    </ComponentPreviewCard>
   )
 }
 
@@ -204,13 +206,15 @@ const childRow: AnimatedTagTreeRow = {
 
 function TagTreeRowDemo() {
   return (
-    <PreviewCard label="标签树行">
-      <div className="tag-page__tree-panel" role="tree" aria-label="TagTreeRow preview">
-        <TagTreeRow onMenuAction={() => {}} onSelect={() => {}} onToggle={() => {}} row={rootRow} rowMenuEnabled variant="default" />
-        <TagTreeRow onMenuAction={() => {}} onSelect={() => {}} onToggle={() => {}} row={childRow} rowMenuEnabled variant="default" />
-        <TagTreeRow onSelect={() => {}} onToggle={() => {}} row={{ ...childRow, tag: 'writing/ideas', label: '灵感', selected: false }} rowMenuEnabled={false} variant="no-action" />
+    <ComponentPreviewCard align="center" className="tag-page__card" label="标签树行">
+      <div className="tag-page__canvas">
+        <div className="tag-page__tree-panel" role="tree" aria-label="TagTreeRow preview">
+          <TagTreeRow onMenuAction={() => {}} onSelect={() => {}} onToggle={() => {}} row={rootRow} rowMenuEnabled variant="default" />
+          <TagTreeRow onMenuAction={() => {}} onSelect={() => {}} onToggle={() => {}} row={childRow} rowMenuEnabled variant="default" />
+          <TagTreeRow onSelect={() => {}} onToggle={() => {}} row={{ ...childRow, tag: 'writing/ideas', label: '灵感', selected: false }} rowMenuEnabled={false} variant="no-action" />
+        </div>
       </div>
-    </PreviewCard>
+    </ComponentPreviewCard>
   )
 }
 
