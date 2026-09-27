@@ -217,6 +217,12 @@ export function TagBar({
     onTagsChange?.(payload.selectedTags)
   }
 
+  function removeTag(tag: string) {
+    if (!canEdit) return
+
+    onTagsChange?.(tags.filter((currentTag) => currentTag !== tag))
+  }
+
   function handleAddChipAnimationEnd() {
     if (!addChipExiting) return
 
@@ -245,7 +251,8 @@ export function TagBar({
                 style={isEmpty ? emptyChipWidthStyle : undefined}
               >
                 {/* 空态芯片承担「+标签」新增语义,保持 CapsuleButton 原样;
-                    非空标签芯片用 EditableCapsule,编辑态挂 X 移除后缀。 */}
+                    非空标签芯片用 EditableCapsule,编辑态挂 X 移除后缀,
+                    点 X 经 onRemove 过滤该标签、点胶囊本体开更新选择器。 */}
                 {isEmpty ? (
                   <CapsuleButton
                     disabled={editable && !canEdit}
@@ -260,6 +267,7 @@ export function TagBar({
                     disabled={editable ? !canEdit : !isTagClickEnabled(tag)}
                     editable={editable}
                     onClick={getChipClickHandler(tag)}
+                    onRemove={() => removeTag(tag)}
                     prefix={TAG_CHIP_HASH_PREFIX}
                   >
                     {tag}

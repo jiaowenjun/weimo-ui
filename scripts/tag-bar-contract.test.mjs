@@ -182,6 +182,9 @@ for (const snippet of [
   "state={editable ? 'frosted' : 'default'}",
   'disabled={editable && !canEdit}',
   'onClick={getChipClickHandler(tag)}',
+  'function removeTag(tag: string)',
+  'onTagsChange?.(tags.filter((currentTag) => currentTag !== tag))',
+  'onRemove={() => removeTag(tag)}',
   'showAddChip ? (',
   "className=\"tag-bar__add-chip\"",
   'data-exiting={!editable && addChipExiting ?',
@@ -348,6 +351,7 @@ assert.ok(
     visibleTagsMapSource.includes('editable={editable}') &&
     visibleTagsMapSource.includes("state={editable ? 'frosted' : 'default'}") &&
     visibleTagsMapSource.includes('onClick={getChipClickHandler(tag)}') &&
+    visibleTagsMapSource.includes('onRemove={() => removeTag(tag)}') &&
     visibleTagsMapSource.includes('disabled={editable && !canEdit}'),
   'TagBar display and edit modes must share the same mapped tag chips so each chip can morph in place.',
 )
