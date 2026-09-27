@@ -81,16 +81,6 @@ export const coreCatalog = {
         { id: 'top-bar', name: 'TopBar', registryName: 'top-bar', packageExport: './components/top-bar' },
       ],
     },
-    {
-      id: 'card-tool-bar',
-      name: '卡片栏位',
-      exportName: 'CardToolBar',
-      registryName: 'card-tool-bar',
-      packageExport: './components/card-tool-bar',
-      components: [
-        { id: 'card-top-bar', name: 'CardTopBar', registryName: 'card-top-bar', packageExport: './components/card-top-bar' },
-      ],
-    },
     { id: 'base-card', name: '基础卡片', exportName: 'BaseCard', registryName: 'base-card', packageExport: './components/base-card' },
     { id: 'component-preview-card', name: '预览卡片', exportName: 'ComponentPreviewCard', registryName: 'component-preview-card', packageExport: './components/component-preview-card' },
   ],

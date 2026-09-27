@@ -65,7 +65,6 @@ describe('public component catalog', () => {
       'action-dialog',
       'bar',
       'page-layout',
-      'card-tool-bar',
       'base-card',
       'component-preview-card',
       'tag',
@@ -73,6 +72,7 @@ describe('public component catalog', () => {
       'md',
       'image',
       'stat',
+      'card-tool-bar',
       'tagged-card',
       'ocr',
     ])

@@ -10,8 +10,8 @@ import type {
 
 import type { CardInitialMode } from './card-edit-state-machine'
 import { isCardInlineMathShortcut, isCardSaveShortcut } from './card-save-shortcut'
-import { CardToolBar } from 'weimo-ui-core/components/card-tool-bar'
-import { CardTopBar } from 'weimo-ui-core/components/card-top-bar'
+import { CardTopBar } from './card-top-bar'
+import { CardToolBar } from './card-tool-bar'
 import {
   resolveCardArticleProps,
   resolveCardContainerSlotProps,

@@ -1,8 +1,8 @@
 import { forwardRef, type ComponentPropsWithoutRef, type ReactNode } from 'react'
 import { Check } from 'lucide-react'
 
-import { BottomBar } from './bottom-bar'
-import { FrostedIconButton } from './frosted-icon-button'
+import { BottomBar } from 'weimo-ui-core/components/bottom-bar'
+import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'
 import { cn } from 'weimo-ui-core/lib/utils'
 
 import './card-tool-bar.css'

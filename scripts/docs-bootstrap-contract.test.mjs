@@ -36,7 +36,7 @@ const sidebarPreviewSource = readProjectFile(
 )
 const componentDefinitionSources = {
   'tagged-card': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/tagged-card.tsx'),
-  'card-tool-bar': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/card-tool-bar.tsx'),
+  'card-tool-bar': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/card-tool-bar.tsx'),
   tag: [
     readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/tag.tsx'),
     readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx'),
@@ -608,7 +608,7 @@ assert.ok(
 )
 assert.ok(
   existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule-button.tsx')) &&
-    existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/card-tool-bar.tsx')),
+    existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/card-tool-bar.tsx')),
   'Package-specific CapsuleButton and card bar docs definitions must exist.',
 )
 

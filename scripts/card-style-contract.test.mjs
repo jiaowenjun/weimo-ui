@@ -41,7 +41,7 @@ function assertIncludes(block, snippet, message) {
 }
 
 const cardCss = readProjectFile('packages/weimo-ui-card/src/components/card.css')
-const cardTopBarCss = readProjectFile('packages/weimo-ui-core/src/components/card-top-bar.css')
+const cardTopBarCss = readProjectFile('packages/weimo-ui-card/src/components/card-top-bar.css')
 const markdownContentCss = readProjectFile('packages/weimo-ui-markdown/src/components/markdown-content.css')
 const CardSource = readProjectFile('packages/weimo-ui-card/src/components/card.tsx')
 const CardResolversSource = readProjectFile('packages/weimo-ui-card/src/components/card-resolvers.tsx')
@@ -314,7 +314,7 @@ assert.ok(
   'CardTopBar CSS must use a selector that beats the IconButton base color.',
 )
 assert.ok(
-  CardSource.includes("import { CardTopBar } from 'weimo-ui-core/components/card-top-bar'") &&
+  CardSource.includes("import { CardTopBar } from './card-top-bar'") &&
     CardSource.includes("} from './card-resolvers'") &&
     CardSource.includes('<CardTopBar') &&
     CardSource.includes('<CardTopBar {...topBarProps} />') &&

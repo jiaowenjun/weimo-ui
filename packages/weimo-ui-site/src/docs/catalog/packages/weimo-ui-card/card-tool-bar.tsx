@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Heading1, List, Quote } from 'lucide-react'
 
-import { CardTopBar } from 'weimo-ui-core/components/card-top-bar'
-import { CardToolBar } from 'weimo-ui-core/components/card-tool-bar'
+import { CardTopBar } from 'weimo-ui-card/components/card-top-bar'
+import { CardToolBar } from 'weimo-ui-card/components/card-tool-bar'
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import { Button } from 'weimo-ui-core/components/coss/button'
 import { Toolbar, ToolbarButton, ToolbarGroup } from 'weimo-ui-core/components/coss/toolbar'

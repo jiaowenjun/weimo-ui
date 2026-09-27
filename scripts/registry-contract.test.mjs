@@ -351,8 +351,8 @@ assert.ok(
   'MdRender must have a standalone public registry item.',
 )
 for (const filePath of [
-  'packages/weimo-ui-core/src/components/card-top-bar.tsx',
-  'packages/weimo-ui-core/src/components/card-top-bar.css',
+  'packages/weimo-ui-card/src/components/card-top-bar.tsx',
+  'packages/weimo-ui-card/src/components/card-top-bar.css',
   'packages/weimo-ui-core/src/components/mode-button.tsx',
   'packages/weimo-ui-core/src/components/mode-button.css',
 ]) {
@@ -367,12 +367,12 @@ for (const filePath of [
   'packages/weimo-ui-markdown/src/components/deferred-md-editor-toolbar.tsx',
   'packages/weimo-ui-card/src/components/card-editable.css',
   'packages/weimo-ui-card/src/components/card.css',
-  'packages/weimo-ui-core/src/components/card-top-bar.tsx',
-  'packages/weimo-ui-core/src/components/card-top-bar.css',
+  'packages/weimo-ui-card/src/components/card-top-bar.tsx',
+  'packages/weimo-ui-card/src/components/card-top-bar.css',
   'packages/weimo-ui-core/src/components/mode-button.tsx',
   'packages/weimo-ui-core/src/components/mode-button.css',
-  'packages/weimo-ui-core/src/components/card-tool-bar.tsx',
-  'packages/weimo-ui-core/src/components/card-tool-bar.css',
+  'packages/weimo-ui-card/src/components/card-tool-bar.tsx',
+  'packages/weimo-ui-card/src/components/card-tool-bar.css',
   'packages/weimo-ui-markdown/src/components/md-view.tsx',
   'packages/weimo-ui-markdown/src/components/md-render.tsx',
   'packages/weimo-ui-markdown/src/components/markdown-content.css',

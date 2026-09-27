@@ -5,6 +5,16 @@ export const cardCatalog = {
   title: 'weimo-ui-card',
   pages: [
     {
+      id: 'card-tool-bar',
+      name: '卡片栏位',
+      exportName: 'CardToolBar',
+      registryName: 'card-tool-bar',
+      packageExport: './components/card-tool-bar',
+      components: [
+        { id: 'card-top-bar', name: 'CardTopBar', registryName: 'card-top-bar', packageExport: './components/card-top-bar' },
+      ],
+    },
+    {
       id: 'tagged-card',
       name: '带标签卡片',
       exportName: 'Card',

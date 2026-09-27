@@ -2,7 +2,7 @@ import { Check, Clipboard, FileImage, X } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 
-import { CardTopBar } from 'weimo-ui-core/components/card-top-bar'
+import { CardTopBar } from './card-top-bar'
 import { ComposerShell } from './composer-shell'
 import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'
 import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'

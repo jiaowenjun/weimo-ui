@@ -38,8 +38,6 @@
     "./components/bottom-bar": "./packages/weimo-ui-core/src/components/bottom-bar.tsx",
     "./components/capsule-button": "./packages/weimo-ui-core/src/components/capsule-button.tsx",
     "./components/card-surface": "./packages/weimo-ui-core/src/components/card-surface.tsx",
-    "./components/card-tool-bar": "./packages/weimo-ui-core/src/components/card-tool-bar.tsx",
-    "./components/card-top-bar": "./packages/weimo-ui-core/src/components/card-top-bar.tsx",
     "./components/component-preview-card": "./packages/weimo-ui-core/src/components/component-preview-card.tsx",
     "./components/coss/button": "./packages/weimo-ui-core/src/components/coss/button.tsx",
     "./components/coss/dialog": "./packages/weimo-ui-core/src/components/coss/dialog.tsx",
@@ -92,6 +90,8 @@
     "./components/stat-group": "./packages/weimo-ui-stats/src/components/stat-group.tsx",
     "./components/card": "./packages/weimo-ui-card/src/components/card.tsx",
     "./components/card-composer": "./packages/weimo-ui-card/src/components/card-composer.tsx",
+    "./components/card-tool-bar": "./packages/weimo-ui-card/src/components/card-tool-bar.tsx",
+    "./components/card-top-bar": "./packages/weimo-ui-card/src/components/card-top-bar.tsx",
     "./components/ocr-card": "./packages/weimo-ui-card/src/components/ocr-card.tsx",
     "./components/ocr-composer": "./packages/weimo-ui-card/src/components/ocr-composer.tsx",
     "./components/ocr-detail": "./packages/weimo-ui-card/src/components/ocr-detail.tsx"

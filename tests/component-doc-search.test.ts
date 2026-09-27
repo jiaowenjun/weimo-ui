@@ -12,7 +12,7 @@ describe('component docs search', () => {
     expect(resultIds('weimo-ui-tagtree')).toEqual(['tag'])
     expect(resultIds('CapsuleButton')).toContain('capsule-button')
     expect(resultIds('weimo-ui-image')).toEqual(['image'])
-    expect(resultIds('weimo-ui-card')).toEqual(['tagged-card', 'ocr'])
+    expect(resultIds('weimo-ui-card')).toEqual(['card-tool-bar', 'tagged-card', 'ocr'])
   })
 
   it('finds localized token pages by stable English identifiers', () => {

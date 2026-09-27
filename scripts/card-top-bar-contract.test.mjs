@@ -22,8 +22,8 @@ function cssBlockFor(source, selector) {
   return match[1]
 }
 
-const componentSource = readProjectFile('packages/weimo-ui-core/src/components/card-top-bar.tsx')
-const componentCss = readProjectFile('packages/weimo-ui-core/src/components/card-top-bar.css')
+const componentSource = readProjectFile('packages/weimo-ui-card/src/components/card-top-bar.tsx')
+const componentCss = readProjectFile('packages/weimo-ui-card/src/components/card-top-bar.css')
 const CardSource = readProjectFile('packages/weimo-ui-card/src/components/card.tsx')
 const CardResolversSource = readProjectFile('packages/weimo-ui-card/src/components/card-resolvers.tsx')
 const packageJson = JSON.parse(readProjectFile('package.json'))
@@ -36,8 +36,8 @@ const CardItem = registryItemsByName.get('card')
 
 for (const snippet of [
   "import type { ComponentPropsWithoutRef, ReactNode } from 'react'",
-  "import { ModeButton, type ModeButtonMode } from './mode-button'",
-  "import type { ActionMenuItem } from './menu'",
+  "import { ModeButton, type ModeButtonMode } from 'weimo-ui-core/components/mode-button'",
+  "import type { ActionMenuItem } from 'weimo-ui-core/components/menu'",
   "import './card-top-bar.css'",
   'export type CardTopBarDisplayProps',
   "mode: 'display'",
@@ -161,12 +161,12 @@ assert.ok(
 assert.ok(
     existsSync(join(root, 'packages/weimo-ui-card/src/components/card.tsx')) &&
     existsSync(join(root, 'packages/weimo-ui-card/src/components/card-resolvers.tsx')) &&
-    CardSource.includes("import { CardTopBar } from 'weimo-ui-core/components/card-top-bar'") &&
+    CardSource.includes("import { CardTopBar } from './card-top-bar'") &&
     CardSource.includes('resolveCardTopBarProps,') &&
     CardSource.includes("} from './card-resolvers'") &&
     CardSource.includes('const topBarProps = resolveCardTopBarProps(') &&
     CardSource.includes('<CardTopBar {...topBarProps} />') &&
-    CardResolversSource.includes("import type { CardTopBarProps } from 'weimo-ui-core/components/card-top-bar'") &&
+    CardResolversSource.includes("import type { CardTopBarProps } from './card-top-bar'") &&
     CardResolversSource.includes('export function resolveCardTopBarProps(') &&
     CardResolversSource.includes('): CardTopBarProps') &&
     CardResolversSource.includes("mode: 'display'") &&
@@ -186,7 +186,7 @@ assert.ok(
   'Card must let CardTopBar own the display mode action control.',
 )
 
-const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/card-tool-bar.tsx')
+const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/card-tool-bar.tsx')
 const componentDefinitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
@@ -215,14 +215,14 @@ assert.ok(
 
 assert.ok(
   componentDefinitionsIndexSource.includes(
-    "import { cardToolBarDefinition } from './packages/weimo-ui-core/card-tool-bar'",
+    "import { cardToolBarDefinition } from './packages/weimo-ui-card/card-tool-bar'",
   ) && componentDefinitionsIndexSource.includes("'card-tool-bar': cardToolBarDefinition"),
   'CardTopBar preview must be registered through the core card-tool-bar page.',
 )
 
 for (const snippet of [
   "import { useState } from 'react'",
-  "import { CardTopBar } from 'weimo-ui-core/components/card-top-bar'",
+  "import { CardTopBar } from 'weimo-ui-card/components/card-top-bar'",
   "import { TextButton } from 'weimo-ui-core/components/text-button'",
   "id: 'card-tool-bar'",
   "summary: '卡片编辑流程的底部工具栏与展示/编辑顶部栏'",
@@ -288,7 +288,7 @@ assert.ok(
 )
 
 assert.ok(
-  packageJson.exports?.['./components/card-top-bar'] === './packages/weimo-ui-core/src/components/card-top-bar.tsx',
+  packageJson.exports?.['./components/card-top-bar'] === './packages/weimo-ui-card/src/components/card-top-bar.tsx',
   'CardTopBar must have a public package export.',
 )
 assert.ok(
@@ -313,8 +313,8 @@ assert.ok(
 )
 assert.ok(CardItem, 'Card registry item must exist.')
 for (const filePath of [
-  'packages/weimo-ui-core/src/components/card-top-bar.tsx',
-  'packages/weimo-ui-core/src/components/card-top-bar.css',
+  'packages/weimo-ui-card/src/components/card-top-bar.tsx',
+  'packages/weimo-ui-card/src/components/card-top-bar.css',
   'packages/weimo-ui-core/src/components/mode-button.tsx',
   'packages/weimo-ui-core/src/components/mode-button.css',
 ]) {

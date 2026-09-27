@@ -2,8 +2,8 @@ import type { ComponentPropsWithoutRef, CSSProperties, ReactNode, TransitionEven
 import type { Editor } from '@tiptap/core'
 import { Trash2 } from 'lucide-react'
 
-import type { CardToolBarProps } from 'weimo-ui-core/components/card-tool-bar'
-import type { CardTopBarProps } from 'weimo-ui-core/components/card-top-bar'
+import type { CardTopBarProps } from './card-top-bar'
+import type { CardToolBarProps } from './card-tool-bar'
 import type {
   CardMode,
   ResolvedCardModeState,

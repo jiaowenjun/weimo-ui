@@ -34,10 +34,10 @@ function assertNotIncludes(source, snippet, message) {
   assert.ok(!source.includes(snippet), message)
 }
 
-const componentSource = readProjectFile('packages/weimo-ui-core/src/components/card-tool-bar.tsx')
-const componentCss = readProjectFile('packages/weimo-ui-core/src/components/card-tool-bar.css')
+const componentSource = readProjectFile('packages/weimo-ui-card/src/components/card-tool-bar.tsx')
+const componentCss = readProjectFile('packages/weimo-ui-card/src/components/card-tool-bar.css')
 const docsDefinitionSource = readProjectFile(
-  'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/card-tool-bar.tsx',
+  'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/card-tool-bar.tsx',
 )
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
@@ -52,8 +52,8 @@ const registryFiles = new Set(
 for (const snippet of [
   "import { forwardRef, type ComponentPropsWithoutRef, type ReactNode } from 'react'",
   "import { Check } from 'lucide-react'",
-  "import { BottomBar } from './bottom-bar'",
-  "import { FrostedIconButton } from './frosted-icon-button'",
+  "import { BottomBar } from 'weimo-ui-core/components/bottom-bar'",
+  "import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'",
   "import { cn } from 'weimo-ui-core/lib/utils'",
   "import './card-tool-bar.css'",
   'export type CardToolBarProps',
@@ -125,7 +125,7 @@ assertNotIncludes(
 for (const snippet of [
   "import { useState } from 'react'",
   "import { Heading1, List, Quote } from 'lucide-react'",
-  "import { CardToolBar } from 'weimo-ui-core/components/card-tool-bar'",
+  "import { CardToolBar } from 'weimo-ui-card/components/card-tool-bar'",
   "import { Button } from 'weimo-ui-core/components/coss/button'",
   "import { Toolbar, ToolbarButton, ToolbarGroup } from 'weimo-ui-core/components/coss/toolbar'",
   "import { TextButton } from 'weimo-ui-core/components/text-button'",
@@ -151,7 +151,7 @@ for (const snippet of [
 
 assertIncludes(
   definitionsIndexSource,
-  "import { cardToolBarDefinition } from './packages/weimo-ui-core/card-tool-bar'",
+  "import { cardToolBarDefinition } from './packages/weimo-ui-card/card-tool-bar'",
   'CardToolBar definition must be imported by component-definitions/index.ts.',
 )
 assertIncludes(
@@ -166,7 +166,7 @@ for (const snippet of [
   "exportName: 'CardToolBar'",
   "registryName: 'card-tool-bar'",
   "packageExport: './components/card-tool-bar'",
-  "packageName: 'weimo-ui-core'",
+  "packageName: 'weimo-ui-card'",
   "page: 'card-tool-bar'",
   'docs: true',
   'registry: true',
@@ -199,7 +199,7 @@ assertIncludes(
 )
 
 assert.ok(
-  packageJson.exports?.['./components/card-tool-bar'] === './packages/weimo-ui-core/src/components/card-tool-bar.tsx',
+  packageJson.exports?.['./components/card-tool-bar'] === './packages/weimo-ui-card/src/components/card-tool-bar.tsx',
   'CardToolBar must have a public package export.',
 )
 assert.ok(

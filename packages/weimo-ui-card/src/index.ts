@@ -1,5 +1,7 @@
 export * from './components/card'
 export * from './components/card-composer'
+export * from './components/card-tool-bar'
+export * from './components/card-top-bar'
 export * from './components/ocr-card'
 export * from './components/ocr-composer'
 export * from './components/ocr-detail'

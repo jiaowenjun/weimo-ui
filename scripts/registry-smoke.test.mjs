@@ -1240,7 +1240,7 @@ try {
 
   assert.ok(
     cardTopBarSource.includes('export function CardTopBar') &&
-      cardTopBarSource.includes("from './mode-button'") &&
+      cardTopBarSource.includes("from 'weimo-ui-core/components/mode-button'") &&
       cardTopBarSource.includes('<ModeButton') &&
       cardTopBarSource.includes('displayLabel={actionLabel}') &&
       cardTopBarSource.includes('editLabel={cancelLabel}') &&
@@ -1260,8 +1260,8 @@ try {
   )
   assert.ok(
     cardToolBarSource.includes('export const CardToolBar = forwardRef<HTMLDivElement, CardToolBarProps>(function CardToolBar') &&
-      cardToolBarSource.includes("from './bottom-bar'") &&
-      cardToolBarSource.includes("from './frosted-icon-button'") &&
+      cardToolBarSource.includes("from 'weimo-ui-core/components/bottom-bar'") &&
+      cardToolBarSource.includes("from 'weimo-ui-core/components/frosted-icon-button'") &&
       cardToolBarSource.includes("import { Check } from 'lucide-react'") &&
       cardToolBarSource.includes('toolbarSlot?: ReactNode') &&
       cardToolBarSource.includes('saveDisabled?: boolean') &&
@@ -1278,8 +1278,8 @@ try {
   )
   assert.ok(
     cardRuntimeSource.includes('export function Card') &&
-      cardRuntimeSource.includes("from 'weimo-ui-core/components/card-top-bar'") &&
-      cardRuntimeSource.includes("from 'weimo-ui-core/components/card-tool-bar'") &&
+      cardRuntimeSource.includes("from './card-top-bar'") &&
+      cardRuntimeSource.includes("from './card-tool-bar'") &&
       cardRuntimeSource.includes("from 'weimo-ui-markdown/components/md-view'") &&
       cardRuntimeSource.includes("from 'weimo-ui-tagtree/components/tag-bar'") &&
       cardRuntimeSource.includes("from './card-layout-measurement'") &&

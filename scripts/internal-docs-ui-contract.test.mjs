@@ -16,7 +16,7 @@ function readProjectFile(relativePath) {
 const shellSource = readProjectFile('packages/weimo-ui-site/src/docs/docs-shell.tsx')
 const detailSource = readProjectFile('packages/weimo-ui-site/src/docs/pages/component-detail-page.tsx')
 const actionDialogDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/action-dialog.tsx')
-const cardTopBarDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/card-tool-bar.tsx')
+const cardTopBarDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/card-tool-bar.tsx')
 const mathDialogDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown.tsx')
 const tagTreeRowDefinitionSource = [
   readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/tag.tsx'),
