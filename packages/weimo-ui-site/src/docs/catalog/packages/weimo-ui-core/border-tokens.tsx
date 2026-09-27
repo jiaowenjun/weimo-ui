@@ -13,8 +13,14 @@ import {
   getBorderRadiusValue,
 } from 'weimo-ui-core/components/border-radius'
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
-import { FrostedSurface } from 'weimo-ui-core/components/frosted-surface'
-import { frostedSurfaceBorderAnchorMap } from 'weimo-ui-core/components/frosted-surface-model'
+import {
+  FrostedSurface,
+  useFrostedSurfaceBackgroundToneRef,
+} from 'weimo-ui-core/components/frosted-surface'
+import {
+  frostedSurfaceBorderAnchorMap,
+  interpolateFrostedBorderColor,
+} from 'weimo-ui-core/components/frosted-surface-model'
 import { GlassPreviewCard } from '../../../components/glass-preview-card'
 import type { ComponentDefinition } from '../../component-docs'
 
@@ -93,6 +99,48 @@ const borderColorSearchAliases = borderColorTones.flatMap((tone) => {
   ]
 })
 
+// --glass-surface-border 行的色值实时跟随画布内磨砂瓦片：透明探针 wrapper 与瓦片同
+// 矩形采样（采样排除探针自身子树，读到的正是画布条纹，与瓦片内部插值同源）；采样
+// 前或采样失败回退 token 主题值。
+function FrostedBorderColorPreview() {
+  const { backgroundLuminance, setElementRef } =
+    useFrostedSurfaceBackgroundToneRef<HTMLDivElement>(true)
+  const liveBorderColor = interpolateFrostedBorderColor(backgroundLuminance)
+
+  return (
+    <GlassPreviewCard
+      aboveCanvas={
+        <div aria-hidden="true" className="frosted-border-preview__row">
+          {frostedBorderAnchorTokens.map((token) => (
+            <div
+              className="frosted-border-preview__sample"
+              key={token}
+              style={{ borderColor: `var(${token})` }}
+            />
+          ))}
+        </div>
+      }
+      className="frosted-border-preview"
+      items={[
+        ...frostedBorderAnchorOrder.map((anchor) => ({
+          token: frostedSurfaceBorderAnchorMap[anchor].token,
+          value: frostedSurfaceBorderAnchorMap[anchor].value,
+        })),
+        {
+          darkValue: liveBorderColor ?? frostedSurfaceBorderColorMap.default.value.dark,
+          token: frostedSurfaceBorderColorMap.default.token,
+          value: liveBorderColor ?? frostedSurfaceBorderColorMap.default.value.light,
+        },
+      ]}
+      label="磨砂材质边框色"
+    >
+      <div className="frosted-border-preview__probe" ref={setElementRef}>
+        <FrostedSurface aria-hidden="true" bordered className="frosted-border-preview__tile" />
+      </div>
+    </GlassPreviewCard>
+  )
+}
+
 // Docs definitions intentionally colocate preview components with exported page metadata.
 function BorderColorPreview() {
   return (
@@ -133,34 +181,7 @@ function BorderColorPreview() {
         </div>
       </ComponentPreviewCard>
 
-      <GlassPreviewCard
-        aboveCanvas={
-          <div aria-hidden="true" className="frosted-border-preview__row">
-            {frostedBorderAnchorTokens.map((token) => (
-              <div
-                className="frosted-border-preview__sample"
-                key={token}
-                style={{ borderColor: `var(${token})` }}
-              />
-            ))}
-          </div>
-        }
-        className="frosted-border-preview"
-        items={[
-          ...frostedBorderAnchorOrder.map((anchor) => ({
-            token: frostedSurfaceBorderAnchorMap[anchor].token,
-            value: frostedSurfaceBorderAnchorMap[anchor].value,
-          })),
-          {
-            darkValue: frostedSurfaceBorderColorMap.default.value.dark,
-            token: frostedSurfaceBorderColorMap.default.token,
-            value: frostedSurfaceBorderColorMap.default.value.light,
-          },
-        ]}
-        label="磨砂材质边框色"
-      >
-        <FrostedSurface aria-hidden="true" bordered className="frosted-border-preview__tile" />
-      </GlassPreviewCard>
+      <FrostedBorderColorPreview />
     </>
   )
 }

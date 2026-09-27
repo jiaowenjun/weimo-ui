@@ -122,6 +122,7 @@ const frostedCanvasOverrideBlock = blockFor(
   appCss,
   '.frosted-border-preview .glass-preview-card__canvas',
 )
+const frostedProbeBlock = blockFor(appCss, '.frosted-border-preview__probe')
 
 assert.equal(
   packageJson.exports?.['./components/border-color'],
@@ -448,9 +449,11 @@ assert.ok(
       'className={`border-color-preview__sample ${getBorderColorClassName(tone)}`}',
     ) &&
     docsDefinitionSource.includes('frostedSurfaceBorderColorMap') &&
-    docsDefinitionSource.includes('darkValue: frostedSurfaceBorderColorMap.default.value.dark,') &&
     docsDefinitionSource.includes(
-      "import { frostedSurfaceBorderAnchorMap } from 'weimo-ui-core/components/frosted-surface-model'",
+      'darkValue: liveBorderColor ?? frostedSurfaceBorderColorMap.default.value.dark,',
+    ) &&
+    docsDefinitionSource.includes(
+      "  frostedSurfaceBorderAnchorMap,\n  interpolateFrostedBorderColor,\n} from 'weimo-ui-core/components/frosted-surface-model'",
     ) &&
     docsDefinitionSource.includes('...frostedBorderAnchorOrder.map((anchor) => ({') &&
     docsDefinitionSource.includes('label="磨砂材质边框色"') &&
@@ -458,8 +461,13 @@ assert.ok(
       "import { GlassPreviewCard } from '../../../components/glass-preview-card'",
     ) &&
     docsDefinitionSource.includes(
-      "import { FrostedSurface } from 'weimo-ui-core/components/frosted-surface'",
+      "  FrostedSurface,\n  useFrostedSurfaceBackgroundToneRef,\n} from 'weimo-ui-core/components/frosted-surface'",
     ) &&
+    docsDefinitionSource.includes('interpolateFrostedBorderColor(backgroundLuminance)') &&
+    docsDefinitionSource.includes(
+      'value: liveBorderColor ?? frostedSurfaceBorderColorMap.default.value.light,',
+    ) &&
+    docsDefinitionSource.includes('className="frosted-border-preview__probe"') &&
     docsDefinitionSource.includes('aboveCanvas={') &&
     docsDefinitionSource.includes('className="frosted-border-preview"') &&
     docsDefinitionSource.includes('frostedBorderAnchorTokens.map((token) => (') &&
@@ -508,6 +516,16 @@ assert.ok(
 )
 
 assert.ok(
+  frostedProbeBlock.includes('display: grid;') &&
+    frostedProbeBlock.includes(
+      'width: clamp(24px, calc((100% - 3 * clamp(12px, 4%, 24px)) / 4), 48px);',
+    ) &&
+    !frostedProbeBlock.includes('background') &&
+    !frostedProbeBlock.includes('border'),
+  'The live border readout probe must be a fully transparent grid wrapper sized like the static squares, sharing the tile rect for sampling.',
+)
+
+assert.ok(
   frostedCanvasOverrideBlock.includes('flex: 1 1 auto;') &&
     frostedCanvasOverrideBlock.includes('min-height: 0;') &&
     frostedCanvasOverrideBlock.includes('border-radius: var(--radius-sm);'),
@@ -531,9 +549,7 @@ assert.ok(
     !frostedSampleBlock.includes('background:') &&
     !frostedSampleBlock.includes('box-shadow:') &&
     !appCss.includes('frosted-border-preview__sample--') &&
-    frostedTileBlock.includes(
-      'width: clamp(24px, calc((100% - 3 * clamp(12px, 4%, 24px)) / 4), 48px);',
-    ) &&
+    frostedTileBlock.includes('width: 100%;') &&
     frostedTileBlock.includes('aspect-ratio: 1;') &&
     frostedTileBlock.includes('border-radius: var(--radius-sm);') &&
     !frostedTileBlock.includes('height:'),

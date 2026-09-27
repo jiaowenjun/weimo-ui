@@ -818,10 +818,18 @@
   border-radius: var(--radius-sm);
 }
 
-/* 画布内的方形磨砂材质示例：真实 FrostedSurface，边框色随画布灰度采样插值动态变化；
-   尺寸与上方静态锚点方片同规格（同一 clamp 公式，画布与行的横向内边距一致故基准相同）。 */
-.frosted-border-preview__tile {
+/* 透明探针 wrapper：与瓦片同矩形供采样（自身无背景，采样排除其子树后读到的正是
+   画布条纹），读数供 token 行实时显示瓦片插值边框色；宽度用与静态方片相同的
+   clamp 公式（基准=画布内容宽=方片行内容宽，均为卡宽扣 32px），瓦片以 100% 填满
+   探针保持同规格——公式放探针层避免瓦片对 shrink-to-fit 父级的百分比循环。 */
+.frosted-border-preview__probe {
+  display: grid;
   width: clamp(24px, calc((100% - 3 * clamp(12px, 4%, 24px)) / 4), 48px);
+}
+
+/* 画布内的方形磨砂材质示例：真实 FrostedSurface，边框色随画布灰度采样插值动态变化。 */
+.frosted-border-preview__tile {
+  width: 100%;
   aspect-ratio: 1;
   border-radius: var(--radius-sm);
 }
