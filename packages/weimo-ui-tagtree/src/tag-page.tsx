@@ -211,10 +211,12 @@ const rootRow: AnimatedTagTreeRow = {
 }
 const childRow: AnimatedTagTreeRow = {
   node: { tag: 'writing/daily', label: '日记', icon: <CalendarDays aria-hidden="true" /> },
-  tag: 'writing/daily', label: '日记', depth: 1, hasChildren: false, expanded: false, selected: true,
+  tag: 'writing/daily', label: '日记', depth: 1, hasChildren: false, expanded: false, selected: false,
 }
 
 function TagTreeRowDemo() {
+  const [expanded, setExpanded] = useState(true)
+
   return (
     <ComponentPreviewCard align="center" className="tag-page__card" label="标签树行">
       <div className="tag-page__canvas">
@@ -223,9 +225,13 @@ function TagTreeRowDemo() {
               TagTree 的真实结构,脱离该作用域行内网格会整体失效。 */}
           <div aria-label="TagTreeRow preview" className="tag-tree" role="tree">
             <div className="tag-tree__list">
-              <TagTreeRow onMenuAction={() => {}} onSelect={() => {}} onToggle={() => {}} row={rootRow} rowMenuEnabled variant="default" />
-              <TagTreeRow onMenuAction={() => {}} onSelect={() => {}} onToggle={() => {}} row={childRow} rowMenuEnabled variant="default" />
-              <TagTreeRow onSelect={() => {}} onToggle={() => {}} row={{ ...childRow, tag: 'writing/ideas', label: '灵感', selected: false }} rowMenuEnabled={false} variant="no-action" />
+              <TagTreeRow onMenuAction={() => {}} onSelect={() => {}} onToggle={() => setExpanded((value) => !value)} row={{ ...rootRow, expanded }} rowMenuEnabled variant="default" />
+              {expanded ? (
+                <>
+                  <TagTreeRow onMenuAction={() => {}} onSelect={() => {}} onToggle={() => {}} row={childRow} rowMenuEnabled variant="default" />
+                  <TagTreeRow onSelect={() => {}} onToggle={() => {}} row={{ ...childRow, tag: 'writing/ideas', label: '灵感' }} rowMenuEnabled={false} variant="no-action" />
+                </>
+              ) : null}
             </div>
           </div>
         </div>
