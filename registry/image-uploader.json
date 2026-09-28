@@ -19,9 +19,14 @@
       "target": "@ui/image-uploader.tsx"
     },
     {
-      "path": "packages/weimo-ui-image/src/components/image-uploader.css",
+      "path": "packages/weimo-ui-image/src/components/image-uploader/image-uploader.tsx",
       "type": "registry:ui",
-      "target": "@ui/image-uploader.css"
+      "target": "@ui/image-uploader/image-uploader.tsx"
+    },
+    {
+      "path": "packages/weimo-ui-image/src/components/image-uploader/image-uploader.css",
+      "type": "registry:ui",
+      "target": "@ui/image-uploader/image-uploader.css"
     }
   ]
 }

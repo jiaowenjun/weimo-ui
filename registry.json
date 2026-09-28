@@ -2058,9 +2058,14 @@
           "target": "@ui/image-view.tsx"
         },
         {
-          "path": "packages/weimo-ui-image/src/components/image-view.css",
+          "path": "packages/weimo-ui-image/src/components/image-view/image-view.tsx",
           "type": "registry:ui",
-          "target": "@ui/image-view.css"
+          "target": "@ui/image-view/image-view.tsx"
+        },
+        {
+          "path": "packages/weimo-ui-image/src/components/image-view/image-view.css",
+          "type": "registry:ui",
+          "target": "@ui/image-view/image-view.css"
         }
       ]
     },
@@ -2085,9 +2090,14 @@
           "target": "@ui/image-uploader.tsx"
         },
         {
-          "path": "packages/weimo-ui-image/src/components/image-uploader.css",
+          "path": "packages/weimo-ui-image/src/components/image-uploader/image-uploader.tsx",
           "type": "registry:ui",
-          "target": "@ui/image-uploader.css"
+          "target": "@ui/image-uploader/image-uploader.tsx"
+        },
+        {
+          "path": "packages/weimo-ui-image/src/components/image-uploader/image-uploader.css",
+          "type": "registry:ui",
+          "target": "@ui/image-uploader/image-uploader.css"
         }
       ]
     },
@@ -2115,9 +2125,19 @@
           "target": "@ui/canvas-transparency-cache.ts"
         },
         {
-          "path": "packages/weimo-ui-image/src/components/canvas-transparency-model.ts",
+          "path": "packages/weimo-ui-image/src/components/canvas-transparency/canvas-transparency.tsx",
           "type": "registry:ui",
-          "target": "@ui/canvas-transparency-model.ts"
+          "target": "@ui/canvas-transparency/canvas-transparency.tsx"
+        },
+        {
+          "path": "packages/weimo-ui-image/src/components/canvas-transparency/canvas-transparency-cache.ts",
+          "type": "registry:ui",
+          "target": "@ui/canvas-transparency/canvas-transparency-cache.ts"
+        },
+        {
+          "path": "packages/weimo-ui-image/src/components/canvas-transparency/canvas-transparency-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/canvas-transparency/canvas-transparency-model.ts"
         }
       ]
     },

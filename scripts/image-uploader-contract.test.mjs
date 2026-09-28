@@ -30,8 +30,12 @@ function assertIncludes(source, snippet, message) {
   assert.ok(source.includes(snippet), message)
 }
 
-const source = readProjectFile('packages/weimo-ui-image/src/components/image-uploader.tsx')
-const css = readProjectFile('packages/weimo-ui-image/src/components/image-uploader.css')
+const source = readProjectFile(
+  'packages/weimo-ui-image/src/components/image-uploader/image-uploader.tsx',
+)
+const css = readProjectFile(
+  'packages/weimo-ui-image/src/components/image-uploader/image-uploader.css',
+)
 const packageJson = readJson('package.json')
 const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
@@ -76,7 +80,7 @@ for (const snippet of [
   "import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'",
   "import type { ChangeEvent, DragEvent, KeyboardEvent, MouseEvent } from 'react'",
   "import type { ComponentPropsWithoutRef } from 'react'",
-  "import { ImageView } from './image-view'",
+  "import { ImageView } from '../image-view'",
   "import { cn } from 'weimo-ui-core/lib/utils'",
   "import './image-uploader.css'",
   "type ImageUploaderSelectionSource = 'picker' | 'clipboard' | 'drop'",
@@ -357,7 +361,8 @@ assert.ok(
 )
 for (const filePath of [
   'packages/weimo-ui-image/src/components/image-uploader.tsx',
-  'packages/weimo-ui-image/src/components/image-uploader.css',
+  'packages/weimo-ui-image/src/components/image-uploader/image-uploader.tsx',
+  'packages/weimo-ui-image/src/components/image-uploader/image-uploader.css',
 ]) {
   assert.ok(
     registryItem.files.some((file) => file.path === filePath),
@@ -370,7 +375,8 @@ for (const filePath of [
   'src/components/image-detail-view.tsx',
   'src/components/image-detail-view.css',
   'packages/weimo-ui-image/src/components/image-view.tsx',
-  'packages/weimo-ui-image/src/components/image-view.css',
+  'packages/weimo-ui-image/src/components/image-view/image-view.tsx',
+  'packages/weimo-ui-image/src/components/image-view/image-view.css',
 ]) {
   assert.ok(
     !registryItem.files.some((file) => file.path === filePath),

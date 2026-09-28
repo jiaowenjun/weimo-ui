@@ -797,16 +797,23 @@ try {
   )
   assert.ok(
     existsSync(join(consumerDir, 'src/components/ui/canvas-transparency.tsx')) &&
-      existsSync(join(consumerDir, 'src/components/ui/canvas-transparency-model.ts')),
-    'shadcn add must write the CanvasTransparency component and processing model files.',
+      existsSync(join(consumerDir, 'src/components/ui/canvas-transparency-cache.ts')) &&
+      existsSync(join(consumerDir, 'src/components/ui/canvas-transparency/canvas-transparency.tsx')) &&
+      existsSync(join(consumerDir, 'src/components/ui/canvas-transparency/canvas-transparency-cache.ts')) &&
+      existsSync(join(consumerDir, 'src/components/ui/canvas-transparency/canvas-transparency-model.ts')),
+    'shadcn add must write the CanvasTransparency entries and colocated implementation files.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/image-uploader.tsx')),
-    'shadcn add must write the explicitly requested ImageUploader component file.',
+    existsSync(join(consumerDir, 'src/components/ui/image-uploader.tsx')) &&
+      existsSync(join(consumerDir, 'src/components/ui/image-uploader/image-uploader.tsx')) &&
+      existsSync(join(consumerDir, 'src/components/ui/image-uploader/image-uploader.css')),
+    'shadcn add must write the ImageUploader entry and colocated implementation files.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/image-uploader.css')),
-    'shadcn add must write the explicitly requested ImageUploader CSS file.',
+    existsSync(join(consumerDir, 'src/components/ui/image-view.tsx')) &&
+      existsSync(join(consumerDir, 'src/components/ui/image-view/image-view.tsx')) &&
+      existsSync(join(consumerDir, 'src/components/ui/image-view/image-view.css')),
+    'shadcn add must write the ImageView entry and colocated implementation files.',
   )
   assert.ok(
     existsSync(join(consumerDir, 'src/components/ui/ocr-composer.tsx')),

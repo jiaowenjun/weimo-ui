@@ -209,7 +209,8 @@ for (const name of promotedRegistryNames) {
 assert.ok(topBarItem, 'Root registry must include the @weimo/top-bar item.')
 for (const filePath of [
   'packages/weimo-ui-image/src/components/image-view.tsx',
-  'packages/weimo-ui-image/src/components/image-view.css',
+  'packages/weimo-ui-image/src/components/image-view/image-view.tsx',
+  'packages/weimo-ui-image/src/components/image-view/image-view.css',
 ]) {
   assert.ok(
     imageViewItem.files.some((file) => file.path === filePath),
@@ -462,7 +463,9 @@ assert.ok(
 for (const filePath of [
   'packages/weimo-ui-image/src/components/canvas-transparency.tsx',
   'packages/weimo-ui-image/src/components/canvas-transparency-cache.ts',
-  'packages/weimo-ui-image/src/components/canvas-transparency-model.ts',
+  'packages/weimo-ui-image/src/components/canvas-transparency/canvas-transparency.tsx',
+  'packages/weimo-ui-image/src/components/canvas-transparency/canvas-transparency-cache.ts',
+  'packages/weimo-ui-image/src/components/canvas-transparency/canvas-transparency-model.ts',
 ]) {
   assert.ok(
     canvasTransparencyItem.files.some((file) => file.path === filePath),
@@ -480,7 +483,8 @@ assert.deepEqual(
 )
 for (const filePath of [
   'packages/weimo-ui-image/src/components/image-uploader.tsx',
-  'packages/weimo-ui-image/src/components/image-uploader.css',
+  'packages/weimo-ui-image/src/components/image-uploader/image-uploader.tsx',
+  'packages/weimo-ui-image/src/components/image-uploader/image-uploader.css',
 ]) {
   assert.ok(
     imageUploaderItem.files.some((file) => file.path === filePath),

@@ -11,3 +11,16 @@ import { ImageView } from 'weimo-ui-image/components/image-view'
 ```
 
 包直接导出 TypeScript、TSX 与 CSS 源码，消费方需要支持这些源码格式，并安装 React peer dependencies。
+
+## 源码结构
+
+```text
+src/components/
+├── canvas-transparency/  # 透明化组件、缓存与图像处理模型
+├── image-uploader/       # 图片选择、预览与上传交互
+└── image-view/           # 图片展示、详情查看与展示模式菜单
+```
+
+`components/*.tsx` 与 `components/canvas-transparency-cache.ts` 仅保留稳定的公开/registry
+入口。实现、样式和内部模型放在对应组件目录；组件内部使用相对导入，跨组件通过
+`weimo-ui-image/components/*` 对应的稳定入口依赖。

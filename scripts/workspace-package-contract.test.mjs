@@ -104,8 +104,8 @@ const packageRules = [
     requiredExports: {
       '.': './src/index.ts',
       './components/canvas-transparency-cache': './src/components/canvas-transparency-cache.ts',
-      './styles/image-uploader.css': './src/components/image-uploader.css',
-      './styles/image-view.css': './src/components/image-view.css',
+      './styles/image-uploader.css': './src/components/image-uploader/image-uploader.css',
+      './styles/image-view.css': './src/components/image-view/image-view.css',
     },
   },
   {
@@ -286,8 +286,14 @@ for (const [relativePath, dependencyPath] of [
   ['packages/weimo-ui-card/src/components/ocr/ocr-detail.tsx', 'weimo-ui-core/components/action-dialog'],
   ['packages/weimo-ui-card/src/components/tags/tag-picker/tag-picker.tsx', 'weimo-ui-tagtree/components/coss/input-group'],
   ['packages/weimo-ui-card/src/components/tags/tag-picker/tag-picker.tsx', 'weimo-ui-tagtree/components/coss/scroll-area'],
-  ['packages/weimo-ui-image/src/components/image-view.tsx', 'weimo-ui-core/components/action-dialog'],
-  ['packages/weimo-ui-image/src/components/image-uploader.tsx', 'weimo-ui-core/lib/utils'],
+  [
+    'packages/weimo-ui-image/src/components/image-view/image-view.tsx',
+    'weimo-ui-core/components/action-dialog',
+  ],
+  [
+    'packages/weimo-ui-image/src/components/image-uploader/image-uploader.tsx',
+    'weimo-ui-core/lib/utils',
+  ],
   ['packages/weimo-ui-stats/src/components/heatmap/heatmap.tsx', 'weimo-ui-core/components/heat-color'],
   ['packages/weimo-ui-stats/src/components/stat-group.tsx', 'weimo-ui-core/lib/utils'],
 ]) {

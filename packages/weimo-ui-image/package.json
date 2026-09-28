@@ -17,8 +17,8 @@
     "./components/canvas-transparency-cache": "./src/components/canvas-transparency-cache.ts",
     "./components/image-uploader": "./src/components/image-uploader.tsx",
     "./components/image-view": "./src/components/image-view.tsx",
-    "./styles/image-uploader.css": "./src/components/image-uploader.css",
-    "./styles/image-view.css": "./src/components/image-view.css"
+    "./styles/image-uploader.css": "./src/components/image-uploader/image-uploader.css",
+    "./styles/image-view.css": "./src/components/image-view/image-view.css"
   },
   "scripts": {
     "test:typecheck": "tsc -p tsconfig.json --noEmit --pretty false"

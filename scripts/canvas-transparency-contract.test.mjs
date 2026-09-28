@@ -17,9 +17,15 @@ function readJson(relativePath) {
   return JSON.parse(readProjectFile(relativePath))
 }
 
-const source = readProjectFile('packages/weimo-ui-image/src/components/canvas-transparency.tsx')
-const cacheSource = readProjectFile('packages/weimo-ui-image/src/components/canvas-transparency-cache.ts')
-const modelSource = readProjectFile('packages/weimo-ui-image/src/components/canvas-transparency-model.ts')
+const source = readProjectFile(
+  'packages/weimo-ui-image/src/components/canvas-transparency/canvas-transparency.tsx',
+)
+const cacheSource = readProjectFile(
+  'packages/weimo-ui-image/src/components/canvas-transparency/canvas-transparency-cache.ts',
+)
+const modelSource = readProjectFile(
+  'packages/weimo-ui-image/src/components/canvas-transparency/canvas-transparency-model.ts',
+)
 const docsDefinition = readProjectFile(
   'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-image/image.tsx',
 )
@@ -207,9 +213,11 @@ assert.deepEqual(
   [
     'packages/weimo-ui-image/src/components/canvas-transparency.tsx',
     'packages/weimo-ui-image/src/components/canvas-transparency-cache.ts',
-    'packages/weimo-ui-image/src/components/canvas-transparency-model.ts',
+    'packages/weimo-ui-image/src/components/canvas-transparency/canvas-transparency.tsx',
+    'packages/weimo-ui-image/src/components/canvas-transparency/canvas-transparency-cache.ts',
+    'packages/weimo-ui-image/src/components/canvas-transparency/canvas-transparency-model.ts',
   ],
-  'CanvasTransparency registry item must ship the component, result cache, and processing model.',
+  'CanvasTransparency registry item must ship stable entries with its colocated implementation.',
 )
 
 const {
@@ -217,7 +225,9 @@ const {
   makeCanvasBackgroundTransparent,
   makeCanvasDarkForeground,
   resolveCanvasTransparencyAlpha,
-} = await import('../packages/weimo-ui-image/src/components/canvas-transparency-model.ts')
+} = await import(
+  '../packages/weimo-ui-image/src/components/canvas-transparency/canvas-transparency-model.ts'
+)
 
 assert.equal(
   resolveCanvasTransparencyAlpha([255, 255, 255], [255, 255, 255], 16, 32),

@@ -34,7 +34,9 @@ function resultFor(label) {
   }
 }
 
-const cacheSource = readProjectFile('packages/weimo-ui-image/src/components/canvas-transparency-cache.ts')
+const cacheSource = readProjectFile(
+  'packages/weimo-ui-image/src/components/canvas-transparency/canvas-transparency-cache.ts',
+)
 
 assert.ok(
   cacheSource.includes('const CANVAS_TRANSPARENCY_CACHE_LIMIT = 32') &&

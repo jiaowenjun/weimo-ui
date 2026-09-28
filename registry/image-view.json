@@ -24,9 +24,14 @@
       "target": "@ui/image-view.tsx"
     },
     {
-      "path": "packages/weimo-ui-image/src/components/image-view.css",
+      "path": "packages/weimo-ui-image/src/components/image-view/image-view.tsx",
       "type": "registry:ui",
-      "target": "@ui/image-view.css"
+      "target": "@ui/image-view/image-view.tsx"
+    },
+    {
+      "path": "packages/weimo-ui-image/src/components/image-view/image-view.css",
+      "type": "registry:ui",
+      "target": "@ui/image-view/image-view.css"
     }
   ]
 }

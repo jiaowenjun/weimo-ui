@@ -22,9 +22,19 @@
       "target": "@ui/canvas-transparency-cache.ts"
     },
     {
-      "path": "packages/weimo-ui-image/src/components/canvas-transparency-model.ts",
+      "path": "packages/weimo-ui-image/src/components/canvas-transparency/canvas-transparency.tsx",
       "type": "registry:ui",
-      "target": "@ui/canvas-transparency-model.ts"
+      "target": "@ui/canvas-transparency/canvas-transparency.tsx"
+    },
+    {
+      "path": "packages/weimo-ui-image/src/components/canvas-transparency/canvas-transparency-cache.ts",
+      "type": "registry:ui",
+      "target": "@ui/canvas-transparency/canvas-transparency-cache.ts"
+    },
+    {
+      "path": "packages/weimo-ui-image/src/components/canvas-transparency/canvas-transparency-model.ts",
+      "type": "registry:ui",
+      "target": "@ui/canvas-transparency/canvas-transparency-model.ts"
     }
   ]
 }

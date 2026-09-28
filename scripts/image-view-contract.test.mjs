@@ -42,8 +42,12 @@ const packageJson = readJson('package.json')
 const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const docsDefinition = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-image/image.tsx')
-const imageViewSource = readProjectFile('packages/weimo-ui-image/src/components/image-view.tsx')
-const imageViewCss = readProjectFile('packages/weimo-ui-image/src/components/image-view.css')
+const imageViewSource = readProjectFile(
+  'packages/weimo-ui-image/src/components/image-view/image-view.tsx',
+)
+const imageViewCss = readProjectFile(
+  'packages/weimo-ui-image/src/components/image-view/image-view.css',
+)
 const ocrDetailSource = readProjectFile('packages/weimo-ui-card/src/components/ocr/ocr-detail.tsx')
 const ocrDetailCss = readProjectFile('packages/weimo-ui-card/src/components/ocr/ocr-detail.css')
 const rootRegistry = readJson('registry.json')
@@ -285,7 +289,8 @@ assert.deepEqual(
 )
 for (const filePath of [
   'packages/weimo-ui-image/src/components/image-view.tsx',
-  'packages/weimo-ui-image/src/components/image-view.css',
+  'packages/weimo-ui-image/src/components/image-view/image-view.tsx',
+  'packages/weimo-ui-image/src/components/image-view/image-view.css',
 ]) {
   assert.ok(
     registryItem.files.some((file) => file.path === filePath),
