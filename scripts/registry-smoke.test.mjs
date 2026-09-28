@@ -917,12 +917,10 @@ try {
     'shadcn add must write internal coss ScrollArea for TagPicker.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/stat-group.tsx')),
-    'shadcn add must write explicitly requested StatGroup files from the configured custom registry.',
-  )
-  assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/stat-group.css')),
-    'shadcn add must write explicitly requested StatGroup CSS from the configured custom registry.',
+    existsSync(join(consumerDir, 'src/components/ui/stat-group.tsx')) &&
+      existsSync(join(consumerDir, 'src/components/ui/stat-group/stat-group.tsx')) &&
+      existsSync(join(consumerDir, 'src/components/ui/stat-group/stat-group.css')),
+    'shadcn add must write the StatGroup entry and colocated implementation files.',
   )
   assert.ok(
     existsSync(join(consumerDir, 'src/components/ui/heatmap.tsx')),
@@ -1211,7 +1209,7 @@ try {
     'utf8',
   )
   const statGroupSource = readFileSync(
-    join(consumerDir, 'src/components/ui/stat-group.tsx'),
+    join(consumerDir, 'src/components/ui/stat-group/stat-group.tsx'),
     'utf8',
   )
   const heatmapSource = readFileSync(

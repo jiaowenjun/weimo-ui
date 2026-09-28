@@ -18,9 +18,14 @@
       "target": "@ui/stat-group.tsx"
     },
     {
-      "path": "packages/weimo-ui-stats/src/components/stat-group.css",
+      "path": "packages/weimo-ui-stats/src/components/stat-group/stat-group.tsx",
       "type": "registry:ui",
-      "target": "@ui/stat-group.css"
+      "target": "@ui/stat-group/stat-group.tsx"
+    },
+    {
+      "path": "packages/weimo-ui-stats/src/components/stat-group/stat-group.css",
+      "type": "registry:ui",
+      "target": "@ui/stat-group/stat-group.css"
     }
   ]
 }

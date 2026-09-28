@@ -16,7 +16,7 @@
     "./components/heatmap": "./src/components/heatmap.tsx",
     "./components/stat-group": "./src/components/stat-group.tsx",
     "./styles/heatmap.css": "./src/components/heatmap/heatmap.css",
-    "./styles/stat-group.css": "./src/components/stat-group.css"
+    "./styles/stat-group.css": "./src/components/stat-group/stat-group.css"
   },
   "scripts": {
     "test:typecheck": "tsc -p tsconfig.json --noEmit --pretty false"

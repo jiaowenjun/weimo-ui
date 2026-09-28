@@ -1,12 +1,12 @@
 export {
   Heatmap,
   type HeatmapProps,
-} from './heatmap/index'
+} from './heatmap/heatmap'
 export {
   HeatColor,
   getHeatColorClassName,
   type HeatColorProps,
-} from './heatmap/index'
+} from './heatmap/heat-color'
 export {
   buildHeatmapCells,
   buildHeatmapColumns,
@@ -18,4 +18,4 @@ export {
   type HeatmapDailyCount,
   type HeatmapLevel,
   type HeatmapMonthLabel,
-} from './heatmap/index'
+} from './heatmap/heatmap-model'

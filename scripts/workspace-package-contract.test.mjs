@@ -120,7 +120,7 @@ const packageRules = [
     requiredExports: {
       '.': './src/index.ts',
       './styles/heatmap.css': './src/components/heatmap/heatmap.css',
-      './styles/stat-group.css': './src/components/stat-group.css',
+      './styles/stat-group.css': './src/components/stat-group/stat-group.css',
     },
   },
   {
@@ -295,7 +295,10 @@ for (const [relativePath, dependencyPath] of [
     'weimo-ui-core/lib/utils',
   ],
   ['packages/weimo-ui-stats/src/components/heatmap/heatmap.tsx', 'weimo-ui-core/components/heat-color'],
-  ['packages/weimo-ui-stats/src/components/stat-group.tsx', 'weimo-ui-core/lib/utils'],
+  [
+    'packages/weimo-ui-stats/src/components/stat-group/stat-group.tsx',
+    'weimo-ui-core/lib/utils',
+  ],
 ]) {
   assert.match(
     readProjectFile(relativePath),

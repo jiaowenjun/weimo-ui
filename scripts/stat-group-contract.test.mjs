@@ -26,8 +26,12 @@ function assertIncludes(block, snippet, message) {
   assert.ok(block.includes(snippet), message)
 }
 
-const source = readProjectFile('packages/weimo-ui-stats/src/components/stat-group.tsx')
-const css = readProjectFile('packages/weimo-ui-stats/src/components/stat-group.css')
+const source = readProjectFile(
+  'packages/weimo-ui-stats/src/components/stat-group/stat-group.tsx',
+)
+const css = readProjectFile(
+  'packages/weimo-ui-stats/src/components/stat-group/stat-group.css',
+)
 const packageJson = JSON.parse(readProjectFile('package.json'))
 const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
@@ -160,8 +164,12 @@ assert.deepEqual(
 )
 assert.deepEqual(
   registryItem.files.map((file) => file.path),
-  ['packages/weimo-ui-stats/src/components/stat-group.tsx', 'packages/weimo-ui-stats/src/components/stat-group.css'],
-  'StatGroup registry item must ship the component and sidecar CSS.',
+  [
+    'packages/weimo-ui-stats/src/components/stat-group.tsx',
+    'packages/weimo-ui-stats/src/components/stat-group/stat-group.tsx',
+    'packages/weimo-ui-stats/src/components/stat-group/stat-group.css',
+  ],
+  'StatGroup registry item must ship its stable entry and colocated implementation files.',
 )
 assert.deepEqual(
   registryItem.registryDependencies,
