@@ -11,7 +11,8 @@ const SLIDER_INITIAL_VALUE = 50
 
 // Slider 专属背景 token（定义在 slider.css 的 .slider 内部，仅滑块子树可用）：
 // 未填充轨道/填充指示条/滑块各一枚，值别名共享色板，展示行按亮暗主题给出解析后的色值。
-// 指示条与滑块 = color-mix(in srgb, --color-bg-primary, --color-bg-card 15%) 的解析值。
+// 指示条与滑块 = color-mix(in srgb, --color-bg-primary, --color-bg-card 15%)
+// 的解析值（27.75%/83.4%），按整数展示。
 const sliderItems = [
   {
     token: '--slider-track-bg',
@@ -20,13 +21,13 @@ const sliderItems = [
   },
   {
     token: '--slider-indicator-bg',
-    value: 'hsl(0 0% 27.75%)',
-    darkValue: 'hsl(0 0% 83.4%)',
+    value: 'hsl(0 0% 28%)',
+    darkValue: 'hsl(0 0% 83%)',
   },
   {
     token: '--slider-thumb-bg',
-    value: 'hsl(0 0% 27.75%)',
-    darkValue: 'hsl(0 0% 83.4%)',
+    value: 'hsl(0 0% 28%)',
+    darkValue: 'hsl(0 0% 83%)',
   },
 ]
 

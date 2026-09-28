@@ -64,8 +64,8 @@ for (const snippet of [
   "token: '--slider-track-bg'",
   "token: '--slider-indicator-bg'",
   "token: '--slider-thumb-bg'",
-  "value: 'hsl(0 0% 27.75%)'",
-  "darkValue: 'hsl(0 0% 83.4%)'",
+  "value: 'hsl(0 0% 28%)'",
+  "darkValue: 'hsl(0 0% 83%)'",
   "id: 'slider'",
   'preview: () => <SliderDemo />',
 ]) {

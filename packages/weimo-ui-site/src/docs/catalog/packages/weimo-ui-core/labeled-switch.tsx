@@ -15,10 +15,11 @@ const switchItems = [
     darkValue: borderColorToneMap.default.value.dark,
   },
   {
-    // 选中轨道 = color-mix(in srgb, --color-bg-primary, --color-bg-card 15%) 的解析值
+    // 选中轨道 = color-mix(in srgb, --color-bg-primary, --color-bg-card 15%)
+    // 的解析值（27.75%/83.4%），按整数展示
     token: '--switch-track-checked-bg',
-    value: 'hsl(0 0% 27.75%)',
-    darkValue: 'hsl(0 0% 83.4%)',
+    value: 'hsl(0 0% 28%)',
+    darkValue: 'hsl(0 0% 83%)',
   },
   {
     token: '--switch-thumb-bg',
