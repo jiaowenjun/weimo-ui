@@ -655,13 +655,16 @@ for (const snippet of [
   'backdrop-filter: blur(var(--frosted-blur));',
   '-webkit-backdrop-filter: blur(var(--frosted-blur));',
   'color: var(--frosted-surface-fg);',
+  'box-shadow: 0 12px 40px hsl(0 0% 0% / 0);',
   'color var(--frosted-surface-tone-transition-duration) ease,',
-  'border-color var(--frosted-surface-tone-transition-duration) ease;',
+  'border-color var(--frosted-surface-tone-transition-duration) ease,',
+  'box-shadow var(--frosted-surface-tone-transition-duration) ease;',
   '.frosted-surface--bordered {',
   'border-color: var(--frosted-surface-border);',
   '.frosted-surface[data-background-tone="light"]',
   '--frosted-surface-fg: var(--frosted-surface-fg-on-light);',
   '--frosted-surface-muted-color: var(--frosted-surface-muted-fg-on-light);',
+  'box-shadow: 0 12px 40px hsl(0 0% 0% / 0.25);',
   '.frosted-surface[data-background-tone="dark"]',
   '--frosted-surface-fg: var(--frosted-surface-fg-on-dark);',
   '--frosted-surface-muted-color: var(--frosted-surface-muted-fg-on-dark);',
@@ -670,6 +673,23 @@ for (const snippet of [
 ]) {
   assertIncludes(frostedSurfaceCss, snippet, `FrostedSurface CSS must include ${snippet}.`)
 }
+// 亮背景 tone 投影与液态玻璃库投影 / --shadow-overlay「数值对齐、定义互不引用」：
+// 磨砂侧持自己的字面量（不引 var(--shadow-overlay)，token 也不进组件），任一侧
+// 改动须四处手动同步（tokens.css+两 registry+库/磨砂两字面量）。
+assert.ok(
+  frostedSurfaceCss.includes('box-shadow: 0 12px 40px hsl(0 0% 0% / 0.25);') &&
+    tokensCss.includes('--shadow-overlay: 0 12px 40px hsl(0 0% 0% / 0.25);') &&
+    !frostedSurfaceCss.includes('var(--shadow-overlay)'),
+  'The light-tone frosted drop shadow must stay value-aligned with --shadow-overlay while keeping its own literal (no var reference).',
+)
+assert.ok(
+  !cssBlockFor(frostedSurfaceCss, '.frosted-surface[data-background-tone="dark"]').includes('box-shadow'),
+  'Dark tone must keep the invisible base shadow (no opaque shadow on dark backgrounds).',
+)
+assert.ok(
+  cssBlockFor(frostedSurfaceCss, '.frosted-surface[data-background-tone="light"]').includes('border-color: transparent;'),
+  'Light tone must hide the frosted border (transparent 1px geometry kept) like the light-theme popup surface, deferring elevation to the drop shadow.',
+)
 assertOmits(
   frostedSurfaceCss,
   'border: 1px solid var(--color-border);',

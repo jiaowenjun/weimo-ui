@@ -12,11 +12,15 @@
 
     color: var(--frosted-surface-fg);
     border: 1px solid transparent;
+    /* 透明同形投影：暗背景/未采样态视觉无阴影；保持「同形不同 alpha」而非 none，
+       tone 翻转时 box-shadow 走 alpha 插值平滑过渡（none 与实影之间会瞬跳）。 */
+    box-shadow: 0 12px 40px hsl(0 0% 0% / 0);
     backdrop-filter: blur(var(--frosted-blur));
     -webkit-backdrop-filter: blur(var(--frosted-blur));
     transition:
       color var(--frosted-surface-tone-transition-duration) ease,
-      border-color var(--frosted-surface-tone-transition-duration) ease;
+      border-color var(--frosted-surface-tone-transition-duration) ease,
+      box-shadow var(--frosted-surface-tone-transition-duration) ease;
   }
 
   /* 描边为 opt-in：基类默认透明（1px 几何保留，与有边框实例并排时内边距节奏一致，
@@ -25,9 +29,15 @@
     border-color: var(--frosted-surface-border);
   }
 
+  /* 亮背景投影与液态玻璃库投影 / --shadow-overlay 数值对齐（偏移 12px、模糊
+     40px、黑 25%），三处各持字面量互不引用，改动须手动同步；暗背景维持无影。
+     亮背景描边随投影隐藏（与浮层亮主题同构：层级由投影表达，1px 几何保留），
+     特异性 0-2-0 压过 --bordered 的 var 声明，插值边框色照常计算只是不再可见。 */
   .frosted-surface[data-background-tone="light"] {
     --frosted-surface-fg: var(--frosted-surface-fg-on-light);
     --frosted-surface-muted-color: var(--frosted-surface-muted-fg-on-light);
+    border-color: transparent;
+    box-shadow: 0 12px 40px hsl(0 0% 0% / 0.25);
   }
 
   .frosted-surface[data-background-tone="dark"] {

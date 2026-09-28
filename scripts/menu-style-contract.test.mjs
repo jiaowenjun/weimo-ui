@@ -91,7 +91,15 @@ assert.ok(
     frostedSurfaceCss.includes('border-color: var(--frosted-surface-border);'),
   'FrostedSurface must keep its stroke opt-in on the --bordered modifier using the background-aware border token.',
 )
-assert.ok(!frostedSurfaceCss.includes('box-shadow:'), 'FrostedSurface must not use inner or outer shadow effects.')
+// 磨砂材质允许的唯一投影=亮背景 tone 投影对（透明基座+25% 亮态，与液态玻璃库
+// 投影 / --shadow-overlay 数值对齐）；除此之外不得引入任何阴影（含 inset 内影）。
+for (const shadowDeclaration of frostedSurfaceCss.match(/box-shadow:[^;]+;/g) ?? []) {
+  assert.ok(
+    shadowDeclaration === 'box-shadow: 0 12px 40px hsl(0 0% 0% / 0);' ||
+      shadowDeclaration === 'box-shadow: 0 12px 40px hsl(0 0% 0% / 0.25);',
+    `FrostedSurface may only declare the tone-interpolable light-background drop shadow pair, found "${shadowDeclaration}".`,
+  )
+}
 assert.ok(!frostedSurfaceCss.includes('--glass-shadow'), 'FrostedSurface must not depend on glass shadow tokens.')
 assert.ok(menuSource.includes('className="weimo-menu__positioner"'), 'Menu positioner must expose a stable class for layer styling.')
 assert.ok(menuSource.includes('data-slot="menu-positioner"'), 'Menu positioner must expose a stable data-slot for diagnostics.')

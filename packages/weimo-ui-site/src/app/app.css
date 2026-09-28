@@ -1295,12 +1295,12 @@
 
 /* 画布与示例等高后,预览窗默认的 overflow: hidden 会把真实阴影整体裁掉
    (卡片 --shadow-card 0 2px 8px、浮层 --shadow-overlay 0 12px 40px,与
-   液态玻璃库投影数值对齐);让阴影画进卡片 padding,浮层卡是页面最后一张卡,
-   阴影透到页底空白处。
+   液态玻璃库投影/磨砂亮背景 tone 投影数值对齐);让阴影画进卡片 padding,
+   浮层卡是页面最后一张卡,阴影透到页底空白处。
    底部操作栏画布同例:示例容器已换成 CardSurface,阴影同样要落进卡片 padding。
    液态系画布(工具栏/图标按钮组/胶囊)同例:库投影比画布(80px 高)大得多,
-   同样要落进卡片 padding。 */
-.component-preview-card:has(.card-surface-preview, .popup-surface-preview, .internal-bottom-preview, .liquid-glass-preview, .liquid-glass-toolbar-preview, .liquid-glass-icon-preview, .liquid-glass-chip-preview, .capsule-slot-preview, .liquid-glass-label-preview) .base-card__content {
+   同样要落进卡片 padding。磨砂瓦片在亮背景 tone 下投影同形,一并放行。 */
+.component-preview-card:has(.card-surface-preview, .popup-surface-preview, .frosted-surface-preview__tile, .internal-bottom-preview, .liquid-glass-preview, .liquid-glass-toolbar-preview, .liquid-glass-icon-preview, .liquid-glass-chip-preview, .capsule-slot-preview, .liquid-glass-label-preview) .base-card__content {
   overflow: visible;
 }
 
