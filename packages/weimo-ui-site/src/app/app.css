@@ -368,6 +368,9 @@
   justify-self: center;
 }
 
+/* 不设 overflow: hidden：贴底工具栏(实为 BottomBar 封装)四周 12px 内缩不碰
+   卡片圆角,磨砂 tone 投影需溢出内嵌卡画进外层卡片 padding(外层画布已经
+   :has 放行);与底部操作栏演示卡同构。 */
 .internal-card-tool-bar-preview__surface {
   position: relative;
   display: grid;
@@ -375,7 +378,6 @@
   min-height: 180px;
   align-items: start;
   padding: 20px;
-  overflow: hidden;
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   background: var(--color-bg-card);
