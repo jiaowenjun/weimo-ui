@@ -1,8 +1,21 @@
 # weimo-ui-image
 
-`weimo-ui-image` 是 Weimo UI 的图片处理与预览 workspace 子项目，包含 `ImageView`、`ImageUploader` 和 `CanvasTransparency`。它唯一的 workspace 内部依赖是 `weimo-ui-core`。
+`weimo-ui-image` 拥有图片选择、展示和画布透明化能力，唯一的 workspace 依赖是 `weimo-ui-core`。
 
-组件按子路径导入：
+该包标记为 `private`。仓库外调用者应使用根包的 `weimo-ui/components/*` 入口。
+
+## 组件入口
+
+| 入口 | 导出 | 职责 |
+| --- | --- | --- |
+| `components/image-uploader` | `ImageUploader` | 文件选择、拖放、剪贴板粘贴与本地预览 |
+| `components/image-view` | `ImageView` | 图片展示、尺寸模式、拖拽查看与原图弹层 |
+| `components/canvas-transparency` | `CanvasTransparency` | 按背景色生成透明化图片并适配明暗主题 |
+| `components/canvas-transparency-cache` | 缓存 API | 透明化结果的获取、复用与释放 |
+
+`ImageUploader` 和 `ImageView` 的 CSS 另有 `styles/*` 入口。完整清单以本包 `package.json#exports` 为准；包根不提供 `.` 导出。
+
+## Workspace 使用
 
 ```tsx
 import { CanvasTransparency } from 'weimo-ui-image/components/canvas-transparency'
@@ -10,16 +23,30 @@ import { ImageUploader } from 'weimo-ui-image/components/image-uploader'
 import { ImageView } from 'weimo-ui-image/components/image-view'
 ```
 
-包直接导出 TypeScript、TSX 与 CSS 源码，消费方需要支持这些源码格式，并安装 React peer dependencies。
+组件直接导入自身样式，并以 TypeScript、TSX 与 CSS 源码交付。
+
+## 依赖边界
+
+- 只依赖 `weimo-ui-core` 的对话框、菜单、按钮和工具函数。
+- 上传协议、远端存储与 URL 持久化属于调用方职责。
+- Canvas 处理模型和缓存由 `canvas-transparency/` 组件族拥有，其他包不能引用其内部文件。
+- 组件之间使用明确实现路径，不维护扁平转发入口。
 
 ## 源码结构
 
 ```text
 src/components/
-├── canvas-transparency/  # 透明化组件、缓存与图像处理模型
-├── image-uploader/       # 图片选择、预览与上传交互
-└── image-view/           # 图片展示、详情查看与展示模式菜单
+├── canvas-transparency/  # 组件、图像处理模型与缓存
+├── image-uploader/       # 文件输入、拖放、粘贴和预览
+└── image-view/           # 展示模式、详情弹层和交互
 ```
 
-公开子路径直接指向对应组件目录中的实现。实现、样式和内部模型放在同一目录；
-组件内部使用相对导入，跨组件通过明确的实现路径依赖。
+## 验证
+
+```bash
+pnpm --filter weimo-ui-image test:typecheck
+pnpm test:contracts
+pnpm test:runtime
+```
+
+整体边界见[组件架构与设计规范](../../docs/architecture/component-architecture.md)。

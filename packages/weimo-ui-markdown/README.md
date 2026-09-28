@@ -1,22 +1,43 @@
 # weimo-ui-markdown
 
-`weimo-ui-markdown` 是 Weimo UI 的 Markdown 渲染、编辑、数学公式和视图切换子项目，唯一的 workspace 内部依赖是 `weimo-ui-core`。
+`weimo-ui-markdown` 拥有 Markdown 渲染、Tiptap 编辑、数学公式和查看/编辑模式编排。它唯一的 workspace 依赖是 `weimo-ui-core`。
 
-组件按子路径导入：
+该包标记为 `private`。仓库外调用者应使用根包的 `weimo-ui/components/*` 与 `weimo-ui/styles/tokens.css` 入口。
+
+## 组件入口
+
+| 入口 | 导出 | 职责 |
+| --- | --- | --- |
+| `components/md-render` | `MdRender` | 安全的只读 Markdown 渲染 |
+| `components/md-editor` | `MdEditor` | Tiptap 编辑器及公开编辑器类型 |
+| `components/md-view` | `MdView` | 查看/编辑切换、延迟加载和布局保护 |
+| `components/math-editor` | `MathEditor` | 数学公式编辑弹层 |
+| `components/deferred-md-editor-toolbar` | 延迟工具栏 | 编辑器工具栏的异步加载边界 |
+
+样式入口包括 `styles/tokens.css`、`styles/markdown-content.css`、`styles/md-editor.css` 和 `styles/md-view.css`。完整清单以本包 `package.json#exports` 为准；包根不提供 `.` 导出。
+
+## Workspace 使用
 
 ```tsx
-import { MdRender } from 'weimo-ui-markdown/components/md-render'
 import { MdEditor } from 'weimo-ui-markdown/components/md-editor'
+import { MdRender } from 'weimo-ui-markdown/components/md-render'
 import { MdView } from 'weimo-ui-markdown/components/md-view'
 ```
 
-应用入口导入 token：
+应用入口加载 Markdown token。该入口会同时加载 core token：
 
 ```ts
 import 'weimo-ui-markdown/styles/tokens.css'
 ```
 
-包直接导出 TypeScript、TSX 与 CSS 源码，消费方需要支持这些源码格式，并安装组件声明的 Markdown/Tiptap 运行时依赖。
+组件会导入各自的结构样式，并以 TypeScript、TSX 与 CSS 源码交付。
+
+## 依赖边界
+
+- 只依赖 `weimo-ui-core` 的控件、材质和工具函数。
+- `MdRender`、`MdEditor` 与 `MdView` 通过公开子路径协作，不依赖彼此的内部文件。
+- 共享 Markdown 语义处理放在 `components/markdown/`，仅由本包组件使用。
+- DOM 测量由拥有真实 DOM 的组件暴露稳定能力，父组件不能查询编辑器内部选择器。
 
 ## 源码结构
 
@@ -24,10 +45,18 @@ import 'weimo-ui-markdown/styles/tokens.css'
 src/
 ├── components/
 │   ├── markdown/   # 渲染器与编辑器共享的纯 Markdown 语义处理
-│   ├── md-render/  # Markdown 渲染实现
-│   ├── md-editor/  # Tiptap 编辑器、扩展、工具栏与数学编辑子组件
-│   └── md-view/    # 渲染/编辑模式编排与布局保护
+│   ├── md-render/  # 只读渲染
+│   ├── md-editor/  # Tiptap 编辑器、扩展、工具栏和数学编辑
+│   └── md-view/    # 模式编排、延迟加载与布局保护
 └── styles/         # Markdown token 与共享内容样式
 ```
 
-公开子路径直接指向对应组件目录中的实现或聚合入口。组件族内部使用相对导入，跨组件族通过 `weimo-ui-markdown/components/*` 的公开子路径依赖。
+## 验证
+
+```bash
+pnpm --filter weimo-ui-markdown test:typecheck
+pnpm test:contracts
+pnpm test:runtime
+```
+
+整体边界见[组件架构与设计规范](../../docs/architecture/component-architecture.md)。

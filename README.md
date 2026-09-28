@@ -221,7 +221,7 @@ import { Heatmap } from 'weimo-ui/components/heatmap'
 import { TagTree } from 'weimo-ui/components/tag-tree'
 ```
 
-不需要复制组件源码，也不需要依赖仓库内部的目录结构。组件的样式会随组件加载；全局 token 只需在应用入口导入一次。
+根包不提供 `weimo-ui` 根入口，请始终选择明确的 `components/*`、`styles/*` 或 `lib/*` 子路径。不需要依赖仓库内部的 workspace 目录结构，也不要从 `packages/*/src` 导入实现。组件样式会随组件加载；全局 token 只需在应用入口导入一次。
 
 ## 本地开发
 
@@ -235,6 +235,12 @@ pnpm dev
 ```
 
 然后打开 `http://localhost:5176/weimo-ui/`。组件目录会展示每个组件的预览、参数和可复制的导入方式。
+
+参与维护时，可以从以下文档开始：
+
+- [维护文档导航](docs/README.md)
+- [组件架构与设计规范](docs/architecture/component-architecture.md)
+- [各子项目职责与入口](docs/README.md#子项目文档)
 
 ## 许可
 

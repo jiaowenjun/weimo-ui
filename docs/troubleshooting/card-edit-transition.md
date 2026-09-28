@@ -1,4 +1,4 @@
-# Card 组件过渡动画问题及解决方案
+# Card 编辑态过渡排查
 
 ## 背景
 
@@ -12,7 +12,9 @@
 - 标签栏和工具栏从普通流布局切换为绝对定位布局。
 - CSS transition 和 WAAPI 动画同时作用于 `transform`。
 
-本次修复的核心经验是：高度和位置必须分阶段测量，动画必须明确区分“布局目标位置”和“视觉过渡位移”。
+相关实现集中在 `packages/weimo-ui-card/src/components/card/` 和 `packages/weimo-ui-markdown/src/components/md-view/`。排查时应从这两个组件族的公开协作契约入手，不跨目录依赖编辑器内部 DOM。
+
+核心经验是：高度和位置必须分阶段测量，动画必须明确区分“布局目标位置”和“视觉过渡位移”。
 
 ## 问题一：进入编辑态前目标高度偏小
 
@@ -154,24 +156,27 @@ element.animate(
 - 编辑器真实内容已经变高。
 - 标签栏和工具栏视觉位置跟随真实内容下移。
 - `Card` 记录的编辑布局高度仍停留在进入编辑态时的旧高度。
-- `exitEditMode()` 锁定当前卡片高度时，拿到的是偏小的外壳高度。
+- `exitEdit()` 锁定当前卡片高度时，拿到的是偏小的外壳高度。
 - 随后退出流程切换到展示态目标布局，底部浮动工具栏还没开始消失动画，就先被偏小的 `overflow: hidden` 容器裁切。
 
 这说明退出动画的起点高度也必须可信。只重新测量展示态目标高度不够，如果编辑态期间的当前布局没有同步，动画会从错误的起点开始。
 
 ### 解决方案
 
-在编辑态内容变化后，复用 `MdView.getContentHeight()` 重新读取编辑内容高度，并用当前布局的展示态内容高度计算新的 `contentExtraHeight`：
+`MdEditor` 使用 `ResizeObserver` 监测真实编辑内容高度，并通过 `onContentHeightChange` 上报。`Card` 用当前布局的展示态内容高度计算新的 `contentExtraHeight`：
 
 ```ts
-function syncEditLayoutContentHeight() {
+function handleEditorContentHeightChange(editorContentHeight: number) {
   if (mode !== 'edit') return
-  if (!editorInstance) return
+  if (!Number.isFinite(editorContentHeight) || editorContentHeight <= 0) return
 
   setEditLayout((currentLayout) => {
     if (!currentLayout) return currentLayout
 
-    const nextContentExtraHeight = resolveEditorContentExtraHeight(currentLayout)
+    const nextContentExtraHeight = resolveEditorContentExtraHeight(
+      currentLayout,
+      editorContentHeight,
+    )
     if (nextContentExtraHeight === currentLayout.contentExtraHeight) return currentLayout
 
     return {
@@ -182,11 +187,11 @@ function syncEditLayoutContentHeight() {
 }
 ```
 
-再用 `useLayoutEffect` 监听 `draft.content`、`editorInstance` 和 `mode`，确保 React/Tiptap DOM 更新后、浏览器绘制前完成布局同步。
+初次进入编辑态仍可通过 `MdView.getContentHeight()` 主动测量；后续内容增长、缩短和排版变化由编辑器的尺寸观察负责，不要求父组件追踪 Tiptap 内部 DOM 更新时机。
 
 关键点：
 
-- 不直接从 `Card` 查询编辑器内部长选择器，继续通过 `MdView` 的内部测量 API 获取内容高度。
+- 不直接从 `Card` 查询编辑器内部长选择器，通过 `MdView` 测量 API 和 `MdEditor` 高度回调获取内容高度。
 - 只在 `contentExtraHeight` 变化时更新 `editLayout`，避免无意义重渲染。
 - 编辑态增长和缩短都需要同步，因为保存、取消或继续编辑时都依赖当前布局高度。
 - 退出动画需要两个正确值：当前编辑态起点高度，以及切回展示态后的目标高度。任意一个过期都会产生跳闪或裁切。
@@ -262,13 +267,13 @@ export type CardMode = 'view' | 'preparing-edit' | 'edit'
 
 退出流程需要重新测量自然展示态布局，然后再做高度动画和标签栏/工具栏位移动画。
 
-### 3.1 编辑态期间也要同步当前布局
+### 4. 编辑态期间也要同步当前布局
 
 重新测量退出目标只能保证 Last 正确，不能保证 First 正确。
 
 如果用户在编辑态新增或删除内容，`contentExtraHeight` 应随编辑内容高度变化持续同步。否则保存时锁定的当前高度可能是旧布局高度，导致退出动画从错误起点开始。
 
-### 3.2 可见状态和准备状态分离
+### 5. 可见状态和准备状态分离
 
 编辑器、图表、富文本等子组件可能存在异步初始化阶段。父组件不能把“进入编辑态”理解为“立即显示编辑 DOM”。
 
@@ -280,13 +285,13 @@ export type CardMode = 'view' | 'preparing-edit' | 'edit'
 
 这样可以避免 skeleton、默认尺寸、未初始化实例和第一次重排直接进入用户视野。
 
-### 4. 使用 transform 动画位置，不动画布局属性
+### 6. 使用 transform 动画位置，不动画布局属性
 
 标签栏和工具栏这类浮动元素应优先使用 `transform` 过渡。
 
 `top`、`bottom`、`inset-block-start` 等布局属性适合表达最终布局，不适合承担每帧动画。这样可以减少 layout 抖动，也能避免滚动区域和绝对定位元素互相影响。
 
-### 5. WAAPI 动画要保留 CSS 基础 transform
+### 7. WAAPI 动画要保留 CSS 基础 transform
 
 如果元素自身 CSS 已经有 transform，WAAPI 动画不能简单写 `translateY(delta) -> translateY(0)`。
 
@@ -298,13 +303,13 @@ base + delta -> base
 
 这条经验尤其适用于同时有“位置动画”和“显示/隐藏微位移”的浮动工具栏。
 
-### 6. 先稳定目标态，再测 Last
+### 8. 先稳定目标态，再测 Last
 
 FLIP 的 Last 必须是目标态的稳定位置。
 
 如果某个 CSS class 或 data attribute 用来关闭 transition、切换隐藏态、或者改变目标 transform，应先设置它，再读取 `getBoundingClientRect()` 和 computed style。
 
-### 7. 小位移无动画时要清理临时状态
+### 9. 小位移无动画时要清理临时状态
 
 如果 `Math.abs(delta) < 0.5` 直接跳过动画，需要同步清理临时 `data-*` 标记，避免元素残留在 exit-animating 状态。
 
@@ -338,7 +343,7 @@ Card 过渡动画后续应尽量用契约测试锁住关键时序：
 - 退出动画读取目标态 computed transform。
 - WAAPI 关键帧使用 `baseTranslateY + delta -> baseTranslateY`。
 - `data-exit-animating` 在测量 Last 前设置。
-- 编辑态 `draft.content` 变化后会重新同步 `contentExtraHeight`。
+- 编辑内容尺寸变化后会通过 `onContentHeightChange` 重新同步 `contentExtraHeight`。
 - 双击正文进入编辑态会先进入 `preparing-edit`。
 - `MdView preloadEditor` 期间继续可见渲染 `MdRender`，并隐藏预加载 `MdEditor`。
 - editor 实例 ready 后才从 `preparing-edit` 推进到 `edit`。

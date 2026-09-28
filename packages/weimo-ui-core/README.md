@@ -1,38 +1,70 @@
 # weimo-ui-core
 
-`weimo-ui-core` 是 Weimo UI workspace 中的基础 React 源码包，承载通用 Token / 样式、Surface / 材质、控件 / 弹层、布局 / 栏位，以及基础卡片和预览卡片壳层。Markdown 专用 token 与组件位于 `weimo-ui-markdown`。
+`weimo-ui-core` 是 workspace 的基础组件包，拥有全局 token、语义样式变体、Surface、基础控件、布局壳和通用行为。它不依赖其他 workspace 包。
 
-组件按子路径导入：
+该包标记为 `private`，用于仓库内分层和依赖约束。仓库外调用者应使用根包的 `weimo-ui/components/*` 与 `weimo-ui/styles/*` 入口。
+
+## 主要入口
+
+| 分类 | 入口 |
+| --- | --- |
+| Token | `styles/tokens.css` |
+| 材质 | `components/card-surface`、`frosted-surface`、`popup-surface`、`liquid-glass` |
+| 按钮与控件 | `components/text-button`、`capsule-button`、`frosted-icon-button`、`ghost-icon-button`、`slider` |
+| 组合组件 | `components/menu`、`action-dialog`、`mode-button`、`base-card`、`component-preview-card` |
+| 布局 | `components/sidebar`、`top-bar`、`bottom-bar`、`float-bar` |
+| 样式变体 | `components/font-size`、`text-color`、`bg-color`、`bg-blur`、`heat-color`、`border-color`、`border-radius`、`pressable` |
+| 通用行为 | `components/animated-inline-size`、`lib/use-infinite-list-sentinel` |
+| 基础适配 | `components/coss/*` |
+
+完整可导入路径以本包 `package.json#exports` 为准。包根不提供 `.` 导出。
+
+## Workspace 使用
 
 ```tsx
 import { FrostedSurface } from 'weimo-ui-core/components/frosted-surface'
+import { SideBar } from 'weimo-ui-core/components/sidebar'
 import { TextButton } from 'weimo-ui-core/components/text-button'
-import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 ```
 
-全局 token 需在应用入口导入一次：
+应用入口加载一次全局 token：
 
 ```ts
 import 'weimo-ui-core/styles/tokens.css'
 ```
 
-包直接导出 TypeScript、TSX 与 CSS 源码，消费方需要支持这些源码格式。
+组件会导入自身样式。单独的 `styles/*` 入口用于 Registry、手动样式组合和不加载组件实现的场景。
+
+## 依赖边界
+
+- 不依赖 `weimo-ui-card`、`weimo-ui-image`、`weimo-ui-markdown`、`weimo-ui-stats`、`weimo-ui-tagtree` 或站点包。
+- 组件族内部使用相对导入；跨组件族使用 `weimo-ui-core/components/*`、`styles/*` 或 `lib/*`。
+- 基础适配层只封装 Base UI 等通用原语，不承载业务数据和页面流程。
+- 下游包只能通过显式子路径消费 core，不能引用 `src` 物理路径。
 
 ## 源码结构
 
 ```text
 src/
-├── behaviors/   # 可跨组件复用的交互与测量行为
+├── behaviors/             # 可跨组件复用的交互与测量行为
 ├── components/
-│   ├── primitives/  # Base UI 等基础适配层；公开路径仍为 components/coss/*
-│   ├── surfaces/    # 卡片、弹层、磨砂与液态玻璃材质
-│   ├── controls/    # 按钮、胶囊、滑块等输入控件
-│   ├── layout/      # 浮动栏、顶部栏与侧边栏
-│   └── composites/  # 菜单、对话框、模式按钮与卡片组合
-├── lib/         # 无 UI 所有权的公共工具
-└── styles/      # 全局 token 与语义样式变体
+│   ├── primitives/        # Base UI 等基础适配层
+│   ├── surfaces/          # 卡片、弹层、磨砂和液态玻璃材质
+│   ├── controls/          # 按钮、胶囊和滑块
+│   ├── layout/            # 栏位与响应式侧栏
+│   └── composites/        # 菜单、对话框、模式按钮和卡片壳
+├── lib/                   # 无 UI 所有权的通用工具
+└── styles/                # 全局 token 与语义样式变体
 ```
 
-同一组件或组件族的实现、模型与 CSS 放在同一目录。族内使用相对导入；跨组件族通过
-`weimo-ui-core/components/*`、`weimo-ui-core/styles/*` 或
-`weimo-ui-core/lib/*` 的稳定子路径依赖，源码物理位置不属于公共 API。
+同一组件族的实现、模型和 CSS 放在同一目录。公开子路径直接指向真实实现，不增加包根 barrel 或扁平转发文件。
+
+## 验证
+
+```bash
+pnpm --filter weimo-ui-core test:typecheck
+pnpm test:contracts
+pnpm catalog:check
+```
+
+整体边界见[组件架构与设计规范](../../docs/architecture/component-architecture.md)。
