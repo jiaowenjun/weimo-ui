@@ -78,6 +78,8 @@ for (const snippet of [
   '<ComponentPreviewCard align="center" items={switchItems} label="开关">',
   "token: '--switch-track-bg'",
   "token: '--switch-track-checked-bg'",
+  "value: 'hsl(0 0% 27.75%)'",
+  "darkValue: 'hsl(0 0% 83.4%)'",
   "token: '--switch-thumb-bg'",
   '<LabeledSwitch',
   'ariaLabel="启用"',
@@ -93,7 +95,7 @@ for (const snippet of [
 // 级联，天然不被其他组件使用），值别名共享色板；绘制必须经专属 token。
 for (const snippet of [
   '--switch-track-bg: var(--color-border);',
-  '--switch-track-checked-bg: var(--color-bg-primary);',
+  '--switch-track-checked-bg: color-mix(in srgb, var(--color-bg-primary), var(--color-bg-card) 15%);',
   '--switch-thumb-bg: var(--color-bg-page);',
   'background: var(--switch-track-bg);',
   'background: var(--switch-track-checked-bg);',

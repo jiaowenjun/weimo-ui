@@ -26,8 +26,8 @@ const docsDefinitionSource = readProjectFile(
 // 天然不被其他组件使用），值别名共享色板；绘制必须经专属 token。
 for (const snippet of [
   '--slider-track-bg: var(--color-border);',
-  '--slider-indicator-bg: var(--color-bg-primary);',
-  '--slider-thumb-bg: var(--color-bg-primary);',
+  '--slider-indicator-bg: color-mix(in srgb, var(--color-bg-primary), var(--color-bg-card) 15%);',
+  '--slider-thumb-bg: color-mix(in srgb, var(--color-bg-primary), var(--color-bg-card) 15%);',
   'background: var(--slider-track-bg);',
   'background: var(--slider-indicator-bg);',
   'background: var(--slider-thumb-bg);',
@@ -57,7 +57,6 @@ assert.equal(
 )
 
 for (const snippet of [
-  "import { bgColorToneMap } from 'weimo-ui-core/components/bg-color'",
   "import { borderColorToneMap } from 'weimo-ui-core/components/border-color'",
   "import { Slider } from 'weimo-ui-core/components/slider'",
   'items={sliderItems}',
@@ -65,6 +64,8 @@ for (const snippet of [
   "token: '--slider-track-bg'",
   "token: '--slider-indicator-bg'",
   "token: '--slider-thumb-bg'",
+  "value: 'hsl(0 0% 27.75%)'",
+  "darkValue: 'hsl(0 0% 83.4%)'",
   "id: 'slider'",
   'preview: () => <SliderDemo />',
 ]) {
