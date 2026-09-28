@@ -1,5 +1,10 @@
 @layer components {
   .coss-switch {
+    /* 组件专属背景 token：定义在 .coss-switch 内部、仅开关子树可用，
+       值别名共享色板（禁裸色值），视觉与共享 token 保持单源同步。 */
+    --switch-track-bg: var(--color-border);
+    --switch-track-checked-bg: var(--color-bg-primary);
+    --switch-thumb-bg: var(--color-bg-page);
     --switch-thumb-size: 14px;
     display: inline-flex;
     flex: none;
@@ -7,21 +12,21 @@
     width: calc(var(--switch-thumb-size) * 2 + 6px);
     height: calc(var(--switch-thumb-size) + 4px);
     padding: 2px;
-    background: var(--color-border);
+    background: var(--switch-track-bg);
     border-radius: var(--radius-round);
     cursor: pointer;
     transition: background 160ms ease;
   }
 
   .coss-switch[data-checked] {
-    background: var(--color-bg-primary);
+    background: var(--switch-track-checked-bg);
   }
 
   .coss-switch__thumb {
     width: var(--switch-thumb-size);
     height: var(--switch-thumb-size);
     border-radius: var(--radius-round);
-    background: var(--color-bg-page);
+    background: var(--switch-thumb-bg);
     transform: translateX(0);
     transition: transform 160ms ease;
   }
