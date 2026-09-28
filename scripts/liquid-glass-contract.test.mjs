@@ -17,13 +17,13 @@ const componentSource = readProjectFile('packages/weimo-ui-core/src/components/s
 const componentCss = readProjectFile('packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass.css')
 const engineSource = readProjectFile('packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass-react/index.tsx')
 const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/surface.tsx')
-const tileSource = readProjectFile('packages/weimo-ui-site/src/docs/components/liquid-glass-tile.tsx')
+const tileSource = readProjectFile('packages/weimo-ui-site/src/docs/previews/liquid-glass-tile.tsx')
 const buttonDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/button.tsx')
 const capsuleButtonDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule-button.tsx')
 const barDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/bar.tsx')
 const pageLayoutDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/page-layout.tsx')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
+const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const frostedSurfaceSource = readProjectFile('packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx')
 const glassLabelSource = readProjectFile('packages/weimo-ui-core/src/components/surfaces/liquid-glass/glass-label.tsx')
 const glassLabelCss = readProjectFile('packages/weimo-ui-core/src/components/surfaces/liquid-glass/glass-label.css')
@@ -98,7 +98,7 @@ for (const snippet of [
   'label="液态玻璃材质"',
   '<LiquidGlassSurface',
   "from 'weimo-ui-core/components/liquid-glass'",
-  "import { LiquidGlassTile } from '../../../components/liquid-glass-tile'",
+  "import { LiquidGlassTile } from '../../../previews/liquid-glass-tile'",
 ]) {
   assert.ok(
     definitionSource.includes(snippet),
@@ -115,7 +115,7 @@ for (const snippet of [
   'label="液态玻璃图标按钮"',
   'label="液态玻璃图标按钮组"',
   '<LiquidGlassSurface cornerRadius={999}',
-  "import { LiquidGlassTile } from '../../../components/liquid-glass-tile'",
+  "import { LiquidGlassTile } from '../../../previews/liquid-glass-tile'",
 ]) {
   assert.ok(
     buttonDefinitionSource.includes(snippet),

@@ -7,7 +7,7 @@ import { EditableCapsule } from 'weimo-ui-card/components/editable-capsule'
 import { CapsuleButton } from 'weimo-ui-core/components/capsule-button'
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import type { ComponentDefinition } from '../../component-docs'
-import { PreviewToggle } from '../../../components/preview-toggle'
+import { PreviewToggle } from '../../../previews/preview-toggle'
 
 const tagOptions = [
   '工作/项目', '写作/日记', '研究/论文', '生活/灵感', '阅读/摘录',

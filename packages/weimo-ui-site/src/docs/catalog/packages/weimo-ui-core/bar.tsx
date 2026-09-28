@@ -9,8 +9,8 @@ import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview
 import { FloatBar } from 'weimo-ui-core/components/float-bar'
 import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'
 import type { ComponentDefinition } from '../../component-docs'
-import { GlassPreviewCard } from '../../../components/glass-preview-card'
-import { LiquidGlassTile } from '../../../components/liquid-glass-tile'
+import { GlassPreviewCard } from '../../../previews/glass-preview-card'
+import { LiquidGlassTile } from '../../../previews/liquid-glass-tile'
 
 // 玻璃标签:液态玻璃材质的标题文字胶囊(全胶囊圆角),文字色随画布 tone
 // 自适应;sm 档用于工具栏栏位标题,lg 档(粗体)用于页面标题。

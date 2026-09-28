@@ -41,7 +41,7 @@ const menuCss = readProjectFile('packages/weimo-ui-core/src/components/composite
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/border-tokens.tsx')
-const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
+const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const rootRegistry = readJson('registry.json')
 const styleRegistry = readJson('registry/style.json')
@@ -215,6 +215,6 @@ assert.deepEqual(
 )
 
 assert.ok(
-  !appCss.includes('border-radius: 1rem;') && !readProjectFile('packages/weimo-ui-site/src/index.css').includes('border-radius: 5px;'),
+  !appCss.includes('border-radius: 1rem;') && !readProjectFile('packages/weimo-ui-site/src/styles/global.css').includes('border-radius: 5px;'),
   'weimo-ui runtime CSS must not keep hard-coded radius values that match shared radius tokens.',
 )

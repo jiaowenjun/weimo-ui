@@ -38,7 +38,7 @@ const css = readProjectFile('packages/weimo-ui-core/src/components/controls/text
 const docsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/button.tsx')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
+const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const registryItem = rootRegistry.items.find((item) => item.name === 'text-button')
 
 const baseBlock = cssBlockFor(css, '.text-button')

@@ -22,7 +22,7 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '../components/coss/command'
+} from '../../components/primitives/command'
 import { TopBar } from 'weimo-ui-core/components/top-bar'
 import { GlassLabel } from 'weimo-ui-core/components/glass-label'
 import { LiquidGlassSurface } from 'weimo-ui-core/components/liquid-glass'
@@ -33,11 +33,11 @@ import {
   componentDocPackages,
   componentDocs,
   type ComponentDocPackage,
-} from './catalog/component-docs'
+} from '../catalog/component-docs'
 import { type DocsOutletContext } from './docs-outlet-context'
-import { componentHref, componentPath } from './routes'
-import { LiquidGlassTile } from './components/liquid-glass-tile'
-import { searchComponentDocs } from './catalog/search-component-docs'
+import { componentHref, componentPath } from '../routes'
+import { LiquidGlassTile } from '../previews/liquid-glass-tile'
+import { searchComponentDocs } from '../catalog/search-component-docs'
 
 type Theme = 'light' | 'dark' | 'system'
 

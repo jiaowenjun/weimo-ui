@@ -52,7 +52,7 @@ const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css'
 const docsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule-button.tsx')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
+const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 
 const baseBlock = cssBlockFor(surfaceCss, '.capsule-frame')
 const defaultLayerBlock = cssBlockFor(surfaceCss, '.capsule-frame::before')
@@ -277,8 +277,8 @@ assert.ok(
   docsSource.includes("import { useLayoutEffect, useRef, useState } from 'react'") &&
     docsSource.includes("import { Hash, X } from 'lucide-react'") &&
     docsSource.includes("import { CapsuleButton } from 'weimo-ui-core/components/capsule-button'") &&
-    docsSource.includes("import { GlassPreviewCard } from '../../../components/glass-preview-card'") &&
-    docsSource.includes("import { PreviewToggle } from '../../../components/preview-toggle'") &&
+    docsSource.includes("import { GlassPreviewCard } from '../../../previews/glass-preview-card'") &&
+    docsSource.includes("import { PreviewToggle } from '../../../previews/preview-toggle'") &&
     docsSource.includes("id: 'capsule-button'") &&
     docsSource.includes('function CapsuleMaterialDemo') &&
     docsSource.includes('<CapsuleMaterialDemo />') &&

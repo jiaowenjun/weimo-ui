@@ -56,11 +56,11 @@ const bgBlurCss = readProjectFile('packages/weimo-ui-core/src/styles/variants/ba
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/background-tokens.tsx')
-const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
+const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const tokenPreviewCardCss = readProjectFile('packages/weimo-ui-core/src/components/composites/cards/component-preview-card.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css')
-const commandCss = readProjectFile('packages/weimo-ui-site/src/components/coss/command.css')
+const commandCss = readProjectFile('packages/weimo-ui-site/src/components/primitives/command.css')
 const dialogCss = readProjectFile('packages/weimo-ui-core/src/components/primitives/dialog.css')
 const sidebarShellCss = readProjectFile('packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.css')
 const rootRegistry = readJson('registry.json')
@@ -240,8 +240,8 @@ assert.ok(
   docsDefinitionSource.includes("id: 'background-tokens'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
     docsDefinitionSource.includes("import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'") &&
-    docsDefinitionSource.includes("import { GlassPreviewCard } from '../../../components/glass-preview-card'") &&
-    docsDefinitionSource.includes("import { glassBackgroundGrayMidpoint } from '../../../components/glass-preview'") &&
+    docsDefinitionSource.includes("import { GlassPreviewCard } from '../../../previews/glass-preview-card'") &&
+    docsDefinitionSource.includes("import { glassBackgroundGrayMidpoint } from '../../../previews/glass-preview'") &&
     docsDefinitionSource.includes('initialGray={glassBackgroundGrayMidpoint}') &&
     docsDefinitionSource.includes('bgBlurTones.map') &&
     docsDefinitionSource.includes('bgBlurToneMap[tone]') &&

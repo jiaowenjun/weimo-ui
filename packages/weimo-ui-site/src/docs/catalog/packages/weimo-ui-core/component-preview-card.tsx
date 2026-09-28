@@ -6,8 +6,8 @@ import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview
 import { FrostedSurface } from 'weimo-ui-core/components/frosted-surface'
 import { TextButton } from 'weimo-ui-core/components/text-button'
 import type { ComponentDefinition } from '../../component-docs'
-import { GlassPreviewCard } from '../../../components/glass-preview-card'
-import { PreviewToggle } from '../../../components/preview-toggle'
+import { GlassPreviewCard } from '../../../previews/glass-preview-card'
+import { PreviewToggle } from '../../../previews/preview-toggle'
 
 // 示例 token 行直接取真实 token 表（通用 hover 底色 + 基础圆角）。
 const previewCardItems = [

@@ -31,7 +31,7 @@ const mdViewCssSource = readProjectFile('packages/weimo-ui-markdown/src/componen
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown.tsx')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
-const cssSource = readProjectFile('packages/weimo-ui-site/src/App.css')
+const cssSource = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 const markdownPackageJson = JSON.parse(readProjectFile('packages/weimo-ui-markdown/package.json'))
 const registryJson = JSON.parse(readProjectFile('registry.json'))
@@ -321,7 +321,7 @@ for (const snippet of [
   "import { useState } from 'react'",
   "import { MdView, type MdViewMode } from 'weimo-ui-markdown/components/md-view'",
   "import { TextButton } from 'weimo-ui-core/components/text-button'",
-  "import { PreviewToggle } from '../../../components/preview-toggle'",
+  "import { PreviewToggle } from '../../../previews/preview-toggle'",
   "import { mdRenderSample } from '../../fixtures/markdown-sample'",
   "const [mode, setMode] = useState<MdViewMode>('view')",
   'const [markdown, setMarkdown] = useState(mdRenderSample)',

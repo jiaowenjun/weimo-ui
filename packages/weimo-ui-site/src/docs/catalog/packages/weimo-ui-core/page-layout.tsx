@@ -5,8 +5,8 @@ import { GlassLabel } from 'weimo-ui-core/components/glass-label'
 import { LiquidGlassSurface } from 'weimo-ui-core/components/liquid-glass'
 import { TopBar } from 'weimo-ui-core/components/top-bar'
 import type { ComponentDefinition } from '../../component-docs'
-import { GlassPreviewCard } from '../../../components/glass-preview-card'
-import { LiquidGlassTile } from '../../../components/liquid-glass-tile'
+import { GlassPreviewCard } from '../../../previews/glass-preview-card'
+import { LiquidGlassTile } from '../../../previews/liquid-glass-tile'
 
 import { SideBarDrawerPreview } from './sidebar-preview'
 

@@ -8,7 +8,7 @@ import {
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import { MdView, type MdViewMode } from 'weimo-ui-markdown/components/md-view'
 import { TextButton } from 'weimo-ui-core/components/text-button'
-import { PreviewToggle } from '../../../components/preview-toggle'
+import { PreviewToggle } from '../../../previews/preview-toggle'
 import type { ComponentDefinition } from '../../component-docs'
 
 import { ControlledMdEditorDemo } from './md-editor-demos'

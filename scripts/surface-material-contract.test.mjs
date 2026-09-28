@@ -35,7 +35,7 @@ const rootRegistry = readJson('registry.json')
 const rootItemsByName = new Map(rootRegistry.items.map((item) => [item.name, item]))
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
-const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
+const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 
 const cardSurfaceSource = readProjectFile('packages/weimo-ui-core/src/components/surfaces/card-surface/card-surface.tsx')
 const cardSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/surfaces/card-surface/card-surface.css')
@@ -45,14 +45,14 @@ const popupSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/s
 
 const cardResolverSource = readProjectFile('packages/weimo-ui-card/src/components/card/card-resolvers.tsx')
 const sharedCardCss = readProjectFile('packages/weimo-ui-card/src/components/card/card.css')
-const cossCardSource = readProjectFile('packages/weimo-ui-site/src/components/coss/card.tsx')
-const cossCardCss = readProjectFile('packages/weimo-ui-site/src/components/coss/card.css')
+const cossCardSource = readProjectFile('packages/weimo-ui-site/src/components/primitives/card.tsx')
+const cossCardCss = readProjectFile('packages/weimo-ui-site/src/components/primitives/card.css')
 const sidebarSource = readProjectFile('packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.tsx')
 const sidebarCss = readProjectFile('packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.css')
 const dialogSource = readProjectFile('packages/weimo-ui-core/src/components/primitives/dialog.tsx')
 const dialogCss = readProjectFile('packages/weimo-ui-core/src/components/primitives/dialog.css')
-const commandSource = readProjectFile('packages/weimo-ui-site/src/components/coss/command.tsx')
-const commandCss = readProjectFile('packages/weimo-ui-site/src/components/coss/command.css')
+const commandSource = readProjectFile('packages/weimo-ui-site/src/components/primitives/command.tsx')
+const commandCss = readProjectFile('packages/weimo-ui-site/src/components/primitives/command.css')
 const tooltipSource = readProjectFile('packages/weimo-ui-core/src/components/primitives/tooltip.tsx')
 const tooltipCss = readProjectFile('packages/weimo-ui-core/src/components/primitives/tooltip.css')
 
@@ -163,10 +163,10 @@ for (const snippet of [
 
 // 标题栏开关（可见状态标签 + Switch）抽到 docs 共享组件：材质页三张卡的边框开关
 // 与按钮页启用/模式开关共用，契约锁共享文件。
-const previewToggleSource = readProjectFile('packages/weimo-ui-site/src/docs/components/preview-toggle.tsx')
+const previewToggleSource = readProjectFile('packages/weimo-ui-site/src/docs/previews/preview-toggle.tsx')
 
 for (const snippet of [
-  "import { Switch } from '../../components/coss/switch'",
+  "import { Switch } from '../../components/primitives/switch'",
   'export function PreviewToggle(',
   'ariaLabel: string',
   'label: ReactNode',

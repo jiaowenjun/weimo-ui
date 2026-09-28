@@ -53,7 +53,7 @@ const definitionSource = readProjectFile(
 const mdRenderDefinitionSource = readProjectFile(
   'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown.tsx',
 )
-const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
+const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const tokensCss = readProjectFile('packages/weimo-ui-markdown/src/styles/tokens.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 const markdownPackageJson = JSON.parse(readProjectFile('packages/weimo-ui-markdown/package.json'))
@@ -255,7 +255,7 @@ assert.ok(
 
 for (const snippet of [
   "import { MdRender } from 'weimo-ui-markdown/components/md-render'",
-  "import { CardPanel } from '../../../../components/coss/card'",
+  "import { CardPanel } from '../../../../components/primitives/card'",
   "import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'",
   "import { mdRenderSample } from '../../fixtures/markdown-sample'",
   'markdownStyleTokens',

@@ -38,7 +38,7 @@ const componentSource = readProjectFile('packages/weimo-ui-card/src/components/t
 const cssSource = readProjectFile('packages/weimo-ui-card/src/components/tags/tag-bar.css')
 const docsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/tag-bar.tsx')
 const tagtreePageSource = readProjectFile('packages/weimo-ui-tagtree/src/page/tag-page.tsx')
-const appCssSource = readProjectFile('packages/weimo-ui-site/src/App.css')
+const appCssSource = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const packageJson = readJson('package.json')
@@ -442,7 +442,7 @@ assert.ok(
 assert.ok(
   docsSource.includes("import { useState } from 'react'") &&
     docsSource.includes("import { TagBar } from 'weimo-ui-card/components/tag-bar'") &&
-    docsSource.includes("import { PreviewToggle } from '../../../components/preview-toggle'") &&
+    docsSource.includes("import { PreviewToggle } from '../../../previews/preview-toggle'") &&
     docsSource.includes('function TagBarDemo') &&
     docsSource.includes('label="标签栏"') &&
     docsSource.includes('<TagBarDemo />') &&

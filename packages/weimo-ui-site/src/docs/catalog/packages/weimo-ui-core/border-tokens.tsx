@@ -21,7 +21,7 @@ import {
   frostedSurfaceBorderAnchorMap,
   interpolateFrostedBorderColor,
 } from 'weimo-ui-core/components/frosted-surface-model'
-import { GlassPreviewCard } from '../../../components/glass-preview-card'
+import { GlassPreviewCard } from '../../../previews/glass-preview-card'
 import type { ComponentDefinition } from '../../component-docs'
 
 type BorderContextToken = {

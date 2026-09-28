@@ -27,7 +27,7 @@ const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/catalo
 const docsDefinition = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/ocr.tsx')
 const source = readProjectFile('packages/weimo-ui-card/src/components/ocr/ocr-card.tsx')
 const css = readProjectFile('packages/weimo-ui-card/src/components/ocr/ocr-card.css')
-const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
+const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const rootRegistry = readJson('registry.json')
 const standaloneRegistry = readJson('registry/ocr-card.json')
 const registryItem = rootRegistry.items.find((item) => item.name === 'ocr-card')

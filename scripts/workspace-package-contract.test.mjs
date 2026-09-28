@@ -321,14 +321,39 @@ for (const relativePath of [
   'packages/weimo-ui-site/index.html',
   'packages/weimo-ui-site/public/favicon.svg',
   'packages/weimo-ui-site/src/main.tsx',
-  'packages/weimo-ui-site/src/App.tsx',
-  'packages/weimo-ui-site/src/components/coss/card.tsx',
-  'packages/weimo-ui-site/src/components/coss/command.tsx',
-  'packages/weimo-ui-site/src/components/coss/switch.tsx',
+  'packages/weimo-ui-site/src/app/app.tsx',
+  'packages/weimo-ui-site/src/app/app.css',
+  'packages/weimo-ui-site/src/components/primitives/card.tsx',
+  'packages/weimo-ui-site/src/components/primitives/card.css',
+  'packages/weimo-ui-site/src/components/primitives/command.tsx',
+  'packages/weimo-ui-site/src/components/primitives/command.css',
+  'packages/weimo-ui-site/src/components/primitives/switch.tsx',
   'packages/weimo-ui-site/src/docs/components-manifest.ts',
+  'packages/weimo-ui-site/src/docs/pages/component-detail-page.tsx',
+  'packages/weimo-ui-site/src/docs/previews/glass-preview-card.tsx',
+  'packages/weimo-ui-site/src/docs/previews/preview-toggle.tsx',
+  'packages/weimo-ui-site/src/docs/shell/docs-outlet-context.ts',
+  'packages/weimo-ui-site/src/docs/shell/docs-shell.tsx',
+  'packages/weimo-ui-site/src/styles/global.css',
   'packages/weimo-ui-site/vite.config.ts',
 ]) {
   assert.ok(existsSync(join(root, relativePath)), `${relativePath} must exist.`)
+}
+for (const obsoletePath of [
+  'packages/weimo-ui-site/src/App.tsx',
+  'packages/weimo-ui-site/src/App.css',
+  'packages/weimo-ui-site/src/index.css',
+  'packages/weimo-ui-site/src/components/coss',
+  'packages/weimo-ui-site/src/docs/component-docs.tsx',
+  'packages/weimo-ui-site/src/docs/components',
+  'packages/weimo-ui-site/src/docs/docs-outlet-context.ts',
+  'packages/weimo-ui-site/src/docs/docs-shell.tsx',
+  'packages/weimo-ui-site/src/docs/search-component-docs.ts',
+]) {
+  assert.ok(
+    !existsSync(join(root, obsoletePath)),
+    `${obsoletePath} must stay removed after the site source layout refactor.`,
+  )
 }
 assert.equal(rootPackageJson.scripts.dev, 'pnpm --filter weimo-ui-site dev')
 assert.equal(rootPackageJson.scripts.build, 'pnpm --filter weimo-ui-site build')

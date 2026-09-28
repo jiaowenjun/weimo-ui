@@ -73,7 +73,7 @@ function assertDecodablePngDataUrl(dataUrl, message) {
 }
 
 const detailPageSource = readProjectFile('packages/weimo-ui-site/src/docs/pages/component-detail-page.tsx')
-const docsShellSource = readProjectFile('packages/weimo-ui-site/src/docs/docs-shell.tsx')
+const docsShellSource = readProjectFile('packages/weimo-ui-site/src/docs/shell/docs-shell.tsx')
 const componentDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/component-docs.tsx')
 const mdRenderDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown.tsx')
 const imageViewDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-image/image.tsx')
@@ -94,7 +94,7 @@ const componentDefinitionsSource = readProjectFile('packages/weimo-ui-site/src/d
   readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/action-dialog.tsx') +
   readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule-button.tsx') +
   mdRenderDefinitionSource
-const css = readProjectFile('packages/weimo-ui-site/src/App.css')
+const css = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const iconPreviewRowBlock = blockFor(css, '.icon-preview__row')
 
 assert.ok(
@@ -281,7 +281,7 @@ assert.ok(
     componentDefinitionsSource.includes("import { FrostedSurface } from 'weimo-ui-core/components/frosted-surface'") &&
     componentDefinitionsSource.includes("id: 'surface'") &&
     componentDefinitionsSource.includes('静态卡片、亮度自适应磨砂玻璃层、液态玻璃与抬升浮层的材质总览') &&
-    componentDefinitionsSource.includes("from '../../../components/glass-preview-card'") &&
+    componentDefinitionsSource.includes("from '../../../previews/glass-preview-card'") &&
     componentDefinitionsSource.includes('<GlassPreviewCard') &&
     !componentDefinitionsSource.includes('frosted-surface-preview__scroll') &&
     !componentDefinitionsSource.includes('frosted-surface-preview__fixed') &&
@@ -291,12 +291,12 @@ assert.ok(
 )
 assert.ok(
     buttonDefinitionSource.includes("import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'") &&
-    buttonDefinitionSource.includes("import { PreviewToggle } from '../../../components/preview-toggle'") &&
+    buttonDefinitionSource.includes("import { PreviewToggle } from '../../../previews/preview-toggle'") &&
     buttonDefinitionSource.includes("import { useState } from 'react'") &&
     buttonDefinitionSource.includes("import { TextButton } from 'weimo-ui-core/components/text-button'") &&
     buttonDefinitionSource.includes("id: 'button'") &&
     !buttonDefinitionSource.includes('glassIconButtonPreviewScenes') &&
-    buttonDefinitionSource.includes("from '../../../components/glass-preview-card'") &&
+    buttonDefinitionSource.includes("from '../../../previews/glass-preview-card'") &&
     buttonDefinitionSource.includes('<GlassPreviewCard') &&
     buttonDefinitionSource.includes('label="磨砂图标按钮"') &&
     buttonDefinitionSource.includes('className="icon-button-preview"') &&

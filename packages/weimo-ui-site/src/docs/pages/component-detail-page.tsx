@@ -4,8 +4,8 @@ import { useNavigate, useParams } from 'react-router'
 import {
   CardFrame as CossCardFrame,
   CardPanel as CossCardPanel,
-} from '../../components/coss/card'
-import { useDocsOutletContext } from '../docs-outlet-context'
+} from '../../components/primitives/card'
+import { useDocsOutletContext } from '../shell/docs-outlet-context'
 
 export function ComponentDetailPage() {
   const { componentId } = useParams()

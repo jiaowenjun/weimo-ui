@@ -4,8 +4,8 @@ import { PopupSurface } from 'weimo-ui-core/components/popup-surface'
 import { LiquidGlassSurface } from 'weimo-ui-core/components/liquid-glass'
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import type { ComponentDefinition } from '../../component-docs'
-import { GlassPreviewCard } from '../../../components/glass-preview-card'
-import { LiquidGlassTile } from '../../../components/liquid-glass-tile'
+import { GlassPreviewCard } from '../../../previews/glass-preview-card'
+import { LiquidGlassTile } from '../../../previews/liquid-glass-tile'
 
 function CardSurfacePreview() {
   return (

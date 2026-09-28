@@ -22,9 +22,9 @@ function blockFor(source, selector) {
   return match[1]
 }
 
-const appSource = readProjectFile('packages/weimo-ui-site/src/App.tsx')
-const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
-const docsShellSource = readProjectFile('packages/weimo-ui-site/src/docs/docs-shell.tsx')
+const appSource = readProjectFile('packages/weimo-ui-site/src/app/app.tsx')
+const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
+const docsShellSource = readProjectFile('packages/weimo-ui-site/src/docs/shell/docs-shell.tsx')
 const routesSource = readProjectFile('packages/weimo-ui-site/src/docs/routes.ts')
 const componentDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/component-docs.tsx')
 const componentManifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
@@ -60,7 +60,7 @@ const componentDefinitionsSource = [
   ...Object.values(componentDefinitionSources),
   sidebarPreviewSource,
 ].join('\n')
-const docsOutletContextSource = readProjectFile('packages/weimo-ui-site/src/docs/docs-outlet-context.ts')
+const docsOutletContextSource = readProjectFile('packages/weimo-ui-site/src/docs/shell/docs-outlet-context.ts')
 const detailPageSource = readProjectFile('packages/weimo-ui-site/src/docs/pages/component-detail-page.tsx')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 const heatmapPreviewBlock = blockFor(appCss, '.heatmap-preview')
@@ -97,7 +97,7 @@ for (const snippet of [
 for (const snippet of [
   "import { LiquidGlassSurface } from 'weimo-ui-core/components/liquid-glass'",
   "import { GlassLabel } from 'weimo-ui-core/components/glass-label'",
-  "import { LiquidGlassTile } from './components/liquid-glass-tile'",
+  "import { LiquidGlassTile } from '../previews/liquid-glass-tile'",
   '<LiquidGlassTile className="docs-liquid-top-bar">',
   'liquid-glass-icon-button-group docs-top-bar__actions',
   'liquid-glass-icon-button-group__item',

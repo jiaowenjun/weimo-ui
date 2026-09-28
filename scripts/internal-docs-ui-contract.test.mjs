@@ -13,7 +13,7 @@ function readProjectFile(relativePath) {
   return readFileSync(absolutePath, 'utf8')
 }
 
-const shellSource = readProjectFile('packages/weimo-ui-site/src/docs/docs-shell.tsx')
+const shellSource = readProjectFile('packages/weimo-ui-site/src/docs/shell/docs-shell.tsx')
 const detailSource = readProjectFile('packages/weimo-ui-site/src/docs/pages/component-detail-page.tsx')
 const actionDialogDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/action-dialog.tsx')
 const cardTopBarDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/card-tool-bar.tsx')
@@ -24,7 +24,7 @@ const tagTreeRowDefinitionSource = [
 ].join('\n')
 const barDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/bar.tsx')
 const pageLayoutDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/page-layout.tsx')
-const css = readProjectFile('packages/weimo-ui-site/src/App.css')
+const css = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const tagPageCss = readProjectFile('packages/weimo-ui-tagtree/src/page/tag-page.css')
 
 function cssBlockFor(source, selector) {

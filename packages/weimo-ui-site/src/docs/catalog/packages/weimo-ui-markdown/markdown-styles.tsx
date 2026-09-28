@@ -1,4 +1,4 @@
-import { CardPanel } from '../../../../components/coss/card'
+import { CardPanel } from '../../../../components/primitives/card'
 import { MdRender } from 'weimo-ui-markdown/components/md-render'
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import { mdRenderSample } from '../../fixtures/markdown-sample'

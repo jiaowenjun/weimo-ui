@@ -53,7 +53,7 @@ const mdRenderSource = readProjectFile('packages/weimo-ui-markdown/src/component
 const markdownSanitizeSource = readProjectFile(
   'packages/weimo-ui-markdown/src/components/markdown/sanitize.ts',
 )
-const indexCss = readProjectFile('packages/weimo-ui-site/src/index.css')
+const indexCss = readProjectFile('packages/weimo-ui-site/src/styles/global.css')
 const sharedTokenCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const markdownTokenCss = readProjectFile('packages/weimo-ui-markdown/src/styles/tokens.css')
 const docsMarkdownSampleSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/fixtures/markdown-sample.ts')
@@ -713,7 +713,7 @@ for (const snippet of [
 
 assert.ok(
   indexCss.includes('@import "weimo-ui-markdown/styles/tokens.css";'),
-  'packages/weimo-ui-site/src/index.css must consume shared tokens through the Markdown token entry.',
+  'packages/weimo-ui-site/src/styles/global.css must consume shared tokens through the Markdown token entry.',
 )
 assert.equal(
   packageJson.exports?.['./styles/tokens.css'],

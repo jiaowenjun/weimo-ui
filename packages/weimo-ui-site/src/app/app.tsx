@@ -1,10 +1,10 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router'
 
-import './App.css'
-import { componentDocs } from './docs/catalog/component-docs'
-import { DocsShell } from './docs/docs-shell'
-import { ComponentDetailPage } from './docs/pages/component-detail-page'
-import { componentPath, routerBasename } from './docs/routes'
+import './app.css'
+import { componentDocs } from '../docs/catalog/component-docs'
+import { DocsShell } from '../docs/shell/docs-shell'
+import { ComponentDetailPage } from '../docs/pages/component-detail-page'
+import { componentPath, routerBasename } from '../docs/routes'
 
 const defaultComponentPath = componentPath(componentDocs[0].id)
 

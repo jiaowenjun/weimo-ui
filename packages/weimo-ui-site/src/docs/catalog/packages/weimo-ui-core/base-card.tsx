@@ -9,7 +9,7 @@ import {
 } from 'weimo-ui-core/components/menu'
 import { TagBar } from 'weimo-ui-card/components/tag-bar'
 import type { ComponentDefinition } from '../../component-docs'
-import { PreviewToggle } from '../../../components/preview-toggle'
+import { PreviewToggle } from '../../../previews/preview-toggle'
 
 const TITLE_BAR_MENU_ITEMS = [
   {

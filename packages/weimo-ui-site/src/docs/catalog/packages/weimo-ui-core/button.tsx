@@ -15,9 +15,9 @@ import {
 import { TextButton } from 'weimo-ui-core/components/text-button'
 import { LiquidGlassSurface } from 'weimo-ui-core/components/liquid-glass'
 import type { ComponentDefinition } from '../../component-docs'
-import { GlassPreviewCard } from '../../../components/glass-preview-card'
-import { LiquidGlassTile } from '../../../components/liquid-glass-tile'
-import { PreviewToggle } from '../../../components/preview-toggle'
+import { GlassPreviewCard } from '../../../previews/glass-preview-card'
+import { LiquidGlassTile } from '../../../previews/liquid-glass-tile'
+import { PreviewToggle } from '../../../previews/preview-toggle'
 
 // 液态玻璃演示点击无实际动作,传 no-op 只为启用库的悬停辉光与按压缩放。
 function noopLiquidGlassClick() {}

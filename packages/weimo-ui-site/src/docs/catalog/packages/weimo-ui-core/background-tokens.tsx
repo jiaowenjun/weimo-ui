@@ -19,10 +19,10 @@ import {
 } from 'weimo-ui-core/components/heat-color'
 import { pressableToneMap, pressableTones } from 'weimo-ui-core/components/pressable'
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
-import { GlassPreviewCard } from '../../../components/glass-preview-card'
-import { glassBackgroundGrayMidpoint } from '../../../components/glass-preview'
+import { GlassPreviewCard } from '../../../previews/glass-preview-card'
+import { glassBackgroundGrayMidpoint } from '../../../previews/glass-preview'
 import type { ComponentDefinition } from '../../component-docs'
-import { useIsDarkTheme } from '../../../components/token-preview-color'
+import { useIsDarkTheme } from '../../../previews/token-preview-color'
 
 // 合并 swatch 卡固定语义顺序,不做亮度排序;唯一例外:亮主题下 card 与 page 互换,
 // 让色块亮度序列在两主题下都单调(亮 card 100%→page 96%→…,暗 page 7%→card 12%→…)。

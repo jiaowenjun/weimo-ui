@@ -41,7 +41,7 @@ const docsDefinitionSource = readProjectFile(
 )
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
+const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const packageJson = readJson('package.json')
 const rootRegistry = readJson('registry.json')
 const registryItemsByName = new Map(rootRegistry.items.map((item) => [item.name, item]))

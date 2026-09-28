@@ -74,8 +74,8 @@ const popupSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/s
 const breadcrumbCss = readProjectFile('packages/weimo-ui-tagtree/src/components/coss/breadcrumb.css')
 const capsuleFrameCss = readProjectFile('packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.css')
 const cossButtonCss = readProjectFile('packages/weimo-ui-core/src/components/primitives/button.css')
-const cossCardCss = readProjectFile('packages/weimo-ui-site/src/components/coss/card.css')
-const cossCommandCss = readProjectFile('packages/weimo-ui-site/src/components/coss/command.css')
+const cossCardCss = readProjectFile('packages/weimo-ui-site/src/components/primitives/card.css')
+const cossCommandCss = readProjectFile('packages/weimo-ui-site/src/components/primitives/command.css')
 const cossDialogCss = readProjectFile('packages/weimo-ui-core/src/components/primitives/dialog.css')
 const cossInputGroupCss = readProjectFile('packages/weimo-ui-tagtree/src/components/coss/input-group.css')
 const cossTableCss = readProjectFile('packages/weimo-ui-core/src/components/primitives/table.css')
@@ -92,7 +92,7 @@ const tagTreeCss = readProjectFile('packages/weimo-ui-tagtree/src/components/tag
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/border-tokens.tsx')
-const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
+const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const rootRegistry = readJson('registry.json')
 const styleRegistry = readJson('registry/style.json')
@@ -454,7 +454,7 @@ assert.ok(
     docsDefinitionSource.includes('...frostedBorderAnchorOrder.map((anchor) => ({') &&
     docsDefinitionSource.includes('label="磨砂材质边框色"') &&
     docsDefinitionSource.includes(
-      "import { GlassPreviewCard } from '../../../components/glass-preview-card'",
+      "import { GlassPreviewCard } from '../../../previews/glass-preview-card'",
     ) &&
     docsDefinitionSource.includes(
       "  FrostedSurface,\n  useFrostedSurfaceBackgroundToneRef,\n} from 'weimo-ui-core/components/frosted-surface'",

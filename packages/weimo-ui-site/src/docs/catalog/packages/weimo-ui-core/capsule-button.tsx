@@ -4,9 +4,9 @@ import { Hash, X } from 'lucide-react'
 import { CapsuleButton } from 'weimo-ui-core/components/capsule-button'
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import type { ComponentDefinition } from '../../component-docs'
-import { GlassPreviewCard } from '../../../components/glass-preview-card'
-import { LiquidGlassTile } from '../../../components/liquid-glass-tile'
-import { PreviewToggle } from '../../../components/preview-toggle'
+import { GlassPreviewCard } from '../../../previews/glass-preview-card'
+import { LiquidGlassTile } from '../../../previews/liquid-glass-tile'
+import { PreviewToggle } from '../../../previews/preview-toggle'
 
 // 胶囊材质:普通(default 态)、磨砂(frosted 态)、液态玻璃(liquid-glass 态,
 // 组件内部包 LiquidGlassSurface 与隐藏 sizer)三例并列于灰度画布,拖动滑块

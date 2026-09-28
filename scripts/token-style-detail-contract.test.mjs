@@ -26,16 +26,16 @@ const packageJson = JSON.parse(readProjectFile('package.json'))
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const componentDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/component-docs.tsx')
 const detailPageSource = readProjectFile('packages/weimo-ui-site/src/docs/pages/component-detail-page.tsx')
-const docsShellSource = readProjectFile('packages/weimo-ui-site/src/docs/docs-shell.tsx')
+const docsShellSource = readProjectFile('packages/weimo-ui-site/src/docs/shell/docs-shell.tsx')
 const searchSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/search-component-docs.ts')
-const colorSource = readProjectFile('packages/weimo-ui-site/src/docs/components/token-preview-color.ts')
+const colorSource = readProjectFile('packages/weimo-ui-site/src/docs/previews/token-preview-color.ts')
 const cardSource = readProjectFile('packages/weimo-ui-core/src/components/composites/cards/component-preview-card.tsx')
 const cardCss = readProjectFile('packages/weimo-ui-core/src/components/composites/cards/component-preview-card.css')
 const cardRegistry = JSON.parse(readProjectFile('registry/component-preview-card.json'))
 const previewCardDefinitionSource = readProjectFile(
   'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/component-preview-card.tsx',
 )
-const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
+const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const previewBlock = blockFor(
   cardCss,
   '.component-preview-card .base-card__content',
@@ -221,7 +221,7 @@ assert.ok(
 assert.ok(
   existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/component-preview-card.tsx')) &&
     previewCardDefinitionSource.includes("import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'") &&
-    previewCardDefinitionSource.includes("from '../../../components/glass-preview-card'") &&
+    previewCardDefinitionSource.includes("from '../../../previews/glass-preview-card'") &&
     previewCardDefinitionSource.includes('<GlassPreviewCard') &&
     previewCardDefinitionSource.includes("frame: 'plain',") &&
     !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/component-preview-card-demo.tsx')),
