@@ -2029,47 +2029,6 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "type": "registry:ui",
-      "dependencies": [
-        "react-markdown",
-        "remark-gfm",
-        "remark-math",
-        "remark-breaks",
-        "rehype-katex",
-        "katex"
-      ],
-      "name": "md",
-      "title": "Md",
-      "description": "A Markdown style and token inspection wrapper backed by MdRender.",
-      "categories": [
-        "style",
-        "markdown"
-      ],
-      "registryDependencies": [
-        "@weimo/style",
-        "@weimo/utils",
-        "@weimo/md-render"
-      ],
-      "files": [
-        {
-          "path": "packages/weimo-ui-markdown/src/components/md.tsx",
-          "type": "registry:ui",
-          "target": "@ui/md.tsx"
-        },
-        {
-          "path": "packages/weimo-ui-markdown/src/components/md/md.tsx",
-          "type": "registry:ui",
-          "target": "@ui/md/md.tsx"
-        },
-        {
-          "path": "packages/weimo-ui-markdown/src/components/md/md.css",
-          "type": "registry:ui",
-          "target": "@ui/md.css"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "image-view",
       "type": "registry:ui",
       "title": "Image View",

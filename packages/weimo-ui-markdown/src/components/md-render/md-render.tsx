@@ -40,6 +40,8 @@ import {
   type ParenthesizedListMarkerStyle,
 } from '../markdown/parenthesized-list'
 
+import 'weimo-ui-markdown/styles/markdown-content.css'
+
 const SAFE_MARKDOWN_HREF_RE = /^(https?:|mailto:)/i
 const TYPED_ORDERED_LIST_MARKER_RE = /^([ivxlcdmIVXLCDM]+|[A-Za-z]{1,2})\.\s+/
 const ORDERED_LIST_MARKER_TYPES = new Set(['1', 'a', 'A', 'i', 'I'])

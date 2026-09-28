@@ -1,7 +1,6 @@
 import { CardPanel } from '../../../../components/coss/card'
-import { Md } from 'weimo-ui-markdown/components/md'
+import { MdRender } from 'weimo-ui-markdown/components/md-render'
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
-import type { ComponentDefinition } from '../../component-docs'
 import { mdRenderSample } from '../../fixtures/markdown-sample'
 
 type MarkdownStyleToken = {
@@ -244,22 +243,22 @@ function renderMarkdownTokenGroupPreview(
 ) {
   switch (group.label) {
     case '内容容器':
-      return <Md content={'<span>Markdown 内容容器<br />承载默认字色、字号和行高。</span>'} />
+      return <MdRender content={'<span>Markdown 内容容器<br />承载默认字色、字号和行高。</span>'} />
     case '段落':
-      return <Md content="这是一段用于预览正文颜色的 Markdown 文本。" />
+      return <MdRender content="这是一段用于预览正文颜色的 Markdown 文本。" />
     case '标题':
-      return <Md content="# 一级标题" />
+      return <MdRender content="# 一级标题" />
     case '引用块':
-      return <Md content="> 引用块使用独立字色与横向内边距。" />
+      return <MdRender content="> 引用块使用独立字色与横向内边距。" />
     case '列表':
-      return <Md content={'- 普通列表\n\nA. 宽序号列表'} />
+      return <MdRender content={'- 普通列表\n\nA. 宽序号列表'} />
     case '代码':
-      return <Md content="行内 `const token = true` 示例" />
+      return <MdRender content="行内 `const token = true` 示例" />
     case '链接':
-      return <Md content="[Markdown 链接](https://weimo.ink)" />
+      return <MdRender content="[Markdown 链接](https://weimo.ink)" />
     case '图片':
       return (
-        <Md
+        <MdRender
           content={'![图片占位](missing-image)\n\n![图片预览](preview-image)'}
           renderImage={({ alt, className }) => (
             <span
@@ -273,7 +272,7 @@ function renderMarkdownTokenGroupPreview(
       )
     case '列表与图片布局':
       return (
-        <Md
+        <MdRender
           content={'1. 第一项\n2. 第二项\n\n![布局图片](preview-image)'}
           renderImage={({ alt, className }) => (
             <span
@@ -286,20 +285,19 @@ function renderMarkdownTokenGroupPreview(
         />
       )
     case '表格':
-      return <Md content={'| 节点 | 状态 |\n| --- | --- |\n| 表格 | Ready |'} />
+      return <MdRender content={'| 节点 | 状态 |\n| --- | --- |\n| 表格 | Ready |'} />
     case '数学公式':
-      return <Md className="md-style-preview__math" content="$E = mc^2$" />
+      return <MdRender className="md-style-preview__math" content="$E = mc^2$" />
     default:
       return null
   }
 }
 
-// Docs definitions intentionally colocate preview components with exported page metadata.
-function MdStylePreview() {
+export function MarkdownStylePreview() {
   return (
     <>
       <CardPanel className="md-style-preview__scene">
-        <Md content={mdRenderSample} />
+        <MdRender content={mdRenderSample} />
       </CardPanel>
 
       {markdownStyleTokenGroups.map((group) => (
@@ -327,15 +325,9 @@ function MdStylePreview() {
   )
 }
 
-export const mdDefinition = {
-  id: 'md',
-  status: 'Ready',
-  frame: 'plain',
-  searchAliases: [
-    'Markdown',
-    'Markdown渲染',
-    'Markdown样式',
-    ...markdownStyleTokens.flatMap((item) => [item.token, item.role]),
-  ],
-  preview: () => <MdStylePreview />,
-} satisfies ComponentDefinition
+export const markdownStyleSearchAliases = [
+  'Markdown',
+  'Markdown渲染',
+  'Markdown样式',
+  ...markdownStyleTokens.flatMap((item) => [item.token, item.role]),
+]

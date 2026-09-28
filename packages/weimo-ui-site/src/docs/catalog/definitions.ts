@@ -14,7 +14,6 @@ import { baseCardDefinition } from './packages/weimo-ui-core/base-card'
 import { componentPreviewCardDefinition } from './packages/weimo-ui-core/component-preview-card'
 import { tagDefinition } from './packages/weimo-ui-tagtree/tag'
 import { markdownDefinition } from './packages/weimo-ui-markdown/markdown'
-import { mdDefinition } from './packages/weimo-ui-markdown/md'
 import { imageDefinition } from './packages/weimo-ui-image/image'
 import { statDefinition } from './packages/weimo-ui-stats/stat'
 import { cardToolBarDefinition } from './packages/weimo-ui-card/card-tool-bar'
@@ -40,7 +39,6 @@ export const componentDefinitionsById = {
   'component-preview-card': componentPreviewCardDefinition,
   tag: tagDefinition,
   markdown: markdownDefinition,
-  md: mdDefinition,
   image: imageDefinition,
   stat: statDefinition,
   'card-tool-bar': cardToolBarDefinition,

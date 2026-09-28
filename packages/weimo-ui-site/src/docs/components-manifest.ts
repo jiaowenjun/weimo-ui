@@ -386,17 +386,6 @@ export const componentManifest = [
     registry: true,
   },
   {
-    id: 'md',
-    name: 'Markdown 样式',
-    exportName: 'Md',
-    registryName: 'md',
-    packageExport: './components/md',
-    packageName: 'weimo-ui-markdown',
-    page: 'md',
-    docs: true,
-    registry: true,
-  },
-  {
     id: 'image',
     name: '图片',
     exportName: 'ImageView',

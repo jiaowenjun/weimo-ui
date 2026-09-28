@@ -1,8 +1,0 @@
-@import "weimo-ui-markdown/styles/markdown-content.css";
-
-@layer components {
-  .md {
-    width: 100%;
-    min-width: 0;
-  }
-}

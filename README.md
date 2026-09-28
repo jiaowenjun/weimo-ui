@@ -197,7 +197,7 @@ export function ActivityExample() {
 
 | 需求 | 组件 |
 | --- | --- |
-| 只读 Markdown | `MdRender` 或 `Md` |
+| 只读 Markdown | `MdRender` |
 | Markdown 查看/编辑切换 | `MdView` |
 | 独立 Markdown 编辑器 | `MdEditor` |
 | 磨砂背景容器 | `FrostedSurface` |

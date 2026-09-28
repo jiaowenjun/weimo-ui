@@ -37,7 +37,6 @@ function cssBlocksFor(source, selector) {
   return matches.map((match) => match.groups?.block ?? '').join('\n')
 }
 
-const componentSource = readProjectFile('packages/weimo-ui-markdown/src/components/md/md.tsx')
 const mdRenderSource = readProjectFile('packages/weimo-ui-markdown/src/components/md-render/md-render.tsx')
 const optionGridSource = readProjectFile('packages/weimo-ui-markdown/src/components/markdown/option-grid.ts')
 const markdownSanitizeSource = readProjectFile('packages/weimo-ui-markdown/src/components/markdown/sanitize.ts')
@@ -48,25 +47,27 @@ const markdownImageRendererSource = readProjectFile(
 const markdownImageSizeSource = readProjectFile('packages/weimo-ui-markdown/src/components/markdown/image-size.ts')
 const markdownContentCss = readProjectFile('packages/weimo-ui-markdown/src/styles/markdown-content.css')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/md.tsx')
+const definitionSource = readProjectFile(
+  'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown-styles.tsx',
+)
 const mdRenderDefinitionSource = readProjectFile(
   'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown.tsx',
 )
-const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const tokensCss = readProjectFile('packages/weimo-ui-markdown/src/styles/tokens.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 const markdownPackageJson = JSON.parse(readProjectFile('packages/weimo-ui-markdown/package.json'))
 const rootRegistry = JSON.parse(readProjectFile('registry.json'))
-const standaloneRegistry = JSON.parse(readProjectFile('registry/md.json'))
+const standaloneMdRenderRegistry = JSON.parse(readProjectFile('registry/md-render.json'))
 const styleRegistry = JSON.parse(readProjectFile('registry/style.json'))
-const rootRegistryItem = rootRegistry.items.find((item) => item.name === 'md')
+const rootMdRenderItem = rootRegistry.items.find((item) => item.name === 'md-render')
 const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 
 const tokenGridBlock = cssBlockFor(appCss, '.app-shell__content--token-grid')
 const mdSceneBlock = cssBlockFor(appCss, '.md-style-preview__scene')
 const mdGroupEffectBlock = cssBlockFor(appCss, '.md-style-preview__group-effect')
 const markdownRootBlock = cssBlockFor(markdownContentCss, '.weimo-markdown-content')
+const markdownRenderRootBlock = cssBlockFor(markdownContentCss, '.weimo-card-markdown')
 const tokensRootBlock = cssBlockFor(tokensCss, ':root')
 const tokensDarkBlock = cssBlockFor(tokensCss, '.dark')
 const markdownImageBlock = cssBlockFor(
@@ -165,9 +166,12 @@ const legacyMarkdownTokenNames = [
 ]
 
 assert.ok(
-  packageJson.exports?.['./components/md'] === './packages/weimo-ui-markdown/src/components/md.tsx' &&
-    markdownPackageJson.exports?.['./components/md'] === './src/components/md.tsx',
-  'Root and weimo-ui-markdown packages must expose ./components/md.',
+  !('./components/md' in packageJson.exports) &&
+    !('./components/md' in markdownPackageJson.exports) &&
+    !('./styles/md.css' in markdownPackageJson.exports) &&
+    !existsSync(join(root, 'packages/weimo-ui-markdown/src/components/md.tsx')) &&
+    !existsSync(join(root, 'packages/weimo-ui-markdown/src/components/md')),
+  'The redundant Md wrapper and its public style entry must stay removed.',
 )
 
 assert.deepEqual(
@@ -235,29 +239,28 @@ for (const [token, value] of markdownStaticTokens) {
 }
 
 assert.ok(
-  manifestSource.includes("id: 'md'") &&
-    manifestSource.includes("name: 'Markdown 样式'") &&
-    manifestSource.includes("registryName: 'md'") &&
-    manifestSource.includes("packageExport: './components/md'") &&
-    manifestSource.includes("packageName: 'weimo-ui-markdown'"),
-  'Md must be listed as a Markdown detail page in the component manifest.',
+  manifestSource.includes("id: 'markdown'") &&
+    manifestSource.includes("name: 'Markdown 编辑与预览'") &&
+    !manifestSource.includes("id: 'md'") &&
+    !manifestSource.includes("packageExport: './components/md'"),
+  'Markdown styles must live on the Markdown page without a standalone Md component.',
 )
 
 assert.ok(
-  definitionsIndexSource.includes("import { mdDefinition } from './packages/weimo-ui-markdown/md'") &&
-    definitionsIndexSource.includes('md: mdDefinition'),
-  'component-definitions/index.ts must export mdDefinition.',
+  mdRenderDefinitionSource.includes("from './markdown-styles'") &&
+    mdRenderDefinitionSource.includes('<MarkdownStylePreview />') &&
+    mdRenderDefinitionSource.includes('...markdownStyleSearchAliases'),
+  'The Markdown overview must include the style preview and its search aliases.',
 )
 
 for (const snippet of [
-  "import { Md } from 'weimo-ui-markdown/components/md'",
+  "import { MdRender } from 'weimo-ui-markdown/components/md-render'",
   "import { CardPanel } from '../../../../components/coss/card'",
   "import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'",
   "import { mdRenderSample } from '../../fixtures/markdown-sample'",
-  "id: 'md'",
-  "frame: 'plain',",
   'markdownStyleTokens',
   'markdownStyleTokenGroups',
+  'markdownStyleSearchAliases',
   'getMarkdownStyleToken',
   'renderMarkdownTokenGroupPreview',
   '<ComponentPreviewCard',
@@ -267,7 +270,7 @@ for (const snippet of [
   'className="md-style-preview__group-effect"',
   '{renderMarkdownTokenGroupPreview(group)}',
   '<CardPanel className="md-style-preview__scene"',
-  '<Md content={mdRenderSample} />',
+  '<MdRender content={mdRenderSample} />',
   "light: 'hsl(0 0% 9%)'",
   "dark: 'hsl(0 0% 98%)'",
   "value: '16px'",
@@ -277,14 +280,14 @@ for (const snippet of [
   "light: 'hsl(40 12% 96%)'",
   "dark: 'hsl(0 0% 20%)'",
 ]) {
-  assert.ok(definitionSource.includes(snippet), `Md docs definition must include ${snippet}.`)
+  assert.ok(definitionSource.includes(snippet), `Markdown style docs must include ${snippet}.`)
 }
 assert.deepEqual(
   [...definitionSource.matchAll(/token: '(--[^']+)'/g)]
     .map((match) => match[1])
     .sort(),
   [...markdownTokenNames].sort(),
-  'Md docs must expose every Markdown theme token without external token names.',
+  'Markdown style docs must expose every Markdown theme token without external token names.',
 )
 const markdownGroupSource = definitionSource.slice(
   definitionSource.indexOf('const markdownStyleTokenGroups = ['),
@@ -305,12 +308,12 @@ assert.deepEqual(
     '表格',
     '数学公式',
   ],
-  'Md docs must group tokens by each rendered Markdown semantic node.',
+  'Markdown style docs must group tokens by each rendered Markdown semantic node.',
 )
 assert.equal(
   [...definitionSource.matchAll(/<ComponentPreviewCard/g)].length,
   1,
-  'Md docs must render every semantic group through the shared ComponentPreviewCard map.',
+  'Markdown style docs must render every semantic group through the shared ComponentPreviewCard map.',
 )
 assert.deepEqual(
   [...markdownGroupSource.matchAll(/'(--md-[a-z0-9-]+)'/g)]
@@ -324,7 +327,7 @@ assert.ok(
     definitionSource.indexOf('{markdownStyleTokenGroups.map((group) => (') &&
     definitionSource.includes("'Markdown渲染'") &&
     definitionSource.includes("'Markdown样式'"),
-  'Md docs must place the real render card first and keep both page names searchable.',
+  'Markdown style docs must place the real render card first and keep both search names.',
 )
 assert.ok(
   !definitionSource.includes('summary:') &&
@@ -337,7 +340,7 @@ assert.ok(
     !definitionSource.includes('md-style-preview__usage-scene') &&
     !definitionSource.includes('md-style-preview__group-header') &&
     !definitionSource.includes('md-style-preview__scene-header'),
-  'Md docs definition must stay visual-only beyond semantic group headings.',
+  'Markdown style docs must stay visual-only beyond semantic group headings.',
 )
 assert.ok(
   !definitionSource.includes('二三级标题字号') &&
@@ -351,7 +354,7 @@ assert.ok(
     !definitionSource.includes("preview: 'bg-page'") &&
     !definitionSource.includes('代码、图片占位和 pre 背景') &&
     !definitionSource.includes('inline code、pre、image-placeholder'),
-  'Md token detail must not document removed Markdown-only local font-size, radius-xs, math-hover, or code background tokens.',
+  'Markdown token detail must not document removed Markdown-only local font-size, radius-xs, math-hover, or code background tokens.',
 )
 
 for (const forbidden of [
@@ -378,21 +381,15 @@ for (const forbidden of [
   'md-style-preview__selector-group',
   'md-style-preview__selector-card',
 ]) {
-  assert.ok(!definitionSource.includes(forbidden), `Md docs definition must not include ${forbidden}.`)
+  assert.ok(!definitionSource.includes(forbidden), `Markdown style docs must not include ${forbidden}.`)
 }
 
-for (const snippet of [
-  "import { forwardRef } from 'react'",
-  "import { MdRender, type MdRenderProps } from 'weimo-ui-markdown/components/md-render'",
-  "import 'weimo-ui-markdown/styles/md.css'",
-  'export type MdProps = MdRenderProps',
-  'export const Md = forwardRef<HTMLDivElement, MdProps>(function Md',
-  "className={cn('md', className)}",
-  'content={content}',
-  "Md.displayName = 'Md'",
-]) {
-  assert.ok(componentSource.includes(snippet), `Md component source must include ${snippet}.`)
-}
+assert.ok(
+  mdRenderSource.includes("import 'weimo-ui-markdown/styles/markdown-content.css'") &&
+    markdownRenderRootBlock.includes('width: 100%;') &&
+    markdownRootBlock.includes('min-width: 0;'),
+  'MdRender must own its shared content styles and preserve the removed wrapper layout.',
+)
 
 const markdownImageSizeTestContext = { exports: {} }
 vm.runInNewContext(
@@ -741,6 +738,9 @@ const mdRenderTestContext = {
     if (specifier === '../markdown/sanitize') {
       return { markdownSanitizeSchema: {} }
     }
+    if (specifier === 'weimo-ui-markdown/styles/markdown-content.css') {
+      return {}
+    }
     if (
       specifier === 'react-markdown' ||
       specifier === 'rehype-katex' ||
@@ -1083,8 +1083,6 @@ const markdownListImagePairImageBlock = cssBlockFor(
   markdownContentCss,
   '.weimo-card-markdown__list-image-pair > .weimo-card-markdown__p',
 )
-const markdownRenderRootBlock = cssBlockFor(markdownContentCss, '.weimo-card-markdown')
-
 assert.ok(
   markdownRenderRootBlock.includes('container-name: weimo-markdown-content;') &&
     markdownRenderRootBlock.includes('container-type: inline-size;') &&
@@ -1276,21 +1274,21 @@ assert.ok(
     tokenGridBlock.includes('grid-template-columns: minmax(0, 1fr);') &&
     !definitionSource.includes('className="md-style-preview"') &&
     !appCss.includes('\n.md-style-preview {'),
-  'Md style cards must use the content-level token grid without a preview wrapper.',
+  'Markdown style cards must use the content-level token grid without a preview wrapper.',
 )
 assert.ok(
   mdSceneBlock.includes('grid-column: 1 / -1;') &&
     mdSceneBlock.includes('max-height: 640px;') &&
     mdSceneBlock.includes('overflow: auto;') &&
     !definitionSource.includes('md-style-preview__render'),
-  'Md real-scene CardPanel must span the grid and own scrolling without an inner wrapper.',
+  'Markdown real-scene CardPanel must span the grid and own scrolling without an inner wrapper.',
 )
 assert.ok(
   mdGroupEffectBlock.includes('min-height: 112px;') &&
     !mdGroupEffectBlock.includes('border:') &&
     !mdGroupEffectBlock.includes('background:') &&
     !mdGroupEffectBlock.includes('box-shadow:'),
-  'Md token groups must use a borderless, background-free ComponentPreviewCard preview area.',
+  'Markdown token groups must use a borderless, background-free ComponentPreviewCard preview area.',
 )
 const mdContentWrapperBlock = cssBlockFor(appCss, '.md-style-preview__content-wrapper')
 assert.ok(
@@ -1300,7 +1298,7 @@ assert.ok(
     mdContentWrapperBlock.includes('border: 1px solid var(--color-border);') &&
     mdContentWrapperBlock.includes('border-radius: var(--radius-sm);') &&
     definitionSource.includes('className="md-style-preview__content-wrapper"'),
-  'Md token group previews must center a padded, 80%-width rounded border wrapper around the rendered content.',
+  'Markdown token group previews must center a padded, 80%-width rounded border wrapper around the rendered content.',
 )
 assert.ok(
   definitionSource.includes("case '代码':") &&
@@ -1309,31 +1307,23 @@ assert.ok(
     definitionSource.includes('# 一级标题') &&
     definitionSource.includes("case '表格':") &&
     definitionSource.includes('| 节点 | 状态 |'),
-  'Md docs must preview grouped tokens through their combined semantic Markdown nodes.',
+  'Markdown style docs must preview grouped tokens through their combined semantic Markdown nodes.',
 )
 
-assert.ok(rootRegistryItem, 'Root registry must include the @weimo/md item.')
-assert.deepEqual(
-  standaloneRegistry,
-  rootRegistryItem,
-  'registry/md.json must match the root registry md payload.',
+assert.ok(
+  !existsSync(join(root, 'registry/md.json')) &&
+    !rootRegistry.items.some((item) => item.name === 'md'),
+  'The standalone Md registry item must stay removed.',
 )
+assert.ok(rootMdRenderItem, 'Root registry must include the @weimo/md-render item.')
 assert.deepEqual(
-  rootRegistryItem.dependencies,
-  ['react-markdown', 'remark-gfm', 'remark-math', 'remark-breaks', 'rehype-katex', 'katex'],
-  'Md registry item must install the markdown rendering dependencies.',
+  standaloneMdRenderRegistry,
+  rootMdRenderItem,
+  'registry/md-render.json must match the root registry md-render payload.',
 )
-assert.deepEqual(
-  rootRegistryItem.registryDependencies,
-  ['@weimo/style', '@weimo/utils', '@weimo/md-render'],
-  'Md registry item must depend on shared style, utils, and MdRender.',
-)
-assert.deepEqual(
-  rootRegistryItem.files.map((file) => file.path),
-  [
-    'packages/weimo-ui-markdown/src/components/md.tsx',
-    'packages/weimo-ui-markdown/src/components/md/md.tsx',
-    'packages/weimo-ui-markdown/src/components/md/md.css',
-  ],
-  'Md registry item must ship its public entry, implementation, and style.',
+assert.ok(
+  rootMdRenderItem.files.some(
+    (file) => file.path === 'packages/weimo-ui-markdown/src/styles/markdown-content.css',
+  ),
+  'MdRender registry item must ship the shared Markdown content styles it imports.',
 )

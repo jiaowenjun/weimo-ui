@@ -24,7 +24,6 @@ import 'weimo-ui-markdown/styles/tokens.css'
 src/
 ├── components/
 │   ├── markdown/   # 渲染器与编辑器共享的纯 Markdown 语义处理
-│   ├── md/         # Md 样式包装组件
 │   ├── md-render/  # Markdown 渲染实现
 │   ├── md-editor/  # Tiptap 编辑器、扩展、工具栏与数学编辑子组件
 │   └── md-view/    # 渲染/编辑模式编排与布局保护

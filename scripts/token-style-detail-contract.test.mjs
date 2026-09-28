@@ -49,8 +49,9 @@ const borderSampleBlock = blockFor(appCss, '.border-color-preview__sample')
 
 assert.ok(
   manifestSource.includes("packageName: 'weimo-ui-core'") &&
-    manifestSource.includes("exportName: 'Md'"),
-  'the manifest must keep token grouping for the style tokens while separating the Md display and export names.',
+    manifestSource.includes("name: 'Markdown 编辑与预览'") &&
+    !manifestSource.includes("exportName: 'Md'"),
+  'the manifest must keep Markdown token documentation without restoring the removed Md export.',
 )
 
 assert.ok(
@@ -293,14 +294,15 @@ assert.ok(
   'BorderColor must hide related-token prose while keeping those tokens searchable.',
 )
 
-const mdDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/md.tsx')
+const mdDefinitionSource = readProjectFile(
+  'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown-styles.tsx',
+)
 
 assert.ok(
-  mdDefinitionSource.includes("frame: 'plain',") &&
-    mdDefinitionSource.includes('searchAliases:') &&
+  mdDefinitionSource.includes('markdownStyleSearchAliases') &&
     mdDefinitionSource.includes('<ComponentPreviewCard') &&
     mdDefinitionSource.includes('<CardPanel className="md-style-preview__scene"') &&
-    mdDefinitionSource.includes('<Md content={mdRenderSample} />') &&
+    mdDefinitionSource.includes('<MdRender content={mdRenderSample} />') &&
     !mdDefinitionSource.includes('className="md-style-preview"') &&
     !appCss.includes('\n.md-style-preview {'),
   'Markdown token docs must remain token-first, searchable, and grounded in a real rendering sample.',

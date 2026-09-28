@@ -12,6 +12,7 @@
   }
 
   .weimo-card-markdown {
+    width: 100%;
     container-name: weimo-markdown-content;
     container-type: inline-size;
   }

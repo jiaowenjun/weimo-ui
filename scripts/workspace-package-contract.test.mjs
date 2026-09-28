@@ -87,7 +87,6 @@ const packageRules = [
       '.': './src/index.ts',
       './styles/tokens.css': './src/styles/tokens.css',
       './styles/markdown-content.css': './src/styles/markdown-content.css',
-      './styles/md.css': './src/components/md/md.css',
       './styles/md-view.css': './src/components/md-view/md-view.css',
       './styles/md-editor.css': './src/components/md-editor/md-editor.css',
     },

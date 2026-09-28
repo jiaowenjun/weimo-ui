@@ -23,10 +23,10 @@ describe('component docs search', () => {
     expect(resultIds('CardSurface')).toContain('surface')
     expect(resultIds('FrostedSurface')).toContain('surface')
     expect(resultIds('PopupSurface')).toContain('surface')
-    expect(resultIds('Md')).toContain('md')
-    expect(resultIds('Markdown')).toContain('md')
-    expect(resultIds('Markdown渲染')).toContain('md')
-    expect(resultIds('Markdown样式')).toContain('md')
+    expect(resultIds('MdRender')).toContain('markdown')
+    expect(resultIds('Markdown')).toContain('markdown')
+    expect(resultIds('Markdown渲染')).toContain('markdown')
+    expect(resultIds('Markdown样式')).toContain('markdown')
   })
 
   it('finds token pages by CSS token and usage language', () => {

@@ -16,6 +16,5 @@ export const markdownCatalog = {
         { id: 'md-view', name: 'MdView', registryName: 'md-view', packageExport: './components/md-view' },
       ],
     },
-    { id: 'md', name: 'Markdown 样式', exportName: 'Md', registryName: 'md', packageExport: './components/md' },
   ],
 } as const satisfies PackageCatalog

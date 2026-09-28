@@ -76,7 +76,6 @@
     "./components/tag-tree": "./packages/weimo-ui-tagtree/src/components/tag-tree.tsx",
     "./components/tag-tree-row": "./packages/weimo-ui-tagtree/src/components/tag-tree-row.tsx",
     "./components/math-editor": "./packages/weimo-ui-markdown/src/components/math-editor.tsx",
-    "./components/md": "./packages/weimo-ui-markdown/src/components/md.tsx",
     "./components/md-editor": "./packages/weimo-ui-markdown/src/components/md-editor.tsx",
     "./components/md-render": "./packages/weimo-ui-markdown/src/components/md-render.tsx",
     "./components/md-view": "./packages/weimo-ui-markdown/src/components/md-view.tsx",

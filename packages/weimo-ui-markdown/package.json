@@ -13,7 +13,6 @@
   ],
   "exports": {
     ".": "./src/index.ts",
-    "./components/md": "./src/components/md.tsx",
     "./components/deferred-md-editor-toolbar": "./src/components/deferred-md-editor-toolbar.tsx",
     "./components/md-editor": "./src/components/md-editor.tsx",
     "./components/md-render": "./src/components/md-render.tsx",
@@ -21,7 +20,6 @@
     "./components/math-editor": "./src/components/math-editor.tsx",
     "./styles/tokens.css": "./src/styles/tokens.css",
     "./styles/markdown-content.css": "./src/styles/markdown-content.css",
-    "./styles/md.css": "./src/components/md/md.css",
     "./styles/md-view.css": "./src/components/md-view/md-view.css",
     "./styles/md-editor.css": "./src/components/md-editor/md-editor.css"
   },

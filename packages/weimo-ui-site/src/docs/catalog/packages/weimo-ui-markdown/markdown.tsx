@@ -12,6 +12,10 @@ import { PreviewToggle } from '../../../components/preview-toggle'
 import type { ComponentDefinition } from '../../component-docs'
 
 import { ControlledMdEditorDemo } from './md-editor-demos'
+import {
+  MarkdownStylePreview,
+  markdownStyleSearchAliases,
+} from './markdown-styles'
 import { mdRenderSample } from '../../fixtures/markdown-sample'
 
 function MathEditorDemo({
@@ -95,6 +99,7 @@ function MarkdownDemo() {
       <MdEditorDemo />
       <MdRenderPreview />
       <MdViewDemo />
+      <MarkdownStylePreview />
     </>
   )
 }
@@ -113,6 +118,7 @@ export const markdownDefinition = {
     'Markdown 编辑器',
     'Markdown 渲染',
     'Markdown 视图',
+    ...markdownStyleSearchAliases,
   ],
   preview: () => <MarkdownDemo />,
 } satisfies ComponentDefinition
