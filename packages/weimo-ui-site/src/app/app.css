@@ -1299,8 +1299,10 @@
    浮层卡是页面最后一张卡,阴影透到页底空白处。
    底部操作栏画布同例:示例容器已换成 CardSurface,阴影同样要落进卡片 padding。
    液态系画布(工具栏/图标按钮组/胶囊)同例:库投影比画布(80px 高)大得多,
-   同样要落进卡片 padding。磨砂瓦片在亮背景 tone 下投影同形,一并放行。 */
-.component-preview-card:has(.card-surface-preview, .popup-surface-preview, .frosted-surface-preview__tile, .internal-bottom-preview, .liquid-glass-preview, .liquid-glass-toolbar-preview, .liquid-glass-icon-preview, .liquid-glass-chip-preview, .capsule-slot-preview, .liquid-glass-label-preview) .base-card__content {
+   同样要落进卡片 padding。磨砂瓦片在亮背景 tone 下投影同形,一并放行;
+   磨砂图标按钮/按钮组卡共用 .icon-preview__row(幽灵图标卡同用该行类,
+   幽灵无投影,放开无视觉差)。 */
+.component-preview-card:has(.card-surface-preview, .popup-surface-preview, .frosted-surface-preview__tile, .icon-preview__row, .internal-bottom-preview, .liquid-glass-preview, .liquid-glass-toolbar-preview, .liquid-glass-icon-preview, .liquid-glass-chip-preview, .capsule-slot-preview, .liquid-glass-label-preview) .base-card__content {
   overflow: visible;
 }
 
