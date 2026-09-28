@@ -40,7 +40,6 @@ const groupRegistry = readJson('registry/frosted-icon-button-group.json')
 const rootGroupItem = rootRegistry.items.find(
   (item) => item.name === 'frosted-icon-button-group',
 )
-const componentManifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const groupSource = readProjectFile('packages/weimo-ui-core/src/components/controls/icon-button/frosted-icon-button-group.tsx')
 const glassIconButtonSource = readProjectFile('packages/weimo-ui-core/src/components/controls/icon-button/frosted-icon-button.tsx')
 const groupCss = readProjectFile('packages/weimo-ui-core/src/components/controls/icon-button/frosted-icon-button-group.css')
@@ -52,22 +51,6 @@ assert.equal(
   './packages/weimo-ui-core/src/components/controls/icon-button/frosted-icon-button-group.tsx',
   'FrostedIconButtonGroup must have a public package export.',
 )
-
-for (const snippet of [
-  "id: 'frosted-icon-button-group'",
-  "name: 'FrostedIconButtonGroup'",
-  "registryName: 'frosted-icon-button-group'",
-  "packageExport: './components/frosted-icon-button-group'",
-  "packageName: 'weimo-ui-core'",
-  'docs: false',
-  'registry: true',
-]) {
-  assertIncludes(
-    componentManifestSource,
-    snippet,
-    `FrostedIconButtonGroup manifest entry must include ${snippet}.`,
-  )
-}
 
 assert.ok(rootGroupItem, 'Root registry must include FrostedIconButtonGroup.')
 assert.deepEqual(

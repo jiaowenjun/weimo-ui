@@ -13,13 +13,14 @@
   ],
   "registryDependencies": [
     "@weimo/style",
-    "@weimo/utils"
+    "@weimo/utils",
+    "@weimo/heat-color"
   ],
   "files": [
     {
-      "path": "packages/weimo-ui-stats/src/components/heatmap.tsx",
+      "path": "packages/weimo-ui-stats/src/components/heatmap/index.ts",
       "type": "registry:ui",
-      "target": "@ui/heatmap.tsx"
+      "target": "@ui/heatmap/index.ts"
     },
     {
       "path": "packages/weimo-ui-stats/src/components/heatmap/heatmap.tsx",
@@ -27,19 +28,9 @@
       "target": "@ui/heatmap/heatmap.tsx"
     },
     {
-      "path": "packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.tsx",
-      "type": "registry:ui",
-      "target": "@ui/heatmap/heat-color.tsx"
-    },
-    {
       "path": "packages/weimo-ui-stats/src/components/heatmap/heatmap-model.ts",
       "type": "registry:ui",
       "target": "@ui/heatmap/heatmap-model.ts"
-    },
-    {
-      "path": "packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.css",
-      "type": "registry:ui",
-      "target": "@ui/heat-color.css"
     },
     {
       "path": "packages/weimo-ui-stats/src/components/heatmap/heatmap.css",

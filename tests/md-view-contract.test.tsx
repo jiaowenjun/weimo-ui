@@ -3,7 +3,7 @@ import { render, waitFor } from '@testing-library/react'
 import { StrictMode, useLayoutEffect, useRef } from 'react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
-import { MdView, type MdViewMode, type MdViewProps } from '../packages/weimo-ui-markdown/src/components/md-view'
+import { MdView, type MdViewMode, type MdViewProps } from '../packages/weimo-ui-markdown/src/components/md-view/md-view'
 
 afterEach(() => vi.restoreAllMocks())
 

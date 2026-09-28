@@ -12,14 +12,14 @@ import { getFrostedSurfaceClassName } from 'weimo-ui-core/components/frosted-sur
 import { cn } from 'weimo-ui-core/lib/utils'
 
 import 'weimo-ui-core/styles/frosted-surface.css'
-import './sidebar-shell.css'
+import './sidebar.css'
 
 type SideBarPanelPropsBase = Omit<
   ComponentPropsWithoutRef<'div'>,
   'aria-label' | 'children' | 'className' | 'id'
 >
 
-export type SideBarShellProps = SideBarPanelPropsBase & {
+export type SideBarProps = SideBarPanelPropsBase & {
   ariaLabel?: string
   children?: ReactNode
   closeButtonLabel?: string
@@ -119,7 +119,7 @@ function SideBarDrawer({
   open,
   showCloseButton = false,
   ...props
-}: SideBarShellProps & { ariaLabel: string }) {
+}: SideBarProps & { ariaLabel: string }) {
   return (
     <Drawer.Root
       open={open}
@@ -162,7 +162,7 @@ function SideBarDrawer({
   )
 }
 
-export function SideBarShell({
+export function SideBar({
   ariaLabel = '侧边栏',
   children,
   className,
@@ -172,7 +172,7 @@ export function SideBarShell({
   open = false,
   showCloseButton = false,
   ...props
-}: SideBarShellProps) {
+}: SideBarProps) {
   const isWideViewport = useWideViewport()
 
   useEffect(() => {

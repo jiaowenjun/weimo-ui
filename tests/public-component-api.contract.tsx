@@ -1,7 +1,7 @@
 import { FrostedIconButton } from 'weimo-ui/components/frosted-icon-button'
 import { GhostIconButton } from 'weimo-ui/components/ghost-icon-button'
 import { TextButton, type TextButtonProps } from 'weimo-ui/components/text-button'
-import type { SideBarShellProps } from 'weimo-ui/components/sidebar'
+import type { SideBarProps } from 'weimo-ui/components/sidebar'
 import {
   ActionMenu,
   type ActionMenuItem,
@@ -26,10 +26,10 @@ const ghostIconButtonRejectsVariant = <GhostIconButton aria-label="Ghost" varian
 // @ts-expect-error TextButton stays a native button surface without variants.
 const textButtonRejectsVariant = <TextButton variant="outline">Text</TextButton>
 
-// @ts-expect-error SideBarShell owns the duplicated panel id internally.
-const sideBarRejectsId: Extract<keyof SideBarShellProps, 'id'> = 'id'
+// @ts-expect-error SideBar owns the duplicated panel id internally.
+const sideBarRejectsId: Extract<keyof SideBarProps, 'id'> = 'id'
 // @ts-expect-error ariaLabel is the only public panel label prop.
-const sideBarRejectsNativeAriaLabel: Extract<keyof SideBarShellProps, 'aria-label'> = 'aria-label'
+const sideBarRejectsNativeAriaLabel: Extract<keyof SideBarProps, 'aria-label'> = 'aria-label'
 
 const menuItems: ActionMenuItem[] = [{ key: 'edit', label: '编辑' }]
 const menuProps: ActionMenuProps = { ariaLabel: 'Actions', items: menuItems }

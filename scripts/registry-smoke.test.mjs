@@ -156,13 +156,34 @@ function writeConsumerProject(consumerDir, registryUrl) {
             'weimo-ui-core/components/*': ['./src/components/ui/*'],
             'weimo-ui-core/lib/*': ['./src/components/ui/lib/*'],
             'weimo-ui-core/styles/*': ['./src/components/ui/*'],
-            'weimo-ui-card/components/*': ['./src/components/ui/*'],
+            'weimo-ui-card/components/card': ['./src/components/ui/card/card.tsx'],
+            'weimo-ui-card/components/card-composer': ['./src/components/ui/composer/card-composer.tsx'],
+            'weimo-ui-card/components/card-tool-bar': ['./src/components/ui/card/card-tool-bar.tsx'],
+            'weimo-ui-card/components/card-top-bar': ['./src/components/ui/card/card-top-bar.tsx'],
+            'weimo-ui-card/components/editable-capsule': ['./src/components/ui/tags/editable-capsule.tsx'],
+            'weimo-ui-card/components/ocr-card': ['./src/components/ui/ocr/ocr-card.tsx'],
+            'weimo-ui-card/components/ocr-composer': ['./src/components/ui/ocr/ocr-composer.tsx'],
+            'weimo-ui-card/components/ocr-detail': ['./src/components/ui/ocr/ocr-detail.tsx'],
+            'weimo-ui-card/components/tag-bar': ['./src/components/ui/tags/tag-bar.tsx'],
+            'weimo-ui-card/components/tag-picker': ['./src/components/ui/tags/tag-picker/index.tsx'],
             'weimo-ui-card/styles/*': ['./src/components/ui/*'],
-            'weimo-ui-image/components/*': ['./src/components/ui/*'],
+            'weimo-ui-image/components/canvas-transparency': ['./src/components/ui/canvas-transparency/canvas-transparency.tsx'],
+            'weimo-ui-image/components/canvas-transparency-cache': ['./src/components/ui/canvas-transparency/canvas-transparency-cache.ts'],
+            'weimo-ui-image/components/image-uploader': ['./src/components/ui/image-uploader/image-uploader.tsx'],
+            'weimo-ui-image/components/image-view': ['./src/components/ui/image-view/image-view.tsx'],
             'weimo-ui-image/styles/*': ['./src/components/ui/*'],
-            'weimo-ui-markdown/components/*': ['./src/components/ui/*'],
+            'weimo-ui-markdown/components/deferred-md-editor-toolbar': ['./src/components/ui/deferred-md-editor-toolbar.tsx'],
+            'weimo-ui-markdown/components/math-editor': ['./src/components/ui/md-editor/math-editor.tsx'],
+            'weimo-ui-markdown/components/md-editor': ['./src/components/ui/md-editor/index.tsx'],
+            'weimo-ui-markdown/components/md-render': ['./src/components/ui/md-render/md-render.tsx'],
+            'weimo-ui-markdown/components/md-view': ['./src/components/ui/md-view/md-view.tsx'],
             'weimo-ui-markdown/styles/*': ['./src/components/ui/*'],
-            'weimo-ui-tagtree/components/*': ['./src/components/ui/*'],
+            'weimo-ui-stats/components/heatmap': ['./src/components/ui/heatmap/index.ts'],
+            'weimo-ui-stats/components/stat-group': ['./src/components/ui/stat-group/stat-group.tsx'],
+            'weimo-ui-tagtree/components/coss/*': ['./src/components/ui/coss/*'],
+            'weimo-ui-tagtree/components/tag-bread': ['./src/components/ui/tag-bread/tag-bread.tsx'],
+            'weimo-ui-tagtree/components/tag-tree': ['./src/components/ui/tag-tree/tag-tree.tsx'],
+            'weimo-ui-tagtree/components/tag-tree-row': ['./src/components/ui/tag-tree/tag-tree-row.tsx'],
             'weimo-ui-tagtree/styles/*': ['./src/components/ui/*'],
           },
         },
@@ -184,11 +205,11 @@ function writeConsumerProject(consumerDir, registryUrl) {
     join(consumerDir, 'src/contract.tsx'),
     `import { useState } from "react"
 import { PanelLeft } from "lucide-react"
-import { Card } from "@/components/ui/card"
-import { CanvasTransparency } from "@/components/ui/canvas-transparency"
-import { ImageUploader } from "@/components/ui/image-uploader"
-import { OcrComposer } from "@/components/ui/ocr-composer"
-import { OcrCard } from "@/components/ui/ocr-card"
+import { Card } from "@/components/ui/card/card"
+import { CanvasTransparency } from "@/components/ui/canvas-transparency/canvas-transparency"
+import { ImageUploader } from "@/components/ui/image-uploader/image-uploader"
+import { OcrComposer } from "@/components/ui/ocr/ocr-composer"
+import { OcrCard } from "@/components/ui/ocr/ocr-card"
 import { TopBar } from "@/components/ui/top-bar"
 import { FrostedIconButton } from "@/components/ui/frosted-icon-button"
 import { GhostIconButton } from "@/components/ui/ghost-icon-button"
@@ -201,7 +222,7 @@ import { TextButton } from "@/components/ui/text-button"
   MenuShortcut,
   MenuTrigger,
 } from "@/components/ui/menu"
-import { SideBar, SideBarShell } from "@/components/ui/sidebar"
+import { SideBar } from "@/components/ui/sidebar/sidebar"
 import { Heatmap } from "@/components/ui/heatmap"
 import { HeatColor } from "@/components/ui/heat-color"
 import { bgBlurTones, getBgBlurClassName } from "@/components/ui/bg-blur"
@@ -212,25 +233,25 @@ import { borderColorTones, getBorderColorClassName } from "@/components/ui/borde
 import { borderRadiusScales, getBorderRadiusToken } from "@/components/ui/border-radius"
 import { fontSizeScales, getFontSizeClassName } from "@/components/ui/font-size"
 import { ComponentPreviewCard } from "@/components/ui/component-preview-card"
-import { TagTree } from "@/components/ui/tag-tree"
-import { StatGroup } from "@/components/ui/stat-group"
-import { TagPicker, type TagPickerApplyPayload } from "@/components/ui/tag-picker"
-import { TagBread } from "@/components/ui/tag-bread"
-import { ImageView, ImageViewDisplayModeMenu, type ImageViewDisplayMode } from "@/components/ui/image-view"
+import { TagTree } from "@/components/ui/tag-tree/tag-tree"
+import { StatGroup } from "@/components/ui/stat-group/stat-group"
+import { TagPicker, type TagPickerApplyPayload } from "@/components/ui/tags/tag-picker"
+import { TagBread } from "@/components/ui/tag-bread/tag-bread"
+import { ImageView, ImageViewDisplayModeMenu, type ImageViewDisplayMode } from "@/components/ui/image-view/image-view"
 import { FrostedSurface } from "@/components/ui/frosted-surface"
 import { FloatBar } from "@/components/ui/float-bar"
 import { BottomBar } from "@/components/ui/bottom-bar"
-import { CardTopBar } from "@/components/ui/card-top-bar"
+import { CardTopBar } from "@/components/ui/card/card-top-bar"
 import { ModeButton, type ModeButtonMode } from "@/components/ui/mode-button"
-import { CardToolBar } from "@/components/ui/card-tool-bar"
+import { CardToolBar } from "@/components/ui/card/card-tool-bar"
 import { ActionDialog } from "@/components/ui/action-dialog"
-import { TagTreeRow, type TagTreeRowProps } from "@/components/ui/tag-tree-row"
+import { TagTreeRow, type TagTreeRowProps } from "@/components/ui/tag-tree/tag-tree-row"
 import { CapsuleButton, type CapsuleButtonState } from "@/components/ui/capsule-button"
-import { TagBar } from "@/components/ui/tag-bar"
+import { TagBar } from "@/components/ui/tags/tag-bar"
 import { MdEditor } from "@/components/ui/md-editor"
-import { MdRender } from "@/components/ui/md-render"
-import { MdView } from "@/components/ui/md-view"
-import { MathEditor, type MathEditorValue } from "@/components/ui/math-editor"
+import { MdRender } from "@/components/ui/md-render/md-render"
+import { MdView } from "@/components/ui/md-view/md-view"
+import { MathEditor, type MathEditorValue } from "@/components/ui/md-editor/math-editor"
 
 function formatWordCountMetric(wordCount: number) {
   if (wordCount < 1000) return { value: String(wordCount), label: "字" }
@@ -457,9 +478,6 @@ export function RegistryConsumerContract() {
           <a href="#card">Card</a>
         </nav>
       </SideBar>
-      <SideBarShell open={false} onClose={() => {}} showCloseButton>
-        <div>Custom sidebar content</div>
-      </SideBarShell>
     </>
   )
 }
@@ -749,7 +767,7 @@ try {
     'shadcn add must not write removed EditableCard CSS file.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/card.tsx')),
+    existsSync(join(consumerDir, 'src/components/ui/card/card.tsx')),
     'shadcn add must write Card component file.',
   )
   assert.ok(
@@ -796,27 +814,23 @@ try {
     'shadcn add must write internal AnimatedInlineSize files used by capsule surfaces.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/canvas-transparency.tsx')) &&
-      existsSync(join(consumerDir, 'src/components/ui/canvas-transparency-cache.ts')) &&
-      existsSync(join(consumerDir, 'src/components/ui/canvas-transparency/canvas-transparency.tsx')) &&
+    existsSync(join(consumerDir, 'src/components/ui/canvas-transparency/canvas-transparency.tsx')) &&
       existsSync(join(consumerDir, 'src/components/ui/canvas-transparency/canvas-transparency-cache.ts')) &&
       existsSync(join(consumerDir, 'src/components/ui/canvas-transparency/canvas-transparency-model.ts')),
-    'shadcn add must write the CanvasTransparency entries and colocated implementation files.',
+    'shadcn add must write the colocated CanvasTransparency files.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/image-uploader.tsx')) &&
-      existsSync(join(consumerDir, 'src/components/ui/image-uploader/image-uploader.tsx')) &&
+    existsSync(join(consumerDir, 'src/components/ui/image-uploader/image-uploader.tsx')) &&
       existsSync(join(consumerDir, 'src/components/ui/image-uploader/image-uploader.css')),
-    'shadcn add must write the ImageUploader entry and colocated implementation files.',
+    'shadcn add must write the colocated ImageUploader files.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/image-view.tsx')) &&
-      existsSync(join(consumerDir, 'src/components/ui/image-view/image-view.tsx')) &&
+    existsSync(join(consumerDir, 'src/components/ui/image-view/image-view.tsx')) &&
       existsSync(join(consumerDir, 'src/components/ui/image-view/image-view.css')),
-    'shadcn add must write the ImageView entry and colocated implementation files.',
+    'shadcn add must write the colocated ImageView files.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/ocr-composer.tsx')),
+    existsSync(join(consumerDir, 'src/components/ui/ocr/ocr-composer.tsx')),
     'shadcn add must write the explicitly requested OcrComposer component file.',
   )
   assert.ok(
@@ -828,7 +842,7 @@ try {
     'shadcn add must write the explicitly requested OcrComposer CSS file.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/ocr-card.tsx')),
+    existsSync(join(consumerDir, 'src/components/ui/ocr/ocr-card.tsx')),
     'shadcn add must write the explicitly requested OcrCard component file.',
   )
   assert.ok(
@@ -836,7 +850,7 @@ try {
     'shadcn add must write the explicitly requested OcrCard CSS file.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/ocr-detail.tsx')),
+    existsSync(join(consumerDir, 'src/components/ui/ocr/ocr-detail.tsx')),
     'shadcn add must write OcrDetail source used by OcrCard review action.',
   )
   assert.ok(
@@ -844,25 +858,20 @@ try {
     'shadcn add must write OcrDetail CSS used by OcrCard review action.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/md-render.tsx')) &&
-      existsSync(join(consumerDir, 'src/components/ui/md-render/md-render.tsx')),
-    'shadcn add must write the shared MdRender entry and implementation files.',
+    existsSync(join(consumerDir, 'src/components/ui/md-render/md-render.tsx')),
+    'shadcn add must write the shared MdRender implementation.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/tag-picker.tsx')),
-    'shadcn add must write explicitly requested TagPicker entry from the configured custom registry.',
+    existsSync(join(consumerDir, 'src/components/ui/tags/tag-picker/index.tsx')),
+    'shadcn add must write the TagPicker public entry beside its implementation.',
   )
   assert.ok(
     existsSync(join(consumerDir, 'src/components/ui/tags/tag-picker/tag-picker.tsx')),
     'shadcn add must write TagPicker implementation files from the configured custom registry.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/tag-bread.tsx')),
-    'shadcn add must write explicitly requested TagBread files from the configured custom registry.',
-  )
-  assert.ok(
     existsSync(join(consumerDir, 'src/components/ui/tag-bread/tag-bread.tsx')),
-    'shadcn add must write the nested TagBread implementation from the configured custom registry.',
+    'shadcn add must write TagBread from the configured custom registry.',
   )
   assert.ok(
     existsSync(join(consumerDir, 'src/components/ui/tag-bread/tag-bread.css')),
@@ -917,14 +926,13 @@ try {
     'shadcn add must write internal coss ScrollArea for TagPicker.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/stat-group.tsx')) &&
-      existsSync(join(consumerDir, 'src/components/ui/stat-group/stat-group.tsx')) &&
+    existsSync(join(consumerDir, 'src/components/ui/stat-group/stat-group.tsx')) &&
       existsSync(join(consumerDir, 'src/components/ui/stat-group/stat-group.css')),
-    'shadcn add must write the StatGroup entry and colocated implementation files.',
+    'shadcn add must write the colocated StatGroup files.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/heatmap.tsx')),
-    'shadcn add must write explicitly requested Heatmap entry from the configured custom registry.',
+    existsSync(join(consumerDir, 'src/components/ui/heatmap/index.ts')),
+    'shadcn add must write the Heatmap public entry beside its implementation.',
   )
   assert.ok(
     existsSync(join(consumerDir, 'src/components/ui/heat-color.tsx')),
@@ -992,12 +1000,6 @@ try {
   )
   assert.ok(
     existsSync(
-      join(consumerDir, 'src/components/ui/heatmap/heat-color.tsx'),
-    ),
-    'shadcn add must write public HeatColor implementation files with Heatmap.',
-  )
-  assert.ok(
-    existsSync(
       join(consumerDir, 'src/components/ui/heatmap/heatmap.css'),
     ),
     'shadcn add must write Heatmap sidecar CSS from the configured custom registry.',
@@ -1022,14 +1024,13 @@ try {
     'shadcn add must write explicitly requested Menu files from the configured custom registry.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/md-editor.tsx')),
+    existsSync(join(consumerDir, 'src/components/ui/md-editor/index.tsx')),
     'shadcn add must write internal MdEditor entry through Card.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/md-view.tsx')) &&
-      existsSync(join(consumerDir, 'src/components/ui/md-view/md-view.tsx')) &&
-      existsSync(join(consumerDir, 'src/components/ui/md-view.css')),
-    'shadcn add must write the MdView entry, implementation, and sidecar CSS through Card.',
+    existsSync(join(consumerDir, 'src/components/ui/md-view/md-view.tsx')) &&
+      existsSync(join(consumerDir, 'src/components/ui/md-view/md-view.css')),
+    'shadcn add must write the MdView implementation and sidecar CSS through Card.',
   )
   assert.ok(
     existsSync(join(consumerDir, 'src/components/ui/md-editor/md-editor.tsx')),
@@ -1054,10 +1055,6 @@ try {
   assert.ok(
     existsSync(join(consumerDir, 'src/components/ui/md-editor/md-editor-markdown.ts')),
     'shadcn add must write MdEditor markdown normalization helper from the configured custom registry.',
-  )
-  assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/tag-tree.tsx')),
-    'shadcn add must write explicitly requested TagTree files from the configured custom registry.',
   )
   assert.ok(
     existsSync(
@@ -1092,7 +1089,7 @@ try {
     'The TopBar registry payload must not ship unused internal FloatBar CSS.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/sidebar/sidebar-shell.tsx')),
+    existsSync(join(consumerDir, 'src/components/ui/sidebar/sidebar.tsx')),
     'shadcn add must write nested sidebar component files from the local @weimo registry.',
   )
 
@@ -1248,8 +1245,8 @@ try {
     join(consumerDir, 'src/components/ui/tag-tree/tag-tree-model.ts'),
     'utf8',
   )
-  const sidebarShellSource = readFileSync(
-    join(consumerDir, 'src/components/ui/sidebar/sidebar-shell.tsx'),
+  const sidebarSource = readFileSync(
+    join(consumerDir, 'src/components/ui/sidebar/sidebar.tsx'),
     'utf8',
   )
   const consumerCss = readFileSync(join(consumerDir, 'src/index.css'), 'utf8')
@@ -1297,7 +1294,7 @@ try {
       cardRuntimeSource.includes("from './card-top-bar'") &&
       cardRuntimeSource.includes("from './card-tool-bar'") &&
       cardRuntimeSource.includes("from 'weimo-ui-markdown/components/md-view'") &&
-      cardRuntimeSource.includes("from '../tag-bar'") &&
+      cardRuntimeSource.includes("from '../tags/tag-bar'") &&
       cardRuntimeSource.includes("from './card-layout-measurement'") &&
       cardRuntimeSource.includes("from './card-resolvers'") &&
       cardRuntimeSource.includes("from './use-card-draft'") &&
@@ -1462,7 +1459,7 @@ try {
     menuSource,
     mdEditorSource,
     tagTreeSource,
-    sidebarShellSource,
+    sidebarSource,
   ]) {
     assert.match(source, /from ['"](?:(?:\.\/|\.\.\/)lib\/utils|weimo-ui-core\/(?:components\/)?lib\/utils)['"]/)
     assert.doesNotMatch(source, /from ['"]@\/lib\/utils['"]/)

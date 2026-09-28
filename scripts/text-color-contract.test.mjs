@@ -54,7 +54,6 @@ const packageJson = JSON.parse(readProjectFile('package.json'))
 const textColorSource = readProjectFile('packages/weimo-ui-core/src/styles/variants/typography/text-color.ts')
 const textColorCss = readProjectFile('packages/weimo-ui-core/src/styles/variants/typography/text-color.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
-const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/text-tokens.tsx')
 const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
@@ -217,15 +216,6 @@ for (const [tone, token, className] of removedTones) {
     `text-color.css must not define removed ${className} utility.`,
   )
 }
-
-assert.ok(
-  manifestSource.includes("id: 'text-color'") &&
-    manifestSource.includes("name: '字色'") &&
-    manifestSource.includes("registryName: 'text-color'") &&
-    manifestSource.includes("packageExport: './components/text-color'") &&
-    /id: 'text-color',[\s\S]*?docs: false,/.test(manifestSource),
-  'component manifest must list TextColor as a public registry-backed utility.',
-)
 assert.ok(
   !definitionsIndexSource.includes("from './text-color'") &&
     !definitionsIndexSource.includes('textColorDefinition') &&

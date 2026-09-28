@@ -27,7 +27,6 @@ const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const docsShellSource = readProjectFile('packages/weimo-ui-site/src/docs/shell/docs-shell.tsx')
 const routesSource = readProjectFile('packages/weimo-ui-site/src/docs/routes.ts')
 const componentDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/component-docs.tsx')
-const componentManifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const componentDefinitionsIndexSource = readProjectFile(
   'packages/weimo-ui-site/src/docs/catalog/definitions.ts',
 )
@@ -225,47 +224,6 @@ for (const componentId of [
 }
 
 for (const snippet of [
-  "id: 'tagged-card'",
-  "id: 'tag'",
-  "id: 'tag-picker'",
-  "id: 'tag-bread'",
-  "id: 'stat'",
-  "id: 'ghost-icon-button'",
-  "id: 'frosted-icon-button'",
-  "id: 'button'",
-  "id: 'menu'",
-  "id: 'surface'",
-  "id: 'tag-bar'",
-  "registryName: 'tag-tree'",
-  "id: 'top-bar'",
-  "id: 'page-layout'",
-  './components/stat-group',
-  './components/tag-picker',
-  './components/tag-bread',
-  "id: 'heatmap'",
-  "id: 'heat-color'",
-  "id: 'bg-blur'",
-  "id: 'background-tokens'",
-  "id: 'border-tokens'",
-  './components/heatmap',
-  './components/heat-color',
-  './components/bg-blur',
-  './components/bg-color',
-  './components/border-color',
-  './components/ghost-icon-button',
-  './components/frosted-icon-button',
-  './components/menu',
-  './components/frosted-surface',
-  './components/tag-tree',
-  './components/card',
-]) {
-  assert.ok(
-    componentManifestSource.includes(snippet),
-    `components-manifest.ts must include ${snippet}.`,
-  )
-}
-
-for (const snippet of [
   "import { useState } from 'react'",
   'type TagTreeNode',
   "import { CalendarDays, Folder, Hash } from 'lucide-react'",
@@ -385,7 +343,7 @@ for (const snippet of [
   'const tagTreeDemoNodes',
   'function TagTreeDemo',
   "from 'weimo-ui-core/components/top-bar'",
-  "from '../components/tag-tree'",
+  "from '../components/tag-tree/tag-tree'",
   "from 'weimo-ui-core/components/capsule-button'",
   "from 'weimo-ui-core/components/menu'",
   '<TagTreeDemo />',
@@ -583,32 +541,6 @@ for (const componentId of ['tagged-card', 'markdown']) {
     !componentDefinitionSources[componentId].includes('galleryPreview') &&
       !componentDefinitionSources[componentId].includes('gallery-preview-sample'),
     `${componentId} must not keep overview-only gallery preview code.`,
-  )
-}
-
-for (const snippet of [
-  "id: 'tag-edit-bar'",
-  "packageExport: './components/tag-edit-bar',",
-  "from './tag-edit-bar'",
-  "from 'weimo-ui-core/components/tag-edit-bar'",
-  '<TagEditBar',
-  'TagEditBarDemo',
-  "id: 'editable-card'",
-  "packageExport: './components/editable-card',",
-  "from './editable-card'",
-  '<EditableCard ',
-  '<EditableCard\n',
-  'EditableCardDemo',
-  'EditableCardNote',
-  'EditableCardDraft',
-  'EditableCardLabels',
-  'EditableCardEditorOptions',
-]) {
-  assert.ok(
-    !componentManifestSource.includes(snippet) &&
-      !componentDefinitionsIndexSource.includes(snippet) &&
-      !componentDefinitionsSource.includes(snippet),
-    `docs sources must not keep removed EditableCard snippet ${snippet}.`,
   )
 }
 

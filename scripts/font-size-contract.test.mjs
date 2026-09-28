@@ -43,7 +43,6 @@ const fontSizeSource = readProjectFile('packages/weimo-ui-core/src/styles/varian
 const fontSizeCss = readProjectFile('packages/weimo-ui-core/src/styles/variants/typography/font-size.css')
 const cossCardCss = readProjectFile('packages/weimo-ui-site/src/components/primitives/card.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
-const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/text-tokens.tsx')
 const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
@@ -138,15 +137,6 @@ assert.ok(
 )
 
 assert.deepEqual(rootStyleItem, styleRegistry, 'registry.json style item must match registry/style.json.')
-
-assert.ok(
-  manifestSource.includes("id: 'text-tokens'") &&
-    manifestSource.includes("name: '文字样式'") &&
-    manifestSource.includes("registryName: 'font-size'") &&
-    manifestSource.includes("packageExport: './components/font-size'") &&
-    manifestSource.includes("packageName: 'weimo-ui-core'"),
-  'component manifest must list the 文字 page as a public registry-backed token utility.',
-)
 assert.ok(
   definitionsIndexSource.includes("import { textTokensDefinition } from './packages/weimo-ui-core/text-tokens'") &&
     definitionsIndexSource.includes("'text-tokens': textTokensDefinition"),

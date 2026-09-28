@@ -35,11 +35,6 @@
   ],
   "files": [
     {
-      "path": "packages/weimo-ui-markdown/src/components/md-editor.tsx",
-      "type": "registry:ui",
-      "target": "@ui/md-editor.tsx"
-    },
-    {
       "path": "packages/weimo-ui-markdown/src/components/md-editor/index.tsx",
       "type": "registry:ui",
       "target": "@ui/md-editor/index.tsx"

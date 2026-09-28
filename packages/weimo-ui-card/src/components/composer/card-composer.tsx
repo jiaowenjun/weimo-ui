@@ -2,7 +2,7 @@ import { X } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 
-import { Card, type CardProps } from '../card'
+import { Card, type CardProps } from '../card/card'
 import { ComposerShell } from './composer-shell'
 import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'
 

@@ -33,7 +33,6 @@ const css = readProjectFile(
   'packages/weimo-ui-stats/src/components/stat-group/stat-group.css',
 )
 const packageJson = JSON.parse(readProjectFile('package.json'))
-const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const docsDefinition = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-stats/stat.tsx')
 const rootRegistry = JSON.parse(readProjectFile('registry.json'))
@@ -125,17 +124,8 @@ assertIncludes(
 
 assert.equal(
   packageJson.exports?.['./components/stat-group'],
-  './packages/weimo-ui-stats/src/components/stat-group.tsx',
+  './packages/weimo-ui-stats/src/components/stat-group/stat-group.tsx',
   'package.json must export StatGroup.',
-)
-assert.ok(
-  manifest.includes("id: 'stat'") &&
-    manifest.includes("name: '统计'") &&
-    manifest.includes("exportName: 'StatGroup'") &&
-    manifest.includes("registryName: 'stat-group'") &&
-    manifest.includes("packageExport: './components/stat-group'") &&
-    !manifest.includes("id: 'stat-group',"),
-  'Component manifest must list StatGroup through the merged Stat page.',
 )
 assert.ok(
   definitionsIndex.includes("import { statDefinition } from './packages/weimo-ui-stats/stat'") &&
@@ -165,7 +155,6 @@ assert.deepEqual(
 assert.deepEqual(
   registryItem.files.map((file) => file.path),
   [
-    'packages/weimo-ui-stats/src/components/stat-group.tsx',
     'packages/weimo-ui-stats/src/components/stat-group/stat-group.tsx',
     'packages/weimo-ui-stats/src/components/stat-group/stat-group.css',
   ],
@@ -175,11 +164,4 @@ assert.deepEqual(
   registryItem.registryDependencies,
   ['@weimo/style', '@weimo/utils'],
   'StatGroup registry item must depend only on shared style and cn utility.',
-)
-assert.ok(
-  !packageJson.exports?.['./components/stat-block'] &&
-    !manifest.includes("id: 'stat-block'") &&
-    !definitionsIndex.includes("from './stat-block'") &&
-    !rootRegistry.items.some((item) => item.name === 'stat-block'),
-  'StatBlock must not remain a public package, docs, or registry component.',
 )

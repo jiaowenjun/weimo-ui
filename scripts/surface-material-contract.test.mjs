@@ -33,7 +33,6 @@ function registryFiles(item) {
 const packageJson = readJson('package.json')
 const rootRegistry = readJson('registry.json')
 const rootItemsByName = new Map(rootRegistry.items.map((item) => [item.name, item]))
-const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 
@@ -47,8 +46,8 @@ const cardResolverSource = readProjectFile('packages/weimo-ui-card/src/component
 const sharedCardCss = readProjectFile('packages/weimo-ui-card/src/components/card/card.css')
 const cossCardSource = readProjectFile('packages/weimo-ui-site/src/components/primitives/card.tsx')
 const cossCardCss = readProjectFile('packages/weimo-ui-site/src/components/primitives/card.css')
-const sidebarSource = readProjectFile('packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.tsx')
-const sidebarCss = readProjectFile('packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.css')
+const sidebarSource = readProjectFile('packages/weimo-ui-core/src/components/layout/sidebar/sidebar.tsx')
+const sidebarCss = readProjectFile('packages/weimo-ui-core/src/components/layout/sidebar/sidebar.css')
 const dialogSource = readProjectFile('packages/weimo-ui-core/src/components/primitives/dialog.tsx')
 const dialogCss = readProjectFile('packages/weimo-ui-core/src/components/primitives/dialog.css')
 const commandSource = readProjectFile('packages/weimo-ui-site/src/components/primitives/command.tsx')
@@ -65,26 +64,6 @@ assert.equal(
   packageJson.exports['./components/popup-surface'],
   './packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.tsx',
   'package.json must expose PopupSurface.',
-)
-
-for (const snippet of [
-  "id: 'surface'",
-  "name: '材质'",
-  "registryName: 'card-surface'",
-  "packageExport: './components/card-surface'",
-  "packageName: 'weimo-ui-core'",
-  "id: 'frosted-surface'",
-  "id: 'popup-surface'",
-  "registryName: 'popup-surface'",
-  "packageExport: './components/popup-surface'",
-]) {
-  assert.ok(manifestSource.includes(snippet), `components-manifest.ts must include ${snippet}.`)
-}
-assert.ok(
-  manifestSource.indexOf("id: 'surface'") < manifestSource.indexOf("id: 'frosted-surface'") &&
-    manifestSource.indexOf("id: 'frosted-surface'") < manifestSource.indexOf("id: 'liquid-glass'") &&
-    manifestSource.indexOf("id: 'liquid-glass'") < manifestSource.indexOf("id: 'popup-surface'"),
-  'The core material page must lead its related surface components in functional order.',
 )
 
 for (const snippet of [
@@ -166,7 +145,7 @@ for (const snippet of [
 const previewToggleSource = readProjectFile('packages/weimo-ui-site/src/docs/previews/preview-toggle.tsx')
 
 for (const snippet of [
-  "import { Switch } from '../../components/primitives/switch'",
+  "import { Switch } from 'weimo-ui-core/components/coss/switch'",
   'export function PreviewToggle(',
   'ariaLabel: string',
   'label: ReactNode',

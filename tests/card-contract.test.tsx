@@ -19,7 +19,7 @@ import {
   isCardSaveShortcut,
   type CardSaveShortcutEvent,
 } from '../packages/weimo-ui-card/src/components/card/card-save-shortcut'
-import { Card, type CardNote } from '../packages/weimo-ui-card/src/components/card'
+import { Card, type CardNote } from '../packages/weimo-ui-card/src/components/card/card'
 
 const note: CardNote = {
   content: 'Original content',

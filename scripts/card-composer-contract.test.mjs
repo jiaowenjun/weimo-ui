@@ -18,7 +18,6 @@ const source = readProjectFile('packages/weimo-ui-card/src/components/composer/c
 const composerShellSource = readProjectFile('packages/weimo-ui-card/src/components/composer/composer-shell.tsx')
 const cssSource = readProjectFile('packages/weimo-ui-card/src/components/composer/card-composer.css')
 const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
-const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/tagged-card.tsx')
 const registry = JSON.parse(readProjectFile('registry.json'))
@@ -26,7 +25,7 @@ const registryItem = readProjectFile('registry/card-composer.json')
 
 assert.equal(
   packageJson.exports?.['./components/card-composer'],
-  './packages/weimo-ui-card/src/components/card-composer.tsx',
+  './packages/weimo-ui-card/src/components/composer/card-composer.tsx',
   'package.json must expose ./components/card-composer.',
 )
 
@@ -34,7 +33,7 @@ for (const snippet of [
   "import { X } from 'lucide-react'",
   "import { useEffect, useRef, useState } from 'react'",
   "import type { ReactNode } from 'react'",
-  "import { Card, type CardProps } from '../card'",
+  "import { Card, type CardProps } from '../card/card'",
   "import { ComposerShell } from './composer-shell'",
   "import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'",
   'export type CardComposerRenderCard = (props: CardProps) => ReactNode',
@@ -159,17 +158,6 @@ for (const snippet of [
   assert.ok(cssSource.includes(snippet), `CardComposer CSS must include: ${snippet}`)
 }
 
-for (const snippet of [
-  "id: 'card-composer'",
-  "name: 'CardComposer'",
-  "registryName: 'card-composer'",
-  "packageExport: './components/card-composer'",
-  "packageName: 'weimo-ui-card'",
-  'docs: false',
-]) {
-  assert.ok(manifestSource.includes(snippet), `CardComposer manifest must include: ${snippet}`)
-}
-
 assert.ok(
   definitionsIndexSource.includes("import { taggedCardDefinition } from './packages/weimo-ui-card/tagged-card'") &&
     definitionsIndexSource.includes("'tagged-card': taggedCardDefinition") &&
@@ -209,7 +197,6 @@ assert.ok(
 )
 assert.ok(
   registryItem.includes('"name": "card-composer"') &&
-    registryItem.includes('"packages/weimo-ui-card/src/components/card-composer.tsx"') &&
     registryItem.includes('"packages/weimo-ui-card/src/components/composer/card-composer.tsx"') &&
     registryItem.includes('"packages/weimo-ui-card/src/components/composer/composer-shell.tsx"') &&
     registryItem.includes('"packages/weimo-ui-card/src/components/composer/card-composer.css"') &&

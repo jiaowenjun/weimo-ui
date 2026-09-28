@@ -33,7 +33,6 @@ function cssBlockFor(source, selector) {
 const packageJson = readJson('package.json')
 const source = readProjectFile('packages/weimo-ui-card/src/components/ocr/ocr-composer.tsx')
 const css = readProjectFile('packages/weimo-ui-card/src/components/ocr/ocr-composer.css')
-const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/ocr.tsx')
 const registry = readJson('registry.json')
@@ -42,7 +41,7 @@ const rootRegistryItem = registry.items.find((item) => item.name === 'ocr-compos
 
 assert.equal(
   packageJson.exports?.['./components/ocr-composer'],
-  './packages/weimo-ui-card/src/components/ocr-composer.tsx',
+  './packages/weimo-ui-card/src/components/ocr/ocr-composer.tsx',
   'package.json must expose ./components/ocr-composer.',
 )
 
@@ -50,12 +49,12 @@ for (const snippet of [
   "import { Check, Clipboard, FileImage, X } from 'lucide-react'",
   "import { useCallback, useEffect, useState } from 'react'",
   "import type { ComponentPropsWithoutRef, ReactNode } from 'react'",
-  "import { CardTopBar } from '../card-top-bar'",
+  "import { CardTopBar } from '../card/card-top-bar'",
   "import { ComposerShell } from '../composer/composer-shell'",
   "import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'",
   "import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'",
   "import { ImageUploader, type ImageUploaderActionApi, type ImageUploaderProps } from 'weimo-ui-image/components/image-uploader'",
-  "import { TagBar } from '../tag-bar'",
+  "import { TagBar } from '../tags/tag-bar'",
   "import { getCardSurfaceClassName } from 'weimo-ui-core/components/card-surface'",
   "import { cn } from 'weimo-ui-core/lib/utils'",
   "import './ocr-composer.css'",
@@ -209,17 +208,6 @@ assert.ok(
   'OcrComposer uploader panel must not set a fixed minimum height.',
 )
 
-for (const snippet of [
-  "id: 'ocr-composer'",
-  "name: 'OcrComposer'",
-  "registryName: 'ocr-composer'",
-  "packageExport: './components/ocr-composer'",
-  "packageName: 'weimo-ui-card'",
-  'docs: false',
-]) {
-  assert.ok(manifestSource.includes(snippet), `OcrComposer manifest must include: ${snippet}`)
-}
-
 assert.ok(
   definitionsIndexSource.includes("import { ocrDefinition } from './packages/weimo-ui-card/ocr'") &&
     definitionsIndexSource.includes('ocr: ocrDefinition') &&
@@ -261,7 +249,6 @@ assert.deepEqual(
 assert.deepEqual(
   registryFilePaths(rootRegistryItem),
   new Set([
-    'packages/weimo-ui-card/src/components/ocr-composer.tsx',
     'packages/weimo-ui-card/src/components/ocr/ocr-composer.tsx',
     'packages/weimo-ui-card/src/components/ocr/ocr-composer.css',
   ]),

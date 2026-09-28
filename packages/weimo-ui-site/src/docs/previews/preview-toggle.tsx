@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 
-import { Switch } from '../../components/primitives/switch'
+import { Switch } from 'weimo-ui-core/components/coss/switch'
 
 // 标题栏开关：可见状态标签 + Switch，按钮页启用/模式开关与材质页边框开关共用，
 // 外观由 app/app.css 的 .preview-toggle 提供。

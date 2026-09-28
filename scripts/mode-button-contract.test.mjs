@@ -30,7 +30,6 @@ const docsDefinitionSource = readProjectFile(
 const componentDefinitionsIndexSource = readProjectFile(
   'packages/weimo-ui-site/src/docs/catalog/definitions.ts',
 )
-const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 
@@ -155,17 +154,6 @@ assert.ok(
     !/<Button\b/.test(docsDefinitionSource),
   'ModeButton docs text toggle must not use coss Button.',
 )
-
-for (const snippet of [
-  "id: 'mode-button'",
-  "name: 'ModeButton'",
-  "registryName: 'mode-button'",
-  "packageExport: './components/mode-button'",
-  'docs: false',
-  'registry: true',
-]) {
-  assert.ok(manifestSource.includes(snippet), `components manifest must include ${snippet}.`)
-}
 assert.ok(
   packageJson.exports?.['./components/mode-button'] === './packages/weimo-ui-core/src/components/composites/mode-button/mode-button.tsx',
   'ModeButton must have a public package export.',

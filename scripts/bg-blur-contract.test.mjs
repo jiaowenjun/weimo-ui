@@ -53,7 +53,6 @@ const expectedTones = [
 const packageJson = readJson('package.json')
 const bgBlurSource = readProjectFile('packages/weimo-ui-core/src/styles/variants/background/bg-blur.ts')
 const bgBlurCss = readProjectFile('packages/weimo-ui-core/src/styles/variants/background/bg-blur.css')
-const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/background-tokens.tsx')
 const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
@@ -62,7 +61,7 @@ const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css'
 const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css')
 const commandCss = readProjectFile('packages/weimo-ui-site/src/components/primitives/command.css')
 const dialogCss = readProjectFile('packages/weimo-ui-core/src/components/primitives/dialog.css')
-const sidebarShellCss = readProjectFile('packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.css')
+const sidebarShellCss = readProjectFile('packages/weimo-ui-core/src/components/layout/sidebar/sidebar.css')
 const rootRegistry = readJson('registry.json')
 const styleRegistry = readJson('registry/style.json')
 const standaloneRegistryItem = readJson('registry/bg-blur.json')
@@ -216,17 +215,6 @@ assert.ok(
     sidebarShellCss.includes('backdrop-filter: blur(var(--backdrop-blur));') &&
     sidebarShellCss.includes('backdrop-filter: blur(0);'),
   'SideBar drawer backdrop must use --color-bg-backdrop and animate between blur(0) and --backdrop-blur.',
-)
-
-assert.ok(
-  manifestSource.includes("id: 'bg-blur'") &&
-    manifestSource.includes("name: '背景模糊度'") &&
-    manifestSource.includes("registryName: 'bg-blur'") &&
-    manifestSource.includes("packageExport: './components/bg-blur'") &&
-    /id: 'bg-blur',[\s\S]*?docs: false,/.test(manifestSource) &&
-    !manifestSource.includes("id: 'blur'") &&
-    !manifestSource.includes("name: 'Blur'"),
-  'component manifest must list BgBlur as the public registry-backed utility and remove Blur.',
 )
 assert.ok(
   !definitionsIndexSource.includes("from './bg-blur'") &&

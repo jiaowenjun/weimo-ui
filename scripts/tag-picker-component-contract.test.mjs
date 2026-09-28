@@ -19,7 +19,6 @@ function cssBlockFor(source, selector) {
   return source.slice(start, end + 1)
 }
 
-const entrySource = readProjectFile('packages/weimo-ui-card/src/components/tag-picker.tsx')
 const indexSource = readProjectFile('packages/weimo-ui-card/src/components/tags/tag-picker/index.tsx')
 const componentSource = readProjectFile('packages/weimo-ui-card/src/components/tags/tag-picker/tag-picker.tsx')
 const hookSource = readProjectFile('packages/weimo-ui-card/src/components/tags/tag-picker/use-tag-picker.ts')
@@ -31,7 +30,6 @@ const floatBarSource = readProjectFile('packages/weimo-ui-core/src/components/la
 const floatBarCss = readProjectFile('packages/weimo-ui-core/src/components/layout/bars/float-bar.css')
 const actionDialogSource = readProjectFile('packages/weimo-ui-core/src/components/composites/action-dialog/action-dialog.tsx')
 const actionDialogCss = readProjectFile('packages/weimo-ui-core/src/components/composites/action-dialog/action-dialog.css')
-const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const rootRegistry = JSON.parse(readProjectFile('registry.json'))
 const packageJson = JSON.parse(readProjectFile('package.json'))
 const floatBarBlock = cssBlockFor(floatBarCss, '.float-bar {')
@@ -39,10 +37,6 @@ const floatBarFrameBlock = cssBlockFor(floatBarCss, '.float-bar__frame {')
 const floatBarSlotBlock = cssBlockFor(floatBarCss, '.float-bar__slot {')
 const floatBarSlotContentBlock = cssBlockFor(floatBarCss, '.float-bar__slot > * {')
 
-assert.ok(
-  entrySource.includes("from './tags/tag-picker/index'"),
-  'TagPicker entry file must re-export the folder API.',
-)
 assert.ok(
   indexSource.includes('TagPicker') &&
   indexSource.includes('TagPickerProps') &&
@@ -59,7 +53,7 @@ assert.ok(
 )
 assert.equal(
   packageJson.exports?.['./components/tag-picker'],
-  './packages/weimo-ui-card/src/components/tag-picker.tsx',
+  './packages/weimo-ui-card/src/components/tags/tag-picker/index.tsx',
   'package.json must expose ./components/tag-picker.',
 )
 assert.equal(
@@ -76,32 +70,6 @@ assert.equal(
   packageJson.exports?.['./components/bottom-bar'],
   './packages/weimo-ui-core/src/components/layout/bars/bottom-bar.tsx',
   'BottomBar must have a public package export.',
-)
-
-assert.ok(
-  manifestSource.includes("id: 'bar'") &&
-    manifestSource.includes("exportName: 'FloatBar'") &&
-    manifestSource.includes("registryName: 'float-bar'") &&
-    manifestSource.includes("packageExport: './components/float-bar'") &&
-    manifestSource.includes('registry: true'),
-  'FloatBar must stay public through the merged floating Bar page.',
-)
-assert.ok(
-  manifestSource.includes("id: 'action-dialog'") &&
-    manifestSource.includes("name: '对话框'") &&
-    manifestSource.includes("exportName: 'ActionDialog'") &&
-    manifestSource.includes("registryName: 'action-dialog'") &&
-    manifestSource.includes("packageExport: './components/action-dialog'") &&
-    manifestSource.includes('registry: true'),
-  'ActionDialog must be documented as a public registry-backed component.',
-)
-assert.ok(
-  manifestSource.includes("id: 'bottom-bar'") &&
-    manifestSource.includes("name: 'BottomBar'") &&
-    manifestSource.includes("registryName: 'bottom-bar'") &&
-    manifestSource.includes("packageExport: './components/bottom-bar'") &&
-    manifestSource.includes('registry: true'),
-  'BottomBar must be documented as a public registry-backed component.',
 )
 assert.equal(
   rootRegistry.items.some((item) => item.name === 'float-bar'),

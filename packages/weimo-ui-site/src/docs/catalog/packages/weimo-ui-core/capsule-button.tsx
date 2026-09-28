@@ -152,8 +152,6 @@ export const capsuleButtonDefinition = {
   searchAliases: [
     'Chip',
     'CapsuleButton',
-    // 旧名保留为搜索别名,便于按历史名称找到本页。
-    'ChipButton',
     '按钮胶囊',
     '标签胶囊',
     '状态标签胶囊',

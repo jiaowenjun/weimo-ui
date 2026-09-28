@@ -16,19 +16,14 @@
   ],
   "files": [
     {
-      "path": "packages/weimo-ui-core/src/components/layout/sidebar/index.tsx",
+      "path": "packages/weimo-ui-core/src/components/layout/sidebar/sidebar.tsx",
       "type": "registry:ui",
-      "target": "@ui/sidebar/index.tsx"
+      "target": "@ui/sidebar/sidebar.tsx"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.tsx",
+      "path": "packages/weimo-ui-core/src/components/layout/sidebar/sidebar.css",
       "type": "registry:ui",
-      "target": "@ui/sidebar/sidebar-shell.tsx"
-    },
-    {
-      "path": "packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.css",
-      "type": "registry:ui",
-      "target": "@ui/sidebar/sidebar-shell.css"
+      "target": "@ui/sidebar/sidebar.css"
     },
     {
       "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx",

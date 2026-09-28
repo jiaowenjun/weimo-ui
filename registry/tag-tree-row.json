@@ -19,11 +19,6 @@
   ],
   "files": [
     {
-      "path": "packages/weimo-ui-tagtree/src/components/tag-tree-row.tsx",
-      "type": "registry:ui",
-      "target": "@ui/tag-tree-row.tsx"
-    },
-    {
       "path": "packages/weimo-ui-tagtree/src/components/tag-tree/tag-tree-row.tsx",
       "type": "registry:ui",
       "target": "@ui/tag-tree/tag-tree-row.tsx"

@@ -12,11 +12,10 @@
     "README.md"
   ],
   "exports": {
-    ".": "./src/index.ts",
-    "./components/canvas-transparency": "./src/components/canvas-transparency.tsx",
-    "./components/canvas-transparency-cache": "./src/components/canvas-transparency-cache.ts",
-    "./components/image-uploader": "./src/components/image-uploader.tsx",
-    "./components/image-view": "./src/components/image-view.tsx",
+    "./components/canvas-transparency": "./src/components/canvas-transparency/canvas-transparency.tsx",
+    "./components/canvas-transparency-cache": "./src/components/canvas-transparency/canvas-transparency-cache.ts",
+    "./components/image-uploader": "./src/components/image-uploader/image-uploader.tsx",
+    "./components/image-view": "./src/components/image-view/image-view.tsx",
     "./styles/image-uploader.css": "./src/components/image-uploader/image-uploader.css",
     "./styles/image-view.css": "./src/components/image-view/image-view.css"
   },

@@ -22,7 +22,6 @@ const buttonDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/
 const capsuleButtonDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule-button.tsx')
 const barDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/bar.tsx')
 const pageLayoutDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/page-layout.tsx')
-const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const frostedSurfaceSource = readProjectFile('packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx')
 const glassLabelSource = readProjectFile('packages/weimo-ui-core/src/components/surfaces/liquid-glass/glass-label.tsx')
@@ -200,17 +199,6 @@ assert.ok(
   'The liquid glass card must keep one tile mirroring the plain glass card, without the pill example.',
 )
 
-for (const snippet of [
-  "id: 'liquid-glass'",
-  "name: '液态玻璃'",
-  "exportName: 'LiquidGlassSurface'",
-  "registryName: 'liquid-glass'",
-  "packageExport: './components/liquid-glass'",
-  "packageName: 'weimo-ui-core'",
-]) {
-  assert.ok(manifestSource.includes(snippet), `components-manifest.ts must include ${snippet}.`)
-}
-
 assert.equal(registryItem.type, 'registry:ui', 'liquid-glass must stay a registry:ui item.')
 assert.ok(
   !registryItem.dependencies?.includes('liquid-glass-react'),
@@ -233,15 +221,6 @@ assert.ok(
   registryItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass.css'),
   'liquid-glass must ship its semantic transition CSS.',
 )
-
-for (const snippet of [
-  "id: 'glass-label'",
-  "name: 'GlassLabel'",
-  "registryName: 'glass-label'",
-  "packageExport: './components/glass-label'",
-]) {
-  assert.ok(manifestSource.includes(snippet), `components-manifest.ts must include ${snippet}.`)
-}
 assert.equal(glassLabelRegistryItem.type, 'registry:ui', 'glass-label must stay a registry:ui item.')
 assert.ok(
   !glassLabelRegistryItem.dependencies?.includes('liquid-glass-react'),

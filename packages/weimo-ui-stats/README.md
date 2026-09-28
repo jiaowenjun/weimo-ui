@@ -15,9 +15,9 @@ import { StatGroup } from 'weimo-ui-stats/components/stat-group'
 
 ```text
 src/components/
-├── heatmap/     # 热力图组件、日期模型与 HeatColor 兼容适配
+├── heatmap/     # 热力图组件与日期模型
 └── stat-group/  # 统计组组件与样式
 ```
 
-`components/*.tsx` 中的平铺文件仅保留稳定的公开/registry 入口。实现、样式和内部
-模型放在对应组件目录；组件内部使用相对导入，跨包依赖通过公开子路径引用。
+公开子路径直接指向对应组件目录中的实现或聚合入口。实现、样式和内部模型放在
+同一目录；跨包依赖通过公开子路径引用。

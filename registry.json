@@ -377,11 +377,6 @@
           "target": "@ui/heat-color.tsx"
         },
         {
-          "path": "packages/weimo-ui-stats/src/components/heatmap/heatmap-model.ts",
-          "type": "registry:ui",
-          "target": "@ui/heatmap/heatmap-model.ts"
-        },
-        {
           "path": "packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.css",
           "type": "registry:ui",
           "target": "@ui/heat-color.css"
@@ -1209,19 +1204,14 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/layout/sidebar/index.tsx",
+          "path": "packages/weimo-ui-core/src/components/layout/sidebar/sidebar.tsx",
           "type": "registry:ui",
-          "target": "@ui/sidebar/index.tsx"
+          "target": "@ui/sidebar/sidebar.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.tsx",
+          "path": "packages/weimo-ui-core/src/components/layout/sidebar/sidebar.css",
           "type": "registry:ui",
-          "target": "@ui/sidebar/sidebar-shell.tsx"
-        },
-        {
-          "path": "packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.css",
-          "type": "registry:ui",
-          "target": "@ui/sidebar/sidebar-shell.css"
+          "target": "@ui/sidebar/sidebar.css"
         },
         {
           "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx",
@@ -1384,16 +1374,6 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-tagtree/src/components/tag-tree.tsx",
-          "type": "registry:ui",
-          "target": "@ui/tag-tree.tsx"
-        },
-        {
-          "path": "packages/weimo-ui-tagtree/src/components/tag-tree/index.tsx",
-          "type": "registry:ui",
-          "target": "@ui/tag-tree/index.tsx"
-        },
-        {
           "path": "packages/weimo-ui-tagtree/src/components/tag-tree/tag-tree.tsx",
           "type": "registry:ui",
           "target": "@ui/tag-tree/tag-tree.tsx"
@@ -1454,11 +1434,6 @@
         "@weimo/utils"
       ],
       "files": [
-        {
-          "path": "packages/weimo-ui-tagtree/src/components/tag-bread.tsx",
-          "type": "registry:ui",
-          "target": "@ui/tag-bread.tsx"
-        },
         {
           "path": "packages/weimo-ui-tagtree/src/components/tag-bread/tag-bread.tsx",
           "type": "registry:ui",
@@ -1542,11 +1517,6 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-tagtree/src/components/tag-tree-row.tsx",
-          "type": "registry:ui",
-          "target": "@ui/tag-tree-row.tsx"
-        },
-        {
           "path": "packages/weimo-ui-tagtree/src/components/tag-tree/tag-tree-row.tsx",
           "type": "registry:ui",
           "target": "@ui/tag-tree/tag-tree-row.tsx"
@@ -1624,11 +1594,6 @@
         "@weimo/frosted-icon-button"
       ],
       "files": [
-        {
-          "path": "packages/weimo-ui-markdown/src/components/md-editor.tsx",
-          "type": "registry:ui",
-          "target": "@ui/md-editor.tsx"
-        },
         {
           "path": "packages/weimo-ui-markdown/src/components/md-editor/index.tsx",
           "type": "registry:ui",
@@ -1857,11 +1822,6 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-markdown/src/components/math-editor.tsx",
-          "type": "registry:ui",
-          "target": "@ui/math-editor.tsx"
-        },
-        {
           "path": "packages/weimo-ui-markdown/src/components/md-editor/math-editor.tsx",
           "type": "registry:ui",
           "target": "@ui/md-editor/math-editor.tsx"
@@ -1944,11 +1904,6 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-markdown/src/components/md-render.tsx",
-          "type": "registry:ui",
-          "target": "@ui/md-render.tsx"
-        },
-        {
           "path": "packages/weimo-ui-markdown/src/components/md-render/md-render.tsx",
           "type": "registry:ui",
           "target": "@ui/md-render/md-render.tsx"
@@ -2016,11 +1971,6 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-markdown/src/components/md-view.tsx",
-          "type": "registry:ui",
-          "target": "@ui/md-view.tsx"
-        },
-        {
           "path": "packages/weimo-ui-markdown/src/components/md-view/md-view.tsx",
           "type": "registry:ui",
           "target": "@ui/md-view/md-view.tsx"
@@ -2028,7 +1978,7 @@
         {
           "path": "packages/weimo-ui-markdown/src/components/md-view/md-view.css",
           "type": "registry:ui",
-          "target": "@ui/md-view.css"
+          "target": "@ui/md-view/md-view.css"
         }
       ]
     },
@@ -2052,11 +2002,6 @@
         "@weimo/menu"
       ],
       "files": [
-        {
-          "path": "packages/weimo-ui-image/src/components/image-view.tsx",
-          "type": "registry:ui",
-          "target": "@ui/image-view.tsx"
-        },
         {
           "path": "packages/weimo-ui-image/src/components/image-view/image-view.tsx",
           "type": "registry:ui",
@@ -2085,11 +2030,6 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-image/src/components/image-uploader.tsx",
-          "type": "registry:ui",
-          "target": "@ui/image-uploader.tsx"
-        },
-        {
           "path": "packages/weimo-ui-image/src/components/image-uploader/image-uploader.tsx",
           "type": "registry:ui",
           "target": "@ui/image-uploader/image-uploader.tsx"
@@ -2114,16 +2054,6 @@
         "@weimo/style"
       ],
       "files": [
-        {
-          "path": "packages/weimo-ui-image/src/components/canvas-transparency.tsx",
-          "type": "registry:ui",
-          "target": "@ui/canvas-transparency.tsx"
-        },
-        {
-          "path": "packages/weimo-ui-image/src/components/canvas-transparency-cache.ts",
-          "type": "registry:ui",
-          "target": "@ui/canvas-transparency-cache.ts"
-        },
         {
           "path": "packages/weimo-ui-image/src/components/canvas-transparency/canvas-transparency.tsx",
           "type": "registry:ui",
@@ -2156,11 +2086,6 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-stats/src/components/stat-group.tsx",
-          "type": "registry:ui",
-          "target": "@ui/stat-group.tsx"
-        },
-        {
           "path": "packages/weimo-ui-stats/src/components/stat-group/stat-group.tsx",
           "type": "registry:ui",
           "target": "@ui/stat-group/stat-group.tsx"
@@ -2187,13 +2112,14 @@
       ],
       "registryDependencies": [
         "@weimo/style",
-        "@weimo/utils"
+        "@weimo/utils",
+        "@weimo/heat-color"
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-stats/src/components/heatmap.tsx",
+          "path": "packages/weimo-ui-stats/src/components/heatmap/index.ts",
           "type": "registry:ui",
-          "target": "@ui/heatmap.tsx"
+          "target": "@ui/heatmap/index.ts"
         },
         {
           "path": "packages/weimo-ui-stats/src/components/heatmap/heatmap.tsx",
@@ -2201,19 +2127,9 @@
           "target": "@ui/heatmap/heatmap.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.tsx",
-          "type": "registry:ui",
-          "target": "@ui/heatmap/heat-color.tsx"
-        },
-        {
           "path": "packages/weimo-ui-stats/src/components/heatmap/heatmap-model.ts",
           "type": "registry:ui",
           "target": "@ui/heatmap/heatmap-model.ts"
-        },
-        {
-          "path": "packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.css",
-          "type": "registry:ui",
-          "target": "@ui/heat-color.css"
         },
         {
           "path": "packages/weimo-ui-stats/src/components/heatmap/heatmap.css",
@@ -2262,11 +2178,6 @@
         "@weimo/frosted-icon-button"
       ],
       "files": [
-        {
-          "path": "packages/weimo-ui-card/src/components/card-tool-bar.tsx",
-          "type": "registry:ui",
-          "target": "@ui/card-tool-bar.tsx"
-        },
         {
           "path": "packages/weimo-ui-card/src/components/card/card-tool-bar.tsx",
           "type": "registry:ui",
@@ -2328,11 +2239,6 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-card/src/components/card-top-bar.tsx",
-          "type": "registry:ui",
-          "target": "@ui/card-top-bar.tsx"
-        },
-        {
           "path": "packages/weimo-ui-card/src/components/card/card-top-bar.tsx",
           "type": "registry:ui",
           "target": "@ui/card/card-top-bar.tsx"
@@ -2388,11 +2294,6 @@
         "@weimo/utils"
       ],
       "files": [
-        {
-          "path": "packages/weimo-ui-card/src/components/card.tsx",
-          "type": "registry:ui",
-          "target": "@ui/card.tsx"
-        },
         {
           "path": "packages/weimo-ui-card/src/components/card/card.tsx",
           "type": "registry:ui",
@@ -2454,11 +2355,6 @@
           "target": "@ui/card/card.css"
         },
         {
-          "path": "packages/weimo-ui-card/src/components/card-top-bar.tsx",
-          "type": "registry:ui",
-          "target": "@ui/card-top-bar.tsx"
-        },
-        {
           "path": "packages/weimo-ui-card/src/components/card/card-top-bar.tsx",
           "type": "registry:ui",
           "target": "@ui/card/card-top-bar.tsx"
@@ -2479,11 +2375,6 @@
           "target": "@ui/mode-button.css"
         },
         {
-          "path": "packages/weimo-ui-card/src/components/card-tool-bar.tsx",
-          "type": "registry:ui",
-          "target": "@ui/card-tool-bar.tsx"
-        },
-        {
           "path": "packages/weimo-ui-card/src/components/card/card-tool-bar.tsx",
           "type": "registry:ui",
           "target": "@ui/card/card-tool-bar.tsx"
@@ -2494,11 +2385,6 @@
           "target": "@ui/card/card-tool-bar.css"
         },
         {
-          "path": "packages/weimo-ui-markdown/src/components/md-view.tsx",
-          "type": "registry:ui",
-          "target": "@ui/md-view.tsx"
-        },
-        {
           "path": "packages/weimo-ui-markdown/src/components/md-view/md-view.tsx",
           "type": "registry:ui",
           "target": "@ui/md-view/md-view.tsx"
@@ -2506,12 +2392,7 @@
         {
           "path": "packages/weimo-ui-markdown/src/components/md-view/md-view.css",
           "type": "registry:ui",
-          "target": "@ui/md-view.css"
-        },
-        {
-          "path": "packages/weimo-ui-markdown/src/components/md-render.tsx",
-          "type": "registry:ui",
-          "target": "@ui/md-render.tsx"
+          "target": "@ui/md-view/md-view.css"
         },
         {
           "path": "packages/weimo-ui-markdown/src/components/md-render/md-render.tsx",
@@ -2552,11 +2433,6 @@
           "path": "packages/weimo-ui-markdown/src/components/markdown/image-renderer.ts",
           "type": "registry:ui",
           "target": "@ui/markdown/image-renderer.ts"
-        },
-        {
-          "path": "packages/weimo-ui-markdown/src/components/md-editor.tsx",
-          "type": "registry:ui",
-          "target": "@ui/md-editor.tsx"
         },
         {
           "path": "packages/weimo-ui-markdown/src/components/md-editor/index.tsx",
@@ -2664,11 +2540,6 @@
           "target": "@ui/md-editor/md-editor.css"
         },
         {
-          "path": "packages/weimo-ui-card/src/components/tag-bar.tsx",
-          "type": "registry:ui",
-          "target": "@ui/tag-bar.tsx"
-        },
-        {
           "path": "packages/weimo-ui-card/src/components/tags/tag-bar.tsx",
           "type": "registry:ui",
           "target": "@ui/tags/tag-bar.tsx"
@@ -2712,11 +2583,6 @@
           "path": "packages/weimo-ui-core/src/behaviors/animated-inline-size/animated-inline-size.css",
           "type": "registry:ui",
           "target": "@ui/animated-inline-size.css"
-        },
-        {
-          "path": "packages/weimo-ui-card/src/components/tag-picker.tsx",
-          "type": "registry:ui",
-          "target": "@ui/tag-picker.tsx"
         },
         {
           "path": "packages/weimo-ui-card/src/components/tags/tag-picker/index.tsx",
@@ -2935,11 +2801,6 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-card/src/components/card-composer.tsx",
-          "type": "registry:ui",
-          "target": "@ui/card-composer.tsx"
-        },
-        {
           "path": "packages/weimo-ui-card/src/components/composer/card-composer.tsx",
           "type": "registry:ui",
           "target": "@ui/composer/card-composer.tsx"
@@ -2977,11 +2838,6 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-card/src/components/tag-bar.tsx",
-          "type": "registry:ui",
-          "target": "@ui/tag-bar.tsx"
-        },
-        {
           "path": "packages/weimo-ui-card/src/components/tags/tag-bar.tsx",
           "type": "registry:ui",
           "target": "@ui/tags/tag-bar.tsx"
@@ -3013,11 +2869,6 @@
         "@weimo/frosted-icon-button"
       ],
       "files": [
-        {
-          "path": "packages/weimo-ui-card/src/components/tag-picker.tsx",
-          "type": "registry:ui",
-          "target": "@ui/tag-picker.tsx"
-        },
         {
           "path": "packages/weimo-ui-card/src/components/tags/tag-picker/index.tsx",
           "type": "registry:ui",
@@ -3165,11 +3016,6 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-card/src/components/editable-capsule.tsx",
-          "type": "registry:ui",
-          "target": "@ui/editable-capsule.tsx"
-        },
-        {
           "path": "packages/weimo-ui-card/src/components/tags/editable-capsule.tsx",
           "type": "registry:ui",
           "target": "@ui/tags/editable-capsule.tsx"
@@ -3197,11 +3043,6 @@
         "@weimo/ocr-detail"
       ],
       "files": [
-        {
-          "path": "packages/weimo-ui-card/src/components/ocr-card.tsx",
-          "type": "registry:ui",
-          "target": "@ui/ocr-card.tsx"
-        },
         {
           "path": "packages/weimo-ui-card/src/components/ocr/ocr-card.tsx",
           "type": "registry:ui",
@@ -3236,11 +3077,6 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-card/src/components/ocr-composer.tsx",
-          "type": "registry:ui",
-          "target": "@ui/ocr-composer.tsx"
-        },
-        {
           "path": "packages/weimo-ui-card/src/components/ocr/ocr-composer.tsx",
           "type": "registry:ui",
           "target": "@ui/ocr/ocr-composer.tsx"
@@ -3271,11 +3107,6 @@
         "@weimo/image-view"
       ],
       "files": [
-        {
-          "path": "packages/weimo-ui-card/src/components/ocr-detail.tsx",
-          "type": "registry:ui",
-          "target": "@ui/ocr-detail.tsx"
-        },
         {
           "path": "packages/weimo-ui-card/src/components/ocr/ocr-detail.tsx",
           "type": "registry:ui",

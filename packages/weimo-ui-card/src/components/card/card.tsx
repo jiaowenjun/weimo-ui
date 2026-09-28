@@ -30,7 +30,7 @@ import {
   resolveCardTopBarProps,
 } from './card-resolvers'
 import { MdView, type MdViewHandle, type MdViewProps } from 'weimo-ui-markdown/components/md-view'
-import { TagBar } from '../tag-bar'
+import { TagBar } from '../tags/tag-bar'
 import type { ActionMenuItem } from 'weimo-ui-core/components/menu'
 import { useCardDraft } from './use-card-draft'
 import { useCardEditTransition } from './use-card-edit-transition'

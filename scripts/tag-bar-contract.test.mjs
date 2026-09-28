@@ -40,7 +40,6 @@ const docsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/pack
 const tagtreePageSource = readProjectFile('packages/weimo-ui-tagtree/src/page/tag-page.tsx')
 const appCssSource = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
-const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const packageJson = readJson('package.json')
 const rootRegistry = readJson('registry.json')
 
@@ -84,7 +83,7 @@ const rootPositionAnimationSource = componentSource.slice(
 
 assert.equal(
   packageJson.exports?.['./components/tag-bar'],
-  './packages/weimo-ui-card/src/components/tag-bar.tsx',
+  './packages/weimo-ui-card/src/components/tags/tag-bar.tsx',
   'TagBar must have a public package export.',
 )
 assert.ok(
@@ -479,17 +478,6 @@ assert.ok(
 assert.ok(
   !tagtreePageSource.includes('TagBar') && !tagtreePageSource.includes('TagPicker'),
   'Tagtree tag page must not keep moved TagBar/TagPicker demos after the card package migration.',
-)
-assert.ok(
-  manifestSource.includes("id: 'tag-bar'") &&
-    manifestSource.includes("name: '标签栏'") &&
-    manifestSource.includes("exportName: 'TagBar'") &&
-    manifestSource.includes("registryName: 'tag-bar'") &&
-    manifestSource.includes("packageExport: './components/tag-bar'") &&
-    manifestSource.includes("packageName: 'weimo-ui-card'") &&
-    manifestSource.includes('registry: true') &&
-    !manifestSource.includes("internalGroup: 'tag-tree'"),
-  'Component manifest must list TagBar as a public registry component through the card-group tag-bar page.',
 )
 
 for (const [block, snippet, message] of [

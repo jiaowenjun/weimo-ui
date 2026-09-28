@@ -30,7 +30,6 @@ const docsDefinition = readProjectFile(
   'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-image/image.tsx',
 )
 const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
-const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const packageJson = readJson('package.json')
 const rootRegistry = readJson('registry.json')
 const standaloneRegistry = readJson('registry/canvas-transparency.json')
@@ -40,22 +39,13 @@ const registryItem = rootRegistry.items.find(
 
 assert.equal(
   packageJson.exports?.['./components/canvas-transparency'],
-  './packages/weimo-ui-image/src/components/canvas-transparency.tsx',
+  './packages/weimo-ui-image/src/components/canvas-transparency/canvas-transparency.tsx',
   'package.json must export CanvasTransparency.',
 )
 assert.equal(
   packageJson.exports?.['./components/canvas-transparency-cache'],
-  './packages/weimo-ui-image/src/components/canvas-transparency-cache.ts',
+  './packages/weimo-ui-image/src/components/canvas-transparency/canvas-transparency-cache.ts',
   'package.json must expose CanvasTransparency cache controls separately from the React component.',
-)
-assert.ok(
-  manifest.includes("id: 'canvas-transparency'") &&
-    manifest.includes("name: 'CanvasTransparency'") &&
-    manifest.includes("registryName: 'canvas-transparency'") &&
-    manifest.includes("packageExport: './components/canvas-transparency'") &&
-    manifest.includes("packageName: 'weimo-ui-image'") &&
-    manifest.includes('docs: false'),
-  'Component manifest must keep CanvasTransparency registry-only in the media-ocr group after the Image page merge.',
 )
 assert.ok(
   definitionsIndex.includes("import { imageDefinition } from './packages/weimo-ui-image/image'") &&
@@ -211,8 +201,6 @@ assert.deepEqual(
 assert.deepEqual(
   registryItem.files.map((file) => file.path),
   [
-    'packages/weimo-ui-image/src/components/canvas-transparency.tsx',
-    'packages/weimo-ui-image/src/components/canvas-transparency-cache.ts',
     'packages/weimo-ui-image/src/components/canvas-transparency/canvas-transparency.tsx',
     'packages/weimo-ui-image/src/components/canvas-transparency/canvas-transparency-cache.ts',
     'packages/weimo-ui-image/src/components/canvas-transparency/canvas-transparency-model.ts',

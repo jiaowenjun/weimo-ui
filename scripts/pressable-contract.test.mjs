@@ -28,7 +28,6 @@ const expectedTones = [
 ]
 
 const packageJson = readJson('package.json')
-const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const pressableSource = readProjectFile('packages/weimo-ui-core/src/styles/variants/background/pressable.ts')
 const backgroundTokensDocsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/background-tokens.tsx')
@@ -76,15 +75,6 @@ assert.ok(
   !definitionsIndexSource.includes("from './pressable'") &&
     !definitionsIndexSource.includes('pressableDefinition'),
   'component definitions index must not expose a separate Pressable detail page.',
-)
-assert.ok(
-  manifestSource.includes("id: 'pressable'") &&
-    manifestSource.includes("name: '按压反馈色'") &&
-    manifestSource.includes("registryName: 'pressable'") &&
-    manifestSource.includes("packageExport: './components/pressable'") &&
-    manifestSource.includes("packageName: 'weimo-ui-core'") &&
-    /id: 'pressable',[\s\S]*?docs: false,/.test(manifestSource),
-  'component manifest must keep Pressable public while hiding its merged docs page.',
 )
 
 assert.ok(

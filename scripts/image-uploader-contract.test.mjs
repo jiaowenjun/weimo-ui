@@ -37,7 +37,6 @@ const css = readProjectFile(
   'packages/weimo-ui-image/src/components/image-uploader/image-uploader.css',
 )
 const packageJson = readJson('package.json')
-const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const docsDefinition = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-image/image.tsx')
 const rootRegistry = readJson('registry.json')
@@ -58,16 +57,8 @@ const readyPanelBlock = blockFor(css, '.image-uploader[data-state="ready"] .imag
 
 assert.equal(
   packageJson.exports?.['./components/image-uploader'],
-  './packages/weimo-ui-image/src/components/image-uploader.tsx',
+  './packages/weimo-ui-image/src/components/image-uploader/image-uploader.tsx',
   'package.json must export ImageUploader.',
-)
-assert.ok(
-  manifest.includes("id: 'image-uploader'") &&
-    manifest.includes("name: 'ImageUploader'") &&
-    manifest.includes("registryName: 'image-uploader'") &&
-    manifest.includes("packageExport: './components/image-uploader'") &&
-    manifest.includes('docs: false'),
-  'Component manifest must keep ImageUploader registry-only after the Image page merge.',
 )
 assert.ok(
   definitionsIndex.includes("import { imageDefinition } from './packages/weimo-ui-image/image'") &&
@@ -80,7 +71,7 @@ for (const snippet of [
   "import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'",
   "import type { ChangeEvent, DragEvent, KeyboardEvent, MouseEvent } from 'react'",
   "import type { ComponentPropsWithoutRef } from 'react'",
-  "import { ImageView } from '../image-view'",
+  "import { ImageView } from '../image-view/image-view'",
   "import { cn } from 'weimo-ui-core/lib/utils'",
   "import './image-uploader.css'",
   "type ImageUploaderSelectionSource = 'picker' | 'clipboard' | 'drop'",
@@ -360,7 +351,6 @@ assert.ok(
   'ImageUploader registry item must let ImageView own its package dependencies.',
 )
 for (const filePath of [
-  'packages/weimo-ui-image/src/components/image-uploader.tsx',
   'packages/weimo-ui-image/src/components/image-uploader/image-uploader.tsx',
   'packages/weimo-ui-image/src/components/image-uploader/image-uploader.css',
 ]) {
@@ -374,7 +364,6 @@ for (const filePath of [
   'src/components/image-detail.css',
   'src/components/image-detail-view.tsx',
   'src/components/image-detail-view.css',
-  'packages/weimo-ui-image/src/components/image-view.tsx',
   'packages/weimo-ui-image/src/components/image-view/image-view.tsx',
   'packages/weimo-ui-image/src/components/image-view/image-view.css',
 ]) {

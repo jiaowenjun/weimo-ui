@@ -19,11 +19,6 @@
   ],
   "files": [
     {
-      "path": "packages/weimo-ui-image/src/components/image-view.tsx",
-      "type": "registry:ui",
-      "target": "@ui/image-view.tsx"
-    },
-    {
       "path": "packages/weimo-ui-image/src/components/image-view/image-view.tsx",
       "type": "registry:ui",
       "target": "@ui/image-view/image-view.tsx"

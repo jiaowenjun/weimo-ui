@@ -26,5 +26,6 @@ src/
 └── main.tsx               # Vite 入口
 ```
 
-`docs/components-manifest.ts` 与 `docs/catalog/definitions.ts` 由
-`pnpm catalog:sync` 生成；组件文档实现应修改 `docs/catalog/packages/` 下对应包的清单和页面定义。
+`docs/catalog/manifest.ts` 从各包目录的 `manifest.ts` 汇总组件目录；
+`docs/catalog/definitions.ts` 由 `pnpm catalog:sync` 生成。组件文档实现应修改
+`docs/catalog/packages/` 下对应包的清单和页面定义。

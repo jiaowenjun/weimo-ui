@@ -5,15 +5,11 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { createServer } from 'vite'
 
 const sidebarSource = readFileSync(
-  new URL('../packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.tsx', import.meta.url),
-  'utf8',
-)
-const sidebarIndexSource = readFileSync(
-  new URL('../packages/weimo-ui-core/src/components/layout/sidebar/index.tsx', import.meta.url),
+  new URL('../packages/weimo-ui-core/src/components/layout/sidebar/sidebar.tsx', import.meta.url),
   'utf8',
 )
 const sidebarCss = readFileSync(
-  new URL('../packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.css', import.meta.url),
+  new URL('../packages/weimo-ui-core/src/components/layout/sidebar/sidebar.css', import.meta.url),
   'utf8',
 )
 const sidebarRegistry = readFileSync(
@@ -42,29 +38,29 @@ const sidebarDrawerViewportBlock = cssBlockFor(
 const sidebarDrawerStageBlock = cssBlockFor(sidebarCss, '.weimo-sidebar-drawer__stage')
 
 assert.doesNotMatch(
-  sidebarIndexSource,
+  sidebarSource,
   /SideBarNav|SideBarPreviewNav|SideBarGroup|SideBarItem|groups/,
   'SideBar must be a blank glass panel; navigation structure belongs to the caller.',
 )
 assert.match(
-  sidebarIndexSource,
+  sidebarSource,
   /children/,
   'SideBar must accept caller-owned children.',
 )
 assert.match(
   sidebarSource,
   /showCloseButton\?: boolean/,
-  'SideBarShell should let callers opt into the built-in drawer close button.',
+  'SideBar should let callers opt into the built-in drawer close button.',
 )
 assert.match(
   sidebarSource,
   /closeButtonLabel\?: string/,
-  'SideBarShell should let callers label the built-in drawer close button.',
+  'SideBar should let callers label the built-in drawer close button.',
 )
 assert.match(
   sidebarSource,
   /showCloseButton = false/,
-  'SideBarShell built-in close button should be hidden by default.',
+  'SideBar built-in close button should be hidden by default.',
 )
 assert.match(
   sidebarSource,
@@ -105,47 +101,47 @@ for (const primitive of [
 assert.match(
   sidebarSource,
   /function useWideViewport\(/,
-  'SideBarShell should use a private media query hook to choose one mounted shape.',
+  'SideBar should use a private media query hook to choose one mounted shape.',
 )
 assert.match(
   sidebarSource,
   /function getWideViewportSnapshot\(\)/,
-  'SideBarShell should centralize the initial media query snapshot.',
+  'SideBar should centralize the initial media query snapshot.',
 )
 assert.match(
   sidebarSource,
   /useState\(getWideViewportSnapshot\)/,
-  'SideBarShell media query hook should initialize from the current viewport when available.',
+  'SideBar media query hook should initialize from the current viewport when available.',
 )
 assert.match(
   sidebarSource,
   /window\.matchMedia\(wideMediaQuery\)/,
-  'SideBarShell must use the shared wideMediaQuery constant.',
+  'SideBar must use the shared wideMediaQuery constant.',
 )
 assert.match(
   sidebarSource,
   /media\.addEventListener\('change', updateViewport\)/,
-  'SideBarShell should subscribe to media query changes.',
+  'SideBar should subscribe to media query changes.',
 )
 assert.match(
   sidebarSource,
   /media\.removeEventListener\('change', updateViewport\)/,
-  'SideBarShell should clean up the media query listener.',
+  'SideBar should clean up the media query listener.',
 )
 assert.match(
   sidebarSource,
   /if \(isWideViewport\) \{[\s\S]*?<SideBarNormal[\s\S]*?return \([\s\S]*?<SideBarDrawer/,
-  'SideBarShell should render either SideBarNormal or SideBarDrawer from an explicit viewport branch.',
+  'SideBar should render either SideBarNormal or SideBarDrawer from an explicit viewport branch.',
 )
 assert.doesNotMatch(
   sidebarSource,
   /<>\s*<SideBarNormal[\s\S]*<SideBarDrawer[\s\S]*<\/>/,
-  'SideBarShell must not render normal and drawer sidebars in the same fragment.',
+  'SideBar must not render normal and drawer sidebars in the same fragment.',
 )
 assert.match(
   sidebarSource,
   /if \(isWideViewport\) \{\s*onClose\(\)\s*\}/,
-  'SideBarShell should still close the controlled drawer state when the viewport is desktop width.',
+  'SideBar should still close the controlled drawer state when the viewport is desktop width.',
 )
 assert.doesNotMatch(
   sidebarSource,
@@ -273,12 +269,12 @@ const viteServer = await createServer({
 })
 
 try {
-  const { SideBarShell } = await viteServer.ssrLoadModule(
-    '/packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.tsx',
+  const { SideBar } = await viteServer.ssrLoadModule(
+    '/packages/weimo-ui-core/src/components/layout/sidebar/sidebar.tsx',
   )
   const html = renderToStaticMarkup(
     React.createElement(
-      SideBarShell,
+      SideBar,
       { open: false, onClose() {} },
       React.createElement('div', { id: 'caller-owned-id' }, 'Caller child'),
     ),
@@ -287,11 +283,11 @@ try {
   assert.equal(
     countOccurrences(html, 'caller-owned-id'),
     1,
-    'SideBarShell server render should include caller children exactly once.',
+    'SideBar server render should include caller children exactly once.',
   )
   assert.ok(
     html.includes('data-sidebar-variant="normal"'),
-    'SideBarShell should render the normal sidebar when the viewport snapshot is wide.',
+    'SideBar should render the normal sidebar when the viewport snapshot is wide.',
   )
 } finally {
   await viteServer.close()

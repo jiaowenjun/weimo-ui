@@ -38,7 +38,6 @@ const expectedScaleOrder = expectedScales.map(([scale]) => scale)
 const packageJson = readJson('package.json')
 const borderRadiusSource = readProjectFile('packages/weimo-ui-core/src/styles/variants/border/border-radius.ts')
 const menuCss = readProjectFile('packages/weimo-ui-core/src/components/composites/menu/menu.css')
-const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/border-tokens.tsx')
 const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
@@ -133,15 +132,6 @@ assert.ok(
 )
 
 assert.deepEqual(rootStyleItem, styleRegistry, 'Root registry style item must match registry/style.json.')
-
-assert.ok(
-  manifestSource.includes("id: 'border-radius'") &&
-    manifestSource.includes("name: '边框圆角'") &&
-    manifestSource.includes("registryName: 'border-radius'") &&
-    manifestSource.includes("packageExport: './components/border-radius'") &&
-    /id: 'border-radius',[\s\S]*?docs: false,/.test(manifestSource),
-  'component manifest must list BorderRadius as a public registry-backed design-token utility.',
-)
 assert.ok(
   !definitionsIndexSource.includes("from './border-radius'") &&
     !definitionsIndexSource.includes('borderRadiusDefinition') &&

@@ -85,11 +85,10 @@ const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components
 const mdEditorCss = readProjectFile('packages/weimo-ui-markdown/src/components/md-editor/md-editor.css')
 const markdownContentCss = readProjectFile('packages/weimo-ui-markdown/src/styles/markdown-content.css')
 const menuCss = readProjectFile('packages/weimo-ui-core/src/components/composites/menu/menu.css')
-const sidebarShellCss = readProjectFile('packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.css')
+const sidebarShellCss = readProjectFile('packages/weimo-ui-core/src/components/layout/sidebar/sidebar.css')
 // 普通侧边栏经由 card-surface 继承无边框默认；抽屉变体不挂材质类，描边自持。
 const sidebarDrawerBlock = blockFor(sidebarShellCss, '.weimo-sidebar--drawer')
 const tagTreeCss = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-tree/tag-tree.css')
-const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/border-tokens.tsx')
 const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
@@ -402,14 +401,6 @@ for (const [token, lightThemeValue, darkThemeValue] of [
 }
 
 assert.deepEqual(rootStyleItem, styleRegistry, 'Root registry style item must match registry/style.json.')
-
-assert.ok(
-  manifestSource.includes("id: 'border-tokens'") &&
-    manifestSource.includes("name: '边框样式'") &&
-    manifestSource.includes("registryName: 'border-color'") &&
-    manifestSource.includes("packageExport: './components/border-color'"),
-  'component manifest must list BorderColor as a public registry-backed utility.',
-)
 assert.ok(
   definitionsIndexSource.includes("import { borderTokensDefinition } from './packages/weimo-ui-core/border-tokens'") &&
     definitionsIndexSource.includes("'border-tokens': borderTokensDefinition"),

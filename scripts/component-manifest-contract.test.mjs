@@ -37,11 +37,52 @@ execFileSync(process.execPath, ['scripts/sync-component-catalog.mjs', '--check']
   stdio: 'pipe',
 })
 
-const { componentManifest, componentPackages } = await loadTsModule(
-  'packages/weimo-ui-site/src/docs/components-manifest.ts',
+const packageCatalogs = await Promise.all(
+  ['core', 'tagtree', 'markdown', 'image', 'stats', 'card'].map(async (packageName) => {
+    const module = await loadTsModule(
+      `packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-${packageName}/manifest.ts`,
+    )
+
+    return Object.values(module)[0]
+  }),
+)
+const componentPackages = packageCatalogs.map(({ id, title }) => ({ id, title }))
+const componentManifest = packageCatalogs.flatMap((packageCatalog) =>
+  packageCatalog.pages.flatMap((page) => [
+    {
+      ...page,
+      packageName: packageCatalog.id,
+      page: page.id,
+      docs: true,
+      registry: true,
+    },
+    ...(page.components ?? []).map((component) => ({
+      ...component,
+      packageName: packageCatalog.id,
+      page: page.id,
+      docs: false,
+      registry: true,
+    })),
+  ]),
+)
+const catalogManifestSource = readProjectFile(
+  'packages/weimo-ui-site/src/docs/catalog/manifest.ts',
 )
 const componentDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/component-docs.tsx')
 const packageJson = JSON.parse(readProjectFile('package.json'))
+
+for (const packageName of ['card', 'core', 'image', 'markdown', 'stats', 'tagtree']) {
+  assert.match(
+    catalogManifestSource,
+    new RegExp(`from './packages/weimo-ui-${packageName}/manifest'`, 'u'),
+    `catalog/manifest.ts must compose the weimo-ui-${packageName} package catalog.`,
+  )
+}
+assert.ok(
+  catalogManifestSource.includes('packageCatalogs.flatMap') &&
+    catalogManifestSource.includes('packageCatalog.pages.flatMap'),
+  'catalog/manifest.ts must derive the public component manifest from package catalogs.',
+)
 
 assert.ok(Array.isArray(componentManifest), 'componentManifest must export an array.')
 assert.ok(componentManifest.length > 0, 'componentManifest must not be empty.')
@@ -85,7 +126,6 @@ assert.deepEqual(
     'component-preview-card',
     'tag',
     'markdown',
-    'md',
     'image',
     'stat',
     'card-tool-bar',

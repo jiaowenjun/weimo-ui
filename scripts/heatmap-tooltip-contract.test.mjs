@@ -154,15 +154,11 @@ assert.ok(
 )
 assert.deepEqual(
   registryItem.registryDependencies,
-  ['@weimo/style', '@weimo/utils'],
-  'Heatmap registry item must keep only existing shared registry dependencies because tooltip files ship with the item.',
+  ['@weimo/style', '@weimo/utils', '@weimo/heat-color'],
+  'Heatmap registry item must depend on the shared HeatColor item while shipping tooltip files directly.',
 )
 assert.ok(
   registryItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/components/primitives/tooltip.tsx') &&
     registryItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/components/primitives/tooltip.css'),
   'Heatmap registry item must ship the coss tooltip primitive files.',
-)
-assert.ok(
-    registryItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.tsx'),
-  'Heatmap registry item must ship the public HeatColor implementation.',
 )

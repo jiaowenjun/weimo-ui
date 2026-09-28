@@ -11,8 +11,8 @@ import { Menu, MenuItem, MenuPopup, MenuTrigger } from 'weimo-ui-core/components
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 
 import { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '../components/coss/breadcrumb'
-import { TagBread } from '../components/tag-bread'
-import { TagTree, type TagTreeNode, type TagTreeVariant } from '../components/tag-tree'
+import { TagBread } from '../components/tag-bread/tag-bread'
+import { TagTree, type TagTreeNode, type TagTreeVariant } from '../components/tag-tree/tag-tree'
 import { TagTreeRow } from '../components/tag-tree/tag-tree-row'
 import { useTagTree } from '../components/tag-tree/use-tag-tree'
 

@@ -14,7 +14,7 @@ const server = await createServer({
 })
 
 try {
-  const { MdRender } = await server.ssrLoadModule('/packages/weimo-ui-markdown/src/components/md-render.tsx')
+  const { MdRender } = await server.ssrLoadModule('/packages/weimo-ui-markdown/src/components/md-render/md-render.tsx')
   const html = renderToStaticMarkup(
     createElement(MdRender, {
       content: '>= First  line\n>= Second line',

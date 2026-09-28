@@ -22,7 +22,6 @@ function assertIncludes(source, snippet, message) {
 }
 
 const packageJson = readJson('package.json')
-const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const docsDefinition = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/ocr.tsx')
 const source = readProjectFile('packages/weimo-ui-card/src/components/ocr/ocr-card.tsx')
@@ -34,19 +33,8 @@ const registryItem = rootRegistry.items.find((item) => item.name === 'ocr-card')
 
 assert.equal(
   packageJson.exports?.['./components/ocr-card'],
-  './packages/weimo-ui-card/src/components/ocr-card.tsx',
+  './packages/weimo-ui-card/src/components/ocr/ocr-card.tsx',
   'package.json must export OcrCard.',
-)
-
-assert.ok(
-  manifest.includes("id: 'ocr'") &&
-    manifest.includes("name: 'OCR'") &&
-    manifest.includes("exportName: 'OcrCard'") &&
-    manifest.includes("registryName: 'ocr-card'") &&
-    manifest.includes("packageExport: './components/ocr-card'") &&
-    manifest.includes("packageName: 'weimo-ui-card'") &&
-    manifest.includes('registry: true'),
-  'Component manifest must list OcrCard through the merged OCR page.',
 )
 assert.ok(
   definitionsIndex.includes("import { ocrDefinition } from './packages/weimo-ui-card/ocr'") &&
@@ -59,7 +47,7 @@ for (const snippet of [
   "import { BookOpenCheck } from 'lucide-react'",
   "import { useEffect, useState } from 'react'",
   "import type { ComponentPropsWithoutRef, ReactNode } from 'react'",
-  "import { Card, type CardDraft, type CardEditorOptions, type CardInitialMode, type CardLabels } from '../card'",
+  "import { Card, type CardDraft, type CardEditorOptions, type CardInitialMode, type CardLabels } from '../card/card'",
   "import { ImageView, type ImageViewProps } from 'weimo-ui-image/components/image-view'",
   "import { cn } from 'weimo-ui-core/lib/utils'",
   "import type { MdRenderImageRenderer, MdRenderImageSrcResolver } from 'weimo-ui-markdown/components/md-render'",
@@ -315,7 +303,6 @@ assert.deepEqual(
   'OcrCard registry item must install lucide-react for its header icons.',
 )
 for (const filePath of [
-  'packages/weimo-ui-card/src/components/ocr-card.tsx',
   'packages/weimo-ui-card/src/components/ocr/ocr-card.tsx',
   'packages/weimo-ui-card/src/components/ocr/ocr-card.css',
 ]) {

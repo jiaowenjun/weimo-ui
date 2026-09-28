@@ -18,11 +18,6 @@
   ],
   "files": [
     {
-      "path": "packages/weimo-ui-tagtree/src/components/tag-bread.tsx",
-      "type": "registry:ui",
-      "target": "@ui/tag-bread.tsx"
-    },
-    {
       "path": "packages/weimo-ui-tagtree/src/components/tag-bread/tag-bread.tsx",
       "type": "registry:ui",
       "target": "@ui/tag-bread/tag-bread.tsx"

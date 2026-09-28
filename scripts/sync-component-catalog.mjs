@@ -161,64 +161,9 @@ function renderDefinitionsIndex(componentManifest) {
   ].join('\n')
 }
 
-function renderLegacyManifest(componentPackages, componentManifest) {
-  const packageLines = componentPackages
-    .map(({ id, title }) => `  { id: '${id}', title: '${title}' },`)
-    .join('\n')
-  const itemLines = componentManifest
-    .map((item) => {
-      const exportName = item.exportName ? `\n    exportName: '${item.exportName}',` : ''
-
-      return [
-        '  {',
-        `    id: '${item.id}',`,
-        `    name: '${item.name}',${exportName}`,
-        `    registryName: '${item.registryName}',`,
-        `    packageExport: '${item.packageExport}',`,
-        `    packageName: '${item.packageName}',`,
-        `    page: '${item.page}',`,
-        `    docs: ${item.docs},`,
-        '    registry: true,',
-        '  },',
-      ].join('\n')
-    })
-    .join('\n')
-
-  return [
-    '// Generated compatibility catalog. Edit catalog/packages instead.',
-    'export const componentPackages = [',
-    packageLines,
-    '] as const',
-    '',
-    "export type ComponentPackageName = (typeof componentPackages)[number]['id']",
-    '',
-    'export type ComponentManifestItem = {',
-    '  id: string',
-    '  name: string',
-    '  exportName?: string',
-    '  registryName: string',
-    '  packageExport: string',
-    '  packageName: ComponentPackageName',
-    '  page: string',
-    '  docs: boolean',
-    '  registry: true',
-    '}',
-    '',
-    'export const componentManifest = [',
-    itemLines,
-    '] as const satisfies ComponentManifestItem[]',
-    '',
-    'export type ComponentId = Extract<',
-    '  (typeof componentManifest)[number],',
-    '  { readonly docs: true }',
-    ">['id']",
-    '',
-  ].join('\n')
-}
-
 function validateManifest(componentPackages, componentManifest, packageJsonByName) {
   if (!Array.isArray(componentPackages) || !Array.isArray(componentManifest)) {
-    throw new Error('components-manifest.ts must export componentPackages and componentManifest arrays.')
+    throw new Error('The component catalog must export componentPackages and componentManifest arrays.')
   }
 
   const packageNames = new Set(componentPackages.map((packageItem) => packageItem.id))
@@ -348,10 +293,6 @@ async function generatedArtifacts() {
   const registryConfig = readProjectJson('registry.config.json')
 
   return new Map([
-    [
-      'packages/weimo-ui-site/src/docs/components-manifest.ts',
-      renderLegacyManifest(componentPackages, componentManifest),
-    ],
     [
       'packages/weimo-ui-site/src/docs/catalog/definitions.ts',
       renderDefinitionsIndex(componentManifest),

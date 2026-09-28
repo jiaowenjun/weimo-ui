@@ -110,7 +110,6 @@ function tokenValuesForSource(source, token) {
 const packageJson = readJson('package.json')
 const bgColorSource = readProjectFile('packages/weimo-ui-core/src/styles/variants/background/bg-color.ts')
 const bgColorCss = readProjectFile('packages/weimo-ui-core/src/styles/variants/background/bg-color.css')
-const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/background-tokens.tsx')
 const textDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/text-tokens.tsx')
@@ -119,7 +118,7 @@ const tokenPreviewCardCss = readProjectFile('packages/weimo-ui-core/src/componen
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const dialogCss = readProjectFile('packages/weimo-ui-core/src/components/primitives/dialog.css')
 const commandCss = readProjectFile('packages/weimo-ui-site/src/components/primitives/command.css')
-const sidebarShellCss = readProjectFile('packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.css')
+const sidebarShellCss = readProjectFile('packages/weimo-ui-core/src/components/layout/sidebar/sidebar.css')
 const rootRegistry = readJson('registry.json')
 const styleRegistry = readJson('registry/style.json')
 const standaloneRegistryItem = readJson('registry/bg-color.json')
@@ -348,14 +347,6 @@ for (const [source, selector] of [
 }
 
 assert.deepEqual(rootStyleItem, styleRegistry, 'Root registry style item must match registry/style.json.')
-
-assert.ok(
-  manifestSource.includes("id: 'background-tokens'") &&
-    manifestSource.includes("name: '背景样式'") &&
-    manifestSource.includes("registryName: 'bg-color'") &&
-    manifestSource.includes("packageExport: './components/bg-color'"),
-  'component manifest must list BgColor as a public registry-backed utility.',
-)
 assert.ok(
   definitionsIndexSource.includes("import { backgroundTokensDefinition } from './packages/weimo-ui-core/background-tokens'") &&
     definitionsIndexSource.includes("'background-tokens': backgroundTokensDefinition"),

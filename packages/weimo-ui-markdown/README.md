@@ -30,4 +30,4 @@ src/
 └── styles/         # Markdown token 与共享内容样式
 ```
 
-`components/*.tsx` 中的平铺文件仅保留稳定的公开/registry 入口。实现与私有子模块放在对应组件目录；组件族内部使用相对导入，跨组件族通过 `weimo-ui-markdown/components/*` 的公开子路径依赖。
+公开子路径直接指向对应组件目录中的实现或聚合入口。组件族内部使用相对导入，跨组件族通过 `weimo-ui-markdown/components/*` 的公开子路径依赖。

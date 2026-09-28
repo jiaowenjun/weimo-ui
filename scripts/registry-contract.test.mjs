@@ -208,7 +208,6 @@ for (const name of promotedRegistryNames) {
 }
 assert.ok(topBarItem, 'Root registry must include the @weimo/top-bar item.')
 for (const filePath of [
-  'packages/weimo-ui-image/src/components/image-view.tsx',
   'packages/weimo-ui-image/src/components/image-view/image-view.tsx',
   'packages/weimo-ui-image/src/components/image-view/image-view.css',
 ]) {
@@ -244,7 +243,6 @@ assert.deepEqual(
   'OcrCard registry item must install lucide-react for its header icons.',
 )
 for (const filePath of [
-  'packages/weimo-ui-card/src/components/ocr-card.tsx',
   'packages/weimo-ui-card/src/components/ocr/ocr-card.tsx',
   'packages/weimo-ui-card/src/components/ocr/ocr-card.css',
 ]) {
@@ -259,7 +257,6 @@ assert.deepEqual(
   'Card registry item must keep only shared style and utils registry dependencies.',
 )
 for (const filePath of [
-  'packages/weimo-ui-card/src/components/card-composer.tsx',
   'packages/weimo-ui-card/src/components/composer/card-composer.tsx',
   'packages/weimo-ui-card/src/components/composer/composer-shell.tsx',
   'packages/weimo-ui-card/src/components/composer/card-composer.css',
@@ -295,7 +292,7 @@ for (const [item, itemName] of [
   )
 }
 const mdRenderCarrierItems = items.filter((item) =>
-  item.files?.some((file) => file.path === 'packages/weimo-ui-markdown/src/components/md-render.tsx'),
+  item.files?.some((file) => file.path === 'packages/weimo-ui-markdown/src/components/md-render/md-render.tsx'),
 )
 
 for (const item of mdRenderCarrierItems) {
@@ -354,7 +351,6 @@ assert.ok(
   'MdRender must have a standalone public registry item.',
 )
 for (const filePath of [
-  'packages/weimo-ui-card/src/components/card-top-bar.tsx',
   'packages/weimo-ui-card/src/components/card/card-top-bar.tsx',
   'packages/weimo-ui-card/src/components/card/card-top-bar.css',
   'packages/weimo-ui-core/src/components/composites/mode-button/mode-button.tsx',
@@ -366,29 +362,23 @@ for (const filePath of [
   )
 }
 for (const filePath of [
-  'packages/weimo-ui-card/src/components/card.tsx',
   'packages/weimo-ui-card/src/components/card/card.tsx',
   'packages/weimo-ui-card/src/components/card/card-resolvers.tsx',
   'packages/weimo-ui-markdown/src/components/deferred-md-editor-toolbar.tsx',
   'packages/weimo-ui-card/src/components/card/card-editable.css',
   'packages/weimo-ui-card/src/components/card/card.css',
-  'packages/weimo-ui-card/src/components/card-top-bar.tsx',
   'packages/weimo-ui-card/src/components/card/card-top-bar.tsx',
   'packages/weimo-ui-card/src/components/card/card-top-bar.css',
   'packages/weimo-ui-core/src/components/composites/mode-button/mode-button.tsx',
   'packages/weimo-ui-core/src/components/composites/mode-button/mode-button.css',
-  'packages/weimo-ui-card/src/components/card-tool-bar.tsx',
   'packages/weimo-ui-card/src/components/card/card-tool-bar.tsx',
   'packages/weimo-ui-card/src/components/card/card-tool-bar.css',
-  'packages/weimo-ui-markdown/src/components/md-view.tsx',
   'packages/weimo-ui-markdown/src/components/md-view/md-view.tsx',
   'packages/weimo-ui-markdown/src/components/md-view/md-view.css',
-  'packages/weimo-ui-markdown/src/components/md-render.tsx',
   'packages/weimo-ui-markdown/src/components/md-render/md-render.tsx',
   'packages/weimo-ui-markdown/src/styles/markdown-content.css',
   'packages/weimo-ui-markdown/src/components/markdown/centered-quote.ts',
   'packages/weimo-ui-markdown/src/components/markdown/image-size.ts',
-  'packages/weimo-ui-markdown/src/components/md-editor.tsx',
   'packages/weimo-ui-markdown/src/components/md-editor/index.tsx',
   'packages/weimo-ui-markdown/src/components/md-editor/md-editor-types.ts',
   'packages/weimo-ui-markdown/src/components/md-editor/md-editor.tsx',
@@ -401,7 +391,6 @@ for (const filePath of [
   'packages/weimo-ui-markdown/src/components/md-editor/md-editor-save-keymap.ts',
   'packages/weimo-ui-markdown/src/components/md-editor/math-editor.tsx',
   'packages/weimo-ui-markdown/src/components/md-editor/md-editor.css',
-  'packages/weimo-ui-card/src/components/tag-bar.tsx',
   'packages/weimo-ui-card/src/components/tags/tag-bar.tsx',
   'packages/weimo-ui-card/src/components/tags/tag-bar.css',
   'packages/weimo-ui-core/src/components/controls/capsule/capsule-button.tsx',
@@ -414,7 +403,6 @@ for (const filePath of [
   'packages/weimo-ui-core/src/behaviors/animated-inline-size/animated-inline-size.tsx',
   'packages/weimo-ui-core/src/behaviors/animated-inline-size/animated-inline-size-model.ts',
   'packages/weimo-ui-core/src/behaviors/animated-inline-size/animated-inline-size.css',
-  'packages/weimo-ui-card/src/components/tag-picker.tsx',
   'packages/weimo-ui-card/src/components/tags/tag-picker/index.tsx',
   'packages/weimo-ui-card/src/components/tags/tag-picker/tag-picker.tsx',
   'packages/weimo-ui-card/src/components/tags/tag-picker/use-tag-picker.ts',
@@ -461,8 +449,6 @@ assert.ok(
   'Card registry item must install @base-ui/react for MdEditor, TagPicker, and ActionDialog internals.',
 )
 for (const filePath of [
-  'packages/weimo-ui-image/src/components/canvas-transparency.tsx',
-  'packages/weimo-ui-image/src/components/canvas-transparency-cache.ts',
   'packages/weimo-ui-image/src/components/canvas-transparency/canvas-transparency.tsx',
   'packages/weimo-ui-image/src/components/canvas-transparency/canvas-transparency-cache.ts',
   'packages/weimo-ui-image/src/components/canvas-transparency/canvas-transparency-model.ts',
@@ -482,7 +468,6 @@ assert.deepEqual(
   'CanvasTransparency registry item must install only the shared style item.',
 )
 for (const filePath of [
-  'packages/weimo-ui-image/src/components/image-uploader.tsx',
   'packages/weimo-ui-image/src/components/image-uploader/image-uploader.tsx',
   'packages/weimo-ui-image/src/components/image-uploader/image-uploader.css',
 ]) {
@@ -510,7 +495,6 @@ for (const filePath of [
   )
 }
 for (const filePath of [
-  'packages/weimo-ui-card/src/components/tag-picker.tsx',
   'packages/weimo-ui-card/src/components/tags/tag-picker/index.tsx',
   'packages/weimo-ui-card/src/components/tags/tag-picker/tag-picker.tsx',
   'packages/weimo-ui-card/src/components/tags/tag-picker/use-tag-picker.ts',

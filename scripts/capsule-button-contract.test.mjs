@@ -51,7 +51,6 @@ const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const docsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule-button.tsx')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
-const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 
 const baseBlock = cssBlockFor(surfaceCss, '.capsule-frame')
@@ -340,17 +339,4 @@ assert.ok(
   definitionsIndexSource.includes("import { capsuleButtonDefinition } from './packages/weimo-ui-core/capsule-button'") &&
     definitionsIndexSource.includes("'capsule-button': capsuleButtonDefinition"),
   'Component definitions index must register the standalone core CapsuleButton page.',
-)
-assert.ok(
-  manifestSource.includes("id: 'capsule-button'") &&
-    manifestSource.includes("name: '按钮胶囊'") &&
-    manifestSource.includes("exportName: 'CapsuleButton'") &&
-    manifestSource.includes("registryName: 'capsule-button'") &&
-    manifestSource.includes("packageExport: './components/capsule-button'") &&
-    manifestSource.includes("packageName: 'weimo-ui-core'") &&
-    manifestSource.includes("page: 'capsule-button'") &&
-    manifestSource.includes('docs: true') &&
-    manifestSource.includes('registry: true') &&
-    !manifestSource.includes("internalGroup: 'tag-tree'"),
-  'Component manifest must expose CapsuleButton through its core functional page.',
 )

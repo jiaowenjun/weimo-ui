@@ -19,11 +19,6 @@
   ],
   "files": [
     {
-      "path": "packages/weimo-ui-card/src/components/tag-picker.tsx",
-      "type": "registry:ui",
-      "target": "@ui/tag-picker.tsx"
-    },
-    {
       "path": "packages/weimo-ui-card/src/components/tags/tag-picker/index.tsx",
       "type": "registry:ui",
       "target": "@ui/tags/tag-picker/index.tsx"

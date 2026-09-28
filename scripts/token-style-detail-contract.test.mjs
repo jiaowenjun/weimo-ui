@@ -23,7 +23,6 @@ function blockFor(source, selector) {
 }
 
 const packageJson = JSON.parse(readProjectFile('package.json'))
-const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const componentDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/component-docs.tsx')
 const detailPageSource = readProjectFile('packages/weimo-ui-site/src/docs/pages/component-detail-page.tsx')
 const docsShellSource = readProjectFile('packages/weimo-ui-site/src/docs/shell/docs-shell.tsx')
@@ -45,14 +44,6 @@ const transparentSurfaceBlock = blockFor(
   '.component-preview-card .component-preview-card__surface',
 )
 const borderSampleBlock = blockFor(appCss, '.border-color-preview__sample')
-
-
-assert.ok(
-  manifestSource.includes("packageName: 'weimo-ui-core'") &&
-    manifestSource.includes("name: 'Markdown 编辑与预览'") &&
-    !manifestSource.includes("exportName: 'Md'"),
-  'the manifest must keep Markdown token documentation without restoring the removed Md export.',
-)
 
 assert.ok(
   componentDocsSource.includes('const pageComponents = componentManifest.filter') &&
@@ -206,17 +197,6 @@ assert.equal(
   packageJson.exports?.['./components/component-preview-card'],
   './packages/weimo-ui-core/src/components/composites/cards/component-preview-card.tsx',
   'ComponentPreviewCard must have a public package export.',
-)
-assert.ok(
-  manifestSource.includes("id: 'component-preview-card'") &&
-    manifestSource.includes("name: '预览卡片'") &&
-    manifestSource.includes("exportName: 'ComponentPreviewCard'") &&
-    manifestSource.includes("registryName: 'component-preview-card'") &&
-    manifestSource.includes("packageExport: './components/component-preview-card'") &&
-    manifestSource.includes(
-      "packageExport: './components/component-preview-card',\n    packageName: 'weimo-ui-core',\n    page: 'component-preview-card',\n    docs: true,",
-    ),
-  'ComponentPreviewCard must be listed in the 卡片 catalog as the preview card docs page.',
 )
 assert.ok(
   existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/component-preview-card.tsx')) &&

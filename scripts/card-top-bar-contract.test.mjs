@@ -188,30 +188,7 @@ assert.ok(
 
 const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/card-tool-bar.tsx')
 const componentDefinitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
-const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
-
-for (const snippet of [
-  "id: 'card-top-bar'",
-  "name: 'CardTopBar'",
-  "registryName: 'card-top-bar'",
-  "packageExport: './components/card-top-bar'",
-  'docs: false',
-  'registry: true',
-]) {
-  assert.ok(manifestSource.includes(snippet), `components manifest must include ${snippet}.`)
-}
-assert.ok(
-  manifestSource.includes("id: 'bar'") &&
-    manifestSource.includes("name: '浮动栏'") &&
-    manifestSource.includes("exportName: 'FloatBar'") &&
-    manifestSource.includes("registryName: 'float-bar'"),
-  'components manifest must list the merged floating Bar page.',
-)
-assert.ok(
-  !manifestSource.includes("internalGroup: 'layout'"),
-  'components manifest must not keep internal layout grouping.',
-)
 
 assert.ok(
   componentDefinitionsIndexSource.includes(
@@ -288,7 +265,7 @@ assert.ok(
 )
 
 assert.ok(
-  packageJson.exports?.['./components/card-top-bar'] === './packages/weimo-ui-card/src/components/card-top-bar.tsx',
+  packageJson.exports?.['./components/card-top-bar'] === './packages/weimo-ui-card/src/components/card/card-top-bar.tsx',
   'CardTopBar must have a public package export.',
 )
 assert.ok(
@@ -306,14 +283,13 @@ assert.ok(
   'Removed EditableCard must not keep package or registry entries.',
 )
 assert.ok(
-  packageJson.exports?.['./components/card'] === './packages/weimo-ui-card/src/components/card.tsx' &&
+  packageJson.exports?.['./components/card'] === './packages/weimo-ui-card/src/components/card/card.tsx' &&
     registryItemsByName.has('card') &&
     registryFiles.has('card.json'),
   'Card must keep package and registry entries.',
 )
 assert.ok(CardItem, 'Card registry item must exist.')
 for (const filePath of [
-  'packages/weimo-ui-card/src/components/card-top-bar.tsx',
   'packages/weimo-ui-card/src/components/card/card-top-bar.tsx',
   'packages/weimo-ui-card/src/components/card/card-top-bar.css',
   'packages/weimo-ui-core/src/components/composites/mode-button/mode-button.tsx',

@@ -44,7 +44,6 @@ const rootFrostedSurfaceItem = rootRegistry.items.find(
 )
 const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const styleRegistry = readJson('registry/style.json')
-const componentManifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const componentDefinitionsIndexSource = readProjectFile(
   'packages/weimo-ui-site/src/docs/catalog/definitions.ts',
 )
@@ -295,22 +294,6 @@ assert.deepEqual(
   rootFrostedSurfaceItem,
   'registry/frosted-surface.json must match registry.json payload.',
 )
-
-for (const snippet of [
-  "id: 'frosted-surface'",
-  "name: 'FrostedSurface'",
-  "registryName: 'frosted-surface'",
-  "packageExport: './components/frosted-surface'",
-  "packageName: 'weimo-ui-core'",
-  'docs: false',
-  'registry: true',
-]) {
-  assertIncludes(
-    componentManifestSource,
-    snippet,
-    `FrostedSurface manifest entry must include ${snippet}.`,
-  )
-}
 
 for (const snippet of [
   "import { surfaceDefinition } from './packages/weimo-ui-core/surface'",

@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
-import { TagTreePage } from './tag-page'
+import { TagTreePage } from './page/tag-page'
 
 import './page/tag-page.css'
 

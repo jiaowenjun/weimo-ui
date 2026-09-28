@@ -41,7 +41,6 @@ const heatmapCss = readProjectFile('packages/weimo-ui-stats/src/components/heatm
 const heatmapSource = readProjectFile('packages/weimo-ui-stats/src/components/heatmap/heatmap.tsx')
 const backgroundTokensDocsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/background-tokens.tsx')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
-const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const rootRegistry = readJson('registry.json')
@@ -148,14 +147,6 @@ assert.ok(
     !heatmapCss.includes('.heat-color'),
   'Heat color utilities must live in heat-color.css without heatmap-heat-color aliases.',
 )
-
-assert.ok(
-  !existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/heat-color.tsx')) &&
-    !definitionsIndexSource.includes("from './heat-color'") &&
-    !definitionsIndexSource.includes('heatColorDefinition') &&
-    /id: 'heat-color',[\s\S]*?docs: false,/.test(manifestSource),
-  'HeatColor must remain public without exposing a separate detail page.',
-)
 assert.ok(
   backgroundTokensDocsDefinitionSource.includes("from 'weimo-ui-core/components/heat-color'") &&
     backgroundTokensDocsDefinitionSource.includes("from 'weimo-ui-core/components/component-preview-card'") &&
@@ -201,13 +192,14 @@ assert.deepEqual(
   standaloneRegistryItem.files.map((file) => file.path),
   [
     'packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.tsx',
-    'packages/weimo-ui-stats/src/components/heatmap/heatmap-model.ts',
     'packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.css',
   ],
-  'HeatColor registry item must ship its implementation, model type, and utility stylesheet.',
+  'HeatColor registry item must ship only its implementation and utility stylesheet.',
 )
 assert.ok(
-  heatmapRegistryItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.css') &&
-    rootHeatmapItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.css'),
-  'Heatmap registry items must ship the shared HeatColor utility stylesheet.',
+  heatmapRegistryItem.registryDependencies.includes('@weimo/heat-color') &&
+    rootHeatmapItem.registryDependencies.includes('@weimo/heat-color') &&
+    !heatmapRegistryItem.files.some((file) => file.path.includes('/heat-color/')) &&
+    !rootHeatmapItem.files.some((file) => file.path.includes('/heat-color/')),
+  'Heatmap registry items must depend on HeatColor without bundling its implementation.',
 )

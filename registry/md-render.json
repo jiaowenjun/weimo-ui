@@ -24,11 +24,6 @@
   ],
   "files": [
     {
-      "path": "packages/weimo-ui-markdown/src/components/md-render.tsx",
-      "type": "registry:ui",
-      "target": "@ui/md-render.tsx"
-    },
-    {
       "path": "packages/weimo-ui-markdown/src/components/md-render/md-render.tsx",
       "type": "registry:ui",
       "target": "@ui/md-render/md-render.tsx"

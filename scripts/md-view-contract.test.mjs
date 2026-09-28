@@ -28,7 +28,6 @@ function cssBlockFor(source, selector) {
 
 const componentSource = readProjectFile('packages/weimo-ui-markdown/src/components/md-view/md-view.tsx')
 const mdViewCssSource = readProjectFile('packages/weimo-ui-markdown/src/components/md-view/md-view.css')
-const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown.tsx')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const cssSource = readProjectFile('packages/weimo-ui-site/src/app/app.css')
@@ -300,17 +299,6 @@ assert.ok(
 )
 
 assert.ok(
-  manifestSource.includes("id: 'md-view'") &&
-    manifestSource.includes("name: 'MdView'") &&
-    manifestSource.includes("registryName: 'md-view'") &&
-    manifestSource.includes("packageExport: './components/md-view'") &&
-    manifestSource.includes('docs: false') &&
-    manifestSource.includes('registry: true') &&
-    !manifestSource.includes("internalGroup: 'editor'"),
-  'components-manifest.ts must include MdView as a public registry component.',
-)
-
-assert.ok(
   definitionsIndexSource.includes("import { markdownDefinition } from './packages/weimo-ui-markdown/markdown'") &&
     definitionsIndexSource.includes('markdown: markdownDefinition') &&
     !definitionsIndexSource.includes('md-view'),
@@ -427,8 +415,8 @@ for (const [block, snippet, message] of [
 }
 
 assert.ok(
-  packageJson.exports?.['./components/md-view'] === './packages/weimo-ui-markdown/src/components/md-view.tsx' &&
-    markdownPackageJson.exports?.['./components/md-view'] === './src/components/md-view.tsx',
+  packageJson.exports?.['./components/md-view'] === './packages/weimo-ui-markdown/src/components/md-view/md-view.tsx' &&
+    markdownPackageJson.exports?.['./components/md-view'] === './src/components/md-view/md-view.tsx',
   'Root and weimo-ui-markdown packages must expose ./components/md-view.',
 )
 assert.ok(

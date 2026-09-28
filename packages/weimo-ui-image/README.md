@@ -21,6 +21,5 @@ src/components/
 └── image-view/           # 图片展示、详情查看与展示模式菜单
 ```
 
-`components/*.tsx` 与 `components/canvas-transparency-cache.ts` 仅保留稳定的公开/registry
-入口。实现、样式和内部模型放在对应组件目录；组件内部使用相对导入，跨组件通过
-`weimo-ui-image/components/*` 对应的稳定入口依赖。
+公开子路径直接指向对应组件目录中的实现。实现、样式和内部模型放在同一目录；
+组件内部使用相对导入，跨组件通过明确的实现路径依赖。

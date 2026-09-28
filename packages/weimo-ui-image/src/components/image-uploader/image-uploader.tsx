@@ -2,7 +2,7 @@ import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } fr
 import type { ChangeEvent, DragEvent, KeyboardEvent, MouseEvent } from 'react'
 import type { ComponentPropsWithoutRef } from 'react'
 
-import { ImageView } from '../image-view'
+import { ImageView } from '../image-view/image-view'
 import { cn } from 'weimo-ui-core/lib/utils'
 
 import './image-uploader.css'

@@ -19,11 +19,6 @@
   ],
   "files": [
     {
-      "path": "packages/weimo-ui-card/src/components/tag-bar.tsx",
-      "type": "registry:ui",
-      "target": "@ui/tag-bar.tsx"
-    },
-    {
       "path": "packages/weimo-ui-card/src/components/tags/tag-bar.tsx",
       "type": "registry:ui",
       "target": "@ui/tags/tag-bar.tsx"

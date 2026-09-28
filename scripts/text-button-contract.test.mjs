@@ -37,7 +37,6 @@ const source = readProjectFile('packages/weimo-ui-core/src/components/controls/t
 const css = readProjectFile('packages/weimo-ui-core/src/components/controls/text-button/text-button.css')
 const docsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/button.tsx')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
-const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const registryItem = rootRegistry.items.find((item) => item.name === 'text-button')
 
@@ -167,18 +166,6 @@ assertIncludes(
   definitionsIndexSource,
   'button: buttonDefinition',
   'Button definition must be mapped by id.',
-)
-assert.ok(
-  manifestSource.includes("id: 'button'") &&
-    manifestSource.includes("name: '按钮'") &&
-    manifestSource.includes("registryName: 'text-button'") &&
-    manifestSource.includes("packageExport: './components/text-button'") &&
-    manifestSource.includes("packageName: 'weimo-ui-core'"),
-  'TextButton must stay listed as a public controls component through the merged Button page.',
-)
-assert.ok(
-  !manifestSource.includes("id: 'text-button'"),
-  'TextButton manifest entry must be merged into the Button page instead of staying standalone.',
 )
 for (const removedFilePath of [
   'packages/weimo-ui-site/src/docs/component-definitions/text-button.tsx',

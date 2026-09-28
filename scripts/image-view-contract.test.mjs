@@ -39,7 +39,6 @@ function assertNotExists(relativePath, message) {
 }
 
 const packageJson = readJson('package.json')
-const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const docsDefinition = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-image/image.tsx')
 const imageViewSource = readProjectFile(
@@ -56,7 +55,7 @@ const registryItem = rootRegistry.items.find((item) => item.name === 'image-view
 
 assert.equal(
   packageJson.exports?.['./components/image-view'],
-  './packages/weimo-ui-image/src/components/image-view.tsx',
+  './packages/weimo-ui-image/src/components/image-view/image-view.tsx',
   'package.json must export ImageView.',
 )
 assert.ok(
@@ -78,26 +77,6 @@ for (const relativePath of [
   'registry/image-detail-view.json',
 ]) {
   assertNotExists(relativePath, `${relativePath} must be removed after ImageView owns detail viewing.`)
-}
-
-assert.ok(
-  manifest.includes("id: 'image'") &&
-    manifest.includes("name: '图片'") &&
-    manifest.includes("exportName: 'ImageView'") &&
-    manifest.includes("registryName: 'image-view'") &&
-    manifest.includes("packageExport: './components/image-view'") &&
-    manifest.includes("packageName: 'weimo-ui-image'"),
-  'Component manifest must list ImageView through the merged Image page as the only public image-detail viewing component.',
-)
-for (const snippet of [
-  "id: 'image-detail'",
-  "id: 'image-detail-view'",
-  "name: 'ImageDetail'",
-  "name: 'ImageDetailView'",
-  "packageExport: './components/image-detail'",
-  "packageExport: './components/image-detail-view'",
-]) {
-  assert.ok(!manifest.includes(snippet), `Component manifest must not include removed ${snippet}.`)
 }
 assert.ok(
   definitionsIndex.includes("import { imageDefinition } from './packages/weimo-ui-image/image'") &&
@@ -288,7 +267,6 @@ assert.deepEqual(
   'ImageView registry item must install style, utils, ActionDialog, glass button, and menu.',
 )
 for (const filePath of [
-  'packages/weimo-ui-image/src/components/image-view.tsx',
   'packages/weimo-ui-image/src/components/image-view/image-view.tsx',
   'packages/weimo-ui-image/src/components/image-view/image-view.css',
 ]) {

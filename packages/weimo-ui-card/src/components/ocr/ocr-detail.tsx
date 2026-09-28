@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { ActionDialog, type ActionDialogProps } from 'weimo-ui-core/components/action-dialog'
-import { Card, type CardDraft, type CardProps } from '../card'
+import { Card, type CardDraft, type CardProps } from '../card/card'
 import { ImageView, ImageViewDisplayModeMenu, type ImageViewDisplayMode } from 'weimo-ui-image/components/image-view'
 import { cn } from 'weimo-ui-core/lib/utils'
 

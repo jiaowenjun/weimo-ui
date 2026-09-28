@@ -41,7 +41,6 @@ function sourceBetween(source, startSnippet, endSnippet) {
 }
 
 const packageJson = readJson('package.json')
-const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const docsDefinition = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/ocr.tsx')
 const ocrDetailSource = readProjectFile('packages/weimo-ui-card/src/components/ocr/ocr-detail.tsx')
@@ -52,18 +51,8 @@ const registryItem = rootRegistry.items.find((item) => item.name === 'ocr-detail
 
 assert.equal(
   packageJson.exports?.['./components/ocr-detail'],
-  './packages/weimo-ui-card/src/components/ocr-detail.tsx',
+  './packages/weimo-ui-card/src/components/ocr/ocr-detail.tsx',
   'package.json must export OcrDetail.',
-)
-
-assert.ok(
-  manifest.includes("id: 'ocr-detail'") &&
-    manifest.includes("name: 'OcrDetail'") &&
-    manifest.includes("registryName: 'ocr-detail'") &&
-    manifest.includes("packageExport: './components/ocr-detail'") &&
-    manifest.includes("packageName: 'weimo-ui-card'") &&
-    manifest.includes('docs: false'),
-  'Component manifest must list OcrDetail as a public registry-backed media/OCR component.',
 )
 assert.ok(
   definitionsIndex.includes("import { ocrDefinition } from './packages/weimo-ui-card/ocr'") &&
@@ -75,7 +64,7 @@ assert.ok(
 for (const snippet of [
   "import { useEffect, useState } from 'react'",
   "import { ActionDialog, type ActionDialogProps } from 'weimo-ui-core/components/action-dialog'",
-  "import { Card, type CardDraft, type CardProps } from '../card'",
+  "import { Card, type CardDraft, type CardProps } from '../card/card'",
   "import { ImageView, ImageViewDisplayModeMenu, type ImageViewDisplayMode } from 'weimo-ui-image/components/image-view'",
   "import { cn } from 'weimo-ui-core/lib/utils'",
   "import './ocr-detail.css'",
@@ -268,7 +257,6 @@ assert.ok(
   'OcrDetail registry item must let ActionDialog, Card, and ImageView own their package dependencies.',
 )
 for (const filePath of [
-  'packages/weimo-ui-card/src/components/ocr-detail.tsx',
   'packages/weimo-ui-card/src/components/ocr/ocr-detail.tsx',
   'packages/weimo-ui-card/src/components/ocr/ocr-detail.css',
 ]) {

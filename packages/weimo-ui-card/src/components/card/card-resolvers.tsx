@@ -11,7 +11,7 @@ import type {
 import type { CardLayoutMeasurements } from './card-layout-measurement'
 import { DeferredMdEditorToolbar } from 'weimo-ui-markdown/components/deferred-md-editor-toolbar'
 import type { MdViewProps } from 'weimo-ui-markdown/components/md-view'
-import type { TagBarProps } from '../tag-bar'
+import type { TagBarProps } from '../tags/tag-bar'
 import type { ActionMenuItem } from 'weimo-ui-core/components/menu'
 import { getCardSurfaceClassName } from 'weimo-ui-core/components/card-surface'
 import type {

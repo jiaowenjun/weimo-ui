@@ -43,7 +43,6 @@ const indexCss = readProjectFile('packages/weimo-ui-site/src/styles/global.css')
 const cossBreadcrumbSource = readProjectFile('packages/weimo-ui-tagtree/src/components/coss/breadcrumb.tsx')
 const cossBreadcrumbCss = readProjectFile('packages/weimo-ui-tagtree/src/components/coss/breadcrumb.css')
 const packageJson = readJson('package.json')
-const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const docsDefinition = readProjectFile('packages/weimo-ui-tagtree/src/page/tag-page.tsx')
 const rootRegistry = readJson('registry.json')
@@ -78,16 +77,8 @@ const docsPreviewEllipsisBlock = blockFor(
 
 assert.equal(
   packageJson.exports?.['./components/tag-bread'],
-  './packages/weimo-ui-tagtree/src/components/tag-bread.tsx',
+  './packages/weimo-ui-tagtree/src/components/tag-bread/tag-bread.tsx',
   'package.json must export TagBread.',
-)
-assert.ok(
-  manifest.includes("id: 'tag-bread'") &&
-    manifest.includes("name: 'TagBread'") &&
-    manifest.includes("registryName: 'tag-bread'") &&
-    manifest.includes("packageExport: './components/tag-bread'") &&
-    manifest.includes('docs: false'),
-  'Component manifest must keep TagBread registry-only after the Tag page merge.',
 )
 assert.ok(
   definitionsIndex.includes("import { tagDefinition } from './packages/weimo-ui-tagtree/tag'") &&
@@ -266,7 +257,7 @@ assert.ok(
 )
 
 assert.ok(
-    docsDefinition.includes("import { TagBread } from '../components/tag-bread'") &&
+    docsDefinition.includes("import { TagBread } from '../components/tag-bread/tag-bread'") &&
     docsDefinition.includes("import { CalendarDays, Folder, Hash } from 'lucide-react'") &&
     docsDefinition.includes("from 'weimo-ui-core/components/capsule-frame'") &&
     docsDefinition.includes("from 'weimo-ui-core/components/frosted-surface-model'") &&
@@ -350,7 +341,6 @@ assert.deepEqual(registryItem.registryDependencies, ['@weimo/style', '@weimo/uti
 assert.deepEqual(
   registryItem.files.map((file) => file.path),
   [
-    'packages/weimo-ui-tagtree/src/components/tag-bread.tsx',
     'packages/weimo-ui-tagtree/src/components/tag-bread/tag-bread.tsx',
     'packages/weimo-ui-tagtree/src/components/tag-bread/tag-bread.css',
     'packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.ts',
@@ -369,10 +359,9 @@ assert.deepEqual(
 
 assert.ok(
   smokeSource.includes('TagBread') &&
-    smokeSource.includes('@/components/ui/tag-bread') &&
+    smokeSource.includes('@/components/ui/tag-bread/tag-bread') &&
     smokeSource.includes("await runShadcnAdd(consumerDir, '@weimo/tag-bread')") &&
     smokeSource.includes("hits.includes('tag-bread.json')") &&
-    smokeSource.includes("src/components/ui/tag-bread.tsx") &&
     smokeSource.includes("src/components/ui/tag-bread/tag-bread.tsx") &&
     smokeSource.includes("src/components/ui/tag-bread/tag-bread.css") &&
     smokeSource.includes("src/components/ui/coss/breadcrumb.tsx"),

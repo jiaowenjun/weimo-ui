@@ -40,7 +40,6 @@ const docsDefinitionSource = readProjectFile(
   'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/card-tool-bar.tsx',
 )
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
-const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const packageJson = readJson('package.json')
 const rootRegistry = readJson('registry.json')
@@ -160,24 +159,6 @@ assertIncludes(
   'CardToolBar definition must be registered by component-definitions/index.ts.',
 )
 
-for (const snippet of [
-  "id: 'card-tool-bar'",
-  "name: '卡片栏位'",
-  "exportName: 'CardToolBar'",
-  "registryName: 'card-tool-bar'",
-  "packageExport: './components/card-tool-bar'",
-  "packageName: 'weimo-ui-card'",
-  "page: 'card-tool-bar'",
-  'docs: true',
-  'registry: true',
-]) {
-  assertIncludes(manifestSource, snippet, `components manifest must include ${snippet}.`)
-}
-assert.ok(
-  !manifestSource.includes("internalGroup: 'layout'"),
-  'components manifest must not keep internal layout grouping.',
-)
-
 for (const selector of [
   '.internal-card-tool-bar-preview',
   '.internal-card-tool-bar-preview__surface',
@@ -199,7 +180,7 @@ assertIncludes(
 )
 
 assert.ok(
-  packageJson.exports?.['./components/card-tool-bar'] === './packages/weimo-ui-card/src/components/card-tool-bar.tsx',
+  packageJson.exports?.['./components/card-tool-bar'] === './packages/weimo-ui-card/src/components/card/card-tool-bar.tsx',
   'CardToolBar must have a public package export.',
 )
 assert.ok(

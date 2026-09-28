@@ -10,8 +10,6 @@ function readProjectFile(relativePath) {
   assert.ok(existsSync(absolutePath), `${relativePath} must exist.`)
   return readFileSync(absolutePath, 'utf8')
 }
-
-const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/tag-bar.tsx')
 const pageSource = readProjectFile('packages/weimo-ui-tagtree/src/page/tag-page.tsx')
@@ -19,19 +17,6 @@ const registryItem = JSON.parse(readProjectFile('registry/tag-picker.json'))
 const rootRegistry = JSON.parse(readProjectFile('registry.json'))
 const rootItem = rootRegistry.items.find((item) => item.name === 'tag-picker')
 const smokeSource = readProjectFile('scripts/registry-smoke.test.mjs')
-
-assert.ok(
-  manifestSource.includes("id: 'tag-picker'") &&
-  manifestSource.includes("name: 'TagPicker'") &&
-  manifestSource.includes("registryName: 'tag-picker'") &&
-  manifestSource.includes("packageExport: './components/tag-picker'") &&
-  manifestSource.includes("packageName: 'weimo-ui-card'") &&
-  manifestSource.includes("page: 'tag-bar'") &&
-  manifestSource.includes('docs: false') &&
-  !manifestSource.includes("@/components/ui/tag-picker") &&
-  !manifestSource.includes("ui/components/tag-picker"),
-  'components-manifest.ts must keep TagPicker registry-only under the card-group tag-bar page.',
-)
 assert.ok(
   definitionsIndexSource.includes("import { tagBarDefinition } from './packages/weimo-ui-card/tag-bar'") &&
   definitionsIndexSource.includes("'tag-bar': tagBarDefinition") &&
@@ -99,7 +84,6 @@ assert.deepEqual(
   ['@weimo/style', '@weimo/utils', '@weimo/frosted-icon-button'],
 )
 for (const filePath of [
-  'packages/weimo-ui-card/src/components/tag-picker.tsx',
   'packages/weimo-ui-card/src/components/tags/tag-picker/index.tsx',
   'packages/weimo-ui-card/src/components/tags/tag-picker/tag-picker.tsx',
   'packages/weimo-ui-card/src/components/tags/tag-picker/use-tag-picker.ts',
@@ -126,10 +110,10 @@ for (const filePath of [
 
 assert.ok(
   smokeSource.includes('TagPicker') &&
-  smokeSource.includes('@/components/ui/tag-picker') &&
+  smokeSource.includes('@/components/ui/tags/tag-picker') &&
   smokeSource.includes("await runShadcnAdd(consumerDir, '@weimo/tag-picker')") &&
   smokeSource.includes("hits.includes('tag-picker.json')") &&
-  smokeSource.includes("src/components/ui/tag-picker.tsx") &&
+  smokeSource.includes("src/components/ui/tags/tag-picker/index.tsx") &&
   smokeSource.includes("src/components/ui/tags/tag-picker/tag-picker.tsx") &&
   smokeSource.includes("src/components/ui/action-dialog.tsx") &&
   smokeSource.includes("src/components/ui/float-bar.tsx") &&

@@ -71,8 +71,7 @@ const packageRules = [
     workspaceDependencies: [['weimo-ui-core', 'workspace:*']],
     forbiddenRelativeImports: [],
     requiredExports: {
-      '.': './src/index.ts',
-      './page': './src/tag-page.tsx',
+      './page': './src/page/tag-page.tsx',
       './components/coss/breadcrumb': './src/components/coss/breadcrumb.tsx',
       './components/coss/input-group': './src/components/coss/input-group.tsx',
       './components/coss/scroll-area': './src/components/coss/scroll-area.tsx',
@@ -84,7 +83,6 @@ const packageRules = [
     workspaceDependencies: [['weimo-ui-core', 'workspace:*']],
     forbiddenRelativeImports: [],
     requiredExports: {
-      '.': './src/index.ts',
       './styles/tokens.css': './src/styles/tokens.css',
       './styles/markdown-content.css': './src/styles/markdown-content.css',
       './styles/md-view.css': './src/components/md-view/md-view.css',
@@ -102,8 +100,7 @@ const packageRules = [
       "from './menu'",
     ],
     requiredExports: {
-      '.': './src/index.ts',
-      './components/canvas-transparency-cache': './src/components/canvas-transparency-cache.ts',
+      './components/canvas-transparency-cache': './src/components/canvas-transparency/canvas-transparency-cache.ts',
       './styles/image-uploader.css': './src/components/image-uploader/image-uploader.css',
       './styles/image-view.css': './src/components/image-view/image-view.css',
     },
@@ -118,7 +115,6 @@ const packageRules = [
       "from '../coss/",
     ],
     requiredExports: {
-      '.': './src/index.ts',
       './styles/heatmap.css': './src/components/heatmap/heatmap.css',
       './styles/stat-group.css': './src/components/stat-group/stat-group.css',
     },
@@ -143,10 +139,9 @@ const packageRules = [
       "from './menu'",
     ],
     requiredExports: {
-      '.': './src/index.ts',
-      './components/editable-capsule': './src/components/editable-capsule.tsx',
-      './components/tag-bar': './src/components/tag-bar.tsx',
-      './components/tag-picker': './src/components/tag-picker.tsx',
+      './components/editable-capsule': './src/components/tags/editable-capsule.tsx',
+      './components/tag-bar': './src/components/tags/tag-bar.tsx',
+      './components/tag-picker': './src/components/tags/tag-picker/index.tsx',
       './components/tag-picker-model': './src/components/tags/tag-picker/tag-picker-model.ts',
       './styles/card.css': './src/components/card/card.css',
       './styles/card-composer.css': './src/components/composer/card-composer.css',
@@ -163,8 +158,24 @@ const packageRules = [
 
 const rootPackageJson = readProjectJson('package.json')
 const workspace = readProjectFile('pnpm-workspace.yaml')
-const { componentManifest, componentPackages } = await loadTsModule(
-  'packages/weimo-ui-site/src/docs/components-manifest.ts',
+const packageCatalogs = await Promise.all(
+  ['core', 'tagtree', 'markdown', 'image', 'stats', 'card'].map(async (packageName) => {
+    const module = await loadTsModule(
+      `packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-${packageName}/manifest.ts`,
+    )
+
+    return Object.values(module)[0]
+  }),
+)
+const componentPackages = packageCatalogs.map(({ id, title }) => ({ id, title }))
+const componentManifest = packageCatalogs.flatMap((packageCatalog) =>
+  packageCatalog.pages.flatMap((page) => [
+    { ...page, packageName: packageCatalog.id },
+    ...(page.components ?? []).map((component) => ({
+      ...component,
+      packageName: packageCatalog.id,
+    })),
+  ]),
 )
 
 assert.match(workspace, /packages:\s*\n\s+- 'packages\/\*'/u)
@@ -307,9 +318,9 @@ for (const [relativePath, dependencyPath] of [
   )
 }
 
-const tagtreeIndex = readProjectFile('packages/weimo-ui-tagtree/src/index.ts')
+const tagtreeMain = readProjectFile('packages/weimo-ui-tagtree/src/main.tsx')
 const tagtreePage = readProjectFile('packages/weimo-ui-tagtree/src/page/tag-page.tsx')
-assert.match(tagtreeIndex, /TagTreePage/u)
+assert.match(tagtreeMain, /TagTreePage/u)
 assert.match(tagtreePage, /export function TagTreePage/u)
 assert.match(tagtreePage, /from ['"]weimo-ui-core\/components\/component-preview-card['"]/u)
 assert.equal(tagtreePage.match(/<ComponentPreviewCard\b/gu)?.length, 3)
@@ -336,8 +347,7 @@ for (const relativePath of [
   'packages/weimo-ui-site/src/components/primitives/card.css',
   'packages/weimo-ui-site/src/components/primitives/command.tsx',
   'packages/weimo-ui-site/src/components/primitives/command.css',
-  'packages/weimo-ui-site/src/components/primitives/switch.tsx',
-  'packages/weimo-ui-site/src/docs/components-manifest.ts',
+  'packages/weimo-ui-site/src/docs/catalog/manifest.ts',
   'packages/weimo-ui-site/src/docs/pages/component-detail-page.tsx',
   'packages/weimo-ui-site/src/docs/previews/glass-preview-card.tsx',
   'packages/weimo-ui-site/src/docs/previews/preview-toggle.tsx',
@@ -358,6 +368,8 @@ for (const obsoletePath of [
   'packages/weimo-ui-site/src/docs/docs-outlet-context.ts',
   'packages/weimo-ui-site/src/docs/docs-shell.tsx',
   'packages/weimo-ui-site/src/docs/search-component-docs.ts',
+  'packages/weimo-ui-site/src/components/primitives/switch.tsx',
+  'packages/weimo-ui-site/src/docs/components-manifest.ts',
 ]) {
   assert.ok(
     !existsSync(join(root, obsoletePath)),

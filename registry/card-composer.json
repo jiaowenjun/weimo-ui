@@ -18,11 +18,6 @@
   ],
   "files": [
     {
-      "path": "packages/weimo-ui-card/src/components/card-composer.tsx",
-      "type": "registry:ui",
-      "target": "@ui/card-composer.tsx"
-    },
-    {
       "path": "packages/weimo-ui-card/src/components/composer/card-composer.tsx",
       "type": "registry:ui",
       "target": "@ui/composer/card-composer.tsx"

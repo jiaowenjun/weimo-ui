@@ -17,11 +17,6 @@
   ],
   "files": [
     {
-      "path": "packages/weimo-ui-card/src/components/card-top-bar.tsx",
-      "type": "registry:ui",
-      "target": "@ui/card-top-bar.tsx"
-    },
-    {
       "path": "packages/weimo-ui-card/src/components/card/card-top-bar.tsx",
       "type": "registry:ui",
       "target": "@ui/card/card-top-bar.tsx"

@@ -46,7 +46,6 @@ const markdownImageRendererSource = readProjectFile(
 )
 const markdownImageSizeSource = readProjectFile('packages/weimo-ui-markdown/src/components/markdown/image-size.ts')
 const markdownContentCss = readProjectFile('packages/weimo-ui-markdown/src/styles/markdown-content.css')
-const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionSource = readProjectFile(
   'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown-styles.tsx',
 )
@@ -237,14 +236,6 @@ for (const [token, value] of markdownStaticTokens) {
   assert.equal(styleRegistry.cssVars.light[key], value, `registry/style.json must export ${token}.`)
   assert.equal(rootStyleItem?.cssVars.light[key], value, `registry.json must export ${token}.`)
 }
-
-assert.ok(
-  manifestSource.includes("id: 'markdown'") &&
-    manifestSource.includes("name: 'Markdown 编辑与预览'") &&
-    !manifestSource.includes("id: 'md'") &&
-    !manifestSource.includes("packageExport: './components/md'"),
-  'Markdown styles must live on the Markdown page without a standalone Md component.',
-)
 
 assert.ok(
   mdRenderDefinitionSource.includes("from './markdown-styles'") &&
