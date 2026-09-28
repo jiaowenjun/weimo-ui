@@ -173,9 +173,15 @@ assert.ok(
 )
 assert.ok(
   appCss.includes(
-    '.component-preview-card:has(.card-surface-preview, .popup-surface-preview, .frosted-surface-preview__tile, .frosted-border-preview__tile, .icon-preview__row, .sidebar-preview, .tag-page__bread-preview, .internal-bottom-preview, .liquid-glass-preview, .liquid-glass-toolbar-preview, .liquid-glass-icon-preview, .liquid-glass-chip-preview, .capsule-slot-preview, .capsule-button, .icon-button--frosted, .liquid-glass-label-preview) .base-card__content {\n  overflow: visible;\n',
+    '.component-preview-card:has(.card-surface-preview, .popup-surface-preview, .frosted-surface-preview__tile, .frosted-border-preview__tile, .icon-preview__row, .sidebar-preview, .tag-page__bread-preview, .internal-bottom-preview, .card-docs-preview, .card-composer-docs-preview, .liquid-glass-preview, .liquid-glass-toolbar-preview, .liquid-glass-icon-preview, .liquid-glass-chip-preview, .capsule-slot-preview, .capsule-button, .icon-button--frosted, .liquid-glass-label-preview) .base-card__content {\n  overflow: visible;\n',
   ),
-  'Card and popup surface demos (plus both frosted tiles — material page and border page, the frosted icon button rows, the drawer trigger canvas, the breadcrumb chain canvas, every capsule card via the component-level .capsule-button match, every frosted icon button host via .icon-button--frosted, the bottom-bar canvas on CardSurface and every liquid glass canvas — material, toolbars, icon buttons, chips, capsule slots, labels) must opt out of the preview-window clip so real shadows (--shadow-card / --shadow-overlay / the tone-aligned liquid glass and frosted drop shadows) render into the card padding.',
+  'Card and popup surface demos (plus both frosted tiles — material page and border page, the frosted icon button rows, the drawer trigger canvas, the breadcrumb chain canvas, the tagged-card page real cards, every capsule card via the component-level .capsule-button match, every frosted icon button host via .icon-button--frosted, the bottom-bar canvas on CardSurface and every liquid glass canvas — material, toolbars, icon buttons, chips, capsule slots, labels) must opt out of the preview-window clip so real shadows (--shadow-card / --shadow-overlay / the tone-aligned liquid glass and frosted drop shadows) render into the card padding.',
+)
+assert.ok(
+  appCss.includes(".card-composer-docs-preview .weimo-card-composer:not([data-state='closing']),") &&
+    appCss.includes(".card-composer-docs-preview .weimo-card-editable:not([data-height-lock='true']) {") &&
+    appCss.includes('  overflow: visible;\n}'),
+  'The composer docs demo must open the steady-state animation masks (composer/frame/editable) so the toolbar tone shadow escapes the card, while keeping the closing-state and height-lock masks for the collapse animations.',
 )
 
 for (const snippet of [
