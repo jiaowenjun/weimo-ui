@@ -202,7 +202,6 @@ assert.deepEqual(
     'pressable',
     'border-radius',
     'frosted-surface',
-    'liquid-glass',
     'popup-surface',
     'frosted-icon-button',
     'frosted-icon-button-group',

@@ -29,8 +29,8 @@
     border-color: var(--frosted-surface-border);
   }
 
-  /* 亮背景投影与液态玻璃库投影 / --shadow-overlay 数值对齐（偏移 12px、模糊
-     40px、黑 25%），三处各持字面量互不引用，改动须手动同步；暗背景维持无影。
+  /* 亮背景投影与 --shadow-overlay 数值对齐（偏移 12px、模糊 40px、黑 25%），
+     两处各持字面量互不引用，改动须手动同步；暗背景维持无影。
      亮背景描边随投影隐藏（与浮层亮主题同构：层级由投影表达，1px 几何保留），
      特异性 0-2-0 压过 --bordered 的 var 声明，插值边框色照常计算只是不再可见。 */
   .frosted-surface[data-background-tone="light"] {

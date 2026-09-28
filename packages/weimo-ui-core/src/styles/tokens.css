@@ -72,9 +72,6 @@
   --frosted-surface-muted-fg-on-light: hsl(215.3 25% 26.7% / 0.68);
   --frosted-surface-fg-on-dark: hsl(0 0% 100% / 0.9);
   --frosted-surface-muted-fg-on-dark: hsl(0 0% 100% / 0.72);
-  /* 液态玻璃材质专属字色:与磨砂 tone 链(--frosted-surface-fg-*)解耦,各自演化 */
-  --liquid-glass-fg-on-light: hsl(222.2 47.4% 11.2% / 0.9);
-  --liquid-glass-fg-on-dark: hsl(0 0% 100% / 0.9);
 
   /* === 阴影 === */
   --shadow-card: 0 1px 2px hsl(0 0% 0% / 0.04), 0 2px 8px hsl(0 0% 0% / 0.06);
@@ -182,8 +179,6 @@
   --frosted-surface-muted-fg-on-light: hsl(215.3 25% 26.7% / 0.68);
   --frosted-surface-fg-on-dark: hsl(0 0% 100% / 0.9);
   --frosted-surface-muted-fg-on-dark: hsl(0 0% 100% / 0.72);
-  --liquid-glass-fg-on-light: hsl(222.2 47.4% 11.2% / 0.9);
-  --liquid-glass-fg-on-dark: hsl(0 0% 100% / 0.9);
   --shadow-card: none;
   --shadow-overlay: none;
   --shadow-tooltip: none;

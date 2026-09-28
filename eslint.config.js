@@ -6,13 +6,9 @@ import tseslint from 'typescript-eslint'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  // dist is build output; liquid-glass-react is vendored upstream code
-  // (rdev/liquid-glass-react 1.1.1, MIT) kept verbatim — its render-time
-  // ref reads and effect setState are core to its design and must not be
-  // rewritten to satisfy repo lint rules.
+  // dist is build output.
   globalIgnores([
     'dist',
-    'packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass-react',
   ]),
   {
     files: ['**/*.{ts,tsx}'],

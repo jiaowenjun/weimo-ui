@@ -49,9 +49,8 @@
 | `opaque.popup` | `PopupSurface` | Dialog、Command、Tooltip 等抬升浮层 |
 | `solid.chip` | `CapsuleFrame` | 普通胶囊控件 |
 | `frosted.adaptive` | `FrostedSurface` | 菜单、磨砂按钮、编辑器工具栏、`TagBread` |
-| `liquid.glass` | `LiquidGlassSurface` | 明确选择液态折射效果的浮动控件 |
 
-- 只有真正浮动且需要透出背景的元素使用磨砂或液态玻璃材质。
+- 只有真正浮动且需要透出背景的元素使用磨砂材质。
 - 常驻、嵌入式和占位式组件使用不透明背景。
 - 抽屉面板本体使用不透明材质；模糊只发生在 backdrop。
 - `CapsuleFrame` 只负责胶囊几何、内容插槽和普通态填充。磨砂态组合 `FrostedSurface`。

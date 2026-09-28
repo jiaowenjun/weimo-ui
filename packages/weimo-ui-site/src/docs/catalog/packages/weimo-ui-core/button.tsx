@@ -159,7 +159,7 @@ function FrostedIconButtonGroupPreview() {
 }
 
 // 液态玻璃图标按钮/按钮组演示卡已删除:工具栏家族全站磨砂化后,液态玻璃
-// 图标按钮不再有演示场景,液态玻璃材质本体的演示在 Surface 材质页。
+// 图标按钮不再有演示场景,液态玻璃材质本体亦已从 core 整体下线。
 
 function ModeButtonDemo() {
   const [mode, setMode] = useState<ModeButtonMode>('display')

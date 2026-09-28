@@ -40,7 +40,6 @@ export const coreCatalog = {
       packageExport: './components/card-surface',
       components: [
         { id: 'frosted-surface', name: 'FrostedSurface', registryName: 'frosted-surface', packageExport: './components/frosted-surface' },
-        { id: 'liquid-glass', name: '液态玻璃', exportName: 'LiquidGlassSurface', registryName: 'liquid-glass', packageExport: './components/liquid-glass' },
         { id: 'popup-surface', name: 'PopupSurface', registryName: 'popup-surface', packageExport: './components/popup-surface' },
       ],
     },

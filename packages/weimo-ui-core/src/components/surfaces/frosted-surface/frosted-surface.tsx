@@ -111,8 +111,8 @@ function useFrostedSurfaceBackgroundToneForElement<ElementType extends HTMLEleme
 
     // Chromium 的 backdrop-filter 快照在「只有背景元素的内联样式变化」时会滞留:
     // 灰度滑块只改画布 style 时,磨砂材质停在旧模糊底色,直到材质自身发生一次
-    // 样式提交(如按压反馈)才刷新。与 LiquidGlassSurface 的抖动同思路——观察
-    // 祖先链 class/style,在元素自身交替写入视觉恒等的 translate 强制重采样。
+    // 样式提交(如按压反馈)才刷新。观察祖先链 class/style,在元素自身交替写入
+    // 视觉恒等的 translate 强制重采样。
     // 只能观察祖先链、写入只能在自身:上面的采样观察器挂在 documentElement
     // subtree 上,抖动若由它触发会对自身写入形成 rAF 乒乓循环。
     const backdropObserver =

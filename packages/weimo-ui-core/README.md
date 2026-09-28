@@ -9,7 +9,7 @@
 | 分类 | 入口 |
 | --- | --- |
 | Token | `styles/tokens.css` |
-| 材质 | `components/card-surface`、`frosted-surface`、`popup-surface`、`liquid-glass` |
+| 材质 | `components/card-surface`、`frosted-surface`、`popup-surface` |
 | 按钮与控件 | `components/text-button`、`capsule-button`、`frosted-icon-button`、`ghost-icon-button`、`slider` |
 | 组合组件 | `components/menu`、`action-dialog`、`mode-button`、`base-card`、`component-preview-card` |
 | 布局 | `components/sidebar`、`top-bar`、`bottom-bar`、`float-bar` |
@@ -49,7 +49,7 @@ src/
 ├── behaviors/             # 可跨组件复用的交互与测量行为
 ├── components/
 │   ├── primitives/        # Base UI 等基础适配层
-│   ├── surfaces/          # 卡片、弹层、磨砂和液态玻璃材质
+│   ├── surfaces/          # 卡片、弹层和磨砂材质
 │   ├── controls/          # 按钮、胶囊和滑块
 │   ├── layout/            # 栏位与响应式侧栏
 │   └── composites/        # 菜单、对话框、模式按钮和卡片壳

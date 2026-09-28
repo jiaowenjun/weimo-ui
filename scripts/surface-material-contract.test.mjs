@@ -127,7 +127,7 @@ for (const snippet of [
   "import { CardSurface } from 'weimo-ui-core/components/card-surface'",
   "import { PopupSurface } from 'weimo-ui-core/components/popup-surface'",
   "import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'",
-  "id: 'surface'",
+  'id: \'surface\'',
   '亮主题细微阴影，暗主题边框描边',
   'function CardSurfacePreview()',
   'label="卡片材质"',
@@ -138,11 +138,18 @@ for (const snippet of [
   'label="浮层材质"',
   '<PopupSurface className="popup-surface-preview__tile">',
   '亮主题抬升投影，暗主题边框描边',
-  
+
   "frame: 'plain',",
 ]) {
   assert.ok(surfaceDefinitionSource.includes(snippet), `Surface docs definition must include ${snippet}.`)
 }
+// 液态玻璃材质已从 core 整体下线:材质页只剩卡片/磨砂/浮层三张卡。
+assert.ok(
+  !surfaceDefinitionSource.includes('LiquidGlass') &&
+    !surfaceDefinitionSource.includes('liquid-glass') &&
+    !surfaceDefinitionSource.includes('液态玻璃'),
+  'The Surface page must stay free of the removed liquid glass material card and aliases.',
+)
 
 // FrostedLabel:磨砂标题标签(原 GlassLabel 更名并改用磨砂材质)——非交互
 // span 自持磨砂材质(frosted-surface 基类,与磨砂图标钮同构,无独立材质层
@@ -266,9 +273,9 @@ assert.ok(
 )
 assert.ok(
   appCss.includes(
-    '.component-preview-card:has(.card-surface-preview, .popup-surface-preview, .frosted-surface-preview__tile, .frosted-border-preview__tile, .icon-preview__row, .sidebar-preview, .tag-page__bread-preview, .internal-bottom-preview, .card-docs-preview, .card-composer-docs-preview, .liquid-glass-preview, .capsule-button, .icon-button--frosted, .frosted-label-preview) .base-card__content {\n  overflow: visible;\n',
+    '.component-preview-card:has(.card-surface-preview, .popup-surface-preview, .frosted-surface-preview__tile, .frosted-border-preview__tile, .icon-preview__row, .sidebar-preview, .tag-page__bread-preview, .internal-bottom-preview, .card-docs-preview, .card-composer-docs-preview, .capsule-button, .icon-button--frosted, .frosted-label-preview) .base-card__content {\n  overflow: visible;\n',
   ),
-  'Card and popup surface demos (plus both frosted tiles — material page and border page, the frosted icon button rows, the drawer trigger canvas, the breadcrumb chain canvas, the tagged-card page real cards, every capsule card via the component-level .capsule-button match, every frosted icon button host via .icon-button--frosted, the bottom-bar canvas on CardSurface, every liquid glass canvas — the material page tile — and the frosted label card) must opt out of the preview-window clip so real shadows (--shadow-card / --shadow-overlay / the tone-aligned liquid glass and frosted drop shadows) render into the card padding.',
+  'Card and popup surface demos (plus both frosted tiles — material page and border page, the frosted icon button rows, the drawer trigger canvas, the breadcrumb chain canvas, the tagged-card page real cards, every capsule card via the component-level .capsule-button match, every frosted icon button host via .icon-button--frosted, the bottom-bar canvas on CardSurface, and the frosted label card) must opt out of the preview-window clip so real shadows (--shadow-card / --shadow-overlay / the tone-aligned frosted drop shadows) render into the card padding.',
 )
 assert.ok(
   appCss.includes(".card-composer-docs-preview .weimo-card-composer:not([data-state='closing']),") &&
@@ -363,23 +370,16 @@ assert.ok(
   blockFor(popupSurfaceCss, '.dark .popup-surface').includes('border-color: var(--color-border-divider);'),
   'Dark theme must stroke popup surfaces with the divider border token instead of the invisible shadow.',
 )
-// 亮主题浮层投影与液态玻璃库投影「数值对齐、定义互不引用」:token 字面量手抄
-// 库内默认分支的投影(偏移 12px、模糊 40px、黑 25%),任一侧改动须手动同步
-// 四处镜像(tokens.css + 两份 registry + 库字面量);库不引用 token,token 不进库。
+// 亮主题浮层投影的三处镜像「数值一致、定义互不引用」:tokens.css 与两份
+// registry 各持同一字面量(偏移 12px、模糊 40px、黑 25%,历史上与已删除的
+// 液态玻璃库投影对齐),任一侧改动须手动同步;磨砂材质亮背景 tone 投影
+// (frosted-surface.css)同值对齐,由 frosted-surface-contract 锁定。
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
-const liquidGlassEngineSource = readProjectFile(
-  'packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass-react/index.tsx',
-)
 const registryJsonText = readProjectFile('registry.json')
 const styleRegistryText = readProjectFile('registry/style.json')
 assert.ok(
-  tokensCss.includes('--shadow-overlay: 0 12px 40px hsl(0 0% 0% / 0.25);') &&
-    liquidGlassEngineSource.includes('"0px 12px 40px rgba(0, 0, 0, 0.25)"'),
-  'Light-theme --shadow-overlay must stay value-aligned with the liquid glass drop shadow literal (same offset, blur and alpha, hand-copied).',
-)
-assert.ok(
-  !liquidGlassEngineSource.includes('--shadow-overlay'),
-  'The vendored liquid glass engine must keep its own shadow literal instead of referencing the overlay token.',
+  tokensCss.includes('--shadow-overlay: 0 12px 40px hsl(0 0% 0% / 0.25);'),
+  'Light-theme --shadow-overlay must keep the aligned literal (offset 12px, blur 40px, black 25%).',
 )
 assert.ok(
   registryJsonText.includes('"shadow-overlay": "0 12px 40px hsl(0 0% 0% / 0.25)"') &&

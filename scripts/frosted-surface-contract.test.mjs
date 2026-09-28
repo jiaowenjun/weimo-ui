@@ -324,7 +324,7 @@ for (const snippet of [
   "import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'",
   "from '../../../previews/glass-preview-card'",
   "id: 'surface'",
-  '静态卡片、亮度自适应磨砂玻璃层、液态玻璃与抬升浮层的材质总览',
+  '静态卡片、亮度自适应磨砂玻璃层与抬升浮层的材质总览',
   'function FrostedSurfacePreview()',
   'label="磨砂材质"',
   
@@ -673,9 +673,9 @@ for (const snippet of [
 ]) {
   assertIncludes(frostedSurfaceCss, snippet, `FrostedSurface CSS must include ${snippet}.`)
 }
-// 亮背景 tone 投影与液态玻璃库投影 / --shadow-overlay「数值对齐、定义互不引用」：
-// 磨砂侧持自己的字面量（不引 var(--shadow-overlay)，token 也不进组件），任一侧
-// 改动须四处手动同步（tokens.css+两 registry+库/磨砂两字面量）。
+// 亮背景 tone 投影与 --shadow-overlay「数值对齐、定义互不引用」：
+// 磨砂侧持自己的字面量（不引 var(--shadow-overlay)，token 也不进组件），
+// 任一侧改动须三处手动同步（tokens.css+两 registry 的 token 镜像与磨砂字面量）。
 assert.ok(
   frostedSurfaceCss.includes('box-shadow: 0 12px 40px hsl(0 0% 0% / 0.25);') &&
     tokensCss.includes('--shadow-overlay: 0 12px 40px hsl(0 0% 0% / 0.25);') &&

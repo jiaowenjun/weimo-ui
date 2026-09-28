@@ -516,52 +516,6 @@
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "type": "registry:ui",
-      "name": "liquid-glass",
-      "title": "Liquid Glass Surface",
-      "description": "A liquid glass material surface with displacement-map refraction, edge aberration and elastic hover, adapted from liquid-glass-react.",
-      "categories": [
-        "layout",
-        "surface"
-      ],
-      "registryDependencies": [
-        "@weimo/style"
-      ],
-      "files": [
-        {
-          "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass.tsx",
-          "type": "registry:ui",
-          "target": "@ui/liquid-glass.tsx"
-        },
-        {
-          "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass.css",
-          "type": "registry:ui",
-          "target": "@ui/liquid-glass.css"
-        },
-        {
-          "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass-react/index.tsx",
-          "type": "registry:ui",
-          "target": "@ui/liquid-glass-react/index.tsx"
-        },
-        {
-          "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass-react/shader-utils.ts",
-          "type": "registry:ui",
-          "target": "@ui/liquid-glass-react/shader-utils.ts"
-        },
-        {
-          "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass-react/utils.ts",
-          "type": "registry:ui",
-          "target": "@ui/liquid-glass-react/utils.ts"
-        },
-        {
-          "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass-react/LICENSE",
-          "type": "registry:ui",
-          "target": "@ui/liquid-glass-react/LICENSE"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "type": "registry:ui",
       "dependencies": [],
       "name": "popup-surface",
       "title": "Popup Surface",

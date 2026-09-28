@@ -280,7 +280,7 @@ assertDecodablePngDataUrl(
 assert.ok(
     componentDefinitionsSource.includes("import { FrostedSurface } from 'weimo-ui-core/components/frosted-surface'") &&
     componentDefinitionsSource.includes("id: 'surface'") &&
-    componentDefinitionsSource.includes('静态卡片、亮度自适应磨砂玻璃层、液态玻璃与抬升浮层的材质总览') &&
+    componentDefinitionsSource.includes('静态卡片、亮度自适应磨砂玻璃层与抬升浮层的材质总览') &&
     componentDefinitionsSource.includes("from '../../../previews/glass-preview-card'") &&
     componentDefinitionsSource.includes('<GlassPreviewCard') &&
     !componentDefinitionsSource.includes('frosted-surface-preview__scroll') &&
