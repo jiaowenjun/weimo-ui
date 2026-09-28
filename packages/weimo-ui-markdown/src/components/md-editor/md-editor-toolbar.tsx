@@ -7,7 +7,7 @@ import { Button } from 'weimo-ui-core/components/coss/button'
 import { Toolbar, ToolbarButton, ToolbarGroup } from 'weimo-ui-core/components/coss/toolbar'
 import { Tooltip, TooltipPopup, TooltipProvider, TooltipTrigger } from 'weimo-ui-core/components/coss/tooltip'
 import { getFrostedSurfaceClassName } from 'weimo-ui-core/components/frosted-surface-model'
-import { WEIMO_CENTERED_QUOTE_MARKER } from '../markdown-centered-quote'
+import { WEIMO_CENTERED_QUOTE_MARKER } from '../markdown/centered-quote'
 import { formatEditorContent } from './md-editor-content-format'
 import { convertSelectionToInlineMath, resolveInlineMathSelection } from './md-editor-math-conversion'
 

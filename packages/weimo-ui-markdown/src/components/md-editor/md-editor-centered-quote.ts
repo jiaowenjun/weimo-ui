@@ -3,7 +3,7 @@ import type { Node as ProseMirrorNode } from '@tiptap/pm/model'
 import { Plugin, PluginKey } from '@tiptap/pm/state'
 import { Decoration, DecorationSet } from '@tiptap/pm/view'
 
-import { WEIMO_CENTERED_QUOTE_MARKER } from '../markdown-centered-quote'
+import { WEIMO_CENTERED_QUOTE_MARKER } from '../markdown/centered-quote'
 
 const centeredQuotePluginKey = new PluginKey('weimoCenteredQuote')
 

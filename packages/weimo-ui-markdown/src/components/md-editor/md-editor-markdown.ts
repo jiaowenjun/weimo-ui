@@ -1,5 +1,5 @@
-import { restoreCenteredQuoteSyntax } from '../markdown-centered-quote'
-import { normalizeParenthesizedListMarkdown } from '../markdown-parenthesized-list'
+import { restoreCenteredQuoteSyntax } from '../markdown/centered-quote'
+import { normalizeParenthesizedListMarkdown } from '../markdown/parenthesized-list'
 
 const EMPTY_PARAGRAPH_PLACEHOLDER_RE = /^(?:[ \t]*(?:&nbsp;|\u00a0)[ \t]*)+$/u
 

@@ -26,8 +26,8 @@ function cssBlockFor(source, selector) {
   return match.groups.block
 }
 
-const componentSource = readProjectFile('packages/weimo-ui-markdown/src/components/md-view.tsx')
-const mdViewCssSource = readProjectFile('packages/weimo-ui-markdown/src/components/md-view.css')
+const componentSource = readProjectFile('packages/weimo-ui-markdown/src/components/md-view/md-view.tsx')
+const mdViewCssSource = readProjectFile('packages/weimo-ui-markdown/src/components/md-view/md-view.css')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown.tsx')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
@@ -61,18 +61,18 @@ for (const snippet of [
   'lazy,',
   'Suspense,',
   'useImperativeHandle,',
-  "import type { MdEditorHandle, MdEditorProps } from './md-editor'",
-  "import('./md-editor')",
+  "from 'weimo-ui-markdown/components/md-editor'",
+  "import('weimo-ui-markdown/components/md-editor')",
   'const MdEditor = lazy(',
   '<Suspense fallback={null}>',
-  "import { MdRender, type MdRenderProps } from './md-render'",
-  "import { normalizeCenteredQuoteSyntax, restoreCenteredQuoteSyntax } from './markdown-centered-quote'",
+  "import { MdRender, type MdRenderProps } from 'weimo-ui-markdown/components/md-render'",
+  "from '../markdown/centered-quote'",
   "import remarkGfm from 'remark-gfm'",
   "import remarkMath from 'remark-math'",
   "import remarkParse from 'remark-parse'",
   "import remarkStringify from 'remark-stringify'",
   "import { unified } from 'unified'",
-  "import './md-view.css'",
+  "import 'weimo-ui-markdown/styles/md-view.css'",
   "export type MdViewMode = 'view' | 'edit'",
   'const mdViewMarkdownFormatter = unified()',
   '.use(remarkParse)',
@@ -256,7 +256,7 @@ assert.ok(
 
 assert.ok(
   !componentSource.includes("import { MdEditor") &&
-    componentSource.includes("import type { MdEditorHandle, MdEditorProps } from './md-editor'"),
+    componentSource.includes("from 'weimo-ui-markdown/components/md-editor'"),
   'MdView must keep MdEditor types static while loading the runtime component on demand.',
 )
 assert.ok(

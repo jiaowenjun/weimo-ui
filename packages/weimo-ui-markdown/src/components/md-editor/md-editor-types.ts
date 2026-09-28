@@ -2,7 +2,7 @@ import type { Editor } from '@tiptap/core'
 import type {
   MarkdownImageRenderer,
   MarkdownImageSrcResolver,
-} from '../markdown-image-renderer'
+} from '../markdown/image-renderer'
 
 export type MdEditorFormatContentOptions = {
   formatMarkdown?: (markdown: string) => string

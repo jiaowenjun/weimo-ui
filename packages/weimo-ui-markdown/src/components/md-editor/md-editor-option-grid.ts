@@ -6,7 +6,7 @@ import { Decoration, DecorationSet, type EditorView } from '@tiptap/pm/view'
 import {
   measureOptionGridColumns,
   type OptionGridColumnCount,
-} from '../markdown-option-grid'
+} from '../markdown/option-grid'
 import { resolveTrailingOrderedListImagePair } from './md-editor-list-image-layout'
 
 type OptionGridMeasurement = {

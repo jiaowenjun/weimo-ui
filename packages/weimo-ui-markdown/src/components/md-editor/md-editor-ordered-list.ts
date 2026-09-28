@@ -19,7 +19,7 @@ import {
   parseParenthesizedListMarker,
   type ParenthesizedListMarker,
   type ParenthesizedListMarkerStyle,
-} from '../markdown-parenthesized-list'
+} from '../markdown/parenthesized-list'
 
 type ParenthesizedListLine = {
   content: string

@@ -837,8 +837,9 @@ try {
     'shadcn add must write OcrDetail CSS used by OcrCard review action.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/md-render.tsx')),
-    'shadcn add must write the shared MdRender component file.',
+    existsSync(join(consumerDir, 'src/components/ui/md-render.tsx')) &&
+      existsSync(join(consumerDir, 'src/components/ui/md-render/md-render.tsx')),
+    'shadcn add must write the shared MdRender entry and implementation files.',
   )
   assert.ok(
     existsSync(join(consumerDir, 'src/components/ui/tag-picker.tsx')),
@@ -1016,6 +1017,12 @@ try {
     'shadcn add must write internal MdEditor entry through Card.',
   )
   assert.ok(
+    existsSync(join(consumerDir, 'src/components/ui/md-view.tsx')) &&
+      existsSync(join(consumerDir, 'src/components/ui/md-view/md-view.tsx')) &&
+      existsSync(join(consumerDir, 'src/components/ui/md-view.css')),
+    'shadcn add must write the MdView entry, implementation, and sidecar CSS through Card.',
+  )
+  assert.ok(
     existsSync(join(consumerDir, 'src/components/ui/md-editor/md-editor.tsx')),
     'shadcn add must write internal MdEditor implementation files through Card.',
   )
@@ -1153,7 +1160,7 @@ try {
     'utf8',
   )
   const mdRenderSource = readFileSync(
-    join(consumerDir, 'src/components/ui/md-render.tsx'),
+    join(consumerDir, 'src/components/ui/md-render/md-render.tsx'),
     'utf8',
   )
   const tagPickerSource = readFileSync(
@@ -1530,7 +1537,7 @@ try {
     'Installed Card CSS must not include removed ShareCard styles.',
   )
   assert.ok(
-    mdEditorCssSource.includes('@import "../markdown-content.css";'),
+    mdEditorCssSource.includes('@import "weimo-ui-markdown/styles/markdown-content.css";'),
     'Installed MdEditor CSS must import shared Markdown content CSS.',
   )
   assert.ok(

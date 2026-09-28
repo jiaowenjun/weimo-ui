@@ -1,4 +1,4 @@
-@import "./markdown-content.css";
+@import "weimo-ui-markdown/styles/markdown-content.css";
 
 @layer components {
   .md {

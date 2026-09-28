@@ -83,7 +83,7 @@ const cossTabsCss = readProjectFile('packages/weimo-ui-core/src/components/primi
 const cossTooltipCss = readProjectFile('packages/weimo-ui-core/src/components/primitives/tooltip.css')
 const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css')
 const mdEditorCss = readProjectFile('packages/weimo-ui-markdown/src/components/md-editor/md-editor.css')
-const markdownContentCss = readProjectFile('packages/weimo-ui-markdown/src/components/markdown-content.css')
+const markdownContentCss = readProjectFile('packages/weimo-ui-markdown/src/styles/markdown-content.css')
 const menuCss = readProjectFile('packages/weimo-ui-core/src/components/composites/menu/menu.css')
 const sidebarShellCss = readProjectFile('packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.css')
 // 普通侧边栏经由 card-surface 继承无边框默认；抽屉变体不挂材质类，描边自持。

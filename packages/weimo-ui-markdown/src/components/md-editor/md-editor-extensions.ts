@@ -11,7 +11,7 @@ import StarterKit from '@tiptap/starter-kit'
 import type {
   MarkdownImageRenderer,
   MarkdownImageSrcResolver,
-} from '../markdown-image-renderer'
+} from '../markdown/image-renderer'
 import { CenteredQuote } from './md-editor-centered-quote'
 import { MdEditorBlockMath } from './md-editor-block-math'
 import { MarkdownImagePlaceholder } from './md-editor-image'

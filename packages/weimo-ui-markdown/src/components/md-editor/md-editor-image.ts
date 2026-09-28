@@ -9,11 +9,11 @@ import { ReactNodeViewRenderer } from '@tiptap/react'
 import {
   getCachedMarkdownImageWidth,
   setMarkdownImageHalfIntrinsicWidth,
-} from '../markdown-image-size'
+} from '../markdown/image-size'
 import type {
   MarkdownImageRenderer,
   MarkdownImageSrcResolver,
-} from '../markdown-image-renderer'
+} from '../markdown/image-renderer'
 import { MdEditorImageView } from './md-editor-image-view'
 
 export type MdEditorImageSrcResolver = MarkdownImageSrcResolver

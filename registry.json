@@ -1735,32 +1735,32 @@
           "target": "@ui/md-editor/md-editor.css"
         },
         {
-          "path": "packages/weimo-ui-markdown/src/components/markdown-centered-quote.ts",
+          "path": "packages/weimo-ui-markdown/src/components/markdown/centered-quote.ts",
           "type": "registry:ui",
-          "target": "@ui/markdown-centered-quote.ts"
+          "target": "@ui/markdown/centered-quote.ts"
         },
         {
-          "path": "packages/weimo-ui-markdown/src/components/markdown-image-size.ts",
+          "path": "packages/weimo-ui-markdown/src/components/markdown/image-size.ts",
           "type": "registry:ui",
-          "target": "@ui/markdown-image-size.ts"
+          "target": "@ui/markdown/image-size.ts"
         },
         {
-          "path": "packages/weimo-ui-markdown/src/components/markdown-image-renderer.ts",
+          "path": "packages/weimo-ui-markdown/src/components/markdown/image-renderer.ts",
           "type": "registry:ui",
-          "target": "@ui/markdown-image-renderer.ts"
+          "target": "@ui/markdown/image-renderer.ts"
         },
         {
-          "path": "packages/weimo-ui-markdown/src/components/markdown-parenthesized-list.ts",
+          "path": "packages/weimo-ui-markdown/src/components/markdown/parenthesized-list.ts",
           "type": "registry:ui",
-          "target": "@ui/markdown-parenthesized-list.ts"
+          "target": "@ui/markdown/parenthesized-list.ts"
         },
         {
-          "path": "packages/weimo-ui-markdown/src/components/markdown-option-grid.ts",
+          "path": "packages/weimo-ui-markdown/src/components/markdown/option-grid.ts",
           "type": "registry:ui",
-          "target": "@ui/markdown-option-grid.ts"
+          "target": "@ui/markdown/option-grid.ts"
         },
         {
-          "path": "packages/weimo-ui-markdown/src/components/markdown-content.css",
+          "path": "packages/weimo-ui-markdown/src/styles/markdown-content.css",
           "type": "registry:ui",
           "target": "@ui/markdown-content.css"
         },
@@ -1944,37 +1944,42 @@
           "target": "@ui/md-render.tsx"
         },
         {
-          "path": "packages/weimo-ui-markdown/src/components/markdown-option-grid.ts",
+          "path": "packages/weimo-ui-markdown/src/components/md-render/md-render.tsx",
           "type": "registry:ui",
-          "target": "@ui/markdown-option-grid.ts"
+          "target": "@ui/md-render/md-render.tsx"
         },
         {
-          "path": "packages/weimo-ui-markdown/src/components/markdown-parenthesized-list.ts",
+          "path": "packages/weimo-ui-markdown/src/components/markdown/option-grid.ts",
           "type": "registry:ui",
-          "target": "@ui/markdown-parenthesized-list.ts"
+          "target": "@ui/markdown/option-grid.ts"
         },
         {
-          "path": "packages/weimo-ui-markdown/src/components/markdown-sanitize.ts",
+          "path": "packages/weimo-ui-markdown/src/components/markdown/parenthesized-list.ts",
           "type": "registry:ui",
-          "target": "@ui/markdown-sanitize.ts"
+          "target": "@ui/markdown/parenthesized-list.ts"
         },
         {
-          "path": "packages/weimo-ui-markdown/src/components/markdown-centered-quote.ts",
+          "path": "packages/weimo-ui-markdown/src/components/markdown/sanitize.ts",
           "type": "registry:ui",
-          "target": "@ui/markdown-centered-quote.ts"
+          "target": "@ui/markdown/sanitize.ts"
         },
         {
-          "path": "packages/weimo-ui-markdown/src/components/markdown-image-size.ts",
+          "path": "packages/weimo-ui-markdown/src/components/markdown/centered-quote.ts",
           "type": "registry:ui",
-          "target": "@ui/markdown-image-size.ts"
+          "target": "@ui/markdown/centered-quote.ts"
         },
         {
-          "path": "packages/weimo-ui-markdown/src/components/markdown-image-renderer.ts",
+          "path": "packages/weimo-ui-markdown/src/components/markdown/image-size.ts",
           "type": "registry:ui",
-          "target": "@ui/markdown-image-renderer.ts"
+          "target": "@ui/markdown/image-size.ts"
         },
         {
-          "path": "packages/weimo-ui-markdown/src/components/markdown-content.css",
+          "path": "packages/weimo-ui-markdown/src/components/markdown/image-renderer.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown/image-renderer.ts"
+        },
+        {
+          "path": "packages/weimo-ui-markdown/src/styles/markdown-content.css",
           "type": "registry:ui",
           "target": "@ui/markdown-content.css"
         }
@@ -2011,7 +2016,12 @@
           "target": "@ui/md-view.tsx"
         },
         {
-          "path": "packages/weimo-ui-markdown/src/components/md-view.css",
+          "path": "packages/weimo-ui-markdown/src/components/md-view/md-view.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-view/md-view.tsx"
+        },
+        {
+          "path": "packages/weimo-ui-markdown/src/components/md-view/md-view.css",
           "type": "registry:ui",
           "target": "@ui/md-view.css"
         }
@@ -2047,7 +2057,12 @@
           "target": "@ui/md.tsx"
         },
         {
-          "path": "packages/weimo-ui-markdown/src/components/md.css",
+          "path": "packages/weimo-ui-markdown/src/components/md/md.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md/md.tsx"
+        },
+        {
+          "path": "packages/weimo-ui-markdown/src/components/md/md.css",
           "type": "registry:ui",
           "target": "@ui/md.css"
         }
@@ -2475,44 +2490,59 @@
           "target": "@ui/md-view.tsx"
         },
         {
+          "path": "packages/weimo-ui-markdown/src/components/md-view/md-view.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-view/md-view.tsx"
+        },
+        {
+          "path": "packages/weimo-ui-markdown/src/components/md-view/md-view.css",
+          "type": "registry:ui",
+          "target": "@ui/md-view.css"
+        },
+        {
           "path": "packages/weimo-ui-markdown/src/components/md-render.tsx",
           "type": "registry:ui",
           "target": "@ui/md-render.tsx"
         },
         {
-          "path": "packages/weimo-ui-markdown/src/components/markdown-option-grid.ts",
+          "path": "packages/weimo-ui-markdown/src/components/md-render/md-render.tsx",
           "type": "registry:ui",
-          "target": "@ui/markdown-option-grid.ts"
+          "target": "@ui/md-render/md-render.tsx"
         },
         {
-          "path": "packages/weimo-ui-markdown/src/components/markdown-parenthesized-list.ts",
+          "path": "packages/weimo-ui-markdown/src/components/markdown/option-grid.ts",
           "type": "registry:ui",
-          "target": "@ui/markdown-parenthesized-list.ts"
+          "target": "@ui/markdown/option-grid.ts"
         },
         {
-          "path": "packages/weimo-ui-markdown/src/components/markdown-sanitize.ts",
+          "path": "packages/weimo-ui-markdown/src/components/markdown/parenthesized-list.ts",
           "type": "registry:ui",
-          "target": "@ui/markdown-sanitize.ts"
+          "target": "@ui/markdown/parenthesized-list.ts"
         },
         {
-          "path": "packages/weimo-ui-markdown/src/components/markdown-content.css",
+          "path": "packages/weimo-ui-markdown/src/components/markdown/sanitize.ts",
+          "type": "registry:ui",
+          "target": "@ui/markdown/sanitize.ts"
+        },
+        {
+          "path": "packages/weimo-ui-markdown/src/styles/markdown-content.css",
           "type": "registry:ui",
           "target": "@ui/markdown-content.css"
         },
         {
-          "path": "packages/weimo-ui-markdown/src/components/markdown-centered-quote.ts",
+          "path": "packages/weimo-ui-markdown/src/components/markdown/centered-quote.ts",
           "type": "registry:ui",
-          "target": "@ui/markdown-centered-quote.ts"
+          "target": "@ui/markdown/centered-quote.ts"
         },
         {
-          "path": "packages/weimo-ui-markdown/src/components/markdown-image-size.ts",
+          "path": "packages/weimo-ui-markdown/src/components/markdown/image-size.ts",
           "type": "registry:ui",
-          "target": "@ui/markdown-image-size.ts"
+          "target": "@ui/markdown/image-size.ts"
         },
         {
-          "path": "packages/weimo-ui-markdown/src/components/markdown-image-renderer.ts",
+          "path": "packages/weimo-ui-markdown/src/components/markdown/image-renderer.ts",
           "type": "registry:ui",
-          "target": "@ui/markdown-image-renderer.ts"
+          "target": "@ui/markdown/image-renderer.ts"
         },
         {
           "path": "packages/weimo-ui-markdown/src/components/md-editor.tsx",

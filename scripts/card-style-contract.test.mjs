@@ -42,16 +42,16 @@ function assertIncludes(block, snippet, message) {
 
 const cardCss = readProjectFile('packages/weimo-ui-card/src/components/card.css')
 const cardTopBarCss = readProjectFile('packages/weimo-ui-card/src/components/card-top-bar.css')
-const markdownContentCss = readProjectFile('packages/weimo-ui-markdown/src/components/markdown-content.css')
+const markdownContentCss = readProjectFile('packages/weimo-ui-markdown/src/styles/markdown-content.css')
 const CardSource = readProjectFile('packages/weimo-ui-card/src/components/card.tsx')
 const CardResolversSource = readProjectFile('packages/weimo-ui-card/src/components/card-resolvers.tsx')
 const cardPropsSource = CardSource.slice(
   CardSource.indexOf('export type CardProps'),
   CardSource.indexOf('function shouldIgnoreCardBodyDoubleClick'),
 )
-const mdRenderSource = readProjectFile('packages/weimo-ui-markdown/src/components/md-render.tsx')
+const mdRenderSource = readProjectFile('packages/weimo-ui-markdown/src/components/md-render/md-render.tsx')
 const markdownSanitizeSource = readProjectFile(
-  'packages/weimo-ui-markdown/src/components/markdown-sanitize.ts',
+  'packages/weimo-ui-markdown/src/components/markdown/sanitize.ts',
 )
 const indexCss = readProjectFile('packages/weimo-ui-site/src/index.css')
 const sharedTokenCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
@@ -362,7 +362,7 @@ assert.ok(
   mdRenderSource.includes("import rehypeKatex from 'rehype-katex'") &&
     mdRenderSource.includes("import rehypeRaw from 'rehype-raw'") &&
     mdRenderSource.includes("import rehypeSanitize from 'rehype-sanitize'") &&
-    mdRenderSource.includes("import { markdownSanitizeSchema } from './markdown-sanitize'") &&
+    mdRenderSource.includes("import { markdownSanitizeSchema } from '../markdown/sanitize'") &&
     mdRenderSource.includes("import remarkGfm from 'remark-gfm'") &&
     mdRenderSource.includes("import remarkMath from 'remark-math'") &&
     mdRenderSource.includes("import remarkBreaks from 'remark-breaks'"),

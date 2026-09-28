@@ -6,7 +6,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import {
   normalizeCenteredQuoteSyntax,
   WEIMO_CENTERED_QUOTE_MARKER,
-} from '../packages/weimo-ui-markdown/src/components/markdown-centered-quote'
+} from '../packages/weimo-ui-markdown/src/components/markdown/centered-quote'
 import { formatEditorContent } from '../packages/weimo-ui-markdown/src/components/md-editor/md-editor-content-format'
 import { createMdEditorExtensions } from '../packages/weimo-ui-markdown/src/components/md-editor/md-editor-extensions'
 import { normalizeEditorMarkdown } from '../packages/weimo-ui-markdown/src/components/md-editor/md-editor-markdown'

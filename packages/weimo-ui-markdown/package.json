@@ -20,9 +20,9 @@
     "./components/md-view": "./src/components/md-view.tsx",
     "./components/math-editor": "./src/components/math-editor.tsx",
     "./styles/tokens.css": "./src/styles/tokens.css",
-    "./styles/markdown-content.css": "./src/components/markdown-content.css",
-    "./styles/md.css": "./src/components/md.css",
-    "./styles/md-view.css": "./src/components/md-view.css",
+    "./styles/markdown-content.css": "./src/styles/markdown-content.css",
+    "./styles/md.css": "./src/components/md/md.css",
+    "./styles/md-view.css": "./src/components/md-view/md-view.css",
     "./styles/md-editor.css": "./src/components/md-editor/md-editor.css"
   },
   "scripts": {

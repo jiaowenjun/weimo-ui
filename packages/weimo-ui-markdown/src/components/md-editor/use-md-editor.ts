@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import type { JSONContent } from '@tiptap/core'
 import { useEditor } from '@tiptap/react'
 
-import { normalizeCenteredQuoteSyntax } from '../markdown-centered-quote'
+import { normalizeCenteredQuoteSyntax } from '../markdown/centered-quote'
 import { createMdEditorExtensions, type MdEditorMathClickPayload } from './md-editor-extensions'
 import { normalizeEditorMarkdown } from './md-editor-markdown'
 import type { MdEditorProps } from './md-editor-types'

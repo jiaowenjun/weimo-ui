@@ -37,16 +37,16 @@ function cssBlocksFor(source, selector) {
   return matches.map((match) => match.groups?.block ?? '').join('\n')
 }
 
-const componentSource = readProjectFile('packages/weimo-ui-markdown/src/components/md.tsx')
-const mdRenderSource = readProjectFile('packages/weimo-ui-markdown/src/components/md-render.tsx')
-const optionGridSource = readProjectFile('packages/weimo-ui-markdown/src/components/markdown-option-grid.ts')
-const markdownSanitizeSource = readProjectFile('packages/weimo-ui-markdown/src/components/markdown-sanitize.ts')
-const parenthesizedListSource = readProjectFile('packages/weimo-ui-markdown/src/components/markdown-parenthesized-list.ts')
+const componentSource = readProjectFile('packages/weimo-ui-markdown/src/components/md/md.tsx')
+const mdRenderSource = readProjectFile('packages/weimo-ui-markdown/src/components/md-render/md-render.tsx')
+const optionGridSource = readProjectFile('packages/weimo-ui-markdown/src/components/markdown/option-grid.ts')
+const markdownSanitizeSource = readProjectFile('packages/weimo-ui-markdown/src/components/markdown/sanitize.ts')
+const parenthesizedListSource = readProjectFile('packages/weimo-ui-markdown/src/components/markdown/parenthesized-list.ts')
 const markdownImageRendererSource = readProjectFile(
-  'packages/weimo-ui-markdown/src/components/markdown-image-renderer.ts',
+  'packages/weimo-ui-markdown/src/components/markdown/image-renderer.ts',
 )
-const markdownImageSizeSource = readProjectFile('packages/weimo-ui-markdown/src/components/markdown-image-size.ts')
-const markdownContentCss = readProjectFile('packages/weimo-ui-markdown/src/components/markdown-content.css')
+const markdownImageSizeSource = readProjectFile('packages/weimo-ui-markdown/src/components/markdown/image-size.ts')
+const markdownContentCss = readProjectFile('packages/weimo-ui-markdown/src/styles/markdown-content.css')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/md.tsx')
 const mdRenderDefinitionSource = readProjectFile(
@@ -383,8 +383,8 @@ for (const forbidden of [
 
 for (const snippet of [
   "import { forwardRef } from 'react'",
-  "import { MdRender, type MdRenderProps } from './md-render'",
-  "import './md.css'",
+  "import { MdRender, type MdRenderProps } from 'weimo-ui-markdown/components/md-render'",
+  "import 'weimo-ui-markdown/styles/md.css'",
   'export type MdProps = MdRenderProps',
   'export const Md = forwardRef<HTMLDivElement, MdProps>(function Md',
   "className={cn('md', className)}",
@@ -723,22 +723,22 @@ const mdRenderTestContext = {
     ) {
       return { cn: (...values) => values.filter(Boolean).join(' ') }
     }
-    if (specifier === './markdown-centered-quote') {
+    if (specifier === '../markdown/centered-quote') {
       return {
         normalizeCenteredQuoteSyntax: (value) => value,
         WEIMO_CENTERED_QUOTE_MARKER: 'weimo-centered-quote:',
       }
     }
-    if (specifier === './markdown-image-size') {
+    if (specifier === '../markdown/image-size') {
       return markdownImageSizeTestContext.exports
     }
-    if (specifier === './markdown-option-grid') {
+    if (specifier === '../markdown/option-grid') {
       return optionGridTestContext.exports
     }
-    if (specifier === './markdown-parenthesized-list') {
+    if (specifier === '../markdown/parenthesized-list') {
       return parenthesizedListTestContext.exports
     }
-    if (specifier === './markdown-sanitize') {
+    if (specifier === '../markdown/sanitize') {
       return { markdownSanitizeSchema: {} }
     }
     if (
@@ -1204,7 +1204,7 @@ assert.ok(
   'MdRender lists must expose marker and option-grid attributes and preserve GFM task-list classes for shared styling.',
 )
 assert.ok(
-  mdRenderSource.includes("from './markdown-option-grid'") &&
+  mdRenderSource.includes("from '../markdown/option-grid'") &&
     mdRenderSource.includes("closest('.weimo-card-markdown__list-image-pair')") &&
     mdRenderSource.includes('new ownerWindow.ResizeObserver') &&
     mdRenderSource.includes('ownerDocument.fonts.ready') &&
@@ -1330,6 +1330,10 @@ assert.deepEqual(
 )
 assert.deepEqual(
   rootRegistryItem.files.map((file) => file.path),
-  ['packages/weimo-ui-markdown/src/components/md.tsx', 'packages/weimo-ui-markdown/src/components/md.css'],
-  'Md registry item must ship only the wrapper source and its style entry.',
+  [
+    'packages/weimo-ui-markdown/src/components/md.tsx',
+    'packages/weimo-ui-markdown/src/components/md/md.tsx',
+    'packages/weimo-ui-markdown/src/components/md/md.css',
+  ],
+  'Md registry item must ship its public entry, implementation, and style.',
 )

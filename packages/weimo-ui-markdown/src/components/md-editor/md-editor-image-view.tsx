@@ -4,8 +4,8 @@ import { NodeViewWrapper, type ReactNodeViewProps } from '@tiptap/react'
 import {
   getCachedMarkdownImageWidth,
   setMarkdownImageHalfIntrinsicWidth,
-} from '../markdown-image-size'
-import type { MarkdownImageRenderProps } from '../markdown-image-renderer'
+} from '../markdown/image-size'
+import type { MarkdownImageRenderProps } from '../markdown/image-renderer'
 import type { MarkdownImageOptions } from './md-editor-image'
 
 type ImageWidthState = {

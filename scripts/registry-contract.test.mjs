@@ -278,7 +278,7 @@ for (const [item, itemName] of [
   [CardItem, 'Card'],
 ]) {
   assert.ok(
-    item.files.some((file) => file.path === 'packages/weimo-ui-markdown/src/components/markdown-content.css'),
+    item.files.some((file) => file.path === 'packages/weimo-ui-markdown/src/styles/markdown-content.css'),
     `${itemName} registry item must ship shared Markdown content CSS.`,
   )
 }
@@ -288,7 +288,7 @@ for (const [item, itemName] of [
   [mdEditorItem, 'MdEditor'],
 ]) {
   assert.ok(
-    item.files.some((file) => file.path === 'packages/weimo-ui-markdown/src/components/markdown-image-size.ts'),
+    item.files.some((file) => file.path === 'packages/weimo-ui-markdown/src/components/markdown/image-size.ts'),
     `${itemName} registry item must ship the shared Markdown intrinsic image sizing helper.`,
   )
 }
@@ -298,7 +298,7 @@ const mdRenderCarrierItems = items.filter((item) =>
 
 for (const item of mdRenderCarrierItems) {
   assert.ok(
-    item.files.some((file) => file.path === 'packages/weimo-ui-markdown/src/components/markdown-image-renderer.ts'),
+    item.files.some((file) => file.path === 'packages/weimo-ui-markdown/src/components/markdown/image-renderer.ts'),
     `${item.name} registry item must ship the shared Markdown image renderer contract.`,
   )
   assert.ok(
@@ -307,15 +307,15 @@ for (const item of mdRenderCarrierItems) {
     `${item.name} registry item must install raw HTML parsing and sanitizing for MdRender.`,
   )
   assert.ok(
-    item.files.some((file) => file.path === 'packages/weimo-ui-markdown/src/components/markdown-parenthesized-list.ts'),
+    item.files.some((file) => file.path === 'packages/weimo-ui-markdown/src/components/markdown/parenthesized-list.ts'),
     `${item.name} registry item must ship the parenthesized list grammar used by MdRender.`,
   )
   assert.ok(
-    item.files.some((file) => file.path === 'packages/weimo-ui-markdown/src/components/markdown-sanitize.ts'),
+    item.files.some((file) => file.path === 'packages/weimo-ui-markdown/src/components/markdown/sanitize.ts'),
     `${item.name} registry item must ship the sanitizer schema used by MdRender.`,
   )
   assert.ok(
-    item.files.some((file) => file.path === 'packages/weimo-ui-markdown/src/components/markdown-option-grid.ts'),
+    item.files.some((file) => file.path === 'packages/weimo-ui-markdown/src/components/markdown/option-grid.ts'),
     `${item.name} registry item must ship the shared option-grid measurement.`,
   )
 }
@@ -326,15 +326,15 @@ const mdEditorCarrierItems = items.filter((item) =>
 
 for (const item of mdEditorCarrierItems) {
   for (const filePath of [
-    'packages/weimo-ui-markdown/src/components/markdown-image-renderer.ts',
-    'packages/weimo-ui-markdown/src/components/markdown-parenthesized-list.ts',
+    'packages/weimo-ui-markdown/src/components/markdown/image-renderer.ts',
+    'packages/weimo-ui-markdown/src/components/markdown/parenthesized-list.ts',
     'packages/weimo-ui-markdown/src/components/md-editor/md-editor-content-format.ts',
     'packages/weimo-ui-markdown/src/components/md-editor/md-editor-table.ts',
     'packages/weimo-ui-markdown/src/components/md-editor/md-editor-ordered-list.ts',
     'packages/weimo-ui-markdown/src/components/md-editor/md-editor-option-grid.ts',
     'packages/weimo-ui-markdown/src/components/md-editor/md-editor-list-image-layout.ts',
     'packages/weimo-ui-markdown/src/components/md-editor/md-editor-image-view.tsx',
-    'packages/weimo-ui-markdown/src/components/markdown-option-grid.ts',
+    'packages/weimo-ui-markdown/src/components/markdown/option-grid.ts',
   ]) {
     assert.ok(
       item.files.some((file) => file.path === filePath),
@@ -375,10 +375,13 @@ for (const filePath of [
   'packages/weimo-ui-card/src/components/card-tool-bar.tsx',
   'packages/weimo-ui-card/src/components/card-tool-bar.css',
   'packages/weimo-ui-markdown/src/components/md-view.tsx',
+  'packages/weimo-ui-markdown/src/components/md-view/md-view.tsx',
+  'packages/weimo-ui-markdown/src/components/md-view/md-view.css',
   'packages/weimo-ui-markdown/src/components/md-render.tsx',
-  'packages/weimo-ui-markdown/src/components/markdown-content.css',
-  'packages/weimo-ui-markdown/src/components/markdown-centered-quote.ts',
-  'packages/weimo-ui-markdown/src/components/markdown-image-size.ts',
+  'packages/weimo-ui-markdown/src/components/md-render/md-render.tsx',
+  'packages/weimo-ui-markdown/src/styles/markdown-content.css',
+  'packages/weimo-ui-markdown/src/components/markdown/centered-quote.ts',
+  'packages/weimo-ui-markdown/src/components/markdown/image-size.ts',
   'packages/weimo-ui-markdown/src/components/md-editor.tsx',
   'packages/weimo-ui-markdown/src/components/md-editor/index.tsx',
   'packages/weimo-ui-markdown/src/components/md-editor/md-editor-types.ts',

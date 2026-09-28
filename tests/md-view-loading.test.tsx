@@ -11,7 +11,7 @@ const moduleGate = vi.hoisted(() => {
   return { ready, resolve }
 })
 
-vi.mock('../packages/weimo-ui-markdown/src/components/md-editor', async (importOriginal) => {
+vi.mock('weimo-ui-markdown/components/md-editor', async (importOriginal) => {
   await moduleGate.ready
   return importOriginal()
 })

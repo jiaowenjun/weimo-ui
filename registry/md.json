@@ -28,7 +28,12 @@
       "target": "@ui/md.tsx"
     },
     {
-      "path": "packages/weimo-ui-markdown/src/components/md.css",
+      "path": "packages/weimo-ui-markdown/src/components/md/md.tsx",
+      "type": "registry:ui",
+      "target": "@ui/md/md.tsx"
+    },
+    {
+      "path": "packages/weimo-ui-markdown/src/components/md/md.css",
       "type": "registry:ui",
       "target": "@ui/md.css"
     }

@@ -2,7 +2,7 @@ import type { Editor } from '@tiptap/core'
 import { closeHistory } from '@tiptap/pm/history'
 import { TextSelection } from '@tiptap/pm/state'
 
-import { normalizeCenteredQuoteSyntax } from '../markdown-centered-quote'
+import { normalizeCenteredQuoteSyntax } from '../markdown/centered-quote'
 import { normalizeEditorMarkdown } from './md-editor-markdown'
 
 export function formatEditorContent(
