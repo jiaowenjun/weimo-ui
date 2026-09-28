@@ -21,7 +21,7 @@
     "./components/coss/breadcrumb": "./src/components/coss/breadcrumb.tsx",
     "./components/coss/input-group": "./src/components/coss/input-group.tsx",
     "./components/coss/scroll-area": "./src/components/coss/scroll-area.tsx",
-    "./styles/page.css": "./src/tag-page.css"
+    "./styles/page.css": "./src/page/tag-page.css"
   },
   "scripts": {
     "dev": "vite",

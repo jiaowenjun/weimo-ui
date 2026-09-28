@@ -76,7 +76,7 @@ const packageRules = [
       './components/coss/breadcrumb': './src/components/coss/breadcrumb.tsx',
       './components/coss/input-group': './src/components/coss/input-group.tsx',
       './components/coss/scroll-area': './src/components/coss/scroll-area.tsx',
-      './styles/page.css': './src/tag-page.css',
+      './styles/page.css': './src/page/tag-page.css',
     },
   },
   {
@@ -299,7 +299,7 @@ for (const [relativePath, dependencyPath] of [
 }
 
 const tagtreeIndex = readProjectFile('packages/weimo-ui-tagtree/src/index.ts')
-const tagtreePage = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx')
+const tagtreePage = readProjectFile('packages/weimo-ui-tagtree/src/page/tag-page.tsx')
 assert.match(tagtreeIndex, /TagTreePage/u)
 assert.match(tagtreePage, /export function TagTreePage/u)
 assert.match(tagtreePage, /from ['"]weimo-ui-core\/components\/component-preview-card['"]/u)

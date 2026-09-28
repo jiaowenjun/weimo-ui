@@ -37,7 +37,7 @@ function assertNotIncludes(source, snippet, message) {
 const componentSource = readProjectFile('packages/weimo-ui-card/src/components/tags/tag-bar.tsx')
 const cssSource = readProjectFile('packages/weimo-ui-card/src/components/tags/tag-bar.css')
 const docsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/tag-bar.tsx')
-const tagtreePageSource = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx')
+const tagtreePageSource = readProjectFile('packages/weimo-ui-tagtree/src/page/tag-page.tsx')
 const appCssSource = readProjectFile('packages/weimo-ui-site/src/App.css')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')

@@ -854,8 +854,12 @@ try {
     'shadcn add must write explicitly requested TagBread files from the configured custom registry.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/tag-bread.css')),
-    'shadcn add must write TagBread glass CSS from the configured custom registry.',
+    existsSync(join(consumerDir, 'src/components/ui/tag-bread/tag-bread.tsx')),
+    'shadcn add must write the nested TagBread implementation from the configured custom registry.',
+  )
+  assert.ok(
+    existsSync(join(consumerDir, 'src/components/ui/tag-bread/tag-bread.css')),
+    'shadcn add must write TagBread glass CSS beside its implementation.',
   )
   assert.ok(
     existsSync(join(consumerDir, 'src/components/ui/coss/breadcrumb.tsx')),

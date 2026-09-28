@@ -20,12 +20,12 @@ const cardTopBarDefinitionSource = readProjectFile('packages/weimo-ui-site/src/d
 const mathDialogDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown.tsx')
 const tagTreeRowDefinitionSource = [
   readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/tag.tsx'),
-  readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx'),
+  readProjectFile('packages/weimo-ui-tagtree/src/page/tag-page.tsx'),
 ].join('\n')
 const barDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/bar.tsx')
 const pageLayoutDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/page-layout.tsx')
 const css = readProjectFile('packages/weimo-ui-site/src/App.css')
-const tagPageCss = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.css')
+const tagPageCss = readProjectFile('packages/weimo-ui-tagtree/src/page/tag-page.css')
 
 function cssBlockFor(source, selector) {
   const start = source.indexOf(`${selector} {`)

@@ -40,7 +40,7 @@ const componentDefinitionSources = {
   'tag-bar': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/tag-bar.tsx'),
   tag: [
     readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/tag.tsx'),
-    readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx'),
+    readProjectFile('packages/weimo-ui-tagtree/src/page/tag-page.tsx'),
   ].join('\n'),
   stat: readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-stats/stat.tsx'),
   'background-tokens': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/background-tokens.tsx'),
@@ -385,7 +385,7 @@ for (const snippet of [
   'const tagTreeDemoNodes',
   'function TagTreeDemo',
   "from 'weimo-ui-core/components/top-bar'",
-  "from './components/tag-tree'",
+  "from '../components/tag-tree'",
   "from 'weimo-ui-core/components/capsule-button'",
   "from 'weimo-ui-core/components/menu'",
   '<TagTreeDemo />',

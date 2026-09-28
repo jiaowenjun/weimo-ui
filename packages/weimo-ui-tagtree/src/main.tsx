@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 
 import { TagTreePage } from './tag-page'
 
-import './tag-page.css'
+import './page/tag-page.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

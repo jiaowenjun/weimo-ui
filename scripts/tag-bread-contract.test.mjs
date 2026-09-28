@@ -34,18 +34,18 @@ function countOccurrences(source, snippet) {
   return source.split(snippet).length - 1
 }
 
-const source = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bread.tsx')
-const css = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bread.css')
+const source = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bread/tag-bread.tsx')
+const css = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bread/tag-bread.css')
 const surfaceCss = readProjectFile('packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.css')
 const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css')
-const pageCss = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.css')
+const pageCss = readProjectFile('packages/weimo-ui-tagtree/src/page/tag-page.css')
 const indexCss = readProjectFile('packages/weimo-ui-site/src/index.css')
 const cossBreadcrumbSource = readProjectFile('packages/weimo-ui-tagtree/src/components/coss/breadcrumb.tsx')
 const cossBreadcrumbCss = readProjectFile('packages/weimo-ui-tagtree/src/components/coss/breadcrumb.css')
 const packageJson = readJson('package.json')
 const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
-const docsDefinition = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx')
+const docsDefinition = readProjectFile('packages/weimo-ui-tagtree/src/page/tag-page.tsx')
 const rootRegistry = readJson('registry.json')
 const standaloneRegistry = readJson('registry/tag-bread.json')
 const registryItem = rootRegistry.items.find((item) => item.name === 'tag-bread')
@@ -105,7 +105,7 @@ for (const snippet of [
   'BreadcrumbList,',
   'BreadcrumbPage,',
   'BreadcrumbSeparator,',
-  "from './coss/breadcrumb'",
+  "from '../coss/breadcrumb'",
   "from 'weimo-ui-core/components/animated-inline-size'",
   "from 'weimo-ui-core/components/animated-inline-size-model'",
   "from 'weimo-ui-core/components/capsule-frame'",
@@ -266,7 +266,7 @@ assert.ok(
 )
 
 assert.ok(
-    docsDefinition.includes("import { TagBread } from './components/tag-bread'") &&
+    docsDefinition.includes("import { TagBread } from '../components/tag-bread'") &&
     docsDefinition.includes("import { CalendarDays, Folder, Hash } from 'lucide-react'") &&
     docsDefinition.includes("from 'weimo-ui-core/components/capsule-frame'") &&
     docsDefinition.includes("from 'weimo-ui-core/components/frosted-surface-model'") &&
@@ -283,7 +283,7 @@ assert.ok(
     docsDefinition.includes("BreadcrumbList,") &&
     docsDefinition.includes("BreadcrumbPage,") &&
     docsDefinition.includes('BreadcrumbSeparator') &&
-    docsDefinition.includes("} from './components/coss/breadcrumb'") &&
+    docsDefinition.includes("} from '../components/coss/breadcrumb'") &&
     docsDefinition.includes('Menu,') &&
     docsDefinition.includes('MenuItem,') &&
     docsDefinition.includes('MenuPopup,') &&
@@ -351,7 +351,8 @@ assert.deepEqual(
   registryItem.files.map((file) => file.path),
   [
     'packages/weimo-ui-tagtree/src/components/tag-bread.tsx',
-    'packages/weimo-ui-tagtree/src/components/tag-bread.css',
+    'packages/weimo-ui-tagtree/src/components/tag-bread/tag-bread.tsx',
+    'packages/weimo-ui-tagtree/src/components/tag-bread/tag-bread.css',
     'packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.ts',
     'packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.css',
     'packages/weimo-ui-core/src/behaviors/animated-inline-size/animated-inline-size.tsx',
@@ -372,6 +373,8 @@ assert.ok(
     smokeSource.includes("await runShadcnAdd(consumerDir, '@weimo/tag-bread')") &&
     smokeSource.includes("hits.includes('tag-bread.json')") &&
     smokeSource.includes("src/components/ui/tag-bread.tsx") &&
+    smokeSource.includes("src/components/ui/tag-bread/tag-bread.tsx") &&
+    smokeSource.includes("src/components/ui/tag-bread/tag-bread.css") &&
     smokeSource.includes("src/components/ui/coss/breadcrumb.tsx"),
   'registry smoke test must install and typecheck TagBread from the custom registry.',
 )

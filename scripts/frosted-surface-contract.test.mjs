@@ -574,7 +574,7 @@ for (const snippet of [
 for (const [sourcePath, sourceLabel, extraSnippets] of [
   ['packages/weimo-ui-core/src/components/controls/capsule/capsule-button.tsx', 'CapsuleButton', ['...style, ...backgroundStyle']],
   ['packages/weimo-ui-core/src/components/composites/menu/menu.tsx', 'MenuPopup', ['style={{ ...style, ...backgroundStyle }}']],
-  ['packages/weimo-ui-tagtree/src/components/tag-bread.tsx', 'TagBread', ['...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle']],
+  ['packages/weimo-ui-tagtree/src/components/tag-bread/tag-bread.tsx', 'TagBread', ['...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle']],
   ['packages/weimo-ui-core/src/components/controls/icon-button/frosted-icon-button.tsx', 'FrostedIconButton', ['style={{ ...style, ...backgroundStyle }}']],
   ['packages/weimo-ui-core/src/components/controls/icon-button/frosted-icon-button-group.tsx', 'FrostedIconButtonGroup', ['style={{ ...style, ...backgroundStyle }}']],
 ]) {

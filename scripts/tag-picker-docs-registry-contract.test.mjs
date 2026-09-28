@@ -14,7 +14,7 @@ function readProjectFile(relativePath) {
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/tag-bar.tsx')
-const pageSource = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.tsx')
+const pageSource = readProjectFile('packages/weimo-ui-tagtree/src/page/tag-page.tsx')
 const registryItem = JSON.parse(readProjectFile('registry/tag-picker.json'))
 const rootRegistry = JSON.parse(readProjectFile('registry.json'))
 const rootItem = rootRegistry.items.find((item) => item.name === 'tag-picker')

@@ -1460,9 +1460,14 @@
           "target": "@ui/tag-bread.tsx"
         },
         {
-          "path": "packages/weimo-ui-tagtree/src/components/tag-bread.css",
+          "path": "packages/weimo-ui-tagtree/src/components/tag-bread/tag-bread.tsx",
           "type": "registry:ui",
-          "target": "@ui/tag-bread.css"
+          "target": "@ui/tag-bread/tag-bread.tsx"
+        },
+        {
+          "path": "packages/weimo-ui-tagtree/src/components/tag-bread/tag-bread.css",
+          "type": "registry:ui",
+          "target": "@ui/tag-bread/tag-bread.css"
         },
         {
           "path": "packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.ts",

@@ -35,7 +35,7 @@ const rootRegistry = readJson('registry.json')
 const modelSource = readProjectFile('packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.ts')
 const css = readProjectFile('packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.css')
 const capsuleButtonSource = readProjectFile('packages/weimo-ui-core/src/components/controls/capsule/capsule-button.tsx')
-const tagBreadSource = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bread.tsx')
+const tagBreadSource = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bread/tag-bread.tsx')
 
 const frameBlock = blockFor(css, '.capsule-frame')
 const beforeBlock = blockFor(css, '.capsule-frame::before')
