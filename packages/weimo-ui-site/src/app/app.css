@@ -335,7 +335,9 @@
   margin-inline: 24px;
 }
 
-/* 示例容器交给 CardSurface 卡片材质(亮主题细微阴影、暗主题描边),这里只保留几何布局 */
+/* 示例容器交给 CardSurface 卡片材质(亮主题细微阴影、暗主题描边),这里只保留几何布局。
+   不设 overflow: hidden：贴底悬浮栏四周 12px 内缩不碰卡片圆角,磨砂 tone 投影
+   需溢出内嵌卡画进外层卡片 padding(外层画布已经 :has 放行)。 */
 .internal-bottom-preview__surface {
   position: relative;
   display: grid;
@@ -343,7 +345,6 @@
   min-height: 220px;
   align-items: start;
   padding: 20px;
-  overflow: hidden;
 }
 
 .internal-card-top-bar-preview__surface {
