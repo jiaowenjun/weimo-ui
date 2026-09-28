@@ -39,8 +39,8 @@ const expectedScales = [
 ]
 
 const packageJson = readJson('package.json')
-const fontSizeSource = readProjectFile('packages/weimo-ui-core/src/components/font-size.ts')
-const fontSizeCss = readProjectFile('packages/weimo-ui-core/src/components/font-size.css')
+const fontSizeSource = readProjectFile('packages/weimo-ui-core/src/styles/variants/typography/font-size.ts')
+const fontSizeCss = readProjectFile('packages/weimo-ui-core/src/styles/variants/typography/font-size.css')
 const cossCardCss = readProjectFile('packages/weimo-ui-site/src/components/coss/card.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
@@ -57,12 +57,12 @@ const samplesBlock = blockFor(appCss, '.font-size-preview__samples')
 
 assert.equal(
   packageJson.exports?.['./components/font-size'],
-  './packages/weimo-ui-core/src/components/font-size.ts',
+  './packages/weimo-ui-core/src/styles/variants/typography/font-size.ts',
   'package.json must expose the public font-size scale map.',
 )
 assert.equal(
   packageJson.exports?.['./styles/font-size.css'],
-  './packages/weimo-ui-core/src/components/font-size.css',
+  './packages/weimo-ui-core/src/styles/variants/typography/font-size.css',
   'package.json must expose the standalone font-size utility stylesheet.',
 )
 
@@ -243,8 +243,8 @@ assert.deepEqual(
 assert.deepEqual(
   registryItem.files.map((file) => file.path),
   [
-    'packages/weimo-ui-core/src/components/font-size.ts',
-    'packages/weimo-ui-core/src/components/font-size.css',
+    'packages/weimo-ui-core/src/styles/variants/typography/font-size.ts',
+    'packages/weimo-ui-core/src/styles/variants/typography/font-size.css',
   ],
   'font-size registry item must ship the scale map and utility stylesheet.',
 )

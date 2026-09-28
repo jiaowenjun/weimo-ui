@@ -1,7 +1,7 @@
 import { Dialog as BaseDialog } from '@base-ui/react/dialog'
 import type { ComponentPropsWithoutRef } from 'react'
 
-import { getPopupSurfaceClassName } from '../popup-surface'
+import { getPopupSurfaceClassName } from 'weimo-ui-core/components/popup-surface'
 import { cn } from 'weimo-ui-core/lib/utils'
 
 import './dialog.css'

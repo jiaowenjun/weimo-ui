@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState, type MouseEvent } from 'react'
 import { Ellipsis, Pencil, X } from 'lucide-react'
 
-import { GhostIconButton, type GhostIconButtonProps } from './ghost-icon-button'
-import { ActionMenu, type ActionMenuItem } from './menu'
+import { GhostIconButton, type GhostIconButtonProps } from 'weimo-ui-core/components/ghost-icon-button'
+import { ActionMenu, type ActionMenuItem } from 'weimo-ui-core/components/menu'
 import { cn } from 'weimo-ui-core/lib/utils'
 
 import './mode-button.css'

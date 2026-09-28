@@ -16,12 +16,12 @@
   ],
   "files": [
     {
-      "path": "packages/weimo-ui-core/src/components/bottom-bar.tsx",
+      "path": "packages/weimo-ui-core/src/components/layout/bars/bottom-bar.tsx",
       "type": "registry:ui",
       "target": "@ui/bottom-bar.tsx"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/bottom-bar.css",
+      "path": "packages/weimo-ui-core/src/components/layout/bars/bottom-bar.css",
       "type": "registry:ui",
       "target": "@ui/bottom-bar.css"
     }

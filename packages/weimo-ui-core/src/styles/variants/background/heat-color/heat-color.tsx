@@ -2,7 +2,7 @@ import type { HTMLAttributes } from 'react'
 
 import { cn } from 'weimo-ui-core/lib/utils'
 
-import '../heat-color.css'
+import 'weimo-ui-core/styles/heat-color.css'
 
 export type HeatColorLevel = 0 | 1 | 2 | 3 | 4
 

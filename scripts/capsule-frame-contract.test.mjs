@@ -32,9 +32,9 @@ function assertIncludes(source, snippet, message) {
 
 const packageJson = readJson('package.json')
 const rootRegistry = readJson('registry.json')
-const modelSource = readProjectFile('packages/weimo-ui-core/src/components/capsule-frame.ts')
-const css = readProjectFile('packages/weimo-ui-core/src/components/capsule-frame.css')
-const capsuleButtonSource = readProjectFile('packages/weimo-ui-core/src/components/capsule-button.tsx')
+const modelSource = readProjectFile('packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.ts')
+const css = readProjectFile('packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.css')
+const capsuleButtonSource = readProjectFile('packages/weimo-ui-core/src/components/controls/capsule/capsule-button.tsx')
 const tagBreadSource = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bread.tsx')
 
 const frameBlock = blockFor(css, '.capsule-frame')
@@ -66,7 +66,7 @@ assert.ok(
   'CapsuleFrame must remain an internal shared frame rather than a public component.',
 )
 assert.ok(
-  !existsSync(join(root, 'packages/weimo-ui-core/src/components/capsule-frame.tsx')) &&
+  !existsSync(join(root, 'packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.tsx')) &&
     !existsSync(join(root, 'src/components/chip-surface.tsx')) &&
     !existsSync(join(root, 'src/components/chip-surface-model.ts')) &&
     !existsSync(join(root, 'src/components/chip-surface.css')),
@@ -174,13 +174,13 @@ for (const registryName of ['card', 'capsule-button', 'tag-bread']) {
   const filePaths = registryItem.files.map((file) => file.path)
 
   assert.ok(
-    filePaths.includes('packages/weimo-ui-core/src/components/capsule-frame.ts') &&
-      filePaths.includes('packages/weimo-ui-core/src/components/capsule-frame.css'),
+    filePaths.includes('packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.ts') &&
+      filePaths.includes('packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.css'),
     `${registryName} must ship the internal CapsuleFrame files.`,
   )
   assert.ok(
     !filePaths.some((filePath) => filePath.includes('chip-surface')) &&
-      !filePaths.includes('packages/weimo-ui-core/src/components/capsule-frame.tsx'),
+      !filePaths.includes('packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.tsx'),
     `${registryName} must not ship the removed surface component.`,
   )
 }

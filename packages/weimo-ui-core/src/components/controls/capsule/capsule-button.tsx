@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes, MouseEvent, ReactElement, ReactNode } from 'react'
 import { Hash } from 'lucide-react'
 
-import { AnimatedInlineSizeMeasure } from './animated-inline-size'
+import { AnimatedInlineSizeMeasure } from 'weimo-ui-core/components/animated-inline-size'
 import {
   getCapsuleFrameAttributes,
   getCapsuleFrameClassName,
@@ -9,17 +9,17 @@ import {
 import {
   getAnimatedInlineSizeStyle,
   useAnimatedInlineSize,
-} from './animated-inline-size-model'
+} from 'weimo-ui-core/components/animated-inline-size-model'
 import {
   getFrostedSurfaceClassName,
   useFrostedSurfaceBackgroundToneRef,
-} from './frosted-surface'
-import { LiquidGlassSurface } from './liquid-glass'
+} from 'weimo-ui-core/components/frosted-surface'
+import { LiquidGlassSurface } from 'weimo-ui-core/components/liquid-glass'
 import { cn } from 'weimo-ui-core/lib/utils'
 
 import './capsule-button.css'
 import './capsule-frame.css'
-import './frosted-surface.css'
+import 'weimo-ui-core/styles/frosted-surface.css'
 
 export type CapsuleButtonState = 'default' | 'frosted' | 'liquid-glass'
 

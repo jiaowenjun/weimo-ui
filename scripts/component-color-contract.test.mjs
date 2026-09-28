@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url'
 const root = fileURLToPath(new URL('..', import.meta.url))
 const componentsRoots = [
   join(root, 'packages/weimo-ui-core/src/components'),
+  join(root, 'packages/weimo-ui-core/src/styles/variants'),
   join(root, 'packages/weimo-ui-card/src/components'),
   join(root, 'packages/weimo-ui-image/src/components'),
   join(root, 'packages/weimo-ui-stats/src/components'),
@@ -41,7 +42,7 @@ const rawColorPattern = /#[\da-f]{3,8}\b|rgba?\([^)]*\)|hsla?\([^)]*\)/gi
 const allowlistedTokenFiles = new Set(['packages/weimo-ui-core/src/styles/tokens.css'])
 const allowlistedComponentColors = new Map([
   [
-    'packages/weimo-ui-core/src/components/component-preview-card.css',
+    'packages/weimo-ui-core/src/components/composites/cards/component-preview-card.css',
     new Set([
       'hsl(18.1 71.9% 46.1% / 0.72)',
       'hsl(222.2 47.4% 11.2% / 0.72)',
@@ -50,7 +51,7 @@ const allowlistedComponentColors = new Map([
     ]),
   ],
   [
-    'packages/weimo-ui-core/src/components/capsule-frame.css',
+    'packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.css',
     // hsl(var(--primary)) 是 token 组合而非裸色值:--color-primary 仅存在于
     // @theme inline(按需发射,组件 var() 引用解析失效),solid 前景必须直连
     // 底层通道 --primary。
@@ -64,11 +65,11 @@ const styleRegistry = readJson('registry/style.json')
 const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const hslOnlyTokenSources = [
   'packages/weimo-ui-core/src/styles/tokens.css',
-  'packages/weimo-ui-core/src/components/bg-blur.ts',
-  'packages/weimo-ui-core/src/components/bg-color.ts',
-  'packages/weimo-ui-core/src/components/border-color.ts',
-  'packages/weimo-ui-core/src/components/heatmap/heat-color.tsx',
-  'packages/weimo-ui-core/src/components/text-color.ts',
+  'packages/weimo-ui-core/src/styles/variants/background/bg-blur.ts',
+  'packages/weimo-ui-core/src/styles/variants/background/bg-color.ts',
+  'packages/weimo-ui-core/src/styles/variants/border/border-color.ts',
+  'packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.tsx',
+  'packages/weimo-ui-core/src/styles/variants/typography/text-color.ts',
   'registry/style.json',
 ]
 const nonHslColorPattern = /#[\da-f]{3,8}\b|rgba?\(/i

@@ -1,11 +1,11 @@
 import { act, cleanup, render, screen } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { useFrostedSurfaceBackgroundToneRef } from '../packages/weimo-ui-core/src/components/frosted-surface'
-import { resolveElementBackgroundSample } from '../packages/weimo-ui-core/src/components/frosted-surface-model'
+import { useFrostedSurfaceBackgroundToneRef } from 'weimo-ui/components/frosted-surface'
+import { resolveElementBackgroundSample } from '../packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface-model'
 
-vi.mock('../packages/weimo-ui-core/src/components/frosted-surface-model', async (importOriginal) => ({
-  ...await importOriginal<typeof import('../packages/weimo-ui-core/src/components/frosted-surface-model')>(),
+vi.mock('../packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface-model', async (importOriginal) => ({
+  ...await importOriginal<typeof import('../packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface-model')>(),
   resolveElementBackgroundSample: vi.fn(),
 }))
 

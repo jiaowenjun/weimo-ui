@@ -13,12 +13,12 @@
   ],
   "files": [
     {
-      "path": "packages/weimo-ui-core/src/components/bg-color.ts",
+      "path": "packages/weimo-ui-core/src/styles/variants/background/bg-color.ts",
       "type": "registry:ui",
       "target": "@ui/bg-color.ts"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/bg-color.css",
+      "path": "packages/weimo-ui-core/src/styles/variants/background/bg-color.css",
       "type": "registry:ui",
       "target": "@ui/bg-color.css"
     }

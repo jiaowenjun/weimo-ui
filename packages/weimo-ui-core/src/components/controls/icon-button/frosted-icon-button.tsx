@@ -4,10 +4,10 @@ import type { ComponentPropsWithoutRef, Ref } from 'react'
 import {
   getFrostedSurfaceClassName,
   useFrostedSurfaceBackgroundToneRef,
-} from './frosted-surface'
+} from 'weimo-ui-core/components/frosted-surface'
 import { getIconButtonClassName, type IconButtonSize } from './icon-button-model'
 
-import './frosted-surface.css'
+import 'weimo-ui-core/styles/frosted-surface.css'
 import './icon-button.css'
 
 export type FrostedIconButtonProps = ComponentPropsWithoutRef<'button'> & {

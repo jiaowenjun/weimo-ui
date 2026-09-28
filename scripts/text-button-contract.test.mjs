@@ -33,8 +33,8 @@ function assertIncludes(source, snippet, message) {
 const packageJson = readJson('package.json')
 const rootRegistry = readJson('registry.json')
 const standaloneRegistryItem = readJson('registry/text-button.json')
-const source = readProjectFile('packages/weimo-ui-core/src/components/text-button.tsx')
-const css = readProjectFile('packages/weimo-ui-core/src/components/text-button.css')
+const source = readProjectFile('packages/weimo-ui-core/src/components/controls/text-button/text-button.tsx')
+const css = readProjectFile('packages/weimo-ui-core/src/components/controls/text-button/text-button.css')
 const docsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/button.tsx')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
@@ -52,12 +52,12 @@ const previewBlock = cssBlockFor(appCss, '.text-button-preview')
 
 assert.equal(
   packageJson.exports?.['./components/text-button'],
-  './packages/weimo-ui-core/src/components/text-button.tsx',
+  './packages/weimo-ui-core/src/components/controls/text-button/text-button.tsx',
   'TextButton must have a public package export.',
 )
 assert.equal(
   packageJson.exports?.['./styles/text-button.css'],
-  './packages/weimo-ui-core/src/components/text-button.css',
+  './packages/weimo-ui-core/src/components/controls/text-button/text-button.css',
   'TextButton must expose its standalone stylesheet.',
 )
 assert.ok(registryItem, 'TextButton must be listed in registry.json.')
@@ -73,7 +73,7 @@ assert.deepEqual(
 )
 assert.deepEqual(
   registryItem?.files.map((file) => file.path),
-  ['packages/weimo-ui-core/src/components/text-button.tsx', 'packages/weimo-ui-core/src/components/text-button.css'],
+  ['packages/weimo-ui-core/src/components/controls/text-button/text-button.tsx', 'packages/weimo-ui-core/src/components/controls/text-button/text-button.css'],
   'TextButton registry item must ship source and CSS while depending on @weimo/utils for cn().',
 )
 

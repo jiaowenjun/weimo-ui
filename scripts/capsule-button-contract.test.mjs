@@ -44,10 +44,10 @@ function assertIncludes(source, snippet, message) {
 
 const packageJson = readJson('package.json')
 const rootRegistry = readJson('registry.json')
-const source = readProjectFile('packages/weimo-ui-core/src/components/capsule-button.tsx')
-const css = readProjectFile('packages/weimo-ui-core/src/components/capsule-button.css')
-const surfaceCss = readProjectFile('packages/weimo-ui-core/src/components/capsule-frame.css')
-const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.css')
+const source = readProjectFile('packages/weimo-ui-core/src/components/controls/capsule/capsule-button.tsx')
+const css = readProjectFile('packages/weimo-ui-core/src/components/controls/capsule/capsule-button.css')
+const surfaceCss = readProjectFile('packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.css')
+const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const docsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule-button.tsx')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
@@ -105,7 +105,7 @@ assert.ok(
 
 assert.equal(
   packageJson.exports?.['./components/capsule-button'],
-  './packages/weimo-ui-core/src/components/capsule-button.tsx',
+  './packages/weimo-ui-core/src/components/controls/capsule/capsule-button.tsx',
   'CapsuleButton must have a public package export.',
 )
 assert.ok(
@@ -120,8 +120,8 @@ assert.ok(
 for (const snippet of [
   "import type { ButtonHTMLAttributes, MouseEvent, ReactElement, ReactNode } from 'react'",
   "import { Hash } from 'lucide-react'",
-  "from './animated-inline-size'",
-  "from './animated-inline-size-model'",
+  "from 'weimo-ui-core/components/animated-inline-size'",
+  "from 'weimo-ui-core/components/animated-inline-size-model'",
   "from './capsule-frame'",
   "import './capsule-button.css'",
   "export type CapsuleButtonState = 'default' | 'frosted' | 'liquid-glass'",
@@ -145,7 +145,7 @@ for (const snippet of [
   "data-has-prefix={isEmptyCapsuleButtonSlot(prefix) ? undefined : 'true'}",
   "data-has-suffix={isEmptyCapsuleButtonSlot(suffix) ? undefined : 'true'}",
   "const isFrostedState = state === 'frosted'",
-  "import { LiquidGlassSurface } from './liquid-glass'",
+  "import { LiquidGlassSurface } from 'weimo-ui-core/components/liquid-glass'",
   "const isLiquidGlassState = state === 'liquid-glass'",
   'capsule-button--liquid-glass',
   '? { ...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle }',

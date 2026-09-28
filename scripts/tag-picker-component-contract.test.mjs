@@ -25,12 +25,12 @@ const componentSource = readProjectFile('packages/weimo-ui-card/src/components/t
 const hookSource = readProjectFile('packages/weimo-ui-card/src/components/tag-picker/use-tag-picker.ts')
 const modelSource = readProjectFile('packages/weimo-ui-card/src/components/tag-picker/tag-picker-model.ts')
 const cssSource = readProjectFile('packages/weimo-ui-card/src/components/tag-picker/tag-picker.css')
-const bottomBarSource = readProjectFile('packages/weimo-ui-core/src/components/bottom-bar.tsx')
-const bottomBarCss = readProjectFile('packages/weimo-ui-core/src/components/bottom-bar.css')
-const floatBarSource = readProjectFile('packages/weimo-ui-core/src/components/float-bar.tsx')
-const floatBarCss = readProjectFile('packages/weimo-ui-core/src/components/float-bar.css')
-const actionDialogSource = readProjectFile('packages/weimo-ui-core/src/components/action-dialog.tsx')
-const actionDialogCss = readProjectFile('packages/weimo-ui-core/src/components/action-dialog.css')
+const bottomBarSource = readProjectFile('packages/weimo-ui-core/src/components/layout/bars/bottom-bar.tsx')
+const bottomBarCss = readProjectFile('packages/weimo-ui-core/src/components/layout/bars/bottom-bar.css')
+const floatBarSource = readProjectFile('packages/weimo-ui-core/src/components/layout/bars/float-bar.tsx')
+const floatBarCss = readProjectFile('packages/weimo-ui-core/src/components/layout/bars/float-bar.css')
+const actionDialogSource = readProjectFile('packages/weimo-ui-core/src/components/composites/action-dialog/action-dialog.tsx')
+const actionDialogCss = readProjectFile('packages/weimo-ui-core/src/components/composites/action-dialog/action-dialog.css')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const rootRegistry = JSON.parse(readProjectFile('registry.json'))
 const packageJson = JSON.parse(readProjectFile('package.json'))
@@ -64,17 +64,17 @@ assert.equal(
 )
 assert.equal(
   packageJson.exports?.['./components/float-bar'],
-  './packages/weimo-ui-core/src/components/float-bar.tsx',
+  './packages/weimo-ui-core/src/components/layout/bars/float-bar.tsx',
   'FloatBar must have a public package export.',
 )
 assert.equal(
   packageJson.exports?.['./components/action-dialog'],
-  './packages/weimo-ui-core/src/components/action-dialog.tsx',
+  './packages/weimo-ui-core/src/components/composites/action-dialog/action-dialog.tsx',
   'ActionDialog must have a public package export.',
 )
 assert.equal(
   packageJson.exports?.['./components/bottom-bar'],
-  './packages/weimo-ui-core/src/components/bottom-bar.tsx',
+  './packages/weimo-ui-core/src/components/layout/bars/bottom-bar.tsx',
   'BottomBar must have a public package export.',
 )
 
@@ -190,10 +190,10 @@ assert.ok(
 assert.ok(
   actionDialogSource.includes("import { X } from 'lucide-react'") &&
     actionDialogSource.includes("import type { ReactNode } from 'react'") &&
-    actionDialogSource.includes("from './coss/dialog'") &&
-    actionDialogSource.includes("import { BottomBar } from './bottom-bar'") &&
-    actionDialogSource.includes("import { FloatBar } from './float-bar'") &&
-    actionDialogSource.includes("import { FrostedIconButton } from './frosted-icon-button'") &&
+    actionDialogSource.includes("from 'weimo-ui-core/components/coss/dialog'") &&
+    actionDialogSource.includes("import { BottomBar } from 'weimo-ui-core/components/bottom-bar'") &&
+    actionDialogSource.includes("import { FloatBar } from 'weimo-ui-core/components/float-bar'") &&
+    actionDialogSource.includes("import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'") &&
     actionDialogSource.includes("import { cn } from 'weimo-ui-core/lib/utils'") &&
     actionDialogSource.includes("import './action-dialog.css'") &&
     actionDialogSource.includes('export type ActionDialogProps') &&

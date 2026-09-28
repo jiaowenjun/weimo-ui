@@ -17,82 +17,82 @@
   ],
   "files": [
     {
-      "path": "packages/weimo-ui-core/src/components/capsule-button.tsx",
+      "path": "packages/weimo-ui-core/src/components/controls/capsule/capsule-button.tsx",
       "type": "registry:ui",
       "target": "@ui/capsule-button.tsx"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/capsule-button.css",
+      "path": "packages/weimo-ui-core/src/components/controls/capsule/capsule-button.css",
       "type": "registry:ui",
       "target": "@ui/capsule-button.css"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/capsule-frame.ts",
+      "path": "packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.ts",
       "type": "registry:ui",
       "target": "@ui/capsule-frame.ts"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/capsule-frame.css",
+      "path": "packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.css",
       "type": "registry:ui",
       "target": "@ui/capsule-frame.css"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/animated-inline-size.tsx",
+      "path": "packages/weimo-ui-core/src/behaviors/animated-inline-size/animated-inline-size.tsx",
       "type": "registry:ui",
       "target": "@ui/animated-inline-size.tsx"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/animated-inline-size-model.ts",
+      "path": "packages/weimo-ui-core/src/behaviors/animated-inline-size/animated-inline-size-model.ts",
       "type": "registry:ui",
       "target": "@ui/animated-inline-size-model.ts"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/animated-inline-size.css",
+      "path": "packages/weimo-ui-core/src/behaviors/animated-inline-size/animated-inline-size.css",
       "type": "registry:ui",
       "target": "@ui/animated-inline-size.css"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/frosted-surface.tsx",
+      "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx",
       "type": "registry:ui",
       "target": "@ui/frosted-surface.tsx"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/frosted-surface-model.ts",
+      "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface-model.ts",
       "type": "registry:ui",
       "target": "@ui/frosted-surface-model.ts"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/frosted-surface.css",
+      "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css",
       "type": "registry:ui",
       "target": "@ui/frosted-surface.css"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/liquid-glass.tsx",
+      "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass.tsx",
       "type": "registry:ui",
       "target": "@ui/liquid-glass.tsx"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/liquid-glass.css",
+      "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass.css",
       "type": "registry:ui",
       "target": "@ui/liquid-glass.css"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/liquid-glass-react/index.tsx",
+      "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass-react/index.tsx",
       "type": "registry:ui",
       "target": "@ui/liquid-glass-react/index.tsx"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/liquid-glass-react/shader-utils.ts",
+      "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass-react/shader-utils.ts",
       "type": "registry:ui",
       "target": "@ui/liquid-glass-react/shader-utils.ts"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/liquid-glass-react/utils.ts",
+      "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass-react/utils.ts",
       "type": "registry:ui",
       "target": "@ui/liquid-glass-react/utils.ts"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/liquid-glass-react/LICENSE",
+      "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass-react/LICENSE",
       "type": "registry:ui",
       "target": "@ui/liquid-glass-react/LICENSE"
     }

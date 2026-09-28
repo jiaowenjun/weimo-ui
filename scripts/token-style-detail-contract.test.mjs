@@ -29,8 +29,8 @@ const detailPageSource = readProjectFile('packages/weimo-ui-site/src/docs/pages/
 const docsShellSource = readProjectFile('packages/weimo-ui-site/src/docs/docs-shell.tsx')
 const searchSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/search-component-docs.ts')
 const colorSource = readProjectFile('packages/weimo-ui-site/src/docs/components/token-preview-color.ts')
-const cardSource = readProjectFile('packages/weimo-ui-core/src/components/component-preview-card.tsx')
-const cardCss = readProjectFile('packages/weimo-ui-core/src/components/component-preview-card.css')
+const cardSource = readProjectFile('packages/weimo-ui-core/src/components/composites/cards/component-preview-card.tsx')
+const cardCss = readProjectFile('packages/weimo-ui-core/src/components/composites/cards/component-preview-card.css')
 const cardRegistry = JSON.parse(readProjectFile('registry/component-preview-card.json'))
 const previewCardDefinitionSource = readProjectFile(
   'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/component-preview-card.tsx',
@@ -203,7 +203,7 @@ for (const selector of ['.bg-color-preview__selection-sample']) {
 
 assert.equal(
   packageJson.exports?.['./components/component-preview-card'],
-  './packages/weimo-ui-core/src/components/component-preview-card.tsx',
+  './packages/weimo-ui-core/src/components/composites/cards/component-preview-card.tsx',
   'ComponentPreviewCard must have a public package export.',
 )
 assert.ok(

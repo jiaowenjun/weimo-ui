@@ -51,12 +51,12 @@ const componentDefinitionsIndexSource = readProjectFile(
 const frostedSurfaceDefinitionSource = readProjectFile(
   'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/surface.tsx',
 )
-const frostedSurfaceSource = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.tsx')
+const frostedSurfaceSource = readProjectFile('packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx')
 const frostedSurfaceModelSource = readProjectFile(
-  'packages/weimo-ui-core/src/components/frosted-surface-model.ts',
+  'packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface-model.ts',
 )
-const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.css')
-const sliderCss = readProjectFile('packages/weimo-ui-core/src/components/slider.css')
+const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css')
+const sliderCss = readProjectFile('packages/weimo-ui-core/src/components/controls/slider/slider.css')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const frostedSurfaceModelContractModule = await import(
@@ -265,7 +265,7 @@ function contractRect(left, top, width, height) {
 
 assert.equal(
   packageJson.exports?.['./components/frosted-surface'],
-  './packages/weimo-ui-core/src/components/frosted-surface.tsx',
+  './packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx',
   'FrostedSurface must have a public package export.',
 )
 assert.ok(
@@ -435,7 +435,7 @@ for (const snippet of [
   )
 }
 
-const sliderModuleSource = readProjectFile('packages/weimo-ui-core/src/components/slider.tsx')
+const sliderModuleSource = readProjectFile('packages/weimo-ui-core/src/components/controls/slider/slider.tsx')
 
 for (const snippet of [
   'function Slider(',
@@ -572,11 +572,11 @@ for (const snippet of [
 // 统一经 backgroundStyle 以 inline 变量下发,直接声明 border-color 的规则
 // (如磨砂图标按钮禁用描边)优先级更高不受影响。
 for (const [sourcePath, sourceLabel, extraSnippets] of [
-  ['packages/weimo-ui-core/src/components/capsule-button.tsx', 'CapsuleButton', ['...style, ...backgroundStyle']],
-  ['packages/weimo-ui-core/src/components/menu.tsx', 'MenuPopup', ['style={{ ...style, ...backgroundStyle }}']],
+  ['packages/weimo-ui-core/src/components/controls/capsule/capsule-button.tsx', 'CapsuleButton', ['...style, ...backgroundStyle']],
+  ['packages/weimo-ui-core/src/components/composites/menu/menu.tsx', 'MenuPopup', ['style={{ ...style, ...backgroundStyle }}']],
   ['packages/weimo-ui-tagtree/src/components/tag-bread.tsx', 'TagBread', ['...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle']],
-  ['packages/weimo-ui-core/src/components/frosted-icon-button.tsx', 'FrostedIconButton', ['style={{ ...style, ...backgroundStyle }}']],
-  ['packages/weimo-ui-core/src/components/frosted-icon-button-group.tsx', 'FrostedIconButtonGroup', ['style={{ ...style, ...backgroundStyle }}']],
+  ['packages/weimo-ui-core/src/components/controls/icon-button/frosted-icon-button.tsx', 'FrostedIconButton', ['style={{ ...style, ...backgroundStyle }}']],
+  ['packages/weimo-ui-core/src/components/controls/icon-button/frosted-icon-button-group.tsx', 'FrostedIconButtonGroup', ['style={{ ...style, ...backgroundStyle }}']],
 ]) {
   const source = readProjectFile(sourcePath)
 
@@ -783,9 +783,9 @@ for (const removedTokenName of [
 assert.deepEqual(
   getRegistryFiles(rootFrostedSurfaceItem),
   [
-    'packages/weimo-ui-core/src/components/frosted-surface.tsx',
-    'packages/weimo-ui-core/src/components/frosted-surface-model.ts',
-    'packages/weimo-ui-core/src/components/frosted-surface.css',
+    'packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx',
+    'packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface-model.ts',
+    'packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css',
   ],
   'FrostedSurface registry item must ship only its own files.',
 )

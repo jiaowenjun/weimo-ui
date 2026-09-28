@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
 
-import { bgColorToneMap, type BgColorTone } from '../packages/weimo-ui-core/src/components/bg-color'
-import { borderColorToneMap, borderColorTones } from '../packages/weimo-ui-core/src/components/border-color'
-import { textColorToneMap, type TextColorTone } from '../packages/weimo-ui-core/src/components/text-color'
+import { bgColorToneMap, type BgColorTone } from 'weimo-ui/components/bg-color'
+import { borderColorToneMap, borderColorTones } from 'weimo-ui/components/border-color'
+import { textColorToneMap, type TextColorTone } from 'weimo-ui/components/text-color'
 import {
   effectiveColorLightness,
   parseColorLightness,

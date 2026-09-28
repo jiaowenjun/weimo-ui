@@ -2,11 +2,11 @@ import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 
 const menuCss = readFileSync(
-  new URL('../packages/weimo-ui-core/src/components/menu.css', import.meta.url),
+  new URL('../packages/weimo-ui-core/src/components/composites/menu/menu.css', import.meta.url),
   'utf8',
 )
 const menuSource = readFileSync(
-  new URL('../packages/weimo-ui-core/src/components/menu.tsx', import.meta.url),
+  new URL('../packages/weimo-ui-core/src/components/composites/menu/menu.tsx', import.meta.url),
   'utf8',
 )
 const menuDefinitionSource = readFileSync(
@@ -15,11 +15,11 @@ const menuDefinitionSource = readFileSync(
 )
 const appCss = readFileSync(new URL('../packages/weimo-ui-site/src/App.css', import.meta.url), 'utf8')
 const frostedSurfaceCss = readFileSync(
-  new URL('../packages/weimo-ui-core/src/components/frosted-surface.css', import.meta.url),
+  new URL('../packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css', import.meta.url),
   'utf8',
 )
 const frostedSurfaceModelSource = readFileSync(
-  new URL('../packages/weimo-ui-core/src/components/frosted-surface-model.ts', import.meta.url),
+  new URL('../packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface-model.ts', import.meta.url),
   'utf8',
 )
 const tokensCss = readFileSync(
@@ -65,7 +65,7 @@ const separatorBlock = cssBlockFor(menuCss, '.weimo-menu__separator')
 const frostedSurfaceBlock = cssBlockFor(frostedSurfaceCss, '.frosted-surface')
 
 assert.ok(
-  menuSource.includes("from './frosted-surface'") &&
+  menuSource.includes("from 'weimo-ui-core/components/frosted-surface'") &&
     menuSource.includes(
       "getFrostedSurfaceClassName(\n            'weimo-menu__popup',\n            'frosted-surface--bordered',\n            className,\n          )",
     ) &&

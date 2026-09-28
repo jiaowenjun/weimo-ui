@@ -11,12 +11,12 @@ function readProjectFile(relativePath) {
   return readFileSync(absolutePath, 'utf8')
 }
 
-const dialogSource = readProjectFile('packages/weimo-ui-core/src/components/coss/dialog.tsx')
-const dialogCss = readProjectFile('packages/weimo-ui-core/src/components/coss/dialog.css')
-const popupSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/popup-surface.css')
+const dialogSource = readProjectFile('packages/weimo-ui-core/src/components/primitives/dialog.tsx')
+const dialogCss = readProjectFile('packages/weimo-ui-core/src/components/primitives/dialog.css')
+const popupSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.css')
 const inputGroupSource = readProjectFile('packages/weimo-ui-tagtree/src/components/coss/input-group.tsx')
 const inputGroupCss = readProjectFile('packages/weimo-ui-tagtree/src/components/coss/input-group.css')
-const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.css')
+const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css')
 const scrollAreaSource = readProjectFile('packages/weimo-ui-tagtree/src/components/coss/scroll-area.tsx')
 const scrollAreaCss = readProjectFile('packages/weimo-ui-tagtree/src/components/coss/scroll-area.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
@@ -57,7 +57,7 @@ assert.ok(
     dialogCss.includes('.coss-dialog__footer') &&
     dialogCss.includes('z-index: 80;') &&
     dialogCss.includes('z-index: 81;') &&
-    dialogSource.includes("import { getPopupSurfaceClassName } from '../popup-surface'") &&
+    dialogSource.includes("import { getPopupSurfaceClassName } from 'weimo-ui-core/components/popup-surface'") &&
     dialogSource.includes("getPopupSurfaceClassName('modal', 'coss-dialog__popup', className)") &&
     popupSurfaceCss.includes('border-radius: var(--radius);') &&
     popupSurfaceCss.includes('background: var(--color-bg-card);'),

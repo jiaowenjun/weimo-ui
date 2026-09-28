@@ -35,9 +35,8 @@ const expectedLevels = [
 ]
 
 const packageJson = readJson('package.json')
-const heatColorEntrySource = readProjectFile('packages/weimo-ui-core/src/components/heat-color.tsx')
-const heatColorSource = readProjectFile('packages/weimo-ui-core/src/components/heatmap/heat-color.tsx')
-const heatColorCss = readProjectFile('packages/weimo-ui-core/src/components/heat-color.css')
+const heatColorSource = readProjectFile('packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.tsx')
+const heatColorCss = readProjectFile('packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.css')
 const heatmapCss = readProjectFile('packages/weimo-ui-stats/src/components/heatmap/heatmap.css')
 const heatmapSource = readProjectFile('packages/weimo-ui-stats/src/components/heatmap/heatmap.tsx')
 const backgroundTokensDocsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/background-tokens.tsx')
@@ -58,17 +57,17 @@ const heatColorSwatchBlock = cssBlockFor(appCss, '.heat-color-preview__swatch')
 
 assert.equal(
   packageJson.exports?.['./components/heat-color'],
-  './packages/weimo-ui-core/src/components/heat-color.tsx',
+  './packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.tsx',
   'package.json must expose the public HeatColor entrypoint.',
 )
 assert.equal(
   packageJson.exports?.['./styles/heat-color.css'],
-  './packages/weimo-ui-core/src/components/heat-color.css',
+  './packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.css',
   'package.json must expose the standalone HeatColor utility stylesheet.',
 )
 
 assert.ok(
-  heatColorSource.includes("import '../heat-color.css'"),
+  heatColorSource.includes("import 'weimo-ui-core/styles/heat-color.css'"),
   'HeatColor implementation must import the standalone utility stylesheet.',
 )
 assert.ok(
@@ -79,14 +78,6 @@ assert.ok(
     heatColorSource.includes('export function getHeatColorToken'),
   'HeatColor module must expose its level map, ordered levels, type, and helpers.',
 )
-assert.ok(
-  heatColorEntrySource.includes('heatColorMap') &&
-    heatColorEntrySource.includes('heatColorLevels') &&
-    heatColorEntrySource.includes('getHeatColorToken') &&
-    heatColorEntrySource.includes('type HeatColorLevel'),
-  'Standalone HeatColor entry must re-export the utility map and helpers.',
-)
-
 for (const [level, token, className, lightValue, darkValue] of expectedLevels) {
   assert.ok(
     heatColorSource.includes(`${level}: {`) &&
@@ -209,15 +200,14 @@ assert.deepEqual(
 assert.deepEqual(
   standaloneRegistryItem.files.map((file) => file.path),
   [
-    'packages/weimo-ui-core/src/components/heat-color.tsx',
-    'packages/weimo-ui-core/src/components/heatmap/heat-color.tsx',
+    'packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.tsx',
     'packages/weimo-ui-stats/src/components/heatmap/heatmap-model.ts',
-    'packages/weimo-ui-core/src/components/heat-color.css',
+    'packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.css',
   ],
-  'HeatColor registry item must ship the entry, implementation, model type, and utility stylesheet.',
+  'HeatColor registry item must ship its implementation, model type, and utility stylesheet.',
 )
 assert.ok(
-  heatmapRegistryItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/components/heat-color.css') &&
-    rootHeatmapItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/components/heat-color.css'),
+  heatmapRegistryItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.css') &&
+    rootHeatmapItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.css'),
   'Heatmap registry items must ship the shared HeatColor utility stylesheet.',
 )

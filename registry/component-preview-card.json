@@ -15,12 +15,12 @@
   ],
   "files": [
     {
-      "path": "packages/weimo-ui-core/src/components/component-preview-card.tsx",
+      "path": "packages/weimo-ui-core/src/components/composites/cards/component-preview-card.tsx",
       "type": "registry:ui",
       "target": "@ui/component-preview-card.tsx"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/component-preview-card.css",
+      "path": "packages/weimo-ui-core/src/components/composites/cards/component-preview-card.css",
       "type": "registry:ui",
       "target": "@ui/component-preview-card.css"
     }

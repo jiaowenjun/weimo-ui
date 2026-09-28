@@ -36,8 +36,8 @@ function countOccurrences(source, snippet) {
 
 const source = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bread.tsx')
 const css = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bread.css')
-const surfaceCss = readProjectFile('packages/weimo-ui-core/src/components/capsule-frame.css')
-const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.css')
+const surfaceCss = readProjectFile('packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.css')
+const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css')
 const pageCss = readProjectFile('packages/weimo-ui-tagtree/src/tag-page.css')
 const indexCss = readProjectFile('packages/weimo-ui-site/src/index.css')
 const cossBreadcrumbSource = readProjectFile('packages/weimo-ui-tagtree/src/components/coss/breadcrumb.tsx')
@@ -352,16 +352,16 @@ assert.deepEqual(
   [
     'packages/weimo-ui-tagtree/src/components/tag-bread.tsx',
     'packages/weimo-ui-tagtree/src/components/tag-bread.css',
-    'packages/weimo-ui-core/src/components/capsule-frame.ts',
-    'packages/weimo-ui-core/src/components/capsule-frame.css',
-    'packages/weimo-ui-core/src/components/animated-inline-size.tsx',
-    'packages/weimo-ui-core/src/components/animated-inline-size-model.ts',
-    'packages/weimo-ui-core/src/components/animated-inline-size.css',
+    'packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.ts',
+    'packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.css',
+    'packages/weimo-ui-core/src/behaviors/animated-inline-size/animated-inline-size.tsx',
+    'packages/weimo-ui-core/src/behaviors/animated-inline-size/animated-inline-size-model.ts',
+    'packages/weimo-ui-core/src/behaviors/animated-inline-size/animated-inline-size.css',
     'packages/weimo-ui-tagtree/src/components/coss/breadcrumb.tsx',
     'packages/weimo-ui-tagtree/src/components/coss/breadcrumb.css',
-    'packages/weimo-ui-core/src/components/frosted-surface.tsx',
-    'packages/weimo-ui-core/src/components/frosted-surface-model.ts',
-    'packages/weimo-ui-core/src/components/frosted-surface.css',
+    'packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx',
+    'packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface-model.ts',
+    'packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css',
   ],
   'TagBread registry item must ship the component, sidecar CSS, shared chip surface internals, and local coss Breadcrumb.',
 )

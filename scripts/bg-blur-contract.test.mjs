@@ -51,18 +51,18 @@ const expectedTones = [
 ]
 
 const packageJson = readJson('package.json')
-const bgBlurSource = readProjectFile('packages/weimo-ui-core/src/components/bg-blur.ts')
-const bgBlurCss = readProjectFile('packages/weimo-ui-core/src/components/bg-blur.css')
+const bgBlurSource = readProjectFile('packages/weimo-ui-core/src/styles/variants/background/bg-blur.ts')
+const bgBlurCss = readProjectFile('packages/weimo-ui-core/src/styles/variants/background/bg-blur.css')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/background-tokens.tsx')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
-const tokenPreviewCardCss = readProjectFile('packages/weimo-ui-core/src/components/component-preview-card.css')
+const tokenPreviewCardCss = readProjectFile('packages/weimo-ui-core/src/components/composites/cards/component-preview-card.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
-const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.css')
+const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css')
 const commandCss = readProjectFile('packages/weimo-ui-site/src/components/coss/command.css')
-const dialogCss = readProjectFile('packages/weimo-ui-core/src/components/coss/dialog.css')
-const sidebarShellCss = readProjectFile('packages/weimo-ui-core/src/components/sidebar/sidebar-shell.css')
+const dialogCss = readProjectFile('packages/weimo-ui-core/src/components/primitives/dialog.css')
+const sidebarShellCss = readProjectFile('packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.css')
 const rootRegistry = readJson('registry.json')
 const styleRegistry = readJson('registry/style.json')
 const standaloneRegistryItem = readJson('registry/bg-blur.json')
@@ -83,12 +83,12 @@ const surfaceBlock = blockFor(
 
 assert.equal(
   packageJson.exports?.['./components/bg-blur'],
-  './packages/weimo-ui-core/src/components/bg-blur.ts',
+  './packages/weimo-ui-core/src/styles/variants/background/bg-blur.ts',
   'package.json must expose the public BgBlur tone map.',
 )
 assert.equal(
   packageJson.exports?.['./styles/bg-blur.css'],
-  './packages/weimo-ui-core/src/components/bg-blur.css',
+  './packages/weimo-ui-core/src/styles/variants/background/bg-blur.css',
   'package.json must expose the standalone BgBlur utility stylesheet.',
 )
 assert.ok(
@@ -326,7 +326,7 @@ assert.deepEqual(
 )
 assert.deepEqual(
   registryItem.files.map((file) => file.path),
-  ['packages/weimo-ui-core/src/components/bg-blur.ts', 'packages/weimo-ui-core/src/components/bg-blur.css'],
+  ['packages/weimo-ui-core/src/styles/variants/background/bg-blur.ts', 'packages/weimo-ui-core/src/styles/variants/background/bg-blur.css'],
   'bg-blur registry item must ship the tone map and utility stylesheet.',
 )
 assert.ok(

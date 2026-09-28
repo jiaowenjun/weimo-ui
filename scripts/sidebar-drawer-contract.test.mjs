@@ -5,15 +5,15 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { createServer } from 'vite'
 
 const sidebarSource = readFileSync(
-  new URL('../packages/weimo-ui-core/src/components/sidebar/sidebar-shell.tsx', import.meta.url),
+  new URL('../packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.tsx', import.meta.url),
   'utf8',
 )
 const sidebarIndexSource = readFileSync(
-  new URL('../packages/weimo-ui-core/src/components/sidebar/index.tsx', import.meta.url),
+  new URL('../packages/weimo-ui-core/src/components/layout/sidebar/index.tsx', import.meta.url),
   'utf8',
 )
 const sidebarCss = readFileSync(
-  new URL('../packages/weimo-ui-core/src/components/sidebar/sidebar-shell.css', import.meta.url),
+  new URL('../packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.css', import.meta.url),
   'utf8',
 )
 const sidebarRegistry = readFileSync(
@@ -174,7 +174,7 @@ assert.doesNotMatch(
   'Desktop sidebar must use a solid card background instead of glass gradient.',
 )
 assert.ok(
-  sidebarSource.includes("import { getCardSurfaceClassName } from '../card-surface'") &&
+  sidebarSource.includes("import { getCardSurfaceClassName } from 'weimo-ui-core/components/card-surface'") &&
     sidebarSource.includes("getCardSurfaceClassName('weimo-sidebar--normal', className)") &&
     !/background:\s*var\(--color-bg-card\);/.test(sidebarNormalBlock) &&
     !/box-shadow:\s*var\(--shadow-card\);/.test(sidebarNormalBlock),
@@ -274,7 +274,7 @@ const viteServer = await createServer({
 
 try {
   const { SideBarShell } = await viteServer.ssrLoadModule(
-    '/packages/weimo-ui-core/src/components/sidebar/sidebar-shell.tsx',
+    '/packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.tsx',
   )
   const html = renderToStaticMarkup(
     React.createElement(

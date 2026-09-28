@@ -1,7 +1,7 @@
 import { X } from 'lucide-react'
 import type { ReactNode } from 'react'
 
-import { BottomBar } from './bottom-bar'
+import { BottomBar } from 'weimo-ui-core/components/bottom-bar'
 import {
   Dialog,
   DialogClose,
@@ -9,9 +9,9 @@ import {
   DialogTitle,
   type DialogPopupProps,
   type DialogProps,
-} from './coss/dialog'
-import { FloatBar } from './float-bar'
-import { FrostedIconButton } from './frosted-icon-button'
+} from 'weimo-ui-core/components/coss/dialog'
+import { FloatBar } from 'weimo-ui-core/components/float-bar'
+import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'
 import { cn } from 'weimo-ui-core/lib/utils'
 
 import './action-dialog.css'

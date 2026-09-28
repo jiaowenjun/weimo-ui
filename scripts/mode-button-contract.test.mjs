@@ -22,8 +22,8 @@ function cssBlockFor(source, selector) {
   return match[1]
 }
 
-const componentSource = readProjectFile('packages/weimo-ui-core/src/components/mode-button.tsx')
-const componentCss = readProjectFile('packages/weimo-ui-core/src/components/mode-button.css')
+const componentSource = readProjectFile('packages/weimo-ui-core/src/components/composites/mode-button/mode-button.tsx')
+const componentCss = readProjectFile('packages/weimo-ui-core/src/components/composites/mode-button/mode-button.css')
 const docsDefinitionSource = readProjectFile(
   'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/button.tsx',
 )
@@ -45,8 +45,8 @@ assert.equal(
 for (const snippet of [
   "import { useEffect, useRef, useState, type MouseEvent } from 'react'",
   "import { Ellipsis, Pencil, X } from 'lucide-react'",
-  "import { GhostIconButton, type GhostIconButtonProps } from './ghost-icon-button'",
-  "import { ActionMenu, type ActionMenuItem } from './menu'",
+  "import { GhostIconButton, type GhostIconButtonProps } from 'weimo-ui-core/components/ghost-icon-button'",
+  "import { ActionMenu, type ActionMenuItem } from 'weimo-ui-core/components/menu'",
   "import { cn } from 'weimo-ui-core/lib/utils'",
   "import './mode-button.css'",
   "export type ModeButtonMode = 'display' | 'edit'",
@@ -167,7 +167,7 @@ for (const snippet of [
   assert.ok(manifestSource.includes(snippet), `components manifest must include ${snippet}.`)
 }
 assert.ok(
-  packageJson.exports?.['./components/mode-button'] === './packages/weimo-ui-core/src/components/mode-button.tsx',
+  packageJson.exports?.['./components/mode-button'] === './packages/weimo-ui-core/src/components/composites/mode-button/mode-button.tsx',
   'ModeButton must have a public package export.',
 )
 

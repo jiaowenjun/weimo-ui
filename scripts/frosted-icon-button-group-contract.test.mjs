@@ -41,15 +41,15 @@ const rootGroupItem = rootRegistry.items.find(
   (item) => item.name === 'frosted-icon-button-group',
 )
 const componentManifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
-const groupSource = readProjectFile('packages/weimo-ui-core/src/components/frosted-icon-button-group.tsx')
-const glassIconButtonSource = readProjectFile('packages/weimo-ui-core/src/components/frosted-icon-button.tsx')
-const groupCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-icon-button-group.css')
-const iconButtonCss = readProjectFile('packages/weimo-ui-core/src/components/icon-button.css')
+const groupSource = readProjectFile('packages/weimo-ui-core/src/components/controls/icon-button/frosted-icon-button-group.tsx')
+const glassIconButtonSource = readProjectFile('packages/weimo-ui-core/src/components/controls/icon-button/frosted-icon-button.tsx')
+const groupCss = readProjectFile('packages/weimo-ui-core/src/components/controls/icon-button/frosted-icon-button-group.css')
+const iconButtonCss = readProjectFile('packages/weimo-ui-core/src/components/controls/icon-button/icon-button.css')
 const buttonDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/button.tsx')
 
 assert.equal(
   packageJson.exports?.['./components/frosted-icon-button-group'],
-  './packages/weimo-ui-core/src/components/frosted-icon-button-group.tsx',
+  './packages/weimo-ui-core/src/components/controls/icon-button/frosted-icon-button-group.tsx',
   'FrostedIconButtonGroup must have a public package export.',
 )
 
@@ -83,19 +83,19 @@ assert.deepEqual(
 assert.deepEqual(
   groupRegistry.files.map((file) => file.path),
   [
-    'packages/weimo-ui-core/src/components/frosted-icon-button-group.tsx',
-    'packages/weimo-ui-core/src/components/frosted-icon-button-group.css',
-    'packages/weimo-ui-core/src/components/icon-button-model.ts',
-    'packages/weimo-ui-core/src/components/icon-button.css',
-    'packages/weimo-ui-core/src/components/frosted-surface.tsx',
-    'packages/weimo-ui-core/src/components/frosted-surface-model.ts',
-    'packages/weimo-ui-core/src/components/frosted-surface.css',
+    'packages/weimo-ui-core/src/components/controls/icon-button/frosted-icon-button-group.tsx',
+    'packages/weimo-ui-core/src/components/controls/icon-button/frosted-icon-button-group.css',
+    'packages/weimo-ui-core/src/components/controls/icon-button/icon-button-model.ts',
+    'packages/weimo-ui-core/src/components/controls/icon-button/icon-button.css',
+    'packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx',
+    'packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface-model.ts',
+    'packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css',
   ],
   'FrostedIconButtonGroup registry item must ship the group plus the icon-button and frosted-surface primitives.',
 )
 
 for (const snippet of [
-  "import {\n  getFrostedSurfaceClassName,\n  useFrostedSurfaceBackgroundToneRef,\n} from './frosted-surface'",
+  "import {\n  getFrostedSurfaceClassName,\n  useFrostedSurfaceBackgroundToneRef,\n} from 'weimo-ui-core/components/frosted-surface'",
   "import { getIconButtonClassName, type IconButtonSize } from './icon-button-model'",
   "import { cn } from 'weimo-ui-core/lib/utils'",
   "import './frosted-icon-button-group.css'",

@@ -1,19 +1,19 @@
-import { FrostedIconButton } from '../packages/weimo-ui-core/src/components/frosted-icon-button'
-import { GhostIconButton } from '../packages/weimo-ui-core/src/components/ghost-icon-button'
-import { TextButton, type TextButtonProps } from '../packages/weimo-ui-core/src/components/text-button'
-import type { SideBarShellProps } from '../packages/weimo-ui-core/src/components/sidebar'
+import { FrostedIconButton } from 'weimo-ui/components/frosted-icon-button'
+import { GhostIconButton } from 'weimo-ui/components/ghost-icon-button'
+import { TextButton, type TextButtonProps } from 'weimo-ui/components/text-button'
+import type { SideBarShellProps } from 'weimo-ui/components/sidebar'
 import {
   ActionMenu,
   type ActionMenuItem,
   type ActionMenuProps,
-} from '../packages/weimo-ui-core/src/components/menu'
+} from 'weimo-ui/components/menu'
 import type { HeatmapProps } from '../packages/weimo-ui-stats/src/components/heatmap'
 import {
   getPressableClassName,
   getPressableToken,
   pressableTones,
   type PressableTone,
-} from '../packages/weimo-ui-core/src/components/pressable'
+} from 'weimo-ui/components/pressable'
 
 const textButtonProps: TextButtonProps = { disabled: false, type: 'button' }
 const glassIconButton = <FrostedIconButton aria-label="Glass action" />

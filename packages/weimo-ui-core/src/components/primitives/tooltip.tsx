@@ -1,6 +1,6 @@
 import { Tooltip as BaseTooltip } from '@base-ui/react/tooltip'
 
-import { getPopupSurfaceClassName } from '../popup-surface'
+import { getPopupSurfaceClassName } from 'weimo-ui-core/components/popup-surface'
 import { cn } from 'weimo-ui-core/lib/utils'
 
 import './tooltip.css'

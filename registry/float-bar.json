@@ -15,12 +15,12 @@
   ],
   "files": [
     {
-      "path": "packages/weimo-ui-core/src/components/float-bar.tsx",
+      "path": "packages/weimo-ui-core/src/components/layout/bars/float-bar.tsx",
       "type": "registry:ui",
       "target": "@ui/float-bar.tsx"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/float-bar.css",
+      "path": "packages/weimo-ui-core/src/components/layout/bars/float-bar.css",
       "type": "registry:ui",
       "target": "@ui/float-bar.css"
     }

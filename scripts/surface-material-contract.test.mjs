@@ -37,33 +37,33 @@ const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/componen
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 
-const cardSurfaceSource = readProjectFile('packages/weimo-ui-core/src/components/card-surface.tsx')
-const cardSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/card-surface.css')
+const cardSurfaceSource = readProjectFile('packages/weimo-ui-core/src/components/surfaces/card-surface/card-surface.tsx')
+const cardSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/surfaces/card-surface/card-surface.css')
 const surfaceDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/surface.tsx')
-const popupSurfaceSource = readProjectFile('packages/weimo-ui-core/src/components/popup-surface.tsx')
-const popupSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/popup-surface.css')
+const popupSurfaceSource = readProjectFile('packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.tsx')
+const popupSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.css')
 
 const cardResolverSource = readProjectFile('packages/weimo-ui-card/src/components/card-resolvers.tsx')
 const sharedCardCss = readProjectFile('packages/weimo-ui-card/src/components/card.css')
 const cossCardSource = readProjectFile('packages/weimo-ui-site/src/components/coss/card.tsx')
 const cossCardCss = readProjectFile('packages/weimo-ui-site/src/components/coss/card.css')
-const sidebarSource = readProjectFile('packages/weimo-ui-core/src/components/sidebar/sidebar-shell.tsx')
-const sidebarCss = readProjectFile('packages/weimo-ui-core/src/components/sidebar/sidebar-shell.css')
-const dialogSource = readProjectFile('packages/weimo-ui-core/src/components/coss/dialog.tsx')
-const dialogCss = readProjectFile('packages/weimo-ui-core/src/components/coss/dialog.css')
+const sidebarSource = readProjectFile('packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.tsx')
+const sidebarCss = readProjectFile('packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.css')
+const dialogSource = readProjectFile('packages/weimo-ui-core/src/components/primitives/dialog.tsx')
+const dialogCss = readProjectFile('packages/weimo-ui-core/src/components/primitives/dialog.css')
 const commandSource = readProjectFile('packages/weimo-ui-site/src/components/coss/command.tsx')
 const commandCss = readProjectFile('packages/weimo-ui-site/src/components/coss/command.css')
-const tooltipSource = readProjectFile('packages/weimo-ui-core/src/components/coss/tooltip.tsx')
-const tooltipCss = readProjectFile('packages/weimo-ui-core/src/components/coss/tooltip.css')
+const tooltipSource = readProjectFile('packages/weimo-ui-core/src/components/primitives/tooltip.tsx')
+const tooltipCss = readProjectFile('packages/weimo-ui-core/src/components/primitives/tooltip.css')
 
 assert.equal(
   packageJson.exports['./components/card-surface'],
-  './packages/weimo-ui-core/src/components/card-surface.tsx',
+  './packages/weimo-ui-core/src/components/surfaces/card-surface/card-surface.tsx',
   'package.json must expose CardSurface.',
 )
 assert.equal(
   packageJson.exports['./components/popup-surface'],
-  './packages/weimo-ui-core/src/components/popup-surface.tsx',
+  './packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.tsx',
   'package.json must expose PopupSurface.',
 )
 
@@ -244,7 +244,7 @@ assert.ok(
 )
 
 assert.ok(
-  sidebarSource.includes("from '../card-surface'") &&
+  sidebarSource.includes("from 'weimo-ui-core/components/card-surface'") &&
     sidebarSource.includes("getCardSurfaceClassName('weimo-sidebar--normal', className)"),
   'SideBar normal panel must compose CardSurface.',
 )
@@ -305,7 +305,7 @@ assert.ok(
   'PopupSurface must own popup material only, not backdrop blur or layout padding.',
 )
 assert.ok(
-  dialogSource.includes("from '../popup-surface'") &&
+  dialogSource.includes("from 'weimo-ui-core/components/popup-surface'") &&
     dialogSource.includes("getPopupSurfaceClassName('modal', 'coss-dialog__popup', className)"),
   'coss Dialog popup must compose PopupSurface.',
 )
@@ -315,14 +315,14 @@ assert.ok(
   'coss Command popup must compose PopupSurface.',
 )
 assert.ok(
-  tooltipSource.includes("from '../popup-surface'") &&
+  tooltipSource.includes("from 'weimo-ui-core/components/popup-surface'") &&
     tooltipSource.includes("getPopupSurfaceClassName('tooltip', 'coss-tooltip__popup', className)"),
   'coss Tooltip popup must compose PopupSurface.',
 )
 for (const [source, selector, name, materialImport] of [
-  [dialogCss, '.coss-dialog__popup', 'Dialog', "import '../popup-surface.css';"],
+  [dialogCss, '.coss-dialog__popup', 'Dialog', "import 'weimo-ui-core/styles/popup-surface.css';"],
   [commandCss, '.coss-command__popup', 'Command', "import 'weimo-ui-core/styles/popup-surface.css';"],
-  [tooltipCss, '.coss-tooltip__popup', 'Tooltip', "import '../popup-surface.css';"],
+  [tooltipCss, '.coss-tooltip__popup', 'Tooltip', "import 'weimo-ui-core/styles/popup-surface.css';"],
 ]) {
   const block = blockFor(source, selector)
   assert.ok(
@@ -347,20 +347,20 @@ for (const name of ['card-surface', 'popup-surface']) {
 
 assert.deepEqual(
   registryFiles(rootItemsByName.get('card-surface')),
-  new Set(['packages/weimo-ui-core/src/components/card-surface.tsx', 'packages/weimo-ui-core/src/components/card-surface.css']),
+  new Set(['packages/weimo-ui-core/src/components/surfaces/card-surface/card-surface.tsx', 'packages/weimo-ui-core/src/components/surfaces/card-surface/card-surface.css']),
   'CardSurface registry item must ship only its component and CSS.',
 )
 assert.deepEqual(
   registryFiles(rootItemsByName.get('popup-surface')),
-  new Set(['packages/weimo-ui-core/src/components/popup-surface.tsx', 'packages/weimo-ui-core/src/components/popup-surface.css']),
+  new Set(['packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.tsx', 'packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.css']),
   'PopupSurface registry item must ship only its component and CSS.',
 )
 
 for (const name of ['card', 'sidebar']) {
   const files = registryFiles(rootItemsByName.get(name))
 
-  assert.ok(files.has('packages/weimo-ui-core/src/components/card-surface.tsx'), `${name} registry item must ship CardSurface source.`)
-  assert.ok(files.has('packages/weimo-ui-core/src/components/card-surface.css'), `${name} registry item must ship CardSurface CSS.`)
+  assert.ok(files.has('packages/weimo-ui-core/src/components/surfaces/card-surface/card-surface.tsx'), `${name} registry item must ship CardSurface source.`)
+  assert.ok(files.has('packages/weimo-ui-core/src/components/surfaces/card-surface/card-surface.css'), `${name} registry item must ship CardSurface CSS.`)
 }
 for (const name of [
   'action-dialog',
@@ -372,6 +372,6 @@ for (const name of [
 ]) {
   const files = registryFiles(rootItemsByName.get(name))
 
-  assert.ok(files.has('packages/weimo-ui-core/src/components/popup-surface.tsx'), `${name} registry item must ship PopupSurface source.`)
-  assert.ok(files.has('packages/weimo-ui-core/src/components/popup-surface.css'), `${name} registry item must ship PopupSurface CSS.`)
+  assert.ok(files.has('packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.tsx'), `${name} registry item must ship PopupSurface source.`)
+  assert.ok(files.has('packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.css'), `${name} registry item must ship PopupSurface CSS.`)
 }

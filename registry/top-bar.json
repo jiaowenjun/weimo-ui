@@ -13,12 +13,12 @@
   ],
   "files": [
     {
-      "path": "packages/weimo-ui-core/src/components/top-bar.tsx",
+      "path": "packages/weimo-ui-core/src/components/layout/bars/top-bar.tsx",
       "type": "registry:ui",
       "target": "@ui/top-bar.tsx"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/top-bar.css",
+      "path": "packages/weimo-ui-core/src/components/layout/bars/top-bar.css",
       "type": "registry:ui",
       "target": "@ui/top-bar.css"
     }

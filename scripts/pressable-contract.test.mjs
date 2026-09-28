@@ -30,7 +30,7 @@ const expectedTones = [
 const packageJson = readJson('package.json')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
-const pressableSource = readProjectFile('packages/weimo-ui-core/src/components/pressable.ts')
+const pressableSource = readProjectFile('packages/weimo-ui-core/src/styles/variants/background/pressable.ts')
 const backgroundTokensDocsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/background-tokens.tsx')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const registrySmokeSource = readProjectFile('scripts/registry-smoke.test.mjs')
@@ -41,7 +41,7 @@ const rootPressableItem = rootRegistry.items.find((item) => item.name === 'press
 
 assert.equal(
   packageJson.exports?.['./components/pressable'],
-  './packages/weimo-ui-core/src/components/pressable.ts',
+  './packages/weimo-ui-core/src/styles/variants/background/pressable.ts',
   'package.json must expose the public Pressable tone map.',
 )
 
@@ -189,7 +189,7 @@ assert.deepEqual(
 )
 assert.deepEqual(
   rootPressableItem.files.map((file) => [file.path, file.target]),
-  [['packages/weimo-ui-core/src/components/pressable.ts', '@ui/pressable.ts']],
+  [['packages/weimo-ui-core/src/styles/variants/background/pressable.ts', '@ui/pressable.ts']],
   'Pressable registry item must ship only the focused public tone map.',
 )
 

@@ -1070,7 +1070,7 @@ try {
   assert.ok(
     !topBarRegistryFiles.some(
       (file) =>
-        file.path === 'packages/weimo-ui-core/src/components/float-bar.css' ||
+        file.path === 'packages/weimo-ui-core/src/components/layout/bars/float-bar.css' ||
         file.target === '@ui/float-bar.css',
     ),
     'The TopBar registry payload must not ship unused internal FloatBar CSS.',
@@ -1251,8 +1251,8 @@ try {
   )
   assert.ok(
     modeButtonSource.includes('export function ModeButton') &&
-      modeButtonSource.includes("from './ghost-icon-button'") &&
-      modeButtonSource.includes("from './menu'") &&
+      modeButtonSource.includes("from 'weimo-ui-core/components/ghost-icon-button'") &&
+      modeButtonSource.includes("from 'weimo-ui-core/components/menu'") &&
       modeButtonSource.includes('<GhostIconButton') &&
       modeButtonSource.includes('<Ellipsis />') &&
       modeButtonSource.includes('<X />'),
@@ -1390,11 +1390,11 @@ try {
 	      tagBarSource.includes('}, [rootPositionLayoutSignature])') &&
 	      capsuleButtonSource.includes('export function CapsuleButton') &&
 	      capsuleButtonSource.includes("from './capsule-frame'") &&
-      capsuleButtonSource.includes("from './animated-inline-size'") &&
-      capsuleButtonSource.includes("from './animated-inline-size-model'") &&
-	      capsuleButtonSource.includes("from './frosted-surface'") &&
+	      capsuleButtonSource.includes("from 'weimo-ui-core/components/animated-inline-size'") &&
+	      capsuleButtonSource.includes("from 'weimo-ui-core/components/animated-inline-size-model'") &&
+	      capsuleButtonSource.includes("from 'weimo-ui-core/components/frosted-surface'") &&
 	      capsuleButtonSource.includes("import './capsule-frame.css'") &&
-	      capsuleButtonSource.includes("import './frosted-surface.css'") &&
+	      capsuleButtonSource.includes("import 'weimo-ui-core/styles/frosted-surface.css'") &&
 	      capsuleButtonSource.includes("material: isFrostedState ? 'frosted' : 'solid'") &&
       capsuleFrameSource.includes('export function getCapsuleFrameClassName') &&
       animatedInlineSizeSource.includes('export function AnimatedInlineSizeMeasure') &&
@@ -1474,10 +1474,10 @@ try {
     'Installed TagPicker must use ActionDialog bottomBarLeftSlot with shipped InputGroup and FrostedIconButton dependencies.',
   )
   assert.ok(
-    actionDialogSource.includes("import { BottomBar } from './bottom-bar'") &&
-    actionDialogSource.includes("import { FloatBar } from './float-bar'") &&
-    actionDialogSource.includes("from './coss/dialog'") &&
-    actionDialogSource.includes("from './frosted-icon-button'") &&
+    actionDialogSource.includes("import { BottomBar } from 'weimo-ui-core/components/bottom-bar'") &&
+    actionDialogSource.includes("import { FloatBar } from 'weimo-ui-core/components/float-bar'") &&
+    actionDialogSource.includes("from 'weimo-ui-core/components/coss/dialog'") &&
+    actionDialogSource.includes("from 'weimo-ui-core/components/frosted-icon-button'") &&
     actionDialogSource.includes('bottomBarLeftSlot?: ReactNode') &&
     actionDialogSource.includes('bottomBarRightSlot?: ReactNode') &&
     actionDialogSource.includes('showCloseButton?: boolean') &&

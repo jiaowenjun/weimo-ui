@@ -14,7 +14,7 @@
   ],
   "files": [
     {
-      "path": "packages/weimo-ui-core/src/components/pressable.ts",
+      "path": "packages/weimo-ui-core/src/styles/variants/background/pressable.ts",
       "type": "registry:ui",
       "target": "@ui/pressable.ts"
     }

@@ -51,8 +51,8 @@ const removedTones = [
 ]
 
 const packageJson = JSON.parse(readProjectFile('package.json'))
-const textColorSource = readProjectFile('packages/weimo-ui-core/src/components/text-color.ts')
-const textColorCss = readProjectFile('packages/weimo-ui-core/src/components/text-color.css')
+const textColorSource = readProjectFile('packages/weimo-ui-core/src/styles/variants/typography/text-color.ts')
+const textColorCss = readProjectFile('packages/weimo-ui-core/src/styles/variants/typography/text-color.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
@@ -68,12 +68,12 @@ const samplesBlock = blockFor(appCss, '.text-color-preview__samples')
 
 assert.equal(
   packageJson.exports?.['./components/text-color'],
-  './packages/weimo-ui-core/src/components/text-color.ts',
+  './packages/weimo-ui-core/src/styles/variants/typography/text-color.ts',
   'package.json must expose the public text-color tone map.',
 )
 assert.equal(
   packageJson.exports?.['./styles/text-color.css'],
-  './packages/weimo-ui-core/src/components/text-color.css',
+  './packages/weimo-ui-core/src/styles/variants/typography/text-color.css',
   'package.json must expose the standalone text-color utility stylesheet.',
 )
 
@@ -294,8 +294,8 @@ assert.deepEqual(
 assert.deepEqual(
   registryItem.files.map((file) => file.path),
   [
-    'packages/weimo-ui-core/src/components/text-color.ts',
-    'packages/weimo-ui-core/src/components/text-color.css',
+    'packages/weimo-ui-core/src/styles/variants/typography/text-color.ts',
+    'packages/weimo-ui-core/src/styles/variants/typography/text-color.css',
   ],
   'text-color registry item must ship the tone map and utility stylesheet.',
 )

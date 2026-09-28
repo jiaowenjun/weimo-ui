@@ -54,16 +54,16 @@ const packageRules = [
     workspaceDependencies: [],
     forbiddenRelativeImports: [],
     requiredExports: {
-      './components/coss/button': './src/components/coss/button.tsx',
-      './components/coss/dialog': './src/components/coss/dialog.tsx',
-      './components/coss/switch': './src/components/coss/switch.tsx',
-      './components/coss/table': './src/components/coss/table.tsx',
-      './components/coss/tabs': './src/components/coss/tabs.tsx',
-      './components/coss/toolbar': './src/components/coss/toolbar.tsx',
-      './components/coss/tooltip': './src/components/coss/tooltip.tsx',
-      './styles/button.css': './src/components/coss/button.css',
-      './styles/switch.css': './src/components/coss/switch.css',
-      './styles/tooltip.css': './src/components/coss/tooltip.css',
+      './components/coss/button': './src/components/primitives/button.tsx',
+      './components/coss/dialog': './src/components/primitives/dialog.tsx',
+      './components/coss/switch': './src/components/primitives/switch.tsx',
+      './components/coss/table': './src/components/primitives/table.tsx',
+      './components/coss/tabs': './src/components/primitives/tabs.tsx',
+      './components/coss/toolbar': './src/components/primitives/toolbar.tsx',
+      './components/coss/tooltip': './src/components/primitives/tooltip.tsx',
+      './styles/button.css': './src/components/primitives/button.css',
+      './styles/switch.css': './src/components/primitives/switch.css',
+      './styles/tooltip.css': './src/components/primitives/tooltip.css',
     },
   },
   {
@@ -270,7 +270,7 @@ assert.equal(
   './src/styles/tokens.css',
 )
 assert.match(
-  readProjectFile('packages/weimo-ui-core/src/components/coss/dialog.tsx'),
+  readProjectFile('packages/weimo-ui-core/src/components/primitives/dialog.tsx'),
   /export function DialogPanel\b/u,
 )
 

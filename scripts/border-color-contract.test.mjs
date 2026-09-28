@@ -67,25 +67,25 @@ const excludedTokens = [
 ]
 
 const packageJson = readJson('package.json')
-const borderColorSource = readProjectFile('packages/weimo-ui-core/src/components/border-color.ts')
-const borderColorCss = readProjectFile('packages/weimo-ui-core/src/components/border-color.css')
-const cardSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/card-surface.css')
-const popupSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/popup-surface.css')
+const borderColorSource = readProjectFile('packages/weimo-ui-core/src/styles/variants/border/border-color.ts')
+const borderColorCss = readProjectFile('packages/weimo-ui-core/src/styles/variants/border/border-color.css')
+const cardSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/surfaces/card-surface/card-surface.css')
+const popupSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.css')
 const breadcrumbCss = readProjectFile('packages/weimo-ui-tagtree/src/components/coss/breadcrumb.css')
-const capsuleFrameCss = readProjectFile('packages/weimo-ui-core/src/components/capsule-frame.css')
-const cossButtonCss = readProjectFile('packages/weimo-ui-core/src/components/coss/button.css')
+const capsuleFrameCss = readProjectFile('packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.css')
+const cossButtonCss = readProjectFile('packages/weimo-ui-core/src/components/primitives/button.css')
 const cossCardCss = readProjectFile('packages/weimo-ui-site/src/components/coss/card.css')
 const cossCommandCss = readProjectFile('packages/weimo-ui-site/src/components/coss/command.css')
-const cossDialogCss = readProjectFile('packages/weimo-ui-core/src/components/coss/dialog.css')
+const cossDialogCss = readProjectFile('packages/weimo-ui-core/src/components/primitives/dialog.css')
 const cossInputGroupCss = readProjectFile('packages/weimo-ui-tagtree/src/components/coss/input-group.css')
-const cossTableCss = readProjectFile('packages/weimo-ui-core/src/components/coss/table.css')
-const cossTabsCss = readProjectFile('packages/weimo-ui-core/src/components/coss/tabs.css')
-const cossTooltipCss = readProjectFile('packages/weimo-ui-core/src/components/coss/tooltip.css')
-const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.css')
+const cossTableCss = readProjectFile('packages/weimo-ui-core/src/components/primitives/table.css')
+const cossTabsCss = readProjectFile('packages/weimo-ui-core/src/components/primitives/tabs.css')
+const cossTooltipCss = readProjectFile('packages/weimo-ui-core/src/components/primitives/tooltip.css')
+const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css')
 const mdEditorCss = readProjectFile('packages/weimo-ui-markdown/src/components/md-editor/md-editor.css')
 const markdownContentCss = readProjectFile('packages/weimo-ui-markdown/src/components/markdown-content.css')
-const menuCss = readProjectFile('packages/weimo-ui-core/src/components/menu.css')
-const sidebarShellCss = readProjectFile('packages/weimo-ui-core/src/components/sidebar/sidebar-shell.css')
+const menuCss = readProjectFile('packages/weimo-ui-core/src/components/composites/menu/menu.css')
+const sidebarShellCss = readProjectFile('packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.css')
 // 普通侧边栏经由 card-surface 继承无边框默认；抽屉变体不挂材质类，描边自持。
 const sidebarDrawerBlock = blockFor(sidebarShellCss, '.weimo-sidebar--drawer')
 const tagTreeCss = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-tree/tag-tree.css')
@@ -126,12 +126,12 @@ const frostedProbeBlock = blockFor(appCss, '.frosted-border-preview__probe')
 
 assert.equal(
   packageJson.exports?.['./components/border-color'],
-  './packages/weimo-ui-core/src/components/border-color.ts',
+  './packages/weimo-ui-core/src/styles/variants/border/border-color.ts',
   'package.json must expose the public border-color tone map.',
 )
 assert.equal(
   packageJson.exports?.['./styles/border-color.css'],
-  './packages/weimo-ui-core/src/components/border-color.css',
+  './packages/weimo-ui-core/src/styles/variants/border/border-color.css',
   'package.json must expose the standalone border-color utility stylesheet.',
 )
 
@@ -561,8 +561,8 @@ assert.deepEqual(
 assert.deepEqual(
   registryItem.files.map((file) => file.path),
   [
-    'packages/weimo-ui-core/src/components/border-color.ts',
-    'packages/weimo-ui-core/src/components/border-color.css',
+    'packages/weimo-ui-core/src/styles/variants/border/border-color.ts',
+    'packages/weimo-ui-core/src/styles/variants/border/border-color.css',
   ],
   'border-color registry item must ship the tone map and utility stylesheet.',
 )

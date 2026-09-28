@@ -268,12 +268,12 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/font-size.ts",
+          "path": "packages/weimo-ui-core/src/styles/variants/typography/font-size.ts",
           "type": "registry:ui",
           "target": "@ui/font-size.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/font-size.css",
+          "path": "packages/weimo-ui-core/src/styles/variants/typography/font-size.css",
           "type": "registry:ui",
           "target": "@ui/font-size.css"
         }
@@ -294,12 +294,12 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/text-color.ts",
+          "path": "packages/weimo-ui-core/src/styles/variants/typography/text-color.ts",
           "type": "registry:ui",
           "target": "@ui/text-color.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/text-color.css",
+          "path": "packages/weimo-ui-core/src/styles/variants/typography/text-color.css",
           "type": "registry:ui",
           "target": "@ui/text-color.css"
         }
@@ -320,12 +320,12 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/bg-color.ts",
+          "path": "packages/weimo-ui-core/src/styles/variants/background/bg-color.ts",
           "type": "registry:ui",
           "target": "@ui/bg-color.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/bg-color.css",
+          "path": "packages/weimo-ui-core/src/styles/variants/background/bg-color.css",
           "type": "registry:ui",
           "target": "@ui/bg-color.css"
         }
@@ -346,12 +346,12 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/bg-blur.ts",
+          "path": "packages/weimo-ui-core/src/styles/variants/background/bg-blur.ts",
           "type": "registry:ui",
           "target": "@ui/bg-blur.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/bg-blur.css",
+          "path": "packages/weimo-ui-core/src/styles/variants/background/bg-blur.css",
           "type": "registry:ui",
           "target": "@ui/bg-blur.css"
         }
@@ -372,14 +372,9 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/heat-color.tsx",
+          "path": "packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.tsx",
           "type": "registry:ui",
           "target": "@ui/heat-color.tsx"
-        },
-        {
-          "path": "packages/weimo-ui-core/src/components/heatmap/heat-color.tsx",
-          "type": "registry:ui",
-          "target": "@ui/heatmap/heat-color.tsx"
         },
         {
           "path": "packages/weimo-ui-stats/src/components/heatmap/heatmap-model.ts",
@@ -387,7 +382,7 @@
           "target": "@ui/heatmap/heatmap-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/heat-color.css",
+          "path": "packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.css",
           "type": "registry:ui",
           "target": "@ui/heat-color.css"
         }
@@ -409,7 +404,7 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/pressable.ts",
+          "path": "packages/weimo-ui-core/src/styles/variants/background/pressable.ts",
           "type": "registry:ui",
           "target": "@ui/pressable.ts"
         }
@@ -430,12 +425,12 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/border-color.ts",
+          "path": "packages/weimo-ui-core/src/styles/variants/border/border-color.ts",
           "type": "registry:ui",
           "target": "@ui/border-color.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/border-color.css",
+          "path": "packages/weimo-ui-core/src/styles/variants/border/border-color.css",
           "type": "registry:ui",
           "target": "@ui/border-color.css"
         }
@@ -456,7 +451,7 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/border-radius.ts",
+          "path": "packages/weimo-ui-core/src/styles/variants/border/border-radius.ts",
           "type": "registry:ui",
           "target": "@ui/border-radius.ts"
         }
@@ -479,12 +474,12 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/card-surface.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/card-surface/card-surface.tsx",
           "type": "registry:ui",
           "target": "@ui/card-surface.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/card-surface.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/card-surface/card-surface.css",
           "type": "registry:ui",
           "target": "@ui/card-surface.css"
         }
@@ -507,17 +502,17 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface-model.ts",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface-model.ts",
           "type": "registry:ui",
           "target": "@ui/frosted-surface-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.css"
         }
@@ -538,32 +533,32 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/liquid-glass.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass.tsx",
           "type": "registry:ui",
           "target": "@ui/liquid-glass.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/liquid-glass.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass.css",
           "type": "registry:ui",
           "target": "@ui/liquid-glass.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/liquid-glass-react/index.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass-react/index.tsx",
           "type": "registry:ui",
           "target": "@ui/liquid-glass-react/index.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/liquid-glass-react/shader-utils.ts",
+          "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass-react/shader-utils.ts",
           "type": "registry:ui",
           "target": "@ui/liquid-glass-react/shader-utils.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/liquid-glass-react/utils.ts",
+          "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass-react/utils.ts",
           "type": "registry:ui",
           "target": "@ui/liquid-glass-react/utils.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/liquid-glass-react/LICENSE",
+          "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass-react/LICENSE",
           "type": "registry:ui",
           "target": "@ui/liquid-glass-react/LICENSE"
         }
@@ -586,12 +581,12 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/popup-surface.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.tsx",
           "type": "registry:ui",
           "target": "@ui/popup-surface.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/popup-surface.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.css",
           "type": "registry:ui",
           "target": "@ui/popup-surface.css"
         }
@@ -612,12 +607,12 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/text-button.tsx",
+          "path": "packages/weimo-ui-core/src/components/controls/text-button/text-button.tsx",
           "type": "registry:ui",
           "target": "@ui/text-button.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/text-button.css",
+          "path": "packages/weimo-ui-core/src/components/controls/text-button/text-button.css",
           "type": "registry:ui",
           "target": "@ui/text-button.css"
         }
@@ -641,32 +636,32 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-icon-button.tsx",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/frosted-icon-button.tsx",
           "type": "registry:ui",
           "target": "@ui/frosted-icon-button.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/icon-button-model.ts",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button-model.ts",
           "type": "registry:ui",
           "target": "@ui/icon-button-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/icon-button.css",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button.css",
           "type": "registry:ui",
           "target": "@ui/icon-button.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface-model.ts",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface-model.ts",
           "type": "registry:ui",
           "target": "@ui/frosted-surface-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.css"
         }
@@ -690,37 +685,37 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-icon-button-group.tsx",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/frosted-icon-button-group.tsx",
           "type": "registry:ui",
           "target": "@ui/frosted-icon-button-group.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-icon-button-group.css",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/frosted-icon-button-group.css",
           "type": "registry:ui",
           "target": "@ui/frosted-icon-button-group.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/icon-button-model.ts",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button-model.ts",
           "type": "registry:ui",
           "target": "@ui/icon-button-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/icon-button.css",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button.css",
           "type": "registry:ui",
           "target": "@ui/icon-button.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface-model.ts",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface-model.ts",
           "type": "registry:ui",
           "target": "@ui/frosted-surface-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.css"
         }
@@ -744,17 +739,17 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/ghost-icon-button.tsx",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/ghost-icon-button.tsx",
           "type": "registry:ui",
           "target": "@ui/ghost-icon-button.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/icon-button-model.ts",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button-model.ts",
           "type": "registry:ui",
           "target": "@ui/icon-button-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/icon-button.css",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button.css",
           "type": "registry:ui",
           "target": "@ui/icon-button.css"
         }
@@ -780,27 +775,27 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/mode-button.tsx",
+          "path": "packages/weimo-ui-core/src/components/composites/mode-button/mode-button.tsx",
           "type": "registry:ui",
           "target": "@ui/mode-button.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/mode-button.css",
+          "path": "packages/weimo-ui-core/src/components/composites/mode-button/mode-button.css",
           "type": "registry:ui",
           "target": "@ui/mode-button.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/ghost-icon-button.tsx",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/ghost-icon-button.tsx",
           "type": "registry:ui",
           "target": "@ui/ghost-icon-button.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/icon-button-model.ts",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button-model.ts",
           "type": "registry:ui",
           "target": "@ui/icon-button-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/icon-button.css",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button.css",
           "type": "registry:ui",
           "target": "@ui/icon-button.css"
         }
@@ -825,82 +820,82 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/capsule-button.tsx",
+          "path": "packages/weimo-ui-core/src/components/controls/capsule/capsule-button.tsx",
           "type": "registry:ui",
           "target": "@ui/capsule-button.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/capsule-button.css",
+          "path": "packages/weimo-ui-core/src/components/controls/capsule/capsule-button.css",
           "type": "registry:ui",
           "target": "@ui/capsule-button.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/capsule-frame.ts",
+          "path": "packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.ts",
           "type": "registry:ui",
           "target": "@ui/capsule-frame.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/capsule-frame.css",
+          "path": "packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.css",
           "type": "registry:ui",
           "target": "@ui/capsule-frame.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/animated-inline-size.tsx",
+          "path": "packages/weimo-ui-core/src/behaviors/animated-inline-size/animated-inline-size.tsx",
           "type": "registry:ui",
           "target": "@ui/animated-inline-size.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/animated-inline-size-model.ts",
+          "path": "packages/weimo-ui-core/src/behaviors/animated-inline-size/animated-inline-size-model.ts",
           "type": "registry:ui",
           "target": "@ui/animated-inline-size-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/animated-inline-size.css",
+          "path": "packages/weimo-ui-core/src/behaviors/animated-inline-size/animated-inline-size.css",
           "type": "registry:ui",
           "target": "@ui/animated-inline-size.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface-model.ts",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface-model.ts",
           "type": "registry:ui",
           "target": "@ui/frosted-surface-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/liquid-glass.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass.tsx",
           "type": "registry:ui",
           "target": "@ui/liquid-glass.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/liquid-glass.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass.css",
           "type": "registry:ui",
           "target": "@ui/liquid-glass.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/liquid-glass-react/index.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass-react/index.tsx",
           "type": "registry:ui",
           "target": "@ui/liquid-glass-react/index.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/liquid-glass-react/shader-utils.ts",
+          "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass-react/shader-utils.ts",
           "type": "registry:ui",
           "target": "@ui/liquid-glass-react/shader-utils.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/liquid-glass-react/utils.ts",
+          "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass-react/utils.ts",
           "type": "registry:ui",
           "target": "@ui/liquid-glass-react/utils.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/liquid-glass-react/LICENSE",
+          "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass-react/LICENSE",
           "type": "registry:ui",
           "target": "@ui/liquid-glass-react/LICENSE"
         }
@@ -920,12 +915,12 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/slider.tsx",
+          "path": "packages/weimo-ui-core/src/components/controls/slider/slider.tsx",
           "type": "registry:ui",
           "target": "@ui/slider.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/slider.css",
+          "path": "packages/weimo-ui-core/src/components/controls/slider/slider.css",
           "type": "registry:ui",
           "target": "@ui/slider.css"
         }
@@ -952,32 +947,32 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/menu.tsx",
+          "path": "packages/weimo-ui-core/src/components/composites/menu/menu.tsx",
           "type": "registry:ui",
           "target": "@ui/menu.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/menu/menu-variants.ts",
+          "path": "packages/weimo-ui-core/src/components/composites/menu/menu-variants.ts",
           "type": "registry:ui",
-          "target": "@ui/menu/menu-variants.ts"
+          "target": "@ui/menu-variants.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/menu.css",
+          "path": "packages/weimo-ui-core/src/components/composites/menu/menu.css",
           "type": "registry:ui",
           "target": "@ui/menu.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface-model.ts",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface-model.ts",
           "type": "registry:ui",
           "target": "@ui/frosted-surface-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.css"
         }
@@ -1006,62 +1001,62 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/action-dialog.tsx",
+          "path": "packages/weimo-ui-core/src/components/composites/action-dialog/action-dialog.tsx",
           "type": "registry:ui",
           "target": "@ui/action-dialog.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/action-dialog.css",
+          "path": "packages/weimo-ui-core/src/components/composites/action-dialog/action-dialog.css",
           "type": "registry:ui",
           "target": "@ui/action-dialog.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/coss/dialog.tsx",
+          "path": "packages/weimo-ui-core/src/components/primitives/dialog.tsx",
           "type": "registry:ui",
           "target": "@ui/coss/dialog.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/coss/dialog.css",
+          "path": "packages/weimo-ui-core/src/components/primitives/dialog.css",
           "type": "registry:ui",
           "target": "@ui/coss/dialog.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-icon-button.tsx",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/frosted-icon-button.tsx",
           "type": "registry:ui",
           "target": "@ui/frosted-icon-button.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/icon-button-model.ts",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button-model.ts",
           "type": "registry:ui",
           "target": "@ui/icon-button-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/icon-button.css",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button.css",
           "type": "registry:ui",
           "target": "@ui/icon-button.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface-model.ts",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface-model.ts",
           "type": "registry:ui",
           "target": "@ui/frosted-surface-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/popup-surface.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.tsx",
           "type": "registry:ui",
           "target": "@ui/popup-surface.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/popup-surface.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.css",
           "type": "registry:ui",
           "target": "@ui/popup-surface.css"
         }
@@ -1084,12 +1079,12 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/float-bar.tsx",
+          "path": "packages/weimo-ui-core/src/components/layout/bars/float-bar.tsx",
           "type": "registry:ui",
           "target": "@ui/float-bar.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/float-bar.css",
+          "path": "packages/weimo-ui-core/src/components/layout/bars/float-bar.css",
           "type": "registry:ui",
           "target": "@ui/float-bar.css"
         }
@@ -1113,12 +1108,12 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/bottom-bar.tsx",
+          "path": "packages/weimo-ui-core/src/components/layout/bars/bottom-bar.tsx",
           "type": "registry:ui",
           "target": "@ui/bottom-bar.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/bottom-bar.css",
+          "path": "packages/weimo-ui-core/src/components/layout/bars/bottom-bar.css",
           "type": "registry:ui",
           "target": "@ui/bottom-bar.css"
         }
@@ -1140,57 +1135,57 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/glass-label.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/glass-label.tsx",
           "type": "registry:ui",
           "target": "@ui/glass-label.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/glass-label.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/glass-label.css",
           "type": "registry:ui",
           "target": "@ui/glass-label.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface-model.ts",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface-model.ts",
           "type": "registry:ui",
           "target": "@ui/frosted-surface-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/liquid-glass.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass.tsx",
           "type": "registry:ui",
           "target": "@ui/liquid-glass.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/liquid-glass.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass.css",
           "type": "registry:ui",
           "target": "@ui/liquid-glass.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/liquid-glass-react/index.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass-react/index.tsx",
           "type": "registry:ui",
           "target": "@ui/liquid-glass-react/index.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/liquid-glass-react/shader-utils.ts",
+          "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass-react/shader-utils.ts",
           "type": "registry:ui",
           "target": "@ui/liquid-glass-react/shader-utils.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/liquid-glass-react/utils.ts",
+          "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass-react/utils.ts",
           "type": "registry:ui",
           "target": "@ui/liquid-glass-react/utils.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/liquid-glass-react/LICENSE",
+          "path": "packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass-react/LICENSE",
           "type": "registry:ui",
           "target": "@ui/liquid-glass-react/LICENSE"
         }
@@ -1214,42 +1209,42 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/sidebar/index.tsx",
+          "path": "packages/weimo-ui-core/src/components/layout/sidebar/index.tsx",
           "type": "registry:ui",
           "target": "@ui/sidebar/index.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/sidebar/sidebar-shell.tsx",
+          "path": "packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.tsx",
           "type": "registry:ui",
           "target": "@ui/sidebar/sidebar-shell.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/sidebar/sidebar-shell.css",
+          "path": "packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.css",
           "type": "registry:ui",
           "target": "@ui/sidebar/sidebar-shell.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface-model.ts",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface-model.ts",
           "type": "registry:ui",
           "target": "@ui/frosted-surface-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/card-surface.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/card-surface/card-surface.tsx",
           "type": "registry:ui",
           "target": "@ui/card-surface.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/card-surface.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/card-surface/card-surface.css",
           "type": "registry:ui",
           "target": "@ui/card-surface.css"
         }
@@ -1270,12 +1265,12 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/top-bar.tsx",
+          "path": "packages/weimo-ui-core/src/components/layout/bars/top-bar.tsx",
           "type": "registry:ui",
           "target": "@ui/top-bar.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/top-bar.css",
+          "path": "packages/weimo-ui-core/src/components/layout/bars/top-bar.css",
           "type": "registry:ui",
           "target": "@ui/top-bar.css"
         }
@@ -1300,37 +1295,37 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/base-card.tsx",
+          "path": "packages/weimo-ui-core/src/components/composites/cards/base-card.tsx",
           "type": "registry:ui",
           "target": "@ui/base-card.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/base-card.css",
+          "path": "packages/weimo-ui-core/src/components/composites/cards/base-card.css",
           "type": "registry:ui",
           "target": "@ui/base-card.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/card-surface.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/card-surface/card-surface.tsx",
           "type": "registry:ui",
           "target": "@ui/card-surface.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/card-surface.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/card-surface/card-surface.css",
           "type": "registry:ui",
           "target": "@ui/card-surface.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/ghost-icon-button.tsx",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/ghost-icon-button.tsx",
           "type": "registry:ui",
           "target": "@ui/ghost-icon-button.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/icon-button-model.ts",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button-model.ts",
           "type": "registry:ui",
           "target": "@ui/icon-button-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/icon-button.css",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button.css",
           "type": "registry:ui",
           "target": "@ui/icon-button.css"
         },
@@ -1358,12 +1353,12 @@
       ],
       "files": [
         {
-          "path": "packages/weimo-ui-core/src/components/component-preview-card.tsx",
+          "path": "packages/weimo-ui-core/src/components/composites/cards/component-preview-card.tsx",
           "type": "registry:ui",
           "target": "@ui/component-preview-card.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/component-preview-card.css",
+          "path": "packages/weimo-ui-core/src/components/composites/cards/component-preview-card.css",
           "type": "registry:ui",
           "target": "@ui/component-preview-card.css"
         }
@@ -1424,17 +1419,17 @@
           "target": "@ui/tag-tree/tag-tree.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/ghost-icon-button.tsx",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/ghost-icon-button.tsx",
           "type": "registry:ui",
           "target": "@ui/ghost-icon-button.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/icon-button-model.ts",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button-model.ts",
           "type": "registry:ui",
           "target": "@ui/icon-button-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/icon-button.css",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button.css",
           "type": "registry:ui",
           "target": "@ui/icon-button.css"
         }
@@ -1470,27 +1465,27 @@
           "target": "@ui/tag-bread.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/capsule-frame.ts",
+          "path": "packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.ts",
           "type": "registry:ui",
           "target": "@ui/capsule-frame.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/capsule-frame.css",
+          "path": "packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.css",
           "type": "registry:ui",
           "target": "@ui/capsule-frame.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/animated-inline-size.tsx",
+          "path": "packages/weimo-ui-core/src/behaviors/animated-inline-size/animated-inline-size.tsx",
           "type": "registry:ui",
           "target": "@ui/animated-inline-size.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/animated-inline-size-model.ts",
+          "path": "packages/weimo-ui-core/src/behaviors/animated-inline-size/animated-inline-size-model.ts",
           "type": "registry:ui",
           "target": "@ui/animated-inline-size-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/animated-inline-size.css",
+          "path": "packages/weimo-ui-core/src/behaviors/animated-inline-size/animated-inline-size.css",
           "type": "registry:ui",
           "target": "@ui/animated-inline-size.css"
         },
@@ -1505,17 +1500,17 @@
           "target": "@ui/coss/breadcrumb.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface-model.ts",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface-model.ts",
           "type": "registry:ui",
           "target": "@ui/frosted-surface-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.css"
         }
@@ -1572,17 +1567,17 @@
           "target": "@ui/tag-tree/tag-tree.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/ghost-icon-button.tsx",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/ghost-icon-button.tsx",
           "type": "registry:ui",
           "target": "@ui/ghost-icon-button.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/icon-button-model.ts",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button-model.ts",
           "type": "registry:ui",
           "target": "@ui/icon-button-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/icon-button.css",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button.css",
           "type": "registry:ui",
           "target": "@ui/icon-button.css"
         }
@@ -1770,67 +1765,67 @@
           "target": "@ui/markdown-content.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/coss/button.tsx",
+          "path": "packages/weimo-ui-core/src/components/primitives/button.tsx",
           "type": "registry:ui",
           "target": "@ui/coss/button.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/coss/button.css",
+          "path": "packages/weimo-ui-core/src/components/primitives/button.css",
           "type": "registry:ui",
           "target": "@ui/coss/button.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/coss/toolbar.tsx",
+          "path": "packages/weimo-ui-core/src/components/primitives/toolbar.tsx",
           "type": "registry:ui",
           "target": "@ui/coss/toolbar.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/coss/tooltip.tsx",
+          "path": "packages/weimo-ui-core/src/components/primitives/tooltip.tsx",
           "type": "registry:ui",
           "target": "@ui/coss/tooltip.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/coss/tooltip.css",
+          "path": "packages/weimo-ui-core/src/components/primitives/tooltip.css",
           "type": "registry:ui",
           "target": "@ui/coss/tooltip.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface-model.ts",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface-model.ts",
           "type": "registry:ui",
           "target": "@ui/frosted-surface-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-icon-button.tsx",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/frosted-icon-button.tsx",
           "type": "registry:ui",
           "target": "@ui/frosted-icon-button.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/icon-button-model.ts",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button-model.ts",
           "type": "registry:ui",
           "target": "@ui/icon-button-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/icon-button.css",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button.css",
           "type": "registry:ui",
           "target": "@ui/icon-button.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/popup-surface.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.tsx",
           "type": "registry:ui",
           "target": "@ui/popup-surface.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/popup-surface.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.css",
           "type": "registry:ui",
           "target": "@ui/popup-surface.css"
         }
@@ -1867,52 +1862,52 @@
           "target": "@ui/md-editor/math-editor.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/coss/dialog.tsx",
+          "path": "packages/weimo-ui-core/src/components/primitives/dialog.tsx",
           "type": "registry:ui",
           "target": "@ui/coss/dialog.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/coss/dialog.css",
+          "path": "packages/weimo-ui-core/src/components/primitives/dialog.css",
           "type": "registry:ui",
           "target": "@ui/coss/dialog.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-icon-button.tsx",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/frosted-icon-button.tsx",
           "type": "registry:ui",
           "target": "@ui/frosted-icon-button.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/icon-button-model.ts",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button-model.ts",
           "type": "registry:ui",
           "target": "@ui/icon-button-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/icon-button.css",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button.css",
           "type": "registry:ui",
           "target": "@ui/icon-button.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface-model.ts",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface-model.ts",
           "type": "registry:ui",
           "target": "@ui/frosted-surface-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/popup-surface.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.tsx",
           "type": "registry:ui",
           "target": "@ui/popup-surface.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/popup-surface.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.css",
           "type": "registry:ui",
           "target": "@ui/popup-surface.css"
         }
@@ -2207,7 +2202,7 @@
           "target": "@ui/heatmap/heatmap.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/heatmap/heat-color.tsx",
+          "path": "packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.tsx",
           "type": "registry:ui",
           "target": "@ui/heatmap/heat-color.tsx"
         },
@@ -2217,7 +2212,7 @@
           "target": "@ui/heatmap/heatmap-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/heat-color.css",
+          "path": "packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.css",
           "type": "registry:ui",
           "target": "@ui/heat-color.css"
         },
@@ -2227,22 +2222,22 @@
           "target": "@ui/heatmap/heatmap.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/coss/tooltip.tsx",
+          "path": "packages/weimo-ui-core/src/components/primitives/tooltip.tsx",
           "type": "registry:ui",
           "target": "@ui/coss/tooltip.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/coss/tooltip.css",
+          "path": "packages/weimo-ui-core/src/components/primitives/tooltip.css",
           "type": "registry:ui",
           "target": "@ui/coss/tooltip.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/popup-surface.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.tsx",
           "type": "registry:ui",
           "target": "@ui/popup-surface.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/popup-surface.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.css",
           "type": "registry:ui",
           "target": "@ui/popup-surface.css"
         }
@@ -2279,32 +2274,32 @@
           "target": "@ui/card-tool-bar.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-icon-button.tsx",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/frosted-icon-button.tsx",
           "type": "registry:ui",
           "target": "@ui/frosted-icon-button.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/icon-button-model.ts",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button-model.ts",
           "type": "registry:ui",
           "target": "@ui/icon-button-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/icon-button.css",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button.css",
           "type": "registry:ui",
           "target": "@ui/icon-button.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface-model.ts",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface-model.ts",
           "type": "registry:ui",
           "target": "@ui/frosted-surface-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.css"
         }
@@ -2455,12 +2450,12 @@
           "target": "@ui/card-top-bar.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/mode-button.tsx",
+          "path": "packages/weimo-ui-core/src/components/composites/mode-button/mode-button.tsx",
           "type": "registry:ui",
           "target": "@ui/mode-button.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/mode-button.css",
+          "path": "packages/weimo-ui-core/src/components/composites/mode-button/mode-button.css",
           "type": "registry:ui",
           "target": "@ui/mode-button.css"
         },
@@ -2640,37 +2635,37 @@
           "target": "@ui/tag-bar.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/capsule-button.tsx",
+          "path": "packages/weimo-ui-core/src/components/controls/capsule/capsule-button.tsx",
           "type": "registry:ui",
           "target": "@ui/capsule-button.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/capsule-button.css",
+          "path": "packages/weimo-ui-core/src/components/controls/capsule/capsule-button.css",
           "type": "registry:ui",
           "target": "@ui/capsule-button.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/capsule-frame.ts",
+          "path": "packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.ts",
           "type": "registry:ui",
           "target": "@ui/capsule-frame.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/capsule-frame.css",
+          "path": "packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.css",
           "type": "registry:ui",
           "target": "@ui/capsule-frame.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/animated-inline-size.tsx",
+          "path": "packages/weimo-ui-core/src/behaviors/animated-inline-size/animated-inline-size.tsx",
           "type": "registry:ui",
           "target": "@ui/animated-inline-size.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/animated-inline-size-model.ts",
+          "path": "packages/weimo-ui-core/src/behaviors/animated-inline-size/animated-inline-size-model.ts",
           "type": "registry:ui",
           "target": "@ui/animated-inline-size-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/animated-inline-size.css",
+          "path": "packages/weimo-ui-core/src/behaviors/animated-inline-size/animated-inline-size.css",
           "type": "registry:ui",
           "target": "@ui/animated-inline-size.css"
         },
@@ -2705,72 +2700,72 @@
           "target": "@ui/tag-picker/tag-picker.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/action-dialog.tsx",
+          "path": "packages/weimo-ui-core/src/components/composites/action-dialog/action-dialog.tsx",
           "type": "registry:ui",
           "target": "@ui/action-dialog.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/action-dialog.css",
+          "path": "packages/weimo-ui-core/src/components/composites/action-dialog/action-dialog.css",
           "type": "registry:ui",
           "target": "@ui/action-dialog.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/float-bar.tsx",
+          "path": "packages/weimo-ui-core/src/components/layout/bars/float-bar.tsx",
           "type": "registry:ui",
           "target": "@ui/float-bar.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/float-bar.css",
+          "path": "packages/weimo-ui-core/src/components/layout/bars/float-bar.css",
           "type": "registry:ui",
           "target": "@ui/float-bar.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/bottom-bar.tsx",
+          "path": "packages/weimo-ui-core/src/components/layout/bars/bottom-bar.tsx",
           "type": "registry:ui",
           "target": "@ui/bottom-bar.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/bottom-bar.css",
+          "path": "packages/weimo-ui-core/src/components/layout/bars/bottom-bar.css",
           "type": "registry:ui",
           "target": "@ui/bottom-bar.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/icon-button.css",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button.css",
           "type": "registry:ui",
           "target": "@ui/icon-button.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/menu.tsx",
+          "path": "packages/weimo-ui-core/src/components/composites/menu/menu.tsx",
           "type": "registry:ui",
           "target": "@ui/menu.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/menu.css",
+          "path": "packages/weimo-ui-core/src/components/composites/menu/menu.css",
           "type": "registry:ui",
           "target": "@ui/menu.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/menu/menu-variants.ts",
+          "path": "packages/weimo-ui-core/src/components/composites/menu/menu-variants.ts",
           "type": "registry:ui",
-          "target": "@ui/menu/menu-variants.ts"
+          "target": "@ui/menu-variants.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/coss/dialog.tsx",
+          "path": "packages/weimo-ui-core/src/components/primitives/dialog.tsx",
           "type": "registry:ui",
           "target": "@ui/coss/dialog.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/coss/dialog.css",
+          "path": "packages/weimo-ui-core/src/components/primitives/dialog.css",
           "type": "registry:ui",
           "target": "@ui/coss/dialog.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/coss/button.tsx",
+          "path": "packages/weimo-ui-core/src/components/primitives/button.tsx",
           "type": "registry:ui",
           "target": "@ui/coss/button.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/coss/button.css",
+          "path": "packages/weimo-ui-core/src/components/primitives/button.css",
           "type": "registry:ui",
           "target": "@ui/coss/button.css"
         },
@@ -2795,27 +2790,27 @@
           "target": "@ui/coss/scroll-area.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/coss/tabs.tsx",
+          "path": "packages/weimo-ui-core/src/components/primitives/tabs.tsx",
           "type": "registry:ui",
           "target": "@ui/coss/tabs.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/coss/tabs.css",
+          "path": "packages/weimo-ui-core/src/components/primitives/tabs.css",
           "type": "registry:ui",
           "target": "@ui/coss/tabs.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/coss/toolbar.tsx",
+          "path": "packages/weimo-ui-core/src/components/primitives/toolbar.tsx",
           "type": "registry:ui",
           "target": "@ui/coss/toolbar.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/coss/tooltip.tsx",
+          "path": "packages/weimo-ui-core/src/components/primitives/tooltip.tsx",
           "type": "registry:ui",
           "target": "@ui/coss/tooltip.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/coss/tooltip.css",
+          "path": "packages/weimo-ui-core/src/components/primitives/tooltip.css",
           "type": "registry:ui",
           "target": "@ui/coss/tooltip.css"
         },
@@ -2825,52 +2820,52 @@
           "target": "@ui/lib/utils.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface-model.ts",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface-model.ts",
           "type": "registry:ui",
           "target": "@ui/frosted-surface-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-icon-button.tsx",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/frosted-icon-button.tsx",
           "type": "registry:ui",
           "target": "@ui/frosted-icon-button.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/icon-button-model.ts",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button-model.ts",
           "type": "registry:ui",
           "target": "@ui/icon-button-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/ghost-icon-button.tsx",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/ghost-icon-button.tsx",
           "type": "registry:ui",
           "target": "@ui/ghost-icon-button.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/card-surface.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/card-surface/card-surface.tsx",
           "type": "registry:ui",
           "target": "@ui/card-surface.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/card-surface.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/card-surface/card-surface.css",
           "type": "registry:ui",
           "target": "@ui/card-surface.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/popup-surface.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.tsx",
           "type": "registry:ui",
           "target": "@ui/popup-surface.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/popup-surface.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.css",
           "type": "registry:ui",
           "target": "@ui/popup-surface.css"
         }
@@ -2995,42 +2990,42 @@
           "target": "@ui/tag-picker/tag-picker.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/action-dialog.tsx",
+          "path": "packages/weimo-ui-core/src/components/composites/action-dialog/action-dialog.tsx",
           "type": "registry:ui",
           "target": "@ui/action-dialog.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/action-dialog.css",
+          "path": "packages/weimo-ui-core/src/components/composites/action-dialog/action-dialog.css",
           "type": "registry:ui",
           "target": "@ui/action-dialog.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/float-bar.tsx",
+          "path": "packages/weimo-ui-core/src/components/layout/bars/float-bar.tsx",
           "type": "registry:ui",
           "target": "@ui/float-bar.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/float-bar.css",
+          "path": "packages/weimo-ui-core/src/components/layout/bars/float-bar.css",
           "type": "registry:ui",
           "target": "@ui/float-bar.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/bottom-bar.tsx",
+          "path": "packages/weimo-ui-core/src/components/layout/bars/bottom-bar.tsx",
           "type": "registry:ui",
           "target": "@ui/bottom-bar.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/bottom-bar.css",
+          "path": "packages/weimo-ui-core/src/components/layout/bars/bottom-bar.css",
           "type": "registry:ui",
           "target": "@ui/bottom-bar.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/coss/dialog.tsx",
+          "path": "packages/weimo-ui-core/src/components/primitives/dialog.tsx",
           "type": "registry:ui",
           "target": "@ui/coss/dialog.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/coss/dialog.css",
+          "path": "packages/weimo-ui-core/src/components/primitives/dialog.css",
           "type": "registry:ui",
           "target": "@ui/coss/dialog.css"
         },
@@ -3055,42 +3050,42 @@
           "target": "@ui/coss/scroll-area.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface-model.ts",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface-model.ts",
           "type": "registry:ui",
           "target": "@ui/frosted-surface-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-surface.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css",
           "type": "registry:ui",
           "target": "@ui/frosted-surface.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/frosted-icon-button.tsx",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/frosted-icon-button.tsx",
           "type": "registry:ui",
           "target": "@ui/frosted-icon-button.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/icon-button-model.ts",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button-model.ts",
           "type": "registry:ui",
           "target": "@ui/icon-button-model.ts"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/icon-button.css",
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button.css",
           "type": "registry:ui",
           "target": "@ui/icon-button.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/popup-surface.tsx",
+          "path": "packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.tsx",
           "type": "registry:ui",
           "target": "@ui/popup-surface.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/popup-surface.css",
+          "path": "packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.css",
           "type": "registry:ui",
           "target": "@ui/popup-surface.css"
         }

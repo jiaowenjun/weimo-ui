@@ -10,7 +10,10 @@ export default defineConfig([
   // (rdev/liquid-glass-react 1.1.1, MIT) kept verbatim — its render-time
   // ref reads and effect setState are core to its design and must not be
   // rewritten to satisfy repo lint rules.
-  globalIgnores(['dist', 'packages/weimo-ui-core/src/components/liquid-glass-react']),
+  globalIgnores([
+    'dist',
+    'packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass-react',
+  ]),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [

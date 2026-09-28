@@ -1,4 +1,4 @@
-@import '../popup-surface.css';
+@import 'weimo-ui-core/styles/popup-surface.css';
 
 @layer components {
   .coss-tooltip__positioner {

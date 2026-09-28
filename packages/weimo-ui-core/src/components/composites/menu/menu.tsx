@@ -5,18 +5,18 @@ import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 import {
   getFrostedSurfaceClassName,
   useFrostedSurfaceBackgroundToneRef,
-} from './frosted-surface'
+} from 'weimo-ui-core/components/frosted-surface'
 import { cn } from 'weimo-ui-core/lib/utils'
 import {
   menuItemVariants,
   type MenuItemVariant,
   type MenuItemStyleProps,
-} from './menu/menu-variants'
+} from './menu-variants'
 
-import './frosted-surface.css'
+import 'weimo-ui-core/styles/frosted-surface.css'
 import './menu.css'
 
-export type { MenuItemVariant } from './menu/menu-variants'
+export type { MenuItemVariant } from './menu-variants'
 
 type WithStringClassName<T> = Omit<T, 'className'> & {
   className?: string

@@ -16,42 +16,42 @@
   ],
   "files": [
     {
-      "path": "packages/weimo-ui-core/src/components/sidebar/index.tsx",
+      "path": "packages/weimo-ui-core/src/components/layout/sidebar/index.tsx",
       "type": "registry:ui",
       "target": "@ui/sidebar/index.tsx"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/sidebar/sidebar-shell.tsx",
+      "path": "packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.tsx",
       "type": "registry:ui",
       "target": "@ui/sidebar/sidebar-shell.tsx"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/sidebar/sidebar-shell.css",
+      "path": "packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.css",
       "type": "registry:ui",
       "target": "@ui/sidebar/sidebar-shell.css"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/frosted-surface.tsx",
+      "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx",
       "type": "registry:ui",
       "target": "@ui/frosted-surface.tsx"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/frosted-surface-model.ts",
+      "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface-model.ts",
       "type": "registry:ui",
       "target": "@ui/frosted-surface-model.ts"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/frosted-surface.css",
+      "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css",
       "type": "registry:ui",
       "target": "@ui/frosted-surface.css"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/card-surface.tsx",
+      "path": "packages/weimo-ui-core/src/components/surfaces/card-surface/card-surface.tsx",
       "type": "registry:ui",
       "target": "@ui/card-surface.tsx"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/card-surface.css",
+      "path": "packages/weimo-ui-core/src/components/surfaces/card-surface/card-surface.css",
       "type": "registry:ui",
       "target": "@ui/card-surface.css"
     }

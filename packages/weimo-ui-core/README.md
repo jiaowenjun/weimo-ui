@@ -17,3 +17,22 @@ import 'weimo-ui-core/styles/tokens.css'
 ```
 
 包直接导出 TypeScript、TSX 与 CSS 源码，消费方需要支持这些源码格式。
+
+## 源码结构
+
+```text
+src/
+├── behaviors/   # 可跨组件复用的交互与测量行为
+├── components/
+│   ├── primitives/  # Base UI 等基础适配层；公开路径仍为 components/coss/*
+│   ├── surfaces/    # 卡片、弹层、磨砂与液态玻璃材质
+│   ├── controls/    # 按钮、胶囊、滑块等输入控件
+│   ├── layout/      # 浮动栏、顶部栏与侧边栏
+│   └── composites/  # 菜单、对话框、模式按钮与卡片组合
+├── lib/         # 无 UI 所有权的公共工具
+└── styles/      # 全局 token 与语义样式变体
+```
+
+同一组件或组件族的实现、模型与 CSS 放在同一目录。族内使用相对导入；跨组件族通过
+`weimo-ui-core/components/*`、`weimo-ui-core/styles/*` 或
+`weimo-ui-core/lib/*` 的稳定子路径依赖，源码物理位置不属于公共 API。

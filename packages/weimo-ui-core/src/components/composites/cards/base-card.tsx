@@ -2,8 +2,8 @@ import { useState } from 'react'
 import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 import { ChevronRight } from 'lucide-react'
 
-import { getCardSurfaceClassName } from './card-surface'
-import { GhostIconButton } from './ghost-icon-button'
+import { getCardSurfaceClassName } from 'weimo-ui-core/components/card-surface'
+import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'
 import { cn } from 'weimo-ui-core/lib/utils'
 
 import './base-card.css'

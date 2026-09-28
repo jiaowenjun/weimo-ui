@@ -1,6 +1,6 @@
 import type { HTMLAttributes, ReactNode } from 'react'
 
-import { useFrostedSurfaceBackgroundToneRef } from './frosted-surface'
+import { useFrostedSurfaceBackgroundToneRef } from 'weimo-ui-core/components/frosted-surface'
 import { LiquidGlassSurface } from './liquid-glass'
 import { cn } from 'weimo-ui-core/lib/utils'
 

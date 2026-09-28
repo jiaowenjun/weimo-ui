@@ -52,7 +52,7 @@ function cssDeclaration(rule: Rule, property: string) {
 
 describe('shared CSS interfaces', () => {
   it('keeps transparent TopBar shell regions click-through', () => {
-    const root = parseProjectCss('packages/weimo-ui-core/src/components/top-bar.css')
+    const root = parseProjectCss('packages/weimo-ui-core/src/components/layout/bars/top-bar.css')
 
     expect(
       cssDeclaration(cssRuleWithDeclaration(root, '.top-bar', 'pointer-events'), 'pointer-events'),
@@ -110,7 +110,7 @@ describe('shared CSS interfaces', () => {
   })
 
   it('keeps icon-button interactions on variant-owned visual layers', () => {
-    const root = parseProjectCss('packages/weimo-ui-core/src/components/icon-button.css')
+    const root = parseProjectCss('packages/weimo-ui-core/src/components/controls/icon-button/icon-button.css')
 
     expect(
       cssDeclaration(

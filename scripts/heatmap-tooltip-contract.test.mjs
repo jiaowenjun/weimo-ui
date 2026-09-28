@@ -54,11 +54,11 @@ const componentCss = readProjectFile(
   'packages/weimo-ui-stats/src/components/heatmap/heatmap.css',
 )
 const heatColorLevelsSource = readProjectFile(
-  'packages/weimo-ui-core/src/components/heatmap/heat-color.tsx',
+  'packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.tsx',
 )
-const tooltipSource = readProjectFile('packages/weimo-ui-core/src/components/coss/tooltip.tsx')
-const tooltipCss = readProjectFile('packages/weimo-ui-core/src/components/coss/tooltip.css')
-const popupSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/popup-surface.css')
+const tooltipSource = readProjectFile('packages/weimo-ui-core/src/components/primitives/tooltip.tsx')
+const tooltipCss = readProjectFile('packages/weimo-ui-core/src/components/primitives/tooltip.css')
+const popupSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.css')
 const registryItem = JSON.parse(readProjectFile('registry/heatmap.json'))
 
 const { formatHeatmapTooltip } = await loadTooltipFormatter()
@@ -89,7 +89,7 @@ assert.ok(
   tooltipCss.includes('.coss-tooltip__popup') &&
     tooltipCss.includes('z-index: 60;') &&
     tooltipCss.includes('font-size: var(--font-size-xs);') &&
-    tooltipCss.includes("@import '../popup-surface.css';") &&
+    tooltipCss.includes("@import 'weimo-ui-core/styles/popup-surface.css';") &&
     popupSurfaceCss.includes('color: var(--color-text-primary);') &&
     popupSurfaceCss.includes('border: 1px solid transparent;') &&
     popupSurfaceCss.includes('border-color: var(--color-border-divider);') &&
@@ -158,11 +158,11 @@ assert.deepEqual(
   'Heatmap registry item must keep only existing shared registry dependencies because tooltip files ship with the item.',
 )
 assert.ok(
-  registryItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/components/coss/tooltip.tsx') &&
-    registryItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/components/coss/tooltip.css'),
+  registryItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/components/primitives/tooltip.tsx') &&
+    registryItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/components/primitives/tooltip.css'),
   'Heatmap registry item must ship the coss tooltip primitive files.',
 )
 assert.ok(
-    registryItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/components/heatmap/heat-color.tsx'),
+    registryItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.tsx'),
   'Heatmap registry item must ship the public HeatColor implementation.',
 )

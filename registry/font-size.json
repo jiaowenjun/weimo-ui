@@ -13,12 +13,12 @@
   ],
   "files": [
     {
-      "path": "packages/weimo-ui-core/src/components/font-size.ts",
+      "path": "packages/weimo-ui-core/src/styles/variants/typography/font-size.ts",
       "type": "registry:ui",
       "target": "@ui/font-size.ts"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/font-size.css",
+      "path": "packages/weimo-ui-core/src/styles/variants/typography/font-size.css",
       "type": "registry:ui",
       "target": "@ui/font-size.css"
     }

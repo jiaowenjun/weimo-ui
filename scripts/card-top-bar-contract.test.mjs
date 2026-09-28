@@ -315,8 +315,8 @@ assert.ok(CardItem, 'Card registry item must exist.')
 for (const filePath of [
   'packages/weimo-ui-card/src/components/card-top-bar.tsx',
   'packages/weimo-ui-card/src/components/card-top-bar.css',
-  'packages/weimo-ui-core/src/components/mode-button.tsx',
-  'packages/weimo-ui-core/src/components/mode-button.css',
+  'packages/weimo-ui-core/src/components/composites/mode-button/mode-button.tsx',
+  'packages/weimo-ui-core/src/components/composites/mode-button/mode-button.css',
 ]) {
   assert.ok(
     CardItem.files.some((file) => file.path === filePath),
