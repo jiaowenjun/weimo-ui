@@ -48,14 +48,19 @@
       "target": "@ui/card.tsx"
     },
     {
-      "path": "packages/weimo-ui-card/src/components/card-edit-state-machine.ts",
+      "path": "packages/weimo-ui-card/src/components/card/card.tsx",
       "type": "registry:ui",
-      "target": "@ui/card-edit-state-machine.ts"
+      "target": "@ui/card/card.tsx"
     },
     {
-      "path": "packages/weimo-ui-card/src/components/use-card-edit-transition.ts",
+      "path": "packages/weimo-ui-card/src/components/card/card-edit-state-machine.ts",
       "type": "registry:ui",
-      "target": "@ui/use-card-edit-transition.ts"
+      "target": "@ui/card/card-edit-state-machine.ts"
+    },
+    {
+      "path": "packages/weimo-ui-card/src/components/card/use-card-edit-transition.ts",
+      "type": "registry:ui",
+      "target": "@ui/card/use-card-edit-transition.ts"
     },
     {
       "path": "packages/weimo-ui-markdown/src/components/md-editor/md-editor-content-format.ts",
@@ -63,14 +68,14 @@
       "target": "@ui/md-editor/md-editor-content-format.ts"
     },
     {
-      "path": "packages/weimo-ui-card/src/components/card-save-shortcut.ts",
+      "path": "packages/weimo-ui-card/src/components/card/card-save-shortcut.ts",
       "type": "registry:ui",
-      "target": "@ui/card-save-shortcut.ts"
+      "target": "@ui/card/card-save-shortcut.ts"
     },
     {
-      "path": "packages/weimo-ui-card/src/components/card-resolvers.tsx",
+      "path": "packages/weimo-ui-card/src/components/card/card-resolvers.tsx",
       "type": "registry:ui",
-      "target": "@ui/card-resolvers.tsx"
+      "target": "@ui/card/card-resolvers.tsx"
     },
     {
       "path": "packages/weimo-ui-markdown/src/components/deferred-md-editor-toolbar.tsx",
@@ -78,29 +83,29 @@
       "target": "@ui/deferred-md-editor-toolbar.tsx"
     },
     {
-      "path": "packages/weimo-ui-card/src/components/use-card-draft.ts",
+      "path": "packages/weimo-ui-card/src/components/card/use-card-draft.ts",
       "type": "registry:ui",
-      "target": "@ui/use-card-draft.ts"
+      "target": "@ui/card/use-card-draft.ts"
     },
     {
-      "path": "packages/weimo-ui-card/src/components/card-layout-measurement.ts",
+      "path": "packages/weimo-ui-card/src/components/card/card-layout-measurement.ts",
       "type": "registry:ui",
-      "target": "@ui/card-layout-measurement.ts"
+      "target": "@ui/card/card-layout-measurement.ts"
     },
     {
-      "path": "packages/weimo-ui-card/src/components/use-height-transition.ts",
+      "path": "packages/weimo-ui-card/src/components/card/use-height-transition.ts",
       "type": "registry:ui",
-      "target": "@ui/use-height-transition.ts"
+      "target": "@ui/card/use-height-transition.ts"
     },
     {
-      "path": "packages/weimo-ui-card/src/components/card-editable.css",
+      "path": "packages/weimo-ui-card/src/components/card/card-editable.css",
       "type": "registry:ui",
-      "target": "@ui/card-editable.css"
+      "target": "@ui/card/card-editable.css"
     },
     {
-      "path": "packages/weimo-ui-card/src/components/card.css",
+      "path": "packages/weimo-ui-card/src/components/card/card.css",
       "type": "registry:ui",
-      "target": "@ui/card.css"
+      "target": "@ui/card/card.css"
     },
     {
       "path": "packages/weimo-ui-card/src/components/card-top-bar.tsx",
@@ -108,9 +113,14 @@
       "target": "@ui/card-top-bar.tsx"
     },
     {
-      "path": "packages/weimo-ui-card/src/components/card-top-bar.css",
+      "path": "packages/weimo-ui-card/src/components/card/card-top-bar.tsx",
       "type": "registry:ui",
-      "target": "@ui/card-top-bar.css"
+      "target": "@ui/card/card-top-bar.tsx"
+    },
+    {
+      "path": "packages/weimo-ui-card/src/components/card/card-top-bar.css",
+      "type": "registry:ui",
+      "target": "@ui/card/card-top-bar.css"
     },
     {
       "path": "packages/weimo-ui-core/src/components/composites/mode-button/mode-button.tsx",
@@ -128,9 +138,14 @@
       "target": "@ui/card-tool-bar.tsx"
     },
     {
-      "path": "packages/weimo-ui-card/src/components/card-tool-bar.css",
+      "path": "packages/weimo-ui-card/src/components/card/card-tool-bar.tsx",
       "type": "registry:ui",
-      "target": "@ui/card-tool-bar.css"
+      "target": "@ui/card/card-tool-bar.tsx"
+    },
+    {
+      "path": "packages/weimo-ui-card/src/components/card/card-tool-bar.css",
+      "type": "registry:ui",
+      "target": "@ui/card/card-tool-bar.css"
     },
     {
       "path": "packages/weimo-ui-markdown/src/components/md-view.tsx",
@@ -308,9 +323,14 @@
       "target": "@ui/tag-bar.tsx"
     },
     {
-      "path": "packages/weimo-ui-card/src/components/tag-bar.css",
+      "path": "packages/weimo-ui-card/src/components/tags/tag-bar.tsx",
       "type": "registry:ui",
-      "target": "@ui/tag-bar.css"
+      "target": "@ui/tags/tag-bar.tsx"
+    },
+    {
+      "path": "packages/weimo-ui-card/src/components/tags/tag-bar.css",
+      "type": "registry:ui",
+      "target": "@ui/tags/tag-bar.css"
     },
     {
       "path": "packages/weimo-ui-core/src/components/controls/capsule/capsule-button.tsx",
@@ -353,29 +373,29 @@
       "target": "@ui/tag-picker.tsx"
     },
     {
-      "path": "packages/weimo-ui-card/src/components/tag-picker/index.tsx",
+      "path": "packages/weimo-ui-card/src/components/tags/tag-picker/index.tsx",
       "type": "registry:ui",
-      "target": "@ui/tag-picker/index.tsx"
+      "target": "@ui/tags/tag-picker/index.tsx"
     },
     {
-      "path": "packages/weimo-ui-card/src/components/tag-picker/tag-picker.tsx",
+      "path": "packages/weimo-ui-card/src/components/tags/tag-picker/tag-picker.tsx",
       "type": "registry:ui",
-      "target": "@ui/tag-picker/tag-picker.tsx"
+      "target": "@ui/tags/tag-picker/tag-picker.tsx"
     },
     {
-      "path": "packages/weimo-ui-card/src/components/tag-picker/use-tag-picker.ts",
+      "path": "packages/weimo-ui-card/src/components/tags/tag-picker/use-tag-picker.ts",
       "type": "registry:ui",
-      "target": "@ui/tag-picker/use-tag-picker.ts"
+      "target": "@ui/tags/tag-picker/use-tag-picker.ts"
     },
     {
-      "path": "packages/weimo-ui-card/src/components/tag-picker/tag-picker-model.ts",
+      "path": "packages/weimo-ui-card/src/components/tags/tag-picker/tag-picker-model.ts",
       "type": "registry:ui",
-      "target": "@ui/tag-picker/tag-picker-model.ts"
+      "target": "@ui/tags/tag-picker/tag-picker-model.ts"
     },
     {
-      "path": "packages/weimo-ui-card/src/components/tag-picker/tag-picker.css",
+      "path": "packages/weimo-ui-card/src/components/tags/tag-picker/tag-picker.css",
       "type": "registry:ui",
-      "target": "@ui/tag-picker/tag-picker.css"
+      "target": "@ui/tags/tag-picker/tag-picker.css"
     },
     {
       "path": "packages/weimo-ui-core/src/components/composites/action-dialog/action-dialog.tsx",

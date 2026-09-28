@@ -1,7 +1,7 @@
 export {
   TagPicker,
   type TagPickerProps,
-} from './tag-picker/index'
+} from './tags/tag-picker/index'
 export {
   applyTagPickerDraft,
   deriveTagPickerState,
@@ -13,4 +13,4 @@ export {
   type TagPickerMode,
   type TagPickerOption,
   type TagPickerOptionBadge,
-} from './tag-picker/index'
+} from './tags/tag-picker/index'

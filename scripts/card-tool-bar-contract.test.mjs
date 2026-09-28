@@ -34,8 +34,8 @@ function assertNotIncludes(source, snippet, message) {
   assert.ok(!source.includes(snippet), message)
 }
 
-const componentSource = readProjectFile('packages/weimo-ui-card/src/components/card-tool-bar.tsx')
-const componentCss = readProjectFile('packages/weimo-ui-card/src/components/card-tool-bar.css')
+const componentSource = readProjectFile('packages/weimo-ui-card/src/components/card/card-tool-bar.tsx')
+const componentCss = readProjectFile('packages/weimo-ui-card/src/components/card/card-tool-bar.css')
 const docsDefinitionSource = readProjectFile(
   'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/card-tool-bar.tsx',
 )

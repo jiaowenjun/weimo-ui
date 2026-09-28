@@ -737,7 +737,7 @@ try {
     'Smoke test must install the shared @weimo/style dependency with component CSS.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/card.css')),
+    existsSync(join(consumerDir, 'src/components/ui/card/card.css')),
     'shadcn add must still write shared card shell CSS through Card.',
   )
   assert.ok(
@@ -753,15 +753,15 @@ try {
     'shadcn add must write Card component file.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/card-resolvers.tsx')),
+    existsSync(join(consumerDir, 'src/components/ui/card/card-resolvers.tsx')),
     'shadcn add must write Card private resolver helpers.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/card.css')),
+    existsSync(join(consumerDir, 'src/components/ui/card/card.css')),
     'shadcn add must write Card CSS file.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/card-editable.css')),
+    existsSync(join(consumerDir, 'src/components/ui/card/card-editable.css')),
     'shadcn add must write Card editable CSS file.',
   )
   assert.ok(
@@ -813,11 +813,11 @@ try {
     'shadcn add must write the explicitly requested OcrComposer component file.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/composer-shell.tsx')),
+    existsSync(join(consumerDir, 'src/components/ui/composer/composer-shell.tsx')),
     'shadcn add must write internal ComposerShell source used by CardComposer and OcrComposer.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/ocr-composer.css')),
+    existsSync(join(consumerDir, 'src/components/ui/ocr/ocr-composer.css')),
     'shadcn add must write the explicitly requested OcrComposer CSS file.',
   )
   assert.ok(
@@ -825,7 +825,7 @@ try {
     'shadcn add must write the explicitly requested OcrCard component file.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/ocr-card.css')),
+    existsSync(join(consumerDir, 'src/components/ui/ocr/ocr-card.css')),
     'shadcn add must write the explicitly requested OcrCard CSS file.',
   )
   assert.ok(
@@ -833,7 +833,7 @@ try {
     'shadcn add must write OcrDetail source used by OcrCard review action.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/ocr-detail.css')),
+    existsSync(join(consumerDir, 'src/components/ui/ocr/ocr-detail.css')),
     'shadcn add must write OcrDetail CSS used by OcrCard review action.',
   )
   assert.ok(
@@ -846,7 +846,7 @@ try {
     'shadcn add must write explicitly requested TagPicker entry from the configured custom registry.',
   )
   assert.ok(
-    existsSync(join(consumerDir, 'src/components/ui/tag-picker/tag-picker.tsx')),
+    existsSync(join(consumerDir, 'src/components/ui/tags/tag-picker/tag-picker.tsx')),
     'shadcn add must write TagPicker implementation files from the configured custom registry.',
   )
   assert.ok(
@@ -1089,17 +1089,17 @@ try {
 
   runConsumerTypecheck(consumerDir)
 
-  const cardCssSource = readFileSync(join(consumerDir, 'src/components/ui/card.css'), 'utf8')
+  const cardCssSource = readFileSync(join(consumerDir, 'src/components/ui/card/card.css'), 'utf8')
   const CardSource = readFileSync(
-    join(consumerDir, 'src/components/ui/card.tsx'),
+    join(consumerDir, 'src/components/ui/card/card.tsx'),
     'utf8',
   )
   const cardEditStateMachineSource = readFileSync(
-    join(consumerDir, 'src/components/ui/card-edit-state-machine.ts'),
+    join(consumerDir, 'src/components/ui/card/card-edit-state-machine.ts'),
     'utf8',
   )
   const cardEditTransitionSource = readFileSync(
-    join(consumerDir, 'src/components/ui/use-card-edit-transition.ts'),
+    join(consumerDir, 'src/components/ui/card/use-card-edit-transition.ts'),
     'utf8',
   )
   const cardRuntimeSource = [
@@ -1108,31 +1108,31 @@ try {
     cardEditTransitionSource,
   ].join('\n')
   const cardResolversSource = readFileSync(
-    join(consumerDir, 'src/components/ui/card-resolvers.tsx'),
+    join(consumerDir, 'src/components/ui/card/card-resolvers.tsx'),
     'utf8',
   )
   const cardDraftSource = readFileSync(
-    join(consumerDir, 'src/components/ui/use-card-draft.ts'),
+    join(consumerDir, 'src/components/ui/card/use-card-draft.ts'),
     'utf8',
   )
   const layoutMeasurementSource = readFileSync(
-    join(consumerDir, 'src/components/ui/card-layout-measurement.ts'),
+    join(consumerDir, 'src/components/ui/card/card-layout-measurement.ts'),
     'utf8',
   )
   const heightTransitionSource = readFileSync(
-    join(consumerDir, 'src/components/ui/use-height-transition.ts'),
+    join(consumerDir, 'src/components/ui/card/use-height-transition.ts'),
     'utf8',
   )
   const cardEditableCssSource = readFileSync(
-    join(consumerDir, 'src/components/ui/card-editable.css'),
+    join(consumerDir, 'src/components/ui/card/card-editable.css'),
     'utf8',
   )
   const tagBarSource = readFileSync(
-    join(consumerDir, 'src/components/ui/tag-bar.tsx'),
+    join(consumerDir, 'src/components/ui/tags/tag-bar.tsx'),
     'utf8',
   )
   const tagBarCssSource = readFileSync(
-    join(consumerDir, 'src/components/ui/tag-bar.css'),
+    join(consumerDir, 'src/components/ui/tags/tag-bar.css'),
     'utf8',
   )
   const capsuleButtonSource = readFileSync(
@@ -1164,7 +1164,7 @@ try {
     'utf8',
   )
   const tagPickerSource = readFileSync(
-    join(consumerDir, 'src/components/ui/tag-picker/tag-picker.tsx'),
+    join(consumerDir, 'src/components/ui/tags/tag-picker/tag-picker.tsx'),
     'utf8',
   )
   const floatBarSource = readFileSync(
@@ -1180,7 +1180,7 @@ try {
     'utf8',
   )
   const cardTopBarSource = readFileSync(
-    join(consumerDir, 'src/components/ui/card-top-bar.tsx'),
+    join(consumerDir, 'src/components/ui/card/card-top-bar.tsx'),
     'utf8',
   )
   const modeButtonSource = readFileSync(
@@ -1188,11 +1188,11 @@ try {
     'utf8',
   )
   const cardToolBarSource = readFileSync(
-    join(consumerDir, 'src/components/ui/card-tool-bar.tsx'),
+    join(consumerDir, 'src/components/ui/card/card-tool-bar.tsx'),
     'utf8',
   )
   const cardToolBarCssSource = readFileSync(
-    join(consumerDir, 'src/components/ui/card-tool-bar.css'),
+    join(consumerDir, 'src/components/ui/card/card-tool-bar.css'),
     'utf8',
   )
   const inputGroupSource = readFileSync(
@@ -1288,7 +1288,7 @@ try {
       cardRuntimeSource.includes("from './card-top-bar'") &&
       cardRuntimeSource.includes("from './card-tool-bar'") &&
       cardRuntimeSource.includes("from 'weimo-ui-markdown/components/md-view'") &&
-      cardRuntimeSource.includes("from './tag-bar'") &&
+      cardRuntimeSource.includes("from '../tag-bar'") &&
       cardRuntimeSource.includes("from './card-layout-measurement'") &&
       cardRuntimeSource.includes("from './card-resolvers'") &&
       cardRuntimeSource.includes("from './use-card-draft'") &&

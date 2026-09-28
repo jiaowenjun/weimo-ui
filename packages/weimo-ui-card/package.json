@@ -23,16 +23,16 @@
     "./components/ocr-detail": "./src/components/ocr-detail.tsx",
     "./components/tag-bar": "./src/components/tag-bar.tsx",
     "./components/tag-picker": "./src/components/tag-picker.tsx",
-    "./components/tag-picker-model": "./src/components/tag-picker/tag-picker-model.ts",
-    "./styles/card.css": "./src/components/card.css",
-    "./styles/card-composer.css": "./src/components/card-composer.css",
-    "./styles/card-tool-bar.css": "./src/components/card-tool-bar.css",
-    "./styles/card-top-bar.css": "./src/components/card-top-bar.css",
-    "./styles/ocr-card.css": "./src/components/ocr-card.css",
-    "./styles/ocr-composer.css": "./src/components/ocr-composer.css",
-    "./styles/ocr-detail.css": "./src/components/ocr-detail.css",
-    "./styles/tag-bar.css": "./src/components/tag-bar.css",
-    "./styles/tag-picker.css": "./src/components/tag-picker/tag-picker.css"
+    "./components/tag-picker-model": "./src/components/tags/tag-picker/tag-picker-model.ts",
+    "./styles/card.css": "./src/components/card/card.css",
+    "./styles/card-composer.css": "./src/components/composer/card-composer.css",
+    "./styles/card-tool-bar.css": "./src/components/card/card-tool-bar.css",
+    "./styles/card-top-bar.css": "./src/components/card/card-top-bar.css",
+    "./styles/ocr-card.css": "./src/components/ocr/ocr-card.css",
+    "./styles/ocr-composer.css": "./src/components/ocr/ocr-composer.css",
+    "./styles/ocr-detail.css": "./src/components/ocr/ocr-detail.css",
+    "./styles/tag-bar.css": "./src/components/tags/tag-bar.css",
+    "./styles/tag-picker.css": "./src/components/tags/tag-picker/tag-picker.css"
   },
   "scripts": {
     "test:typecheck": "tsc -p tsconfig.json --noEmit --pretty false"

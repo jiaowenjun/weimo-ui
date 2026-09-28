@@ -31,8 +31,8 @@ function cssBlockFor(source, selector) {
 }
 
 const packageJson = readJson('package.json')
-const source = readProjectFile('packages/weimo-ui-card/src/components/ocr-composer.tsx')
-const css = readProjectFile('packages/weimo-ui-card/src/components/ocr-composer.css')
+const source = readProjectFile('packages/weimo-ui-card/src/components/ocr/ocr-composer.tsx')
+const css = readProjectFile('packages/weimo-ui-card/src/components/ocr/ocr-composer.css')
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/ocr.tsx')
@@ -50,12 +50,12 @@ for (const snippet of [
   "import { Check, Clipboard, FileImage, X } from 'lucide-react'",
   "import { useCallback, useEffect, useState } from 'react'",
   "import type { ComponentPropsWithoutRef, ReactNode } from 'react'",
-  "import { CardTopBar } from './card-top-bar'",
-  "import { ComposerShell } from './composer-shell'",
+  "import { CardTopBar } from '../card-top-bar'",
+  "import { ComposerShell } from '../composer/composer-shell'",
   "import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'",
   "import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'",
   "import { ImageUploader, type ImageUploaderActionApi, type ImageUploaderProps } from 'weimo-ui-image/components/image-uploader'",
-  "import { TagBar } from './tag-bar'",
+  "import { TagBar } from '../tag-bar'",
   "import { getCardSurfaceClassName } from 'weimo-ui-core/components/card-surface'",
   "import { cn } from 'weimo-ui-core/lib/utils'",
   "import './ocr-composer.css'",
@@ -262,7 +262,8 @@ assert.deepEqual(
   registryFilePaths(rootRegistryItem),
   new Set([
     'packages/weimo-ui-card/src/components/ocr-composer.tsx',
-    'packages/weimo-ui-card/src/components/ocr-composer.css',
+    'packages/weimo-ui-card/src/components/ocr/ocr-composer.tsx',
+    'packages/weimo-ui-card/src/components/ocr/ocr-composer.css',
   ]),
-  'OcrComposer registry item must ship only its component and styles.',
+  'OcrComposer registry item must ship its public entry, implementation, and styles.',
 )

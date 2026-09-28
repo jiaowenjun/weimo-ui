@@ -24,9 +24,14 @@
       "target": "@ui/tag-bar.tsx"
     },
     {
-      "path": "packages/weimo-ui-card/src/components/tag-bar.css",
+      "path": "packages/weimo-ui-card/src/components/tags/tag-bar.tsx",
       "type": "registry:ui",
-      "target": "@ui/tag-bar.css"
+      "target": "@ui/tags/tag-bar.tsx"
+    },
+    {
+      "path": "packages/weimo-ui-card/src/components/tags/tag-bar.css",
+      "type": "registry:ui",
+      "target": "@ui/tags/tag-bar.css"
     }
   ]
 }

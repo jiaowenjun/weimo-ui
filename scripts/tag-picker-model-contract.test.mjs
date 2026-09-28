@@ -33,7 +33,7 @@ const {
   normalizeTagPickerDraft,
   resolveTagPickerListFilterQuery,
   tagMatchesPickerQuery,
-} = await loadTsModule('packages/weimo-ui-card/src/components/tag-picker/tag-picker-model.ts')
+} = await loadTsModule('packages/weimo-ui-card/src/components/tags/tag-picker/tag-picker-model.ts')
 
 const tagOptions = ['工作/项目', '写作/日记', '研究/论文', '生活/灵感', '阅读/摘录']
 

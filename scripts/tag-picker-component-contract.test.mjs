@@ -20,11 +20,11 @@ function cssBlockFor(source, selector) {
 }
 
 const entrySource = readProjectFile('packages/weimo-ui-card/src/components/tag-picker.tsx')
-const indexSource = readProjectFile('packages/weimo-ui-card/src/components/tag-picker/index.tsx')
-const componentSource = readProjectFile('packages/weimo-ui-card/src/components/tag-picker/tag-picker.tsx')
-const hookSource = readProjectFile('packages/weimo-ui-card/src/components/tag-picker/use-tag-picker.ts')
-const modelSource = readProjectFile('packages/weimo-ui-card/src/components/tag-picker/tag-picker-model.ts')
-const cssSource = readProjectFile('packages/weimo-ui-card/src/components/tag-picker/tag-picker.css')
+const indexSource = readProjectFile('packages/weimo-ui-card/src/components/tags/tag-picker/index.tsx')
+const componentSource = readProjectFile('packages/weimo-ui-card/src/components/tags/tag-picker/tag-picker.tsx')
+const hookSource = readProjectFile('packages/weimo-ui-card/src/components/tags/tag-picker/use-tag-picker.ts')
+const modelSource = readProjectFile('packages/weimo-ui-card/src/components/tags/tag-picker/tag-picker-model.ts')
+const cssSource = readProjectFile('packages/weimo-ui-card/src/components/tags/tag-picker/tag-picker.css')
 const bottomBarSource = readProjectFile('packages/weimo-ui-core/src/components/layout/bars/bottom-bar.tsx')
 const bottomBarCss = readProjectFile('packages/weimo-ui-core/src/components/layout/bars/bottom-bar.css')
 const floatBarSource = readProjectFile('packages/weimo-ui-core/src/components/layout/bars/float-bar.tsx')
@@ -40,7 +40,7 @@ const floatBarSlotBlock = cssBlockFor(floatBarCss, '.float-bar__slot {')
 const floatBarSlotContentBlock = cssBlockFor(floatBarCss, '.float-bar__slot > * {')
 
 assert.ok(
-  entrySource.includes("from './tag-picker/index'"),
+  entrySource.includes("from './tags/tag-picker/index'"),
   'TagPicker entry file must re-export the folder API.',
 )
 assert.ok(

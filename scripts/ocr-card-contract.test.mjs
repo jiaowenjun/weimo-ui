@@ -25,8 +25,8 @@ const packageJson = readJson('package.json')
 const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const docsDefinition = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/ocr.tsx')
-const source = readProjectFile('packages/weimo-ui-card/src/components/ocr-card.tsx')
-const css = readProjectFile('packages/weimo-ui-card/src/components/ocr-card.css')
+const source = readProjectFile('packages/weimo-ui-card/src/components/ocr/ocr-card.tsx')
+const css = readProjectFile('packages/weimo-ui-card/src/components/ocr/ocr-card.css')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const rootRegistry = readJson('registry.json')
 const standaloneRegistry = readJson('registry/ocr-card.json')
@@ -59,7 +59,7 @@ for (const snippet of [
   "import { BookOpenCheck } from 'lucide-react'",
   "import { useEffect, useState } from 'react'",
   "import type { ComponentPropsWithoutRef, ReactNode } from 'react'",
-  "import { Card, type CardDraft, type CardEditorOptions, type CardInitialMode, type CardLabels } from './card'",
+  "import { Card, type CardDraft, type CardEditorOptions, type CardInitialMode, type CardLabels } from '../card'",
   "import { ImageView, type ImageViewProps } from 'weimo-ui-image/components/image-view'",
   "import { cn } from 'weimo-ui-core/lib/utils'",
   "import type { MdRenderImageRenderer, MdRenderImageSrcResolver } from 'weimo-ui-markdown/components/md-render'",
@@ -316,7 +316,8 @@ assert.deepEqual(
 )
 for (const filePath of [
   'packages/weimo-ui-card/src/components/ocr-card.tsx',
-  'packages/weimo-ui-card/src/components/ocr-card.css',
+  'packages/weimo-ui-card/src/components/ocr/ocr-card.tsx',
+  'packages/weimo-ui-card/src/components/ocr/ocr-card.css',
 ]) {
   assert.ok(
     registryItem.files.some((file) => file.path === filePath),

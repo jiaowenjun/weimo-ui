@@ -23,14 +23,19 @@
       "target": "@ui/card-composer.tsx"
     },
     {
-      "path": "packages/weimo-ui-card/src/components/composer-shell.tsx",
+      "path": "packages/weimo-ui-card/src/components/composer/card-composer.tsx",
       "type": "registry:ui",
-      "target": "@ui/composer-shell.tsx"
+      "target": "@ui/composer/card-composer.tsx"
     },
     {
-      "path": "packages/weimo-ui-card/src/components/card-composer.css",
+      "path": "packages/weimo-ui-card/src/components/composer/composer-shell.tsx",
       "type": "registry:ui",
-      "target": "@ui/card-composer.css"
+      "target": "@ui/composer/composer-shell.tsx"
+    },
+    {
+      "path": "packages/weimo-ui-card/src/components/composer/card-composer.css",
+      "type": "registry:ui",
+      "target": "@ui/composer/card-composer.css"
     }
   ]
 }

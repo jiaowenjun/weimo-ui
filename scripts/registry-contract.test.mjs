@@ -244,7 +244,8 @@ assert.deepEqual(
 )
 for (const filePath of [
   'packages/weimo-ui-card/src/components/ocr-card.tsx',
-  'packages/weimo-ui-card/src/components/ocr-card.css',
+  'packages/weimo-ui-card/src/components/ocr/ocr-card.tsx',
+  'packages/weimo-ui-card/src/components/ocr/ocr-card.css',
 ]) {
   assert.ok(
     ocrCardItem.files.some((file) => file.path === filePath),
@@ -258,8 +259,9 @@ assert.deepEqual(
 )
 for (const filePath of [
   'packages/weimo-ui-card/src/components/card-composer.tsx',
-  'packages/weimo-ui-card/src/components/composer-shell.tsx',
-  'packages/weimo-ui-card/src/components/card-composer.css',
+  'packages/weimo-ui-card/src/components/composer/card-composer.tsx',
+  'packages/weimo-ui-card/src/components/composer/composer-shell.tsx',
+  'packages/weimo-ui-card/src/components/composer/card-composer.css',
 ]) {
   assert.ok(
     cardComposerItem.files.some((file) => file.path === filePath),
@@ -352,7 +354,8 @@ assert.ok(
 )
 for (const filePath of [
   'packages/weimo-ui-card/src/components/card-top-bar.tsx',
-  'packages/weimo-ui-card/src/components/card-top-bar.css',
+  'packages/weimo-ui-card/src/components/card/card-top-bar.tsx',
+  'packages/weimo-ui-card/src/components/card/card-top-bar.css',
   'packages/weimo-ui-core/src/components/composites/mode-button/mode-button.tsx',
   'packages/weimo-ui-core/src/components/composites/mode-button/mode-button.css',
 ]) {
@@ -363,16 +366,19 @@ for (const filePath of [
 }
 for (const filePath of [
   'packages/weimo-ui-card/src/components/card.tsx',
-  'packages/weimo-ui-card/src/components/card-resolvers.tsx',
+  'packages/weimo-ui-card/src/components/card/card.tsx',
+  'packages/weimo-ui-card/src/components/card/card-resolvers.tsx',
   'packages/weimo-ui-markdown/src/components/deferred-md-editor-toolbar.tsx',
-  'packages/weimo-ui-card/src/components/card-editable.css',
-  'packages/weimo-ui-card/src/components/card.css',
+  'packages/weimo-ui-card/src/components/card/card-editable.css',
+  'packages/weimo-ui-card/src/components/card/card.css',
   'packages/weimo-ui-card/src/components/card-top-bar.tsx',
-  'packages/weimo-ui-card/src/components/card-top-bar.css',
+  'packages/weimo-ui-card/src/components/card/card-top-bar.tsx',
+  'packages/weimo-ui-card/src/components/card/card-top-bar.css',
   'packages/weimo-ui-core/src/components/composites/mode-button/mode-button.tsx',
   'packages/weimo-ui-core/src/components/composites/mode-button/mode-button.css',
   'packages/weimo-ui-card/src/components/card-tool-bar.tsx',
-  'packages/weimo-ui-card/src/components/card-tool-bar.css',
+  'packages/weimo-ui-card/src/components/card/card-tool-bar.tsx',
+  'packages/weimo-ui-card/src/components/card/card-tool-bar.css',
   'packages/weimo-ui-markdown/src/components/md-view.tsx',
   'packages/weimo-ui-markdown/src/components/md-view/md-view.tsx',
   'packages/weimo-ui-markdown/src/components/md-view/md-view.css',
@@ -395,7 +401,8 @@ for (const filePath of [
   'packages/weimo-ui-markdown/src/components/md-editor/math-editor.tsx',
   'packages/weimo-ui-markdown/src/components/md-editor/md-editor.css',
   'packages/weimo-ui-card/src/components/tag-bar.tsx',
-  'packages/weimo-ui-card/src/components/tag-bar.css',
+  'packages/weimo-ui-card/src/components/tags/tag-bar.tsx',
+  'packages/weimo-ui-card/src/components/tags/tag-bar.css',
   'packages/weimo-ui-core/src/components/controls/capsule/capsule-button.tsx',
   'packages/weimo-ui-core/src/components/controls/capsule/capsule-button.css',
   'packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.ts',
@@ -407,11 +414,11 @@ for (const filePath of [
   'packages/weimo-ui-core/src/behaviors/animated-inline-size/animated-inline-size-model.ts',
   'packages/weimo-ui-core/src/behaviors/animated-inline-size/animated-inline-size.css',
   'packages/weimo-ui-card/src/components/tag-picker.tsx',
-  'packages/weimo-ui-card/src/components/tag-picker/index.tsx',
-  'packages/weimo-ui-card/src/components/tag-picker/tag-picker.tsx',
-  'packages/weimo-ui-card/src/components/tag-picker/use-tag-picker.ts',
-  'packages/weimo-ui-card/src/components/tag-picker/tag-picker-model.ts',
-  'packages/weimo-ui-card/src/components/tag-picker/tag-picker.css',
+  'packages/weimo-ui-card/src/components/tags/tag-picker/index.tsx',
+  'packages/weimo-ui-card/src/components/tags/tag-picker/tag-picker.tsx',
+  'packages/weimo-ui-card/src/components/tags/tag-picker/use-tag-picker.ts',
+  'packages/weimo-ui-card/src/components/tags/tag-picker/tag-picker-model.ts',
+  'packages/weimo-ui-card/src/components/tags/tag-picker/tag-picker.css',
   'packages/weimo-ui-core/src/components/composites/action-dialog/action-dialog.tsx',
   'packages/weimo-ui-core/src/components/composites/action-dialog/action-dialog.css',
   'packages/weimo-ui-core/src/components/layout/bars/float-bar.tsx',
@@ -500,11 +507,11 @@ for (const filePath of [
 }
 for (const filePath of [
   'packages/weimo-ui-card/src/components/tag-picker.tsx',
-  'packages/weimo-ui-card/src/components/tag-picker/index.tsx',
-  'packages/weimo-ui-card/src/components/tag-picker/tag-picker.tsx',
-  'packages/weimo-ui-card/src/components/tag-picker/use-tag-picker.ts',
-  'packages/weimo-ui-card/src/components/tag-picker/tag-picker-model.ts',
-  'packages/weimo-ui-card/src/components/tag-picker/tag-picker.css',
+  'packages/weimo-ui-card/src/components/tags/tag-picker/index.tsx',
+  'packages/weimo-ui-card/src/components/tags/tag-picker/tag-picker.tsx',
+  'packages/weimo-ui-card/src/components/tags/tag-picker/use-tag-picker.ts',
+  'packages/weimo-ui-card/src/components/tags/tag-picker/tag-picker-model.ts',
+  'packages/weimo-ui-card/src/components/tags/tag-picker/tag-picker.css',
   'packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx',
   'packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface-model.ts',
   'packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css',

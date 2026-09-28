@@ -7,7 +7,7 @@ import ts from 'typescript'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
 const source = readFileSync(
-  join(root, 'packages/weimo-ui-card/src/components/card-edit-state-machine.ts'),
+  join(root, 'packages/weimo-ui-card/src/components/card/card-edit-state-machine.ts'),
   'utf8',
 )
 const context = { exports: {} }

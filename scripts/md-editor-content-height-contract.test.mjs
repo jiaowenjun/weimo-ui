@@ -7,11 +7,11 @@ function readProjectFile(relativePath) {
 
 const editorTypesSource = readProjectFile('packages/weimo-ui-markdown/src/components/md-editor/md-editor-types.ts')
 const editorSource = readProjectFile('packages/weimo-ui-markdown/src/components/md-editor/md-editor.tsx')
-const cardSource = readProjectFile('packages/weimo-ui-card/src/components/card.tsx')
+const cardSource = readProjectFile('packages/weimo-ui-card/src/components/card/card.tsx')
 const cardEditTransitionSource = readProjectFile(
-  'packages/weimo-ui-card/src/components/use-card-edit-transition.ts',
+  'packages/weimo-ui-card/src/components/card/use-card-edit-transition.ts',
 )
-const cardResolversSource = readProjectFile('packages/weimo-ui-card/src/components/card-resolvers.tsx')
+const cardResolversSource = readProjectFile('packages/weimo-ui-card/src/components/card/card-resolvers.tsx')
 
 assert.ok(
   editorTypesSource.includes('onContentHeightChange?: (height: number) => void'),

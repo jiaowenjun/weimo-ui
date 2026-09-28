@@ -24,9 +24,14 @@
       "target": "@ui/card-tool-bar.tsx"
     },
     {
-      "path": "packages/weimo-ui-card/src/components/card-tool-bar.css",
+      "path": "packages/weimo-ui-card/src/components/card/card-tool-bar.tsx",
       "type": "registry:ui",
-      "target": "@ui/card-tool-bar.css"
+      "target": "@ui/card/card-tool-bar.tsx"
+    },
+    {
+      "path": "packages/weimo-ui-card/src/components/card/card-tool-bar.css",
+      "type": "registry:ui",
+      "target": "@ui/card/card-tool-bar.css"
     },
     {
       "path": "packages/weimo-ui-core/src/components/controls/icon-button/frosted-icon-button.tsx",

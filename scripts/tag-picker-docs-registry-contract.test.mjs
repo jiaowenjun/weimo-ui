@@ -100,11 +100,11 @@ assert.deepEqual(
 )
 for (const filePath of [
   'packages/weimo-ui-card/src/components/tag-picker.tsx',
-  'packages/weimo-ui-card/src/components/tag-picker/index.tsx',
-  'packages/weimo-ui-card/src/components/tag-picker/tag-picker.tsx',
-  'packages/weimo-ui-card/src/components/tag-picker/use-tag-picker.ts',
-  'packages/weimo-ui-card/src/components/tag-picker/tag-picker-model.ts',
-  'packages/weimo-ui-card/src/components/tag-picker/tag-picker.css',
+  'packages/weimo-ui-card/src/components/tags/tag-picker/index.tsx',
+  'packages/weimo-ui-card/src/components/tags/tag-picker/tag-picker.tsx',
+  'packages/weimo-ui-card/src/components/tags/tag-picker/use-tag-picker.ts',
+  'packages/weimo-ui-card/src/components/tags/tag-picker/tag-picker-model.ts',
+  'packages/weimo-ui-card/src/components/tags/tag-picker/tag-picker.css',
   'packages/weimo-ui-core/src/components/composites/action-dialog/action-dialog.tsx',
   'packages/weimo-ui-core/src/components/composites/action-dialog/action-dialog.css',
   'packages/weimo-ui-core/src/components/layout/bars/float-bar.tsx',
@@ -130,7 +130,7 @@ assert.ok(
   smokeSource.includes("await runShadcnAdd(consumerDir, '@weimo/tag-picker')") &&
   smokeSource.includes("hits.includes('tag-picker.json')") &&
   smokeSource.includes("src/components/ui/tag-picker.tsx") &&
-  smokeSource.includes("src/components/ui/tag-picker/tag-picker.tsx") &&
+  smokeSource.includes("src/components/ui/tags/tag-picker/tag-picker.tsx") &&
   smokeSource.includes("src/components/ui/action-dialog.tsx") &&
   smokeSource.includes("src/components/ui/float-bar.tsx") &&
   smokeSource.includes("src/components/ui/bottom-bar.tsx") &&

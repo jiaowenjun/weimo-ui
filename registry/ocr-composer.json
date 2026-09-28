@@ -25,9 +25,14 @@
       "target": "@ui/ocr-composer.tsx"
     },
     {
-      "path": "packages/weimo-ui-card/src/components/ocr-composer.css",
+      "path": "packages/weimo-ui-card/src/components/ocr/ocr-composer.tsx",
       "type": "registry:ui",
-      "target": "@ui/ocr-composer.css"
+      "target": "@ui/ocr/ocr-composer.tsx"
+    },
+    {
+      "path": "packages/weimo-ui-card/src/components/ocr/ocr-composer.css",
+      "type": "registry:ui",
+      "target": "@ui/ocr/ocr-composer.css"
     }
   ]
 }

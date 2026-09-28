@@ -9,10 +9,10 @@ function read(relativePath) {
   return readFileSync(join(root, relativePath), 'utf8')
 }
 
-const tagBar = read('packages/weimo-ui-card/src/components/tag-bar.tsx')
-const card = read('packages/weimo-ui-card/src/components/card.tsx')
-const cardResolvers = read('packages/weimo-ui-card/src/components/card-resolvers.tsx')
-const ocrCard = read('packages/weimo-ui-card/src/components/ocr-card.tsx')
+const tagBar = read('packages/weimo-ui-card/src/components/tags/tag-bar.tsx')
+const card = read('packages/weimo-ui-card/src/components/card/card.tsx')
+const cardResolvers = read('packages/weimo-ui-card/src/components/card/card-resolvers.tsx')
+const ocrCard = read('packages/weimo-ui-card/src/components/ocr/ocr-card.tsx')
 
 assert.ok(tagBar.includes('isTagClickEnabled?: (tag: string) => boolean'))
 assert.ok(tagBar.includes('isTagClickEnabled = () => true'))

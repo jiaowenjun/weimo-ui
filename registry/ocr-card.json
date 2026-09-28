@@ -25,9 +25,14 @@
       "target": "@ui/ocr-card.tsx"
     },
     {
-      "path": "packages/weimo-ui-card/src/components/ocr-card.css",
+      "path": "packages/weimo-ui-card/src/components/ocr/ocr-card.tsx",
       "type": "registry:ui",
-      "target": "@ui/ocr-card.css"
+      "target": "@ui/ocr/ocr-card.tsx"
+    },
+    {
+      "path": "packages/weimo-ui-card/src/components/ocr/ocr-card.css",
+      "type": "registry:ui",
+      "target": "@ui/ocr/ocr-card.css"
     }
   ]
 }

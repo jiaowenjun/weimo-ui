@@ -43,8 +43,8 @@ const surfaceDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs
 const popupSurfaceSource = readProjectFile('packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.tsx')
 const popupSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.css')
 
-const cardResolverSource = readProjectFile('packages/weimo-ui-card/src/components/card-resolvers.tsx')
-const sharedCardCss = readProjectFile('packages/weimo-ui-card/src/components/card.css')
+const cardResolverSource = readProjectFile('packages/weimo-ui-card/src/components/card/card-resolvers.tsx')
+const sharedCardCss = readProjectFile('packages/weimo-ui-card/src/components/card/card.css')
 const cossCardSource = readProjectFile('packages/weimo-ui-site/src/components/coss/card.tsx')
 const cossCardCss = readProjectFile('packages/weimo-ui-site/src/components/coss/card.css')
 const sidebarSource = readProjectFile('packages/weimo-ui-core/src/components/layout/sidebar/sidebar-shell.tsx')

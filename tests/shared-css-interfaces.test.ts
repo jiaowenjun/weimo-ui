@@ -78,7 +78,7 @@ describe('shared CSS interfaces', () => {
   })
 
   it('keeps Card edit layout and MdEditor scrolling owned by explicit state selectors', () => {
-    const card = parseProjectCss('packages/weimo-ui-card/src/components/card-editable.css')
+    const card = parseProjectCss('packages/weimo-ui-card/src/components/card/card-editable.css')
     const editor = parseProjectCss('packages/weimo-ui-markdown/src/components/md-editor/md-editor.css')
 
     expect(

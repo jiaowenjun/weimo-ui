@@ -22,9 +22,14 @@
       "target": "@ui/card-top-bar.tsx"
     },
     {
-      "path": "packages/weimo-ui-card/src/components/card-top-bar.css",
+      "path": "packages/weimo-ui-card/src/components/card/card-top-bar.tsx",
       "type": "registry:ui",
-      "target": "@ui/card-top-bar.css"
+      "target": "@ui/card/card-top-bar.tsx"
+    },
+    {
+      "path": "packages/weimo-ui-card/src/components/card/card-top-bar.css",
+      "type": "registry:ui",
+      "target": "@ui/card/card-top-bar.css"
     }
   ]
 }

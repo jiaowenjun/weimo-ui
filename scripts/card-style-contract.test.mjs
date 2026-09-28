@@ -40,11 +40,11 @@ function assertIncludes(block, snippet, message) {
   assert.ok(block.includes(snippet), message)
 }
 
-const cardCss = readProjectFile('packages/weimo-ui-card/src/components/card.css')
-const cardTopBarCss = readProjectFile('packages/weimo-ui-card/src/components/card-top-bar.css')
+const cardCss = readProjectFile('packages/weimo-ui-card/src/components/card/card.css')
+const cardTopBarCss = readProjectFile('packages/weimo-ui-card/src/components/card/card-top-bar.css')
 const markdownContentCss = readProjectFile('packages/weimo-ui-markdown/src/styles/markdown-content.css')
-const CardSource = readProjectFile('packages/weimo-ui-card/src/components/card.tsx')
-const CardResolversSource = readProjectFile('packages/weimo-ui-card/src/components/card-resolvers.tsx')
+const CardSource = readProjectFile('packages/weimo-ui-card/src/components/card/card.tsx')
+const CardResolversSource = readProjectFile('packages/weimo-ui-card/src/components/card/card-resolvers.tsx')
 const cardPropsSource = CardSource.slice(
   CardSource.indexOf('export type CardProps'),
   CardSource.indexOf('function shouldIgnoreCardBodyDoubleClick'),
@@ -347,7 +347,7 @@ assert.ok(
 )
 assert.ok(CardItem, 'registry.json must include the @weimo/card item.')
 assert.ok(
-  CardItem.files.some((file) => file.path === 'packages/weimo-ui-card/src/components/card-resolvers.tsx'),
+  CardItem.files.some((file) => file.path === 'packages/weimo-ui-card/src/components/card/card-resolvers.tsx'),
   'Card registry item must ship private Card resolver helpers.',
 )
 assert.ok(
@@ -700,7 +700,7 @@ assert.ok(
   'Shared markdown docs preview sample must remain with Card docs.',
 )
 assert.deepEqual(
-  CardItem.files.some((file) => file.path === 'packages/weimo-ui-card/src/components/card.css'),
+  CardItem.files.some((file) => file.path === 'packages/weimo-ui-card/src/components/card/card.css'),
   true,
   'Card registry item must keep shipping shared card shell CSS.',
 )

@@ -44,8 +44,8 @@ const packageJson = readJson('package.json')
 const manifest = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const docsDefinition = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/ocr.tsx')
-const ocrDetailSource = readProjectFile('packages/weimo-ui-card/src/components/ocr-detail.tsx')
-const ocrDetailCss = readProjectFile('packages/weimo-ui-card/src/components/ocr-detail.css')
+const ocrDetailSource = readProjectFile('packages/weimo-ui-card/src/components/ocr/ocr-detail.tsx')
+const ocrDetailCss = readProjectFile('packages/weimo-ui-card/src/components/ocr/ocr-detail.css')
 const rootRegistry = readJson('registry.json')
 const standaloneRegistry = readJson('registry/ocr-detail.json')
 const registryItem = rootRegistry.items.find((item) => item.name === 'ocr-detail')
@@ -75,7 +75,7 @@ assert.ok(
 for (const snippet of [
   "import { useEffect, useState } from 'react'",
   "import { ActionDialog, type ActionDialogProps } from 'weimo-ui-core/components/action-dialog'",
-  "import { Card, type CardDraft, type CardProps } from './card'",
+  "import { Card, type CardDraft, type CardProps } from '../card'",
   "import { ImageView, ImageViewDisplayModeMenu, type ImageViewDisplayMode } from 'weimo-ui-image/components/image-view'",
   "import { cn } from 'weimo-ui-core/lib/utils'",
   "import './ocr-detail.css'",
@@ -269,7 +269,8 @@ assert.ok(
 )
 for (const filePath of [
   'packages/weimo-ui-card/src/components/ocr-detail.tsx',
-  'packages/weimo-ui-card/src/components/ocr-detail.css',
+  'packages/weimo-ui-card/src/components/ocr/ocr-detail.tsx',
+  'packages/weimo-ui-card/src/components/ocr/ocr-detail.css',
 ]) {
   assert.ok(
     registryItem.files.some((file) => file.path === filePath),
