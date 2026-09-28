@@ -173,9 +173,9 @@ assert.ok(
 )
 assert.ok(
   appCss.includes(
-    '.component-preview-card:has(.card-surface-preview, .popup-surface-preview, .frosted-surface-preview__tile, .frosted-border-preview__tile, .icon-preview__row, .internal-bottom-preview, .liquid-glass-preview, .liquid-glass-toolbar-preview, .liquid-glass-icon-preview, .liquid-glass-chip-preview, .capsule-slot-preview, .capsule-button, .liquid-glass-label-preview) .base-card__content {\n  overflow: visible;\n',
+    '.component-preview-card:has(.card-surface-preview, .popup-surface-preview, .frosted-surface-preview__tile, .frosted-border-preview__tile, .icon-preview__row, .sidebar-preview, .internal-bottom-preview, .liquid-glass-preview, .liquid-glass-toolbar-preview, .liquid-glass-icon-preview, .liquid-glass-chip-preview, .capsule-slot-preview, .capsule-button, .liquid-glass-label-preview) .base-card__content {\n  overflow: visible;\n',
   ),
-  'Card and popup surface demos (plus both frosted tiles — material page and border page, the frosted icon button rows, every capsule card via the component-level .capsule-button match, the bottom-bar canvas on CardSurface and every liquid glass canvas — material, toolbars, icon buttons, chips, capsule slots, labels) must opt out of the preview-window clip so real shadows (--shadow-card / --shadow-overlay / the tone-aligned liquid glass and frosted drop shadows) render into the card padding.',
+  'Card and popup surface demos (plus both frosted tiles — material page and border page, the frosted icon button rows, the drawer trigger canvas, every capsule card via the component-level .capsule-button match, the bottom-bar canvas on CardSurface and every liquid glass canvas — material, toolbars, icon buttons, chips, capsule slots, labels) must opt out of the preview-window clip so real shadows (--shadow-card / --shadow-overlay / the tone-aligned liquid glass and frosted drop shadows) render into the card padding.',
 )
 
 for (const snippet of [
