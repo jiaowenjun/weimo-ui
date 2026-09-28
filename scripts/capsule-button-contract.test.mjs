@@ -328,14 +328,14 @@ assert.ok(
 )
 assert.ok(
   ['CapsuleButton 前后缀预览'].every((demoLabel) =>
-    docsSource.includes(`<div className="text-button-preview" aria-label="${demoLabel}">`),
+    docsSource.includes(`<div className="capsule-slot-preview" aria-label="${demoLabel}">`),
   ) &&
-    appCss.includes('.text-button-preview') &&
+    appCss.includes('.capsule-slot-preview') &&
     !docsSource.includes('label="胶囊按钮"') &&
     !docsSource.includes('textSize=') &&
     !docsSource.includes('label="胶囊字号"') &&
     !docsSource.includes('label="磨砂态胶囊"'),
-  'Capsule button demo cards must lay out their buttons in the shared preview row; the redundant state-pair and text-size cards must stay removed.',
+  'Capsule button demo cards must lay out their buttons in the slot preview row (liquid-glass shadow unclipped); the redundant state-pair and text-size cards must stay removed.',
 )
 assert.ok(
   definitionsIndexSource.includes("import { capsuleButtonDefinition } from './packages/weimo-ui-core/capsule-button'") &&
