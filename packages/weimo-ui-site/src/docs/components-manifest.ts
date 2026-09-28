@@ -261,6 +261,16 @@ export const componentManifest = [
     registry: true,
   },
   {
+    id: 'glass-label',
+    name: 'GlassLabel',
+    registryName: 'glass-label',
+    packageExport: './components/glass-label',
+    packageName: 'weimo-ui-core',
+    page: 'bar',
+    docs: false,
+    registry: true,
+  },
+  {
     id: 'page-layout',
     name: '页面布局',
     exportName: 'SideBar',

@@ -100,7 +100,7 @@ const iconPreviewRowBlock = blockFor(css, '.icon-preview__row')
 assert.ok(
   docsShellSource.includes('className="docs-top-bar__title"') &&
     docsShellSource.includes('{selected.name}') &&
-    docsShellSource.includes('docs-top-bar__title-sizer') &&
+    docsShellSource.includes('<GlassLabel') &&
     !detailPageSource.includes('<h1') &&
     !detailPageSource.includes('doc-page__header') &&
     !css.includes('.doc-page__title') &&

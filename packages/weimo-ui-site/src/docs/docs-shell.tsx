@@ -24,6 +24,7 @@ import {
   CommandList,
 } from '../components/coss/command'
 import { TopBar } from 'weimo-ui-core/components/top-bar'
+import { GlassLabel } from 'weimo-ui-core/components/glass-label'
 import { LiquidGlassSurface } from 'weimo-ui-core/components/liquid-glass'
 import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'
 import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'
@@ -214,17 +215,10 @@ export function DocsShell() {
         </LiquidGlassSurface>
       </button>
       {selected ? (
-        <span className="docs-top-bar__title">
-          {/* 库只在挂载/窗口 resize 时测量各玻璃层尺寸;标题变化时重新测量。 */}
-          <LiquidGlassSurface key={selected.name} cornerRadius={999} padding="6px 10px">
-            <span className="liquid-glass-chip__label liquid-glass-chip__label--lg">
-              {selected.name}
-            </span>
-          </LiquidGlassSurface>
-          <span aria-hidden="true" className="docs-top-bar__title-sizer">
-            {selected.name}
-          </span>
-        </span>
+        /* 库只在挂载/窗口 resize 时测量各玻璃层尺寸;标题变化时随 key 重挂测量。 */
+        <GlassLabel className="docs-top-bar__title" key={selected.name} size="lg">
+          {selected.name}
+        </GlassLabel>
       ) : null}
     </LiquidGlassTile>
   )

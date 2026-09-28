@@ -69,6 +69,7 @@ export const coreCatalog = {
       packageExport: './components/float-bar',
       components: [
         { id: 'bottom-bar', name: 'BottomBar', registryName: 'bottom-bar', packageExport: './components/bottom-bar' },
+        { id: 'glass-label', name: 'GlassLabel', registryName: 'glass-label', packageExport: './components/glass-label' },
       ],
     },
     {

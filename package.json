@@ -49,6 +49,7 @@
     "./components/frosted-icon-button-group": "./packages/weimo-ui-core/src/components/frosted-icon-button-group.tsx",
     "./components/frosted-surface": "./packages/weimo-ui-core/src/components/frosted-surface.tsx",
     "./components/ghost-icon-button": "./packages/weimo-ui-core/src/components/ghost-icon-button.tsx",
+    "./components/glass-label": "./packages/weimo-ui-core/src/components/glass-label.tsx",
     "./components/heat-color": "./packages/weimo-ui-core/src/components/heat-color.tsx",
     "./components/liquid-glass": "./packages/weimo-ui-core/src/components/liquid-glass.tsx",
     "./components/menu": "./packages/weimo-ui-core/src/components/menu.tsx",

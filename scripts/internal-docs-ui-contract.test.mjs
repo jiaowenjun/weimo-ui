@@ -248,13 +248,17 @@ const topBarDemoSource = sliceDemoSource(
 assertGlassToolbarDemo(bottomBarDemoSource, 'BottomBar')
 
 function assertLiquidGlassToolbarDemo(demoSource, label) {
-  const liquidLayerCount = (demoSource.match(/<LiquidGlassSurface cornerRadius=\{999\}/g) ?? []).length
+  // GlassLabel 组件内部包 LiquidGlassSurface,标题胶囊按组件出现次数计入玻璃层。
+  const liquidLayerCount =
+    (demoSource.match(/<LiquidGlassSurface cornerRadius=\{999\}/g) ?? []).length +
+    (demoSource.match(/<GlassLabel\b/g) ?? []).length
 
   assert.ok(
     liquidLayerCount >= 3 &&
+      demoSource.includes('<GlassLabel') &&
       demoSource.includes('<LiquidGlassTile') &&
       !demoSource.includes('FrostedIconButton'),
-    `${label} docs demo must render every button and text capsule as LiquidGlassSurface layers.`,
+    `${label} docs demo must render every button and text capsule as liquid glass layers (LiquidGlassSurface or GlassLabel).`,
   )
 }
 

@@ -25,7 +25,10 @@ const pageLayoutDefinitionSource = readProjectFile('packages/weimo-ui-site/src/d
 const manifestSource = readProjectFile('packages/weimo-ui-site/src/docs/components-manifest.ts')
 const appCss = readProjectFile('packages/weimo-ui-site/src/App.css')
 const frostedSurfaceSource = readProjectFile('packages/weimo-ui-core/src/components/frosted-surface.tsx')
+const glassLabelSource = readProjectFile('packages/weimo-ui-core/src/components/glass-label.tsx')
+const glassLabelCss = readProjectFile('packages/weimo-ui-core/src/components/glass-label.css')
 const registryItem = JSON.parse(readProjectFile('registry/liquid-glass.json'))
+const glassLabelRegistryItem = JSON.parse(readProjectFile('registry/glass-label.json'))
 const packageJson = JSON.parse(readProjectFile('package.json'))
 
 assert.ok(
@@ -131,17 +134,39 @@ for (const snippet of [
     `The core CapsuleButton page material card must include ${snippet}.`,
   )
 }
-const liquidGlassCapsuleButtonBlock =
-  appCss.match(/button\.liquid-glass-chip\s*\{([^}]*)\}/)?.[1] ?? ''
+// GlassLabel:工具栏标题胶囊升格为组件——非交互 span + 液态玻璃层(LiquidGlassSurface)
+// 绝对居中覆盖,隐藏 sizer 复刻文字与内边距撑盒宽,文字色随自身 tone 采样自适应。
+for (const snippet of [
+  "import { LiquidGlassSurface } from './liquid-glass'",
+  'export function GlassLabel',
+  'cornerRadius={999}',
+  'padding="6px 10px"',
+  'data-background-tone={backgroundTone ?? undefined}',
+  'className="glass-label__sizer"',
+]) {
+  assert.ok(
+    glassLabelSource.includes(snippet),
+    `glass-label.tsx must include ${snippet}.`,
+  )
+}
 assert.ok(
-  liquidGlassCapsuleButtonBlock.includes('border: none;') &&
-    liquidGlassCapsuleButtonBlock.includes('cursor: pointer;'),
-  'The capsule page liquid glass chips must be whole buttons: button.liquid-glass-chip resets the button chrome while span title capsules keep the plain .liquid-glass-chip base.',
+  !glassLabelSource.includes('onClick'),
+  'GlassLabel must stay a non-interactive label: press feedback belongs to CapsuleButton liquid-glass.',
 )
+for (const snippet of [
+  'label="玻璃标签"',
+  '<GlassLabel size="sm">浮动栏</GlassLabel>',
+  '<GlassLabel size="lg">页面标题</GlassLabel>',
+]) {
+  assert.ok(
+    barDefinitionSource.includes(snippet),
+    `The GlassLabel preview card must include ${snippet}.`,
+  )
+}
 for (const snippet of [
   'label="浮动工具栏"',
   '<LiquidGlassTile className="liquid-glass-toolbar-preview">',
-  'liquid-glass-chip--sm',
+  '<GlassLabel size="sm">浮动栏</GlassLabel>',
   'liquid-glass-icon-button--sm',
 ]) {
   assert.ok(
@@ -152,8 +177,8 @@ for (const snippet of [
 for (const snippet of [
   'label="顶部工具栏"',
   '<LiquidGlassTile className="liquid-glass-toolbar-preview">',
-  'liquid-glass-chip--lg',
-  'top-bar-preview__title',
+  "import { GlassLabel } from 'weimo-ui-core/components/glass-label'",
+  '<GlassLabel size="lg">页面标题</GlassLabel>',
 ]) {
   assert.ok(
     pageLayoutDefinitionSource.includes(snippet),
@@ -209,9 +234,39 @@ assert.ok(
   'liquid-glass must ship its semantic transition CSS.',
 )
 
+for (const snippet of [
+  "id: 'glass-label'",
+  "name: 'GlassLabel'",
+  "registryName: 'glass-label'",
+  "packageExport: './components/glass-label'",
+]) {
+  assert.ok(manifestSource.includes(snippet), `components-manifest.ts must include ${snippet}.`)
+}
+assert.equal(glassLabelRegistryItem.type, 'registry:ui', 'glass-label must stay a registry:ui item.')
+assert.ok(
+  !glassLabelRegistryItem.dependencies?.includes('liquid-glass-react'),
+  'glass-label must not declare the liquid-glass-react npm dependency: the engine is vendored in-repo.',
+)
+for (const filePath of [
+  'packages/weimo-ui-core/src/components/glass-label.tsx',
+  'packages/weimo-ui-core/src/components/glass-label.css',
+  'packages/weimo-ui-core/src/components/liquid-glass.tsx',
+  'packages/weimo-ui-core/src/components/liquid-glass-react/index.tsx',
+  'packages/weimo-ui-core/src/components/liquid-glass-react/LICENSE',
+]) {
+  assert.ok(
+    glassLabelRegistryItem.files.some((file) => file.path === filePath),
+    `glass-label must ship ${filePath} so the label installs with its glass engine.`,
+  )
+}
+
 assert.ok(
   packageJson.exports['./components/liquid-glass'],
   'package.json must export ./components/liquid-glass.',
+)
+assert.ok(
+  packageJson.exports['./components/glass-label'],
+  'package.json must export ./components/glass-label.',
 )
 assert.ok(
   !packageJson.dependencies['liquid-glass-react'],
@@ -292,11 +347,31 @@ assert.ok(
 )
 assert.ok(
   appCss.includes('text-shadow 160ms ease;') &&
-    appCss.includes('.liquid-glass-chip__label {') &&
-    appCss.includes('color 160ms ease,') &&
-    appCss.includes('button.liquid-glass-chip,') &&
+    appCss.includes('.liquid-glass-preview__title') &&
     appCss.includes('transition-duration: 1ms;'),
-  'Liquid glass previews and labels must transition tone and text shadow together and respect reduced motion.',
+  'Liquid glass previews must transition tone and text shadow together and respect reduced motion.',
+)
+for (const snippet of [
+  '.glass-label__text {',
+  'color 160ms ease,',
+  'text-shadow 160ms ease;',
+  ".glass-label[data-background-tone='light'] .glass-label__text",
+  'text-shadow: none;',
+  '@media (prefers-reduced-motion: reduce)',
+  'transition-duration: 1ms;',
+]) {
+  assert.ok(
+    glassLabelCss.includes(snippet),
+    `GlassLabel CSS must include ${snippet}.`,
+  )
+}
+assert.ok(
+  glassLabelCss.includes('var(--liquid-glass-fg-on-dark)') &&
+    glassLabelCss.includes('var(--liquid-glass-fg-on-light)') &&
+    glassLabelCss.includes('font-size: var(--font-size-lg);') &&
+    glassLabelCss.includes('font-weight: 600;') &&
+    glassLabelCss.includes('padding: 6px 10px;'),
+  'GlassLabel must adapt its text color to the sampled tone, bold the lg size, and mirror the glass 6px 10px padding in its sizer.',
 )
 assert.ok(
   appCss.includes('color-mix(in srgb, currentColor 12%, transparent)') &&

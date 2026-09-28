@@ -1,0 +1,57 @@
+@layer components {
+  /* 液态玻璃标题标签:盒只管布局与 tone 采样,玻璃层绝对居中覆盖,隐藏
+     sizer 复刻文字撑盒宽;文字色随 tone 在明暗两枚前景 token 间切换。 */
+  .glass-label {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    color: var(--liquid-glass-fg-on-dark);
+  }
+
+  .glass-label[data-background-tone='light'] {
+    color: var(--liquid-glass-fg-on-light);
+  }
+
+  .glass-label__text {
+    display: block;
+    white-space: nowrap;
+    line-height: 1;
+    transition:
+      color 160ms ease,
+      text-shadow 160ms ease;
+  }
+
+  /* 库内容层 .liquid-glass__content 带内联 font:500 20px,样式表无法覆写该层:
+     字号/字重下沉到文字与 sizer 自身声明,玻璃层才会与 sizer 同宽;
+     sizer 复刻玻璃层的 6px 10px 内边距,盒宽即玻璃宽。 */
+  .glass-label__liquid-glass-layer .glass-label__text,
+  .glass-label__sizer {
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
+    font-weight: 400;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .glass-label--lg .glass-label__liquid-glass-layer .glass-label__text,
+  .glass-label--lg .glass-label__sizer {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+  }
+
+  /* 库在内容层内联了暗底文字投影,亮背景下会发虚,随 tone 关闭。 */
+  .glass-label[data-background-tone='light'] .glass-label__text {
+    text-shadow: none;
+  }
+
+  .glass-label__sizer {
+    visibility: hidden;
+    padding: 6px 10px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .glass-label__text {
+      transition-duration: 1ms;
+    }
+  }
+}

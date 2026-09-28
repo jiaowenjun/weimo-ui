@@ -3,6 +3,7 @@ import { Check, Plus, Search, X } from 'lucide-react'
 import { BottomBar } from 'weimo-ui-core/components/bottom-bar'
 import { CardSurface } from 'weimo-ui-core/components/card-surface'
 import { CapsuleButton } from 'weimo-ui-core/components/capsule-button'
+import { GlassLabel } from 'weimo-ui-core/components/glass-label'
 import { LiquidGlassSurface } from 'weimo-ui-core/components/liquid-glass'
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import { FloatBar } from 'weimo-ui-core/components/float-bar'
@@ -10,6 +11,19 @@ import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'
 import type { ComponentDefinition } from '../../component-docs'
 import { GlassPreviewCard } from '../../../components/glass-preview-card'
 import { LiquidGlassTile } from '../../../components/liquid-glass-tile'
+
+// 玻璃标签:液态玻璃材质的标题文字胶囊(全胶囊圆角),文字色随画布 tone
+// 自适应;sm 档用于工具栏栏位标题,lg 档(粗体)用于页面标题。
+function GlassLabelDemo() {
+  return (
+    <GlassPreviewCard label="玻璃标签">
+      <div aria-label="玻璃标签预览" className="liquid-glass-label-preview">
+        <GlassLabel size="sm">浮动栏</GlassLabel>
+        <GlassLabel size="lg">页面标题</GlassLabel>
+      </div>
+    </GlassPreviewCard>
+  )
+}
 
 function BottomBarDemo() {
   return (
@@ -47,8 +61,8 @@ function BottomBarDemo() {
 }
 
 // 浮动工具栏示例改用液态玻璃按钮与液态玻璃胶囊文字(底部/顶部工具栏保持磨砂):
-// 图标钮/按钮组复用按钮页 .liquid-glass-icon-* 尺寸档,胶囊复用 .liquid-glass-chip 档,
-// 图标与文字色随画布 tone 自适应(容器持有 data-background-tone)。
+// 图标钮/按钮组复用按钮页 .liquid-glass-icon-* 尺寸档,标题文字用 GlassLabel 组件,
+// 图标与文字色随画布 tone 自适应(图标色由容器持有 data-background-tone)。
 function FloatBarDemo() {
   return (
     <GlassPreviewCard label="浮动工具栏">
@@ -56,13 +70,7 @@ function FloatBarDemo() {
         <FloatBar
           aria-label="浮动工具栏预览"
           className="internal-float-preview"
-          leftSlot={
-            <span className="liquid-glass-chip liquid-glass-chip--sm">
-              <LiquidGlassSurface cornerRadius={999} padding="6px 10px">
-                <span className="liquid-glass-chip__label liquid-glass-chip__label--sm">浮动栏</span>
-              </LiquidGlassSurface>
-            </span>
-          }
+          leftSlot={<GlassLabel size="sm">浮动栏</GlassLabel>}
           rightSlot={
             <span className="internal-preview__actions">
               <button
@@ -102,6 +110,7 @@ function FloatBarDemo() {
 function BarDemo() {
   return (
     <>
+      <GlassLabelDemo />
       <FloatBarDemo />
       <BottomBarDemo />
     </>
@@ -110,12 +119,14 @@ function BarDemo() {
 
 export const barDefinition = {
   id: 'bar',
-  summary: '浮动工具栏与底部操作栏总览',
+  summary: '玻璃标签与浮动/底部工具栏总览',
   status: 'Ready',
   frame: 'plain',
   searchAliases: [
     'BottomBar',
     'FloatBar',
+    'GlassLabel',
+    '玻璃标签',
     '底部操作栏',
     '浮动工具栏',
   ],

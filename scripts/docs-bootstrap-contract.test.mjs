@@ -91,15 +91,17 @@ for (const snippet of [
   )
 }
 
-// 顶部栏改走液态玻璃:标题胶囊/侧边栏钮/搜索与主题组都是 LiquidGlassSurface 层,
-// 搜索与主题两颗按钮收在同一枚玻璃胶囊里,色随页面背景 tone 自适应。
+// 顶部栏改走液态玻璃:标题胶囊用 GlassLabel 组件,侧边栏钮/搜索与主题组是
+// LiquidGlassSurface 层,搜索与主题两颗按钮收在同一枚玻璃胶囊里,色随页面
+// 背景 tone 自适应。
 for (const snippet of [
   "import { LiquidGlassSurface } from 'weimo-ui-core/components/liquid-glass'",
+  "import { GlassLabel } from 'weimo-ui-core/components/glass-label'",
   "import { LiquidGlassTile } from './components/liquid-glass-tile'",
   '<LiquidGlassTile className="docs-liquid-top-bar">',
   'liquid-glass-icon-button-group docs-top-bar__actions',
   'liquid-glass-icon-button-group__item',
-  'docs-top-bar__title-sizer',
+  '<GlassLabel className="docs-top-bar__title" key={selected.name} size="lg">',
   'title="按 / 搜索"',
 ]) {
   assert.ok(

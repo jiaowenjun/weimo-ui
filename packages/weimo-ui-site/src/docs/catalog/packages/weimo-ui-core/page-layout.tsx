@@ -1,6 +1,7 @@
 import { Menu, Search } from 'lucide-react'
 
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
+import { GlassLabel } from 'weimo-ui-core/components/glass-label'
 import { LiquidGlassSurface } from 'weimo-ui-core/components/liquid-glass'
 import { TopBar } from 'weimo-ui-core/components/top-bar'
 import type { ComponentDefinition } from '../../component-docs'
@@ -60,7 +61,7 @@ function renderTopBarSearchButton() {
 }
 
 // 顶部工具栏示例同样改走液态玻璃(标题胶囊/按钮与浮动工具栏同规则):
-// 标题胶囊复用 .liquid-glass-chip lg 档,字重沿用 .top-bar-preview__title 的 600。
+// 标题胶囊用 GlassLabel lg 档(粗体 600)。
 function TopBarDemo() {
   return (
     <GlassPreviewCard label="顶部工具栏">
@@ -70,13 +71,7 @@ function TopBarDemo() {
           leftSlot={
             <>
               {renderTopBarSidebarButton()}
-              <span className="liquid-glass-chip liquid-glass-chip--lg">
-                <LiquidGlassSurface cornerRadius={999} padding="6px 10px">
-                  <span className="liquid-glass-chip__label liquid-glass-chip__label--lg top-bar-preview__title">
-                    页面标题
-                  </span>
-                </LiquidGlassSurface>
-              </span>
+              <GlassLabel size="lg">页面标题</GlassLabel>
             </>
           }
           rightSlot={renderTopBarSearchButton()}
