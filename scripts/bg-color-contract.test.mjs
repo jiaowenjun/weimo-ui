@@ -439,12 +439,12 @@ assert.ok(
 assert.ok(
   firstBlockFor(appCss, '.bg-color-preview__swatch-canvas').includes('container-type: inline-size;') &&
     firstBlockFor(appCss, '.bg-color-preview__swatch-group').includes('grid-template-columns: repeat(8, 42px);') &&
-    firstBlockFor(appCss, '.bg-color-preview__swatch-group').includes('gap: clamp(12px, 2vw, 36px);') &&
+    firstBlockFor(appCss, '.bg-color-preview__swatch-group').includes('gap: clamp(12px, 2vw, 24px);') &&
     firstBlockFor(appCss, '.bg-color-preview__swatch-group').includes('padding-inline: 16px;') &&
     firstBlockFor(appCss, '@container (width < 620px)').includes(
       'grid-template-columns: repeat(4, minmax(42px, 48px));',
     ),
-  'The merged swatch grid must stay 8-per-row on wide canvases and fall back to two clamped rows of 4 (42-48px, 12-36px gap) below the 620px threshold.',
+  'The merged swatch grid must stay 8-per-row on wide canvases and fall back to two clamped rows of 4 (42-48px, 12-24px gap) below the 620px threshold.',
 )
 const selectionSampleBlock = blockFor(appCss, '.bg-color-preview__selection-sample')
 const selectionHighlightBlock = blockFor(appCss, '.bg-color-preview__selection-highlight')

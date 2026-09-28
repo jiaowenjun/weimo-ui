@@ -174,7 +174,7 @@ assert.ok(
 )
 assert.ok(
   heatColorGroupBlock.includes('display: flex;') &&
-    heatColorGroupBlock.includes('gap: clamp(6px, 2vw, 16px);') &&
+    heatColorGroupBlock.includes('gap: clamp(12px, 2vw, 24px);') &&
     heatColorSwatchBlock.includes('aspect-ratio: 1;') &&
     heatColorSwatchBlock.includes('border-radius: var(--radius-sm);') &&
     !heatColorSwatchBlock.includes('border:') &&

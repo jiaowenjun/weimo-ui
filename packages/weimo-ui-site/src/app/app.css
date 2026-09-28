@@ -636,7 +636,7 @@
   width: 100%;
   align-items: center;
   justify-content: center;
-  gap: clamp(6px, 2vw, 16px);
+  gap: clamp(12px, 2vw, 24px);
 }
 
 .heat-color-preview__swatch {
@@ -660,7 +660,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  gap: clamp(12px, 2vw, 36px);
+  gap: clamp(12px, 2vw, 24px);
   /* 左右内边距把色块挡在画布 16px 圆角之外 */
   padding-inline: 16px;
 }
@@ -671,7 +671,7 @@
   border-radius: var(--radius-sm);
 }
 
-/* 容器不足 8 枚一行(8×42px+7×36px 间隙+2×16px 内边距=620px)时改两行 4 枚,色块 42~48px 自适应 */
+/* 容器不足 8 枚一行(8×42px+7×24px 间隙+2×16px 内边距=536px,阈值沿用 620px 保守值)时改两行 4 枚,色块 42~48px 自适应 */
 @container (width < 620px) {
   .bg-color-preview__swatch-group {
     grid-template-columns: repeat(4, minmax(42px, 48px));
