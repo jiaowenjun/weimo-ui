@@ -54,7 +54,7 @@ const componentCss = readProjectFile(
   'packages/weimo-ui-stats/src/components/heatmap/heatmap.css',
 )
 const heatColorLevelsSource = readProjectFile(
-  'packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.tsx',
+  'packages/weimo-ui-stats/src/components/heatmap/heat-color.tsx',
 )
 const tooltipSource = readProjectFile('packages/weimo-ui-core/src/components/primitives/tooltip.tsx')
 const tooltipCss = readProjectFile('packages/weimo-ui-core/src/components/primitives/tooltip.css')

@@ -16,7 +16,7 @@ import {
   getHeatColorToken,
   heatColorLevels,
   heatColorMap,
-} from 'weimo-ui-core/components/heat-color'
+} from 'weimo-ui-stats/components/heat-color'
 import { pressableToneMap, pressableTones } from 'weimo-ui-core/components/pressable'
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import { GlassPreviewCard } from '../../../previews/glass-preview-card'

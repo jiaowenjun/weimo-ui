@@ -12,8 +12,10 @@
     "README.md"
   ],
   "exports": {
+    "./components/heat-color": "./src/components/heatmap/heat-color.tsx",
     "./components/heatmap": "./src/components/heatmap/index.ts",
     "./components/stat-group": "./src/components/stat-group/stat-group.tsx",
+    "./styles/heat-color.css": "./src/components/heatmap/heat-color.css",
     "./styles/heatmap.css": "./src/components/heatmap/heatmap.css",
     "./styles/stat-group.css": "./src/components/stat-group/stat-group.css"
   },

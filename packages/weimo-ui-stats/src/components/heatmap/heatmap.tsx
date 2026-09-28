@@ -7,7 +7,7 @@ import {
   TooltipTrigger,
 } from 'weimo-ui-core/components/coss/tooltip'
 import { cn } from 'weimo-ui-core/lib/utils'
-import { getHeatColorClassName } from 'weimo-ui-core/components/heat-color'
+import { getHeatColorClassName } from 'weimo-ui-stats/components/heat-color'
 import {
   buildHeatmapCells,
   buildHeatmapColumns,

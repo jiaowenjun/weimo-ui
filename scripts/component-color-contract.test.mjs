@@ -42,6 +42,22 @@ const rawColorPattern = /#[\da-f]{3,8}\b|rgba?\([^)]*\)|hsla?\([^)]*\)/gi
 const allowlistedTokenFiles = new Set(['packages/weimo-ui-core/src/styles/tokens.css'])
 const allowlistedComponentColors = new Map([
   [
+    // 热力图背景色 token 随 HeatColor 迁入 stats:亮暗两主题的字面量值与 utilities 同文件交付
+    'packages/weimo-ui-stats/src/components/heatmap/heat-color.css',
+    new Set([
+      'hsl(0 0% 94%)',
+      'hsl(18 62% 89%)',
+      'hsl(18 62% 78%)',
+      'hsl(18 62% 65%)',
+      'hsl(18 62% 52%)',
+      'hsl(0 0% 19%)',
+      'hsl(23 31% 22%)',
+      'hsl(23 42% 32%)',
+      'hsl(23 50% 44%)',
+      'hsl(23 68% 56%)',
+    ]),
+  ],
+  [
     'packages/weimo-ui-core/src/components/composites/cards/component-preview-card.css',
     new Set([
       'hsl(18.1 71.9% 46.1% / 0.72)',
@@ -68,7 +84,7 @@ const hslOnlyTokenSources = [
   'packages/weimo-ui-core/src/styles/variants/background/bg-blur.ts',
   'packages/weimo-ui-core/src/styles/variants/background/bg-color.ts',
   'packages/weimo-ui-core/src/styles/variants/border/border-color.ts',
-  'packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.tsx',
+  'packages/weimo-ui-stats/src/components/heatmap/heat-color.tsx',
   'packages/weimo-ui-core/src/styles/variants/typography/text-color.ts',
   'registry/style.json',
 ]

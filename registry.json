@@ -160,11 +160,6 @@
           "color-bg-chip": "hsl(40 12% 92%)",
           "color-bg-selection": "hsl(var(--primary) / 0.2)",
           "color-bg-backdrop": "hsl(214.3 33.3% 4.1% / 0.32)",
-          "color-heat-0": "hsl(0 0% 94%)",
-          "color-heat-1": "hsl(18 62% 89%)",
-          "color-heat-2": "hsl(18 62% 78%)",
-          "color-heat-3": "hsl(18 62% 65%)",
-          "color-heat-4": "hsl(18 62% 52%)",
           "color-heatmap-today-ring": "hsl(18.1 71.9% 46.1% / 0.55)",
           "color-bg-hover": "hsl(40 12% 90%)",
           "color-bg-nested-hover": "hsl(40 12% 88%)",
@@ -208,11 +203,6 @@
           "color-border-disabled-on-dark": "hsl(0 0% 24%)",
           "color-bg-chip": "hsl(0 0% 19%)",
           "color-bg-selection": "hsl(var(--primary) / 0.2)",
-          "color-heat-0": "hsl(0 0% 19%)",
-          "color-heat-1": "hsl(23 31% 22%)",
-          "color-heat-2": "hsl(23 42% 32%)",
-          "color-heat-3": "hsl(23 50% 44%)",
-          "color-heat-4": "hsl(23 68% 56%)",
           "color-heatmap-today-ring": "hsl(0 0% 100% / 0.38)",
           "color-bg-hover": "hsl(0 0% 21%)",
           "color-bg-nested-hover": "hsl(0 0% 28%)",
@@ -354,32 +344,6 @@
           "path": "packages/weimo-ui-core/src/styles/variants/background/bg-blur.css",
           "type": "registry:ui",
           "target": "@ui/bg-blur.css"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "name": "heat-color",
-      "type": "registry:ui",
-      "title": "Heat Color",
-      "description": "Standalone heatmap heat color utilities shared by Heatmap.",
-      "categories": [
-        "display"
-      ],
-      "registryDependencies": [
-        "@weimo/style",
-        "@weimo/utils"
-      ],
-      "files": [
-        {
-          "path": "packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.tsx",
-          "type": "registry:ui",
-          "target": "@ui/heat-color.tsx"
-        },
-        {
-          "path": "packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.css",
-          "type": "registry:ui",
-          "target": "@ui/heat-color.css"
         }
       ]
     },
@@ -2027,6 +1991,32 @@
           "path": "packages/weimo-ui-stats/src/components/stat-group/stat-group.css",
           "type": "registry:ui",
           "target": "@ui/stat-group/stat-group.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "heat-color",
+      "type": "registry:ui",
+      "title": "Heat Color",
+      "description": "Standalone heatmap heat color utilities shared by Heatmap.",
+      "categories": [
+        "display"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/weimo-ui-stats/src/components/heatmap/heat-color.tsx",
+          "type": "registry:ui",
+          "target": "@ui/heat-color.tsx"
+        },
+        {
+          "path": "packages/weimo-ui-stats/src/components/heatmap/heat-color.css",
+          "type": "registry:ui",
+          "target": "@ui/heat-color.css"
         }
       ]
     },

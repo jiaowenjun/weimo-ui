@@ -115,6 +115,8 @@ const packageRules = [
       "from '../coss/",
     ],
     requiredExports: {
+      './components/heat-color': './src/components/heatmap/heat-color.tsx',
+      './styles/heat-color.css': './src/components/heatmap/heat-color.css',
       './styles/heatmap.css': './src/components/heatmap/heatmap.css',
       './styles/stat-group.css': './src/components/stat-group/stat-group.css',
     },
@@ -305,7 +307,7 @@ for (const [relativePath, dependencyPath] of [
     'packages/weimo-ui-image/src/components/image-uploader/image-uploader.tsx',
     'weimo-ui-core/lib/utils',
   ],
-  ['packages/weimo-ui-stats/src/components/heatmap/heatmap.tsx', 'weimo-ui-core/components/heat-color'],
+  ['packages/weimo-ui-stats/src/components/heatmap/heatmap.tsx', 'weimo-ui-stats/components/heat-color'],
   [
     'packages/weimo-ui-stats/src/components/stat-group/stat-group.tsx',
     'weimo-ui-core/lib/utils',

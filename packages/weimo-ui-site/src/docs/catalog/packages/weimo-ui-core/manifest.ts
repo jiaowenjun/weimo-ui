@@ -20,7 +20,6 @@ export const coreCatalog = {
       packageExport: './components/bg-color',
       components: [
         { id: 'bg-blur', name: '背景模糊度', registryName: 'bg-blur', packageExport: './components/bg-blur' },
-        { id: 'heat-color', name: '热力图色', registryName: 'heat-color', packageExport: './components/heat-color' },
         { id: 'pressable', name: '按压反馈色', registryName: 'pressable', packageExport: './components/pressable' },
       ],
     },

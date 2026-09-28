@@ -11,6 +11,7 @@ export const statsCatalog = {
       registryName: 'stat-group',
       packageExport: './components/stat-group',
       components: [
+        { id: 'heat-color', name: '热力图色', registryName: 'heat-color', packageExport: './components/heat-color' },
         { id: 'heatmap', name: 'Heatmap', registryName: 'heatmap', packageExport: './components/heatmap' },
       ],
     },

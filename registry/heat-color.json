@@ -13,12 +13,12 @@
   ],
   "files": [
     {
-      "path": "packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.tsx",
+      "path": "packages/weimo-ui-stats/src/components/heatmap/heat-color.tsx",
       "type": "registry:ui",
       "target": "@ui/heat-color.tsx"
     },
     {
-      "path": "packages/weimo-ui-core/src/styles/variants/background/heat-color/heat-color.css",
+      "path": "packages/weimo-ui-stats/src/components/heatmap/heat-color.css",
       "type": "registry:ui",
       "target": "@ui/heat-color.css"
     }

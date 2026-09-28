@@ -13,7 +13,7 @@
 | 按钮与控件 | `components/text-button`、`capsule-button`、`frosted-icon-button`、`ghost-icon-button`、`slider` |
 | 组合组件 | `components/menu`、`action-dialog`、`mode-button`、`base-card`、`component-preview-card` |
 | 布局 | `components/sidebar`、`top-bar`、`bottom-bar`、`float-bar` |
-| 样式变体 | `components/font-size`、`text-color`、`bg-color`、`bg-blur`、`heat-color`、`border-color`、`border-radius`、`pressable` |
+| 样式变体 | `components/font-size`、`text-color`、`bg-color`、`bg-blur`、`border-color`、`border-radius`、`pressable` |
 | 通用行为 | `components/animated-inline-size`、`lib/use-infinite-list-sentinel` |
 | 基础适配 | `components/coss/*` |
 

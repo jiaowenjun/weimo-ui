@@ -178,6 +178,7 @@ function writeConsumerProject(consumerDir, registryUrl) {
             'weimo-ui-markdown/components/md-render': ['./src/components/ui/md-render/md-render.tsx'],
             'weimo-ui-markdown/components/md-view': ['./src/components/ui/md-view/md-view.tsx'],
             'weimo-ui-markdown/styles/*': ['./src/components/ui/*'],
+            'weimo-ui-stats/components/heat-color': ['./src/components/ui/heat-color.tsx'],
             'weimo-ui-stats/components/heatmap': ['./src/components/ui/heatmap/index.ts'],
             'weimo-ui-stats/components/stat-group': ['./src/components/ui/stat-group/stat-group.tsx'],
             'weimo-ui-tagtree/components/coss/*': ['./src/components/ui/coss/*'],
@@ -942,6 +943,12 @@ try {
     existsSync(join(consumerDir, 'src/components/ui/heat-color.css')),
     'shadcn add must write the HeatColor utility stylesheet from the configured custom registry.',
   )
+  const consumerHeatColorCss = readFileSync(
+    join(consumerDir, 'src/components/ui/heat-color.css'),
+    'utf8',
+  )
+  assert.match(consumerHeatColorCss, /--color-heat-0:\s*hsl\(0 0% 94%\);/)
+  assert.match(consumerHeatColorCss, /--color-heat-4:\s*hsl\(23 68% 56%\);/)
   assert.ok(
     existsSync(join(consumerDir, 'src/components/ui/bg-blur.ts')),
     'shadcn add must write the public BgBlur tone map from the configured custom registry.',
@@ -1468,8 +1475,7 @@ try {
   assert.match(consumerCss, /--radius:\s*16px;/)
   assert.match(consumerCss, /--color-background:\s*hsl\(var\(--background\)\);/)
   assert.match(consumerCss, /--color-bg-card:/)
-  assert.match(consumerCss, /--color-heat-0:\s*hsl\(0 0% 94%\);/)
-  assert.match(consumerCss, /--color-heat-1:\s*hsl\(18 62% 89%\);/)
+  assert.doesNotMatch(consumerCss, /--color-heat-\d/)
   assert.match(consumerCss, /--color-heatmap-today-ring:\s*hsl\(18\.1 71\.9% 46\.1% \/ 0\.55\);/)
   assert.ok(
     (tagPickerSource.includes("from 'weimo-ui-tagtree/components/coss/input-group'") ||

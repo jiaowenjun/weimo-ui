@@ -198,7 +198,6 @@ assert.deepEqual(
   [
     'text-color',
     'bg-blur',
-    'heat-color',
     'pressable',
     'border-radius',
     'frosted-surface',
@@ -217,6 +216,7 @@ assert.deepEqual(
     'md-view',
     'image-uploader',
     'canvas-transparency',
+    'heat-color',
     'heatmap',
     'card-top-bar',
     'card-composer',
