@@ -15,6 +15,7 @@
 ### 故障排查
 
 - [Card 编辑态过渡](troubleshooting/card-edit-transition.md)：卡片编辑切换中的测量、FLIP 和异步编辑器初始化问题。
+- [阴影裁切排查与预览窗放行规范](troubleshooting/shadow-clipping.md)：tone 投影时代的裁切三层模型、`:has` 放行白名单维护规则与裁切诊断方法。
 
 ## 子项目文档
 
