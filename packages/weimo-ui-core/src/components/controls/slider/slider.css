@@ -3,6 +3,11 @@
    thumb 与 indicator 的几何由 --fill 一个自定义属性驱动；平滑移动 = 纯 CSS
    transition，按住（:active）期间禁用过渡保证拖动逐帧跟手。 */
 .slider {
+  /* 组件专属背景 token：定义在 .slider 内部、仅滑块子树可用，
+     值别名共享色板（禁裸色值），视觉与共享 token 保持单源同步。 */
+  --slider-track-bg: var(--color-border);
+  --slider-indicator-bg: var(--color-bg-primary);
+  --slider-thumb-bg: var(--color-bg-primary);
   position: relative;
   width: 140px;
   height: 20px;
@@ -26,7 +31,7 @@
   height: 4px;
   translate: 0 -50%;
   border-radius: var(--radius-round);
-  background: var(--color-border);
+  background: var(--slider-track-bg);
   pointer-events: none;
 }
 
@@ -37,7 +42,7 @@
   /* 滑块中心行程 = 轨道宽 − 滑块宽（与 Base UI 的 inset 定位几何一致） */
   inline-size: calc(7px + (100% - 14px) * var(--fill));
   border-radius: inherit;
-  background: var(--color-bg-primary);
+  background: var(--slider-indicator-bg);
   transition: inline-size 300ms ease-out;
 }
 
@@ -49,7 +54,7 @@
   height: 14px;
   border: 2px solid var(--color-bg-card);
   border-radius: var(--radius-round);
-  background: var(--color-bg-primary);
+  background: var(--slider-thumb-bg);
   translate: -50% -50%;
   transition: inset-inline-start 300ms ease-out;
   pointer-events: none;
