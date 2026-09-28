@@ -173,10 +173,12 @@ assertIncludes(
   'position: relative;',
   'CardToolBar docs preview surface must provide an absolute positioning context.',
 )
-assertIncludes(
-  previewSurfaceBlock,
-  'overflow: hidden;',
-  'CardToolBar docs preview surface must clip the internal absolute bottom bar.',
+// 贴底工具栏(实为 BottomBar 封装)四周 12px 内缩不碰圆角,磨砂 tone 投影须
+// 溢出内嵌卡画进外层卡片 padding;旧 overflow: hidden 是 tone 投影时代之前的
+// 防御性裁切,已随材质规则反转。
+assert.ok(
+  !previewSurfaceBlock.includes('overflow'),
+  'CardToolBar docs preview surface must let the tone-aligned bar shadow escape into the outer card padding.',
 )
 
 assert.ok(
