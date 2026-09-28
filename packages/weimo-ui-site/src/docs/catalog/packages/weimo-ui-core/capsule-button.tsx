@@ -6,21 +6,16 @@ import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview
 import { LabeledSwitch } from 'weimo-ui-core/components/labeled-switch'
 import type { ComponentDefinition } from '../../component-docs'
 import { GlassPreviewCard } from '../../../previews/glass-preview-card'
-import { LiquidGlassTile } from '../../../previews/liquid-glass-tile'
 
-// 胶囊材质:普通(default 态)、磨砂(frosted 态)、液态玻璃(liquid-glass 态,
-// 组件内部包 LiquidGlassSurface 与隐藏 sizer)三例并列于灰度画布,拖动滑块
-// 可对比三种材质随背景的表现,磨砂/液态玻璃文字色随自身 tone 采样自适应。
+// 胶囊材质:普通(default 态)、磨砂(frosted 态)两例并列于灰度画布,拖动滑块
+// 可对比两种材质随背景的表现,磨砂文字色随自身 tone 采样自适应。
 function CapsuleMaterialDemo() {
   return (
     <GlassPreviewCard label="胶囊材质">
-      <LiquidGlassTile className="liquid-glass-chip-preview">
-        <div aria-label="胶囊材质预览" className="capsule-material-row">
-          <CapsuleButton prefix={null} state="default">普通胶囊</CapsuleButton>
-          <CapsuleButton prefix={null} state="frosted">磨砂胶囊</CapsuleButton>
-          <CapsuleButton prefix={null} state="liquid-glass">液态玻璃胶囊</CapsuleButton>
-        </div>
-      </LiquidGlassTile>
+      <div aria-label="胶囊材质预览" className="capsule-material-row">
+        <CapsuleButton prefix={null} state="default">普通胶囊</CapsuleButton>
+        <CapsuleButton prefix={null} state="frosted">磨砂胶囊</CapsuleButton>
+      </div>
     </GlassPreviewCard>
   )
 }
@@ -33,17 +28,6 @@ function CapsuleSlotDemo() {
         <CapsuleButton
           prefix={null}
           state="frosted"
-          suffix={
-            <span aria-hidden="true" className="icon-button icon-button--ghost icon-button--xs">
-              <X aria-hidden="true" />
-            </span>
-          }
-        >
-          可关闭标签
-        </CapsuleButton>
-        <CapsuleButton
-          prefix={<Hash aria-hidden="true" />}
-          state="liquid-glass"
           suffix={
             <span aria-hidden="true" className="icon-button icon-button--ghost icon-button--xs">
               <X aria-hidden="true" />
@@ -148,7 +132,7 @@ function CapsuleButtonDemo() {
 
 export const capsuleButtonDefinition = {
   id: 'capsule-button',
-  summary: '按钮形态的交互胶囊：前后缀、磨砂/液态玻璃状态与内容宽度切换',
+  summary: '按钮形态的交互胶囊：前后缀、磨砂状态与内容宽度切换',
   status: 'Preview',
   frame: 'plain',
   searchAliases: [
@@ -161,7 +145,6 @@ export const capsuleButtonDefinition = {
     '胶囊长度切换',
     '胶囊前缀',
     '胶囊后缀',
-    '液态玻璃胶囊',
     '胶囊材质',
   ],
   preview: () => <CapsuleButtonDemo />,

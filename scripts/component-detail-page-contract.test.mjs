@@ -100,12 +100,12 @@ const iconPreviewRowBlock = blockFor(css, '.icon-preview__row')
 assert.ok(
   docsShellSource.includes('className="docs-top-bar__title"') &&
     docsShellSource.includes('{selected.name}') &&
-    docsShellSource.includes('<GlassLabel') &&
+    docsShellSource.includes('<FrostedLabel') &&
     !detailPageSource.includes('<h1') &&
     !detailPageSource.includes('doc-page__header') &&
     !css.includes('.doc-page__title') &&
     css.includes('.docs-top-bar__title'),
-  'component titles must render in the liquid glass TopBar capsule instead of consuming detail-page content space.',
+  'component titles must render in the TopBar capsule (FrostedLabel) instead of consuming detail-page content space.',
 )
 
 assert.ok(

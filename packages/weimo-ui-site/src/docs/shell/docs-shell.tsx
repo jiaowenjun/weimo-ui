@@ -24,9 +24,12 @@ import {
   CommandList,
 } from '../../components/primitives/command'
 import { TopBar } from 'weimo-ui-core/components/top-bar'
-import { GlassLabel } from 'weimo-ui-core/components/glass-label'
-import { LiquidGlassSurface } from 'weimo-ui-core/components/liquid-glass'
+import { FrostedLabel } from 'weimo-ui-core/components/frosted-label'
 import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'
+import {
+  FrostedIconButtonGroup,
+  FrostedIconGroupButton,
+} from 'weimo-ui-core/components/frosted-icon-button-group'
 import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'
 import { SideBar } from 'weimo-ui-core/components/sidebar'
 import {
@@ -36,7 +39,6 @@ import {
 } from '../catalog/component-docs'
 import { type DocsOutletContext } from './docs-outlet-context'
 import { componentHref, componentPath } from '../routes'
-import { LiquidGlassTile } from '../previews/liquid-glass-tile'
 import { searchComponentDocs } from '../catalog/search-component-docs'
 
 type Theme = 'light' | 'dark' | 'system'
@@ -199,61 +201,49 @@ export function DocsShell() {
     onComponentSelect: openComponent,
   })
 
-  // 站点顶栏同样走液态玻璃:标题胶囊/侧边栏钮/搜索与主题组;TopBar 本体是
-  // fixed 定位,tone 容器(LiquidGlassTile)按槽各挂一个避免包装层塌陷;
-  // 标题文字长度可变,用隐藏 sizer 同尺寸撑盒宽,玻璃绝对居中覆盖其上。
+  // 站点顶栏:标题胶囊/侧边栏钮/搜索与主题组均为磨砂材质,组件各自采样
+  // 页面背景 tone 自适应;TopBar 本体是 fixed 定位,包装层按槽各挂一个
+  // 避免包装层塌陷。图标钮与组内钮走默认顶栏尺寸档(md)。
   const topBarLeftSlot = (
-    <LiquidGlassTile className="docs-liquid-top-bar">
-      <button
+    <div className="docs-top-bar__slot">
+      <FrostedIconButton
         aria-label="打开侧边栏"
-        className="liquid-glass-icon-button docs-top-bar__sidebar-trigger"
-        type="button"
+        className="docs-top-bar__sidebar-trigger"
         onClick={() => setSidebarOpen(true)}
       >
-        <LiquidGlassSurface cornerRadius={999} onClick={() => {}} padding="12px">
-          <Menu />
-        </LiquidGlassSurface>
-      </button>
+        <Menu />
+      </FrostedIconButton>
       {selected ? (
-        /* 库只在挂载/窗口 resize 时测量各玻璃层尺寸;标题变化时随 key 重挂测量。 */
-        <GlassLabel className="docs-top-bar__title" key={selected.name} size="lg">
+        <FrostedLabel className="docs-top-bar__title" key={selected.name} size="lg">
           {selected.name}
-        </GlassLabel>
+        </FrostedLabel>
       ) : null}
-    </LiquidGlassTile>
+    </div>
   )
   const topBarRightSlot = (
-    <LiquidGlassTile className="docs-liquid-top-bar">
-      <span className="liquid-glass-icon-button-group docs-top-bar__actions">
-        <LiquidGlassSurface cornerRadius={999} padding="0px">
-          <span className="liquid-glass-icon-button-group__row">
-            <button
-              aria-label="搜索"
-              className="liquid-glass-icon-button-group__item"
-              title="按 / 搜索"
-              type="button"
-              onClick={() => setSearchOpen(true)}
-            >
-              <Search />
-            </button>
-            <button
-              aria-label={
-                theme === 'light'
-                  ? '切换到深色主题'
-                  : theme === 'dark'
-                    ? '切换到跟随系统主题'
-                    : '切换到浅色主题'
-              }
-              className="liquid-glass-icon-button-group__item"
-              type="button"
-              onClick={() => setTheme((current) => nextTheme(current))}
-            >
-              {theme === 'system' ? <Monitor /> : theme === 'light' ? <Sun /> : <Moon />}
-            </button>
-          </span>
-        </LiquidGlassSurface>
-      </span>
-    </LiquidGlassTile>
+    <div className="docs-top-bar__slot">
+      <FrostedIconButtonGroup aria-label="搜索与主题" className="docs-top-bar__actions">
+        <FrostedIconGroupButton
+          aria-label="搜索"
+          title="按 / 搜索"
+          onClick={() => setSearchOpen(true)}
+        >
+          <Search />
+        </FrostedIconGroupButton>
+        <FrostedIconGroupButton
+          aria-label={
+            theme === 'light'
+              ? '切换到深色主题'
+              : theme === 'dark'
+                ? '切换到跟随系统主题'
+                : '切换到浅色主题'
+          }
+          onClick={() => setTheme((current) => nextTheme(current))}
+        >
+          {theme === 'system' ? <Monitor /> : theme === 'light' ? <Sun /> : <Moon />}
+        </FrostedIconGroupButton>
+      </FrostedIconButtonGroup>
+    </div>
   )
   const closeSidebar = () => setSidebarOpen(false)
   const sidebarDrawerAction = (

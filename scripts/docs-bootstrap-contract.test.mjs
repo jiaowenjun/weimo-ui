@@ -90,37 +90,33 @@ for (const snippet of [
   )
 }
 
-// 顶部栏改走液态玻璃:标题胶囊用 GlassLabel 组件,侧边栏钮/搜索与主题组是
-// LiquidGlassSurface 层,搜索与主题两颗按钮收在同一枚玻璃胶囊里,色随页面
-// 背景 tone 自适应。
+// 顶部栏改走磨砂:标题胶囊 FrostedLabel,侧边栏钮 FrostedIconButton(默认
+// 顶栏尺寸档),搜索与主题两颗按钮收在同一枚磨砂按钮组里,组件各自采样
+// 页面背景 tone 自适应。
 for (const snippet of [
-  "import { LiquidGlassSurface } from 'weimo-ui-core/components/liquid-glass'",
-  "import { GlassLabel } from 'weimo-ui-core/components/glass-label'",
-  "import { LiquidGlassTile } from '../previews/liquid-glass-tile'",
-  '<LiquidGlassTile className="docs-liquid-top-bar">',
-  'liquid-glass-icon-button-group docs-top-bar__actions',
-  'liquid-glass-icon-button-group__item',
-  '<GlassLabel className="docs-top-bar__title" key={selected.name} size="lg">',
+  "import { FrostedLabel } from 'weimo-ui-core/components/frosted-label'",
+  "import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'",
+  "from 'weimo-ui-core/components/frosted-icon-button-group'",
+  'FrostedIconGroupButton',
+  'className="docs-top-bar__slot"',
+  '<FrostedIconButtonGroup aria-label="搜索与主题" className="docs-top-bar__actions">',
+  '<FrostedLabel className="docs-top-bar__title" key={selected.name} size="lg">',
   'title="按 / 搜索"',
 ]) {
   assert.ok(
     docsShellSource.includes(snippet),
-    `DocsShell liquid glass top bar must include ${snippet}.`,
+    `DocsShell frosted top bar must include ${snippet}.`,
   )
 }
 assert.equal(
-  (docsShellSource.match(/docs-top-bar__actions[\s\S]*?<\/span>/g) ?? []).length,
+  (docsShellSource.match(/docs-top-bar__actions[\s\S]*?<\/div>/g) ?? []).length,
   1,
-  'DocsShell top bar must hold exactly one liquid glass actions pill.',
+  'DocsShell top bar must hold exactly one frosted actions pill.',
 )
 assert.ok(
-  (docsShellSource.match(/docs-top-bar__actions[\s\S]*?<\/span>/)?.[0].match(/<button\b/g) ?? []).length ===
+  (docsShellSource.match(/docs-top-bar__actions[\s\S]*?<\/div>/)?.[0].match(/<FrostedIconGroupButton\b/g) ?? []).length ===
     2,
-  'DocsShell liquid glass actions pill must hold exactly the search and theme toggle buttons.',
-)
-assert.ok(
-  !docsShellSource.includes('FrostedIconButtonGroup'),
-  'DocsShell top bar must not fall back to frosted groups.',
+  'DocsShell frosted actions pill must hold exactly the search and theme toggle buttons.',
 )
 
 assert.ok(

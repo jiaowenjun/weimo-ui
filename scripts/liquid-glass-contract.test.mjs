@@ -20,14 +20,9 @@ const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalo
 const tileSource = readProjectFile('packages/weimo-ui-site/src/docs/previews/liquid-glass-tile.tsx')
 const buttonDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/button.tsx')
 const capsuleButtonDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule-button.tsx')
-const barDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/bar.tsx')
-const pageLayoutDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/page-layout.tsx')
 const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const frostedSurfaceSource = readProjectFile('packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx')
-const glassLabelSource = readProjectFile('packages/weimo-ui-core/src/components/surfaces/liquid-glass/glass-label.tsx')
-const glassLabelCss = readProjectFile('packages/weimo-ui-core/src/components/surfaces/liquid-glass/glass-label.css')
 const registryItem = JSON.parse(readProjectFile('registry/liquid-glass.json'))
-const glassLabelRegistryItem = JSON.parse(readProjectFile('registry/glass-label.json'))
 const packageJson = JSON.parse(readProjectFile('package.json'))
 
 assert.ok(
@@ -110,22 +105,17 @@ for (const snippet of [
 ]) {
   assert.ok(tileSource.includes(snippet), `liquid-glass-tile.tsx must include ${snippet}.`)
 }
-for (const snippet of [
-  'label="液态玻璃图标按钮"',
-  'label="液态玻璃图标按钮组"',
-  '<LiquidGlassSurface cornerRadius={999}',
-  "import { LiquidGlassTile } from '../../../previews/liquid-glass-tile'",
-]) {
-  assert.ok(
-    buttonDefinitionSource.includes(snippet),
-    `The button page liquid glass icon cards must include ${snippet}.`,
-  )
-}
+// 液态玻璃图标按钮/按钮组已删除:它们不是 core 组件,而是按钮页演示层的
+// 组合用法(裸 button + LiquidGlassSurface + 演示级 CSS);工具栏家族全站
+// 磨砂化后不再有演示场景,液态玻璃材质本体的演示只在 Surface 材质页。
+assert.ok(
+  !buttonDefinitionSource.includes('LiquidGlass') &&
+    !buttonDefinitionSource.includes('liquid-glass'),
+  'The button page must not carry liquid glass icon button demos: toolbar families are frosted and the material itself is demoed on the Surface page.',
+)
 for (const snippet of [
   'label="胶囊材质"',
-  '<LiquidGlassTile className="liquid-glass-chip-preview">',
   '<CapsuleButton prefix={null} state="frosted">磨砂胶囊</CapsuleButton>',
-  '<CapsuleButton prefix={null} state="liquid-glass">液态玻璃胶囊</CapsuleButton>',
   '胶囊材质预览',
 ]) {
   assert.ok(
@@ -133,57 +123,9 @@ for (const snippet of [
     `The core CapsuleButton page material card must include ${snippet}.`,
   )
 }
-// GlassLabel:工具栏标题胶囊升格为组件——非交互 span + 液态玻璃层(LiquidGlassSurface)
-// 绝对居中覆盖,隐藏 sizer 复刻文字与内边距撑盒宽,文字色随自身 tone 采样自适应。
-for (const snippet of [
-  "import { LiquidGlassSurface } from './liquid-glass'",
-  'export function GlassLabel',
-  'cornerRadius={999}',
-  'padding="6px 10px"',
-  'data-background-tone={backgroundTone ?? undefined}',
-  'className="glass-label__sizer"',
-]) {
-  assert.ok(
-    glassLabelSource.includes(snippet),
-    `glass-label.tsx must include ${snippet}.`,
-  )
-}
-assert.ok(
-  !glassLabelSource.includes('onClick'),
-  'GlassLabel must stay a non-interactive label: press feedback belongs to CapsuleButton liquid-glass.',
-)
-for (const snippet of [
-  'label="玻璃标签"',
-  '<GlassLabel size="sm">浮动栏</GlassLabel>',
-  '<GlassLabel size="lg">页面标题</GlassLabel>',
-]) {
-  assert.ok(
-    barDefinitionSource.includes(snippet),
-    `The GlassLabel preview card must include ${snippet}.`,
-  )
-}
-for (const snippet of [
-  'label="浮动工具栏"',
-  '<LiquidGlassTile className="liquid-glass-toolbar-preview">',
-  '<GlassLabel size="sm">浮动栏</GlassLabel>',
-  'liquid-glass-icon-button--sm',
-]) {
-  assert.ok(
-    barDefinitionSource.includes(snippet),
-    `The float toolbar liquid glass demo must include ${snippet}.`,
-  )
-}
-for (const snippet of [
-  'label="顶部工具栏"',
-  '<LiquidGlassTile className="liquid-glass-toolbar-preview">',
-  "import { GlassLabel } from 'weimo-ui-core/components/glass-label'",
-  '<GlassLabel size="lg">页面标题</GlassLabel>',
-]) {
-  assert.ok(
-    pageLayoutDefinitionSource.includes(snippet),
-    `The top toolbar liquid glass demo must include ${snippet}.`,
-  )
-}
+// GlassLabel:工具栏标题胶囊已更名 FrostedLabel 并改用磨砂材质,浮动/顶部
+// 工具栏卡的图标钮也整体磨砂化,契约随迁 surface-material-contract;两张
+// 工具栏演示卡已不属于液态玻璃演示。
 assert.ok(
   !existsSync(join(root, 'packages/weimo-ui-site/src/docs/component-definitions/liquid-glass.tsx')),
   'The liquid glass docs page must be merged into the Surface page without a standalone definition file.',
@@ -221,31 +163,9 @@ assert.ok(
   registryItem.files.some((file) => file.path === 'packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass.css'),
   'liquid-glass must ship its semantic transition CSS.',
 )
-assert.equal(glassLabelRegistryItem.type, 'registry:ui', 'glass-label must stay a registry:ui item.')
-assert.ok(
-  !glassLabelRegistryItem.dependencies?.includes('liquid-glass-react'),
-  'glass-label must not declare the liquid-glass-react npm dependency: the engine is vendored in-repo.',
-)
-for (const filePath of [
-  'packages/weimo-ui-core/src/components/surfaces/liquid-glass/glass-label.tsx',
-  'packages/weimo-ui-core/src/components/surfaces/liquid-glass/glass-label.css',
-  'packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass.tsx',
-  'packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass-react/index.tsx',
-  'packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass-react/LICENSE',
-]) {
-  assert.ok(
-    glassLabelRegistryItem.files.some((file) => file.path === filePath),
-    `glass-label must ship ${filePath} so the label installs with its glass engine.`,
-  )
-}
-
 assert.ok(
   packageJson.exports['./components/liquid-glass'],
   'package.json must export ./components/liquid-glass.',
-)
-assert.ok(
-  packageJson.exports['./components/glass-label'],
-  'package.json must export ./components/glass-label.',
 )
 assert.ok(
   !packageJson.dependencies['liquid-glass-react'],
@@ -330,52 +250,10 @@ assert.ok(
     appCss.includes('transition-duration: 1ms;'),
   'Liquid glass previews must transition tone and text shadow together and respect reduced motion.',
 )
-for (const snippet of [
-  '.glass-label__text {',
-  'color 160ms ease,',
-  'text-shadow 160ms ease;',
-  ".glass-label[data-background-tone='light'] .glass-label__text",
-  'text-shadow: none;',
-  '@media (prefers-reduced-motion: reduce)',
-  'transition-duration: 1ms;',
-]) {
-  assert.ok(
-    glassLabelCss.includes(snippet),
-    `GlassLabel CSS must include ${snippet}.`,
-  )
-}
 assert.ok(
-  glassLabelCss.includes('var(--liquid-glass-fg-on-dark)') &&
-    glassLabelCss.includes('var(--liquid-glass-fg-on-light)') &&
-    glassLabelCss.includes('font-size: var(--font-size-lg);') &&
-    glassLabelCss.includes('font-weight: 600;') &&
-    glassLabelCss.includes('padding: 6px 10px;'),
-  'GlassLabel must adapt its text color to the sampled tone, bold the lg size, and mirror the glass 6px 10px padding in its sizer.',
+  !appCss.includes('.liquid-glass-icon-button') &&
+    !appCss.includes('.liquid-glass-icon-preview'),
+  'The liquid glass icon button/group demo styles must stay removed: toolbar families are frosted and the liquid material is demoed only on the Surface page tile.',
 )
-assert.ok(
-  appCss.includes('color-mix(in srgb, currentColor 12%, transparent)') &&
-    appCss.includes('.liquid-glass-icon-button:not(:disabled):hover::after') &&
-    appCss.includes('.liquid-glass-icon-button:not(:disabled):active::after') &&
-    appCss.includes('@media (hover: hover) and (pointer: fine)'),
-  'Liquid glass buttons must mirror the frosted icon button hover color wash (same 12% currentColor value as frosted-surface-contract locks, hover gated to fine pointers, active pinned on).',
-)
-assert.ok(
-  appCss.includes('.liquid-glass-icon-button-group__item::after') &&
-    appCss.includes('__item:hover::after') &&
-    appCss.includes('__item:active::after') &&
-    appCss.includes('.liquid-glass-icon-button-group__item {'),
-  'Liquid glass icon groups must give each icon an independent hover disc (frosted-group-like inset circle, hover gated to fine pointers, active pinned on) inside the single-button shell.',
-)
-assert.ok(
-  !appCss.includes('.liquid-glass-icon-button-group::after') &&
-    !appCss.includes('.liquid-glass-icon-button-group:not(:disabled):hover::after') &&
-    !appCss.includes('.liquid-glass-icon-button-group:not(:disabled):active::after'),
-  'Liquid glass icon groups must not carry a group-wide pill wash: the frosted group container has no group-level hover feedback, per-icon discs replace it.',
-)
-assert.ok(
-  appCss.includes('.docs-top-bar__actions.liquid-glass-icon-button-group') &&
-    appCss.includes('.docs-top-bar__actions .liquid-glass-icon-button-group__item::after') &&
-    appCss.includes('.docs-top-bar__actions .liquid-glass-icon-button-group__item svg') &&
-    !appCss.includes('docs-liquid-top-bar-actions'),
-  'The docs top bar actions pill must reuse the standard liquid glass icon button group skeleton (sized modifier, real buttons carrying the item class for independent hover discs) instead of a bespoke actions stylesheet.',
-)
+// 站点顶栏(docs-shell)与按钮页图标卡均已磨砂化/删除,液态玻璃演示只剩
+// Surface 材质页的材质卡瓦片(经共享画布渲染,无站点特化样式)。

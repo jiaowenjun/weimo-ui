@@ -48,6 +48,10 @@ const cossCardSource = readProjectFile('packages/weimo-ui-site/src/components/pr
 const cossCardCss = readProjectFile('packages/weimo-ui-site/src/components/primitives/card.css')
 const sidebarSource = readProjectFile('packages/weimo-ui-core/src/components/layout/sidebar/sidebar.tsx')
 const sidebarCss = readProjectFile('packages/weimo-ui-core/src/components/layout/sidebar/sidebar.css')
+const frostedLabelSource = readProjectFile('packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-label.tsx')
+const frostedLabelCss = readProjectFile('packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-label.css')
+const barDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/bar.tsx')
+const pageLayoutDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/page-layout.tsx')
 const dialogSource = readProjectFile('packages/weimo-ui-core/src/components/primitives/dialog.tsx')
 const dialogCss = readProjectFile('packages/weimo-ui-core/src/components/primitives/dialog.css')
 const commandSource = readProjectFile('packages/weimo-ui-site/src/components/primitives/command.tsx')
@@ -140,6 +144,95 @@ for (const snippet of [
   assert.ok(surfaceDefinitionSource.includes(snippet), `Surface docs definition must include ${snippet}.`)
 }
 
+// FrostedLabel:磨砂标题标签(原 GlassLabel 更名并改用磨砂材质)——非交互
+// span 自持磨砂材质(frosted-surface 基类,与磨砂图标钮同构,无独立材质层
+// 与 sizer),文字色随自身 tone 采样自适应;几何镜像磨砂胶囊的 6px 10px
+// 内边距,sm 档用于工具栏栏位标题,lg 档(粗体 600)用于页面标题。
+for (const snippet of [
+  "from 'weimo-ui-core/components/frosted-surface'",
+  'getFrostedSurfaceClassName',
+  'useFrostedSurfaceBackgroundToneRef',
+  'export function FrostedLabel',
+  'frosted-surface--bordered',
+  'data-background-tone={backgroundTone ?? undefined}',
+]) {
+  assert.ok(
+    frostedLabelSource.includes(snippet),
+    `frosted-label.tsx must include ${snippet}.`,
+  )
+}
+assert.ok(
+  !frostedLabelSource.includes('onClick') &&
+    !frostedLabelSource.includes('LiquidGlass'),
+  'FrostedLabel must stay a non-interactive frosted label: press feedback belongs to CapsuleButton, and the liquid glass engine is no longer part of the label.',
+)
+for (const snippet of [
+  'border-radius: var(--radius-round);',
+  'padding: 6px 10px;',
+  'font-size: var(--font-size-sm);',
+  'font-size: var(--font-size-lg);',
+  'font-weight: 600;',
+]) {
+  assert.ok(
+    frostedLabelCss.includes(snippet),
+    `FrostedLabel CSS must include ${snippet}.`,
+  )
+}
+for (const snippet of [
+  'label="磨砂标签"',
+  'className="frosted-label-preview"',
+  '<FrostedLabel size="sm">浮动栏</FrostedLabel>',
+  '<FrostedLabel size="lg">页面标题</FrostedLabel>',
+]) {
+  assert.ok(
+    barDefinitionSource.includes(snippet),
+    `The FrostedLabel preview card must include ${snippet}.`,
+  )
+}
+assert.ok(
+  pageLayoutDefinitionSource.includes('<FrostedLabel size="lg">页面标题</FrostedLabel>'),
+  'The top toolbar demo must render its page title through the FrostedLabel lg size.',
+)
+
+// 顶部工具栏卡整体磨砂化:标题 FrostedLabel lg + 磨砂图标钮(默认尺寸档,
+// 经 render helper 渲染),与浮动/底部工具栏同规则。
+for (const snippet of [
+  'label="顶部工具栏"',
+  'className="frosted-toolbar-preview"',
+  'function renderTopBarSidebarButton()',
+  '<FrostedIconButton aria-label="打开侧边栏">',
+  '<FrostedIconButton aria-label="搜索">',
+]) {
+  assert.ok(
+    pageLayoutDefinitionSource.includes(snippet),
+    `The top toolbar frosted demo must include ${snippet}.`,
+  )
+}
+assert.ok(
+  !pageLayoutDefinitionSource.includes('LiquidGlass'),
+  'The top toolbar demo must be fully frosted: no liquid glass layers or tiles remain after the material switch.',
+)
+
+// 浮动工具栏卡整体磨砂化:标题 FrostedLabel + 磨砂图标钮/按钮组,画布只管
+// 网格排布(磨砂组件自采样),液态玻璃层与 tone 容器退出该卡。
+for (const snippet of [
+  'label="浮动工具栏"',
+  'className="frosted-toolbar-preview"',
+  '<FrostedLabel size="sm">浮动栏</FrostedLabel>',
+  '<FrostedIconButton aria-label="搜索" size="sm">',
+  '<FrostedIconButtonGroup aria-label="确认与关闭">',
+  '<FrostedIconGroupButton aria-label="确认" size="sm">',
+]) {
+  assert.ok(
+    barDefinitionSource.includes(snippet),
+    `The float toolbar frosted demo must include ${snippet}.`,
+  )
+}
+assert.ok(
+  !barDefinitionSource.includes('LiquidGlass'),
+  'The float toolbar page must be fully frosted: no liquid glass layers or tiles remain after the material switch.',
+)
+
 // 标题栏开关机制已下沉为 core 正式组件 LabeledSwitch
 // （packages/weimo-ui-core/src/components/controls/labeled-switch/），
 // 契约迁移至 scripts/labeled-switch-contract.test.mjs。
@@ -173,9 +266,9 @@ assert.ok(
 )
 assert.ok(
   appCss.includes(
-    '.component-preview-card:has(.card-surface-preview, .popup-surface-preview, .frosted-surface-preview__tile, .frosted-border-preview__tile, .icon-preview__row, .sidebar-preview, .tag-page__bread-preview, .internal-bottom-preview, .card-docs-preview, .card-composer-docs-preview, .liquid-glass-preview, .liquid-glass-toolbar-preview, .liquid-glass-icon-preview, .liquid-glass-chip-preview, .capsule-slot-preview, .capsule-button, .icon-button--frosted, .liquid-glass-label-preview) .base-card__content {\n  overflow: visible;\n',
+    '.component-preview-card:has(.card-surface-preview, .popup-surface-preview, .frosted-surface-preview__tile, .frosted-border-preview__tile, .icon-preview__row, .sidebar-preview, .tag-page__bread-preview, .internal-bottom-preview, .card-docs-preview, .card-composer-docs-preview, .liquid-glass-preview, .capsule-button, .icon-button--frosted, .frosted-label-preview) .base-card__content {\n  overflow: visible;\n',
   ),
-  'Card and popup surface demos (plus both frosted tiles — material page and border page, the frosted icon button rows, the drawer trigger canvas, the breadcrumb chain canvas, the tagged-card page real cards, every capsule card via the component-level .capsule-button match, every frosted icon button host via .icon-button--frosted, the bottom-bar canvas on CardSurface and every liquid glass canvas — material, toolbars, icon buttons, chips, capsule slots, labels) must opt out of the preview-window clip so real shadows (--shadow-card / --shadow-overlay / the tone-aligned liquid glass and frosted drop shadows) render into the card padding.',
+  'Card and popup surface demos (plus both frosted tiles — material page and border page, the frosted icon button rows, the drawer trigger canvas, the breadcrumb chain canvas, the tagged-card page real cards, every capsule card via the component-level .capsule-button match, every frosted icon button host via .icon-button--frosted, the bottom-bar canvas on CardSurface, every liquid glass canvas — the material page tile — and the frosted label card) must opt out of the preview-window clip so real shadows (--shadow-card / --shadow-overlay / the tone-aligned liquid glass and frosted drop shadows) render into the card padding.',
 )
 assert.ok(
   appCss.includes(".card-composer-docs-preview .weimo-card-composer:not([data-state='closing']),") &&
@@ -337,6 +430,31 @@ for (const name of ['card-surface', 'popup-surface']) {
   assert.ok(rootItem, `Root registry must include @weimo/${name}.`)
   assert.deepEqual(standaloneItem, rootItem, `registry/${name}.json must match registry.json.`)
 }
+
+const frostedLabelRootItem = rootItemsByName.get('frosted-label')
+
+assert.ok(frostedLabelRootItem, 'Root registry must include @weimo/frosted-label.')
+assert.deepEqual(
+  readJson('registry/frosted-label.json'),
+  frostedLabelRootItem,
+  'registry/frosted-label.json must match registry.json.',
+)
+assert.deepEqual(
+  registryFiles(frostedLabelRootItem),
+  new Set([
+    'packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-label.tsx',
+    'packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-label.css',
+    'packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx',
+    'packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface-model.ts',
+    'packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css',
+  ]),
+  'FrostedLabel registry item must ship the label plus the frosted surface engine only: the liquid glass engine files stay out after the material switch.',
+)
+assert.equal(
+  packageJson.exports['./components/frosted-label'],
+  './packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-label.tsx',
+  'package.json must expose FrostedLabel at ./components/frosted-label.',
+)
 
 assert.deepEqual(
   registryFiles(rootItemsByName.get('card-surface')),

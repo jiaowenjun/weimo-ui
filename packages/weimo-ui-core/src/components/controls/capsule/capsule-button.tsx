@@ -14,14 +14,12 @@ import {
   getFrostedSurfaceClassName,
   useFrostedSurfaceBackgroundToneRef,
 } from 'weimo-ui-core/components/frosted-surface'
-import { LiquidGlassSurface } from 'weimo-ui-core/components/liquid-glass'
-import { cn } from 'weimo-ui-core/lib/utils'
 
 import './capsule-button.css'
 import './capsule-frame.css'
 import 'weimo-ui-core/styles/frosted-surface.css'
 
-export type CapsuleButtonState = 'default' | 'frosted' | 'liquid-glass'
+export type CapsuleButtonState = 'default' | 'frosted'
 
 export type CapsuleButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'prefix'> & {
   animateWidth?: boolean
@@ -52,11 +50,8 @@ export function CapsuleButton({
   ...props
 }: CapsuleButtonProps) {
   const isFrostedState = state === 'frosted'
-  const isLiquidGlassState = state === 'liquid-glass'
   const { backgroundStyle, backgroundTone, setElementRef } =
-    useFrostedSurfaceBackgroundToneRef<HTMLButtonElement>(
-      isFrostedState || isLiquidGlassState,
-    )
+    useFrostedSurfaceBackgroundToneRef<HTMLButtonElement>(isFrostedState)
   const { measureRef, inlineSize } = useAnimatedInlineSize([
     prefix,
     children,
@@ -93,47 +88,6 @@ export function CapsuleButton({
       )}
     </>
   )
-  // noop 点击透传给玻璃层以启用库的悬停辉光与按压缩放反馈(同液态玻璃
-  // 图标按钮);消费者的 onClick 仍由外层 button 承接,两者互不干扰。
-  function noopLiquidGlassFeedback() {}
-
-  // 液态玻璃态:按钮盒只做点击区,玻璃层绝对居中覆盖,隐藏 sizer 复刻
-  // buttonContent 撑盒宽;不走 capsule-frame 材质层与 overflow:hidden,库投影
-  // 可外溢。玻璃内边距镜像胶囊插槽几何(带插槽侧收窄到 6px)。
-  if (isLiquidGlassState) {
-    const liquidGlassPadding = `6px ${isEmptyCapsuleButtonSlot(suffix) ? '10px' : '6px'} 6px ${
-      isEmptyCapsuleButtonSlot(prefix) ? '10px' : '6px'
-    }`
-
-    return (
-      <button
-        className={cn('capsule-button', 'capsule-button--liquid-glass', className)}
-        data-background-tone={backgroundTone ?? undefined}
-        data-state={state}
-        ref={setElementRef}
-        style={style}
-        type="button"
-        {...props}
-      >
-        <LiquidGlassSurface
-          className="capsule-button__liquid-glass-layer"
-          cornerRadius={999}
-          onClick={noopLiquidGlassFeedback}
-          padding={liquidGlassPadding}
-        >
-          {buttonContent}
-        </LiquidGlassSurface>
-        <span
-          aria-hidden="true"
-          className="capsule-button__liquid-sizer"
-          style={{ padding: liquidGlassPadding }}
-        >
-          {buttonContent}
-        </span>
-      </button>
-    )
-  }
-
   const button = (
     <button
       className={getCapsuleFrameClassName(

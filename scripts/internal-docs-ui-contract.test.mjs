@@ -187,7 +187,7 @@ for (const [snippet, message] of [
 // 相邻动作可收进 FrostedIconButtonGroup（组内为 FrostedIconGroupButton，反馈同源）。
 // 磨砂图标按钮与磨砂态胶囊的边框展示不做限制（有边框、无边框都支持），
 // 因此这里只锁组件种类与 state，不断言边框的有无或取值。
-// 浮动工具栏与顶部工具栏改走液态玻璃：按钮与胶囊文字一律 LiquidGlassSurface 层（assertLiquidGlassToolbarDemo）。
+// 三张工具栏演示卡（底部/浮动/顶部）同走磨砂断言：图标钮/组为 Frosted 系，标题胶囊为 frosted 文字胶囊。
 function sliceDemoSource(source, startMarker, endMarker, label) {
   const start = source.indexOf(startMarker)
 
@@ -203,13 +203,14 @@ function sliceDemoSource(source, startMarker, endMarker, label) {
 function assertGlassToolbarDemo(demoSource, label) {
   const capsuleButtonCount = (demoSource.match(/<CapsuleButton\b/g) ?? []).length
   const frostedStateCount = (demoSource.match(/state="frosted"/g) ?? []).length
+  const frostedLabelCount = (demoSource.match(/<FrostedLabel\b/g) ?? []).length
 
   assert.ok(
-    capsuleButtonCount > 0 &&
+    capsuleButtonCount + frostedLabelCount > 0 &&
       frostedStateCount >= capsuleButtonCount &&
       !demoSource.includes('internal-preview__text') &&
       !demoSource.includes('internal-preview__title'),
-    `${label} docs demo must render every text label as a frosted-state CapsuleButton instead of raw preview text spans.`,
+    `${label} docs demo must render every text label as a frosted capsule (CapsuleButton frosted state or FrostedLabel) instead of raw preview text spans.`,
   )
 
   assert.ok(
@@ -246,21 +247,7 @@ const topBarDemoSource = sliceDemoSource(
 )
 
 assertGlassToolbarDemo(bottomBarDemoSource, 'BottomBar')
-
-function assertLiquidGlassToolbarDemo(demoSource, label) {
-  // GlassLabel 组件内部包 LiquidGlassSurface,标题胶囊按组件出现次数计入玻璃层。
-  const liquidLayerCount =
-    (demoSource.match(/<LiquidGlassSurface cornerRadius=\{999\}/g) ?? []).length +
-    (demoSource.match(/<GlassLabel\b/g) ?? []).length
-
-  assert.ok(
-    liquidLayerCount >= 3 &&
-      demoSource.includes('<GlassLabel') &&
-      demoSource.includes('<LiquidGlassTile') &&
-      !demoSource.includes('FrostedIconButton'),
-    `${label} docs demo must render every button and text capsule as liquid glass layers (LiquidGlassSurface or GlassLabel).`,
-  )
-}
-
-assertLiquidGlassToolbarDemo(floatBarDemoSource, 'FloatBar')
-assertLiquidGlassToolbarDemo(topBarDemoSource, 'TopBar')
+// 浮动/顶部工具栏与底部工具栏同走磨砂断言:图标钮/组为 Frosted 系,标题是
+// FrostedLabel(底部栏的文字胶囊则是 frosted 态 CapsuleButton)。
+assertGlassToolbarDemo(floatBarDemoSource, 'FloatBar')
+assertGlassToolbarDemo(topBarDemoSource, 'TopBar')

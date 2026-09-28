@@ -80,8 +80,6 @@ const capsuleButtonBlock = standaloneCssBlockFor(css, 'button.capsule-button')
 const capsuleButtonPrefixPaddingBlock = standaloneCssBlockFor(css, 'button.capsule-button[data-has-prefix]')
 const capsuleButtonSuffixPaddingBlock = standaloneCssBlockFor(css, 'button.capsule-button[data-has-suffix]')
 const textBlock = standaloneCssBlockFor(css, '.capsule-button__text')
-const capsuleButtonLiquidBlock = cssBlockFor(css, '.capsule-button--liquid-glass')
-const capsuleButtonLiquidToneBlock = cssBlockFor(css, `.capsule-button--liquid-glass[data-background-tone='light']`)
 const reducedMotionBlock = cssBlockFor(
   surfaceCss,
   `.capsule-frame,
@@ -123,7 +121,7 @@ for (const snippet of [
   "from 'weimo-ui-core/components/animated-inline-size-model'",
   "from './capsule-frame'",
   "import './capsule-button.css'",
-  "export type CapsuleButtonState = 'default' | 'frosted' | 'liquid-glass'",
+  "export type CapsuleButtonState = 'default' | 'frosted'",
   'export type CapsuleButtonProps',
   "Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'prefix'>",
   'animateWidth?: boolean',
@@ -144,9 +142,6 @@ for (const snippet of [
   "data-has-prefix={isEmptyCapsuleButtonSlot(prefix) ? undefined : 'true'}",
   "data-has-suffix={isEmptyCapsuleButtonSlot(suffix) ? undefined : 'true'}",
   "const isFrostedState = state === 'frosted'",
-  "import { LiquidGlassSurface } from 'weimo-ui-core/components/liquid-glass'",
-  "const isLiquidGlassState = state === 'liquid-glass'",
-  'capsule-button--liquid-glass',
   '? { ...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle }',
   'capsule-frame__slot capsule-button__prefix',
   'capsule-frame__content capsule-button__text',
@@ -163,6 +158,19 @@ assert.ok(
     !source.includes("textSize = 'sm'") &&
     !source.includes('CapsuleFrameTextSize'),
   'CapsuleButton must support the single small text size only; the textSize prop stays removed.',
+)
+assert.ok(
+  !source.includes('liquid-glass') &&
+    !source.includes('LiquidGlassSurface') &&
+    !css.includes('liquid-glass') &&
+    !css.includes('--liquid-glass'),
+  'The CapsuleButton liquid-glass state stays removed: interactive liquid glass belongs to the icon buttons, not the capsule or the (now frosted) label.',
+)
+assert.ok(
+  !docsSource.includes('state="liquid-glass"') &&
+    !docsSource.includes('液态玻璃胶囊') &&
+    !docsSource.includes('liquid-glass-chip-preview'),
+  'Capsule docs must stay free of the removed liquid-glass capsule state and its preview canvas class.',
 )
 assertIncludes(
   css,
@@ -217,8 +225,6 @@ for (const [block, snippet, message] of [
   [capsuleButtonBlock, 'gap: 1px;', 'CapsuleButton must keep the tight uniform 1px inner gap between the prefix icon and text across text sizes.'],
   [capsuleButtonPrefixPaddingBlock, 'padding-left: 6px;', 'CapsuleButton with a prefix must sit the icon 6px from the left border across text sizes.'],
   [capsuleButtonSuffixPaddingBlock, 'padding-right: 6px;', 'CapsuleButton with a suffix must sit the icon 6px from the right border across text sizes.'],
-  [capsuleButtonLiquidBlock, 'color: var(--liquid-glass-fg-on-dark);', 'CapsuleButton liquid glass state must default its label color to the on-dark glass token.'],
-  [capsuleButtonLiquidToneBlock, 'color: var(--liquid-glass-fg-on-light);', 'CapsuleButton liquid glass state must flip its label color on light backgrounds via its own tone sampling.'],
   [textBlock, 'overflow: hidden;', 'CapsuleButton text must hide overflowing content.'],
   [textBlock, 'text-overflow: clip;', 'CapsuleButton text overflow must be clipped without an ellipsis.'],
   [textBlock, 'white-space: nowrap;', 'CapsuleButton text must stay on one line when clipped.'],
@@ -335,7 +341,7 @@ assert.ok(
     !docsSource.includes('textSize=') &&
     !docsSource.includes('label="胶囊字号"') &&
     !docsSource.includes('label="磨砂态胶囊"'),
-  'Capsule button demo cards must lay out their buttons in the slot preview row (liquid-glass shadow unclipped); the redundant state-pair and text-size cards must stay removed.',
+  'Capsule button demo cards must lay out their buttons in the slot preview row; the redundant state-pair and text-size cards must stay removed.',
 )
 assert.ok(
   definitionsIndexSource.includes("import { capsuleButtonDefinition } from './packages/weimo-ui-core/capsule-button'") &&

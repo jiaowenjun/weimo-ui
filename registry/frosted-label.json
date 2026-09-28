@@ -1,0 +1,42 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "type": "registry:ui",
+  "name": "frosted-label",
+  "title": "Frosted Label",
+  "description": "A frosted label capsule for toolbar titles with tone-adaptive text.",
+  "categories": [
+    "layout",
+    "toolbar"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/utils"
+  ],
+  "files": [
+    {
+      "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-label.tsx",
+      "type": "registry:ui",
+      "target": "@ui/frosted-label.tsx"
+    },
+    {
+      "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-label.css",
+      "type": "registry:ui",
+      "target": "@ui/frosted-label.css"
+    },
+    {
+      "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.tsx",
+      "type": "registry:ui",
+      "target": "@ui/frosted-surface.tsx"
+    },
+    {
+      "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface-model.ts",
+      "type": "registry:ui",
+      "target": "@ui/frosted-surface-model.ts"
+    },
+    {
+      "path": "packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css",
+      "type": "registry:ui",
+      "target": "@ui/frosted-surface.css"
+    }
+  ]
+}

@@ -13,14 +13,9 @@ import {
   type ModeButtonMode,
 } from 'weimo-ui-core/components/mode-button'
 import { TextButton } from 'weimo-ui-core/components/text-button'
-import { LiquidGlassSurface } from 'weimo-ui-core/components/liquid-glass'
 import { LabeledSwitch } from 'weimo-ui-core/components/labeled-switch'
 import type { ComponentDefinition } from '../../component-docs'
 import { GlassPreviewCard } from '../../../previews/glass-preview-card'
-import { LiquidGlassTile } from '../../../previews/liquid-glass-tile'
-
-// 液态玻璃演示点击无实际动作,传 no-op 只为启用库的悬停辉光与按压缩放。
-function noopLiquidGlassClick() {}
 
 function TextButtonPreview() {
   const [disabled, setDisabled] = useState(false)
@@ -163,118 +158,8 @@ function FrostedIconButtonGroupPreview() {
   )
 }
 
-// 液态玻璃图标按钮:玻璃层绝对居中于定尺寸按钮盒(与磨砂图标按钮同尺寸,
-// 默认 44/小号 28),圆形 cornerRadius 999;图标色随画布 tone 自适应。
-function LiquidGlassIconButtonPreviewGroup({ disabled }: { disabled: boolean }) {
-  return (
-    <LiquidGlassTile className="liquid-glass-icon-preview">
-      <button
-        aria-label="菜单"
-        className="liquid-glass-icon-button"
-        disabled={disabled}
-        type="button"
-      >
-        <LiquidGlassSurface cornerRadius={999} onClick={disabled ? undefined : noopLiquidGlassClick} padding="12px">
-          <Menu />
-        </LiquidGlassSurface>
-      </button>
-      <button
-        aria-label="小号菜单"
-        className="liquid-glass-icon-button liquid-glass-icon-button--sm"
-        disabled={disabled}
-        type="button"
-      >
-        <LiquidGlassSurface cornerRadius={999} padding="6px">
-          <Menu />
-        </LiquidGlassSurface>
-      </button>
-    </LiquidGlassTile>
-  )
-}
-
-function LiquidGlassIconButtonPreview() {
-  const [disabled, setDisabled] = useState(false)
-
-  return (
-    <GlassPreviewCard
-      action={
-        <LabeledSwitch
-          ariaLabel="启用"
-          checked={!disabled}
-          labelOff="禁用"
-          labelOn="启用"
-          onCheckedChange={(checked) => setDisabled(!checked)}
-        />
-      }
-      label="液态玻璃图标按钮"
-    >
-      <LiquidGlassIconButtonPreviewGroup disabled={disabled} />
-    </GlassPreviewCard>
-  )
-}
-
-// 液态玻璃图标按钮组:单枚玻璃胶囊承载成组图标(默认 72×36/小号 56×28)。
-function LiquidGlassIconButtonGroupPreviewGroup({ disabled }: { disabled: boolean }) {
-  return (
-    <LiquidGlassTile className="liquid-glass-icon-preview">
-      <button
-        aria-label="液态玻璃图标按钮组"
-        className="liquid-glass-icon-button-group"
-        disabled={disabled}
-        type="button"
-      >
-        <LiquidGlassSurface cornerRadius={999} padding="8px">
-          <span className="liquid-glass-icon-button-group__row">
-            <span className="liquid-glass-icon-button-group__item">
-              <Share />
-            </span>
-            <span className="liquid-glass-icon-button-group__item">
-              <Ellipsis />
-            </span>
-          </span>
-        </LiquidGlassSurface>
-      </button>
-      <button
-        aria-label="小号液态玻璃图标按钮组"
-        className="liquid-glass-icon-button-group liquid-glass-icon-button-group--sm"
-        disabled={disabled}
-        type="button"
-      >
-        <LiquidGlassSurface cornerRadius={999} padding="6px">
-          <span className="liquid-glass-icon-button-group__row">
-            <span className="liquid-glass-icon-button-group__item">
-              <Share />
-            </span>
-            <span className="liquid-glass-icon-button-group__item">
-              <Ellipsis />
-            </span>
-          </span>
-        </LiquidGlassSurface>
-      </button>
-    </LiquidGlassTile>
-  )
-}
-
-function LiquidGlassIconButtonGroupPreview() {
-  const [disabled, setDisabled] = useState(false)
-
-  return (
-    <GlassPreviewCard
-      action={
-        <LabeledSwitch
-          ariaLabel="启用"
-          checked={!disabled}
-          labelOff="禁用"
-          labelOn="启用"
-          onCheckedChange={(checked) => setDisabled(!checked)}
-        />
-      }
-      label="液态玻璃图标按钮组"
-    >
-      <LiquidGlassIconButtonGroupPreviewGroup disabled={disabled} />
-    </GlassPreviewCard>
-  )
-}
+// 液态玻璃图标按钮/按钮组演示卡已删除:工具栏家族全站磨砂化后,液态玻璃
+// 图标按钮不再有演示场景,液态玻璃材质本体的演示在 Surface 材质页。
 
 function ModeButtonDemo() {
   const [mode, setMode] = useState<ModeButtonMode>('display')
@@ -316,8 +201,6 @@ function ButtonDemo() {
       <GhostIconButtonPreview />
       <FrostedIconButtonPreview />
       <FrostedIconButtonGroupPreview />
-      <LiquidGlassIconButtonPreview />
-      <LiquidGlassIconButtonGroupPreview />
       <ModeButtonDemo />
     </>
   )

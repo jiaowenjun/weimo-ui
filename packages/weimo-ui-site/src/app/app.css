@@ -50,54 +50,13 @@
   display: inline-flex;
 }
 
-/* 站点顶栏:液态玻璃标题胶囊(隐藏 sizer 撑盒宽,玻璃绝对居中覆盖)
-   与搜索/主题液态按钮组;色随页面背景 tone 自适应(每槽一个 tone 容器)。 */
-.docs-liquid-top-bar {
+/* 站点顶栏:磨砂标题胶囊/侧边栏钮/搜索主题组,组件各自采样页面背景
+   tone;包装层只负责槽内排布。 */
+.docs-top-bar__slot {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   min-width: 0;
-  color: var(--liquid-glass-fg-on-dark);
-}
-
-.docs-liquid-top-bar[data-background-tone='light'] {
-  color: var(--liquid-glass-fg-on-light);
-}
-
-/* 顶栏右侧组:标准液态图标按钮组骨架 + 独立功能按钮变体。搜索/主题两颗
-   按钮各自 onClick,故宿主是 span 组盒、子单元是真实 button 挂 __item 类
-   (hover 圆、整组按压缩放、触屏保护、reduced-motion 全部继承组类);
-   玻璃 padding 0 两颗 44 满排 88×44。修饰三处几何:盒尺寸、__row gap 0
-   (标准 gap 16 撑不满盒)、item 圆改 44 盒内收 inset 4px(圆 36、玻璃环
-   4px=磨砂组默认档;item 默认 -4px 是 20 图标盒的外扩圆,方向相反)。 */
-.docs-top-bar__actions.liquid-glass-icon-button-group {
-  width: 88px;
-  height: 44px;
-}
-
-.docs-top-bar__actions .liquid-glass-icon-button-group__row {
-  gap: 0;
-}
-
-.docs-top-bar__actions .liquid-glass-icon-button-group__item {
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  border: none;
-  background: none;
-  color: inherit;
-  cursor: pointer;
-}
-
-.docs-top-bar__actions .liquid-glass-icon-button-group__item svg {
-  width: 20px;
-  height: 20px;
-}
-
-.docs-top-bar__actions .liquid-glass-icon-button-group__item::after {
-  inset: 4px;
 }
 
 .preview-stage .weimo-card {
@@ -1045,226 +1004,8 @@
   }
 }
 
-/* 液态玻璃图标按钮/按钮组(按钮页):玻璃层绝对居中于定尺寸按钮盒,
-   尺寸与磨砂图标按钮对齐(默认 44×44/小号 28×28,组 72×36/56×28);
-   图标色随画布 tone 自适应(容器持有 data-background-tone)。 */
-.liquid-glass-icon-preview {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  min-width: 0;
-  color: var(--liquid-glass-fg-on-dark);
-}
-
-.liquid-glass-icon-preview[data-background-tone='light'] {
-  color: var(--liquid-glass-fg-on-light);
-}
-
-.liquid-glass-icon-button,
-.liquid-glass-icon-button-group {
-  position: relative;
-  padding: 0;
-  border: none;
-  background: none;
-  color: inherit;
-  cursor: pointer;
-  /* 按压缩放对齐磨砂图标按钮:transform 150ms ease 同款节奏。 */
-  transition: transform 150ms ease;
-}
-
-.liquid-glass-icon-button {
-  width: 44px;
-  height: 44px;
-}
-
-.liquid-glass-icon-button svg {
-  width: 20px;
-  height: 20px;
-}
-
-.liquid-glass-icon-button--sm {
-  width: 28px;
-  height: 28px;
-}
-
-.liquid-glass-icon-button--sm svg {
-  width: 16px;
-  height: 16px;
-}
-
-.liquid-glass-icon-button-group {
-  width: 72px;
-  height: 36px;
-}
-
-.liquid-glass-icon-button-group--sm {
-  width: 56px;
-  height: 28px;
-}
-
-.liquid-glass-icon-button-group__row {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.liquid-glass-icon-button-group__row svg {
-  width: 20px;
-  height: 20px;
-}
-
-.liquid-glass-icon-button-group--sm .liquid-glass-icon-button-group__row {
-  gap: 12px;
-}
-
-.liquid-glass-icon-button-group--sm .liquid-glass-icon-button-group__row svg {
-  width: 16px;
-  height: 16px;
-}
-
-/* 组内图标独立 hover 圆(对齐磨砂组的子按钮高亮圆):组维持单 button,
-   item 只是视觉/命中单元,点击仍整组一个 onClick。圆几何对齐磨砂组
-   「玻璃环+圆间距」节奏——默认档 inset 4px:圆 28、上下玻璃环 4px、
-   相邻圆间距 8px;sm 档 inset 2px 同为 4px 环/8px 圆距。
-   罩垫图标之下:isolation 把 z-index:-1 封在 item 内,不漏进玻璃
-   折射层的 backdrop 采样区,图标不被染色(优于单按钮罩的盖顶方案)。 */
-.liquid-glass-icon-button-group__item {
-  position: relative;
-  display: inline-flex;
-  isolation: isolate;
-}
-
-.liquid-glass-icon-button-group__item::after {
-  content: '';
-  position: absolute;
-  inset: -4px;
-  z-index: -1;
-  border-radius: var(--radius-round);
-  background-color: color-mix(in srgb, currentColor 12%, transparent);
-  opacity: 0;
-  pointer-events: none;
-  transition:
-    background-color 160ms ease,
-    opacity 180ms ease;
-}
-
-.liquid-glass-icon-button-group--sm .liquid-glass-icon-button-group__item::after {
-  inset: -2px;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .liquid-glass-icon-button-group:not(:disabled) .liquid-glass-icon-button-group__item:hover::after {
-    opacity: 1;
-  }
-}
-
-.liquid-glass-icon-button-group:not(:disabled) .liquid-glass-icon-button-group__item:active::after {
-  opacity: 1;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .liquid-glass-icon-button,
-  .liquid-glass-icon-button-group,
-  .liquid-glass-icon-button-group__item::after {
-    transition-duration: 1ms;
-  }
-}
-
-.liquid-glass-icon-button:disabled,
-.liquid-glass-icon-button-group:disabled {
-  opacity: 0.5;
-  cursor: default;
-}
-
-/* 按压缩放对齐磨砂图标按钮:scale(var(--press-scale)) 由宿主按钮承担,
-   整体缩放玻璃层与辉光/描边覆盖层。库在按压时给玻璃层及兄弟层内联写入
-   scale(0.96),方向相反且与宿主 1.05 叠加后近乎抵消,必须一并归一——
-   库层 transform 是内联 style,只能 !important 覆盖;归一仅发生在
-   :active 期间,非按压时的弹性平移/方向拉伸不受影响(按压时鼠标就在
-   玻璃上,被丢弃的弹性偏移不足 0.5px,不可感知)。 */
-.liquid-glass-icon-button:not(:disabled):active,
-.liquid-glass-icon-button-group:not(:disabled):active {
-  transform: scale(var(--press-scale));
-}
-
-.liquid-glass-icon-button:active > div,
-.liquid-glass-icon-button:active > span,
-.liquid-glass-icon-button-group:active > div,
-.liquid-glass-icon-button-group:active > span {
-  transform: translate(-50%, -50%) !important;
-}
-
-/* 触屏保护对齐磨砂图标按钮:磨砂的 hover 反馈包在 (hover: hover) and
-   (pointer: fine) 内,触屏不会粘滞;液态的 hover 辉光由库 React state
-   驱动,触屏点按合成的 mouseenter 会点亮辉光且 mouseleave 迟迟不发,
-   辉光粘滞,只能在 CSS 侧压制。辉光层没有类名、opacity 全由内联 state
-   写入,它们是玻璃层(.liquid-glass)之后的兄弟 div,故对玻璃根取后续
-   兄弟选择器;媒体查询取磨砂条件的德摩根反面(hover:none 或
-   pointer:coarse)以传统语法表达,opacity 以 !important 压过内联。
-   按压辉光随之一并关闭——触屏按压反馈由宿主 :active 缩放承担,与磨砂
-   触屏行为一致;弹性跟随是位移维度、无残留态,不受影响。 */
-@media (hover: none), (pointer: coarse) {
-  .liquid-glass-icon-button > .liquid-glass ~ div,
-  .liquid-glass-icon-button-group > .liquid-glass ~ div {
-    opacity: 0 !important;
-  }
-}
-
-/* hover 背景色罩对齐磨砂图标按钮(单按钮档):同值 color-mix(currentColor
-   12%, transparent)(= frosted-surface 的 --frosted-surface-hover-bg)、同款
-   opacity 180ms ease 过渡、hover 限定精确指针、:active 常亮、
-   reduced-motion 降级。组(单 button 多图标)不走满胶囊罩——磨砂组容器
-   本无组级 hover 反馈,组内独立高亮圆见下方 __item 规则。
-   层序取舍:磨砂 ::after 垫内容之后(z-index:-1,图标不被染);液态玻璃
-   根恒带内联 transform 创建堆叠上下文,宿主伪元素插不进「玻璃材质之上、
-   图标之下」,垫到玻璃背后则会进入 warp 的 backdrop-filter 采样区、
-   opacity 过渡期(<1)还可能合成层化为 backdrop root 截断采样——故色罩
-   盖在最上,图标被同色 12% 轻微加浓为已知微小差异。色罩几何=宿主盒,
-   与玻璃满盒同尺寸,弹性平移期错位不足 0.5px 不可感知。 */
-.liquid-glass-icon-button::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: var(--radius-round);
-  background-color: color-mix(in srgb, currentColor 12%, transparent);
-  opacity: 0;
-  pointer-events: none;
-  transition:
-    background-color 160ms ease,
-    opacity 180ms ease;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .liquid-glass-icon-button:not(:disabled):hover::after {
-    opacity: 1;
-  }
-}
-
-.liquid-glass-icon-button:not(:disabled):active::after {
-  opacity: 1;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .liquid-glass-icon-button::after {
-    transition-duration: 1ms;
-  }
-}
-
-/* 胶囊材质卡(按钮胶囊页):普通/磨砂/液态玻璃三例并列于灰度画布;磨砂与
-   液态玻璃文字色由组件自身 tone 采样自适应,画布仅提供灰度背景。 */
-.liquid-glass-chip-preview {
-  display: grid;
-  min-width: 0;
-  place-items: center;
-  color: var(--liquid-glass-fg-on-dark);
-}
-
-.liquid-glass-chip-preview[data-background-tone='light'] {
-  color: var(--liquid-glass-fg-on-light);
-}
-
+/* 胶囊材质卡(按钮胶囊页):普通/磨砂两例并列于灰度画布;磨砂文字色由
+   组件自身 tone 采样自适应,画布仅提供灰度背景。 */
 .capsule-material-row {
   display: flex;
   flex-wrap: wrap;
@@ -1273,9 +1014,7 @@
   gap: 16px;
 }
 
-/* 胶囊插槽卡(按钮胶囊页):前后缀三例的换行行布局,与 text-button-preview 同构。
-   第三例为液态玻璃态,库投影 0 12px 40px 远超画布(80px 高度地板),须进下方
-   :has 清单放行 overflow,让真实阴影落进卡片 padding,否则底部被裁成平边。 */
+/* 胶囊插槽卡(按钮胶囊页):前后缀两例的换行行布局,与 text-button-preview 同构。 */
 .capsule-slot-preview {
   display: flex;
   min-width: 0;
@@ -1287,20 +1026,17 @@
 
 /* 浮动工具栏(浮动栏页):示例内液态玻璃按钮/胶囊的图标与文字色随画布 tone
    自适应,容器(LiquidGlassTile)持有 data-background-tone。 */
-.liquid-glass-toolbar-preview {
+/* 磨砂工具栏画布(浮动栏/页面布局页):只负责网格排布,磨砂组件自采样
+   tone,无需画布持有前景色。 */
+.frosted-toolbar-preview {
   display: grid;
   width: 100%;
   min-width: 0;
-  color: var(--liquid-glass-fg-on-dark);
 }
 
-.liquid-glass-toolbar-preview[data-background-tone='light'] {
-  color: var(--liquid-glass-fg-on-light);
-}
-
-/* 玻璃标签卡(浮动栏页):sm/lg 两档 GlassLabel 居中并列于灰度画布,
+/* 磨砂标签卡(浮动栏页):sm/lg 两档 FrostedLabel 居中并列于灰度画布,
    标签自身采样 tone,行容器只负责排布。 */
-.liquid-glass-label-preview {
+.frosted-label-preview {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -1313,7 +1049,7 @@
    液态玻璃库投影/磨砂亮背景 tone 投影数值对齐);让阴影画进卡片 padding,
    浮层卡是页面最后一张卡,阴影透到页底空白处。
    底部操作栏画布同例:示例容器已换成 CardSurface,阴影同样要落进卡片 padding。
-   液态系画布(工具栏/图标按钮组/胶囊)同例:库投影比画布(80px 高)大得多,
+   液态系画布(工具栏/图标按钮组)同例:库投影比画布(80px 高)大得多,
    同样要落进卡片 padding。磨砂瓦片在亮背景 tone 下投影同形,一并放行
    (材质页方瓦片+边框页活方瓦片);磨砂图标按钮/按钮组卡共用
    .icon-preview__row(幽灵图标卡同用该行类,幽灵无投影,放开无视觉差)。
@@ -1327,7 +1063,7 @@
    (Md 编辑器工具栏是 coss/toolbar,不受影响)。带标签卡片页两张真实卡
    (笔记卡片/新建草稿壳层)经 .card-docs-preview 放行其卡片材质影与
    tone 影。 */
-.component-preview-card:has(.card-surface-preview, .popup-surface-preview, .frosted-surface-preview__tile, .frosted-border-preview__tile, .icon-preview__row, .sidebar-preview, .tag-page__bread-preview, .internal-bottom-preview, .card-docs-preview, .card-composer-docs-preview, .liquid-glass-preview, .liquid-glass-toolbar-preview, .liquid-glass-icon-preview, .liquid-glass-chip-preview, .capsule-slot-preview, .capsule-button, .icon-button--frosted, .liquid-glass-label-preview) .base-card__content {
+.component-preview-card:has(.card-surface-preview, .popup-surface-preview, .frosted-surface-preview__tile, .frosted-border-preview__tile, .icon-preview__row, .sidebar-preview, .tag-page__bread-preview, .internal-bottom-preview, .card-docs-preview, .card-composer-docs-preview, .liquid-glass-preview, .capsule-button, .icon-button--frosted, .frosted-label-preview) .base-card__content {
   overflow: visible;
 }
 

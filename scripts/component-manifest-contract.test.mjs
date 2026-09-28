@@ -209,7 +209,7 @@ assert.deepEqual(
     'ghost-icon-button',
     'mode-button',
     'bottom-bar',
-    'glass-label',
+    'frosted-label',
     'top-bar',
     'tag-bread',
     'tag-tree-row',
