@@ -7,9 +7,9 @@ import {
   ActionMenu,
   type ActionMenuItem,
 } from 'weimo-ui-core/components/menu'
+import { LabeledSwitch } from 'weimo-ui-core/components/labeled-switch'
 import { TagBar } from 'weimo-ui-card/components/tag-bar'
 import type { ComponentDefinition } from '../../component-docs'
-import { PreviewToggle } from '../../../previews/preview-toggle'
 
 const TITLE_BAR_MENU_ITEMS = [
   {
@@ -95,10 +95,11 @@ function BaseCardDemo() {
         </p>
       </BaseCard>
       <div className="docs-debug-toggle">
-        <PreviewToggle
+        <LabeledSwitch
           ariaLabel="切换 DEBUG 边框显示"
           checked={debugBorder}
-          label={debugBorder ? '已显示 DEBUG 边框' : '已隐藏 DEBUG 边框'}
+          labelOff="已隐藏 DEBUG 边框"
+          labelOn="已显示 DEBUG 边框"
           onCheckedChange={setDebugBorder}
         />
       </div>

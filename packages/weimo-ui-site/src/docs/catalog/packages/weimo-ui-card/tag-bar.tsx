@@ -6,8 +6,8 @@ import { TagPicker, type TagPickerApplyPayload, type TagPickerMode } from 'weimo
 import { EditableCapsule } from 'weimo-ui-card/components/editable-capsule'
 import { CapsuleButton } from 'weimo-ui-core/components/capsule-button'
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
+import { LabeledSwitch } from 'weimo-ui-core/components/labeled-switch'
 import type { ComponentDefinition } from '../../component-docs'
-import { PreviewToggle } from '../../../previews/preview-toggle'
 
 const tagOptions = [
   '工作/项目', '写作/日记', '研究/论文', '生活/灵感', '阅读/摘录',
@@ -81,10 +81,11 @@ function TagBarDemo() {
   return (
     <ComponentPreviewCard
       action={
-        <PreviewToggle
+        <LabeledSwitch
           ariaLabel="切换编辑态"
           checked={editable}
-          label={editable ? '编辑态' : '展示态'}
+          labelOff="展示态"
+          labelOn="编辑态"
           onCheckedChange={setEditable}
         />
       }
@@ -117,10 +118,11 @@ function EditableCapsuleDemo() {
   return (
     <ComponentPreviewCard
       action={
-        <PreviewToggle
+        <LabeledSwitch
           ariaLabel="切换编辑态"
           checked={editable}
-          label={editable ? '编辑态' : '展示态'}
+          labelOff="展示态"
+          labelOn="编辑态"
           onCheckedChange={setEditable}
         />
       }

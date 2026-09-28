@@ -310,19 +310,6 @@
   gap: 12px;
 }
 
-/* 标题栏 Switch 控件与其可见标签 */
-.preview-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.preview-toggle__label {
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-xs);
-  line-height: 1.2;
-}
-
 .internal-bottom-preview,
 .internal-card-top-bar-preview,
 .internal-card-tool-bar-preview,
@@ -1271,6 +1258,18 @@
   gap: 16px;
 }
 
+/* 胶囊插槽卡(按钮胶囊页):前后缀三例的换行行布局,与 text-button-preview 同构。
+   第三例为液态玻璃态,库投影 0 12px 40px 远超画布(80px 高度地板),须进下方
+   :has 清单放行 overflow,让真实阴影落进卡片 padding,否则底部被裁成平边。 */
+.capsule-slot-preview {
+  display: flex;
+  min-width: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
 /* 浮动工具栏(浮动栏页):示例内液态玻璃按钮/胶囊的图标与文字色随画布 tone
    自适应,容器(LiquidGlassTile)持有 data-background-tone。 */
 .liquid-glass-toolbar-preview {
@@ -1300,7 +1299,7 @@
    底部操作栏画布同例:示例容器已换成 CardSurface,阴影同样要落进卡片 padding。
    液态系画布(工具栏/图标按钮组/胶囊)同例:库投影 0 12px 40px 比画布
    (80px 高)大得多,同样要落进卡片 padding。 */
-.component-preview-card:has(.card-surface-preview, .popup-surface-preview, .internal-bottom-preview, .liquid-glass-preview, .liquid-glass-toolbar-preview, .liquid-glass-icon-preview, .liquid-glass-chip-preview, .liquid-glass-label-preview) .base-card__content {
+.component-preview-card:has(.card-surface-preview, .popup-surface-preview, .internal-bottom-preview, .liquid-glass-preview, .liquid-glass-toolbar-preview, .liquid-glass-icon-preview, .liquid-glass-chip-preview, .capsule-slot-preview, .liquid-glass-label-preview) .base-card__content {
   overflow: visible;
 }
 

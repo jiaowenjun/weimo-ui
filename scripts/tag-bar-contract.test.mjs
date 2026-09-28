@@ -61,8 +61,11 @@ const morphMeasureChipBlock = cssBlockFor(cssSource, '.tag-bar__morph-measure .c
 const addChipBlock = cssBlockFor(cssSource, '.tag-bar__add-chip')
 const exitingAddChipBlock = cssBlockFor(cssSource, '.tag-bar__add-chip[data-exiting="true"]')
 const previewPanelBlock = cssBlockFor(appCssSource, '.tag-bar-preview__panel')
-const previewToggleBlock = cssBlockFor(appCssSource, '.preview-toggle')
-const previewToggleLabelBlock = cssBlockFor(appCssSource, '.preview-toggle__label')
+const labeledSwitchCssSource = readProjectFile(
+  'packages/weimo-ui-core/src/components/controls/labeled-switch/labeled-switch.css',
+)
+const previewToggleBlock = cssBlockFor(labeledSwitchCssSource, '.labeled-switch')
+const previewToggleLabelBlock = cssBlockFor(labeledSwitchCssSource, '.labeled-switch__label')
 const visibleTagsMapStart = componentSource.indexOf('visibleTags.map((tag, index) =>')
 const addChipStart = componentSource.indexOf('showAddChip ? (', visibleTagsMapStart)
 const visibleTagsMapSource = componentSource.slice(visibleTagsMapStart, addChipStart)
@@ -441,7 +444,7 @@ assert.ok(
 assert.ok(
   docsSource.includes("import { useState } from 'react'") &&
     docsSource.includes("import { TagBar } from 'weimo-ui-card/components/tag-bar'") &&
-    docsSource.includes("import { PreviewToggle } from '../../../previews/preview-toggle'") &&
+    docsSource.includes("import { LabeledSwitch } from 'weimo-ui-core/components/labeled-switch'") &&
     docsSource.includes('function TagBarDemo') &&
     docsSource.includes('label="标签栏"') &&
     docsSource.includes('<TagBarDemo />') &&
@@ -452,10 +455,11 @@ assert.ok(
     docsSource.includes('onTagsChange={setTags}') &&
     docsSource.includes('tagOptions={tagOptions}') &&
     docsSource.includes('tags={tags}') &&
-    docsSource.includes('<PreviewToggle') &&
+    docsSource.includes('<LabeledSwitch') &&
     docsSource.includes('ariaLabel="切换编辑态"') &&
     docsSource.includes('checked={editable}') &&
-    docsSource.includes("label={editable ? '编辑态' : '展示态'}"),
+    docsSource.includes('labelOn="编辑态"') &&
+    docsSource.includes('labelOff="展示态"'),
   'TagBar docs definition must provide a local state TagBar preview with a title-bar edit switch.',
 )
 assert.ok(

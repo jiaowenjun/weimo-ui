@@ -140,24 +140,9 @@ for (const snippet of [
   assert.ok(surfaceDefinitionSource.includes(snippet), `Surface docs definition must include ${snippet}.`)
 }
 
-// 标题栏开关（可见状态标签 + Switch）抽到 docs 共享组件：材质页三张卡的边框开关
-// 与按钮页启用/模式开关共用，契约锁共享文件。
-const previewToggleSource = readProjectFile('packages/weimo-ui-site/src/docs/previews/preview-toggle.tsx')
-
-for (const snippet of [
-  "import { Switch } from 'weimo-ui-core/components/coss/switch'",
-  'export function PreviewToggle(',
-  'ariaLabel: string',
-  'label: ReactNode',
-  'aria-label={ariaLabel}',
-  'checked={checked}',
-  'onCheckedChange={onCheckedChange}',
-  'export function SurfaceBorderToggle(',
-  'ariaLabel="显示边框"',
-  "label={bordered ? '有边框' : '无边框'}",
-]) {
-  assert.ok(previewToggleSource.includes(snippet), `PreviewToggle shared component must include ${snippet}.`)
-}
+// 标题栏开关机制已下沉为 core 正式组件 LabeledSwitch
+// （packages/weimo-ui-core/src/components/controls/labeled-switch/），
+// 契约迁移至 scripts/labeled-switch-contract.test.mjs。
 assert.ok(
   !surfaceDefinitionSource.includes('items=') && !surfaceDefinitionSource.includes('surface-backdrop'),
   'Surface docs definition must keep the label title bar without token rows or preview backdrop.',

@@ -6,9 +6,9 @@ import {
   type MathEditorValue,
 } from 'weimo-ui-markdown/components/math-editor'
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
+import { LabeledSwitch } from 'weimo-ui-core/components/labeled-switch'
 import { MdView, type MdViewMode } from 'weimo-ui-markdown/components/md-view'
 import { TextButton } from 'weimo-ui-core/components/text-button'
-import { PreviewToggle } from '../../../previews/preview-toggle'
 import type { ComponentDefinition } from '../../component-docs'
 
 import { ControlledMdEditorDemo } from './md-editor-demos'
@@ -69,10 +69,11 @@ function MdViewDemo() {
   return (
     <ComponentPreviewCard
       action={
-        <PreviewToggle
+        <LabeledSwitch
           ariaLabel="MdView 编辑模式"
           checked={mode === 'edit'}
-          label={mode === 'edit' ? '编辑' : '展示'}
+          labelOff="展示"
+          labelOn="编辑"
           onCheckedChange={(checked) => setMode(checked ? 'edit' : 'view')}
         />
       }

@@ -350,7 +350,6 @@ for (const relativePath of [
   'packages/weimo-ui-site/src/docs/catalog/manifest.ts',
   'packages/weimo-ui-site/src/docs/pages/component-detail-page.tsx',
   'packages/weimo-ui-site/src/docs/previews/glass-preview-card.tsx',
-  'packages/weimo-ui-site/src/docs/previews/preview-toggle.tsx',
   'packages/weimo-ui-site/src/docs/shell/docs-outlet-context.ts',
   'packages/weimo-ui-site/src/docs/shell/docs-shell.tsx',
   'packages/weimo-ui-site/src/styles/global.css',

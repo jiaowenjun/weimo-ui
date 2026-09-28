@@ -277,7 +277,7 @@ assert.ok(
     docsSource.includes("import { Hash, X } from 'lucide-react'") &&
     docsSource.includes("import { CapsuleButton } from 'weimo-ui-core/components/capsule-button'") &&
     docsSource.includes("import { GlassPreviewCard } from '../../../previews/glass-preview-card'") &&
-    docsSource.includes("import { PreviewToggle } from '../../../previews/preview-toggle'") &&
+    docsSource.includes("import { LabeledSwitch } from 'weimo-ui-core/components/labeled-switch'") &&
     docsSource.includes("id: 'capsule-button'") &&
     docsSource.includes('function CapsuleMaterialDemo') &&
     docsSource.includes('<CapsuleMaterialDemo />') &&
@@ -314,9 +314,11 @@ assert.ok(
     docsSource.includes('ref={widthMeasureRef}') &&
     docsSource.includes('aria-label="CapsuleButton 宽度变化预览"') &&
     docsSource.includes("checked={state === 'frosted'}") &&
-    docsSource.includes("label={state === 'frosted' ? '磨砂态' : '默认态'}") &&
+    docsSource.includes('labelOn="磨砂态"') &&
+    docsSource.includes('labelOff="默认态"') &&
     docsSource.includes("checked={widthMode === 'long'}") &&
-    docsSource.includes("label={widthMode === 'long' ? '长标签' : '短标签'}"),
+    docsSource.includes('labelOn="长标签"') &&
+    docsSource.includes('labelOff="短标签"'),
   'CapsuleButton docs definition must include an internal preview with state and width-change toggles.',
 )
 assert.ok(

@@ -3,10 +3,10 @@ import { Hash, X } from 'lucide-react'
 
 import { CapsuleButton } from 'weimo-ui-core/components/capsule-button'
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
+import { LabeledSwitch } from 'weimo-ui-core/components/labeled-switch'
 import type { ComponentDefinition } from '../../component-docs'
 import { GlassPreviewCard } from '../../../previews/glass-preview-card'
 import { LiquidGlassTile } from '../../../previews/liquid-glass-tile'
-import { PreviewToggle } from '../../../previews/preview-toggle'
 
 // 胶囊材质:普通(default 态)、磨砂(frosted 态)、液态玻璃(liquid-glass 态,
 // 组件内部包 LiquidGlassSurface 与隐藏 sizer)三例并列于灰度画布,拖动滑块
@@ -28,7 +28,7 @@ function CapsuleMaterialDemo() {
 function CapsuleSlotDemo() {
   return (
     <ComponentPreviewCard align="center" label="胶囊插槽">
-      <div className="text-button-preview" aria-label="CapsuleButton 前后缀预览">
+      <div className="capsule-slot-preview" aria-label="CapsuleButton 前后缀预览">
         <CapsuleButton prefix={<Hash aria-hidden="true" />}>写作/日记</CapsuleButton>
         <CapsuleButton
           prefix={null}
@@ -63,10 +63,11 @@ function StateToggleCapsuleButtonDemo() {
   return (
     <ComponentPreviewCard
       action={
-        <PreviewToggle
+        <LabeledSwitch
           ariaLabel="切换磨砂态"
           checked={state === 'frosted'}
-          label={state === 'frosted' ? '磨砂态' : '默认态'}
+          labelOff="默认态"
+          labelOn="磨砂态"
           onCheckedChange={(checked) => setState(checked ? 'frosted' : 'default')}
         />
       }
@@ -102,10 +103,11 @@ function WidthToggleCapsuleButtonDemo() {
   return (
     <ComponentPreviewCard
       action={
-        <PreviewToggle
+        <LabeledSwitch
           ariaLabel="切换长标签"
           checked={widthMode === 'long'}
-          label={widthMode === 'long' ? '长标签' : '短标签'}
+          labelOff="短标签"
+          labelOn="长标签"
           onCheckedChange={(checked) => setWidthMode(checked ? 'long' : 'short')}
         />
       }

@@ -130,6 +130,7 @@ assert.ok(
 for (const snippet of [
   "import { useState } from 'react'",
   "import { TextButton } from 'weimo-ui-core/components/text-button'",
+  "import { LabeledSwitch } from 'weimo-ui-core/components/labeled-switch'",
   'ModeButton,',
   'type ModeButtonMode,',
   "} from 'weimo-ui-core/components/mode-button'",
@@ -137,7 +138,9 @@ for (const snippet of [
   'function toggleMode(checked: boolean)',
   '<ModeButton',
   '<TextButton',
-  '<PreviewToggle',
+  '<LabeledSwitch',
+  'labelOn="编辑态"',
+  'labelOff="默认态"',
   'mode={mode}',
   'onModeChange={setMode}',
   "buttonProps={{ size: 'sm' }}",

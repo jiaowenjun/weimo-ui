@@ -898,6 +898,45 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "name": "labeled-switch",
+      "title": "Labeled Switch",
+      "description": "A switch with a visible state label that swaps between on and off text as the checked state changes.",
+      "categories": [
+        "input"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/weimo-ui-core/src/components/controls/labeled-switch/labeled-switch.tsx",
+          "type": "registry:ui",
+          "target": "@ui/labeled-switch.tsx"
+        },
+        {
+          "path": "packages/weimo-ui-core/src/components/controls/labeled-switch/labeled-switch.css",
+          "type": "registry:ui",
+          "target": "@ui/labeled-switch.css"
+        },
+        {
+          "path": "packages/weimo-ui-core/src/components/primitives/switch.tsx",
+          "type": "registry:ui",
+          "target": "@ui/coss/switch.tsx"
+        },
+        {
+          "path": "packages/weimo-ui-core/src/components/primitives/switch.css",
+          "type": "registry:ui",
+          "target": "@ui/coss/switch.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "slider",
       "type": "registry:ui",
       "title": "Slider",

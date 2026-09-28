@@ -5,6 +5,7 @@ import { borderTokensDefinition } from './packages/weimo-ui-core/border-tokens'
 import { surfaceDefinition } from './packages/weimo-ui-core/surface'
 import { buttonDefinition } from './packages/weimo-ui-core/button'
 import { capsuleButtonDefinition } from './packages/weimo-ui-core/capsule-button'
+import { labeledSwitchDefinition } from './packages/weimo-ui-core/labeled-switch'
 import { sliderDefinition } from './packages/weimo-ui-core/slider'
 import { menuDefinition } from './packages/weimo-ui-core/menu'
 import { actionDialogDefinition } from './packages/weimo-ui-core/action-dialog'
@@ -30,6 +31,7 @@ export const componentDefinitionsById = {
   surface: surfaceDefinition,
   button: buttonDefinition,
   'capsule-button': capsuleButtonDefinition,
+  'labeled-switch': labeledSwitchDefinition,
   slider: sliderDefinition,
   menu: menuDefinition,
   'action-dialog': actionDialogDefinition,

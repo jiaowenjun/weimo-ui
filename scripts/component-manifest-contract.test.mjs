@@ -117,6 +117,7 @@ assert.deepEqual(
     'surface',
     'button',
     'capsule-button',
+    'labeled-switch',
     'slider',
     'menu',
     'action-dialog',

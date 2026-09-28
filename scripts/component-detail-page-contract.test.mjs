@@ -291,7 +291,7 @@ assert.ok(
 )
 assert.ok(
     buttonDefinitionSource.includes("import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'") &&
-    buttonDefinitionSource.includes("import { PreviewToggle } from '../../../previews/preview-toggle'") &&
+    buttonDefinitionSource.includes("import { LabeledSwitch } from 'weimo-ui-core/components/labeled-switch'") &&
     buttonDefinitionSource.includes("import { useState } from 'react'") &&
     buttonDefinitionSource.includes("import { TextButton } from 'weimo-ui-core/components/text-button'") &&
     buttonDefinitionSource.includes("id: 'button'") &&

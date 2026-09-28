@@ -4,10 +4,10 @@ import { bgColorToneMap } from 'weimo-ui-core/components/bg-color'
 import { borderRadiusScaleMap } from 'weimo-ui-core/components/border-radius'
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import { FrostedSurface } from 'weimo-ui-core/components/frosted-surface'
+import { LabeledSwitch } from 'weimo-ui-core/components/labeled-switch'
 import { TextButton } from 'weimo-ui-core/components/text-button'
 import type { ComponentDefinition } from '../../component-docs'
 import { GlassPreviewCard } from '../../../previews/glass-preview-card'
-import { PreviewToggle } from '../../../previews/preview-toggle'
 
 // 示例 token 行直接取真实 token 表（通用 hover 底色 + 基础圆角）。
 const previewCardItems = [
@@ -44,10 +44,11 @@ function PreviewCardDemo() {
         </FrostedSurface>
       </GlassPreviewCard>
       <div className="docs-debug-toggle">
-        <PreviewToggle
+        <LabeledSwitch
           ariaLabel="切换 DEBUG 边框显示"
           checked={debugBorder}
-          label={debugBorder ? '已显示 DEBUG 边框' : '已隐藏 DEBUG 边框'}
+          labelOff="已隐藏 DEBUG 边框"
+          labelOn="已显示 DEBUG 边框"
           onCheckedChange={setDebugBorder}
         />
       </div>

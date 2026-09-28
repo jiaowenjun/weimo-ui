@@ -14,10 +14,10 @@ import {
 } from 'weimo-ui-core/components/mode-button'
 import { TextButton } from 'weimo-ui-core/components/text-button'
 import { LiquidGlassSurface } from 'weimo-ui-core/components/liquid-glass'
+import { LabeledSwitch } from 'weimo-ui-core/components/labeled-switch'
 import type { ComponentDefinition } from '../../component-docs'
 import { GlassPreviewCard } from '../../../previews/glass-preview-card'
 import { LiquidGlassTile } from '../../../previews/liquid-glass-tile'
-import { PreviewToggle } from '../../../previews/preview-toggle'
 
 // 液态玻璃演示点击无实际动作,传 no-op 只为启用库的悬停辉光与按压缩放。
 function noopLiquidGlassClick() {}
@@ -28,10 +28,11 @@ function TextButtonPreview() {
   return (
     <ComponentPreviewCard
       action={
-        <PreviewToggle
+        <LabeledSwitch
           ariaLabel="启用"
           checked={!disabled}
-          label={disabled ? '禁用' : '启用'}
+          labelOff="禁用"
+          labelOn="启用"
           onCheckedChange={(checked) => setDisabled(!checked)}
         />
       }
@@ -67,10 +68,11 @@ function GhostIconButtonPreview() {
   return (
     <ComponentPreviewCard
       action={
-        <PreviewToggle
+        <LabeledSwitch
           ariaLabel="启用"
           checked={!disabled}
-          label={disabled ? '禁用' : '启用'}
+          labelOff="禁用"
+          labelOn="启用"
           onCheckedChange={(checked) => setDisabled(!checked)}
         />
       }
@@ -102,10 +104,11 @@ function FrostedIconButtonPreview() {
   return (
     <GlassPreviewCard
       action={
-        <PreviewToggle
+        <LabeledSwitch
           ariaLabel="启用"
           checked={!disabled}
-          label={disabled ? '禁用' : '启用'}
+          labelOff="禁用"
+          labelOn="启用"
           onCheckedChange={(checked) => setDisabled(!checked)}
         />
       }
@@ -145,10 +148,11 @@ function FrostedIconButtonGroupPreview() {
   return (
     <GlassPreviewCard
       action={
-        <PreviewToggle
+        <LabeledSwitch
           ariaLabel="启用"
           checked={!disabled}
-          label={disabled ? '禁用' : '启用'}
+          labelOff="禁用"
+          labelOn="启用"
           onCheckedChange={(checked) => setDisabled(!checked)}
         />
       }
@@ -194,10 +198,11 @@ function LiquidGlassIconButtonPreview() {
   return (
     <GlassPreviewCard
       action={
-        <PreviewToggle
+        <LabeledSwitch
           ariaLabel="启用"
           checked={!disabled}
-          label={disabled ? '禁用' : '启用'}
+          labelOff="禁用"
+          labelOn="启用"
           onCheckedChange={(checked) => setDisabled(!checked)}
         />
       }
@@ -256,10 +261,11 @@ function LiquidGlassIconButtonGroupPreview() {
   return (
     <GlassPreviewCard
       action={
-        <PreviewToggle
+        <LabeledSwitch
           ariaLabel="启用"
           checked={!disabled}
-          label={disabled ? '禁用' : '启用'}
+          labelOff="禁用"
+          labelOn="启用"
           onCheckedChange={(checked) => setDisabled(!checked)}
         />
       }
@@ -281,10 +287,11 @@ function ModeButtonDemo() {
   return (
     <ComponentPreviewCard
       action={
-        <PreviewToggle
+        <LabeledSwitch
           ariaLabel="切换编辑态"
           checked={editing}
-          label={editing ? '编辑态' : '默认态'}
+          labelOff="默认态"
+          labelOn="编辑态"
           onCheckedChange={toggleMode}
         />
       }
