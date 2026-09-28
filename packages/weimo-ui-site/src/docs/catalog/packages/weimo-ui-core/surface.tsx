@@ -20,6 +20,19 @@ function CardSurfacePreview() {
   )
 }
 
+function PopupSurfacePreview() {
+  return (
+    <ComponentPreviewCard align="center" label="浮层材质">
+      <div className="popup-surface-preview">
+        <PopupSurface className="popup-surface-preview__tile">
+          <span className="popup-surface-preview__title">Modal Surface</span>
+          <span className="popup-surface-preview__meta">亮主题抬升投影，暗主题边框描边</span>
+        </PopupSurface>
+      </div>
+    </ComponentPreviewCard>
+  )
+}
+
 function FrostedSurfacePreview() {
   return (
     <GlassPreviewCard label="磨砂材质">
@@ -49,27 +62,14 @@ function LiquidGlassPreview() {
   )
 }
 
-function PopupSurfacePreview() {
-  return (
-    <ComponentPreviewCard align="center" label="浮层材质">
-      <div className="popup-surface-preview">
-        <PopupSurface className="popup-surface-preview__tile">
-          <span className="popup-surface-preview__title">Modal Surface</span>
-          <span className="popup-surface-preview__meta">亮主题抬升投影，暗主题边框描边</span>
-        </PopupSurface>
-      </div>
-    </ComponentPreviewCard>
-  )
-}
-
 // Docs definitions intentionally colocate preview components with exported page metadata.
 function SurfaceDemo() {
   return (
     <>
       <CardSurfacePreview />
+      <PopupSurfacePreview />
       <FrostedSurfacePreview />
       <LiquidGlassPreview />
-      <PopupSurfacePreview />
     </>
   )
 }
