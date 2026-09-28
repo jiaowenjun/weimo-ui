@@ -264,6 +264,29 @@ assert.ok(
   blockFor(popupSurfaceCss, '.dark .popup-surface').includes('border-color: var(--color-border-divider);'),
   'Dark theme must stroke popup surfaces with the divider border token instead of the invisible shadow.',
 )
+// 亮主题浮层投影与液态玻璃库投影「数值对齐、定义互不引用」:token 字面量手抄
+// 库内默认分支的投影(偏移 12px、模糊 40px、黑 25%),任一侧改动须手动同步
+// 四处镜像(tokens.css + 两份 registry + 库字面量);库不引用 token,token 不进库。
+const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
+const liquidGlassEngineSource = readProjectFile(
+  'packages/weimo-ui-core/src/components/surfaces/liquid-glass/liquid-glass-react/index.tsx',
+)
+const registryJsonText = readProjectFile('registry.json')
+const styleRegistryText = readProjectFile('registry/style.json')
+assert.ok(
+  tokensCss.includes('--shadow-overlay: 0 12px 40px hsl(0 0% 0% / 0.25);') &&
+    liquidGlassEngineSource.includes('"0px 12px 40px rgba(0, 0, 0, 0.25)"'),
+  'Light-theme --shadow-overlay must stay value-aligned with the liquid glass drop shadow literal (same offset, blur and alpha, hand-copied).',
+)
+assert.ok(
+  !liquidGlassEngineSource.includes('--shadow-overlay'),
+  'The vendored liquid glass engine must keep its own shadow literal instead of referencing the overlay token.',
+)
+assert.ok(
+  registryJsonText.includes('"shadow-overlay": "0 12px 40px hsl(0 0% 0% / 0.25)"') &&
+    styleRegistryText.includes('"shadow-overlay": "0 12px 40px hsl(0 0% 0% / 0.25)"'),
+  'Both registry mirrors must carry the value-aligned overlay shadow.',
+)
 assert.ok(
   !popupSurfaceCss.includes('backdrop-filter') && !popupSurfaceBlock.includes('padding:'),
   'PopupSurface must own popup material only, not backdrop blur or layout padding.',
