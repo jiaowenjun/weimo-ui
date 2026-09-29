@@ -101,4 +101,24 @@ describe('surface background tone timing', () => {
     unmount()
     expect(frames.size).toBe(0)
   })
+
+  it('keeps the last successful sample through a transient sampling failure', () => {
+    render(<ToneProbe />)
+    expect(screen.getByTestId('surface')).toHaveAttribute('data-background-tone', 'light')
+
+    // iOS 手势滚动期间的瞬态失败（采样返回 null）不得移除 data-background-tone
+    vi.mocked(resolveElementBackgroundSample).mockReturnValue(null)
+    act(() => window.dispatchEvent(new Event('resize')))
+    flushFrame()
+    expect(screen.getByTestId('surface')).toHaveAttribute('data-background-tone', 'light')
+
+    // 采样恢复后正常采纳新值
+    vi.mocked(resolveElementBackgroundSample).mockReturnValue({
+      luminance: 0.1,
+      tone: 'dark',
+    })
+    act(() => window.dispatchEvent(new Event('resize')))
+    flushFrame()
+    expect(screen.getByTestId('surface')).toHaveAttribute('data-background-tone', 'dark')
+  })
 })

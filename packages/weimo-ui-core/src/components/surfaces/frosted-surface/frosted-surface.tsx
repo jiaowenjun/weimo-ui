@@ -86,12 +86,20 @@ function useFrostedSurfaceBackgroundToneForElement<ElementType extends HTMLEleme
       animationFrame = 0
       const nextSample = resolveElementBackgroundSample(element)
 
-      setBackgroundSample((currentSample) => (
-        currentSample?.tone === nextSample?.tone &&
-        currentSample?.luminance === nextSample?.luminance
+      setBackgroundSample((currentSample) => {
+        // 采样瞬态失败（如 iOS 手势滚动期间异步滚动与主线程命中测试不同步，
+        // elementsFromPoint 落空或矩形失效）视为「本帧无新信息」，保留上次成功
+        // 采样：置 null 会移除 data-background-tone，亮背景下回退成暗变体
+        // （透明影+描边闪变）。observe 关闭与卸载路径仍显式清空。
+        if (nextSample == null) {
+          return currentSample
+        }
+
+        return currentSample?.tone === nextSample.tone &&
+          currentSample?.luminance === nextSample.luminance
           ? currentSample
           : nextSample
-      ))
+      })
     }
 
     const scheduleUpdate = () => {
