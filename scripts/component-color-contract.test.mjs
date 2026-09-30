@@ -78,6 +78,14 @@ const allowlistedComponentColors = new Map([
     // 底层通道 --primary。
     new Set(['hsl(var(--primary)']),
   ],
+  [
+    'packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css',
+    // 磨砂投影是 tone 驱动(data-background-tone)而非主题驱动,且透明同形影是
+    // tone 翻转时 box-shadow alpha 插值的形状载体:引用 var(--shadow-card) 会
+    // 在暗主题(其值为 none)破坏 tone/主题独立与插值连续性。亮态字面量与
+    // --shadow-card 数值对齐、互不引用,frosted-surface-contract 已锁两侧同步。
+    new Set(['hsl(0 0% 0% / 0)', 'hsl(0 0% 0% / 0.04)', 'hsl(0 0% 0% / 0.06)']),
+  ],
 ])
 const cssFiles = componentsRoots.flatMap(listCssFiles)
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
