@@ -632,7 +632,7 @@
 
 .bg-color-preview__swatch-group {
   display: grid;
-  grid-template-columns: repeat(8, 42px);
+  grid-template-columns: repeat(7, 42px);
   justify-content: center;
   align-items: center;
   width: 100%;

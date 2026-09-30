@@ -1,6 +1,7 @@
 @layer components {
   .image-uploader {
     --image-uploader-panel-padding: 15px;
+    --image-uploader-panel-accent-bg: hsl(40 12% 92% / 0.42);
 
     display: grid;
     width: 100%;
@@ -8,6 +9,10 @@
     color: var(--color-text-secondary);
     text-align: center;
     isolation: isolate;
+  }
+
+  .dark .image-uploader {
+    --image-uploader-panel-accent-bg: hsl(0 0% 19% / 0.42);
   }
 
   .image-uploader__panel {
@@ -29,12 +34,12 @@
 
   .image-uploader[data-state="initial"] .image-uploader__panel:hover {
     border-color: var(--color-border-accent);
-    background: color-mix(in srgb, var(--color-bg-chip) 42%, transparent);
+    background: var(--image-uploader-panel-accent-bg);
   }
 
   .image-uploader[data-state="initial"][data-drag-over="true"] .image-uploader__panel {
     border-color: var(--color-border-accent);
-    background: color-mix(in srgb, var(--color-bg-chip) 42%, transparent);
+    background: var(--image-uploader-panel-accent-bg);
   }
 
   .image-uploader[data-state="ready"] .image-uploader__panel {

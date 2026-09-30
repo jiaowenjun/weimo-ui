@@ -25,7 +25,3 @@
 .bg-color--selected {
   background: var(--color-bg-selected);
 }
-
-.bg-color--chip {
-  background: var(--color-bg-chip);
-}

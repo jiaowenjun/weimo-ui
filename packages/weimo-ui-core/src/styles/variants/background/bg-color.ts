@@ -85,18 +85,6 @@ export const bgColorToneMap = {
     uiUsage: 'TagTree selected row',
     bijiUsage: '继承 ui/styles/tokens.css，暂无独立覆盖',
   },
-  chip: {
-    label: 'Chip 底色',
-    token: '--color-bg-chip',
-    value: {
-      light: 'hsl(40 12% 92%)',
-      dark: 'hsl(0 0% 19%)',
-    },
-    className: 'bg-color--chip',
-    description: '标签、筛选 chip 和轻量标记的柔和填充色。',
-    uiUsage: 'CapsuleButton、ImageUploader selected file',
-    bijiUsage: 'WorkspaceFilterBar chip、TagBar',
-  },
 } as const
 
 export type BgColorTone = keyof typeof bgColorToneMap

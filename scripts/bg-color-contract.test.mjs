@@ -50,7 +50,6 @@ const expectedTones = [
   ['hover', '--color-bg-hover', 'bg-color--hover', 'hsl(40 12% 90%)', 'hsl(0 0% 21%)'],
   ['hover-on-hover', '--color-bg-nested-hover', 'bg-color--hover-on-hover', 'hsl(40 12% 88%)', 'hsl(0 0% 28%)'],
   ['selected', '--color-bg-selected', 'bg-color--selected', 'hsl(40 10% 94%)', 'hsl(0 0% 15%)'],
-  ['chip', '--color-bg-chip', 'bg-color--chip', 'hsl(40 12% 92%)', 'hsl(0 0% 19%)'],
 ]
 
 const expectedSwatchTones = [
@@ -58,7 +57,6 @@ const expectedSwatchTones = [
   'card',
   'selected',
   'raised',
-  'chip',
   'hover',
   'hover-on-hover',
   'primary',
@@ -75,13 +73,11 @@ const excludedTokens = [
 const opaqueFeedbackTokens = new Set([
   '--color-bg-hover',
   '--color-bg-nested-hover',
-  '--color-bg-chip',
 ])
 
 const expectedOpaqueFeedbackTokenValues = new Map([
   ['--color-bg-hover', ['hsl(40 12% 90%)', 'hsl(0 0% 21%)']],
   ['--color-bg-nested-hover', ['hsl(40 12% 88%)', 'hsl(0 0% 28%)']],
-  ['--color-bg-chip', ['hsl(40 12% 92%)', 'hsl(0 0% 19%)']],
 ])
 
 function assertOpaqueValue(value, token) {
@@ -115,6 +111,7 @@ const textDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/
 const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const tokenPreviewCardCss = readProjectFile('packages/weimo-ui-core/src/components/composites/cards/component-preview-card.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
+const imageUploaderCss = readProjectFile('packages/weimo-ui-image/src/components/image-uploader/image-uploader.css')
 const dialogCss = readProjectFile('packages/weimo-ui-core/src/components/primitives/dialog.css')
 const commandCss = readProjectFile('packages/weimo-ui-site/src/components/primitives/command.css')
 const sidebarShellCss = readProjectFile('packages/weimo-ui-core/src/components/layout/sidebar/sidebar.css')
@@ -268,6 +265,23 @@ for (const removedSelectionToken of [
   )
 }
 
+for (const removedChipToken of [
+  'color-bg-chip',
+  'bg-color--chip',
+]) {
+  assert.ok(
+    !bgColorSource.includes(removedChipToken) &&
+      !bgColorCss.includes(removedChipToken) &&
+      !tokensCss.includes(removedChipToken) &&
+      !docsDefinitionSource.includes(removedChipToken) &&
+      !appCss.includes(removedChipToken) &&
+      !imageUploaderCss.includes(removedChipToken) &&
+      !JSON.stringify(styleRegistry).includes(removedChipToken) &&
+      !JSON.stringify(rootStyleItem).includes(removedChipToken),
+    `BgColor surfaces must not keep the capsule-owned chip tone ${removedChipToken}.`,
+  )
+}
+
 assert.ok(
   !bgColorSource.includes("'brand-subtle'") &&
     !bgColorSource.includes('bg-color--brand-subtle') &&
@@ -410,7 +424,7 @@ assert.ok(
     !docsDefinitionSource.includes('summary:') &&
     !docsDefinitionSource.includes('bg-color-preview__group') &&
     !docsDefinitionSource.includes('bg-color-preview__description'),
-  'BgColor docs definition must merge all eight tones into the single fixed-order swatch card.',
+  'BgColor docs definition must merge all seven tones into the single fixed-order swatch card.',
 )
 
 const previewTonesSource = docsDefinitionSource.slice(
@@ -421,7 +435,7 @@ const previewTonesSource = docsDefinitionSource.slice(
 assert.deepEqual(
   [...previewTonesSource.matchAll(/'([a-z-]+)'/g)].map((match) => match[1]),
   expectedSwatchTones,
-  'BgColor docs must merge all eight tones into one card in the fixed semantic order.',
+  'BgColor docs must merge all seven tones into one card in the fixed semantic order.',
 )
 assert.ok(
   docsDefinitionSource.includes('pressableToneMap[tone]') &&
@@ -455,13 +469,13 @@ assert.ok(
 )
 assert.ok(
   firstBlockFor(appCss, '.bg-color-preview__swatch-canvas').includes('container-type: inline-size;') &&
-    firstBlockFor(appCss, '.bg-color-preview__swatch-group').includes('grid-template-columns: repeat(8, 42px);') &&
+    firstBlockFor(appCss, '.bg-color-preview__swatch-group').includes('grid-template-columns: repeat(7, 42px);') &&
     firstBlockFor(appCss, '.bg-color-preview__swatch-group').includes('gap: clamp(12px, 2vw, 24px);') &&
     firstBlockFor(appCss, '.bg-color-preview__swatch-group').includes('padding-inline: 16px;') &&
     firstBlockFor(appCss, '@container (width < 620px)').includes(
       'grid-template-columns: repeat(4, minmax(42px, 48px));',
     ),
-  'The merged swatch grid must stay 8-per-row on wide canvases and fall back to two clamped rows of 4 (42-48px, 12-24px gap) below the 620px threshold.',
+  'The merged swatch grid must stay 7-per-row on wide canvases and fall back to clamped rows of 4 and 3 (42-48px, 12-24px gap) below the 620px threshold.',
 )
 assert.ok(
   !textDocsSource.includes("from 'weimo-ui-core/components/bg-color'") &&

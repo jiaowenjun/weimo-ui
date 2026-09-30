@@ -19,14 +19,14 @@ describe('token preview color ordering', () => {
   })
 
   it('orders background colors against the current theme surface', () => {
-    const tones: BgColorTone[] = ['page', 'card', 'primary', 'chip']
+    const tones: BgColorTone[] = ['page', 'card', 'primary']
     const colorFor = (tone: BgColorTone) => bgColorToneMap[tone].value
 
     expect(sortByThemeLightness(tones, colorFor, false, 94)).toEqual([
-      'card', 'page', 'chip', 'primary',
+      'card', 'page', 'primary',
     ])
     expect(sortByThemeLightness(tones, colorFor, true, 15)).toEqual([
-      'primary', 'chip', 'card', 'page',
+      'primary', 'card', 'page',
     ])
   })
 

@@ -76,7 +76,15 @@ const allowlistedComponentColors = new Map([
     // hsl(var(--primary)) 是 token 组合而非裸色值:--color-primary 仅存在于
     // @theme inline(按需发射,组件 var() 引用解析失效),solid 前景必须直连
     // 底层通道 --primary。
-    new Set(['hsl(var(--primary)']),
+    // chip 底色已迁入胶囊族作用域(--capsule-frame-chip-background),亮暗字面量
+    // 与组件同文件交付,capsule-frame-contract 锁两侧值。
+    new Set(['hsl(var(--primary)', 'hsl(40 12% 92%)', 'hsl(0 0% 19%)']),
+  ],
+  [
+    'packages/weimo-ui-image/src/components/image-uploader/image-uploader.css',
+    // 面板强调底色随 chip 迁出共享色板本地化(--image-uploader-panel-accent-bg,
+    // 原 color-mix 42% 的等价 alpha 形式),亮暗字面量与组件同文件交付。
+    new Set(['hsl(40 12% 92% / 0.42)', 'hsl(0 0% 19% / 0.42)']),
   ],
   [
     'packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css',

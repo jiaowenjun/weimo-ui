@@ -25,7 +25,6 @@ const bgColorSwatchTones = [
   'card',
   'selected',
   'raised',
-  'chip',
   'hover',
   'hover-on-hover',
   'primary',

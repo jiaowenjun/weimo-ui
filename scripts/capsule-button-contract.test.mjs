@@ -207,7 +207,7 @@ for (const [block, snippet, message] of [
   [baseBlock, 'inline-size var(--animated-inline-size-transition-duration) cubic-bezier(0.2, 0, 0, 1)', 'CapsuleButton must be able to animate measured content-width changes without custom CSS.'],
   [baseBlock, 'border-color var(--capsule-frame-state-transition-duration) ease', 'CapsuleButton border transition must use the shared state duration variable.'],
   [baseBlock, 'color var(--capsule-frame-state-transition-duration) ease', 'CapsuleButton color transition must use the shared state duration variable.'],
-  [defaultLayerBlock, 'background: var(--color-bg-chip);', 'CapsuleButton default layer must use the shared brand chip surface.'],
+  [defaultLayerBlock, 'background: var(--capsule-frame-chip-background);', 'CapsuleButton default layer must use the capsule-owned chip surface.'],
   [defaultLayerBlock, 'opacity var(--capsule-frame-state-transition-duration) ease', 'CapsuleButton default layer opacity transition must use the shared state duration variable.'],
   [defaultLayerBlock, 'transform var(--capsule-frame-state-transition-duration) ease', 'CapsuleButton default layer transform transition must use the shared state duration variable.'],
   [defaultLayerBlock, 'background-color var(--capsule-frame-state-transition-duration) ease', 'CapsuleButton default layer hover repaint must fade like icon buttons.'],
@@ -277,9 +277,10 @@ assert.ok(
   'CapsuleButton hover and active must not fade visual layers out because that causes dark-mode background flicker.',
 )
 assert.ok(
-  tokensCss.includes('--color-bg-chip: hsl(40 12% 92%);') &&
-    tokensCss.includes('--color-bg-chip: hsl(0 0% 19%);'),
-  'CapsuleButton brand chip surface token must derive from the local neutral brand theme by default.',
+  surfaceCss.includes('--capsule-frame-chip-background: hsl(40 12% 92%);') &&
+    surfaceCss.includes('--capsule-frame-chip-background: hsl(0 0% 19%);') &&
+    !tokensCss.includes('--color-bg-chip'),
+  'CapsuleButton brand chip surface must be owned by the capsule frame scope with concrete light/dark values, not the shared token sheet.',
 )
 assert.ok(
   !/\.capsule-frame\[data-interactive="true"\]:(?:hover|active)::(?:before|after)[^{]*\{[^}]*opacity:\s*0;/.test(surfaceCss),

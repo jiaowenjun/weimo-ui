@@ -38,6 +38,7 @@ const capsuleButtonSource = readProjectFile('packages/weimo-ui-core/src/componen
 const tagBreadSource = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bread/tag-bread.tsx')
 
 const frameBlock = blockFor(css, '.capsule-frame')
+const darkFrameBlock = blockFor(css, '.dark .capsule-frame')
 const beforeBlock = blockFor(css, '.capsule-frame::before')
 const afterBlock = blockFor(css, '.capsule-frame::after')
 const solidFrameBlock = blockFor(css, '.capsule-frame[data-material="solid"]')
@@ -96,6 +97,11 @@ assert.ok(
   'CapsuleFrame attributes must describe frame state, not own material borders, text sizes, or the removed surface API.',
 )
 
+assert.ok(
+  !css.includes('--color-bg-chip'),
+  'The capsule chip fill must stay capsule-scoped; the shared bg-chip token is removed.',
+)
+
 for (const [block, snippet, message] of [
   [frameBlock, 'display: inline-flex;', 'CapsuleFrame must own inline capsule layout.'],
   [frameBlock, 'max-width: 100%;', 'CapsuleFrame must fit narrow containers.'],
@@ -107,7 +113,9 @@ for (const [block, snippet, message] of [
   [frameBlock, 'overflow: hidden;', 'CapsuleFrame must clip material layers.'],
   [frameBlock, '--animated-inline-size-transition-duration: 180ms;', 'CapsuleFrame must expose width motion timing.'],
   [frameBlock, '--capsule-frame-state-transition-duration: 180ms;', 'CapsuleFrame must expose state timing.'],
-  [beforeBlock, 'background: var(--color-bg-chip);', 'The solid capsule layer must retain the chip fill token.'],
+  [frameBlock, '--capsule-frame-chip-background: hsl(40 12% 92%);', 'CapsuleFrame must own the capsule chip surface with a concrete light value.'],
+  [darkFrameBlock, '--capsule-frame-chip-background: hsl(0 0% 19%);', 'CapsuleFrame must override the chip surface for dark themes.'],
+  [beforeBlock, 'background: var(--capsule-frame-chip-background);', 'The solid capsule layer must use the capsule-owned chip fill token.'],
   [solidFrameBlock, 'border: 1px solid transparent;', 'Solid capsules must preserve the shared 1px border geometry.'],
   [solidFrameBlock, 'color: hsl(var(--primary));', 'Solid capsules must retain the primary foreground token.'],
   [solidBeforeBlock, 'opacity: 1;', 'Solid capsules must show the chip fill layer.'],
