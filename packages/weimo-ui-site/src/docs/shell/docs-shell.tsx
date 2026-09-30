@@ -73,7 +73,9 @@ function buildSidebarGroups(options: {
 
 function DocsSidebarContent({ groups }: { groups: DocsSidebarGroup[] }) {
   return (
-    <div className="docs-sidebar-nav">
+    // data-base-ui-swipe-ignore:Base UI Drawer 的 capture touchmove 在横向 swipe 判定窗内
+    // 会 preventDefault 触摸滚动(iOS 首次划动被吞),命中此属性的落点直接跳过该监听
+    <div className="docs-sidebar-nav" data-base-ui-swipe-ignore>
       <div className="docs-sidebar-nav__top">
         <strong>Weimo UI</strong>
       </div>
