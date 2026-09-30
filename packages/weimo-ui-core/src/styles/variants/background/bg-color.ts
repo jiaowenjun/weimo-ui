@@ -97,18 +97,6 @@ export const bgColorToneMap = {
     uiUsage: 'CapsuleButton、ImageUploader selected file',
     bijiUsage: 'WorkspaceFilterBar chip、TagBar',
   },
-  selection: {
-    label: '编辑选区',
-    token: '--color-bg-selection',
-    value: {
-      light: 'hsl(0 0% 15% / 0.2)',
-      dark: 'hsl(0 0% 96% / 0.2)',
-    },
-    className: 'bg-color--selection',
-    description: '编辑器选择文本和局部高亮的柔和强调底色。',
-    uiUsage: 'MdEditor selection',
-    bijiUsage: 'Card edit mode、MdEditor',
-  },
 } as const
 
 export type BgColorTone = keyof typeof bgColorToneMap

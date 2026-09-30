@@ -150,6 +150,11 @@ const markdownStyleTokens = [
     role: '数学节点悬停背景',
     value: { light: 'hsl(40 12% 96%)', dark: 'hsl(0 0% 20%)' },
   },
+  {
+    token: '--md-selection-bg',
+    role: '编辑器选区底色',
+    value: { light: 'hsl(0 0% 15% / 0.2)', dark: 'hsl(0 0% 96% / 0.2)' },
+  },
 ] satisfies readonly MarkdownStyleToken[]
 
 type MarkdownStyleTokenName = (typeof markdownStyleTokens)[number]['token']
@@ -223,6 +228,7 @@ const markdownStyleTokenGroups = [
       '--md-math-hover-bg',
     ],
   },
+  { label: '编辑选区', tokens: ['--md-selection-bg'] },
 ] satisfies readonly {
   label: string
   tokens: readonly MarkdownStyleTokenName[]
@@ -288,6 +294,16 @@ function renderMarkdownTokenGroupPreview(
       return <MdRender content={'| 节点 | 状态 |\n| --- | --- |\n| 表格 | Ready |'} />
     case '数学公式':
       return <MdRender className="md-style-preview__math" content="$E = mc^2$" />
+    case '编辑选区':
+      return (
+        <p className="md-style-preview__selection-sample">
+          <span className="md-style-preview__selection-copy">
+            在编辑器里
+            <span className="md-style-preview__selection-highlight">选中一段文字</span>
+            时，会铺上这层柔和的强调底色；也可以直接拖选这段话试试。
+          </span>
+        </p>
+      )
     default:
       return null
   }

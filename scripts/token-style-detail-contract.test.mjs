@@ -183,7 +183,7 @@ assert.ok(
   'Transparent color and blur previews must share one ComponentPreviewCard surface layout.',
 )
 
-for (const selector of ['.bg-color-preview__selection-sample']) {
+for (const selector of ['.md-style-preview__selection-sample']) {
   const escapedSelector = selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
   assert.match(

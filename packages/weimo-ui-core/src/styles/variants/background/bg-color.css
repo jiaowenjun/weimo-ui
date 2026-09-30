@@ -29,7 +29,3 @@
 .bg-color--chip {
   background: var(--color-bg-chip);
 }
-
-.bg-color--selection {
-  background: var(--color-bg-selection);
-}

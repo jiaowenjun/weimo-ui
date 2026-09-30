@@ -179,15 +179,10 @@ assert.ok(
 )
 
 assert.ok(
-  docsDefinitionSource.includes("from 'weimo-ui-core/components/bg-color'") &&
-    docsDefinitionSource.includes('bgColorToneMap.selection') &&
-    docsDefinitionSource.includes("token={getBgColorToken('selection')}") &&
-    docsDefinitionSource.includes('label={bgColorToneMap.selection.label}') &&
-    docsDefinitionSource.includes('darkValue={bgColorToneMap.selection.value.dark}') &&
-    docsDefinitionSource.includes('bg-color-preview__selection-sample') &&
-    docsDefinitionSource.includes('bgColorToneMap.selection.label,') &&
-    docsDefinitionSource.includes('bgColorToneMap.selection.token,'),
-  'Font docs page must host the BgColor selection tone as the selected-text preview card with its search aliases.',
+  !docsDefinitionSource.includes("from 'weimo-ui-core/components/bg-color'") &&
+    !docsDefinitionSource.includes('bgColorToneMap.selection') &&
+    !docsDefinitionSource.includes('bg-color-preview__selection'),
+  'The Font docs page must not host the selection tone; it lives in the Markdown style docs as --md-selection-bg.',
 )
 
 assert.ok(

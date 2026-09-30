@@ -39,7 +39,7 @@
   }
 
   .md-editor__content ::selection {
-    background: var(--color-bg-selection);
+    background: var(--md-selection-bg);
   }
 
   .md-editor__content p.is-editor-empty:first-child::before {

@@ -46,6 +46,7 @@ const markdownImageRendererSource = readProjectFile(
 )
 const markdownImageSizeSource = readProjectFile('packages/weimo-ui-markdown/src/components/markdown/image-size.ts')
 const markdownContentCss = readProjectFile('packages/weimo-ui-markdown/src/styles/markdown-content.css')
+const mdEditorCss = readProjectFile('packages/weimo-ui-markdown/src/components/md-editor/md-editor.css')
 const definitionSource = readProjectFile(
   'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown-styles.tsx',
 )
@@ -65,6 +66,13 @@ const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 const tokenGridBlock = cssBlockFor(appCss, '.app-shell__content--token-grid')
 const mdSceneBlock = cssBlockFor(appCss, '.md-style-preview__scene')
 const mdGroupEffectBlock = cssBlockFor(appCss, '.md-style-preview__group-effect')
+const editorSelectionPseudoBlock = cssBlockFor(mdEditorCss, '.md-editor__content ::selection')
+const mdSelectionSampleBlock = cssBlockFor(appCss, '.md-style-preview__selection-sample')
+const mdSelectionHighlightBlock = cssBlockFor(appCss, '.md-style-preview__selection-highlight')
+const mdSelectionPseudoBlock = cssBlockFor(
+  appCss,
+  '.md-style-preview__selection-sample ::selection',
+)
 const markdownRootBlock = cssBlockFor(markdownContentCss, '.weimo-markdown-content')
 const markdownRenderRootBlock = cssBlockFor(markdownContentCss, '.weimo-card-markdown')
 const tokensRootBlock = cssBlockFor(tokensCss, ':root')
@@ -86,6 +94,7 @@ const markdownColorTokens = [
   ['--md-table-cell-border-color', 'hsl(0 0% 88%)', 'hsl(0 0% 28%)'],
   ['--md-table-header-color', 'hsl(0 0% 28%)', 'hsl(0 0% 64%)'],
   ['--md-math-hover-bg', 'hsl(40 12% 96%)', 'hsl(0 0% 20%)'],
+  ['--md-selection-bg', 'hsl(0 0% 15% / 0.2)', 'hsl(0 0% 96% / 0.2)'],
 ]
 const markdownStaticTokens = [
   ['--md-font-size', '16px'],
@@ -112,7 +121,10 @@ const markdownTokenNames = [
 ]
 const markdownReferencedTokens = [
   ...new Set(
-    [...markdownContentCss.matchAll(/var\((--[^,)]+)/g)].map((match) => match[1]),
+    [
+      ...markdownContentCss.matchAll(/var\((--[^,)]+)/g),
+      ...mdEditorCss.matchAll(/var\((--md-[^,)]+)/g),
+    ].map((match) => match[1]),
   ),
 ]
 const markdownDefinedTokens = [
@@ -270,6 +282,10 @@ for (const snippet of [
   "value: '14px'",
   "light: 'hsl(40 12% 96%)'",
   "dark: 'hsl(0 0% 20%)'",
+  "light: 'hsl(0 0% 15% / 0.2)'",
+  "dark: 'hsl(0 0% 96% / 0.2)'",
+  'md-style-preview__selection-sample',
+  'md-style-preview__selection-highlight',
 ]) {
   assert.ok(definitionSource.includes(snippet), `Markdown style docs must include ${snippet}.`)
 }
@@ -298,6 +314,7 @@ assert.deepEqual(
     '列表与图片布局',
     '表格',
     '数学公式',
+    '编辑选区',
   ],
   'Markdown style docs must group tokens by each rendered Markdown semantic node.',
 )
@@ -1299,6 +1316,30 @@ assert.ok(
     definitionSource.includes("case '表格':") &&
     definitionSource.includes('| 节点 | 状态 |'),
   'Markdown style docs must preview grouped tokens through their combined semantic Markdown nodes.',
+)
+
+assert.ok(
+  definitionSource.includes("case '编辑选区':") &&
+    definitionSource.includes('md-style-preview__selection-copy') &&
+    definitionSource.includes('选中一段文字'),
+  'Markdown style docs must preview the selection tone as real selectable editor text.',
+)
+assert.ok(
+  editorSelectionPseudoBlock.includes('background: var(--md-selection-bg);'),
+  'MdEditor selected text must use the Markdown-owned --md-selection-bg token.',
+)
+assert.ok(
+  mdSelectionPseudoBlock.includes('background: var(--md-selection-bg);') &&
+    mdSelectionHighlightBlock.includes('background: var(--md-selection-bg);'),
+  'The Markdown style selection sample must support live drag selection with the real token.',
+)
+assert.ok(
+  mdSelectionSampleBlock.includes('height: 80px;') &&
+    mdSelectionSampleBlock.includes('color: var(--color-text-primary);') &&
+    mdSelectionSampleBlock.includes('user-select: text;') &&
+    mdSelectionHighlightBlock.includes('padding-block: 0.4em;') &&
+    !mdSelectionHighlightBlock.includes('border-radius:'),
+  'The selection sample must render real text with a full-line-height highlight band and no rounded corners.',
 )
 
 assert.ok(

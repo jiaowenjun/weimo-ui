@@ -1,9 +1,4 @@
 import {
-  bgColorToneMap,
-  getBgColorClassName,
-  getBgColorToken,
-} from 'weimo-ui-core/components/bg-color'
-import {
   fontSizeScaleMap,
   fontSizeScales,
   getFontSizeClassName,
@@ -108,25 +103,6 @@ function FontPreview() {
           ))}
         </div>
       </ComponentPreviewCard>
-
-      <ComponentPreviewCard
-        darkValue={bgColorToneMap.selection.value.dark}
-        label={bgColorToneMap.selection.label}
-        token={getBgColorToken('selection')}
-        value={bgColorToneMap.selection.value.light}
-      >
-        <p className="bg-color-preview__selection-sample">
-          <span className="bg-color-preview__selection-copy">
-            在编辑器里
-            <span
-              className={`bg-color-preview__selection-highlight ${getBgColorClassName('selection')}`}
-            >
-              选中一段文字
-            </span>
-            时，会铺上这层柔和的强调底色；也可以直接拖选这段话试试。
-          </span>
-        </p>
-      </ComponentPreviewCard>
     </>
   )
 }
@@ -145,17 +121,6 @@ export const textTokensDefinition = {
 
       return ['TextColor', '字色', tone, item.label, item.token, item.description]
     }),
-  ).concat(
-    [
-      'BgColor',
-      '背景色',
-      'selection',
-      bgColorToneMap.selection.label,
-      bgColorToneMap.selection.token,
-      bgColorToneMap.selection.description,
-      bgColorToneMap.selection.uiUsage,
-      bgColorToneMap.selection.bijiUsage,
-    ],
   ).concat(
     fontFamilyTokens.flatMap((font) => ['FontFamily', '字体', '字型', font.token, font.label]),
   ),

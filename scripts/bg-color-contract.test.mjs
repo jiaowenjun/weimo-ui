@@ -51,7 +51,6 @@ const expectedTones = [
   ['hover-on-hover', '--color-bg-nested-hover', 'bg-color--hover-on-hover', 'hsl(40 12% 88%)', 'hsl(0 0% 28%)'],
   ['selected', '--color-bg-selected', 'bg-color--selected', 'hsl(40 10% 94%)', 'hsl(0 0% 15%)'],
   ['chip', '--color-bg-chip', 'bg-color--chip', 'hsl(40 12% 92%)', 'hsl(0 0% 19%)'],
-  ['selection', '--color-bg-selection', 'bg-color--selection', 'hsl(0 0% 15% / 0.2)', 'hsl(0 0% 96% / 0.2)'],
 ]
 
 const expectedSwatchTones = [
@@ -251,6 +250,24 @@ for (const removedShareCardToken of [
   )
 }
 
+for (const removedSelectionToken of [
+  'color-bg-selection',
+  'bg-color--selection',
+  'bg-color-preview__selection',
+]) {
+  assert.ok(
+    !bgColorSource.includes(removedSelectionToken) &&
+      !bgColorCss.includes(removedSelectionToken) &&
+      !tokensCss.includes(removedSelectionToken) &&
+      !docsDefinitionSource.includes(removedSelectionToken) &&
+      !textDocsSource.includes(removedSelectionToken) &&
+      !appCss.includes(removedSelectionToken) &&
+      !JSON.stringify(styleRegistry).includes(removedSelectionToken) &&
+      !JSON.stringify(rootStyleItem).includes(removedSelectionToken),
+    `BgColor surfaces must not keep the Markdown-owned selection tone ${removedSelectionToken}.`,
+  )
+}
+
 assert.ok(
   !bgColorSource.includes("'brand-subtle'") &&
     !bgColorSource.includes('bg-color--brand-subtle') &&
@@ -446,34 +463,12 @@ assert.ok(
     ),
   'The merged swatch grid must stay 8-per-row on wide canvases and fall back to two clamped rows of 4 (42-48px, 12-24px gap) below the 620px threshold.',
 )
-const selectionSampleBlock = blockFor(appCss, '.bg-color-preview__selection-sample')
-const selectionHighlightBlock = blockFor(appCss, '.bg-color-preview__selection-highlight')
-const selectionPseudoBlock = blockFor(appCss, '.bg-color-preview__selection-sample ::selection')
 assert.ok(
-  textDocsSource.includes("from 'weimo-ui-core/components/bg-color'") &&
-    textDocsSource.includes('bgColorToneMap.selection') &&
-    textDocsSource.includes('bg-color-preview__selection-sample') &&
-    textDocsSource.includes('bg-color-preview__selection-copy') &&
-    textDocsSource.includes('bg-color-preview__selection-highlight') &&
-    textDocsSource.includes(
-      "className={`bg-color-preview__selection-highlight ${getBgColorClassName('selection')}`}",
-    ) &&
+  !textDocsSource.includes("from 'weimo-ui-core/components/bg-color'") &&
+    !textDocsSource.includes('bgColorToneMap.selection') &&
     !docsDefinitionSource.includes("tone === 'selection'") &&
-    !docsDefinitionSource.includes('bg-color-preview__selection') &&
     !docsDefinitionSource.includes('内容高亮'),
-  'The selection tone must preview the real selected-text rendering on the Font docs page instead of a generic translucent swatch on the BgColor page.',
-)
-assert.ok(
-  selectionPseudoBlock.includes('background: var(--color-bg-selection);'),
-  'The selected-text sample must support live drag selection with the real token.',
-)
-assert.ok(
-  selectionSampleBlock.includes('height: 80px;') &&
-    selectionSampleBlock.includes('color: var(--color-text-primary);') &&
-    selectionSampleBlock.includes('user-select: text;') &&
-    selectionHighlightBlock.includes('padding-block: 0.4em;') &&
-    !selectionHighlightBlock.includes('border-radius:'),
-  'The selection sample must render real text with a full-line-height highlight band and no rounded corners.',
+  'The selection tone must live in the Markdown style docs as --md-selection-bg, not in the BgColor tone map or the Font docs page.',
 )
 assert.ok(
   surfaceBlock.includes('inset: 10px 12px;') &&
