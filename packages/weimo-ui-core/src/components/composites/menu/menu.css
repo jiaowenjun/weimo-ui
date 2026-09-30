@@ -117,7 +117,7 @@
     padding: 0 12px;
     color: inherit;
     font: inherit;
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-md);
     text-align: left;
     text-decoration: none;
     cursor: pointer;
