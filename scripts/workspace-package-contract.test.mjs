@@ -51,6 +51,7 @@ function workspaceDependencies(packageJson) {
 const packageRules = [
   {
     name: 'weimo-ui-core',
+    private: false,
     workspaceDependencies: [],
     forbiddenRelativeImports: [],
     requiredExports: {
@@ -202,7 +203,7 @@ for (const rule of packageRules) {
   const source = sourceFiles.map((file) => readFileSync(file, 'utf8')).join('\n')
 
   assert.equal(packageJson.name, rule.name)
-  assert.equal(packageJson.private, true)
+  assert.equal(packageJson.private, rule.private ?? true)
   assert.ok(rootPackageJson.files.includes(`packages/${rule.name}/src`))
   assert.deepEqual(
     workspaceDependencies(packageJson),
