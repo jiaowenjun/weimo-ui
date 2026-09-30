@@ -91,12 +91,13 @@ assert.ok(
     frostedSurfaceCss.includes('border-color: var(--frosted-surface-border);'),
   'FrostedSurface must keep its stroke opt-in on the --bordered modifier using the background-aware border token.',
 )
-// 磨砂材质允许的唯一投影=亮背景 tone 投影对（透明基座+25% 亮态，与
-// --shadow-overlay 数值对齐）；除此之外不得引入任何阴影（含 inset 内影）。
+// 磨砂材质允许的唯一投影=亮背景 tone 投影对（透明基座+卡片同款双层亮态，
+// 2026-09-30 起数值对齐 --shadow-card、与 --shadow-overlay 分道）；
+// 除此之外不得引入任何阴影（含 inset 内影）。
 for (const shadowDeclaration of frostedSurfaceCss.match(/box-shadow:[^;]+;/g) ?? []) {
   assert.ok(
-    shadowDeclaration === 'box-shadow: 0 12px 40px hsl(0 0% 0% / 0);' ||
-      shadowDeclaration === 'box-shadow: 0 12px 40px hsl(0 0% 0% / 0.25);',
+    shadowDeclaration === 'box-shadow: 0 1px 2px hsl(0 0% 0% / 0), 0 2px 8px hsl(0 0% 0% / 0);' ||
+      shadowDeclaration === 'box-shadow: 0 1px 2px hsl(0 0% 0% / 0.04), 0 2px 8px hsl(0 0% 0% / 0.06);',
     `FrostedSurface may only declare the tone-interpolable light-background drop shadow pair, found "${shadowDeclaration}".`,
   )
 }

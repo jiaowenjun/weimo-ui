@@ -655,7 +655,7 @@ for (const snippet of [
   'backdrop-filter: blur(var(--frosted-blur));',
   '-webkit-backdrop-filter: blur(var(--frosted-blur));',
   'color: var(--frosted-surface-fg);',
-  'box-shadow: 0 12px 40px hsl(0 0% 0% / 0);',
+  'box-shadow: 0 1px 2px hsl(0 0% 0% / 0), 0 2px 8px hsl(0 0% 0% / 0);',
   'color var(--frosted-surface-tone-transition-duration) ease,',
   'border-color var(--frosted-surface-tone-transition-duration) ease,',
   'box-shadow var(--frosted-surface-tone-transition-duration) ease;',
@@ -664,7 +664,7 @@ for (const snippet of [
   '.frosted-surface[data-background-tone="light"]',
   '--frosted-surface-fg: var(--frosted-surface-fg-on-light);',
   '--frosted-surface-muted-color: var(--frosted-surface-muted-fg-on-light);',
-  'box-shadow: 0 12px 40px hsl(0 0% 0% / 0.25);',
+  'box-shadow: 0 1px 2px hsl(0 0% 0% / 0.04), 0 2px 8px hsl(0 0% 0% / 0.06);',
   '.frosted-surface[data-background-tone="dark"]',
   '--frosted-surface-fg: var(--frosted-surface-fg-on-dark);',
   '--frosted-surface-muted-color: var(--frosted-surface-muted-fg-on-dark);',
@@ -673,14 +673,21 @@ for (const snippet of [
 ]) {
   assertIncludes(frostedSurfaceCss, snippet, `FrostedSurface CSS must include ${snippet}.`)
 }
-// 亮背景 tone 投影与 --shadow-overlay「数值对齐、定义互不引用」：
-// 磨砂侧持自己的字面量（不引 var(--shadow-overlay)，token 也不进组件），
-// 任一侧改动须三处手动同步（tokens.css+两 registry 的 token 镜像与磨砂字面量）。
+// 亮背景 tone 投影与卡片材质 --shadow-card「数值对齐、定义互不引用」：
+// 磨砂侧持自己的字面量（不引 var(--shadow-card)，token 也不进组件），任一侧
+// 改动须手动同步（tokens.css+两 registry 的 token 镜像与磨砂字面量）。
+// 曾对齐 --shadow-overlay（偏移 12px、模糊 40px、黑 25%），其上晕越过布局
+// 视口顶会触发 iOS Safari 安全区回退（状态栏条带变不透明根背景、遮盖滚入
+// 内容），2026-09-30 起分道：先缩中半径（0 6px 16px 真机验证留影且无白带），
+// 再并入卡片双层配方——上晕 blur−offset=6px，按最保守的 blur 外扩判定（8px）
+// 也留在顶栏上边距约 14px 内。
 assert.ok(
-  frostedSurfaceCss.includes('box-shadow: 0 12px 40px hsl(0 0% 0% / 0.25);') &&
-    tokensCss.includes('--shadow-overlay: 0 12px 40px hsl(0 0% 0% / 0.25);') &&
-    !frostedSurfaceCss.includes('var(--shadow-overlay)'),
-  'The light-tone frosted drop shadow must stay value-aligned with --shadow-overlay while keeping its own literal (no var reference).',
+  frostedSurfaceCss.includes('box-shadow: 0 1px 2px hsl(0 0% 0% / 0.04), 0 2px 8px hsl(0 0% 0% / 0.06);') &&
+    tokensCss.includes('--shadow-card: 0 1px 2px hsl(0 0% 0% / 0.04), 0 2px 8px hsl(0 0% 0% / 0.06);') &&
+    !frostedSurfaceCss.includes('var(--shadow-card)') &&
+    !frostedSurfaceCss.includes('var(--shadow-overlay)') &&
+    !frostedSurfaceCss.includes('0 12px 40px'),
+  'The light-tone frosted drop shadow must stay value-aligned with --shadow-card (two-layer card recipe) using its own literals (no var reference) and must not regress to the overlay-sized radius.',
 )
 assert.ok(
   !cssBlockFor(frostedSurfaceCss, '.frosted-surface[data-background-tone="dark"]').includes('box-shadow'),

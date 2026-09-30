@@ -373,7 +373,9 @@ assert.ok(
 // 亮主题浮层投影的三处镜像「数值一致、定义互不引用」:tokens.css 与两份
 // registry 各持同一字面量(偏移 12px、模糊 40px、黑 25%,历史上与已删除的
 // 液态玻璃库投影对齐),任一侧改动须手动同步;磨砂材质亮背景 tone 投影
-// (frosted-surface.css)同值对齐,由 frosted-surface-contract 锁定。
+// (frosted-surface.css)2026-09-30 起改为卡片同款双层配方(数值对齐
+// --shadow-card,大半径上晕越过布局视口顶会触发 iOS Safari 安全区回退),
+// 由 frosted-surface-contract 锁定,此处不再涉及磨砂侧。
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const registryJsonText = readProjectFile('registry.json')
 const styleRegistryText = readProjectFile('registry/style.json')

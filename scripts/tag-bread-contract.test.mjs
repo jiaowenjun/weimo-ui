@@ -198,7 +198,7 @@ assert.ok(
 assertIncludes(frostedSurfaceBlock, 'backdrop-filter: blur(var(--frosted-blur));', 'TagBread must enable the glass blur.')
 assertIncludes(frostedSurfaceBlock, '-webkit-backdrop-filter: blur(var(--frosted-blur));', 'TagBread must support Safari glass blur.')
 assert.ok(
-  frostedSurfaceBlock.includes('box-shadow: 0 12px 40px hsl(0 0% 0% / 0);') && !surfaceCss.includes('--glass-shadow'),
+  frostedSurfaceBlock.includes('box-shadow: 0 1px 2px hsl(0 0% 0% / 0), 0 2px 8px hsl(0 0% 0% / 0);') && !surfaceCss.includes('--glass-shadow'),
   'TagBread glass surface must not add shadows of its own; the frosted material provides the tone pair (invisible on dark backgrounds, light-tone drop shadow only).',
 )
 assertIncludes(cossListBlock, 'color: var(--color-text-secondary);', 'coss Breadcrumb list must own TagBread text color even when the shared chip surface sets root color.')

@@ -113,7 +113,7 @@ assert.ok(
     frostedSurfaceCss.includes('border-color: var(--frosted-surface-border);') &&
     !frostedSurfaceBlock.includes('background: var(--glass-gradient);') &&
     !frostedSurfaceBlock.includes('linear-gradient') &&
-    frostedSurfaceCss.includes('box-shadow: 0 12px 40px hsl(0 0% 0% / 0);') &&
+    frostedSurfaceCss.includes('box-shadow: 0 1px 2px hsl(0 0% 0% / 0), 0 2px 8px hsl(0 0% 0% / 0);') &&
     !frostedSurfaceCss.includes('--glass-shadow') &&
     frostedSurfaceBlock.includes('backdrop-filter: blur(var(--frosted-blur));') &&
     frostedSurfaceBlock.includes('-webkit-backdrop-filter: blur(var(--frosted-blur));'),
