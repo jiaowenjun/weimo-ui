@@ -18,14 +18,14 @@
   ],
   "files": [
     {
-      "path": "packages/weimo-ui-core/src/components/composites/mode-button/mode-button.tsx",
+      "path": "packages/weimo-ui-card/src/components/card/mode-button.tsx",
       "type": "registry:ui",
-      "target": "@ui/mode-button.tsx"
+      "target": "@ui/card/mode-button.tsx"
     },
     {
-      "path": "packages/weimo-ui-core/src/components/composites/mode-button/mode-button.css",
+      "path": "packages/weimo-ui-card/src/components/card/mode-button.css",
       "type": "registry:ui",
-      "target": "@ui/mode-button.css"
+      "target": "@ui/card/mode-button.css"
     },
     {
       "path": "packages/weimo-ui-core/src/components/controls/icon-button/ghost-icon-button.tsx",

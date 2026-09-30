@@ -147,7 +147,7 @@ assert.ok(
 for (const snippet of [
   "import { TextButton } from 'weimo-ui-core/components/text-button'",
   "id: 'button'",
-  "summary: '文本按钮、幽灵/磨砂图标按钮、磨砂图标按钮组与模式按钮的按钮总览'",
+  "summary: '文本按钮、幽灵/磨砂图标按钮与磨砂图标按钮组的按钮总览'",
   'preview: () => <ButtonDemo />',
   '<TextButtonPreview />',
 ]) {

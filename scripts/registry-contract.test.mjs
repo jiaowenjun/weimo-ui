@@ -353,8 +353,8 @@ assert.ok(
 for (const filePath of [
   'packages/weimo-ui-card/src/components/card/card-top-bar.tsx',
   'packages/weimo-ui-card/src/components/card/card-top-bar.css',
-  'packages/weimo-ui-core/src/components/composites/mode-button/mode-button.tsx',
-  'packages/weimo-ui-core/src/components/composites/mode-button/mode-button.css',
+  'packages/weimo-ui-card/src/components/card/mode-button.tsx',
+  'packages/weimo-ui-card/src/components/card/mode-button.css',
 ]) {
   assert.ok(
     CardItem.files.some((file) => file.path === filePath),
@@ -369,8 +369,8 @@ for (const filePath of [
   'packages/weimo-ui-card/src/components/card/card.css',
   'packages/weimo-ui-card/src/components/card/card-top-bar.tsx',
   'packages/weimo-ui-card/src/components/card/card-top-bar.css',
-  'packages/weimo-ui-core/src/components/composites/mode-button/mode-button.tsx',
-  'packages/weimo-ui-core/src/components/composites/mode-button/mode-button.css',
+  'packages/weimo-ui-card/src/components/card/mode-button.tsx',
+  'packages/weimo-ui-card/src/components/card/mode-button.css',
   'packages/weimo-ui-card/src/components/card/card-tool-bar.tsx',
   'packages/weimo-ui-card/src/components/card/card-tool-bar.css',
   'packages/weimo-ui-markdown/src/components/md-view/md-view.tsx',

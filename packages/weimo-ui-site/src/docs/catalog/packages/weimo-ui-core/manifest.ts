@@ -52,7 +52,6 @@ export const coreCatalog = {
         { id: 'frosted-icon-button', name: 'FrostedIconButton', registryName: 'frosted-icon-button', packageExport: './components/frosted-icon-button' },
         { id: 'frosted-icon-button-group', name: 'FrostedIconButtonGroup', registryName: 'frosted-icon-button-group', packageExport: './components/frosted-icon-button-group' },
         { id: 'ghost-icon-button', name: 'GhostIconButton', registryName: 'ghost-icon-button', packageExport: './components/ghost-icon-button' },
-        { id: 'mode-button', name: 'ModeButton', registryName: 'mode-button', packageExport: './components/mode-button' },
       ],
     },
     { id: 'capsule-button', name: '按钮胶囊', exportName: 'CapsuleButton', registryName: 'capsule-button', packageExport: './components/capsule-button' },

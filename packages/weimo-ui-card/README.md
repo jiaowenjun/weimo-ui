@@ -12,6 +12,7 @@
 | `components/card-composer` | `CardComposer` | 新建卡片的进入、退出与自动聚焦编排 |
 | `components/card-top-bar` | `CardTopBar` | 卡片顶部信息与操作栏 |
 | `components/card-tool-bar` | `CardToolBar` | 编辑态保存、取消等动作栏 |
+| `components/mode-button` | `ModeButton` | 卡片展示/编辑模式切换图标按钮 |
 | `components/tag-bar` | `TagBar` | 卡片标签展示与编辑入口 |
 | `components/tag-picker` | `TagPicker` | 标签搜索和选择 |
 | `components/editable-capsule` | `EditableCapsule` | 可删除的标签胶囊 |

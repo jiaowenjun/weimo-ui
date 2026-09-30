@@ -3,10 +3,15 @@ import { Heading1, List, Quote } from 'lucide-react'
 
 import { CardTopBar } from 'weimo-ui-card/components/card-top-bar'
 import { CardToolBar } from 'weimo-ui-card/components/card-tool-bar'
+import {
+  ModeButton,
+  type ModeButtonMode,
+} from 'weimo-ui-card/components/mode-button'
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import { Button } from 'weimo-ui-core/components/coss/button'
 import { Toolbar, ToolbarButton, ToolbarGroup } from 'weimo-ui-core/components/coss/toolbar'
 import { TextButton } from 'weimo-ui-core/components/text-button'
+import { LabeledSwitch } from 'weimo-ui-core/components/labeled-switch'
 import type { ComponentDefinition } from '../../component-docs'
 
 function CardToolBarDemo() {
@@ -109,25 +114,60 @@ function CardTopBarDemo() {
   )
 }
 
+function ModeButtonDemo() {
+  const [mode, setMode] = useState<ModeButtonMode>('display')
+  const editing = mode === 'edit'
+
+  function toggleMode(checked: boolean) {
+    setMode(checked ? 'edit' : 'display')
+  }
+
+  return (
+    <ComponentPreviewCard
+      action={
+        <LabeledSwitch
+          ariaLabel="切换编辑态"
+          checked={editing}
+          labelOff="默认态"
+          labelOn="编辑态"
+          onCheckedChange={toggleMode}
+        />
+      }
+      label="模式按钮"
+    >
+      <div className="icon-button-preview" aria-label="ModeButton preview">
+        <ModeButton
+          mode={mode}
+          onModeChange={setMode}
+          buttonProps={{ size: 'sm' }}
+        />
+      </div>
+    </ComponentPreviewCard>
+  )
+}
+
 function CardBarDemo() {
   return (
     <>
       <CardToolBarDemo />
       <CardTopBarDemo />
+      <ModeButtonDemo />
     </>
   )
 }
 
 export const cardToolBarDefinition = {
   id: 'card-tool-bar',
-  summary: '卡片编辑流程的底部工具栏与展示/编辑顶部栏',
+  summary: '卡片编辑流程的底部工具栏、展示/编辑顶部栏与模式按钮',
   status: 'Ready',
   frame: 'plain',
   searchAliases: [
     'CardToolBar',
     'CardTopBar',
+    'ModeButton',
     '卡片工具栏',
     '卡片顶部栏',
+    '模式按钮',
   ],
   preview: () => <CardBarDemo />,
 } satisfies ComponentDefinition

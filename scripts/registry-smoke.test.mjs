@@ -160,6 +160,7 @@ function writeConsumerProject(consumerDir, registryUrl) {
             'weimo-ui-card/components/card-composer': ['./src/components/ui/composer/card-composer.tsx'],
             'weimo-ui-card/components/card-tool-bar': ['./src/components/ui/card/card-tool-bar.tsx'],
             'weimo-ui-card/components/card-top-bar': ['./src/components/ui/card/card-top-bar.tsx'],
+            'weimo-ui-card/components/mode-button': ['./src/components/ui/card/mode-button.tsx'],
             'weimo-ui-card/components/editable-capsule': ['./src/components/ui/tags/editable-capsule.tsx'],
             'weimo-ui-card/components/ocr-card': ['./src/components/ui/ocr/ocr-card.tsx'],
             'weimo-ui-card/components/ocr-composer': ['./src/components/ui/ocr/ocr-composer.tsx'],
@@ -243,7 +244,7 @@ import { FrostedSurface } from "@/components/ui/frosted-surface"
 import { FloatBar } from "@/components/ui/float-bar"
 import { BottomBar } from "@/components/ui/bottom-bar"
 import { CardTopBar } from "@/components/ui/card/card-top-bar"
-import { ModeButton, type ModeButtonMode } from "@/components/ui/mode-button"
+import { ModeButton, type ModeButtonMode } from "@/components/ui/card/mode-button"
 import { CardToolBar } from "@/components/ui/card/card-tool-bar"
 import { ActionDialog } from "@/components/ui/action-dialog"
 import { TagTreeRow, type TagTreeRowProps } from "@/components/ui/tag-tree/tag-tree-row"
@@ -1209,7 +1210,7 @@ try {
     'utf8',
   )
   const modeButtonSource = readFileSync(
-    join(consumerDir, 'src/components/ui/mode-button.tsx'),
+    join(consumerDir, 'src/components/ui/card/mode-button.tsx'),
     'utf8',
   )
   const cardToolBarSource = readFileSync(
@@ -1272,7 +1273,7 @@ try {
 
   assert.ok(
     cardTopBarSource.includes('export function CardTopBar') &&
-      cardTopBarSource.includes("from 'weimo-ui-core/components/mode-button'") &&
+      cardTopBarSource.includes("from './mode-button'") &&
       cardTopBarSource.includes('<ModeButton') &&
       cardTopBarSource.includes('displayLabel={actionLabel}') &&
       cardTopBarSource.includes('editLabel={cancelLabel}') &&

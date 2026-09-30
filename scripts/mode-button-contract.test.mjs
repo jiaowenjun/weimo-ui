@@ -22,10 +22,10 @@ function cssBlockFor(source, selector) {
   return match[1]
 }
 
-const componentSource = readProjectFile('packages/weimo-ui-core/src/components/composites/mode-button/mode-button.tsx')
-const componentCss = readProjectFile('packages/weimo-ui-core/src/components/composites/mode-button/mode-button.css')
+const componentSource = readProjectFile('packages/weimo-ui-card/src/components/card/mode-button.tsx')
+const componentCss = readProjectFile('packages/weimo-ui-card/src/components/card/mode-button.css')
 const docsDefinitionSource = readProjectFile(
-  'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/button.tsx',
+  'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/card-tool-bar.tsx',
 )
 const componentDefinitionsIndexSource = readProjectFile(
   'packages/weimo-ui-site/src/docs/catalog/definitions.ts',
@@ -133,7 +133,7 @@ for (const snippet of [
   "import { LabeledSwitch } from 'weimo-ui-core/components/labeled-switch'",
   'ModeButton,',
   'type ModeButtonMode,',
-  "} from 'weimo-ui-core/components/mode-button'",
+  "} from 'weimo-ui-card/components/mode-button'",
   "useState<ModeButtonMode>('display')",
   'function toggleMode(checked: boolean)',
   '<ModeButton',
@@ -145,30 +145,25 @@ for (const snippet of [
   'onModeChange={setMode}',
   "buttonProps={{ size: 'sm' }}",
   '编辑',
-  "id: 'button'",
-  "summary: '文本按钮、幽灵/磨砂图标按钮、磨砂图标按钮组与模式按钮的按钮总览'",
-  'preview: () => <ButtonDemo />',
+  "id: 'card-tool-bar'",
+  "summary: '卡片编辑流程的底部工具栏、展示/编辑顶部栏与模式按钮'",
+  'preview: () => <CardBarDemo />',
   '<ModeButtonDemo />',
 ]) {
   assert.ok(docsDefinitionSource.includes(snippet), `docs definition must include ${snippet}.`)
 }
 assert.ok(
-  !docsDefinitionSource.includes("import { Button } from 'weimo-ui-core/components/coss/button'") &&
-    !/<Button\b/.test(docsDefinitionSource),
-  'ModeButton docs text toggle must not use coss Button.',
-)
-assert.ok(
-  packageJson.exports?.['./components/mode-button'] === './packages/weimo-ui-core/src/components/composites/mode-button/mode-button.tsx',
+  packageJson.exports?.['./components/mode-button'] === './packages/weimo-ui-card/src/components/card/mode-button.tsx',
   'ModeButton must have a public package export.',
 )
 
 assert.ok(
   componentDefinitionsIndexSource.includes(
-    "import { buttonDefinition } from './packages/weimo-ui-core/button'",
+    "import { cardToolBarDefinition } from './packages/weimo-ui-card/card-tool-bar'",
   ) &&
-    componentDefinitionsIndexSource.includes('button: buttonDefinition') &&
+    componentDefinitionsIndexSource.includes("'card-tool-bar': cardToolBarDefinition") &&
     !componentDefinitionsIndexSource.includes('mode-button'),
-  'ModeButton preview must be registered through the merged Button definition in component-definitions/index.ts.',
+  'ModeButton preview must be registered through the merged card-tool-bar definition in definitions.ts.',
 )
 
 assert.ok(

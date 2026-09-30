@@ -672,52 +672,6 @@
       "dependencies": [
         "lucide-react"
       ],
-      "name": "mode-button",
-      "title": "Mode Button",
-      "description": "An icon mode button that switches between display and edit actions.",
-      "categories": [
-        "action"
-      ],
-      "registryDependencies": [
-        "@weimo/style",
-        "@weimo/utils",
-        "@weimo/ghost-icon-button",
-        "@weimo/menu"
-      ],
-      "files": [
-        {
-          "path": "packages/weimo-ui-core/src/components/composites/mode-button/mode-button.tsx",
-          "type": "registry:ui",
-          "target": "@ui/mode-button.tsx"
-        },
-        {
-          "path": "packages/weimo-ui-core/src/components/composites/mode-button/mode-button.css",
-          "type": "registry:ui",
-          "target": "@ui/mode-button.css"
-        },
-        {
-          "path": "packages/weimo-ui-core/src/components/controls/icon-button/ghost-icon-button.tsx",
-          "type": "registry:ui",
-          "target": "@ui/ghost-icon-button.tsx"
-        },
-        {
-          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button-model.ts",
-          "type": "registry:ui",
-          "target": "@ui/icon-button-model.ts"
-        },
-        {
-          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button.css",
-          "type": "registry:ui",
-          "target": "@ui/icon-button.css"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "type": "registry:ui",
-      "dependencies": [
-        "lucide-react"
-      ],
       "name": "capsule-button",
       "title": "Capsule Button",
       "description": "A button-shaped capsule with default and glass states.",
@@ -2173,6 +2127,52 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "name": "mode-button",
+      "title": "Mode Button",
+      "description": "An icon mode button that switches between display and edit actions.",
+      "categories": [
+        "action"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/ghost-icon-button",
+        "@weimo/menu"
+      ],
+      "files": [
+        {
+          "path": "packages/weimo-ui-card/src/components/card/mode-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/card/mode-button.tsx"
+        },
+        {
+          "path": "packages/weimo-ui-card/src/components/card/mode-button.css",
+          "type": "registry:ui",
+          "target": "@ui/card/mode-button.css"
+        },
+        {
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/ghost-icon-button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/ghost-icon-button.tsx"
+        },
+        {
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button-model.ts",
+          "type": "registry:ui",
+          "target": "@ui/icon-button-model.ts"
+        },
+        {
+          "path": "packages/weimo-ui-core/src/components/controls/icon-button/icon-button.css",
+          "type": "registry:ui",
+          "target": "@ui/icon-button.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "card",
       "type": "registry:ui",
       "title": "Card",
@@ -2286,14 +2286,14 @@
           "target": "@ui/card/card-top-bar.css"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/composites/mode-button/mode-button.tsx",
+          "path": "packages/weimo-ui-card/src/components/card/mode-button.tsx",
           "type": "registry:ui",
-          "target": "@ui/mode-button.tsx"
+          "target": "@ui/card/mode-button.tsx"
         },
         {
-          "path": "packages/weimo-ui-core/src/components/composites/mode-button/mode-button.css",
+          "path": "packages/weimo-ui-card/src/components/card/mode-button.css",
           "type": "registry:ui",
-          "target": "@ui/mode-button.css"
+          "target": "@ui/card/mode-button.css"
         },
         {
           "path": "packages/weimo-ui-card/src/components/card/card-tool-bar.tsx",

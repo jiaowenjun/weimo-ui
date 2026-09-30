@@ -36,7 +36,7 @@ const CardItem = registryItemsByName.get('card')
 
 for (const snippet of [
   "import type { ComponentPropsWithoutRef, ReactNode } from 'react'",
-  "import { ModeButton, type ModeButtonMode } from 'weimo-ui-core/components/mode-button'",
+  "import { ModeButton, type ModeButtonMode } from './mode-button'",
   "import type { ActionMenuItem } from 'weimo-ui-core/components/menu'",
   "import './card-top-bar.css'",
   'export type CardTopBarDisplayProps',
@@ -202,7 +202,7 @@ for (const snippet of [
   "import { CardTopBar } from 'weimo-ui-card/components/card-top-bar'",
   "import { TextButton } from 'weimo-ui-core/components/text-button'",
   "id: 'card-tool-bar'",
-  "summary: '卡片编辑流程的底部工具栏与展示/编辑顶部栏'",
+  "summary: '卡片编辑流程的底部工具栏、展示/编辑顶部栏与模式按钮'",
   "useState<'display' | 'edit'>('display')",
   'setMode((current) => (current ===',
   '<TextButton',
@@ -292,8 +292,8 @@ assert.ok(CardItem, 'Card registry item must exist.')
 for (const filePath of [
   'packages/weimo-ui-card/src/components/card/card-top-bar.tsx',
   'packages/weimo-ui-card/src/components/card/card-top-bar.css',
-  'packages/weimo-ui-core/src/components/composites/mode-button/mode-button.tsx',
-  'packages/weimo-ui-core/src/components/composites/mode-button/mode-button.css',
+  'packages/weimo-ui-card/src/components/card/mode-button.tsx',
+  'packages/weimo-ui-card/src/components/card/mode-button.css',
 ]) {
   assert.ok(
     CardItem.files.some((file) => file.path === filePath),

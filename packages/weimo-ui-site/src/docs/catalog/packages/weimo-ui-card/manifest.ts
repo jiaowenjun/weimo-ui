@@ -12,6 +12,7 @@ export const cardCatalog = {
       packageExport: './components/card-tool-bar',
       components: [
         { id: 'card-top-bar', name: 'CardTopBar', registryName: 'card-top-bar', packageExport: './components/card-top-bar' },
+        { id: 'mode-button', name: 'ModeButton', registryName: 'mode-button', packageExport: './components/mode-button' },
       ],
     },
     {

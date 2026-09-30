@@ -8,10 +8,6 @@ import {
   FrostedIconButtonGroup,
   FrostedIconGroupButton,
 } from 'weimo-ui-core/components/frosted-icon-button-group'
-import {
-  ModeButton,
-  type ModeButtonMode,
-} from 'weimo-ui-core/components/mode-button'
 import { TextButton } from 'weimo-ui-core/components/text-button'
 import { LabeledSwitch } from 'weimo-ui-core/components/labeled-switch'
 import type { ComponentDefinition } from '../../component-docs'
@@ -161,38 +157,6 @@ function FrostedIconButtonGroupPreview() {
 // 液态玻璃图标按钮/按钮组演示卡已删除:工具栏家族全站磨砂化后,液态玻璃
 // 图标按钮不再有演示场景,液态玻璃材质本体亦已从 core 整体下线。
 
-function ModeButtonDemo() {
-  const [mode, setMode] = useState<ModeButtonMode>('display')
-  const editing = mode === 'edit'
-
-  function toggleMode(checked: boolean) {
-    setMode(checked ? 'edit' : 'display')
-  }
-
-  return (
-    <ComponentPreviewCard
-      action={
-        <LabeledSwitch
-          ariaLabel="切换编辑态"
-          checked={editing}
-          labelOff="默认态"
-          labelOn="编辑态"
-          onCheckedChange={toggleMode}
-        />
-      }
-      label="模式按钮"
-    >
-      <div className="icon-button-preview" aria-label="ModeButton preview">
-        <ModeButton
-          mode={mode}
-          onModeChange={setMode}
-          buttonProps={{ size: 'sm' }}
-        />
-      </div>
-    </ComponentPreviewCard>
-  )
-}
-
 // Docs definitions intentionally colocate preview components with exported page metadata.
 function ButtonDemo() {
   return (
@@ -201,14 +165,13 @@ function ButtonDemo() {
       <GhostIconButtonPreview />
       <FrostedIconButtonPreview />
       <FrostedIconButtonGroupPreview />
-      <ModeButtonDemo />
     </>
   )
 }
 
 export const buttonDefinition = {
   id: 'button',
-  summary: '文本按钮、幽灵/磨砂图标按钮、磨砂图标按钮组与模式按钮的按钮总览',
+  summary: '文本按钮、幽灵/磨砂图标按钮与磨砂图标按钮组的按钮总览',
   status: 'Ready',
   frame: 'plain',
   searchAliases: [
@@ -216,12 +179,10 @@ export const buttonDefinition = {
     'GhostIconButton',
     'FrostedIconButton',
     'FrostedIconButtonGroup',
-    'ModeButton',
     '文本按钮',
     '幽灵图标按钮',
     '磨砂图标按钮',
     '磨砂图标按钮组',
-    '模式按钮',
   ],
   preview: () => <ButtonDemo />,
 } satisfies ComponentDefinition
