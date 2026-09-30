@@ -1,0 +1,277 @@
+<!doctype html>
+<!--
+  iOS Safari 抽屉侧边栏「第一次划动不滚、第二次才跟手」问题的取证演示页。
+  根因:@base-ui/react 1.5.0 DrawerViewport 在 document 上挂 capture + passive:false
+  的 touchmove;swipeDirection="left" 时横向 scrollTarget 恒为 null(抽屉 overflow-x:
+  hidden)⇒ 判定窗内每帧 preventDefault,iOS 将整支手势标记为 JS 接管后不再启动原生
+  滚动。唯一逃生门 = 纵向累计位移 ≥6px 且 > 横向+2px。
+
+  本地运行(零依赖,iOS 设备与本机同一 Wi-Fi):
+    cd docs/troubleshooting && python3 -m http.server 8642 --bind 0.0.0.0
+    手机 Safari 访问 http://<本机局域网IP>:8642/ios-sidebar-swipe-repro.html
+
+  三模式:A = Base UI 同款判定链(复现问题);B = 不挂 capture 拦截(对照);
+  C = 滚动内容根节点加 data-base-ui-swipe-ignore(官方逃生门,即修复方案)。
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>侧边栏触摸滚动吞手势复现</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; overscroll-behavior: none; }
+  body {
+    font: 14px/1.5 -apple-system, "PingFang SC", sans-serif;
+    background: #f4f4f5;
+    color: #18181b;
+  }
+  .toolbar {
+    position: fixed; inset-inline: 0; top: 0; z-index: 60;
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+    padding: 10px 12px;
+    background: #fff; border-bottom: 1px solid #e4e4e7;
+  }
+  .toolbar strong { font-size: 13px; }
+  .seg { display: flex; border: 1px solid #d4d4d8; border-radius: 8px; overflow: hidden; }
+  .seg button {
+    padding: 6px 10px; font-size: 12px; border: 0; background: #fff; color: #52525b;
+  }
+  .seg button.on { background: #18181b; color: #fff; }
+  .clear { margin-left: auto; padding: 6px 10px; font-size: 12px; border: 1px solid #d4d4d8; border-radius: 8px; background: #fff; }
+  main { padding: 96px 14px 40px; max-width: 720px; margin: 0 auto; }
+  .card { background: #fff; border: 1px solid #e4e4e7; border-radius: 12px; padding: 14px; margin-bottom: 14px; }
+  .card h2 { font-size: 15px; margin-bottom: 6px; }
+  .card p, .card li { font-size: 13px; color: #3f3f46; }
+  .card ol { padding-left: 18px; }
+  .hint b { color: #dc2626; }
+  .hint b.ok { color: #16a34a; }
+
+  /* ===== 复刻 weimo-ui 抽屉结构 ===== */
+  .repro-viewport {
+    position: fixed; inset: 0; z-index: 50;
+    display: flex; align-items: stretch; justify-content: flex-start;
+    padding: 16px; pointer-events: none;
+    touch-action: pan-y;                    /* 同 .weimo-sidebar-drawer__viewport */
+  }
+  .repro-stage {
+    opacity: 1; pointer-events: none;
+    touch-action: pan-y;                    /* 同 .weimo-sidebar-drawer__stage */
+    will-change: transform;
+  }
+  .repro-drawer {
+    position: relative; z-index: 1;
+    width: min(264px, calc(100vw - 32px)); height: 100%;
+    min-height: 0;
+    overflow-x: hidden; overflow-y: auto;   /* 同 .weimo-sidebar--drawer */
+    border: 1px solid #d4d4d8; border-radius: 12px;
+    background: #fff;
+    pointer-events: auto;
+    touch-action: pan-y;
+  }
+  .repro-nav {
+    display: flex; flex-direction: column; gap: 10px;
+    padding: 16px;
+    height: 100%;
+    overflow: auto;                          /* 同 .docs-sidebar-nav(双层滚动内层) */
+    touch-action: pan-y;
+  }
+  .repro-nav p { font-size: 11px; color: #71717a; }
+  .repro-nav a {
+    display: flex; align-items: center; min-height: 34px; padding: 0 9px;
+    border-radius: 6px; background: #fafafa; border: 1px solid #f0f0f0;
+    text-decoration: none; color: #18181b; font-size: 13px;
+  }
+  .log-item {
+    font: 11px/1.7 ui-monospace, Menlo, monospace;
+    background: #fafafa; border: 1px solid #e4e4e7; border-radius: 8px;
+    padding: 8px 10px; margin-bottom: 8px;
+    word-break: break-all;
+  }
+  .log-item .fr { display: inline-block; margin-right: 6px; }
+  .fr.p { color: #dc2626; font-weight: 700; }
+  .fr.s { color: #16a34a; font-weight: 700; }
+  .fr.i { color: #7c3aed; font-weight: 700; }
+  .log-item .verdict { font-weight: 700; margin-top: 4px; display: block; }
+  .verdict.dead { color: #dc2626; }
+  .verdict.live { color: #16a34a; }
+  .meta { color: #71717a; }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <strong>模式</strong>
+  <div class="seg" id="seg">
+    <button data-mode="baseui" class="on">A·Base UI 同款</button>
+    <button data-mode="off">B·无 capture 拦截</button>
+    <button data-mode="ignore">C·swipe-ignore 修复</button>
+  </div>
+  <button class="clear" id="clear">清空日志</button>
+</div>
+
+<main>
+  <div class="card hint">
+    <h2>验证步骤</h2>
+    <ol>
+      <li>模式 A 下,在左侧列表里<b>缓慢拖动</b>或<b>斜向滑动</b>(往右下/右上斜)→ 预期:第一次常常完全不滚,第二次快速垂直划才滚。日志里红 <span class="fr p">P</span> 帧出现 = touchmove 被 preventDefault。</li>
+      <li>同一划法切到模式 B → 预期:第一次立即跟手。证明根因 = capture 层 preventDefault。</li>
+      <li>切到模式 C(列表根节点加 data-base-ui-swipe-ignore,Base UI 官方逃生门)→ 预期:与 B 等价,第一次即跟手。</li>
+    </ol>
+    <p>每帧标记:<span class="fr p">P</span> = 本帧被 preventDefault;<span class="fr s">S</span> = 纵向位移≥6px 逃生门生效,本帧起放行;<span class="fr i">I</span> = swipe-ignore 命中,直接放行。判定链与 Base UI 1.5.0 DrawerViewport 一致。</p>
+  </div>
+  <div class="card">
+    <h2>手势日志(新手势追加在最上)</h2>
+    <div id="log"><p class="meta">在左侧抽屉列表上滑动,每次抬手生成一条记录。</p></div>
+  </div>
+</main>
+
+<!-- ===== 复刻结构:viewport > stage > drawer(overflow-x:hidden) > nav(overflow:auto,长列表) ===== -->
+<div class="repro-viewport" id="viewport">
+  <div class="repro-stage" id="stage">
+    <div class="repro-drawer" id="drawer">
+      <div class="repro-nav" id="nav"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  // ---------- 列表内容 ----------
+  var groups = ['core 包', 'card 包', 'stats 包', 'markdown 包', 'image 包', 'tagtree 包', '更多组件'];
+  var nav = document.getElementById('nav');
+  groups.forEach(function (g) {
+    var p = document.createElement('p');
+    p.textContent = g;
+    nav.appendChild(p);
+    for (var i = 0; i < 14; i++) {
+      var a = document.createElement('a');
+      a.href = 'javascript:void(0)';
+      a.textContent = g.replace(' 包', '') + ' 组件 ' + (i + 1);
+      nav.appendChild(a);
+    }
+  });
+
+  // ---------- 模式 ----------
+  var mode = 'baseui';
+  var seg = document.getElementById('seg');
+  seg.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-mode]');
+    if (!btn) return;
+    mode = btn.dataset.mode;
+    seg.querySelectorAll('button').forEach(function (b) { b.classList.toggle('on', b === btn); });
+    nav.toggleAttribute('data-base-ui-swipe-ignore', mode === 'ignore');
+  });
+  document.getElementById('clear').addEventListener('click', function () {
+    document.getElementById('log').innerHTML = '';
+  });
+
+  // ---------- Base UI 判定链复刻(scrollable.js) ----------
+  function isScrollable(element, axis) {
+    var style = getComputedStyle(element);
+    if (axis === 'vertical') {
+      var oy = style.overflowY;
+      return (oy === 'auto' || oy === 'scroll') && element.scrollHeight > element.clientHeight;
+    }
+    var ox = style.overflowX;
+    return (ox === 'auto' || ox === 'scroll') && element.scrollWidth > element.clientWidth;
+  }
+  function findScrollableTouchTarget(target, root, axis) {
+    var node = target;
+    while (node && node !== root) {
+      if (isScrollable(node, axis)) return node;
+      node = node.parentElement;
+    }
+    return isScrollable(root, axis) ? root : null;
+  }
+  // swipeDirection = 'left' ⇒ scrollAxis=horizontal, crossAxis=vertical
+  var root = document.getElementById('viewport');
+  var scrollAxis = 'horizontal';
+  var crossScrollAxis = 'vertical';
+
+  var state = null;      // touchScrollStateRef.current
+  var ignored = false;   // ignoreTouchSwipeRef.current
+  var gesture = null;    // 打点
+
+  // ---------- DrawerViewport.onTouchStart 复刻 ----------
+  root.addEventListener('touchstart', function (event) {
+    var touch = event.touches[0];
+    if (!touch) return;
+    gesture = { frames: [], startTop: nav.scrollTop };
+    var target = document.elementFromPoint(touch.clientX, touch.clientY);
+    ignored = Boolean(target && target.closest('[data-base-ui-swipe-ignore]'));
+    if (ignored) { state = null; return; }
+    if (!root.contains(event.target)) { ignored = true; state = null; return; }
+    var scrollTarget = findScrollableTouchTarget(event.target, root, scrollAxis);        // → null(无横向可滚祖先)
+    var hasCross = findScrollableTouchTarget(event.target, root, crossScrollAxis) != null; // → true(nav 纵向可滚)
+    var allowSwipe = null;
+    if (scrollTarget) allowSwipe = false; // 简化:横向 edge 判定省略,本结构 scrollTarget 恒 null
+    state = {
+      startX: touch.clientX, startY: touch.clientY, lastX: touch.clientX, lastY: touch.clientY,
+      scrollTarget: scrollTarget, hasCrossAxisScrollableContent: hasCross,
+      allowSwipe: allowSwipe, preserveNativeCrossAxisScroll: false,
+    };
+  }, { passive: true });
+
+  // ---------- preserveNativeCrossAxisScrollOnMove 复刻(6px 逃生门) ----------
+  function preserveGate(touchState, touch) {
+    if (touchState.preserveNativeCrossAxisScroll) return true;
+    if (touchState.allowSwipe === true || !touchState.hasCrossAxisScrollableContent) return false;
+    var crossDelta = touch.clientY - touchState.startY;   // crossAxis = vertical
+    var drawerDelta = touch.clientX - touchState.startX;  // drawerAxis = horizontal
+    if (Math.abs(crossDelta) < 6 || Math.abs(crossDelta) <= Math.abs(drawerDelta) + 2) return false;
+    touchState.preserveNativeCrossAxisScroll = true;
+    return true;
+  }
+
+  // ---------- handleNativeTouchMove 复刻(document capture, passive:false) ----------
+  var nativeMove = function (event) {
+    if (mode === 'off') return;                       // 模式 B:不拦截
+    var touch = event.touches[0];
+    if (!touch || !state) return;
+    var frame = { dx: Math.round(touch.clientX - state.startX), dy: Math.round(touch.clientY - state.startY) };
+    if (ignored) { frame.mark = 'I'; gesture.frames.push(frame); return; }  // 模式 C:直接放行
+    if (preserveGate(state, touch)) { frame.mark = 'S'; gesture.frames.push(frame); state.lastY = touch.clientY; return; }
+    if (!state.scrollTarget || state.scrollTarget === document.documentElement || state.scrollTarget === document.body) {
+      if (event.cancelable) { event.preventDefault(); frame.mark = 'P'; }
+      gesture.frames.push(frame);
+      state.lastY = touch.clientY;
+      return;
+    }
+    gesture.frames.push(frame);
+    state.lastY = touch.clientY;
+  };
+  document.addEventListener('touchmove', nativeMove, { passive: false, capture: true });
+
+  // ---------- touchend 结算 ----------
+  function settle() {
+    if (!gesture) return;
+    var dTop = nav.scrollTop - gesture.startTop;
+    var scrolled = Math.abs(dTop) >= 1;
+    var div = document.createElement('div');
+    div.className = 'log-item';
+    var html = gesture.frames.map(function (f) {
+      var cls = f.mark ? ' ' + f.mark.toLowerCase() : '';
+      var tag = f.mark ? '<b class="fr' + cls + '">' + f.mark + '</b>' : '';
+      return tag + '<span class="fr' + cls + '">(' + f.dx + ',' + f.dy + ')</span>';
+    }).join('');
+    div.innerHTML = '模式 ' + mode.toUpperCase() + ' · ' + gesture.frames.length + ' 帧<br>' + html +
+      '<span class="verdict ' + (scrolled ? 'live' : 'dead') + '">' +
+      (scrolled ? '✓ 滚动了 ΔscrollTop=' + dTop + 'px' : '✗ 未滚动(手势被吞)') + '</span>' +
+      '<span class="meta">起 scrollTop=' + gesture.startTop + '</span>';
+    var log = document.getElementById('log');
+    if (log.firstChild && log.firstChild.tagName !== 'P') log.removeChild(log.firstChild);
+    log.insertBefore(div, log.firstChild);
+    while (log.children.length > 12) log.removeChild(log.lastChild);
+    gesture = null;
+    state = null;
+    ignored = false;
+  }
+  document.addEventListener('touchend', settle);
+  document.addEventListener('touchcancel', settle);
+})();
+</script>
+</body>
+</html>
