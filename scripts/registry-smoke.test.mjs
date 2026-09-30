@@ -1011,6 +1011,18 @@ try {
     ),
     'shadcn add must write Heatmap sidecar CSS from the configured custom registry.',
   )
+  const consumerHeatmapCss = readFileSync(
+    join(consumerDir, 'src/components/ui/heatmap/heatmap.css'),
+    'utf8',
+  )
+  assert.match(
+    consumerHeatmapCss,
+    /--color-heatmap-today-ring:\s*hsl\(18\.1 71\.9% 46\.1% \/ 0\.55\);/,
+  )
+  assert.match(
+    consumerHeatmapCss,
+    /--color-heatmap-today-ring:\s*hsl\(0 0% 100% \/ 0\.38\);/,
+  )
   assert.ok(
     existsSync(join(consumerDir, 'src/components/ui/frosted-icon-button.tsx')) &&
       existsSync(join(consumerDir, 'src/components/ui/ghost-icon-button.tsx')) &&
@@ -1476,7 +1488,7 @@ try {
   assert.match(consumerCss, /--color-background:\s*hsl\(var\(--background\)\);/)
   assert.match(consumerCss, /--color-bg-card:/)
   assert.doesNotMatch(consumerCss, /--color-heat-\d/)
-  assert.match(consumerCss, /--color-heatmap-today-ring:\s*hsl\(18\.1 71\.9% 46\.1% \/ 0\.55\);/)
+  assert.doesNotMatch(consumerCss, /--color-heatmap-today-ring/)
   assert.ok(
     (tagPickerSource.includes("from 'weimo-ui-tagtree/components/coss/input-group'") ||
       tagPickerSource.includes("from '../coss/input-group'")) &&

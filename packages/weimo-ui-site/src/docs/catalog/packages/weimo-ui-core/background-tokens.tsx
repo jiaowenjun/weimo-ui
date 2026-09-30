@@ -11,12 +11,6 @@ import {
   getBgColorToken,
   type BgColorTone,
 } from 'weimo-ui-core/components/bg-color'
-import {
-  getHeatColorClassName,
-  getHeatColorToken,
-  heatColorLevels,
-  heatColorMap,
-} from 'weimo-ui-stats/components/heat-color'
 import { pressableToneMap, pressableTones } from 'weimo-ui-core/components/pressable'
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import { GlassPreviewCard } from '../../../previews/glass-preview-card'
@@ -70,28 +64,6 @@ function BgColorPreview() {
         </div>
       </ComponentPreviewCard>
 
-      <ComponentPreviewCard
-        items={heatColorLevels.map((level) => {
-          const item = heatColorMap[level]
-
-          return {
-            darkValue: item.value.dark,
-            token: getHeatColorToken(level),
-            value: item.value.light,
-          }
-        })}
-        label="热力图"
-      >
-        <div aria-hidden="true" className="heat-color-preview__group">
-          {heatColorLevels.map((level) => (
-            <span
-              className={`heat-color-preview__swatch ${getHeatColorClassName(level)}`}
-              key={level}
-            />
-          ))}
-        </div>
-      </ComponentPreviewCard>
-
       <GlassPreviewCard
         initialGray={glassBackgroundGrayMidpoint}
         items={bgBlurTones.map((tone) => ({
@@ -127,11 +99,6 @@ export const backgroundTokensDefinition = {
       const item = pressableToneMap[tone]
 
       return ['Pressable', tone, item.label, item.description, item.uiUsage, item.bijiUsage]
-    }),
-    heatColorLevels.flatMap((level) => {
-      const item = heatColorMap[level]
-
-      return ['HeatColor', `level ${level}`, '热力图', item.label, item.token, item.description]
     }),
     bgBlurTones.flatMap((tone) => {
       const item = bgBlurToneMap[tone]

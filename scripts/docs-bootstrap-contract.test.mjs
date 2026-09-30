@@ -309,10 +309,10 @@ assert.ok(
 )
 
 assert.ok(
-  !componentDefinitionSources.stat.includes('HeatColor') &&
-    !componentDefinitionSources.stat.includes('<HeatColor') &&
-    !componentDefinitionSources.stat.includes('HeatColor.'),
-  'Heatmap component docs must leave token previews to the BgColor detail page.',
+  componentDefinitionSources.stat.includes('heatColorLevels.map') &&
+    componentDefinitionSources.stat.includes('heat-color-preview__swatch') &&
+    componentDefinitionSources.stat.includes('label="热力图色"'),
+  'HeatColor token docs must render on the stat page as the 热力图色 card.',
 )
 
 assert.ok(
@@ -324,10 +324,10 @@ assert.ok(
 
 assert.ok(
   !existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/heat-color.tsx')) &&
-    componentDefinitionSources['background-tokens'].includes('heatColorLevels.map') &&
-    componentDefinitionSources['background-tokens'].includes('<ComponentPreviewCard') &&
-    componentDefinitionSources['background-tokens'].includes('label="热力图"'),
-  'HeatColor docs must be merged into the BgColor Heatmap group.',
+    !componentDefinitionSources['background-tokens'].includes('heatColor') &&
+    !componentDefinitionSources['background-tokens'].includes('heat-color') &&
+    !componentDefinitionSources['background-tokens'].includes('热力图'),
+  'HeatColor token docs must not stay on the BgColor detail page; the card lives on the stat page.',
 )
 
 for (const snippet of [

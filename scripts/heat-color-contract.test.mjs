@@ -42,6 +42,7 @@ const heatColorCss = readProjectFile('packages/weimo-ui-stats/src/components/hea
 const heatmapCss = readProjectFile('packages/weimo-ui-stats/src/components/heatmap/heatmap.css')
 const heatmapSource = readProjectFile('packages/weimo-ui-stats/src/components/heatmap/heatmap.tsx')
 const backgroundTokensDocsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/background-tokens.tsx')
+const statDocsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-stats/stat.tsx')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
@@ -52,7 +53,6 @@ const heatmapRegistryItem = readJson('registry/heatmap.json')
 const rootHeatColorItem = rootRegistry.items.find((item) => item.name === 'heat-color')
 const rootHeatmapItem = rootRegistry.items.find((item) => item.name === 'heatmap')
 const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
-const tokenGridBlock = cssBlockFor(appCss, '.app-shell__content--token-grid')
 const heatColorGroupBlock = cssBlockFor(appCss, '.heat-color-preview__group')
 const heatColorSwatchBlock = cssBlockFor(appCss, '.heat-color-preview__swatch')
 
@@ -134,6 +134,24 @@ assert.ok(
   'Heatmap cells must consume the stats-owned HeatColor utility helper.',
 )
 
+const todayRingToken = '--color-heatmap-today-ring'
+
+assert.ok(
+  !tokensCss.includes(`${todayRingToken}:`) &&
+    !tokensCss.includes(`var(${todayRingToken})`) &&
+    !(todayRingToken.slice(2) in styleRegistry.cssVars.light) &&
+    !(todayRingToken.slice(2) in styleRegistry.cssVars.dark) &&
+    !(todayRingToken.slice(2) in rootStyleItem.cssVars.light) &&
+    !(todayRingToken.slice(2) in rootStyleItem.cssVars.dark),
+  'The today ring token must live in the stats-owned heatmap.css instead of core tokens or the shared style registry.',
+)
+assert.ok(
+  heatmapCss.includes(`${todayRingToken}: hsl(18.1 71.9% 46.1% / 0.55);`) &&
+    heatmapCss.includes(`${todayRingToken}: hsl(0 0% 100% / 0.38);`) &&
+    heatmapCss.includes(`var(${todayRingToken})`),
+  'heatmap.css must define the today ring token in both themes beside its consumer rules.',
+)
+
 assert.ok(
   !heatColorSource.includes('heatmap-heat-color') &&
     !heatColorCss.includes('heatmap-heat-color') &&
@@ -143,29 +161,35 @@ assert.ok(
   'Heat color utilities must live in heat-color.css without heatmap-heat-color aliases.',
 )
 assert.ok(
-  backgroundTokensDocsDefinitionSource.includes("from 'weimo-ui-stats/components/heat-color'") &&
-    backgroundTokensDocsDefinitionSource.includes("from 'weimo-ui-core/components/component-preview-card'") &&
-    backgroundTokensDocsDefinitionSource.includes('heatColorLevels.map') &&
-    backgroundTokensDocsDefinitionSource.includes('heatColorMap[level]') &&
-    backgroundTokensDocsDefinitionSource.includes('getHeatColorClassName(level)') &&
-    backgroundTokensDocsDefinitionSource.includes('getHeatColorToken(level)') &&
-    backgroundTokensDocsDefinitionSource.includes('darkValue: item.value.dark') &&
-    backgroundTokensDocsDefinitionSource.includes('label="热力图"') &&
-    backgroundTokensDocsDefinitionSource.includes('token: getHeatColorToken(level)') &&
-    backgroundTokensDocsDefinitionSource.includes('value: item.value.light') &&
-    backgroundTokensDocsDefinitionSource.includes('heat-color-preview__group') &&
-    backgroundTokensDocsDefinitionSource.includes('heat-color-preview__swatch') &&
-    backgroundTokensDocsDefinitionSource.includes('<ComponentPreviewCard') &&
-    backgroundTokensDocsDefinitionSource.includes("'HeatColor'") &&
-    backgroundTokensDocsDefinitionSource.includes("'热力图'") &&
-    !backgroundTokensDocsDefinitionSource.includes('<HeatColor'),
-  'BgColor docs must render the Heatmap tokens as one searchable ComponentPreviewCard.',
+  statDocsDefinitionSource.includes("from 'weimo-ui-stats/components/heat-color'") &&
+    statDocsDefinitionSource.includes("from 'weimo-ui-core/components/component-preview-card'") &&
+    statDocsDefinitionSource.includes('heatColorLevels.map') &&
+    statDocsDefinitionSource.includes('heatColorMap[level]') &&
+    statDocsDefinitionSource.includes('getHeatColorClassName(level)') &&
+    statDocsDefinitionSource.includes('getHeatColorToken(level)') &&
+    statDocsDefinitionSource.includes('darkValue: item.value.dark') &&
+    statDocsDefinitionSource.includes('label="热力图色"') &&
+    statDocsDefinitionSource.includes('token: getHeatColorToken(level)') &&
+    statDocsDefinitionSource.includes('value: item.value.light') &&
+    statDocsDefinitionSource.includes('heat-color-preview__group') &&
+    statDocsDefinitionSource.includes('heat-color-preview__swatch') &&
+    statDocsDefinitionSource.includes('<ComponentPreviewCard') &&
+    statDocsDefinitionSource.includes("'HeatColor'") &&
+    statDocsDefinitionSource.includes("'热力图色'") &&
+    !statDocsDefinitionSource.includes('<HeatColor ') &&
+    !statDocsDefinitionSource.includes('<HeatColor/'),
+  'Stat docs must render the HeatColor tokens as one searchable ComponentPreviewCard.',
 )
 assert.ok(
-  tokenGridBlock.includes('display: grid;') &&
-    tokenGridBlock.includes('grid-template-columns: minmax(0, 1fr);') &&
-    !backgroundTokensDocsDefinitionSource.includes('className="heat-color-preview"'),
-  'HeatColor cards must use the content-level token grid without a preview wrapper.',
+  !backgroundTokensDocsDefinitionSource.includes('heatColor') &&
+    !backgroundTokensDocsDefinitionSource.includes('HeatColor') &&
+    !backgroundTokensDocsDefinitionSource.includes('heat-color') &&
+    !backgroundTokensDocsDefinitionSource.includes('热力图'),
+  'BgColor docs must leave the HeatColor token card to the stat page.',
+)
+assert.ok(
+  !statDocsDefinitionSource.includes('className="heat-color-preview"'),
+  'HeatColor card must render its swatch row directly without a preview wrapper.',
 )
 assert.ok(
   heatColorGroupBlock.includes('display: flex;') &&

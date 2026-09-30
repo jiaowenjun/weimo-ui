@@ -58,6 +58,11 @@ const allowlistedComponentColors = new Map([
     ]),
   ],
   [
+    // 今日环描边色随 Heatmap 迁入 stats:亮暗两主题的字面量值与组件同文件交付
+    'packages/weimo-ui-stats/src/components/heatmap/heatmap.css',
+    new Set(['hsl(18.1 71.9% 46.1% / 0.55)', 'hsl(0 0% 100% / 0.38)']),
+  ],
+  [
     'packages/weimo-ui-core/src/components/composites/cards/component-preview-card.css',
     new Set([
       'hsl(18.1 71.9% 46.1% / 0.72)',

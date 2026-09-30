@@ -2,6 +2,12 @@ import { useState } from 'react'
 
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import {
+  getHeatColorClassName,
+  getHeatColorToken,
+  heatColorLevels,
+  heatColorMap,
+} from 'weimo-ui-stats/components/heat-color'
+import {
   Heatmap,
   formatHeatmapDateKey,
   type HeatmapDailyCount,
@@ -32,6 +38,32 @@ const demoDailyCounts: HeatmapDailyCount[] = [
   { date: dateOffset(-2), count: 3 },
   { date: dateOffset(0), count: 2 },
 ]
+
+function HeatColorDemo() {
+  return (
+    <ComponentPreviewCard
+      items={heatColorLevels.map((level) => {
+        const item = heatColorMap[level]
+
+        return {
+          darkValue: item.value.dark,
+          token: getHeatColorToken(level),
+          value: item.value.light,
+        }
+      })}
+      label="热力图色"
+    >
+      <div aria-hidden="true" className="heat-color-preview__group">
+        {heatColorLevels.map((level) => (
+          <span
+            className={`heat-color-preview__swatch ${getHeatColorClassName(level)}`}
+            key={level}
+          />
+        ))}
+      </div>
+    </ComponentPreviewCard>
+  )
+}
 
 function HeatmapDemo({
   counts = demoDailyCounts,
@@ -85,6 +117,7 @@ function StatGroupDemo() {
 function StatDemo() {
   return (
     <>
+      <HeatColorDemo />
       <HeatmapDemo />
       <StatGroupDemo />
     </>
@@ -100,7 +133,13 @@ export const statDefinition = {
     'Heatmap',
     'StatGroup',
     '热力图',
+    '热力图色',
     '统计组',
+    ...heatColorLevels.flatMap((level) => {
+      const item = heatColorMap[level]
+
+      return ['HeatColor', `level ${level}`, item.label, item.token, item.description]
+    }),
   ],
   preview: () => <StatDemo />,
 } satisfies ComponentDefinition

@@ -304,13 +304,15 @@ assert.ok(
   'Pressable docs must stay merged into the BgColor detail page as the plain solid sample.',
 )
 
+const statDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-stats/stat.tsx')
+
 assert.ok(
   !existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/heat-color.tsx')) &&
-    backgroundTokensDefinitionSource.includes('heatColorLevels.map') &&
-    backgroundTokensDefinitionSource.includes('<ComponentPreviewCard') &&
-    backgroundTokensDefinitionSource.includes('heat-color-preview__swatch') &&
-    backgroundTokensDefinitionSource.includes('label="热力图"'),
-  'HeatColor docs must stay merged into the BgColor detail page under the grouped ComponentPreviewCard.',
+    !backgroundTokensDefinitionSource.includes('heatColorLevels') &&
+    statDefinitionSource.includes('heatColorLevels.map') &&
+    statDefinitionSource.includes('heat-color-preview__swatch') &&
+    statDefinitionSource.includes('label="热力图色"'),
+  'HeatColor docs must stay merged into the stat detail page as the 热力图色 token card.',
 )
 
 assert.ok(

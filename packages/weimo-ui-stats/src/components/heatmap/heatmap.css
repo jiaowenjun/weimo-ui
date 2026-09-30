@@ -1,3 +1,13 @@
+/* 今日环描边色 token:随 Heatmap 组件归属 stats,亮值进 :root、暗值进 .dark,
+   供 .heatmap__cell--today 的 inset 描边消费。 */
+:root {
+  --color-heatmap-today-ring: hsl(18.1 71.9% 46.1% / 0.55);
+}
+
+.dark {
+  --color-heatmap-today-ring: hsl(0 0% 100% / 0.38);
+}
+
 @layer components {
   .heatmap {
     --heatmap-cell-size: 15px;

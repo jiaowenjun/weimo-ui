@@ -26,7 +26,7 @@ import { StatGroup } from 'weimo-ui-stats/components/stat-group'
 ## 依赖边界
 
 - 只依赖 `weimo-ui-core`。
-- `Heatmap` 拥有日期、列和月份标签模型；色阶展示由本包的 `HeatColor` 拥有，热力图背景色 token（`--color-heat-0..4`）随 `heat-color.css` 交付。
+- `Heatmap` 拥有日期、列和月份标签模型；色阶展示由本包的 `HeatColor` 拥有，热力图背景色 token（`--color-heat-0..4`）随 `heat-color.css` 交付，今日环描边色（`--color-heatmap-today-ring`）随 `heatmap.css` 交付。
 - `weimo-ui-stats/components/heatmap` 不再转发 `HeatColor`。需要色阶组件时直接使用 `weimo-ui-stats/components/heat-color`，根包调用者使用 `weimo-ui/components/heat-color`。
 - Heatmap 和 StatGroup 互不依赖。
 
