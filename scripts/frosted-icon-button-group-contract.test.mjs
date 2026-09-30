@@ -197,7 +197,7 @@ assert.ok(
 )
 assert.ok(
   groupXsHoverBlock.includes('inset: 2px;'),
-  'Grouped xs hover circles must keep the 2px inset so the highlight stays larger than the 12px icon.',
+  'Grouped xs hover circles must keep the 2px inset — the 12px circle stays close to the 13px icon on the 16px box.',
 )
 
 // 反馈与材质完全继承：组不自建悬停/按压/边框/模糊,半径走共享 round token。

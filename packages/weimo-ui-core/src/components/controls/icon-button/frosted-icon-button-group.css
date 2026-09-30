@@ -40,7 +40,7 @@
     inset: 2px;
   }
 
-  /* xs 按钮盒仅 16px，内收 4px 后高亮圆(8px)会小于 12px 图标，退回 2px 环。 */
+  /* xs 按钮盒仅 16px，内收 4px 后高亮圆(8px)会远小于 13px 图标，退回 2px 环。 */
   .frosted-icon-button-group > .icon-button--xs.icon-button--frosted::after {
     inset: 2px;
   }
