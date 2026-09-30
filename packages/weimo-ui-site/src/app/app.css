@@ -568,9 +568,11 @@
   background: color-mix(in srgb, var(--color-bg-hover) 78%, transparent);
 }
 
-.docs-sidebar-nav__group a:hover {
-  color: var(--color-text-primary);
-  background: var(--color-bg-hover);
+@media (hover: hover) and (pointer: fine) {
+  .docs-sidebar-nav__group a:hover {
+    color: var(--color-text-primary);
+    background: var(--color-bg-hover);
+  }
 }
 
 .docs-sidebar-nav__group svg {
