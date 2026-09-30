@@ -26,6 +26,7 @@ export type CapsuleButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, '
   prefix?: ReactElement | null
   state?: CapsuleButtonState
   suffix?: ReactElement | null
+  suffixCollapsed?: boolean
 }
 
 function isEmptyCapsuleButtonSlot(slot: ReactNode) {
@@ -47,6 +48,7 @@ export function CapsuleButton({
   state = 'default',
   style,
   suffix,
+  suffixCollapsed = false,
   ...props
 }: CapsuleButtonProps) {
   const isFrostedState = state === 'frosted'
@@ -102,6 +104,7 @@ export function CapsuleButton({
       data-has-prefix={isEmptyCapsuleButtonSlot(prefix) ? undefined : 'true'}
       data-has-suffix={isEmptyCapsuleButtonSlot(suffix) ? undefined : 'true'}
       data-state={state}
+      data-suffix-collapsed={suffixCollapsed ? 'true' : undefined}
       ref={isFrostedState ? setElementRef : undefined}
       style={
         animateWidth
@@ -133,6 +136,7 @@ export function CapsuleButton({
           data-has-prefix={isEmptyCapsuleButtonSlot(prefix) ? undefined : 'true'}
           data-has-suffix={isEmptyCapsuleButtonSlot(suffix) ? undefined : 'true'}
           data-state={state}
+          data-suffix-collapsed={suffixCollapsed ? 'true' : undefined}
           type="button"
           {...capsuleFrameAttributes}
         >

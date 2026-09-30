@@ -79,6 +79,8 @@ const contentBlock = cssBlockFor(surfaceCss, '.capsule-frame__content')
 const capsuleButtonBlock = standaloneCssBlockFor(css, 'button.capsule-button')
 const capsuleButtonPrefixPaddingBlock = standaloneCssBlockFor(css, 'button.capsule-button[data-has-prefix]')
 const capsuleButtonSuffixPaddingBlock = standaloneCssBlockFor(css, 'button.capsule-button[data-has-suffix]')
+const suffixSlotBlock = cssBlockFor(css, '.capsule-frame__slot.capsule-button__suffix')
+const suffixCollapseBlock = cssBlockFor(css, '.capsule-frame[data-suffix-collapsed] .capsule-button__suffix')
 const textBlock = standaloneCssBlockFor(css, '.capsule-button__text')
 const reducedMotionBlock = cssBlockFor(
   surfaceCss,
@@ -128,10 +130,12 @@ for (const snippet of [
   'prefix?: ReactElement | null',
   'state?: CapsuleButtonState',
   'suffix?: ReactElement | null',
+  'suffixCollapsed?: boolean',
   'export function CapsuleButton',
   'animateWidth = false',
   'prefix = <Hash aria-hidden="true" />',
   "state = 'default'",
+  'suffixCollapsed = false',
   'function isEmptyCapsuleButtonSlot',
   '{isEmptyCapsuleButtonSlot(prefix) ? null : (',
   '{isEmptyCapsuleButtonSlot(suffix) ? null : (',
@@ -141,6 +145,7 @@ for (const snippet of [
   'data-state={state}',
   "data-has-prefix={isEmptyCapsuleButtonSlot(prefix) ? undefined : 'true'}",
   "data-has-suffix={isEmptyCapsuleButtonSlot(suffix) ? undefined : 'true'}",
+  "data-suffix-collapsed={suffixCollapsed ? 'true' : undefined}",
   "const isFrostedState = state === 'frosted'",
   '? { ...getAnimatedInlineSizeStyle(style, inlineSize), ...backgroundStyle }',
   'capsule-frame__slot capsule-button__prefix',
@@ -225,6 +230,13 @@ for (const [block, snippet, message] of [
   [capsuleButtonBlock, 'gap: 1px;', 'CapsuleButton must keep the tight uniform 1px inner gap between the prefix icon and text across text sizes.'],
   [capsuleButtonPrefixPaddingBlock, 'padding-left: 6px;', 'CapsuleButton with a prefix must sit the icon 6px from the left border across text sizes.'],
   [capsuleButtonSuffixPaddingBlock, 'padding-right: 6px;', 'CapsuleButton with a suffix must sit the icon 6px from the right border across text sizes.'],
+  [suffixSlotBlock, 'inline-size: 16px;', 'The suffix slot must pin the icon-button xs circle width (16px, value-aligned with icon-button.css, not referenced) so the collapse transition animates a definite length.'],
+  [suffixSlotBlock, 'clip-path: inset(-100% 0);', 'The suffix slot must clip at its horizontal bounds so a mid-transition X never paints over the text, while staying open vertically for taller suffix widgets.'],
+  [suffixSlotBlock, 'inline-size var(--animated-inline-size-transition-duration) cubic-bezier(0.2, 0, 0, 1)', 'The suffix slot width must animate with the same duration and curve as the capsule inline-size so the text region keeps a constant width and never clips during the reveal.'],
+  [suffixSlotBlock, 'opacity var(--capsule-frame-state-transition-duration) ease', 'The suffix must fade in and out with the shared state duration while its slot expands or collapses.'],
+  [suffixCollapseBlock, 'inline-size: 0;', 'A collapsed suffix must free all layout width so the display-state capsule keeps its suffix-free natural width.'],
+  [suffixCollapseBlock, 'opacity: 0;', 'A collapsed suffix must stay invisible in display state.'],
+  [suffixCollapseBlock, 'pointer-events: none;', 'A collapsed suffix must not intercept pointer events while hidden.'],
   [textBlock, 'overflow: hidden;', 'CapsuleButton text must hide overflowing content.'],
   [textBlock, 'text-overflow: clip;', 'CapsuleButton text overflow must be clipped without an ellipsis.'],
   [textBlock, 'white-space: nowrap;', 'CapsuleButton text must stay on one line when clipped.'],
@@ -276,6 +288,17 @@ assert.ok(
 assert.ok(
   !textBlock.includes('text-overflow: ellipsis;'),
   'CapsuleButton text overflow must not render an ellipsis.',
+)
+
+assertIncludes(
+  css,
+  'transition-duration: 1ms;',
+  'The suffix slot collapse must respect reduced motion with the same 1ms override as the capsule width transition.',
+)
+assertIncludes(
+  css,
+  '.animated-inline-size__measure .capsule-frame__slot.capsule-button__suffix {\n    transition: none;\n  }',
+  'The hidden measurement clone must not animate the suffix slot: width measurement runs at transition frame zero and must read the terminal slot width.',
 )
 
 assert.ok(

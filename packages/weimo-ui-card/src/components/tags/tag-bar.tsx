@@ -251,8 +251,9 @@ export function TagBar({
                 style={isEmpty ? emptyChipWidthStyle : undefined}
               >
                 {/* 空态芯片承担「+标签」新增语义,保持 CapsuleButton 原样;
-                    非空标签芯片用 EditableCapsule,编辑态挂 X 移除后缀,
-                    点 X 经 onRemove 过滤该标签、点胶囊本体开更新选择器。 */}
+                    非空标签芯片用 EditableCapsule,X 后缀常驻收展(展示态收拢,
+                    编辑态随胶囊宽度同步展开),点 X 经 onRemove 过滤该标签、
+                    点胶囊本体开更新选择器。 */}
                 {isEmpty ? (
                   <CapsuleButton
                     disabled={editable && !canEdit}
