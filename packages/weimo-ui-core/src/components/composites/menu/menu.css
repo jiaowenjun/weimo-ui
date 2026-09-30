@@ -52,11 +52,14 @@
   }
 
   /* MenuPopup composes FrostedSurface on the same node. Own the complete
-     transition list so foreground tone does not depend on stylesheet order. */
+     transition list so foreground tone does not depend on stylesheet order;
+     shadow motion must be restated too, or tone flips jump instead of
+     interpolating alpha. */
   .weimo-menu__popup.frosted-surface {
     transition:
       color var(--frosted-surface-tone-transition-duration, 160ms) ease,
       border-color var(--frosted-surface-tone-transition-duration, 160ms) ease,
+      box-shadow var(--frosted-surface-tone-transition-duration, 160ms) ease,
       opacity 200ms cubic-bezier(0.22, 1, 0.36, 1),
       transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1);
   }
@@ -85,6 +88,7 @@
     transition:
       color var(--frosted-surface-tone-transition-duration, 160ms) ease,
       border-color var(--frosted-surface-tone-transition-duration, 160ms) ease,
+      box-shadow var(--frosted-surface-tone-transition-duration, 160ms) ease,
       opacity 130ms cubic-bezier(0.4, 0, 1, 1),
       transform 130ms cubic-bezier(0.4, 0, 1, 1);
   }

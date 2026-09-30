@@ -21,11 +21,14 @@
     background: transparent;
     font-size: var(--font-size-sm);
     line-height: 1;
+    /* box-shadow 只为 frosted→solid 切换服务：切换后按本列表插值，缺行则
+       亮态投影瞬跳消失；solid 自身无影。 */
     transition:
       inline-size var(--animated-inline-size-transition-duration) cubic-bezier(0.2, 0, 0, 1),
       border-color var(--capsule-frame-state-transition-duration) ease,
       transform 150ms ease,
-      color var(--capsule-frame-state-transition-duration) ease;
+      color var(--capsule-frame-state-transition-duration) ease,
+      box-shadow var(--capsule-frame-state-transition-duration) ease;
   }
 
   .capsule-frame::before {
@@ -80,7 +83,9 @@
   }
 
   /* CapsuleFrame owns width and press motion while FrostedSurface owns the
-     material's foreground, border, and backdrop blur on the same element. */
+     material's foreground, border, and backdrop blur on the same element.
+     完整列表会整体顶掉 FrostedSurface 基类里含 box-shadow 的过渡声明，必须
+     在此重述，tone 翻转时亮态投影才能走 alpha 插值而非瞬跳。 */
   .capsule-frame.frosted-surface {
     --capsule-frame-hover-background: var(--frosted-surface-hover-bg);
     --capsule-frame-active-background: var(--frosted-surface-hover-bg);
@@ -89,7 +94,8 @@
       inline-size var(--animated-inline-size-transition-duration) cubic-bezier(0.2, 0, 0, 1),
       border-color var(--frosted-surface-tone-transition-duration, 160ms) ease,
       transform 150ms ease,
-      color var(--frosted-surface-tone-transition-duration, 160ms) ease;
+      color var(--frosted-surface-tone-transition-duration, 160ms) ease,
+      box-shadow var(--frosted-surface-tone-transition-duration, 160ms) ease;
   }
 
   /* 插槽行盒统一锁 1em:更高的前后缀部件(icon-button 圆框 xs16/sm24 等)在

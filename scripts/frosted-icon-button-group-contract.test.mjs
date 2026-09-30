@@ -154,6 +154,10 @@ for (const snippet of [
   )
 }
 assert.ok(
+  frostedIconButtonBlock.includes('box-shadow var(--frosted-surface-tone-transition-duration, 160ms) ease'),
+  'Standalone frosted icon buttons must restate shadow motion: the complete list supersedes the FrostedSurface base transition that tone flips rely on. Grouped buttons sit inside the group surface and carry no shadow, so the shared snippet loop above stays shadow-free.',
+)
+assert.ok(
   groupCss.includes('@media (prefers-reduced-motion: reduce)') &&
     groupCss.includes('transition-duration: 1ms;') &&
     iconButtonCss.includes('.icon-button.frosted-surface,') &&

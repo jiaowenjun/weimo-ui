@@ -254,10 +254,10 @@ assert.ok(
   'The unlayered button.capsule-button block must stay geometry-only: an unlayered color would unconditionally beat the layered glass variant tone-adaptive color and pin frosted chip text.',
 )
 assert.ok(
-  !baseBlock.includes('box-shadow') &&
-    !glassBaseBlock.includes('box-shadow') &&
+  !baseBlock.includes('box-shadow:') &&
+    !glassBaseBlock.includes('box-shadow:') &&
     !css.includes('--glass-shadow'),
-  'CapsuleButton glass state must not use glass shadow effects.',
+  'CapsuleFrame blocks must not declare their own shadow effects; shadow values stay owned by FrostedSurface (transition entries carry no colon).',
 )
 
 assert.ok(

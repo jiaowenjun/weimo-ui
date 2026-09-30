@@ -112,8 +112,9 @@ assert.ok(popupBlock.includes('cubic-bezier(0.34, 1.56, 0.64, 1)'), 'Menu popup 
 for (const block of [composedPopupBlock, composedPopupExitBlock]) {
   assert.ok(
     block.includes('color var(--frosted-surface-tone-transition-duration, 160ms) ease') &&
-      block.includes('border-color var(--frosted-surface-tone-transition-duration, 160ms) ease'),
-    'Menu popup must preserve FrostedSurface tone transitions alongside enter/exit motion independent of CSS order.',
+      block.includes('border-color var(--frosted-surface-tone-transition-duration, 160ms) ease') &&
+      block.includes('box-shadow var(--frosted-surface-tone-transition-duration, 160ms) ease'),
+    'Menu popup must preserve FrostedSurface tone transitions (foreground, border, shadow) alongside enter/exit motion independent of CSS order.',
   )
 }
 assert.ok(

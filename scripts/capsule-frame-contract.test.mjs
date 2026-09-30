@@ -116,6 +116,8 @@ for (const [block, snippet, message] of [
   [frostedAfterBlock, 'opacity: 1;', 'Frosted capsules must expose the feedback layer.'],
   [composedFrostedBlock, '--capsule-frame-hover-background: var(--frosted-surface-hover-bg);', 'Frosted capsules must reuse the FrostedSurface hover tint.'],
   [composedFrostedBlock, 'color var(--frosted-surface-tone-transition-duration, 160ms) ease', 'Frame motion must compose with FrostedSurface tone motion.'],
+  [composedFrostedBlock, 'box-shadow var(--frosted-surface-tone-transition-duration, 160ms) ease', 'The complete frosted list must restate shadow motion; it supersedes the FrostedSurface base transition that tone flips rely on for alpha interpolation.'],
+  [frameBlock, 'box-shadow var(--capsule-frame-state-transition-duration) ease', 'The solid-side list must keep shadow motion so returning from frosted fades the light-tone shadow out instead of dropping it instantly.'],
   [interactiveBlock, 'cursor: pointer;', 'Interactive frames must expose pointer affordance.'],
   [interactiveBlock, 'appearance: none;', 'Interactive frames must reset native appearance.'],
   [activeTransformBlock, 'transform: scale(var(--press-scale));', 'Interactive frames must use the shared press scale.'],

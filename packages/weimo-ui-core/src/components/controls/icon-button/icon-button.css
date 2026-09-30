@@ -17,12 +17,15 @@
   }
 
   /* FrostedSurface and IconButton share one element. This compound rule owns
-     the complete list so CSS import order cannot drop press feedback. */
+     the complete list so CSS import order cannot drop press feedback. The
+     complete list also supersedes the FrostedSurface base transition, so
+     shadow motion must be restated for tone flips to interpolate alpha. */
   .icon-button.frosted-surface {
     transition:
       transform 150ms ease,
       color var(--frosted-surface-tone-transition-duration, 160ms) ease,
-      border-color var(--frosted-surface-tone-transition-duration, 160ms) ease;
+      border-color var(--frosted-surface-tone-transition-duration, 160ms) ease,
+      box-shadow var(--frosted-surface-tone-transition-duration, 160ms) ease;
   }
 
   /* === Sizes === */
