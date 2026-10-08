@@ -69,7 +69,12 @@ const packageRules = [
   },
   {
     name: 'weimo-ui-tagtree',
-    workspaceDependencies: [['weimo-ui-core', 'workspace:*']],
+    // 文档页 TagTreePage 用 card 包的 ComponentPreviewCard;card 的 TagPicker 反向
+    // 消费本包 coss 组件,这对工作区环依赖是源码包(无构建序)下的已知且受控形态。
+    workspaceDependencies: [
+      ['weimo-ui-card', 'workspace:*'],
+      ['weimo-ui-core', 'workspace:*'],
+    ],
     forbiddenRelativeImports: [],
     requiredExports: {
       './page': './src/page/tag-page.tsx',
@@ -325,7 +330,7 @@ const tagtreeMain = readProjectFile('packages/weimo-ui-tagtree/src/main.tsx')
 const tagtreePage = readProjectFile('packages/weimo-ui-tagtree/src/page/tag-page.tsx')
 assert.match(tagtreeMain, /TagTreePage/u)
 assert.match(tagtreePage, /export function TagTreePage/u)
-assert.match(tagtreePage, /from ['"]weimo-ui-core\/components\/component-preview-card['"]/u)
+assert.match(tagtreePage, /from ['"]weimo-ui-card\/components\/component-preview-card['"]/u)
 assert.equal(tagtreePage.match(/<ComponentPreviewCard\b/gu)?.length, 3)
 
 const sitePackageJson = readProjectJson('packages/weimo-ui-site/package.json')

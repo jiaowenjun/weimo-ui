@@ -12,7 +12,7 @@ import {
   getBorderRadiusToken,
   getBorderRadiusValue,
 } from 'weimo-ui-core/components/border-radius'
-import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
 import {
   FrostedSurface,
   useFrostedSurfaceBackgroundToneRef,

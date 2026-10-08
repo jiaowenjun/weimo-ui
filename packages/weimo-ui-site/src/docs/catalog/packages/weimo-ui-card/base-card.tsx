@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Copy, Edit3, Trash2 } from 'lucide-react'
 
-import { BaseCard } from 'weimo-ui-core/components/base-card'
+import { BaseCard } from 'weimo-ui-card/components/base-card'
 import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'
 import {
   ActionMenu,

@@ -5,7 +5,7 @@ import {
   Trash2,
 } from 'lucide-react'
 
-import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
 import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'
 import {
   ActionMenu,

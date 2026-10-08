@@ -145,7 +145,7 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'text-tokens'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'") &&
+    docsDefinitionSource.includes("import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'") &&
     docsDefinitionSource.includes("from 'weimo-ui-core/components/text-color'") &&
     !docsDefinitionSource.includes('component-preview-card-demo__category') &&
     docsDefinitionSource.includes('fontFamilyTokens.map') &&

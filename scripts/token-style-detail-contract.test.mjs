@@ -28,11 +28,11 @@ const detailPageSource = readProjectFile('packages/weimo-ui-site/src/docs/pages/
 const docsShellSource = readProjectFile('packages/weimo-ui-site/src/docs/shell/docs-shell.tsx')
 const searchSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/search-component-docs.ts')
 const colorSource = readProjectFile('packages/weimo-ui-site/src/docs/previews/token-preview-color.ts')
-const cardSource = readProjectFile('packages/weimo-ui-core/src/components/composites/cards/component-preview-card.tsx')
-const cardCss = readProjectFile('packages/weimo-ui-core/src/components/composites/cards/component-preview-card.css')
+const cardSource = readProjectFile('packages/weimo-ui-card/src/components/card/component-preview-card.tsx')
+const cardCss = readProjectFile('packages/weimo-ui-card/src/components/card/component-preview-card.css')
 const cardRegistry = JSON.parse(readProjectFile('registry/component-preview-card.json'))
 const previewCardDefinitionSource = readProjectFile(
-  'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/component-preview-card.tsx',
+  'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/component-preview-card.tsx',
 )
 const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const previewBlock = blockFor(
@@ -195,12 +195,12 @@ for (const selector of ['.md-style-preview__selection-sample']) {
 
 assert.equal(
   packageJson.exports?.['./components/component-preview-card'],
-  './packages/weimo-ui-core/src/components/composites/cards/component-preview-card.tsx',
+  './packages/weimo-ui-card/src/components/card/component-preview-card.tsx',
   'ComponentPreviewCard must have a public package export.',
 )
 assert.ok(
-  existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/component-preview-card.tsx')) &&
-    previewCardDefinitionSource.includes("import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'") &&
+  existsSync(join(root, 'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/component-preview-card.tsx')) &&
+    previewCardDefinitionSource.includes("import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'") &&
     previewCardDefinitionSource.includes("from '../../../previews/glass-preview-card'") &&
     previewCardDefinitionSource.includes('<GlassPreviewCard') &&
     previewCardDefinitionSource.includes("frame: 'plain',") &&
@@ -243,7 +243,7 @@ for (const componentId of semanticTokenDefinitions) {
   assert.ok(
       definitionSource.includes("frame: 'plain',") &&
       definitionSource.includes('searchAliases:') &&
-      definitionSource.includes("import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'") &&
+      definitionSource.includes("import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'") &&
       definitionSource.includes('<ComponentPreviewCard') &&
       !definitionSource.includes('description={item.description}') &&
       !definitionSource.includes('uiUsage={item.uiUsage}') &&

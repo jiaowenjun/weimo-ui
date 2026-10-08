@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { bgColorToneMap } from 'weimo-ui-core/components/bg-color'
 import { borderRadiusScaleMap } from 'weimo-ui-core/components/border-radius'
-import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
 import { FrostedSurface } from 'weimo-ui-core/components/frosted-surface'
 import { LabeledSwitch } from 'weimo-ui-core/components/labeled-switch'
 import { TextButton } from 'weimo-ui-core/components/text-button'

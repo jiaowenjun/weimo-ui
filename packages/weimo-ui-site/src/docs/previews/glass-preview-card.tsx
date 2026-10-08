@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
 
-import { ComponentPreviewCard, type ComponentPreviewCardItem } from 'weimo-ui-core/components/component-preview-card'
+import { ComponentPreviewCard, type ComponentPreviewCardItem } from 'weimo-ui-card/components/component-preview-card'
 import { Slider } from 'weimo-ui-core/components/slider'
 import {
   getGlassPreviewBackground,

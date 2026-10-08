@@ -12,7 +12,7 @@ describe('component docs search', () => {
     expect(resultIds('weimo-ui-tagtree')).toEqual(['tag'])
     expect(resultIds('CapsuleButton')).toContain('capsule-button')
     expect(resultIds('weimo-ui-image')).toEqual(['image'])
-    expect(resultIds('weimo-ui-card')).toEqual(['card-tool-bar', 'tagged-card', 'tag-bar', 'ocr'])
+    expect(resultIds('weimo-ui-card')).toEqual(['base-card', 'component-preview-card', 'card-tool-bar', 'tagged-card', 'tag-bar', 'ocr'])
     expect(resultIds('TagPicker')).toContain('tag-bar')
     expect(resultIds('标签选择器')).toEqual(['tag-bar'])
   })

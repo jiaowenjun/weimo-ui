@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Ellipsis, Menu, Share } from 'lucide-react'
 
-import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
 import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'
 import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'
 import {

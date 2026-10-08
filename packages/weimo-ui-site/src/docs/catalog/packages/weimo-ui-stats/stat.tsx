@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
 import {
   getHeatColorClassName,
   getHeatColorToken,

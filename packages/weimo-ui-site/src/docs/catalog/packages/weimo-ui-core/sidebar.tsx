@@ -1,4 +1,4 @@
-import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
 import type { ComponentDefinition } from '../../component-docs'
 import { SideBarDrawerPreview } from './sidebar-preview'
 

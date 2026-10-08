@@ -109,7 +109,7 @@ const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/
 const docsDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/background-tokens.tsx')
 const textDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/text-tokens.tsx')
 const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
-const tokenPreviewCardCss = readProjectFile('packages/weimo-ui-core/src/components/composites/cards/component-preview-card.css')
+const tokenPreviewCardCss = readProjectFile('packages/weimo-ui-card/src/components/card/component-preview-card.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const imageUploaderCss = readProjectFile('packages/weimo-ui-image/src/components/image-uploader/image-uploader.css')
 const dialogCss = readProjectFile('packages/weimo-ui-core/src/components/primitives/dialog.css')
@@ -386,7 +386,7 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'background-tokens'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'") &&
+    docsDefinitionSource.includes("import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'") &&
     docsDefinitionSource.includes("import { pressableToneMap, pressableTones } from 'weimo-ui-core/components/pressable'") &&
     docsDefinitionSource.includes("from 'weimo-ui-core/components/bg-blur'") &&
     docsDefinitionSource.includes('bgColorSwatchTones') &&

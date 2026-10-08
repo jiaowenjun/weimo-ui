@@ -7,7 +7,7 @@ import {
   ModeButton,
   type ModeButtonMode,
 } from 'weimo-ui-card/components/mode-button'
-import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
 import { Button } from 'weimo-ui-core/components/coss/button'
 import { Toolbar, ToolbarButton, ToolbarGroup } from 'weimo-ui-core/components/coss/toolbar'
 import { TextButton } from 'weimo-ui-core/components/text-button'

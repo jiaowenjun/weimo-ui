@@ -4,6 +4,8 @@ export const cardCatalog = {
   id: 'weimo-ui-card',
   title: 'weimo-ui-card',
   pages: [
+    { id: 'base-card', name: '基础卡片', exportName: 'BaseCard', registryName: 'base-card', packageExport: './components/base-card' },
+    { id: 'component-preview-card', name: '预览卡片', exportName: 'ComponentPreviewCard', registryName: 'component-preview-card', packageExport: './components/component-preview-card' },
     {
       id: 'card-tool-bar',
       name: '卡片栏位',

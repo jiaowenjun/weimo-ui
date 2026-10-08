@@ -259,7 +259,7 @@ assert.ok(
 for (const snippet of [
   "import { MdRender } from 'weimo-ui-markdown/components/md-render'",
   "import { CardPanel } from '../../../../components/primitives/card'",
-  "import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'",
+  "import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'",
   "import { mdRenderSample } from '../../fixtures/markdown-sample'",
   'markdownStyleTokens',
   'markdownStyleTokenGroups',

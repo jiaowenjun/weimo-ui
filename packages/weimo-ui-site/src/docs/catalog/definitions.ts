@@ -11,12 +11,12 @@ import { menuDefinition } from './packages/weimo-ui-core/menu'
 import { actionDialogDefinition } from './packages/weimo-ui-core/action-dialog'
 import { barDefinition } from './packages/weimo-ui-core/bar'
 import { sidebarDefinition } from './packages/weimo-ui-core/sidebar'
-import { baseCardDefinition } from './packages/weimo-ui-core/base-card'
-import { componentPreviewCardDefinition } from './packages/weimo-ui-core/component-preview-card'
 import { tagDefinition } from './packages/weimo-ui-tagtree/tag'
 import { markdownDefinition } from './packages/weimo-ui-markdown/markdown'
 import { imageDefinition } from './packages/weimo-ui-image/image'
 import { statDefinition } from './packages/weimo-ui-stats/stat'
+import { baseCardDefinition } from './packages/weimo-ui-card/base-card'
+import { componentPreviewCardDefinition } from './packages/weimo-ui-card/component-preview-card'
 import { cardToolBarDefinition } from './packages/weimo-ui-card/card-tool-bar'
 import { taggedCardDefinition } from './packages/weimo-ui-card/tagged-card'
 import { tagBarDefinition } from './packages/weimo-ui-card/tag-bar'
@@ -37,12 +37,12 @@ export const componentDefinitionsById = {
   'action-dialog': actionDialogDefinition,
   bar: barDefinition,
   sidebar: sidebarDefinition,
-  'base-card': baseCardDefinition,
-  'component-preview-card': componentPreviewCardDefinition,
   tag: tagDefinition,
   markdown: markdownDefinition,
   image: imageDefinition,
   stat: statDefinition,
+  'base-card': baseCardDefinition,
+  'component-preview-card': componentPreviewCardDefinition,
   'card-tool-bar': cardToolBarDefinition,
   'tagged-card': taggedCardDefinition,
   'tag-bar': tagBarDefinition,

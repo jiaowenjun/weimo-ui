@@ -321,7 +321,7 @@ assertOmits(
 
 for (const snippet of [
   "import { FrostedSurface } from 'weimo-ui-core/components/frosted-surface'",
-  "import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'",
+  "import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'",
   "from '../../../previews/glass-preview-card'",
   "id: 'surface'",
   '静态卡片、亮度自适应磨砂玻璃层与抬升浮层的材质总览',
@@ -358,7 +358,7 @@ const glassPreviewCardModuleSource = readProjectFile(
 
 for (const snippet of [
   'function GlassPreviewCard(',
-  "from 'weimo-ui-core/components/component-preview-card'",
+  "from 'weimo-ui-card/components/component-preview-card'",
   "from './glass-preview'",
   "from 'weimo-ui-core/components/slider'",
   'initialGray ??',

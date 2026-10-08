@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Card } from 'weimo-ui-card/components/card'
 import type { CardDraft, CardProps } from 'weimo-ui-card/components/card'
 import { CardComposer } from 'weimo-ui-card/components/card-composer'
-import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
 import type { ComponentDefinition } from '../../component-docs'
 
 import { mdRenderSample } from '../../fixtures/markdown-sample'

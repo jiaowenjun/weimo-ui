@@ -8,7 +8,7 @@ import {
 import { getFrostedSurfaceClassName } from 'weimo-ui-core/components/frosted-surface-model'
 import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'
 import { Menu, MenuItem, MenuPopup, MenuTrigger } from 'weimo-ui-core/components/menu'
-import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
 
 import { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '../components/coss/breadcrumb'
 import { TagBread } from '../components/tag-bread/tag-bread'

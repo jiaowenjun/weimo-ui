@@ -72,7 +72,5 @@ export const coreCatalog = {
       ],
     },
     { id: 'sidebar', name: '侧边栏', exportName: 'SideBar', registryName: 'sidebar', packageExport: './components/sidebar' },
-    { id: 'base-card', name: '基础卡片', exportName: 'BaseCard', registryName: 'base-card', packageExport: './components/base-card' },
-    { id: 'component-preview-card', name: '预览卡片', exportName: 'ComponentPreviewCard', registryName: 'component-preview-card', packageExport: './components/component-preview-card' },
   ],
 } as const satisfies PackageCatalog

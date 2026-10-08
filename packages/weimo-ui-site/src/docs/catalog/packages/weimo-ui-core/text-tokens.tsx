@@ -11,7 +11,7 @@ import {
   textColorToneMap,
   textColorTones,
 } from 'weimo-ui-core/components/text-color'
-import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
 import type { ComponentDefinition } from '../../component-docs'
 
 const previewTextColorTones = textColorTones.filter((tone) => tone !== 'inherit')

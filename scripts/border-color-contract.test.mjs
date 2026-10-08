@@ -409,7 +409,7 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'border-tokens'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'") &&
+    docsDefinitionSource.includes("import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'") &&
     docsDefinitionSource.includes("from 'weimo-ui-core/components/border-radius'") &&
     !docsDefinitionSource.includes('component-preview-card-demo__category') &&
     docsDefinitionSource.includes('borderRadiusScales.map') &&

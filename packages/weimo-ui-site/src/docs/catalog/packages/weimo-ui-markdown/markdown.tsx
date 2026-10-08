@@ -5,7 +5,7 @@ import {
   MathEditor,
   type MathEditorValue,
 } from 'weimo-ui-markdown/components/math-editor'
-import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
 import { LabeledSwitch } from 'weimo-ui-core/components/labeled-switch'
 import { MdView, type MdViewMode } from 'weimo-ui-markdown/components/md-view'
 import { TextButton } from 'weimo-ui-core/components/text-button'

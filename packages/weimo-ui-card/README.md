@@ -1,6 +1,6 @@
 # weimo-ui-card
 
-`weimo-ui-card` 是内容工作流组合包，拥有可编辑内容卡片、卡片创建器、标签编辑和 OCR 卡片。它组合 core、Markdown、图片和标签树能力，但不拥有这些基础能力的实现。
+`weimo-ui-card` 是内容工作流组合包，拥有基础卡片壳层、可编辑内容卡片、卡片创建器、标签编辑和 OCR 卡片。它组合 core、Markdown、图片和标签树能力，但不拥有这些基础能力的实现。
 
 该包标记为 `private`。仓库外调用者应使用根包的 `weimo-ui/components/*` 入口。
 
@@ -8,6 +8,8 @@
 
 | 入口 | 导出 | 职责 |
 | --- | --- | --- |
+| `components/base-card` | `BaseCard` | 卡片材质上的最小卡片壳层(标题栏、元信息区、底部栏插槽) |
+| `components/component-preview-card` | `ComponentPreviewCard` | 文档站预览卡(标题栏 + token 行 + 内容画布) |
 | `components/card` | `Card` | 内容展示、编辑、标签和保存流程 |
 | `components/card-composer` | `CardComposer` | 新建卡片的进入、退出与自动聚焦编排 |
 | `components/card-top-bar` | `CardTopBar` | 卡片顶部信息与操作栏 |
@@ -48,7 +50,7 @@ import { OcrDetail } from 'weimo-ui-card/components/ocr-detail'
 
 ```text
 src/components/
-├── card/       # Card、栏位、编辑状态机、测量与过渡 hooks
+├── card/       # BaseCard、ComponentPreviewCard、Card、栏位、编辑状态机、测量与过渡 hooks
 ├── composer/   # CardComposer 与创建器壳层
 ├── tags/       # TagBar、EditableCapsule 和 TagPicker 组件族
 └── ocr/        # OcrCard、OcrComposer 与 OcrDetail

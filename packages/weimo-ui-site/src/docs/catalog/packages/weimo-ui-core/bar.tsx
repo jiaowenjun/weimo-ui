@@ -4,7 +4,7 @@ import { BottomBar } from 'weimo-ui-core/components/bottom-bar'
 import { CardSurface } from 'weimo-ui-core/components/card-surface'
 import { CapsuleButton } from 'weimo-ui-core/components/capsule-button'
 import { FrostedLabel } from 'weimo-ui-core/components/frosted-label'
-import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
 import { FloatBar } from 'weimo-ui-core/components/float-bar'
 import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'
 import {

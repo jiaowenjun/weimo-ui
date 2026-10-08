@@ -63,7 +63,7 @@ const allowlistedComponentColors = new Map([
     new Set(['hsl(18.1 71.9% 46.1% / 0.55)', 'hsl(0 0% 100% / 0.38)']),
   ],
   [
-    'packages/weimo-ui-core/src/components/composites/cards/component-preview-card.css',
+    'packages/weimo-ui-card/src/components/card/component-preview-card.css',
     new Set([
       'hsl(18.1 71.9% 46.1% / 0.72)',
       'hsl(222.2 47.4% 11.2% / 0.72)',

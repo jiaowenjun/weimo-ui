@@ -2,7 +2,7 @@ import { Check } from 'lucide-react'
 import { useState } from 'react'
 
 import { ActionDialog } from 'weimo-ui-core/components/action-dialog'
-import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
 import { DialogPanel } from 'weimo-ui-core/components/coss/dialog'
 import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'
 import { TextButton } from 'weimo-ui-core/components/text-button'

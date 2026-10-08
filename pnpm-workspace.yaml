@@ -1,6 +1,10 @@
 packages:
   - 'packages/*'
 
+# card↔tagtree 是受控环依赖(card 的 TagPicker 用 tagtree coss 组件,tagtree 的
+# 文档页用 card 的 ComponentPreviewCard);源码包无构建序,任务顺序豁免安全。
+ignoreWorkspaceCycles: true
+
 allowBuilds:
   esbuild: true
 overrides:
