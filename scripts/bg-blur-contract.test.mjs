@@ -29,16 +29,6 @@ function blockFor(source, selector) {
 
 const expectedTones = [
   {
-    tone: 'glass',
-    label: '磨砂材质',
-    backgroundToken: 'none',
-    blurToken: '--frosted-blur',
-    blurValue: '14px',
-    filter: 'blur(var(--frosted-blur))',
-    className: 'bg-blur--glass',
-    usage: 'FrostedSurface、CapsuleButton 磨砂态、TagBread',
-  },
-  {
     tone: 'backdrop',
     label: '背景遮罩',
     backgroundToken: '--color-bg-backdrop',
@@ -159,16 +149,20 @@ assert.ok(
     !Object.hasOwn(rootStyleItem?.cssVars?.dark ?? {}, 'glass-gradient'),
   'shared UI tokens and registry style payloads must remove the glass background gradient token.',
 )
-assert.equal(
-  styleRegistry.cssVars?.light?.['frosted-blur'],
-  '14px',
-  'registry/style.json must export --frosted-blur as 14px.',
+assert.ok(
+  !bgBlurSource.includes('--frosted-blur') &&
+    !bgBlurCss.includes('bg-blur--glass'),
+  'BgBlur must not document or consume the frosted material blur; the glass tone stays removed.',
 )
-assert.ok(tokensCss.includes('--frosted-blur: 14px;'), 'shared UI tokens must define --frosted-blur as 14px.')
-assert.equal(
-  rootStyleItem?.cssVars?.light?.['frosted-blur'],
-  '14px',
-  'registry.json style item must export --frosted-blur as 14px.',
+assert.ok(
+  !tokensCss.includes('--frosted-blur') &&
+    !Object.hasOwn(styleRegistry.cssVars?.light ?? {}, 'frosted-blur') &&
+    !Object.hasOwn(rootStyleItem?.cssVars?.light ?? {}, 'frosted-blur'),
+  '--frosted-blur must live inside the frosted surface scope, not the shared token sheet or registry payloads.',
+)
+assert.ok(
+  frostedSurfaceCss.includes('--frosted-blur: 14px;'),
+  'frosted-surface.css must own the frosted blur definition as 14px.',
 )
 assert.ok(
   tokensCss.includes('--color-bg-backdrop: hsl(214.3 33.3% 4.1% / 0.32);') &&

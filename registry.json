@@ -122,7 +122,6 @@
           "md-math-border-radius": "8px",
           "md-math-hover-bg": "hsl(40 12% 96%)",
           "md-selection-bg": "hsl(0 0% 15% / 0.2)",
-          "frosted-blur": "14px",
           "backdrop-blur": "4px",
           "frosted-surface-border-dark-start": "hsl(0 0% 38%)",
           "frosted-surface-border-dark-end": "hsl(0 0% 98%)",

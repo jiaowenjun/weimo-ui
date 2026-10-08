@@ -57,7 +57,6 @@
   --popup-open-scale: 1.02;
 
   /* === 玻璃效果 === */
-  --frosted-blur: 14px;
   --backdrop-blur: 4px;
   --frosted-surface-border: hsl(0 0% 80%);
   /* 磨砂边框随背景感知亮度插值的四锚点：暗段=暗背景侧 0~50%（start→end 递增），

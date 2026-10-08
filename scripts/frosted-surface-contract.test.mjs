@@ -648,6 +648,7 @@ assertOmits(
 for (const snippet of [
   '.frosted-surface {',
   '@property --frosted-surface-fg-opacity',
+  '--frosted-blur: 14px;',
   '--frosted-surface-tone-transition-duration: 160ms;',
   '--frosted-surface-muted-color: var(--frosted-surface-muted-fg);',
   '--frosted-surface-hover-bg: color-mix(in srgb, currentColor 12%, transparent);',

@@ -31,7 +31,7 @@ describe('component docs search', () => {
 
   it('finds token pages by CSS token and usage language', () => {
     expect(resultIds('--color-bg-card')).toContain('background-tokens')
-    expect(resultIds('--frosted-blur')).toContain('background-tokens')
+    expect(resultIds('--backdrop-blur')).toContain('background-tokens')
     expect(resultIds('TagPicker option')).toContain('background-tokens')
     expect(resultIds('--color-heat-4')).toContain('stat')
     expect(resultIds('-frosted-surface-border')).toContain('border-tokens')

@@ -1,8 +1,3 @@
-.bg-blur--glass {
-  backdrop-filter: blur(var(--frosted-blur));
-  -webkit-backdrop-filter: blur(var(--frosted-blur));
-}
-
 .bg-blur--backdrop {
   background: var(--color-bg-backdrop);
   backdrop-filter: blur(var(--backdrop-blur));
