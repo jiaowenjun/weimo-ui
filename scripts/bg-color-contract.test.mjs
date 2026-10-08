@@ -48,7 +48,7 @@ const expectedTones = [
   ['raised', '--color-bg-raised', 'bg-color--raised', 'hsl(40 10% 93%)', 'hsl(0 0% 17%)'],
   ['primary', '--color-bg-primary', 'bg-color--primary', 'hsl(0 0% 15%)', 'hsl(0 0% 96%)'],
   ['hover', '--color-bg-hover', 'bg-color--hover', 'hsl(40 12% 90%)', 'hsl(0 0% 21%)'],
-  ['hover-on-hover', '--color-bg-nested-hover', 'bg-color--hover-on-hover', 'hsl(40 12% 88%)', 'hsl(0 0% 28%)'],
+  ['hover-on-hover', '--color-bg-nested-hover', 'bg-color--hover-on-hover', 'hsl(40 12% 85%)', 'hsl(0 0% 28%)'],
   ['selected', '--color-bg-selected', 'bg-color--selected', 'hsl(40 10% 94%)', 'hsl(0 0% 15%)'],
 ]
 
@@ -77,7 +77,7 @@ const opaqueFeedbackTokens = new Set([
 
 const expectedOpaqueFeedbackTokenValues = new Map([
   ['--color-bg-hover', ['hsl(40 12% 90%)', 'hsl(0 0% 21%)']],
-  ['--color-bg-nested-hover', ['hsl(40 12% 88%)', 'hsl(0 0% 28%)']],
+  ['--color-bg-nested-hover', ['hsl(40 12% 85%)', 'hsl(0 0% 28%)']],
 ])
 
 function assertOpaqueValue(value, token) {

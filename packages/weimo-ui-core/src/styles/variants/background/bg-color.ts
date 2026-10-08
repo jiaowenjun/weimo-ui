@@ -65,7 +65,7 @@ export const bgColorToneMap = {
     label: '叠加 hover',
     token: '--color-bg-nested-hover',
     value: {
-      light: 'hsl(40 12% 88%)',
+      light: 'hsl(40 12% 85%)',
       dark: 'hsl(0 0% 28%)',
     },
     className: 'bg-color--hover-on-hover',
