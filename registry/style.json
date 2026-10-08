@@ -133,7 +133,7 @@
       "color-border-disabled-on-dark": "hsl(0 0% 24%)",
       "color-bg-backdrop": "hsl(214.3 33.3% 4.1% / 0.32)",
       "color-bg-hover": "hsl(40 12% 90%)",
-      "color-bg-nested-hover": "hsl(40 12% 85%)",
+      "color-bg-nested-hover": "hsl(40 12% 84%)",
       "color-text-danger": "hsl(4 77% 40%)",
       "color-border-danger": "hsl(4 77% 40%)",
       "frosted-surface-border": "hsl(0 0% 80%)",
