@@ -12,7 +12,6 @@ export const markdownCatalog = {
       packageExport: './components/md-editor',
       components: [
         { id: 'math-editor', name: 'MathEditor', registryName: 'math-editor', packageExport: './components/math-editor' },
-        { id: 'md-view', name: 'MdView', registryName: 'md-view', packageExport: './components/md-view' },
       ],
     },
     {
@@ -21,6 +20,13 @@ export const markdownCatalog = {
       exportName: 'MdRender',
       registryName: 'md-render',
       packageExport: './components/md-render',
+    },
+    {
+      id: 'markdown-view',
+      name: 'Markdown视图',
+      exportName: 'MdView',
+      registryName: 'md-view',
+      packageExport: './components/md-view',
     },
   ],
 } as const satisfies PackageCatalog

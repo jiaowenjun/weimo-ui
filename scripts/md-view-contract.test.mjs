@@ -28,7 +28,7 @@ function cssBlockFor(source, selector) {
 
 const componentSource = readProjectFile('packages/weimo-ui-markdown/src/components/md-view/md-view.tsx')
 const mdViewCssSource = readProjectFile('packages/weimo-ui-markdown/src/components/md-view/md-view.css')
-const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown.tsx')
+const definitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown-view.tsx')
 const definitionsIndexSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
 const cssSource = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
@@ -301,14 +301,14 @@ assert.ok(
 assert.ok(
   definitionsIndexSource.includes("import { markdownDefinition } from './packages/weimo-ui-markdown/markdown'") &&
     definitionsIndexSource.includes('markdown: markdownDefinition') &&
-    !definitionsIndexSource.includes('md-view'),
-  'component-definitions/index.ts must register the merged Markdown definition for MdView.',
+    definitionsIndexSource.includes("import { markdownViewDefinition } from './packages/weimo-ui-markdown/markdown-view'") &&
+    definitionsIndexSource.includes("'markdown-view': markdownViewDefinition"),
+  'component-definitions/index.ts must register the Markdown editor page and the standalone MdView page.',
 )
 
 for (const snippet of [
   "import { useState } from 'react'",
   "import { MdView, type MdViewMode } from 'weimo-ui-markdown/components/md-view'",
-  "import { TextButton } from 'weimo-ui-core/components/text-button'",
   "import { LabeledSwitch } from 'weimo-ui-core/components/labeled-switch'",
   "import { mdRenderSample } from '../../fixtures/markdown-sample'",
   "const [mode, setMode] = useState<MdViewMode>('view')",

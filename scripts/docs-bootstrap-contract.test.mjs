@@ -59,6 +59,7 @@ const componentDefinitionSources = {
     readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown-render.tsx'),
     readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown-styles.tsx'),
   ].join('\n'),
+  'markdown-view': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown-view.tsx'),
   bar: readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/bar.tsx'),
   sidebar: readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/sidebar.tsx'),
   'capsule-button': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule-button.tsx'),

@@ -15,6 +15,7 @@ import { tagBreadDefinition } from './packages/weimo-ui-tagtree/tag-bread'
 import { tagDefinition } from './packages/weimo-ui-tagtree/tag'
 import { markdownDefinition } from './packages/weimo-ui-markdown/markdown'
 import { markdownRenderDefinition } from './packages/weimo-ui-markdown/markdown-render'
+import { markdownViewDefinition } from './packages/weimo-ui-markdown/markdown-view'
 import { imageDefinition } from './packages/weimo-ui-image/image'
 import { statDefinition } from './packages/weimo-ui-stats/stat'
 import { baseCardDefinition } from './packages/weimo-ui-card/base-card'
@@ -43,6 +44,7 @@ export const componentDefinitionsById = {
   tag: tagDefinition,
   markdown: markdownDefinition,
   'markdown-render': markdownRenderDefinition,
+  'markdown-view': markdownViewDefinition,
   image: imageDefinition,
   stat: statDefinition,
   'base-card': baseCardDefinition,
