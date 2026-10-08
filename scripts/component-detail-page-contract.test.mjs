@@ -75,12 +75,13 @@ function assertDecodablePngDataUrl(dataUrl, message) {
 const detailPageSource = readProjectFile('packages/weimo-ui-site/src/docs/pages/component-detail-page.tsx')
 const docsShellSource = readProjectFile('packages/weimo-ui-site/src/docs/shell/docs-shell.tsx')
 const componentDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/component-docs.tsx')
-const mdRenderDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown.tsx')
+const mdRenderDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown-render.tsx')
 const imageViewDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-image/image.tsx')
 const buttonDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/button.tsx')
 const borderTokensDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/border-tokens.tsx')
 const componentDefinitionsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/tagged-card.tsx') +
   readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/card-tool-bar.tsx') +
+  readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown.tsx') +
   mdRenderDefinitionSource +
   imageViewDefinitionSource +
   readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/surface.tsx') +
@@ -223,7 +224,7 @@ for (const selector of [
 
 assert.ok(
   mdRenderDefinitionSource.includes("import { MdRender } from 'weimo-ui-markdown/components/md-render'") &&
-    mdRenderDefinitionSource.includes("id: 'markdown'") &&
+    mdRenderDefinitionSource.includes("id: 'markdown-render'") &&
     mdRenderDefinitionSource.includes('function MdRenderPreview()') &&
     mdRenderDefinitionSource.includes('<MdRenderPreview />') &&
     mdRenderDefinitionSource.includes('content={mdRenderSample}'),

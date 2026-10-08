@@ -1640,6 +1640,43 @@
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "type": "registry:ui",
       "dependencies": [
+        "remark-gfm",
+        "remark-math",
+        "remark-parse",
+        "remark-stringify",
+        "unified"
+      ],
+      "name": "md-view",
+      "title": "Md View",
+      "description": "A markdown view/edit bridge that swaps MdRender and MdEditor while preserving measured height.",
+      "categories": [
+        "markdown",
+        "display",
+        "input"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/md-editor",
+        "@weimo/md-render"
+      ],
+      "files": [
+        {
+          "path": "packages/weimo-ui-markdown/src/components/md-view/md-view.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-view/md-view.tsx"
+        },
+        {
+          "path": "packages/weimo-ui-markdown/src/components/md-view/md-view.css",
+          "type": "registry:ui",
+          "target": "@ui/md-view/md-view.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [
         "react-markdown",
         "remark-gfm",
         "remark-math",
@@ -1700,43 +1737,6 @@
           "path": "packages/weimo-ui-markdown/src/styles/markdown-content.css",
           "type": "registry:ui",
           "target": "@ui/markdown-content.css"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "type": "registry:ui",
-      "dependencies": [
-        "remark-gfm",
-        "remark-math",
-        "remark-parse",
-        "remark-stringify",
-        "unified"
-      ],
-      "name": "md-view",
-      "title": "Md View",
-      "description": "A markdown view/edit bridge that swaps MdRender and MdEditor while preserving measured height.",
-      "categories": [
-        "markdown",
-        "display",
-        "input"
-      ],
-      "registryDependencies": [
-        "@weimo/style",
-        "@weimo/utils",
-        "@weimo/md-editor",
-        "@weimo/md-render"
-      ],
-      "files": [
-        {
-          "path": "packages/weimo-ui-markdown/src/components/md-view/md-view.tsx",
-          "type": "registry:ui",
-          "target": "@ui/md-view/md-view.tsx"
-        },
-        {
-          "path": "packages/weimo-ui-markdown/src/components/md-view/md-view.css",
-          "type": "registry:ui",
-          "target": "@ui/md-view/md-view.css"
         }
       ]
     },

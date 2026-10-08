@@ -1,6 +1,5 @@
 import { useState } from 'react'
 
-import { MdRender } from 'weimo-ui-markdown/components/md-render'
 import {
   MathEditor,
   type MathEditorValue,
@@ -12,10 +11,6 @@ import { TextButton } from 'weimo-ui-core/components/text-button'
 import type { ComponentDefinition } from '../../component-docs'
 
 import { ControlledMdEditorDemo } from './md-editor-demos'
-import {
-  MarkdownStylePreview,
-  markdownStyleSearchAliases,
-} from './markdown-styles'
 import { mdRenderSample } from '../../fixtures/markdown-sample'
 
 function MathEditorDemo({
@@ -50,14 +45,6 @@ function MdEditorDemo() {
   return (
     <ComponentPreviewCard label="Markdown 编辑器">
       <ControlledMdEditorDemo />
-    </ComponentPreviewCard>
-  )
-}
-
-function MdRenderPreview() {
-  return (
-    <ComponentPreviewCard label="Markdown 渲染">
-      <MdRender aria-label="MdRender 预览" content={mdRenderSample} />
     </ComponentPreviewCard>
   )
 }
@@ -98,28 +85,23 @@ function MarkdownDemo() {
     <>
       <MathEditorDemo error="请输入 LaTeX 源码。" />
       <MdEditorDemo />
-      <MdRenderPreview />
       <MdViewDemo />
-      <MarkdownStylePreview />
     </>
   )
 }
 
 export const markdownDefinition = {
   id: 'markdown',
-  summary: '公式编辑器、Markdown 编辑器、渲染与视图的 Markdown 总览',
+  summary: '公式编辑器、Markdown 编辑器与视图的 Markdown 总览',
   status: 'Ready',
   frame: 'plain',
   searchAliases: [
     'MathEditor',
     'MdEditor',
-    'MdRender',
     'MdView',
     '公式编辑器',
     'Markdown 编辑器',
-    'Markdown 渲染',
     'Markdown 视图',
-    ...markdownStyleSearchAliases,
   ],
   preview: () => <MarkdownDemo />,
 } satisfies ComponentDefinition

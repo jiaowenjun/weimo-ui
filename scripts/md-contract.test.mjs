@@ -51,7 +51,7 @@ const definitionSource = readProjectFile(
   'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown-styles.tsx',
 )
 const mdRenderDefinitionSource = readProjectFile(
-  'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown.tsx',
+  'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown-render.tsx',
 )
 const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const tokensCss = readProjectFile('packages/weimo-ui-markdown/src/styles/tokens.css')
@@ -252,7 +252,7 @@ assert.ok(
   mdRenderDefinitionSource.includes("from './markdown-styles'") &&
     mdRenderDefinitionSource.includes('<MarkdownStylePreview />') &&
     mdRenderDefinitionSource.includes('...markdownStyleSearchAliases'),
-  'The Markdown overview must include the style preview and its search aliases.',
+  'The Markdown render page must include the style preview and its search aliases.',
 )
 
 for (const snippet of [
