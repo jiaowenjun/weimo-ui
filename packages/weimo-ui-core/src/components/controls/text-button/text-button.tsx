@@ -19,14 +19,13 @@ export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(functio
   },
   ref,
 ) {
+  // 变体走 data 属性而非修饰类:cn() 的 twMerge 会把 text-button 与任何
+  // text-* 类判为同组工具类而丢弃前者(基类样式整体失效)。
   return (
     <button
       {...props}
-      className={cn(
-        'text-button',
-        variant === 'ghost' && 'text-button--ghost',
-        className,
-      )}
+      className={cn('text-button', className)}
+      data-variant={variant === 'default' ? undefined : variant}
       ref={ref}
       type={type}
     />

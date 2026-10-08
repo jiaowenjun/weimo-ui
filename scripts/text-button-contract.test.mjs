@@ -45,9 +45,9 @@ const hoverBlock = cssBlockFor(css, '.text-button:not(:disabled):hover')
 const activeBlock = cssBlockFor(css, '.text-button:not(:disabled):active')
 const disabledBlock = cssBlockFor(css, '.text-button:disabled')
 const focusBlock = cssBlockFor(css, '.text-button:focus-visible')
-const ghostBaseBlock = cssBlockFor(css, '.text-button--ghost')
-const ghostHoverBlock = cssBlockFor(css, '.text-button--ghost:not(:disabled):hover')
-const ghostDisabledBlock = cssBlockFor(css, '.text-button--ghost:disabled')
+const ghostBaseBlock = cssBlockFor(css, '.text-button[data-variant="ghost"]')
+const ghostHoverBlock = cssBlockFor(css, '.text-button[data-variant="ghost"]:not(:disabled):hover')
+const ghostDisabledBlock = cssBlockFor(css, '.text-button[data-variant="ghost"]:disabled')
 const unlayeredBaseBlock = cssBlockFor(css, 'button.text-button')
 const unlayeredDisabledBlock = cssBlockFor(css, 'button.text-button:disabled')
 const previewBlock = cssBlockFor(appCss, '.text-button-preview')
@@ -88,7 +88,8 @@ for (const snippet of [
   'forwardRef<HTMLButtonElement, TextButtonProps>(function TextButton',
   "type = 'button'",
   "variant = 'default',",
-  "variant === 'ghost' && 'text-button--ghost',",
+  "className={cn('text-button', className)}",
+  "data-variant={variant === 'default' ? undefined : variant}",
   'ref={ref}',
   'TextButton.displayName = \'TextButton\'',
 ]) {
@@ -139,8 +140,12 @@ assert.ok(
   !ghostBaseBlock.includes('background') &&
     !ghostHoverBlock.includes('background') &&
     !ghostDisabledBlock.includes('background') &&
-    !css.includes('.text-button--ghost:not(:disabled):active'),
+    !css.includes('.text-button[data-variant="ghost"]:not(:disabled):active'),
   'Ghost TextButton must stay identical to the default variant except for the transparent border.',
+)
+assert.ok(
+  !source.includes('text-button--') && !css.includes('text-button--'),
+  'TextButton variants must hook via data-variant attributes: cn() runs tailwind-merge, which collapses text-button and any text-* modifier class into one text-color group and drops the base class.',
 )
 assert.ok(
   css.includes('@media (prefers-reduced-motion: reduce)') &&

@@ -24,8 +24,8 @@
 
   /* === Variants === */
   /* 幽灵变体:与默认变体唯一差异是边框透明(保 1px 几何等高),
-     背景/反馈样式全部继承基类。 */
-  .text-button--ghost {
+     背景/反馈样式全部继承基类;属性选择器特异性高于基类,不依赖源码顺序。 */
+  .text-button[data-variant="ghost"] {
     border-color: transparent;
   }
 
@@ -35,7 +35,7 @@
       background: var(--color-bg-hover);
     }
 
-    .text-button--ghost:not(:disabled):hover {
+    .text-button[data-variant="ghost"]:not(:disabled):hover {
       border-color: transparent;
     }
   }
@@ -53,7 +53,7 @@
     background: var(--color-bg-card);
   }
 
-  .text-button--ghost:disabled {
+  .text-button[data-variant="ghost"]:disabled {
     border-color: transparent;
   }
 
