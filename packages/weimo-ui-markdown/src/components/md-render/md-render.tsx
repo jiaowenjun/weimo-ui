@@ -859,7 +859,10 @@ const baseMarkdownComponents: Components = {
   },
   table({ children }) {
     return (
-      <div className="weimo-card-markdown__scroll-block">
+      <div
+        className="weimo-card-markdown__scroll-block"
+        data-markdown-table-scroll="true"
+      >
         <table className="weimo-card-markdown__table">{children}</table>
       </div>
     )

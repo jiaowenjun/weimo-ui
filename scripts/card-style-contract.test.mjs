@@ -397,8 +397,9 @@ assert.ok(
 )
 assert.ok(
   mdRenderSource.includes('weimo-card-markdown__scroll-block') &&
+    mdRenderSource.includes('data-markdown-table-scroll="true"') &&
     mdRenderSource.includes('weimo-card-markdown__table'),
-  'MdRender table rendering must include a horizontal scroll wrapper.',
+  'MdRender table rendering must include a public semantic scroll marker and horizontal scroll wrapper.',
 )
 assert.ok(
   mdRenderSource.includes('sanitizeMarkdownHref') &&

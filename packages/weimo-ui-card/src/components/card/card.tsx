@@ -49,7 +49,7 @@ const CARD_BODY_DOUBLE_CLICK_IGNORE_SELECTOR = [
   '[contenteditable="true"]',
   '[role="button"]',
   '[role="link"]',
-  '.weimo-card-markdown__scroll-block',
+  '[data-markdown-table-scroll="true"]',
 ].join(', ')
 
 export type { CardInitialMode, CardMode } from './card-edit-state-machine'
