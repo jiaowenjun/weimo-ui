@@ -1,7 +1,5 @@
-import { CardPanel } from '../../../../components/primitives/card'
 import { MdRender } from 'weimo-ui-markdown/components/md-render'
 import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
-import { mdRenderSample } from '../../fixtures/markdown-sample'
 
 type MarkdownStyleToken = {
   token: string
@@ -310,35 +308,27 @@ function renderMarkdownTokenGroupPreview(
 }
 
 export function MarkdownStylePreview() {
-  return (
-    <>
-      <CardPanel className="md-style-preview__scene">
-        <MdRender content={mdRenderSample} />
-      </CardPanel>
+  return markdownStyleTokenGroups.map((group) => (
+    <ComponentPreviewCard
+      items={group.tokens.map((token) => {
+        const item = getMarkdownStyleToken(token)
 
-      {markdownStyleTokenGroups.map((group) => (
-        <ComponentPreviewCard
-          items={group.tokens.map((token) => {
-            const item = getMarkdownStyleToken(token)
-
-            return {
-              darkValue: typeof item.value === 'string' ? undefined : item.value.dark,
-              token: item.token,
-              value: typeof item.value === 'string' ? item.value : item.value.light,
-            }
-          })}
-          key={group.label}
-          label={group.label}
-        >
-          <div className="md-style-preview__group-effect">
-            <div className="md-style-preview__content-wrapper">
-              {renderMarkdownTokenGroupPreview(group)}
-            </div>
-          </div>
-        </ComponentPreviewCard>
-      ))}
-    </>
-  )
+        return {
+          darkValue: typeof item.value === 'string' ? undefined : item.value.dark,
+          token: item.token,
+          value: typeof item.value === 'string' ? item.value : item.value.light,
+        }
+      })}
+      key={group.label}
+      label={group.label}
+    >
+      <div className="md-style-preview__group-effect">
+        <div className="md-style-preview__content-wrapper">
+          {renderMarkdownTokenGroupPreview(group)}
+        </div>
+      </div>
+    </ComponentPreviewCard>
+  ))
 }
 
 export const markdownStyleSearchAliases = [

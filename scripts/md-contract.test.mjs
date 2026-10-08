@@ -64,7 +64,6 @@ const rootMdRenderItem = rootRegistry.items.find((item) => item.name === 'md-ren
 const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 
 const tokenGridBlock = cssBlockFor(appCss, '.app-shell__content--token-grid')
-const mdSceneBlock = cssBlockFor(appCss, '.md-style-preview__scene')
 const mdGroupEffectBlock = cssBlockFor(appCss, '.md-style-preview__group-effect')
 const editorSelectionPseudoBlock = cssBlockFor(mdEditorCss, '.md-editor__content ::selection')
 const mdSelectionSampleBlock = cssBlockFor(appCss, '.md-style-preview__selection-sample')
@@ -258,9 +257,7 @@ assert.ok(
 
 for (const snippet of [
   "import { MdRender } from 'weimo-ui-markdown/components/md-render'",
-  "import { CardPanel } from '../../../../components/primitives/card'",
   "import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'",
-  "import { mdRenderSample } from '../../fixtures/markdown-sample'",
   'markdownStyleTokens',
   'markdownStyleTokenGroups',
   'markdownStyleSearchAliases',
@@ -272,8 +269,6 @@ for (const snippet of [
   'token: item.token',
   'className="md-style-preview__group-effect"',
   '{renderMarkdownTokenGroupPreview(group)}',
-  '<CardPanel className="md-style-preview__scene"',
-  '<MdRender content={mdRenderSample} />',
   "light: 'hsl(0 0% 9%)'",
   "dark: 'hsl(0 0% 98%)'",
   "value: '16px'",
@@ -331,11 +326,12 @@ assert.deepEqual(
   'Every Markdown token must appear in exactly one semantic-node group.',
 )
 assert.ok(
-  definitionSource.indexOf('<CardPanel className="md-style-preview__scene"') <
-    definitionSource.indexOf('{markdownStyleTokenGroups.map((group) => (') &&
+  !definitionSource.includes('md-style-preview__scene') &&
+    !definitionSource.includes('mdRenderSample') &&
+    !definitionSource.includes("from '../../../../components/primitives/card'") &&
     definitionSource.includes("'Markdown渲染'") &&
     definitionSource.includes("'Markdown样式'"),
-  'Markdown style docs must place the real render card first and keep both search names.',
+  'Markdown style docs must drop the real-render scene card and keep both search names.',
 )
 assert.ok(
   !definitionSource.includes('summary:') &&
@@ -1243,7 +1239,6 @@ assert.ok(
 )
 
 for (const snippet of [
-  '.md-style-preview__scene',
   '.md-style-preview__group-effect',
   '.md-style-preview__content-wrapper',
   '.md-style-preview__image',
@@ -1253,6 +1248,7 @@ for (const snippet of [
 }
 
 for (const forbidden of [
+  '.md-style-preview__scene',
   '.md-style-preview__token-panel',
   '.md-style-preview__section-header',
   '.md-style-preview__mini-type--md',
@@ -1285,11 +1281,8 @@ assert.ok(
   'Markdown style cards must use the content-level token grid without a preview wrapper.',
 )
 assert.ok(
-  mdSceneBlock.includes('grid-column: 1 / -1;') &&
-    mdSceneBlock.includes('max-height: 640px;') &&
-    mdSceneBlock.includes('overflow: auto;') &&
-    !definitionSource.includes('md-style-preview__render'),
-  'Markdown real-scene CardPanel must span the grid and own scrolling without an inner wrapper.',
+  !definitionSource.includes('md-style-preview__render'),
+  'Markdown style docs must not reintroduce an inner render wrapper.',
 )
 assert.ok(
   mdGroupEffectBlock.includes('min-height: 112px;') &&

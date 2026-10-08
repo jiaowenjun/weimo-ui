@@ -281,11 +281,12 @@ const mdDefinitionSource = readProjectFile(
 assert.ok(
   mdDefinitionSource.includes('markdownStyleSearchAliases') &&
     mdDefinitionSource.includes('<ComponentPreviewCard') &&
-    mdDefinitionSource.includes('<CardPanel className="md-style-preview__scene"') &&
-    mdDefinitionSource.includes('<MdRender content={mdRenderSample} />') &&
+    !mdDefinitionSource.includes('md-style-preview__scene') &&
+    !mdDefinitionSource.includes('mdRenderSample') &&
     !mdDefinitionSource.includes('className="md-style-preview"') &&
-    !appCss.includes('\n.md-style-preview {'),
-  'Markdown token docs must remain token-first, searchable, and grounded in a real rendering sample.',
+    !appCss.includes('\n.md-style-preview {') &&
+    !appCss.includes('\n.md-style-preview__scene {'),
+  'Markdown token docs must remain token-first and searchable without the removed real-render scene card.',
 )
 
 assert.ok(
