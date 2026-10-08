@@ -664,10 +664,10 @@
 
 .bg-blur-pair__surface {
   display: block;
-  flex: 1 1 0;
   min-width: 0;
-  /* 480 宽封顶,宽画布上示例不再无限拉宽,余量居中 */
-  max-width: 480px;
+  /* 定宽与材质页磨砂材质瓦片 260px 一致,窄画布经 max-width 同步收缩 */
+  width: 260px;
+  max-width: 100%;
   /* 高度与材质页磨砂材质瓦片(260×80)对齐,画布随共享 16px 内边距同节奏 */
   height: 80px;
   border-radius: var(--radius-sm);

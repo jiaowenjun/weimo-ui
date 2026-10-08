@@ -274,8 +274,9 @@ assert.ok(
 assert.ok(
   blockFor(appCss, '.bg-blur-pair').includes('gap: clamp(24px, 4vw, 48px);') &&
     blockFor(appCss, '.bg-blur-pair').includes('justify-content: center;') &&
+    blockFor(appCss, '.bg-blur-pair__surface').includes('width: 260px;') &&
+    blockFor(appCss, '.bg-blur-pair__surface').includes('max-width: 100%;') &&
     blockFor(appCss, '.bg-blur-pair__surface').includes('height: 80px;') &&
-    blockFor(appCss, '.bg-blur-pair__surface').includes('max-width: 480px;') &&
     blockFor(appCss, '.bg-blur-pair__surface').includes(
       'border: 1px solid var(--color-border);',
     ) &&
