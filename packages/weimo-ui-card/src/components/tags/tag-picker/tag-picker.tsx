@@ -140,6 +140,8 @@ export function TagPicker({
       toolbarLabel="标签选择器工具栏"
       bottomBarLabel="标签选择器输入栏"
       bottomBarClassName="tag-picker__bottom-float-bar"
+      bottomBarFrameClassName="tag-picker__bottom-frame"
+      bottomBarLeftSlotClassName="tag-picker__bottom-slot-left"
       bottomBarLeftSlot={
         <div className="tag-picker__input-row">
           <InputGroup data-mode={mode}>

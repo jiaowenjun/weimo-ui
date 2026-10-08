@@ -240,7 +240,11 @@ export function TagBar({
       {...props}
     >
       <FloatBar
+        centerSlotClassName="tag-bar__slot-center"
         className="tag-bar__float-bar"
+        frameClassName="tag-bar__frame"
+        leftSlotClassName="tag-bar__slot-left"
+        rightSlotClassName="tag-bar__slot-right"
         role={editable ? undefined : 'presentation'}
         leftSlot={
           <div className="tag-bar__chips" aria-label="笔记标签">

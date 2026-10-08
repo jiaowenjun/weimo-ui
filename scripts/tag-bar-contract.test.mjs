@@ -46,12 +46,12 @@ const rootRegistry = readJson('registry.json')
 const rootBlock = cssBlockFor(cssSource, '.tag-bar')
 const positionAnimatingRootBlock = cssBlockFor(cssSource, '.tag-bar[data-position-animating="true"]')
 const floatBarBlock = cssBlockFor(cssSource, '.tag-bar__float-bar')
-const frameBlock = cssBlockFor(cssSource, '.tag-bar__float-bar .float-bar__frame')
-const leftSlotBlock = cssBlockFor(cssSource, '.tag-bar__float-bar .float-bar__slot--left')
+const frameBlock = cssBlockFor(cssSource, '.tag-bar__float-bar .tag-bar__frame')
+const leftSlotBlock = cssBlockFor(cssSource, '.tag-bar__float-bar .tag-bar__slot-left')
 const hiddenSlotBlock = cssBlockFor(
   cssSource,
-  `.tag-bar__float-bar .float-bar__slot--center,
-  .tag-bar__float-bar .float-bar__slot--right`,
+  `.tag-bar__float-bar .tag-bar__slot-center,
+  .tag-bar__float-bar .tag-bar__slot-right`,
 )
 const chipsBlock = cssBlockFor(cssSource, '.tag-bar__chips')
 const morphSlotBlock = cssBlockFor(cssSource, '.tag-bar__morph-slot')
@@ -167,6 +167,10 @@ for (const snippet of [
   "aria-label={editable ? '编辑标签栏' : '标签栏'}",
   "role={editable ? undefined : 'group'}",
   'className="tag-bar__float-bar"',
+  'frameClassName="tag-bar__frame"',
+  'leftSlotClassName="tag-bar__slot-left"',
+  'centerSlotClassName="tag-bar__slot-center"',
+  'rightSlotClassName="tag-bar__slot-right"',
   "role={editable ? undefined : 'presentation'}",
   'className="tag-bar__chips"',
   "className={isEmpty ? 'tag-bar__morph-slot' : undefined}",

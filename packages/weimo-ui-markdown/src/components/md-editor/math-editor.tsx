@@ -53,6 +53,8 @@ export function MathEditor({
     <ActionDialog
       bottomBarLabel="公式编辑操作栏"
       bottomBarClassName="md-editor__math-dialog-float-bar"
+      bottomBarFrameClassName="md-editor__math-dialog-frame"
+      bottomBarRightSlotClassName="md-editor__math-dialog-slot-right"
       bottomBarRightSlot={
         <div className="md-editor__math-dialog-action-row">
           <FrostedIconButton

@@ -25,7 +25,8 @@
     padding: var(--space-card-pad);
   }
 
-  .ocr-detail__image-toolbar .float-bar__frame {
+  /* 工具栏约束在图片列:经 ActionDialog 顶栏公开 frame 钩子挂载自有类名。 */
+  .ocr-detail__image-toolbar .ocr-detail__toolbar-frame {
     grid-column: 1;
   }
 

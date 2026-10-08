@@ -206,12 +206,14 @@
     line-height: 1.4;
   }
 
-  .md-editor__math-dialog-float-bar .float-bar__frame {
+  /* 公式对话框底栏改单列堆叠:经 ActionDialog 底栏公开 frame/slot 钩子
+     挂载自有类名。 */
+  .md-editor__math-dialog-float-bar .md-editor__math-dialog-frame {
     width: 100%;
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .md-editor__math-dialog-float-bar .float-bar__slot--right {
+  .md-editor__math-dialog-float-bar .md-editor__math-dialog-slot-right {
     width: 100%;
     grid-column: 1 / -1;
   }

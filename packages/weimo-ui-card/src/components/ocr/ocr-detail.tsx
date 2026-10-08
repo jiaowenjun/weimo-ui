@@ -110,6 +110,7 @@ export function OcrDetail({
     <ActionDialog
       className={cn('ocr-detail', className)}
       floatBarClassName="ocr-detail__image-toolbar"
+      floatBarFrameClassName="ocr-detail__toolbar-frame"
       onOpenChange={onOpenChange}
       title={null}
       toolbarRightSlot={renderToolbarRightSlot()}

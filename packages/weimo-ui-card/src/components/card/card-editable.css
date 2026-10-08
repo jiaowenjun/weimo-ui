@@ -103,6 +103,9 @@
     min-height: 0;
   }
 
+  /* 编辑视口底部安全区:--md-view-editor-bottom-safe-area 是 weimo-ui-markdown
+     MdView 注入的公开布局交接 token;本包经 fallback 链消费,token 缺省时
+     回退 --weimo-card-editable-editor-extra-height。 */
   .weimo-card-editable[data-edit-layout="true"] .md-editor__viewport {
     min-height: 0;
     max-height: none;
@@ -225,13 +228,10 @@
     padding-block-end: 0;
   }
 
-  .weimo-card-editable[data-custom-content="true"] .weimo-card-editable__bottom-bar .float-bar__frame {
+  /* frame 行高经 CardToolBar 的公开 frameClassName 钩子挂载;
+     pointer-events 与右槽对齐均与 FloatBar 基类重复,不再覆写。 */
+  .weimo-card-editable[data-custom-content="true"] .weimo-card-editable__bottom-bar .weimo-card-editable__bottom-frame {
     min-height: var(--size-topbar-button);
-    pointer-events: none;
-  }
-
-  .weimo-card-editable[data-custom-content="true"] .weimo-card-editable__bottom-bar .float-bar__slot--right {
-    align-items: center;
   }
 
   @media (prefers-reduced-motion: reduce) {

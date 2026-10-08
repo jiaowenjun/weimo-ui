@@ -13,17 +13,19 @@
     justify-content: flex-start;
   }
 
-  .tag-bar__float-bar .float-bar__frame {
+  /* 标签栏把 FloatBar 退化为单区域条:frame 置 block、只留左槽。
+     经 FloatBar 公开 frameClassName/slotClassName 钩子挂载自有类名。 */
+  .tag-bar__float-bar .tag-bar__frame {
     display: block;
   }
 
-  .tag-bar__float-bar .float-bar__slot--left {
+  .tag-bar__float-bar .tag-bar__slot-left {
     display: flex;
     justify-content: flex-start;
   }
 
-  .tag-bar__float-bar .float-bar__slot--center,
-  .tag-bar__float-bar .float-bar__slot--right {
+  .tag-bar__float-bar .tag-bar__slot-center,
+  .tag-bar__float-bar .tag-bar__slot-right {
     display: none;
   }
 

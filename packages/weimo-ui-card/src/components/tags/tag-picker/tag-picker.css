@@ -8,11 +8,12 @@
     max-width: min(100%, 280px);
   }
 
-  .tag-picker__bottom-float-bar .float-bar__frame {
+  /* 输入栏占满整行:经 ActionDialog 底栏公开 frame/slot 钩子挂载自有类名。 */
+  .tag-picker__bottom-float-bar .tag-picker__bottom-frame {
     grid-template-columns: 1fr;
   }
 
-  .tag-picker__bottom-float-bar .float-bar__slot--left {
+  .tag-picker__bottom-float-bar .tag-picker__bottom-slot-left {
     width: 100%;
     grid-column: 1 / -1;
   }

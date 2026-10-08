@@ -2,6 +2,9 @@
   .icon-button {
     --icon-button-active-scale: var(--press-scale);
     --icon-button-popup-open-scale: var(--popup-open-scale);
+    /* 公开 theming hook:幽灵按钮 hover/按压底色,默认一级悬停层;
+       消费方可按作用域覆写为更深层级(先例:capsule 后缀、tagtree 树行
+       均覆写为 --color-bg-nested-hover)。 */
     --icon-button-ghost-hover-bg: var(--color-bg-hover);
 
     display: inline-flex;

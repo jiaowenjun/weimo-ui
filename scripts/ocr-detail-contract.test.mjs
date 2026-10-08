@@ -124,6 +124,7 @@ for (const snippet of [
   '<ActionDialog',
   "className={cn('ocr-detail', className)}",
   'floatBarClassName="ocr-detail__image-toolbar"',
+  'floatBarFrameClassName="ocr-detail__toolbar-frame"',
   'onOpenChange={onOpenChange}',
   'showCloseButton={false}',
   'title={null}',
@@ -207,7 +208,7 @@ for (const snippet of [
 const rootBlock = blockFor(ocrDetailCss, '.ocr-detail')
 const contentBlock = blockFor(ocrDetailCss, '.ocr-detail__content')
 const imageToolbarBlock = blockFor(ocrDetailCss, '.ocr-detail__image-toolbar')
-const imageToolbarFrameBlock = blockFor(ocrDetailCss, '.ocr-detail__image-toolbar .float-bar__frame')
+const imageToolbarFrameBlock = blockFor(ocrDetailCss, '.ocr-detail__image-toolbar .ocr-detail__toolbar-frame')
 const imagePaneBlock = blockFor(ocrDetailCss, '.ocr-detail__image-pane')
 const cardPaneBlock = blockFor(ocrDetailCss, '.ocr-detail__card-pane')
 const cardBlock = blockFor(ocrDetailCss, '.ocr-detail__card-pane .weimo-card')

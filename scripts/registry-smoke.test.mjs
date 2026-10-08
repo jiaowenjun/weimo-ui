@@ -1305,8 +1305,8 @@ try {
       cardToolBarSource.includes("CardToolBar.displayName = 'CardToolBar'") &&
       cardToolBarSource.includes('onMouseDown={(event) => event.preventDefault()}') &&
       cardToolBarSource.includes('<Check />') &&
-      cardToolBarCssSource.includes('.weimo-card-tool-bar .float-bar__slot--left') &&
-      cardToolBarCssSource.includes('overflow: visible;'),
+      cardToolBarCssSource.includes('.weimo-card-tool-bar__actions') &&
+      !cardToolBarCssSource.includes('float-bar__'),
     'Installed CardToolBar must compose BottomBar and own the save IconButton.',
   )
   assert.ok(
@@ -1547,6 +1547,8 @@ try {
       !mathEditorSource.includes("from '../bottom-bar'") &&
       mathEditorSource.includes('bottomBarLabel="公式编辑操作栏"') &&
       mathEditorSource.includes('bottomBarClassName="md-editor__math-dialog-float-bar"') &&
+      mathEditorSource.includes('bottomBarFrameClassName="md-editor__math-dialog-frame"') &&
+      mathEditorSource.includes('bottomBarRightSlotClassName="md-editor__math-dialog-slot-right"') &&
       mathEditorSource.includes('bottomBarRightSlot={') &&
       mathEditorSource.includes('form={formId}') &&
       mathEditorSource.includes('id={formId}') &&

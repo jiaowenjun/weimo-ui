@@ -410,6 +410,7 @@ export function resolveCardToolBarProps(
     'data-layout': toolBarState.dataLayout,
     'data-visible': toolBarState.dataVisible,
     disabled: toolBarState.disabled,
+    frameClassName: 'weimo-card-editable__bottom-frame',
     saveDisabled: toolBarState.saveDisabled,
     saveLabel: labels.save,
     toolbarSlot,

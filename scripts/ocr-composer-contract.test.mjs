@@ -204,7 +204,7 @@ assert.ok(
   'OcrComposer card shell must not set a fixed minimum height.',
 )
 assert.ok(
-  !cssBlockFor(css, '.weimo-ocr-composer__uploader .image-uploader__panel').includes('min-height'),
+  !cssBlockFor(css, '.weimo-ocr-composer__uploader .weimo-ocr-composer__uploader-panel').includes('min-height'),
   'OcrComposer uploader panel must not set a fixed minimum height.',
 )
 

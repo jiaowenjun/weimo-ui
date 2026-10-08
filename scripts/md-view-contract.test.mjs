@@ -415,6 +415,19 @@ for (const [block, snippet, message] of [
   assert.ok(block.includes(snippet), message)
 }
 
+// --md-view-editor-bottom-safe-area 是 MdView 对外发布的公开布局交接 token,
+// card 包编辑视口经 fallback 链消费(registry-smoke 另锁安装后副本)。
+const cardEditableCssSource = readProjectFile(
+  'packages/weimo-ui-card/src/components/card/card-editable.css',
+)
+
+assert.ok(
+  cardEditableCssSource.includes(
+    'var(--md-view-editor-bottom-safe-area, var(--weimo-card-editable-editor-extra-height))',
+  ),
+  'card editable viewport must keep consuming the public MdView bottom safe-area token via fallback chain.',
+)
+
 assert.ok(
   packageJson.exports?.['./components/md-view'] === './packages/weimo-ui-markdown/src/components/md-view/md-view.tsx' &&
     markdownPackageJson.exports?.['./components/md-view'] === './src/components/md-view/md-view.tsx',

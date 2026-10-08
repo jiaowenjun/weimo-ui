@@ -237,6 +237,7 @@ export function OcrComposer({
             file={file}
             onActionsChange={setImageActions}
             onFileChange={onFileChange}
+            panelClassName="weimo-ocr-composer__uploader-panel"
             title={imageUploaderTitle ?? resolvedLabels.imageTitle}
           />
         </div>

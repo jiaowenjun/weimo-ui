@@ -30,6 +30,8 @@ export type ImageUploaderProps = Omit<ComponentPropsWithoutRef<'div'>, 'children
   onFileChange: (file: File | null) => void
   onActionsChange?: (actions: ImageUploaderActionApi) => void
   onCheck?: () => void
+  /* 公开定制钩子:消费方样式落在此自有类名上,不得选择内部结构类。 */
+  panelClassName?: string
   title?: string
   description?: string
   clipboardSourceLabel?: string
@@ -181,6 +183,7 @@ export function ImageUploader({
   onDragOver,
   onDrop,
   onKeyDown,
+  panelClassName,
   role,
   tabIndex,
   title = DEFAULT_IMAGE_UPLOADER_TITLE,
@@ -437,7 +440,7 @@ export function ImageUploader({
       tabIndex={tabIndex}
       {...props}
     >
-      <div className="image-uploader__panel">
+      <div className={cn('image-uploader__panel', panelClassName)}>
         {!hasFile ? (
           <input
             {...inputProps}

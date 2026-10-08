@@ -152,7 +152,7 @@ for (const snippet of [
   "className={cn('image-uploader', className)}",
   "data-drag-over={isDragActive ? 'true' : undefined}",
   "data-state={hasFile ? 'ready' : 'initial'}",
-  'className="image-uploader__panel"',
+  "className={cn('image-uploader__panel', panelClassName)}",
   'ref={inputRef}',
   "className={cn('image-uploader__input', inputProps.className)}",
   "aria-label={inputProps['aria-label'] ?? title}",

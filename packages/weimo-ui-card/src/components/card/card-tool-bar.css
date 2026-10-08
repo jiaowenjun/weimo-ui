@@ -1,8 +1,6 @@
 @layer components {
-  .weimo-card-tool-bar .float-bar__slot--left {
-    min-width: 0;
-    overflow: visible;
-  }
+  /* 左槽 min-width:0 / overflow:visible 由 core BottomBar 的左槽预设提供,
+     此处不再覆写 bar 的内部结构类。 */
 
   .weimo-card-tool-bar__actions {
     display: flex;

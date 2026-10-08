@@ -19,7 +19,8 @@
     align-self: stretch;
   }
 
-  .weimo-ocr-composer__uploader .image-uploader__panel {
+  /* 面板高度经 ImageUploader 公开 panelClassName 钩子挂载自有类名。 */
+  .weimo-ocr-composer__uploader .weimo-ocr-composer__uploader-panel {
     height: 100%;
   }
 

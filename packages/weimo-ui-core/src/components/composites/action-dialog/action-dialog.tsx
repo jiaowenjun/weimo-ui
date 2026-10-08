@@ -18,13 +18,17 @@ import './action-dialog.css'
 
 export type ActionDialogProps = DialogProps & {
   bottomBarClassName?: string
+  bottomBarFrameClassName?: string
   bottomBarLabel?: string
   bottomBarLeftSlot?: ReactNode
+  bottomBarLeftSlotClassName?: string
   bottomBarRightSlot?: ReactNode
+  bottomBarRightSlotClassName?: string
   children: ReactNode
   className?: string
   closeLabel?: string
   floatBarClassName?: string
+  floatBarFrameClassName?: string
   popupProps?: Omit<DialogPopupProps, 'children' | 'className'>
   showCloseButton?: boolean
   title: ReactNode
@@ -35,13 +39,17 @@ export type ActionDialogProps = DialogProps & {
 
 export function ActionDialog({
   bottomBarClassName,
+  bottomBarFrameClassName,
   bottomBarLabel = '对话框底部操作栏',
   bottomBarLeftSlot,
+  bottomBarLeftSlotClassName,
   bottomBarRightSlot,
+  bottomBarRightSlotClassName,
   children,
   className,
   closeLabel = '关闭对话框',
   floatBarClassName,
+  floatBarFrameClassName,
   popupProps,
   showCloseButton = true,
   title,
@@ -61,6 +69,7 @@ export function ActionDialog({
         <FloatBar
           aria-label={toolbarLabel}
           className={cn('action-dialog__bar', floatBarClassName)}
+          frameClassName={floatBarFrameClassName}
           centerSlot={
             <DialogTitle
               className={cn('action-dialog__title', titleClassName)}
@@ -88,8 +97,11 @@ export function ActionDialog({
           <BottomBar
             aria-label={bottomBarLabel}
             className={cn('action-dialog__bottom-bar', bottomBarClassName)}
+            frameClassName={bottomBarFrameClassName}
             leftSlot={bottomBarLeftSlot}
+            leftSlotClassName={bottomBarLeftSlotClassName}
             rightSlot={bottomBarRightSlot}
+            rightSlotClassName={bottomBarRightSlotClassName}
           />
         ) : null}
       </DialogPopup>

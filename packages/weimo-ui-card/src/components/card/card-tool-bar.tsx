@@ -9,6 +9,8 @@ import './card-tool-bar.css'
 
 export type CardToolBarProps = Omit<ComponentPropsWithoutRef<'div'>, 'children'> & {
   disabled?: boolean
+  /* 透传给内部 BottomBar/FloatBar 的公开 frame 定制钩子。 */
+  frameClassName?: string
   saveDisabled?: boolean
   saveLabel?: string
   toolbarSlot?: ReactNode
@@ -19,6 +21,7 @@ export const CardToolBar = forwardRef<HTMLDivElement, CardToolBarProps>(function
   {
     className,
     disabled,
+    frameClassName,
     onSave,
     saveDisabled,
     saveLabel = '保存',
@@ -32,6 +35,7 @@ export const CardToolBar = forwardRef<HTMLDivElement, CardToolBarProps>(function
       {...props}
       ref={ref}
       className={cn('weimo-card-tool-bar', className)}
+      frameClassName={frameClassName}
       leftSlot={toolbarSlot}
       rightSlot={
         <div className="weimo-card-tool-bar__actions">

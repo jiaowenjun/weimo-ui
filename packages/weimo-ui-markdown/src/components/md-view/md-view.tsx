@@ -32,6 +32,9 @@ const MdEditor = lazy(() =>
 )
 
 export type MdViewMode = 'view' | 'edit'
+/* --md-view-editor-bottom-safe-area 是 MdView 的公开布局交接 token:
+   MdView 在编辑器根内联注入,宿主与消费方(如 weimo-ui-card 的编辑视口)
+   在后代选择器中经 var() 消费,为末行下方预留底部安全区。 */
 type MdViewStyle = CSSProperties & Record<'--md-view-editor-bottom-safe-area', string>
 
 type MdViewRootProps = ComponentPropsWithoutRef<'div'> & { mode: MdViewMode }

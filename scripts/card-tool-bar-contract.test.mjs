@@ -96,15 +96,15 @@ assertNotIncludes(
   'CardToolBar must not know about TagBar placement.',
 )
 
-const leftSlotBlock = cssBlockFor(
+// 左槽收缩由 core BottomBar 的预设提供;CardToolBar 只能经公开钩子定制 bar,
+// 不得直接选择 bar 的内部结构类名。
+assertNotIncludes(
   componentCss,
-  '.weimo-card-tool-bar .float-bar__slot--left',
+  'float-bar__',
+  'CardToolBar must customize the bar via public hooks, not internal bar class names.',
 )
-const actionsBlock = cssBlockFor(componentCss, '.weimo-card-tool-bar__actions')
 
-for (const snippet of ['min-width: 0;', 'overflow: visible;']) {
-  assertIncludes(leftSlotBlock, snippet, `CardToolBar left slot must include ${snippet}.`)
-}
+const actionsBlock = cssBlockFor(componentCss, '.weimo-card-tool-bar__actions')
 
 for (const snippet of [
   'display: flex;',

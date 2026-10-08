@@ -268,6 +268,8 @@ assert.ok(
     componentSource.includes('toolbarLabel="标签选择器工具栏"') &&
     componentSource.includes('bottomBarLabel="标签选择器输入栏"') &&
     componentSource.includes('bottomBarClassName="tag-picker__bottom-float-bar"') &&
+    componentSource.includes('bottomBarFrameClassName="tag-picker__bottom-frame"') &&
+    componentSource.includes('bottomBarLeftSlotClassName="tag-picker__bottom-slot-left"') &&
     componentSource.includes('bottomBarLeftSlot={') &&
     !componentSource.includes('<Dialog open={open} onOpenChange={onOpenChange}>') &&
     !componentSource.includes('<DialogPopup') &&
@@ -362,9 +364,9 @@ assert.ok(
   cssSource.includes('.tag-picker__bottom-float-bar') &&
   !cssSource.includes('.tag-picker__bottom-float-bar {\n    inset-block-start: auto;') &&
   !cssSource.includes('padding: 0 12px 12px;') &&
-  cssSource.includes('.tag-picker__bottom-float-bar .float-bar__frame') &&
+  cssSource.includes('.tag-picker__bottom-float-bar .tag-picker__bottom-frame') &&
   cssSource.includes('grid-template-columns: 1fr;') &&
-  cssSource.includes('.tag-picker__bottom-float-bar .float-bar__slot--left') &&
+  cssSource.includes('.tag-picker__bottom-float-bar .tag-picker__bottom-slot-left') &&
   cssSource.includes('grid-column: 1 / -1;') &&
   cssSource.includes('.tag-picker__list') &&
   cssSource.includes('padding-bottom: 72px;') &&
