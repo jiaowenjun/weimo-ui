@@ -37,6 +37,10 @@ const componentDefinitionSources = {
   'tagged-card': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/tagged-card.tsx'),
   'card-tool-bar': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/card-tool-bar.tsx'),
   'tag-bar': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-card/tag-bar.tsx'),
+  'tag-bread': [
+    readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/tag-bread.tsx'),
+    readProjectFile('packages/weimo-ui-tagtree/src/page/tag-bread-page.tsx'),
+  ].join('\n'),
   tag: [
     readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-tagtree/tag.tsx'),
     readProjectFile('packages/weimo-ui-tagtree/src/page/tag-page.tsx'),
@@ -201,6 +205,7 @@ for (const snippet of [
 
 for (const componentId of [
   'tagged-card',
+  'tag-bread',
   'tag',
   'stat',
   'background-tokens',
@@ -369,6 +374,12 @@ assert.ok(
     !componentDefinitionSources.tag.includes('TagPicker') &&
     !componentDefinitionSources.tag.includes('TagBar'),
   'Tag docs page must not keep moved TagPicker/TagBar demos after the card package migration.',
+)
+assert.ok(
+  !componentDefinitionSources.tag.includes('TagBread') &&
+    !componentDefinitionSources.tag.includes('面包屑') &&
+    componentDefinitionSources['tag-bread'].includes('function TagBreadDemo'),
+  'Tag docs page must not keep the moved TagBread demo after the 标签面包屑 page split.',
 )
 assert.ok(
   !componentDefinitionSources['tag-bar'].includes("from 'weimo-ui-core/components/coss/button'") &&

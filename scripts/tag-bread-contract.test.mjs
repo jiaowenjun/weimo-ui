@@ -44,7 +44,7 @@ const cossBreadcrumbSource = readProjectFile('packages/weimo-ui-tagtree/src/comp
 const cossBreadcrumbCss = readProjectFile('packages/weimo-ui-tagtree/src/components/coss/breadcrumb.css')
 const packageJson = readJson('package.json')
 const definitionsIndex = readProjectFile('packages/weimo-ui-site/src/docs/catalog/definitions.ts')
-const docsDefinition = readProjectFile('packages/weimo-ui-tagtree/src/page/tag-page.tsx')
+const docsDefinition = readProjectFile('packages/weimo-ui-tagtree/src/page/tag-bread-page.tsx')
 const rootRegistry = readJson('registry.json')
 const standaloneRegistry = readJson('registry/tag-bread.json')
 const registryItem = rootRegistry.items.find((item) => item.name === 'tag-bread')
@@ -81,10 +81,13 @@ assert.equal(
   'package.json must export TagBread.',
 )
 assert.ok(
-  definitionsIndex.includes("import { tagDefinition } from './packages/weimo-ui-tagtree/tag'") &&
-    definitionsIndex.includes('tag: tagDefinition') &&
-    !definitionsIndex.includes('tag-bread'),
-  'TagBread preview must be wired into component-definitions/index.ts through the merged Tag definition.',
+  definitionsIndex.includes(
+    "import { tagBreadDefinition } from './packages/weimo-ui-tagtree/tag-bread'",
+  ) &&
+    definitionsIndex.includes("'tag-bread': tagBreadDefinition") &&
+    definitionsIndex.includes("import { tagDefinition } from './packages/weimo-ui-tagtree/tag'") &&
+    definitionsIndex.includes('tag: tagDefinition'),
+  'TagBread preview must own its 标签面包屑 docs page definition in component-definitions/index.ts.',
 )
 
 for (const snippet of [
@@ -258,7 +261,7 @@ assert.ok(
 
 assert.ok(
     docsDefinition.includes("import { TagBread } from '../components/tag-bread/tag-bread'") &&
-    docsDefinition.includes("import { CalendarDays, Folder, Hash } from 'lucide-react'") &&
+    docsDefinition.includes("import { Hash } from 'lucide-react'") &&
     docsDefinition.includes("from 'weimo-ui-core/components/capsule-frame'") &&
     docsDefinition.includes("from 'weimo-ui-core/components/frosted-surface-model'") &&
     docsDefinition.includes('const surfaceAttributes = getCapsuleFrameAttributes({') &&

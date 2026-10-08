@@ -13,6 +13,7 @@
   ],
   "exports": {
     "./page": "./src/page/tag-page.tsx",
+    "./page/tag-bread": "./src/page/tag-bread-page.tsx",
     "./components/tag-bread": "./src/components/tag-bread/tag-bread.tsx",
     "./components/tag-tree": "./src/components/tag-tree/tag-tree.tsx",
     "./components/tag-tree-model": "./src/components/tag-tree/tag-tree-model.ts",

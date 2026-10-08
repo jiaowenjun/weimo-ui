@@ -78,6 +78,7 @@ const packageRules = [
     forbiddenRelativeImports: [],
     requiredExports: {
       './page': './src/page/tag-page.tsx',
+      './page/tag-bread': './src/page/tag-bread-page.tsx',
       './components/coss/breadcrumb': './src/components/coss/breadcrumb.tsx',
       './components/coss/input-group': './src/components/coss/input-group.tsx',
       './components/coss/scroll-area': './src/components/coss/scroll-area.tsx',
@@ -328,10 +329,13 @@ for (const [relativePath, dependencyPath] of [
 
 const tagtreeMain = readProjectFile('packages/weimo-ui-tagtree/src/main.tsx')
 const tagtreePage = readProjectFile('packages/weimo-ui-tagtree/src/page/tag-page.tsx')
+const tagtreeBreadPage = readProjectFile('packages/weimo-ui-tagtree/src/page/tag-bread-page.tsx')
 assert.match(tagtreeMain, /TagTreePage/u)
 assert.match(tagtreePage, /export function TagTreePage/u)
 assert.match(tagtreePage, /from ['"]weimo-ui-card\/components\/component-preview-card['"]/u)
-assert.equal(tagtreePage.match(/<ComponentPreviewCard\b/gu)?.length, 3)
+assert.equal(tagtreePage.match(/<ComponentPreviewCard\b/gu)?.length, 2)
+assert.match(tagtreeBreadPage, /export function TagBreadPage/u)
+assert.equal(tagtreeBreadPage.match(/<ComponentPreviewCard\b/gu)?.length, 1)
 
 const sitePackageJson = readProjectJson('packages/weimo-ui-site/package.json')
 const siteSourceFiles = collectSourceFiles(join(root, 'packages/weimo-ui-site/src'))

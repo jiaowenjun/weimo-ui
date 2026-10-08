@@ -9,7 +9,8 @@ function resultIds(query: string) {
 
 describe('component docs search', () => {
   it('finds functional pages by workspace package', () => {
-    expect(resultIds('weimo-ui-tagtree')).toEqual(['tag'])
+    expect(resultIds('weimo-ui-tagtree')).toEqual(['tag-bread', 'tag'])
+    expect(resultIds('面包屑')).toEqual(['tag-bread'])
     expect(resultIds('CapsuleButton')).toContain('capsule-button')
     expect(resultIds('weimo-ui-image')).toEqual(['image'])
     expect(resultIds('weimo-ui-card')).toEqual(['base-card', 'component-preview-card', 'card-tool-bar', 'tagged-card', 'tag-bar', 'ocr'])

@@ -11,6 +11,7 @@ import { menuDefinition } from './packages/weimo-ui-core/menu'
 import { actionDialogDefinition } from './packages/weimo-ui-core/action-dialog'
 import { barDefinition } from './packages/weimo-ui-core/bar'
 import { sidebarDefinition } from './packages/weimo-ui-core/sidebar'
+import { tagBreadDefinition } from './packages/weimo-ui-tagtree/tag-bread'
 import { tagDefinition } from './packages/weimo-ui-tagtree/tag'
 import { markdownDefinition } from './packages/weimo-ui-markdown/markdown'
 import { imageDefinition } from './packages/weimo-ui-image/image'
@@ -37,6 +38,7 @@ export const componentDefinitionsById = {
   'action-dialog': actionDialogDefinition,
   bar: barDefinition,
   sidebar: sidebarDefinition,
+  'tag-bread': tagBreadDefinition,
   tag: tagDefinition,
   markdown: markdownDefinition,
   image: imageDefinition,
