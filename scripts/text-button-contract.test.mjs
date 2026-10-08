@@ -47,7 +47,6 @@ const disabledBlock = cssBlockFor(css, '.text-button:disabled')
 const focusBlock = cssBlockFor(css, '.text-button:focus-visible')
 const ghostBaseBlock = cssBlockFor(css, '.text-button--ghost')
 const ghostHoverBlock = cssBlockFor(css, '.text-button--ghost:not(:disabled):hover')
-const ghostActiveBlock = cssBlockFor(css, '.text-button--ghost:not(:disabled):active')
 const ghostDisabledBlock = cssBlockFor(css, '.text-button--ghost:disabled')
 const unlayeredBaseBlock = cssBlockFor(css, 'button.text-button')
 const unlayeredDisabledBlock = cssBlockFor(css, 'button.text-button:disabled')
@@ -128,18 +127,21 @@ for (const [block, snippet, message] of [
   [focusBlock, 'outline: 2px solid var(--color-border-accent);', 'TextButton focus must use the shared accent border.'],
   [focusBlock, 'outline-offset: 2px;', 'TextButton focus ring must stay outside the control.'],
   [ghostBaseBlock, 'border-color: transparent;', 'Ghost TextButton must drop the border visually.'],
-  [ghostBaseBlock, 'background: transparent;', 'Ghost TextButton must start fully transparent.'],
   [ghostHoverBlock, 'border-color: transparent;', 'Ghost TextButton hover must stay borderless.'],
-  [ghostHoverBlock, 'background: var(--color-bg-hover);', 'Ghost TextButton hover must use the shared feedback background.'],
-  [ghostActiveBlock, 'background: var(--color-bg-hover);', 'Ghost TextButton active must keep the shared feedback background.'],
   [ghostDisabledBlock, 'border-color: transparent;', 'Ghost TextButton disabled state must stay borderless.'],
-  [ghostDisabledBlock, 'background: transparent;', 'Ghost TextButton disabled state must stay transparent.'],
   [unlayeredBaseBlock, 'color: var(--color-text-primary);', 'TextButton must keep primary text outside layered CSS ordering.'],
   [unlayeredDisabledBlock, 'color: var(--color-text-disabled);', 'TextButton must keep disabled text outside layered CSS ordering.'],
   [previewBlock, 'display: flex;', 'TextButton detail preview must lay out examples in one row when possible.'],
 ]) {
   assertIncludes(block, snippet, message)
 }
+assert.ok(
+  !ghostBaseBlock.includes('background') &&
+    !ghostHoverBlock.includes('background') &&
+    !ghostDisabledBlock.includes('background') &&
+    !css.includes('.text-button--ghost:not(:disabled):active'),
+  'Ghost TextButton must stay identical to the default variant except for the transparent border.',
+)
 assert.ok(
   css.includes('@media (prefers-reduced-motion: reduce)') &&
     css.includes('transition-duration: 1ms;'),

@@ -23,10 +23,10 @@
   }
 
   /* === Variants === */
-  /* 幽灵变体:边框置透明而非删除,保住 1px 几何与默认变体同行等高。 */
+  /* 幽灵变体:与默认变体唯一差异是边框透明(保 1px 几何等高),
+     背景/反馈样式全部继承基类。 */
   .text-button--ghost {
     border-color: transparent;
-    background: transparent;
   }
 
   @media (hover: hover) and (pointer: fine) {
@@ -37,17 +37,12 @@
 
     .text-button--ghost:not(:disabled):hover {
       border-color: transparent;
-      background: var(--color-bg-hover);
     }
   }
 
   .text-button:not(:disabled):active {
     background: var(--color-bg-hover);
     transform: scale(var(--press-scale));
-  }
-
-  .text-button--ghost:not(:disabled):active {
-    background: var(--color-bg-hover);
   }
 
   .text-button:disabled {
@@ -60,7 +55,6 @@
 
   .text-button--ghost:disabled {
     border-color: transparent;
-    background: transparent;
   }
 
   .text-button:focus-visible {
