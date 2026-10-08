@@ -39,7 +39,7 @@
     "test:typecheck": "tsc -p tsconfig.json --noEmit --pretty false"
   },
   "dependencies": {
-    "@tiptap/core": "3.27.0",
+    "@tiptap/core": "3.31.4",
     "lucide-react": "1.24.0",
     "weimo-ui-core": "workspace:*",
     "weimo-ui-image": "workspace:*",

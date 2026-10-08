@@ -49,8 +49,6 @@ type ListItemRenderContext = {
   parentType?: string
 }
 
-const baseOrderedListParseMarkdown = OrderedList.config.parseMarkdown
-
 function isMarkerStyle(value: unknown): value is ParenthesizedListMarkerStyle {
   return value === PAREN_UPPER_ROMAN_MARKER_STYLE || value === PAREN_DECIMAL_MARKER_STYLE
 }
@@ -244,7 +242,7 @@ export const MdEditorOrderedList = OrderedList.extend({
     token: MarkdownToken,
     helpers: MarkdownParseHelpers,
   ): MarkdownParseResult {
-    const parsed = baseOrderedListParseMarkdown?.(token, helpers)
+    const parsed = this.parent?.(token, helpers)
 
     if (!parsed || Array.isArray(parsed) || !isMarkerStyle(token.markerStyle)) {
       return parsed ?? []
