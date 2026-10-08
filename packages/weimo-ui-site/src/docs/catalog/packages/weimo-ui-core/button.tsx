@@ -32,6 +32,9 @@ function TextButtonPreview() {
     >
       <div className="text-button-preview" aria-label="TextButton 状态预览">
         <TextButton disabled={disabled}>文本按钮</TextButton>
+        <TextButton disabled={disabled} variant="ghost">
+          幽灵文本按钮
+        </TextButton>
       </div>
     </ComponentPreviewCard>
   )
@@ -180,6 +183,7 @@ export const buttonDefinition = {
     'FrostedIconButton',
     'FrostedIconButtonGroup',
     '文本按钮',
+    '幽灵文本按钮',
     '幽灵图标按钮',
     '磨砂图标按钮',
     '磨砂图标按钮组',

@@ -505,7 +505,7 @@
       "name": "text-button",
       "type": "registry:ui",
       "title": "Text Button",
-      "description": "A small bordered text button with shared hover, active, and disabled token feedback.",
+      "description": "A small text button with bordered and ghost variants sharing hover, active, and disabled token feedback.",
       "categories": [
         "action"
       ],

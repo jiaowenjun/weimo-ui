@@ -22,9 +22,21 @@
       color 160ms ease;
   }
 
+  /* === Variants === */
+  /* 幽灵变体:边框置透明而非删除,保住 1px 几何与默认变体同行等高。 */
+  .text-button--ghost {
+    border-color: transparent;
+    background: transparent;
+  }
+
   @media (hover: hover) and (pointer: fine) {
     .text-button:not(:disabled):hover {
       border-color: var(--color-border-emphasis);
+      background: var(--color-bg-hover);
+    }
+
+    .text-button--ghost:not(:disabled):hover {
+      border-color: transparent;
       background: var(--color-bg-hover);
     }
   }
@@ -34,12 +46,21 @@
     transform: scale(var(--press-scale));
   }
 
+  .text-button--ghost:not(:disabled):active {
+    background: var(--color-bg-hover);
+  }
+
   .text-button:disabled {
     cursor: default;
     transform: none;
     color: var(--color-text-disabled);
     border-color: var(--color-border-disabled);
     background: var(--color-bg-card);
+  }
+
+  .text-button--ghost:disabled {
+    border-color: transparent;
+    background: transparent;
   }
 
   .text-button:focus-visible {

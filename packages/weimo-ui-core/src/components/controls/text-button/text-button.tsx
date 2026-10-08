@@ -4,12 +4,17 @@ import { cn } from 'weimo-ui-core/lib/utils'
 
 import './text-button.css'
 
-export type TextButtonProps = ComponentPropsWithoutRef<'button'>
+export type TextButtonVariant = 'default' | 'ghost'
+
+export type TextButtonProps = ComponentPropsWithoutRef<'button'> & {
+  variant?: TextButtonVariant
+}
 
 export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(function TextButton(
   {
     className,
     type = 'button',
+    variant = 'default',
     ...props
   },
   ref,
@@ -17,7 +22,11 @@ export const TextButton = forwardRef<HTMLButtonElement, TextButtonProps>(functio
   return (
     <button
       {...props}
-      className={cn('text-button', className)}
+      className={cn(
+        'text-button',
+        variant === 'ghost' && 'text-button--ghost',
+        className,
+      )}
       ref={ref}
       type={type}
     />
