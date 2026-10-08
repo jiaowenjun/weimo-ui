@@ -52,7 +52,7 @@ const componentDefinitionSources = {
     readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/md-editor-demos.tsx'),
   ].join('\n'),
   bar: readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/bar.tsx'),
-  'page-layout': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/page-layout.tsx'),
+  sidebar: readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/sidebar.tsx'),
   'capsule-button': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule-button.tsx'),
 }
 const componentDefinitionsSource = [
@@ -209,7 +209,7 @@ for (const componentId of [
   'menu',
   'surface',
   'bar',
-  'page-layout',
+  'sidebar',
   'card-tool-bar',
   'capsule-button',
 ]) {
@@ -413,7 +413,7 @@ for (const snippet of [
   '<SideBarDrawerPreview />',
 ]) {
   assert.ok(
-    componentDefinitionSources['page-layout'].includes(snippet),
+    componentDefinitionSources['sidebar'].includes(snippet),
     `SideBar component definition must include ${snippet}.`,
   )
 }
@@ -439,11 +439,17 @@ for (const snippet of [
 }
 
 assert.ok(
-  !componentDefinitionSources['page-layout'].includes('preview: ({ onOpenSidebar })') &&
-    !componentDefinitionSources['page-layout'].includes('preview: ({onOpenSidebar})') &&
-    !componentDefinitionSources['page-layout'].includes('onClick={onOpenSidebar}') &&
+  !componentDefinitionSources['sidebar'].includes('preview: ({ onOpenSidebar })') &&
+    !componentDefinitionSources['sidebar'].includes('preview: ({onOpenSidebar})') &&
+    !componentDefinitionSources['sidebar'].includes('onClick={onOpenSidebar}') &&
     !sidebarPreviewSource.includes('onOpenSidebar'),
   'SideBar preview drawer trigger must use local preview drawer state, not the docs shell sidebar.',
+)
+
+assert.ok(
+  !componentDefinitionSources['sidebar'].includes('TopBar') &&
+    !componentDefinitionSources['sidebar'].includes('顶部工具栏'),
+  'PageLayout docs page must not keep the TopBar demo after it moves to the bar page.',
 )
 
 assert.ok(

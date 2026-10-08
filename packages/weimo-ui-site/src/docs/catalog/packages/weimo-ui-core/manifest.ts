@@ -68,18 +68,10 @@ export const coreCatalog = {
       components: [
         { id: 'bottom-bar', name: 'BottomBar', registryName: 'bottom-bar', packageExport: './components/bottom-bar' },
         { id: 'frosted-label', name: 'FrostedLabel', registryName: 'frosted-label', packageExport: './components/frosted-label' },
-      ],
-    },
-    {
-      id: 'page-layout',
-      name: '页面布局',
-      exportName: 'SideBar',
-      registryName: 'sidebar',
-      packageExport: './components/sidebar',
-      components: [
         { id: 'top-bar', name: 'TopBar', registryName: 'top-bar', packageExport: './components/top-bar' },
       ],
     },
+    { id: 'sidebar', name: '侧边栏', exportName: 'SideBar', registryName: 'sidebar', packageExport: './components/sidebar' },
     { id: 'base-card', name: '基础卡片', exportName: 'BaseCard', registryName: 'base-card', packageExport: './components/base-card' },
     { id: 'component-preview-card', name: '预览卡片', exportName: 'ComponentPreviewCard', registryName: 'component-preview-card', packageExport: './components/component-preview-card' },
   ],

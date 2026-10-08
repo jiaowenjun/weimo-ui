@@ -1,4 +1,4 @@
-import { Check, Plus, Search, X } from 'lucide-react'
+import { Check, Menu, Plus, Search, X } from 'lucide-react'
 
 import { BottomBar } from 'weimo-ui-core/components/bottom-bar'
 import { CardSurface } from 'weimo-ui-core/components/card-surface'
@@ -11,6 +11,7 @@ import {
   FrostedIconButtonGroup,
   FrostedIconGroupButton,
 } from 'weimo-ui-core/components/frosted-icon-button-group'
+import { TopBar } from 'weimo-ui-core/components/top-bar'
 import type { ComponentDefinition } from '../../component-docs'
 import { GlassPreviewCard } from '../../../previews/glass-preview-card'
 
@@ -93,12 +94,50 @@ function FloatBarDemo() {
   )
 }
 
+function renderTopBarSidebarButton() {
+  return (
+    <FrostedIconButton aria-label="打开侧边栏">
+      <Menu />
+    </FrostedIconButton>
+  )
+}
+
+function renderTopBarSearchButton() {
+  return (
+    <FrostedIconButton aria-label="搜索">
+      <Search />
+    </FrostedIconButton>
+  )
+}
+
+// 顶部工具栏示例:标题胶囊与图标钮均为磨砂材质(与浮动/底部工具栏同
+// 规则,图标钮用默认尺寸档),组件各自采样画布 tone 自适应。
+function TopBarDemo() {
+  return (
+    <GlassPreviewCard label="顶部工具栏">
+      <div className="frosted-toolbar-preview">
+        <TopBar
+          className="top-bar-preview"
+          leftSlot={
+            <>
+              {renderTopBarSidebarButton()}
+              <FrostedLabel size="lg">页面标题</FrostedLabel>
+            </>
+          }
+          rightSlot={renderTopBarSearchButton()}
+        />
+      </div>
+    </GlassPreviewCard>
+  )
+}
+
 // Docs definitions intentionally colocate preview components with exported page metadata.
 function BarDemo() {
   return (
     <>
       <FrostedLabelDemo />
       <FloatBarDemo />
+      <TopBarDemo />
       <BottomBarDemo />
     </>
   )
@@ -106,16 +145,18 @@ function BarDemo() {
 
 export const barDefinition = {
   id: 'bar',
-  summary: '磨砂标签与浮动/底部工具栏总览',
+  summary: '磨砂标签与浮动/顶部/底部工具栏总览',
   status: 'Ready',
   frame: 'plain',
   searchAliases: [
     'BottomBar',
     'FloatBar',
     'FrostedLabel',
+    'TopBar',
     '磨砂标签',
     '底部操作栏',
     '浮动工具栏',
+    '顶部工具栏',
   ],
   preview: () => <BarDemo />,
 } satisfies ComponentDefinition

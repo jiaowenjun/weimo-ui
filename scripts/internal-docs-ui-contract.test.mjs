@@ -23,7 +23,6 @@ const tagTreeRowDefinitionSource = [
   readProjectFile('packages/weimo-ui-tagtree/src/page/tag-page.tsx'),
 ].join('\n')
 const barDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/bar.tsx')
-const pageLayoutDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/page-layout.tsx')
 const css = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const tagPageCss = readProjectFile('packages/weimo-ui-tagtree/src/page/tag-page.css')
 
@@ -233,14 +232,14 @@ const bottomBarDemoSource = sliceDemoSource(
 const floatBarDemoSource = sliceDemoSource(
   barDefinitionSource,
   'function FloatBarDemo()',
-  '// Docs definitions intentionally colocate',
+  'function renderTopBarSidebarButton',
   'FloatBarDemo',
 )
 
 // 顶部工具栏的按钮经 renderTopBarSidebarButton/renderTopBarSearchButton 渲染，
-// 因此切块从第一个 render helper 起到 TopBarDemo 结束，保证断言能覆盖到按钮本体。
+// 因此切块从第一个 render helper 起到 colocate 注释结束，保证断言能覆盖到按钮本体。
 const topBarDemoSource = sliceDemoSource(
-  pageLayoutDefinitionSource,
+  barDefinitionSource,
   'function renderTopBarSidebarButton',
   '// Docs definitions intentionally colocate',
   'TopBarDemo',

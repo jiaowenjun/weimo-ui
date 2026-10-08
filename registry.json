@@ -1034,6 +1034,32 @@
     },
     {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "top-bar",
+      "type": "registry:ui",
+      "title": "Top Bar",
+      "description": "A fixed-position blank glass top panel that renders caller-owned children.",
+      "categories": [
+        "navigation"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils"
+      ],
+      "files": [
+        {
+          "path": "packages/weimo-ui-core/src/components/layout/bars/top-bar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/top-bar.tsx"
+        },
+        {
+          "path": "packages/weimo-ui-core/src/components/layout/bars/top-bar.css",
+          "type": "registry:ui",
+          "target": "@ui/top-bar.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "sidebar",
       "type": "registry:ui",
       "title": "Sidebar",
@@ -1083,32 +1109,6 @@
           "path": "packages/weimo-ui-core/src/components/surfaces/card-surface/card-surface.css",
           "type": "registry:ui",
           "target": "@ui/card-surface.css"
-        }
-      ]
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "name": "top-bar",
-      "type": "registry:ui",
-      "title": "Top Bar",
-      "description": "A fixed-position blank glass top panel that renders caller-owned children.",
-      "categories": [
-        "navigation"
-      ],
-      "registryDependencies": [
-        "@weimo/style",
-        "@weimo/utils"
-      ],
-      "files": [
-        {
-          "path": "packages/weimo-ui-core/src/components/layout/bars/top-bar.tsx",
-          "type": "registry:ui",
-          "target": "@ui/top-bar.tsx"
-        },
-        {
-          "path": "packages/weimo-ui-core/src/components/layout/bars/top-bar.css",
-          "type": "registry:ui",
-          "target": "@ui/top-bar.css"
         }
       ]
     },

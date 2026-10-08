@@ -90,7 +90,7 @@ const componentDefinitionsSource = readProjectFile('packages/weimo-ui-site/src/d
   borderTokensDefinitionSource +
   readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/menu.tsx') +
   readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/bar.tsx') +
-  readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/page-layout.tsx') +
+  readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/sidebar.tsx') +
   readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/action-dialog.tsx') +
   readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/capsule-button.tsx') +
   mdRenderDefinitionSource

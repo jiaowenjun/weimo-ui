@@ -122,7 +122,7 @@ assert.deepEqual(
     'menu',
     'action-dialog',
     'bar',
-    'page-layout',
+    'sidebar',
     'base-card',
     'component-preview-card',
     'tag',

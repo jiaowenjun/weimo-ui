@@ -51,7 +51,6 @@ const sidebarCss = readProjectFile('packages/weimo-ui-core/src/components/layout
 const frostedLabelSource = readProjectFile('packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-label.tsx')
 const frostedLabelCss = readProjectFile('packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-label.css')
 const barDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/bar.tsx')
-const pageLayoutDefinitionSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-core/page-layout.tsx')
 const dialogSource = readProjectFile('packages/weimo-ui-core/src/components/primitives/dialog.tsx')
 const dialogCss = readProjectFile('packages/weimo-ui-core/src/components/primitives/dialog.css')
 const commandSource = readProjectFile('packages/weimo-ui-site/src/components/primitives/command.tsx')
@@ -197,7 +196,7 @@ for (const snippet of [
   )
 }
 assert.ok(
-  pageLayoutDefinitionSource.includes('<FrostedLabel size="lg">页面标题</FrostedLabel>'),
+  barDefinitionSource.includes('<FrostedLabel size="lg">页面标题</FrostedLabel>'),
   'The top toolbar demo must render its page title through the FrostedLabel lg size.',
 )
 
@@ -211,12 +210,12 @@ for (const snippet of [
   '<FrostedIconButton aria-label="搜索">',
 ]) {
   assert.ok(
-    pageLayoutDefinitionSource.includes(snippet),
+    barDefinitionSource.includes(snippet),
     `The top toolbar frosted demo must include ${snippet}.`,
   )
 }
 assert.ok(
-  !pageLayoutDefinitionSource.includes('LiquidGlass'),
+  !barDefinitionSource.includes('LiquidGlass'),
   'The top toolbar demo must be fully frosted: no liquid glass layers or tiles remain after the material switch.',
 )
 

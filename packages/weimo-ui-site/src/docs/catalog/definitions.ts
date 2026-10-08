@@ -10,7 +10,7 @@ import { sliderDefinition } from './packages/weimo-ui-core/slider'
 import { menuDefinition } from './packages/weimo-ui-core/menu'
 import { actionDialogDefinition } from './packages/weimo-ui-core/action-dialog'
 import { barDefinition } from './packages/weimo-ui-core/bar'
-import { pageLayoutDefinition } from './packages/weimo-ui-core/page-layout'
+import { sidebarDefinition } from './packages/weimo-ui-core/sidebar'
 import { baseCardDefinition } from './packages/weimo-ui-core/base-card'
 import { componentPreviewCardDefinition } from './packages/weimo-ui-core/component-preview-card'
 import { tagDefinition } from './packages/weimo-ui-tagtree/tag'
@@ -36,7 +36,7 @@ export const componentDefinitionsById = {
   menu: menuDefinition,
   'action-dialog': actionDialogDefinition,
   bar: barDefinition,
-  'page-layout': pageLayoutDefinition,
+  sidebar: sidebarDefinition,
   'base-card': baseCardDefinition,
   'component-preview-card': componentPreviewCardDefinition,
   tag: tagDefinition,
