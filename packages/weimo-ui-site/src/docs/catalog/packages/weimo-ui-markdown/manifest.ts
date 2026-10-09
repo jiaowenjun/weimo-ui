@@ -15,6 +15,13 @@ export const markdownCatalog = {
       ],
     },
     {
+      id: 'markdown-edit-simple',
+      name: '简化Markdown编辑',
+      exportName: 'MdEditorSimple',
+      registryName: 'md-editor-simple',
+      packageExport: './components/md-editor-simple',
+    },
+    {
       id: 'markdown-render',
       name: 'Markdown渲染',
       exportName: 'MdRender',

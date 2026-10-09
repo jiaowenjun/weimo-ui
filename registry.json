@@ -1337,7 +1337,8 @@
         "@tiptap/extension-table-header",
         "@tiptap/extension-table-cell",
         "@tiptap/extension-mathematics",
-        "lucide-react"
+        "lucide-react",
+        "marked"
       ],
       "name": "md-editor",
       "title": "Md Editor",
@@ -1635,6 +1636,30 @@
           "path": "packages/weimo-ui-core/src/components/surfaces/popup-surface/popup-surface.css",
           "type": "registry:ui",
           "target": "@ui/popup-surface.css"
+        }
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "type": "registry:ui",
+      "dependencies": [],
+      "name": "md-editor-simple",
+      "title": "Md Editor Simple",
+      "description": "A simplified markdown editor variant without math, tables, or inline code.",
+      "categories": [
+        "markdown",
+        "input"
+      ],
+      "registryDependencies": [
+        "@weimo/style",
+        "@weimo/utils",
+        "@weimo/md-editor"
+      ],
+      "files": [
+        {
+          "path": "packages/weimo-ui-markdown/src/components/md-editor-simple/md-editor-simple.tsx",
+          "type": "registry:ui",
+          "target": "@ui/md-editor-simple/md-editor-simple.tsx"
         }
       ]
     },

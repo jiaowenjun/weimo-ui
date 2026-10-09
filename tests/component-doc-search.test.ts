@@ -24,6 +24,8 @@ describe('component docs search', () => {
     expect(resultIds('CardSurface')).toContain('surface')
     expect(resultIds('FrostedSurface')).toContain('surface')
     expect(resultIds('PopupSurface')).toContain('surface')
+    expect(resultIds('MdEditorSimple')).toContain('markdown-edit-simple')
+    expect(resultIds('简化Markdown编辑')).toContain('markdown-edit-simple')
     expect(resultIds('MdRender')).toContain('markdown-render')
     expect(resultIds('MdRenderSimple')).toContain('markdown-render-simple')
     expect(resultIds('简化Markdown渲染')).toContain('markdown-render-simple')

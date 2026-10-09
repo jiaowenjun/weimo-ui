@@ -86,6 +86,7 @@ export function useMdEditor({
   renderImage,
   resolveImageSrc,
   value,
+  variant = 'default',
 }: Pick<
   MdEditorProps,
   | 'autoFocus'
@@ -100,6 +101,7 @@ export function useMdEditor({
   | 'renderImage'
   | 'resolveImageSrc'
   | 'value'
+  | 'variant'
 >) {
   const isControlled = value !== undefined
   const [initialValue] = useState(() => value ?? defaultValue)
@@ -165,6 +167,7 @@ export function useMdEditor({
       resolveImageSrc,
       getInteraction: interactionStore.get,
       onMathClick: handleMathClick,
+      variant,
     }),
     content: initialContent,
     contentType: hasInitialContent ? 'markdown' : undefined,

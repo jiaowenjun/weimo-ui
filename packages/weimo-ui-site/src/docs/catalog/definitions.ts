@@ -14,6 +14,7 @@ import { sidebarDefinition } from './packages/weimo-ui-core/sidebar'
 import { tagBreadDefinition } from './packages/weimo-ui-tagtree/tag-bread'
 import { tagDefinition } from './packages/weimo-ui-tagtree/tag'
 import { markdownDefinition } from './packages/weimo-ui-markdown/markdown'
+import { markdownEditSimpleDefinition } from './packages/weimo-ui-markdown/markdown-edit-simple'
 import { markdownRenderDefinition } from './packages/weimo-ui-markdown/markdown-render'
 import { markdownRenderSimpleDefinition } from './packages/weimo-ui-markdown/markdown-render-simple'
 import { markdownViewDefinition } from './packages/weimo-ui-markdown/markdown-view'
@@ -44,6 +45,7 @@ export const componentDefinitionsById = {
   'tag-bread': tagBreadDefinition,
   tag: tagDefinition,
   markdown: markdownDefinition,
+  'markdown-edit-simple': markdownEditSimpleDefinition,
   'markdown-render': markdownRenderDefinition,
   'markdown-render-simple': markdownRenderSimpleDefinition,
   'markdown-view': markdownViewDefinition,

@@ -12,6 +12,10 @@ import { createMdEditorExtensions } from '../packages/weimo-ui-markdown/src/comp
 import { normalizeEditorMarkdown } from '../packages/weimo-ui-markdown/src/components/md-editor/md-editor-markdown'
 import type { MdEditorHandle } from '../packages/weimo-ui-markdown/src/components/md-editor/md-editor-types'
 import { MdEditor } from '../packages/weimo-ui-markdown/src/components/md-editor'
+import {
+  MdEditorSimple,
+  type MdEditorSimpleHandle,
+} from '../packages/weimo-ui-markdown/src/components/md-editor-simple/md-editor-simple'
 
 const editors: Editor[] = []
 
@@ -109,7 +113,45 @@ describe('MdEditor markdown model', () => {
     expect(normalized).toBe(`> ${WEIMO_CENTERED_QUOTE_MARKER}居中引用\n> 第二行`)
     expect(normalizeEditorMarkdown(normalized)).toBe(authored)
   })
+
+  it('drops math, table, task-list, inline-code, and strike support in the simple variant', () => {
+    const editor = new Editor({
+      content: '行内 $x^2$ 公式与 `code` 标记',
+      contentType: 'markdown',
+      extensions: createMdEditorExtensions({
+        getInteraction: () => ({ disabled: false }),
+        variant: 'simple',
+      }),
+    })
+    editors.push(editor)
+
+    expect(editor.schema.nodes.inlineMath).toBeUndefined()
+    expect(editor.schema.nodes.blockMath).toBeUndefined()
+    expect(editor.schema.nodes.table).toBeUndefined()
+    expect(editor.schema.nodes.taskList).toBeUndefined()
+    expect(editor.schema.marks.code).toBeUndefined()
+    expect(editor.schema.marks.strike).toBeUndefined()
+    expect(editor.getMarkdown()).toContain('$x^2$')
+    expect(editor.getMarkdown()).not.toContain('`')
+  })
+
+  it('falls GFM tables and task lists back to literal text in the simple variant', () => {
+    const editor = new Editor({
+      content: ['| a | b |', '| --- | --- |', '| 1 | 2 |', '', '- [ ] 任务'].join('\n'),
+      contentType: 'markdown',
+      extensions: createMdEditorExtensions({
+        getInteraction: () => ({ disabled: false }),
+        variant: 'simple',
+      }),
+    })
+    editors.push(editor)
+
+    expect(editor.state.doc.textContent).toContain('a')
+    expect(editor.state.doc.textContent).toContain('任务')
+    expect(editor.getMarkdown()).toContain('任务')
+  })
 })
+
 
 describe('MdEditor public component', () => {
   it('exposes normalized Markdown through its handle and supports clear', async () => {
@@ -130,6 +172,28 @@ describe('MdEditor public component', () => {
 
     await waitFor(() => expect(ref.current?.getMarkdown()).toBe(''))
     expect(onChange).toHaveBeenCalledWith('')
+  })
+
+  it('renders MdEditorSimple without math, table, or inline-code DOM', async () => {
+    const ref = createRef<MdEditorSimpleHandle>()
+    const onChange = vi.fn()
+    render(
+      <MdEditorSimple
+        defaultValue={'$x^2$ 与 `code`\n\n| a | b |\n| --- | --- |\n| 1 | 2 |'}
+        onChange={onChange}
+        ref={ref}
+      />,
+    )
+
+    await waitFor(() => expect(ref.current?.getMarkdown()).toContain('$x^2$'))
+
+    const content = document.querySelector('.md-editor__content')
+
+    expect(content).not.toBeNull()
+    expect(content?.querySelector('table')).toBeNull()
+    expect(content?.querySelector('code')).toBeNull()
+    expect(content?.querySelector('.katex')).toBeNull()
+    expect(ref.current?.getMarkdown()).not.toContain('`')
   })
 
   it('tracks controlled values without emitting a synthetic change', async () => {
@@ -153,7 +217,9 @@ describe('MdEditor public component', () => {
       configurable: true,
       value: 'Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/605.1.15 Version/18.0 Safari/605.1.15',
     })
-    const focusSpy = vi.spyOn(HTMLElement.prototype, 'focus').mockImplementation(function () {
+    const focusSpy = vi.spyOn(HTMLElement.prototype, 'focus').mockImplementation(function (
+      this: HTMLElement,
+    ) {
       if (
         flushedDuringFocus ||
         !activeEditor ||

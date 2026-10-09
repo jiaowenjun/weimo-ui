@@ -59,6 +59,15 @@ const mdRenderSimpleDefinitionSource = readProjectFile(
 const mdRenderSimpleComponentSource = readProjectFile(
   'packages/weimo-ui-markdown/src/components/md-render-simple/md-render-simple.tsx',
 )
+const mdEditorSimpleDefinitionSource = readProjectFile(
+  'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown-edit-simple.tsx',
+)
+const mdEditorSimpleComponentSource = readProjectFile(
+  'packages/weimo-ui-markdown/src/components/md-editor-simple/md-editor-simple.tsx',
+)
+const mdEditorExtensionsSource = readProjectFile(
+  'packages/weimo-ui-markdown/src/components/md-editor/md-editor-extensions.ts',
+)
 const markdownSampleSource = readProjectFile(
   'packages/weimo-ui-site/src/docs/catalog/fixtures/markdown-sample.ts',
 )
@@ -69,9 +78,11 @@ const markdownPackageJson = JSON.parse(readProjectFile('packages/weimo-ui-markdo
 const rootRegistry = JSON.parse(readProjectFile('registry.json'))
 const standaloneMdRenderRegistry = JSON.parse(readProjectFile('registry/md-render.json'))
 const standaloneMdRenderSimpleRegistry = JSON.parse(readProjectFile('registry/md-render-simple.json'))
+const standaloneMdEditorSimpleRegistry = JSON.parse(readProjectFile('registry/md-editor-simple.json'))
 const styleRegistry = JSON.parse(readProjectFile('registry/style.json'))
 const rootMdRenderItem = rootRegistry.items.find((item) => item.name === 'md-render')
 const rootMdRenderSimpleItem = rootRegistry.items.find((item) => item.name === 'md-render-simple')
+const rootMdEditorSimpleItem = rootRegistry.items.find((item) => item.name === 'md-editor-simple')
 const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 
 const tokenGridBlock = cssBlockFor(appCss, '.app-shell__content--token-grid')
@@ -280,6 +291,39 @@ assert.ok(
     mdRenderSimpleDefinitionSource.includes('mdRenderSimpleSample') &&
     !mdRenderSimpleDefinitionSource.includes('mdRenderSample'),
   'The simplified Markdown render page must render the MdRenderSimple card with its own sample.',
+)
+assert.ok(
+  mdEditorSimpleDefinitionSource.includes(
+    "import { MdEditorSimple } from 'weimo-ui-markdown/components/md-editor-simple'",
+  ) &&
+    mdEditorSimpleDefinitionSource.includes('label="简化Markdown编辑器"') &&
+    mdEditorSimpleDefinitionSource.includes('mdRenderSimpleSample') &&
+    !mdEditorSimpleDefinitionSource.includes('MathEditor'),
+  'The simplified Markdown edit page must render the MdEditorSimple card without the math editor card.',
+)
+assert.ok(
+  mdEditorExtensionsSource.includes('variant?: MdEditorVariant') &&
+    mdEditorExtensionsSource.includes("const isSimple = options.variant === 'simple'") &&
+    mdEditorExtensionsSource.includes('{ code: false, strike: false }') &&
+    mdEditorExtensionsSource.includes('marked: new Marked()') &&
+    mdEditorExtensionsSource.includes('markedOptions: { gfm: false }') &&
+    mdEditorExtensionsSource.includes("markdownTokenName: 'codespan'") &&
+    mdEditorExtensionsSource.includes('...(isSimple'),
+  'MdEditor must expose a simple variant preset that drops inline code, strike marks, and GFM parsing on a private marked instance.',
+)
+assert.ok(
+  mdEditorSimpleComponentSource.includes("import { useMdEditor } from '../md-editor/use-md-editor'") &&
+    mdEditorSimpleComponentSource.includes("variant: 'simple'") &&
+    mdEditorSimpleComponentSource.includes(
+      "export type MdEditorSimpleHandle = Omit<MdEditorHandle, 'convertSelectionToInlineMath'>",
+    ) &&
+    mdEditorSimpleComponentSource.includes(
+      "export type MdEditorSimpleProps = Omit<MdEditorProps, 'variant'>",
+    ) &&
+    mdEditorSimpleComponentSource.includes("MdEditorSimple.displayName = 'MdEditorSimple'") &&
+    !mdEditorSimpleComponentSource.includes("components/md-editor'") &&
+    !mdEditorSimpleComponentSource.includes('<MdEditor '),
+  'MdEditorSimple must be a standalone implementation that composes the shared editor hook without wrapping MdEditor or exposing math helpers.',
 )
 assert.ok(
   mdRenderSource.includes("export type MdRenderVariant = 'default' | 'simple'") &&
@@ -1458,6 +1502,21 @@ assert.ok(
     !rootMdRenderSimpleItem.dependencies.includes('rehype-katex') &&
     !rootMdRenderSimpleItem.dependencies.includes('remark-gfm'),
   'The MdRenderSimple registry item must reuse MdRender instead of shipping its own math or table pipeline.',
+)
+assert.ok(
+  rootMdEditorSimpleItem,
+  'Root registry must include the @weimo/md-editor-simple item.',
+)
+assert.deepEqual(
+  standaloneMdEditorSimpleRegistry,
+  rootMdEditorSimpleItem,
+  'registry/md-editor-simple.json must match the root registry md-editor-simple payload.',
+)
+assert.ok(
+  rootMdEditorSimpleItem.registryDependencies.includes('@weimo/md-editor') &&
+    !rootMdEditorSimpleItem.dependencies.includes('@tiptap/extension-table') &&
+    !rootMdEditorSimpleItem.dependencies.includes('@tiptap/extension-mathematics'),
+  'The MdEditorSimple registry item must reuse MdEditor instead of shipping its own math or table extensions.',
 )
 assert.deepEqual(
   standaloneMdRenderRegistry,

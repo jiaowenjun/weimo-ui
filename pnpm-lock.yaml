@@ -513,6 +513,9 @@ importers:
       lucide-react:
         specifier: 1.24.0
         version: 1.24.0(react@19.2.7)
+      marked:
+        specifier: ^17.0.1
+        version: 17.0.6
       react:
         specifier: ^19.0.0
         version: 19.2.7

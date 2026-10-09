@@ -55,6 +55,7 @@ const componentDefinitionSources = {
     readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown.tsx'),
     readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/md-editor-demos.tsx'),
   ].join('\n'),
+  'markdown-edit-simple': readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown-edit-simple.tsx'),
   'markdown-render': [
     readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown-render.tsx'),
     readProjectFile('packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown-styles.tsx'),

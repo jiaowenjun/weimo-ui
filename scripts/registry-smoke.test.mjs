@@ -90,6 +90,7 @@ function writeConsumerProject(consumerDir, registryUrl) {
           'class-variance-authority': '^0.7.1',
           katex: '^0.16.43',
           'lucide-react': '^0.555.0',
+          'marked': '^17.0.1',
           'remark-parse': '^11.0.0',
           'remark-stringify': '^11.0.0',
           unified: '^11.0.0',
@@ -176,6 +177,7 @@ function writeConsumerProject(consumerDir, registryUrl) {
             'weimo-ui-markdown/components/deferred-md-editor-toolbar': ['./src/components/ui/deferred-md-editor-toolbar.tsx'],
             'weimo-ui-markdown/components/math-editor': ['./src/components/ui/md-editor/math-editor.tsx'],
             'weimo-ui-markdown/components/md-editor': ['./src/components/ui/md-editor/index.tsx'],
+            'weimo-ui-markdown/components/md-editor-simple': ['./src/components/ui/md-editor-simple/md-editor-simple.tsx'],
             'weimo-ui-markdown/components/md-render': ['./src/components/ui/md-render/md-render.tsx'],
             'weimo-ui-markdown/components/md-render-simple': ['./src/components/ui/md-render-simple/md-render-simple.tsx'],
             'weimo-ui-markdown/components/md-view': ['./src/components/ui/md-view/md-view.tsx'],
@@ -252,6 +254,7 @@ import { TagTreeRow, type TagTreeRowProps } from "@/components/ui/tag-tree/tag-t
 import { CapsuleButton, type CapsuleButtonState } from "@/components/ui/capsule-button"
 import { TagBar } from "@/components/ui/tags/tag-bar"
 import { MdEditor } from "@/components/ui/md-editor"
+import { MdEditorSimple } from "@/components/ui/md-editor-simple/md-editor-simple"
 import { MdRender } from "@/components/ui/md-render/md-render"
 import { MdRenderSimple } from "@/components/ui/md-render-simple/md-render-simple"
 import { MdView } from "@/components/ui/md-view/md-view"
@@ -376,6 +379,7 @@ export function RegistryConsumerContract() {
       <MdRender content={"## Render\\n\\ncontent"} />
       <MdRenderSimple content={"## Simple\\n\\ncontent"} />
       <MdEditor value={"## Editor"} onChange={() => {}} />
+      <MdEditorSimple value={"## Simple Editor"} onChange={() => {}} />
       <MdView mode="view" value={"## View"} />
       <MathEditor dialog={mathDialog} onOpenChange={() => {}} onSave={() => {}} />
       <FrostedIconButton aria-label="Open">
@@ -632,6 +636,7 @@ try {
     '@weimo/capsule-button',
     '@weimo/tag-bar',
     '@weimo/md-editor',
+    '@weimo/md-editor-simple',
     '@weimo/md-render',
     '@weimo/md-render-simple',
     '@weimo/md-view',
@@ -666,6 +671,7 @@ try {
   )
   for (const file of [
     'image-view.json',
+    'md-editor-simple.json',
     'md-render.json',
     'md-render-simple.json',
     'capsule-button.json',
@@ -871,6 +877,10 @@ try {
   assert.ok(
     existsSync(join(consumerDir, 'src/components/ui/md-render-simple/md-render-simple.tsx')),
     'shadcn add must write the MdRenderSimple variant wrapper.',
+  )
+  assert.ok(
+    existsSync(join(consumerDir, 'src/components/ui/md-editor-simple/md-editor-simple.tsx')),
+    'shadcn add must write the MdEditorSimple variant wrapper.',
   )
   assert.ok(
     existsSync(join(consumerDir, 'src/components/ui/tags/tag-picker/index.tsx')),

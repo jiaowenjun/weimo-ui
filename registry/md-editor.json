@@ -17,7 +17,8 @@
     "@tiptap/extension-table-header",
     "@tiptap/extension-table-cell",
     "@tiptap/extension-mathematics",
-    "lucide-react"
+    "lucide-react",
+    "marked"
   ],
   "name": "md-editor",
   "title": "Md Editor",

@@ -27,6 +27,7 @@ export const MdEditor = forwardRef<MdEditorHandle, MdEditorProps>(function MdEdi
     renderImage,
     resolveImageSrc,
     value,
+    variant = 'default',
   },
   ref,
 ) {
@@ -54,6 +55,7 @@ export const MdEditor = forwardRef<MdEditorHandle, MdEditorProps>(function MdEdi
     renderImage,
     resolveImageSrc,
     value,
+    variant,
   })
 
   function measureEditorContentHeight() {

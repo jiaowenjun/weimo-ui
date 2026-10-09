@@ -185,6 +185,7 @@ const promotedRegistryNames = [
   'tag-bar',
   'editable-capsule',
   'md-editor',
+  'md-editor-simple',
   'md-render',
   'md-render-simple',
   'md-view',
