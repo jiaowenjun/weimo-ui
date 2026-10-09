@@ -144,6 +144,60 @@ describe('MdEditor public component', () => {
     expect(onChange).not.toHaveBeenCalled()
   })
 
+  it('avoids stale focus transactions when Safari flushes editor changes synchronously', async () => {
+    const originalUserAgent = window.navigator.userAgent
+    let activeEditor: Editor | null = null
+    let flushedDuringFocus = false
+
+    Object.defineProperty(window.navigator, 'userAgent', {
+      configurable: true,
+      value: 'Mozilla/5.0 (Macintosh; Intel Mac OS X) AppleWebKit/605.1.15 Version/18.0 Safari/605.1.15',
+    })
+    const focusSpy = vi.spyOn(HTMLElement.prototype, 'focus').mockImplementation(function () {
+      if (
+        flushedDuringFocus ||
+        !activeEditor ||
+        !this.classList.contains('md-editor__content')
+      ) {
+        return
+      }
+
+      flushedDuringFocus = true
+      activeEditor.commands.insertContent('!')
+    })
+
+    try {
+      const ref = createRef<MdEditorHandle>()
+      const { rerender } = render(
+        <MdEditor
+          autoFocus={false}
+          defaultValue="Draft"
+          onEditorChange={(editor) => { activeEditor = editor }}
+          ref={ref}
+        />,
+      )
+
+      await waitFor(() => expect(activeEditor).not.toBeNull())
+      rerender(
+        <MdEditor
+          autoFocus
+          defaultValue="Draft"
+          onEditorChange={(editor) => { activeEditor = editor }}
+          ref={ref}
+        />,
+      )
+
+      await waitFor(() => expect(ref.current?.getMarkdown()).toBe('Draft!'))
+      expect(flushedDuringFocus).toBe(true)
+    } finally {
+      focusSpy.mockRestore()
+      Object.defineProperty(window.navigator, 'userAgent', {
+        configurable: true,
+        value: originalUserAgent,
+      })
+    }
+  })
+
   it('routes Mod-S and Escape through the editor interaction contract', async () => {
     const onCancel = vi.fn()
     const onSave = vi.fn()

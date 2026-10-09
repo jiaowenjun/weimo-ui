@@ -170,7 +170,7 @@ export function useCardEditTransition({
     exitToolbarTransition.clear()
     if (focusEditorAfterEnterAnimationRef.current) {
       focusEditorAfterEnterAnimationRef.current = false
-      editorInstance?.commands.focus('end')
+      mdViewRef.current?.focus('end')
     }
     if (clearEditLayoutAfterHeightAnimationRef.current) {
       clearEditLayoutAfterHeightAnimationRef.current = false
@@ -218,7 +218,7 @@ export function useCardEditTransition({
     if (!editorInstance) return
 
     initialEditAutoFocusCompletedRef.current = true
-    editorInstance.commands.focus('end')
+    mdViewRef.current?.focus('end')
   }
 
   function resolveInitialEditLayout() {
@@ -313,7 +313,7 @@ export function useCardEditTransition({
     if (!pendingLayout) {
       if (canUseMarkdownEditor && focusEditorAfterEnterAnimationRef.current) {
         focusEditorAfterEnterAnimationRef.current = false
-        editorInstance?.commands.focus('end')
+        mdViewRef.current?.focus('end')
       }
       return
     }

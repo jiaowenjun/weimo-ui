@@ -116,6 +116,7 @@ function formatMdViewMarkdown(markdown: string) {
 
 export type MdViewHandle = {
   convertSelectionToInlineMath: MdEditorHandle['convertSelectionToInlineMath']
+  focus: MdEditorHandle['focus']
   formatContent: MdEditorHandle['formatContent']
   getContentHeight: () => number
 }
@@ -189,6 +190,7 @@ export const MdView = forwardRef<MdViewHandle, MdViewProps>(function MdView(
     () => ({
       convertSelectionToInlineMath: () =>
         editorRef.current?.convertSelectionToInlineMath() ?? false,
+      focus: (position) => editorRef.current?.focus(position),
       formatContent: (options) =>
         editorRef.current?.formatContent(options) ?? value,
       getContentHeight: () =>

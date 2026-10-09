@@ -8,8 +8,10 @@ export type MdEditorFormatContentOptions = {
   formatMarkdown?: (markdown: string) => string
 }
 
+export type MdEditorFocusPosition = 'start' | 'end'
+
 export type MdEditorHandle = {
-  focus: () => void
+  focus: (position?: MdEditorFocusPosition) => void
   clear: () => void
   convertSelectionToInlineMath: () => boolean
   formatContent: (options?: MdEditorFormatContentOptions) => string

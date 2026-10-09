@@ -1,11 +1,17 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import type { JSONContent } from '@tiptap/core'
+import {
+  isAndroid,
+  isSafari,
+  isiOS,
+  type Editor,
+  type JSONContent,
+} from '@tiptap/core'
 import { useEditor } from '@tiptap/react'
 
 import { normalizeCenteredQuoteSyntax } from '../markdown/centered-quote'
 import { createMdEditorExtensions, type MdEditorMathClickPayload } from './md-editor-extensions'
 import { normalizeEditorMarkdown } from './md-editor-markdown'
-import type { MdEditorProps } from './md-editor-types'
+import type { MdEditorFocusPosition, MdEditorProps } from './md-editor-types'
 
 export const EMPTY_EDITOR_DOCUMENT = {
   type: 'doc',
@@ -26,6 +32,45 @@ function resolveInitialContent(content: string) {
       ? normalizeCenteredQuoteSyntax(normalized)
       : EMPTY_EDITOR_DOCUMENT,
   }
+}
+
+function focusEditor(editor: Editor, position?: MdEditorFocusPosition) {
+  const needsNativeFocusBeforeFrame = isSafari() || isiOS() || isAndroid()
+
+  if (!needsNativeFocusBeforeFrame) {
+    editor.commands.focus(position)
+    return
+  }
+
+  // Tiptap's Safari focus branch calls native focus before its command
+  // transaction is dispatched. WebKit can synchronously flush DOM changes
+  // during that focus, making the pending transaction stale. Commit the
+  // selection first, then focus without keeping an old transaction alive.
+  if (position) {
+    editor.commands.setTextSelection(position === 'start' ? 0 : editor.state.doc.content.size)
+  }
+
+  const view = editor.view
+  const dom = view.dom as HTMLElement
+
+  if (isiOS() || isAndroid()) {
+    dom.focus()
+  } else {
+    try {
+      dom.focus({ preventScroll: true })
+    } catch {
+      dom.focus()
+    }
+  }
+
+  const ownerWindow = dom.ownerDocument.defaultView ?? window
+
+  ownerWindow.requestAnimationFrame(() => {
+    if (editor.isDestroyed) return
+
+    view.focus()
+    editor.commands.scrollIntoView()
+  })
 }
 
 export function useMdEditor({
@@ -156,7 +201,7 @@ export function useMdEditor({
   useEffect(() => {
     if (!autoFocus || !editor) return
 
-    editor.commands.focus(autoFocusPosition === 'start' ? 'start' : 'end')
+    focusEditor(editor, autoFocusPosition)
   }, [autoFocus, autoFocusPosition, editor])
 
   useEffect(() => {
@@ -192,10 +237,10 @@ export function useMdEditor({
     emitMarkdown('')
   }, [disabled, editor, emitMarkdown])
 
-  const focus = useCallback(() => {
+  const focus = useCallback((position?: MdEditorFocusPosition) => {
     if (disabled) return
 
-    editor?.commands.focus()
+    if (editor) focusEditor(editor, position)
   }, [disabled, editor])
 
   const saveMathDialog = useCallback(
