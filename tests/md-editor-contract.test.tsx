@@ -12,6 +12,7 @@ import { createMdEditorExtensions } from '../packages/weimo-ui-markdown/src/comp
 import { normalizeEditorMarkdown } from '../packages/weimo-ui-markdown/src/components/md-editor/md-editor-markdown'
 import type { MdEditorHandle } from '../packages/weimo-ui-markdown/src/components/md-editor/md-editor-types'
 import { MdEditor } from '../packages/weimo-ui-markdown/src/components/md-editor'
+import { createMdEditorSimpleExtensions } from '../packages/weimo-ui-markdown/src/components/md-editor-simple/md-editor-simple-extensions'
 import {
   MdEditorSimple,
   type MdEditorSimpleHandle,
@@ -114,13 +115,12 @@ describe('MdEditor markdown model', () => {
     expect(normalizeEditorMarkdown(normalized)).toBe(authored)
   })
 
-  it('drops math, table, task-list, inline-code, and strike support in the simple variant', () => {
+  it('drops math, table, task-list, inline-code, and strike support in the simple preset', () => {
     const editor = new Editor({
       content: '行内 $x^2$ 公式与 `code` 标记',
       contentType: 'markdown',
-      extensions: createMdEditorExtensions({
+      extensions: createMdEditorSimpleExtensions({
         getInteraction: () => ({ disabled: false }),
-        variant: 'simple',
       }),
     })
     editors.push(editor)
@@ -135,13 +135,12 @@ describe('MdEditor markdown model', () => {
     expect(editor.getMarkdown()).not.toContain('`')
   })
 
-  it('falls GFM tables and task lists back to literal text in the simple variant', () => {
+  it('falls GFM tables and task lists back to literal text in the simple preset', () => {
     const editor = new Editor({
       content: ['| a | b |', '| --- | --- |', '| 1 | 2 |', '', '- [ ] 任务'].join('\n'),
       contentType: 'markdown',
-      extensions: createMdEditorExtensions({
+      extensions: createMdEditorSimpleExtensions({
         getInteraction: () => ({ disabled: false }),
-        variant: 'simple',
       }),
     })
     editors.push(editor)

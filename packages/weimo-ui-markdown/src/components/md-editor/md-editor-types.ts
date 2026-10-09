@@ -19,8 +19,6 @@ export type MdEditorHandle = {
   getContentHeight: () => number
 }
 
-export type MdEditorVariant = 'default' | 'simple'
-
 export type MdEditorProps = {
   value?: string
   defaultValue?: string
@@ -35,7 +33,6 @@ export type MdEditorProps = {
   disabled?: boolean
   autoFocus?: boolean
   autoFocusPosition?: 'start' | 'end'
-  variant?: MdEditorVariant
   className?: string
   editorClassName?: string
 }

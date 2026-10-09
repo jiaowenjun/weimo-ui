@@ -1,79 +1,17 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import {
-  isAndroid,
-  isSafari,
-  isiOS,
-  type Editor,
-  type JSONContent,
-} from '@tiptap/core'
 import { useEditor } from '@tiptap/react'
 
 import { normalizeCenteredQuoteSyntax } from '../markdown/centered-quote'
-import { createMdEditorExtensions, type MdEditorMathClickPayload } from './md-editor-extensions'
-import { normalizeEditorMarkdown } from './md-editor-markdown'
-import type { MdEditorFocusPosition, MdEditorProps } from './md-editor-types'
+import { normalizeEditorMarkdown } from '../md-editor/md-editor-markdown'
+import type { MdEditorFocusPosition, MdEditorProps } from '../md-editor/md-editor-types'
+import {
+  focusEditor,
+  normalizeMarkdown,
+  resolveInitialContent,
+} from '../md-editor/use-md-editor'
+import { createMdEditorSimpleExtensions } from './md-editor-simple-extensions'
 
-export const EMPTY_EDITOR_DOCUMENT = {
-  type: 'doc',
-  content: [{ type: 'paragraph' }],
-} satisfies JSONContent
-
-export function normalizeMarkdown(markdown: string) {
-  return markdown.trim().length > 0 ? markdown : ''
-}
-
-export function resolveInitialContent(content: string) {
-  const normalized = normalizeMarkdown(content)
-  const hasInitialContent = normalized.length > 0
-
-  return {
-    hasInitialContent,
-    initialContent: hasInitialContent
-      ? normalizeCenteredQuoteSyntax(normalized)
-      : EMPTY_EDITOR_DOCUMENT,
-  }
-}
-
-export function focusEditor(editor: Editor, position?: MdEditorFocusPosition) {
-  const needsNativeFocusBeforeFrame = isSafari() || isiOS() || isAndroid()
-
-  if (!needsNativeFocusBeforeFrame) {
-    editor.commands.focus(position)
-    return
-  }
-
-  // Tiptap's Safari focus branch calls native focus before its command
-  // transaction is dispatched. WebKit can synchronously flush DOM changes
-  // during that focus, making the pending transaction stale. Commit the
-  // selection first, then focus without keeping an old transaction alive.
-  if (position) {
-    editor.commands.setTextSelection(position === 'start' ? 0 : editor.state.doc.content.size)
-  }
-
-  const view = editor.view
-  const dom = view.dom as HTMLElement
-
-  if (isiOS() || isAndroid()) {
-    dom.focus()
-  } else {
-    try {
-      dom.focus({ preventScroll: true })
-    } catch {
-      dom.focus()
-    }
-  }
-
-  const ownerWindow = dom.ownerDocument.defaultView ?? window
-
-  ownerWindow.requestAnimationFrame(() => {
-    if (editor.isDestroyed) return
-
-    view.focus()
-    editor.commands.scrollIntoView()
-  })
-}
-
-export function useMdEditor({
+export function useMdEditorSimple({
   autoFocus = false,
   autoFocusPosition = 'end',
   defaultValue = '',
@@ -106,8 +44,6 @@ export function useMdEditor({
   const { hasInitialContent, initialContent } = resolveInitialContent(initialValue)
   const [isEmpty, setIsEmpty] = useState(!hasInitialContent)
   const [internalValue, setInternalValue] = useState(initialValue)
-  const [mathDialog, setMathDialog] = useState<MdEditorMathClickPayload | null>(null)
-  const [mathError, setMathError] = useState<string | null>(null)
   const onChangeRef = useRef(onChange)
   const onEditorChangeRef = useRef(onEditorChange)
   const onSaveRef = useRef(onSave)
@@ -146,25 +82,12 @@ export function useMdEditor({
     [isControlled],
   )
 
-  const handleMathClick = useCallback((payload: MdEditorMathClickPayload) => {
-    if (disabledRef.current) return
-
-    setMathError(null)
-    setMathDialog(payload)
-  }, [])
-
-  const closeMathDialog = useCallback(() => {
-    setMathDialog(null)
-    setMathError(null)
-  }, [])
-
   const editor = useEditor({
-    extensions: createMdEditorExtensions({
+    extensions: createMdEditorSimpleExtensions({
       placeholder,
       renderImage,
       resolveImageSrc,
       getInteraction: interactionStore.get,
-      onMathClick: handleMathClick,
     }),
     content: initialContent,
     contentType: hasInitialContent ? 'markdown' : undefined,
@@ -243,42 +166,11 @@ export function useMdEditor({
     if (editor) focusEditor(editor, position)
   }, [disabled, editor])
 
-  const saveMathDialog = useCallback(
-    (latex: string) => {
-      if (!editor || disabledRef.current || !mathDialog) return
-
-      const nextLatex = latex.trim()
-
-      if (nextLatex.length === 0) {
-        setMathError('请输入 LaTeX 源码。')
-        return
-      }
-
-      const command = editor.chain().setNodeSelection(mathDialog.pos)
-      const success =
-        mathDialog.kind === 'inline'
-          ? command.updateInlineMath({ latex: nextLatex }).focus().run()
-          : command.updateBlockMath({ latex: nextLatex }).focus().run()
-
-      if (!success) {
-        setMathError('公式已不存在，请关闭后重试。')
-        return
-      }
-
-      closeMathDialog()
-    },
-    [closeMathDialog, editor, mathDialog],
-  )
-
   return {
     editor,
     clear,
-    closeMathDialog,
     focus,
     getMarkdown,
     isEmpty,
-    mathDialog,
-    mathError,
-    saveMathDialog,
   }
 }

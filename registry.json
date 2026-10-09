@@ -1660,6 +1660,16 @@
           "path": "packages/weimo-ui-markdown/src/components/md-editor-simple/md-editor-simple.tsx",
           "type": "registry:ui",
           "target": "@ui/md-editor-simple/md-editor-simple.tsx"
+        },
+        {
+          "path": "packages/weimo-ui-markdown/src/components/md-editor-simple/use-md-editor-simple.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor-simple/use-md-editor-simple.ts"
+        },
+        {
+          "path": "packages/weimo-ui-markdown/src/components/md-editor-simple/md-editor-simple-extensions.ts",
+          "type": "registry:ui",
+          "target": "@ui/md-editor-simple/md-editor-simple-extensions.ts"
         }
       ]
     },

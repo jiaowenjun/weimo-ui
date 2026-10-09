@@ -4,7 +4,7 @@ import { EditorContent } from '@tiptap/react'
 import { cn } from 'weimo-ui-core/lib/utils'
 import { formatEditorContent } from '../md-editor/md-editor-content-format'
 import type { MdEditorHandle, MdEditorProps } from '../md-editor/md-editor-types'
-import { useMdEditor } from '../md-editor/use-md-editor'
+import { useMdEditorSimple } from './use-md-editor-simple'
 
 import 'weimo-ui-markdown/styles/md-editor.css'
 
@@ -34,7 +34,7 @@ export const MdEditorSimple = forwardRef<MdEditorSimpleHandle, MdEditorSimplePro
   ) {
     const rootRef = useRef<HTMLDivElement | null>(null)
     const contentHeightChangeHandlerRef = useRef(onContentHeightChange)
-    const { clear, editor, focus, getMarkdown } = useMdEditor({
+    const { clear, editor, focus, getMarkdown } = useMdEditorSimple({
       autoFocus,
       autoFocusPosition,
       defaultValue,
@@ -47,7 +47,6 @@ export const MdEditorSimple = forwardRef<MdEditorSimpleHandle, MdEditorSimplePro
       renderImage,
       resolveImageSrc,
       value,
-      variant: 'simple',
     })
 
     function measureEditorContentHeight() {

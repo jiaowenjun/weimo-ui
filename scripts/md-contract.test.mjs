@@ -65,6 +65,12 @@ const mdEditorSimpleDefinitionSource = readProjectFile(
 const mdEditorSimpleComponentSource = readProjectFile(
   'packages/weimo-ui-markdown/src/components/md-editor-simple/md-editor-simple.tsx',
 )
+const mdEditorSimpleExtensionsSource = readProjectFile(
+  'packages/weimo-ui-markdown/src/components/md-editor-simple/md-editor-simple-extensions.ts',
+)
+const useMdEditorSimpleSource = readProjectFile(
+  'packages/weimo-ui-markdown/src/components/md-editor-simple/use-md-editor-simple.ts',
+)
 const mdEditorExtensionsSource = readProjectFile(
   'packages/weimo-ui-markdown/src/components/md-editor/md-editor-extensions.ts',
 )
@@ -302,18 +308,21 @@ assert.ok(
   'The simplified Markdown edit page must render the MdEditorSimple card without the math editor card.',
 )
 assert.ok(
-  mdEditorExtensionsSource.includes('variant?: MdEditorVariant') &&
-    mdEditorExtensionsSource.includes("const isSimple = options.variant === 'simple'") &&
-    mdEditorExtensionsSource.includes('{ code: false, strike: false }') &&
-    mdEditorExtensionsSource.includes('marked: new Marked()') &&
-    mdEditorExtensionsSource.includes('markedOptions: { gfm: false }') &&
-    mdEditorExtensionsSource.includes("markdownTokenName: 'codespan'") &&
-    mdEditorExtensionsSource.includes('...(isSimple'),
-  'MdEditor must expose a simple variant preset that drops inline code, strike marks, and GFM parsing on a private marked instance.',
+  mdEditorSimpleExtensionsSource.includes('code: false') &&
+    mdEditorSimpleExtensionsSource.includes('strike: false') &&
+    mdEditorSimpleExtensionsSource.includes('marked: new Marked()') &&
+    mdEditorSimpleExtensionsSource.includes('markedOptions: { gfm: false }') &&
+    mdEditorSimpleExtensionsSource.includes("markdownTokenName: 'codespan'"),
+  'MdEditorSimple must ship its own extension pipeline that drops inline code, strike marks, and GFM parsing on a private marked instance.',
 )
 assert.ok(
-  mdEditorSimpleComponentSource.includes("import { useMdEditor } from '../md-editor/use-md-editor'") &&
-    mdEditorSimpleComponentSource.includes("variant: 'simple'") &&
+  !mdEditorExtensionsSource.includes('isSimple') &&
+    !mdEditorExtensionsSource.includes('MdEditorVariant') &&
+    !mdEditorExtensionsSource.includes('new Marked()'),
+  'The full MdEditor extension pipeline must stay variant-free; the simple preset lives in its own module.',
+)
+assert.ok(
+  mdEditorSimpleComponentSource.includes("import { useMdEditorSimple } from './use-md-editor-simple'") &&
     mdEditorSimpleComponentSource.includes(
       "export type MdEditorSimpleHandle = Omit<MdEditorHandle, 'convertSelectionToInlineMath'>",
     ) &&
@@ -322,8 +331,17 @@ assert.ok(
     ) &&
     mdEditorSimpleComponentSource.includes("MdEditorSimple.displayName = 'MdEditorSimple'") &&
     !mdEditorSimpleComponentSource.includes("components/md-editor'") &&
-    !mdEditorSimpleComponentSource.includes('<MdEditor '),
-  'MdEditorSimple must be a standalone implementation that composes the shared editor hook without wrapping MdEditor or exposing math helpers.',
+    !mdEditorSimpleComponentSource.includes('<MdEditor ') &&
+    !mdEditorSimpleComponentSource.includes('useMdEditor('),
+  'MdEditorSimple must be a standalone implementation that composes its own editor hook without wrapping MdEditor or exposing math helpers.',
+)
+assert.ok(
+  useMdEditorSimpleSource.includes('createMdEditorSimpleExtensions') &&
+    !useMdEditorSimpleSource.includes('mathDialog') &&
+    !useMdEditorSimpleSource.includes('MathClick') &&
+    !useMdEditorSimpleSource.includes('InlineMath') &&
+    !useMdEditorSimpleSource.includes('BlockMath'),
+  'useMdEditorSimple must compose the simple extension pipeline without carrying any math dialog state.',
 )
 assert.ok(
   mdRenderSource.includes("export type MdRenderVariant = 'default' | 'simple'") &&
