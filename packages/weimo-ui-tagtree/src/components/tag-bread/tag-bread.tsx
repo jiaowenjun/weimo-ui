@@ -15,8 +15,11 @@ import {
   getFrostedSurfaceClassName,
   useFrostedSurfaceBackgroundToneRef,
 } from 'weimo-ui-core/components/frosted-surface'
+import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'
+import { Menu, MenuItem, MenuPopup, MenuTrigger } from 'weimo-ui-core/components/menu'
 import {
   Breadcrumb,
+  BreadcrumbEllipsis,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
@@ -40,6 +43,7 @@ export type TagBreadProps = Omit<
   onSelect?: (tag: string) => void
   prefix?: ReactNode
   separator?: ReactNode
+  maxVisible?: number
 }
 
 function buildTagBreadCrumbs(tag: string): TagBreadCrumb[] {
@@ -60,10 +64,20 @@ export function TagBread({
   onSelect,
   prefix = <Hash aria-hidden="true" />,
   separator = '/',
+  maxVisible = 4,
   style,
   ...props
 }: TagBreadProps) {
   const crumbs = buildTagBreadCrumbs(tag)
+  const maxVisibleCrumbs = Math.max(maxVisible, 2)
+  const collapsedCrumbs =
+    crumbs.length > maxVisibleCrumbs
+      ? crumbs.slice(1, crumbs.length - (maxVisibleCrumbs - 1))
+      : []
+  const visibleCrumbs =
+    collapsedCrumbs.length > 0
+      ? [crumbs[0], ...crumbs.slice(crumbs.length - (maxVisibleCrumbs - 1))]
+      : crumbs
   const { measureRef, inlineSize } = useAnimatedInlineSize(tag)
   const { backgroundStyle, backgroundTone, setElementRef } =
     useFrostedSurfaceBackgroundToneRef<HTMLElement>(true)
@@ -79,11 +93,36 @@ export function TagBread({
     onSelect?.(path)
   }
 
+  function renderEllipsisItem(interactive = true) {
+    return (
+      <BreadcrumbItem className="tag-bread__item">
+        {interactive ? (
+          <Menu>
+            <MenuTrigger render={<GhostIconButton aria-label="展开省略的面包屑层级" size="sm" />}>
+              <BreadcrumbEllipsis />
+            </MenuTrigger>
+            <MenuPopup align="start">
+              {collapsedCrumbs.map((crumb) => (
+                <MenuItem key={crumb.path} onClick={() => onSelect?.(crumb.path)}>
+                  {crumb.label}
+                </MenuItem>
+              ))}
+            </MenuPopup>
+          </Menu>
+        ) : (
+          <GhostIconButton aria-hidden="true" size="sm" tabIndex={-1}>
+            <BreadcrumbEllipsis />
+          </GhostIconButton>
+        )}
+      </BreadcrumbItem>
+    )
+  }
+
   function renderCrumbs(interactive = true) {
     return (
       <BreadcrumbList>
-        {crumbs.map((crumb, index) => {
-          const isPage = index === crumbs.length - 1
+        {visibleCrumbs.map((crumb, index) => {
+          const isPage = index === visibleCrumbs.length - 1
 
           return (
             <Fragment key={crumb.path}>
@@ -109,10 +148,18 @@ export function TagBread({
                   </BreadcrumbLink>
                 )}
               </BreadcrumbItem>
-              {index < crumbs.length - 1 ? (
+              {index < visibleCrumbs.length - 1 ? (
                 <BreadcrumbSeparator className="tag-bread__separator">
                   {separator}
                 </BreadcrumbSeparator>
+              ) : null}
+              {index === 0 && collapsedCrumbs.length > 0 ? (
+                <Fragment>
+                  {renderEllipsisItem(interactive)}
+                  <BreadcrumbSeparator className="tag-bread__separator">
+                    {separator}
+                  </BreadcrumbSeparator>
+                </Fragment>
               ) : null}
             </Fragment>
           )

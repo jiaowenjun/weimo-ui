@@ -30,10 +30,6 @@ function assertIncludes(source, snippet, message) {
   assert.ok(source.includes(snippet), message)
 }
 
-function countOccurrences(source, snippet) {
-  return source.split(snippet).length - 1
-}
-
 const source = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bread/tag-bread.tsx')
 const css = readProjectFile('packages/weimo-ui-tagtree/src/components/tag-bread/tag-bread.css')
 const surfaceCss = readProjectFile('packages/weimo-ui-core/src/components/controls/capsule/capsule-frame.css')
@@ -103,6 +99,8 @@ for (const snippet of [
   "from 'weimo-ui-core/components/animated-inline-size'",
   "from 'weimo-ui-core/components/animated-inline-size-model'",
   "from 'weimo-ui-core/components/capsule-frame'",
+  "from 'weimo-ui-core/components/ghost-icon-button'",
+  "import { Menu, MenuItem, MenuPopup, MenuTrigger } from 'weimo-ui-core/components/menu'",
   "import 'weimo-ui-core/styles/capsule-frame.css'",
   "import './tag-bread.css'",
   'type TagBreadCrumb = {',
@@ -115,6 +113,7 @@ for (const snippet of [
   'onSelect?: (tag: string) => void',
   'prefix?: ReactNode',
   'separator?: ReactNode',
+  'maxVisible?: number',
   'function buildTagBreadCrumbs(tag: string): TagBreadCrumb[]',
   "const segments = tag",
   ".split('/')",
@@ -126,11 +125,24 @@ for (const snippet of [
   'onSelect,',
   'prefix = <Hash aria-hidden="true" />',
   "separator = '/'",
+  'maxVisible = 4,',
   'const crumbs = buildTagBreadCrumbs(tag)',
+  'const maxVisibleCrumbs = Math.max(maxVisible, 2)',
+  'const collapsedCrumbs =',
+  'crumbs.slice(1, crumbs.length - (maxVisibleCrumbs - 1))',
+  'const visibleCrumbs =',
+  'crumbs.slice(crumbs.length - (maxVisibleCrumbs - 1))',
+  'function renderEllipsisItem(interactive = true) {',
   'function handleCrumbClick(event: MouseEvent<HTMLAnchorElement>, path: string) {',
   'event.preventDefault()',
   'onSelect?.(path)',
-  'const isPage = index === crumbs.length - 1',
+  'const isPage = index === visibleCrumbs.length - 1',
+  'index === 0 && collapsedCrumbs.length > 0',
+  'aria-label="展开省略的面包屑层级"',
+  '<BreadcrumbEllipsis />',
+  '<MenuPopup align="start">',
+  'onClick={() => onSelect?.(crumb.path)}',
+  '<GhostIconButton aria-hidden="true" size="sm" tabIndex={-1}>',
   'const frostedSurfaceClassName = getFrostedSurfaceClassName(',
   "'frosted-surface--bordered'",
   "useFrostedSurfaceBackgroundToneRef<HTMLElement>(true)",
@@ -261,61 +273,25 @@ assert.ok(
 
 assert.ok(
     docsDefinition.includes("import { TagBread } from '../components/tag-bread/tag-bread'") &&
-    docsDefinition.includes("import { Hash } from 'lucide-react'") &&
-    docsDefinition.includes("from 'weimo-ui-core/components/capsule-frame'") &&
-    docsDefinition.includes("from 'weimo-ui-core/components/frosted-surface-model'") &&
-    docsDefinition.includes('const surfaceAttributes = getCapsuleFrameAttributes({') &&
-    docsDefinition.includes("material: 'frosted'") &&
-    !docsDefinition.includes('textSize') &&
-    docsDefinition.includes('className={getCapsuleFrameClassName(') &&
-    docsDefinition.includes("import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'") &&
-    !docsDefinition.includes("import { Button } from 'weimo-ui-core/components/coss/button'") &&
-    docsDefinition.includes("import {") &&
-    docsDefinition.includes("BreadcrumbEllipsis,") &&
-    docsDefinition.includes("BreadcrumbItem,") &&
-    docsDefinition.includes("BreadcrumbLink,") &&
-    docsDefinition.includes("BreadcrumbList,") &&
-    docsDefinition.includes("BreadcrumbPage,") &&
-    docsDefinition.includes('BreadcrumbSeparator') &&
-    docsDefinition.includes("} from '../components/coss/breadcrumb'") &&
-    docsDefinition.includes('Menu,') &&
-    docsDefinition.includes('MenuItem,') &&
-    docsDefinition.includes('MenuPopup,') &&
-    docsDefinition.includes('MenuTrigger') &&
-    docsDefinition.includes("} from 'weimo-ui-core/components/menu'") &&
-    !docsDefinition.includes('TagBreadItem') &&
     docsDefinition.includes('function TagBreadDemo') &&
     docsDefinition.includes('className="tag-page__bread-preview"') &&
     docsDefinition.includes('tag="文学/古代/诗词"') &&
+    docsDefinition.includes('tag="文学/古代/诗词/唐诗/李白/静夜思"') &&
     docsDefinition.includes('onSelect={() => {}}') &&
-    docsDefinition.includes('<Breadcrumb') &&
-    docsDefinition.includes('aria-label="省略面包屑示例"') &&
-    docsDefinition.includes('{...surfaceAttributes}') &&
-    docsDefinition.includes('<span className="tag-bread__prefix">') &&
-    docsDefinition.includes('<Hash aria-hidden="true" />') &&
-    docsDefinition.includes('<BreadcrumbItem className="tag-bread__item">') &&
-    docsDefinition.includes('<BreadcrumbLink href="/">') &&
-    docsDefinition.includes('<Menu>') &&
-    docsDefinition.includes('<MenuTrigger') &&
-    docsDefinition.includes('render={') &&
-    docsDefinition.includes('<GhostIconButton') &&
-    docsDefinition.includes('aria-label="展开省略的面包屑层级"') &&
-    docsDefinition.includes('size="sm"') &&
-    !docsDefinition.includes('variant="ghost"') &&
-    docsDefinition.includes('<BreadcrumbEllipsis />') &&
-    docsDefinition.includes('<MenuPopup align="start">') &&
-    docsDefinition.includes('<MenuItem render={<a href="/docs" />}>Docs</MenuItem>') &&
-    docsDefinition.includes('<MenuItem render={<a href="/particles" />}>Particles</MenuItem>') &&
-    docsDefinition.includes('<BreadcrumbLink href="/docs/components">') &&
-    docsDefinition.includes('<BreadcrumbPage>Breadcrumb</BreadcrumbPage>') &&
-    !docsDefinition.includes("href: '#writing'"),
-  'TagBread docs definition must preview the tag-string API and the coss ellipsis breadcrumb example.',
-)
-
-assert.equal(
-  countOccurrences(docsDefinition, '<BreadcrumbSeparator>/</BreadcrumbSeparator>'),
-  3,
-  'TagBread docs ellipsis preview must render every separator as the shared slash separator.',
+    !docsDefinition.includes("from 'lucide-react'") &&
+    !docsDefinition.includes("from 'weimo-ui-core/components/capsule-frame'") &&
+    !docsDefinition.includes("from 'weimo-ui-core/components/frosted-surface-model'") &&
+    !docsDefinition.includes("from 'weimo-ui-core/components/ghost-icon-button'") &&
+    !docsDefinition.includes("from 'weimo-ui-core/components/menu'") &&
+    !docsDefinition.includes("from '../components/coss/breadcrumb'") &&
+    !docsDefinition.includes('<Breadcrumb') &&
+    !docsDefinition.includes('<Menu') &&
+    !docsDefinition.includes('GhostIconButton') &&
+    !docsDefinition.includes('surfaceAttributes') &&
+    !docsDefinition.includes('getCapsuleFrameClassName') &&
+    !docsDefinition.includes('textSize') &&
+    !docsDefinition.includes('TagBreadItem'),
+  'TagBread docs definition must preview the full and auto-collapsed TagBread APIs without hand-rolled breadcrumb markup.',
 )
 assert.ok(
   docsPreviewEllipsisBlock.includes('min-width: 0;'),
@@ -340,7 +316,11 @@ assert.equal(registryItem.name, 'tag-bread')
 assert.equal(registryItem.type, 'registry:ui')
 assert.deepEqual(registryItem.categories, ['navigation', 'tag'])
 assert.deepEqual(registryItem.dependencies, ['@base-ui/react', 'lucide-react'])
-assert.deepEqual(registryItem.registryDependencies, ['@weimo/style', '@weimo/utils'])
+assert.deepEqual(
+  registryItem.registryDependencies,
+  ['@weimo/ghost-icon-button', '@weimo/menu', '@weimo/style', '@weimo/utils'],
+  'TagBread registry item must transitively ship the ellipsis menu and its ghost trigger.',
+)
 assert.deepEqual(
   registryItem.files.map((file) => file.path),
   [

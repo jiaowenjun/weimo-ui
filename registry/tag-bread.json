@@ -13,6 +13,8 @@
     "lucide-react"
   ],
   "registryDependencies": [
+    "@weimo/ghost-icon-button",
+    "@weimo/menu",
     "@weimo/style",
     "@weimo/utils"
   ],
