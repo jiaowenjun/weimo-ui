@@ -379,7 +379,13 @@ export function RegistryConsumerContract() {
       <MdRender content={"## Render\\n\\ncontent"} />
       <MdRenderSimple content={"## Simple\\n\\ncontent"} />
       <MdEditor value={"## Editor"} onChange={() => {}} />
-      <MdEditorSimple value={"## Simple Editor"} onChange={() => {}} />
+      <MdEditorSimple
+        value={{
+          type: 'doc',
+          content: [{ type: 'paragraph', content: [{ type: 'text', text: 'Simple Editor' }] }],
+        }}
+        onChange={() => {}}
+      />
       <MdView mode="view" value={"## View"} />
       <MathEditor dialog={mathDialog} onOpenChange={() => {}} onSave={() => {}} />
       <FrostedIconButton aria-label="Open">

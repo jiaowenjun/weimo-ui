@@ -1,20 +1,39 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useEditor } from '@tiptap/react'
+import type { Editor, JSONContent } from '@tiptap/core'
 
-import { normalizeCenteredQuoteSyntax } from '../markdown/centered-quote'
-import { normalizeEditorMarkdown } from '../md-editor/md-editor-markdown'
-import type { MdEditorFocusPosition, MdEditorProps } from '../md-editor/md-editor-types'
-import {
-  focusEditor,
-  normalizeMarkdown,
-  resolveInitialContent,
-} from '../md-editor/use-md-editor'
+import type { MdEditorFocusPosition } from '../md-editor/md-editor-types'
+import { focusEditor } from '../md-editor/use-md-editor'
 import { createMdEditorSimpleExtensions } from './md-editor-simple-extensions'
+
+export type MdEditorSimpleContent = JSONContent
+
+export type UseMdEditorSimpleProps = {
+  autoFocus?: boolean
+  autoFocusPosition?: MdEditorFocusPosition
+  defaultValue?: MdEditorSimpleContent
+  disabled?: boolean
+  onCancel?: () => void
+  onChange?: (content: MdEditorSimpleContent) => void
+  onEditorChange?: (editor: Editor | null) => void
+  onSave?: (content: MdEditorSimpleContent) => void
+  placeholder?: string
+  value?: MdEditorSimpleContent
+}
+
+const EMPTY_SIMPLE_DOCUMENT: MdEditorSimpleContent = {
+  type: 'doc',
+  content: [{ type: 'paragraph' }],
+}
+
+function serializeContent(content: MdEditorSimpleContent) {
+  return JSON.stringify(content)
+}
 
 export function useMdEditorSimple({
   autoFocus = false,
   autoFocusPosition = 'end',
-  defaultValue = '',
+  defaultValue,
   disabled = false,
   onCancel,
   onChange,
@@ -22,30 +41,17 @@ export function useMdEditorSimple({
   onSave,
   placeholder,
   value,
-}: Pick<
-  MdEditorProps,
-  | 'autoFocus'
-  | 'autoFocusPosition'
-  | 'defaultValue'
-  | 'disabled'
-  | 'onCancel'
-  | 'onChange'
-  | 'onEditorChange'
-  | 'onSave'
-  | 'placeholder'
-  | 'value'
->) {
+}: UseMdEditorSimpleProps) {
   const isControlled = value !== undefined
   const [initialValue] = useState(() => value ?? defaultValue)
-  const { hasInitialContent, initialContent } = resolveInitialContent(initialValue)
-  const [isEmpty, setIsEmpty] = useState(!hasInitialContent)
+  const [isEmpty, setIsEmpty] = useState(initialValue === undefined)
   const [internalValue, setInternalValue] = useState(initialValue)
   const onChangeRef = useRef(onChange)
   const onEditorChangeRef = useRef(onEditorChange)
   const onSaveRef = useRef(onSave)
   const onCancelRef = useRef(onCancel)
   const disabledRef = useRef(disabled)
-  const lastMarkdownRef = useRef(normalizeEditorMarkdown(initialValue))
+  const lastContentRef = useRef(initialValue === undefined ? '' : serializeContent(initialValue))
   const [interactionStore] = useState(() => ({
     get: () => ({
       disabled: disabledRef.current,
@@ -62,18 +68,16 @@ export function useMdEditorSimple({
     disabledRef.current = disabled
   }, [disabled, onCancel, onChange, onEditorChange, onSave])
 
-  const emitMarkdown = useCallback(
-    (nextMarkdown: string) => {
-      const normalized = normalizeEditorMarkdown(nextMarkdown)
-
-      lastMarkdownRef.current = normalized
-      setIsEmpty(normalized.length === 0)
+  const emitContent = useCallback(
+    (nextContent: MdEditorSimpleContent, nextIsEmpty: boolean) => {
+      lastContentRef.current = serializeContent(nextContent)
+      setIsEmpty(nextIsEmpty)
 
       if (!isControlled) {
-        setInternalValue(normalized)
+        setInternalValue(nextContent)
       }
 
-      onChangeRef.current?.(normalized)
+      onChangeRef.current?.(nextContent)
     },
     [isControlled],
   )
@@ -83,8 +87,7 @@ export function useMdEditorSimple({
       placeholder,
       getInteraction: interactionStore.get,
     }),
-    content: initialContent,
-    contentType: hasInitialContent ? 'markdown' : undefined,
+    content: initialValue,
     editable: !disabled,
     immediatelyRender: false,
     editorProps: {
@@ -93,13 +96,11 @@ export function useMdEditorSimple({
       },
     },
     onCreate: ({ editor: currentEditor }) => {
-      const nextMarkdown = currentEditor.isEmpty ? '' : currentEditor.getMarkdown()
-
-      lastMarkdownRef.current = normalizeEditorMarkdown(nextMarkdown)
+      lastContentRef.current = serializeContent(currentEditor.getJSON())
       setIsEmpty(currentEditor.isEmpty)
     },
     onUpdate: ({ editor: currentEditor }) => {
-      emitMarkdown(currentEditor.isEmpty ? '' : currentEditor.getMarkdown())
+      emitContent(currentEditor.getJSON(), currentEditor.isEmpty)
     },
   })
 
@@ -124,35 +125,31 @@ export function useMdEditorSimple({
   useEffect(() => {
     if (!editor || !isControlled) return
 
-    const nextValue = normalizeMarkdown(value ?? '')
+    const nextContent = value ?? EMPTY_SIMPLE_DOCUMENT
+    const serialized = serializeContent(nextContent)
 
-    if (nextValue === lastMarkdownRef.current) return
+    if (serialized === lastContentRef.current) return
 
-    if (nextValue.length === 0) {
-      editor.commands.clearContent(false)
-    } else {
-      editor.commands.setContent(normalizeCenteredQuoteSyntax(nextValue), {
-        contentType: 'markdown',
-        emitUpdate: false,
-      })
-    }
+    editor.commands.setContent(nextContent, {
+      emitUpdate: false,
+    })
 
-    lastMarkdownRef.current = nextValue
-    setIsEmpty(nextValue.length === 0)
+    lastContentRef.current = serialized
+    setIsEmpty(editor.isEmpty)
   }, [editor, isControlled, value])
 
-  const getMarkdown = useCallback(() => {
-    if (!editor) return normalizeMarkdown(isControlled ? value ?? '' : internalValue)
+  const getContent = useCallback(() => {
+    if (!editor) return internalValue ?? EMPTY_SIMPLE_DOCUMENT
 
-    return editor.isEmpty ? '' : normalizeEditorMarkdown(editor.getMarkdown())
-  }, [editor, internalValue, isControlled, value])
+    return editor.getJSON()
+  }, [editor, internalValue])
 
   const clear = useCallback(() => {
     if (!editor || disabled) return
 
     editor.commands.clearContent()
-    emitMarkdown('')
-  }, [disabled, editor, emitMarkdown])
+    emitContent(editor.getJSON(), editor.isEmpty)
+  }, [disabled, editor, emitContent])
 
   const focus = useCallback((position?: MdEditorFocusPosition) => {
     if (disabled) return
@@ -164,7 +161,7 @@ export function useMdEditorSimple({
     editor,
     clear,
     focus,
-    getMarkdown,
+    getContent,
     isEmpty,
   }
 }

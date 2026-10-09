@@ -13,16 +13,16 @@ import { createMdEditorExtensions, type MdEditorMathClickPayload } from './md-ed
 import { normalizeEditorMarkdown } from './md-editor-markdown'
 import type { MdEditorFocusPosition, MdEditorProps } from './md-editor-types'
 
-export const EMPTY_EDITOR_DOCUMENT = {
+const EMPTY_EDITOR_DOCUMENT = {
   type: 'doc',
   content: [{ type: 'paragraph' }],
 } satisfies JSONContent
 
-export function normalizeMarkdown(markdown: string) {
+function normalizeMarkdown(markdown: string) {
   return markdown.trim().length > 0 ? markdown : ''
 }
 
-export function resolveInitialContent(content: string) {
+function resolveInitialContent(content: string) {
   const normalized = normalizeMarkdown(content)
   const hasInitialContent = normalized.length > 0
 

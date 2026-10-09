@@ -303,7 +303,7 @@ assert.ok(
     "import { MdEditorSimple } from 'weimo-ui-markdown/components/md-editor-simple'",
   ) &&
     mdEditorSimpleDefinitionSource.includes('label="简化Markdown编辑器"') &&
-    mdEditorSimpleDefinitionSource.includes('mdRenderSimpleSample') &&
+    mdEditorSimpleDefinitionSource.includes('mdEditorSimpleSample') &&
     !mdEditorSimpleDefinitionSource.includes('MathEditor'),
   'The simplified Markdown edit page must render the MdEditorSimple card without the math editor card.',
 )
@@ -316,23 +316,11 @@ assert.ok(
     mdEditorSimpleExtensionsSource.includes('orderedList: false') &&
     mdEditorSimpleExtensionsSource.includes('strike: false') &&
     mdEditorSimpleExtensionsSource.includes('underline: false') &&
-    mdEditorSimpleExtensionsSource.includes('marked: new Marked()') &&
-    mdEditorSimpleExtensionsSource.includes('markedOptions: { gfm: false }'),
-  'MdEditorSimple must keep only heading, bold, centered quote, blockquote, and bullet-list formats on a private marked instance.',
-)
-assert.ok(
-  mdEditorSimpleExtensionsSource.includes("markdownTokenName: 'codespan'") &&
-    mdEditorSimpleExtensionsSource.includes("markdownTokenName: 'code'") &&
-    mdEditorSimpleExtensionsSource.includes("markdownTokenName: 'list'") &&
-    mdEditorSimpleExtensionsSource.includes("markdownTokenName: 'hr'") &&
-    mdEditorSimpleExtensionsSource.includes("markdownTokenName: 'image'") &&
-    !mdEditorSimpleExtensionsSource.includes('MdEditorOrderedList') &&
-    !mdEditorSimpleExtensionsSource.includes('ParenthesizedOrderedListTokenizer') &&
-    !mdEditorSimpleExtensionsSource.includes('MdEditorOptionGrid') &&
-    !mdEditorSimpleExtensionsSource.includes('MdEditorListImageLayout') &&
-    !mdEditorSimpleExtensionsSource.includes('MarkdownImagePlaceholder') &&
-    !mdEditorSimpleExtensionsSource.includes('AlphabeticOrderedListMarker'),
-  'MdEditorSimple must degrade unsupported markdown tokens (codespan, code block, ordered list, hr, image) to plain or literal text instead of dropping them.',
+    !mdEditorSimpleExtensionsSource.includes('@tiptap/markdown') &&
+    !mdEditorSimpleExtensionsSource.includes('marked') &&
+    !mdEditorSimpleExtensionsSource.includes('MdEditorListItem') &&
+    mdEditorSimpleExtensionsSource.includes('SimpleSaveKeymap'),
+  'MdEditorSimple must keep only heading, bold, centered quote, blockquote, and bullet-list formats without any markdown parse or serialize machinery.',
 )
 assert.ok(
   !mdEditorExtensionsSource.includes('isSimple') &&
@@ -341,29 +329,32 @@ assert.ok(
   'The full MdEditor extension pipeline must stay variant-free; the simple preset lives in its own module.',
 )
 assert.ok(
-  mdEditorSimpleComponentSource.includes("import { useMdEditorSimple } from './use-md-editor-simple'") &&
+  mdEditorSimpleComponentSource.includes("from './use-md-editor-simple'") &&
     mdEditorSimpleComponentSource.includes(
-      "export type MdEditorSimpleHandle = Omit<MdEditorHandle, 'convertSelectionToInlineMath'>",
+      "'convertSelectionToInlineMath' | 'formatContent' | 'getMarkdown'",
     ) &&
+    mdEditorSimpleComponentSource.includes('getContent: () => JSONContent') &&
     mdEditorSimpleComponentSource.includes('export type MdEditorSimpleProps = Omit<') &&
-    mdEditorSimpleComponentSource.includes(
-      "'variant' | 'renderImage' | 'resolveImageSrc'",
-    ) &&
-    mdEditorSimpleComponentSource.includes("MdEditorSimple.displayName = 'MdEditorSimple'") &&
-    !mdEditorSimpleComponentSource.includes("components/md-editor'") &&
-    !mdEditorSimpleComponentSource.includes('<MdEditor ') &&
-    !mdEditorSimpleComponentSource.includes('useMdEditor('),
-  'MdEditorSimple must be a standalone implementation that composes its own editor hook without wrapping MdEditor or exposing math and image props.',
+    mdEditorSimpleComponentSource.includes("'variant'") &&
+    mdEditorSimpleComponentSource.includes("'renderImage'") &&
+    mdEditorSimpleComponentSource.includes("'resolveImageSrc'") &&
+    mdEditorSimpleComponentSource.includes("'defaultValue'") &&
+    mdEditorSimpleComponentSource.includes('value?: MdEditorSimpleContent') &&
+    !mdEditorSimpleComponentSource.includes('getMarkdown:') &&
+    !mdEditorSimpleComponentSource.includes('formatEditorContent') &&
+    !mdEditorSimpleComponentSource.includes('<MdEditor '),
+  'MdEditorSimple must be a standalone JSON-content implementation that composes its own editor hook without markdown conversion or the full MdEditor.',
 )
 assert.ok(
   useMdEditorSimpleSource.includes('createMdEditorSimpleExtensions') &&
-    !useMdEditorSimpleSource.includes('mathDialog') &&
-    !useMdEditorSimpleSource.includes('MathClick') &&
-    !useMdEditorSimpleSource.includes('InlineMath') &&
-    !useMdEditorSimpleSource.includes('BlockMath') &&
+    useMdEditorSimpleSource.includes('MdEditorSimpleContent') &&
+    !useMdEditorSimpleSource.includes('getMarkdown') &&
+    !useMdEditorSimpleSource.includes('contentType') &&
+    !useMdEditorSimpleSource.includes('normalizeEditorMarkdown') &&
+    !useMdEditorSimpleSource.includes('CenteredQuoteSyntax') &&
     !useMdEditorSimpleSource.includes('renderImage') &&
     !useMdEditorSimpleSource.includes('resolveImageSrc'),
-  'useMdEditorSimple must compose the simple extension pipeline without carrying math dialog or image rendering state.',
+  'useMdEditorSimple must exchange tiptap JSON content only, without markdown parse, serialize, or normalization.',
 )
 assert.ok(
   mdRenderSource.includes("export type MdRenderVariant = 'default' | 'simple'") &&

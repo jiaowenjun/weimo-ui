@@ -1,18 +1,34 @@
 import { forwardRef, useImperativeHandle, useLayoutEffect, useRef } from 'react'
 import { EditorContent } from '@tiptap/react'
+import type { JSONContent } from '@tiptap/core'
 
 import { cn } from 'weimo-ui-core/lib/utils'
-import { formatEditorContent } from '../md-editor/md-editor-content-format'
 import type { MdEditorHandle, MdEditorProps } from '../md-editor/md-editor-types'
-import { useMdEditorSimple } from './use-md-editor-simple'
+import { useMdEditorSimple, type MdEditorSimpleContent } from './use-md-editor-simple'
 
 import 'weimo-ui-markdown/styles/md-editor.css'
 
 export type MdEditorSimpleProps = Omit<
   MdEditorProps,
-  'variant' | 'renderImage' | 'resolveImageSrc'
->
-export type MdEditorSimpleHandle = Omit<MdEditorHandle, 'convertSelectionToInlineMath'>
+  | 'variant'
+  | 'renderImage'
+  | 'resolveImageSrc'
+  | 'value'
+  | 'defaultValue'
+  | 'onChange'
+  | 'onSave'
+> & {
+  value?: MdEditorSimpleContent
+  defaultValue?: MdEditorSimpleContent
+  onChange?: (content: MdEditorSimpleContent) => void
+  onSave?: (content: MdEditorSimpleContent) => void
+}
+export type MdEditorSimpleHandle = Omit<
+  MdEditorHandle,
+  'convertSelectionToInlineMath' | 'formatContent' | 'getMarkdown'
+> & {
+  getContent: () => JSONContent
+}
 
 export const MdEditorSimple = forwardRef<MdEditorSimpleHandle, MdEditorSimpleProps>(
   function MdEditorSimple(
@@ -35,7 +51,7 @@ export const MdEditorSimple = forwardRef<MdEditorSimpleHandle, MdEditorSimplePro
   ) {
     const rootRef = useRef<HTMLDivElement | null>(null)
     const contentHeightChangeHandlerRef = useRef(onContentHeightChange)
-    const { clear, editor, focus, getMarkdown } = useMdEditorSimple({
+    const { clear, editor, focus, getContent } = useMdEditorSimple({
       autoFocus,
       autoFocusPosition,
       defaultValue,
@@ -99,19 +115,10 @@ export const MdEditorSimple = forwardRef<MdEditorSimpleHandle, MdEditorSimplePro
       () => ({
         clear,
         focus,
-        formatContent: (options) => {
-          if (!editor) return getMarkdown()
-
-          formatEditorContent(editor, {
-            focus: false,
-            formatMarkdown: options?.formatMarkdown,
-          })
-          return getMarkdown()
-        },
-        getMarkdown,
+        getContent,
         getContentHeight: measureEditorContentHeight,
       }),
-      [clear, editor, focus, getMarkdown],
+      [clear, editor, focus, getContent],
     )
 
     if (!editor) {
