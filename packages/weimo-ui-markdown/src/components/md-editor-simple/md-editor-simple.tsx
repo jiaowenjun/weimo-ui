@@ -8,7 +8,10 @@ import { useMdEditorSimple } from './use-md-editor-simple'
 
 import 'weimo-ui-markdown/styles/md-editor.css'
 
-export type MdEditorSimpleProps = Omit<MdEditorProps, 'variant'>
+export type MdEditorSimpleProps = Omit<
+  MdEditorProps,
+  'variant' | 'renderImage' | 'resolveImageSrc'
+>
 export type MdEditorSimpleHandle = Omit<MdEditorHandle, 'convertSelectionToInlineMath'>
 
 export const MdEditorSimple = forwardRef<MdEditorSimpleHandle, MdEditorSimpleProps>(
@@ -26,8 +29,6 @@ export const MdEditorSimple = forwardRef<MdEditorSimpleHandle, MdEditorSimplePro
       onEditorChange,
       onSave,
       placeholder,
-      renderImage,
-      resolveImageSrc,
       value,
     },
     ref,
@@ -44,8 +45,6 @@ export const MdEditorSimple = forwardRef<MdEditorSimpleHandle, MdEditorSimplePro
       onEditorChange,
       onSave,
       placeholder,
-      renderImage,
-      resolveImageSrc,
       value,
     })
 

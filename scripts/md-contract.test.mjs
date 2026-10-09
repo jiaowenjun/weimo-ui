@@ -309,11 +309,30 @@ assert.ok(
 )
 assert.ok(
   mdEditorSimpleExtensionsSource.includes('code: false') &&
+    mdEditorSimpleExtensionsSource.includes('codeBlock: false') &&
+    mdEditorSimpleExtensionsSource.includes('horizontalRule: false') &&
+    mdEditorSimpleExtensionsSource.includes('italic: false') &&
+    mdEditorSimpleExtensionsSource.includes('link: false') &&
+    mdEditorSimpleExtensionsSource.includes('orderedList: false') &&
     mdEditorSimpleExtensionsSource.includes('strike: false') &&
+    mdEditorSimpleExtensionsSource.includes('underline: false') &&
     mdEditorSimpleExtensionsSource.includes('marked: new Marked()') &&
-    mdEditorSimpleExtensionsSource.includes('markedOptions: { gfm: false }') &&
-    mdEditorSimpleExtensionsSource.includes("markdownTokenName: 'codespan'"),
-  'MdEditorSimple must ship its own extension pipeline that drops inline code, strike marks, and GFM parsing on a private marked instance.',
+    mdEditorSimpleExtensionsSource.includes('markedOptions: { gfm: false }'),
+  'MdEditorSimple must keep only heading, bold, centered quote, blockquote, and bullet-list formats on a private marked instance.',
+)
+assert.ok(
+  mdEditorSimpleExtensionsSource.includes("markdownTokenName: 'codespan'") &&
+    mdEditorSimpleExtensionsSource.includes("markdownTokenName: 'code'") &&
+    mdEditorSimpleExtensionsSource.includes("markdownTokenName: 'list'") &&
+    mdEditorSimpleExtensionsSource.includes("markdownTokenName: 'hr'") &&
+    mdEditorSimpleExtensionsSource.includes("markdownTokenName: 'image'") &&
+    !mdEditorSimpleExtensionsSource.includes('MdEditorOrderedList') &&
+    !mdEditorSimpleExtensionsSource.includes('ParenthesizedOrderedListTokenizer') &&
+    !mdEditorSimpleExtensionsSource.includes('MdEditorOptionGrid') &&
+    !mdEditorSimpleExtensionsSource.includes('MdEditorListImageLayout') &&
+    !mdEditorSimpleExtensionsSource.includes('MarkdownImagePlaceholder') &&
+    !mdEditorSimpleExtensionsSource.includes('AlphabeticOrderedListMarker'),
+  'MdEditorSimple must degrade unsupported markdown tokens (codespan, code block, ordered list, hr, image) to plain or literal text instead of dropping them.',
 )
 assert.ok(
   !mdEditorExtensionsSource.includes('isSimple') &&
@@ -326,22 +345,25 @@ assert.ok(
     mdEditorSimpleComponentSource.includes(
       "export type MdEditorSimpleHandle = Omit<MdEditorHandle, 'convertSelectionToInlineMath'>",
     ) &&
+    mdEditorSimpleComponentSource.includes('export type MdEditorSimpleProps = Omit<') &&
     mdEditorSimpleComponentSource.includes(
-      "export type MdEditorSimpleProps = Omit<MdEditorProps, 'variant'>",
+      "'variant' | 'renderImage' | 'resolveImageSrc'",
     ) &&
     mdEditorSimpleComponentSource.includes("MdEditorSimple.displayName = 'MdEditorSimple'") &&
     !mdEditorSimpleComponentSource.includes("components/md-editor'") &&
     !mdEditorSimpleComponentSource.includes('<MdEditor ') &&
     !mdEditorSimpleComponentSource.includes('useMdEditor('),
-  'MdEditorSimple must be a standalone implementation that composes its own editor hook without wrapping MdEditor or exposing math helpers.',
+  'MdEditorSimple must be a standalone implementation that composes its own editor hook without wrapping MdEditor or exposing math and image props.',
 )
 assert.ok(
   useMdEditorSimpleSource.includes('createMdEditorSimpleExtensions') &&
     !useMdEditorSimpleSource.includes('mathDialog') &&
     !useMdEditorSimpleSource.includes('MathClick') &&
     !useMdEditorSimpleSource.includes('InlineMath') &&
-    !useMdEditorSimpleSource.includes('BlockMath'),
-  'useMdEditorSimple must compose the simple extension pipeline without carrying any math dialog state.',
+    !useMdEditorSimpleSource.includes('BlockMath') &&
+    !useMdEditorSimpleSource.includes('renderImage') &&
+    !useMdEditorSimpleSource.includes('resolveImageSrc'),
+  'useMdEditorSimple must compose the simple extension pipeline without carrying math dialog or image rendering state.',
 )
 assert.ok(
   mdRenderSource.includes("export type MdRenderVariant = 'default' | 'simple'") &&

@@ -115,7 +115,7 @@ describe('MdEditor markdown model', () => {
     expect(normalizeEditorMarkdown(normalized)).toBe(authored)
   })
 
-  it('drops math, table, task-list, inline-code, and strike support in the simple preset', () => {
+  it('keeps only heading, bold, centered quote, blockquote, and bullet lists in the simple preset', () => {
     const editor = new Editor({
       content: '行内 $x^2$ 公式与 `code` 标记',
       contentType: 'markdown',
@@ -125,14 +125,104 @@ describe('MdEditor markdown model', () => {
     })
     editors.push(editor)
 
+    expect(editor.schema.nodes.heading).toBeDefined()
+    expect(editor.schema.nodes.blockquote).toBeDefined()
+    expect(editor.schema.nodes.bulletList).toBeDefined()
+    expect(editor.schema.marks.bold).toBeDefined()
+
     expect(editor.schema.nodes.inlineMath).toBeUndefined()
     expect(editor.schema.nodes.blockMath).toBeUndefined()
     expect(editor.schema.nodes.table).toBeUndefined()
     expect(editor.schema.nodes.taskList).toBeUndefined()
+    expect(editor.schema.nodes.orderedList).toBeUndefined()
+    expect(editor.schema.nodes.codeBlock).toBeUndefined()
+    expect(editor.schema.nodes.horizontalRule).toBeUndefined()
+    expect(editor.schema.nodes.image).toBeUndefined()
     expect(editor.schema.marks.code).toBeUndefined()
     expect(editor.schema.marks.strike).toBeUndefined()
+    expect(editor.schema.marks.italic).toBeUndefined()
+    expect(editor.schema.marks.link).toBeUndefined()
+    expect(editor.schema.marks.underline).toBeUndefined()
     expect(editor.getMarkdown()).toContain('$x^2$')
     expect(editor.getMarkdown()).not.toContain('`')
+  })
+
+  it('degrades unsupported syntax to plain or literal text in the simple preset', () => {
+    const editor = new Editor({
+      content: [
+        '*斜体* 与 [链接](https://example.com) 与 ![替代文本](/img.png)',
+        '',
+        '1. 第一项',
+        '2. 第二项',
+        '',
+        '```ts',
+        'const answer = 42',
+        '```',
+        '',
+        '---',
+      ].join('\n'),
+      contentType: 'markdown',
+      extensions: createMdEditorSimpleExtensions({
+        getInteraction: () => ({ disabled: false }),
+      }),
+    })
+    editors.push(editor)
+
+    const markdown = editor.getMarkdown()
+
+    expect(markdown).toContain('斜体')
+    expect(markdown).not.toContain('*斜体*')
+    expect(markdown).toContain('链接')
+    expect(markdown).not.toContain('https://example.com')
+    expect(markdown).toContain('替代文本')
+    expect(markdown).not.toContain('/img.png')
+    expect(markdown).toContain('1. 第一项')
+    expect(markdown).toContain('2. 第二项')
+    expect(markdown).toContain('const answer = 42')
+    expect(markdown).not.toContain('```')
+    expect(markdown).toContain('---')
+  })
+
+  it('round-trips the five supported formats in the simple preset', () => {
+    const source = [
+      '# 标题',
+      '',
+      '**加粗** 正文',
+      '',
+      '> 引用内容',
+      '',
+      '>= 居中一行',
+      '',
+      '- 无序一项',
+      '- 无序二项',
+    ].join('\n')
+    const editor = new Editor({
+      content: normalizeCenteredQuoteSyntax(source),
+      contentType: 'markdown',
+      extensions: createMdEditorSimpleExtensions({
+        getInteraction: () => ({ disabled: false }),
+      }),
+    })
+    editors.push(editor)
+
+    const markdown = normalizeEditorMarkdown(editor.getMarkdown())
+    const reloaded = new Editor({
+      content: normalizeCenteredQuoteSyntax(markdown),
+      contentType: 'markdown',
+      extensions: createMdEditorSimpleExtensions({
+        getInteraction: () => ({ disabled: false }),
+      }),
+    })
+    editors.push(reloaded)
+
+    expect(markdown).toContain('# 标题')
+    expect(markdown).toContain('**加粗**')
+    expect(markdown).toContain('> 引用内容')
+    expect(markdown).toContain('>= 居中一行')
+    expect(markdown).toContain('- 无序一项')
+    expect(JSON.parse(JSON.stringify(reloaded.getJSON()))).toEqual(
+      JSON.parse(JSON.stringify(editor.getJSON())),
+    )
   })
 
   it('falls GFM tables and task lists back to literal text in the simple preset', () => {
@@ -192,6 +282,9 @@ describe('MdEditor public component', () => {
     expect(content?.querySelector('table')).toBeNull()
     expect(content?.querySelector('code')).toBeNull()
     expect(content?.querySelector('.katex')).toBeNull()
+    expect(content?.querySelector('em')).toBeNull()
+    expect(content?.querySelector('a')).toBeNull()
+    expect(content?.querySelector('img')).toBeNull()
     expect(ref.current?.getMarkdown()).not.toContain('`')
   })
 

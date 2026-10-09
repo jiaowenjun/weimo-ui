@@ -21,8 +21,6 @@ export function useMdEditorSimple({
   onEditorChange,
   onSave,
   placeholder,
-  renderImage,
-  resolveImageSrc,
   value,
 }: Pick<
   MdEditorProps,
@@ -35,8 +33,6 @@ export function useMdEditorSimple({
   | 'onEditorChange'
   | 'onSave'
   | 'placeholder'
-  | 'renderImage'
-  | 'resolveImageSrc'
   | 'value'
 >) {
   const isControlled = value !== undefined
@@ -85,8 +81,6 @@ export function useMdEditorSimple({
   const editor = useEditor({
     extensions: createMdEditorSimpleExtensions({
       placeholder,
-      renderImage,
-      resolveImageSrc,
       getInteraction: interactionStore.get,
     }),
     content: initialContent,

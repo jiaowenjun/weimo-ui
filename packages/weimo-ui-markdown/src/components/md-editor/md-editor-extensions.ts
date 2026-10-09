@@ -26,7 +26,7 @@ import {
 } from './md-editor-ordered-list'
 import { SaveKeymap, type MdEditorInteractionContext } from './md-editor-save-keymap'
 
-export const AlphabeticOrderedListMarker = Extension.create({
+const AlphabeticOrderedListMarker = Extension.create({
   name: 'alphabeticOrderedListMarker',
 
   addGlobalAttributes() {
