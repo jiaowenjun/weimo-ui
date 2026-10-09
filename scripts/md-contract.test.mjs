@@ -310,6 +310,7 @@ assert.ok(
 assert.ok(
   mdEditorSimpleExtensionsSource.includes('code: false') &&
     mdEditorSimpleExtensionsSource.includes('codeBlock: false') &&
+    mdEditorSimpleExtensionsSource.includes('heading: { levels: [1] }') &&
     mdEditorSimpleExtensionsSource.includes('horizontalRule: false') &&
     mdEditorSimpleExtensionsSource.includes('italic: false') &&
     mdEditorSimpleExtensionsSource.includes('link: false') &&
@@ -319,8 +320,9 @@ assert.ok(
     !mdEditorSimpleExtensionsSource.includes('@tiptap/markdown') &&
     !mdEditorSimpleExtensionsSource.includes('marked') &&
     !mdEditorSimpleExtensionsSource.includes('MdEditorListItem') &&
+    !mdEditorSimpleExtensionsSource.includes('CenteredQuote') &&
     mdEditorSimpleExtensionsSource.includes('SimpleSaveKeymap'),
-  'MdEditorSimple must keep only heading, bold, centered quote, blockquote, and bullet-list formats without any markdown parse or serialize machinery.',
+  'MdEditorSimple must keep only heading, bold, blockquote, and bullet-list formats without any markdown parse or serialize machinery.',
 )
 assert.ok(
   !mdEditorExtensionsSource.includes('isSimple') &&

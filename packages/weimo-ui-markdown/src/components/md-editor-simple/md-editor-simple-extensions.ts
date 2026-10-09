@@ -3,12 +3,10 @@ import type { JSONContent } from '@tiptap/core'
 import Placeholder from '@tiptap/extension-placeholder'
 import StarterKit from '@tiptap/starter-kit'
 
-import { CenteredQuote } from '../md-editor/md-editor-centered-quote'
-
 // 预设不加载 tiptap 的 markdown 扩展:内容以 tiptap 原生 JSON 进出,编辑器
-// 既不解析 Markdown 源码也不序列化回 Markdown。格式面收敛为标题/加粗/居中/
-// 引用/无序列表五种,其余 StarterKit 格式(斜体/链接/行内代码/代码块/删除
-// 线/下划线/有序列表/分隔线)全部关闭,schema 层面即无法产生。
+// 既不解析 Markdown 源码也不序列化回 Markdown。格式面收敛为标题/加粗/引用/
+// 无序列表四种(标题仅 level 1),其余 StarterKit 格式(斜体/链接/行内代码/
+// 代码块/删除线/下划线/有序列表/分隔线)全部关闭,schema 层面即无法产生。
 
 export type MdEditorSimpleInteractionContext = {
   disabled: boolean
@@ -62,6 +60,7 @@ export function createMdEditorSimpleExtensions(options: {
     StarterKit.configure({
       code: false,
       codeBlock: false,
+      heading: { levels: [1] },
       horizontalRule: false,
       italic: false,
       link: false,
@@ -69,7 +68,6 @@ export function createMdEditorSimpleExtensions(options: {
       strike: false,
       underline: false,
     }),
-    CenteredQuote,
     Placeholder.configure({
       placeholder: options.placeholder ?? '',
     }),

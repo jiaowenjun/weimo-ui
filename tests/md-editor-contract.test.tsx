@@ -115,7 +115,7 @@ describe('MdEditor markdown model', () => {
     expect(normalizeEditorMarkdown(normalized)).toBe(authored)
   })
 
-  it('keeps only heading, bold, centered quote, blockquote, and bullet lists in the simple preset', () => {
+  it('keeps only heading, bold, blockquote, and bullet lists in the simple preset', () => {
     const editor = new Editor({
       extensions: createMdEditorSimpleExtensions({
         getInteraction: () => ({ disabled: false }),
@@ -128,6 +128,10 @@ describe('MdEditor markdown model', () => {
     expect(editor.schema.nodes.bulletList).toBeDefined()
     expect(editor.schema.nodes.listItem).toBeDefined()
     expect(editor.schema.marks.bold).toBeDefined()
+
+    expect(editor.commands.setHeading({ level: 1 })).toBe(true)
+    expect(editor.commands.setHeading({ level: 2 })).toBe(false)
+    expect(editor.isActive('heading', { level: 1 })).toBe(true)
 
     expect(editor.schema.nodes.inlineMath).toBeUndefined()
     expect(editor.schema.nodes.blockMath).toBeUndefined()
@@ -163,7 +167,7 @@ describe('MdEditor markdown model', () => {
     expect(editor.isActive('bold')).toBe(false)
   })
 
-  it('round-trips the five supported formats as tiptap JSON', () => {
+  it('round-trips the four supported formats as tiptap JSON', () => {
     const source = {
       type: 'doc',
       content: [
@@ -177,17 +181,6 @@ describe('MdEditor markdown model', () => {
           content: [
             { type: 'text', text: '正文' },
             { type: 'text', marks: [{ type: 'bold' }], text: '加粗' },
-          ],
-        },
-        {
-          type: 'blockquote',
-          content: [
-            {
-              type: 'paragraph',
-              content: [
-                { type: 'text', text: `${WEIMO_CENTERED_QUOTE_MARKER}居中一行` },
-              ],
-            },
           ],
         },
         {
@@ -223,7 +216,6 @@ describe('MdEditor markdown model', () => {
     })
     editors.push(editor)
 
-    expect(editor.state.doc.textContent).toContain('居中一行')
     expect(JSON.parse(JSON.stringify(editor.getJSON()))).toEqual(
       JSON.parse(JSON.stringify(source)),
     )
@@ -262,7 +254,7 @@ describe('MdEditor public component', () => {
           content: [
             {
               type: 'heading',
-              attrs: { level: 2 },
+              attrs: { level: 1 },
               content: [{ type: 'text', text: '标题' }],
             },
             {
@@ -284,7 +276,7 @@ describe('MdEditor public component', () => {
     const content = document.querySelector('.md-editor__content')
 
     expect(content).not.toBeNull()
-    expect(content?.querySelector('h2')).not.toBeNull()
+    expect(content?.querySelector('h1')).not.toBeNull()
     expect(content?.querySelector('strong')).not.toBeNull()
     expect(content?.querySelector('table')).toBeNull()
     expect(content?.querySelector('code')).toBeNull()
