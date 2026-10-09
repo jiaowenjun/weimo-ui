@@ -1,6 +1,8 @@
-import { useState } from 'react'
-import type { JSONContent } from '@tiptap/core'
+import { useRef, useState } from 'react'
+import type { Editor, JSONContent } from '@tiptap/core'
+import { List } from 'lucide-react'
 
+import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'
 import { MdEditorSimple } from 'weimo-ui-markdown/components/md-editor-simple'
 import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
 import type { ComponentDefinition } from '../../component-docs'
@@ -44,25 +46,34 @@ const mdEditorSimpleSample: JSONContent = {
   ],
 }
 
-function ControlledMdEditorSimpleDemo() {
-  const [content, setContent] = useState<JSONContent>(mdEditorSimpleSample)
-
-  return (
-    <div className="md-editor-docs-preview">
-      <MdEditorSimple
-        onChange={setContent}
-        placeholder="写点什么..."
-        value={content}
-      />
-    </div>
-  )
-}
-
 // Docs definitions intentionally colocate preview components with exported page metadata.
 function MdEditorSimpleDemo() {
+  const [content, setContent] = useState<JSONContent>(mdEditorSimpleSample)
+  const editorRef = useRef<Editor | null>(null)
+
   return (
-    <ComponentPreviewCard label="简化Markdown编辑器">
-      <ControlledMdEditorSimpleDemo />
+    <ComponentPreviewCard
+      action={
+        <GhostIconButton
+          aria-label="切换无序列表"
+          onClick={() => editorRef.current?.chain().focus().toggleBulletList().run()}
+          size="sm"
+        >
+          <List />
+        </GhostIconButton>
+      }
+      label="简化Markdown编辑器"
+    >
+      <div className="md-editor-docs-preview">
+        <MdEditorSimple
+          onChange={setContent}
+          onEditorChange={(editor) => {
+            editorRef.current = editor
+          }}
+          placeholder="写点什么..."
+          value={content}
+        />
+      </div>
     </ComponentPreviewCard>
   )
 }
