@@ -1,4 +1,5 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
+import { useEditorState } from '@tiptap/react'
 import type { Editor, JSONContent } from '@tiptap/core'
 import { List } from 'lucide-react'
 
@@ -49,14 +50,21 @@ const mdEditorSimpleSample: JSONContent = {
 // Docs definitions intentionally colocate preview components with exported page metadata.
 function MdEditorSimpleDemo() {
   const [content, setContent] = useState<JSONContent>(mdEditorSimpleSample)
-  const editorRef = useRef<Editor | null>(null)
+  const [editor, setEditor] = useState<Editor | null>(null)
+  const bulletListActive =
+    useEditorState({
+      editor,
+      selector: ({ editor: currentEditor }) =>
+        currentEditor?.isActive('bulletList') ?? false,
+    }) ?? false
 
   return (
     <ComponentPreviewCard
       action={
         <GhostIconButton
+          active={bulletListActive}
           aria-label="切换无序列表"
-          onClick={() => editorRef.current?.chain().focus().toggleBulletList().run()}
+          onClick={() => editor?.chain().focus().toggleBulletList().run()}
           size="sm"
         >
           <List />
@@ -67,9 +75,7 @@ function MdEditorSimpleDemo() {
       <div className="md-editor-docs-preview">
         <MdEditorSimple
           onChange={setContent}
-          onEditorChange={(editor) => {
-            editorRef.current = editor
-          }}
+          onEditorChange={setEditor}
           placeholder="写点什么..."
           value={content}
         />

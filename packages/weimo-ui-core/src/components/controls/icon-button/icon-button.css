@@ -6,6 +6,9 @@
        消费方可按作用域覆写为更深层级(先例:capsule 后缀、tagtree 树行
        均覆写为 --color-bg-nested-hover)。 */
     --icon-button-ghost-hover-bg: var(--color-bg-hover);
+    /* 公开 theming hook:幽灵按钮选中态(active prop)底色,默认凸起层
+       (对齐 md-editor 工具栏按钮 data-active 的视觉层级)。 */
+    --icon-button-ghost-active-bg: var(--color-bg-raised);
 
     display: inline-flex;
     align-items: center;
@@ -146,6 +149,13 @@
 
   .icon-button--ghost[data-popup-open] {
     background: var(--icon-button-ghost-hover-bg);
+  }
+
+  /* === Selected (active prop / aria-pressed) === */
+  .icon-button--ghost[data-active='true'],
+  .icon-button--ghost[data-active='true']:not(:disabled):hover {
+    color: var(--color-text-primary);
+    background: var(--icon-button-ghost-active-bg);
   }
 
   /* === Active === */
