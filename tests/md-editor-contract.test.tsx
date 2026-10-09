@@ -16,6 +16,7 @@ import { createMdEditorSimpleExtensions } from '../packages/weimo-ui-markdown/sr
 import {
   MdEditorSimple,
   type MdEditorSimpleHandle,
+  type MdEditorSimpleSelectionFormat,
 } from '../packages/weimo-ui-markdown/src/components/md-editor-simple/md-editor-simple'
 
 const editors: Editor[] = []
@@ -316,6 +317,112 @@ describe('MdEditor public component', () => {
 
     await waitFor(() => expect(JSON.stringify(ref.current?.getContent())).toContain('Second'))
     expect(onChange).not.toHaveBeenCalled()
+  })
+
+  it('publishes semantic format state when the selection moves', async () => {
+    const ref = createRef<MdEditorSimpleHandle>()
+    const formats: Array<MdEditorSimpleSelectionFormat | null> = []
+    const { unmount } = render(
+      <MdEditorSimple
+        defaultValue={{
+          type: 'doc',
+          content: [
+            {
+              type: 'heading',
+              attrs: { level: 1 },
+              content: [{ type: 'text', text: '标题' }],
+            },
+            {
+              type: 'blockquote',
+              content: [
+                { type: 'paragraph', content: [{ type: 'text', text: '引用' }] },
+              ],
+            },
+          ],
+        }}
+        onSelectionFormatChange={(format) => formats.push(format)}
+        ref={ref}
+      />,
+    )
+
+    await waitFor(() => expect(formats).toContainEqual({ block: 'heading', bold: false }))
+    act(() => ref.current?.focus('end'))
+    await waitFor(() => expect(formats.at(-1)).toEqual({ block: 'quote', bold: false }))
+
+    unmount()
+    expect(formats.at(-1)).toBeNull()
+  })
+
+  it('sets and toggles mutually exclusive formats through the public handle', async () => {
+    const ref = createRef<MdEditorSimpleHandle>()
+    const onSelectionFormatChange = vi.fn()
+    render(
+      <MdEditorSimple
+        defaultValue={{
+          type: 'doc',
+          content: [
+            { type: 'paragraph', content: [{ type: 'text', text: '正文' }] },
+          ],
+        }}
+        onSelectionFormatChange={onSelectionFormatChange}
+        ref={ref}
+      />,
+    )
+
+    await waitFor(() => expect(ref.current?.getSelectionFormat()?.block).toBe('paragraph'))
+
+    let commandResult = false
+    act(() => {
+      commandResult = ref.current?.setBlockFormat('heading') ?? false
+    })
+    expect(commandResult).toBe(true)
+    await waitFor(() => expect(ref.current?.getSelectionFormat()?.block).toBe('heading'))
+    expect(ref.current?.getContent().content?.[0]?.type).toBe('heading')
+
+    act(() => {
+      commandResult = ref.current?.setBlockFormat('list') ?? false
+    })
+    expect(commandResult).toBe(true)
+    await waitFor(() => expect(ref.current?.getSelectionFormat()?.block).toBe('list'))
+    expect(ref.current?.getContent().content?.[0]?.type).toBe('bulletList')
+
+    act(() => {
+      commandResult = ref.current?.setBlockFormat('quote') ?? false
+    })
+    expect(commandResult).toBe(true)
+    await waitFor(() => expect(ref.current?.getSelectionFormat()?.block).toBe('quote'))
+    expect(ref.current?.getContent().content?.[0]?.type).toBe('blockquote')
+
+    act(() => {
+      commandResult = ref.current?.toggleBlockFormat('quote') ?? false
+    })
+    expect(commandResult).toBe(true)
+    await waitFor(() => expect(ref.current?.getSelectionFormat()?.block).toBe('paragraph'))
+    expect(ref.current?.getContent().content?.[0]?.type).toBe('paragraph')
+
+    act(() => {
+      commandResult = ref.current?.setBold(true) ?? false
+    })
+    expect(commandResult).toBe(true)
+    await waitFor(() => expect(ref.current?.getSelectionFormat()?.bold).toBe(true))
+
+    act(() => {
+      commandResult = ref.current?.toggleBold() ?? false
+    })
+    expect(commandResult).toBe(true)
+    await waitFor(() => expect(ref.current?.getSelectionFormat()?.bold).toBe(false))
+    expect(onSelectionFormatChange).toHaveBeenCalledWith({ block: 'quote', bold: false })
+  })
+
+  it('rejects public format commands while disabled', async () => {
+    const ref = createRef<MdEditorSimpleHandle>()
+    render(<MdEditorSimple disabled ref={ref} />)
+
+    await waitFor(() => expect(ref.current?.getSelectionFormat()).not.toBeNull())
+    expect(ref.current?.setBlockFormat('heading')).toBe(false)
+    expect(ref.current?.toggleBlockFormat('list')).toBe(false)
+    expect(ref.current?.setBold(true)).toBe(false)
+    expect(ref.current?.toggleBold()).toBe(false)
   })
 
   it('tracks controlled values without emitting a synthetic change', async () => {

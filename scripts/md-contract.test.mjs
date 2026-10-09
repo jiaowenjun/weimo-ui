@@ -299,13 +299,18 @@ assert.ok(
   'The simplified Markdown render page must render the MdRenderSimple card with its own sample.',
 )
 assert.ok(
-  mdEditorSimpleDefinitionSource.includes(
-    "import { MdEditorSimple } from 'weimo-ui-markdown/components/md-editor-simple'",
-  ) &&
+  mdEditorSimpleDefinitionSource.includes('MdEditorSimple,') &&
+    mdEditorSimpleDefinitionSource.includes(
+      "from 'weimo-ui-markdown/components/md-editor-simple'",
+    ) &&
     mdEditorSimpleDefinitionSource.includes('label="简化Markdown编辑器"') &&
     mdEditorSimpleDefinitionSource.includes('mdEditorSimpleSample') &&
+    mdEditorSimpleDefinitionSource.includes('onSelectionFormatChange={setSelectionFormat}') &&
+    mdEditorSimpleDefinitionSource.includes("toggleBlockFormat('heading')") &&
+    !mdEditorSimpleDefinitionSource.includes('useEditorState') &&
+    !mdEditorSimpleDefinitionSource.includes('onEditorChange=') &&
     !mdEditorSimpleDefinitionSource.includes('MathEditor'),
-  'The simplified Markdown edit page must render the MdEditorSimple card without the math editor card.',
+  'The simplified Markdown edit page must consume MdEditorSimple semantic format state and commands without a Tiptap editor instance.',
 )
 assert.ok(
   mdEditorSimpleExtensionsSource.includes('code: false') &&
@@ -332,16 +337,16 @@ assert.ok(
 )
 assert.ok(
   mdEditorSimpleComponentSource.includes("from './use-md-editor-simple'") &&
-    mdEditorSimpleComponentSource.includes(
-      "'convertSelectionToInlineMath' | 'formatContent' | 'getMarkdown'",
-    ) &&
-    mdEditorSimpleComponentSource.includes('getContent: () => JSONContent') &&
-    mdEditorSimpleComponentSource.includes('export type MdEditorSimpleProps = Omit<') &&
-    mdEditorSimpleComponentSource.includes("'variant'") &&
-    mdEditorSimpleComponentSource.includes("'renderImage'") &&
-    mdEditorSimpleComponentSource.includes("'resolveImageSrc'") &&
-    mdEditorSimpleComponentSource.includes("'defaultValue'") &&
+    mdEditorSimpleComponentSource.includes('export type MdEditorSimpleHandle = {') &&
+    mdEditorSimpleComponentSource.includes('getContent: () => MdEditorSimpleContent') &&
+    mdEditorSimpleComponentSource.includes('export type MdEditorSimpleProps = MdEditorBaseProps &') &&
+    mdEditorSimpleComponentSource.includes('onSelectionFormatChange?:') &&
+    mdEditorSimpleComponentSource.includes('getSelectionFormat: () =>') &&
+    mdEditorSimpleComponentSource.includes('setBlockFormat:') &&
+    mdEditorSimpleComponentSource.includes('toggleBlockFormat:') &&
     mdEditorSimpleComponentSource.includes('value?: MdEditorSimpleContent') &&
+    !mdEditorSimpleComponentSource.includes('onEditorChange') &&
+    !mdEditorSimpleComponentSource.includes('MdEditorHandle') &&
     !mdEditorSimpleComponentSource.includes('getMarkdown:') &&
     !mdEditorSimpleComponentSource.includes('formatEditorContent') &&
     !mdEditorSimpleComponentSource.includes('<MdEditor '),

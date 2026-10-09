@@ -1,33 +1,42 @@
 import { forwardRef, useImperativeHandle, useLayoutEffect, useRef } from 'react'
 import { EditorContent } from '@tiptap/react'
-import type { JSONContent } from '@tiptap/core'
 
 import { cn } from 'weimo-ui-core/lib/utils'
-import type { MdEditorHandle, MdEditorProps } from '../md-editor/md-editor-types'
-import { useMdEditorSimple, type MdEditorSimpleContent } from './use-md-editor-simple'
+import type { MdEditorBaseProps, MdEditorFocusPosition } from '../md-editor/md-editor-types'
+import {
+  useMdEditorSimple,
+  type MdEditorSimpleBlockFormat,
+  type MdEditorSimpleContent,
+  type MdEditorSimpleSelectionFormat,
+} from './use-md-editor-simple'
 
 import 'weimo-ui-markdown/styles/md-editor.css'
 
-export type MdEditorSimpleProps = Omit<
-  MdEditorProps,
-  | 'variant'
-  | 'renderImage'
-  | 'resolveImageSrc'
-  | 'value'
-  | 'defaultValue'
-  | 'onChange'
-  | 'onSave'
-> & {
+export type {
+  MdEditorSimpleBlockFormat,
+  MdEditorSimpleContent,
+  MdEditorSimpleSelectionFormat,
+} from './use-md-editor-simple'
+
+export type MdEditorSimpleProps = MdEditorBaseProps & {
   value?: MdEditorSimpleContent
   defaultValue?: MdEditorSimpleContent
   onChange?: (content: MdEditorSimpleContent) => void
+  onSelectionFormatChange?: (format: MdEditorSimpleSelectionFormat | null) => void
   onSave?: (content: MdEditorSimpleContent) => void
 }
-export type MdEditorSimpleHandle = Omit<
-  MdEditorHandle,
-  'convertSelectionToInlineMath' | 'formatContent' | 'getMarkdown'
-> & {
-  getContent: () => JSONContent
+export type MdEditorSimpleHandle = {
+  clear: () => void
+  focus: (position?: MdEditorFocusPosition) => void
+  getContent: () => MdEditorSimpleContent
+  getContentHeight: () => number
+  getSelectionFormat: () => MdEditorSimpleSelectionFormat | null
+  setBlockFormat: (format: MdEditorSimpleBlockFormat) => boolean
+  setBold: (active: boolean) => boolean
+  toggleBlockFormat: (
+    format: Exclude<MdEditorSimpleBlockFormat, 'paragraph'>,
+  ) => boolean
+  toggleBold: () => boolean
 }
 
 export const MdEditorSimple = forwardRef<MdEditorSimpleHandle, MdEditorSimpleProps>(
@@ -42,7 +51,7 @@ export const MdEditorSimple = forwardRef<MdEditorSimpleHandle, MdEditorSimplePro
       onCancel,
       onChange,
       onContentHeightChange,
-      onEditorChange,
+      onSelectionFormatChange,
       onSave,
       placeholder,
       value,
@@ -51,14 +60,24 @@ export const MdEditorSimple = forwardRef<MdEditorSimpleHandle, MdEditorSimplePro
   ) {
     const rootRef = useRef<HTMLDivElement | null>(null)
     const contentHeightChangeHandlerRef = useRef(onContentHeightChange)
-    const { clear, editor, focus, getContent } = useMdEditorSimple({
+    const {
+      clear,
+      editor,
+      focus,
+      getContent,
+      getSelectionFormat,
+      setBlockFormat,
+      setBold,
+      toggleBlockFormat,
+      toggleBold,
+    } = useMdEditorSimple({
       autoFocus,
       autoFocusPosition,
       defaultValue,
       disabled,
       onCancel,
       onChange,
-      onEditorChange,
+      onSelectionFormatChange,
       onSave,
       placeholder,
       value,
@@ -116,9 +135,24 @@ export const MdEditorSimple = forwardRef<MdEditorSimpleHandle, MdEditorSimplePro
         clear,
         focus,
         getContent,
+        getSelectionFormat,
         getContentHeight: measureEditorContentHeight,
+        setBlockFormat,
+        setBold,
+        toggleBlockFormat,
+        toggleBold,
       }),
-      [clear, editor, focus, getContent],
+      [
+        clear,
+        editor,
+        focus,
+        getContent,
+        getSelectionFormat,
+        setBlockFormat,
+        setBold,
+        toggleBlockFormat,
+        toggleBold,
+      ],
     )
 
     if (!editor) {

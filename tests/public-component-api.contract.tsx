@@ -8,6 +8,11 @@ import {
   type ActionMenuProps,
 } from 'weimo-ui/components/menu'
 import type { HeatmapProps } from '../packages/weimo-ui-stats/src/components/heatmap'
+import type {
+  MdEditorSimpleHandle,
+  MdEditorSimpleProps,
+  MdEditorSimpleSelectionFormat,
+} from 'weimo-ui/components/md-editor-simple'
 import {
   getPressableClassName,
   getPressableToken,
@@ -47,6 +52,20 @@ const pressableTone: PressableTone = pressableTones[0]
 const pressableClassName = getPressableClassName(pressableTone)
 const pressableToken = getPressableToken(pressableTone)
 
+const simpleSelectionFormat: MdEditorSimpleSelectionFormat = {
+  block: 'heading',
+  bold: false,
+}
+const simpleEditorProps: MdEditorSimpleProps = {
+  onSelectionFormatChange: (format) => void format,
+}
+const simpleEditorRejectsInstance: MdEditorSimpleProps = {
+  // @ts-expect-error MdEditorSimple exposes semantic state instead of its Tiptap instance.
+  onEditorChange: () => undefined,
+}
+declare const simpleEditorHandle: MdEditorSimpleHandle
+const simpleEditorCommandResult = simpleEditorHandle.toggleBlockFormat('quote')
+
 void glassIconButton
 void ghostIconButton
 void textButton
@@ -62,3 +81,7 @@ void heatmapRejectsToday
 void heatmapRejectsNativeAriaLabel
 void pressableClassName
 void pressableToken
+void simpleSelectionFormat
+void simpleEditorProps
+void simpleEditorRejectsInstance
+void simpleEditorCommandResult

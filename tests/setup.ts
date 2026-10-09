@@ -52,6 +52,16 @@ Object.defineProperty(HTMLElement.prototype, 'scrollIntoView', {
   value: vi.fn(),
 })
 
+Object.defineProperty(Range.prototype, 'getClientRects', {
+  configurable: true,
+  value: vi.fn(() => []),
+})
+
+Object.defineProperty(Range.prototype, 'getBoundingClientRect', {
+  configurable: true,
+  value: vi.fn(() => new DOMRect()),
+})
+
 Object.defineProperty(Document.prototype, 'elementFromPoint', {
   configurable: true,
   value: vi.fn(() => document.body),

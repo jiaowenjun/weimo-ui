@@ -19,20 +19,23 @@ export type MdEditorHandle = {
   getContentHeight: () => number
 }
 
-export type MdEditorProps = {
+export type MdEditorBaseProps = {
+  onCancel?: () => void
+  onContentHeightChange?: (height: number) => void
+  placeholder?: string
+  disabled?: boolean
+  autoFocus?: boolean
+  autoFocusPosition?: MdEditorFocusPosition
+  className?: string
+  editorClassName?: string
+}
+
+export type MdEditorProps = MdEditorBaseProps & {
   value?: string
   defaultValue?: string
   onChange?: (markdown: string) => void
   onSave?: (markdown: string) => void
-  onCancel?: () => void
   onEditorChange?: (editor: Editor | null) => void
-  onContentHeightChange?: (height: number) => void
   renderImage?: MarkdownImageRenderer
   resolveImageSrc?: MarkdownImageSrcResolver
-  placeholder?: string
-  disabled?: boolean
-  autoFocus?: boolean
-  autoFocusPosition?: 'start' | 'end'
-  className?: string
-  editorClassName?: string
 }
