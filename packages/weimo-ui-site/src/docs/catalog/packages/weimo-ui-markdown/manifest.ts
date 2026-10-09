@@ -6,7 +6,7 @@ export const markdownCatalog = {
   pages: [
     {
       id: 'markdown',
-      name: 'Markdown 编辑与预览',
+      name: 'Markdown编辑',
       exportName: 'MdEditor',
       registryName: 'md-editor',
       packageExport: './components/md-editor',
