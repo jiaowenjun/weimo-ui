@@ -127,6 +127,7 @@ assert.deepEqual(
     'tag',
     'markdown',
     'markdown-render',
+    'markdown-render-simple',
     'markdown-view',
     'image',
     'stat',

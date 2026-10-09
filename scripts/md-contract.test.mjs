@@ -53,14 +53,25 @@ const definitionSource = readProjectFile(
 const mdRenderDefinitionSource = readProjectFile(
   'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown-render.tsx',
 )
+const mdRenderSimpleDefinitionSource = readProjectFile(
+  'packages/weimo-ui-site/src/docs/catalog/packages/weimo-ui-markdown/markdown-render-simple.tsx',
+)
+const mdRenderSimpleComponentSource = readProjectFile(
+  'packages/weimo-ui-markdown/src/components/md-render-simple/md-render-simple.tsx',
+)
+const markdownSampleSource = readProjectFile(
+  'packages/weimo-ui-site/src/docs/catalog/fixtures/markdown-sample.ts',
+)
 const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const tokensCss = readProjectFile('packages/weimo-ui-markdown/src/styles/tokens.css')
 const packageJson = JSON.parse(readProjectFile('package.json'))
 const markdownPackageJson = JSON.parse(readProjectFile('packages/weimo-ui-markdown/package.json'))
 const rootRegistry = JSON.parse(readProjectFile('registry.json'))
 const standaloneMdRenderRegistry = JSON.parse(readProjectFile('registry/md-render.json'))
+const standaloneMdRenderSimpleRegistry = JSON.parse(readProjectFile('registry/md-render-simple.json'))
 const styleRegistry = JSON.parse(readProjectFile('registry/style.json'))
 const rootMdRenderItem = rootRegistry.items.find((item) => item.name === 'md-render')
+const rootMdRenderSimpleItem = rootRegistry.items.find((item) => item.name === 'md-render-simple')
 const rootStyleItem = rootRegistry.items.find((item) => item.name === 'style')
 
 const tokenGridBlock = cssBlockFor(appCss, '.app-shell__content--token-grid')
@@ -255,6 +266,65 @@ assert.ok(
   'The Markdown render page must include the style preview and its search aliases.',
 )
 
+assert.ok(
+  mdRenderSimpleDefinitionSource.includes("from './markdown-styles'") &&
+    mdRenderSimpleDefinitionSource.includes('<MarkdownSimpleStylePreview />') &&
+    mdRenderSimpleDefinitionSource.includes('...markdownSimpleStyleSearchAliases'),
+  'The simplified Markdown render page must include the filtered style preview and its search aliases.',
+)
+assert.ok(
+  mdRenderSimpleDefinitionSource.includes(
+    "import { MdRenderSimple } from 'weimo-ui-markdown/components/md-render-simple'",
+  ) &&
+    mdRenderSimpleDefinitionSource.includes('label="简化Markdown渲染"') &&
+    mdRenderSimpleDefinitionSource.includes('mdRenderSimpleSample') &&
+    !mdRenderSimpleDefinitionSource.includes('mdRenderSample'),
+  'The simplified Markdown render page must render the MdRenderSimple card with its own sample.',
+)
+assert.ok(
+  mdRenderSource.includes("export type MdRenderVariant = 'default' | 'simple'") &&
+    mdRenderSource.includes('variant?: MdRenderVariant') &&
+    mdRenderSource.includes("variant = 'default'") &&
+    mdRenderSource.includes(
+      "rehypePlugins={variant === 'simple' ? simpleRehypePlugins : fullRehypePlugins}",
+    ) &&
+    mdRenderSource.includes(
+      "remarkPlugins={variant === 'simple' ? simpleRemarkPlugins : fullRemarkPlugins}",
+    ),
+  'MdRender must expose a simple variant that swaps the markdown plugin pipeline.',
+)
+const simpleRemarkPluginsList =
+  mdRenderSource.match(/const simpleRemarkPlugins: PluggableList = \[([^\]]*)\]/)?.[1] ?? ''
+const simpleRehypePluginsList =
+  mdRenderSource.match(/const simpleRehypePlugins: PluggableList = \[([^\]]*)\]/)?.[1] ?? ''
+assert.ok(
+  simpleRemarkPluginsList.includes('unwrapInlineCodeRemarkPlugin') &&
+    !simpleRemarkPluginsList.includes('remarkGfm') &&
+    !simpleRemarkPluginsList.includes('remarkMath'),
+  'The simple remark pipeline must drop GFM tables and math while unwrapping inline code.',
+)
+assert.ok(
+  !simpleRehypePluginsList.includes('rehypeKatex'),
+  'The simple rehype pipeline must not render KaTeX.',
+)
+assert.ok(
+  mdRenderSimpleComponentSource.includes(
+    "import { MdRender, type MdRenderProps } from 'weimo-ui-markdown/components/md-render'",
+  ) &&
+    mdRenderSimpleComponentSource.includes('variant="simple"') &&
+    mdRenderSimpleComponentSource.includes("MdRenderSimple.displayName = 'MdRenderSimple'"),
+  'MdRenderSimple must stay a thin variant preset wrapper around MdRender.',
+)
+const mdRenderSimpleSampleMatch = markdownSampleSource.match(
+  /export const mdRenderSimpleSample = `([^`]*)`/,
+)
+assert.ok(
+  mdRenderSimpleSampleMatch &&
+    !mdRenderSimpleSampleMatch[1].includes('$') &&
+    !mdRenderSimpleSampleMatch[1].includes('| --- |'),
+  'The simplified sample must not contain math or table syntax, and inline code backticks cannot enter its template literal.',
+)
+
 for (const snippet of [
   "import { MdRender } from 'weimo-ui-markdown/components/md-render'",
   "import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'",
@@ -268,7 +338,7 @@ for (const snippet of [
   "darkValue: typeof item.value === 'string' ? undefined : item.value.dark",
   'token: item.token',
   'className="md-style-preview__group-effect"',
-  '{renderMarkdownTokenGroupPreview(group)}',
+  '{renderMarkdownTokenGroupPreview(group, RenderMarkdown)}',
   "light: 'hsl(0 0% 9%)'",
   "dark: 'hsl(0 0% 98%)'",
   "value: '16px'",
@@ -762,7 +832,7 @@ const mdRenderTestContext = {
 }
 vm.runInNewContext(
   ts.transpileModule(
-    `${mdRenderSource}\nexport { alphabeticOrderedListRemarkPlugin as __testAlphabeticOrderedListRemarkPlugin, trailingOrderedListImageRemarkPlugin as __testTrailingOrderedListImageRemarkPlugin }`,
+    `${mdRenderSource}\nexport { alphabeticOrderedListRemarkPlugin as __testAlphabeticOrderedListRemarkPlugin, trailingOrderedListImageRemarkPlugin as __testTrailingOrderedListImageRemarkPlugin, unwrapInlineCodeRemarkPlugin as __testUnwrapInlineCodeRemarkPlugin }`,
     {
       compilerOptions: {
         jsx: ts.JsxEmit.ReactJSX,
@@ -778,6 +848,38 @@ const alphabeticOrderedListRemarkPlugin =
   mdRenderTestContext.exports.__testAlphabeticOrderedListRemarkPlugin
 const trailingOrderedListImageRemarkPlugin =
   mdRenderTestContext.exports.__testTrailingOrderedListImageRemarkPlugin
+const unwrapInlineCodeRemarkPlugin =
+  mdRenderTestContext.exports.__testUnwrapInlineCodeRemarkPlugin
+const inlineCodeTree = {
+  type: 'root',
+  children: [
+    {
+      type: 'paragraph',
+      children: [
+        { type: 'inlineCode', value: 'const token = true' },
+        { type: 'strong', children: [{ type: 'inlineCode', value: 'nested' }] },
+      ],
+    },
+  ],
+}
+
+unwrapInlineCodeRemarkPlugin()(inlineCodeTree)
+
+assert.equal(
+  inlineCodeTree.children[0].children[0].type,
+  'text',
+  'The simple variant must unwrap top-level inline code into plain text.',
+)
+assert.equal(
+  inlineCodeTree.children[0].children[0].value,
+  'const token = true',
+  'Unwrapped inline code must keep its literal value.',
+)
+assert.equal(
+  inlineCodeTree.children[0].children[1].children[0].type,
+  'text',
+  'The simple variant must unwrap nested inline code as well.',
+)
 
 assert.equal(
   typeof resolveOptionGridColumns,
@@ -1341,6 +1443,22 @@ assert.ok(
   'The standalone Md registry item must stay removed.',
 )
 assert.ok(rootMdRenderItem, 'Root registry must include the @weimo/md-render item.')
+assert.ok(
+  rootMdRenderSimpleItem,
+  'Root registry must include the @weimo/md-render-simple item.',
+)
+assert.deepEqual(
+  standaloneMdRenderSimpleRegistry,
+  rootMdRenderSimpleItem,
+  'registry/md-render-simple.json must match the root registry md-render-simple payload.',
+)
+assert.ok(
+  rootMdRenderSimpleItem.registryDependencies.includes('@weimo/md-render') &&
+    !rootMdRenderSimpleItem.dependencies.includes('remark-math') &&
+    !rootMdRenderSimpleItem.dependencies.includes('rehype-katex') &&
+    !rootMdRenderSimpleItem.dependencies.includes('remark-gfm'),
+  'The MdRenderSimple registry item must reuse MdRender instead of shipping its own math or table pipeline.',
+)
 assert.deepEqual(
   standaloneMdRenderRegistry,
   rootMdRenderItem,

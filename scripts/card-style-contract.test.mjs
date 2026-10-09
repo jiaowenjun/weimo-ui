@@ -370,15 +370,21 @@ assert.ok(
 )
 assert.ok(
   mdRenderSource.includes(
-    'rehypePlugins={[rehypeRaw, [rehypeSanitize, markdownSanitizeSchema], rehypeKatex]}',
-  ),
-  'MdRender must parse raw HTML before sanitizing it and rendering KaTeX.',
+    'const fullRehypePlugins: PluggableList = [rehypeRaw, [rehypeSanitize, markdownSanitizeSchema], rehypeKatex]',
+  ) &&
+    mdRenderSource.includes(
+      'const simpleRehypePlugins: PluggableList = [rehypeRaw, [rehypeSanitize, markdownSanitizeSchema]]',
+    ),
+  'MdRender must parse raw HTML before sanitizing it, with KaTeX reserved for the full variant.',
 )
 assert.ok(
-  /remarkPlugins=\{\[\s*remarkGfm,\s*remarkMath,\s*alphabeticOrderedListRemarkPlugin,\s*trailingOrderedListImageRemarkPlugin,\s*markCenteredBlockquotes,\s*remarkBreaks,?\s*\]\}/.test(
+  /const fullRemarkPlugins: PluggableList = \[\s*remarkGfm,\s*remarkMath,\s*alphabeticOrderedListRemarkPlugin,\s*trailingOrderedListImageRemarkPlugin,\s*markCenteredBlockquotes,\s*remarkBreaks,?\s*\]/.test(
     mdRenderSource,
-  ),
-  'MdRender must enable remark-breaks after centered quote marking so single newlines render as <br> without introducing a leading centered-quote break.',
+  ) &&
+    /const simpleRemarkPlugins: PluggableList = \[\s*unwrapInlineCodeRemarkPlugin,\s*alphabeticOrderedListRemarkPlugin,\s*trailingOrderedListImageRemarkPlugin,\s*markCenteredBlockquotes,\s*remarkBreaks,?\s*\]/.test(
+      mdRenderSource,
+    ),
+  'MdRender must enable remark-breaks after centered quote marking so single newlines render as <br> without introducing a leading centered-quote break, with the simple pipeline keeping that order minus GFM and math.',
 )
 assert.ok(
   mdRenderSource.includes('export type MdRenderProps') &&

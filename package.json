@@ -73,6 +73,7 @@
     "./components/math-editor": "./packages/weimo-ui-markdown/src/components/md-editor/math-editor.tsx",
     "./components/md-editor": "./packages/weimo-ui-markdown/src/components/md-editor/index.tsx",
     "./components/md-render": "./packages/weimo-ui-markdown/src/components/md-render/md-render.tsx",
+    "./components/md-render-simple": "./packages/weimo-ui-markdown/src/components/md-render-simple/md-render-simple.tsx",
     "./components/md-view": "./packages/weimo-ui-markdown/src/components/md-view/md-view.tsx",
     "./styles/tokens.css": "./packages/weimo-ui-markdown/src/styles/tokens.css",
     "./components/canvas-transparency": "./packages/weimo-ui-image/src/components/canvas-transparency/canvas-transparency.tsx",

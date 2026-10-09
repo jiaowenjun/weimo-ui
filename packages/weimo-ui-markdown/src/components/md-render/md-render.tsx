@@ -15,6 +15,7 @@ import rehypeSanitize from 'rehype-sanitize'
 import remarkBreaks from 'remark-breaks'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
+import type { PluggableList } from 'unified'
 
 import { cn } from 'weimo-ui-core/lib/utils'
 import {
@@ -751,6 +752,40 @@ function markCenteredBlockquotes() {
   }
 }
 
+function unwrapInlineCodeNodes(node: MarkdownAstNode): void {
+  for (const child of node.children ?? []) {
+    if (child.type === 'inlineCode') {
+      child.type = 'text'
+    } else {
+      unwrapInlineCodeNodes(child)
+    }
+  }
+}
+
+function unwrapInlineCodeRemarkPlugin() {
+  return (tree: MarkdownAstNode) => {
+    unwrapInlineCodeNodes(tree)
+  }
+}
+
+const fullRemarkPlugins: PluggableList = [
+  remarkGfm,
+  remarkMath,
+  alphabeticOrderedListRemarkPlugin,
+  trailingOrderedListImageRemarkPlugin,
+  markCenteredBlockquotes,
+  remarkBreaks,
+]
+const simpleRemarkPlugins: PluggableList = [
+  unwrapInlineCodeRemarkPlugin,
+  alphabeticOrderedListRemarkPlugin,
+  trailingOrderedListImageRemarkPlugin,
+  markCenteredBlockquotes,
+  remarkBreaks,
+]
+const fullRehypePlugins: PluggableList = [rehypeRaw, [rehypeSanitize, markdownSanitizeSchema], rehypeKatex]
+const simpleRehypePlugins: PluggableList = [rehypeRaw, [rehypeSanitize, markdownSanitizeSchema]]
+
 const baseMarkdownComponents: Components = {
   a({ children, href, title }) {
     const safeHref = sanitizeMarkdownHref(href)
@@ -943,10 +978,13 @@ function MarkdownImage({ alt, renderImage, resolvedSrc, title }: MarkdownImagePr
   return renderImage ? renderImage(imageProps) : <img {...imageProps} />
 }
 
+export type MdRenderVariant = 'default' | 'simple'
+
 export type MdRenderProps = ComponentPropsWithoutRef<'div'> & {
   content: string
   renderImage?: MdRenderImageRenderer
   resolveImageSrc?: MdRenderImageSrcResolver
+  variant?: MdRenderVariant
 }
 
 export const MdRender = forwardRef<HTMLDivElement, MdRenderProps>(function MdRender(
@@ -956,6 +994,7 @@ export const MdRender = forwardRef<HTMLDivElement, MdRenderProps>(function MdRen
     onMouseDown,
     renderImage,
     resolveImageSrc,
+    variant = 'default',
     ...props
   },
   ref,
@@ -1000,16 +1039,9 @@ export const MdRender = forwardRef<HTMLDivElement, MdRenderProps>(function MdRen
     >
       <ReactMarkdown
         components={markdownComponents}
-        rehypePlugins={[rehypeRaw, [rehypeSanitize, markdownSanitizeSchema], rehypeKatex]}
+        rehypePlugins={variant === 'simple' ? simpleRehypePlugins : fullRehypePlugins}
         remarkRehypeOptions={markdownRemarkRehypeOptions}
-        remarkPlugins={[
-          remarkGfm,
-          remarkMath,
-          alphabeticOrderedListRemarkPlugin,
-          trailingOrderedListImageRemarkPlugin,
-          markCenteredBlockquotes,
-          remarkBreaks,
-        ]}
+        remarkPlugins={variant === 'simple' ? simpleRemarkPlugins : fullRemarkPlugins}
       >
         {normalizeCenteredQuoteSyntax(content)}
       </ReactMarkdown>

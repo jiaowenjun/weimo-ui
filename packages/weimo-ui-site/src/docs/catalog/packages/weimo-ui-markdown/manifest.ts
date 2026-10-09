@@ -22,6 +22,13 @@ export const markdownCatalog = {
       packageExport: './components/md-render',
     },
     {
+      id: 'markdown-render-simple',
+      name: '简化Markdown渲染',
+      exportName: 'MdRenderSimple',
+      registryName: 'md-render-simple',
+      packageExport: './components/md-render-simple',
+    },
+    {
       id: 'markdown-view',
       name: 'Markdown视图',
       exportName: 'MdView',

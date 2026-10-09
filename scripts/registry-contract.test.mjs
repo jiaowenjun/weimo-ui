@@ -186,6 +186,7 @@ const promotedRegistryNames = [
   'editable-capsule',
   'md-editor',
   'md-render',
+  'md-render-simple',
   'md-view',
   'math-editor',
   'heat-color',

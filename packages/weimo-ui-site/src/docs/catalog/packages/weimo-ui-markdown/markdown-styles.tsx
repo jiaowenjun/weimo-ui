@@ -1,4 +1,5 @@
 import { MdRender } from 'weimo-ui-markdown/components/md-render'
+import { MdRenderSimple } from 'weimo-ui-markdown/components/md-render-simple'
 import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
 
 type MarkdownStyleToken = {
@@ -156,6 +157,10 @@ const markdownStyleTokens = [
 ] satisfies readonly MarkdownStyleToken[]
 
 type MarkdownStyleTokenName = (typeof markdownStyleTokens)[number]['token']
+type MarkdownStyleTokenGroup = (typeof markdownStyleTokenGroups)[number]
+
+// 简化渲染页剔除只服务于行内代码、表格、数学公式这三类已下线格式的 token 组。
+const markdownSimpleExcludedGroupLabels = ['代码', '表格', '数学公式']
 
 const markdownStyleTokenGroups = [
   {
@@ -243,26 +248,27 @@ function getMarkdownStyleToken(token: MarkdownStyleTokenName) {
 }
 
 function renderMarkdownTokenGroupPreview(
-  group: (typeof markdownStyleTokenGroups)[number],
+  group: MarkdownStyleTokenGroup,
+  RenderMarkdown: typeof MdRender = MdRender,
 ) {
   switch (group.label) {
     case '内容容器':
-      return <MdRender content={'<span>Markdown 内容容器<br />承载默认字色、字号和行高。</span>'} />
+      return <RenderMarkdown content={'<span>Markdown 内容容器<br />承载默认字色、字号和行高。</span>'} />
     case '段落':
-      return <MdRender content="这是一段用于预览正文颜色的 Markdown 文本。" />
+      return <RenderMarkdown content="这是一段用于预览正文颜色的 Markdown 文本。" />
     case '标题':
-      return <MdRender content="# 一级标题" />
+      return <RenderMarkdown content="# 一级标题" />
     case '引用块':
-      return <MdRender content="> 引用块使用独立字色与横向内边距。" />
+      return <RenderMarkdown content="> 引用块使用独立字色与横向内边距。" />
     case '列表':
-      return <MdRender content={'- 普通列表\n\nA. 宽序号列表'} />
+      return <RenderMarkdown content={'- 普通列表\n\nA. 宽序号列表'} />
     case '代码':
-      return <MdRender content="行内 `const token = true` 示例" />
+      return <RenderMarkdown content="行内 `const token = true` 示例" />
     case '链接':
-      return <MdRender content="[Markdown 链接](https://weimo.ink)" />
+      return <RenderMarkdown content="[Markdown 链接](https://weimo.ink)" />
     case '图片':
       return (
-        <MdRender
+        <RenderMarkdown
           content={'![图片占位](missing-image)\n\n![图片预览](preview-image)'}
           renderImage={({ alt, className }) => (
             <span
@@ -276,7 +282,7 @@ function renderMarkdownTokenGroupPreview(
       )
     case '列表与图片布局':
       return (
-        <MdRender
+        <RenderMarkdown
           content={'1. 第一项\n2. 第二项\n\n![布局图片](preview-image)'}
           renderImage={({ alt, className }) => (
             <span
@@ -289,9 +295,9 @@ function renderMarkdownTokenGroupPreview(
         />
       )
     case '表格':
-      return <MdRender content={'| 节点 | 状态 |\n| --- | --- |\n| 表格 | Ready |'} />
+      return <RenderMarkdown content={'| 节点 | 状态 |\n| --- | --- |\n| 表格 | Ready |'} />
     case '数学公式':
-      return <MdRender className="md-style-preview__math" content="$E = mc^2$" />
+      return <RenderMarkdown className="md-style-preview__math" content="$E = mc^2$" />
     case '编辑选区':
       return (
         <p className="md-style-preview__selection-sample">
@@ -307,8 +313,11 @@ function renderMarkdownTokenGroupPreview(
   }
 }
 
-export function MarkdownStylePreview() {
-  return markdownStyleTokenGroups.map((group) => (
+function renderMarkdownStyleGroupCard(
+  group: MarkdownStyleTokenGroup,
+  RenderMarkdown: typeof MdRender = MdRender,
+) {
+  return (
     <ComponentPreviewCard
       items={group.tokens.map((token) => {
         const item = getMarkdownStyleToken(token)
@@ -324,11 +333,21 @@ export function MarkdownStylePreview() {
     >
       <div className="md-style-preview__group-effect">
         <div className="md-style-preview__content-wrapper">
-          {renderMarkdownTokenGroupPreview(group)}
+          {renderMarkdownTokenGroupPreview(group, RenderMarkdown)}
         </div>
       </div>
     </ComponentPreviewCard>
-  ))
+  )
+}
+
+export function MarkdownStylePreview() {
+  return markdownStyleTokenGroups.map((group) => renderMarkdownStyleGroupCard(group))
+}
+
+export function MarkdownSimpleStylePreview() {
+  return markdownStyleTokenGroups
+    .filter((group) => !markdownSimpleExcludedGroupLabels.includes(group.label))
+    .map((group) => renderMarkdownStyleGroupCard(group, MdRenderSimple))
 }
 
 export const markdownStyleSearchAliases = [
@@ -336,4 +355,19 @@ export const markdownStyleSearchAliases = [
   'Markdown渲染',
   'Markdown样式',
   ...markdownStyleTokens.flatMap((item) => [item.token, item.role]),
+]
+
+const markdownSimpleExcludedTokens = new Set(
+  markdownStyleTokenGroups
+    .filter((group) => markdownSimpleExcludedGroupLabels.includes(group.label))
+    .flatMap((group) => group.tokens),
+)
+
+export const markdownSimpleStyleSearchAliases = [
+  'Markdown',
+  '简化Markdown渲染',
+  'Markdown样式',
+  ...markdownStyleTokens
+    .filter((item) => !markdownSimpleExcludedTokens.has(item.token))
+    .flatMap((item) => [item.token, item.role]),
 ]

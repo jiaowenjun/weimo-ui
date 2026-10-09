@@ -177,6 +177,7 @@ function writeConsumerProject(consumerDir, registryUrl) {
             'weimo-ui-markdown/components/math-editor': ['./src/components/ui/md-editor/math-editor.tsx'],
             'weimo-ui-markdown/components/md-editor': ['./src/components/ui/md-editor/index.tsx'],
             'weimo-ui-markdown/components/md-render': ['./src/components/ui/md-render/md-render.tsx'],
+            'weimo-ui-markdown/components/md-render-simple': ['./src/components/ui/md-render-simple/md-render-simple.tsx'],
             'weimo-ui-markdown/components/md-view': ['./src/components/ui/md-view/md-view.tsx'],
             'weimo-ui-markdown/styles/*': ['./src/components/ui/*'],
             'weimo-ui-stats/components/heat-color': ['./src/components/ui/heat-color.tsx'],
@@ -252,6 +253,7 @@ import { CapsuleButton, type CapsuleButtonState } from "@/components/ui/capsule-
 import { TagBar } from "@/components/ui/tags/tag-bar"
 import { MdEditor } from "@/components/ui/md-editor"
 import { MdRender } from "@/components/ui/md-render/md-render"
+import { MdRenderSimple } from "@/components/ui/md-render-simple/md-render-simple"
 import { MdView } from "@/components/ui/md-view/md-view"
 import { MathEditor, type MathEditorValue } from "@/components/ui/md-editor/math-editor"
 
@@ -372,6 +374,7 @@ export function RegistryConsumerContract() {
       <CapsuleButton state={chipState}>Chip button</CapsuleButton>
       <TagBar tags={["Tag"]} />
       <MdRender content={"## Render\\n\\ncontent"} />
+      <MdRenderSimple content={"## Simple\\n\\ncontent"} />
       <MdEditor value={"## Editor"} onChange={() => {}} />
       <MdView mode="view" value={"## View"} />
       <MathEditor dialog={mathDialog} onOpenChange={() => {}} onSave={() => {}} />
@@ -630,6 +633,7 @@ try {
     '@weimo/tag-bar',
     '@weimo/md-editor',
     '@weimo/md-render',
+    '@weimo/md-render-simple',
     '@weimo/md-view',
     '@weimo/math-editor',
   ]) {
@@ -663,6 +667,7 @@ try {
   for (const file of [
     'image-view.json',
     'md-render.json',
+    'md-render-simple.json',
     'capsule-button.json',
     'md-editor.json',
     'frosted-surface.json',
@@ -862,6 +867,10 @@ try {
   assert.ok(
     existsSync(join(consumerDir, 'src/components/ui/md-render/md-render.tsx')),
     'shadcn add must write the shared MdRender implementation.',
+  )
+  assert.ok(
+    existsSync(join(consumerDir, 'src/components/ui/md-render-simple/md-render-simple.tsx')),
+    'shadcn add must write the MdRenderSimple variant wrapper.',
   )
   assert.ok(
     existsSync(join(consumerDir, 'src/components/ui/tags/tag-picker/index.tsx')),

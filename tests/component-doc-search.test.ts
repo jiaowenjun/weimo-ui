@@ -25,6 +25,8 @@ describe('component docs search', () => {
     expect(resultIds('FrostedSurface')).toContain('surface')
     expect(resultIds('PopupSurface')).toContain('surface')
     expect(resultIds('MdRender')).toContain('markdown-render')
+    expect(resultIds('MdRenderSimple')).toContain('markdown-render-simple')
+    expect(resultIds('简化Markdown渲染')).toContain('markdown-render-simple')
     expect(resultIds('MdView')).toContain('markdown-view')
     expect(resultIds('Markdown')).toContain('markdown')
     expect(resultIds('Markdown渲染')).toContain('markdown-render')
