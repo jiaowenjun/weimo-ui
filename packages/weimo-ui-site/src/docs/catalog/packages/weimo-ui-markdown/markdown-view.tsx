@@ -30,6 +30,7 @@ function MdViewDemo() {
           editorProps={{ placeholder: '写点什么...' }}
           mode={mode}
           onChange={setMarkdown}
+          preloadEditor
           value={markdown}
         />
       </div>
