@@ -151,7 +151,7 @@ function MarkdownEditSimpleDemo() {
 
 export const markdownEditSimpleDefinition = {
   id: 'markdown-edit-simple',
-  summary: 'MdEditorSimple 简化编辑器，tiptap JSON 内容进出，仅五种格式',
+  summary: 'MdEditorSimple 简化编辑器，tiptap JSON 内容进出，仅四种格式',
   status: 'Ready',
   frame: 'plain',
   searchAliases: [
