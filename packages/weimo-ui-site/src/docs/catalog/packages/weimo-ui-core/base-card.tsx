@@ -1,14 +1,13 @@
 import { useState } from 'react'
 import { Copy, Edit3, Trash2 } from 'lucide-react'
 
-import { BaseCard } from 'weimo-ui-card/components/base-card'
+import { BaseCard } from 'weimo-ui-core/components/base-card'
 import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'
 import {
   ActionMenu,
   type ActionMenuItem,
 } from 'weimo-ui-core/components/menu'
 import { LabeledSwitch } from 'weimo-ui-core/components/labeled-switch'
-import { TagBar } from 'weimo-ui-card/components/tag-bar'
 import type { ComponentDefinition } from '../../component-docs'
 
 const TITLE_BAR_MENU_ITEMS = [
@@ -86,7 +85,7 @@ function BaseCardDemo() {
         actionSlot={renderTitleBarAction()}
         aria-label="BaseCard 标题栏元信息区底部栏基础卡片预览"
         className={cardClassName}
-        footerSlot={<TagBar aria-label="标签栏预览" tags={['笔记', '设计', 'weimo']} />}
+        footerSlot={<span>笔记 · 设计 · weimo</span>}
         meta="3 条笔记 · 今天 14:06 更新"
         title="卡片标题"
       >

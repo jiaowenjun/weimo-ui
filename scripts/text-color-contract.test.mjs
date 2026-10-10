@@ -225,7 +225,7 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'text-tokens'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'") &&
+    docsDefinitionSource.includes("import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'") &&
     docsDefinitionSource.includes('const previewTextColorTones = textColorTones.filter((tone) => tone !== \'inherit\')') &&
     docsDefinitionSource.includes('textColorToneMap[tone]') &&
     docsDefinitionSource.includes('function FontPreview()') &&

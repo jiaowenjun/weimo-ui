@@ -409,7 +409,7 @@ assert.ok(
 
 for (const snippet of [
   "import { MdRender } from 'weimo-ui-markdown/components/md-render'",
-  "import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'",
+  "import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'",
   'markdownStyleTokens',
   'markdownStyleTokenGroups',
   'markdownStyleSearchAliases',

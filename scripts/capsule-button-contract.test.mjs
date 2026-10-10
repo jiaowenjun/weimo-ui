@@ -306,7 +306,7 @@ assert.ok(
   docsSource.includes("import { useLayoutEffect, useRef, useState } from 'react'") &&
     docsSource.includes("import { Hash, X } from 'lucide-react'") &&
     docsSource.includes("import { CapsuleButton } from 'weimo-ui-core/components/capsule-button'") &&
-    docsSource.includes("import { GlassPreviewCard } from '../../../previews/glass-preview-card'") &&
+    docsSource.includes("import { GlassPreviewCard } from 'weimo-ui-core/components/glass-preview-card'") &&
     docsSource.includes("import { LabeledSwitch } from 'weimo-ui-core/components/labeled-switch'") &&
     docsSource.includes("id: 'capsule-button'") &&
     docsSource.includes('function CapsuleMaterialDemo') &&

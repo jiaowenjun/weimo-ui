@@ -74,7 +74,7 @@ for (const snippet of [
   "import { bgColorToneMap } from 'weimo-ui-core/components/bg-color'",
   "import { borderColorToneMap } from 'weimo-ui-core/components/border-color'",
   "import { LabeledSwitch } from 'weimo-ui-core/components/labeled-switch'",
-  "import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'",
+  "import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'",
   '<ComponentPreviewCard align="center" items={switchItems} label="开关">',
   "token: '--switch-track-bg'",
   "token: '--switch-track-checked-bg'",

@@ -56,6 +56,12 @@ const frostedSurfaceModelSource = readProjectFile(
 )
 const frostedSurfaceCss = readProjectFile('packages/weimo-ui-core/src/components/surfaces/frosted-surface/frosted-surface.css')
 const sliderCss = readProjectFile('packages/weimo-ui-core/src/components/controls/slider/slider.css')
+const glassPreviewCardModuleSource = readProjectFile(
+  'packages/weimo-ui-core/src/components/composites/card/glass-preview-card.tsx',
+)
+const glassPreviewCardCss = readProjectFile(
+  'packages/weimo-ui-core/src/components/composites/card/glass-preview-card.css',
+)
 const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
 const tokensCss = readProjectFile('packages/weimo-ui-core/src/styles/tokens.css')
 const frostedSurfaceModelContractModule = await import(
@@ -321,8 +327,8 @@ assertOmits(
 
 for (const snippet of [
   "import { FrostedSurface } from 'weimo-ui-core/components/frosted-surface'",
-  "import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'",
-  "from '../../../previews/glass-preview-card'",
+  "import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'",
+  "from 'weimo-ui-core/components/glass-preview-card'",
   "id: 'surface'",
   '静态卡片、亮度自适应磨砂玻璃层与抬升浮层的材质总览',
   'function FrostedSurfacePreview()',
@@ -352,20 +358,18 @@ assertOmits(
 
 // 滑块 + 主题归位 + 条纹背景的玻璃卡外壳抽到 GlassPreviewCard 共享组件
 // （Surface 页磨砂材质卡与按钮页玻璃图标按钮卡共用），契约锁共享组件源。
-const glassPreviewCardModuleSource = readProjectFile(
-  'packages/weimo-ui-site/src/docs/previews/glass-preview-card.tsx',
-)
-
 for (const snippet of [
-  'function GlassPreviewCard(',
-  "from 'weimo-ui-card/components/component-preview-card'",
-  "from './glass-preview'",
+  'export function GlassPreviewCard(',
+  "from './component-preview-card'",
+  "from 'weimo-ui-core/components/bg-color'",
   "from 'weimo-ui-core/components/slider'",
+  "from 'weimo-ui-core/lib/utils'",
   'initialGray ??',
   'onGrayChange?: (gray: number) => void',
   'onGrayChange?.(glassBackgroundGray)',
   'window.matchMedia(\'(prefers-color-scheme: dark)\').matches',
-  '? glassBackgroundGrayDark\n      : glassBackgroundGrayLight',
+  '? glassBackgroundGrayDark',
+  ': glassBackgroundGrayLight',
   'const syncThemeEndpoint = () => {',
   'const themeObserver = new MutationObserver(syncThemeEndpoint)',
   'themeObserver.observe(document.documentElement, {',
@@ -377,6 +381,18 @@ for (const snippet of [
   'style={getGlassPreviewBackground(glassBackgroundGray)}',
   'footer={',
   'glass-preview-card__slider-row',
+  'export function getGlassPreviewBackground(',
+  'export const glassBackgroundGrayMidpoint =',
+  'const glassGradientStops',
+  'const glassStripeWidth = 48',
+  'const glassStripePeriod = glassGradientStops.length * glassStripeWidth',
+  'function glassHslToRgb(',
+  'const colorfulness = progress <= 0 || progress >= 1 ? 0 : Math.sin(Math.PI * progress)',
+  'const boundedGray =',
+  'colorfulness === 0 ? gray : Math.min(Math.max(gray + spread * colorfulness, 3), 100)',
+  'return `rgb(${red}, ${green}, ${blue}) ${index * glassStripeWidth}px ${(index + 1) * glassStripeWidth}px`',
+  'backgroundImage: `repeating-linear-gradient(90deg, ${stripes.join(\', \')})`',
+  'backgroundPositionX: `${-progress * glassStripePeriod}px`',
 ]) {
   assertIncludes(
     glassPreviewCardModuleSource,
@@ -390,33 +406,6 @@ assert.ok(
       glassPreviewCardModuleSource.indexOf('className="glass-preview-card__canvas"'),
   'GlassPreviewCard slider row must live in the BaseCard footer slot, not inside the striped canvas content.',
 )
-
-// 条纹背景机制与自研滑块抽到 docs 共享模块（Surface 页与按钮页玻璃卡共用），契约随之锁共享文件。
-const glassPreviewModuleSource = readProjectFile('packages/weimo-ui-site/src/docs/previews/glass-preview.ts')
-
-for (const snippet of [
-  "from 'weimo-ui-core/components/bg-color'",
-  'parseColorLightness(bgColorToneMap.card.value.dark)?.lightness ?? 12',
-  'parseColorLightness(bgColorToneMap.card.value.light)?.lightness ?? 100',
-  'export const glassBackgroundGrayMidpoint = (glassBackgroundGrayDark + glassBackgroundGrayLight) / 2',
-  'const glassGradientStops',
-  'const glassStripeWidth = 48',
-  'const glassStripePeriod = glassGradientStops.length * glassStripeWidth',
-  'function glassHslToRgb(',
-  'function getGlassPreviewBackground(',
-  'const colorfulness = progress <= 0 || progress >= 1 ? 0 : Math.sin(Math.PI * progress)',
-  'const boundedGray =',
-  'colorfulness === 0 ? gray : Math.min(Math.max(gray + spread * colorfulness, 3), 100)',
-  'return `rgb(${red}, ${green}, ${blue}) ${index * glassStripeWidth}px ${(index + 1) * glassStripeWidth}px`',
-  'backgroundImage: `repeating-linear-gradient(90deg, ${stripes.join(\', \')})`',
-  'backgroundPositionX: `${-progress * glassStripePeriod}px`',
-]) {
-  assertIncludes(
-    glassPreviewModuleSource,
-    snippet,
-    `Glass preview shared module must include ${snippet}.`,
-  )
-}
 
 const sliderModuleSource = readProjectFile('packages/weimo-ui-core/src/components/controls/slider/slider.tsx')
 
@@ -445,9 +434,6 @@ assert.ok(
 )
 
 for (const snippet of [
-  '.glass-preview-card__canvas {\n  border-radius: var(--radius);\n  display: grid;\n  min-height: 100%;\n  padding: 16px;\n  place-items: center;\n}',
-  '.glass-preview-card__slider-row',
-  'justify-content: center;',
   '.frosted-surface-preview__tile',
   'justify-items: center;',
   'text-align: center;',
@@ -456,9 +442,22 @@ for (const snippet of [
 ]) {
   assertIncludes(appCss, snippet, `FrostedSurface preview CSS must include ${snippet}.`)
 }
+const glassPreviewCanvasCss = cssBlockFor(glassPreviewCardCss, '.glass-preview-card__canvas')
+const glassPreviewSliderCss = cssBlockFor(glassPreviewCardCss, '.glass-preview-card__slider-row')
 assert.ok(
-  !appCss.includes('.glass-preview-card__slider-row {\n  display: flex;\n  justify-content: center;\n  min-height: 0;'),
-  'The slider row must not keep the old canvas-rhythm min-height override now that it lives in the BaseCard footer.',
+  glassPreviewCanvasCss.includes('display: grid;') &&
+    glassPreviewCanvasCss.includes('min-height: 100%;') &&
+    glassPreviewCanvasCss.includes('padding: 16px;') &&
+    glassPreviewCanvasCss.includes('border-radius: var(--radius);') &&
+    glassPreviewCanvasCss.includes('place-items: center;') &&
+    glassPreviewSliderCss.includes('display: flex;') &&
+    glassPreviewSliderCss.includes('justify-content: center;'),
+  'GlassPreviewCard must own its reusable canvas and slider-row styles in weimo-ui-core.',
+)
+assert.ok(
+  !appCss.includes('\n.glass-preview-card__canvas {') &&
+    !appCss.includes('\n.glass-preview-card__slider-row {'),
+  'The site stylesheet must not retain the reusable GlassPreviewCard base styles.',
 )
 
 assertOmits(

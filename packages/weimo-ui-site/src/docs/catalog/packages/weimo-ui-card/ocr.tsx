@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import { OcrCard } from 'weimo-ui-card/components/ocr-card'
 import { OcrComposer } from 'weimo-ui-card/components/ocr-composer'
 import type { OcrComposerDraft } from 'weimo-ui-card/components/ocr-composer'

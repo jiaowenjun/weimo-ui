@@ -409,7 +409,7 @@ assert.ok(
 assert.ok(
   docsDefinitionSource.includes("id: 'border-tokens'") &&
     docsDefinitionSource.includes("frame: 'plain',") &&
-    docsDefinitionSource.includes("import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'") &&
+    docsDefinitionSource.includes("import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'") &&
     docsDefinitionSource.includes("from 'weimo-ui-core/components/border-radius'") &&
     !docsDefinitionSource.includes('component-preview-card-demo__category') &&
     docsDefinitionSource.includes('borderRadiusScales.map') &&
@@ -445,7 +445,7 @@ assert.ok(
     docsDefinitionSource.includes('...frostedBorderAnchorOrder.map((anchor) => ({') &&
     docsDefinitionSource.includes('label="磨砂材质边框色"') &&
     docsDefinitionSource.includes(
-      "import { GlassPreviewCard } from '../../../previews/glass-preview-card'",
+      "import { GlassPreviewCard } from 'weimo-ui-core/components/glass-preview-card'",
     ) &&
     docsDefinitionSource.includes(
       "  FrostedSurface,\n  useFrostedSurfaceBackgroundToneRef,\n} from 'weimo-ui-core/components/frosted-surface'",

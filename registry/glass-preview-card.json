@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "glass-preview-card",
+  "type": "registry:ui",
+  "title": "Glass Preview Card",
+  "description": "A component preview card with a theme-aware striped background and grayscale slider for inspecting frosted materials.",
+  "categories": [
+    "style",
+    "development"
+  ],
+  "registryDependencies": [
+    "@weimo/style",
+    "@weimo/bg-color",
+    "@weimo/component-preview-card",
+    "@weimo/slider",
+    "@weimo/utils"
+  ],
+  "files": [
+    {
+      "path": "packages/weimo-ui-core/src/components/composites/card/glass-preview-card.tsx",
+      "type": "registry:ui",
+      "target": "@ui/glass-preview-card.tsx"
+    },
+    {
+      "path": "packages/weimo-ui-core/src/components/composites/card/glass-preview-card.css",
+      "type": "registry:ui",
+      "target": "@ui/glass-preview-card.css"
+    }
+  ]
+}

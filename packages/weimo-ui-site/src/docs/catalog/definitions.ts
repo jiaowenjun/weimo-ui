@@ -3,6 +3,8 @@ import { textTokensDefinition } from './packages/weimo-ui-core/text-tokens'
 import { backgroundTokensDefinition } from './packages/weimo-ui-core/background-tokens'
 import { borderTokensDefinition } from './packages/weimo-ui-core/border-tokens'
 import { surfaceDefinition } from './packages/weimo-ui-core/surface'
+import { baseCardDefinition } from './packages/weimo-ui-core/base-card'
+import { componentPreviewCardDefinition } from './packages/weimo-ui-core/component-preview-card'
 import { buttonDefinition } from './packages/weimo-ui-core/button'
 import { capsuleButtonDefinition } from './packages/weimo-ui-core/capsule-button'
 import { labeledSwitchDefinition } from './packages/weimo-ui-core/labeled-switch'
@@ -20,8 +22,6 @@ import { markdownRenderSimpleDefinition } from './packages/weimo-ui-markdown/mar
 import { markdownViewDefinition } from './packages/weimo-ui-markdown/markdown-view'
 import { imageDefinition } from './packages/weimo-ui-image/image'
 import { statDefinition } from './packages/weimo-ui-stats/stat'
-import { baseCardDefinition } from './packages/weimo-ui-card/base-card'
-import { componentPreviewCardDefinition } from './packages/weimo-ui-card/component-preview-card'
 import { cardToolBarDefinition } from './packages/weimo-ui-card/card-tool-bar'
 import { taggedCardDefinition } from './packages/weimo-ui-card/tagged-card'
 import { tagBarDefinition } from './packages/weimo-ui-card/tag-bar'
@@ -34,6 +34,8 @@ export const componentDefinitionsById = {
   'background-tokens': backgroundTokensDefinition,
   'border-tokens': borderTokensDefinition,
   surface: surfaceDefinition,
+  'base-card': baseCardDefinition,
+  'component-preview-card': componentPreviewCardDefinition,
   button: buttonDefinition,
   'capsule-button': capsuleButtonDefinition,
   'labeled-switch': labeledSwitchDefinition,
@@ -51,8 +53,6 @@ export const componentDefinitionsById = {
   'markdown-view': markdownViewDefinition,
   image: imageDefinition,
   stat: statDefinition,
-  'base-card': baseCardDefinition,
-  'component-preview-card': componentPreviewCardDefinition,
   'card-tool-bar': cardToolBarDefinition,
   'tagged-card': taggedCardDefinition,
   'tag-bar': tagBarDefinition,

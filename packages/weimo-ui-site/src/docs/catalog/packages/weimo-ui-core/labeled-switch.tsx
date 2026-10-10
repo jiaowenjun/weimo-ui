@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { bgColorToneMap } from 'weimo-ui-core/components/bg-color'
 import { borderColorToneMap } from 'weimo-ui-core/components/border-color'
-import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import { LabeledSwitch } from 'weimo-ui-core/components/labeled-switch'
 import type { ComponentDefinition } from '../../component-docs'
 

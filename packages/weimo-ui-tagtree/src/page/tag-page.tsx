@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { CalendarDays, Folder, Hash } from 'lucide-react'
 
-import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 
 import { TagTree, type TagTreeNode, type TagTreeVariant } from '../components/tag-tree/tag-tree'
 import { TagTreeRow } from '../components/tag-tree/tag-tree-row'

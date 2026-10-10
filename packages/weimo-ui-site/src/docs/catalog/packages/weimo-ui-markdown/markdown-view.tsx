@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { LabeledSwitch } from 'weimo-ui-core/components/labeled-switch'
 import { MdView, type MdViewMode } from 'weimo-ui-markdown/components/md-view'
-import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import type { ComponentDefinition } from '../../component-docs'
 
 import { mdRenderSample } from '../../fixtures/markdown-sample'

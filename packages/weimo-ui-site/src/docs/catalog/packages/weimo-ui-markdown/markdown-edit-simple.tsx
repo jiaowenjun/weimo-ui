@@ -8,7 +8,7 @@ import {
   type MdEditorSimpleHandle,
   type MdEditorSimpleSelectionFormat,
 } from 'weimo-ui-markdown/components/md-editor-simple'
-import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import type { ComponentDefinition } from '../../component-docs'
 
 // 内容以 tiptap 原生 JSON 进出,编辑器不做任何 Markdown 解析与序列化。

@@ -2,10 +2,10 @@ import { useLayoutEffect, useRef, useState } from 'react'
 import { Hash, X } from 'lucide-react'
 
 import { CapsuleButton } from 'weimo-ui-core/components/capsule-button'
-import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import { LabeledSwitch } from 'weimo-ui-core/components/labeled-switch'
 import type { ComponentDefinition } from '../../component-docs'
-import { GlassPreviewCard } from '../../../previews/glass-preview-card'
+import { GlassPreviewCard } from 'weimo-ui-core/components/glass-preview-card'
 
 // 胶囊材质:普通(default 态)、磨砂(frosted 态)两例并列于灰度画布,拖动滑块
 // 可对比两种材质随背景的表现,磨砂文字色随自身 tone 采样自适应。

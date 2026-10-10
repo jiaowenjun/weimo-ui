@@ -1,6 +1,6 @@
 import { MdRender } from 'weimo-ui-markdown/components/md-render'
 import { MdRenderSimple } from 'weimo-ui-markdown/components/md-render-simple'
-import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 
 type MarkdownStyleToken = {
   token: string

@@ -55,6 +55,9 @@ const packageRules = [
     workspaceDependencies: [],
     forbiddenRelativeImports: [],
     requiredExports: {
+      './components/base-card': './src/components/composites/card/base-card.tsx',
+      './components/component-preview-card': './src/components/composites/card/component-preview-card.tsx',
+      './components/glass-preview-card': './src/components/composites/card/glass-preview-card.tsx',
       './components/coss/button': './src/components/primitives/button.tsx',
       './components/coss/dialog': './src/components/primitives/dialog.tsx',
       './components/coss/switch': './src/components/primitives/switch.tsx',
@@ -62,6 +65,9 @@ const packageRules = [
       './components/coss/tabs': './src/components/primitives/tabs.tsx',
       './components/coss/toolbar': './src/components/primitives/toolbar.tsx',
       './components/coss/tooltip': './src/components/primitives/tooltip.tsx',
+      './styles/base-card.css': './src/components/composites/card/base-card.css',
+      './styles/component-preview-card.css': './src/components/composites/card/component-preview-card.css',
+      './styles/glass-preview-card.css': './src/components/composites/card/glass-preview-card.css',
       './styles/button.css': './src/components/primitives/button.css',
       './styles/switch.css': './src/components/primitives/switch.css',
       './styles/tooltip.css': './src/components/primitives/tooltip.css',
@@ -69,12 +75,7 @@ const packageRules = [
   },
   {
     name: 'weimo-ui-tagtree',
-    // 文档页 TagTreePage 用 card 包的 ComponentPreviewCard;card 的 TagPicker 反向
-    // 消费本包 coss 组件,这对工作区环依赖是源码包(无构建序)下的已知且受控形态。
-    workspaceDependencies: [
-      ['weimo-ui-card', 'workspace:*'],
-      ['weimo-ui-core', 'workspace:*'],
-    ],
+    workspaceDependencies: [['weimo-ui-core', 'workspace:*']],
     forbiddenRelativeImports: [],
     requiredExports: {
       './page': './src/page/tag-page.tsx',
@@ -332,7 +333,7 @@ const tagtreePage = readProjectFile('packages/weimo-ui-tagtree/src/page/tag-page
 const tagtreeBreadPage = readProjectFile('packages/weimo-ui-tagtree/src/page/tag-bread-page.tsx')
 assert.match(tagtreeMain, /TagTreePage/u)
 assert.match(tagtreePage, /export function TagTreePage/u)
-assert.match(tagtreePage, /from ['"]weimo-ui-card\/components\/component-preview-card['"]/u)
+assert.match(tagtreePage, /from ['"]weimo-ui-core\/components\/component-preview-card['"]/u)
 assert.equal(tagtreePage.match(/<ComponentPreviewCard\b/gu)?.length, 2)
 assert.match(tagtreeBreadPage, /export function TagBreadPage/u)
 assert.equal(tagtreeBreadPage.match(/<ComponentPreviewCard\b/gu)?.length, 1)
@@ -361,7 +362,7 @@ for (const relativePath of [
   'packages/weimo-ui-site/src/components/primitives/command.css',
   'packages/weimo-ui-site/src/docs/catalog/manifest.ts',
   'packages/weimo-ui-site/src/docs/pages/component-detail-page.tsx',
-  'packages/weimo-ui-site/src/docs/previews/glass-preview-card.tsx',
+  'packages/weimo-ui-core/src/components/composites/card/glass-preview-card.tsx',
   'packages/weimo-ui-site/src/docs/shell/docs-outlet-context.ts',
   'packages/weimo-ui-site/src/docs/shell/docs-shell.tsx',
   'packages/weimo-ui-site/src/styles/global.css',
@@ -381,6 +382,8 @@ for (const obsoletePath of [
   'packages/weimo-ui-site/src/docs/search-component-docs.ts',
   'packages/weimo-ui-site/src/components/primitives/switch.tsx',
   'packages/weimo-ui-site/src/docs/components-manifest.ts',
+  'packages/weimo-ui-site/src/docs/previews/glass-preview-card.tsx',
+  'packages/weimo-ui-site/src/docs/previews/glass-preview.ts',
 ]) {
   assert.ok(
     !existsSync(join(root, obsoletePath)),

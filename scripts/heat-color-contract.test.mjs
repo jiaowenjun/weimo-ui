@@ -162,7 +162,7 @@ assert.ok(
 )
 assert.ok(
   statDocsDefinitionSource.includes("from 'weimo-ui-stats/components/heat-color'") &&
-    statDocsDefinitionSource.includes("from 'weimo-ui-card/components/component-preview-card'") &&
+    statDocsDefinitionSource.includes("from 'weimo-ui-core/components/component-preview-card'") &&
     statDocsDefinitionSource.includes('heatColorLevels.map') &&
     statDocsDefinitionSource.includes('heatColorMap[level]') &&
     statDocsDefinitionSource.includes('getHeatColorClassName(level)') &&

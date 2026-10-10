@@ -1,7 +1,12 @@
-import { render, screen, within } from '@testing-library/react'
-import { describe, expect, it } from 'vitest'
+import { fireEvent, render, screen, within } from '@testing-library/react'
+import { describe, expect, it, vi } from 'vitest'
 
 import { ComponentPreviewCard } from 'weimo-ui/components/component-preview-card'
+import {
+  GlassPreviewCard,
+  glassBackgroundGrayDark,
+  glassBackgroundGrayLight,
+} from 'weimo-ui/components/glass-preview-card'
 
 describe('ComponentPreviewCard', () => {
   it('renders token identity and preview content on the BaseCard shell', () => {
@@ -113,5 +118,39 @@ describe('ComponentPreviewCard', () => {
 
     expect(header?.querySelector('.base-card__title')).toHaveTextContent('玻璃材质')
     expect(action?.contains(screen.getByRole('button', { name: '调节' }))).toBe(true)
+  })
+})
+
+describe('GlassPreviewCard', () => {
+  it('owns the striped canvas and reports grayscale slider changes', () => {
+    const onGrayChange = vi.fn()
+    const { container } = render(
+      <GlassPreviewCard
+        aboveCanvas={<span data-testid="above-canvas">锚点</span>}
+        initialGray={50}
+        label="磨砂材质"
+        onGrayChange={onGrayChange}
+      >
+        <span data-testid="glass-content">内容</span>
+      </GlassPreviewCard>,
+    )
+
+    const card = container.querySelector('.glass-preview-card')
+    const canvas = container.querySelector<HTMLElement>('.glass-preview-card__canvas')
+    const slider = screen.getByRole('slider', { name: '背景灰度' })
+
+    expect(card).toHaveClass('component-preview-card')
+    expect(screen.getByTestId('above-canvas').nextElementSibling).toBe(canvas)
+    expect(screen.getByTestId('glass-content').parentElement).toBe(canvas)
+    expect(slider).toHaveAttribute('min', String(glassBackgroundGrayDark))
+    expect(slider).toHaveAttribute('max', String(glassBackgroundGrayLight))
+    expect(slider).toHaveValue('50')
+    expect(canvas?.style.backgroundImage).toContain('repeating-linear-gradient')
+    expect(onGrayChange).toHaveBeenLastCalledWith(50)
+
+    fireEvent.change(slider, { target: { value: '60' } })
+
+    expect(slider).toHaveValue('60')
+    expect(onGrayChange).toHaveBeenLastCalledWith(60)
   })
 })

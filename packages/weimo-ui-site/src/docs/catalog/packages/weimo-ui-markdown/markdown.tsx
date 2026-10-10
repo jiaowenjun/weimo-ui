@@ -4,7 +4,7 @@ import {
   MathEditor,
   type MathEditorValue,
 } from 'weimo-ui-markdown/components/math-editor'
-import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import { TextButton } from 'weimo-ui-core/components/text-button'
 import type { ComponentDefinition } from '../../component-docs'
 

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Check, Clipboard, FileImage, X } from 'lucide-react'
 
 import { CanvasTransparency } from 'weimo-ui-image/components/canvas-transparency'
-import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'
 import { ImageUploader, type ImageUploaderActionApi } from 'weimo-ui-image/components/image-uploader'
 import { ImageView, ImageViewDisplayModeMenu, type ImageViewDisplayMode } from 'weimo-ui-image/components/image-view'

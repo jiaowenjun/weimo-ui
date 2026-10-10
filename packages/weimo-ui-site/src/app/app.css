@@ -240,26 +240,6 @@
   place-items: center;
 }
 
-/* GlassPreviewCard 条纹画布：默认与 .icon-button-preview 同节奏，条纹背景由组件内联
-   style 注入。纵向撑满内容区（预览卡 80px 高度地板），否则矮示例（如 FloatBar 28px）
-   画布下方会露出无条纹空带，看起来像底部被裁切。四角圆角由画布自持：液态系卡片
-   （:has 列表）的内容区为放真实阴影开了 overflow: visible，圆角不能再依赖内容区
-   裁切，否则这些卡的条纹露出直角（与磨砂预览卡默认样式不一致）。 */
-.glass-preview-card__canvas {
-  border-radius: var(--radius);
-  display: grid;
-  min-height: 100%;
-  padding: 16px;
-  place-items: center;
-}
-
-/* 灰度滑块：置于 BaseCard 底部栏,画布下方居中,只保留自身高度
-   (footer 下方紧接卡级 padding,不再额外垫底部留白)。 */
-.glass-preview-card__slider-row {
-  display: flex;
-  justify-content: center;
-}
-
 .icon-preview__row {
   grid-area: 1 / 1;
   display: flex;

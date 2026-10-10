@@ -625,6 +625,7 @@ try {
   await runShadcnAdd(consumerDir, '@weimo/border-radius')
   await runShadcnAdd(consumerDir, '@weimo/font-size')
   await runShadcnAdd(consumerDir, '@weimo/component-preview-card')
+  await runShadcnAdd(consumerDir, '@weimo/glass-preview-card')
   await runShadcnAdd(consumerDir, '@weimo/top-bar')
   await runShadcnAdd(consumerDir, '@weimo/sidebar')
   await runShadcnAdd(consumerDir, '@weimo/menu')
@@ -756,6 +757,10 @@ try {
   assert.ok(
     hits.includes('component-preview-card.json'),
     'Smoke test must install the explicitly requested ComponentPreviewCard item through the local @weimo registry.',
+  )
+  assert.ok(
+    hits.includes('glass-preview-card.json'),
+    'Smoke test must install the explicitly requested GlassPreviewCard item through the local @weimo registry.',
   )
   assert.ok(
     hits.includes('frosted-icon-button.json') && hits.includes('ghost-icon-button.json'),
@@ -1024,6 +1029,11 @@ try {
     existsSync(join(consumerDir, 'src/components/ui/component-preview-card.tsx')) &&
       existsSync(join(consumerDir, 'src/components/ui/component-preview-card.css')),
     'shadcn add must write the public ComponentPreviewCard component and stylesheet from the configured custom registry.',
+  )
+  assert.ok(
+    existsSync(join(consumerDir, 'src/components/ui/glass-preview-card.tsx')) &&
+      existsSync(join(consumerDir, 'src/components/ui/glass-preview-card.css')),
+    'shadcn add must write the public GlassPreviewCard component and stylesheet from the configured custom registry.',
   )
   assert.ok(
     existsSync(

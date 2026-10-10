@@ -675,9 +675,6 @@ importers:
       react-dom:
         specifier: ^19.0.0
         version: 19.2.7(react@19.2.7)
-      weimo-ui-card:
-        specifier: workspace:*
-        version: link:../weimo-ui-card
       weimo-ui-core:
         specifier: workspace:*
         version: link:../weimo-ui-core

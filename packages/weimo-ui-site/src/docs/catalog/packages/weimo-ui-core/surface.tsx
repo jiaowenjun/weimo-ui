@@ -1,9 +1,9 @@
 import { CardSurface } from 'weimo-ui-core/components/card-surface'
 import { FrostedSurface } from 'weimo-ui-core/components/frosted-surface'
 import { PopupSurface } from 'weimo-ui-core/components/popup-surface'
-import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import type { ComponentDefinition } from '../../component-docs'
-import { GlassPreviewCard } from '../../../previews/glass-preview-card'
+import { GlassPreviewCard } from 'weimo-ui-core/components/glass-preview-card'
 
 function CardSurfacePreview() {
   return (

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Ellipsis, Menu, Share } from 'lucide-react'
 
-import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'
 import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'
 import {
@@ -11,7 +11,7 @@ import {
 import { TextButton } from 'weimo-ui-core/components/text-button'
 import { LabeledSwitch } from 'weimo-ui-core/components/labeled-switch'
 import type { ComponentDefinition } from '../../component-docs'
-import { GlassPreviewCard } from '../../../previews/glass-preview-card'
+import { GlassPreviewCard } from 'weimo-ui-core/components/glass-preview-card'
 
 function TextButtonPreview() {
   const [disabled, setDisabled] = useState(false)

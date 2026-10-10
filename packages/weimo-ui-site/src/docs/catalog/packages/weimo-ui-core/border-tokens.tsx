@@ -12,7 +12,7 @@ import {
   getBorderRadiusToken,
   getBorderRadiusValue,
 } from 'weimo-ui-core/components/border-radius'
-import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import {
   FrostedSurface,
   useFrostedSurfaceBackgroundToneRef,
@@ -21,7 +21,7 @@ import {
   frostedSurfaceBorderAnchorMap,
   interpolateFrostedBorderColor,
 } from 'weimo-ui-core/components/frosted-surface-model'
-import { GlassPreviewCard } from '../../../previews/glass-preview-card'
+import { GlassPreviewCard } from 'weimo-ui-core/components/glass-preview-card'
 import type { ComponentDefinition } from '../../component-docs'
 
 type BorderContextToken = {

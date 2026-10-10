@@ -6,7 +6,7 @@
   ],
   "name": "base-card",
   "title": "Base Card",
-  "description": "A minimal card shell on the card surface material, matching Card's radius and padding, with a temporary debug dashed outline around the content area.",
+  "description": "A minimal card shell on the card surface material with optional title, metadata, action, and footer regions.",
   "categories": [
     "layout",
     "surface"
@@ -17,12 +17,12 @@
   ],
   "files": [
     {
-      "path": "packages/weimo-ui-card/src/components/card/base-card.tsx",
+      "path": "packages/weimo-ui-core/src/components/composites/card/base-card.tsx",
       "type": "registry:ui",
       "target": "@ui/base-card.tsx"
     },
     {
-      "path": "packages/weimo-ui-card/src/components/card/base-card.css",
+      "path": "packages/weimo-ui-core/src/components/composites/card/base-card.css",
       "type": "registry:ui",
       "target": "@ui/base-card.css"
     },

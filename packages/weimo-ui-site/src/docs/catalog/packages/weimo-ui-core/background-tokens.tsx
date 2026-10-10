@@ -12,9 +12,11 @@ import {
   type BgColorTone,
 } from 'weimo-ui-core/components/bg-color'
 import { pressableToneMap, pressableTones } from 'weimo-ui-core/components/pressable'
-import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
-import { GlassPreviewCard } from '../../../previews/glass-preview-card'
-import { glassBackgroundGrayMidpoint } from '../../../previews/glass-preview'
+import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
+import {
+  GlassPreviewCard,
+  glassBackgroundGrayMidpoint,
+} from 'weimo-ui-core/components/glass-preview-card'
 import type { ComponentDefinition } from '../../component-docs'
 import { useIsDarkTheme } from '../../../previews/token-preview-color'
 

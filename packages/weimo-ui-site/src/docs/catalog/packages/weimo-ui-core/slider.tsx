@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { RotateCcw } from 'lucide-react'
 
 import { borderColorToneMap } from 'weimo-ui-core/components/border-color'
-import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'
 import { Slider } from 'weimo-ui-core/components/slider'
 import type { ComponentDefinition } from '../../component-docs'

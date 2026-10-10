@@ -2,12 +2,12 @@ import { useState } from 'react'
 
 import { bgColorToneMap } from 'weimo-ui-core/components/bg-color'
 import { borderRadiusScaleMap } from 'weimo-ui-core/components/border-radius'
-import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import { FrostedSurface } from 'weimo-ui-core/components/frosted-surface'
 import { LabeledSwitch } from 'weimo-ui-core/components/labeled-switch'
 import { TextButton } from 'weimo-ui-core/components/text-button'
 import type { ComponentDefinition } from '../../component-docs'
-import { GlassPreviewCard } from '../../../previews/glass-preview-card'
+import { GlassPreviewCard } from 'weimo-ui-core/components/glass-preview-card'
 
 // 示例 token 行直接取真实 token 表（通用 hover 底色 + 基础圆角）。
 const previewCardItems = [

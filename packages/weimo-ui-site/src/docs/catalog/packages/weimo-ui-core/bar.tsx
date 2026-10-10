@@ -4,7 +4,7 @@ import { BottomBar } from 'weimo-ui-core/components/bottom-bar'
 import { CardSurface } from 'weimo-ui-core/components/card-surface'
 import { CapsuleButton } from 'weimo-ui-core/components/capsule-button'
 import { FrostedLabel } from 'weimo-ui-core/components/frosted-label'
-import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'
+import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import { FloatBar } from 'weimo-ui-core/components/float-bar'
 import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'
 import {
@@ -13,7 +13,7 @@ import {
 } from 'weimo-ui-core/components/frosted-icon-button-group'
 import { TopBar } from 'weimo-ui-core/components/top-bar'
 import type { ComponentDefinition } from '../../component-docs'
-import { GlassPreviewCard } from '../../../previews/glass-preview-card'
+import { GlassPreviewCard } from 'weimo-ui-core/components/glass-preview-card'
 
 // 磨砂标签:磨砂材质的标题文字胶囊(全胶囊圆角),文字色随画布 tone
 // 自适应;sm 档用于工具栏栏位标题,lg 档(粗体)用于页面标题。

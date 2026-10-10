@@ -42,6 +42,17 @@ export const coreCatalog = {
         { id: 'popup-surface', name: 'PopupSurface', registryName: 'popup-surface', packageExport: './components/popup-surface' },
       ],
     },
+    { id: 'base-card', name: '基础卡片', exportName: 'BaseCard', registryName: 'base-card', packageExport: './components/base-card' },
+    {
+      id: 'component-preview-card',
+      name: '预览卡片',
+      exportName: 'ComponentPreviewCard',
+      registryName: 'component-preview-card',
+      packageExport: './components/component-preview-card',
+      components: [
+        { id: 'glass-preview-card', name: 'GlassPreviewCard', registryName: 'glass-preview-card', packageExport: './components/glass-preview-card' },
+      ],
+    },
     {
       id: 'button',
       name: '按钮',

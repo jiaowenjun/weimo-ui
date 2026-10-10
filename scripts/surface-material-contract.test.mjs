@@ -125,7 +125,7 @@ assert.ok(
 for (const snippet of [
   "import { CardSurface } from 'weimo-ui-core/components/card-surface'",
   "import { PopupSurface } from 'weimo-ui-core/components/popup-surface'",
-  "import { ComponentPreviewCard } from 'weimo-ui-card/components/component-preview-card'",
+  "import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'",
   'id: \'surface\'',
   '亮主题细微阴影，暗主题边框描边',
   'function CardSurfacePreview()',
