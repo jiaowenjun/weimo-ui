@@ -24,6 +24,7 @@ function blockFor(source, selector) {
 
 const appSource = readProjectFile('packages/weimo-ui-site/src/app/app.tsx')
 const appCss = readProjectFile('packages/weimo-ui-site/src/app/app.css')
+const siteHtmlSource = readProjectFile('packages/weimo-ui-site/index.html')
 const docsShellSource = readProjectFile('packages/weimo-ui-site/src/docs/shell/docs-shell.tsx')
 const routesSource = readProjectFile('packages/weimo-ui-site/src/docs/routes.ts')
 const componentDocsSource = readProjectFile('packages/weimo-ui-site/src/docs/catalog/component-docs.tsx')
@@ -103,6 +104,27 @@ for (const snippet of [
     `DocsShell theme toggle must include ${snippet}.`,
   )
 }
+
+assert.match(
+  siteHtmlSource,
+  /html\s*{[^}]*background-color:\s*hsl\(40 16% 96%\);[^}]*}/s,
+  'the document must provide the light page background before site CSS loads',
+)
+assert.match(
+  siteHtmlSource,
+  /html\.dark\s*{[^}]*background-color:\s*hsl\(0 0% 7%\);[^}]*color-scheme:\s*dark;[^}]*}/s,
+  'the document must provide the dark page background before site CSS loads',
+)
+assert.match(
+  siteHtmlSource,
+  /document\.documentElement\.classList\.toggle\(\s*'dark',\s*window\.matchMedia\('\(prefers-color-scheme: dark\)'\)\.matches,?\s*\)/s,
+  'the document must resolve the system theme before React mounts',
+)
+assert.ok(
+  siteHtmlSource.indexOf("window.matchMedia('(prefers-color-scheme: dark)')") <
+    siteHtmlSource.indexOf('<script type="module" src="./src/main.tsx"></script>'),
+  'theme initialization must run before the application module',
+)
 
 // 顶部栏改走磨砂:标题胶囊 FrostedLabel,侧边栏钮 FrostedIconButton(默认
 // 顶栏尺寸档),搜索与主题两颗按钮收在同一枚磨砂按钮组里,组件各自采样
