@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@import "weimo-ui-core/styles/tokens.css";
+@import "weimo-ui-template/styles/base.css";
+
+@layer base {
+  code {
+    color: var(--color-text-primary);
+    border-radius: var(--radius-xs);
+  }
+}

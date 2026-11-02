@@ -1,49 +1,94 @@
 {
   "name": "weimo-ui-tagtree",
-  "private": true,
-  "version": "0.1.0",
+  "private": false,
+  "version": "0.5.3",
   "type": "module",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jiaowenjun/weimo-ui-tagtree.git"
+  },
+  "packageManager": "pnpm@12.4.2",
+  "publishConfig": {
+    "access": "public"
+  },
   "sideEffects": [
     "**/*.css"
   ],
   "files": [
-    "src",
-    "README.md"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
   "exports": {
-    "./page": "./src/page/tag-page.tsx",
-    "./page/tag-bread": "./src/page/tag-bread-page.tsx",
-    "./components/tag-bread": "./src/components/tag-bread/tag-bread.tsx",
-    "./components/tag-tree": "./src/components/tag-tree/tag-tree.tsx",
-    "./components/tag-tree-model": "./src/components/tag-tree/tag-tree-model.ts",
-    "./components/tag-tree-row": "./src/components/tag-tree/tag-tree-row.tsx",
-    "./components/coss/breadcrumb": "./src/components/coss/breadcrumb.tsx",
-    "./components/coss/input-group": "./src/components/coss/input-group.tsx",
-    "./components/coss/scroll-area": "./src/components/coss/scroll-area.tsx",
-    "./styles/page.css": "./src/page/tag-page.css"
+    "./components/tag-bread": {
+      "types": "./dist/components/tag-bread/tag-bread.d.ts",
+      "import": "./dist/components/tag-bread/tag-bread.js"
+    },
+    "./components/tag-bread-item": {
+      "types": "./dist/components/tag-bread/tag-bread-item.d.ts",
+      "import": "./dist/components/tag-bread/tag-bread-item.js"
+    },
+    "./components/tag-tree": {
+      "types": "./dist/components/tag-tree/tag-tree.d.ts",
+      "import": "./dist/components/tag-tree/tag-tree.js"
+    },
+    "./components/tag-tree-model": {
+      "types": "./dist/components/tag-tree/tag-tree-model.d.ts",
+      "import": "./dist/components/tag-tree/tag-tree-model.js"
+    },
+    "./components/tag-tree-row": {
+      "types": "./dist/components/tag-tree/tag-tree-row.d.ts",
+      "import": "./dist/components/tag-tree/tag-tree-row.js"
+    },
+    "./components/coss/breadcrumb": {
+      "types": "./dist/components/coss/breadcrumb.d.ts",
+      "import": "./dist/components/coss/breadcrumb.js"
+    },
+    "./components/coss/input-group": {
+      "types": "./dist/components/coss/input-group.d.ts",
+      "import": "./dist/components/coss/input-group.js"
+    },
+    "./components/coss/scroll-area": {
+      "types": "./dist/components/coss/scroll-area.d.ts",
+      "import": "./dist/components/coss/scroll-area.js"
+    }
   },
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -p tsconfig.json --noEmit --pretty false && vite build",
-    "test:typecheck": "tsc -p tsconfig.json --noEmit --pretty false"
+    "clean": "rimraf dist",
+    "build": "pnpm clean && tsc -p tsconfig.build.json && node scripts/copy-css.mjs",
+    "site:dev": "pnpm build && pnpm --dir site dev",
+    "site:build": "pnpm build && pnpm --dir site build",
+    "site:preview": "pnpm --dir site preview",
+    "typecheck": "tsc -p tsconfig.json --noEmit --pretty false",
+    "test:typecheck": "pnpm typecheck",
+    "test": "vitest run",
+    "check:package": "pnpm build && publint && attw --pack . --profile esm-only --ignore-rules internal-resolution-error",
+    "test:site-template": "node scripts/site-template-contract.mjs",
+    "test:css-tokens": "node scripts/css-token-contract.mjs",
+    "verify": "pnpm typecheck && pnpm test && pnpm test:site-template && pnpm check:package && pnpm test:css-tokens && pnpm --dir site build",
+    "prepack": "pnpm build"
   },
   "dependencies": {
-    "@base-ui/react": "1.5.0",
-    "lucide-react": "1.24.0",
-    "weimo-ui-core": "workspace:*"
+    "lucide-react": "^1.54.0"
   },
   "peerDependencies": {
+    "@base-ui/react": "^1.9.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "weimo-ui-core": "~0.4.0"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.3.3",
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@base-ui/react": "1.9.0",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
-    "@vitejs/plugin-react": "^6.1.2",
-    "tailwindcss": "^4.3.3",
-    "typescript": "~6.0.3",
-    "vite": "^8.3.3"
+    "publint": "^0.3.25",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "rimraf": "^6.1.3",
+    "typescript": "~7.0.2",
+    "vitest": "^5.0.3",
+    "weimo-ui-core": "workspace:*"
   }
 }

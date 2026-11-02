@@ -1,0 +1,30 @@
+@import "weimo-ui-core/styles/tokens.css";
+
+:root {
+  /* === Markdown 渲染 === */
+  --md-color: hsl(0 0% 9%);
+  --md-font-size: 16px;
+  --md-line-height: 1.6;
+  --md-paragraph-color: hsl(0 0% 9%);
+  --md-h1-color: hsl(0 0% 9%);
+  --md-h1-font-size: 16px;
+  --md-h1-line-height: 1.6;
+  --md-quote-color: hsl(0 0% 28%);
+  --md-quote-pad-inline: 20px;
+  --md-list-indent: 1.35em;
+  --md-code-font-family: "SFMono-Regular", "Cascadia Code", "Liberation Mono", Menlo, Consolas, monospace;
+  --md-code-font-size: 14px;
+  --md-code-border-color: hsl(0 0% 88%);
+  --md-code-border-radius: 8px;
+  --md-selection-bg: hsl(0 0% 15% / 0.2);
+}
+
+.dark {
+  /* === Markdown 渲染暗色覆盖 === */
+  --md-color: hsl(0 0% 98%);
+  --md-paragraph-color: hsl(0 0% 98%);
+  --md-h1-color: hsl(0 0% 98%);
+  --md-quote-color: hsl(0 0% 64%);
+  --md-code-border-color: hsl(0 0% 28%);
+  --md-selection-bg: hsl(0 0% 96% / 0.2);
+}

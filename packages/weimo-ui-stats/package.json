@@ -1,37 +1,82 @@
 {
   "name": "weimo-ui-stats",
-  "private": true,
-  "version": "0.1.0",
+  "private": false,
+  "version": "0.2.1",
   "type": "module",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jiaowenjun/weimo-ui-stats.git"
+  },
+  "packageManager": "pnpm@12.4.2",
+  "publishConfig": {
+    "access": "public"
+  },
   "sideEffects": [
     "**/*.css"
   ],
   "files": [
-    "src",
-    "README.md"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
   "exports": {
-    "./components/heat-color": "./src/components/heatmap/heat-color.tsx",
-    "./components/heatmap": "./src/components/heatmap/index.ts",
-    "./components/stat-group": "./src/components/stat-group/stat-group.tsx",
-    "./styles/heat-color.css": "./src/components/heatmap/heat-color.css",
-    "./styles/heatmap.css": "./src/components/heatmap/heatmap.css",
-    "./styles/stat-group.css": "./src/components/stat-group/stat-group.css"
+    "./components/heat-color": {
+      "types": "./dist/components/heatmap/heat-color.d.ts",
+      "import": "./dist/components/heatmap/heat-color.js"
+    },
+    "./components/heatmap": {
+      "types": "./dist/components/heatmap/index.d.ts",
+      "import": "./dist/components/heatmap/index.js"
+    },
+    "./components/stat-group": {
+      "types": "./dist/components/stat-group/stat-group.d.ts",
+      "import": "./dist/components/stat-group/stat-group.js"
+    },
+    "./styles/heat-color.css": {
+      "types": "./dist/components/heatmap/heat-color.d.css.ts",
+      "default": "./dist/components/heatmap/heat-color.css"
+    },
+    "./styles/heatmap.css": {
+      "types": "./dist/components/heatmap/heatmap.d.css.ts",
+      "default": "./dist/components/heatmap/heatmap.css"
+    },
+    "./styles/stat-group.css": {
+      "types": "./dist/components/stat-group/stat-group.d.css.ts",
+      "default": "./dist/components/stat-group/stat-group.css"
+    }
   },
   "scripts": {
-    "test:typecheck": "tsc -p tsconfig.json --noEmit --pretty false"
-  },
-  "dependencies": {
-    "weimo-ui-core": "workspace:*"
+    "clean": "rimraf dist",
+    "build": "pnpm clean && tsc -p tsconfig.build.json && node scripts/copy-css.mjs",
+    "site:dev": "pnpm build && pnpm --dir site dev",
+    "site:build": "pnpm build && pnpm --dir site build",
+    "site:preview": "pnpm --dir site preview",
+    "typecheck": "tsc -p tsconfig.json --noEmit --pretty false",
+    "test:typecheck": "pnpm typecheck",
+    "test": "vitest run",
+    "check:package": "pnpm build && publint && attw --pack . --profile esm-only --ignore-rules internal-resolution-error",
+    "test:site-template": "node scripts/site-template-contract.mjs",
+    "test:css-tokens": "node scripts/css-token-contract.mjs",
+    "verify": "pnpm typecheck && pnpm test && pnpm test:site-template && pnpm check:package && pnpm test:css-tokens && pnpm --dir site build",
+    "prepack": "pnpm build"
   },
   "peerDependencies": {
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "weimo-ui-core": "~0.4.0"
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@base-ui/react": "1.9.0",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
-    "typescript": "~6.0.3"
+    "publint": "^0.3.25",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "rimraf": "^6.1.3",
+    "typescript": "~7.0.2",
+    "vitest": "^5.0.3",
+    "weimo-ui-core": "workspace:*"
   }
 }

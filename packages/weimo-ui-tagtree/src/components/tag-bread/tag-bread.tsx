@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import type { ComponentPropsWithoutRef, MouseEvent, ReactNode } from 'react'
+import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 import { Hash } from 'lucide-react'
 
 import { AnimatedInlineSizeMeasure } from 'weimo-ui-core/components/animated-inline-size'
@@ -21,11 +21,12 @@ import {
   Breadcrumb,
   BreadcrumbEllipsis,
   BreadcrumbItem,
-  BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '../coss/breadcrumb'
+import { TagBreadItem } from './tag-bread-item'
+import 'weimo-ui-core/styles/tokens.css'
 import 'weimo-ui-core/styles/capsule-frame.css'
 import 'weimo-ui-core/styles/frosted-surface.css'
 import './tag-bread.css'
@@ -88,11 +89,6 @@ export function TagBread({
     'frosted-surface--bordered',
   )
 
-  function handleCrumbClick(event: MouseEvent<HTMLAnchorElement>, path: string) {
-    event.preventDefault()
-    onSelect?.(path)
-  }
-
   function renderEllipsisItem(interactive = true) {
     return (
       <BreadcrumbItem className="tag-bread__item">
@@ -135,17 +131,12 @@ export function TagBread({
                     {crumb.label}
                   </BreadcrumbPage>
                 ) : (
-                  <BreadcrumbLink
-                    className="tag-bread__link"
-                    href=""
-                    onClick={
-                      interactive
-                        ? (event) => handleCrumbClick(event, crumb.path)
-                        : undefined
-                    }
+                  <TagBreadItem
+                    path={crumb.path}
+                    onSelect={interactive ? onSelect : undefined}
                   >
                     {crumb.label}
-                  </BreadcrumbLink>
+                  </TagBreadItem>
                 )}
               </BreadcrumbItem>
               {index < visibleCrumbs.length - 1 ? (

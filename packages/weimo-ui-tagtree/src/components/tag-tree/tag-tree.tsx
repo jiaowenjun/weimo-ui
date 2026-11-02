@@ -6,6 +6,7 @@ import { TagTreeRow } from './tag-tree-row'
 import { useTagTree } from './use-tag-tree'
 import type { TagTreeNode } from './tag-tree-model'
 
+import 'weimo-ui-core/styles/tokens.css'
 import './tag-tree.css'
 
 export type { TagTreeNode } from './tag-tree-model'
@@ -21,6 +22,7 @@ export type TagTreeProps = Omit<
   variant?: TagTreeVariant
   defaultIcon?: ReactNode
   selectedTag?: string
+  accordion?: boolean
   expandedTags?: string[]
   defaultExpandedTags?: string[]
   emptyLabel?: ReactNode
@@ -38,6 +40,7 @@ export type TagTreeProps = Omit<
 }
 
 export function TagTree({
+  accordion = true,
   additionalMenuItems,
   className,
   defaultExpandedTags = [],
@@ -54,6 +57,7 @@ export function TagTree({
   ...props
 }: TagTreeProps) {
   const { handleSelect, handleToggle, renderedRows } = useTagTree({
+    accordion,
     defaultExpandedTags,
     expandedTags,
     nodes,

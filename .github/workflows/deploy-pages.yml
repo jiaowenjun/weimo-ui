@@ -19,25 +19,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: pnpm/action-setup@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: latest
           cache: pnpm
-
       - run: pnpm install --frozen-lockfile
-
-      - run: pnpm build
-
-      # GitHub Pages 无 SPA fallback,深链接靠 404.html 引导回 index.html
-      - name: Add SPA fallback page
-        run: cp packages/weimo-ui-site/dist/index.html packages/weimo-ui-site/dist/404.html
-
+      - name: Build all packages and sites
+        run: pnpm -r build
+      - name: Assemble pages-dist
+        run: node scripts/assemble-pages.mjs
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: packages/weimo-ui-site/dist
+          path: pages-dist
 
   deploy:
     needs: build

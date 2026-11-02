@@ -14,6 +14,7 @@ import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'
 import { cn } from 'weimo-ui-core/lib/utils'
 import { ActionMenu, type ActionMenuItem } from 'weimo-ui-core/components/menu'
 
+import 'weimo-ui-core/styles/tokens.css'
 import './image-view.css'
 
 export type ImageViewObjectFit = 'contain' | 'cover'

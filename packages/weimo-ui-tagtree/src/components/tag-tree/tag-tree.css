@@ -12,12 +12,24 @@
     --tag-tree-root-body-padding-start: var(--tag-tree-row-body-padding-inline);
     --tag-tree-root-icon-center: calc(var(--tag-tree-root-body-padding-start) + (var(--tag-tree-icon-size) / 2));
 
+    /* 公开 theming hook:行悬停底色,一级悬停层降透明度做轻量版(与
+       tag-bread 行内链接同语言)。浅色 90% 是层级下限——再低时混合色
+       向卡片底收拢,60% 已与 --color-bg-selected 逐通道重合(#F2F0EE vs
+       #F1F0EE),悬停会被误读为选中;深色 hover 与 selected 令牌间距更宽
+       (Δ16),60% 仍余 Δ6.5,可与 tag-bread 取同档。 */
+
     display: grid;
     gap: 2px;
     width: 100%;
     min-width: 0;
     color: var(--color-text-primary);
     font-size: var(--font-size-base);
+
+    --tag-tree-row-hover-bg: color-mix(in srgb, var(--color-bg-hover) 90%, transparent);
+  }
+
+  .dark .tag-tree {
+    --tag-tree-row-hover-bg: color-mix(in srgb, var(--color-bg-hover) 60%, transparent);
   }
 
   .tag-tree__list {
@@ -96,7 +108,7 @@
     min-height: var(--tag-tree-row-height);
     margin-inline-end: var(--tag-tree-body-margin-end);
     padding-inline: var(--tag-tree-row-body-padding-inline);
-    grid-template-columns: minmax(0, 1fr) var(--tag-tree-action-size) var(--tag-tree-action-size);
+    grid-template-columns: minmax(0, 1fr) max-content var(--tag-tree-action-size) var(--tag-tree-action-size);
     align-items: center;
     overflow: hidden;
     border-radius: var(--radius-sm);
@@ -106,11 +118,11 @@
 
   .tag-tree__row-body[data-variant="no-action"],
   .tag-tree__row-body[data-variant="no-action"][data-has-menu="true"] {
-    grid-template-columns: minmax(0, 1fr) var(--tag-tree-action-size);
+    grid-template-columns: minmax(0, 1fr) max-content var(--tag-tree-action-size);
   }
 
   .tag-tree__row-body[data-variant="default"]:not([data-has-menu="true"]) {
-    grid-template-columns: minmax(0, 1fr) var(--tag-tree-action-size);
+    grid-template-columns: minmax(0, 1fr) max-content var(--tag-tree-action-size);
   }
 
   .tag-tree__row-body::before {
@@ -143,7 +155,7 @@
 
   @media (hover: hover) and (pointer: fine) {
     .tag-tree__row:hover .tag-tree__row-body::before {
-      background: var(--color-bg-hover);
+      background: var(--tag-tree-row-hover-bg);
     }
 
     .tag-tree__row:hover .tag-tree__toggle,
@@ -168,9 +180,11 @@
     border: 0;
   }
 
+  /* 尾列 max-content 是计数格(itemCount 缺席时塌缩为 0 宽)——计数留在
+     select 按钮内部,悬浮手指/点击选中与标签同体,不再是按钮外的死区 */
   .tag-tree__select {
     display: grid;
-    grid-template-columns: var(--tag-tree-icon-size) minmax(0, 1fr);
+    grid-template-columns: var(--tag-tree-icon-size) minmax(0, 1fr) max-content;
     column-gap: 4px;
     align-items: center;
     height: 100%;
@@ -206,8 +220,32 @@
     place-items: center;
   }
 
-  .tag-tree__row-body[data-variant="no-action"] .tag-tree__toggle {
-    grid-column: 2;
+  /* 行内格子显式定位:第 2 列是 max-content 计数列(itemCount 缺席时塌缩
+     为 0 宽),若任由自动布局,后继元素会掉进空计数列错位——select 跨
+     1-2 列(计数已收进按钮内部尾格)、折叠开关/占位在 3、菜单在
+     4(no-action 无菜单列,模板只有 3 列,菜单不渲染;default 无菜单时
+     模板同为 3 列) */
+  .tag-tree__select {
+    grid-column: 1 / 3;
+  }
+
+  .tag-tree__toggle,
+  .tag-tree__toggle-spacer {
+    grid-column: 3;
+  }
+
+  .tag-tree__menu-slot {
+    grid-column: 4;
+  }
+
+  /* 计数(itemCount):置于折叠开关左侧,在 select 按钮内部的 max-content
+     尾格,与开关同为占位色作次级信息;右对齐 + 表格数字让个位对齐 */
+  .tag-tree__count {
+    justify-self: end;
+    padding-inline-end: 6px;
+    color: var(--color-text-placeholder);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
   }
 
   .tag-tree__toggle {

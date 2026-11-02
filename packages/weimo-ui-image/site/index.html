@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="weimo-ui-image 的 React 图片视图、图片上传与画布透明化组件文档。"
+    />
+    <title>weimo-ui-image</title>
+    <style>
+      html {
+        background-color: hsl(40 16% 96%);
+      }
+
+      html.dark {
+        background-color: hsl(0 0% 7%);
+        color-scheme: dark;
+      }
+    </style>
+    <script>
+      document.documentElement.classList.toggle(
+        'dark',
+        window.matchMedia('(prefers-color-scheme: dark)').matches,
+      )
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./src/main.tsx"></script>
+  </body>
+</html>

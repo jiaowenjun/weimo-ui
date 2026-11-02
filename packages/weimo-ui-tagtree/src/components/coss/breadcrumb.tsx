@@ -5,6 +5,7 @@ import { useRender } from '@base-ui/react/use-render'
 
 import { cn } from 'weimo-ui-core/lib/utils'
 
+import 'weimo-ui-core/styles/tokens.css'
 import './breadcrumb.css'
 
 export function Breadcrumb({

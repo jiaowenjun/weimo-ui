@@ -1,0 +1,39 @@
+.stat-page__card {
+  box-sizing: border-box;
+  min-width: 0;
+  /* 模板 0.3.0 起 hero 全宽,卡片自限阅读宽度(content-max 700px)并居中;
+   * width:100% 先铺满再被 max-width 封顶——否则 flex 列里 auto 边距
+   * 会让 stretch 失效、卡片缩成内容宽 */
+  width: 100%;
+  max-width: var(--size-content-max-width);
+  margin-inline: auto;
+}
+
+/* 相邻演示卡之间的间距:仅宽屏(≥700px,模板 gap 15px)在模板 gap 之上再加 9px;
+ * 窄屏不加,保持模板自身的 12px gap;均不改变 hero 标题区到首卡的节奏 */
+@media (min-width: 700px) {
+  .stat-page__card + .stat-page__card {
+    margin-block-start: 9px;
+  }
+}
+
+.stat-page__heatmap-preview {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  align-items: center;
+  justify-content: center;
+  overflow-x: auto;
+}
+
+.stat-page__stat-group-preview {
+  width: 100%;
+  min-width: 0;
+  padding: 16px;
+}
+
+/* 详情页 stage 框架下的组件摘要 */
+.component-detail-page__summary {
+  color: var(--color-text-subtle);
+  font-size: var(--font-size-sm);
+}

@@ -7,7 +7,7 @@ import {
   TooltipTrigger,
 } from 'weimo-ui-core/components/coss/tooltip'
 import { cn } from 'weimo-ui-core/lib/utils'
-import { getHeatColorClassName } from 'weimo-ui-stats/components/heat-color'
+import { getHeatColorClassName } from './heat-color'
 import {
   buildHeatmapCells,
   buildHeatmapColumns,
@@ -17,6 +17,7 @@ import {
   type HeatmapDailyCount,
 } from './heatmap-model'
 
+import 'weimo-ui-core/styles/tokens.css'
 import './heatmap.css'
 
 export type { HeatmapCell, HeatmapDailyCount } from './heatmap-model'

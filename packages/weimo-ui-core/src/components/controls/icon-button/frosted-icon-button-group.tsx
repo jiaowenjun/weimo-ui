@@ -5,9 +5,11 @@ import {
   getFrostedSurfaceClassName,
   useFrostedSurfaceBackgroundToneRef,
 } from 'weimo-ui-core/components/frosted-surface'
+import { withIconButtonTooltip } from './icon-button-tooltip'
 import { getIconButtonClassName, type IconButtonSize } from './icon-button-model'
 import { cn } from 'weimo-ui-core/lib/utils'
 
+import 'weimo-ui-core/styles/tokens.css'
 import './frosted-icon-button-group.css'
 
 export type FrostedIconButtonGroupProps = Omit<ComponentPropsWithoutRef<'div'>, 'children'> & {
@@ -58,24 +60,28 @@ FrostedIconButtonGroup.displayName = 'FrostedIconButtonGroup'
 
 export type FrostedIconGroupButtonProps = ComponentPropsWithoutRef<'button'> & {
   size?: IconButtonSize
+  /** 悬停/聚焦提示：传入后按钮原地接入 Tooltip 原语，不新增 DOM 节点。 */
+  tooltip?: ReactNode
 }
 
 export const FrostedIconGroupButton = forwardRef<HTMLButtonElement, FrostedIconGroupButtonProps>(function FrostedIconGroupButton(
   {
     className,
     size,
+    tooltip,
     type = 'button',
     ...props
   },
   ref,
 ) {
-  return (
+  return withIconButtonTooltip(
     <button
       {...props}
       className={cn(getIconButtonClassName('glass', size), className)}
       ref={ref}
       type={type}
-    />
+    />,
+    tooltip,
   )
 })
 

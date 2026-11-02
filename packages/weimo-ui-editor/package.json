@@ -1,0 +1,105 @@
+{
+  "name": "weimo-ui-editor",
+  "private": false,
+  "version": "0.4.3",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jiaowenjun/weimo-ui-editor.git"
+  },
+  "packageManager": "pnpm@12.10.1",
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    "./components/rich-editor": {
+      "types": "./dist/components/rich-editor/rich-editor.d.ts",
+      "import": "./dist/components/rich-editor/rich-editor.js"
+    },
+    "./components/wdf-render": {
+      "types": "./dist/components/wdf-render/wdf-render.d.ts",
+      "import": "./dist/components/wdf-render/wdf-render.js"
+    },
+    "./components/wdf-card": {
+      "types": "./dist/components/wdf-card/wdf-card.d.ts",
+      "import": "./dist/components/wdf-card/wdf-card.js"
+    },
+    "./components/card-composer": {
+      "types": "./dist/components/card-composer/card-composer.d.ts",
+      "import": "./dist/components/card-composer/card-composer.js"
+    },
+    "./styles/tokens.css": {
+      "types": "./dist/styles/tokens.d.css.ts",
+      "default": "./dist/styles/tokens.css"
+    },
+    "./styles/markdown-content.css": {
+      "types": "./dist/styles/markdown-content.d.css.ts",
+      "default": "./dist/styles/markdown-content.css"
+    },
+    "./styles/rich-editor.css": {
+      "types": "./dist/components/rich-editor/rich-editor.d.css.ts",
+      "default": "./dist/components/rich-editor/rich-editor.css"
+    },
+    "./styles/wdf-card.css": {
+      "types": "./dist/components/wdf-card/wdf-card.d.css.ts",
+      "default": "./dist/components/wdf-card/wdf-card.css"
+    },
+    "./styles/card-composer.css": {
+      "types": "./dist/components/card-composer/card-composer.d.css.ts",
+      "default": "./dist/components/card-composer/card-composer.css"
+    }
+  },
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "pnpm clean && tsc -p tsconfig.build.json && node scripts/copy-css.mjs",
+    "site:dev": "pnpm build && pnpm --dir site dev",
+    "site:build": "pnpm build && pnpm --dir site build",
+    "site:preview": "pnpm --dir site preview",
+    "typecheck": "tsc -p tsconfig.json --noEmit --pretty false",
+    "test:typecheck": "pnpm typecheck",
+    "test:site-template": "node scripts/site-template-contract.mjs",
+    "test:wdf-card": "node scripts/wdf-card-contract.mjs",
+    "test:css-tokens": "node scripts/css-token-contract.mjs",
+    "check:package": "pnpm build && node scripts/editor-schema-contract.mjs && publint && attw --pack . --profile esm-only --ignore-rules internal-resolution-error",
+    "verify": "pnpm typecheck && pnpm test:site-template && pnpm test:wdf-card && pnpm check:package && pnpm test:css-tokens && pnpm --dir site build",
+    "prepack": "pnpm build"
+  },
+  "dependencies": {
+    "@tiptap/core": "^3.32.0",
+    "@tiptap/extension-blockquote": "^3.32.0",
+    "@tiptap/extension-list": "^3.32.0",
+    "@tiptap/extension-placeholder": "^3.32.0",
+    "@tiptap/extensions": "^3.32.0",
+    "@tiptap/pm": "^3.32.0",
+    "@tiptap/react": "^3.32.0",
+    "@tiptap/starter-kit": "^3.32.0",
+    "lucide-react": "^1.54.0"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "weimo-ui-core": "~0.4.0",
+    "weimo-wdf": "^0.1.0"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "publint": "^0.3.25",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "rimraf": "^6.1.3",
+    "typescript": "~7.0.2",
+    "weimo-ui-core": "workspace:*",
+    "weimo-wdf": "^0.1.0"
+  }
+}

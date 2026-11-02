@@ -1,247 +1,45 @@
-# Weimo UI
+# weimo-ui
 
-面向 Weimo 风格产品的 React UI 组件库。它提供可以直接组合到应用中的材质、Markdown、卡片、标签、图片和数据可视化组件，帮助你更快搭建一致、可交互的界面。
+weimo-ui 组件家族 monorepo:七个独立 npm 包,共享一个文档站。
 
-- [在线文档与组件预览](https://jiaowenjun.github.io/weimo-ui/)
-- [GitHub 仓库](https://github.com/jiaowenjun/weimo-ui)
+| 包 | 说明 | 文档 |
+| --- | --- | --- |
+| [weimo-ui-core](./packages/weimo-ui-core) | 基础组件与设计 token | [/weimo-ui/core](https://jiaowenjun.github.io/weimo-ui/core/) |
+| [weimo-ui-template](./packages/weimo-ui-template) | 站点模板 SiteTemplate / MiniSiteTemplate | [/weimo-ui/template](https://jiaowenjun.github.io/weimo-ui/template/) |
+| [weimo-ui-editor](./packages/weimo-ui-editor) | WdfCard 富文本卡片与编辑器 | [/weimo-ui/editor](https://jiaowenjun.github.io/weimo-ui/editor/) |
+| [weimo-ui-stats](./packages/weimo-ui-stats) | 热力图与统计大数字 | [/weimo-ui/stats](https://jiaowenjun.github.io/weimo-ui/stats/) |
+| [weimo-ui-tagtree](./packages/weimo-ui-tagtree) | 标签树与面包屑 | [/weimo-ui/tagtree](https://jiaowenjun.github.io/weimo-ui/tagtree/) |
+| [weimo-ui-image](./packages/weimo-ui-image) | 图片视图与上传 | [/weimo-ui/image](https://jiaowenjun.github.io/weimo-ui/image/) |
+| [weimo-ui-ocr](./packages/weimo-ui-ocr) | OCR 卡片/上传/校对 | [/weimo-ui/ocr](https://jiaowenjun.github.io/weimo-ui/ocr/) |
 
-## 适合什么场景
+## 结构
 
-Weimo UI 适合需要以下界面的 React 应用：
-
-- 笔记、知识库和内容管理：Markdown 展示、编辑和阅读/编辑切换
-- 标签导航：可展开、可选中、支持操作菜单的标签树
-- 图片工作流：图片上传、拖放、粘贴、预览和原图查看
-- 内容卡片：带标题、正文、标签和编辑流程的卡片，以及 OCR 卡片
-- 活动与统计：日期热力图和统计指标组
-- 轻量的页面壳层：磨砂材质、卡片材质、弹层、按钮和布局栏位
-
-它更适合产品型界面和 Weimo 风格的专用交互，而不是用来替代已经成熟的通用组件库。
-
-## 安装
-
-当前通过 Git commit 安装，建议锁定具体 commit，避免依赖随分支变化：
-
-下面示例中的 `COMMIT_SHA` 替换为你要使用的完整 commit SHA。
-
-```bash
-pnpm add github:jiaowenjun/weimo-ui#COMMIT_SHA
-```
-
-也可以写入 `package.json`：
-
-```json
-{
-  "dependencies": {
-    "weimo-ui": "github:jiaowenjun/weimo-ui#COMMIT_SHA"
-  }
-}
-```
-
-组件以 TypeScript/TSX/CSS 源码提供。你的构建工具需要能够处理这些格式；应用需要使用 React 19，并安装 `react` 与 `react-dom`。
-
-## 第一个组件
-
-在应用入口加载一次全局 token，然后从 `weimo-ui/...` 导入需要的组件：
-
-```tsx
-// main.tsx
-import 'weimo-ui/styles/tokens.css'
-```
-
-```tsx
-import { useState } from 'react'
-import { FrostedSurface } from 'weimo-ui/components/frosted-surface'
-import { TextButton } from 'weimo-ui/components/text-button'
-
-export function WelcomePanel() {
-  const [message, setMessage] = useState('准备开始')
-
-  return (
-    <FrostedSurface className="welcome-panel">
-      <p>{message}</p>
-      <TextButton onClick={() => setMessage('已完成')}>确认</TextButton>
-    </FrostedSurface>
-  )
-}
-```
-
-支持原生属性透传的组件可以直接接收 `className`、`style`、ARIA 属性和事件处理器；每个组件的完整参数与交互预览见[在线文档](https://jiaowenjun.github.io/weimo-ui/)。
-
-## 常用调用示例
-
-### Markdown 展示与编辑
-
-`MdRender` 适合只读内容；需要在同一位置切换查看和编辑时使用 `MdView`。
-
-```tsx
-import { useState } from 'react'
-import { MdView, type MdViewMode } from 'weimo-ui/components/md-view'
-
-export function MarkdownExample() {
-  const [mode, setMode] = useState<MdViewMode>('view')
-  const [content, setContent] = useState('## 今日\n\n- 完成首页')
-
-  return (
-    <>
-      <button type="button" onClick={() => setMode(mode === 'view' ? 'edit' : 'view')}>
-        {mode === 'view' ? '编辑' : '完成'}
-      </button>
-      <MdView mode={mode} value={content} onChange={setContent} />
-    </>
-  )
-}
-```
-
-### 图片上传与预览
-
-`ImageUploader` 负责选择、拖放和粘贴图片；上传到服务端后，可以把返回的 URL 交给 `ImageView` 展示。
-
-```tsx
-import { useEffect, useState } from 'react'
-import { ImageUploader } from 'weimo-ui/components/image-uploader'
-import { ImageView } from 'weimo-ui/components/image-view'
-
-export function ImageExample() {
-  const [file, setFile] = useState<File | null>(null)
-  const [previewUrl, setPreviewUrl] = useState<string>()
-
-  useEffect(() => {
-    if (!file) {
-      setPreviewUrl(undefined)
-      return
-    }
-
-    const url = URL.createObjectURL(file)
-    setPreviewUrl(url)
-
-    return () => URL.revokeObjectURL(url)
-  }, [file])
-
-  return (
-    <>
-      <ImageUploader file={file} onFileChange={setFile} />
-      <ImageView
-        alt="图片预览"
-        displayMode="fit-width"
-        src={previewUrl}
-        style={{ maxWidth: 480 }}
-      />
-    </>
-  )
-}
-```
-
-在实际应用中，建议在文件变化时上传并回收预览 URL；如果只需要展示已有地址，可以直接使用 `ImageView`。
-
-### 标签树
-
-标签节点使用递归数据结构；通过 `selectedTag` 和回调接入应用自己的路由或筛选状态。
-
-```tsx
-import { useState } from 'react'
-import { TagTree, type TagTreeNode } from 'weimo-ui/components/tag-tree'
-
-const nodes: TagTreeNode[] = [
-  {
-    tag: 'project',
-    label: '项目',
-    children: [
-      { tag: 'project/design', label: '设计', itemCount: 12 },
-      { tag: 'project/research', label: '调研', itemCount: 4 },
-    ],
-  },
-]
-
-export function TagTreeExample() {
-  const [selectedTag, setSelectedTag] = useState('project/design')
-
-  return (
-    <TagTree
-      nodes={nodes}
-      selectedTag={selectedTag}
-      onSelect={(tag) => setSelectedTag(tag)}
-    />
-  )
-}
-```
-
-### 热力图与统计指标
-
-```tsx
-import { Heatmap } from 'weimo-ui/components/heatmap'
-import { StatGroup } from 'weimo-ui/components/stat-group'
-
-export function ActivityExample() {
-  return (
-    <>
-      <StatGroup
-        items={[
-          { label: '连续记录', value: '12 天' },
-          { label: '本月记录', value: 38 },
-        ]}
-      />
-      <Heatmap
-        dailyCounts={[
-          { date: '2026-09-25', count: 3 },
-          { date: '2026-09-26', count: 7 },
-        ]}
-        onDateSelect={(date) => console.log('选择日期', date)}
-      />
-    </>
-  )
-}
-```
-
-## 组件怎么选
-
-| 需求 | 组件 |
-| --- | --- |
-| 只读 Markdown | `MdRender` |
-| Markdown 查看/编辑切换 | `MdView` |
-| 独立 Markdown 编辑器 | `MdEditor` |
-| 磨砂背景容器 | `FrostedSurface` |
-| 卡片背景容器 | `CardSurface` |
-| 带编辑流程的内容卡片 | `Card` |
-| 上传、拖放或粘贴图片 | `ImageUploader` |
-| 图片展示和原图预览 | `ImageView` |
-| 可展开标签导航 | `TagTree` |
-| 日期活动可视化 | `Heatmap` |
-| 一组关键指标 | `StatGroup` |
-
-更多按钮、弹层、菜单、布局栏位和 token 组件，可以在[组件目录](https://jiaowenjun.github.io/weimo-ui/)中按场景查看预览与参数。
-
-## 导入规则
-
-优先使用根包的公开子路径：
-
-```tsx
-import { Card } from 'weimo-ui/components/card'
-import { Heatmap } from 'weimo-ui/components/heatmap'
-import { TagTree } from 'weimo-ui/components/tag-tree'
-```
-
-根包不提供 `weimo-ui` 根入口，请始终选择明确的 `components/*`、`styles/*` 或 `lib/*` 子路径。不需要依赖仓库内部的 workspace 目录结构，也不要从 `packages/*/src` 导入实现。组件样式会随组件加载；全局 token 只需在应用入口导入一次。
+- `packages/<name>/` — 各包源码(独立构建、独立 tsconfig、各自 verify 链与契约测试)
+- `packages/<name>/site/` — 各包文档站(workspace 包,`workspace:*` 链接本地源码)
+- 包间依赖 = peerDependencies(语义带,面向 npm 消费方) + devDependencies(`workspace:*`,本地联测)
+- 单 GitHub Pages:七站经 vite `base: /weimo-ui/<短名>/` 按路径收纳,根目录落地页导航
 
 ## 本地开发
 
-如果需要查看组件目录或参与贡献：
-
 ```bash
-git clone https://github.com/jiaowenjun/weimo-ui.git
-cd weimo-ui
 pnpm install
-pnpm dev
+pnpm build              # 全部包 + 站点(拓扑序)
+pnpm verify             # build 后逐包跑完整 verify 链
+pnpm site:build         # build + 聚合 pages-dist/(含落地页,本地预览产物)
+pnpm dev:ocr            # 任选一包起站点(4176-4183 固定端口)
 ```
 
-然后打开 `http://localhost:5176/weimo-ui/`。组件目录会展示每个组件的预览、参数和可复制的导入方式。
+## 发布
 
-参与维护时，可以从以下文档开始：
+各包独立版本独立发布(版本号见各包 package.json):
 
-- [维护文档导航](docs/README.md)
-- [组件架构与设计规范](docs/architecture/component-architecture.md)
-- [各子项目职责与入口](docs/README.md#子项目文档)
+```bash
+pnpm --filter weimo-ui-<name> build
+pnpm --dir packages/weimo-ui-<name> publish   # pnpm 自动把 workspace:* 替换为实际版本
+```
 
-## 许可
+历史:2026-10 由旧 monorepo 拆为七仓独立演进,2026-11 合并回 monorepo(peer 带已全量对齐 core ~0.4.0)。原七仓作为独立仓库保留。
 
-[MIT](LICENSE)
+## 许可证
+
+[MIT](./LICENSE)

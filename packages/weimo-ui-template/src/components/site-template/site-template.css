@@ -1,0 +1,159 @@
+@layer components {
+  .weimo-site-template {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: var(--size-layout-max-width);
+    min-height: 100svh;
+    padding: var(--space-main-offset-top) var(--space-gutter) var(--space-gutter);
+  }
+
+  .weimo-site-template__layout {
+    display: flex;
+    gap: calc(var(--space-gutter) * 1.6);
+  }
+
+  .weimo-site-template__sidebar-space {
+    display: none;
+    width: var(--size-sidebar-width);
+    flex: none;
+  }
+
+  .weimo-site-template__content {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    flex-direction: column;
+    gap: var(--space-gutter);
+    color: var(--color-text-primary);
+  }
+
+  /* 触发钮零收缩：长标题+窄幅下 flex-shrink 按基宽比例向全部 flex 项
+     分摊压缩，圆钮被压成竖椭圆——退出分摊，空间不足全归标题截断
+     （消费方长标题自持 min-width:0+省略号，见 weimo-douban 实装） */
+  .weimo-site-template__sidebar-trigger {
+    display: inline-flex;
+    flex: none;
+  }
+
+  .weimo-site-template__top-bar-slot {
+    display: inline-flex;
+    min-width: 0;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .weimo-site-template__top-bar-leading {
+    display: inline-flex;
+    min-width: 0;
+    align-items: center;
+  }
+
+  /* 灵动岛让位避让（topBarIslandYield，host 类挂锁——关闭时零影响）：
+     被居中悬浮内容实测压到的槽位元素（挂类由 useTopBarIslandYield 的
+     实测遮叠驱动）渐隐让路，岛收起后延迟回弹——320ms 延迟兜住 core
+     TopBarNotice 收拢退场（transform 260ms + 余量），core 改退场时长
+     须同步这里；让位方向 delay 归零即时生效 */
+  .weimo-site-template__top-bar--island-yield .weimo-site-template__top-bar-slot > * {
+    transition: opacity 240ms ease 320ms;
+  }
+
+  .weimo-site-template__top-bar--island-yield
+    .weimo-site-template__top-bar-slot > *.weimo-site-template__island-yield {
+    opacity: 0;
+    transition-delay: 0ms;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .weimo-site-template__top-bar--island-yield .weimo-site-template__top-bar-slot > * {
+      transition-duration: 1ms;
+      transition-delay: 0ms;
+    }
+  }
+
+  .weimo-site-template__navigation {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+    gap: 20px;
+    padding: 16px;
+    overflow: auto;
+  }
+
+  .weimo-site-template__navigation-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+  }
+
+  .weimo-site-template__navigation-header strong {
+    display: block;
+    margin-top: 3px;
+    font-size: 0.95rem;
+  }
+
+  .weimo-site-template__navigation-group {
+    display: grid;
+    gap: 7px;
+  }
+
+  .weimo-site-template__navigation-group p {
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: 0.72rem;
+  }
+
+  .weimo-site-template__navigation-group a {
+    display: flex;
+    min-height: 34px;
+    align-items: center;
+    gap: 8px;
+    padding-inline: 9px;
+    color: var(--color-text-primary);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+  }
+
+  .weimo-site-template__navigation-group a.active {
+    background: color-mix(in srgb, var(--color-bg-hover) 78%, transparent);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .weimo-site-template__navigation-group a:hover {
+      background: var(--color-bg-hover);
+    }
+  }
+
+  @media (min-width: 700px) {
+    .weimo-site-template__sidebar-space {
+      display: block;
+    }
+
+    .weimo-site-template__content {
+      max-width: var(--size-content-max-width);
+    }
+
+    .weimo-site-template__sidebar-trigger {
+      display: none;
+    }
+
+    .weimo-site-template__page-title,
+    .weimo-site-template__top-bar-leading {
+      margin-inline-start: calc(var(--size-sidebar-width) + var(--space-gutter) * 1.6);
+    }
+
+    /* 灵动岛居中于内容列:侧栏常驻档(与上方同断点)把 core 居中槽位的
+       行首锚点右移到内容列起点,值与 __page-title 的越侧栏缩进同源。
+       变量声明在 TopBar 宿主元素上(__center 的祖先,不在其自身——
+       会遮蔽消费方注入);core <0.3.3 不认该变量,静默退回全宽居中。 */
+    .weimo-site-template__top-bar {
+      --top-bar-center-inset: calc(var(--size-sidebar-width) + var(--space-gutter) * 1.6);
+    }
+  }
+
+  @media (max-width: 699px) {
+    .weimo-site-template {
+      padding-inline: var(--space-gutter);
+    }
+  }
+}

@@ -1,0 +1,64 @@
+@layer components {
+  /* 图片态(无识别结果):内置展示卡,表面经 core card-surface 公开类钩子。 */
+  .weimo-ocr-card--image {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: var(--space-card-pad);
+  }
+
+  .weimo-ocr-card--image > :last-child {
+    margin-bottom: 0;
+  }
+
+  .weimo-ocr-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: calc(var(--space-card-section-gap) - (var(--size-icon-button-sm) - var(--font-size-sm)) / 2);
+    color: var(--color-text-placeholder);
+  }
+
+  .weimo-ocr-card__header-main {
+    display: flex;
+    flex: 1 1 auto;
+    min-width: 0;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .weimo-ocr-card__title {
+    display: block;
+    overflow: hidden;
+    font-size: var(--font-size-sm);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .weimo-ocr-card__time {
+    font-size: var(--font-size-sm);
+  }
+
+  .weimo-ocr-card__header-actions {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: var(--space-tag-gap);
+  }
+
+  .weimo-ocr-card__body {
+    margin: 0 0 var(--space-card-section-gap);
+  }
+
+  .weimo-ocr-card__image.image-view {
+    width: 100%;
+  }
+
+  .weimo-ocr-card__tags {
+    display: flex;
+    min-width: 0;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: var(--space-tag-gap);
+  }
+}

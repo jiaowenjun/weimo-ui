@@ -1,0 +1,17 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      ui-runtime:
+        patterns:
+          - react
+          - react-dom
+          - '@base-ui/react'
+          - lucide-react
+          - 'weimo-*'
+      build-tooling:
+        patterns:
+          - '*'

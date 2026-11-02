@@ -1,0 +1,14 @@
+/* 演示卡双列,列宽封顶内容最大宽度 token,超宽窗口下卡片组整体居中;
+   窄于 700px 断点回落单列(与项目断点体系一致) */
+.layout-example-page__cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, var(--size-content-max-width)));
+  justify-content: center;
+  gap: calc(var(--space-gutter) * 1.6);
+}
+
+@media (max-width: 699px) {
+  .layout-example-page__cards {
+    grid-template-columns: minmax(0, var(--size-content-max-width));
+  }
+}

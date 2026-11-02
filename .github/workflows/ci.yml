@@ -10,17 +10,28 @@ permissions:
 
 jobs:
   verify:
+    name: verify (${{ matrix.package }})
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package:
+          - weimo-ui-core
+          - weimo-ui-template
+          - weimo-ui-editor
+          - weimo-ui-stats
+          - weimo-ui-tagtree
+          - weimo-ui-image
+          - weimo-ui-ocr
     steps:
       - uses: actions/checkout@v4
-
       - uses: pnpm/action-setup@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: latest
           cache: pnpm
-
       - run: pnpm install --frozen-lockfile
-      - run: pnpm test
-      - run: pnpm build
+      - name: Build package with workspace deps
+        run: pnpm --filter ${{ matrix.package }}... build
+      - name: Verify package
+        run: pnpm --dir packages/${{ matrix.package }} verify

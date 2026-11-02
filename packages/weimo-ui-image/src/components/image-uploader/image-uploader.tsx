@@ -5,6 +5,7 @@ import type { ComponentPropsWithoutRef } from 'react'
 import { ImageView } from '../image-view/image-view'
 import { cn } from 'weimo-ui-core/lib/utils'
 
+import 'weimo-ui-core/styles/tokens.css'
 import './image-uploader.css'
 
 type ImageUploaderSelectionSource = 'picker' | 'clipboard' | 'drop'

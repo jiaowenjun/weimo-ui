@@ -1,0 +1,12 @@
+/* 不退出 base.css 的 #root 槽边:SiteTemplate 的对齐契约依赖
+   #root padding 与侧栏链(shell/frame 双层 padding)配对,退掉槽边
+   会使满宽区间(700–1074px)main 左移一个 gutter,侧栏面板与内容列
+   错位 15px;触顶区间(≥1074px)padding 被居中余量吸收,两配置等价。 */
+
+.site-template-preview-page__description {
+  max-width: 44em;
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-md);
+  line-height: 1.7;
+}

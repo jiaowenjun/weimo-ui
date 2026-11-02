@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from 'react'
 import {
   buildVisibleRows,
   collectSelectedAncestorTags,
+  expandTagExclusive,
   TAG_TREE_ANIMATION_MS,
   stageTagTreeRows,
   toggleExpandedTag,
@@ -12,6 +13,7 @@ import {
 import type { TagTreeProps } from './tag-tree'
 
 export function useTagTree({
+  accordion = true,
   defaultExpandedTags = [],
   expandedTags: expandedTagsProp,
   nodes,
@@ -20,6 +22,7 @@ export function useTagTree({
   selectedTag,
 }: Pick<
   TagTreeProps,
+  | 'accordion'
   | 'defaultExpandedTags'
   | 'expandedTags'
   | 'nodes'
@@ -104,12 +107,27 @@ export function useTagTree({
   }
 
   function handleToggle(row: VisibleTagTreeRow) {
-    commitExpandedTags(toggleExpandedTag(explicitExpandedTags, row.tag))
+    const isExpanding = !effectiveExpandedTags.has(row.tag)
+
+    commitExpandedTags(
+      accordion && isExpanding
+        ? expandTagExclusive(explicitExpandedTags, row.tag, nodes)
+        : toggleExpandedTag(explicitExpandedTags, row.tag),
+    )
   }
 
   function handleSelect(row: VisibleTagTreeRow) {
-    if (row.hasChildren && !effectiveExpandedTags.has(row.tag)) {
-      commitExpandedTags(toggleExpandedTag(explicitExpandedTags, row.tag))
+    if (row.hasChildren) {
+      if (row.selected) {
+        // 已选中的节点再次点击:切换展开/折叠,语义与箭头按钮一致(含手风琴互斥)
+        handleToggle(row)
+      } else if (!effectiveExpandedTags.has(row.tag)) {
+        commitExpandedTags(
+          accordion
+            ? expandTagExclusive(explicitExpandedTags, row.tag, nodes)
+            : toggleExpandedTag(explicitExpandedTags, row.tag),
+        )
+      }
     }
 
     onSelect?.(row.tag, row.node)

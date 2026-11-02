@@ -1,0 +1,66 @@
+@layer components {
+  /* 全宽单页壳:内容区不限宽,顶栏经 TopBar variant="full-width" 解除限宽保持边缘对齐 */
+  .weimo-mini-site-template {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 100svh;
+    padding: var(--space-main-offset-top) var(--space-gutter) var(--space-gutter);
+  }
+
+  .weimo-mini-site-template__content {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: var(--space-gutter);
+    color: var(--color-text-primary);
+  }
+
+  .weimo-mini-site-template__top-bar-slot {
+    display: inline-flex;
+    min-width: 0;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* hero wrapper:包住标题区与内容,自身零 padding,纵向衔接统一由 gap 驱动;
+   * 不设最大宽度,充分占用视口(仅剩壳的页边留白)——标题区仍居中、
+   * 副标题按 44em 文本度量收拢,内容卡可用宽度随视口展开;
+   * 顶距 64px 由 hero 自持(页面进入 hero 区的留白) */
+  .weimo-mini-site-template__hero {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    flex-direction: column;
+    gap: var(--space-gutter);
+    margin-block-start: 64px;
+  }
+
+  /* 居中标题区,按单页站尺度缩放;
+   * 零 padding,上 margin 为 0(顶距由 __hero 承担),下 36 表达与 hero 内后续内容的间距 */
+  .weimo-mini-site-template__hero-head {
+    padding-block: 0;
+    margin-block: 0 36px;
+    text-align: center;
+  }
+
+  .weimo-mini-site-template__headline {
+    margin: 0;
+    font-size: clamp(32px, 5vw, 64px);
+    font-weight: 700;
+    color: var(--color-text-primary);
+  }
+
+  .weimo-mini-site-template__subheadline {
+    max-width: 44em;
+    margin: 12px auto 0;
+    font-size: var(--font-size-xl);
+    font-weight: 400;
+    color: var(--color-text-secondary);
+  }
+
+  @media (max-width: 699px) {
+    .weimo-mini-site-template {
+      padding-inline: var(--space-gutter);
+    }
+  }
+}

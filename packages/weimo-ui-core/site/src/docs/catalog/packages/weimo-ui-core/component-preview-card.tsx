@@ -1,0 +1,115 @@
+import { useState } from 'react'
+import { Check, X } from 'lucide-react'
+
+import { bgColorToneMap } from 'weimo-ui-core/components/bg-color'
+import { borderRadiusScaleMap } from 'weimo-ui-core/components/border-radius'
+import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
+import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'
+import { FrostedSurface } from 'weimo-ui-core/components/frosted-surface'
+import { LabeledSwitch } from 'weimo-ui-core/components/labeled-switch'
+import { TextButton } from 'weimo-ui-core/components/text-button'
+import type { ComponentDefinition } from '../../component-docs'
+import { ComponentCardTitle } from '../../component-card-title'
+import { FrostedPreviewCard } from 'weimo-ui-core/components/frosted-preview-card'
+
+// 示例 token 行直接取真实 token 表（通用 hover 底色 + 基础圆角）。
+const previewCardItems = [
+  {
+    token: bgColorToneMap.hover.token,
+    value: bgColorToneMap.hover.value.light,
+    darkValue: bgColorToneMap.hover.value.dark,
+  },
+  {
+    token: borderRadiusScaleMap.base.token,
+    value: borderRadiusScaleMap.base.value,
+  },
+]
+
+// Docs definitions intentionally colocate preview components with exported page metadata.
+function PreviewCardDemo() {
+  const [debugBorder, setDebugBorder] = useState(false)
+  const debugClassName = `base-card-debug${debugBorder ? '' : ' base-card-debug--hidden'}`
+
+  return (
+    <>
+      <ComponentPreviewCard
+        align="center"
+        className={debugClassName}
+        items={previewCardItems}
+        label={
+          <ComponentCardTitle componentName="component-preview-card">
+            组件预览卡
+          </ComponentCardTitle>
+        }
+      >
+        <TextButton>内容区示例</TextButton>
+      </ComponentPreviewCard>
+      <ComponentPreviewCard
+        align="center"
+        className={debugClassName}
+        footer={
+          <div className="component-preview-card-demo__footer-row">
+            <GhostIconButton aria-label="cancel" size="sm">
+              <X aria-hidden="true" />
+            </GhostIconButton>
+            <GhostIconButton aria-label="check" size="sm">
+              <Check aria-hidden="true" />
+            </GhostIconButton>
+          </div>
+        }
+        label={
+          <ComponentCardTitle componentName="component-preview-card">
+            组件预览卡·底部控件栏
+          </ComponentCardTitle>
+        }
+      >
+        <TextButton>内容区示例</TextButton>
+      </ComponentPreviewCard>
+      <FrostedPreviewCard
+        className={debugClassName}
+        label={<ComponentCardTitle componentName="frosted-preview-card">磨砂预览卡</ComponentCardTitle>}
+      >
+        <FrostedSurface className="frosted-surface-preview__tile">
+          <span className="frosted-surface-preview__title">Frosted Preview</span>
+          <span className="frosted-surface-preview__meta">拖动灰度滑块验证磨砂材质</span>
+        </FrostedSurface>
+      </FrostedPreviewCard>
+      <FrostedPreviewCard
+        aboveCanvas={
+          <div className="frosted-canvas-preview__row">
+            <TextButton>前置区文本按钮</TextButton>
+          </div>
+        }
+        className={`${debugClassName} frosted-canvas-preview`}
+        label={
+          <ComponentCardTitle componentName="frosted-preview-card">
+            磨砂预览卡·画布前置区
+          </ComponentCardTitle>
+        }
+      >
+        <FrostedSurface className="frosted-surface-preview__tile">
+          <span className="frosted-surface-preview__title">Frosted Preview</span>
+          <span className="frosted-surface-preview__meta">前置区渲染于磨砂画布上方，灰度滑块照常生效</span>
+        </FrostedSurface>
+      </FrostedPreviewCard>
+      <div className="docs-debug-toggle">
+        <LabeledSwitch
+          ariaLabel="切换 DEBUG 边框显示"
+          checked={debugBorder}
+          labelOff="已隐藏 DEBUG 边框"
+          labelOn="已显示 DEBUG 边框"
+          onCheckedChange={setDebugBorder}
+        />
+      </div>
+    </>
+  )
+}
+
+export const componentPreviewCardDefinition = {
+  id: 'component-preview-card',
+  summary:
+    '文档站预览卡外壳：标题栏 + 可选 token 行 + 内容画布 + 可选底部控件栏；磨砂变体自带灰度滑块画布与可选画布前置区',
+  status: 'Preview',
+  frame: 'plain',
+  preview: () => <PreviewCardDemo />,
+} satisfies ComponentDefinition

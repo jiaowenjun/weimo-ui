@@ -1,0 +1,74 @@
+@layer components {
+  /* 可独立复用的面包屑可点击项:命中区不参与布局宽度,避免视觉间距被
+     点击保护区撑大。透明扩展层仍覆盖两侧 5px,且不会污染测量克隆。 */
+  .tag-bread-item {
+    --tag-bread-hit-extend: 5px;
+    position: relative;
+    z-index: 0;
+    display: inline-block;
+    white-space: inherit;
+    border-radius: var(--radius-round);
+    transition:
+      color 160ms ease,
+      transform 150ms ease;
+  }
+
+  .tag-bread-item__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* coss-breadcrumb__link:focus-visible 的 0-2-0 描边圆角规则压过本类
+     0-1-0,同特异性别名重述,让聚焦描边与悬停高亮同为胶囊形。 */
+  .tag-bread-item:focus-visible {
+    border-radius: var(--radius-round);
+    outline: none;
+  }
+
+  /* 与 capsule-button/icon-button 同款按压缩放;transform 连同 ::before
+     高亮层一起缩放,不触发布局。 */
+  .tag-bread-item:active {
+    transform: scale(var(--press-scale));
+  }
+
+  /* 悬停底色走伪元素而非链接自身背景:行盒锁 1em,自身背景画不出更高的
+     底色;伪元素越过行盒垂直居中 24px,仿 capsule-frame 材质层以 z -1
+     垫在文字下。24px 仍留在胶囊 28px 内容带内,不与 28px icon-button
+     溢出带冲突,胶囊 overflow: hidden 也不会裁到它。 */
+  .tag-bread-item::before {
+    position: absolute;
+    top: calc(50% - 12px);
+    right: calc(0px - var(--tag-bread-hit-extend));
+    bottom: auto;
+    left: calc(0px - var(--tag-bread-hit-extend));
+    z-index: 0;
+    height: 24px;
+    border-radius: inherit;
+    background: color-mix(in srgb, var(--color-bg-hover) 60%, transparent);
+    opacity: 0;
+    pointer-events: auto;
+    transition: opacity 160ms ease;
+    content: '';
+  }
+
+  .tag-bread-item:focus-visible::before {
+    opacity: 1;
+    outline: 2px solid var(--color-border-accent);
+    outline-offset: 2px;
+  }
+
+  /* 与 core ghost 控件同款指针门槛;bg-hover 实色对行内文字过重,
+     color-mix 降透明度做低配版,变色反馈仍由 coss-breadcrumb__link:hover 承担。 */
+  @media (hover: hover) and (pointer: fine) {
+    .tag-bread-item:hover::before {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tag-bread-item,
+    .tag-bread-item::before {
+      transition-duration: 1ms;
+    }
+  }
+}

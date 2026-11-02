@@ -2,6 +2,7 @@ import type { CSSProperties, ReactNode } from 'react'
 import { ChevronRight, Hash, Pencil, Trash2 } from 'lucide-react'
 
 import { GhostIconButton } from 'weimo-ui-core/components/ghost-icon-button'
+import { MagicNumber } from 'weimo-ui-core/components/magic-number'
 import { ActionMenu, type ActionMenuItem } from 'weimo-ui-core/components/menu'
 import {
   guideSlotsForDepth,
@@ -102,6 +103,9 @@ export function TagTreeRow({
             {icon}
           </span>
           <span className="tag-tree__label">{row.label}</span>
+          {row.node.itemCount != null ? (
+            <MagicNumber className="tag-tree__count" value={row.node.itemCount} />
+          ) : null}
         </button>
 
         {row.hasChildren ? (

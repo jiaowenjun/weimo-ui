@@ -1,0 +1,27 @@
+/* 演示画布:直接落于 hero 区,限阅读宽度并居中,
+ * 面包屑与树面板垂直堆叠、整体居中 */
+.tag-page__canvas {
+  display: grid;
+  box-sizing: border-box;
+  min-width: 0;
+  width: 100%;
+  max-width: var(--size-content-max-width);
+  margin-inline: auto;
+  justify-items: center;
+  gap: 20px;
+}
+
+.tag-page__tree-panel {
+  width: min(100%, 380px);
+  margin: 0 auto;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-card);
+}
+
+/* 详情页 stage 框架下的组件摘要 */
+.component-detail-page__summary {
+  color: var(--color-text-subtle);
+  font-size: var(--font-size-sm);
+}

@@ -1,0 +1,73 @@
+.ocr-page__card {
+  min-width: 0;
+}
+
+.ocr-card-docs-preview {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  align-self: center;
+  justify-self: stretch;
+}
+
+.ocr-composer-docs-preview {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  align-content: start;
+  gap: 12px;
+}
+
+.ocr-detail-docs-preview {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  align-content: center;
+  justify-items: start;
+  gap: 12px;
+}
+
+.tag-bar-docs-preview {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  align-content: start;
+  gap: 16px;
+}
+
+.tag-bar-docs-preview__row {
+  display: flex;
+  min-width: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.tag-bar-docs-preview__label {
+  flex: 0 0 72px;
+  color: var(--color-text-subtle);
+  font-size: var(--font-size-sm);
+}
+
+@media (max-width: 760px) {
+  .ocr-card-docs-preview {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 组件卡片标题里的组件类名:等宽小字,弱化为标题的补充说明 */
+.docs-component-class {
+  margin-left: 6px;
+  color: var(--color-text-subtle);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 400;
+}
+
+/* 详情页 stage 框架下的组件摘要 */
+.component-detail-page__summary {
+  color: var(--color-text-subtle);
+  font-size: var(--font-size-sm);
+}

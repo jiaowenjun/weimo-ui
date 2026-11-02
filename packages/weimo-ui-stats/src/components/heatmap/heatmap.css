@@ -89,6 +89,13 @@
     white-space: nowrap;
   }
 
+  /* 最右列标签右缘与最右单元格右缘齐平:盒子收缩到文字实际宽度后贴 flex 末端,
+     装不下的部分向网格内部(左侧)溢出。text-align 对溢出行不生效,故用此组合。 */
+  .heatmap__column:last-child .heatmap__month {
+    align-self: flex-end;
+    width: max-content;
+  }
+
   .heatmap__month-spacer {
     pointer-events: none;
   }

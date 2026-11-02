@@ -95,6 +95,40 @@ export function toggleExpandedTag(tags: string[], tag: string): string[] {
     : [...tags, tag]
 }
 
+/** 收集 tag 所在层级的全部兄弟 tag(含自身);tag 不在树中时返回空集 */
+export function findSiblingTags(nodes: TagTreeNode[], tag: string): Set<string> {
+  const siblings = new Set<string>()
+
+  function visit(level: TagTreeNode[]): boolean {
+    const levelTags = level.map((node) => node.tag)
+
+    if (levelTags.includes(tag)) {
+      levelTags.forEach((sibling) => siblings.add(sibling))
+      return true
+    }
+
+    return level.some((node) => visit(node.children ?? []))
+  }
+
+  visit(nodes)
+  return siblings
+}
+
+/** 手风琴展开:展开 tag 的同时折叠其同级兄弟(后代展开状态保留,重开父节点时恢复) */
+export function expandTagExclusive(
+  tags: string[],
+  tag: string,
+  nodes: TagTreeNode[],
+): string[] {
+  const siblings = findSiblingTags(nodes, tag)
+
+  if (siblings.size === 0) {
+    return tags.includes(tag) ? tags : [...tags, tag]
+  }
+
+  return [...tags.filter((item) => !siblings.has(item)), tag]
+}
+
 export function guideSlotsForDepth(depth: number) {
   return Array.from({ length: Math.min(depth, MAX_GUIDE_DEPTH) }, (_, index) => index)
 }

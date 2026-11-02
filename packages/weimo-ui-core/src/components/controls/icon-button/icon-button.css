@@ -72,6 +72,9 @@
   .icon-button--frosted {
     --icon-button-glass-hover-opacity: 0;
 
+    /* 磨砂材质成立的前提是元素底透明；UA ButtonFace 灰盘会击穿
+       backdrop-blur 观感，故不依赖消费方 reset（与 ghost 变体对齐）。 */
+    background-color: transparent;
     position: relative;
     overflow: hidden;
     isolation: isolate;
@@ -93,6 +96,11 @@
 
   .icon-button--ghost {
     background: transparent;
+
+    /* 幽灵语义完全无描边：UA 默认 button 边框（如 WebKit 2px outset）会在
+       无表单 reset 的消费站点透出，故不依赖消费方 reset（与背景声明对齐）。
+       frosted 系不适用：.frosted-surface 自带 1px 透明边框几何。 */
+    border: none;
   }
 
   .icon-button:disabled {

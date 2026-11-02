@@ -1,0 +1,78 @@
+.image-page__card {
+  min-width: 0;
+}
+
+.image-view-docs-preview {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  align-self: center;
+  justify-self: stretch;
+}
+
+.image-view-docs-preview__detail-shell {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  grid-column: 1 / -1;
+  gap: 12px;
+}
+
+.image-view-docs-preview__detail-toolbar {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.image-view-docs-preview__detail {
+  height: min(54vh, 420px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--color-bg-raised) 70%, transparent);
+}
+
+.image-uploader-docs-preview {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  align-content: center;
+  gap: 12px;
+}
+
+.image-uploader-docs-preview__actions {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding-top: 12px;
+}
+
+.canvas-transparency-docs-preview {
+  display: grid;
+  width: 100%;
+  min-height: 100%;
+  place-items: center;
+}
+
+@media (max-width: 660px) {
+  .image-view-docs-preview {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 组件卡片标题里的组件类名:等宽小字,弱化为标题的补充说明 */
+.docs-component-class {
+  margin-left: 6px;
+  color: var(--color-text-subtle);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 400;
+}
+
+/* 详情页 stage 框架下的组件摘要 */
+.component-detail-page__summary {
+  color: var(--color-text-subtle);
+  font-size: var(--font-size-sm);
+}

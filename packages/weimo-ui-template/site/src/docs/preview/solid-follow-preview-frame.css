@@ -1,0 +1,42 @@
+/* 测量外壳:透明无裁切,保持满宽承担可用宽基准;
+   视觉(背景/圆角/裁切)由宽度受控的 stage 自持 */
+.solid-follow-preview-frame {
+  display: flex;
+  justify-content: center;
+}
+
+/* 视觉视口:宽度 = 百分比 × 容器可用宽,底色与圆角随宽度全程跟随滑块 */
+.solid-follow-preview-frame__stage {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  background: var(--color-bg-page);
+  border-radius: calc(var(--radius) + 2px);
+  transition: width 180ms ease;
+}
+
+.solid-follow-preview-frame__iframe {
+  display: block;
+  border: 0;
+  transform-origin: top left;
+  background: var(--color-bg-page);
+  opacity: 0;
+  transition: opacity 240ms ease;
+}
+
+.solid-follow-preview-frame__iframe--loaded {
+  opacity: 1;
+}
+
+/* 拖动期间禁用过渡保证逐帧跟手;监听挂在 window 上,
+   指针拖出滑块范围后松手也能恢复过渡(重置的归位动画依赖它) */
+.solid-follow-preview-frame--resizing .solid-follow-preview-frame__stage {
+  transition: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .solid-follow-preview-frame__stage,
+  .solid-follow-preview-frame__iframe {
+    transition: none;
+  }
+}

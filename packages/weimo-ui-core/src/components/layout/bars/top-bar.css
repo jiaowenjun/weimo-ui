@@ -11,6 +11,8 @@
   }
 
   .top-bar__frame {
+    /* 悬浮槽位(居中通知)的定位锚点 */
+    position: relative;
     display: grid;
     min-height: 46px;
     width: 100%;
@@ -23,6 +25,11 @@
     background: transparent;
     padding-inline: var(--space-gutter);
     padding-block: var(--space-topbar-pad-block);
+  }
+
+  /* variant=full-width:解除默认限宽,由 TopBar 的 variant prop 驱动 */
+  .top-bar__frame--full-width {
+    max-width: none;
   }
 
   .top-bar__slot {
@@ -44,6 +51,34 @@
   .top-bar__slot--right {
     flex: none;
     justify-content: flex-end;
+  }
+
+  /* 居中悬浮槽位:绝对居中于 frame(inset+auto margin 双轴居中),
+   * 叠于左右槽位之上(灵动岛式,可短驻盖住两侧内容)。
+   * height 必须同 width 一样取 fit-content:绝对定位元素 top/bottom
+   * 皆非 auto 而 height 为 auto 时会解析为撑满容器,药丸会被拉到
+   * 顶栏同高;收成内容高后由 auto margin 垂直居中。
+   * --top-bar-center-inset(默认 0)把行首锚点右移:居中与 max-width
+   * 都改为在「frame 减去该内缩」的可用区域内解析——不对称布局(左侧
+   * 常驻侧栏等)由消费方按自己布局注入,侧栏宽 = 290px 时设 290px,
+   * 灵动岛即居中于内容区而非整个 frame;侧栏隐藏时须移除该变量。
+   * max-width 留出两侧 gutter 呼吸位,点击穿透同槽位规则。 */
+  .top-bar__center {
+    position: absolute;
+    inset-block: 0;
+    inset-inline: var(--top-bar-center-inset, 0px) 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    width: fit-content;
+    height: fit-content;
+    max-width: calc(100% - var(--top-bar-center-inset, 0px) - var(--space-gutter) * 2);
+    pointer-events: none;
+  }
+
+  .top-bar__center > * {
+    pointer-events: auto;
   }
 
   @media (min-width: 700px) {
