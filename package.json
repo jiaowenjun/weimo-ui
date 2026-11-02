@@ -7,9 +7,11 @@
   "description": "weimo-ui 组件家族 monorepo:core/template/editor/stats/tagtree/image/ocr 七包",
   "packageManager": "pnpm@12.15.0",
   "scripts": {
+    "dev": "pnpm -r --filter './packages/*' build && pnpm -r --parallel --filter './packages/*/site' run dev",
     "build": "pnpm -r build",
     "verify": "pnpm -r build && pnpm -r verify",
     "site:build": "pnpm -r build && node scripts/assemble-pages.mjs",
+    "site:preview": "pnpm --dir packages/weimo-ui-core/site exec vite preview --config ../../../scripts/site-preview.config.mjs",
     "dev:core": "pnpm --dir packages/weimo-ui-core site:dev",
     "dev:template": "pnpm --dir packages/weimo-ui-template site:dev",
     "dev:editor": "pnpm --dir packages/weimo-ui-editor site:dev",
