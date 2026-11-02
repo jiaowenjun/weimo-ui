@@ -3,7 +3,6 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router'
 import { LayoutExamplePage } from '../docs/pages/layout-example-page'
 import { DocsShell } from '../docs/shell/docs-shell'
 import {
-  examplePath,
   miniSiteTemplatePreviewPath,
   routerBasename,
   siteTemplatePreviewPath,
@@ -16,9 +15,8 @@ function App() {
     <BrowserRouter basename={routerBasename || undefined}>
       <Routes>
         <Route element={<DocsShell />} path="/">
-          <Route index element={<Navigate replace to={examplePath} />} />
-          <Route element={<LayoutExamplePage />} path="examples/site-template" />
-          <Route element={<Navigate replace to={examplePath} />} path="*" />
+          <Route index element={<LayoutExamplePage />} />
+          <Route element={<Navigate replace to="/" />} path="*" />
         </Route>
         {/* iframe 预览源页面:独立 document,不套文档壳,供缩放预览壳加载 */}
         <Route

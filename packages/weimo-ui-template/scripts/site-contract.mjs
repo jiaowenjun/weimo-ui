@@ -116,9 +116,11 @@ for (const [name, demo, hrefFactory] of [
 
 // 实底跟随预览壳:缩放倍率由 BASE_WIDTH ÷ maxLayoutWidth 派生且恒定,
 // 卡片装不下基准时右端点动态收紧——比例恒定语义是这套预览的地基。
+// BASE_WIDTH 以「672 原始校准 × 0.9 视觉缩小」表达,demo 的 maxLayoutWidth
+// 同乘 0.9,缩放比不变。
 assert.match(
   followFrame,
-  /const BASE_WIDTH = 672/,
+  /const BASE_WIDTH = 672 \* 0\.9/,
   'the follow frame must keep the fixed scale base width',
 )
 assert.match(

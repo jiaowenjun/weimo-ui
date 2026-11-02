@@ -10,7 +10,7 @@ const outDir = path.join(root, 'pages-dist')
 // 直达、刷新都会被根部 404 拦到静态落地页;未知路径仍由落地页兜底。
 const sites = [
   { short: 'core', title: 'weimo-ui-core', desc: '基础组件与设计 token' },
-  { short: 'template', title: 'weimo-ui-template', desc: '站点模板 SiteTemplate / MiniSiteTemplate', extraRoutes: ['examples/site-template', 'previews/site-template', 'previews/mini-site-template'] },
+  { short: 'template', title: 'weimo-ui-template', desc: '站点模板 SiteTemplate / MiniSiteTemplate', extraRoutes: ['previews/site-template', 'previews/mini-site-template'] },
   { short: 'editor', title: 'weimo-ui-editor', desc: 'WdfCard 富文本卡片与编辑器' },
   { short: 'stats', title: 'weimo-ui-stats', desc: '热力图与统计大数字' },
   { short: 'tagtree', title: 'weimo-ui-tagtree', desc: '标签树与面包屑' },
