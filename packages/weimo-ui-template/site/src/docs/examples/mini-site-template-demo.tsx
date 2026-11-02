@@ -10,7 +10,7 @@ import './mini-site-template-demo.css'
 
 const minPercent = 30
 const maxPercent = 100
-const maxLayoutWidth = 1100
+const maxLayoutWidth = 1100 * 0.9
 const defaultPercent = 100
 
 function ResetIcon() {

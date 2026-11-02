@@ -8,10 +8,11 @@ import { siteTemplatePreviewHref } from '../routes'
 import { SolidFollowPreviewFrame } from '../preview/solid-follow-preview-frame'
 import './site-template-demo.css'
 
-/* 断点落在滑块约 63.6%(700/1100)处:100% 档的布局宽 = maxLayoutWidth */
+/* 断点落在滑块约 70.7%(700/990)处:100% 档的布局宽 = maxLayoutWidth。
+   视觉尺寸整体 ×0.9 缩小,BASE_WIDTH 同乘 0.9,缩放比不变 */
 const minPercent = 30
 const maxPercent = 100
-const maxLayoutWidth = 1100
+const maxLayoutWidth = 1100 * 0.9
 const defaultPercent = 100
 
 function ResetIcon() {
@@ -37,7 +38,7 @@ function ResetIcon() {
 
 /** SiteTemplate 官方演示:iframe 内直出生产组件,布局宽与视觉宽分离。
     滑块是百分比视觉宽,预览区连同底色全程 1:1 跟随;iframe 布局宽按
-    恒定倍率(100% 档 = 1100px)派生,699px 断点按布局宽真实判定。 */
+    恒定倍率(100% 档 = 990px)派生,699px 断点按布局宽真实判定。 */
 export function SiteTemplateDemo() {
   const [percent, setPercent] = useState(defaultPercent)
   const [resizing, setResizing] = useState(false)

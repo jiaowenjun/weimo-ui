@@ -18,11 +18,12 @@ type SolidFollowPreviewFrameProps = {
     下不变;卡片装不下基准时右端点对应的布局宽动态收紧(100% 档
     视觉恰好满卡),断点位置随之上移。 */
 
-/* 固定缩放基准:100% 档视觉宽的上限,与演示卡内容最大宽度 token 对应
-   (700px − 卡片 padding/边框 ≈ 672);卡片达上限时预览正好满卡 */
-const BASE_WIDTH = 672
+/* 固定缩放基准:100% 档视觉宽的上限。原校准值 672 对应演示卡内容最大宽度
+   token(700px − 卡片 padding/边框),整体 ×0.9 缩小视觉尺寸后宽卡下预览
+   居中留边、不再恰好满卡;缩放比与 maxLayoutWidth 同乘 0.9 保持不变 */
+const BASE_WIDTH = 672 * 0.9
 export function SolidFollowPreviewFrame({
-  height = 430,
+  height = 430 * 0.9,
   maxLayoutWidth,
   onAvailableWidthChange,
   percent,
@@ -57,7 +58,7 @@ export function SolidFollowPreviewFrame({
   const ratio = Math.min(percent, 100) / 100
   /* 缩放比例恒定(倍率固定,100% 档满基准卡);卡片装不下基准时动态收紧
      右端点对应的布局宽——100% 档视觉恰好满卡,画面大小不随卡片缩放,
-     代价是窄卡下断点位置随之上移、右端点布局宽低于 1100 */
+     代价是窄卡下断点位置随之上移、右端点布局宽低于 maxLayoutWidth */
   const zoomFactor = maxLayoutWidth / BASE_WIDTH
   const scale = 1 / zoomFactor
   const effectiveMaxLayoutWidth =
