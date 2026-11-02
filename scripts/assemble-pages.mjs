@@ -1,13 +1,16 @@
-import { cpSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
-import { fileURLToPath } from 'node:url'
+import { cpSync, existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 import path from 'node:path'
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)))
 const outDir = path.join(root, 'pages-dist')
 
+// GitHub Pages 只响应产物根部的 404.html(即落地页),子目录 404.html 一律忽略。
+// 因此各站每条深链路由都要物化成 <route>/index.html 实体文件,否则 iframe、
+// 直达、刷新都会被根部 404 拦到静态落地页;未知路径仍由落地页兜底。
 const sites = [
   { short: 'core', title: 'weimo-ui-core', desc: '基础组件与设计 token' },
-  { short: 'template', title: 'weimo-ui-template', desc: '站点模板 SiteTemplate / MiniSiteTemplate' },
+  { short: 'template', title: 'weimo-ui-template', desc: '站点模板 SiteTemplate / MiniSiteTemplate', extraRoutes: ['examples/site-template', 'previews/site-template', 'previews/mini-site-template'] },
   { short: 'editor', title: 'weimo-ui-editor', desc: 'WdfCard 富文本卡片与编辑器' },
   { short: 'stats', title: 'weimo-ui-stats', desc: '热力图与统计大数字' },
   { short: 'tagtree', title: 'weimo-ui-tagtree', desc: '标签树与面包屑' },
@@ -17,17 +20,56 @@ const sites = [
 
 mkdirSync(outDir, { recursive: true })
 
-for (const { short, title } of sites) {
-  const dist = path.join(root, 'packages', title, 'site', 'dist')
+/** 从站点 catalog manifest 提取组件页路由,与 componentHref 同源,免手工同步。
+    manifest 只含类型导入和可擦除语法,依赖 Node ≥23.6 的原生 TS 类型剥离。 */
+async function catalogRoutes(siteDir) {
+  const catalogDir = path.join(siteDir, 'src', 'docs', 'catalog', 'packages')
+  if (!existsSync(catalogDir)) return []
+
+  const routes = []
+  for (const entry of readdirSync(catalogDir, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue
+
+    const manifestPath = path.join(catalogDir, entry.name, 'manifest.ts')
+    if (!existsSync(manifestPath)) continue
+
+    const mod = await import(pathToFileURL(manifestPath).href)
+    const catalog = Object.values(mod).find((value) => value && Array.isArray(value.pages))
+    if (!catalog) {
+      throw new Error(`catalog 缺少 pages 数组: ${manifestPath}`)
+    }
+
+    // 顶层 page 才参与路由;嵌套 components 的 docs:false,由所属页面承载
+    for (const page of catalog.pages) {
+      routes.push(`components/${encodeURIComponent(page.id)}`)
+    }
+  }
+  return routes
+}
+
+for (const { short, title, extraRoutes = [] } of sites) {
+  const siteDir = path.join(root, 'packages', title, 'site')
+  const dist = path.join(siteDir, 'dist')
   const index = path.join(dist, 'index.html')
   if (!existsSync(index)) {
     throw new Error(`缺少站点产物: ${title}/site/dist/index.html(先跑 pnpm -r build)`)
   }
+
+  // 先清空目标目录,避免改名/下线的路由残留幽灵页面
   const target = path.join(outDir, short)
+  rmSync(target, { recursive: true, force: true })
   cpSync(dist, target, { recursive: true })
-  // SPA fallback:深链 404 时由最近目录的 404.html 回应用壳
-  cpSync(index, path.join(target, '404.html'))
-  console.log(`✓ ${short} <- packages/${title}/site/dist`)
+
+  const routes = [...(await catalogRoutes(siteDir)), ...extraRoutes]
+  if (routes.length === 0) {
+    throw new Error(`${title} 未物化出任何深链路由`)
+  }
+  for (const route of routes) {
+    const routeIndex = path.join(target, ...route.split('/'), 'index.html')
+    mkdirSync(path.dirname(routeIndex), { recursive: true })
+    cpSync(index, routeIndex)
+  }
+  console.log(`✓ ${short} <- packages/${title}/site/dist(${routes.length} 条深链路由)`)
 }
 
 const items = sites
