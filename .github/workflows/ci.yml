@@ -31,7 +31,7 @@ jobs:
           node-version: latest
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - name: Build package with workspace deps
-        run: pnpm --filter ${{ matrix.package }}... build
+      - name: Build package, site and workspace deps
+        run: pnpm --filter ${{ matrix.package }}-site... build
       - name: Verify package
         run: pnpm --dir packages/${{ matrix.package }} verify
