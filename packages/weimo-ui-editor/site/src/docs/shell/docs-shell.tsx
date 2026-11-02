@@ -1,4 +1,4 @@
-import { Outlet, useMatch } from 'react-router'
+import { Outlet } from 'react-router'
 import { ChevronLeft, Plus } from 'lucide-react'
 
 import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'
@@ -26,15 +26,9 @@ function GitHubIcon() {
 }
 
 export function DocsShell() {
-  const componentMatch = useMatch('/components/:componentId')
-  const activeComponentId = componentMatch?.params.componentId
-  const selected = activeComponentId
-    ? componentDocs.find((doc) => doc.id === activeComponentId)
-    : undefined
-  // 主页展示区(`/` 重定向落地的第一个组件页):顶栏 + 驱动 composer,
+  // 单组件站:首页即唯一组件页,顶栏常驻新建按钮 + 驱动 composer,
   // 卡片与示例卡同列呈现。
   const homePlayground = useComposerPlayground()
-  const isHome = activeComponentId === componentDocs[0].id
   const outletContext: DocsOutletContext = {
     docs: componentDocs,
   }
@@ -42,22 +36,20 @@ export function DocsShell() {
   return (
     <MiniSiteTemplate
       headline="点开即写，收起即读"
-      pageTitle={selected?.name}
+      pageTitle={componentDocs[0].name}
       showThemeToggle={false}
       siteName="weimo-ui-editor"
       subheadline="把富文本编辑器做进一张卡片"
       topBarActions={
         <>
-          {isHome ? (
-            <FrostedIconButton
-              aria-label="新建笔记"
-              disabled={homePlayground.hasActive}
-              onClick={homePlayground.openNew}
-              tooltip="新建笔记"
-            >
-              <Plus />
-            </FrostedIconButton>
-          ) : null}
+          <FrostedIconButton
+            aria-label="新建笔记"
+            disabled={homePlayground.hasActive}
+            onClick={homePlayground.openNew}
+            tooltip="新建笔记"
+          >
+            <Plus />
+          </FrostedIconButton>
           <FrostedIconButton
             aria-label="GitHub 仓库"
             onClick={() => window.open(repoUrl, '_blank', 'noopener,noreferrer')}
@@ -77,14 +69,10 @@ export function DocsShell() {
         </FrostedIconButton>
       }
     >
-      {isHome ? (
-        <div className="docs-home-column">
-          {homePlayground.renderList()}
-          <Outlet context={outletContext} />
-        </div>
-      ) : (
+      <div className="docs-home-column">
+        {homePlayground.renderList()}
         <Outlet context={outletContext} />
-      )}
+      </div>
     </MiniSiteTemplate>
   )
 }

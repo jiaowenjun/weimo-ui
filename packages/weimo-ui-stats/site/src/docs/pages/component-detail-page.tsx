@@ -1,24 +1,10 @@
-import { useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router'
-
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import { useDocsOutletContext } from '../shell/docs-outlet-context'
 
+/** 单组件站:详情页即站点首页,恒取唯一文档 */
 export function ComponentDetailPage() {
-  const { componentId } = useParams()
-  const navigate = useNavigate()
   const { docs } = useDocsOutletContext()
-  const selected = docs.find((doc) => doc.id === componentId)
-
-  useEffect(() => {
-    if (!selected) {
-      navigate('/', { replace: true })
-    }
-  }, [navigate, selected])
-
-  if (!selected) {
-    return null
-  }
+  const selected = docs[0]
 
   // plain 框架的预览自带 ComponentPreviewCard,外层不再包卡片
   if (selected.frame === 'plain') {

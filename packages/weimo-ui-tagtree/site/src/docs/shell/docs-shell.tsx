@@ -1,4 +1,4 @@
-import { Outlet, useMatch } from 'react-router'
+import { Outlet } from 'react-router'
 import { ChevronLeft } from 'lucide-react'
 
 import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'
@@ -25,17 +25,12 @@ function GitHubIcon() {
 }
 
 export function DocsShell() {
-  const componentMatch = useMatch('/components/:componentId')
-  const activeComponentId = componentMatch?.params.componentId
-  const selected = activeComponentId
-    ? componentDocs.find((doc) => doc.id === activeComponentId)
-    : undefined
   const outletContext: DocsOutletContext = { docs: componentDocs }
 
   return (
     <MiniSiteTemplate
       headline="标签再多，也不迷路"
-      pageTitle={selected?.name}
+      pageTitle={componentDocs[0].name}
       showThemeToggle={false}
       siteName="weimo-ui-tagtree"
       subheadline="层级逐级收窄定位，面包屑同步回溯来路"

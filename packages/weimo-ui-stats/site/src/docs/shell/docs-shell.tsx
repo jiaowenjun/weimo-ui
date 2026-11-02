@@ -1,4 +1,4 @@
-import { Outlet, useMatch } from 'react-router'
+import { Outlet } from 'react-router'
 import { ChevronLeft } from 'lucide-react'
 
 import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'
@@ -25,17 +25,12 @@ function GitHubIcon() {
 }
 
 export function DocsShell() {
-  const componentMatch = useMatch('/components/:componentId')
-  const activeComponentId = componentMatch?.params.componentId
-  const selected = activeComponentId
-    ? componentDocs.find((doc) => doc.id === activeComponentId)
-    : undefined
   const outletContext: DocsOutletContext = { docs: componentDocs }
 
   return (
     <MiniSiteTemplate
       headline="你的坚持，看得见"
-      pageTitle={selected?.name}
+      pageTitle={componentDocs[0].name}
       showThemeToggle={false}
       siteName="weimo-ui-stats"
       subheadline="为笔记与打卡而生"

@@ -11,9 +11,9 @@ const outDir = path.join(root, 'pages-dist')
 const sites = [
   { short: 'core', title: 'weimo-ui-core', desc: '基础组件与设计 token' },
   { short: 'template', title: 'weimo-ui-template', desc: '站点模板 SiteTemplate / MiniSiteTemplate', extraRoutes: ['previews/site-template', 'previews/mini-site-template'] },
-  { short: 'editor', title: 'weimo-ui-editor', desc: 'WdfCard 富文本卡片与编辑器' },
-  { short: 'stats', title: 'weimo-ui-stats', desc: '热力图与统计大数字' },
-  { short: 'tagtree', title: 'weimo-ui-tagtree', desc: '标签树与面包屑' },
+  { short: 'editor', title: 'weimo-ui-editor', desc: 'WdfCard 富文本卡片与编辑器', flatRoot: true },
+  { short: 'stats', title: 'weimo-ui-stats', desc: '热力图与统计大数字', flatRoot: true },
+  { short: 'tagtree', title: 'weimo-ui-tagtree', desc: '标签树与面包屑', flatRoot: true },
   { short: 'image', title: 'weimo-ui-image', desc: '图片视图与上传' },
   { short: 'ocr', title: 'weimo-ui-ocr', desc: 'OCR 卡片/上传/校对' },
 ]
@@ -47,7 +47,7 @@ async function catalogRoutes(siteDir) {
   return routes
 }
 
-for (const { short, title, extraRoutes = [] } of sites) {
+for (const { short, title, extraRoutes = [], flatRoot = false } of sites) {
   const siteDir = path.join(root, 'packages', title, 'site')
   const dist = path.join(siteDir, 'dist')
   const index = path.join(dist, 'index.html')
@@ -60,8 +60,11 @@ for (const { short, title, extraRoutes = [] } of sites) {
   rmSync(target, { recursive: true, force: true })
   cpSync(dist, target, { recursive: true })
 
-  const routes = [...(await catalogRoutes(siteDir)), ...extraRoutes]
-  if (routes.length === 0) {
+  // flatRoot:单页站(MiniSiteTemplate + 唯一演示页)内容直出根路径,无深链可物化
+  const routes = flatRoot
+    ? extraRoutes
+    : [...(await catalogRoutes(siteDir)), ...extraRoutes]
+  if (!flatRoot && routes.length === 0) {
     throw new Error(`${title} 未物化出任何深链路由`)
   }
   for (const route of routes) {
@@ -69,7 +72,8 @@ for (const { short, title, extraRoutes = [] } of sites) {
     mkdirSync(path.dirname(routeIndex), { recursive: true })
     cpSync(index, routeIndex)
   }
-  console.log(`✓ ${short} <- packages/${title}/site/dist(${routes.length} 条深链路由)`)
+  const routeNote = flatRoot ? '根路径直出' : `${routes.length} 条深链路由`
+  console.log(`✓ ${short} <- packages/${title}/site/dist(${routeNote})`)
 }
 
 const items = sites
