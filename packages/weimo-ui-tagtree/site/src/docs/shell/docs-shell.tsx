@@ -6,7 +6,7 @@ import { MiniSiteTemplate } from 'weimo-ui-template/components/mini-site-templat
 import { componentDocs } from '../catalog/component-docs'
 import { type DocsOutletContext } from './docs-outlet-context'
 
-const homePageUrl = 'https://jiaowenjun.github.io'
+const homePageUrl = 'https://jiaowenjun.github.io/weimo-ui/'
 const repoUrl = 'https://github.com/jiaowenjun/weimo-ui-tagtree'
 
 /** lucide-react 1.x 已移除品牌图标,GitHub 标记内联为 SVG */

@@ -1,5 +1,7 @@
 import { Outlet, useMatch, useNavigate } from 'react-router'
+import { ChevronLeft } from 'lucide-react'
 
+import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'
 import {
   SiteTemplate,
   type SiteNavigationGroup,
@@ -11,6 +13,8 @@ import {
 } from '../catalog/component-docs'
 import { type DocsOutletContext } from './docs-outlet-context'
 import { componentHref, componentPath } from '../routes'
+
+const homePageUrl = 'https://jiaowenjun.github.io/weimo-ui/'
 
 const navigationGroups: SiteNavigationGroup[] = componentDocPackages.map(
   (docPackage) => ({
@@ -43,6 +47,15 @@ export function DocsShell() {
       onNavigate={openComponent}
       pageTitle={selected?.name}
       siteName="weimo-ui-image"
+      topBarLeading={
+        <FrostedIconButton
+          aria-label="返回主页"
+          onClick={() => window.location.assign(homePageUrl)}
+          tooltip="返回主页"
+        >
+          <ChevronLeft />
+        </FrostedIconButton>
+      }
     >
       <Outlet context={outletContext} />
     </SiteTemplate>

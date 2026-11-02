@@ -6,7 +6,7 @@ import { MiniSiteTemplate } from 'weimo-ui-template/components/mini-site-templat
 
 import { GitHubIcon } from '../github-icon'
 
-const homePageUrl = 'https://jiaowenjun.github.io'
+const homePageUrl = 'https://jiaowenjun.github.io/weimo-ui/'
 const repoUrl = 'https://github.com/jiaowenjun/weimo-ui-template'
 
 export function DocsShell() {
