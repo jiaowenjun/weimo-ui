@@ -86,6 +86,85 @@
   accent-color: var(--color-bg-primary);
 }
 
+/* dsh 演示:控制行(一次性按钮 + busyEnter 分段 + steer 开关) */
+.agent-page__dsh-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.agent-page__arm-reject {
+  padding: 4px 10px;
+  border: 1px solid var(--color-border-danger);
+  border-radius: var(--radius-round);
+  background: none;
+  color: var(--color-text-danger);
+  font-size: var(--font-size-xs);
+  cursor: pointer;
+}
+
+.agent-page__arm-reject:hover {
+  background: var(--color-bg-raised);
+}
+
+.agent-page__segment {
+  display: inline-flex;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-round);
+}
+
+.agent-page__segment-item {
+  padding: 4px 10px;
+  border: none;
+  background: none;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  cursor: pointer;
+}
+
+.agent-page__segment-item--active {
+  background: var(--color-bg-primary);
+  color: hsl(var(--primary-foreground));
+}
+
+/* dsh 演示:协议要点表 */
+.agent-page__protocol {
+  display: flex;
+  margin: 0;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.agent-page__protocol-row {
+  display: grid;
+  grid-template-columns: 7em 1fr;
+  gap: 10px;
+}
+
+.agent-page__protocol-row dt {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.agent-page__protocol-row dd {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--font-line-height-reading);
+}
+
+/* 组件卡片标题里的组件类名:等宽小字,弱化为标题的补充说明 */
+.docs-component-class {
+  margin-left: 6px;
+  color: var(--color-text-subtle);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 400;
+}
+
 /* 详情页 stage 框架下的组件摘要 */
 .component-detail-page__summary {
   color: var(--color-text-subtle);

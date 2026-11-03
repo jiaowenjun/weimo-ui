@@ -1,0 +1,385 @@
+@layer components {
+  .conversation-composer-dsh {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ---- QueueDock:负 margin 上提,方角下缘由卡片上边框收口(蓝本贴卡手法) ---- */
+
+  .conversation-composer-dsh__dock {
+    display: flex;
+    width: 100%;
+    max-width: var(--size-content-max-width);
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px 12px 14px;
+    border: 1px solid var(--color-border);
+    border-block-end: none;
+    border-start-start-radius: var(--radius);
+    border-start-end-radius: var(--radius);
+    background: var(--color-bg-raised);
+    margin-block-end: -1px; /* 与卡片上边框重叠收口 */
+    font-size: var(--font-size-sm);
+  }
+
+  .conversation-composer-dsh__dock-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--color-text-subtle);
+    font-size: var(--font-size-xs);
+    cursor: pointer;
+  }
+
+  .conversation-composer-dsh__dock-header--static {
+    cursor: default;
+  }
+
+  .conversation-composer-dsh__dock-header svg {
+    inline-size: 14px;
+    block-size: 14px;
+  }
+
+  .conversation-composer-dsh__dock-list {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+    gap: 6px;
+    list-style: none;
+  }
+
+  .conversation-composer-dsh__dock-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 8px 10px;
+    border: 1px solid var(--color-border-divider);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-card);
+  }
+
+  .conversation-composer-dsh__dock-text {
+    margin: 0;
+    color: var(--color-text-primary);
+    font-size: var(--font-size-sm);
+    line-height: var(--font-line-height-reading);
+    overflow-wrap: anywhere;
+  }
+
+  .conversation-composer-dsh__dock-editor {
+    box-sizing: border-box;
+    min-width: 0;
+    flex: 1;
+    padding: 6px 8px;
+    border: 1px solid var(--color-border-emphasis);
+    border-radius: var(--radius-xs);
+    background: var(--color-bg-card);
+    color: var(--color-text-primary);
+    font-family: inherit;
+    font-size: var(--font-size-sm);
+    line-height: var(--font-line-height-reading);
+    resize: vertical;
+    outline: none;
+  }
+
+  .conversation-composer-dsh__dock-row-actions {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .conversation-composer-dsh__dock-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 26px;
+    block-size: 26px;
+    padding: 0;
+    border: none;
+    border-radius: var(--radius-xs);
+    background: none;
+    color: var(--color-text-subtle);
+    cursor: pointer;
+  }
+
+  .conversation-composer-dsh__dock-icon svg {
+    inline-size: 13px;
+    block-size: 13px;
+  }
+
+  .conversation-composer-dsh__dock-icon:not(:disabled):hover {
+    background: var(--color-bg-hover);
+    color: var(--color-text-primary);
+  }
+
+  .conversation-composer-dsh__dock-icon:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+
+  .conversation-composer-dsh__dock-act {
+    padding: 4px 10px;
+    border: 1px solid var(--color-border-emphasis);
+    border-radius: var(--radius-xs);
+    background: none;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-xs);
+    cursor: pointer;
+  }
+
+  .conversation-composer-dsh__dock-act--primary:not(:disabled) {
+    background: var(--color-bg-primary);
+    border-color: var(--color-bg-primary);
+    color: hsl(var(--primary-foreground));
+  }
+
+  .conversation-composer-dsh__dock-act:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  .conversation-composer-dsh__dock-busy {
+    inline-size: 8px;
+    block-size: 8px;
+    border-radius: var(--radius-round);
+    background: var(--color-bg-primary);
+    animation: conversation-composer-dsh-pulse 1s ease-in-out infinite;
+  }
+
+  /* ---- 卡片 ---- */
+
+  .conversation-composer-dsh__card {
+    position: relative;
+    display: flex;
+    width: 100%;
+    max-width: var(--size-content-max-width);
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px 12px 8px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-bg-card);
+    box-shadow: var(--shadow-card);
+    transition: border-color 160ms ease;
+  }
+
+  .conversation-composer-dsh__card:hover {
+    border-color: var(--color-border-emphasis);
+  }
+
+  .conversation-composer-dsh__card:focus-within {
+    border-color: var(--color-border-accent);
+  }
+
+  /* ---- notices ---- */
+
+  .conversation-composer-dsh__notices {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .conversation-composer-dsh__notice {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 5px 10px;
+    border-radius: var(--radius-xs);
+    font-size: var(--font-size-sm);
+  }
+
+  .conversation-composer-dsh__notice--error {
+    background: var(--color-bg-raised);
+    border-inline-start: 3px solid var(--color-text-danger);
+    color: var(--color-text-danger);
+  }
+
+  .conversation-composer-dsh__notice--info {
+    background: var(--color-bg-raised);
+    color: var(--color-text-secondary);
+  }
+
+  .conversation-composer-dsh__notice-dismiss {
+    flex: none;
+    padding: 0 2px;
+    border: none;
+    background: none;
+    color: inherit;
+    font-size: var(--font-size-md);
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  /* ---- 编辑区 ---- */
+
+  .conversation-composer-dsh__editor {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .conversation-composer-dsh__textarea {
+    box-sizing: border-box;
+    inline-size: 100%;
+    /* 蓝本 .input 地板 36px;.scroll 上限约 14 行后滚动 */
+    min-height: calc(var(--font-size-md) * var(--font-line-height-reading) + 8px);
+    max-height: calc(var(--font-size-md) * var(--font-line-height-reading) * 14 + 8px);
+    padding: 4px 2px 0;
+    overflow-y: auto;
+    border: none;
+    background: transparent;
+    color: var(--color-text-primary);
+    font-family: inherit;
+    font-size: var(--font-size-md);
+    line-height: var(--font-line-height-reading);
+    resize: none;
+    outline: none;
+  }
+
+  .conversation-composer-dsh__textarea::placeholder {
+    color: var(--color-text-placeholder);
+  }
+
+  /* 冻结事务中只读但保焦点(蓝本 setEditable 单写者语义) */
+  .conversation-composer-dsh__textarea[data-frozen] {
+    color: var(--color-text-secondary);
+  }
+
+  .conversation-composer-dsh__claim-hint {
+    margin: 0;
+    padding: 0 2px;
+    color: var(--color-text-placeholder);
+    font-size: var(--font-size-xs);
+    user-select: none;
+  }
+
+  /* ---- 工具行 ---- */
+
+  .conversation-composer-dsh__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-width: 0;
+    padding: 2px 2px 2px;
+  }
+
+  .conversation-composer-dsh__tools,
+  .conversation-composer-dsh__trailing {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .conversation-composer-dsh__trailing {
+    flex: none;
+    margin-inline-start: auto;
+  }
+
+  /* 蓝本 .add:28px 圆钮 selector 底 */
+  .conversation-composer-dsh__add {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 28px;
+    block-size: 28px;
+    padding: 0;
+    border: none;
+    border-radius: var(--radius-round);
+    background: var(--color-bg-raised);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: background-color 160ms ease;
+  }
+
+  .conversation-composer-dsh__add svg {
+    inline-size: 15px;
+    block-size: 15px;
+  }
+
+  .conversation-composer-dsh__add:not(:disabled):hover {
+    background: var(--color-bg-hover);
+    color: var(--color-text-primary);
+  }
+
+  .conversation-composer-dsh__add:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  /* ---- 主按钮(蓝本 .primary:34px 圆钮三态) ---- */
+
+  .conversation-composer-dsh__primary {
+    display: grid;
+    flex: none;
+    place-items: center;
+    inline-size: 34px;
+    block-size: 34px;
+    padding: 0;
+    border: none;
+    border-radius: var(--radius-round);
+    background: var(--color-bg-primary);
+    color: hsl(var(--primary-foreground));
+    cursor: pointer;
+    transition: background-color 100ms ease, opacity 100ms ease;
+  }
+
+  .conversation-composer-dsh__primary:not(:disabled):active {
+    transform: scale(var(--press-scale));
+  }
+
+  .conversation-composer-dsh__primary:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+
+  /* sending 满色 + progress 光标(蓝本 data-sending) */
+  .conversation-composer-dsh__primary[data-sending] {
+    opacity: 1;
+    cursor: progress;
+  }
+
+  .conversation-composer-dsh__spinner {
+    animation: conversation-composer-dsh-spin 800ms linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .conversation-composer-dsh__spinner {
+      animation-duration: 2400ms;
+    }
+
+    .conversation-composer-dsh__dock-busy {
+      animation-duration: 2400ms;
+    }
+  }
+
+  @keyframes conversation-composer-dsh-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes conversation-composer-dsh-pulse {
+    0%,
+    100% {
+      opacity: 0.35;
+    }
+
+    50% {
+      opacity: 1;
+    }
+  }
+}

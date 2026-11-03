@@ -16,7 +16,7 @@ const sites = [
   { short: 'tagtree', title: 'weimo-ui-tagtree', desc: '标签树与面包屑', flatRoot: true },
   { short: 'image', title: 'weimo-ui-image', desc: '图片视图与上传' },
   { short: 'ocr', title: 'weimo-ui-ocr', desc: 'OCR 卡片/上传/校对' },
-  { short: 'agent', title: 'weimo-ui-agent', desc: 'Agent 会话输入框', flatRoot: true },
+  { short: 'agent', title: 'weimo-ui-agent', desc: 'Agent 会话输入框（zcode/dsh 双实现）' },
 ]
 
 mkdirSync(outDir, { recursive: true })

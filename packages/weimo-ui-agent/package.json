@@ -28,6 +28,14 @@
     "./styles/conversation-composer.css": {
       "types": "./dist/components/conversation-composer/conversation-composer.d.css.ts",
       "default": "./dist/components/conversation-composer/conversation-composer.css"
+    },
+    "./components/conversation-composer-dsh": {
+      "types": "./dist/components/conversation-composer-dsh/index.d.ts",
+      "import": "./dist/components/conversation-composer-dsh/index.js"
+    },
+    "./styles/conversation-composer-dsh.css": {
+      "types": "./dist/components/conversation-composer-dsh/conversation-composer-dsh.d.css.ts",
+      "default": "./dist/components/conversation-composer-dsh/conversation-composer-dsh.css"
     }
   },
   "scripts": {

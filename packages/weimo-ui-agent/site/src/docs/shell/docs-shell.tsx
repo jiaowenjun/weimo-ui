@@ -1,10 +1,18 @@
-import { Outlet } from 'react-router'
+import { Outlet, useMatch, useNavigate } from 'react-router'
 import { ChevronLeft } from 'lucide-react'
 
 import { FrostedIconButton } from 'weimo-ui-core/components/frosted-icon-button'
-import { MiniSiteTemplate } from 'weimo-ui-template/components/mini-site-template'
-import { componentDocs } from '../catalog/component-docs'
+import {
+  SiteTemplate,
+  type SiteNavigationGroup,
+  type SiteNavigationItem,
+} from 'weimo-ui-template/components/site-template'
+import {
+  componentDocPackages,
+  componentDocs,
+} from '../catalog/component-docs'
 import { type DocsOutletContext } from './docs-outlet-context'
+import { componentHref, componentPath } from '../routes'
 
 const homePageUrl = 'https://jiaowenjun.github.io/weimo-ui/'
 const repoUrl = 'https://github.com/jiaowenjun/weimo-ui'
@@ -24,16 +32,37 @@ function GitHubIcon() {
   )
 }
 
+const navigationGroups: SiteNavigationGroup[] = componentDocPackages.map(
+  (docPackage) => ({
+    id: docPackage.id,
+    title: docPackage.title,
+    items: docPackage.items.map((doc) => ({
+      id: doc.id,
+      href: componentHref(doc.id),
+      label: doc.name,
+    })),
+  }),
+)
+
 export function DocsShell() {
+  const navigate = useNavigate()
+  const componentMatch = useMatch('/components/:componentId')
+  const activeComponentId = componentMatch?.params.componentId
+  const selected = activeComponentId
+    ? componentDocs.find((doc) => doc.id === activeComponentId)
+    : undefined
   const outletContext: DocsOutletContext = { docs: componentDocs }
+  const openComponent = (item: SiteNavigationItem) => {
+    navigate(componentPath(item.id))
+  }
 
   return (
-    <MiniSiteTemplate
-      headline="让对话，有了节奏"
-      pageTitle={componentDocs[0].name}
-      showThemeToggle={false}
+    <SiteTemplate
+      activeItemId={activeComponentId}
+      navigationGroups={navigationGroups}
+      onNavigate={openComponent}
+      pageTitle={selected?.name}
       siteName="weimo-ui-agent"
-      subheadline="Agent 会话输入组件"
       topBarActions={
         <FrostedIconButton
           aria-label="GitHub 仓库"
@@ -54,6 +83,6 @@ export function DocsShell() {
       }
     >
       <Outlet context={outletContext} />
-    </MiniSiteTemplate>
+    </SiteTemplate>
   )
 }

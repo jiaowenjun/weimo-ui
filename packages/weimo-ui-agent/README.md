@@ -10,15 +10,16 @@ Agent 会话场景的 React 组件:输入、发送、停止,以及围绕它们�
 
 ## 简介
 
-- **ConversationComposer** — Agent 聊天输入框:Enter 发送 / Shift+Enter 换行 / IME 安全,发送键三态(发送 → Spinner → Stop),提交返回值协议(业务层返回 `false` 草稿保留),`↑`/`↓` 历史翻阅,三个插槽(`topContent` / `leadingActions` / `submitControl`)留给附件、模式切换与模型选择。
+- **ConversationComposer** — Agent 聊天输入框(zcode 血统):Enter 发送 / Shift+Enter 换行 / IME 安全,发送键三态(发送 → Spinner → Stop),提交返回值协议(业务层返回 `false` 草稿保留),`↑`/`↓` 历史翻阅,三个插槽(`topContent` / `leadingActions` / `submitControl`)。
+- **ConversationComposerDsh** — Agent 聊天输入框(dsh 血统):事务化提交状态机(SubmitMachine,事件进/效果出)、异步受理结算(Host 接受才清空草稿,拒绝原样回归)、IME 三重守卫(`isComposing` + `keyCode 229` + compositionend 后 10ms 窗口)、queue/steer 双模式(busyEnter 偏好 + Ctrl/Cmd+Enter 加速反转 + 按钮诚实标签)、双击 Esc 停止、`/命令 ` claim 锁定与 QueueDock 排队消息(行内编辑/steer/删除)。
 
-交互协议抽象自 ZCode 桌面客户端的 composer 实现,去协议化后成为纯 props 驱动的可复用组件。
+两个组件并列成对:同一输入场景的两种协议取舍——zcode 版是同步返回值协议的轻量实现,dsh 版是异步受理结算的事务化实现,按宿主复杂度选择。
 
 ## ✨ 特性
 
-- 轻量 `textarea` 编辑器(无富文本依赖),自动增高约 5 行后转滚动
-- `status` 单 prop 驱动发送键三态:`idle` / `pending`(Spinner)/ `running`(空草稿时变 Stop,`Esc` 亦可停止)
-- 提交返回值协议:`onSubmit` 返回 `false` 拒绝提交,草稿保留不清空
+- 轻量 `textarea` 编辑器(无富文本依赖):zcode 版自动增高约 5 行;dsh 版地板 36px、上限 14 行
+- zcode 版:`status` 单 prop 驱动发送键三态,`onSubmit` 返回 `false` 拒绝提交草稿保留
+- dsh 版:`phase` 五相(plain/adjudicating/claimed/submitting/sending),frozen 事务中编辑器只读、seq 防陈旧回包
 - 受控/非受控统一,DOM props 透传,亮暗主题、`prefers-reduced-motion` 继承家族 token
 
 ## 📦 安装
@@ -69,6 +70,8 @@ function Chat() {
 | --- | --- |
 | `weimo-ui-agent/components/conversation-composer` | `ConversationComposer` 及其类型 |
 | `weimo-ui-agent/styles/conversation-composer.css` | 组件样式 |
+| `weimo-ui-agent/components/conversation-composer-dsh` | `ConversationComposerDsh`、`QueueDock`、`SubmitMachine` 及其类型 |
+| `weimo-ui-agent/styles/conversation-composer-dsh.css` | 组件样式 |
 
 ### ConversationComposer
 
@@ -84,6 +87,19 @@ function Chat() {
 | `disabled` / `disabledReason` / `placeholder` | 常规态控制 |
 
 其余 props 透传到根 `form` 元素。
+
+### ConversationComposerDsh
+
+| Prop | 说明 |
+| --- | --- |
+| `onSubmit` | `(draft, mode, attempt) => Promise<SubmitOutcome>`;resolve success 才清空草稿(异步受理结算) |
+| `running` / `busyEnter` / `steeringAvailable` | queue/steer 三要素;Ctrl/Cmd+Enter 取偏好反面 |
+| `commands` | slash 命令目录;草稿出现完整 token(如 `/model `)即 claim 锁定,Enter 执行 `run(args)` |
+| `queue` / `onQueueAction` | QueueDock 排队消息数据与 edit/remove/steer 动作 |
+| `onStop` | 双击 Esc(500ms 窗口)或 Stop 按钮的停止通道 |
+| `leadingActions` / `trailingActions` | 插槽:工具行 + 按钮两侧 |
+
+提交面类型(`SubmitMachine`/`InputEvent`/`InputEffect`/`SubmitAttempt` 等)均从入口导出,可对状态机直接单测。
 
 ## 🧩 生态
 
