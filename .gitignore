@@ -4,3 +4,5 @@ site/dist
 .DS_Store
 *.tsbuildinfo
 pages-dist
+reference/zcode/
+reference/dsh/

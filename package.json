@@ -4,7 +4,7 @@
   "version": "0.2.0",
   "type": "module",
   "license": "MIT",
-  "description": "weimo-ui 组件家族 monorepo:core/template/editor/stats/tagtree/image/ocr 七包",
+  "description": "weimo-ui 组件家族 monorepo:core/template/editor/stats/tagtree/image/ocr/agent 八包",
   "packageManager": "pnpm@12.15.0",
   "scripts": {
     "dev": "pnpm -r --filter './packages/*' build && pnpm -r --parallel --filter './packages/*/site' run dev",
@@ -18,6 +18,7 @@
     "dev:stats": "pnpm --dir packages/weimo-ui-stats site:dev",
     "dev:tagtree": "pnpm --dir packages/weimo-ui-tagtree site:dev",
     "dev:image": "pnpm --dir packages/weimo-ui-image site:dev",
-    "dev:ocr": "pnpm --dir packages/weimo-ui-ocr site:dev"
+    "dev:ocr": "pnpm --dir packages/weimo-ui-ocr site:dev",
+    "dev:agent": "pnpm --dir packages/weimo-ui-agent site:dev"
   }
 }

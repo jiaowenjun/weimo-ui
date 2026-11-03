@@ -166,6 +166,89 @@ importers:
 
   .: {}
 
+  packages/weimo-ui-agent:
+    dependencies:
+      lucide-react:
+        specifier: ^1.54.0
+        version: 1.66.0(@types/react@19.3.0)(react@19.3.1)
+    devDependencies:
+      '@arethetypeswrong/cli':
+        specifier: ^0.18.5
+        version: 0.18.5
+      '@types/react':
+        specifier: ^19.3.0
+        version: 19.3.0
+      '@types/react-dom':
+        specifier: ^19.3.0
+        version: 19.3.0(@types/react@19.3.0)
+      publint:
+        specifier: ^0.3.25
+        version: 0.3.25
+      react:
+        specifier: 19.3.1
+        version: 19.3.1
+      react-dom:
+        specifier: 19.3.1
+        version: 19.3.1(react@19.3.1)
+      rimraf:
+        specifier: ^6.1.3
+        version: 6.1.3
+      typescript:
+        specifier: ~7.0.2
+        version: 7.0.2
+      vitest:
+        specifier: ^5.0.3
+        version: 5.0.5(@types/node@26.6.6)(jsdom@30.1.3)(vite@8.3.5(@types/node@26.6.6)(jiti@2.7.0))
+      weimo-ui-core:
+        specifier: workspace:*
+        version: link:../weimo-ui-core
+
+  packages/weimo-ui-agent/site:
+    dependencies:
+      lucide-react:
+        specifier: ^1.54.0
+        version: 1.66.0(@types/react@19.3.0)(react@19.3.1)
+      react:
+        specifier: 19.3.1
+        version: 19.3.1
+      react-dom:
+        specifier: 19.3.1
+        version: 19.3.1(react@19.3.1)
+      react-router:
+        specifier: 8.5.0
+        version: 8.5.0(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      weimo-ui-agent:
+        specifier: workspace:*
+        version: link:..
+      weimo-ui-core:
+        specifier: workspace:*
+        version: link:../../weimo-ui-core
+      weimo-ui-template:
+        specifier: workspace:*
+        version: link:../../weimo-ui-template
+    devDependencies:
+      '@tailwindcss/vite':
+        specifier: ^4.3.3
+        version: 4.3.3(vite@8.3.5(@types/node@26.6.6)(jiti@2.7.0))
+      '@types/react':
+        specifier: ^19.3.0
+        version: 19.3.0
+      '@types/react-dom':
+        specifier: ^19.3.0
+        version: 19.3.0(@types/react@19.3.0)
+      '@vitejs/plugin-react':
+        specifier: ^6.1.2
+        version: 6.1.2(vite@8.3.5(@types/node@26.6.6)(jiti@2.7.0))
+      tailwindcss:
+        specifier: ^4.3.3
+        version: 4.3.3
+      typescript:
+        specifier: ~7.0.2
+        version: 7.0.2
+      vite:
+        specifier: ^8.3.4
+        version: 8.3.5(@types/node@26.6.6)(jiti@2.7.0)
+
   packages/weimo-ui-core:
     dependencies:
       class-variance-authority:

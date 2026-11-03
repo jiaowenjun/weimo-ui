@@ -23,6 +23,7 @@ jobs:
           - weimo-ui-tagtree
           - weimo-ui-image
           - weimo-ui-ocr
+          - weimo-ui-agent
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4

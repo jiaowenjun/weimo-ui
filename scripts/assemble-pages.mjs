@@ -16,6 +16,7 @@ const sites = [
   { short: 'tagtree', title: 'weimo-ui-tagtree', desc: '标签树与面包屑', flatRoot: true },
   { short: 'image', title: 'weimo-ui-image', desc: '图片视图与上传' },
   { short: 'ocr', title: 'weimo-ui-ocr', desc: 'OCR 卡片/上传/校对' },
+  { short: 'agent', title: 'weimo-ui-agent', desc: 'Agent 会话输入框', flatRoot: true },
 ]
 
 mkdirSync(outDir, { recursive: true })
@@ -119,7 +120,7 @@ const landing = `<!doctype html>
   <body>
     <main>
       <h1>weimo-ui</h1>
-      <p class="sub">七个独立 npm 包共享一个 Pages 站点,各站按路径收纳</p>
+      <p class="sub">八个独立 npm 包共享一个 Pages 站点,各站按路径收纳</p>
       <ul>
 ${items}
       </ul>

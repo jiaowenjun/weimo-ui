@@ -1,0 +1,120 @@
+.agent-page__card {
+  box-sizing: border-box;
+  min-width: 0;
+  /* 模板 0.3.0 起 hero 全宽,卡片自限阅读宽度(content-max 700px)并居中;
+   * width:100% 先铺满再被 max-width 封顶——否则 flex 列里 auto 边距
+   * 会让 stretch 失效、卡片缩成内容宽 */
+  width: 100%;
+  max-width: var(--size-content-max-width);
+  margin-inline: auto;
+}
+
+/* 相邻演示卡之间的间距:仅宽屏(≥700px,模板 gap 15px)在模板 gap 之上再加 9px;
+ * 窄屏不加,保持模板自身的 12px gap;均不改变 hero 标题区到首卡的节奏 */
+@media (min-width: 700px) {
+  .agent-page__card + .agent-page__card {
+    margin-block-start: 9px;
+  }
+}
+
+.agent-page__chat {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.agent-page__log {
+  display: flex;
+  max-height: 300px;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  overflow-y: auto;
+  border: 1px solid var(--color-border-divider);
+  border-radius: var(--radius-sm);
+}
+
+.agent-page__bubble {
+  max-width: 82%;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  line-height: var(--font-line-height-reading);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.agent-page__bubble--user {
+  align-self: flex-end;
+  background: var(--color-bg-primary);
+  color: hsl(var(--primary-foreground));
+}
+
+.agent-page__bubble--agent {
+  align-self: flex-start;
+  background: var(--color-bg-raised);
+  color: var(--color-text-primary);
+}
+
+.agent-page__hint {
+  margin: 0;
+  padding: 6px 10px;
+  border-inline-start: 3px solid var(--color-text-danger);
+  border-radius: var(--radius-xs);
+  background: var(--color-bg-raised);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+/* leadingActions 插槽的演示件:假模型选择 pill */
+.agent-page__model-pill {
+  padding: 2px 10px;
+  border: 1px solid var(--color-border-divider);
+  border-radius: var(--radius-round);
+  background: var(--color-bg-raised);
+  color: var(--color-text-subtle);
+  font-size: var(--font-size-xs);
+  user-select: none;
+}
+
+.agent-page__toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  user-select: none;
+}
+
+.agent-page__toggle input {
+  accent-color: var(--color-bg-primary);
+}
+
+.agent-page__states {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.agent-page__figure {
+  display: flex;
+  margin: 0;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.agent-page__figure-caption {
+  color: var(--color-text-subtle);
+  font-size: var(--font-size-sm);
+}
+
+/* 详情页 stage 框架下的组件摘要 */
+.component-detail-page__summary {
+  color: var(--color-text-subtle);
+  font-size: var(--font-size-sm);
+}
