@@ -5,14 +5,14 @@
  * - Enter 提交门禁:修饰键/IME/空输入逐层拒绝(LexicalChatInput shouldSubmitLexicalEnter)
  * - 提交返回值协议:业务层返回 false 拒绝提交,草稿保留(shouldResetLexicalEditorAfterSubmit)
  * - 发送控制三态:running+空草稿 → Stop、pending → Spinner、否则发送键
- *   (ConversationComposer canSend/showStopControl)
+ *   (ConversationComposerZcode canSend/showStopControl)
  * - ↑/↓ 历史导航索引步进(promptHistory)
  */
 
-export type ConversationComposerStatus = 'idle' | 'pending' | 'running'
+export type ConversationComposerZcodeStatus = 'idle' | 'pending' | 'running'
 
 /** onSubmit 返回值:false = 业务层拒绝提交,草稿保留;其余(void/true) = 已受理,清空输入。 */
-export type ConversationComposerSubmitResult = boolean | void
+export type ConversationComposerZcodeSubmitResult = boolean | void
 
 export interface ComposerEnterGuardOptions {
   enterSubmits: boolean
@@ -49,7 +49,7 @@ export function shouldSubmitEnter({
 
 /** 提交返回值协议:只有显式 false 保留草稿,undefined/true 都按已受理清空。 */
 export function shouldResetAfterSubmit(
-  result: ConversationComposerSubmitResult,
+  result: ConversationComposerZcodeSubmitResult,
 ): boolean {
   return result !== false
 }
@@ -59,7 +59,7 @@ export type ComposerSendControl =
   | { kind: 'send'; canSend: boolean; pending: boolean }
 
 export interface ComposerSendControlOptions {
-  status: ConversationComposerStatus
+  status: ConversationComposerZcodeStatus
   /** 有可提交内容(非空文本;附件等未来内容源并入此位)。 */
   hasDraft: boolean
   disabled?: boolean

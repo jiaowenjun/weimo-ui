@@ -10,7 +10,7 @@ Agent 会话场景的 React 组件:输入、发送、停止,以及围绕它们�
 
 ## 简介
 
-- **ConversationComposer** — Agent 聊天输入框(zcode 血统):Enter 发送 / Shift+Enter 换行 / IME 安全,发送键三态(发送 → Spinner → Stop),提交返回值协议(业务层返回 `false` 草稿保留),`↑`/`↓` 历史翻阅,三个插槽(`topContent` / `leadingActions` / `submitControl`)。
+- **ConversationComposerZcode** — Agent 聊天输入框(zcode 血统):Enter 发送 / Shift+Enter 换行 / IME 安全,发送键三态(发送 → Spinner → Stop),提交返回值协议(业务层返回 `false` 草稿保留),`↑`/`↓` 历史翻阅,三个插槽(`topContent` / `leadingActions` / `submitControl`)。
 - **ConversationComposerDsh** — Agent 聊天输入框(dsh 血统):事务化提交状态机(SubmitMachine,事件进/效果出)、异步受理结算(Host 接受才清空草稿,拒绝原样回归)、IME 三重守卫(`isComposing` + `keyCode 229` + compositionend 后 10ms 窗口)、queue/steer 双模式(busyEnter 偏好 + Ctrl/Cmd+Enter 加速反转 + 按钮诚实标签)、双击 Esc 停止、`/命令 ` claim 锁定与 QueueDock 排队消息(行内编辑/steer/删除)。
 
 两个组件并列成对:同一输入场景的两种协议取舍——zcode 版是同步返回值协议的轻量实现,dsh 版是异步受理结算的事务化实现,按宿主复杂度选择。
@@ -33,8 +33,8 @@ peer 依赖:`react`、`react-dom`、`weimo-ui-core`。
 包根不提供 `.` 导出,按组件显式引入:
 
 ```tsx
-import { ConversationComposer } from 'weimo-ui-agent/components/conversation-composer'
-import 'weimo-ui-agent/styles/conversation-composer.css'
+import { ConversationComposerZcode } from 'weimo-ui-agent/components/conversation-composer-zcode'
+import 'weimo-ui-agent/styles/conversation-composer-zcode.css'
 ```
 
 样式零配置:组件入口自带 token 导入,闭包内样式自洽。
@@ -43,14 +43,14 @@ import 'weimo-ui-agent/styles/conversation-composer.css'
 
 ```tsx
 import { useState } from 'react'
-import { ConversationComposer } from 'weimo-ui-agent/components/conversation-composer'
-import 'weimo-ui-agent/styles/conversation-composer.css'
+import { ConversationComposerZcode } from 'weimo-ui-agent/components/conversation-composer-zcode'
+import 'weimo-ui-agent/styles/conversation-composer-zcode.css'
 
 function Chat() {
   const [status, setStatus] = useState<'idle' | 'pending' | 'running'>('idle')
 
   return (
-    <ConversationComposer
+    <ConversationComposerZcode
       onStop={() => stopAgent()}
       onSubmit={(text) => {
         if (!text.trim()) return false // 草稿保留
@@ -68,12 +68,12 @@ function Chat() {
 
 | 入口 | 说明 |
 | --- | --- |
-| `weimo-ui-agent/components/conversation-composer` | `ConversationComposer` 及其类型 |
-| `weimo-ui-agent/styles/conversation-composer.css` | 组件样式 |
+| `weimo-ui-agent/components/conversation-composer` | `ConversationComposerZcode` 及其类型 |
+| `weimo-ui-agent/styles/conversation-composer-zcode.css` | 组件样式 |
 | `weimo-ui-agent/components/conversation-composer-dsh` | `ConversationComposerDsh`、`QueueDock`、`SubmitMachine` 及其类型 |
 | `weimo-ui-agent/styles/conversation-composer-dsh.css` | 组件样式 |
 
-### ConversationComposer
+### ConversationComposerZcode
 
 | Prop | 说明 |
 | --- | --- |

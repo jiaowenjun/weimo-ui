@@ -5,11 +5,11 @@ export const agentCatalog = {
   title: 'weimo-ui-agent',
   pages: [
     {
-      id: 'conversation-composer',
+      id: 'conversation-composer-zcode',
       name: '会话输入框 · zcode',
-      exportName: 'ConversationComposer',
-      registryName: 'conversation-composer',
-      packageExport: './components/conversation-composer',
+      exportName: 'ConversationComposerZcode',
+      registryName: 'conversation-composer-zcode',
+      packageExport: './components/conversation-composer-zcode',
     },
     {
       id: 'conversation-composer-dsh',

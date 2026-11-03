@@ -7,7 +7,7 @@ import {
   resolveSendControl,
   shouldResetAfterSubmit,
   shouldSubmitEnter,
-} from '../src/components/conversation-composer/conversation-composer-model'
+} from '../src/components/conversation-composer-zcode/conversation-composer-model'
 
 describe('shouldSubmitEnter', () => {
   const base = { enterSubmits: true, text: '你好' }

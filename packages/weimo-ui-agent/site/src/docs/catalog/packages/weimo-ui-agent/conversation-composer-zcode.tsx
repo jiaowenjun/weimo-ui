@@ -2,9 +2,9 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { ComponentPreviewCard } from 'weimo-ui-core/components/component-preview-card'
 import {
-  ConversationComposer,
-  type ConversationComposerStatus,
-} from 'weimo-ui-agent/components/conversation-composer'
+  ConversationComposerZcode,
+  type ConversationComposerZcodeStatus,
+} from 'weimo-ui-agent/components/conversation-composer-zcode'
 import type { ComponentDefinition } from '../../component-docs'
 
 /* ------------------------------------------------------------------ */
@@ -38,7 +38,7 @@ const REPLY_INTERVAL_MS = 1300
 
 function useDemoAgent() {
   const [messages, setMessages] = useState<DemoMessage[]>(SEED_MESSAGES)
-  const [status, setStatus] = useState<ConversationComposerStatus>('idle')
+  const [status, setStatus] = useState<ConversationComposerZcodeStatus>('idle')
   const timersRef = useRef<number[]>([])
   const queueRef = useRef<string[]>([])
   const seqRef = useRef(SEED_MESSAGES.length)
@@ -135,7 +135,7 @@ function ConversationComposerDemo() {
           ))}
           <div ref={logEndRef} />
         </div>
-        <ConversationComposer
+        <ConversationComposerZcode
           leadingActions={<span className="agent-page__model-pill">GLM-5.3</span>}
           onSubmit={(text) => (rejectSubmit ? false : agent.submit(text))}
           onStop={agent.stop}
@@ -169,8 +169,8 @@ function ConversationComposerPageDemo() {
   return <ConversationComposerDemo />
 }
 
-export const conversationComposerDefinition = {
-  id: 'conversation-composer',
+export const conversationComposerZcodeDefinition = {
+  id: 'conversation-composer-zcode',
   summary: 'Agent 聊天输入框:键盘协议、发送键三态、提交返回值协议与三个插槽',
   status: 'Ready',
   frame: 'plain',

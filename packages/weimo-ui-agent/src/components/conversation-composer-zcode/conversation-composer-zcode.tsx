@@ -12,15 +12,15 @@ import {
   resolveSendControl,
   shouldResetAfterSubmit,
   shouldSubmitEnter,
-  type ConversationComposerStatus,
-  type ConversationComposerSubmitResult,
+  type ConversationComposerZcodeStatus,
+  type ConversationComposerZcodeSubmitResult,
 } from './conversation-composer-model'
 import { useComposerText } from './use-composer-text'
 
 import 'weimo-ui-core/styles/tokens.css'
-import './conversation-composer.css'
+import './conversation-composer-zcode.css'
 
-export type ConversationComposerProps = Omit<
+export type ConversationComposerZcodeProps = Omit<
   ComponentPropsWithoutRef<'form'>,
   'children' | 'onChange' | 'onSubmit'
 > & {
@@ -32,11 +32,11 @@ export type ConversationComposerProps = Omit<
    * 提交(发送按钮 / 裸 Enter)。返回 false 表示业务层拒绝本次提交
    * (如附件未就绪、校验失败),草稿保留不清空;其余返回值按已受理清空。
    */
-  onSubmit: (value: string) => ConversationComposerSubmitResult
+  onSubmit: (value: string) => ConversationComposerZcodeSubmitResult
   /** status='running' 时的停止通道:Stop 按钮 / Esc。 */
   onStop?: () => void
   /** idle=可编辑可提交;pending=请求进行中(输入不锁,Enter 退回换行);running=任务执行中。 */
-  status?: ConversationComposerStatus
+  status?: ConversationComposerZcodeStatus
   placeholder?: string
   disabled?: boolean
   /** 禁用原因,悬停可见。 */
@@ -59,7 +59,7 @@ export type ConversationComposerProps = Omit<
   inputLabel?: string
 }
 
-export function ConversationComposer({
+export function ConversationComposerZcode({
   allowSubmitWhenEmpty = false,
   className,
   defaultValue,
@@ -80,7 +80,7 @@ export function ConversationComposer({
   topContent,
   value,
   ...props
-}: ConversationComposerProps) {
+}: ConversationComposerZcodeProps) {
   const composer = useComposerText({ defaultValue, onChange, promptHistory, value })
 
   const canStop = status === 'running' && Boolean(onStop) && !disabled
