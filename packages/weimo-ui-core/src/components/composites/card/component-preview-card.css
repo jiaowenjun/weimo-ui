@@ -45,7 +45,10 @@
     isolation: isolate;
     width: 100%;
     min-height: 80px;
-    border-radius: var(--radius);
+    /* 裁切半径与外层卡片圆角同心:卡片 radius − 内边距 − 边框。
+     * 若照抄 --radius(16px),满幅子元素自身的圆角边框会在四角
+     * 被更大的裁切弧吃掉一截(如 agent 站的对话记录面板) */
+    border-radius: calc(var(--radius) - var(--space-card-pad) - 1px);
   }
 
   .component-preview-card--align-center .base-card__content {

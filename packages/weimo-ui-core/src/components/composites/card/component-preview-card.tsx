@@ -127,7 +127,8 @@ export type ComponentPreviewCardProps = Omit<
   darkValue?: ReactNode
   footer?: ReactNode
   items?: readonly ComponentPreviewCardItem[]
-  label: ReactNode
+  /** 省略时不渲染卡片标题行(仅纯演示舞台) */
+  label?: ReactNode
   token?: string
   value?: ReactNode
 }

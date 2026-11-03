@@ -5,7 +5,9 @@
     gap: 8px;
     padding: 12px;
     border: 1px solid var(--color-border);
-    border-radius: var(--radius);
+    /* 输入控件用小一档圆角:大圆角会让 1px 边框在弧线段被抗锯齿稀释,
+     * 看起来像边框被圆角吃掉;--radius 留给外层卡片 */
+    border-radius: var(--radius-sm);
     background: var(--color-bg-card);
     box-shadow: var(--shadow-card);
     transition: border-color 160ms ease;

@@ -122,7 +122,7 @@ function ConversationComposerDemo() {
   }, [agent.messages])
 
   return (
-    <ComponentPreviewCard className="agent-page__card" label="会话输入框">
+    <ComponentPreviewCard className="agent-page__card">
       <div className="agent-page__chat">
         <div aria-label="对话记录" className="agent-page__log" role="log">
           {agent.messages.map((message) => (
@@ -165,63 +165,8 @@ function ConversationComposerDemo() {
   )
 }
 
-/* ------------------------------------------------------------------ */
-/* 状态卡:idle / pending / running / disabled 并列                    */
-/* ------------------------------------------------------------------ */
-
-function ConversationComposerStatesDemo() {
-  return (
-    <ComponentPreviewCard className="agent-page__card" label="状态与禁用">
-      <div className="agent-page__states">
-        <figure className="agent-page__figure">
-          <figcaption className="agent-page__figure-caption">idle · 空草稿（发送禁用）</figcaption>
-          <ConversationComposer onSubmit={() => true} placeholder="输入内容后可发送" />
-        </figure>
-        <figure className="agent-page__figure">
-          <figcaption className="agent-page__figure-caption">idle · 有草稿（Enter 可发）</figcaption>
-          <ConversationComposer
-            defaultValue="整理今天的会议纪要，按主题分组"
-            onSubmit={() => true}
-          />
-        </figure>
-        <figure className="agent-page__figure">
-          <figcaption className="agent-page__figure-caption">pending · 加载中（Enter 退回换行）</figcaption>
-          <ConversationComposer
-            defaultValue="正在等待受理的一条草稿"
-            onSubmit={() => true}
-            status="pending"
-          />
-        </figure>
-        <figure className="agent-page__figure">
-          <figcaption className="agent-page__figure-caption">running · 空草稿（Stop 现身）</figcaption>
-          <ConversationComposer
-            onSubmit={() => true}
-            onStop={() => undefined}
-            placeholder="运行中……"
-            status="running"
-          />
-        </figure>
-        <figure className="agent-page__figure">
-          <figcaption className="agent-page__figure-caption">disabled · 带禁用原因</figcaption>
-          <ConversationComposer
-            disabled
-            disabledReason="会话连接已断开"
-            onSubmit={() => true}
-            placeholder="不可用"
-          />
-        </figure>
-      </div>
-    </ComponentPreviewCard>
-  )
-}
-
 function ConversationComposerPageDemo() {
-  return (
-    <>
-      <ConversationComposerDemo />
-      <ConversationComposerStatesDemo />
-    </>
-  )
+  return <ConversationComposerDemo />
 }
 
 export const conversationComposerDefinition = {

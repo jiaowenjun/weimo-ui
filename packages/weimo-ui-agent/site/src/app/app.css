@@ -9,14 +9,6 @@
   margin-inline: auto;
 }
 
-/* 相邻演示卡之间的间距:仅宽屏(≥700px,模板 gap 15px)在模板 gap 之上再加 9px;
- * 窄屏不加,保持模板自身的 12px gap;均不改变 hero 标题区到首卡的节奏 */
-@media (min-width: 700px) {
-  .agent-page__card + .agent-page__card {
-    margin-block-start: 9px;
-  }
-}
-
 .agent-page__chat {
   display: flex;
   width: 100%;
@@ -92,25 +84,6 @@
 
 .agent-page__toggle input {
   accent-color: var(--color-bg-primary);
-}
-
-.agent-page__states {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 12px;
-}
-
-.agent-page__figure {
-  display: flex;
-  margin: 0;
-  flex-direction: column;
-  gap: 8px;
-  min-width: 0;
-}
-
-.agent-page__figure-caption {
-  color: var(--color-text-subtle);
-  font-size: var(--font-size-sm);
 }
 
 /* 详情页 stage 框架下的组件摘要 */
